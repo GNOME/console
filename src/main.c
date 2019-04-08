@@ -50,45 +50,47 @@ int
 main (int   argc,
       char *argv[])
 {
-	g_autoptr(GtkApplication) app = NULL;
-	int ret;
+  g_autoptr(GtkApplication) app = NULL;
+  int ret;
 
-	/* Set up gettext translations */
-	bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-	textdomain (GETTEXT_PACKAGE);
+  /* Set up gettext translations */
+  bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+  textdomain (GETTEXT_PACKAGE);
+
+  g_set_application_name (_("King's Cross"));
 
   g_type_ensure (VTE_TYPE_TERMINAL);
 
-	/*
-	 * Create a new GtkApplication. The application manages our main loop,
-	 * application windows, integration with the window manager/compositor, and
-	 * desktop features such as file opening and single-instance applications.
-	 */
-	app = gtk_application_new ("org.gnome.zbrown.KingsCross", G_APPLICATION_FLAGS_NONE);
+  /*
+   * Create a new GtkApplication. The application manages our main loop,
+   * application windows, integration with the window manager/compositor, and
+   * desktop features such as file opening and single-instance applications.
+   */
+  app = gtk_application_new ("org.gnome.zbrown.KingsCross", G_APPLICATION_FLAGS_NONE);
 
-	/*
-	 * We connect to the activate signal to create a window when the application
-	 * has been lauched. Additionally, this signal notifies us when the user
-	 * tries to launch a "second instance" of the application. When they try
-	 * to do that, we'll just present any existing window.
-	 *
-	 * Because we can't pass a pointer to any function type, we have to cast
-	 * our "on_activate" function to a GCallback.
-	 */
-	g_signal_connect (app, "activate", G_CALLBACK (on_activate), NULL);
+  /*
+   * We connect to the activate signal to create a window when the application
+   * has been lauched. Additionally, this signal notifies us when the user
+   * tries to launch a "second instance" of the application. When they try
+   * to do that, we'll just present any existing window.
+   *
+   * Because we can't pass a pointer to any function type, we have to cast
+   * our "on_activate" function to a GCallback.
+   */
+  g_signal_connect (app, "activate", G_CALLBACK (on_activate), NULL);
 
-	/*
-	 * Run the application. This function will block until the applicaiton
-	 * exits. Upon return, we have our exit code to return to the shell. (This
-	 * is the code you see when you do `echo $?` after running a command in a
-	 * terminal.
-	 *
-	 * Since GtkApplication inherits from GApplication, we use the parent class
-	 * method "run". But we need to cast, which is what the "G_APPLICATION()"
-	 * macro does.
-	 */
-	ret = g_application_run (G_APPLICATION (app), argc, argv);
+  /*
+  * Run the application. This function will block until the applicaiton
+   * exits. Upon return, we have our exit code to return to the shell. (This
+   * is the code you see when you do `echo $?` after running a command in a
+   * terminal.
+   *
+   * Since GtkApplication inherits from GApplication, we use the parent class
+   * method "run". But we need to cast, which is what the "G_APPLICATION()"
+   * macro does.
+   */
+  ret = g_application_run (G_APPLICATION (app), argc, argv);
 
-	return ret;
+  return ret;
 }

@@ -1,0 +1,4 @@
+[D-BUS Service]
+Name=org.gnome.zbrown.KingsCross
+Exec=@BINDIR@/kgx --gapplication-service
+

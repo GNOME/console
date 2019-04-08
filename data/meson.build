@@ -39,3 +39,15 @@ if compile_schemas.found()
     args: ['--strict', '--dry-run', meson.current_source_dir()]
   )
 endif
+
+configure_file(input: 'org.gnome.zbrown.KingsCross.service.in',
+               output: 'org.gnome.zbrown.KingsCross.service',
+               configuration: config_h,
+               install_dir: join_paths([get_option('datadir'),'dbus-1/services']))
+
+install_data('org.gnome.zbrown.KingsCross.svg',
+             install_dir: join_paths([get_option('datadir'),'icons/hicolor/scalable/apps']))
+
+install_data('org.gnome.zbrown.KingsCross-symbolic.svg',
+             install_dir: join_paths([get_option('datadir'),'icons/hicolor/symbolic/apps']))
+

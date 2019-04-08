@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <glib/gi18n.h>
 #include <vte/vte.h>
 
 #include "kgx.h"
@@ -150,7 +151,17 @@ about_activated (GSimpleAction *action,
                  GVariant      *parameter,
                  gpointer       data)
 {
-  gtk_show_about_dialog (GTK_WINDOW (data), NULL);
+  const gchar *authors[] = { "Zander Brown", NULL };
+
+  gtk_show_about_dialog (GTK_WINDOW (data),
+                         "authors", authors,
+                         "comments", _("Terminal Emulator"),
+                         "copyright", g_strdup_printf (_("Copyright © %Id Zander Brown"), 2019),
+                         "license-type", GTK_LICENSE_GPL_3_0,
+                         "logo-icon-name", "org.gnome.zbrown.KingsCross",
+                         "proogram-name", _("King's Cross"),
+                         "version", PACKAGE_VERSION,
+                         NULL);
 }
 
 static GActionEntry win_entries[] =
