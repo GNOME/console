@@ -1,0 +1,7 @@
+data/org.gnome.zbrown.KingsCross.desktop.in
+data/org.gnome.zbrown.KingsCross.appdata.xml.in
+data/org.gnome.zbrown.KingsCross.gschema.xml
+src/kgx-window.ui
+src/main.c
+src/kgx-window.c
+
