@@ -46,6 +46,14 @@ on_activate (GtkApplication *app)
 	gtk_window_present (window);
 }
 
+static void
+on_startup (GtkApplication *app)
+{
+  const char * const new_window_accels[] = { "<shift><primary>n", NULL };
+
+  gtk_application_set_accels_for_action (GTK_APPLICATION (app), "win.new-window", new_window_accels);
+}
+
 int
 main (int   argc,
       char *argv[])
@@ -79,6 +87,7 @@ main (int   argc,
    * our "on_activate" function to a GCallback.
    */
   g_signal_connect (app, "activate", G_CALLBACK (on_activate), NULL);
+  g_signal_connect (app, "startup", G_CALLBACK (on_startup), NULL);
 
   /*
   * Run the application. This function will block until the applicaiton

@@ -4,4 +4,7 @@
     <file>kgx-window.ui</file>
     <file>styles.css</file>
   </gresource>
+  <gresource prefix="/org/gnome/zbrown/KingsCross/gtk">
+    <file>menus.ui</file>
+  </gresource>
 </gresources>

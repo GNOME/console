@@ -11,8 +11,10 @@
         "--socket=wayland",
         "--filesystem=xdg-run/dconf",
         "--filesystem=~/.config/dconf:ro",
+        "--talk-name=org.freedesktop.FileManager1",
         "--talk-name=ca.desrt.dconf",
-        "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
+        "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
+        "--device=dri"
     ],
     "build-options": {
         "cflags": "-O2 -g",

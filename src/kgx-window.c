@@ -169,6 +169,126 @@ kgx_window_class_init (KgxWindowClass *klass)
 }
 
 static void
+new_activated (GSimpleAction *action,
+               GVariant      *parameter,
+               gpointer       data)
+{
+  GtkWindow *window;
+  GtkApplication *app;
+  guint32 timestamp;
+
+  /* Slightly "wrong" but hopefully by taking the time before
+   * we spend non-zero time initing the window it's far enough in the
+   * past for shell to do-the-right-thing
+   */
+  timestamp = GDK_CURRENT_TIME;
+
+  app = gtk_window_get_application (GTK_WINDOW (data));
+
+  window = g_object_new (KGX_TYPE_WINDOW,
+                        "application", app,
+                        NULL);
+
+  gtk_window_present_with_time (window, timestamp);
+}
+
+static void
+got_text (GtkClipboard *clipboard,
+          const gchar *text,
+          gpointer data)
+{
+  GtkWidget *term = KGX_WINDOW (data)->terminal;
+
+  // TODO: Check for sudo
+
+  // HACK: Technically a race condition here
+  vte_terminal_paste_clipboard (VTE_TERMINAL (term));
+}
+
+static void
+paste_activated (GSimpleAction *action,
+                 GVariant      *parameter,
+                 gpointer       data)
+{
+  GtkClipboard *cb;
+
+  cb = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
+
+  gtk_clipboard_request_text (cb, got_text, data);
+}
+
+static void
+select_all_activated (GSimpleAction *action,
+                      GVariant      *parameter,
+                      gpointer       data)
+{
+  GtkWidget *term = KGX_WINDOW (data)->terminal;
+
+  vte_terminal_select_all (VTE_TERMINAL (term));
+}
+
+static void
+show_in_files_activated (GSimpleAction *action,
+                         GVariant      *parameter,
+                         gpointer       data)
+{
+  GDBusProxy      *proxy;
+  GVariant        *retval;
+  GVariantBuilder *builder;
+  GError          *error = NULL;
+  GtkWidget       *term = KGX_WINDOW (data)->terminal;
+  const gchar     *uri = NULL;
+  const gchar     *method;
+
+  uri = vte_terminal_get_current_file_uri (VTE_TERMINAL (term));
+  method = "ShowItems";
+
+  if (uri == NULL) {
+    uri = vte_terminal_get_current_directory_uri (VTE_TERMINAL (term));
+    method = "ShowFolders";
+  }
+
+  if (uri == NULL) {
+    g_warning (_("win.show-in-files: no file"));
+    return;
+  }
+
+  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                         G_DBUS_PROXY_FLAGS_NONE,
+                                         NULL,
+                                         "org.freedesktop.FileManager1",
+                                         "/org/freedesktop/FileManager1",
+                                         "org.freedesktop.FileManager1",
+                                         NULL, &error);
+
+  if (!proxy) {
+    g_warning (_("win.show-in-files: dbus connect failed %s"), error->message);
+    return;
+  }
+
+  builder = g_variant_builder_new (G_VARIANT_TYPE ("as"));
+  g_variant_builder_add (builder, "s", uri);
+
+  retval = g_dbus_proxy_call_sync (proxy,
+                                   method,
+                                   g_variant_new ("(ass)",
+                                                  builder,
+                                                  ""),
+                                   G_DBUS_CALL_FLAGS_NONE,
+                                   -1, NULL, &error);
+
+  g_variant_builder_unref (builder);
+  g_object_unref (proxy);
+
+  if (!retval) {
+    g_warning (_("win.show-in-files: dbus call failed %s"), error->message);
+    return;
+  }
+
+  g_variant_unref (retval);
+}
+
+static void
 about_activated (GSimpleAction *action,
                  GVariant      *parameter,
                  gpointer       data)
@@ -188,9 +308,53 @@ about_activated (GSimpleAction *action,
 
 static GActionEntry win_entries[] =
 {
+  { "new-window", new_activated, NULL, NULL, NULL },
+  { "open-link", new_activated, NULL, NULL, NULL },
+  { "copy-link", new_activated, NULL, NULL, NULL },
+  { "copy", new_activated, NULL, NULL, NULL },
+  { "paste", paste_activated, NULL, NULL, NULL },
+  { "select-all", select_all_activated, NULL, NULL, NULL },
+  { "show-in-files", show_in_files_activated, NULL, NULL, NULL },
   { "about", about_activated, NULL, NULL, NULL },
 };
 
+static void
+context_menu (KgxWindow *self, GtkWidget *term, GdkEventButton *event)
+{
+  GtkWidget *menu;
+  GtkApplication *app;
+  GMenu *model;
+  GdkRectangle rect;
+
+  app = gtk_window_get_application (GTK_WINDOW (self));
+  model = gtk_application_get_menu_by_id (app, "context-menu");
+
+  rect = (GdkRectangle) { event->x, event->y, 1, 1 };
+
+  menu = gtk_popover_new_from_model (term, G_MENU_MODEL (model));
+  gtk_popover_set_pointing_to (GTK_POPOVER (menu), &rect);
+  gtk_popover_popup (GTK_POPOVER (menu));
+}
+
+static gboolean
+button_press_event (GtkWidget *widget, GdkEventButton *event, KgxWindow *self)
+{
+  if (gdk_event_triggers_context_menu ((GdkEvent *) event) &&
+      event->type == GDK_BUTTON_PRESS)
+    {
+      context_menu (self, widget, event);
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+static gboolean
+popup_menu (GtkWidget *widget, KgxWindow *self)
+{
+  context_menu (self, widget, NULL);
+  return TRUE;
+}
 
 static void
 kgx_window_init (KgxWindow *self)
@@ -227,6 +391,9 @@ kgx_window_init (KgxWindow *self)
     shell[0] = "/bin/sh";
     g_warning ("Defaulting to /bin/sh");
   }
+
+  g_signal_connect (self->terminal, "button-press-event", G_CALLBACK (button_press_event), self);
+  g_signal_connect (self->terminal, "popup-menu", G_CALLBACK (popup_menu), self);
 
   vte_terminal_spawn_async (VTE_TERMINAL (self->terminal),
                             VTE_PTY_DEFAULT,
