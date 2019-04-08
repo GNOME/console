@@ -19,6 +19,8 @@
 #include <glib/gi18n.h>
 #include <vte/vte.h>
 
+#include "rgba.h"
+
 #include "kgx.h"
 #include "kgx-config.h"
 #include "kgx-window.h"
@@ -45,6 +47,7 @@ enum {
 
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 
+
 void
 kgx_window_set_theme (KgxWindow *self,
                       KgxTheme   theme)
@@ -52,6 +55,26 @@ kgx_window_set_theme (KgxWindow *self,
   GtkSettings *settings;
   GdkRGBA fg;
   GdkRGBA bg;
+
+  // Workings of GDK_RGBA prevent this being static
+  GdkRGBA palette[16] = {
+    GDK_RGBA ("241f31"), // Black
+    GDK_RGBA ("c01c28"), // Red
+    GDK_RGBA ("2ec27e"), // Green
+    GDK_RGBA ("f5c211"), // Yellow
+    GDK_RGBA ("1c71d8"), // Blue
+    GDK_RGBA ("813d9c"), // Magenta
+    GDK_RGBA ("0ab9dc"), // Cyan
+    GDK_RGBA ("c0bfbc"), // White
+    GDK_RGBA ("5e5c64"), // Bright Black
+    GDK_RGBA ("ed333b"), // Bright Red
+    GDK_RGBA ("57e389"), // Bright Green
+    GDK_RGBA ("f8e45c"), // Bright Yellow
+    GDK_RGBA ("62a0ea"), // Bright Blue
+    GDK_RGBA ("c061cb"), // Bright Magenta
+    GDK_RGBA ("4fd2fd"), // Bright Cyan
+    GDK_RGBA ("f6f5f4"), // Bright White
+  };
 
   self->theme = theme;
 
@@ -82,8 +105,7 @@ kgx_window_set_theme (KgxWindow *self,
       break;
   }
 
-  vte_terminal_set_color_foreground (VTE_TERMINAL (self->terminal), &fg);
-  vte_terminal_set_color_background (VTE_TERMINAL (self->terminal), &bg);
+  vte_terminal_set_colors (VTE_TERMINAL (self->terminal), &fg, &bg, palette, 16);
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_THEME]);
 }
