@@ -1,3 +1,8 @@
 .terminal-window {
   background: transparent;
 }
+
+vte-terminal {
+  padding: 3px;
+}
+
