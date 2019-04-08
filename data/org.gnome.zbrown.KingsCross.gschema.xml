@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="kgx">
-	<schema id="org.gnome.zbrown.KingsCross" path="/org/gnome/zbrown/KingsCross/">
-	</schema>
+  <enum id="org.gnome.zbrown.KingsCross.Theme">
+    <value nick="night" value="1"/>
+    <value nick="hacker" value="2"/>
+    <value nick="day" value="4"/>
+  </enum>
+
+  <schema id="org.gnome.zbrown.KingsCross" path="/org/gnome/zbrown/KingsCross/">
+    <key name="theme" enum="org.gnome.zbrown.KingsCross.Theme">
+      <default>'hacker'</default>
+    </key>
+  </schema>
 </schemalist>

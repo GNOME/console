@@ -1,5 +1,5 @@
-project('kgx', 'c',        version: '0.1.0',
-  meson_version: '>= 0.40.0',
+project('kgx', 'c', version: '0.1.0',
+  meson_version: '>= 0.42.0',
 )
 
 i18n = import('i18n')
