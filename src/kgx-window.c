@@ -193,6 +193,16 @@ new_activated (GSimpleAction *action,
 }
 
 static void
+copy_activated (GSimpleAction *action,
+                 GVariant      *parameter,
+                 gpointer       data)
+{
+  GtkWidget *term = KGX_WINDOW (data)->terminal;
+
+  vte_terminal_copy_clipboard_format (VTE_TERMINAL (term), VTE_FORMAT_TEXT);
+}
+
+static void
 got_text (GtkClipboard *clipboard,
           const gchar *text,
           gpointer data)
@@ -311,7 +321,7 @@ static GActionEntry win_entries[] =
   { "new-window", new_activated, NULL, NULL, NULL },
   { "open-link", new_activated, NULL, NULL, NULL },
   { "copy-link", new_activated, NULL, NULL, NULL },
-  { "copy", new_activated, NULL, NULL, NULL },
+  { "copy", copy_activated, NULL, NULL, NULL },
   { "paste", paste_activated, NULL, NULL, NULL },
   { "select-all", select_all_activated, NULL, NULL, NULL },
   { "show-in-files", show_in_files_activated, NULL, NULL, NULL },
@@ -325,6 +335,8 @@ context_menu (KgxWindow *self, GtkWidget *term, GdkEventButton *event)
   GtkApplication *app;
   GMenu *model;
   GdkRectangle rect;
+
+  g_message ("%s", vte_terminal_hyperlink_check_event(term,event));
 
   app = gtk_window_get_application (GTK_WINDOW (self));
   model = gtk_application_get_menu_by_id (app, "context-menu");
@@ -357,12 +369,57 @@ popup_menu (GtkWidget *widget, KgxWindow *self)
 }
 
 static void
+selection_changed (VteTerminal *term, KgxWindow *self)
+{
+  GAction *act;
+
+  act = g_action_map_lookup_action (G_ACTION_MAP (self), "copy");
+
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (act),
+                               vte_terminal_get_has_selection (term));
+}
+
+static void
+location_changed (VteTerminal *term, KgxWindow *self)
+{
+  GAction *act;
+  gboolean value;
+
+  act = g_action_map_lookup_action (G_ACTION_MAP (self), "show-in-files");
+
+  value = vte_terminal_get_current_file_uri (term) ||
+            vte_terminal_get_current_directory_uri (term);
+
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
+}
+
+static void
+link_changed (VteTerminal  *term,
+              gchar        *uri,
+              GdkRectangle *bbox,
+              KgxWindow    *self)
+{
+  GAction *act;
+  gboolean value;
+
+  value = uri != NULL;
+
+  g_message ("link chaned %i", value);
+
+  act = g_action_map_lookup_action (G_ACTION_MAP (self), "open-link");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
+  act = g_action_map_lookup_action (G_ACTION_MAP (self), "copy-link");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
+}
+
+static void
 kgx_window_init (KgxWindow *self)
 {
-  GPropertyAction *act;
-  GSettings *settings;
-  GtkCssProvider *provider;
-  gchar *shell[2] = {NULL, NULL};
+  GAction         *act;
+  GPropertyAction *pact;
+  GSettings       *settings;
+  GtkCssProvider  *provider;
+  gchar           *shell[2] = {NULL, NULL};
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -376,8 +433,8 @@ kgx_window_init (KgxWindow *self)
   settings = g_settings_new ("org.gnome.zbrown.KingsCross");
   g_settings_bind (settings, "theme", self, "theme", G_SETTINGS_BIND_DEFAULT);
 
-  act = g_property_action_new ("theme", G_OBJECT (self), "theme");
-  g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (act));
+  pact = g_property_action_new ("theme", G_OBJECT (self), "theme");
+  g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (pact));
 
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (provider, "/org/gnome/zbrown/KingsCross/styles.css");
@@ -385,6 +442,14 @@ kgx_window_init (KgxWindow *self)
                                              GTK_STYLE_PROVIDER (provider),
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
+  act = g_action_map_lookup_action (G_ACTION_MAP (self), "open-link");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
+  act = g_action_map_lookup_action (G_ACTION_MAP (self), "copy-link");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
+  act = g_action_map_lookup_action (G_ACTION_MAP (self), "copy");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
+  act = g_action_map_lookup_action (G_ACTION_MAP (self), "show-in-files");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
 
   shell[0] = vte_get_user_shell ();
   if (shell[0] == NULL) {
@@ -394,6 +459,12 @@ kgx_window_init (KgxWindow *self)
 
   g_signal_connect (self->terminal, "button-press-event", G_CALLBACK (button_press_event), self);
   g_signal_connect (self->terminal, "popup-menu", G_CALLBACK (popup_menu), self);
+
+  g_signal_connect (self->terminal, "selection-changed", G_CALLBACK (selection_changed), self);
+  g_signal_connect (self->terminal, "current-directory-uri-changed", G_CALLBACK (location_changed), self);
+  g_signal_connect (self->terminal, "current-file-uri-changed", G_CALLBACK (location_changed), self);
+
+  g_signal_connect (self->terminal, "hyperlink-hover-uri-changed", G_CALLBACK (link_changed), self);
 
   vte_terminal_spawn_async (VTE_TERMINAL (self->terminal),
                             VTE_PTY_DEFAULT,
