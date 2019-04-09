@@ -17,42 +17,9 @@
  */
 
 #include <glib/gi18n.h>
-#include <vte/vte.h>
 
 #include "kgx-config.h"
-#include "kgx-window.h"
-
-static void
-on_activate (GtkApplication *app)
-{
-	GtkWindow *window;
-
-	/* It's good practice to check your parameters at the beginning of the
-	 * function. It helps catch errors early and in development instead of
-	 * by your users.
-	 */
-	g_assert (GTK_IS_APPLICATION (app));
-
-	/* Get the current window or create one if necessary. */
-	window = gtk_application_get_active_window (app);
-	if (window == NULL)
-		window = g_object_new (KGX_TYPE_WINDOW,
-		                       "application", app,
-		                       "default-width", 600,
-		                       "default-height", 300,
-		                       NULL);
-
-	/* Ask the window manager/compositor to present the window. */
-	gtk_window_present (window);
-}
-
-static void
-on_startup (GtkApplication *app)
-{
-  const char * const new_window_accels[] = { "<shift><primary>n", NULL };
-
-  gtk_application_set_accels_for_action (GTK_APPLICATION (app), "win.new-window", new_window_accels);
-}
+#include "kgx-application.h"
 
 int
 main (int   argc,
@@ -68,26 +35,15 @@ main (int   argc,
 
   g_set_application_name (_("King's Cross"));
 
-  g_type_ensure (VTE_TYPE_TERMINAL);
-
   /*
    * Create a new GtkApplication. The application manages our main loop,
    * application windows, integration with the window manager/compositor, and
    * desktop features such as file opening and single-instance applications.
    */
-  app = gtk_application_new ("org.gnome.zbrown.KingsCross", G_APPLICATION_FLAGS_NONE);
-
-  /*
-   * We connect to the activate signal to create a window when the application
-   * has been lauched. Additionally, this signal notifies us when the user
-   * tries to launch a "second instance" of the application. When they try
-   * to do that, we'll just present any existing window.
-   *
-   * Because we can't pass a pointer to any function type, we have to cast
-   * our "on_activate" function to a GCallback.
-   */
-  g_signal_connect (app, "activate", G_CALLBACK (on_activate), NULL);
-  g_signal_connect (app, "startup", G_CALLBACK (on_startup), NULL);
+  app = g_object_new (KGX_TYPE_APPLICATION,
+                      "application_id", "org.gnome.zbrown.KingsCross",
+                      "flags", G_APPLICATION_FLAGS_NONE,
+                      NULL);
 
   /*
   * Run the application. This function will block until the applicaiton

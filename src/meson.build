@@ -1,5 +1,6 @@
 kgx_sources = [
   'main.c',
+  'kgx-application.c',
   'kgx-window.c',
 ]
 

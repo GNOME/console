@@ -161,7 +161,7 @@ kgx_window_class_init (KgxWindowClass *klass)
                        KGX_TYPE_THEME, KGX_THEME_HACKER,
                        G_PARAM_READWRITE);
 
-	g_object_class_install_properties (object_class, LAST_PROP, pspecs);
+  g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/zbrown/KingsCross/kgx-window.ui");
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, header_bar);
@@ -329,6 +329,16 @@ static GActionEntry win_entries[] =
 };
 
 static void
+application_set (GObject *object, GParamSpec *pspec, gpointer data)
+{
+  g_object_bind_property (gtk_window_get_application (GTK_WINDOW (object)),
+                          "theme",
+                          object,
+                          "theme",
+                          G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+}
+
+static void
 context_menu (KgxWindow *self, GtkWidget *term, GdkEventButton *event)
 {
   GtkWidget *menu;
@@ -417,8 +427,6 @@ kgx_window_init (KgxWindow *self)
 {
   GAction         *act;
   GPropertyAction *pact;
-  GSettings       *settings;
-  GtkCssProvider  *provider;
   gchar           *shell[2] = {NULL, NULL};
 
   gtk_widget_init_template (GTK_WIDGET (self));
@@ -428,19 +436,12 @@ kgx_window_init (KgxWindow *self)
                                    G_N_ELEMENTS (win_entries),
                                    self);
 
-  self->theme = KGX_THEME_HACKER;
+  self->theme = KGX_THEME_NIGHT;
 
-  settings = g_settings_new ("org.gnome.zbrown.KingsCross");
-  g_settings_bind (settings, "theme", self, "theme", G_SETTINGS_BIND_DEFAULT);
+  g_signal_connect (self, "notify::application", G_CALLBACK (application_set), NULL);
 
   pact = g_property_action_new ("theme", G_OBJECT (self), "theme");
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (pact));
-
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/zbrown/KingsCross/styles.css");
-  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
-                                             GTK_STYLE_PROVIDER (provider),
-                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   act = g_action_map_lookup_action (G_ACTION_MAP (self), "open-link");
   g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);

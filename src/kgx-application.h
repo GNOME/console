@@ -1,4 +1,4 @@
-/* kgx.h
+/* kgx-application.h
  *
  * Copyright 2019 Zander Brown
  *
@@ -22,17 +22,9 @@
 
 G_BEGIN_DECLS
 
-/* Until https://github.com/mesonbuild/meson/issues/1687 is resolved this
- * enum must be manually kept in sync with org.gnome.zbrown.KingsCross.Theme
- * in the gschema
- */
+#define KGX_TYPE_APPLICATION (kgx_application_get_type())
 
-typedef enum /*< enum,prefix=KGX >*/
-{
-  KGX_THEME_NIGHT = 1,  /*< nick=night >*/
-  KGX_THEME_HACKER = 2, /*< nick=hacker >*/
-  KGX_THEME_DAY = 4,    /*< nick=day >*/
-} KgxTheme;
+G_DECLARE_FINAL_TYPE (KgxApplication, kgx_application, KGX, APPLICATION, GtkApplication)
 
 G_END_DECLS
 
