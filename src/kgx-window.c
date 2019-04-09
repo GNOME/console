@@ -76,6 +76,7 @@ struct _KgxWindow
   GtkWidget            *header_bar;
   GtkWidget            *terminal;
   GtkWidget            *dims;
+  GtkWidget            *search_bar;
 };
 
 G_DEFINE_TYPE (KgxWindow, kgx_window, GTK_TYPE_APPLICATION_WINDOW)
@@ -169,6 +170,38 @@ kgx_window_get_property (GObject    *object,
   }
 }
 
+static void
+search_changed (GtkEntry  *entry,
+                KgxWindow *self)
+{
+  VteRegex *regex;
+  GError *error = NULL;
+
+  regex = vte_regex_new_for_search (gtk_entry_get_text (entry), -1,
+                                    PCRE2_MULTILINE, &error);
+
+  if (error) {
+    g_warning (_("Search error: %s"), error->message);
+    return;
+  }
+
+  vte_terminal_search_set_regex (VTE_TERMINAL (self->terminal),
+                                 regex, 0);
+}
+
+static void
+search_next (gpointer   entry_or_button,
+             KgxWindow *self)
+{
+  vte_terminal_search_find_next (VTE_TERMINAL (self->terminal));
+}
+
+static void
+search_prev (gpointer   entry_or_button,
+             KgxWindow *self)
+{
+  vte_terminal_search_find_previous (VTE_TERMINAL (self->terminal));
+}
 
 static void
 kgx_window_class_init (KgxWindowClass *klass)
@@ -187,9 +220,15 @@ kgx_window_class_init (KgxWindowClass *klass)
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/zbrown/KingsCross/kgx-window.ui");
+
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, header_bar);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, terminal);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, dims);
+  gtk_widget_class_bind_template_child (widget_class, KgxWindow, search_bar);
+
+  gtk_widget_class_bind_template_callback (widget_class, search_changed);
+  gtk_widget_class_bind_template_callback (widget_class, search_next);
+  gtk_widget_class_bind_template_callback (widget_class, search_prev);
 }
 
 static void
@@ -369,7 +408,7 @@ about_activated (GSimpleAction *action,
                          "copyright", g_strdup_printf (_("Copyright © %Id Zander Brown"), 2019),
                          "license-type", GTK_LICENSE_GPL_3_0,
                          "logo-icon-name", "org.gnome.zbrown.KingsCross",
-                         "proogram-name", _("King's Cross"),
+                         "program-name", _("King's Cross"),
                          "version", PACKAGE_VERSION,
                          NULL);
 }
@@ -545,6 +584,9 @@ kgx_window_init (KgxWindow *self)
   pact = g_property_action_new ("theme", G_OBJECT (self), "theme");
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (pact));
 
+  pact = g_property_action_new ("find", G_OBJECT (self->search_bar), "search-mode-enabled");
+  g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (pact));
+
   act = g_action_map_lookup_action (G_ACTION_MAP (self), "open-link");
   g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
   act = g_action_map_lookup_action (G_ACTION_MAP (self), "copy-link");
@@ -568,6 +610,8 @@ kgx_window_init (KgxWindow *self)
   g_signal_connect (self->terminal, "current-file-uri-changed", G_CALLBACK (location_changed), self);
 
   g_signal_connect (self->terminal, "size-allocate", G_CALLBACK (size_changed), self);
+
+  vte_terminal_search_set_wrap_around (VTE_TERMINAL (self->terminal), TRUE);
 
   for (int i = 0; i < N_LINK_REGEX; i++) {
     VteRegex *regex;

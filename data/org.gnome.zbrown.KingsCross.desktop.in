@@ -2,7 +2,9 @@
 Name=King's Cross
 Exec=kgx
 Icon=org.gnome.zbrown.KingsCross
+Keywords=shell;prompt;command;commandline;cmd;
 Terminal=false
 Type=Application
-Categories=GTK;
+Categories=System;TerminalEmulator;X-GNOME-Utilities;GTK;
 StartupNotify=true
+DBusActivatable=true

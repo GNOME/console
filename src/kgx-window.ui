@@ -11,68 +11,132 @@
     </section>
     <section>
       <item>
+        <attribute name="label" translatable="yes">_Find</attribute>
+        <attribute name="action">win.find</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
         <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
         <attribute name="action">win.show-help-overlay</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">_About King's Cross</attribute>
+        <attribute name="label" translatable="yes">_About King&apos;s Cross</attribute>
         <attribute name="action">win.about</attribute>
       </item>
     </section>
   </menu>
   <template class="KgxWindow" parent="GtkApplicationWindow">
-    <property name="can_focus">False</property>
-    <property name="default_width">800</property>
-    <property name="default_height">450</property>
+    <property name="can-focus">False</property>
+    <property name="default-width">800</property>
+    <property name="default-height">450</property>
     <child type="titlebar">
       <object class="GtkHeaderBar" id="header_bar">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="title" bind-source="terminal" bind-property="window-title" bind-flags="sync-create">King's Cross</property>
-        <property name="subtitle" bind-source="terminal" bind-property="current-directory-uri" bind-flags="sync-create">/home/user</property>
-        <property name="show_close_button">True</property>
+        <property name="visible">1</property>
+        <property name="title" bind-source="terminal" bind-property="window-title" bind-flags="sync-create"/>
+        <property name="subtitle" bind-source="terminal" bind-property="current-directory-uri" bind-flags="sync-create"/>
+        <property name="show-close-button">1</property>
         <child>
           <object class="GtkMenuButton">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="menu_model">win-menu</property>
+            <property name="visible">1</property>
+            <property name="can-focus">1</property>
+            <property name="receives-default">1</property>
+            <property name="menu-model">win-menu</property>
             <child>
               <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="icon_name">open-menu-symbolic</property>
+                <property name="visible">1</property>
+                <property name="icon-name">open-menu-symbolic</property>
               </object>
             </child>
           </object>
           <packing>
-            <property name="pack_type">end</property>
+            <property name="pack-type">end</property>
           </packing>
         </child>
       </object>
     </child>
     <child>
       <object class="GtkOverlay">
-        <property name="visible">True</property>
+        <property name="visible">1</property>
         <child>
-          <object class="GtkScrolledWindow">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="shadow_type">none</property>
-            <property name="propagate-natural-width">True</property>
-            <property name="propagate-natural-height">True</property>
-            <property name="hscrollbar-policy">never</property>
+          <object class="GtkBox">
+            <property name="visible">1</property>
+            <property name="orientation">vertical</property>
             <child>
-              <object class="VteTerminal" id="terminal">
-                <property name="visible">True</property>
-                <property name="allow-hyperlink">True</property>
+              <object class="GtkSearchBar" id="search_bar">
+                <property name="visible">1</property>
+                <property name="show-close-button">1</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">1</property>
+                    <child>
+                      <object class="GtkSearchEntry" id="entry">
+                        <property name="visible">1</property>
+                        <property name="can-focus">1</property>
+                        <property name="hexpand">1</property>
+                        <signal name="next-match" handler="search_next" swapped="no"/>
+                        <signal name="previous-match" handler="search_prev" swapped="no"/>
+                        <signal name="search-changed" handler="search_changed" swapped="no"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton">
+                        <property name="visible">1</property>
+                        <property name="can-focus">1</property>
+                        <property name="receives-default">1</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">1</property>
+                            <property name="icon-name">go-down-symbolic</property>
+                          </object>
+                        </child>
+                        <signal name="clicked" handler="search_next" swapped="no"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton">
+                        <property name="visible">1</property>
+                        <property name="can-focus">1</property>
+                        <property name="receives-default">1</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">1</property>
+                            <property name="icon-name">go-up-symbolic</property>
+                          </object>
+                        </child>
+                        <signal name="clicked" handler="search_prev" swapped="no"/>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="linked"/>
+                    </style>
+                  </object>
+                </child>
+                <style>
+                  <class name="background"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow">
+                <property name="visible">1</property>
+                <property name="can-focus">1</property>
+                <property name="expand">1</property>
+                <property name="propagate-natural-width">1</property>
+                <property name="propagate-natural-height">1</property>
+                <property name="hscrollbar-policy">never</property>
+                <child>
+                  <object class="VteTerminal" id="terminal">
+                    <property name="visible">True</property>
+                    <property name="allow-hyperlink">True</property>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
         </child>
         <child type="overlay">
           <object class="GtkLabel" id="dims">
-            <property name="visible">False</property>
             <property name="halign">end</property>
             <property name="valign">end</property>
             <property name="label">WxH</property>
