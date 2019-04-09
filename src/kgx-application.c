@@ -136,7 +136,10 @@ kgx_application_startup (GApplication *app)
   gtk_css_provider_load_from_resource (provider, "/org/gnome/zbrown/KingsCross/styles.css");
   gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
                                              GTK_STYLE_PROVIDER (provider),
-                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+                                             /* Is this stupid? Yes
+                                              * Does it fix vte using the wrong
+                                              * priority for fallback styles? Yes*/
+                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
 }
 
 static void
