@@ -18,6 +18,8 @@
 
 #include <glib/gi18n.h>
 #include <vte/vte.h>
+#define PCRE2_CODE_UNIT_WIDTH 0
+#include <pcre2.h>
 
 #include "rgba.h"
 
@@ -26,11 +28,42 @@
 #include "kgx-window.h"
 #include "kgx-enums.h"
 
+/*       Regex adapted from TerminalWidget.vala in Pantheon Terminal       */
+
+#define USERCHARS "-[:alnum:]"
+#define USERCHARS_CLASS "[" USERCHARS "]"
+#define PASSCHARS_CLASS "[-[:alnum:]\\Q,?;.:/!%$^*&~\"#'\\E]"
+#define HOSTCHARS_CLASS "[-[:alnum:]]"
+#define HOST HOSTCHARS_CLASS "+(\\." HOSTCHARS_CLASS "+)*"
+#define PORT "(?:\\:[[:digit:]]{1,5})?"
+#define PATHCHARS_CLASS "[-[:alnum:]\\Q_$.+!*,;:@&=?/~#%\\E]"
+#define PATHTERM_CLASS "[^\\Q]'.}>) \t\r\n,\"\\E]"
+#define SCHEME "(?:news:|telnet:|nntp:|file:\\/|https?:|ftps?:|sftp:|webcal:\n" \
+               "|irc:|sftp:|ldaps?:|nfs:|smb:|rsync:|"                          \
+               "ssh:|rlogin:|telnet:|git:\n"                                    \
+               "|git\\+ssh:|bzr:|bzr\\+ssh:|svn:|svn\\"                         \
+               "+ssh:|hg:|mailto:|magnet:)"
+#define USERPASS USERCHARS_CLASS "+(?:" PASSCHARS_CLASS "+)?"
+#define URLPATH "(?:(/" PATHCHARS_CLASS "+(?:[(]" PATHCHARS_CLASS "*[)])*" PATHCHARS_CLASS "*)*" PATHTERM_CLASS ")?"
+
+#define N_LINK_REGEX 5
+const gchar* links[N_LINK_REGEX] = {
+  SCHEME "//(?:" USERPASS "\\@)?" HOST PORT URLPATH,
+  "(?:www|ftp)" HOSTCHARS_CLASS "*\\." HOST PORT URLPATH,
+  "(?:callto:|h323:|sip:)" USERCHARS_CLASS "[" USERCHARS ".]*(?:" PORT "/[a-z0-9]+)?\\@" HOST,
+  "(?:mailto:)?" USERCHARS_CLASS "[" USERCHARS ".]*\\@" HOSTCHARS_CLASS "+\\." HOST,
+  "(?:news:|man:|info:)[[:alnum:]\\Q^_{|}~!\"#$%&'()*+,./;:=?`\\E]+"
+};
+
+/*       Regex adapted from TerminalWidget.vala in Pantheon Terminal       */
+
 struct _KgxWindow
 {
   GtkApplicationWindow  parent_instance;
 
   KgxTheme              theme;
+  const char           *current_url;
+  int                   match_id[N_LINK_REGEX];
 
   /* Template widgets */
   GtkWidget            *header_bar;
@@ -52,7 +85,6 @@ void
 kgx_window_set_theme (KgxWindow *self,
                       KgxTheme   theme)
 {
-  GtkSettings *settings;
   GdkRGBA fg;
   GdkRGBA bg;
 
@@ -62,15 +94,15 @@ kgx_window_set_theme (KgxWindow *self,
     GDK_RGBA ("c01c28"), // Red
     GDK_RGBA ("2ec27e"), // Green
     GDK_RGBA ("f5c211"), // Yellow
-    GDK_RGBA ("1c71d8"), // Blue
-    GDK_RGBA ("813d9c"), // Magenta
+    GDK_RGBA ("1e78e4"), // Blue
+    GDK_RGBA ("9841bb"), // Magenta
     GDK_RGBA ("0ab9dc"), // Cyan
     GDK_RGBA ("c0bfbc"), // White
     GDK_RGBA ("5e5c64"), // Bright Black
     GDK_RGBA ("ed333b"), // Bright Red
     GDK_RGBA ("57e389"), // Bright Green
     GDK_RGBA ("f8e45c"), // Bright Yellow
-    GDK_RGBA ("62a0ea"), // Bright Blue
+    GDK_RGBA ("51a1ff"), // Bright Blue
     GDK_RGBA ("c061cb"), // Bright Magenta
     GDK_RGBA ("4fd2fd"), // Bright Cyan
     GDK_RGBA ("f6f5f4"), // Bright White
@@ -78,28 +110,17 @@ kgx_window_set_theme (KgxWindow *self,
 
   self->theme = theme;
 
-  settings = gtk_settings_get_default ();
-
   switch (theme) {
     case KGX_THEME_NIGHT:
-      g_object_set (G_OBJECT (settings),
-                    "gtk-application-prefer-dark-theme", TRUE,
-                    NULL);
       bg = (GdkRGBA) { 0.1, 0.1, 0.1, 0.96};
       fg = (GdkRGBA) { 1.0, 1.0, 1.0, 1.0};
       break;
     case KGX_THEME_HACKER:
-      g_object_set (G_OBJECT (settings),
-                    "gtk-application-prefer-dark-theme", TRUE,
-                    NULL);
       bg = (GdkRGBA) { 0.1, 0.1, 0.1, 0.96};
       fg = (GdkRGBA) { 0.1, 1.0, 0.1, 1.0};
       break;
     case KGX_THEME_DAY:
     default:
-      g_object_set (G_OBJECT (settings),
-                    "gtk-application-prefer-dark-theme", FALSE,
-                    NULL);
       bg = (GdkRGBA) { 1.0, 1.0, 1.0, 0.96};
       fg = (GdkRGBA) { 0.0, 0.0, 0.0, 1.0};
       break;
@@ -193,6 +214,40 @@ new_activated (GSimpleAction *action,
 }
 
 static void
+open_link_activated (GSimpleAction *action,
+                     GVariant      *parameter,
+                     gpointer       data)
+{
+  GError *error = NULL;
+  KgxWindow *self = KGX_WINDOW (data);
+  guint32 timestamp;
+
+  timestamp = GDK_CURRENT_TIME;
+
+  gtk_show_uri_on_window (GTK_WINDOW (self),
+                          self->current_url,
+                          timestamp,
+                          &error);
+
+  if (error) {
+    g_warning (_("Failed to open link %s"), error->message);
+  }
+}
+
+static void
+copy_link_activated (GSimpleAction *action,
+                     GVariant      *parameter,
+                     gpointer       data)
+{
+  GtkClipboard *cb;
+  KgxWindow *self = KGX_WINDOW (data);
+
+  cb = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+
+  gtk_clipboard_set_text (cb, self->current_url, -1);
+}
+
+static void
 copy_activated (GSimpleAction *action,
                  GVariant      *parameter,
                  gpointer       data)
@@ -222,7 +277,7 @@ paste_activated (GSimpleAction *action,
 {
   GtkClipboard *cb;
 
-  cb = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
+  cb = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
 
   gtk_clipboard_request_text (cb, got_text, data);
 }
@@ -319,8 +374,8 @@ about_activated (GSimpleAction *action,
 static GActionEntry win_entries[] =
 {
   { "new-window", new_activated, NULL, NULL, NULL },
-  { "open-link", new_activated, NULL, NULL, NULL },
-  { "copy-link", new_activated, NULL, NULL, NULL },
+  { "open-link", open_link_activated, NULL, NULL, NULL },
+  { "copy-link", copy_link_activated, NULL, NULL, NULL },
   { "copy", copy_activated, NULL, NULL, NULL },
   { "paste", paste_activated, NULL, NULL, NULL },
   { "select-all", select_all_activated, NULL, NULL, NULL },
@@ -341,12 +396,32 @@ application_set (GObject *object, GParamSpec *pspec, gpointer data)
 static void
 context_menu (KgxWindow *self, GtkWidget *term, GdkEventButton *event)
 {
-  GtkWidget *menu;
+  GAction        *act;
+  GtkWidget      *menu;
   GtkApplication *app;
-  GMenu *model;
-  GdkRectangle rect;
+  GMenu          *model;
+  GdkRectangle    rect;
+  gboolean        value;
+  const char     *match;
+  int             match_id;
 
-  g_message ("%s", vte_terminal_hyperlink_check_event(term,event));
+  match = vte_terminal_match_check_event (VTE_TERMINAL (term),
+                                          (GdkEvent *) event,
+                                          &match_id);
+
+  self->current_url = NULL;
+  for (int i = 0; i < N_LINK_REGEX; i++) {
+    if (self->match_id[i] == match_id) {
+      self->current_url = match;
+      break;
+    }
+  }
+  value = self->current_url != NULL;
+
+  act = g_action_map_lookup_action (G_ACTION_MAP (self), "open-link");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
+  act = g_action_map_lookup_action (G_ACTION_MAP (self), "copy-link");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
 
   app = gtk_window_get_application (GTK_WINDOW (self));
   model = gtk_application_get_menu_by_id (app, "context-menu");
@@ -404,25 +479,6 @@ location_changed (VteTerminal *term, KgxWindow *self)
 }
 
 static void
-link_changed (VteTerminal  *term,
-              gchar        *uri,
-              GdkRectangle *bbox,
-              KgxWindow    *self)
-{
-  GAction *act;
-  gboolean value;
-
-  value = uri != NULL;
-
-  g_message ("link chaned %i", value);
-
-  act = g_action_map_lookup_action (G_ACTION_MAP (self), "open-link");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
-  act = g_action_map_lookup_action (G_ACTION_MAP (self), "copy-link");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
-}
-
-static void
 kgx_window_init (KgxWindow *self)
 {
   GAction         *act;
@@ -437,6 +493,7 @@ kgx_window_init (KgxWindow *self)
                                    self);
 
   self->theme = KGX_THEME_NIGHT;
+  self->current_url = NULL;
 
   g_signal_connect (self, "notify::application", G_CALLBACK (application_set), NULL);
 
@@ -465,7 +522,25 @@ kgx_window_init (KgxWindow *self)
   g_signal_connect (self->terminal, "current-directory-uri-changed", G_CALLBACK (location_changed), self);
   g_signal_connect (self->terminal, "current-file-uri-changed", G_CALLBACK (location_changed), self);
 
-  g_signal_connect (self->terminal, "hyperlink-hover-uri-changed", G_CALLBACK (link_changed), self);
+  for (int i = 0; i < N_LINK_REGEX; i++) {
+    VteRegex *regex;
+    GError *error = NULL;
+
+    regex = vte_regex_new_for_match (links[i], -1, PCRE2_MULTILINE, &error);
+
+    if (error) {
+      g_warning (_("link regex failed: %s"), error->message);
+      continue;
+    }
+
+    self->match_id[i] = vte_terminal_match_add_regex (VTE_TERMINAL (self->terminal),
+                                                      regex,
+                                                      0);
+
+    vte_terminal_match_set_cursor_name (VTE_TERMINAL (self->terminal),
+                                        self->match_id[i],
+                                        "pointer");
+  }
 
   vte_terminal_spawn_async (VTE_TERMINAL (self->terminal),
                             VTE_PTY_DEFAULT,

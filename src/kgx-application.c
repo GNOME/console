@@ -130,14 +130,25 @@ kgx_application_activate (GApplication *app)
 static void
 kgx_application_startup (GApplication *app)
 {
+  GSettings      *settings;
+  GtkCssProvider *provider;
   const char *const new_window_accels[] = { "<shift><primary>n", NULL };
 
   g_type_ensure (VTE_TYPE_TERMINAL);
 
+  G_APPLICATION_CLASS (kgx_application_parent_class)->startup (app);
+
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "win.new-window", new_window_accels);
 
-  G_APPLICATION_CLASS (kgx_application_parent_class)->startup (app);
+  settings = g_settings_new ("org.gnome.zbrown.KingsCross");
+  g_settings_bind (settings, "theme", app, "theme", G_SETTINGS_BIND_DEFAULT);
+
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_resource (provider, "/org/gnome/zbrown/KingsCross/styles.css");
+  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+                                             GTK_STYLE_PROVIDER (provider),
+                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 static void
@@ -163,15 +174,4 @@ kgx_application_class_init (KgxApplicationClass *klass)
 static void
 kgx_application_init (KgxApplication *self)
 {
-  GSettings       *settings;
-  GtkCssProvider  *provider;
-
-  settings = g_settings_new ("org.gnome.zbrown.KingsCross");
-  g_settings_bind (settings, "theme", self, "theme", G_SETTINGS_BIND_DEFAULT);
-
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/zbrown/KingsCross/styles.css");
-  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
-                                             GTK_STYLE_PROVIDER (provider),
-                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
