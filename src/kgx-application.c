@@ -48,26 +48,7 @@ void
 kgx_application_set_theme (KgxApplication *self,
                            KgxTheme        theme)
 {
-  GtkSettings *settings;
-
   self->theme = theme;
-
-  settings = gtk_settings_get_default ();
-
-  switch (theme) {
-    case KGX_THEME_NIGHT:
-    case KGX_THEME_HACKER:
-      g_object_set (G_OBJECT (settings),
-                    "gtk-application-prefer-dark-theme", TRUE,
-                    NULL);
-      break;
-    case KGX_THEME_DAY:
-    default:
-      g_object_set (G_OBJECT (settings),
-                    "gtk-application-prefer-dark-theme", FALSE,
-                    NULL);
-      break;
-  }
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_THEME]);
 }
@@ -130,6 +111,7 @@ kgx_application_activate (GApplication *app)
 static void
 kgx_application_startup (GApplication *app)
 {
+  GtkSettings    *gtk_settings;
   GSettings      *settings;
   GtkCssProvider *provider;
   const char *const new_window_accels[] = { "<shift><primary>n", NULL };
@@ -137,6 +119,12 @@ kgx_application_startup (GApplication *app)
   g_type_ensure (VTE_TYPE_TERMINAL);
 
   G_APPLICATION_CLASS (kgx_application_parent_class)->startup (app);
+
+  gtk_settings = gtk_settings_get_default ();
+
+  g_object_set (G_OBJECT (gtk_settings),
+                "gtk-application-prefer-dark-theme", TRUE,
+                NULL);
 
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "win.new-window", new_window_accels);

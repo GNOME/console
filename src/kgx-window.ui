@@ -11,23 +11,6 @@
     </section>
     <section>
       <item>
-        <attribute name="label" translatable="yes">N_ight</attribute>
-        <attribute name="action">win.theme</attribute>
-        <attribute name="target">night</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">_Hacker</attribute>
-        <attribute name="action">win.theme</attribute>
-        <attribute name="target">hacker</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">_Day</attribute>
-        <attribute name="action">win.theme</attribute>
-        <attribute name="target">day</attribute>
-      </item>
-    </section>
-    <section>
-      <item>
         <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
         <attribute name="action">win.show-help-overlay</attribute>
       </item>

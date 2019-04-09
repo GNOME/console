@@ -2,6 +2,10 @@
   background: transparent;
 }
 
+.terminal-window.root headerbar {
+  background: #a51d2d;
+}
+
 vte-terminal {
   padding: 3px;
 }

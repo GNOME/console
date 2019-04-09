@@ -86,7 +86,7 @@ kgx_window_set_theme (KgxWindow *self,
                       KgxTheme   theme)
 {
   GdkRGBA fg;
-  GdkRGBA bg;
+  GdkRGBA bg = (GdkRGBA) { 0.1, 0.1, 0.1, 0.96};
 
   // Workings of GDK_RGBA prevent this being static
   GdkRGBA palette[16] = {
@@ -111,18 +111,12 @@ kgx_window_set_theme (KgxWindow *self,
   self->theme = theme;
 
   switch (theme) {
-    case KGX_THEME_NIGHT:
-      bg = (GdkRGBA) { 0.1, 0.1, 0.1, 0.96};
-      fg = (GdkRGBA) { 1.0, 1.0, 1.0, 1.0};
-      break;
     case KGX_THEME_HACKER:
-      bg = (GdkRGBA) { 0.1, 0.1, 0.1, 0.96};
       fg = (GdkRGBA) { 0.1, 1.0, 0.1, 1.0};
       break;
-    case KGX_THEME_DAY:
+    case KGX_THEME_NIGHT:
     default:
-      bg = (GdkRGBA) { 1.0, 1.0, 1.0, 0.96};
-      fg = (GdkRGBA) { 0.0, 0.0, 0.0, 1.0};
+      fg = (GdkRGBA) { 1.0, 1.0, 1.0, 1.0};
       break;
   }
 

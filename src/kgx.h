@@ -31,7 +31,6 @@ typedef enum /*< enum,prefix=KGX >*/
 {
   KGX_THEME_NIGHT = 1,  /*< nick=night >*/
   KGX_THEME_HACKER = 2, /*< nick=hacker >*/
-  KGX_THEME_DAY = 4,    /*< nick=day >*/
 } KgxTheme;
 
 G_END_DECLS

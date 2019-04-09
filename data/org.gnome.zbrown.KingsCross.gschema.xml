@@ -3,12 +3,11 @@
   <enum id="org.gnome.zbrown.KingsCross.Theme">
     <value nick="night" value="1"/>
     <value nick="hacker" value="2"/>
-    <value nick="day" value="4"/>
   </enum>
 
   <schema id="org.gnome.zbrown.KingsCross" path="/org/gnome/zbrown/KingsCross/">
     <key name="theme" enum="org.gnome.zbrown.KingsCross.Theme">
-      <default>'hacker'</default>
+      <default>'night'</default>
     </key>
   </schema>
 </schemalist>
