@@ -22,8 +22,8 @@
   </menu>
   <template class="KgxWindow" parent="GtkApplicationWindow">
     <property name="can_focus">False</property>
-    <property name="default_width">600</property>
-    <property name="default_height">300</property>
+    <property name="default_width">800</property>
+    <property name="default_height">450</property>
     <child type="titlebar">
       <object class="GtkHeaderBar" id="header_bar">
         <property name="visible">True</property>
@@ -52,17 +52,33 @@
       </object>
     </child>
     <child>
-      <object class="GtkScrolledWindow">
+      <object class="GtkOverlay">
         <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="shadow_type">none</property>
-        <property name="propagate-natural-width">True</property>
-        <property name="propagate-natural-height">True</property>
-        <property name="hscrollbar-policy">never</property>
         <child>
-          <object class="VteTerminal" id="terminal">
+          <object class="GtkScrolledWindow">
             <property name="visible">True</property>
-            <property name="allow-hyperlink">True</property>
+            <property name="can_focus">True</property>
+            <property name="shadow_type">none</property>
+            <property name="propagate-natural-width">True</property>
+            <property name="propagate-natural-height">True</property>
+            <property name="hscrollbar-policy">never</property>
+            <child>
+              <object class="VteTerminal" id="terminal">
+                <property name="visible">True</property>
+                <property name="allow-hyperlink">True</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child type="overlay">
+          <object class="GtkLabel" id="dims">
+            <property name="visible">False</property>
+            <property name="halign">end</property>
+            <property name="valign">end</property>
+            <property name="label">WxH</property>
+            <style>
+              <class name="floating-bar"/>
+            </style>
           </object>
         </child>
       </object>

@@ -62,12 +62,20 @@ struct _KgxWindow
   GtkApplicationWindow  parent_instance;
 
   KgxTheme              theme;
+
+  /* Hyperlinks */
   const char           *current_url;
   int                   match_id[N_LINK_REGEX];
+
+  /* Size indicator */
+  int                   last_cols;
+  int                   last_rows;
+  guint                 timeout;
 
   /* Template widgets */
   GtkWidget            *header_bar;
   GtkWidget            *terminal;
+  GtkWidget            *dims;
 };
 
 G_DEFINE_TYPE (KgxWindow, kgx_window, GTK_TYPE_APPLICATION_WINDOW)
@@ -181,6 +189,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/zbrown/KingsCross/kgx-window.ui");
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, header_bar);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, terminal);
+  gtk_widget_class_bind_template_child (widget_class, KgxWindow, dims);
 }
 
 static void
@@ -472,6 +481,48 @@ location_changed (VteTerminal *term, KgxWindow *self)
   g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
 }
 
+static gboolean
+size_timeout (KgxWindow *self)
+{
+  self->timeout = 0;
+
+  gtk_widget_hide (self->dims);
+
+  return G_SOURCE_REMOVE;
+}
+
+static void
+size_changed (GtkWidget    *widget,
+              GdkRectangle *allocation,
+              KgxWindow    *self)
+{
+  char        *label;
+  int          cols;
+  int          rows;
+  VteTerminal *term = VTE_TERMINAL (widget);
+
+  cols = vte_terminal_get_column_count (term);
+  rows = vte_terminal_get_row_count (term);
+
+  if (self->timeout != 0) {
+    g_source_remove (self->timeout);
+  }
+  self->timeout = g_timeout_add (800, G_SOURCE_FUNC (size_timeout), self);
+
+  if (cols == self->last_cols && rows == self->last_rows)
+    return;
+
+  self->last_cols = cols;
+  self->last_rows = rows;
+
+  label = g_strdup_printf ("%ix%i", cols, rows);
+
+  gtk_label_set_label (GTK_LABEL (self->dims), label);
+  gtk_widget_show (self->dims);
+
+  g_free (label);
+}
+
 static void
 kgx_window_init (KgxWindow *self)
 {
@@ -515,6 +566,8 @@ kgx_window_init (KgxWindow *self)
   g_signal_connect (self->terminal, "selection-changed", G_CALLBACK (selection_changed), self);
   g_signal_connect (self->terminal, "current-directory-uri-changed", G_CALLBACK (location_changed), self);
   g_signal_connect (self->terminal, "current-file-uri-changed", G_CALLBACK (location_changed), self);
+
+  g_signal_connect (self->terminal, "size-allocate", G_CALLBACK (size_changed), self);
 
   for (int i = 0; i < N_LINK_REGEX; i++) {
     VteRegex *regex;
