@@ -11,12 +11,6 @@
     </section>
     <section>
       <item>
-        <attribute name="label" translatable="yes">_Find</attribute>
-        <attribute name="action">win.find</attribute>
-      </item>
-    </section>
-    <section>
-      <item>
         <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
         <attribute name="action">win.show-help-overlay</attribute>
       </item>
@@ -37,6 +31,23 @@
         <property name="title" bind-source="terminal" bind-property="window-title" bind-flags="sync-create"/>
         <property name="subtitle" bind-source="terminal" bind-property="current-directory-uri" bind-flags="sync-create"/>
         <property name="show-close-button">1</property>
+        <child>
+          <object class="GtkToggleButton">
+            <property name="visible">1</property>
+            <property name="can-focus">1</property>
+            <property name="receives-default">1</property>
+            <property name="action-name">win.find</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">1</property>
+                <property name="icon-name">edit-find-symbolic</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="pack-type">start</property>
+          </packing>
+        </child>
         <child>
           <object class="GtkMenuButton">
             <property name="visible">1</property>
@@ -66,7 +77,6 @@
             <child>
               <object class="GtkSearchBar" id="search_bar">
                 <property name="visible">1</property>
-                <property name="show-close-button">1</property>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">1</property>
