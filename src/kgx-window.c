@@ -171,14 +171,24 @@ kgx_window_get_property (GObject    *object,
 }
 
 static void
+application_set (GObject *object, GParamSpec *pspec, gpointer data)
+{
+  g_object_bind_property (gtk_window_get_application (GTK_WINDOW (object)),
+                          "theme",
+                          object,
+                          "theme",
+                          G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+}
+
+static void
 search_changed (GtkEntry  *entry,
                 KgxWindow *self)
 {
   VteRegex *regex;
   GError *error = NULL;
 
-  regex = vte_regex_new_for_search (gtk_entry_get_text (entry), -1,
-                                    PCRE2_MULTILINE, &error);
+  regex = vte_regex_new_for_search (g_regex_escape_string (gtk_entry_get_text (entry), -1),
+                                    -1, PCRE2_MULTILINE, &error);
 
   if (error) {
     g_warning (_("Search error: %s"), error->message);
@@ -201,6 +211,133 @@ search_prev (gpointer   entry_or_button,
              KgxWindow *self)
 {
   vte_terminal_search_find_previous (VTE_TERMINAL (self->terminal));
+}
+
+static gboolean
+size_timeout (KgxWindow *self)
+{
+  self->timeout = 0;
+
+  gtk_widget_hide (self->dims);
+
+  return G_SOURCE_REMOVE;
+}
+
+static void
+size_changed (GtkWidget    *widget,
+              GdkRectangle *allocation,
+              KgxWindow    *self)
+{
+  char        *label;
+  int          cols;
+  int          rows;
+  VteTerminal *term = VTE_TERMINAL (widget);
+
+  cols = vte_terminal_get_column_count (term);
+  rows = vte_terminal_get_row_count (term);
+
+  if (self->timeout != 0) {
+    g_source_remove (self->timeout);
+  }
+  self->timeout = g_timeout_add (800, G_SOURCE_FUNC (size_timeout), self);
+
+  if (cols == self->last_cols && rows == self->last_rows)
+    return;
+
+  self->last_cols = cols;
+  self->last_rows = rows;
+
+  label = g_strdup_printf ("%ix%i", cols, rows);
+
+  gtk_label_set_label (GTK_LABEL (self->dims), label);
+  gtk_widget_show (self->dims);
+
+  g_free (label);
+}
+
+static void
+context_menu (KgxWindow *self, GtkWidget *term, GdkEventButton *event)
+{
+  GAction        *act;
+  GtkWidget      *menu;
+  GtkApplication *app;
+  GMenu          *model;
+  GdkRectangle    rect;
+  gboolean        value;
+  const char     *match;
+  int             match_id;
+
+  match = vte_terminal_match_check_event (VTE_TERMINAL (term),
+                                          (GdkEvent *) event,
+                                          &match_id);
+
+  self->current_url = NULL;
+  for (int i = 0; i < N_LINK_REGEX; i++) {
+    if (self->match_id[i] == match_id) {
+      self->current_url = match;
+      break;
+    }
+  }
+  value = self->current_url != NULL;
+
+  act = g_action_map_lookup_action (G_ACTION_MAP (self), "open-link");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
+  act = g_action_map_lookup_action (G_ACTION_MAP (self), "copy-link");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
+
+  app = gtk_window_get_application (GTK_WINDOW (self));
+  model = gtk_application_get_menu_by_id (app, "context-menu");
+
+  rect = (GdkRectangle) { event->x, event->y, 1, 1 };
+
+  menu = gtk_popover_new_from_model (term, G_MENU_MODEL (model));
+  gtk_popover_set_pointing_to (GTK_POPOVER (menu), &rect);
+  gtk_popover_popup (GTK_POPOVER (menu));
+}
+
+static gboolean
+button_press_event (GtkWidget *widget, GdkEventButton *event, KgxWindow *self)
+{
+  if (gdk_event_triggers_context_menu ((GdkEvent *) event) &&
+      event->type == GDK_BUTTON_PRESS)
+    {
+      context_menu (self, widget, event);
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+static gboolean
+popup_menu (GtkWidget *widget, KgxWindow *self)
+{
+  context_menu (self, widget, NULL);
+  return TRUE;
+}
+
+static void
+selection_changed (VteTerminal *term, KgxWindow *self)
+{
+  GAction *act;
+
+  act = g_action_map_lookup_action (G_ACTION_MAP (self), "copy");
+
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (act),
+                               vte_terminal_get_has_selection (term));
+}
+
+static void
+location_changed (VteTerminal *term, KgxWindow *self)
+{
+  GAction *act;
+  gboolean value;
+
+  act = g_action_map_lookup_action (G_ACTION_MAP (self), "show-in-files");
+
+  value = vte_terminal_get_current_file_uri (term) ||
+            vte_terminal_get_current_directory_uri (term);
+
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
 }
 
 static void
@@ -226,9 +363,18 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, dims);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, search_bar);
 
+  gtk_widget_class_bind_template_callback (widget_class, application_set);
+
   gtk_widget_class_bind_template_callback (widget_class, search_changed);
   gtk_widget_class_bind_template_callback (widget_class, search_next);
   gtk_widget_class_bind_template_callback (widget_class, search_prev);
+
+  gtk_widget_class_bind_template_callback (widget_class, size_changed);
+  gtk_widget_class_bind_template_callback (widget_class, button_press_event);
+  gtk_widget_class_bind_template_callback (widget_class, popup_menu);
+
+  gtk_widget_class_bind_template_callback (widget_class, selection_changed);
+  gtk_widget_class_bind_template_callback (widget_class, location_changed);
 }
 
 static void
@@ -426,143 +572,6 @@ static GActionEntry win_entries[] =
 };
 
 static void
-application_set (GObject *object, GParamSpec *pspec, gpointer data)
-{
-  g_object_bind_property (gtk_window_get_application (GTK_WINDOW (object)),
-                          "theme",
-                          object,
-                          "theme",
-                          G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
-}
-
-static void
-context_menu (KgxWindow *self, GtkWidget *term, GdkEventButton *event)
-{
-  GAction        *act;
-  GtkWidget      *menu;
-  GtkApplication *app;
-  GMenu          *model;
-  GdkRectangle    rect;
-  gboolean        value;
-  const char     *match;
-  int             match_id;
-
-  match = vte_terminal_match_check_event (VTE_TERMINAL (term),
-                                          (GdkEvent *) event,
-                                          &match_id);
-
-  self->current_url = NULL;
-  for (int i = 0; i < N_LINK_REGEX; i++) {
-    if (self->match_id[i] == match_id) {
-      self->current_url = match;
-      break;
-    }
-  }
-  value = self->current_url != NULL;
-
-  act = g_action_map_lookup_action (G_ACTION_MAP (self), "open-link");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
-  act = g_action_map_lookup_action (G_ACTION_MAP (self), "copy-link");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
-
-  app = gtk_window_get_application (GTK_WINDOW (self));
-  model = gtk_application_get_menu_by_id (app, "context-menu");
-
-  rect = (GdkRectangle) { event->x, event->y, 1, 1 };
-
-  menu = gtk_popover_new_from_model (term, G_MENU_MODEL (model));
-  gtk_popover_set_pointing_to (GTK_POPOVER (menu), &rect);
-  gtk_popover_popup (GTK_POPOVER (menu));
-}
-
-static gboolean
-button_press_event (GtkWidget *widget, GdkEventButton *event, KgxWindow *self)
-{
-  if (gdk_event_triggers_context_menu ((GdkEvent *) event) &&
-      event->type == GDK_BUTTON_PRESS)
-    {
-      context_menu (self, widget, event);
-      return TRUE;
-    }
-
-  return FALSE;
-}
-
-static gboolean
-popup_menu (GtkWidget *widget, KgxWindow *self)
-{
-  context_menu (self, widget, NULL);
-  return TRUE;
-}
-
-static void
-selection_changed (VteTerminal *term, KgxWindow *self)
-{
-  GAction *act;
-
-  act = g_action_map_lookup_action (G_ACTION_MAP (self), "copy");
-
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act),
-                               vte_terminal_get_has_selection (term));
-}
-
-static void
-location_changed (VteTerminal *term, KgxWindow *self)
-{
-  GAction *act;
-  gboolean value;
-
-  act = g_action_map_lookup_action (G_ACTION_MAP (self), "show-in-files");
-
-  value = vte_terminal_get_current_file_uri (term) ||
-            vte_terminal_get_current_directory_uri (term);
-
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
-}
-
-static gboolean
-size_timeout (KgxWindow *self)
-{
-  self->timeout = 0;
-
-  gtk_widget_hide (self->dims);
-
-  return G_SOURCE_REMOVE;
-}
-
-static void
-size_changed (GtkWidget    *widget,
-              GdkRectangle *allocation,
-              KgxWindow    *self)
-{
-  char        *label;
-  int          cols;
-  int          rows;
-  VteTerminal *term = VTE_TERMINAL (widget);
-
-  cols = vte_terminal_get_column_count (term);
-  rows = vte_terminal_get_row_count (term);
-
-  if (self->timeout != 0) {
-    g_source_remove (self->timeout);
-  }
-  self->timeout = g_timeout_add (800, G_SOURCE_FUNC (size_timeout), self);
-
-  if (cols == self->last_cols && rows == self->last_rows)
-    return;
-
-  self->last_cols = cols;
-  self->last_rows = rows;
-
-  label = g_strdup_printf ("%ix%i", cols, rows);
-
-  gtk_label_set_label (GTK_LABEL (self->dims), label);
-  gtk_widget_show (self->dims);
-
-  g_free (label);
-}
-
-static void
 kgx_window_init (KgxWindow *self)
 {
   GAction         *act;
@@ -578,8 +587,6 @@ kgx_window_init (KgxWindow *self)
 
   self->theme = KGX_THEME_NIGHT;
   self->current_url = NULL;
-
-  g_signal_connect (self, "notify::application", G_CALLBACK (application_set), NULL);
 
   pact = g_property_action_new ("theme", G_OBJECT (self), "theme");
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (pact));
@@ -601,15 +608,6 @@ kgx_window_init (KgxWindow *self)
     shell[0] = "/bin/sh";
     g_warning ("Defaulting to /bin/sh");
   }
-
-  g_signal_connect (self->terminal, "button-press-event", G_CALLBACK (button_press_event), self);
-  g_signal_connect (self->terminal, "popup-menu", G_CALLBACK (popup_menu), self);
-
-  g_signal_connect (self->terminal, "selection-changed", G_CALLBACK (selection_changed), self);
-  g_signal_connect (self->terminal, "current-directory-uri-changed", G_CALLBACK (location_changed), self);
-  g_signal_connect (self->terminal, "current-file-uri-changed", G_CALLBACK (location_changed), self);
-
-  g_signal_connect (self->terminal, "size-allocate", G_CALLBACK (size_changed), self);
 
   vte_terminal_search_set_wrap_around (VTE_TERMINAL (self->terminal), TRUE);
 
