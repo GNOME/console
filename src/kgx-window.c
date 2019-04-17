@@ -571,6 +571,46 @@ static GActionEntry win_entries[] =
   { "about", about_activated, NULL, NULL, NULL },
 };
 
+static gboolean
+update_subtitle (GBinding     *binding,
+                 const GValue *from_value,
+                 GValue       *to_value,
+                 gpointer      data)
+{
+  g_autoptr (GFile) file = NULL;
+  g_autofree char *path = NULL;
+  const char *uri;
+  const char *home;
+
+  uri = g_value_get_string (from_value);
+  if (uri == NULL) {
+    g_value_set_string (to_value, NULL);
+    return TRUE;
+  }
+
+  file = g_file_new_for_uri (uri);
+
+  path = g_file_get_path (file);
+  if (path == NULL) {
+    g_value_set_string (to_value, NULL);
+
+    return TRUE;
+  }
+
+  home = g_get_home_dir ();
+  if (g_str_has_prefix (path, home)) {
+    home = g_strdup_printf ("~%s", path + strlen (home));
+
+    g_value_set_string (to_value, home);
+
+    return TRUE;
+  }
+
+  g_value_set_string (to_value, path);
+
+  return TRUE;
+}
+
 static void
 kgx_window_init (KgxWindow *self)
 {
@@ -602,6 +642,12 @@ kgx_window_init (KgxWindow *self)
   g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
   act = g_action_map_lookup_action (G_ACTION_MAP (self), "show-in-files");
   g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
+
+  g_object_bind_property_full (self->terminal, "current-directory-uri",
+                               self->header_bar, "subtitle",
+                               G_BINDING_SYNC_CREATE,
+                               update_subtitle,
+                               NULL, NULL, NULL);
 
   shell[0] = vte_get_user_shell ();
   if (shell[0] == NULL) {

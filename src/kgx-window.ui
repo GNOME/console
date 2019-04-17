@@ -29,7 +29,7 @@
       <object class="GtkHeaderBar" id="header_bar">
         <property name="visible">1</property>
         <property name="title" bind-source="terminal" bind-property="window-title" bind-flags="sync-create"/>
-        <property name="subtitle" bind-source="terminal" bind-property="current-directory-uri" bind-flags="sync-create"/>
+        <property name="subtitle"></property>
         <property name="show-close-button">1</property>
         <child>
           <object class="GtkToggleButton">
