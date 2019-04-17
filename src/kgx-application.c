@@ -20,6 +20,7 @@
 #include <vte/vte.h>
 
 #include "rgba.h"
+#include "terminal-interface.h"
 
 #include "kgx.h"
 #include "kgx-config.h"
@@ -142,6 +143,41 @@ kgx_application_startup (GApplication *app)
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
 }
 
+static gboolean
+create_instance (TerminalFactory       *interface,
+                 GDBusMethodInvocation *invocation,
+                 const gchar           *greeting,
+                 gpointer               user_data)
+{
+  terminal_factory_complete_create_instance (interface, invocation, "/org/gnome/Terminal/Factory0/");
+
+  return TRUE;
+}
+
+static gboolean
+kgx_application_dbus_register (GApplication    *app,
+                               GDBusConnection *connection,
+                               const gchar     *object_path,
+                               GError         **error)
+{
+  TerminalFactory *interface = terminal_factory_skeleton_new ();
+
+  g_signal_connect (interface,
+                    "handle-create-instance",
+                    G_CALLBACK (create_instance),
+                    app);
+
+  if (!g_dbus_interface_skeleton_export (G_DBUS_INTERFACE_SKELETON (interface),
+                                         connection,
+                                         "/org/gnome/Terminal/Factory0",
+                                         error))
+    {
+      /* handle error */
+    }
+
+  return TRUE;
+}
+
 static void
 kgx_application_class_init (KgxApplicationClass *klass)
 {
@@ -153,6 +189,7 @@ kgx_application_class_init (KgxApplicationClass *klass)
 
   app_class->activate = kgx_application_activate;
   app_class->startup = kgx_application_startup;
+  app_class->dbus_register = kgx_application_dbus_register;
 
   pspecs[PROP_THEME] =
     g_param_spec_enum ("theme", "Theme", "Terminal theme",

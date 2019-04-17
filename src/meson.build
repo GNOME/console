@@ -17,6 +17,13 @@ kgx_sources += gnome.compile_resources('kgx-resources',
   c_name: 'kgx'
 )
 
+kgx_sources += gnome.gdbus_codegen('terminal-interface',
+  sources: 'org.gnome.Terminal.xml',
+  interface_prefix : 'org.gnome.',
+  object_manager: true,
+  namespace : 'Terminal'
+)
+
 kgx_sources += gnome.mkenums_simple('kgx-enums', sources: 'kgx.h')
 
 executable('kgx', kgx_sources,
