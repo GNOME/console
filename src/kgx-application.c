@@ -25,6 +25,7 @@
 #include "kgx.h"
 #include "kgx-config.h"
 #include "kgx-application.h"
+#include "kgx-terminal.h"
 #include "kgx-window.h"
 #include "kgx-enums.h"
 
@@ -117,7 +118,7 @@ kgx_application_startup (GApplication *app)
   GtkCssProvider *provider;
   const char *const new_window_accels[] = { "<shift><primary>n", NULL };
 
-  g_type_ensure (VTE_TYPE_TERMINAL);
+  g_type_ensure (KGX_TYPE_TERMINAL);
 
   G_APPLICATION_CLASS (kgx_application_parent_class)->startup (app);
 

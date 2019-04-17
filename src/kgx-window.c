@@ -28,44 +28,11 @@
 #include "kgx-window.h"
 #include "kgx-enums.h"
 
-/*       Regex adapted from TerminalWidget.vala in Pantheon Terminal       */
-
-#define USERCHARS "-[:alnum:]"
-#define USERCHARS_CLASS "[" USERCHARS "]"
-#define PASSCHARS_CLASS "[-[:alnum:]\\Q,?;.:/!%$^*&~\"#'\\E]"
-#define HOSTCHARS_CLASS "[-[:alnum:]]"
-#define HOST HOSTCHARS_CLASS "+(\\." HOSTCHARS_CLASS "+)*"
-#define PORT "(?:\\:[[:digit:]]{1,5})?"
-#define PATHCHARS_CLASS "[-[:alnum:]\\Q_$.+!*,;:@&=?/~#%\\E]"
-#define PATHTERM_CLASS "[^\\Q]'.}>) \t\r\n,\"\\E]"
-#define SCHEME "(?:news:|telnet:|nntp:|file:\\/|https?:|ftps?:|sftp:|webcal:\n" \
-               "|irc:|sftp:|ldaps?:|nfs:|smb:|rsync:|"                          \
-               "ssh:|rlogin:|telnet:|git:\n"                                    \
-               "|git\\+ssh:|bzr:|bzr\\+ssh:|svn:|svn\\"                         \
-               "+ssh:|hg:|mailto:|magnet:)"
-#define USERPASS USERCHARS_CLASS "+(?:" PASSCHARS_CLASS "+)?"
-#define URLPATH "(?:(/" PATHCHARS_CLASS "+(?:[(]" PATHCHARS_CLASS "*[)])*" PATHCHARS_CLASS "*)*" PATHTERM_CLASS ")?"
-
-#define N_LINK_REGEX 5
-const gchar* links[N_LINK_REGEX] = {
-  SCHEME "//(?:" USERPASS "\\@)?" HOST PORT URLPATH,
-  "(?:www|ftp)" HOSTCHARS_CLASS "*\\." HOST PORT URLPATH,
-  "(?:callto:|h323:|sip:)" USERCHARS_CLASS "[" USERCHARS ".]*(?:" PORT "/[a-z0-9]+)?\\@" HOST,
-  "(?:mailto:)?" USERCHARS_CLASS "[" USERCHARS ".]*\\@" HOSTCHARS_CLASS "+\\." HOST,
-  "(?:news:|man:|info:)[[:alnum:]\\Q^_{|}~!\"#$%&'()*+,./;:=?`\\E]+"
-};
-
-/*       Regex adapted from TerminalWidget.vala in Pantheon Terminal       */
-
 struct _KgxWindow
 {
   GtkApplicationWindow  parent_instance;
 
   KgxTheme              theme;
-
-  /* Hyperlinks */
-  const char           *current_url;
-  int                   match_id[N_LINK_REGEX];
 
   /* Size indicator */
   int                   last_cols;
@@ -256,91 +223,6 @@ size_changed (GtkWidget    *widget,
 }
 
 static void
-context_menu (KgxWindow *self, GtkWidget *term, GdkEventButton *event)
-{
-  GAction        *act;
-  GtkWidget      *menu;
-  GtkApplication *app;
-  GMenu          *model;
-  GdkRectangle    rect;
-  gboolean        value;
-  const char     *match;
-  int             match_id;
-
-  match = vte_terminal_match_check_event (VTE_TERMINAL (term),
-                                          (GdkEvent *) event,
-                                          &match_id);
-
-  self->current_url = NULL;
-  for (int i = 0; i < N_LINK_REGEX; i++) {
-    if (self->match_id[i] == match_id) {
-      self->current_url = match;
-      break;
-    }
-  }
-  value = self->current_url != NULL;
-
-  act = g_action_map_lookup_action (G_ACTION_MAP (self), "open-link");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
-  act = g_action_map_lookup_action (G_ACTION_MAP (self), "copy-link");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
-
-  app = gtk_window_get_application (GTK_WINDOW (self));
-  model = gtk_application_get_menu_by_id (app, "context-menu");
-
-  rect = (GdkRectangle) { event->x, event->y, 1, 1 };
-
-  menu = gtk_popover_new_from_model (term, G_MENU_MODEL (model));
-  gtk_popover_set_pointing_to (GTK_POPOVER (menu), &rect);
-  gtk_popover_popup (GTK_POPOVER (menu));
-}
-
-static gboolean
-button_press_event (GtkWidget *widget, GdkEventButton *event, KgxWindow *self)
-{
-  if (gdk_event_triggers_context_menu ((GdkEvent *) event) &&
-      event->type == GDK_BUTTON_PRESS)
-    {
-      context_menu (self, widget, event);
-      return TRUE;
-    }
-
-  return FALSE;
-}
-
-static gboolean
-popup_menu (GtkWidget *widget, KgxWindow *self)
-{
-  context_menu (self, widget, NULL);
-  return TRUE;
-}
-
-static void
-selection_changed (VteTerminal *term, KgxWindow *self)
-{
-  GAction *act;
-
-  act = g_action_map_lookup_action (G_ACTION_MAP (self), "copy");
-
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act),
-                               vte_terminal_get_has_selection (term));
-}
-
-static void
-location_changed (VteTerminal *term, KgxWindow *self)
-{
-  GAction *act;
-  gboolean value;
-
-  act = g_action_map_lookup_action (G_ACTION_MAP (self), "show-in-files");
-
-  value = vte_terminal_get_current_file_uri (term) ||
-            vte_terminal_get_current_directory_uri (term);
-
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
-}
-
-static void
 kgx_window_class_init (KgxWindowClass *klass)
 {
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
@@ -370,11 +252,6 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, search_prev);
 
   gtk_widget_class_bind_template_callback (widget_class, size_changed);
-  gtk_widget_class_bind_template_callback (widget_class, button_press_event);
-  gtk_widget_class_bind_template_callback (widget_class, popup_menu);
-
-  gtk_widget_class_bind_template_callback (widget_class, selection_changed);
-  gtk_widget_class_bind_template_callback (widget_class, location_changed);
 }
 
 static void
@@ -402,146 +279,6 @@ new_activated (GSimpleAction *action,
 }
 
 static void
-open_link_activated (GSimpleAction *action,
-                     GVariant      *parameter,
-                     gpointer       data)
-{
-  GError *error = NULL;
-  KgxWindow *self = KGX_WINDOW (data);
-  guint32 timestamp;
-
-  timestamp = GDK_CURRENT_TIME;
-
-  gtk_show_uri_on_window (GTK_WINDOW (self),
-                          self->current_url,
-                          timestamp,
-                          &error);
-
-  if (error) {
-    g_warning (_("Failed to open link %s"), error->message);
-  }
-}
-
-static void
-copy_link_activated (GSimpleAction *action,
-                     GVariant      *parameter,
-                     gpointer       data)
-{
-  GtkClipboard *cb;
-  KgxWindow *self = KGX_WINDOW (data);
-
-  cb = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
-
-  gtk_clipboard_set_text (cb, self->current_url, -1);
-}
-
-static void
-copy_activated (GSimpleAction *action,
-                 GVariant      *parameter,
-                 gpointer       data)
-{
-  GtkWidget *term = KGX_WINDOW (data)->terminal;
-
-  vte_terminal_copy_clipboard_format (VTE_TERMINAL (term), VTE_FORMAT_TEXT);
-}
-
-static void
-got_text (GtkClipboard *clipboard,
-          const gchar *text,
-          gpointer data)
-{
-  GtkWidget *term = KGX_WINDOW (data)->terminal;
-
-  // TODO: Check for sudo
-
-  // HACK: Technically a race condition here
-  vte_terminal_paste_clipboard (VTE_TERMINAL (term));
-}
-
-static void
-paste_activated (GSimpleAction *action,
-                 GVariant      *parameter,
-                 gpointer       data)
-{
-  GtkClipboard *cb;
-
-  cb = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
-
-  gtk_clipboard_request_text (cb, got_text, data);
-}
-
-static void
-select_all_activated (GSimpleAction *action,
-                      GVariant      *parameter,
-                      gpointer       data)
-{
-  GtkWidget *term = KGX_WINDOW (data)->terminal;
-
-  vte_terminal_select_all (VTE_TERMINAL (term));
-}
-
-static void
-show_in_files_activated (GSimpleAction *action,
-                         GVariant      *parameter,
-                         gpointer       data)
-{
-  GDBusProxy      *proxy;
-  GVariant        *retval;
-  GVariantBuilder *builder;
-  GError          *error = NULL;
-  GtkWidget       *term = KGX_WINDOW (data)->terminal;
-  const gchar     *uri = NULL;
-  const gchar     *method;
-
-  uri = vte_terminal_get_current_file_uri (VTE_TERMINAL (term));
-  method = "ShowItems";
-
-  if (uri == NULL) {
-    uri = vte_terminal_get_current_directory_uri (VTE_TERMINAL (term));
-    method = "ShowFolders";
-  }
-
-  if (uri == NULL) {
-    g_warning (_("win.show-in-files: no file"));
-    return;
-  }
-
-  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-                                         G_DBUS_PROXY_FLAGS_NONE,
-                                         NULL,
-                                         "org.freedesktop.FileManager1",
-                                         "/org/freedesktop/FileManager1",
-                                         "org.freedesktop.FileManager1",
-                                         NULL, &error);
-
-  if (!proxy) {
-    g_warning (_("win.show-in-files: dbus connect failed %s"), error->message);
-    return;
-  }
-
-  builder = g_variant_builder_new (G_VARIANT_TYPE ("as"));
-  g_variant_builder_add (builder, "s", uri);
-
-  retval = g_dbus_proxy_call_sync (proxy,
-                                   method,
-                                   g_variant_new ("(ass)",
-                                                  builder,
-                                                  ""),
-                                   G_DBUS_CALL_FLAGS_NONE,
-                                   -1, NULL, &error);
-
-  g_variant_builder_unref (builder);
-  g_object_unref (proxy);
-
-  if (!retval) {
-    g_warning (_("win.show-in-files: dbus call failed %s"), error->message);
-    return;
-  }
-
-  g_variant_unref (retval);
-}
-
-static void
 about_activated (GSimpleAction *action,
                  GVariant      *parameter,
                  gpointer       data)
@@ -562,12 +299,6 @@ about_activated (GSimpleAction *action,
 static GActionEntry win_entries[] =
 {
   { "new-window", new_activated, NULL, NULL, NULL },
-  { "open-link", open_link_activated, NULL, NULL, NULL },
-  { "copy-link", copy_link_activated, NULL, NULL, NULL },
-  { "copy", copy_activated, NULL, NULL, NULL },
-  { "paste", paste_activated, NULL, NULL, NULL },
-  { "select-all", select_all_activated, NULL, NULL, NULL },
-  { "show-in-files", show_in_files_activated, NULL, NULL, NULL },
   { "about", about_activated, NULL, NULL, NULL },
 };
 
@@ -614,7 +345,6 @@ update_subtitle (GBinding     *binding,
 static void
 kgx_window_init (KgxWindow *self)
 {
-  GAction         *act;
   GPropertyAction *pact;
   gchar           *shell[2] = {NULL, NULL};
 
@@ -626,7 +356,6 @@ kgx_window_init (KgxWindow *self)
                                    self);
 
   self->theme = KGX_THEME_NIGHT;
-  self->current_url = NULL;
 
   pact = g_property_action_new ("theme", G_OBJECT (self), "theme");
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (pact));
@@ -634,47 +363,20 @@ kgx_window_init (KgxWindow *self)
   pact = g_property_action_new ("find", G_OBJECT (self->search_bar), "search-mode-enabled");
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (pact));
 
-  act = g_action_map_lookup_action (G_ACTION_MAP (self), "open-link");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
-  act = g_action_map_lookup_action (G_ACTION_MAP (self), "copy-link");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
-  act = g_action_map_lookup_action (G_ACTION_MAP (self), "copy");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
-  act = g_action_map_lookup_action (G_ACTION_MAP (self), "show-in-files");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
-
   g_object_bind_property_full (self->terminal, "current-directory-uri",
                                self->header_bar, "subtitle",
                                G_BINDING_SYNC_CREATE,
                                update_subtitle,
                                NULL, NULL, NULL);
 
+  g_object_bind_property (self, "theme",
+                          self->terminal, "theme",
+                          G_BINDING_SYNC_CREATE);
+
   shell[0] = vte_get_user_shell ();
   if (shell[0] == NULL) {
     shell[0] = "/bin/sh";
     g_warning ("Defaulting to /bin/sh");
-  }
-
-  vte_terminal_search_set_wrap_around (VTE_TERMINAL (self->terminal), TRUE);
-
-  for (int i = 0; i < N_LINK_REGEX; i++) {
-    VteRegex *regex;
-    GError *error = NULL;
-
-    regex = vte_regex_new_for_match (links[i], -1, PCRE2_MULTILINE, &error);
-
-    if (error) {
-      g_warning (_("link regex failed: %s"), error->message);
-      continue;
-    }
-
-    self->match_id[i] = vte_terminal_match_add_regex (VTE_TERMINAL (self->terminal),
-                                                      regex,
-                                                      0);
-
-    vte_terminal_match_set_cursor_name (VTE_TERMINAL (self->terminal),
-                                        self->match_id[i],
-                                        "pointer");
   }
 
   vte_terminal_spawn_async (VTE_TERMINAL (self->terminal),

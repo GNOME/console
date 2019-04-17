@@ -137,15 +137,10 @@
                 <property name="propagate-natural-height">1</property>
                 <property name="hscrollbar-policy">never</property>
                 <child>
-                  <object class="VteTerminal" id="terminal">
+                  <object class="KgxTerminal" id="terminal">
                     <property name="visible">True</property>
                     <property name="allow-hyperlink">True</property>
                     <signal name="size-allocate" handler="size_changed" swapped="no"/>
-                    <signal name="button-press-event" handler="button_press_event" swapped="no"/>
-                    <signal name="popup-menu" handler="popup_menu" swapped="no"/>
-                    <signal name="selection-changed" handler="selection_changed" swapped="no"/>
-                    <signal name="current-directory-uri-changed" handler="location_changed" swapped="no"/>
-                    <signal name="current-file-uri-changed" handler="location_changed" swapped="no"/>
                   </object>
                 </child>
               </object>
