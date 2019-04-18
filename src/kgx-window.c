@@ -35,6 +35,7 @@ struct _KgxWindow
   GtkApplicationWindow  parent_instance;
 
   KgxTheme              theme;
+  const char           *working_dir;
 
   /* Size indicator */
   int                   last_cols;
@@ -51,9 +52,10 @@ struct _KgxWindow
 G_DEFINE_TYPE (KgxWindow, kgx_window, GTK_TYPE_APPLICATION_WINDOW)
 
 enum {
-	PROP_0,
-	PROP_THEME,
-	LAST_PROP
+  PROP_0,
+  PROP_THEME,
+  PROP_INITIAL_WORK_DIR,
+  LAST_PROP
 };
 
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -114,6 +116,9 @@ kgx_window_set_property (GObject      *object,
   switch (property_id) {
     case PROP_THEME:
       kgx_window_set_theme (self, g_value_get_enum (value));
+      break;
+    case PROP_INITIAL_WORK_DIR:
+      self->working_dir = g_value_get_string (value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -238,6 +243,12 @@ kgx_window_class_init (KgxWindowClass *klass)
                        KGX_TYPE_THEME, KGX_THEME_HACKER,
                        G_PARAM_READWRITE);
 
+  pspecs[PROP_INITIAL_WORK_DIR] =
+    g_param_spec_string ("initial-work-dir", "Initial directory",
+                         "Initial working directory",
+                         NULL,
+                         G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/zbrown/KingsCross/kgx-window.ui");
@@ -261,9 +272,10 @@ new_activated (GSimpleAction *action,
                GVariant      *parameter,
                gpointer       data)
 {
-  GtkWindow *window;
-  GtkApplication *app;
-  guint32 timestamp;
+  GtkWindow       *window;
+  GtkApplication  *app;
+  guint32          timestamp;
+  const char      *dir;
 
   /* Slightly "wrong" but hopefully by taking the time before
    * we spend non-zero time initing the window it's far enough in the
@@ -273,8 +285,11 @@ new_activated (GSimpleAction *action,
 
   app = gtk_window_get_application (GTK_WINDOW (data));
 
+  dir = kgx_window_get_working_dir (KGX_WINDOW (data));
+
   window = g_object_new (KGX_TYPE_WINDOW,
                         "application", app,
+                        "initial-work-dir", dir,
                         NULL);
 
   gtk_window_present_with_time (window, timestamp);
@@ -365,6 +380,7 @@ kgx_window_init (KgxWindow *self)
 {
   GPropertyAction *pact;
   gchar           *shell[2] = {NULL, NULL};
+  const char      *initial = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -397,9 +413,13 @@ kgx_window_init (KgxWindow *self)
     g_warning ("Defaulting to /bin/sh");
   }
 
+  if (self->working_dir) {
+    initial = self->working_dir;
+  }
+
   vte_terminal_spawn_async (VTE_TERMINAL (self->terminal),
                             VTE_PTY_DEFAULT,
-                            NULL,
+                            initial,
                             shell,
                             NULL,
                             G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_SEARCH_PATH_FROM_ENVP,
@@ -410,4 +430,18 @@ kgx_window_init (KgxWindow *self)
                             NULL,
                             spawned,
                             self);
+}
+
+const char *
+kgx_window_get_working_dir (KgxWindow *self)
+{
+  const char *uri;
+  g_autoptr (GFile) file;
+
+  g_return_val_if_fail (KGX_IS_WINDOW (self), NULL);
+
+  uri = vte_terminal_get_current_directory_uri (VTE_TERMINAL (self->terminal));
+  file = g_file_new_for_uri (uri);
+
+  return g_file_get_path (file);
 }

@@ -26,4 +26,6 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (KgxWindow, kgx_window, KGX, WINDOW, GtkApplicationWindow)
 
+const char *kgx_window_get_working_dir (KgxWindow *self);
+
 G_END_DECLS
