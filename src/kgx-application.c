@@ -29,11 +29,18 @@
 #include "kgx-window.h"
 #include "kgx-enums.h"
 
+struct ProcessWatch {
+  KgxWindow  *window;
+  KgxProcess *process;
+};
+
 struct _KgxApplication
 {
-  GtkApplication parent_instance;
+  GtkApplication  parent_instance;
 
-  KgxTheme       theme;
+  KgxTheme        theme;
+
+  GPtrArray      *watching;
 };
 
 G_DEFINE_TYPE (KgxApplication, kgx_application, GTK_TYPE_APPLICATION)
@@ -110,12 +117,60 @@ kgx_application_activate (GApplication *app)
   gtk_window_present_with_time (window, timestamp);
 }
 
+static gboolean
+watch (gpointer data)
+{
+  KgxApplication *self = KGX_APPLICATION (data);
+  g_autoptr (GPtrArray) plist = NULL;
+  GtkStyleContext *context;
+  const char *exec;
+
+  plist = kgx_process_get_list ();
+
+  g_message ("Watch");
+
+  for (int i = 0; i < self->watching->len; i++) {
+    struct ProcessWatch *watch = g_ptr_array_index (self->watching, i);
+
+    for (int i = 0; i < plist->len; i++) {
+      g_autoptr (KgxProcess) parent = NULL;
+      KgxProcess *curr = g_ptr_array_index (plist, i);
+
+      parent = kgx_process_get_parent (curr);
+
+      if (kgx_process_get_pid (parent) == kgx_process_get_pid (watch->process)) {
+        exec = kgx_process_get_exec (curr);
+        g_message ("Found child pid %i (of %i) @%i: %s",
+                  kgx_process_get_pid (curr),
+                  kgx_process_get_pid (watch->process),
+                  i,
+                  exec);
+        
+        if (g_strcmp0 (exec, "ssh") == 0) {
+          context = gtk_widget_get_style_context (GTK_WIDGET (watch->window));
+          gtk_style_context_add_class (context, "remote");
+        }
+
+        if (kgx_process_get_is_root (curr)) {
+          context = gtk_widget_get_style_context (GTK_WIDGET (watch->window));
+          gtk_style_context_add_class (context, "root");
+        }
+      }
+    }
+
+    g_message ("%i", kgx_process_get_pid (watch->process));
+  }
+
+  return G_SOURCE_CONTINUE;
+}
+
 static void
 kgx_application_startup (GApplication *app)
 {
   GtkSettings    *gtk_settings;
   GSettings      *settings;
   GtkCssProvider *provider;
+  guint           source;
   const char *const new_window_accels[] = { "<shift><primary>n", NULL };
 
   g_type_ensure (KGX_TYPE_TERMINAL);
@@ -142,6 +197,9 @@ kgx_application_startup (GApplication *app)
                                               * Does it fix vte using the wrong
                                               * priority for fallback styles? Yes*/
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
+
+  source = g_timeout_add (500, watch, app);
+  g_source_set_name_by_id (source, _("child watcher"));
 }
 
 static gboolean
@@ -203,4 +261,22 @@ kgx_application_class_init (KgxApplicationClass *klass)
 static void
 kgx_application_init (KgxApplication *self)
 {
+  self->watching = g_ptr_array_new ();
+}
+
+void
+kgx_application_add_watch (KgxApplication *self,
+                           KgxProcess     *process,
+                           KgxWindow      *window)
+{
+  struct ProcessWatch *watch;
+
+  g_return_if_fail (KGX_IS_APPLICATION (self));
+  g_return_if_fail (KGX_IS_WINDOW (window));
+
+  watch = g_new0 (struct ProcessWatch, 1);
+  watch->process = g_rc_box_acquire (process);
+  watch->window = window;
+
+  g_ptr_array_add (self->watching, watch);
 }

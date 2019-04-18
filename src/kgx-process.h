@@ -1,4 +1,4 @@
-/* kgx-application.h
+/* kgx-process.h
  *
  * Copyright 2019 Zander Brown
  *
@@ -18,20 +18,24 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
-
-#include "kgx-process.h"
-#include "kgx-window.h"
+#include <glib.h>
 
 G_BEGIN_DECLS
 
-#define KGX_TYPE_APPLICATION (kgx_application_get_type())
+typedef struct _KgxProcess KgxProcess;
 
-G_DECLARE_FINAL_TYPE (KgxApplication, kgx_application, KGX, APPLICATION, GtkApplication)
+#define KGX_TYPE_PROCESS (kgx_process_get_type ())
 
-void kgx_application_add_watch (KgxApplication *self,
-                                KgxProcess     *process,
-                                KgxWindow      *window);
+GType       kgx_process_get_type    (void);
+GPtrArray  *kgx_process_get_list    ();
+KgxProcess *kgx_process_new         (GPid        pid);
+void        kgx_process_unref       (KgxProcess *self);
+GPid        kgx_process_get_pid     (KgxProcess *self);
+gint32      kgx_process_get_uid     (KgxProcess *self);
+gboolean    kgx_process_get_is_root (KgxProcess *self);
+KgxProcess *kgx_process_get_parent  (KgxProcess *self);
+const char *kgx_process_get_exec    (KgxProcess *self);
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (KgxProcess, kgx_process_unref)
 
 G_END_DECLS
-

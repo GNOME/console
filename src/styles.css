@@ -6,6 +6,10 @@
   background: #a51d2d;
 }
 
+.terminal-window.remote headerbar {
+  background: #613583;
+}
+
 vte-terminal {
   padding: 1px 12px;
 }

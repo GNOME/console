@@ -25,7 +25,9 @@
 
 #include "kgx.h"
 #include "kgx-config.h"
+#include "kgx-application.h"
 #include "kgx-window.h"
+#include "kgx-process.h"
 #include "kgx-enums.h"
 
 struct _KgxWindow
@@ -343,6 +345,22 @@ update_subtitle (GBinding     *binding,
 }
 
 static void
+spawned (VteTerminal *term,
+         GPid         pid,
+         GError      *error,
+         gpointer     self)
+{
+  if (error) {
+    g_critical (_("Failed to spawn shell: %s"), error->message);
+    vte_terminal_feed (term, _("KGX: Failed to start shell\n"), -1);
+  }
+
+  kgx_application_add_watch (KGX_APPLICATION (gtk_window_get_application (GTK_WINDOW (self))),
+                             kgx_process_new (pid),
+                             KGX_WINDOW (self));
+}
+
+static void
 kgx_window_init (KgxWindow *self)
 {
   GPropertyAction *pact;
@@ -384,12 +402,12 @@ kgx_window_init (KgxWindow *self)
                             NULL,
                             shell,
                             NULL,
-                            G_SPAWN_DEFAULT,
+                            G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_SEARCH_PATH_FROM_ENVP,
                             NULL,
                             NULL,
                             NULL,
                             -1,
                             NULL,
-                            NULL,
-                            NULL);
+                            spawned,
+                            self);
 }
