@@ -5,6 +5,8 @@
     "sdk": "org.gnome.Sdk",
     "command": "kgx",
     "finish-args": [
+        "--allow=devel",
+        "--require-version=1.0.0",
         "--share=network",
         "--share=ipc",
         "--socket=x11",
@@ -40,6 +42,7 @@
             "name": "kgx",
             "builddir": true,
             "buildsystem": "meson",
+            "config-opts": ["-Dgtop=false"],
             "sources": [
                 {
                     "type": "git",

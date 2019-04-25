@@ -2,11 +2,13 @@
   background: transparent;
 }
 
-.terminal-window.root headerbar {
+.terminal-window.root headerbar,
+.terminal-window.root headerbar button {
   background: #a51d2d;
 }
 
-.terminal-window.remote headerbar {
+.terminal-window.remote headerbar,
+.terminal-window.remote headerbar button {
   background: #613583;
 }
 

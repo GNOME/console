@@ -22,6 +22,7 @@
 #include <pcre2.h>
 
 #include "rgba.h"
+#include "fp-vte-util.h"
 
 #include "kgx.h"
 #include "kgx-config.h"
@@ -360,19 +361,61 @@ update_subtitle (GBinding     *binding,
 }
 
 static void
-spawned (VteTerminal *term,
-         GPid         pid,
-         GError      *error,
-         gpointer     self)
+wait_cb (GSubprocess            *subprocess,
+         GAsyncResult           *result,
+         G_GNUC_UNUSED gpointer  user_data)
 {
+  g_autoptr(GError) error = NULL;
+
+  g_assert (G_IS_SUBPROCESS (subprocess));
+  g_assert (G_IS_ASYNC_RESULT (result));
+
+  g_message ("So long shell");
+
+  /* wait_check will set @error if it got a signal/non-zero exit */
+  if (!g_subprocess_wait_check_finish (subprocess, result, &error))
+    g_warning ("Uh oh %s\n", error->message);
+}
+
+static void
+spawned (VtePty       *pty,
+         GAsyncResult *res,
+         gpointer      data)
+
+{
+  g_autoptr(GSubprocess) subprocess = NULL;
+  g_autoptr(GError) error = NULL;
+  KgxWindow *self = KGX_WINDOW (data);
+  #if HAS_GTOP
+  const char *id;
+  gint64 pid;
+  #endif
+
+  g_return_if_fail (VTE_IS_PTY (pty));
+  g_return_if_fail (G_IS_ASYNC_RESULT (res));
+
+  subprocess = fp_vte_pty_spawn_finish (pty, res, &error);
+
   if (error) {
     g_critical (_("Failed to spawn shell: %s"), error->message);
-    vte_terminal_feed (term, _("KGX: Failed to start shell\n"), -1);
+    vte_terminal_feed (VTE_TERMINAL (self->terminal),
+                       _("KGX: Failed to start shell\n"), -1);
+    return;
   }
+
+  #if HAS_GTOP
+  id = g_subprocess_get_identifier (subprocess);
+  g_ascii_string_to_signed (id, 10, 0, G_MAXINT, &pid, &error);
 
   kgx_application_add_watch (KGX_APPLICATION (gtk_window_get_application (GTK_WINDOW (self))),
                              kgx_process_new (pid),
                              KGX_WINDOW (self));
+  #endif
+
+  g_subprocess_wait_check_async (subprocess,
+                                 NULL,
+                                 (GAsyncReadyCallback) wait_cb,
+                                 NULL);
 }
 
 static void
@@ -381,6 +424,8 @@ kgx_window_init (KgxWindow *self)
   GPropertyAction *pact;
   gchar           *shell[2] = {NULL, NULL};
   const char      *initial = NULL;
+  VtePty          *pty;
+  g_autoptr (GError) error = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -407,36 +452,36 @@ kgx_window_init (KgxWindow *self)
                           self->terminal, "theme",
                           G_BINDING_SYNC_CREATE);
 
+
+  pty = vte_pty_new_sync (VTE_PTY_DEFAULT, NULL, &error);
+
   shell[0] = vte_get_user_shell ();
   if (shell[0] == NULL) {
     shell[0] = "/bin/sh";
     g_warning ("Defaulting to /bin/sh");
   }
+  shell[0] = fp_vte_guess_shell (NULL, &error);
 
   if (self->working_dir) {
     initial = self->working_dir;
   }
 
-  vte_terminal_spawn_async (VTE_TERMINAL (self->terminal),
-                            VTE_PTY_DEFAULT,
-                            initial,
-                            shell,
-                            NULL,
-                            G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_SEARCH_PATH_FROM_ENVP,
-                            NULL,
-                            NULL,
-                            NULL,
-                            -1,
-                            NULL,
-                            spawned,
-                            self);
+  vte_terminal_set_pty (VTE_TERMINAL (self->terminal), pty);
+  fp_vte_pty_spawn_async (pty,
+                          initial,
+                          (const gchar * const *) shell,
+                          NULL,
+                          -1,
+                          NULL,
+                          (GAsyncReadyCallback) spawned,
+                          self);
 }
 
 const char *
 kgx_window_get_working_dir (KgxWindow *self)
 {
   const char *uri;
-  g_autoptr (GFile) file;
+  g_autoptr (GFile) file = NULL;
 
   g_return_val_if_fail (KGX_IS_WINDOW (self), NULL);
 

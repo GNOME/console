@@ -41,6 +41,9 @@ struct _KgxApplication
   KgxTheme        theme;
 
   GPtrArray      *watching;
+
+  // Child process being watched, int (GINT_TO_POINTER) -> KgxProcess
+  GTree          *children;
 };
 
 G_DEFINE_TYPE (KgxApplication, kgx_application, GTK_TYPE_APPLICATION)
@@ -117,6 +120,22 @@ kgx_application_activate (GApplication *app)
   gtk_window_present_with_time (window, timestamp);
 }
 
+#if HAS_GTOP
+static void
+child_ended (GPid     pid,
+             int      status,
+             gpointer data)
+{
+  //KgxApplication *self = KGX_APPLICATION (data);
+  g_autoptr (GError) error = NULL;
+
+  g_message ("Bye child %i of the %i", pid, status);
+
+  if (!g_spawn_check_exit_status (status, &error)) {
+    g_warning ("Child didn't exit cleanly: %s", error->message);
+  }
+}
+
 static gboolean
 watch (gpointer data)
 {
@@ -127,7 +146,7 @@ watch (gpointer data)
 
   plist = kgx_process_get_list ();
 
-  g_message ("Watch");
+  g_message ("Watch %i pids", plist->len);
 
   for (int i = 0; i < self->watching->len; i++) {
     struct ProcessWatch *watch = g_ptr_array_index (self->watching, i);
@@ -135,17 +154,28 @@ watch (gpointer data)
     for (int i = 0; i < plist->len; i++) {
       g_autoptr (KgxProcess) parent = NULL;
       KgxProcess *curr = g_ptr_array_index (plist, i);
+      GPid pid;
 
       parent = kgx_process_get_parent (curr);
+      pid = kgx_process_get_pid (curr);
 
       if (kgx_process_get_pid (parent) == kgx_process_get_pid (watch->process)) {
         exec = kgx_process_get_exec (curr);
         g_message ("Found child pid %i (of %i) @%i: %s",
-                  kgx_process_get_pid (curr),
+                  pid,
                   kgx_process_get_pid (watch->process),
                   i,
                   exec);
         
+        if (g_tree_lookup (self->children, GINT_TO_POINTER (pid)) == NULL) {
+          g_message ("New child, watch it!");
+          g_child_watch_add (pid, child_ended, self);
+          g_tree_insert (self->children,
+                         GINT_TO_POINTER (pid),
+                         g_rc_box_acquire (curr));
+          g_message ("tree at %i", g_tree_nnodes (self->children));
+        }
+
         if (g_strcmp0 (exec, "ssh") == 0) {
           context = gtk_widget_get_style_context (GTK_WIDGET (watch->window));
           gtk_style_context_add_class (context, "remote");
@@ -157,12 +187,11 @@ watch (gpointer data)
         }
       }
     }
-
-    g_message ("%i", kgx_process_get_pid (watch->process));
   }
 
   return G_SOURCE_CONTINUE;
 }
+#endif
 
 static void
 kgx_application_startup (GApplication *app)
@@ -170,7 +199,9 @@ kgx_application_startup (GApplication *app)
   GtkSettings    *gtk_settings;
   GSettings      *settings;
   GtkCssProvider *provider;
+  #if HAS_GTOP
   guint           source;
+  #endif
   const char *const new_window_accels[] = { "<shift><primary>n", NULL };
 
   g_type_ensure (KGX_TYPE_TERMINAL);
@@ -198,8 +229,10 @@ kgx_application_startup (GApplication *app)
                                               * priority for fallback styles? Yes*/
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
 
+  #if HAS_GTOP
   source = g_timeout_add (500, watch, app);
   g_source_set_name_by_id (source, _("child watcher"));
+  #endif
 }
 
 static gboolean
@@ -258,10 +291,22 @@ kgx_application_class_init (KgxApplicationClass *klass)
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 }
 
+static int
+pid_compare (gconstpointer a,
+             gconstpointer b,
+             gpointer      data)
+{
+  return GPOINTER_TO_INT (a) - GPOINTER_TO_INT (b);
+}
+
 static void
 kgx_application_init (KgxApplication *self)
 {
-  self->watching = g_ptr_array_new ();
+  self->watching = g_ptr_array_new_with_free_func (g_free);
+  self->children = g_tree_new_full (pid_compare,
+                                    NULL,
+                                    NULL,
+                                    (GDestroyNotify) kgx_process_unref);
 }
 
 void

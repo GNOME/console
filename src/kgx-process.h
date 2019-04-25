@@ -19,6 +19,9 @@
 #pragma once
 
 #include <glib.h>
+#include <glib-object.h>
+
+#include "kgx-config.h"
 
 G_BEGIN_DECLS
 
@@ -26,15 +29,21 @@ typedef struct _KgxProcess KgxProcess;
 
 #define KGX_TYPE_PROCESS (kgx_process_get_type ())
 
-GType       kgx_process_get_type    (void);
+/* The type itself is always defined but we hide the symbols
+ * when libgtop isn't used to highlight other places where things
+ * need to be #if GOT_GTOP
+ */
+#if GOT_GTOP
 GPtrArray  *kgx_process_get_list    ();
 KgxProcess *kgx_process_new         (GPid        pid);
-void        kgx_process_unref       (KgxProcess *self);
 GPid        kgx_process_get_pid     (KgxProcess *self);
 gint32      kgx_process_get_uid     (KgxProcess *self);
 gboolean    kgx_process_get_is_root (KgxProcess *self);
 KgxProcess *kgx_process_get_parent  (KgxProcess *self);
 const char *kgx_process_get_exec    (KgxProcess *self);
+#endif
+GType       kgx_process_get_type    (void);
+void        kgx_process_unref       (KgxProcess *self);
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (KgxProcess, kgx_process_unref)
 
