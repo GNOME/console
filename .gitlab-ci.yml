@@ -25,8 +25,12 @@ stop_review:
     extends: '.stop_review'
 
 pages:
-  image: registry.gitlab.gnome.org/gnome/gtk/master:v4
+  image: fedora:latest
   stage: deploy 
+  before_script:
+    - dnf update -y --nogpgcheck
+    - dnf install -y --nogpgcheck meson gettext glib2-devel
+      desktop-file-utils gtk3-devel libgtop2-devel vte291-devel gtk-doc
   script:
     - meson -Dgtk_doc=true _docs_build .
     - ninja -C _docs_build
