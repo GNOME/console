@@ -22,8 +22,24 @@
 
 #include "kgx-process.h"
 #include "kgx-window.h"
+#include "kgx-enums.h"
 
 G_BEGIN_DECLS
+
+/**
+ * KgxTheme:
+ * @KGX_THEME_NIGHT: The default, public, theme
+ * @KGX_THEME_HACKER: Little easter egg theme
+ * 
+ * Until [meson#1687](https://github.com/mesonbuild/meson/issues/1687) is
+ * resolved this enum must be manually kept in sync with
+ * org.gnome.zbrown.KingsCross.Theme in the gschema
+ */
+typedef enum /*< enum,prefix=KGX >*/
+{
+  KGX_THEME_NIGHT = 1,  /*< nick=night >*/
+  KGX_THEME_HACKER = 2, /*< nick=hacker >*/
+} KgxTheme;
 
 #define KGX_TYPE_APPLICATION (kgx_application_get_type())
 

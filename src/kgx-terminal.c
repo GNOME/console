@@ -16,6 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION:kgx-terminal
+ * @title: KgxTerminal
+ * @short_description: The terminal
+ */
+
 #include <glib/gi18n.h>
 #include <vte/vte.h>
 #define PCRE2_CODE_UNIT_WIDTH 0
@@ -23,10 +29,9 @@
 
 #include "rgba.h"
 
-#include "kgx.h"
 #include "kgx-config.h"
 #include "kgx-terminal.h"
-#include "kgx-enums.h"
+#include "kgx-application.h"
 
 /*       Regex adapted from TerminalWidget.vala in Pantheon Terminal       */
 

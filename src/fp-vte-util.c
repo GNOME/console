@@ -32,6 +32,8 @@
 
 /**
  * SECTION:fp-vte-util
+ * @title: FpVte
+ * @short_description: Vte utils
  *
  * One of the more complicated things about making a terminal work across
  * pid namespaces is that you need to be careful about where you perform

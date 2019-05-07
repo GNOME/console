@@ -1,0 +1,11 @@
+ent_conf = configuration_data()
+ent_conf.set('PACKAGE', 'King\'s Cross')
+ent_conf.set('PACKAGE_BUGREPORT', 'https://gitlab.gnome.org/ZanderBrown/kgx/issues')
+ent_conf.set('PACKAGE_NAME', 'King\'s Cross')
+ent_conf.set('PACKAGE_STRING', 'kgx')
+ent_conf.set('PACKAGE_TARNAME', 'kgx-' + meson.project_version())
+ent_conf.set('PACKAGE_URL', 'https://gitlab.gnome.org/ZanderBrown/kgx')
+ent_conf.set('PACKAGE_VERSION', meson.project_version())
+ent_conf.set('PACKAGE_API_VERSION', '0.0')
+configure_file(input: 'gtkdocentities.ent.in', output: 'gtkdocentities.ent', configuration: ent_conf)
+

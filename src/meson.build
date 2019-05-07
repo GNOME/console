@@ -1,5 +1,4 @@
 kgx_sources = [
-  'main.c',
   'kgx-application.c',
   'fp-vte-util.c',
   'kgx-terminal.c',
@@ -26,16 +25,24 @@ kgx_sources += gnome.compile_resources('kgx-resources',
   c_name: 'kgx'
 )
 
-kgx_sources += gnome.gdbus_codegen('terminal-interface',
+kgx_sources += gnome.gdbus_codegen('kgx-dbus',
   sources: 'org.gnome.Terminal.xml',
   interface_prefix : 'org.gnome.',
-  object_manager: true,
-  namespace : 'Terminal'
+  object_manager: false,
+  namespace : 'KgxDBus'
 )
 
-kgx_sources += gnome.mkenums_simple('kgx-enums', sources: 'kgx.h')
+kgx_sources += gnome.mkenums_simple('kgx-enums', sources: 'kgx-application.h')
 
-executable('kgx', kgx_sources,
-  dependencies: kgx_deps,
+kgx_lib = library ('kgx', kgx_sources, dependencies: kgx_deps)
+kgx_inc = include_directories('.')
+
+kgx_dep = declare_dependency (sources: kgx_sources,
+                              include_directories: kgx_inc,
+                              link_with: kgx_lib,
+                              dependencies: kgx_deps)
+
+executable('kgx', 'main.c',
+  dependencies: kgx_dep,
   install: true,
 )

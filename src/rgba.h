@@ -1,5 +1,9 @@
 /**
- * By chergert
+ * SECTION:rgba
+ * @title: RGBA
+ * @short_description: #GdkRGBA utils
+ * @include: rgba.h
+ * @author: chergert
  *
  * https://gist.github.com/chergert/acc7f41c4d5a45ba254188bb19764f72
  */
@@ -32,6 +36,12 @@
             _GDK_RGBA_HIGH(str[1]) | _GDK_RGBA_LOW(str[1]), \
             _GDK_RGBA_HIGH(str[2]) | _GDK_RGBA_LOW(str[2]), \
             0xFF)
+/**
+ * GDK_RGBA:
+ * @str: Hex string
+ * 
+ * Compile time parsing of hex encoded colours
+ */
 # define GDK_RGBA(str) ((sizeof(str) == 9) ? _GDK_RGBA8(str) : \
                         (sizeof(str) == 7) ? _GDK_RGBA6(str) : \
                         (sizeof(str) == 5) ? _GDK_RGBA4(str) : \

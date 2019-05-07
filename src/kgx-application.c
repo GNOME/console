@@ -16,18 +16,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION:kgx-application
+ * @title: KgxApplication
+ * @short_description: Application
+ */
+
 #include <glib/gi18n.h>
 #include <vte/vte.h>
 
 #include "rgba.h"
-#include "terminal-interface.h"
+#include "kgx-dbus.h"
 
-#include "kgx.h"
 #include "kgx-config.h"
 #include "kgx-application.h"
 #include "kgx-terminal.h"
 #include "kgx-window.h"
-#include "kgx-enums.h"
 
 struct ProcessWatch {
   KgxWindow  *window;
@@ -244,12 +248,12 @@ kgx_application_startup (GApplication *app)
 }
 
 static gboolean
-create_instance (TerminalFactory       *interface,
+create_instance (KgxDBusFactory        *interface,
                  GDBusMethodInvocation *invocation,
                  const gchar           *greeting,
                  gpointer               user_data)
 {
-  terminal_factory_complete_create_instance (interface, invocation, "/org/gnome/Terminal/Factory0/");
+  kgx_dbus_factory_complete_create_instance (interface, invocation, "/org/gnome/Terminal/Factory0/");
 
   return TRUE;
 }
@@ -260,7 +264,7 @@ kgx_application_dbus_register (GApplication    *app,
                                const gchar     *object_path,
                                GError         **error)
 {
-  TerminalFactory *interface = terminal_factory_skeleton_new ();
+  KgxDBusFactory *interface = kgx_dbus_factory_skeleton_new ();
 
   g_signal_connect (interface,
                     "handle-create-instance",

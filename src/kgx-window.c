@@ -16,6 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * SECTION:kgx-window
+ * @title: KgxWindow
+ * @short_description: Window
+ */
+
 #include <glib/gi18n.h>
 #include <vte/vte.h>
 #define PCRE2_CODE_UNIT_WIDTH 0
@@ -24,12 +30,10 @@
 #include "rgba.h"
 #include "fp-vte-util.h"
 
-#include "kgx.h"
 #include "kgx-config.h"
 #include "kgx-application.h"
 #include "kgx-window.h"
 #include "kgx-process.h"
-#include "kgx-enums.h"
 
 #define KGX_WINDOW_STYLE_ROOT "root"
 #define KGX_WINDOW_STYLE_REMOTE "remote"
