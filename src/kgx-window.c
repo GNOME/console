@@ -31,6 +31,9 @@
 #include "kgx-process.h"
 #include "kgx-enums.h"
 
+#define KGX_WINDOW_STYLE_ROOT "root"
+#define KGX_WINDOW_STYLE_REMOTE "remote"
+
 struct _KgxWindow
 {
   GtkApplicationWindow  parent_instance;
@@ -42,6 +45,10 @@ struct _KgxWindow
   int                   last_cols;
   int                   last_rows;
   guint                 timeout;
+
+  /* Remote/root states */
+  int                   root;
+  int                   remote;
 
   /* Template widgets */
   GtkWidget            *header_bar;
@@ -464,6 +471,8 @@ kgx_window_init (KgxWindow *self)
 
   if (self->working_dir) {
     initial = self->working_dir;
+  } else {
+    initial = g_get_home_dir ();
   }
 
   vte_terminal_set_pty (VTE_TERMINAL (self->terminal), pty);
@@ -489,4 +498,60 @@ kgx_window_get_working_dir (KgxWindow *self)
   file = g_file_new_for_uri (uri);
 
   return g_file_get_path (file);
+}
+
+void
+kgx_window_push_root (KgxWindow *self)
+{
+  g_return_if_fail (KGX_IS_WINDOW (self));
+
+  self->root++;
+
+  g_debug ("root push now at %i", self->root);
+
+  gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self)),
+                               KGX_WINDOW_STYLE_ROOT);
+}
+
+void
+kgx_window_pop_root (KgxWindow *self)
+{
+  g_return_if_fail (KGX_IS_WINDOW (self));
+
+  self->root--;
+
+  g_debug ("root pop now at %i", self->root);
+
+  if (self->root <= 0) {
+    gtk_style_context_remove_class (gtk_widget_get_style_context (GTK_WIDGET (self)),
+                                    KGX_WINDOW_STYLE_ROOT);
+  }
+}
+
+void
+kgx_window_push_remote (KgxWindow *self)
+{
+  g_return_if_fail (KGX_IS_WINDOW (self));
+
+  self->remote++;
+
+  g_debug ("remote push now at %i", self->remote);
+
+  gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self)),
+                               KGX_WINDOW_STYLE_REMOTE);
+}
+
+void
+kgx_window_pop_remote (KgxWindow *self)
+{
+  g_return_if_fail (KGX_IS_WINDOW (self));
+
+  self->remote--;
+
+  g_debug ("remote pop now at %i", self->remote);
+
+  if (self->remote <= 0) {
+    gtk_style_context_remove_class (gtk_widget_get_style_context (GTK_WIDGET (self)),
+                                    KGX_WINDOW_STYLE_REMOTE);
+  }
 }

@@ -31,9 +31,9 @@ typedef struct _KgxProcess KgxProcess;
 
 /* The type itself is always defined but we hide the symbols
  * when libgtop isn't used to highlight other places where things
- * need to be #if GOT_GTOP
+ * need to be #if HAS_GTOP
  */
-#if GOT_GTOP
+#if HAS_GTOP
 GPtrArray  *kgx_process_get_list    ();
 KgxProcess *kgx_process_new         (GPid        pid);
 GPid        kgx_process_get_pid     (KgxProcess *self);

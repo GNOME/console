@@ -9,11 +9,11 @@ config_h = configuration_data()
 config_h.set_quoted('PACKAGE_VERSION', meson.project_version())
 config_h.set_quoted('GETTEXT_PACKAGE', 'kgx')
 config_h.set_quoted('LOCALEDIR', join_paths(get_option('prefix'), get_option('localedir')))
-config_h.set('BINDIR', join_paths([ get_option('prefix'), 'bin' ]))
+config_h.set('BINDIR', get_option('bindir'))
 if get_option('gtop')
-  config_h.set('GOT_GTOP', 1)
+  config_h.set('HAS_GTOP', 1)
 else
-  config_h.set('GOT_GTOP', 0)
+  config_h.set('HAS_GTOP', 0)
 endif
 configure_file(
   output: 'kgx-config.h',

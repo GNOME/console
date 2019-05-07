@@ -41,9 +41,7 @@ struct _KgxApplication
   KgxTheme        theme;
 
   GPtrArray      *watching;
-
-  // Child process being watched, int (GINT_TO_POINTER) -> KgxProcess
-  GTree          *children;
+  GPtrArray      *children;
 };
 
 G_DEFINE_TYPE (KgxApplication, kgx_application, GTK_TYPE_APPLICATION)
@@ -121,19 +119,18 @@ kgx_application_activate (GApplication *app)
 }
 
 #if HAS_GTOP
-static void
-child_ended (GPid     pid,
-             int      status,
-             gpointer data)
+static gboolean
+watch_is_for_process (struct ProcessWatch *watch,
+                      KgxProcess          *process)
 {
-  //KgxApplication *self = KGX_APPLICATION (data);
-  g_autoptr (GError) error = NULL;
+  return kgx_process_get_pid (watch->process) == kgx_process_get_pid (process);
+}
 
-  g_message ("Bye child %i of the %i", pid, status);
-
-  if (!g_spawn_check_exit_status (status, &error)) {
-    g_warning ("Child didn't exit cleanly: %s", error->message);
-  }
+static gboolean
+process_is_watched_by (KgxProcess *process,
+                       struct ProcessWatch *watch)
+{
+  return kgx_process_get_pid (watch->process) == kgx_process_get_pid (process);
 }
 
 static gboolean
@@ -141,12 +138,9 @@ watch (gpointer data)
 {
   KgxApplication *self = KGX_APPLICATION (data);
   g_autoptr (GPtrArray) plist = NULL;
-  GtkStyleContext *context;
   const char *exec;
 
   plist = kgx_process_get_list ();
-
-  g_message ("Watch %i pids", plist->len);
 
   for (int i = 0; i < self->watching->len; i++) {
     struct ProcessWatch *watch = g_ptr_array_index (self->watching, i);
@@ -167,25 +161,39 @@ watch (gpointer data)
                   i,
                   exec);
         
-        if (g_tree_lookup (self->children, GINT_TO_POINTER (pid)) == NULL) {
+        if (!g_ptr_array_find_with_equal_func (self->children, curr, (GEqualFunc) watch_is_for_process, NULL)) {
+          struct ProcessWatch *child_watch = g_new(struct ProcessWatch, 1);
+
+          child_watch->process = g_rc_box_acquire (curr);
+          child_watch->window = watch->window;
+
           g_message ("New child, watch it!");
-          g_child_watch_add (pid, child_ended, self);
-          g_tree_insert (self->children,
-                         GINT_TO_POINTER (pid),
-                         g_rc_box_acquire (curr));
-          g_message ("tree at %i", g_tree_nnodes (self->children));
+
+          g_ptr_array_add (self->children, child_watch);
         }
 
         if (g_strcmp0 (exec, "ssh") == 0) {
-          context = gtk_widget_get_style_context (GTK_WIDGET (watch->window));
-          gtk_style_context_add_class (context, "remote");
+          kgx_window_push_remote (watch->window);
         }
 
         if (kgx_process_get_is_root (curr)) {
-          context = gtk_widget_get_style_context (GTK_WIDGET (watch->window));
-          gtk_style_context_add_class (context, "root");
+          kgx_window_push_root (watch->window);
         }
       }
+    }
+  }
+
+  for (int i = 0; i < self->children->len; i++) {
+    struct ProcessWatch *child_watch = g_ptr_array_index (self->children, i);
+
+    g_message ("%i of %i", i, self->children->len);
+
+    if (!g_ptr_array_find_with_equal_func (plist, child_watch, (GEqualFunc) process_is_watched_by, NULL)) {
+      g_message ("Oh bye then %s", kgx_process_get_exec (child_watch->process));
+      kgx_window_pop_remote (child_watch->window);
+      kgx_window_pop_root (child_watch->window);
+      g_ptr_array_remove_index (self->children, i);
+      i--;
     }
   }
 
@@ -291,22 +299,19 @@ kgx_application_class_init (KgxApplicationClass *klass)
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 }
 
-static int
-pid_compare (gconstpointer a,
-             gconstpointer b,
-             gpointer      data)
+static void
+clear_watch (struct ProcessWatch *watch)
 {
-  return GPOINTER_TO_INT (a) - GPOINTER_TO_INT (b);
+  kgx_process_unref (watch->process);
+
+  g_free (watch);
 }
 
 static void
 kgx_application_init (KgxApplication *self)
 {
   self->watching = g_ptr_array_new_with_free_func (g_free);
-  self->children = g_tree_new_full (pid_compare,
-                                    NULL,
-                                    NULL,
-                                    (GDestroyNotify) kgx_process_unref);
+  self->children = g_ptr_array_new_with_free_func ((GDestroyNotify) clear_watch);
 }
 
 void
@@ -322,6 +327,8 @@ kgx_application_add_watch (KgxApplication *self,
   watch = g_new0 (struct ProcessWatch, 1);
   watch->process = g_rc_box_acquire (process);
   watch->window = window;
+
+  g_return_if_fail (KGX_IS_WINDOW (watch->window));
 
   g_ptr_array_add (self->watching, watch);
 }
