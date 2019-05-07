@@ -28,12 +28,12 @@ pages:
   image: registry.gitlab.gnome.org/gnome/gtk/master:v4
   stage: deploy 
   script:
-    - meson -Dgtk_doc=true _build .
-    - ninja -C _build
-    - ninja -C _build kgx-doc
+    - meson -Dgtk_doc=true _docs_build .
+    - ninja -C _docs_build
+    - ninja -C _docs_build kgx-doc
 
     - mkdir -p public/
-    - mv _build/docs/reference/kgx/html/ public/kgx/
+    - mv _docs_build/docs/reference/kgx/html/ public/kgx/
   artifacts:
     paths:
       - public

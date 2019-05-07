@@ -1,8 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component type="desktop">
-	<id>org.gnome.zbrown.KingsCross.desktop</id>
-	<metadata_license>CC0-1.0</metadata_license>
-	<project_license>GPL-3.0-or-later</project_license>
-	<description>
-	</description>
+<!-- Copyright 2019 Zander Brown -->
+<component type="desktop-application">
+  <id>org.gnome.zbrown.KingsCross</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <project_group>GNOME</project_group>
+  <name>Kings Cross</name>
+  <summary>Terminal Emulator</summary>
+  <description>
+    <p>
+      Icon Preview is a tool for designing icons which target the GNOME desktop.
+    </p>
+  </description>
+  <kudos>
+    <kudo>HiDpiIcon</kudo>
+    <kudo>ModernToolkit</kudo>
+  </kudos>
+  <screenshots>
+    <screenshot type="default">
+      <image height="650" width="1196">https://gitlab.gnome.org/World/icon-tool/raw/master/data/screenshots/01-Welcome.png</image>
+      <caption>TODO: Make a screenshot</caption>
+    </screenshot>
+  </screenshots>
+  <launchable type="desktop-id">org.gnome.zbrown.KingsCross.desktop</launchable>
+  <url type="homepage">https://gitlab.gnome.org/ZanderBrown/kgx/</url>
+  <url type="bugtracker">https://gitlab.gnome.org/ZanderBrown/kgx/issues</url>
+  <update_contact>zbrown@gnome.org</update_contact>
+  <translation type="gettext">kgx</translation>
+  <content_rating type="oars-1.1" />
+  <developer_name>Zander Brown</developer_name>
 </component>
