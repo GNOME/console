@@ -29,7 +29,7 @@ pages:
   stage: deploy 
   before_script:
     - dnf update -y --nogpgcheck
-    - dnf install -y --nogpgcheck meson gettext glib2-devel
+    - dnf install -y --nogpgcheck meson gettext glib2-devel gcc
       desktop-file-utils gtk3-devel libgtop2-devel vte291-devel gtk-doc
   script:
     - meson -Dgtk_doc=true _docs_build .
@@ -37,7 +37,7 @@ pages:
     - ninja -C _docs_build kgx-doc
 
     - mkdir -p public/
-    - mv _docs_build/docs/reference/kgx/html/ public/kgx/
+    - mv _docs_build/doc/html/ public/kgx/
   artifacts:
     paths:
       - public
