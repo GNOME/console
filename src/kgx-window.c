@@ -233,7 +233,7 @@ size_changed (GtkWidget    *widget,
   self->last_cols = cols;
   self->last_rows = rows;
 
-  label = g_strdup_printf ("%ix%i", cols, rows);
+  label = g_strdup_printf ("%i × %i", cols, rows);
 
   gtk_label_set_label (GTK_LABEL (self->dims), label);
   gtk_widget_show (self->dims);
