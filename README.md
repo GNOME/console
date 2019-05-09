@@ -1,5 +1,7 @@
 # King's Cross
 
+![](data/org.gnome.zbrown.KingsCross.svg)
+
 A minimal terminal for GNOME
 
 KGX is supposed to be a simple terminal emulator for the average user to carry out simple cli tasks and aims to be a 'core' app for GNOME/Phosh
