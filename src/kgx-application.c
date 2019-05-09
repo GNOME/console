@@ -42,9 +42,10 @@
 G_DEFINE_TYPE (KgxApplication, kgx_application, GTK_TYPE_APPLICATION)
 
 enum {
-	PROP_0,
-	PROP_THEME,
-	LAST_PROP
+  PROP_0,
+  PROP_THEME,
+  PROP_FONT,
+  LAST_PROP
 };
 
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -88,10 +89,26 @@ kgx_application_get_property (GObject    *object,
     case PROP_THEME:
       g_value_set_enum (value, self->theme);
       break;
+    case PROP_FONT:
+      g_value_set_boxed (value, kgx_application_get_system_font (self));
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
   }
+}
+
+static void
+kgx_application_finalize (GObject *object)
+{
+  KgxApplication *self = KGX_APPLICATION (object);
+
+  g_clear_object (&self->desktop_interface);
+
+  g_ptr_array_unref (self->watching);
+  g_ptr_array_unref (self->children);
+
+  G_OBJECT_CLASS (kgx_application_parent_class)->finalize (object);
 }
 
 static void
@@ -282,6 +299,7 @@ kgx_application_class_init (KgxApplicationClass *klass)
 
   object_class->set_property = kgx_application_set_property;
   object_class->get_property = kgx_application_get_property;
+  object_class->finalize = kgx_application_finalize;
 
   app_class->activate = kgx_application_activate;
   app_class->startup = kgx_application_startup;
@@ -291,6 +309,11 @@ kgx_application_class_init (KgxApplicationClass *klass)
     g_param_spec_enum ("theme", "Theme", "Terminal theme",
                        KGX_TYPE_THEME, KGX_THEME_NIGHT,
                        G_PARAM_READWRITE);
+
+  pspecs[PROP_FONT] =
+    g_param_spec_boxed ("font", "Font", "Monospace font",
+                         PANGO_TYPE_FONT_DESCRIPTION,
+                         G_PARAM_READABLE);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 }
@@ -304,8 +327,23 @@ clear_watch (struct ProcessWatch *watch)
 }
 
 static void
+font_changed (GSettings      *settings,
+              const char     *key,
+              KgxApplication *self)
+{
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_FONT]);
+}
+
+static void
 kgx_application_init (KgxApplication *self)
 {
+  self->desktop_interface = g_settings_new (DESKTOP_INTERFACE_SETTINGS_SCHEMA);
+
+  g_signal_connect (self->desktop_interface,
+                    "changed::" MONOSPACE_FONT_KEY_NAME,
+                    G_CALLBACK (font_changed),
+                    self);
+
   self->watching = g_ptr_array_new_with_free_func (g_free);
   self->children = g_ptr_array_new_with_free_func ((GDestroyNotify) clear_watch);
 }
@@ -335,4 +373,26 @@ kgx_application_add_watch (KgxApplication *self,
   g_return_if_fail (KGX_IS_WINDOW (watch->window));
 
   g_ptr_array_add (self->watching, watch);
+}
+
+/**
+ * kgx_application_get_system_font:
+ * @self: the #KgxApplication
+ *
+ * Creates a #PangoFontDescription for the system monospace font.
+ *
+ * Returns: (transfer full): a new #PangoFontDescription
+ */
+PangoFontDescription *
+kgx_application_get_system_font (KgxApplication *self)
+{
+  // Taken from gnome-terminal
+  g_autofree char *font = NULL;
+
+  g_return_val_if_fail (KGX_IS_APPLICATION (self), NULL);
+
+  font = g_settings_get_string (self->desktop_interface,
+                                MONOSPACE_FONT_KEY_NAME);
+
+  return pango_font_description_from_string (font);
 }

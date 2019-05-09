@@ -26,6 +26,19 @@
 
 G_BEGIN_DECLS
 
+/**
+ * DESKTOP_INTERFACE_SETTINGS_SCHEMA:
+ * The schema that defines the system fonts
+ */
+#define DESKTOP_INTERFACE_SETTINGS_SCHEMA "org.gnome.desktop.interface"
+
+/**
+ * MONOSPACE_FONT_KEY_NAME:
+ * The name of the key in %DESKTOP_INTERFACE_SETTINGS_SCHEMA for the monospace
+ * font
+ */
+#define MONOSPACE_FONT_KEY_NAME "monospace-font-name"
+
 #define KGX_TYPE_APPLICATION (kgx_application_get_type())
 
 /**
@@ -43,6 +56,7 @@ struct ProcessWatch {
 /**
  * KgxApplication:
  * @theme: the colour palette in use
+ * @desktop_interface: the #GSettings storing the system monospace font
  * @watching: (element-type ProcessWatch): the shells running in windows
  * @children: (element-type ProcessWatch): the processes running in shells
  * 
@@ -55,6 +69,8 @@ struct _KgxApplication
 
   /*< public >*/
   KgxTheme        theme;
+  
+  GSettings      *desktop_interface;
 
   GPtrArray      *watching;
   GPtrArray      *children;
@@ -62,9 +78,9 @@ struct _KgxApplication
 
 G_DECLARE_FINAL_TYPE (KgxApplication, kgx_application, KGX, APPLICATION, GtkApplication)
 
-void kgx_application_add_watch (KgxApplication *self,
-                                KgxProcess     *process,
-                                KgxWindow      *window);
+void                  kgx_application_add_watch       (KgxApplication *self,
+                                                       KgxProcess     *process,
+                                                       KgxWindow      *window);
+PangoFontDescription *kgx_application_get_system_font (KgxApplication *self);
 
 G_END_DECLS
-

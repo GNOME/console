@@ -139,11 +139,21 @@ kgx_window_get_property (GObject    *object,
 static void
 application_set (GObject *object, GParamSpec *pspec, gpointer data)
 {
-  g_object_bind_property (gtk_window_get_application (GTK_WINDOW (object)),
+  GtkApplication *app;
+
+  app = gtk_window_get_application (GTK_WINDOW (object));
+
+  g_object_bind_property (app,
                           "theme",
                           object,
                           "theme",
                           G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+
+  g_object_bind_property (app,
+                          "font",
+                          KGX_WINDOW (object)->terminal,
+                          "font-desc",
+                          G_BINDING_SYNC_CREATE);
 }
 
 static void
