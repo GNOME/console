@@ -1,6 +1,6 @@
 # King's Cross
 
-![](data/org.gnome.zbrown.KingsCross.svg)
+![](logo.png)
 
 A minimal terminal for GNOME
 
