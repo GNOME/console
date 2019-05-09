@@ -2,6 +2,7 @@
 <gresources>
   <gresource prefix="/org/gnome/zbrown/KingsCross">
     <file>kgx-window.ui</file>
+    <file>kgx-search-box.ui</file>
     <file>styles.css</file>
   </gresource>
   <gresource prefix="/org/gnome/zbrown/KingsCross/gtk">

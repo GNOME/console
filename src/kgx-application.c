@@ -31,6 +31,7 @@
 #include "kgx-config.h"
 #include "kgx-application.h"
 #include "kgx-terminal.h"
+#include "kgx-search-box.h"
 #include "kgx-window.h"
 
 struct ProcessWatch {
@@ -217,6 +218,7 @@ kgx_application_startup (GApplication *app)
   const char *const new_window_accels[] = { "<shift><primary>n", NULL };
 
   g_type_ensure (KGX_TYPE_TERMINAL);
+  g_type_ensure (KGX_TYPE_SEARCH_BOX);
 
   G_APPLICATION_CLASS (kgx_application_parent_class)->startup (app);
 

@@ -33,6 +33,7 @@
 #include "kgx-config.h"
 #include "kgx-application.h"
 #include "kgx-window.h"
+#include "kgx-search-box.h"
 #include "kgx-process.h"
 
 #define KGX_WINDOW_STYLE_ROOT "root"
@@ -167,13 +168,14 @@ application_set (GObject *object, GParamSpec *pspec, gpointer data)
 }
 
 static void
-search_changed (GtkEntry  *entry,
-                KgxWindow *self)
+search_changed (KgxSearchBox *box,
+                const gchar  *search,
+                KgxWindow    *self)
 {
   VteRegex *regex;
   GError *error = NULL;
 
-  regex = vte_regex_new_for_search (g_regex_escape_string (gtk_entry_get_text (entry), -1),
+  regex = vte_regex_new_for_search (g_regex_escape_string (search, -1),
                                     -1, PCRE2_MULTILINE, &error);
 
   if (error) {
@@ -186,15 +188,15 @@ search_changed (GtkEntry  *entry,
 }
 
 static void
-search_next (gpointer   entry_or_button,
-             KgxWindow *self)
+search_next (KgxSearchBox *box,
+             KgxWindow    *self)
 {
   vte_terminal_search_find_next (VTE_TERMINAL (self->terminal));
 }
 
 static void
-search_prev (gpointer   entry_or_button,
-             KgxWindow *self)
+search_prev (KgxSearchBox *box,
+             KgxWindow    *self)
 {
   vte_terminal_search_find_previous (VTE_TERMINAL (self->terminal));
 }

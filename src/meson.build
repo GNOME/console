@@ -2,6 +2,7 @@ kgx_sources = [
   'kgx-application.c',
   'fp-vte-util.c',
   'kgx-terminal.c',
+  'kgx-search-box.c',
   'kgx-window.c',
 ]
 
