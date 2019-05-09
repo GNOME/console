@@ -22,26 +22,43 @@
 
 #include "kgx-process.h"
 #include "kgx-window.h"
-#include "kgx-enums.h"
+#include "kgx-terminal.h"
 
 G_BEGIN_DECLS
 
-/**
- * KgxTheme:
- * @KGX_THEME_NIGHT: The default, public, theme
- * @KGX_THEME_HACKER: Little easter egg theme
- * 
- * Until [meson#1687](https://github.com/mesonbuild/meson/issues/1687) is
- * resolved this enum must be manually kept in sync with
- * org.gnome.zbrown.KingsCross.Theme in the gschema
- */
-typedef enum /*< enum,prefix=KGX >*/
-{
-  KGX_THEME_NIGHT = 1,  /*< nick=night >*/
-  KGX_THEME_HACKER = 2, /*< nick=hacker >*/
-} KgxTheme;
-
 #define KGX_TYPE_APPLICATION (kgx_application_get_type())
+
+/**
+ * ProcessWatch:
+ * @window: the window the #KgxProcess is in
+ * @process: what we are watching
+ * 
+ * Stability: Private
+ */
+struct ProcessWatch {
+  KgxWindow  *window;
+  KgxProcess *process;
+};
+
+/**
+ * KgxApplication:
+ * @theme: the colour palette in use
+ * @watching: (element-type ProcessWatch): the shells running in windows
+ * @children: (element-type ProcessWatch): the processes running in shells
+ * 
+ * Stability: Private
+ */
+struct _KgxApplication
+{
+  /*< private >*/
+  GtkApplication  parent_instance;
+
+  /*< public >*/
+  KgxTheme        theme;
+
+  GPtrArray      *watching;
+  GPtrArray      *children;
+};
 
 G_DECLARE_FINAL_TYPE (KgxApplication, kgx_application, KGX, APPLICATION, GtkApplication)
 

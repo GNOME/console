@@ -20,6 +20,10 @@
  * SECTION:kgx-process
  * @title: KgxProcess
  * @short_description: Information about running processes
+ * 
+ * Provides an abstraction of libgtop to fetch information about running
+ * process, this is used by #KgxApplication to monitor things happening in
+ * a #KgxTerminal for the purposes of styling a #KgxWindow
  */
 
 #include <gio/gio.h>
@@ -42,6 +46,14 @@ clear (KgxProcess *self)
   g_free (self->exec);
 }
 
+/**
+ * kgx_process_unref:
+ * @self: the #KgxProcess
+ * 
+ * Reduce the refrence count of @self, possibly freeing @self
+ * 
+ * See g_rc_box_acquire() and g_rc_box_release_full()
+ */
 void
 kgx_process_unref (KgxProcess *self)
 {
@@ -52,6 +64,12 @@ kgx_process_unref (KgxProcess *self)
 
 G_DEFINE_BOXED_TYPE (KgxProcess, kgx_process, g_rc_box_acquire, kgx_process_unref)
 
+/**
+ * kgx_process_new:
+ * @pid: The #GPid to get info about
+ * 
+ * Populate a new #KgxProcess with details about the process @pid
+ */
 KgxProcess *
 kgx_process_new (GPid pid)
 {
@@ -76,6 +94,12 @@ kgx_process_new (GPid pid)
   return self;
 }
 
+/**
+ * kgx_process_get_pid:
+ * @self: the #KgxProcess
+ * 
+ * Returns: The process id
+ */
 GPid
 kgx_process_get_pid (KgxProcess *self)
 {
@@ -84,6 +108,12 @@ kgx_process_get_pid (KgxProcess *self)
   return self->pid;
 }
 
+/**
+ * kgx_process_get_uid:
+ * @self: the #KgxProcess
+ * 
+ * Returns: The user id of the process
+ */
 gint32
 kgx_process_get_uid (KgxProcess *self)
 {
@@ -92,6 +122,12 @@ kgx_process_get_uid (KgxProcess *self)
   return self->uid;
 }
 
+/**
+ * kgx_process_get_is_root:
+ * @self: the #KgxProcess
+ * 
+ * Returns: %TRUE if this process is running as root
+ */
 gboolean
 kgx_process_get_is_root (KgxProcess *self)
 {
@@ -100,6 +136,14 @@ kgx_process_get_is_root (KgxProcess *self)
   return self->uid == 0;
 }
 
+/**
+ * kgx_process_get_parent:
+ * @self: the #KgxProcess
+ * 
+ * Get information about the processes parent
+ * 
+ * Returns: the parent, free with kgx_process_unref()
+ */
 KgxProcess *
 kgx_process_get_parent (KgxProcess *self)
 {
@@ -108,6 +152,12 @@ kgx_process_get_parent (KgxProcess *self)
   return kgx_process_new (self->parent);
 }
 
+/**
+ * kgx_process_get_exec:
+ * @self: the #KgxProcess
+ * 
+ * Get the command line used to invoke to process
+ */
 const char *
 kgx_process_get_exec (KgxProcess *self)
 {
@@ -116,7 +166,13 @@ kgx_process_get_exec (KgxProcess *self)
   return self->exec;
 }
 
-// Caller must call g_ptr_array_unref
+/**
+ * kgx_process_get_list:
+ * 
+ * Get the list of running processes
+ * 
+ * Returns: (element-type Kgx.Process): List of processes free with g_ptr_array_unref()
+ */
 GPtrArray *
 kgx_process_get_list ()
 {

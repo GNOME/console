@@ -20,6 +20,12 @@
  * SECTION:kgx-application
  * @title: KgxApplication
  * @short_description: Application
+ * 
+ * The application, on the face of it nothing particularly interesting but
+ * under the hood it contains a #GSource used to monitor the shells (and
+ * there children) running in the open #KgxWindow s
+ * 
+ * Sooner or later this will implement the GNOME Terminal dbus interface
  */
 
 #include <glib/gi18n.h>
@@ -30,24 +36,8 @@
 
 #include "kgx-config.h"
 #include "kgx-application.h"
-#include "kgx-terminal.h"
 #include "kgx-search-box.h"
 #include "kgx-window.h"
-
-struct ProcessWatch {
-  KgxWindow  *window;
-  KgxProcess *process;
-};
-
-struct _KgxApplication
-{
-  GtkApplication  parent_instance;
-
-  KgxTheme        theme;
-
-  GPtrArray      *watching;
-  GPtrArray      *children;
-};
 
 G_DEFINE_TYPE (KgxApplication, kgx_application, GTK_TYPE_APPLICATION)
 
@@ -320,6 +310,14 @@ kgx_application_init (KgxApplication *self)
   self->children = g_ptr_array_new_with_free_func ((GDestroyNotify) clear_watch);
 }
 
+/**
+ * kgx_application_add_watch:
+ * @self: the #KgxApplication
+ * @process: the shell process to watch
+ * @window: the window the shell is running in
+ * 
+ * registers a new shell proccess with the pid watcher
+ */
 void
 kgx_application_add_watch (KgxApplication *self,
                            KgxProcess     *process,

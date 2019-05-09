@@ -20,6 +20,8 @@
  * SECTION:kgx-window
  * @title: KgxWindow
  * @short_description: Window
+ * 
+ * The main #GtkApplicationWindow that acts as the terminal
  */
 
 #include <glib/gi18n.h>
@@ -31,36 +33,13 @@
 #include "fp-vte-util.h"
 
 #include "kgx-config.h"
-#include "kgx-application.h"
 #include "kgx-window.h"
+#include "kgx-application.h"
 #include "kgx-search-box.h"
 #include "kgx-process.h"
 
 #define KGX_WINDOW_STYLE_ROOT "root"
 #define KGX_WINDOW_STYLE_REMOTE "remote"
-
-struct _KgxWindow
-{
-  GtkApplicationWindow  parent_instance;
-
-  KgxTheme              theme;
-  const char           *working_dir;
-
-  /* Size indicator */
-  int                   last_cols;
-  int                   last_rows;
-  guint                 timeout;
-
-  /* Remote/root states */
-  int                   root;
-  int                   remote;
-
-  /* Template widgets */
-  GtkWidget            *header_bar;
-  GtkWidget            *terminal;
-  GtkWidget            *dims;
-  GtkWidget            *search_bar;
-};
 
 G_DEFINE_TYPE (KgxWindow, kgx_window, GTK_TYPE_APPLICATION_WINDOW)
 
@@ -492,6 +471,13 @@ kgx_window_init (KgxWindow *self)
                           self);
 }
 
+/**
+ * kgx_window_get_working_dir:
+ * @self: the #KgxWindow
+ * 
+ * Get the working directory path of this window, used to open new windows
+ * in the same directory
+ */
 const char *
 kgx_window_get_working_dir (KgxWindow *self)
 {
@@ -506,6 +492,13 @@ kgx_window_get_working_dir (KgxWindow *self)
   return g_file_get_path (file);
 }
 
+/**
+ * kgx_window_push_root:
+ * @self: the #KgxWindow
+ * 
+ * Increase the count of processes running as root and applying the
+ * appropriate styles
+ */
 void
 kgx_window_push_root (KgxWindow *self)
 {
@@ -519,6 +512,12 @@ kgx_window_push_root (KgxWindow *self)
                                KGX_WINDOW_STYLE_ROOT);
 }
 
+/**
+ * kgx_window_pop_root:
+ * @self: the #KgxWindow
+ * 
+ * Reduce the count of root children, removing styles if we hit 0
+ */
 void
 kgx_window_pop_root (KgxWindow *self)
 {
@@ -534,6 +533,12 @@ kgx_window_pop_root (KgxWindow *self)
   }
 }
 
+/**
+ * kgx_window_push_remote:
+ * @self: the #KgxWindow
+ * 
+ * Same as kgx_window_push_root() but for ssh
+ */
 void
 kgx_window_push_remote (KgxWindow *self)
 {
@@ -547,6 +552,12 @@ kgx_window_push_remote (KgxWindow *self)
                                KGX_WINDOW_STYLE_REMOTE);
 }
 
+/**
+ * kgx_window_pop_remote:
+ * @self: the #KgxWindow
+ * 
+ * Same as kgx_window_pop_root() but for ssh
+ */
 void
 kgx_window_pop_remote (KgxWindow *self)
 {

@@ -25,6 +25,26 @@ G_BEGIN_DECLS
 
 #define KGX_TYPE_SEARCH_BOX (kgx_search_box_get_type())
 
+/**
+ * KgxSearchBox:
+ * @parent: The #GtkSearchBar that contains the box
+ * @entry: The #GtkSearchEntry we contain
+ * @parent_width: Width of the @parent
+ * 
+ * Stability: Private
+ */
+struct _KgxSearchBox
+{
+  /*< private >*/
+  GtkBox parent_instance;
+
+  /*< public >*/
+  GtkWidget *parent;
+  GtkWidget *entry;
+
+  int parent_width;
+};
+
 G_DECLARE_FINAL_TYPE (KgxSearchBox, kgx_search_box, KGX, SEARCH_BOX, GtkBox)
 
 const char *kgx_search_box_get_search (KgxSearchBox *self);

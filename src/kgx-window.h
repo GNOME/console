@@ -20,9 +20,51 @@
 
 #include <gtk/gtk.h>
 
+#include "kgx-terminal.h"
+
 G_BEGIN_DECLS
 
 #define KGX_TYPE_WINDOW (kgx_window_get_type())
+
+/**
+ * KgxWindow:
+ * @theme: the palette
+ * @working_dir: the working directory of the #KgxTerminal
+ * @last_cols: the column width last time we received #GtkWidget::size-allocate
+ * @last_rows: the row count last time we received #GtkWidget::size-allocate
+ * @timeout: the id of the #GSource used to hide the statusbar
+ * @root: count of the children running as root, when its > 0 root styles are
+ * applied to the headerbar
+ * @remote: same as @root but for ssh
+ * @header_bar: the #GtkHeaderBar that the styles are applied to
+ * @terminal: the #KgxTerminal the window contains
+ * @dims: the floating status bar
+ * @search_bar: the windows #GtkSearchBar
+ */
+struct _KgxWindow
+{
+  /*< private >*/
+  GtkApplicationWindow  parent_instance;
+
+  /*< public >*/
+  KgxTheme              theme;
+  const char           *working_dir;
+
+  /* Size indicator */
+  int                   last_cols;
+  int                   last_rows;
+  guint                 timeout;
+
+  /* Remote/root states */
+  int                   root;
+  int                   remote;
+
+  /* Template widgets */
+  GtkWidget            *header_bar;
+  GtkWidget            *terminal;
+  GtkWidget            *dims;
+  GtkWidget            *search_bar;
+};
 
 G_DECLARE_FINAL_TYPE (KgxWindow, kgx_window, KGX, WINDOW, GtkApplicationWindow)
 

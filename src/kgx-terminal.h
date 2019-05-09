@@ -21,9 +21,57 @@
 #include <gtk/gtk.h>
 #include <vte/vte.h>
 
+#include "kgx-enums.h"
+
 G_BEGIN_DECLS
 
+/**
+ * KgxTheme:
+ * @KGX_THEME_NIGHT: The default, public, theme
+ * @KGX_THEME_HACKER: Little easter egg theme
+ * 
+ * Until [meson#1687](https://github.com/mesonbuild/meson/issues/1687) is
+ * resolved this enum must be manually kept in sync with
+ * org.gnome.zbrown.KingsCross.Theme in the gschema
+ */
+typedef enum /*< enum,prefix=KGX >*/
+{
+  KGX_THEME_NIGHT = 1,  /*< nick=night >*/
+  KGX_THEME_HACKER = 2, /*< nick=hacker >*/
+} KgxTheme;
+
+/**
+ * KGX_TERMINAL_N_LINK_REGEX:
+ * The number of regexs use to search for hyperlinks
+ * 
+ * Stability: Private
+ */
+#define KGX_TERMINAL_N_LINK_REGEX 5
+
 #define KGX_TYPE_TERMINAL (kgx_terminal_get_type())
+
+/**
+ * KgxTerminal:
+ * @theme: the palette to use
+ * @actions: action map for the context menu
+ * @current_url: the address under the cursor
+ * @match_id: regex ids for finding hyperlinks
+ * 
+ * Stability: Private
+ */
+struct _KgxTerminal
+{
+  /*< private >*/
+  VteTerminal parent_instance;
+
+  /*< public >*/
+  KgxTheme    theme;
+  GActionMap *actions; 
+
+  /* Hyperlinks */
+  const char *current_url;
+  int         match_id[KGX_TERMINAL_N_LINK_REGEX];
+};
 
 G_DECLARE_FINAL_TYPE (KgxTerminal, kgx_terminal, KGX, TERMINAL, VteTerminal)
 

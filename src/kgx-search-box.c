@@ -20,22 +20,26 @@
  * SECTION:kgx-search-box
  * @title: KgxSearchBox
  * @short_description: The dynamically sized search box
+ * 
+ * #GtkSearchBar has a weird way of sizing its children which results in a
+ * tiny #GtkSearchEntry, we could set #GtkWidget:width-request but then the
+ * entry wouldn't go small enough for the
+ * [librem5](https://puri.sm/products/librem-5/) and would still be small on
+ * in larger windows, sigh
+ * 
+ * So here we are with a custom widget that does almost nothing but allows
+ * the entry to grow up to 500px wide whilst still going as small as possible
+ * as the window gets smaller, it also proxies various signals from
+ * #GtkSearchEntry up for consumers to listen to
+ * 
+ * This *must* be inside a #GtkSearchBar, it may still work outside one but
+ * that's very much undefined behaviour
  */
 
 #include <glib/gi18n.h>
 
 #include "kgx-config.h"
 #include "kgx-search-box.h"
-
-struct _KgxSearchBox
-{
-  GtkBox parent_instance;
-
-  GtkWidget *parent;
-  GtkWidget *entry;
-
-  int parent_width;
-};
 
 G_DEFINE_TYPE (KgxSearchBox, kgx_search_box, GTK_TYPE_BOX)
 
@@ -111,18 +115,37 @@ kgx_search_box_class_init (KgxSearchBoxClass *klass)
 
   widget_class->get_preferred_width = kgx_search_box_get_preferred_width;
 
+  /**
+   * KgxSearchBox::next:
+   * 
+   * Straight proxy to #GtkSearchEntry::next-match so check that for details
+   * (also includes #GtkButton::clicked for the relevent button)
+   */
   signals[NEXT] = g_signal_new ("next",
                                 G_TYPE_FROM_CLASS (klass),
                                 G_SIGNAL_RUN_FIRST,
                                 0, NULL, NULL, NULL,
                                 G_TYPE_NONE, 0);
 
+  /**
+   * KgxSearchBox::previous:
+   * 
+   * Straight proxy to #GtkSearchEntry::previous-match so check that for
+   * details (also includes #GtkButton::clicked for the relevent button)
+   */
   signals[PREVIOUS] = g_signal_new ("previous",
                                     G_TYPE_FROM_CLASS (klass),
                                     G_SIGNAL_RUN_FIRST,
                                     0, NULL, NULL, NULL,
                                     G_TYPE_NONE, 0);
 
+  /**
+   * KgxSearchBox::changed:
+   * @search: The current contents of the #GtkSearchEntry
+   * 
+   * Proxy to #GtkSearchEntry::search-changed but with the current search
+   * as a parameter
+   */
   signals[CHANGED] = g_signal_new ("changed",
                                     G_TYPE_FROM_CLASS (klass),
                                     G_SIGNAL_RUN_FIRST,
@@ -189,6 +212,12 @@ kgx_search_box_init (KgxSearchBox *self)
   g_signal_connect (self, "notify::parent", G_CALLBACK (set_parent), NULL);
 }
 
+/**
+ * kgx_search_box_get_search:
+ * @self: The #KgxSearchBox
+ * 
+ * Gets the current search, aka #GtkEntry:text on the #GtkSearchEntry
+ */
 const char *
 kgx_search_box_get_search (KgxSearchBox *self)
 {

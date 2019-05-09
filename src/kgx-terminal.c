@@ -20,6 +20,9 @@
  * SECTION:kgx-terminal
  * @title: KgxTerminal
  * @short_description: The terminal
+ * 
+ * The main terminal widget with various features added such as a context
+ * menu (via #GtkPopover) and link detection
  */
 
 #include <glib/gi18n.h>
@@ -31,7 +34,6 @@
 
 #include "kgx-config.h"
 #include "kgx-terminal.h"
-#include "kgx-application.h"
 
 /*       Regex adapted from TerminalWidget.vala in Pantheon Terminal       */
 
@@ -51,8 +53,7 @@
 #define USERPASS USERCHARS_CLASS "+(?:" PASSCHARS_CLASS "+)?"
 #define URLPATH "(?:(/" PATHCHARS_CLASS "+(?:[(]" PATHCHARS_CLASS "*[)])*" PATHCHARS_CLASS "*)*" PATHTERM_CLASS ")?"
 
-#define N_LINK_REGEX 5
-static const gchar* links[N_LINK_REGEX] = {
+static const gchar* links[KGX_TERMINAL_N_LINK_REGEX] = {
   SCHEME "//(?:" USERPASS "\\@)?" HOST PORT URLPATH,
   "(?:www|ftp)" HOSTCHARS_CLASS "*\\." HOST PORT URLPATH,
   "(?:callto:|h323:|sip:)" USERCHARS_CLASS "[" USERCHARS ".]*(?:" PORT "/[a-z0-9]+)?\\@" HOST,
@@ -61,18 +62,6 @@ static const gchar* links[N_LINK_REGEX] = {
 };
 
 /*       Regex adapted from TerminalWidget.vala in Pantheon Terminal       */
-
-struct _KgxTerminal
-{
-  VteTerminal parent_instance;
-
-  KgxTheme    theme;
-  GActionMap *actions; 
-
-  /* Hyperlinks */
-  const char *current_url;
-  int         match_id[N_LINK_REGEX];
-};
 
 G_DEFINE_TYPE (KgxTerminal, kgx_terminal, VTE_TYPE_TERMINAL)
 
@@ -183,7 +172,7 @@ context_menu (GtkWidget *widget, GdkEventButton *event)
                                           &match_id);
 
   self->current_url = NULL;
-  for (int i = 0; i < N_LINK_REGEX; i++) {
+  for (int i = 0; i < KGX_TERMINAL_N_LINK_REGEX; i++) {
     if (self->match_id[i] == match_id) {
       self->current_url = match;
       break;
@@ -240,6 +229,10 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
   widget_class->popup_menu = kgx_terminal_popup_menu;
   widget_class->button_press_event = kgx_terminal_button_press_event;
 
+  /**
+   * KgxTerminal:theme:
+   * The palette to use
+   */
   pspecs[PROP_THEME] =
     g_param_spec_enum ("theme", "Theme", "Terminal theme",
                        KGX_TYPE_THEME, KGX_THEME_NIGHT,
@@ -284,8 +277,8 @@ copy_link_activated (GSimpleAction *action,
 
 static void
 copy_activated (GSimpleAction *action,
-                 GVariant      *parameter,
-                 gpointer       data)
+                GVariant      *parameter,
+                gpointer       data)
 {
   vte_terminal_copy_clipboard_format (VTE_TERMINAL (data), VTE_FORMAT_TEXT);
 }
@@ -449,7 +442,7 @@ kgx_terminal_init (KgxTerminal *self)
   g_signal_connect (self, "current-file-uri-changed",
                     G_CALLBACK (location_changed), NULL);
 
-  for (int i = 0; i < N_LINK_REGEX; i++) {
+  for (int i = 0; i < KGX_TERMINAL_N_LINK_REGEX; i++) {
     VteRegex *regex;
     GError *error = NULL;
 
