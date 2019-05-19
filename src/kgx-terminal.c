@@ -283,15 +283,65 @@ copy_activated (GSimpleAction *action,
   vte_terminal_copy_clipboard_format (VTE_TERMINAL (data), VTE_FORMAT_TEXT);
 }
 
+struct Paste {
+  VteTerminal *dest;
+  char        *text;
+};
+
+static void
+paste_response (GtkDialog    *dlg,
+                int           response,
+                struct Paste *paste)
+{
+  if (dlg && GTK_IS_DIALOG (dlg)) {
+    gtk_widget_destroy (GTK_WIDGET (dlg));
+  }
+
+  if (response == GTK_RESPONSE_ACCEPT) {
+    vte_terminal_feed_child (paste->dest, paste->text, -1);
+  }
+
+  g_free (paste->text);
+  g_free (paste);
+}
+
 static void
 got_text (GtkClipboard *clipboard,
           const gchar  *text,
           gpointer      data)
 {
-  // TODO: Check for sudo
+  g_autofree char *striped = g_strchug (g_strdup (text));
+  struct Paste    *paste = g_new (struct Paste, 1);
 
-  // HACK: Technically a race condition here
-  vte_terminal_paste_clipboard (VTE_TERMINAL (data));
+  paste->dest = VTE_TERMINAL (data);
+  paste->text = g_strdup (text);
+
+  if (g_strstr_len (striped, -1, "sudo") != NULL &&
+      g_strstr_len (striped, -1, "\n") != NULL) {
+    GtkWidget *dlg = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (data))),
+                                             GTK_DIALOG_MODAL,
+                                             GTK_MESSAGE_QUESTION,
+                                             GTK_BUTTONS_NONE,
+                                             _("You are pasting a command that runs as an administrator"));
+    gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dlg),
+                                              // TRANSLATORS: %s is the command being pasted
+                                              _("Make sure you know what the command does:\n%s"),
+                                              text);
+    GtkWidget *accept;
+
+    g_signal_connect (dlg, "response", G_CALLBACK (paste_response), paste);
+    gtk_dialog_add_button (GTK_DIALOG (dlg),
+                           _("_Cancel"),
+                           GTK_RESPONSE_DELETE_EVENT);
+    accept = gtk_dialog_add_button (GTK_DIALOG (dlg),
+                                    _("_Paste"),
+                                    GTK_RESPONSE_ACCEPT);
+    gtk_style_context_add_class (gtk_widget_get_style_context (accept),
+                                 GTK_STYLE_CLASS_DESTRUCTIVE_ACTION);
+    gtk_widget_show (dlg);
+  } else {
+    paste_response (NULL, GTK_RESPONSE_ACCEPT, paste);
+  }
 }
 
 static void
