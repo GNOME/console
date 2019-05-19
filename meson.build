@@ -9,7 +9,7 @@ config_h = configuration_data()
 config_h.set_quoted('PACKAGE_VERSION', meson.project_version())
 config_h.set_quoted('GETTEXT_PACKAGE', 'kgx')
 config_h.set_quoted('LOCALEDIR', join_paths(get_option('prefix'), get_option('localedir')))
-config_h.set('BINDIR', get_option('bindir'))
+config_h.set('BINDIR', join_paths(get_option('prefix'), get_option('bindir')))
 if get_option('gtop')
   config_h.set('HAS_GTOP', 1)
 else

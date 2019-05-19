@@ -2,7 +2,7 @@
 Name=King's Cross
 Exec=kgx
 Icon=org.gnome.zbrown.KingsCross
-Keywords=command;prompt;cmd;commandline;run;shell;
+Keywords=command;prompt;cmd;commandline;run;shell;terminal;
 Terminal=false
 Type=Application
 Categories=System;TerminalEmulator;X-GNOME-Utilities;GTK;GNOME;
