@@ -1,6 +1,6 @@
 project('kgx', 'c', version: '0.1.0',
   meson_version: '>= 0.46.0',
-  default_options: ['werror=true', 'c_std=gnu11'],
+  default_options: ['werror=true', 'c_std=gnu11', 'cpp_std=gnu++17'],
 )
 
 i18n = import('i18n')
@@ -21,7 +21,7 @@ configure_file(
 )
 
 gtk_ver = 'GDK_VERSION_3_24'
-glib_ver = 'GLIB_VERSION_2_58'
+glib_ver = 'GLIB_VERSION_2_60'
 add_project_arguments([
   '-I' + meson.build_root(),
   '-DGDK_VERSION_MIN_REQUIRED=@0@'.format(gtk_ver),

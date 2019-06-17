@@ -1,0 +1,4 @@
+[wrap-git]
+directory=vte
+url=https://gitlab.gnome.org/GNOME/vte
+revision=origin/master

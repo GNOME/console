@@ -15,17 +15,18 @@
 
 #include <vte/vte.h>
 
-gchar       *fp_vte_guess_shell      (GCancellable         *cancellable,
-                                      GError              **error);
-void         fp_vte_pty_spawn_async  (VtePty               *pty,
-                                      const gchar          *working_directory,
-                                      const gchar * const  *argv,
-                                      const gchar * const  *env,
-                                      gint                  timeout,
-                                      GCancellable         *cancellable,
-                                      GAsyncReadyCallback   callback,
-                                      gpointer              user_data);
-GSubprocess *fp_vte_pty_spawn_finish (VtePty               *pty,
-                                      GAsyncResult         *result,
-                                      GError              **error);
-
+VtePtyFlags  fp_vte_pty_default_flags (void);
+gchar       *fp_vte_guess_shell       (GCancellable         *cancellable,
+                                       GError              **error);
+void         fp_vte_pty_spawn_async   (VtePty               *pty,
+                                       const gchar          *working_directory,
+                                       const gchar * const  *argv,
+                                       const gchar * const  *env,
+                                       gint                  timeout,
+                                       GCancellable         *cancellable,
+                                       GAsyncReadyCallback   callback,
+                                       gpointer              user_data);
+gboolean     fp_vte_pty_spawn_finish  (VtePty               *pty,
+                                       GAsyncResult         *result,
+                                       GPid                 *child_pid,
+                                       GError              **error);

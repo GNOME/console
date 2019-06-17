@@ -39,6 +39,17 @@
     ],
     "modules": [
         {
+            "name": "vte",
+            "builddir": true,
+            "buildsystem": "meson",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/vte"
+                }
+            ]
+        },
+        {
             "name": "kgx",
             "builddir": true,
             "buildsystem": "meson",

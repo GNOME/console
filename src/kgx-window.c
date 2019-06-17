@@ -363,20 +363,19 @@ update_subtitle (GBinding     *binding,
 }
 
 static void
-wait_cb (GSubprocess            *subprocess,
-         GAsyncResult           *result,
-         G_GNUC_UNUSED gpointer  user_data)
-{
-  g_autoptr(GError) error = NULL;
+wait_cb (G_GNUC_UNUSED GPid     pid,
+         gint                   status,
+         G_GNUC_UNUSED gpointer user_data)
 
-  g_assert (G_IS_SUBPROCESS (subprocess));
-  g_assert (G_IS_ASYNC_RESULT (result));
+{
+  g_autoptr (GError) error = NULL;
 
   g_message ("So long shell");
 
   /* wait_check will set @error if it got a signal/non-zero exit */
-  if (!g_subprocess_wait_check_finish (subprocess, result, &error))
+  if (!g_spawn_check_exit_status (status, &error)) {
     g_warning ("Uh oh %s\n", error->message);
+  }
 }
 
 static void
@@ -385,18 +384,14 @@ spawned (VtePty       *pty,
          gpointer      data)
 
 {
-  g_autoptr(GSubprocess) subprocess = NULL;
   g_autoptr(GError) error = NULL;
   KgxWindow *self = KGX_WINDOW (data);
-  #if HAS_GTOP
-  const char *id;
-  gint64 pid;
-  #endif
+  GPid pid;
 
   g_return_if_fail (VTE_IS_PTY (pty));
   g_return_if_fail (G_IS_ASYNC_RESULT (res));
 
-  subprocess = fp_vte_pty_spawn_finish (pty, res, &error);
+  fp_vte_pty_spawn_finish (pty, res, &pid, &error);
 
   if (error) {
     g_critical (_("Failed to spawn shell: %s"), error->message);
@@ -406,18 +401,12 @@ spawned (VtePty       *pty,
   }
 
   #if HAS_GTOP
-  id = g_subprocess_get_identifier (subprocess);
-  g_ascii_string_to_signed (id, 10, 0, G_MAXINT, &pid, &error);
-
   kgx_application_add_watch (KGX_APPLICATION (gtk_window_get_application (GTK_WINDOW (self))),
                              kgx_process_new (pid),
                              KGX_WINDOW (self));
   #endif
 
-  g_subprocess_wait_check_async (subprocess,
-                                 NULL,
-                                 (GAsyncReadyCallback) wait_cb,
-                                 NULL);
+  g_child_watch_add (pid, wait_cb, NULL);
 }
 
 static void
