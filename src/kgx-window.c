@@ -444,7 +444,7 @@ kgx_window_init (KgxWindow *self)
                           G_BINDING_SYNC_CREATE);
 
 
-  pty = vte_pty_new_sync (VTE_PTY_DEFAULT, NULL, &error);
+  pty = vte_pty_new_sync (fp_vte_pty_default_flags (), NULL, &error);
 
   shell[0] = vte_get_user_shell ();
   if (shell[0] == NULL) {
