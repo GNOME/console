@@ -417,6 +417,7 @@ kgx_window_init (KgxWindow *self)
   const char      *initial = NULL;
   VtePty          *pty;
   g_autoptr (GError) error = NULL;
+  g_auto (GStrv) env = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -459,11 +460,13 @@ kgx_window_init (KgxWindow *self)
     initial = g_get_home_dir ();
   }
 
+  env = g_environ_setenv (env, "TERM", g_getenv ("TERM"), TRUE);
+
   vte_terminal_set_pty (VTE_TERMINAL (self->terminal), pty);
   fp_vte_pty_spawn_async (pty,
                           initial,
                           (const gchar * const *) shell,
-                          NULL,
+                          (const gchar * const *) env,
                           -1,
                           NULL,
                           (GAsyncReadyCallback) spawned,
