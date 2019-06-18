@@ -52,3 +52,14 @@ vte-terminal {
   padding: 0px;
 }
   
+.exit-info {
+  padding: 12px;
+  border-top: 1px solid #1e78e4;
+  background: rgba(30, 120, 228, 0.33);
+  color: #ffffff;
+}
+
+.exit-info.error {
+  border-top: 1px solid #ed333b;
+  background: rgba(192, 28, 40, 0.66);
+}

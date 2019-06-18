@@ -64,6 +64,8 @@ struct _KgxWindow
   GtkWidget            *terminal;
   GtkWidget            *dims;
   GtkWidget            *search_bar;
+  GtkWidget            *exit_info;
+  GtkWidget            *exit_message;
 };
 
 G_DECLARE_FINAL_TYPE (KgxWindow, kgx_window, KGX, WINDOW, GtkApplicationWindow)

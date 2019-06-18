@@ -190,6 +190,14 @@ search_prev (KgxSearchBox *box,
   vte_terminal_search_find_previous (VTE_TERMINAL (self->terminal));
 }
 
+static void
+exit_dismiss (GtkButton *btn,
+              KgxWindow *self)
+{
+  gtk_label_set_label (GTK_LABEL (self->exit_message), NULL);
+  gtk_widget_hide (self->exit_info);
+}
+
 static gboolean
 size_timeout (KgxWindow *self)
 {
@@ -260,12 +268,16 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, terminal);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, dims);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, search_bar);
+  gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_info);
+  gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_message);
 
   gtk_widget_class_bind_template_callback (widget_class, application_set);
 
   gtk_widget_class_bind_template_callback (widget_class, search_changed);
   gtk_widget_class_bind_template_callback (widget_class, search_next);
   gtk_widget_class_bind_template_callback (widget_class, search_prev);
+
+  gtk_widget_class_bind_template_callback (widget_class, exit_dismiss);
 
   gtk_widget_class_bind_template_callback (widget_class, size_changed);
 }
@@ -363,19 +375,33 @@ update_subtitle (GBinding     *binding,
 }
 
 static void
-wait_cb (G_GNUC_UNUSED GPid     pid,
-         gint                   status,
-         G_GNUC_UNUSED gpointer user_data)
+wait_cb (G_GNUC_UNUSED GPid pid,
+         gint               status,
+         gpointer           user_data)
 
 {
+  KgxWindow *self = KGX_WINDOW (user_data);
   g_autoptr (GError) error = NULL;
+  GtkStyleContext *context = NULL;
 
-  g_message ("So long shell");
+  context = gtk_widget_get_style_context (GTK_WIDGET (self->exit_info));
 
   /* wait_check will set @error if it got a signal/non-zero exit */
   if (!g_spawn_check_exit_status (status, &error)) {
-    g_warning ("Uh oh %s\n", error->message);
+    g_autofree char *message = NULL;
+
+    message = g_strdup_printf (_("Command exited with code %i"), status);
+
+    gtk_label_set_label (GTK_LABEL (self->exit_message),
+                         message);
+    gtk_style_context_add_class (context, "error");
+  } else {
+    gtk_label_set_label (GTK_LABEL (self->exit_message),
+                         _("Command exited"));
+    gtk_style_context_remove_class (context, "error");
   }
+
+  gtk_widget_show (self->exit_info);
 }
 
 static void
@@ -406,7 +432,7 @@ spawned (VtePty       *pty,
                              KGX_WINDOW (self));
   #endif
 
-  g_child_watch_add (pid, wait_cb, NULL);
+  g_child_watch_add (pid, wait_cb, self);
 }
 
 static void
@@ -460,7 +486,7 @@ kgx_window_init (KgxWindow *self)
     initial = g_get_home_dir ();
   }
 
-  env = g_environ_setenv (env, "TERM", g_getenv ("TERM"), TRUE);
+  env = g_environ_setenv (env, "TERM", "xterm-256color", TRUE);
 
   vte_terminal_set_pty (VTE_TERMINAL (self->terminal), pty);
   fp_vte_pty_spawn_async (pty,
