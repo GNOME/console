@@ -191,14 +191,6 @@ search_prev (KgxSearchBox *box,
 }
 
 static void
-exit_dismiss (GtkButton *btn,
-              KgxWindow *self)
-{
-  gtk_label_set_label (GTK_LABEL (self->exit_message), NULL);
-  gtk_widget_hide (self->exit_info);
-}
-
-static void
 font_increase (VteTerminal *term,
                KgxWindow   *self)
 {
@@ -297,8 +289,6 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, search_next);
   gtk_widget_class_bind_template_callback (widget_class, search_prev);
 
-  gtk_widget_class_bind_template_callback (widget_class, exit_dismiss);
-
   gtk_widget_class_bind_template_callback (widget_class, font_increase);
   gtk_widget_class_bind_template_callback (widget_class, font_decrease);
 
@@ -338,14 +328,16 @@ about_activated (GSimpleAction *action,
                  GVariant      *parameter,
                  gpointer       data)
 {
-  const gchar *authors[] = { "Zander Brown", NULL };
-  const gchar *artists[] = { "Tobias Bernard", NULL };
+  const char *authors[] = { "Zander Brown<zbrown@gnome.org>", NULL };
+  const char *artists[] = { "Tobias Bernard", NULL };
+  g_autofree char *copyright = g_strdup_printf (_("Copyright © %s Zander Brown"),
+                                                "2019");
 
   gtk_show_about_dialog (GTK_WINDOW (data),
                          "authors", authors,
                          "artists", artists,
                          "comments", _("Terminal Emulator"),
-                         "copyright", g_strdup_printf (_("Copyright © %Id Zander Brown"), 2019),
+                         "copyright", copyright,
                          "license-type", GTK_LICENSE_GPL_3_0,
                          "logo-icon-name", "org.gnome.zbrown.KingsCross",
                          "program-name", _("King's Cross"),
@@ -474,18 +466,19 @@ wait_cb (G_GNUC_UNUSED GPid pid,
   if (!g_spawn_check_exit_status (status, &error)) {
     g_autofree char *message = NULL;
 
-    message = g_strdup_printf (_("Command exited with code %i"), status);
+    // translators: <b> </b> marks the text as bold, ensure they are matched please!
+    message = g_strdup_printf (_("<b>Read Only</b> — Command exited with code %i"), status);
 
-    gtk_label_set_label (GTK_LABEL (self->exit_message),
-                         message);
+    gtk_label_set_markup (GTK_LABEL (self->exit_message), message);
     gtk_style_context_add_class (context, "error");
   } else {
-    gtk_label_set_label (GTK_LABEL (self->exit_message),
-                         _("Command exited"));
+    gtk_label_set_markup (GTK_LABEL (self->exit_message),
+    // translators: <b> </b> marks the text as bold, ensure they are matched please!
+                         _("<b>Read Only</b> — Command exited"));
     gtk_style_context_remove_class (context, "error");
   }
 
-  gtk_widget_show (self->exit_info);
+  gtk_revealer_set_reveal_child (GTK_REVEALER (self->exit_info), TRUE);
 }
 
 static void
@@ -504,9 +497,20 @@ spawned (VtePty       *pty,
   fp_vte_pty_spawn_finish (pty, res, &pid, &error);
 
   if (error) {
+    g_autofree char *message = NULL;
+
     g_critical (_("Failed to spawn shell: %s"), error->message);
-    vte_terminal_feed (VTE_TERMINAL (self->terminal),
-                       _("KGX: Failed to start shell\n"), -1);
+
+    gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self->exit_info)),
+                                 "error");
+
+    // translators: <b> </b> marks the text as bold, ensure they are matched please!
+    message = g_strdup_printf (_("<b>Failed to start</b> — %s"), error->message);
+   
+    gtk_label_set_markup (GTK_LABEL (self->exit_message), message);
+
+    gtk_revealer_set_reveal_child (GTK_REVEALER (self->exit_info), TRUE);
+
     return;
   }
 

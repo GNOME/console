@@ -126,6 +126,35 @@
                 </child>
               </object>
             </child>
+            <child>
+              <object class="GtkRevealer" id="exit_info">
+                <property name="visible">1</property>
+                <property name="reveal_child">False</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">1</property>
+                    <property name="can_focus">False</property>
+                    <property name="valign">end</property>
+                    <child>
+                      <object class="GtkLabel" id="exit_message">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="hexpand">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <style>
+                      <class name="exit-info"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
           </object>
         </child>
         <child type="overlay">
@@ -135,52 +164,6 @@
             <property name="label">WxH</property>
             <style>
               <class name="floating-bar"/>
-            </style>
-          </object>
-        </child>
-        <child type="overlay">
-          <object class="GtkBox" id="exit_info">
-            <property name="can_focus">False</property>
-            <property name="valign">end</property>
-            <child>
-              <object class="GtkLabel" id="exit_message">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="hexpand">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="halign">end</property>
-                <property name="valign">center</property>
-                <property name="relief">none</property>
-                <signal name="clicked" handler="exit_dismiss" swapped="no"/>
-                <child>
-                  <object class="GtkImage">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="icon_name">window-close-symbolic</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
-            <style>
-              <class name="osd"/>
-              <class name="exit-info"/>
             </style>
           </object>
         </child>

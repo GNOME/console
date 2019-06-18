@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=King's Cross
 Exec=kgx
+# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 Icon=org.gnome.zbrown.KingsCross
 Keywords=command;prompt;cmd;commandline;run;shell;terminal;
 Terminal=false
