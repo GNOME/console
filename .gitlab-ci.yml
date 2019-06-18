@@ -29,7 +29,7 @@ pages:
   stage: deploy 
   before_script:
     - dnf update -y --nogpgcheck
-    - dnf install -y --nogpgcheck meson gettext glib2-devel gcc
+    - dnf install -y --nogpgcheck meson gettext glib2-devel gcc git
       desktop-file-utils gtk3-devel libgtop2-devel vte291-devel gtk-doc
   script:
     - meson -Dgtk_doc=true _docs_build .
