@@ -198,6 +198,26 @@ exit_dismiss (GtkButton *btn,
   gtk_widget_hide (self->exit_info);
 }
 
+static void
+font_increase (VteTerminal *term,
+               KgxWindow   *self)
+{
+  GAction *action = NULL;
+
+  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-in");
+  g_action_activate (action, NULL);
+}
+
+static void
+font_decrease (VteTerminal *term,
+               KgxWindow   *self)
+{
+  GAction *action = NULL;
+
+  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-out");
+  g_action_activate (action, NULL);
+}
+
 static gboolean
 size_timeout (KgxWindow *self)
 {
@@ -279,6 +299,9 @@ kgx_window_class_init (KgxWindowClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, exit_dismiss);
 
+  gtk_widget_class_bind_template_callback (widget_class, font_increase);
+  gtk_widget_class_bind_template_callback (widget_class, font_decrease);
+
   gtk_widget_class_bind_template_callback (widget_class, size_changed);
 }
 
@@ -316,9 +339,11 @@ about_activated (GSimpleAction *action,
                  gpointer       data)
 {
   const gchar *authors[] = { "Zander Brown", NULL };
+  const gchar *artists[] = { "Tobias Bernard", NULL };
 
   gtk_show_about_dialog (GTK_WINDOW (data),
                          "authors", authors,
+                         "artists", artists,
                          "comments", _("Terminal Emulator"),
                          "copyright", g_strdup_printf (_("Copyright © %Id Zander Brown"), 2019),
                          "license-type", GTK_LICENSE_GPL_3_0,
@@ -328,10 +353,69 @@ about_activated (GSimpleAction *action,
                          NULL);
 }
 
+static void
+update_actions (KgxWindow *self)
+{
+  VteTerminal *term = VTE_TERMINAL (self->terminal);
+  gdouble current = vte_terminal_get_font_scale (term);
+  GAction *action;
+
+  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-out");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), current > 0.5);
+  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-normal");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), current != 1.0);
+  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-in");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), current < 2.0);
+}
+
+static void
+zoom_out_activated (GSimpleAction *action,
+                    GVariant      *parameter,
+                    gpointer       data)
+{
+  KgxWindow *self = KGX_WINDOW (data);
+  VteTerminal *term = VTE_TERMINAL (self->terminal);
+  gdouble current = vte_terminal_get_font_scale (term);
+
+  vte_terminal_set_font_scale (term, current - 0.1);
+
+  update_actions (self);
+}
+
+static void
+zoom_normal_activated (GSimpleAction *action,
+                       GVariant      *parameter,
+                       gpointer       data)
+{
+  KgxWindow *self = KGX_WINDOW (data);
+  VteTerminal *term = VTE_TERMINAL (self->terminal);
+
+  vte_terminal_set_font_scale (term, 1.0);
+
+  update_actions (self);
+}
+
+static void
+zoom_in_activated (GSimpleAction *action,
+                   GVariant      *parameter,
+                   gpointer       data)
+{
+  KgxWindow *self = KGX_WINDOW (data);
+  VteTerminal *term = VTE_TERMINAL (self->terminal);
+  gdouble current = vte_terminal_get_font_scale (term);
+
+  vte_terminal_set_font_scale (term, current + 0.1);
+
+  update_actions (self);
+}
+
 static GActionEntry win_entries[] =
 {
   { "new-window", new_activated, NULL, NULL, NULL },
   { "about", about_activated, NULL, NULL, NULL },
+  { "zoom-out", zoom_out_activated, NULL, NULL, NULL },
+  { "zoom-normal", zoom_normal_activated, NULL, NULL, NULL },
+  { "zoom-in", zoom_in_activated, NULL, NULL, NULL },
 };
 
 static gboolean
@@ -451,6 +535,8 @@ kgx_window_init (KgxWindow *self)
                                    win_entries,
                                    G_N_ELEMENTS (win_entries),
                                    self);
+
+  update_actions (self);
 
   self->theme = KGX_THEME_NIGHT;
 

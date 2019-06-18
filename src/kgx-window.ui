@@ -10,6 +10,23 @@
       </item>
     </section>
     <section>
+      <attribute name="display-hint">horizontal-buttons</attribute>
+      <item>
+        <attribute name="label" translatable="yes">Zoom _Out</attribute>
+        <attribute name="verb-icon">zoom-out-symbolic</attribute>
+        <attribute name="action">win.zoom-out</attribute>
+      </item>
+      <item>
+        <attribute name="label">100%</attribute>
+        <attribute name="action">win.zoom-normal</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Zoom _In</attribute>
+        <attribute name="verb-icon">zoom-in-symbolic</attribute>
+        <attribute name="action">win.zoom-in</attribute>
+      </item>
+    </section>
+    <section>
       <item>
         <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
         <attribute name="action">win.show-help-overlay</attribute>
@@ -103,6 +120,8 @@
                     <property name="visible">True</property>
                     <property name="allow-hyperlink">True</property>
                     <signal name="size-allocate" handler="size_changed" swapped="no"/>
+                    <signal name="increase-font-size" handler="font_increase" swapped="no"/>
+                    <signal name="decrease-font-size" handler="font_decrease" swapped="no"/>
                   </object>
                 </child>
               </object>
