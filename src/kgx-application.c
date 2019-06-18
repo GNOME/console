@@ -28,6 +28,8 @@
  * Sooner or later this will implement the GNOME Terminal dbus interface
  */
 
+#define G_LOG_DOMAIN "Kgx"
+
 #include <glib/gi18n.h>
 #include <vte/vte.h>
 
@@ -301,6 +303,58 @@ kgx_application_dbus_register (GApplication    *app,
   return TRUE;
 }
 
+
+static int
+kgx_application_command_line (GApplication            *app,
+                              GApplicationCommandLine *cli)
+{
+  GVariantDict *options = NULL;
+  const char *working_dir = NULL;
+  const char *command = NULL;
+  GtkWidget *window;
+  g_autofree char *abs_path = NULL;
+
+  options = g_application_command_line_get_options_dict (cli);
+
+  g_variant_dict_lookup (options, "working-directory", "^&ay", &working_dir);
+  g_variant_dict_lookup (options, "command", "^&ay", &command);
+
+  abs_path = g_canonicalize_filename (working_dir, NULL);
+
+  window = g_object_new (KGX_TYPE_WINDOW,
+                         "application", app,
+                         "close-on-zero", command == NULL,
+                         "initial-work-dir", abs_path,
+                         "command", command,
+                         NULL);
+  gtk_widget_show (window);
+
+  return 0;
+}
+
+static int
+kgx_application_handle_local_options (GApplication *app,
+                                      GVariantDict *options)
+{
+  gboolean version = FALSE;
+
+  if (g_variant_dict_lookup (options, "version", "b", &version)) {
+    if (version) {
+      g_print (_("# King's Cross %s using VTE %u.%u.%u %s\n"),
+               PACKAGE_VERSION,
+               vte_get_major_version (),
+               vte_get_minor_version (),
+               vte_get_micro_version (),
+               vte_get_features ());
+      return 0;
+    }
+  }
+
+  g_message ("%i", G_APPLICATION_CLASS (kgx_application_parent_class)->handle_local_options (app, options));
+
+  return -1;
+}
+
 static void
 kgx_application_class_init (KgxApplicationClass *klass)
 {
@@ -314,6 +368,8 @@ kgx_application_class_init (KgxApplicationClass *klass)
   app_class->activate = kgx_application_activate;
   app_class->startup = kgx_application_startup;
   app_class->dbus_register = kgx_application_dbus_register;
+  app_class->command_line = kgx_application_command_line;
+  app_class->handle_local_options = kgx_application_handle_local_options;
 
   pspecs[PROP_THEME] =
     g_param_spec_enum ("theme", "Theme", "Terminal theme",
@@ -344,9 +400,61 @@ font_changed (GSettings      *settings,
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_FONT]);
 }
 
+static GOptionEntry entries[] =
+{
+  {
+    "print-environment",
+    'p',
+    0,
+    G_OPTION_ARG_NONE,
+    NULL,
+    N_("Print environment variables to interact with the terminal"),
+    NULL
+  },
+  {
+    "version",
+    0,
+    0,
+    G_OPTION_ARG_NONE,
+    NULL,
+    NULL,
+    NULL
+  },
+  {
+    "command",
+    'e',
+    0,
+    G_OPTION_ARG_FILENAME,
+    NULL,
+    N_("Execute the argument to this option inside the terminal"),
+    NULL
+  },
+  {
+    "working-directory",
+    0,
+    0,
+    G_OPTION_ARG_FILENAME,
+    NULL,
+    N_("Set the working directory"),
+    N_("DIRNAME")
+  },
+  {
+    "wait",
+    0,
+    0,
+    G_OPTION_ARG_NONE,
+    NULL,
+    N_("Wait until the child exits"),
+    NULL
+  },
+  { NULL }
+};
+
 static void
 kgx_application_init (KgxApplication *self)
 {
+  g_application_add_main_option_entries (G_APPLICATION (self), entries);
+
   self->desktop_interface = g_settings_new (DESKTOP_INTERFACE_SETTINGS_SCHEMA);
 
   g_signal_connect (self->desktop_interface,

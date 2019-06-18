@@ -24,6 +24,8 @@
  * The main #GtkApplicationWindow that acts as the terminal
  */
 
+#define G_LOG_DOMAIN "Kgx"
+
 #include <glib/gi18n.h>
 #include <vte/vte.h>
 #define PCRE2_CODE_UNIT_WIDTH 0
@@ -47,6 +49,7 @@ enum {
   PROP_0,
   PROP_THEME,
   PROP_INITIAL_WORK_DIR,
+  PROP_COMMAND,
   PROP_CLOSE_ON_ZERO,
   LAST_PROP
 };
@@ -99,6 +102,133 @@ kgx_window_set_theme (KgxWindow *self,
 }
 
 static void
+wait_cb (G_GNUC_UNUSED GPid pid,
+         gint               status,
+         gpointer           user_data)
+
+{
+  KgxWindow *self = KGX_WINDOW (user_data);
+  g_autoptr (GError) error = NULL;
+  GtkStyleContext *context = NULL;
+
+  context = gtk_widget_get_style_context (GTK_WIDGET (self->exit_info));
+
+  /* wait_check will set @error if it got a signal/non-zero exit */
+  if (!g_spawn_check_exit_status (status, &error)) {
+    g_autofree char *message = NULL;
+
+    // translators: <b> </b> marks the text as bold, ensure they are matched please!
+    message = g_strdup_printf (_("<b>Read Only</b> — Command exited with code %i"), status);
+
+    gtk_label_set_markup (GTK_LABEL (self->exit_message), message);
+    gtk_style_context_add_class (context, "error");
+  } else if (self->close_on_zero) {
+    gtk_widget_destroy (GTK_WIDGET (self));
+
+    return;
+  } else {
+    gtk_label_set_markup (GTK_LABEL (self->exit_message),
+    // translators: <b> </b> marks the text as bold, ensure they are matched please!
+                         _("<b>Read Only</b> — Command exited"));
+    gtk_style_context_remove_class (context, "error");
+  }
+
+  gtk_revealer_set_reveal_child (GTK_REVEALER (self->exit_info), TRUE);
+}
+
+static void
+spawned (VtePty       *pty,
+         GAsyncResult *res,
+         gpointer      data)
+
+{
+  g_autoptr(GError) error = NULL;
+  KgxWindow *self = KGX_WINDOW (data);
+  GPid pid;
+
+  g_return_if_fail (VTE_IS_PTY (pty));
+  g_return_if_fail (G_IS_ASYNC_RESULT (res));
+
+  fp_vte_pty_spawn_finish (pty, res, &pid, &error);
+
+  if (error) {
+    g_autofree char *message = NULL;
+
+    g_critical (_("Failed to spawn: %s"), error->message);
+
+    gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self->exit_info)),
+                                 "error");
+
+    // translators: <b> </b> marks the text as bold, ensure they are matched please!
+    message = g_strdup_printf (_("<b>Failed to start</b> — %s"), error->message);
+   
+    gtk_label_set_markup (GTK_LABEL (self->exit_message), message);
+
+    gtk_revealer_set_reveal_child (GTK_REVEALER (self->exit_info), TRUE);
+
+    return;
+  }
+
+  #if HAS_GTOP
+  kgx_application_add_watch (KGX_APPLICATION (gtk_window_get_application (GTK_WINDOW (self))),
+                             kgx_process_new (pid),
+                             KGX_WINDOW (self));
+  #endif
+
+  g_child_watch_add (pid, wait_cb, self);
+}
+
+static void
+kgx_window_constructed (GObject *object)
+{
+  KgxWindow *self = KGX_WINDOW (object);
+  gchar           *shell[2] = {NULL, NULL};
+  const char      *initial = NULL;
+  VtePty          *pty;
+  g_autoptr (GError) error = NULL;
+  g_auto (GStrv) env = NULL;
+
+  pty = vte_pty_new_sync (fp_vte_pty_default_flags (), NULL, &error);
+
+
+  if (self->command != NULL) {
+    shell[0] = self->command;
+  } else {
+    shell[0] = fp_vte_guess_shell (NULL, &error);
+    if (error) {
+      g_warning ("flatterm: %s", error->message);
+    }
+  }
+
+  if (shell[0] == NULL) {
+    shell[0] = "/bin/sh";
+    g_warning ("Defaulting to /bin/sh");
+  }
+
+  if (self->working_dir) {
+    initial = self->working_dir;
+  } else {
+    initial = g_get_home_dir ();
+  }
+
+  g_message ("Fun in: %s", initial);
+
+  env = g_environ_setenv (env, "TERM", "xterm-256color", TRUE);
+
+  vte_terminal_set_pty (VTE_TERMINAL (self->terminal), pty);
+  fp_vte_pty_spawn_async (pty,
+                          initial,
+                          (const gchar * const *) shell,
+                          (const gchar * const *) env,
+                          -1,
+                          NULL,
+                          (GAsyncReadyCallback) spawned,
+                          self);
+
+  G_OBJECT_CLASS (kgx_window_parent_class)->constructed (object);
+}
+
+static void
 kgx_window_set_property (GObject      *object,
                          guint         property_id,
                          const GValue *value,
@@ -111,7 +241,10 @@ kgx_window_set_property (GObject      *object,
       kgx_window_set_theme (self, g_value_get_enum (value));
       break;
     case PROP_INITIAL_WORK_DIR:
-      self->working_dir = g_value_get_string (value);
+      self->working_dir = g_value_dup_string (value);
+      break;
+    case PROP_COMMAND:
+      self->command = g_value_dup_string (value);
       break;
     case PROP_CLOSE_ON_ZERO:
       self->close_on_zero = g_value_get_boolean (value);
@@ -134,6 +267,12 @@ kgx_window_get_property (GObject    *object,
     case PROP_THEME:
       g_value_set_enum (value, self->theme);
       break;
+    case PROP_INITIAL_WORK_DIR:
+      g_value_set_string (value, self->working_dir);
+      break;
+    case PROP_COMMAND:
+      g_value_set_string (value, self->command);
+      break;
     case PROP_CLOSE_ON_ZERO:
       g_value_set_boolean (value, self->close_on_zero);
       break;
@@ -141,6 +280,17 @@ kgx_window_get_property (GObject    *object,
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
   }
+}
+
+static void
+kgx_window_finalize (GObject *object)
+{
+  KgxWindow *self = KGX_WINDOW (object);
+
+  g_clear_pointer (&self->working_dir, g_free);
+  g_clear_pointer (&self->command, g_free);
+
+  G_OBJECT_CLASS (kgx_window_parent_class)->finalize (object);
 }
 
 static void
@@ -265,8 +415,10 @@ kgx_window_class_init (KgxWindowClass *klass)
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
+  object_class->constructed = kgx_window_constructed;
   object_class->set_property = kgx_window_set_property;
   object_class->get_property = kgx_window_get_property;
+  object_class->finalize = kgx_window_finalize;
 
   pspecs[PROP_THEME] =
     g_param_spec_enum ("theme", "Theme", "Terminal theme",
@@ -277,7 +429,13 @@ kgx_window_class_init (KgxWindowClass *klass)
     g_param_spec_string ("initial-work-dir", "Initial directory",
                          "Initial working directory",
                          NULL,
-                         G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY);
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+
+  pspecs[PROP_COMMAND] =
+    g_param_spec_string ("command", "Command",
+                         "Command to run",
+                         NULL,
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
   pspecs[PROP_CLOSE_ON_ZERO] =
     g_param_spec_boolean ("close-on-zero", "Close on zero",
@@ -465,91 +623,9 @@ update_subtitle (GBinding     *binding,
 }
 
 static void
-wait_cb (G_GNUC_UNUSED GPid pid,
-         gint               status,
-         gpointer           user_data)
-
-{
-  KgxWindow *self = KGX_WINDOW (user_data);
-  g_autoptr (GError) error = NULL;
-  GtkStyleContext *context = NULL;
-
-  context = gtk_widget_get_style_context (GTK_WIDGET (self->exit_info));
-
-  /* wait_check will set @error if it got a signal/non-zero exit */
-  if (!g_spawn_check_exit_status (status, &error)) {
-    g_autofree char *message = NULL;
-
-    // translators: <b> </b> marks the text as bold, ensure they are matched please!
-    message = g_strdup_printf (_("<b>Read Only</b> — Command exited with code %i"), status);
-
-    gtk_label_set_markup (GTK_LABEL (self->exit_message), message);
-    gtk_style_context_add_class (context, "error");
-  } else if (self->close_on_zero) {
-    gtk_widget_destroy (GTK_WIDGET (self));
-
-    return;
-  } else {
-    gtk_label_set_markup (GTK_LABEL (self->exit_message),
-    // translators: <b> </b> marks the text as bold, ensure they are matched please!
-                         _("<b>Read Only</b> — Command exited"));
-    gtk_style_context_remove_class (context, "error");
-  }
-
-  gtk_revealer_set_reveal_child (GTK_REVEALER (self->exit_info), TRUE);
-}
-
-static void
-spawned (VtePty       *pty,
-         GAsyncResult *res,
-         gpointer      data)
-
-{
-  g_autoptr(GError) error = NULL;
-  KgxWindow *self = KGX_WINDOW (data);
-  GPid pid;
-
-  g_return_if_fail (VTE_IS_PTY (pty));
-  g_return_if_fail (G_IS_ASYNC_RESULT (res));
-
-  fp_vte_pty_spawn_finish (pty, res, &pid, &error);
-
-  if (error) {
-    g_autofree char *message = NULL;
-
-    g_critical (_("Failed to spawn shell: %s"), error->message);
-
-    gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self->exit_info)),
-                                 "error");
-
-    // translators: <b> </b> marks the text as bold, ensure they are matched please!
-    message = g_strdup_printf (_("<b>Failed to start</b> — %s"), error->message);
-   
-    gtk_label_set_markup (GTK_LABEL (self->exit_message), message);
-
-    gtk_revealer_set_reveal_child (GTK_REVEALER (self->exit_info), TRUE);
-
-    return;
-  }
-
-  #if HAS_GTOP
-  kgx_application_add_watch (KGX_APPLICATION (gtk_window_get_application (GTK_WINDOW (self))),
-                             kgx_process_new (pid),
-                             KGX_WINDOW (self));
-  #endif
-
-  g_child_watch_add (pid, wait_cb, self);
-}
-
-static void
 kgx_window_init (KgxWindow *self)
 {
   GPropertyAction *pact;
-  gchar           *shell[2] = {NULL, NULL};
-  const char      *initial = NULL;
-  VtePty          *pty;
-  g_autoptr (GError) error = NULL;
-  g_auto (GStrv) env = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -578,34 +654,6 @@ kgx_window_init (KgxWindow *self)
   g_object_bind_property (self, "theme",
                           self->terminal, "theme",
                           G_BINDING_SYNC_CREATE);
-
-
-  pty = vte_pty_new_sync (fp_vte_pty_default_flags (), NULL, &error);
-
-  shell[0] = vte_get_user_shell ();
-  if (shell[0] == NULL) {
-    shell[0] = "/bin/sh";
-    g_warning ("Defaulting to /bin/sh");
-  }
-  shell[0] = fp_vte_guess_shell (NULL, &error);
-
-  if (self->working_dir) {
-    initial = self->working_dir;
-  } else {
-    initial = g_get_home_dir ();
-  }
-
-  env = g_environ_setenv (env, "TERM", "xterm-256color", TRUE);
-
-  vte_terminal_set_pty (VTE_TERMINAL (self->terminal), pty);
-  fp_vte_pty_spawn_async (pty,
-                          initial,
-                          (const gchar * const *) shell,
-                          (const gchar * const *) env,
-                          -1,
-                          NULL,
-                          (GAsyncReadyCallback) spawned,
-                          self);
 }
 
 /**

@@ -30,6 +30,7 @@ G_BEGIN_DECLS
  * KgxWindow:
  * @theme: the palette
  * @working_dir: the working directory of the #KgxTerminal
+ * @command: the command to run, %NULL for default shell
  * @close_on_zero: should the window close when the command exits with 0
  * @last_cols: the column width last time we received #GtkWidget::size-allocate
  * @last_rows: the row count last time we received #GtkWidget::size-allocate
@@ -51,7 +52,8 @@ struct _KgxWindow
 
   /*< public >*/
   KgxTheme              theme;
-  const char           *working_dir;
+  char                 *working_dir;
+  char                 *command;
   gboolean              close_on_zero;
 
   /* Size indicator */
