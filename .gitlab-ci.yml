@@ -31,7 +31,7 @@ pages:
     - dnf update -y --nogpgcheck
     - dnf install -y --nogpgcheck meson gettext glib2-devel gcc gcc-c++ git
       desktop-file-utils gtk3-devel libgtop2-devel vte291-devel gtk-doc
-      gobject-introspection-devel gperf
+      gobject-introspection-devel gperf vala
   script:
     - meson -Dgtk_doc=true _docs_build .
     - ninja -C _docs_build
