@@ -30,6 +30,7 @@ G_BEGIN_DECLS
  * KgxWindow:
  * @theme: the palette
  * @working_dir: the working directory of the #KgxTerminal
+ * @close_on_zero: should the window close when the command exits with 0
  * @last_cols: the column width last time we received #GtkWidget::size-allocate
  * @last_rows: the row count last time we received #GtkWidget::size-allocate
  * @timeout: the id of the #GSource used to hide the statusbar
@@ -40,6 +41,8 @@ G_BEGIN_DECLS
  * @terminal: the #KgxTerminal the window contains
  * @dims: the floating status bar
  * @search_bar: the windows #GtkSearchBar
+ * @exit_info: the #GtkRevealer hat wraps @exit_message
+ * @exit_message: the #GtkLabel for showing important messages
  */
 struct _KgxWindow
 {
@@ -49,6 +52,7 @@ struct _KgxWindow
   /*< public >*/
   KgxTheme              theme;
   const char           *working_dir;
+  gboolean              close_on_zero;
 
   /* Size indicator */
   int                   last_cols;

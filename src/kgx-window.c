@@ -47,6 +47,7 @@ enum {
   PROP_0,
   PROP_THEME,
   PROP_INITIAL_WORK_DIR,
+  PROP_CLOSE_ON_ZERO,
   LAST_PROP
 };
 
@@ -112,6 +113,9 @@ kgx_window_set_property (GObject      *object,
     case PROP_INITIAL_WORK_DIR:
       self->working_dir = g_value_get_string (value);
       break;
+    case PROP_CLOSE_ON_ZERO:
+      self->close_on_zero = g_value_get_boolean (value);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -129,6 +133,9 @@ kgx_window_get_property (GObject    *object,
   switch (property_id) {
     case PROP_THEME:
       g_value_set_enum (value, self->theme);
+      break;
+    case PROP_CLOSE_ON_ZERO:
+      g_value_set_boolean (value, self->close_on_zero);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -272,6 +279,12 @@ kgx_window_class_init (KgxWindowClass *klass)
                          NULL,
                          G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY);
 
+  pspecs[PROP_CLOSE_ON_ZERO] =
+    g_param_spec_boolean ("close-on-zero", "Close on zero",
+                          "Should close when child exits with 0",
+                          TRUE,
+                          G_PARAM_READWRITE);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/zbrown/KingsCross/kgx-window.ui");
@@ -318,6 +331,7 @@ new_activated (GSimpleAction *action,
   window = g_object_new (KGX_TYPE_WINDOW,
                         "application", app,
                         "initial-work-dir", dir,
+                        "close-on-zero", TRUE,
                         NULL);
 
   gtk_window_present_with_time (window, timestamp);
@@ -471,6 +485,10 @@ wait_cb (G_GNUC_UNUSED GPid pid,
 
     gtk_label_set_markup (GTK_LABEL (self->exit_message), message);
     gtk_style_context_add_class (context, "error");
+  } else if (self->close_on_zero) {
+    gtk_widget_destroy (GTK_WIDGET (self));
+
+    return;
   } else {
     gtk_label_set_markup (GTK_LABEL (self->exit_message),
     // translators: <b> </b> marks the text as bold, ensure they are matched please!
@@ -543,6 +561,7 @@ kgx_window_init (KgxWindow *self)
   update_actions (self);
 
   self->theme = KGX_THEME_NIGHT;
+  self->close_on_zero = TRUE;
 
   pact = g_property_action_new ("theme", G_OBJECT (self), "theme");
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (pact));

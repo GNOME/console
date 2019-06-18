@@ -124,6 +124,7 @@ kgx_application_activate (GApplication *app)
   if (window == NULL) {
     window = g_object_new (KGX_TYPE_WINDOW,
                            "application", app,
+                           "close-on-zero", TRUE,
                            NULL);
   }
 
