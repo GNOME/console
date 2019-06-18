@@ -51,8 +51,8 @@
         <child>
           <object class="GtkToggleButton">
             <property name="visible">1</property>
-            <property name="can-focus">1</property>
-            <property name="receives-default">1</property>
+            <property name="can-focus">0</property>
+            <property name="receives-default">0</property>
             <property name="action-name">win.find</property>
             <child>
               <object class="GtkImage">
@@ -68,7 +68,7 @@
         <child>
           <object class="GtkMenuButton">
             <property name="visible">1</property>
-            <property name="can-focus">1</property>
+            <property name="can-focus">0</property>
             <property name="receives-default">1</property>
             <property name="menu-model">win-menu</property>
             <child>
