@@ -34,6 +34,7 @@ main (int   argc,
   textdomain (GETTEXT_PACKAGE);
 
   g_set_application_name (_("King's Cross"));
+  g_set_prgname ("org.gnome.zbrown.KingsCross");
 
   /*
    * Create a new GtkApplication. The application manages our main loop,
