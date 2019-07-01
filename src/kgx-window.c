@@ -290,6 +290,9 @@ kgx_window_finalize (GObject *object)
   g_clear_pointer (&self->working_dir, g_free);
   g_clear_pointer (&self->command, g_free);
 
+  g_clear_pointer (&self->root, g_hash_table_unref);
+  g_clear_pointer (&self->remote, g_hash_table_unref);
+
   G_OBJECT_CLASS (kgx_window_parent_class)->finalize (object);
 }
 
@@ -639,6 +642,9 @@ kgx_window_init (KgxWindow *self)
   self->theme = KGX_THEME_NIGHT;
   self->close_on_zero = TRUE;
 
+  self->root = g_hash_table_new (g_direct_hash, g_direct_equal);
+  self->remote = g_hash_table_new (g_direct_hash, g_direct_equal);
+
   pact = g_property_action_new ("theme", G_OBJECT (self), "theme");
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (pact));
 
@@ -685,13 +691,14 @@ kgx_window_get_working_dir (KgxWindow *self)
  * appropriate styles
  */
 void
-kgx_window_push_root (KgxWindow *self)
+kgx_window_push_root (KgxWindow *self,
+                      GPid       pid)
 {
   g_return_if_fail (KGX_IS_WINDOW (self));
 
-  self->root++;
+  g_hash_table_add (self->root, GINT_TO_POINTER (pid));
 
-  g_debug ("root push now at %i", self->root);
+  g_debug ("root push now at %i", g_hash_table_size (self->root));
 
   gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self)),
                                KGX_WINDOW_STYLE_ROOT);
@@ -704,15 +711,16 @@ kgx_window_push_root (KgxWindow *self)
  * Reduce the count of root children, removing styles if we hit 0
  */
 void
-kgx_window_pop_root (KgxWindow *self)
+kgx_window_pop_root (KgxWindow *self,
+                     GPid       pid)
 {
   g_return_if_fail (KGX_IS_WINDOW (self));
 
-  self->root--;
+  g_hash_table_remove (self->root, GINT_TO_POINTER (pid));
 
-  g_debug ("root pop now at %i", self->root);
+  g_debug ("root pop now at %i", g_hash_table_size (self->root));
 
-  if (self->root <= 0) {
+  if (g_hash_table_size (self->root) <= 0) {
     gtk_style_context_remove_class (gtk_widget_get_style_context (GTK_WIDGET (self)),
                                     KGX_WINDOW_STYLE_ROOT);
   }
@@ -725,13 +733,14 @@ kgx_window_pop_root (KgxWindow *self)
  * Same as kgx_window_push_root() but for ssh
  */
 void
-kgx_window_push_remote (KgxWindow *self)
+kgx_window_push_remote (KgxWindow *self,
+                        GPid       pid)
 {
   g_return_if_fail (KGX_IS_WINDOW (self));
 
-  self->remote++;
+  g_hash_table_add (self->remote, GINT_TO_POINTER (pid));
 
-  g_debug ("remote push now at %i", self->remote);
+  g_debug ("remote push now at %i", g_hash_table_size (self->remote));
 
   gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self)),
                                KGX_WINDOW_STYLE_REMOTE);
@@ -744,15 +753,16 @@ kgx_window_push_remote (KgxWindow *self)
  * Same as kgx_window_pop_root() but for ssh
  */
 void
-kgx_window_pop_remote (KgxWindow *self)
+kgx_window_pop_remote (KgxWindow *self,
+                       GPid       pid)
 {
   g_return_if_fail (KGX_IS_WINDOW (self));
 
-  self->remote--;
+  g_hash_table_remove (self->remote, GINT_TO_POINTER (pid));
 
-  g_debug ("remote pop now at %i", self->remote);
+  g_debug ("remote pop now at %i", g_hash_table_size (self->remote));
 
-  if (self->remote <= 0) {
+  if (g_hash_table_size (self->remote) <= 0) {
     gtk_style_context_remove_class (gtk_widget_get_style_context (GTK_WIDGET (self)),
                                     KGX_WINDOW_STYLE_REMOTE);
   }

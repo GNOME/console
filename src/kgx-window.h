@@ -62,8 +62,8 @@ struct _KgxWindow
   guint                 timeout;
 
   /* Remote/root states */
-  int                   root;
-  int                   remote;
+  GHashTable           *root;
+  GHashTable           *remote;
 
   /* Template widgets */
   GtkWidget            *header_bar;
@@ -77,10 +77,14 @@ struct _KgxWindow
 G_DECLARE_FINAL_TYPE (KgxWindow, kgx_window, KGX, WINDOW, GtkApplicationWindow)
 
 const char *kgx_window_get_working_dir (KgxWindow *self);
-void        kgx_window_push_root       (KgxWindow *self);
-void        kgx_window_pop_root        (KgxWindow *self);
-void        kgx_window_push_remote     (KgxWindow *self);
-void        kgx_window_pop_remote      (KgxWindow *self);
+void        kgx_window_push_root       (KgxWindow *self,
+                                        GPid       pid);
+void        kgx_window_pop_root        (KgxWindow *self,
+                                        GPid       pid);
+void        kgx_window_push_remote     (KgxWindow *self,
+                                        GPid       pid);
+void        kgx_window_pop_remote      (KgxWindow *self,
+                                        GPid       pid);
 
 
 G_END_DECLS

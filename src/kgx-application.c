@@ -188,11 +188,11 @@ watch (gpointer data)
         }
 
         if (g_strcmp0 (exec, "ssh") == 0) {
-          kgx_window_push_remote (watch->window);
+          kgx_window_push_remote (watch->window, pid);
         }
 
         if (kgx_process_get_is_root (curr)) {
-          kgx_window_push_root (watch->window);
+          kgx_window_push_root (watch->window, pid);
         }
       }
     }
@@ -205,8 +205,10 @@ watch (gpointer data)
 
     if (!g_ptr_array_find_with_equal_func (plist, child_watch, (GEqualFunc) process_is_watched_by, NULL)) {
       g_message ("Oh bye then %s", kgx_process_get_exec (child_watch->process));
-      kgx_window_pop_remote (child_watch->window);
-      kgx_window_pop_root (child_watch->window);
+      kgx_window_pop_remote (child_watch->window,
+                             kgx_process_get_pid (child_watch->process));
+      kgx_window_pop_root (child_watch->window,
+                           kgx_process_get_pid (child_watch->process));
       g_ptr_array_remove_index (self->children, i);
       i--;
     }
