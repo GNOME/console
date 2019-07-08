@@ -108,15 +108,19 @@ wait_cb (GPid     pid,
 
 {
   KgxWindow *self = KGX_WINDOW (user_data);
+  #if HAS_GTOP
   GtkApplication *app = NULL;
+  #endif
   g_autoptr (GError) error = NULL;
   GtkStyleContext *context = NULL;
 
   g_return_if_fail (KGX_IS_WINDOW (self));
 
+  #if HAS_GTOP
   app = gtk_window_get_application (GTK_WINDOW (self));
 
   kgx_application_remove_watch (KGX_APPLICATION (app), pid);
+  #endif
 
   /* wait_check will set @error if it got a signal/non-zero exit */
   if (!g_spawn_check_exit_status (status, &error)) {
@@ -153,7 +157,9 @@ spawned (VtePty       *pty,
 {
   g_autoptr(GError) error = NULL;
   KgxWindow *self = KGX_WINDOW (data);
+  #if HAS_GTOP
   GtkApplication *app = NULL;
+  #endif
   GPid pid;
 
   g_return_if_fail (VTE_IS_PTY (pty));

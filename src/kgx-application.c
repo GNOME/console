@@ -473,6 +473,7 @@ kgx_application_init (KgxApplication *self)
   self->children = g_ptr_array_new_with_free_func ((GDestroyNotify) clear_watch);
 }
 
+#if HAS_GTOP
 /**
  * kgx_application_add_watch:
  * @self: the #KgxApplication
@@ -532,6 +533,7 @@ kgx_application_remove_watch (KgxApplication *self,
     g_warning ("Unknown process %i", pid);
   }
 }
+#endif
 
 /**
  * kgx_application_get_system_font:
