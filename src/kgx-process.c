@@ -41,9 +41,9 @@ struct _KgxProcess {
 };
 
 static void
-clear (KgxProcess *self)
+clear_process (KgxProcess *self)
 {
-  g_free (self->exec);
+  g_clear_pointer (&self->exec, g_free);
 }
 
 /**
@@ -59,7 +59,7 @@ kgx_process_unref (KgxProcess *self)
 {
   g_return_if_fail (self != NULL);
 
-  g_rc_box_release_full (self, (GDestroyNotify) clear);
+  g_rc_box_release_full (self, (GDestroyNotify) clear_process);
 }
 
 G_DEFINE_BOXED_TYPE (KgxProcess, kgx_process, g_rc_box_acquire, kgx_process_unref)
@@ -73,10 +73,12 @@ G_DEFINE_BOXED_TYPE (KgxProcess, kgx_process, g_rc_box_acquire, kgx_process_unre
 KgxProcess *
 kgx_process_new (GPid pid)
 {
-  glibtop_proc_uid    info;
-  glibtop_proc_args   args_size;
-  char              **args;
-  KgxProcess          *self = g_rc_box_new0 (KgxProcess);
+  glibtop_proc_uid   info;
+  glibtop_proc_args  args_size;
+  g_auto(GStrv)      args = NULL;
+  KgxProcess        *self = NULL;
+  
+  self = g_rc_box_new0 (KgxProcess);
 
   self->pid = pid;
 
@@ -88,8 +90,6 @@ kgx_process_new (GPid pid)
   args = glibtop_get_proc_argv (&args_size, pid, 0);
 
   self->exec = g_strdup (args[0]);
-
-  g_strfreev (args);
 
   return self;
 }
@@ -177,12 +177,14 @@ GPtrArray *
 kgx_process_get_list ()
 {
   glibtop_proclist pid_list;
-  GPid *pids;
-  GPtrArray *list;
+  g_autofree GPid *pids = NULL;
+  GPtrArray *list = NULL;
   
   list = g_ptr_array_new_with_free_func ((GDestroyNotify) kgx_process_unref);
 
   pids = glibtop_get_proclist (&pid_list, GLIBTOP_KERN_PROC_ALL, 0);
+
+  g_return_val_if_fail (pids != NULL, NULL);
 
   for (int i = 0; i < pid_list.number; i++) {
     g_ptr_array_add (list, kgx_process_new (pids[i]));

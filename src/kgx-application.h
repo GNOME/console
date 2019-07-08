@@ -79,8 +79,10 @@ struct _KgxApplication
 G_DECLARE_FINAL_TYPE (KgxApplication, kgx_application, KGX, APPLICATION, GtkApplication)
 
 void                  kgx_application_add_watch       (KgxApplication *self,
-                                                       KgxProcess     *process,
+                                                       GPid            pid,
                                                        KgxWindow      *window);
+void                  kgx_application_remove_watch    (KgxApplication *self,
+                                                       GPid            pid);
 PangoFontDescription *kgx_application_get_system_font (KgxApplication *self);
 
 G_END_DECLS

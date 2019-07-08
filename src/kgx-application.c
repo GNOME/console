@@ -92,7 +92,7 @@ kgx_application_get_property (GObject    *object,
       g_value_set_enum (value, self->theme);
       break;
     case PROP_FONT:
-      g_value_set_boxed (value, kgx_application_get_system_font (self));
+      g_value_take_boxed (value, kgx_application_get_system_font (self));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -180,7 +180,7 @@ watch (gpointer data)
           struct ProcessWatch *child_watch = g_new(struct ProcessWatch, 1);
 
           child_watch->process = g_rc_box_acquire (curr);
-          child_watch->window = watch->window;
+          child_watch->window = g_object_ref (watch->window);
 
           g_message ("New child, watch it!");
 
@@ -321,7 +321,9 @@ kgx_application_command_line (GApplication            *app,
   g_variant_dict_lookup (options, "working-directory", "^&ay", &working_dir);
   g_variant_dict_lookup (options, "command", "^&ay", &command);
 
+  if (working_dir != NULL) {
   abs_path = g_canonicalize_filename (working_dir, NULL);
+  }
 
   window = g_object_new (KGX_TYPE_WINDOW,
                          "application", app,
@@ -389,9 +391,12 @@ kgx_application_class_init (KgxApplicationClass *klass)
 static void
 clear_watch (struct ProcessWatch *watch)
 {
-  kgx_process_unref (watch->process);
+  g_return_if_fail (watch != NULL);
 
-  g_free (watch);
+  g_clear_pointer (&watch->process, kgx_process_unref);
+  g_clear_object (&watch->window);
+
+  g_clear_pointer (&watch, g_free);
 }
 
 static void
@@ -464,21 +469,21 @@ kgx_application_init (KgxApplication *self)
                     G_CALLBACK (font_changed),
                     self);
 
-  self->watching = g_ptr_array_new_with_free_func (g_free);
+  self->watching = g_ptr_array_new_with_free_func ((GDestroyNotify) clear_watch);
   self->children = g_ptr_array_new_with_free_func ((GDestroyNotify) clear_watch);
 }
 
 /**
  * kgx_application_add_watch:
  * @self: the #KgxApplication
- * @process: the shell process to watch
+ * @pid: the shell process to watch
  * @window: the window the shell is running in
  * 
  * registers a new shell proccess with the pid watcher
  */
 void
 kgx_application_add_watch (KgxApplication *self,
-                           KgxProcess     *process,
+                           GPid            pid,
                            KgxWindow      *window)
 {
   struct ProcessWatch *watch;
@@ -487,12 +492,45 @@ kgx_application_add_watch (KgxApplication *self,
   g_return_if_fail (KGX_IS_WINDOW (window));
 
   watch = g_new0 (struct ProcessWatch, 1);
-  watch->process = g_rc_box_acquire (process);
-  watch->window = window;
+  watch->process = kgx_process_new (pid);
+  watch->window = g_object_ref (window);
 
   g_return_if_fail (KGX_IS_WINDOW (watch->window));
 
   g_ptr_array_add (self->watching, watch);
+}
+
+static gboolean
+watch_is_for_pid (struct ProcessWatch *watch,
+                  gpointer             pid)
+{
+  return kgx_process_get_pid (watch->process) == GPOINTER_TO_INT (pid);
+}
+
+/**
+ * kgx_application_remove_watch:
+ * @self: the #KgxApplication
+ * @pid: the shell process to stop watch watching
+ * 
+ * unregisters the shell with #GPid pid
+ */
+void
+kgx_application_remove_watch (KgxApplication *self,
+                              GPid            pid)
+{
+  guint idx = 0;
+
+  g_return_if_fail (KGX_IS_APPLICATION (self));
+
+  if (g_ptr_array_find_with_equal_func (self->watching,
+                                         GINT_TO_POINTER (pid),
+                                         (GEqualFunc) watch_is_for_pid,
+                                         &idx)) {
+    g_ptr_array_remove_index_fast (self->watching, idx);
+    g_debug ("Stoped watching %i", pid);
+  } else {
+    g_warning ("Unknown process %i", pid);
+  }
 }
 
 /**

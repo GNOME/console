@@ -102,20 +102,27 @@ kgx_window_set_theme (KgxWindow *self,
 }
 
 static void
-wait_cb (G_GNUC_UNUSED GPid pid,
-         gint               status,
-         gpointer           user_data)
+wait_cb (GPid     pid,
+         gint     status,
+         gpointer user_data)
 
 {
   KgxWindow *self = KGX_WINDOW (user_data);
+  GtkApplication *app = NULL;
   g_autoptr (GError) error = NULL;
   GtkStyleContext *context = NULL;
 
-  context = gtk_widget_get_style_context (GTK_WIDGET (self->exit_info));
+  g_return_if_fail (KGX_IS_WINDOW (self));
+
+  app = gtk_window_get_application (GTK_WINDOW (self));
+
+  kgx_application_remove_watch (KGX_APPLICATION (app), pid);
 
   /* wait_check will set @error if it got a signal/non-zero exit */
   if (!g_spawn_check_exit_status (status, &error)) {
     g_autofree char *message = NULL;
+
+    context = gtk_widget_get_style_context (GTK_WIDGET (self->exit_info));
 
     // translators: <b> </b> marks the text as bold, ensure they are matched please!
     message = g_strdup_printf (_("<b>Read Only</b> — Command exited with code %i"), status);
@@ -127,6 +134,8 @@ wait_cb (G_GNUC_UNUSED GPid pid,
 
     return;
   } else {
+    context = gtk_widget_get_style_context (GTK_WIDGET (self->exit_info));
+
     gtk_label_set_markup (GTK_LABEL (self->exit_message),
     // translators: <b> </b> marks the text as bold, ensure they are matched please!
                          _("<b>Read Only</b> — Command exited"));
@@ -144,6 +153,7 @@ spawned (VtePty       *pty,
 {
   g_autoptr(GError) error = NULL;
   KgxWindow *self = KGX_WINDOW (data);
+  GtkApplication *app = NULL;
   GPid pid;
 
   g_return_if_fail (VTE_IS_PTY (pty));
@@ -170,8 +180,10 @@ spawned (VtePty       *pty,
   }
 
   #if HAS_GTOP
-  kgx_application_add_watch (KGX_APPLICATION (gtk_window_get_application (GTK_WINDOW (self))),
-                             kgx_process_new (pid),
+  app = gtk_window_get_application (GTK_WINDOW (self));
+
+  kgx_application_add_watch (KGX_APPLICATION (app),
+                             pid,
                              KGX_WINDOW (self));
   #endif
 
@@ -181,18 +193,19 @@ spawned (VtePty       *pty,
 static void
 kgx_window_constructed (GObject *object)
 {
-  KgxWindow *self = KGX_WINDOW (object);
-  gchar           *shell[2] = {NULL, NULL};
-  const char      *initial = NULL;
-  VtePty          *pty;
-  g_autoptr (GError) error = NULL;
-  g_auto (GStrv) env = NULL;
+  KgxWindow          *self = KGX_WINDOW (object);
+  gchar              *shell[2] = {NULL, NULL};
+  const char         *initial = NULL;
+  g_autoptr (VtePty)  pty = NULL;
+  g_autoptr (GError)  error = NULL;
+  g_auto (GStrv)      env = NULL;
 
   pty = vte_pty_new_sync (fp_vte_pty_default_flags (), NULL, &error);
 
-
-  if (self->command != NULL) {
-    shell[0] = self->command;
+  if (G_UNLIKELY (self->command != NULL)) {
+    // dup the string so we can free shell[0] later to handle the
+    // (more likly) fp_vte_guess_shell case
+    shell[0] = g_strdup (self->command);
   } else {
     shell[0] = fp_vte_guess_shell (NULL, &error);
     if (error) {
@@ -201,8 +214,8 @@ kgx_window_constructed (GObject *object)
   }
 
   if (shell[0] == NULL) {
-    shell[0] = "/bin/sh";
-    g_warning ("Defaulting to /bin/sh");
+    shell[0] = g_strdup ("/bin/sh");
+    g_warning ("Defaulting to %s", shell[0]);
   }
 
   if (self->working_dir) {
@@ -224,6 +237,8 @@ kgx_window_constructed (GObject *object)
                           NULL,
                           (GAsyncReadyCallback) spawned,
                           self);
+
+  g_free (shell[0]);
 
   G_OBJECT_CLASS (kgx_window_parent_class)->constructed (object);
 }
@@ -474,10 +489,10 @@ new_activated (GSimpleAction *action,
                GVariant      *parameter,
                gpointer       data)
 {
-  GtkWindow       *window;
-  GtkApplication  *app;
+  GtkWindow       *window = NULL;
+  GtkApplication  *app = NULL;
   guint32          timestamp;
-  const char      *dir;
+  g_autofree char *dir = NULL;
 
   /* Slightly "wrong" but hopefully by taking the time before
    * we spend non-zero time initing the window it's far enough in the
@@ -594,7 +609,7 @@ update_subtitle (GBinding     *binding,
   g_autoptr (GFile) file = NULL;
   g_autofree char *path = NULL;
   const char *uri;
-  const char *home;
+  const char *home = NULL;
 
   uri = g_value_get_string (from_value);
   if (uri == NULL) {
@@ -613,9 +628,9 @@ update_subtitle (GBinding     *binding,
 
   home = g_get_home_dir ();
   if (g_str_has_prefix (path, home)) {
-    home = g_strdup_printf ("~%s", path + strlen (home));
+    g_autofree char *short_home = g_strdup_printf ("~%s", path + strlen (home));
 
-    g_value_set_string (to_value, home);
+    g_value_set_string (to_value, short_home);
 
     return TRUE;
   }
@@ -669,7 +684,7 @@ kgx_window_init (KgxWindow *self)
  * Get the working directory path of this window, used to open new windows
  * in the same directory
  */
-const char *
+char *
 kgx_window_get_working_dir (KgxWindow *self)
 {
   const char *uri;
@@ -686,6 +701,7 @@ kgx_window_get_working_dir (KgxWindow *self)
 /**
  * kgx_window_push_root:
  * @self: the #KgxWindow
+ * @pid: the #GPid of the root process
  * 
  * Increase the count of processes running as root and applying the
  * appropriate styles
@@ -707,6 +723,7 @@ kgx_window_push_root (KgxWindow *self,
 /**
  * kgx_window_pop_root:
  * @self: the #KgxWindow
+ * @pid: the #GPid of the root process
  * 
  * Reduce the count of root children, removing styles if we hit 0
  */
@@ -729,6 +746,7 @@ kgx_window_pop_root (KgxWindow *self,
 /**
  * kgx_window_push_remote:
  * @self: the #KgxWindow
+ * @pid: the #GPid of the remote process
  * 
  * Same as kgx_window_push_root() but for ssh
  */
@@ -749,6 +767,7 @@ kgx_window_push_remote (KgxWindow *self,
 /**
  * kgx_window_pop_remote:
  * @self: the #KgxWindow
+ * @pid: the #GPid of the remote process
  * 
  * Same as kgx_window_pop_root() but for ssh
  */

@@ -493,8 +493,8 @@ kgx_terminal_init (KgxTerminal *self)
                     G_CALLBACK (location_changed), NULL);
 
   for (int i = 0; i < KGX_TERMINAL_N_LINK_REGEX; i++) {
-    VteRegex *regex;
-    GError *error = NULL;
+    g_autoptr (VteRegex) regex = NULL;
+    g_autoptr (GError) error = NULL;
 
     regex = vte_regex_new_for_match (links[i], -1, PCRE2_MULTILINE, &error);
 

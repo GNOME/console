@@ -76,7 +76,7 @@ struct _KgxWindow
 
 G_DECLARE_FINAL_TYPE (KgxWindow, kgx_window, KGX, WINDOW, GtkApplicationWindow)
 
-const char *kgx_window_get_working_dir (KgxWindow *self);
+char       *kgx_window_get_working_dir (KgxWindow *self);
 void        kgx_window_push_root       (KgxWindow *self,
                                         GPid       pid);
 void        kgx_window_pop_root        (KgxWindow *self,
