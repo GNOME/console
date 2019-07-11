@@ -47,8 +47,10 @@ pages:
 
 debian:
   image: debian:buster
-  stage: package
+  stage: deploy
   script:
+    - apt update
+    - apt upgrade
     - dpkg-buildpackage -uc -us
     - cp ../*.deb .
   artifacts:
