@@ -18,8 +18,8 @@
   </kudos>
   <screenshots>
     <screenshot type="default">
-      <image height="650" width="1196">https://gitlab.gnome.org/World/icon-tool/raw/master/data/screenshots/01-Welcome.png</image>
-      <caption>TODO: Make a screenshot</caption>
+      <image height="497" width="800">https://gitlab.gnome.org/zanderbrown/kgx/raw/master/data/screenshots/01-Terminal.png</image>
+      <caption>Terminal window</caption>
     </screenshot>
   </screenshots>
   <launchable type="desktop-id">org.gnome.zbrown.KingsCross.desktop</launchable>
