@@ -9,9 +9,19 @@ kgx_sources = [
 kgx_deps = [
   dependency('gio-2.0', version: '>= 2.58'),
   dependency('gtk+-3.0', version: '>= 3.24'),
-  dependency('vte-2.91', version: '>= 0.57',
-             fallback: ['vte', 'libvte_gtk3_dep']),
 ]
+
+ideal_vte = dependency('vte-2.91', version: '>= 0.57',
+                       fallback: ['vte', 'libvte_gtk3_dep'],
+                       required: false)
+
+if not ideal_vte.found()
+  message('Using old vte, this is only supported for PureOS!')
+  add_project_arguments(['-DVTE_PTY_NO_CTTY=0'], language: 'c')
+  kgx_deps += [dependency('vte-2.91', version: '>= 0.54.2')]
+else
+  kgx_deps += [ideal_vte]
+endif
 
 if get_option('gtop')
   kgx_deps += dependency('libgtop-2.0')
