@@ -56,6 +56,7 @@ struct ProcessWatch {
 /**
  * KgxApplication:
  * @theme: the colour palette in use
+ * @scale: the font scaling used
  * @desktop_interface: the #GSettings storing the system monospace font
  * @watching: (element-type ProcessWatch): the shells running in windows
  * @children: (element-type ProcessWatch): the processes running in shells
@@ -65,15 +66,17 @@ struct ProcessWatch {
 struct _KgxApplication
 {
   /*< private >*/
-  GtkApplication  parent_instance;
+  GtkApplication            parent_instance;
 
   /*< public >*/
-  KgxTheme        theme;
-  
-  GSettings      *desktop_interface;
+  KgxTheme                  theme;
+  gdouble                   scale;
 
-  GPtrArray      *watching;
-  GPtrArray      *children;
+  
+  GSettings                *desktop_interface;
+
+  GPtrArray                *watching;
+  GPtrArray                *children;
 };
 
 G_DECLARE_FINAL_TYPE (KgxApplication, kgx_application, KGX, APPLICATION, GtkApplication)

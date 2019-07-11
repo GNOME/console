@@ -9,5 +9,9 @@
     <key name="theme" enum="org.gnome.zbrown.KingsCross.Theme">
       <default>'night'</default>
     </key>
+    <key name="font-scale" type="d">
+      <range min="0.5" max="2.0"/>
+      <default>1.0</default>
+    </key>
   </schema>
 </schemalist>

@@ -47,18 +47,32 @@ enum {
   PROP_0,
   PROP_THEME,
   PROP_FONT,
+  PROP_FONT_SCALE,
   LAST_PROP
 };
 
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 
-void
+static void
 kgx_application_set_theme (KgxApplication *self,
                            KgxTheme        theme)
 {
+  g_return_if_fail (KGX_IS_APPLICATION (self));
+
   self->theme = theme;
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_THEME]);
+}
+
+static void
+kgx_application_set_scale (KgxApplication *self,
+                           gdouble         scale)
+{
+  g_return_if_fail (KGX_IS_APPLICATION (self));
+
+  self->scale = scale;
+
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_FONT_SCALE]);
 }
 
 static void
@@ -72,6 +86,9 @@ kgx_application_set_property (GObject      *object,
   switch (property_id) {
     case PROP_THEME:
       kgx_application_set_theme (self, g_value_get_enum (value));
+      break;
+    case PROP_FONT_SCALE:
+      kgx_application_set_scale (self, g_value_get_double (value));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -93,6 +110,9 @@ kgx_application_get_property (GObject    *object,
       break;
     case PROP_FONT:
       g_value_take_boxed (value, kgx_application_get_system_font (self));
+      break;
+    case PROP_FONT_SCALE:
+      g_value_set_double (value, self->scale);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -254,6 +274,7 @@ kgx_application_startup (GApplication *app)
 
   settings = g_settings_new ("org.gnome.zbrown.KingsCross");
   g_settings_bind (settings, "theme", app, "theme", G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (settings, "font-scale", app, "font-scale", G_SETTINGS_BIND_DEFAULT);
 
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (provider, "/org/gnome/zbrown/KingsCross/styles.css");
@@ -384,6 +405,11 @@ kgx_application_class_init (KgxApplicationClass *klass)
     g_param_spec_boxed ("font", "Font", "Monospace font",
                          PANGO_TYPE_FONT_DESCRIPTION,
                          G_PARAM_READABLE);
+
+  pspecs[PROP_FONT_SCALE] =
+    g_param_spec_double ("font-scale", "Font scale", "Font scaling",
+                         0.5, 2.0, 1.0,
+                         G_PARAM_READWRITE);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 }
