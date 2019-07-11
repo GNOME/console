@@ -32,7 +32,6 @@
 #include <vte/vte.h>
 
 #include "rgba.h"
-#include "kgx-dbus.h"
 
 #include "kgx-config.h"
 #include "kgx-application.h"
@@ -188,19 +187,14 @@ watch (gpointer data)
 
       if (kgx_process_get_pid (parent) == kgx_process_get_pid (watch->process)) {
         exec = kgx_process_get_exec (curr);
-        g_message ("Found child pid %i (of %i) @%i: %s",
-                  pid,
-                  kgx_process_get_pid (watch->process),
-                  i,
-                  exec);
-        
+
         if (!g_ptr_array_find_with_equal_func (self->children, curr, (GEqualFunc) watch_is_for_process, NULL)) {
           struct ProcessWatch *child_watch = g_new(struct ProcessWatch, 1);
 
           child_watch->process = g_rc_box_acquire (curr);
           child_watch->window = g_object_ref (watch->window);
 
-          g_message ("New child, watch it!");
+          g_debug ("Hello %s!", exec);
 
           g_ptr_array_add (self->children, child_watch);
         }
@@ -219,10 +213,8 @@ watch (gpointer data)
   for (int i = 0; i < self->children->len; i++) {
     struct ProcessWatch *child_watch = g_ptr_array_index (self->children, i);
 
-    g_message ("%i of %i", i, self->children->len);
-
     if (!g_ptr_array_find_with_equal_func (plist, child_watch, (GEqualFunc) process_is_watched_by, NULL)) {
-      g_message ("Oh bye then %s", kgx_process_get_exec (child_watch->process));
+      g_debug ("Bye %s!", kgx_process_get_exec (child_watch->process));
       kgx_window_pop_remote (child_watch->window,
                              kgx_process_get_pid (child_watch->process));
       kgx_window_pop_root (child_watch->window,
@@ -337,9 +329,7 @@ kgx_application_handle_local_options (GApplication *app,
     }
   }
 
-  g_message ("%i", G_APPLICATION_CLASS (kgx_application_parent_class)->handle_local_options (app, options));
-
-  return -1;
+  return G_APPLICATION_CLASS (kgx_application_parent_class)->handle_local_options (app, options);
 }
 
 static void
@@ -473,6 +463,8 @@ kgx_application_add_watch (KgxApplication *self,
   watch = g_new0 (struct ProcessWatch, 1);
   watch->process = kgx_process_new (pid);
   watch->window = g_object_ref (window);
+
+  g_debug ("Started watching %i", pid);
 
   g_return_if_fail (KGX_IS_WINDOW (watch->window));
 

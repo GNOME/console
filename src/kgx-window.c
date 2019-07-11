@@ -230,7 +230,7 @@ kgx_window_constructed (GObject *object)
     initial = g_get_home_dir ();
   }
 
-  g_message ("Fun in: %s", initial);
+  g_debug ("Working in %s", initial);
 
   env = g_environ_setenv (env, "TERM", "xterm-256color", TRUE);
 
@@ -726,7 +726,7 @@ kgx_window_push_root (KgxWindow *self,
 
   g_hash_table_add (self->root, GINT_TO_POINTER (pid));
 
-  g_debug ("root push now at %i", g_hash_table_size (self->root));
+  g_debug ("Now %i root", g_hash_table_size (self->root));
 
   gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self)),
                                KGX_WINDOW_STYLE_ROOT);
@@ -743,15 +743,20 @@ void
 kgx_window_pop_root (KgxWindow *self,
                      GPid       pid)
 {
+  guint size = 0;
+
   g_return_if_fail (KGX_IS_WINDOW (self));
 
   g_hash_table_remove (self->root, GINT_TO_POINTER (pid));
 
-  g_debug ("root pop now at %i", g_hash_table_size (self->root));
+  size = g_hash_table_size (self->root);
 
-  if (g_hash_table_size (self->root) <= 0) {
+  if (size <= 0) {
     gtk_style_context_remove_class (gtk_widget_get_style_context (GTK_WIDGET (self)),
                                     KGX_WINDOW_STYLE_ROOT);
+    g_debug ("No longer root");
+  } else {
+    g_debug ("%i root remaining", size);
   }
 }
 
@@ -770,7 +775,7 @@ kgx_window_push_remote (KgxWindow *self,
 
   g_hash_table_add (self->remote, GINT_TO_POINTER (pid));
 
-  g_debug ("remote push now at %i", g_hash_table_size (self->remote));
+  g_debug ("Now %i remote", g_hash_table_size (self->remote));
 
   gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self)),
                                KGX_WINDOW_STYLE_REMOTE);
@@ -787,14 +792,19 @@ void
 kgx_window_pop_remote (KgxWindow *self,
                        GPid       pid)
 {
+  guint size = 0;
+
   g_return_if_fail (KGX_IS_WINDOW (self));
 
   g_hash_table_remove (self->remote, GINT_TO_POINTER (pid));
 
-  g_debug ("remote pop now at %i", g_hash_table_size (self->remote));
+  size = g_hash_table_size (self->remote);
 
-  if (g_hash_table_size (self->remote) <= 0) {
+  if (size <= 0) {
     gtk_style_context_remove_class (gtk_widget_get_style_context (GTK_WIDGET (self)),
                                     KGX_WINDOW_STYLE_REMOTE);
+    g_debug ("No longer remote");
+  } else {
+    g_debug ("%i remote remaining", size);
   }
 }
