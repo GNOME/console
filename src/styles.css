@@ -2,6 +2,10 @@
   background: transparent;
 }
 
+.maximized.terminal-window {
+  background: black;
+}
+
 .terminal-window.root headerbar,
 .terminal-window.root headerbar button {
   background: #a51d2d;
