@@ -24,8 +24,6 @@
  * The application, on the face of it nothing particularly interesting but
  * under the hood it contains a #GSource used to monitor the shells (and
  * there children) running in the open #KgxWindow s
- * 
- * Sooner or later this will implement the GNOME Terminal dbus interface
  */
 
 #define G_LOG_DOMAIN "Kgx"
@@ -291,42 +289,6 @@ kgx_application_startup (GApplication *app)
   #endif
 }
 
-static gboolean
-create_instance (KgxDBusFactory        *interface,
-                 GDBusMethodInvocation *invocation,
-                 const gchar           *greeting,
-                 gpointer               user_data)
-{
-  kgx_dbus_factory_complete_create_instance (interface, invocation, "/org/gnome/Terminal/Factory0/");
-
-  return TRUE;
-}
-
-static gboolean
-kgx_application_dbus_register (GApplication    *app,
-                               GDBusConnection *connection,
-                               const gchar     *object_path,
-                               GError         **error)
-{
-  KgxDBusFactory *interface = kgx_dbus_factory_skeleton_new ();
-
-  g_signal_connect (interface,
-                    "handle-create-instance",
-                    G_CALLBACK (create_instance),
-                    app);
-
-  if (!g_dbus_interface_skeleton_export (G_DBUS_INTERFACE_SKELETON (interface),
-                                         connection,
-                                         "/org/gnome/Terminal/Factory0",
-                                         error))
-    {
-      /* handle error */
-    }
-
-  return TRUE;
-}
-
-
 static int
 kgx_application_command_line (GApplication            *app,
                               GApplicationCommandLine *cli)
@@ -392,7 +354,6 @@ kgx_application_class_init (KgxApplicationClass *klass)
 
   app_class->activate = kgx_application_activate;
   app_class->startup = kgx_application_startup;
-  app_class->dbus_register = kgx_application_dbus_register;
   app_class->command_line = kgx_application_command_line;
   app_class->handle_local_options = kgx_application_handle_local_options;
 
@@ -436,15 +397,6 @@ font_changed (GSettings      *settings,
 static GOptionEntry entries[] =
 {
   {
-    "print-environment",
-    'p',
-    0,
-    G_OPTION_ARG_NONE,
-    NULL,
-    N_("Print environment variables to interact with the terminal"),
-    NULL
-  },
-  {
     "version",
     0,
     0,
@@ -477,7 +429,7 @@ static GOptionEntry entries[] =
     0,
     G_OPTION_ARG_NONE,
     NULL,
-    N_("Wait until the child exits"),
+    N_("Wait until the child exits (TODO)"),
     NULL
   },
   { NULL }

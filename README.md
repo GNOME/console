@@ -11,11 +11,10 @@ We are not however trying to replace GNOME Terminal/Tilix, these advanced tools 
 ## Roadmap
 
 - [ ] 'API' compatible with GNOME Terminal
-    - [ ] Command line flags
-    - [ ] DBus interface
+    - [ ] Command line flags *Partial, supports -e/--command and --working-directory*
 - [ ] Command done notifications
-- [ ] 'root mode' turns red when sudo/su/pkexec is active in the terminal
-- [ ] 'remote mode' turns (purple?) when ssh is in use
+- [X] 'root mode' turns red when sudo/su/pkexec is active in the terminal
+- [X] 'remote mode' turns (purple?) when ssh is in use
 - [ ] Other bash/shell integrations
 
 Due to the complexities of sandboxing a terminal emulator flatpaks are only for development purposes (for now)

@@ -27,13 +27,6 @@ kgx_sources += gnome.compile_resources('kgx-resources',
   c_name: 'kgx'
 )
 
-kgx_sources += gnome.gdbus_codegen('kgx-dbus',
-  sources: 'org.gnome.Terminal.xml',
-  interface_prefix : 'org.gnome.',
-  object_manager: false,
-  namespace : 'KgxDBus'
-)
-
 kgx_sources += gnome.mkenums_simple('kgx-enums', sources: 'kgx-terminal.h')
 
 kgx_lib = library ('kgx', kgx_sources, dependencies: kgx_deps)
