@@ -22,4 +22,6 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  gsettings-desktop-schemas (>= 0.1.0),
-Description: Simple terminal emulator for human beings
+Description: A simple user-friendly terminal emulator for the GNOME desktop.
+ Kings Cross is a simple terminal emulator for GNOME that adjusts nicely
+ to small screen sizes and touch usage.
