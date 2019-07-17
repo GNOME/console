@@ -171,7 +171,7 @@ kgx_process_get_exec (KgxProcess *self)
  * 
  * Get the list of running processes
  * 
- * Returns: (element-type Kgx.Process): List of processes free with g_ptr_array_unref()
+ * Returns: (transfer full) (element-type Kgx.Process): List of processes free with g_ptr_array_unref()
  */
 GPtrArray *
 kgx_process_get_list (void)

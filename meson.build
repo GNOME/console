@@ -70,3 +70,11 @@ subdir('po')
 subdir('doc')
 
 meson.add_install_script('build-aux/meson/postinstall.py')
+
+configure_file(
+  input: 'gi.in',
+  output: 'gi',
+  configuration: {
+    'BUILD_DIR': join_paths(meson.current_build_dir(), 'src')
+  }
+)

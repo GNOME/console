@@ -141,6 +141,7 @@ kgx_search_box_class_init (KgxSearchBoxClass *klass)
 
   /**
    * KgxSearchBox::changed:
+   * @self: the #KgxSearchBox
    * @search: The current contents of the #GtkSearchEntry
    * 
    * Proxy to #GtkSearchEntry::search-changed but with the current search

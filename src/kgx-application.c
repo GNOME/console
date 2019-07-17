@@ -106,7 +106,7 @@ kgx_application_get_property (GObject    *object,
       g_value_set_enum (value, self->theme);
       break;
     case PROP_FONT:
-      g_value_take_boxed (value, kgx_application_get_system_font (self));
+      g_value_take_boxed (value, kgx_application_get_font (self));
       break;
     case PROP_FONT_SCALE:
       g_value_set_double (value, self->scale);
@@ -517,7 +517,7 @@ kgx_application_remove_watch (KgxApplication *self,
 #endif
 
 /**
- * kgx_application_get_system_font:
+ * kgx_application_get_font:
  * @self: the #KgxApplication
  *
  * Creates a #PangoFontDescription for the system monospace font.
@@ -525,7 +525,7 @@ kgx_application_remove_watch (KgxApplication *self,
  * Returns: (transfer full): a new #PangoFontDescription
  */
 PangoFontDescription *
-kgx_application_get_system_font (KgxApplication *self)
+kgx_application_get_font (KgxApplication *self)
 {
   // Taken from gnome-terminal
   g_autofree char *font = NULL;

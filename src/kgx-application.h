@@ -88,6 +88,6 @@ void                  kgx_application_add_watch       (KgxApplication *self,
 void                  kgx_application_remove_watch    (KgxApplication *self,
                                                        GPid            pid);
 #endif
-PangoFontDescription *kgx_application_get_system_font (KgxApplication *self);
+PangoFontDescription *kgx_application_get_font        (KgxApplication *self);
 
 G_END_DECLS

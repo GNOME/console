@@ -17,9 +17,7 @@
  */
 
 #include <glib/gi18n.h>
-
-#include "kgx-config.h"
-#include "kgx-application.h"
+#include <kgx.h>
 
 int
 main (int   argc,
