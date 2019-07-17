@@ -34,7 +34,7 @@ typedef struct _KgxProcess KgxProcess;
  * need to be #if HAS_GTOP
  */
 #if HAS_GTOP
-GPtrArray  *kgx_process_get_list    ();
+GPtrArray  *kgx_process_get_list    (void);
 KgxProcess *kgx_process_new         (GPid        pid);
 GPid        kgx_process_get_pid     (KgxProcess *self);
 gint32      kgx_process_get_uid     (KgxProcess *self);

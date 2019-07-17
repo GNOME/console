@@ -74,7 +74,7 @@ enum {
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 
 
-void
+static void
 kgx_terminal_set_theme (KgxTerminal *self,
                         KgxTheme     theme)
 {
@@ -103,6 +103,7 @@ kgx_terminal_set_theme (KgxTerminal *self,
 
   self->theme = theme;
 
+
   switch (theme) {
     case KGX_THEME_HACKER:
       fg = (GdkRGBA) { 0.1, 1.0, 0.1, 1.0};
@@ -115,7 +116,11 @@ kgx_terminal_set_theme (KgxTerminal *self,
 
   vte_terminal_set_colors (VTE_TERMINAL (self), &fg, &bg, palette, 16);
 
+  if (self->theme != theme) {
+    self->theme = theme;
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_THEME]);
+}
+
 }
 
 static void
@@ -231,7 +236,14 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
 
   /**
    * KgxTerminal:theme:
-   * The palette to use
+   * 
+   * The palette to use, one of the values of #KgxTheme
+   * 
+   * Officially only "night" exists, "hacker" is just a little fun
+   * 
+   * Bound to #KgxApplication:theme on the #KgxApplication
+   * 
+   * Stability: Private
    */
   pspecs[PROP_THEME] =
     g_param_spec_enum ("theme", "Theme", "Terminal theme",
@@ -318,6 +330,7 @@ got_text (GtkClipboard *clipboard,
 
   if (g_strstr_len (striped, -1, "sudo") != NULL &&
       g_strstr_len (striped, -1, "\n") != NULL) {
+    GtkWidget *accept = NULL;
     GtkWidget *dlg = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (data))),
                                              GTK_DIALOG_MODAL,
                                              GTK_MESSAGE_QUESTION,
@@ -327,7 +340,6 @@ got_text (GtkClipboard *clipboard,
                                               // TRANSLATORS: %s is the command being pasted
                                               _("Make sure you know what the command does:\n%s"),
                                               text);
-    GtkWidget *accept;
 
     g_signal_connect (dlg, "response", G_CALLBACK (paste_response), paste);
     gtk_dialog_add_button (GTK_DIALOG (dlg),
@@ -465,6 +477,7 @@ kgx_terminal_init (KgxTerminal *self)
 {
   GAction *act;
 
+  self->theme = KGX_THEME_NIGHT;
   self->actions = G_ACTION_MAP (g_simple_action_group_new ());
   g_action_map_add_action_entries (self->actions,
                                    term_entries,

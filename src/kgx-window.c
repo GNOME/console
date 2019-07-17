@@ -57,7 +57,7 @@ enum {
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 
 
-void
+static void
 kgx_window_set_theme (KgxWindow *self,
                       KgxTheme   theme)
 {

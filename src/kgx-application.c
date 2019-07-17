@@ -177,9 +177,9 @@ watch (gpointer data)
   for (int i = 0; i < self->watching->len; i++) {
     struct ProcessWatch *watch = g_ptr_array_index (self->watching, i);
 
-    for (int i = 0; i < plist->len; i++) {
+    for (int j = 0; j < plist->len; j++) {
       g_autoptr (KgxProcess) parent = NULL;
-      KgxProcess *curr = g_ptr_array_index (plist, i);
+      KgxProcess *curr = g_ptr_array_index (plist, j);
       GPid pid;
 
       parent = kgx_process_get_parent (curr);
@@ -347,6 +347,17 @@ kgx_application_class_init (KgxApplicationClass *klass)
   app_class->command_line = kgx_application_command_line;
   app_class->handle_local_options = kgx_application_handle_local_options;
 
+  /**
+   * KgxApplication:theme:
+   * 
+   * The palette to use, one of the values of #KgxTheme
+   * 
+   * Officially only "night" exists, "hacker" is just a little fun
+   * 
+   * Bound to /org/gnome/zbrown/KingsCross/theme so changes persist
+   * 
+   * Stability: Private
+   */
   pspecs[PROP_THEME] =
     g_param_spec_enum ("theme", "Theme", "Terminal theme",
                        KGX_TYPE_THEME, KGX_THEME_NIGHT,

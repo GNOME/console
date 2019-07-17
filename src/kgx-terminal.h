@@ -52,7 +52,7 @@ typedef enum /*< enum,prefix=KGX >*/
 
 /**
  * KgxTerminal:
- * @theme: the palette to use
+ * @theme: the palette to use, see #KgxTerminal:theme
  * @actions: action map for the context menu
  * @current_url: the address under the cursor
  * @match_id: regex ids for finding hyperlinks

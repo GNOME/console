@@ -174,7 +174,7 @@ kgx_process_get_exec (KgxProcess *self)
  * Returns: (element-type Kgx.Process): List of processes free with g_ptr_array_unref()
  */
 GPtrArray *
-kgx_process_get_list ()
+kgx_process_get_list (void)
 {
   glibtop_proclist pid_list;
   g_autofree GPid *pids = NULL;
