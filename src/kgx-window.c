@@ -686,6 +686,10 @@ kgx_window_init (KgxWindow *self)
 
   g_object_bind_property (self, "theme",
                           self->terminal, "theme",
+                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+
+  g_object_bind_property (self, "is-maximized",
+                          self->terminal, "opaque",
                           G_BINDING_SYNC_CREATE);
 }
 

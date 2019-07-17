@@ -53,6 +53,7 @@ typedef enum /*< enum,prefix=KGX >*/
 /**
  * KgxTerminal:
  * @theme: the palette to use, see #KgxTerminal:theme
+ * @opaque: is transparency enabled, see #KgxTerminal:opaque
  * @actions: action map for the context menu
  * @current_url: the address under the cursor
  * @match_id: regex ids for finding hyperlinks
@@ -66,7 +67,8 @@ struct _KgxTerminal
 
   /*< public >*/
   KgxTheme    theme;
-  GActionMap *actions; 
+  gboolean    opaque;
+  GActionMap *actions;
 
   /* Hyperlinks */
   const char *current_url;
