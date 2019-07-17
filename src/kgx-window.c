@@ -417,6 +417,11 @@ size_changed (GtkWidget    *widget,
   int          rows;
   VteTerminal *term = VTE_TERMINAL (widget);
 
+  if (gtk_window_is_maximized (GTK_WINDOW (self))) {
+    // Don't show when maximised as it isn't very interesting
+    return;
+  }
+
   cols = vte_terminal_get_column_count (term);
   rows = vte_terminal_get_row_count (term);
 
