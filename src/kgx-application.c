@@ -241,6 +241,8 @@ kgx_application_startup (GApplication *app)
   const char *const copy_accels[] = { "<shift><primary>c", NULL };
   const char *const paste_accels[] = { "<shift><primary>v", NULL };
   const char *const find_accels[] = { "<shift><primary>f", NULL };
+  const char *const zoom_in_accels[] = { "<primary>plus", NULL };
+  const char *const zoom_out_accels[] = { "<primary>minus", NULL };
 
   g_type_ensure (KGX_TYPE_TERMINAL);
   g_type_ensure (KGX_TYPE_SEARCH_BOX);
@@ -261,6 +263,10 @@ kgx_application_startup (GApplication *app)
                                          "term.paste", paste_accels);
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "win.find", find_accels);
+  gtk_application_set_accels_for_action (GTK_APPLICATION (app),
+                                         "win.zoom-in", zoom_in_accels);
+  gtk_application_set_accels_for_action (GTK_APPLICATION (app),
+                                         "win.zoom-out", zoom_out_accels);
 
   settings = g_settings_new ("org.gnome.zbrown.KingsCross");
   g_settings_bind (settings, "theme", app, "theme", G_SETTINGS_BIND_DEFAULT);
