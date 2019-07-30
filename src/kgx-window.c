@@ -30,6 +30,7 @@
 #include <vte/vte.h>
 #define PCRE2_CODE_UNIT_WIDTH 0
 #include <pcre2.h>
+#include <math.h>
 
 #include "rgba.h"
 #include "fp-vte-util.h"
@@ -397,6 +398,35 @@ font_decrease (VteTerminal *term,
   g_action_activate (action, NULL);
 }
 
+static void
+update_actions (KgxWindow *self)
+{
+  VteTerminal *term = VTE_TERMINAL (self->terminal);
+  gdouble current = vte_terminal_get_font_scale (term);
+  GAction *action;
+
+  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-out");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), current > 0.5);
+  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-normal");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), current != 1.0);
+  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-in");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), current < 2.0);
+}
+
+static void
+font_scaled (VteTerminal *term,
+             GParamSpec  *param,
+             KgxWindow   *self)
+{
+  g_autofree char *label = NULL;
+
+  label = g_strdup_printf ("%i%%",
+                           (int) round (vte_terminal_get_font_scale (term) * 100));
+  gtk_label_set_label (GTK_LABEL (self->zoom_level), label);
+
+  update_actions (self);
+}
+
 static gboolean
 size_timeout (KgxWindow *self)
 {
@@ -488,6 +518,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, search_bar);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_info);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_message);
+  gtk_widget_class_bind_template_child (widget_class, KgxWindow, zoom_level);
 
   gtk_widget_class_bind_template_callback (widget_class, application_set);
 
@@ -497,6 +528,7 @@ kgx_window_class_init (KgxWindowClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, font_increase);
   gtk_widget_class_bind_template_callback (widget_class, font_decrease);
+  gtk_widget_class_bind_template_callback (widget_class, font_scaled);
 
   gtk_widget_class_bind_template_callback (widget_class, size_changed);
 }
@@ -557,21 +589,6 @@ about_activated (GSimpleAction *action,
 }
 
 static void
-update_actions (KgxWindow *self)
-{
-  VteTerminal *term = VTE_TERMINAL (self->terminal);
-  gdouble current = vte_terminal_get_font_scale (term);
-  GAction *action;
-
-  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-out");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), current > 0.5);
-  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-normal");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), current != 1.0);
-  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-in");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), current < 2.0);
-}
-
-static void
 zoom_out_activated (GSimpleAction *action,
                     GVariant      *parameter,
                     gpointer       data)
@@ -581,8 +598,6 @@ zoom_out_activated (GSimpleAction *action,
   gdouble current = vte_terminal_get_font_scale (term);
 
   vte_terminal_set_font_scale (term, current - 0.1);
-
-  update_actions (self);
 }
 
 static void
@@ -594,8 +609,6 @@ zoom_normal_activated (GSimpleAction *action,
   VteTerminal *term = VTE_TERMINAL (self->terminal);
 
   vte_terminal_set_font_scale (term, 1.0);
-
-  update_actions (self);
 }
 
 static void
@@ -608,8 +621,6 @@ zoom_in_activated (GSimpleAction *action,
   gdouble current = vte_terminal_get_font_scale (term);
 
   vte_terminal_set_font_scale (term, current + 0.1);
-
-  update_actions (self);
 }
 
 static GActionEntry win_entries[] =

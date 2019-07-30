@@ -13,6 +13,7 @@
             <property name="visible">True</property>
             <property name="orientation">horizontal</property>
             <property name="margin-bottom">10</property>
+            <property name="homogeneous">True</property>
             <child>
               <object class="GtkButton">
                 <property name="visible">True</property>
@@ -29,7 +30,12 @@
               <object class="GtkButton">
                 <property name="visible">True</property>
                 <property name="action-name">win.zoom-normal</property>
-                <property name="label" translatable="yes">100%</property>
+                <child>
+                  <object class="GtkLabel" id="zoom_level">
+                    <property name="visible">True</property>
+                    <property name="width_chars">5</property>
+                  </object>
+                </child>
               </object>
             </child>
             <child>
@@ -163,6 +169,7 @@
                     <signal name="size-allocate" handler="size_changed" swapped="no"/>
                     <signal name="increase-font-size" handler="font_increase" swapped="no"/>
                     <signal name="decrease-font-size" handler="font_decrease" swapped="no"/>
+                    <signal name="notify::font-size" handler="font_scaled" swapped="no"/>
                   </object>
                 </child>
               </object>
