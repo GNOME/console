@@ -2,41 +2,82 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <menu id="win-menu">
-    <section>
-      <attribute name="display-hint">horizontal-buttons</attribute>
-      <item>
-        <attribute name="label" translatable="yes">Zoom _Out</attribute>
-        <attribute name="verb-icon">zoom-out-symbolic</attribute>
-        <attribute name="action">win.zoom-out</attribute>
-      </item>
-      <item>
-        <attribute name="label">100%</attribute>
-        <attribute name="action">win.zoom-normal</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">Zoom _In</attribute>
-        <attribute name="verb-icon">zoom-in-symbolic</attribute>
-        <attribute name="action">win.zoom-in</attribute>
-      </item>
-    </section>
-    <section>
-      <item>
-        <attribute name="label" translatable="yes">_New Window</attribute>
-        <attribute name="action">win.new-window</attribute>
-      </item>
-    </section>
-    <section>
-      <item>
-        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
-        <attribute name="action">win.show-help-overlay</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">_About King&apos;s Cross</attribute>
-        <attribute name="action">win.about</attribute>
-      </item>
-    </section>
-  </menu>
+  <object class="GtkPopoverMenu" id="popover">
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="margin">10</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="orientation">horizontal</property>
+            <property name="margin-bottom">10</property>
+            <child>
+              <object class="GtkButton">
+                <property name="visible">True</property>
+                <property name="action-name">win.zoom-out</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="icon-name">zoom-in-symbolic</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="visible">True</property>
+                <property name="action-name">win.zoom-normal</property>
+                <property name="label" translatable="yes">100%</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="visible">True</property>
+                <property name="action-name">win.zoom-in</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="icon-name">zoom-in-symbolic</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <style>
+              <class name="linked"/>
+            </style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="text" translatable="yes">_New Window</property>
+            <property name="action-name">win.new-window</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="text" translatable="yes">_Keyboard Shortcuts</property>
+            <property name="action-name">win.show-help-overlay</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="text" translatable="yes">_About King&apos;s Cross</property>
+            <property name="action-name">win.about</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
   <template class="KgxWindow" parent="GtkApplicationWindow">
     <property name="can-focus">False</property>
     <property name="default-width">800</property>
@@ -70,7 +111,7 @@
             <property name="visible">1</property>
             <property name="can-focus">0</property>
             <property name="receives-default">1</property>
-            <property name="menu-model">win-menu</property>
+            <property name="popover">popover</property>
             <child>
               <object class="GtkImage">
                 <property name="visible">1</property>
