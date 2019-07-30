@@ -18,3 +18,8 @@ option('vapi',
        type: 'boolean',
        value: false,
        description: 'Whether to generate VAPI, you probably don\'t want this')
+
+option('generic',
+       type: 'boolean',
+       value: false,
+       description: 'Present using the generic name "Terminal"')

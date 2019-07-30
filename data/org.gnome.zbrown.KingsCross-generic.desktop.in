@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=King's Cross
+Name=Terminal
 Exec=kgx
 # Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-Icon=org.gnome.zbrown.KingsCross
+Icon=org.gnome.zbrown.KingsCross.Generic
 Keywords=command;prompt;cmd;commandline;run;shell;terminal;kgx;
 Terminal=false
 Type=Application

@@ -1,11 +1,22 @@
-desktop_file = i18n.merge_file(
-  input: 'org.gnome.zbrown.KingsCross.desktop.in',
-  output: 'org.gnome.zbrown.KingsCross.desktop',
-  type: 'desktop',
-  po_dir: '../po',
-  install: true,
-  install_dir: join_paths(get_option('datadir'), 'applications')
-)
+if get_option('generic')
+  desktop_file = i18n.merge_file(
+    input: 'org.gnome.zbrown.KingsCross-generic.desktop.in',
+    output: 'org.gnome.zbrown.KingsCross.desktop',
+    type: 'desktop',
+    po_dir: '../po',
+    install: true,
+    install_dir: join_paths(get_option('datadir'), 'applications')
+  )
+else
+  desktop_file = i18n.merge_file(
+    input: 'org.gnome.zbrown.KingsCross.desktop.in',
+    output: 'org.gnome.zbrown.KingsCross.desktop',
+    type: 'desktop',
+    po_dir: '../po',
+    install: true,
+    install_dir: join_paths(get_option('datadir'), 'applications')
+  )
+endif
 
 desktop_utils = find_program('desktop-file-validate', required: false)
 if desktop_utils.found()
@@ -49,5 +60,11 @@ install_data('org.gnome.zbrown.KingsCross.svg',
              install_dir: join_paths([get_option('datadir'),'icons/hicolor/scalable/apps']))
 
 install_data('org.gnome.zbrown.KingsCross-symbolic.svg',
+             install_dir: join_paths([get_option('datadir'),'icons/hicolor/symbolic/apps']))
+
+install_data('org.gnome.zbrown.KingsCross.Generic.svg',
+             install_dir: join_paths([get_option('datadir'),'icons/hicolor/scalable/apps']))
+
+install_data('org.gnome.zbrown.KingsCross.Generic-symbolic.svg',
              install_dir: join_paths([get_option('datadir'),'icons/hicolor/symbolic/apps']))
 

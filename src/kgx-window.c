@@ -546,8 +546,12 @@ about_activated (GSimpleAction *action,
                          "comments", _("Terminal Emulator"),
                          "copyright", copyright,
                          "license-type", GTK_LICENSE_GPL_3_0,
-                         "logo-icon-name", "org.gnome.zbrown.KingsCross",
+                         "logo-icon-name", "kgx-original",
+                         #if IS_GENERIC
+                         "program-name", _("Terminal\nby King's Cross"),
+                         #else
                          "program-name", _("King's Cross"),
+                         #endif
                          "version", PACKAGE_VERSION,
                          NULL);
 }

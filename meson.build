@@ -15,6 +15,11 @@ if get_option('gtop')
 else
   config_h.set('HAS_GTOP', 0)
 endif
+if get_option('generic')
+  config_h.set('IS_GENERIC', 1)
+else
+  config_h.set('IS_GENERIC', 0)
+endif
 configure_file(
   output: 'kgx-config.h',
   configuration: config_h,

@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/gnome/zbrown/KingsCross">
-    <file>kgx-window.ui</file>
-    <file>kgx-search-box.ui</file>
-    <file>styles.css</file>
+    <file compressed="true">kgx-window.ui</file>
+    <file compressed="true">kgx-search-box.ui</file>
+    <file compressed="true">styles.css</file>
   </gresource>
   <gresource prefix="/org/gnome/zbrown/KingsCross/gtk">
-    <file>menus.ui</file>
+    <file compressed="true">menus.ui</file>
     <file>help-overlay.ui</file>
+  </gresource>
+  <gresource prefix="/org/gnome/zbrown/KingsCross/icons">
+    <file preprocess="xml-stripblanks" alias="kgx-original.svg">../data/org.gnome.zbrown.KingsCross.svg</file>
+    <file preprocess="xml-stripblanks" alias="org.gnome.zbrown.KingsCross.svg">../data/org.gnome.zbrown.KingsCross.svg</file>
+    <file preprocess="xml-stripblanks" alias="org.gnome.zbrown.KingsCross.Generic.svg">../data/org.gnome.zbrown.KingsCross.Generic.svg</file>
+    <file preprocess="xml-stripblanks" alias="org.gnome.zbrown.KingsCross-symbolic.svg">../data/org.gnome.zbrown.KingsCross-symbolic.svg</file>
+    <file preprocess="xml-stripblanks" alias="org.gnome.zbrown.KingsCross.Generic-symbolic.svg">../data/org.gnome.zbrown.KingsCross.Generic-symbolic.svg</file>
   </gresource>
 </gresources>
