@@ -120,8 +120,16 @@ wait_cb (GPid     pid,
   #if HAS_GTOP
   app = gtk_window_get_application (GTK_WINDOW (self));
 
-  kgx_application_remove_watch (KGX_APPLICATION (app), pid);
+  // If the application is in closing the app may already be null
+  if (app) {
+    kgx_application_remove_watch (KGX_APPLICATION (app), pid);
+  }
   #endif
+
+  // If the window has already closed we can't do much
+  if (self->exit_info == NULL) {
+    return;
+  }
 
   /* wait_check will set @error if it got a signal/non-zero exit */
   if (!g_spawn_check_exit_status (status, &error)) {

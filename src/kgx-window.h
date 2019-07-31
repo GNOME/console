@@ -44,6 +44,7 @@ G_BEGIN_DECLS
  * @search_bar: the windows #GtkSearchBar
  * @exit_info: the #GtkRevealer hat wraps @exit_message
  * @exit_message: the #GtkLabel for showing important messages
+ * @zoom_level: the #GtkLabel in the #GtkPopover showing the current zoom level
  */
 struct _KgxWindow
 {
