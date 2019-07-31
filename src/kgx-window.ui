@@ -21,7 +21,7 @@
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
-                    <property name="icon-name">zoom-in-symbolic</property>
+                    <property name="icon-name">zoom-out-symbolic</property>
                   </object>
                 </child>
               </object>
