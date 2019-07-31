@@ -15,6 +15,7 @@ kgx_sources = [
 kgx_deps = [
   dependency('gio-2.0', version: '>= 2.58'),
   dependency('gtk+-3.0', version: '>= 3.24'),
+  cc.find_library('m', required: false),
 ]
 
 ideal_vte = dependency('vte-2.91', version: '>= 0.57',
