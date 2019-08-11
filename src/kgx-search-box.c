@@ -226,3 +226,11 @@ kgx_search_box_get_search (KgxSearchBox *self)
 
   return gtk_entry_get_text (GTK_ENTRY (self->entry));
 }
+
+void
+kgx_search_box_focus (KgxSearchBox *self)
+{
+  g_return_if_fail (KGX_IS_SEARCH_BOX (self));
+
+  gtk_widget_grab_focus (self->entry);
+}

@@ -42,6 +42,7 @@ G_BEGIN_DECLS
  * @terminal: the #KgxTerminal the window contains
  * @dims: the floating status bar
  * @search_bar: the windows #GtkSearchBar
+ * @search_wrap: the #KgxSearchBox in @search_bar
  * @exit_info: the #GtkRevealer hat wraps @exit_message
  * @exit_message: the #GtkLabel for showing important messages
  * @zoom_level: the #GtkLabel in the #GtkPopover showing the current zoom level
@@ -71,6 +72,7 @@ struct _KgxWindow
   GtkWidget            *terminal;
   GtkWidget            *dims;
   GtkWidget            *search_bar;
+  GtkWidget            *search_wrap;
   GtkWidget            *exit_info;
   GtkWidget            *exit_message;
   GtkWidget            *zoom_level;

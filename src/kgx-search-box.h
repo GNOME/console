@@ -48,5 +48,6 @@ struct _KgxSearchBox
 G_DECLARE_FINAL_TYPE (KgxSearchBox, kgx_search_box, KGX, SEARCH_BOX, GtkBox)
 
 const char *kgx_search_box_get_search (KgxSearchBox *self);
+void        kgx_search_box_focus      (KgxSearchBox *self);
 
 G_END_DECLS

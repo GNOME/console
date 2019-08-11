@@ -353,6 +353,18 @@ application_set (GObject *object, GParamSpec *pspec, gpointer data)
 }
 
 static void
+search_enabled (GObject    *object,
+                GParamSpec *pspec,
+                KgxWindow  *self)
+{
+  if (gtk_search_bar_get_search_mode (GTK_SEARCH_BAR (self->search_bar))) {
+    kgx_search_box_focus (KGX_SEARCH_BOX (self->search_wrap));
+  } else {
+    gtk_widget_grab_focus (self->terminal);
+  }
+}
+
+static void
 search_changed (KgxSearchBox *box,
                 const gchar  *search,
                 KgxWindow    *self)
@@ -524,12 +536,14 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, terminal);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, dims);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, search_bar);
+  gtk_widget_class_bind_template_child (widget_class, KgxWindow, search_wrap);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_info);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_message);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, zoom_level);
 
   gtk_widget_class_bind_template_callback (widget_class, application_set);
 
+  gtk_widget_class_bind_template_callback (widget_class, search_enabled);
   gtk_widget_class_bind_template_callback (widget_class, search_changed);
   gtk_widget_class_bind_template_callback (widget_class, search_next);
   gtk_widget_class_bind_template_callback (widget_class, search_prev);
