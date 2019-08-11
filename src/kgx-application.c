@@ -283,6 +283,8 @@ kgx_application_startup (GApplication *app)
 
   #if HAS_GTOP
   source = g_timeout_add (500, watch, app);
+  // Translators: This is the name of the timeout that looks for programs
+  // running in the terminal
   g_source_set_name_by_id (source, _("child watcher"));
   #endif
 }
@@ -325,6 +327,8 @@ kgx_application_handle_local_options (GApplication *app,
 
   if (g_variant_dict_lookup (options, "version", "b", &version)) {
     if (version) {
+      // Translators: The leading # is intentional, the initial %s is the
+      // version of King's Cross itself, the latter format is the VTE version
       g_print (_("# King’s Cross %s using VTE %u.%u.%u %s\n"),
                PACKAGE_VERSION,
                vte_get_major_version (),
@@ -428,6 +432,7 @@ static GOptionEntry entries[] =
     G_OPTION_ARG_FILENAME,
     NULL,
     N_("Set the working directory"),
+    // Translators: Placeholder of for a given directory
     N_("DIRNAME")
   },
   {

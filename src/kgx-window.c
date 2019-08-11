@@ -597,12 +597,15 @@ about_activated (GSimpleAction *action,
   gtk_show_about_dialog (GTK_WINDOW (data),
                          "authors", authors,
                          "artists", artists,
+                         // Translators: Credit yourself here
                          "translator-credits", _("translator-credits"),
                          "comments", _("Terminal Emulator"),
                          "copyright", copyright,
                          "license-type", GTK_LICENSE_GPL_3_0,
                          "logo-icon-name", "kgx-original",
                          #if IS_GENERIC
+                         // Translators: "by King’s Cross" here is meaning author
+                         // or creator of 'Terminal'
                          "program-name", _("Terminal\nby King’s Cross"),
                          #else
                          "program-name", _("King’s Cross"),
