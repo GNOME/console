@@ -1,9 +1,10 @@
 [Desktop Entry]
 # Translators: This is a train station, see README.md for more info
-Name=King's Cross
+Name=King’s Cross
 Exec=kgx
 # Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 Icon=org.gnome.zbrown.KingsCross
+# Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 Keywords=command;prompt;cmd;commandline;run;shell;terminal;kgx;
 Terminal=false
 Type=Application

@@ -10,7 +10,7 @@
         <property name="visible">True</property>
         <child>
           <object class="GtkShortcutsGroup">
-            <property name="title" translatable="yes">Application</property>
+            <property name="title" translatable="yes" context="shortcut window">Application</property>
             <property name="visible">True</property>
             <child>
               <object class="GtkShortcutsShortcut">
@@ -23,7 +23,7 @@
         </child>
         <child>
           <object class="GtkShortcutsGroup">
-            <property name="title" translatable="yes">Terminal</property>
+            <property name="title" translatable="yes" context="shortcut window">Terminal</property>
             <property name="visible">True</property>
             <child>
               <object class="GtkShortcutsShortcut">

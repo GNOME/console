@@ -325,7 +325,7 @@ kgx_application_handle_local_options (GApplication *app,
 
   if (g_variant_dict_lookup (options, "version", "b", &version)) {
     if (version) {
-      g_print (_("# King's Cross %s using VTE %u.%u.%u %s\n"),
+      g_print (_("# King’s Cross %s using VTE %u.%u.%u %s\n"),
                PACKAGE_VERSION,
                vte_get_major_version (),
                vte_get_minor_version (),
@@ -465,7 +465,7 @@ kgx_application_init (KgxApplication *self)
  * @pid: the shell process to watch
  * @window: the window the shell is running in
  * 
- * registers a new shell proccess with the pid watcher
+ * registers a new shell process with the pid watcher
  */
 void
 kgx_application_add_watch (KgxApplication *self,
@@ -515,7 +515,7 @@ kgx_application_remove_watch (KgxApplication *self,
                                          (GEqualFunc) watch_is_for_pid,
                                          &idx)) {
     g_ptr_array_remove_index_fast (self->watching, idx);
-    g_debug ("Stoped watching %i", pid);
+    g_debug ("Stopped watching %i", pid);
   } else {
     g_warning ("Unknown process %i", pid);
   }

@@ -35,7 +35,7 @@ main (int   argc,
   g_set_application_name (_("Terminal"));
   gtk_window_set_default_icon_name ("org.gnome.zbrown.KingsCross.Generic");
   #else
-  g_set_application_name (_("King's Cross"));
+  g_set_application_name (_("King’s Cross"));
   gtk_window_set_default_icon_name ("org.gnome.zbrown.KingsCross");
   #endif
   g_set_prgname ("org.gnome.zbrown.KingsCross");
@@ -51,7 +51,7 @@ main (int   argc,
                       NULL);
 
   /*
-  * Run the application. This function will block until the applicaiton
+  * Run the application. This function will block until the application
    * exits. Upon return, we have our exit code to return to the shell. (This
    * is the code you see when you do `echo $?` after running a command in a
    * terminal.

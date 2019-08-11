@@ -179,7 +179,7 @@ spawned (VtePty       *pty,
   if (error) {
     g_autofree char *message = NULL;
 
-    g_critical (_("Failed to spawn: %s"), error->message);
+    g_critical ("Failed to spawn: %s", error->message);
 
     gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self->exit_info)),
                                  "error");
@@ -219,7 +219,7 @@ kgx_window_constructed (GObject *object)
 
   if (G_UNLIKELY (self->command != NULL)) {
     // dup the string so we can free shell[0] later to handle the
-    // (more likly) fp_vte_guess_shell case
+    // (more likely) fp_vte_guess_shell case
     shell[0] = g_strdup (self->command);
   } else {
     shell[0] = fp_vte_guess_shell (NULL, &error);
@@ -376,7 +376,7 @@ search_changed (KgxSearchBox *box,
                                     -1, PCRE2_MULTILINE, &error);
 
   if (error) {
-    g_warning (_("Search error: %s"), error->message);
+    g_warning ("Search error: %s", error->message);
     return;
   }
 
@@ -603,9 +603,9 @@ about_activated (GSimpleAction *action,
                          "license-type", GTK_LICENSE_GPL_3_0,
                          "logo-icon-name", "kgx-original",
                          #if IS_GENERIC
-                         "program-name", _("Terminal\nby King's Cross"),
+                         "program-name", _("Terminal\nby King’s Cross"),
                          #else
-                         "program-name", _("King's Cross"),
+                         "program-name", _("King’s Cross"),
                          #endif
                          "version", PACKAGE_VERSION,
                          NULL);

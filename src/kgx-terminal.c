@@ -270,7 +270,7 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
   /**
    * KgxTerminal:opaque:
    * 
-   * Wether to disable transparency
+   * Whether to disable transparency
    * 
    * Bound to #GtkWindow:is-maximized on the #KgxWindow
    * 
@@ -301,7 +301,7 @@ open_link_activated (GSimpleAction *action,
                           &error);
 
   if (error) {
-    g_warning (_("Failed to open link %s"), error->message);
+    g_warning ("Failed to open link %s", error->message);
   }
 }
 
@@ -429,7 +429,7 @@ show_in_files_activated (GSimpleAction *action,
   }
 
   if (uri == NULL) {
-    g_warning (_("win.show-in-files: no file"));
+    g_warning ("win.show-in-files: no file");
     return;
   }
 
@@ -442,7 +442,7 @@ show_in_files_activated (GSimpleAction *action,
                                          NULL, &error);
 
   if (!proxy) {
-    g_warning (_("win.show-in-files: dbus connect failed %s"), error->message);
+    g_warning ("win.show-in-files: D-Bus connect failed %s", error->message);
     return;
   }
 
@@ -461,7 +461,7 @@ show_in_files_activated (GSimpleAction *action,
   g_object_unref (proxy);
 
   if (!retval) {
-    g_warning (_("win.show-in-files: dbus call failed %s"), error->message);
+    g_warning ("win.show-in-files: D-Bus call failed %s", error->message);
     return;
   }
 
@@ -545,7 +545,7 @@ kgx_terminal_init (KgxTerminal *self)
     regex = vte_regex_new_for_match (links[i], -1, PCRE2_MULTILINE, &error);
 
     if (error) {
-      g_warning (_("link regex failed: %s"), error->message);
+      g_warning ("link regex failed: %s", error->message);
       continue;
     }
 
