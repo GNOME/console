@@ -177,20 +177,23 @@ kgx_terminal_get_property (GObject    *object,
 }
 
 static void
-context_menu (GtkWidget *widget, GdkEventButton *event)
+context_menu (GtkWidget *widget,
+              int        x,
+              int        y,
+              GdkEvent  *event)
 {
   KgxTerminal    *self = KGX_TERMINAL (widget);
   GAction        *act;
   GtkWidget      *menu;
   GtkApplication *app;
   GMenu          *model;
-  GdkRectangle    rect = {0, 0, 1, 1};
+  GdkRectangle    rect = {x, y, 1, 1};
   gboolean        value;
   const char     *match;
   int             match_id;
 
   match = vte_terminal_match_check_event (VTE_TERMINAL (self),
-                                          (GdkEvent *) event,
+                                          event,
                                           &match_id);
 
   self->current_url = NULL;
@@ -210,10 +213,6 @@ context_menu (GtkWidget *widget, GdkEventButton *event)
   app = GTK_APPLICATION (g_application_get_default ());
   model = gtk_application_get_menu_by_id (app, "context-menu");
 
-  if (event) {
-    rect = (GdkRectangle) { event->x, event->y, 1, 1 };
-  }
-
   menu = gtk_popover_new_from_model (widget, G_MENU_MODEL (model));
   gtk_popover_set_pointing_to (GTK_POPOVER (menu), &rect);
   gtk_popover_popup (GTK_POPOVER (menu));
@@ -222,7 +221,7 @@ context_menu (GtkWidget *widget, GdkEventButton *event)
 static gboolean
 kgx_terminal_popup_menu (GtkWidget *self)
 {
-  context_menu (self, NULL);
+  context_menu (self, 1, 1, NULL);
   return TRUE;
 }
 
@@ -232,7 +231,7 @@ kgx_terminal_button_press_event (GtkWidget *self, GdkEventButton *event)
   if (gdk_event_triggers_context_menu ((GdkEvent *) event) &&
       event->type == GDK_BUTTON_PRESS)
     {
-      context_menu (self, event);
+      context_menu (self, event->x, event->y, (GdkEvent *) event);
       return TRUE;
     }
 
@@ -479,6 +478,15 @@ static GActionEntry term_entries[] =
 };
 
 static void
+long_pressed (GtkGestureLongPress *gesture,
+              gdouble              x,
+              gdouble              y,
+              KgxTerminal         *self)
+{
+  context_menu (GTK_WIDGET (self), (int) x, (int) y, NULL);
+}
+
+static void
 selection_changed (KgxTerminal *self)
 {
   GAction *act;
@@ -507,6 +515,7 @@ static void
 kgx_terminal_init (KgxTerminal *self)
 {
   GAction *act;
+  GtkGesture *gesture;
 
   self->theme = KGX_THEME_NIGHT;
   self->opaque = FALSE;
@@ -519,6 +528,12 @@ kgx_terminal_init (KgxTerminal *self)
   gtk_widget_insert_action_group (GTK_WIDGET (self),
                                   "term",
                                   G_ACTION_GROUP (self->actions));
+
+  gesture = gtk_gesture_long_press_new (GTK_WIDGET (self));
+  gtk_gesture_single_set_touch_only (GTK_GESTURE_SINGLE (gesture), TRUE);
+  gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (gesture),
+                                              GTK_PHASE_TARGET);
+  g_signal_connect (gesture, "pressed", G_CALLBACK (long_pressed), self);
 
   act = g_action_map_lookup_action (self->actions, "open-link");
   g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
