@@ -1,0 +1,203 @@
+# Spanish translation for kgx.
+# Copyright (C) 2019 kgx's COPYRIGHT HOLDER
+# This file is distributed under the same license as the kgx package.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kgx master\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
+"POT-Creation-Date: 2019-08-18 15:05+0000\n"
+"PO-Revision-Date: 2019-08-20 12:56+0200\n"
+"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
+"Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 3.32.1\n"
+
+#. Translators: This is a train station, see README.md for more info
+#: data/org.gnome.zbrown.KingsCross.desktop.in:4
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-window.c:611
+#: src/main.c:38
+msgid "King’s Cross"
+msgstr "King’s Cross"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.zbrown.KingsCross.desktop.in:9
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:8
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
+msgstr "comando;prompt;cmd;línea;ejecutar;shell;terminal;kgx;"
+
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3 src/main.c:35
+msgid "Terminal"
+msgstr "Terminal"
+
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-window.c:602
+msgid "Terminal Emulator"
+msgstr "Emulador de terminal"
+
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:11
+msgid "A simple user-friendly terminal emulator for the GNOME desktop."
+msgstr "Un sencillo y amigable emulador de terminal para el escritorio GNOME."
+
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:22
+msgid "Terminal window"
+msgstr "Ventana de la terminal"
+
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:31
+msgid "Zander Brown"
+msgstr "Zander Brown"
+
+#: src/help-overlay.ui:13
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Aplicación"
+
+#: src/help-overlay.ui:19
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Ventana nueva"
+
+#: src/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Terminal"
+
+#: src/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Buscar"
+
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Copiar"
+
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Pegar"
+
+#. Translators: This is the name of the timeout that looks for programs
+#. running in the terminal
+#: src/kgx-application.c:288
+msgid "child watcher"
+msgstr "monitor de los hijos"
+
+#. Translators: The leading # is intentional, the initial %s is the
+#. version of King's Cross itself, the latter format is the VTE version
+#: src/kgx-application.c:332
+#, c-format
+msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
+msgstr "# King’s Cross %s usando VTE %u.%u.%u %s\n"
+
+#: src/kgx-application.c:425
+msgid "Execute the argument to this option inside the terminal"
+msgstr "Ejecutar el argumento de esta opción en la terminal"
+
+#: src/kgx-application.c:434
+msgid "Set the working directory"
+msgstr "Establecer la carpeta de trabajo"
+
+#. Translators: Placeholder of for a given directory
+#: src/kgx-application.c:436
+msgid "DIRNAME"
+msgstr "NOMBRE_CARPETA"
+
+#: src/kgx-application.c:444
+msgid "Wait until the child exits (TODO)"
+msgstr "Esperar a que el hijo termine (POR_HACER)"
+
+#: src/kgx-terminal.c:368
+msgid "You are pasting a command that runs as an administrator"
+msgstr "Está pegando un comando que se ejecuta como administrador"
+
+#. TRANSLATORS: %s is the command being pasted
+#: src/kgx-terminal.c:371
+#, c-format
+msgid ""
+"Make sure you know what the command does:\n"
+"%s"
+msgstr ""
+"Asegúrese de que sabe lo que hace el comando:\n"
+"%s"
+
+#: src/kgx-terminal.c:376
+msgid "_Cancel"
+msgstr "C_ancelar"
+
+#: src/kgx-terminal.c:379 src/menus.ui:24
+msgid "_Paste"
+msgstr "_Pegar"
+
+#. translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-window.c:141
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Sólo lectura</b> — el comando ha terminado con código %i"
+
+#. translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-window.c:154
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Sólo lectura</b> — el comando ha terminado"
+
+#. translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-window.c:188
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Falló al iniciar</b> — %s"
+
+#: src/kgx-window.c:594
+#, c-format
+msgid "Copyright © %s Zander Brown"
+msgstr "Copyright © %s Zander Brown"
+
+#. Translators: Credit yourself here
+#: src/kgx-window.c:601
+msgid "translator-credits"
+msgstr "Daniel Mustieles <daniel.musiteles@gmail.com>, 2019"
+
+#. Translators: "by King’s Cross" here is meaning author
+#. or creator of 'Terminal'
+#: src/kgx-window.c:609
+msgid ""
+"Terminal\n"
+"by King’s Cross"
+msgstr ""
+"Terminal\n"
+"por King’s Cross"
+
+#: src/kgx-window.ui:61
+msgid "_New Window"
+msgstr "Ventana _nueva"
+
+#: src/kgx-window.ui:73
+msgid "_Keyboard Shortcuts"
+msgstr "Atajos del _teclado"
+
+#: src/kgx-window.ui:80
+msgid "_About King’s Cross"
+msgstr "_Acerca de King’s Cross"
+
+#: src/menus.ui:7
+msgid "_Open Link"
+msgstr "A_brir enlace"
+
+#: src/menus.ui:12
+msgid "Copy _Link"
+msgstr "Copiar en_lace"
+
+#: src/menus.ui:19
+msgid "_Copy"
+msgstr "C_opiar"
+
+#: src/menus.ui:29
+msgid "_Select All"
+msgstr "Seleccionar _todo"
+
+#: src/menus.ui:36
+msgid "Show in _Files"
+msgstr "Mostrar en _Archivos"
