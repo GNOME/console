@@ -69,17 +69,23 @@ add_project_arguments(
   language: 'c'
 )
 
-subdir('data')
-subdir('src')
-subdir('po')
-subdir('doc')
-
-meson.add_install_script('build-aux/meson/postinstall.py')
-
-configure_file(
+gi_runner = configure_file(
   input: 'gi.in',
   output: 'gi',
   configuration: {
     'BUILD_DIR': join_paths(meson.current_build_dir(), 'src')
   }
 )
+
+subdir('data')
+subdir('src')
+subdir('po')
+subdir('doc')
+if get_option('tests')
+  if not get_option('gir')
+    error('Tests require GIR')
+  endif
+  subdir('tests')
+endif
+
+meson.add_install_script('build-aux/meson/postinstall.py')

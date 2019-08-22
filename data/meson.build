@@ -19,7 +19,7 @@ else
 endif
 
 desktop_utils = find_program('desktop-file-validate', required: false)
-if desktop_utils.found()
+if desktop_utils.found() and get_option('tests')
   test('Validate desktop file', desktop_utils,
     args: [desktop_file]
   )
@@ -34,7 +34,7 @@ appstream_file = i18n.merge_file(
 )
 
 appstream_util = find_program('appstream-util', required: false)
-if appstream_util.found()
+if appstream_util.found() and get_option('tests')
   test('Validate appstream file', appstream_util,
     args: ['validate', '--nonet', appstream_file]
   )
@@ -45,7 +45,7 @@ install_data('org.gnome.zbrown.KingsCross.gschema.xml',
 )
 
 compile_schemas = find_program('glib-compile-schemas', required: false)
-if compile_schemas.found()
+if compile_schemas.found() and get_option('tests')
   test('Validate schema file', compile_schemas,
     args: ['--strict', '--dry-run', meson.current_source_dir()]
   )
