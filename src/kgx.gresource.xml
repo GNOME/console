@@ -4,6 +4,7 @@
     <file compressed="true">kgx-window.ui</file>
     <file compressed="true">kgx-search-box.ui</file>
     <file compressed="true">styles.css</file>
+    <file compressed="true">logo.txt</file>
   </gresource>
   <gresource prefix="/org/gnome/zbrown/KingsCross/gtk">
     <file compressed="true">menus.ui</file>

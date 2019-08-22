@@ -30,6 +30,8 @@
 
 #include <glib/gi18n.h>
 #include <vte/vte.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
 
 #include "rgba.h"
 
@@ -37,6 +39,9 @@
 #include "kgx-application.h"
 #include "kgx-search-box.h"
 #include "kgx-window.h"
+
+#define LOGO_COL_SIZE 28
+#define LOGO_ROW_SIZE 14
 
 G_DEFINE_TYPE (KgxApplication, kgx_application, GTK_TYPE_APPLICATION)
 
@@ -305,7 +310,7 @@ kgx_application_command_line (GApplication            *app,
   g_variant_dict_lookup (options, "command", "^&ay", &command);
 
   if (working_dir != NULL) {
-  abs_path = g_canonicalize_filename (working_dir, NULL);
+    abs_path = g_canonicalize_filename (working_dir, NULL);
   }
 
   window = g_object_new (KGX_TYPE_WINDOW,
@@ -319,11 +324,56 @@ kgx_application_command_line (GApplication            *app,
   return 0;
 }
 
+static void
+print_center (char *msg, int ign, short width)
+{
+  int half_msg = 0;
+  int half_screen = 0;
+
+  half_msg = strlen (msg) / 2;
+  half_screen = width / 2;
+
+  g_print ("%*s\n",
+           half_screen + half_msg,
+           msg);
+}
+
+static void
+print_logo (short width)
+{
+  g_autoptr (GFile) logo = NULL;
+  g_autoptr (GError) error = NULL;
+  g_auto (GStrv) logo_lines = NULL;
+  g_autofree char *logo_text = NULL;
+  int i = 0;
+  int half_screen = width / 2;
+
+  logo = g_file_new_for_uri ("resource://org/gnome/zbrown/KingsCross/logo.txt");
+
+  g_file_load_contents (logo, NULL, &logo_text, NULL, NULL, &error);
+
+  if (error) {
+    g_error ("Wat? %s", error->message);
+  }
+
+  logo_lines = g_strsplit (logo_text, "\n", -1);
+
+  while (logo_lines[i]) {
+    g_print ("%*s%s\n",
+             half_screen - (LOGO_COL_SIZE / 2),
+             "",
+             logo_lines[i]);
+
+    i++;
+  }
+}
+
 static int
 kgx_application_handle_local_options (GApplication *app,
                                       GVariantDict *options)
 {
   gboolean version = FALSE;
+  gboolean about = FALSE;
 
   if (g_variant_dict_lookup (options, "version", "b", &version)) {
     if (version) {
@@ -335,6 +385,36 @@ kgx_application_handle_local_options (GApplication *app,
                vte_get_minor_version (),
                vte_get_micro_version (),
                vte_get_features ());
+      return 0;
+    }
+  }
+
+  if (g_variant_dict_lookup (options, "about", "b", &about)) {
+    if (about) {
+      g_autofree char *copyright = g_strdup_printf (_("Copyright © %s Zander Brown"),
+                                                    "2019");
+      struct winsize w;
+      int padding = 0;
+
+      ioctl (STDOUT_FILENO, TIOCGWINSZ, &w);
+
+      padding = ((w.ws_row -1) - (LOGO_ROW_SIZE + 5)) / 2;
+
+      for (int i = 0; i < padding - 1; i++) {
+        g_print ("\n");
+      }
+
+      print_logo (w.ws_col);
+      print_center (_("King’s Cross"), -1, w.ws_col);
+      print_center (PACKAGE_VERSION, -1, w.ws_col);
+      print_center (_("Terminal Emulator"), -1, w.ws_col);
+      print_center (copyright, -1, w.ws_col);
+      print_center ("GPL 3+\n", -1, w.ws_col);
+
+      for (int i = 0; i < padding; i++) {
+        g_print ("\n");
+      }
+
       return 0;
     }
   }
@@ -409,6 +489,15 @@ static GOptionEntry entries[] =
 {
   {
     "version",
+    0,
+    0,
+    G_OPTION_ARG_NONE,
+    NULL,
+    NULL,
+    NULL
+  },
+  {
+    "about",
     0,
     0,
     G_OPTION_ARG_NONE,
