@@ -25,7 +25,7 @@
   <releases>
     <release version="0.1.0" date="2019-07-30">
       <description>
-        <p>Initial release</p>
+        <p>First release of our little terminal emulator.</p>
       </description>
     </release>
   </releases>
