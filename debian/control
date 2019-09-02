@@ -14,6 +14,7 @@ Build-Depends:
  libgtop2-dev,
  gobject-introspection,
  libgirepository1.0-dev,
+ python3-gi,
  meson,
 Standards-Version: 4.2.1
 Homepage: https://gitlab.gnome.org/ZanderBrown/kgx
