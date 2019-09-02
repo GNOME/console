@@ -60,6 +60,9 @@ struct ProcessWatch {
  * @desktop_interface: the #GSettings storing the system monospace font
  * @watching: (element-type ProcessWatch): the shells running in windows
  * @children: (element-type ProcessWatch): the processes running in shells
+ * @active: counter of #KgxWindow's with #GtkWindow:is-active = %TRUE,
+ *          obviously this should only ever be 1 or but we can't be certain
+ * @timeout: the current #GSource id of the watcher
  * 
  * Stability: Private
  */
@@ -77,6 +80,9 @@ struct _KgxApplication
 
   GPtrArray                *watching;
   GPtrArray                *children;
+
+  guint                     timeout;
+  int                       active;
 };
 
 G_DECLARE_FINAL_TYPE (KgxApplication, kgx_application, KGX, APPLICATION, GtkApplication)
@@ -89,5 +95,7 @@ void                  kgx_application_remove_watch    (KgxApplication *self,
                                                        GPid            pid);
 #endif
 PangoFontDescription *kgx_application_get_font        (KgxApplication *self);
+void                  kgx_application_push_active     (KgxApplication *self);
+void                  kgx_application_pop_active      (KgxApplication *self);
 
 G_END_DECLS

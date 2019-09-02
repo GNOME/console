@@ -357,6 +357,20 @@ application_set (GObject *object, GParamSpec *pspec, gpointer data)
 }
 
 static void
+active_changed (GObject *object, GParamSpec *pspec, gpointer data)
+{
+  GtkApplication *app;
+
+  app = gtk_window_get_application (GTK_WINDOW (object));
+
+  if (gtk_window_is_active (GTK_WINDOW (object))) {
+    kgx_application_push_active (KGX_APPLICATION (app));
+  } else {
+    kgx_application_pop_active (KGX_APPLICATION (app));
+  }
+}
+
+static void
 search_enabled (GObject    *object,
                 GParamSpec *pspec,
                 KgxWindow  *self)
@@ -546,6 +560,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, zoom_level);
 
   gtk_widget_class_bind_template_callback (widget_class, application_set);
+  gtk_widget_class_bind_template_callback (widget_class, active_changed);
 
   gtk_widget_class_bind_template_callback (widget_class, search_enabled);
   gtk_widget_class_bind_template_callback (widget_class, search_changed);

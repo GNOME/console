@@ -89,6 +89,7 @@
     <property name="default-width">800</property>
     <property name="default-height">450</property>
     <signal name="notify::application" handler="application_set" swapped="no"/>
+    <signal name="notify::is-active" handler="active_changed" swapped="no"/>
     <child type="titlebar">
       <object class="GtkHeaderBar" id="header_bar">
         <property name="visible">1</property>

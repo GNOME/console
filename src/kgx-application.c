@@ -233,15 +233,30 @@ watch (gpointer data)
 }
 #endif
 
+static inline void
+set_watcher (KgxApplication *self, gboolean focused)
+{
+  g_debug ("updated watcher focused? %s", focused ? "yes" : "no");
+
+  #if HAS_GTOP
+  if (self->timeout != 0) {
+    g_source_remove (self->timeout);
+  }
+
+  // Slow down polling when nothing is focused
+  self->timeout = g_timeout_add (focused ? 500 : 2000, watch, self);
+  // Translators: This is the name of the timeout that looks for programs
+  // running in the terminal
+  g_source_set_name_by_id (self->timeout, _("child watcher"));
+  #endif
+}
+
 static void
 kgx_application_startup (GApplication *app)
 {
   GtkSettings    *gtk_settings;
   GSettings      *settings;
   GtkCssProvider *provider;
-  #if HAS_GTOP
-  guint           source;
-  #endif
   const char *const new_window_accels[] = { "<shift><primary>n", NULL };
   const char *const copy_accels[] = { "<shift><primary>c", NULL };
   const char *const paste_accels[] = { "<shift><primary>v", NULL };
@@ -286,12 +301,7 @@ kgx_application_startup (GApplication *app)
                                               * priority for fallback styles? Yes*/
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
 
-  #if HAS_GTOP
-  source = g_timeout_add (500, watch, app);
-  // Translators: This is the name of the timeout that looks for programs
-  // running in the terminal
-  g_source_set_name_by_id (source, _("child watcher"));
-  #endif
+  set_watcher (KGX_APPLICATION (app), TRUE);
 }
 
 static int
@@ -550,6 +560,9 @@ kgx_application_init (KgxApplication *self)
 
   self->watching = g_ptr_array_new_with_free_func ((GDestroyNotify) clear_watch);
   self->children = g_ptr_array_new_with_free_func ((GDestroyNotify) clear_watch);
+
+  self->active = 0;
+  self->timeout = 0;
 }
 
 #if HAS_GTOP
@@ -636,4 +649,48 @@ kgx_application_get_font (KgxApplication *self)
                                 MONOSPACE_FONT_KEY_NAME);
 
   return pango_font_description_from_string (font);
+}
+
+/**
+ * kgx_application_push_active:
+ * @self: the #KgxApplication
+ *
+ * Increase the active window count
+ */
+void
+kgx_application_push_active (KgxApplication *self)
+{
+  g_return_if_fail (KGX_IS_APPLICATION (self));
+
+  self->active++;
+
+  g_debug ("push_active");
+
+  if (G_LIKELY (self->active > 0)) {
+    set_watcher (self, TRUE);
+  } else {
+    set_watcher (self, FALSE);
+  }
+}
+
+/**
+ * kgx_application_pop_active:
+ * @self: the #KgxApplication
+ *
+ * Decrease the active window count
+ */
+void
+kgx_application_pop_active (KgxApplication *self)
+{
+  g_return_if_fail (KGX_IS_APPLICATION (self));
+
+  self->active--;
+
+  g_debug ("pop_active");
+
+  if (G_LIKELY (self->active < 1)) {
+    set_watcher (self, FALSE);
+  } else {
+    set_watcher (self, TRUE);
+  }
 }
