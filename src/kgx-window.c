@@ -209,28 +209,34 @@ static void
 kgx_window_constructed (GObject *object)
 {
   KgxWindow          *self = KGX_WINDOW (object);
-  gchar              *shell[2] = {NULL, NULL};
   const char         *initial = NULL;
   g_autoptr (VtePty)  pty = NULL;
   g_autoptr (GError)  error = NULL;
+  g_auto (GStrv)      shell = NULL;
   g_auto (GStrv)      env = NULL;
+  g_autofree char    *command = NULL;
 
   pty = vte_pty_new_sync (fp_vte_pty_default_flags (), NULL, &error);
 
   if (G_UNLIKELY (self->command != NULL)) {
-    // dup the string so we can free shell[0] later to handle the
+    // dup the string so we can free command later to handle the
     // (more likely) fp_vte_guess_shell case
-    shell[0] = g_strdup (self->command);
+    command = g_strdup (self->command);
   } else {
-    shell[0] = fp_vte_guess_shell (NULL, &error);
+    command = fp_vte_guess_shell (NULL, &error);
     if (error) {
       g_warning ("flatterm: %s", error->message);
     }
   }
 
-  if (shell[0] == NULL) {
-    shell[0] = g_strdup ("/bin/sh");
+  if (command == NULL) {
+    command = g_strdup ("/bin/sh");
     g_warning ("Defaulting to %s", shell[0]);
+  }
+
+  g_shell_parse_argv (command, NULL, &shell, &error);
+  if (error) {
+    g_warning ("Can't handle %s: %s", command, error->message);
   }
 
   if (self->working_dir) {
@@ -252,8 +258,6 @@ kgx_window_constructed (GObject *object)
                           NULL,
                           (GAsyncReadyCallback) spawned,
                           self);
-
-  g_free (shell[0]);
 
   G_OBJECT_CLASS (kgx_window_parent_class)->constructed (object);
 }
