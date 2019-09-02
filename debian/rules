@@ -9,3 +9,8 @@ MESON_OPTS += -Dtests=true -Dgir=true
 
 override_dh_auto_configure:
 	dh_auto_configure -- $(MESON_OPTS)
+
+override_dh_auto_test:
+ifeq ($(filter nocheck,$(DEB_BUILD_OPTIONS)),)
+	LC_ALL=C.UTF-8 xvfb-run ninja -C _build test
+endif

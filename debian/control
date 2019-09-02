@@ -12,10 +12,14 @@ Build-Depends:
  libpcre2-dev (>= 10.00),
  libvte-2.91-dev (>= 0.54.2),
  libgtop2-dev,
+ meson,
+# Tests:
  gobject-introspection,
  libgirepository1.0-dev,
  python3-gi,
- meson,
+ at-spi2-core,
+ xvfb,
+ xauth,
 Standards-Version: 4.2.1
 Homepage: https://gitlab.gnome.org/ZanderBrown/kgx
 
