@@ -53,7 +53,7 @@
             "name": "kgx",
             "builddir": true,
             "buildsystem": "meson",
-            "config-opts": ["-Dgtop=false"],
+            "config-opts": ["-Dgtop=false", "-Dtests=true", "-Dgir=true"],
             "sources": [
                 {
                     "type": "git",

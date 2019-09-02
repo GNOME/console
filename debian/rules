@@ -2,6 +2,10 @@
 
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 
+MESON_OPTS += -Dtests=true -Dgir=true
+
 %:
 	dh $@ --builddirectory=_build
 
+override_dh_auto_configure:
+	dh_auto_configure -- $(MESON_OPTS)
