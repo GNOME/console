@@ -934,7 +934,7 @@ kgx_window_push_child (KgxWindow    *self,
   pid = kgx_process_get_pid (process);
   exec = kgx_process_get_exec (process);
 
-  if (G_UNLIKELY (g_strcmp0 (exec, "ssh") == 0)) {
+  if (G_UNLIKELY (g_str_has_prefix (exec, "ssh "))) {
     push_type (self->remote, pid, NULL, context, KGX_WINDOW_STYLE_REMOTE);
   }
 

@@ -82,8 +82,6 @@ inline KgxProcess *
 kgx_process_new (GPid pid)
 {
   glibtop_proc_uid   info;
-  glibtop_proc_args  args_size;
-  g_auto(GStrv)      args = NULL;
   KgxProcess        *self = NULL;
   
   self = g_rc_box_new0 (KgxProcess);
@@ -94,10 +92,7 @@ kgx_process_new (GPid pid)
 
   self->parent = info.ppid;
   self->uid = info.uid;
-
-  args = glibtop_get_proc_argv (&args_size, pid, 0);
-
-  self->exec = g_strdup (args[0]);
+  self->exec = NULL;
 
   return self;
 }
@@ -151,7 +146,7 @@ kgx_process_get_uid (KgxProcess *self)
 inline gboolean
 kgx_process_get_is_root (KgxProcess *self)
 {
-  g_return_val_if_fail (self != NULL, 0);
+  g_return_val_if_fail (self != NULL, FALSE);
 
   return self->uid == 0;
 }
@@ -171,7 +166,7 @@ kgx_process_get_is_root (KgxProcess *self)
 inline KgxProcess *
 kgx_process_get_parent (KgxProcess *self)
 {
-  g_return_val_if_fail (self != NULL, 0);
+  g_return_val_if_fail (self != NULL, NULL);
 
   return kgx_process_new (self->parent);
 }
@@ -189,7 +184,16 @@ kgx_process_get_parent (KgxProcess *self)
 inline const char *
 kgx_process_get_exec (KgxProcess *self)
 {
-  g_return_val_if_fail (self != NULL, 0);
+  g_return_val_if_fail (self != NULL, NULL);
+
+  if (G_LIKELY (self->exec == NULL)) {
+    g_auto(GStrv)     args = NULL;
+    glibtop_proc_args args_size;
+
+    args = glibtop_get_proc_argv (&args_size, self->pid, 0);
+
+    self->exec = g_strjoinv (" ", args);
+  }
 
   return self->exec;
 }
