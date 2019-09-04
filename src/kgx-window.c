@@ -344,6 +344,7 @@ kgx_window_finalize (GObject *object)
   G_OBJECT_CLASS (kgx_window_parent_class)->finalize (object);
 }
 
+#if HAS_GTOP
 static void
 delete_response (GtkWidget *dlg,
                  int        response,
@@ -388,6 +389,14 @@ kgx_window_delete_event (GtkWidget   *widget,
   
   return TRUE; // Block the close
 }
+#else
+static gboolean
+kgx_window_delete_event (GtkWidget   *widget,
+                         GdkEventAny *event)
+{
+  return FALSE; // Aka no, I don't want to block closing
+}
+#endif
 
 static void
 application_set (GObject *object, GParamSpec *pspec, gpointer data)
@@ -881,6 +890,7 @@ kgx_window_get_working_dir (KgxWindow *self)
   return g_file_get_path (file);
 }
 
+#if HAS_GTOP
 static inline void
 push_type (GHashTable      *table,
            GPid             pid,
@@ -898,6 +908,7 @@ push_type (GHashTable      *table,
     gtk_style_context_add_class (context, class_name);
   }
 }
+#endif
 
 /**
  * kgx_window_push_child:
@@ -912,9 +923,10 @@ void
 kgx_window_push_child (KgxWindow    *self,
                        KgxProcess   *process)
 {
+  #if HAS_GTOP
   GtkStyleContext *context;
-  GPid pid;
-  const char *exec;
+  GPid pid = 0;
+  const char *exec = NULL;
 
   g_return_if_fail (KGX_IS_WINDOW (self));
 
@@ -931,6 +943,7 @@ kgx_window_push_child (KgxWindow    *self,
   }
 
   push_type (self->children, pid, process, context, NULL);
+  #endif
 }
 
 inline static void
@@ -969,12 +982,14 @@ kgx_window_pop_child (KgxWindow    *self,
                       KgxProcess   *process)
 {
   GtkStyleContext *context;
-  GPid pid;
+  GPid pid = 0;
 
   g_return_if_fail (KGX_IS_WINDOW (self));
 
   context = gtk_widget_get_style_context (GTK_WIDGET (self));
+  #if HAS_GTOP
   pid = kgx_process_get_pid (process);
+  #endif
   
   pop_type (self->remote, pid, context, KGX_WINDOW_STYLE_REMOTE);
   pop_type (self->root, pid, context, KGX_WINDOW_STYLE_ROOT);
