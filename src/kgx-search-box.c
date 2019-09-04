@@ -34,6 +34,8 @@
  * 
  * This *must* be inside a #GtkSearchBar, it may still work outside one but
  * that's very much undefined behaviour
+ * 
+ * Since: 0.1.0
  */
 
 #include <glib/gi18n.h>
@@ -120,6 +122,8 @@ kgx_search_box_class_init (KgxSearchBoxClass *klass)
    * 
    * Straight proxy to #GtkSearchEntry::next-match so check that for details
    * (also includes #GtkButton::clicked for the relevent button)
+   * 
+   * Since: 0.1.0
    */
   signals[NEXT] = g_signal_new ("next",
                                 G_TYPE_FROM_CLASS (klass),
@@ -132,6 +136,8 @@ kgx_search_box_class_init (KgxSearchBoxClass *klass)
    * 
    * Straight proxy to #GtkSearchEntry::previous-match so check that for
    * details (also includes #GtkButton::clicked for the relevent button)
+   * 
+   * Since: 0.1.0
    */
   signals[PREVIOUS] = g_signal_new ("previous",
                                     G_TYPE_FROM_CLASS (klass),
@@ -146,6 +152,8 @@ kgx_search_box_class_init (KgxSearchBoxClass *klass)
    * 
    * Proxy to #GtkSearchEntry::search-changed but with the current search
    * as a parameter
+   * 
+   * Since: 0.1.0
    */
   signals[CHANGED] = g_signal_new ("changed",
                                     G_TYPE_FROM_CLASS (klass),
@@ -153,7 +161,8 @@ kgx_search_box_class_init (KgxSearchBoxClass *klass)
                                     0, NULL, NULL, NULL,
                                     G_TYPE_NONE, 1, G_TYPE_STRING);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/zbrown/KingsCross/kgx-search-box.ui");
+  gtk_widget_class_set_template_from_resource (widget_class,
+                                               RES_PATH "kgx-search-box.ui");
 
   gtk_widget_class_bind_template_child (widget_class, KgxSearchBox, entry);
 
@@ -218,6 +227,8 @@ kgx_search_box_init (KgxSearchBox *self)
  * @self: The #KgxSearchBox
  * 
  * Gets the current search, aka #GtkEntry:text on the #GtkSearchEntry
+ * 
+ * Since: 0.1.0
  */
 const char *
 kgx_search_box_get_search (KgxSearchBox *self)
@@ -227,6 +238,14 @@ kgx_search_box_get_search (KgxSearchBox *self)
   return gtk_entry_get_text (GTK_ENTRY (self->entry));
 }
 
+/**
+ * kgx_search_box_focus:
+ * @self: the #KgxSearchBox
+ * 
+ * gtk_widget_grab_focus() the #GtkSearchEntry
+ * 
+ * Since: 0.2.0
+ */
 void
 kgx_search_box_focus (KgxSearchBox *self)
 {

@@ -3,6 +3,8 @@
   <gresource prefix="/org/gnome/zbrown/KingsCross">
     <file compressed="true">kgx-window.ui</file>
     <file compressed="true">kgx-search-box.ui</file>
+    <file compressed="true">kgx-close-dialog.ui</file>
+    <file compressed="true">kgx-close-dialog-row.ui</file>
     <file compressed="true">styles.css</file>
     <file compressed="true">logo.txt</file>
   </gresource>

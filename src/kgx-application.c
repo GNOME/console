@@ -175,7 +175,6 @@ watch (gpointer data)
 {
   KgxApplication *self = KGX_APPLICATION (data);
   g_autoptr (GPtrArray) plist = NULL;
-  const char *exec;
 
   plist = kgx_process_get_list ();
 
@@ -185,32 +184,22 @@ watch (gpointer data)
     for (int j = 0; j < plist->len; j++) {
       g_autoptr (KgxProcess) parent = NULL;
       KgxProcess *curr = g_ptr_array_index (plist, j);
-      GPid pid;
 
       parent = kgx_process_get_parent (curr);
-      pid = kgx_process_get_pid (curr);
 
       if (kgx_process_get_pid (parent) == kgx_process_get_pid (watch->process)) {
-        exec = kgx_process_get_exec (curr);
-
         if (!g_ptr_array_find_with_equal_func (self->children, curr, (GEqualFunc) watch_is_for_process, NULL)) {
           struct ProcessWatch *child_watch = g_new(struct ProcessWatch, 1);
 
           child_watch->process = g_rc_box_acquire (curr);
           child_watch->window = g_object_ref (watch->window);
 
-          g_debug ("Hello %s!", exec);
+          // g_debug ("Hello %s!", exec);
 
           g_ptr_array_add (self->children, child_watch);
         }
 
-        if (g_strcmp0 (exec, "ssh") == 0) {
-          kgx_window_push_remote (watch->window, pid);
-        }
-
-        if (kgx_process_get_is_root (curr)) {
-          kgx_window_push_root (watch->window, pid);
-        }
+        kgx_window_push_child (watch->window, curr);
       }
     }
   }
@@ -220,10 +209,7 @@ watch (gpointer data)
 
     if (!g_ptr_array_find_with_equal_func (plist, child_watch, (GEqualFunc) process_is_watched_by, NULL)) {
       g_debug ("Bye %s!", kgx_process_get_exec (child_watch->process));
-      kgx_window_pop_remote (child_watch->window,
-                             kgx_process_get_pid (child_watch->process));
-      kgx_window_pop_root (child_watch->window,
-                           kgx_process_get_pid (child_watch->process));
+      kgx_window_pop_child (child_watch->window, child_watch->process);
       g_ptr_array_remove_index (self->children, i);
       i--;
     }
@@ -293,7 +279,7 @@ kgx_application_startup (GApplication *app)
   g_settings_bind (settings, "font-scale", app, "font-scale", G_SETTINGS_BIND_DEFAULT);
 
   provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/zbrown/KingsCross/styles.css");
+  gtk_css_provider_load_from_resource (provider, RES_PATH "styles.css");
   gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
                                              GTK_STYLE_PROVIDER (provider),
                                              /* Is this stupid? Yes
@@ -358,7 +344,7 @@ print_logo (short width)
   int i = 0;
   int half_screen = width / 2;
 
-  logo = g_file_new_for_uri ("resource://org/gnome/zbrown/KingsCross/logo.txt");
+  logo = g_file_new_for_uri ("resource:/" RES_PATH "logo.txt");
 
   g_file_load_contents (logo, NULL, &logo_text, NULL, NULL, &error);
 

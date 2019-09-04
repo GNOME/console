@@ -23,6 +23,8 @@
  * 
  * The main terminal widget with various features added such as a context
  * menu (via #GtkPopover) and link detection
+ * 
+ * Since: 0.1.0
  */
 
 #include <glib/gi18n.h>
@@ -260,6 +262,8 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
    * Bound to #KgxApplication:theme on the #KgxApplication
    * 
    * Stability: Private
+   * 
+   * Since: 0.1.0
    */
   pspecs[PROP_THEME] =
     g_param_spec_enum ("theme", "Theme", "Terminal theme",
@@ -274,6 +278,8 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
    * Bound to #GtkWindow:is-maximized on the #KgxWindow
    * 
    * Stability: Private
+   * 
+   * Since: 0.1.0
    */
   pspecs[PROP_OPAQUE] =
     g_param_spec_boolean ("opaque", "Opaque", "Terminal opaqueness",

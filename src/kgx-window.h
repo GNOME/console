@@ -21,6 +21,7 @@
 #include <gtk/gtk.h>
 
 #include "kgx-terminal.h"
+#include "kgx-process.h"
 
 G_BEGIN_DECLS
 
@@ -38,6 +39,8 @@ G_BEGIN_DECLS
  * @root: count of the children running as root, when its > 0 root styles are
  * applied to the headerbar
  * @remote: same as @root but for ssh
+ * @children: all children of the terminal as a #GPid -> #KgxProcess map
+ * @close_anyway: ignore running children and close without prompt
  * @header_bar: the #GtkHeaderBar that the styles are applied to
  * @terminal: the #KgxTerminal the window contains
  * @dims: the floating status bar
@@ -46,6 +49,8 @@ G_BEGIN_DECLS
  * @exit_info: the #GtkRevealer hat wraps @exit_message
  * @exit_message: the #GtkLabel for showing important messages
  * @zoom_level: the #GtkLabel in the #GtkPopover showing the current zoom level
+ * 
+ * Since: 0.1.0
  */
 struct _KgxWindow
 {
@@ -66,6 +71,8 @@ struct _KgxWindow
   /* Remote/root states */
   GHashTable           *root;
   GHashTable           *remote;
+  GHashTable           *children;
+  gboolean              close_anyway;
 
   /* Template widgets */
   GtkWidget            *header_bar;
@@ -80,15 +87,10 @@ struct _KgxWindow
 
 G_DECLARE_FINAL_TYPE (KgxWindow, kgx_window, KGX, WINDOW, GtkApplicationWindow)
 
-char       *kgx_window_get_working_dir (KgxWindow *self);
-void        kgx_window_push_root       (KgxWindow *self,
-                                        GPid       pid);
-void        kgx_window_pop_root        (KgxWindow *self,
-                                        GPid       pid);
-void        kgx_window_push_remote     (KgxWindow *self,
-                                        GPid       pid);
-void        kgx_window_pop_remote      (KgxWindow *self,
-                                        GPid       pid);
-
+char       *kgx_window_get_working_dir (KgxWindow    *self);
+void        kgx_window_push_child      (KgxWindow    *self,
+                                        KgxProcess   *process);
+void        kgx_window_pop_child       (KgxWindow    *self,
+                                        KgxProcess   *process);
 
 G_END_DECLS

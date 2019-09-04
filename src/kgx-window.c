@@ -22,6 +22,8 @@
  * @short_description: Window
  * 
  * The main #GtkApplicationWindow that acts as the terminal
+ * 
+ * Since: 0.1.0
  */
 
 #define G_LOG_DOMAIN "Kgx"
@@ -40,6 +42,7 @@
 #include "kgx-application.h"
 #include "kgx-search-box.h"
 #include "kgx-process.h"
+#include "kgx-close-dialog.h"
 
 #define KGX_WINDOW_STYLE_ROOT "root"
 #define KGX_WINDOW_STYLE_REMOTE "remote"
@@ -97,7 +100,11 @@ kgx_window_set_theme (KgxWindow *self,
       break;
   }
 
-  vte_terminal_set_colors (VTE_TERMINAL (self->terminal), &fg, &bg, palette, 16);
+  vte_terminal_set_colors (VTE_TERMINAL (self->terminal),
+                           &fg,
+                           &bg,
+                           palette,
+                           16);
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_THEME]);
 }
@@ -137,8 +144,10 @@ wait_cb (GPid     pid,
 
     context = gtk_widget_get_style_context (GTK_WIDGET (self->exit_info));
 
-    // translators: <b> </b> marks the text as bold, ensure they are matched please!
-    message = g_strdup_printf (_("<b>Read Only</b> — Command exited with code %i"), status);
+    // translators: <b> </b> marks the text as bold, ensure they are
+    // matched please!
+    message = g_strdup_printf (_("<b>Read Only</b> — Command exited with code %i"),
+                               status);
 
     gtk_label_set_markup (GTK_LABEL (self->exit_message), message);
     gtk_style_context_add_class (context, "error");
@@ -150,7 +159,8 @@ wait_cb (GPid     pid,
     context = gtk_widget_get_style_context (GTK_WIDGET (self->exit_info));
 
     gtk_label_set_markup (GTK_LABEL (self->exit_message),
-    // translators: <b> </b> marks the text as bold, ensure they are matched please!
+    // translators: <b> </b> marks the text as bold, ensure they are
+    // matched please!
                          _("<b>Read Only</b> — Command exited"));
     gtk_style_context_remove_class (context, "error");
   }
@@ -177,15 +187,19 @@ spawned (VtePty       *pty,
   fp_vte_pty_spawn_finish (pty, res, &pid, &error);
 
   if (error) {
+    GtkStyleContext *context;
     g_autofree char *message = NULL;
 
     g_critical ("Failed to spawn: %s", error->message);
 
-    gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self->exit_info)),
-                                 "error");
+    context = gtk_widget_get_style_context (GTK_WIDGET (self->exit_info));
 
-    // translators: <b> </b> marks the text as bold, ensure they are matched please!
-    message = g_strdup_printf (_("<b>Failed to start</b> — %s"), error->message);
+    gtk_style_context_add_class (context, "error");
+
+    // translators: <b> </b> marks the text as bold, ensure they are
+    // matched please!
+    message = g_strdup_printf (_("<b>Failed to start</b> — %s"),
+                               error->message);
    
     gtk_label_set_markup (GTK_LABEL (self->exit_message), message);
 
@@ -328,6 +342,51 @@ kgx_window_finalize (GObject *object)
   g_clear_pointer (&self->remote, g_hash_table_unref);
 
   G_OBJECT_CLASS (kgx_window_parent_class)->finalize (object);
+}
+
+static void
+delete_response (GtkWidget *dlg,
+                 int        response,
+                 KgxWindow *self)
+{
+  gtk_widget_destroy (dlg);
+
+  if (response == GTK_RESPONSE_OK) {
+    self->close_anyway = TRUE;
+
+    gtk_widget_destroy (GTK_WIDGET (self));
+  }
+}
+
+static gboolean
+kgx_window_delete_event (GtkWidget   *widget,
+                         GdkEventAny *event)
+{
+  KgxWindow *self = KGX_WINDOW (widget);
+  GHashTableIter iter;
+  GtkWidget *dlg;
+  gpointer pid, process;
+
+  if (g_hash_table_size (self->children) < 1 || self->close_anyway) {
+    return FALSE; // Aka no, I don't want to block closing
+  }
+
+  dlg = g_object_new (KGX_TYPE_CLOSE_DIALOG,
+                      "transient-for", self,
+                      "use-header-bar", TRUE,
+                      NULL);
+
+  g_signal_connect (dlg, "response", G_CALLBACK (delete_response), self);
+
+  g_hash_table_iter_init (&iter, self->children);
+  while (g_hash_table_iter_next (&iter, &pid, &process)) {
+    kgx_close_dialog_add_command (KGX_CLOSE_DIALOG (dlg),
+                                  kgx_process_get_exec (process));
+  }
+
+  gtk_widget_show (dlg);
+  
+  return TRUE; // Block the close
 }
 
 static void
@@ -523,23 +582,54 @@ kgx_window_class_init (KgxWindowClass *klass)
   object_class->get_property = kgx_window_get_property;
   object_class->finalize = kgx_window_finalize;
 
+  widget_class->delete_event = kgx_window_delete_event;
+
+  /**
+   * KgxWindow:theme:
+   * 
+   * The #KgxTheme used in the window, is bound to #KgxApplication:theme
+   * 
+   * Since: 0.1.0
+   */
   pspecs[PROP_THEME] =
     g_param_spec_enum ("theme", "Theme", "Terminal theme",
                        KGX_TYPE_THEME, KGX_THEME_HACKER,
                        G_PARAM_READWRITE);
 
+
+  /**
+   * KgxWindow:initial-work-dir:
+   * 
+   * Used to handle --working-dir
+   * 
+   * Since: 0.1.0
+   */
   pspecs[PROP_INITIAL_WORK_DIR] =
     g_param_spec_string ("initial-work-dir", "Initial directory",
                          "Initial working directory",
                          NULL,
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+  /**
+   * KgxWindow:command:
+   * 
+   * Used to handle -e
+   * 
+   * Since: 0.1.0
+   */
   pspecs[PROP_COMMAND] =
     g_param_spec_string ("command", "Command",
                          "Command to run",
                          NULL,
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+  /**
+   * KgxWindow:close-on-zero:
+   * 
+   * Should the window autoclose when the terminal complete
+   * 
+   * Since: 0.1.0
+   */
   pspecs[PROP_CLOSE_ON_ZERO] =
     g_param_spec_boolean ("close-on-zero", "Close on zero",
                           "Should close when child exits with 0",
@@ -548,7 +638,8 @@ kgx_window_class_init (KgxWindowClass *klass)
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/zbrown/KingsCross/kgx-window.ui");
+  gtk_widget_class_set_template_from_resource (widget_class,
+                                               RES_PATH "kgx-window.ui");
 
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, header_bar);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, terminal);
@@ -610,8 +701,10 @@ about_activated (GSimpleAction *action,
 {
   const char *authors[] = { "Zander Brown<zbrown@gnome.org>", NULL };
   const char *artists[] = { "Tobias Bernard", NULL };
-  g_autofree char *copyright = g_strdup_printf (_("Copyright © %s Zander Brown"),
-                                                "2019");
+  g_autofree char *copyright = NULL;
+  
+  copyright = g_strdup_printf (_("Copyright © %s Zander Brown"),
+                               "2019");
 
   gtk_show_about_dialog (GTK_WINDOW (data),
                          "authors", authors,
@@ -623,8 +716,8 @@ about_activated (GSimpleAction *action,
                          "license-type", GTK_LICENSE_GPL_3_0,
                          "logo-icon-name", "kgx-original",
                          #if IS_GENERIC
-                         // Translators: "by King’s Cross" here is meaning author
-                         // or creator of 'Terminal'
+                         // Translators: "by King’s Cross" here is meaning
+                         // author or creator of 'Terminal'
                          "program-name", _("Terminal\nby King’s Cross"),
                          #else
                          "program-name", _("King’s Cross"),
@@ -705,7 +798,8 @@ update_subtitle (GBinding     *binding,
 
   home = g_get_home_dir ();
   if (g_str_has_prefix (path, home)) {
-    g_autofree char *short_home = g_strdup_printf ("~%s", path + strlen (home));
+    g_autofree char *short_home = g_strdup_printf ("~%s",
+                                                   path + strlen (home));
 
     g_value_set_string (to_value, short_home);
 
@@ -736,11 +830,17 @@ kgx_window_init (KgxWindow *self)
 
   self->root = g_hash_table_new (g_direct_hash, g_direct_equal);
   self->remote = g_hash_table_new (g_direct_hash, g_direct_equal);
+  self->children = g_hash_table_new_full (g_direct_hash,
+                                          g_direct_equal,
+                                          NULL,
+                                          (GDestroyNotify) kgx_process_unref);
 
   pact = g_property_action_new ("theme", G_OBJECT (self), "theme");
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (pact));
 
-  pact = g_property_action_new ("find", G_OBJECT (self->search_bar), "search-mode-enabled");
+  pact = g_property_action_new ("find",
+                                G_OBJECT (self->search_bar),
+                                "search-mode-enabled");
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (pact));
 
   g_object_bind_property_full (self->terminal, "current-directory-uri",
@@ -764,6 +864,8 @@ kgx_window_init (KgxWindow *self)
  * 
  * Get the working directory path of this window, used to open new windows
  * in the same directory
+ * 
+ * Since: 0.1.0
  */
 char *
 kgx_window_get_working_dir (KgxWindow *self)
@@ -779,101 +881,102 @@ kgx_window_get_working_dir (KgxWindow *self)
   return g_file_get_path (file);
 }
 
-/**
- * kgx_window_push_root:
- * @self: the #KgxWindow
- * @pid: the #GPid of the root process
- * 
- * Increase the count of processes running as root and applying the
- * appropriate styles
- */
-void
-kgx_window_push_root (KgxWindow *self,
-                      GPid       pid)
+static inline void
+push_type (GHashTable      *table,
+           GPid             pid,
+           KgxProcess      *process,
+           GtkStyleContext *context,
+           const char      *class_name)
 {
-  g_return_if_fail (KGX_IS_WINDOW (self));
+  g_hash_table_insert (table,
+                       GINT_TO_POINTER (pid),
+                       g_rc_box_acquire (process));
 
-  g_hash_table_add (self->root, GINT_TO_POINTER (pid));
+  g_debug ("Now %i %s", g_hash_table_size (table), class_name);
 
-  g_debug ("Now %i root", g_hash_table_size (self->root));
-
-  gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self)),
-                               KGX_WINDOW_STYLE_ROOT);
-}
-
-/**
- * kgx_window_pop_root:
- * @self: the #KgxWindow
- * @pid: the #GPid of the root process
- * 
- * Reduce the count of root children, removing styles if we hit 0
- */
-void
-kgx_window_pop_root (KgxWindow *self,
-                     GPid       pid)
-{
-  guint size = 0;
-
-  g_return_if_fail (KGX_IS_WINDOW (self));
-
-  g_hash_table_remove (self->root, GINT_TO_POINTER (pid));
-
-  size = g_hash_table_size (self->root);
-
-  if (size <= 0) {
-    gtk_style_context_remove_class (gtk_widget_get_style_context (GTK_WIDGET (self)),
-                                    KGX_WINDOW_STYLE_ROOT);
-    g_debug ("No longer root");
-  } else {
-    g_debug ("%i root remaining", size);
+  if (G_LIKELY (class_name != NULL)) {
+    gtk_style_context_add_class (context, class_name);
   }
 }
 
 /**
- * kgx_window_push_remote:
+ * kgx_window_push_child:
  * @self: the #KgxWindow
- * @pid: the #GPid of the remote process
+ * @process: the #KgxProcess of the remote process
  * 
- * Same as kgx_window_push_root() but for ssh
+ * Registers @pid as a child of @self
+ * 
+ * Since: 0.2.0
  */
 void
-kgx_window_push_remote (KgxWindow *self,
-                        GPid       pid)
+kgx_window_push_child (KgxWindow    *self,
+                       KgxProcess   *process)
 {
+  GtkStyleContext *context;
+  GPid pid;
+  const char *exec;
+
   g_return_if_fail (KGX_IS_WINDOW (self));
 
-  g_hash_table_add (self->remote, GINT_TO_POINTER (pid));
+  context = gtk_widget_get_style_context (GTK_WIDGET (self));
+  pid = kgx_process_get_pid (process);
+  exec = kgx_process_get_exec (process);
 
-  g_debug ("Now %i remote", g_hash_table_size (self->remote));
+  if (G_UNLIKELY (g_strcmp0 (exec, "ssh") == 0)) {
+    push_type (self->remote, pid, NULL, context, KGX_WINDOW_STYLE_REMOTE);
+  }
 
-  gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self)),
-                               KGX_WINDOW_STYLE_REMOTE);
+  if (G_UNLIKELY (kgx_process_get_is_root (process))) {
+    push_type (self->root, pid, NULL, context, KGX_WINDOW_STYLE_ROOT);
+  }
+
+  push_type (self->children, pid, process, context, NULL);
 }
 
-/**
- * kgx_window_pop_remote:
- * @self: the #KgxWindow
- * @pid: the #GPid of the remote process
- * 
- * Same as kgx_window_pop_root() but for ssh
- */
-void
-kgx_window_pop_remote (KgxWindow *self,
-                       GPid       pid)
+inline static void
+pop_type (GHashTable      *table,
+          GPid             pid,
+          GtkStyleContext *context,
+          const char      *class_name)
 {
   guint size = 0;
 
+  g_hash_table_remove (table, GINT_TO_POINTER (pid));
+
+  size = g_hash_table_size (table);
+
+  if (G_LIKELY (size <= 0)) {
+    if (G_LIKELY (class_name)) {
+      gtk_style_context_remove_class (context, class_name);
+    }
+    g_debug ("No longer %s", class_name);
+  } else {
+    g_debug ("%i %s remaining", size, class_name);
+  }
+}
+
+/**
+ * kgx_window_pop_child:
+ * @self: the #KgxWindow
+ * @process: the #KgxProcess of the child process
+ * 
+ * Remove a child added with kgx_window_push_child()
+ * 
+ * Since: 0.2.0
+ */
+void
+kgx_window_pop_child (KgxWindow    *self,
+                      KgxProcess   *process)
+{
+  GtkStyleContext *context;
+  GPid pid;
+
   g_return_if_fail (KGX_IS_WINDOW (self));
 
-  g_hash_table_remove (self->remote, GINT_TO_POINTER (pid));
-
-  size = g_hash_table_size (self->remote);
-
-  if (size <= 0) {
-    gtk_style_context_remove_class (gtk_widget_get_style_context (GTK_WIDGET (self)),
-                                    KGX_WINDOW_STYLE_REMOTE);
-    g_debug ("No longer remote");
-  } else {
-    g_debug ("%i remote remaining", size);
-  }
+  context = gtk_widget_get_style_context (GTK_WIDGET (self));
+  pid = kgx_process_get_pid (process);
+  
+  pop_type (self->remote, pid, context, KGX_WINDOW_STYLE_REMOTE);
+  pop_type (self->root, pid, context, KGX_WINDOW_STYLE_ROOT);
+  pop_type (self->children, pid, context, NULL);
 }

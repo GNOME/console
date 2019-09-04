@@ -53,6 +53,10 @@ clear_process (KgxProcess *self)
  * Reduce the refrence count of @self, possibly freeing @self
  * 
  * See g_rc_box_acquire() and g_rc_box_release_full()
+ * 
+ * Since: 0.1.0
+ * 
+ * Stability: Private
  */
 void
 kgx_process_unref (KgxProcess *self)
@@ -69,8 +73,12 @@ G_DEFINE_BOXED_TYPE (KgxProcess, kgx_process, g_rc_box_acquire, kgx_process_unre
  * @pid: The #GPid to get info about
  * 
  * Populate a new #KgxProcess with details about the process @pid
+ * 
+ * Since: 0.1.0
+ * 
+ * Stability: Private
  */
-KgxProcess *
+inline KgxProcess *
 kgx_process_new (GPid pid)
 {
   glibtop_proc_uid   info;
@@ -99,8 +107,12 @@ kgx_process_new (GPid pid)
  * @self: the #KgxProcess
  * 
  * Returns: The process id
+ * 
+ * Since: 0.1.0
+ * 
+ * Stability: Private
  */
-GPid
+inline GPid
 kgx_process_get_pid (KgxProcess *self)
 {
   g_return_val_if_fail (self != NULL, 0);
@@ -113,8 +125,12 @@ kgx_process_get_pid (KgxProcess *self)
  * @self: the #KgxProcess
  * 
  * Returns: The user id of the process
+ * 
+ * Since: 0.1.0
+ * 
+ * Stability: Private
  */
-gint32
+inline gint32
 kgx_process_get_uid (KgxProcess *self)
 {
   g_return_val_if_fail (self != NULL, 0);
@@ -127,8 +143,12 @@ kgx_process_get_uid (KgxProcess *self)
  * @self: the #KgxProcess
  * 
  * Returns: %TRUE if this process is running as root
+ * 
+ * Stability: Private
+ * 
+ * Since: 0.1.0
  */
-gboolean
+inline gboolean
 kgx_process_get_is_root (KgxProcess *self)
 {
   g_return_val_if_fail (self != NULL, 0);
@@ -143,8 +163,12 @@ kgx_process_get_is_root (KgxProcess *self)
  * Get information about the processes parent
  * 
  * Returns: the parent, free with kgx_process_unref()
+ * 
+ * Stability: Private
+ * 
+ * Since: 0.1.0
  */
-KgxProcess *
+inline KgxProcess *
 kgx_process_get_parent (KgxProcess *self)
 {
   g_return_val_if_fail (self != NULL, 0);
@@ -157,8 +181,12 @@ kgx_process_get_parent (KgxProcess *self)
  * @self: the #KgxProcess
  * 
  * Get the command line used to invoke to process
+ * 
+ * Stability: Private
+ * 
+ * Since: 0.1.0
  */
-const char *
+inline const char *
 kgx_process_get_exec (KgxProcess *self)
 {
   g_return_val_if_fail (self != NULL, 0);
@@ -172,6 +200,10 @@ kgx_process_get_exec (KgxProcess *self)
  * Get the list of running processes
  * 
  * Returns: (transfer full) (element-type Kgx.Process): List of processes free with g_ptr_array_unref()
+ * 
+ * Stability: Private
+ * 
+ * Since: 0.1.0
  */
 GPtrArray *
 kgx_process_get_list (void)

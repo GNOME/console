@@ -1,4 +1,4 @@
-/* kgx-search-box.h
+/* kgx-close-dialog-row.h
  *
  * Copyright 2019 Zander Brown
  *
@@ -23,33 +23,25 @@
 
 G_BEGIN_DECLS
 
-#define KGX_TYPE_SEARCH_BOX (kgx_search_box_get_type())
+#define KGX_TYPE_CLOSE_DIALOG_ROW (kgx_close_dialog_row_get_type())
 
 /**
- * KgxSearchBox:
- * @parent: The #GtkSearchBar that contains the box
- * @entry: The #GtkSearchEntry we contain
- * @parent_width: Width of the @parent
+ * KgxCloseDialogRow:
+ * @command: the kgx_process_get_exec() of the pid being represented
+ * @icon: the #GIcon to represent this process
  * 
  * Stability: Private
- * 
- * Since: 0.1.0
  */
-struct _KgxSearchBox
+struct _KgxCloseDialogRow
 {
   /*< private >*/
-  GtkBox parent_instance;
+  GtkListBoxRow  parent_instance;
 
   /*< public >*/
-  GtkWidget *parent;
-  GtkWidget *entry;
-
-  int parent_width;
+  char          *command;
+  GIcon         *icon;
 };
 
-G_DECLARE_FINAL_TYPE (KgxSearchBox, kgx_search_box, KGX, SEARCH_BOX, GtkBox)
-
-const char *kgx_search_box_get_search (KgxSearchBox *self);
-void        kgx_search_box_focus      (KgxSearchBox *self);
+G_DECLARE_FINAL_TYPE (KgxCloseDialogRow, kgx_close_dialog_row, KGX, CLOSE_DIALOG_ROW, GtkListBoxRow)
 
 G_END_DECLS
