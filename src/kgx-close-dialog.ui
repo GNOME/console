@@ -22,7 +22,7 @@
             <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">Some commands are still running, cosing this terminal will kill them and may lead to unexpected outcomes</property>
+                <property name="label" translatable="yes">Some commands are still running, closing this terminal will kill them and may lead to unexpected outcomes</property>
                 <property name="wrap">True</property>
                 <property name="xalign">0</property>
               </object>
@@ -39,7 +39,8 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">No children</property>
+                    <!-- Impossible state, don't translate -->
+                    <property name="label" translatable="no">No children</property>
                     <property name="margin">12</property>
                     <property name="xalign">0</property>
                   </object>
@@ -60,7 +61,7 @@
     </child>
     <child type="action">
       <object class="GtkButton" id="button-ok">
-        <property name="label" translatable="yes">_Okay</property>
+        <property name="label" translatable="yes">_OK</property>
         <property name="visible">True</property>
         <property name="use-underline">True</property>
         <style>

@@ -718,7 +718,7 @@ about_activated (GSimpleAction *action,
                  GVariant      *parameter,
                  gpointer       data)
 {
-  const char *authors[] = { "Zander Brown<zbrown@gnome.org>", NULL };
+  const char *authors[] = { "Zander Brown <zbrown@gnome.org>", NULL };
   const char *artists[] = { "Tobias Bernard", NULL };
   g_autofree char *copyright = NULL;
   
@@ -1010,7 +1010,7 @@ kgx_window_pop_child (KgxWindow    *self,
     g_autoptr (GNotification) noti = NULL;
     GtkApplication *app = gtk_window_get_application (GTK_WINDOW (self));
 
-    noti = g_notification_new (_("Command complete"));
+    noti = g_notification_new (_("Command completed"));
     #if HAS_GTOP
     g_notification_set_body (noti, kgx_process_get_exec (process));
     #endif
