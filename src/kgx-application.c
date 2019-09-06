@@ -129,8 +129,8 @@ kgx_application_finalize (GObject *object)
 
   g_clear_object (&self->desktop_interface);
 
-  g_ptr_array_unref (self->watching);
-  g_ptr_array_unref (self->children);
+  g_clear_pointer (&self->watching, g_tree_unref);
+  g_clear_pointer (&self->children, g_tree_unref);
 
   G_OBJECT_CLASS (kgx_application_parent_class)->finalize (object);
 }
@@ -157,63 +157,83 @@ kgx_application_activate (GApplication *app)
 
 #if HAS_GTOP
 static gboolean
-watch_is_for_process (struct ProcessWatch *watch,
-                      KgxProcess          *process)
+handle_watch_iter (gpointer pid,
+                   gpointer val,
+                   gpointer user_data)
 {
-  return kgx_process_get_pid (watch->process) == kgx_process_get_pid (process);
+  KgxProcess *process = val;
+  KgxApplication *self = user_data;
+  GPid parent = kgx_process_get_parent (process);
+  struct ProcessWatch *watch = NULL;
+
+  watch = g_tree_lookup (self->watching, GINT_TO_POINTER (parent));
+
+  // There are far more processes on the system than there are children
+  // of watches, thus lookup are unlikly
+  if (G_UNLIKELY (watch != NULL)) {
+    if (!g_tree_lookup (self->children, pid)) {
+      struct ProcessWatch *child_watch = g_new (struct ProcessWatch, 1);
+
+      child_watch->process = g_rc_box_acquire (process);
+      child_watch->window = g_object_ref (watch->window);
+
+      g_debug ("Hello %i!", GPOINTER_TO_INT (pid));
+
+      g_tree_insert (self->children, pid, child_watch);
+    }
+
+    kgx_window_push_child (watch->window, process);
+  }
+
+  return FALSE;
 }
 
+struct RemoveDead {
+  GTree     *plist;
+  GPtrArray *dead;
+};
+
 static gboolean
-process_is_watched_by (KgxProcess *process,
-                       struct ProcessWatch *watch)
+remove_dead (gpointer pid,
+             gpointer val,
+             gpointer user_data)
 {
-  return kgx_process_get_pid (watch->process) == kgx_process_get_pid (process);
+  struct RemoveDead *data = user_data;
+  struct ProcessWatch *watch = val;
+
+  if (!g_tree_lookup (data->plist, pid)) {
+    g_debug ("%i marked as dead", GPOINTER_TO_INT (pid));
+
+    kgx_window_pop_child (watch->window, watch->process);
+
+    g_ptr_array_add (data->dead, pid);
+  }
+
+  return FALSE;
 }
 
 static gboolean
 watch (gpointer data)
 {
   KgxApplication *self = KGX_APPLICATION (data);
-  g_autoptr (GPtrArray) plist = NULL;
+  g_autoptr (GTree) plist = NULL;
+  struct RemoveDead dead;
 
   plist = kgx_process_get_list ();
 
-  for (int i = 0; i < self->watching->len; i++) {
-    struct ProcessWatch *watch = g_ptr_array_index (self->watching, i);
+  g_tree_foreach (plist, handle_watch_iter, self);
 
-    for (int j = 0; j < plist->len; j++) {
-      g_autoptr (KgxProcess) parent = NULL;
-      KgxProcess *curr = g_ptr_array_index (plist, j);
+  dead.plist = plist;
+  dead.dead = g_ptr_array_new_full (1, NULL);
 
-      parent = kgx_process_get_parent (curr);
+  g_tree_foreach (self->children, remove_dead, &dead);
 
-      if (kgx_process_get_pid (parent) == kgx_process_get_pid (watch->process)) {
-        if (!g_ptr_array_find_with_equal_func (self->children, curr, (GEqualFunc) watch_is_for_process, NULL)) {
-          struct ProcessWatch *child_watch = g_new(struct ProcessWatch, 1);
-
-          child_watch->process = g_rc_box_acquire (curr);
-          child_watch->window = g_object_ref (watch->window);
-
-          // g_debug ("Hello %s!", exec);
-
-          g_ptr_array_add (self->children, child_watch);
-        }
-
-        kgx_window_push_child (watch->window, curr);
-      }
-    }
+  // We can't modify self->chilren whilst walking it
+  for (int i = 0; i < dead.dead->len; i++) {
+    g_tree_remove (self->children, g_ptr_array_index (dead.dead, i));
   }
 
-  for (int i = 0; i < self->children->len; i++) {
-    struct ProcessWatch *child_watch = g_ptr_array_index (self->children, i);
-
-    if (!g_ptr_array_find_with_equal_func (plist, child_watch, (GEqualFunc) process_is_watched_by, NULL)) {
-      g_debug ("Bye %s!", kgx_process_get_exec (child_watch->process));
-      kgx_window_pop_child (child_watch->window, child_watch->process);
-      g_ptr_array_remove_index (self->children, i);
-      i--;
-    }
-  }
+  g_ptr_array_unref (dead.dead);
 
   return G_SOURCE_CONTINUE;
 }
@@ -544,8 +564,14 @@ kgx_application_init (KgxApplication *self)
                     G_CALLBACK (font_changed),
                     self);
 
-  self->watching = g_ptr_array_new_with_free_func ((GDestroyNotify) clear_watch);
-  self->children = g_ptr_array_new_with_free_func ((GDestroyNotify) clear_watch);
+  self->watching = g_tree_new_full (kgx_pid_cmp,
+                                    NULL,
+                                    NULL,
+                                    (GDestroyNotify) clear_watch);
+  self->children = g_tree_new_full (kgx_pid_cmp,
+                                    NULL,
+                                    NULL,
+                                    (GDestroyNotify) clear_watch);
 
   self->active = 0;
   self->timeout = 0;
@@ -578,14 +604,7 @@ kgx_application_add_watch (KgxApplication *self,
 
   g_return_if_fail (KGX_IS_WINDOW (watch->window));
 
-  g_ptr_array_add (self->watching, watch);
-}
-
-static gboolean
-watch_is_for_pid (struct ProcessWatch *watch,
-                  gpointer             pid)
-{
-  return kgx_process_get_pid (watch->process) == GPOINTER_TO_INT (pid);
+  g_tree_insert (self->watching, GINT_TO_POINTER (pid), watch);
 }
 
 /**
@@ -599,15 +618,10 @@ void
 kgx_application_remove_watch (KgxApplication *self,
                               GPid            pid)
 {
-  guint idx = 0;
-
   g_return_if_fail (KGX_IS_APPLICATION (self));
 
-  if (g_ptr_array_find_with_equal_func (self->watching,
-                                         GINT_TO_POINTER (pid),
-                                         (GEqualFunc) watch_is_for_pid,
-                                         &idx)) {
-    g_ptr_array_remove_index_fast (self->watching, idx);
+  if (G_LIKELY (g_tree_lookup (self->watching, GINT_TO_POINTER (pid)))) {
+    g_tree_remove (self->watching, GINT_TO_POINTER (pid));
     g_debug ("Stopped watching %i", pid);
   } else {
     g_warning ("Unknown process %i", pid);

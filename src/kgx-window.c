@@ -900,7 +900,7 @@ push_type (GHashTable      *table,
 {
   g_hash_table_insert (table,
                        GINT_TO_POINTER (pid),
-                       g_rc_box_acquire (process));
+                       process != NULL ? g_rc_box_acquire (process) : NULL);
 
   g_debug ("Now %i %s", g_hash_table_size (table), class_name);
 

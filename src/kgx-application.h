@@ -58,8 +58,8 @@ struct ProcessWatch {
  * @theme: the colour palette in use
  * @scale: the font scaling used
  * @desktop_interface: the #GSettings storing the system monospace font
- * @watching: (element-type ProcessWatch): the shells running in windows
- * @children: (element-type ProcessWatch): the processes running in shells
+ * @watching: ~ (element-type GLib.Pid ProcessWatch) the shells running in windows
+ * @children: ~ (element-type GLib.Pid ProcessWatch) the processes running in shells
  * @active: counter of #KgxWindow's with #GtkWindow:is-active = %TRUE,
  *          obviously this should only ever be 1 or but we can't be certain
  * @timeout: the current #GSource id of the watcher
@@ -78,8 +78,8 @@ struct _KgxApplication
   
   GSettings                *desktop_interface;
 
-  GPtrArray                *watching;
-  GPtrArray                *children;
+  GTree                    *watching;
+  GTree                    *children;
 
   guint                     timeout;
   int                       active;

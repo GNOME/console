@@ -157,18 +157,21 @@ kgx_process_get_is_root (KgxProcess *self)
  * 
  * Get information about the processes parent
  * 
- * Returns: the parent, free with kgx_process_unref()
+ * Note a previous version (0.1.0) returned a #KgxProcess, this has been
+ * changed in favour of lazy loading
+ * 
+ * Returns: the parent #GPid
  * 
  * Stability: Private
  * 
  * Since: 0.1.0
  */
-inline KgxProcess *
+inline GPid
 kgx_process_get_parent (KgxProcess *self)
 {
-  g_return_val_if_fail (self != NULL, NULL);
+  g_return_val_if_fail (self != NULL, 0);
 
-  return kgx_process_new (self->parent);
+  return self->parent;
 }
 
 /**
@@ -199,31 +202,64 @@ kgx_process_get_exec (KgxProcess *self)
 }
 
 /**
- * kgx_process_get_list:
+ * kgx_pid_cmp:
+ * @a: the first #GPid
+ * @b: the second #GPid
+ * @data: unused
+ * 
+ * Implementation of #GCompareDataFunc for comparing #GPid encoded with
+ * GINT_TO_POINTER()
+ * 
+ * Returns: difference between @a and @b
+ * 
+ * Stability: Private
+ * 
+ * Since: 0.2.0
+ */
+int
+kgx_pid_cmp (gconstpointer a, gconstpointer b, gpointer data)
+{
+  return a - b;
+}
+
+/**
+ * kgx_process_get_list: (skip)
  * 
  * Get the list of running processes
  * 
- * Returns: (transfer full) (element-type Kgx.Process): List of processes free with g_ptr_array_unref()
+ * Note: This originally (0.1.0) returned #GPtrArray but now returns #GTree
+ * for faster lookup
+ * 
+ * Note: (skip) due to
+ * https://gitlab.gnome.org/GNOME/gobject-introspection/issues/310
+ * 
+ * #GTree is map of #GPid -> #KgxProcess
+ * 
+ * Returns: ~ (transfer full) (element-type GLib.Pid Kgx.Process)
+ * List of processes, free with g_tree_unref()
  * 
  * Stability: Private
  * 
  * Since: 0.1.0
  */
-GPtrArray *
+GTree *
 kgx_process_get_list (void)
 {
   glibtop_proclist pid_list;
   g_autofree GPid *pids = NULL;
-  GPtrArray *list = NULL;
+  GTree *list = NULL;
   
-  list = g_ptr_array_new_with_free_func ((GDestroyNotify) kgx_process_unref);
+  list = g_tree_new_full (kgx_pid_cmp,
+                          NULL,
+                          NULL,
+                          (GDestroyNotify) kgx_process_unref);
 
   pids = glibtop_get_proclist (&pid_list, GLIBTOP_KERN_PROC_ALL, 0);
 
   g_return_val_if_fail (pids != NULL, NULL);
 
   for (int i = 0; i < pid_list.number; i++) {
-    g_ptr_array_add (list, kgx_process_new (pids[i]));
+    g_tree_insert (list, GINT_TO_POINTER (pids[i]), kgx_process_new (pids[i]));
   }
 
   return list;
