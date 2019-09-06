@@ -553,9 +553,33 @@ static GOptionEntry entries[] =
 };
 
 static void
+focus_activated (GSimpleAction *action,
+                 GVariant      *parameter,
+                 gpointer       data)
+{
+  KgxApplication *self = KGX_APPLICATION (data);
+  GtkWindow *win;
+
+  win = gtk_application_get_window_by_id (GTK_APPLICATION (self),
+                                          g_variant_get_uint32 (parameter));
+
+  gtk_window_present_with_time (win, GDK_CURRENT_TIME);
+}
+
+static GActionEntry app_entries[] =
+{
+  { "focus-window", focus_activated, "u", NULL, NULL },
+};
+
+static void
 kgx_application_init (KgxApplication *self)
 {
   g_application_add_main_option_entries (G_APPLICATION (self), entries);
+
+  g_action_map_add_action_entries (G_ACTION_MAP (self),
+                                   app_entries,
+                                   G_N_ELEMENTS (app_entries),
+                                   self);
 
   self->desktop_interface = g_settings_new (DESKTOP_INTERFACE_SETTINGS_SCHEMA);
 

@@ -229,6 +229,11 @@ kgx_window_constructed (GObject *object)
   g_auto (GStrv)      shell = NULL;
   g_auto (GStrv)      env = NULL;
   g_autofree char    *command = NULL;
+  guint               id = 0;
+  
+  id = gtk_application_window_get_id (GTK_APPLICATION_WINDOW (self));
+
+  self->notification_id = g_strdup_printf ("command-completed-%u", id);
 
   pty = vte_pty_new_sync (fp_vte_pty_default_flags (), NULL, &error);
 
@@ -334,9 +339,14 @@ static void
 kgx_window_finalize (GObject *object)
 {
   KgxWindow *self = KGX_WINDOW (object);
+  GtkApplication *app = gtk_window_get_application (GTK_WINDOW (self));
+
+  g_application_withdraw_notification (G_APPLICATION (app),
+                                       self->notification_id);
 
   g_clear_pointer (&self->working_dir, g_free);
   g_clear_pointer (&self->command, g_free);
+  g_clear_pointer (&self->notification_id, g_free);
 
   g_clear_pointer (&self->root, g_hash_table_unref);
   g_clear_pointer (&self->remote, g_hash_table_unref);
@@ -983,6 +993,7 @@ kgx_window_pop_child (KgxWindow    *self,
 {
   GtkStyleContext *context;
   GPid pid = 0;
+  guint id = 0;
 
   g_return_if_fail (KGX_IS_WINDOW (self));
 
@@ -994,4 +1005,23 @@ kgx_window_pop_child (KgxWindow    *self,
   pop_type (self->remote, pid, context, KGX_WINDOW_STYLE_REMOTE);
   pop_type (self->root, pid, context, KGX_WINDOW_STYLE_ROOT);
   pop_type (self->children, pid, context, NULL);
+  
+  if (!gtk_window_is_active (GTK_WINDOW (self))) {
+    g_autoptr (GNotification) noti = NULL;
+    GtkApplication *app = gtk_window_get_application (GTK_WINDOW (self));
+
+    noti = g_notification_new (_("Command complete"));
+    #if HAS_GTOP
+    g_notification_set_body (noti, kgx_process_get_exec (process));
+    #endif
+    id = gtk_application_window_get_id (GTK_APPLICATION_WINDOW (self));
+    g_notification_set_default_action_and_target (noti,
+                                                  "app.focus-window",
+                                                  "u",
+                                                  id);
+
+    g_application_send_notification (G_APPLICATION (app),
+                                     self->notification_id,
+                                     noti);
+  }
 }

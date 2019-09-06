@@ -28,7 +28,7 @@ We also considered a center aligned ~ to be a proper station roundel but we felt
 
 - [ ] 'API' compatible with GNOME Terminal
     - [ ] Command line flags *Partial, supports -e/--command and --working-directory*
-- [ ] Command done notifications
+- [X] Command done notifications
 - [X] 'root mode' turns red when sudo/su/pkexec is active in the terminal
 - [X] 'remote mode' turns (purple?) when ssh is in use
 - [ ] Other bash/shell integrations
