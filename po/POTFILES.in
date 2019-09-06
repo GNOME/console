@@ -9,3 +9,4 @@ src/kgx-window.c
 src/kgx-window.ui
 src/main.c
 src/menus.ui
+src/kgx-close-dialog.ui 
