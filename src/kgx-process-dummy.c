@@ -29,3 +29,11 @@ kgx_process_unref (KgxProcess *self)
 {
   g_critical ("%s shouldn't be reached", G_STRLOC);
 }
+
+int
+kgx_pid_cmp (gconstpointer a, gconstpointer b, gpointer data)
+{
+  g_critical ("%s shouldn't be reached", G_STRLOC);
+  
+  return 0;
+}

@@ -717,4 +717,4 @@ kgx_application_pop_active (KgxApplication *self)
   } else {
     set_watcher (self, TRUE);
   }
-}
+} 
