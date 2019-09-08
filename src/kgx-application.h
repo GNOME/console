@@ -19,6 +19,7 @@
 #pragma once
 
 #include <gtk/gtk.h>
+#include <gio/gdesktopappinfo.h>
 
 #include "kgx-process.h"
 #include "kgx-window.h"

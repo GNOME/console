@@ -316,22 +316,46 @@ kgx_application_command_line (GApplication            *app,
 {
   GVariantDict *options = NULL;
   const char *working_dir = NULL;
-  const char *command = NULL;
+  g_autofree char *command = NULL;
+  const char *desktop = NULL;
   GtkWidget *window;
   g_autofree char *abs_path = NULL;
 
   options = g_application_command_line_get_options_dict (cli);
 
   g_variant_dict_lookup (options, "working-directory", "^&ay", &working_dir);
-  g_variant_dict_lookup (options, "command", "^&ay", &command);
+  g_variant_dict_lookup (options, "command", "^ay", &command);
+  g_variant_dict_lookup (options, "launch-desktop", "^&ay", &desktop);
+
+  if (desktop && command) {
+    g_application_command_line_printerr (cli,
+                                         "Can't specify --command and --launch-desktop, ignoring --command");
+    g_clear_pointer (&command, g_free);
+  }
 
   if (working_dir != NULL) {
     abs_path = g_canonicalize_filename (working_dir, NULL);
   }
 
+  if (desktop) {
+    g_autoptr (GDesktopAppInfo) info = NULL;
+
+    info = g_desktop_app_info_new (desktop);
+
+    if (info == NULL) {
+      g_application_command_line_printerr (cli,
+                                           "Can't find '%s'\n",
+                                           desktop);
+
+      return 1;
+    }
+    
+    command = g_strdup (g_app_info_get_commandline (G_APP_INFO (info)));
+  }
+
   window = g_object_new (KGX_TYPE_WINDOW,
                          "application", app,
-                         "close-on-zero", command == NULL,
+                         "close-on-zero", command == NULL || desktop != NULL,
                          "initial-work-dir", abs_path,
                          "command", command,
                          NULL);
@@ -547,6 +571,15 @@ static GOptionEntry entries[] =
     G_OPTION_ARG_NONE,
     NULL,
     N_("Wait until the child exits (TODO)"),
+    NULL
+  },
+  {
+    "launch-desktop",
+    0,
+    0,
+    G_OPTION_ARG_FILENAME,
+    NULL,
+    N_("Execute a .desktop file (like --command, but with a launcher)"),
     NULL
   },
   { NULL }
