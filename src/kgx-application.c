@@ -325,13 +325,7 @@ kgx_application_command_line (GApplication            *app,
 
   g_variant_dict_lookup (options, "working-directory", "^&ay", &working_dir);
   g_variant_dict_lookup (options, "command", "^ay", &command);
-  g_variant_dict_lookup (options, "launch-desktop", "^&ay", &desktop);
-
-  if (desktop && command) {
-    g_application_command_line_printerr (cli,
-                                         "Can't specify --command and --launch-desktop, ignoring --command");
-    g_clear_pointer (&command, g_free);
-  }
+  g_variant_dict_lookup (options, "desktop-id", "^&ay", &desktop);
 
   if (working_dir != NULL) {
     abs_path = g_canonicalize_filename (working_dir, NULL);
@@ -574,12 +568,12 @@ static GOptionEntry entries[] =
     NULL
   },
   {
-    "launch-desktop",
+    "desktop-id",
     0,
-    0,
+    G_OPTION_FLAG_HIDDEN,
     G_OPTION_ARG_FILENAME,
     NULL,
-    N_("Execute a .desktop file (like --command, but with a launcher)"),
+    NULL,
     NULL
   },
   { NULL }
