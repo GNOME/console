@@ -1,0 +1,233 @@
+# Hungarian translation for kgx.
+# Copyright (C) 2019 Free Software Foundation, Inc.
+# This file is distributed under the same license as the kgx package.
+#
+# Balázs Úr <ur.balazs at fsf dot hu>, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: kgx master\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
+"POT-Creation-Date: 2019-09-09 07:44+0000\n"
+"PO-Revision-Date: 2019-09-10 07:54+0200\n"
+"Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
+"Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 18.12.3\n"
+
+#. Translators: This is a train station, see README.md for more info
+#: data/org.gnome.zbrown.KingsCross.desktop.in:4
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:424
+#: src/kgx-window.c:742 src/main.c:38
+msgid "King’s Cross"
+msgstr "A király keresztje"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.zbrown.KingsCross.desktop.in:9
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
+msgstr ""
+"parancs;bekérés;cmd;parancssor;futtatás;parancsértelmező;terminál;kgx;király;k"
+"eresztje;"
+
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3 src/main.c:35
+msgid "Terminal"
+msgstr "Terminál"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:8
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
+msgstr "parancs;bekérés;cmd;parancssor;futtatás;parancsértelmező;terminál;kgx;"
+
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:426
+#: src/kgx-window.c:733
+msgid "Terminal Emulator"
+msgstr "Terminálemulátor"
+
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:11
+msgid "A simple user-friendly terminal emulator for the GNOME desktop."
+msgstr "Egy egyszerű, felhasználóbarát terminálemulátor a GNOME asztalhoz."
+
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:22
+msgid "Terminal window"
+msgstr "Terminálablak"
+
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:38
+msgid "Zander Brown"
+msgstr "Zander Brown"
+
+#: src/help-overlay.ui:13
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Alkalmazás"
+
+#: src/help-overlay.ui:19
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Új ablak"
+
+#: src/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Terminál"
+
+#: src/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Keresés"
+
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Másolás"
+
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Beillesztés"
+
+#. Translators: This is the name of the timeout that looks for programs
+#. running in the terminal
+#: src/kgx-application.c:256
+msgid "child watcher"
+msgstr "gyermek megfigyelő"
+
+#. Translators: The leading # is intentional, the initial %s is the
+#. version of King's Cross itself, the latter format is the VTE version
+#: src/kgx-application.c:398
+#, c-format
+msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
+msgstr "# A király keresztje %s VTE %u.%u.%u %s használatával\n"
+
+#: src/kgx-application.c:410 src/kgx-window.c:725
+#, c-format
+msgid "Copyright © %s Zander Brown"
+msgstr "Copyright © %s Zander Brown"
+
+#: src/kgx-application.c:530
+msgid "Execute the argument to this option inside the terminal"
+msgstr "Az argumentum végrehajtása erre a kapcsolóra a terminálon belül"
+
+#: src/kgx-application.c:539
+msgid "Set the working directory"
+msgstr "A munkakönyvtár beállítása"
+
+#. Translators: Placeholder of for a given directory
+#: src/kgx-application.c:541
+msgid "DIRNAME"
+msgstr "KÖNYVTÁRNÉV"
+
+#: src/kgx-application.c:549
+msgid "Wait until the child exits (TODO)"
+msgstr "Várakozás a gyermek kilépéséig (TODO)"
+
+#: src/kgx-terminal.c:374
+msgid "You are pasting a command that runs as an administrator"
+msgstr "Olyan parancsot illeszt be, amely rendszergazdaként fut"
+
+#. TRANSLATORS: %s is the command being pasted
+#: src/kgx-terminal.c:377
+#, c-format
+msgid ""
+"Make sure you know what the command does:\n"
+"%s"
+msgstr ""
+"Győződjön meg arról, hogy pontosan tudja-e, mit csinál a parancs:\n"
+"%s"
+
+#: src/kgx-terminal.c:382 src/kgx-close-dialog.ui:56
+msgid "_Cancel"
+msgstr "_Mégse"
+
+#: src/kgx-terminal.c:385 src/menus.ui:24
+msgid "_Paste"
+msgstr "_Beillesztés"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-window.c:149
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Csak olvasható</b> — A parancs kilépett %i kóddal"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-window.c:164
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Csak olvasható</b> — A parancs kilépett"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-window.c:201
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Indítás sikertelen</b> — %s"
+
+#. Translators: Credit yourself here
+#: src/kgx-window.c:732
+msgid "translator-credits"
+msgstr "Úr Balázs <ur.balazs at fsf dot hu>, 2019."
+
+#. Translators: "by King’s Cross" here is meaning
+#. author or creator of 'Terminal'
+#: src/kgx-window.c:740
+msgid ""
+"Terminal\n"
+"by King’s Cross"
+msgstr ""
+"Terminál\n"
+"A király keresztjétől"
+
+#: src/kgx-window.c:1013
+msgid "Command completed"
+msgstr "Parancs befejezve"
+
+#: src/kgx-window.ui:61
+msgid "_New Window"
+msgstr "Ú_j ablak"
+
+#: src/kgx-window.ui:73
+msgid "_Keyboard Shortcuts"
+msgstr "_Gyorsbillentyűk"
+
+#: src/kgx-window.ui:80
+msgid "_About King’s Cross"
+msgstr "A király keresztjének _névjegye"
+
+#: src/menus.ui:7
+msgid "_Open Link"
+msgstr "_Hivatkozás megnyitása"
+
+#: src/menus.ui:12
+msgid "Copy _Link"
+msgstr "Hi_vatkozás másolása"
+
+#: src/menus.ui:19
+msgid "_Copy"
+msgstr "_Másolás"
+
+#: src/menus.ui:29
+msgid "_Select All"
+msgstr "Összes _kijelölése"
+
+#: src/menus.ui:36
+msgid "Show in _Files"
+msgstr "Megjelenítés a _Fájlokban"
+
+#: src/kgx-close-dialog.ui:6
+msgid "Close Terminal"
+msgstr "Terminál bezárása"
+
+#: src/kgx-close-dialog.ui:25
+msgid ""
+"Some commands are still running, closing this terminal will kill them and "
+"may lead to unexpected outcomes"
+msgstr ""
+"Néhány parancs még mindig fut, a terminál bezárása ki fogja lőni azokat, és"
+" ez váratlan eredményekhez vezethet"
+
+#: src/kgx-close-dialog.ui:64
+msgid "_OK"
+msgstr "_Rendben"
