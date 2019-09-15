@@ -1,4 +1,4 @@
-/* kgx.h
+/* kgx-utils.h
  *
  * Copyright 2019 Zander Brown
  *
@@ -16,13 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "kgx-config.h"
-#include "kgx-application.h"
-#include "kgx-window.h"
-#include "kgx-terminal.h"
-#include "kgx-search-box.h"
-#include "kgx-enums.h"
-#include "kgx-process.h"
-#include "kgx-utils.h"
+#pragma once
 
-#include "fp-vte-util.h"
+#include <gtk/gtk.h>
+
+G_BEGIN_DECLS
+
+gboolean kgx_get_app_colour (GAppInfo *info, GdkRGBA *colour);
+
+G_END_DECLS

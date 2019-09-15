@@ -11,4 +11,4 @@ Categories=System;TerminalEmulator;X-GNOME-Utilities;GTK;GNOME;
 StartupNotify=true
 DBusActivatable=true
 X-GNOME-UsesNotifications=true
-x-terminal-handler/standard;x-terminal-handler/enhanced;
+MimeType=x-terminal-handler/standard;x-terminal-handler/enhanced;

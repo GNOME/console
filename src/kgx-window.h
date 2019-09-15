@@ -49,6 +49,7 @@ G_BEGIN_DECLS
  * @exit_info: the #GtkRevealer hat wraps @exit_message
  * @exit_message: the #GtkLabel for showing important messages
  * @zoom_level: the #GtkLabel in the #GtkPopover showing the current zoom level
+ * @notification_id: the id used for #GNotification s sent by this window
  * 
  * Since: 0.1.0
  */

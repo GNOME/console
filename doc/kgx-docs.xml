@@ -44,6 +44,7 @@
 
   <part id="util-api">
     <title>Utils</title>
+    <xi:include href="xml/kgx-utils.xml"/>
     <xi:include href="xml/rgba.xml"/>
     <xi:include href="xml/fp-vte-util.xml"/>
   </part>

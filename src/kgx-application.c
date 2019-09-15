@@ -39,6 +39,7 @@
 #include "kgx-application.h"
 #include "kgx-search-box.h"
 #include "kgx-window.h"
+#include "kgx-utils.h"
 
 #define LOGO_COL_SIZE 28
 #define LOGO_ROW_SIZE 14
@@ -333,6 +334,7 @@ kgx_application_command_line (GApplication            *app,
 
   if (desktop) {
     g_autoptr (GDesktopAppInfo) info = NULL;
+    GdkRGBA colour;
 
     info = g_desktop_app_info_new (desktop);
 
@@ -344,7 +346,36 @@ kgx_application_command_line (GApplication            *app,
       return 1;
     }
     
-    command = g_strdup (g_app_info_get_commandline (G_APP_INFO (info)));
+    if (kgx_get_app_colour (G_APP_INFO (info), &colour)) {
+      GtkCssProvider *provider;
+      g_autofree char* css = NULL;
+      const char *icon_name = "application-x-executable";
+      GIcon *icon = NULL;
+
+      g_message ("App Colour -> %s", gdk_rgba_to_string (&colour));
+
+      icon = g_app_info_get_icon (G_APP_INFO (info));
+
+      if (icon && G_IS_THEMED_ICON (icon)) {
+        icon_name = g_themed_icon_get_names (G_THEMED_ICON (icon))[0];
+      }
+
+      gtk_window_set_default_icon_name (icon_name);
+
+      css = g_strdup_printf ("headerbar {"
+                             "  background: -gtk-icontheme(\"%s\") 50px 0/64px 64px no-repeat,"
+                             "               #241f31;"
+                             "  border-bottom-color: %s;"
+                             "}",
+                             icon_name,
+                             gdk_rgba_to_string (&colour));
+
+      provider = gtk_css_provider_new ();
+      gtk_css_provider_load_from_data (provider, css, -1, NULL);
+      gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+                                                GTK_STYLE_PROVIDER (provider),
+                                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
+    }
   }
 
   window = g_object_new (KGX_TYPE_WINDOW,
