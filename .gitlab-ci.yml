@@ -50,10 +50,12 @@ debian:
   stage: test
   before_script:
     - export DEBIAN_FRONTEND=noninteractive
+    - apt -y update
+    - apt -y install wget ca-certificates gnupg
     - echo "deb http://ci.puri.sm/ scratch librem5" > /etc/apt/sources.list.d/ci.list
     - wget -O- https://ci.puri.sm/ci-repo.key | apt-key add -
     - echo "deb http://debug.mirrors.debian.org/debian-debug/ buster-debug main" > /etc/apt/sources.list.d/debug.list
-    - apt update
+    - apt -y update
     - apt -y upgrade
     - apt -y build-dep .
   script:
