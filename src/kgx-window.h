@@ -78,8 +78,8 @@ struct _KgxWindow
   GtkWidget            *header_bar;
   GtkWidget            *terminal;
   GtkWidget            *dims;
+  GtkWidget            *search_entry;
   GtkWidget            *search_bar;
-  GtkWidget            *search_wrap;
   GtkWidget            *exit_info;
   GtkWidget            *exit_message;
   GtkWidget            *zoom_level;

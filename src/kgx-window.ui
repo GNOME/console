@@ -140,15 +140,59 @@
             <property name="visible">1</property>
             <property name="orientation">vertical</property>
             <child>
-              <object class="GtkSearchBar" id="search_bar">
+              <object class="HdySearchBar" id="search_bar">
                 <property name="visible">1</property>
                 <signal name="notify::search-mode-enabled" handler="search_enabled" swapped="no"/>
                 <child>
-                  <object class="KgxSearchBox" id="search_wrap">
+                  <object class="HdyColumn">
                     <property name="visible">1</property>
-                    <signal name="next" handler="search_next" swapped="no"/>
-                    <signal name="previous" handler="search_prev" swapped="no"/>
-                    <signal name="changed" handler="search_changed" swapped="no"/>
+                    <property name="maximum-width">500</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">1</property>
+                        <child>
+                          <object class="GtkSearchEntry" id="search_entry">
+                          <property name="visible">1</property>
+                          <property name="can-focus">1</property>
+                          <property name="hexpand">1</property>
+                          <signal name="next-match" handler="search_next" swapped="no"/>
+                          <signal name="previous-match" handler="search_prev" swapped="no"/>
+                          <signal name="search-changed" handler="search_changed" swapped="no"/>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton">
+                          <property name="visible">1</property>
+                          <property name="can-focus">1</property>
+                          <property name="receives-default">1</property>
+                          <child>
+                            <object class="GtkImage">
+                            <property name="visible">1</property>
+                            <property name="icon-name">go-down-symbolic</property>
+                            </object>
+                          </child>
+                          <signal name="clicked" handler="search_next" swapped="no"/>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton">
+                          <property name="visible">1</property>
+                          <property name="can-focus">1</property>
+                          <property name="receives-default">1</property>
+                          <child>
+                            <object class="GtkImage">
+                            <property name="visible">1</property>
+                            <property name="icon-name">go-up-symbolic</property>
+                            </object>
+                          </child>
+                          <signal name="clicked" handler="search_prev" swapped="no"/>
+                          </object>
+                        </child>
+                        <style>
+                          <class name="linked"/>
+                        </style>
+                      </object>
+                    </child>
                   </object>
                 </child>
                 <style>

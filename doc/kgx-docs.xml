@@ -34,7 +34,6 @@
     <xi:include href="xml/kgx-window.xml"/>
     <xi:include href="xml/kgx-terminal.xml"/>
     <xi:include href="xml/kgx-process.xml"/>
-    <xi:include href="xml/kgx-search-box.xml"/>
     <chapter>
       <title>Confirm Close Dialog</title>
       <xi:include href="xml/kgx-close-dialog.xml"/>

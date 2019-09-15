@@ -20,7 +20,6 @@
 #include "kgx-application.h"
 #include "kgx-window.h"
 #include "kgx-terminal.h"
-#include "kgx-search-box.h"
 #include "kgx-enums.h"
 #include "kgx-process.h"
 

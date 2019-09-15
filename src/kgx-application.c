@@ -37,7 +37,6 @@
 
 #include "kgx-config.h"
 #include "kgx-application.h"
-#include "kgx-search-box.h"
 #include "kgx-window.h"
 
 #define LOGO_COL_SIZE 28
@@ -271,7 +270,6 @@ kgx_application_startup (GApplication *app)
   const char *const zoom_out_accels[] = { "<primary>minus", NULL };
 
   g_type_ensure (KGX_TYPE_TERMINAL);
-  g_type_ensure (KGX_TYPE_SEARCH_BOX);
 
   G_APPLICATION_CLASS (kgx_application_parent_class)->startup (app);
 

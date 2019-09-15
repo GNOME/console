@@ -33,6 +33,8 @@
 #define PCRE2_CODE_UNIT_WIDTH 0
 #include <pcre2.h>
 #include <math.h>
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
 
 #include "rgba.h"
 #include "fp-vte-util.h"
@@ -40,7 +42,6 @@
 #include "kgx-config.h"
 #include "kgx-window.h"
 #include "kgx-application.h"
-#include "kgx-search-box.h"
 #include "kgx-process.h"
 #include "kgx-close-dialog.h"
 
@@ -453,20 +454,20 @@ search_enabled (GObject    *object,
                 GParamSpec *pspec,
                 KgxWindow  *self)
 {
-  if (gtk_search_bar_get_search_mode (GTK_SEARCH_BAR (self->search_bar))) {
-    kgx_search_box_focus (KGX_SEARCH_BOX (self->search_wrap));
-  } else {
+  if (!hdy_search_bar_get_search_mode (HDY_SEARCH_BAR (self->search_bar))) {
     gtk_widget_grab_focus (self->terminal);
   }
 }
 
 static void
-search_changed (KgxSearchBox *box,
-                const gchar  *search,
+search_changed (HdySearchBar *bar,
                 KgxWindow    *self)
 {
   VteRegex *regex;
   GError *error = NULL;
+  const char *search = NULL;
+
+  search = gtk_entry_get_text (GTK_ENTRY (self->search_entry));
 
   regex = vte_regex_new_for_search (g_regex_escape_string (search, -1),
                                     -1, PCRE2_MULTILINE, &error);
@@ -481,14 +482,14 @@ search_changed (KgxSearchBox *box,
 }
 
 static void
-search_next (KgxSearchBox *box,
+search_next (HdySearchBar *bar,
              KgxWindow    *self)
 {
   vte_terminal_search_find_next (VTE_TERMINAL (self->terminal));
 }
 
 static void
-search_prev (KgxSearchBox *box,
+search_prev (HdySearchBar *bar,
              KgxWindow    *self)
 {
   vte_terminal_search_find_previous (VTE_TERMINAL (self->terminal));
@@ -663,8 +664,8 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, header_bar);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, terminal);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, dims);
+  gtk_widget_class_bind_template_child (widget_class, KgxWindow, search_entry);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, search_bar);
-  gtk_widget_class_bind_template_child (widget_class, KgxWindow, search_wrap);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_info);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_message);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, zoom_level);
@@ -875,6 +876,9 @@ kgx_window_init (KgxWindow *self)
   g_object_bind_property (self, "is-maximized",
                           self->terminal, "opaque",
                           G_BINDING_SYNC_CREATE);
+
+  hdy_search_bar_connect_entry (HDY_SEARCH_BAR (self->search_bar),
+                                GTK_ENTRY (self->search_entry));
 }
 
 /**

@@ -5,8 +5,6 @@ kgx_sources = [
   'fp-vte-util.h',
   'kgx-terminal.c',
   'kgx-terminal.h',
-  'kgx-search-box.c',
-  'kgx-search-box.h',
   'kgx-close-dialog.c',
   'kgx-close-dialog.h',
   'kgx-close-dialog-row.c',
