@@ -50,6 +50,17 @@
             ]
         },
         {
+            "name": "handy",
+            "builddir": true,
+            "buildsystem": "meson",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://source.puri.sm/Librem5/libhandy"
+                }
+            ]
+        },
+        {
             "name": "kgx",
             "builddir": true,
             "buildsystem": "meson",
