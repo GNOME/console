@@ -20,6 +20,8 @@
 
 #include <gtk/gtk.h>
 #include <vte/vte.h>
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
 
 G_BEGIN_DECLS
 
@@ -34,13 +36,13 @@ G_BEGIN_DECLS
 struct _KgxCloseDialog
 {
   /*< private >*/
-  GtkDialog parent_instance;
+  HdyDialog parent_instance;
 
   /*< public >*/
   GtkWidget *list;
 };
 
-G_DECLARE_FINAL_TYPE (KgxCloseDialog, kgx_close_dialog, KGX, CLOSE_DIALOG, GtkDialog)
+G_DECLARE_FINAL_TYPE (KgxCloseDialog, kgx_close_dialog, KGX, CLOSE_DIALOG, HdyDialog)
 
 void kgx_close_dialog_add_command (KgxCloseDialog *self,
                                    const char     *command);
