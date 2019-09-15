@@ -5,27 +5,28 @@ project('kgx', 'c', version: '0.2.0',
 
 i18n = import('i18n')
 
-config_h = configuration_data()
-config_h.set_quoted('PACKAGE_VERSION', meson.project_version())
-config_h.set_quoted('GETTEXT_PACKAGE', 'kgx')
-config_h.set_quoted('LOCALEDIR',
+conf = configuration_data()
+conf.set_quoted('PACKAGE_VERSION', '@VCS_TAG@')
+conf.set_quoted('GETTEXT_PACKAGE', 'kgx')
+conf.set_quoted('LOCALEDIR',
                     join_paths(get_option('prefix'), get_option('localedir')))
-config_h.set_quoted('RES_PATH', '/org/gnome/zbrown/KingsCross/')
-config_h.set('BINDIR', join_paths(get_option('prefix'), get_option('bindir')))
+conf.set_quoted('RES_PATH', '/org/gnome/zbrown/KingsCross/')
+conf.set('BINDIR', join_paths(get_option('prefix'), get_option('bindir')))
 if get_option('gtop')
-  config_h.set('HAS_GTOP', 1)
+  conf.set('HAS_GTOP', 1)
 else
-  config_h.set('HAS_GTOP', 0)
+  conf.set('HAS_GTOP', 0)
 endif
 if get_option('generic')
-  config_h.set('IS_GENERIC', 1)
+  conf.set('IS_GENERIC', 1)
 else
-  config_h.set('IS_GENERIC', 0)
+  conf.set('IS_GENERIC', 0)
 endif
-configure_file(
-  output: 'kgx-config.h',
-  configuration: config_h,
+config_h_in = configure_file(
+  output: 'kgx-config.h.in',
+  configuration: conf,
 )
+config_h = vcs_tag(input: config_h_in, output: 'kgx-config.h')
 
 gtk_ver = 'GDK_VERSION_3_24'
 glib_ver = 'GLIB_VERSION_2_58'

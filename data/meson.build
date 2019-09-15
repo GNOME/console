@@ -53,7 +53,7 @@ endif
 
 configure_file(input: 'org.gnome.zbrown.KingsCross.service.in',
                output: 'org.gnome.zbrown.KingsCross.service',
-               configuration: config_h,
+               configuration: conf,
                install_dir: join_paths([get_option('datadir'),'dbus-1/services']))
 
 install_data('org.gnome.zbrown.KingsCross.svg',
