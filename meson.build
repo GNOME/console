@@ -1,4 +1,4 @@
-project('kgx', 'c', version: '0.1.0',
+project('kgx', 'c', version: '0.2.0',
   meson_version: '>= 0.49.0',
   default_options: ['werror=true', 'c_std=gnu11', 'cpp_std=gnu++17'],
 )

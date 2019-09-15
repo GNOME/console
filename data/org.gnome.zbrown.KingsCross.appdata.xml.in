@@ -23,6 +23,13 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="0.2.0" date="2019-09-15">
+      <description>
+        <p>Impoved tracking of running commands reducing resource usage, especially when running in the background.</p>
+        <p>Command complete notifications and query close when commands are still running.</p>
+        <p>Translations for de, en_GB, es, fi, hu, pl &amp; pt_BR from various users on l10n.gnome.org (thanks guys!)</p>
+      </description>
+    </release>
     <release version="0.1.0" date="2019-07-30">
       <description>
         <p>The first release of our little terminal emulator with basic functionality.</p>

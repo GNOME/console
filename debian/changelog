@@ -1,3 +1,13 @@
+kgx (0.2.0) purple; urgency=low
+
+  * Impoved tracking of running commands reducing resource usage, especially when running in the background.
+  * Command complete notifications
+  * Query close when commands are still running.
+  * Translations for de, en_GB, es, fi, hu, pl &amp; pt_BR from various users on l10n.gnome.org (thanks guys!)
+
+ -- Zander Brown <zbrown@gnome.org>  Sun, 15 Sep 2019 11:52:00 +0100
+
+
 kgx (0.0.1) purple; urgency=low
 
   * Initial release
