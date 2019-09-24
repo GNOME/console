@@ -669,6 +669,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_info);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_message);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, zoom_level);
+  gtk_widget_class_bind_template_child (widget_class, KgxWindow, about_item);
 
   gtk_widget_class_bind_template_callback (widget_class, application_set);
   gtk_widget_class_bind_template_callback (widget_class, active_changed);
@@ -738,7 +739,7 @@ about_activated (GSimpleAction *action,
                          #if IS_GENERIC
                          // Translators: "by King’s Cross" here is meaning
                          // author or creator of 'Terminal'
-                         "program-name", _("Terminal\nby King’s Cross"),
+                         "program-name", _("Terminal (King’s Cross)"),
                          #else
                          "program-name", _("King’s Cross"),
                          #endif
@@ -837,6 +838,12 @@ kgx_window_init (KgxWindow *self)
   GPropertyAction *pact;
 
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  #if IS_GENERIC
+  g_object_set (self->about_item,
+                "text", _("_About Terminal"),
+                NULL);
+  #endif
 
   g_action_map_add_action_entries (G_ACTION_MAP (self),
                                    win_entries,

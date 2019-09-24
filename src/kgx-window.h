@@ -83,6 +83,7 @@ struct _KgxWindow
   GtkWidget            *exit_info;
   GtkWidget            *exit_message;
   GtkWidget            *zoom_level;
+  GtkWidget            *about_item;
 
   char                 *notification_id;
 };
