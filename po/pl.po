@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2019-09-06 18:34+0000\n"
-"PO-Revision-Date: 2019-09-08 11:15+0200\n"
+"POT-Creation-Date: 2019-09-24 16:40+0000\n"
+"PO-Revision-Date: 2019-09-29 16:05+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -21,8 +21,8 @@ msgstr ""
 
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:424
-#: src/kgx-window.c:742 src/main.c:38
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:422
+#: src/kgx-window.c:744 src/main.c:38
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
@@ -44,8 +44,8 @@ msgstr ""
 "powłoka;shell;prompt;polecenie;komenda;wiersz poleceń;linia poleceń;wiersz "
 "komend;linia komend;cmd;konsola;terminal;kgx;kings cross;"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:426
-#: src/kgx-window.c:733
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:424
+#: src/kgx-window.c:735
 msgid "Terminal Emulator"
 msgstr "Emulator terminala"
 
@@ -57,7 +57,7 @@ msgstr "Prosty, łatwy w użyciu emulator terminala dla środowiska GNOME."
 msgid "Terminal window"
 msgstr "Okno terminala"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:38
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:45
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -93,36 +93,36 @@ msgstr "Wklejenie"
 
 #. Translators: This is the name of the timeout that looks for programs
 #. running in the terminal
-#: src/kgx-application.c:256
+#: src/kgx-application.c:255
 msgid "child watcher"
 msgstr "obserwator procesu potomnego"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:398
+#: src/kgx-application.c:396
 #, c-format
 msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgstr "# King’s Cross %s, używa biblioteki VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:410 src/kgx-window.c:725
+#: src/kgx-application.c:408 src/kgx-window.c:727
 #, c-format
 msgid "Copyright © %s Zander Brown"
 msgstr "Copyright © %s Zander Brown"
 
-#: src/kgx-application.c:530
+#: src/kgx-application.c:528
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Wykonuje parametr do tej opcji wewnątrz terminala"
 
-#: src/kgx-application.c:539
+#: src/kgx-application.c:537
 msgid "Set the working directory"
 msgstr "Ustawia katalog roboczy"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:541
+#: src/kgx-application.c:539
 msgid "DIRNAME"
 msgstr "NAZWA-KATALOGU"
 
-#: src/kgx-application.c:549
+#: src/kgx-application.c:547
 msgid "Wait until the child exits (TODO)"
 msgstr "Czeka, aż proces potomny zakończy działanie (niezaimplementowane)"
 
@@ -150,26 +150,26 @@ msgstr "Wk_lej"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-window.c:149
+#: src/kgx-window.c:150
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Tylko do odczytu</b> — polecenie zakończyło działanie z kodem %i"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-window.c:164
+#: src/kgx-window.c:165
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Tylko do odczytu</b> — polecenie zakończyło działanie"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-window.c:201
+#: src/kgx-window.c:202
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Uruchomienie się nie powiodło</b> — %s"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:732
+#: src/kgx-window.c:734
 msgid "translator-credits"
 msgstr ""
 "Piotr Drąg <piotrdrag@gmail.com>, 2019\n"
@@ -177,15 +177,15 @@ msgstr ""
 
 #. Translators: "by King’s Cross" here is meaning
 #. author or creator of 'Terminal'
-#: src/kgx-window.c:740
-msgid ""
-"Terminal\n"
-"by King’s Cross"
-msgstr ""
-"Terminal\n"
-"na stacji King’s Cross"
+#: src/kgx-window.c:742
+msgid "Terminal (King’s Cross)"
+msgstr "Terminal (King’s Cross)"
 
-#: src/kgx-window.c:1013
+#: src/kgx-window.c:844
+msgid "_About Terminal"
+msgstr "_O programie"
+
+#: src/kgx-window.c:1024
 msgid "Command completed"
 msgstr "Ukończono polecenie"
 
