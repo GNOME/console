@@ -23,6 +23,13 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="0.2.1" date="2019-10-06">
+      <description>
+        <p>Use HdySearchBar to match the behaviour in other apps.</p>
+        <p>Improved generic banding (no weird symbols in about dialog).</p>
+        <p>Translation updates from the wonderful d-l team (except en_GB, that translator seems to have dropped the ball....).</p>
+      </description>
+    </release>
     <release version="0.2.0" date="2019-09-15">
       <description>
         <p>Impoved tracking of running commands reducing resource usage, especially when running in the background.</p>
