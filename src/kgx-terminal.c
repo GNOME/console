@@ -71,10 +71,17 @@ enum {
   PROP_0,
   PROP_THEME,
   PROP_OPAQUE,
+  PROP_PATH,
   LAST_PROP
 };
 
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
+
+enum {
+  SIZE_CHANGED,
+  N_SIGNALS
+};
+static guint signals[N_SIGNALS];
 
 
 static void
@@ -83,7 +90,7 @@ kgx_terminal_set_theme (KgxTerminal *self,
                         gboolean     opaque)
 {
   GdkRGBA fg;
-  GdkRGBA bg = (GdkRGBA) { 0.1, 0.1, 0.1, 0.96};
+  GdkRGBA bg = (GdkRGBA) { 0.05, 0.05, 0.05, 0.96};
 
   // Workings of GDK_RGBA prevent this being static
   GdkRGBA palette[16] = {
@@ -164,6 +171,8 @@ kgx_terminal_get_property (GObject    *object,
                            GParamSpec *pspec)
 {
   KgxTerminal *self = KGX_TERMINAL (object);
+  const char *uri;
+  g_autoptr (GFile) path = NULL;
 
   switch (property_id) {
     case PROP_THEME:
@@ -171,6 +180,14 @@ kgx_terminal_get_property (GObject    *object,
       break;
     case PROP_OPAQUE:
       g_value_set_boolean (value, self->opaque);
+      break;
+    case PROP_PATH:
+      if ((uri = vte_terminal_get_current_file_uri (VTE_TERMINAL (self)))) {
+        path = g_file_new_for_uri (uri);
+      } else if ((uri = vte_terminal_get_current_directory_uri (VTE_TERMINAL (self)))) {
+        path = g_file_new_for_uri (uri);
+      }
+      g_value_set_object (value, path);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -286,7 +303,29 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
                           FALSE,
                           G_PARAM_READWRITE);
 
+  /**
+   * KgxTerminal:path:
+   * 
+   * 
+   * Stability: Private
+   * 
+   * Since: 0.3.0
+   */
+  pspecs[PROP_PATH] =
+    g_param_spec_object ("path", "Path", "Current path",
+                         G_TYPE_FILE,
+                         G_PARAM_READABLE);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
+
+  signals[SIZE_CHANGED] = g_signal_new ("size-changed",
+                                        G_TYPE_FROM_CLASS (klass),
+                                        G_SIGNAL_RUN_LAST,
+                                        0, NULL, NULL, NULL,
+                                        G_TYPE_NONE,
+                                        2,
+                                        G_TYPE_UINT,
+                                        G_TYPE_UINT);
 }
 
 static void
@@ -503,6 +542,7 @@ selection_changed (KgxTerminal *self)
                                vte_terminal_get_has_selection (VTE_TERMINAL (self)));
 }
 
+
 static void
 location_changed (KgxTerminal *self)
 {
@@ -515,7 +555,26 @@ location_changed (KgxTerminal *self)
             vte_terminal_get_current_directory_uri (VTE_TERMINAL (self));
 
   g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
+
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_PATH]);
 }
+
+
+static void
+size_changed (GtkWidget    *widget,
+              GdkRectangle *allocation)
+{
+  int          rows;
+  int          cols;
+  KgxTerminal *self = KGX_TERMINAL (widget);
+  VteTerminal *term = VTE_TERMINAL (self);
+
+  rows = vte_terminal_get_row_count (term);
+  cols = vte_terminal_get_column_count (term);
+
+  g_signal_emit (self, signals[SIZE_CHANGED], 0, rows, cols);
+}
+
 
 static void
 kgx_terminal_init (KgxTerminal *self)
@@ -523,8 +582,7 @@ kgx_terminal_init (KgxTerminal *self)
   GAction *act;
   GtkGesture *gesture;
 
-  self->theme = KGX_THEME_NIGHT;
-  self->opaque = FALSE;
+  kgx_terminal_set_theme (self, KGX_THEME_NIGHT, FALSE);
 
   self->actions = G_ACTION_MAP (g_simple_action_group_new ());
   g_action_map_add_action_entries (self->actions,
@@ -551,6 +609,7 @@ kgx_terminal_init (KgxTerminal *self)
   g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
 
   vte_terminal_search_set_wrap_around (VTE_TERMINAL (self), TRUE);
+  vte_terminal_set_allow_hyperlink (VTE_TERMINAL (self), TRUE);
 
   g_signal_connect (self, "selection-changed",
                     G_CALLBACK (selection_changed), NULL);
@@ -558,6 +617,8 @@ kgx_terminal_init (KgxTerminal *self)
                     G_CALLBACK (location_changed), NULL);
   g_signal_connect (self, "current-file-uri-changed",
                     G_CALLBACK (location_changed), NULL);
+  g_signal_connect (self, "size-allocate",
+                    G_CALLBACK (size_changed), NULL);
 
   for (int i = 0; i < KGX_TERMINAL_N_LINK_REGEX; i++) {
     g_autoptr (VteRegex) regex = NULL;

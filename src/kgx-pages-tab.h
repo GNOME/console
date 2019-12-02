@@ -1,4 +1,4 @@
-/* kgx.h
+/* kgx-pages-tab.h
  *
  * Copyright 2019 Zander Brown
  *
@@ -16,12 +16,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "kgx-config.h"
-#include "kgx-application.h"
-#include "kgx-window.h"
-#include "kgx-terminal.h"
-#include "kgx-enums.h"
-#include "kgx-process.h"
-#include "kgx-pages.h"
+#pragma once
 
-#include "fp-vte-util.h"
+#include <gtk/gtk.h>
+
+G_BEGIN_DECLS
+
+#define KGX_TYPE_PAGES_TAB (kgx_pages_tab_get_type())
+
+/**
+ * KgxPagesTab:
+ * 
+ * Stability: Private
+ */
+struct _KgxPagesTab
+{
+  /*< private >*/
+  GtkBox  parent_instance;
+
+  /*< public >*/
+  char   *title;
+};
+
+G_DECLARE_FINAL_TYPE (KgxPagesTab, kgx_pages_tab, KGX, PAGES_TAB, GtkBox)
+
+
+G_END_DECLS

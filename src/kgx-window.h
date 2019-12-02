@@ -22,8 +22,30 @@
 
 #include "kgx-terminal.h"
 #include "kgx-process.h"
+#include "kgx-enums.h"
 
 G_BEGIN_DECLS
+
+
+/**
+ * KgxZoom:
+ * @KGX_ZOOM_IN: Make text bigger
+ * @KGX_ZOOM_OUT: Shrink text
+ * 
+ * Indicates the zoom direction the zoom action was triggered for
+ * 
+ * See #KgxPage:zoom, #KgxPages:zoom
+ * 
+ * Since: 0.3.0
+ * 
+ * Stability: Private
+ */
+typedef enum /*< enum,prefix=KGX >*/
+{
+  KGX_ZOOM_IN = 0,  /*< nick=in >*/
+  KGX_ZOOM_OUT = 1, /*< nick=out >*/
+} KgxZoom;
+
 
 #define KGX_TYPE_WINDOW (kgx_window_get_type())
 
@@ -76,14 +98,13 @@ struct _KgxWindow
 
   /* Template widgets */
   GtkWidget            *header_bar;
-  GtkWidget            *terminal;
-  GtkWidget            *dims;
   GtkWidget            *search_entry;
   GtkWidget            *search_bar;
   GtkWidget            *exit_info;
   GtkWidget            *exit_message;
   GtkWidget            *zoom_level;
   GtkWidget            *about_item;
+  GtkWidget            *pages;
 
   char                 *notification_id;
 };
@@ -95,5 +116,7 @@ void        kgx_window_push_child      (KgxWindow    *self,
                                         KgxProcess   *process);
 void        kgx_window_pop_child       (KgxWindow    *self,
                                         KgxProcess   *process);
+void        kgx_window_show_status     (KgxWindow    *self,
+                                        const char   *status);
 
 G_END_DECLS

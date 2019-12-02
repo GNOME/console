@@ -5,6 +5,14 @@ kgx_sources = [
   'fp-vte-util.h',
   'kgx-terminal.c',
   'kgx-terminal.h',
+  'kgx-page.c',
+  'kgx-page.h',
+  'kgx-local-page.c',
+  'kgx-local-page.h',
+  'kgx-pages.c',
+  'kgx-pages.h',
+  'kgx-pages-tab.c',
+  'kgx-pages-tab.h',
   'kgx-close-dialog.c',
   'kgx-close-dialog.h',
   'kgx-close-dialog-row.c',
@@ -47,7 +55,8 @@ kgx_sources += gnome.compile_resources('kgx-resources',
   c_name: 'kgx'
 )
 
-kgx_sources += gnome.mkenums_simple('kgx-enums', sources: 'kgx-terminal.h')
+kgx_sources += gnome.mkenums_simple('kgx-enums',
+                                    sources: ['kgx-terminal.h', 'kgx-window.h'])
 
 kgx_lib = library ('kgx', kgx_sources, dependencies: kgx_deps)
 kgx_inc = include_directories('.')

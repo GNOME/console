@@ -38,6 +38,7 @@
 #include "kgx-config.h"
 #include "kgx-application.h"
 #include "kgx-window.h"
+#include "kgx-pages.h"
 
 #define LOGO_COL_SIZE 28
 #define LOGO_ROW_SIZE 14
@@ -69,9 +70,18 @@ static void
 kgx_application_set_scale (KgxApplication *self,
                            gdouble         scale)
 {
+  GAction *action;
+
   g_return_if_fail (KGX_IS_APPLICATION (self));
 
   self->scale = scale;
+
+  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-out");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), self->scale > 0.5);
+  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-normal");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), self->scale != 1.0);
+  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-in");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), self->scale < 2.0);
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_FONT_SCALE]);
 }
@@ -270,6 +280,7 @@ kgx_application_startup (GApplication *app)
   const char *const zoom_out_accels[] = { "<primary>minus", NULL };
 
   g_type_ensure (KGX_TYPE_TERMINAL);
+  g_type_ensure (KGX_TYPE_PAGES);
 
   G_APPLICATION_CLASS (kgx_application_parent_class)->startup (app);
 
@@ -564,10 +575,52 @@ focus_activated (GSimpleAction *action,
   gtk_window_present_with_time (win, GDK_CURRENT_TIME);
 }
 
+
+static void
+zoom_out_activated (GSimpleAction *action,
+                    GVariant      *parameter,
+                    gpointer       data)
+{
+  KgxApplication *self = KGX_APPLICATION (data);
+
+  if (self->scale < 0.1) {
+    return;
+  }
+
+  kgx_application_set_scale (self, self->scale - 0.1);
+}
+
+
+static void
+zoom_normal_activated (GSimpleAction *action,
+                       GVariant      *parameter,
+                       gpointer       data)
+{
+  KgxApplication *self = KGX_APPLICATION (data);
+
+  kgx_application_set_scale (self, 1.0);
+}
+
+
+static void
+zoom_in_activated (GSimpleAction *action,
+                   GVariant      *parameter,
+                   gpointer       data)
+{
+  KgxApplication *self = KGX_APPLICATION (data);
+
+  kgx_application_set_scale (self, self->scale + 0.1);
+}
+
+
 static GActionEntry app_entries[] =
 {
   { "focus-window", focus_activated, "u", NULL, NULL },
+  { "zoom-out", zoom_out_activated, NULL, NULL, NULL },
+  { "zoom-normal", zoom_normal_activated, NULL, NULL, NULL },
+  { "zoom-in", zoom_in_activated, NULL, NULL, NULL },
 };
+
 
 static void
 kgx_application_init (KgxApplication *self)
