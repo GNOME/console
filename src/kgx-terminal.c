@@ -90,7 +90,7 @@ kgx_terminal_set_theme (KgxTerminal *self,
                         gboolean     opaque)
 {
   GdkRGBA fg;
-  GdkRGBA bg = (GdkRGBA) { 0.05, 0.05, 0.05, 0.96};
+  GdkRGBA bg = (GdkRGBA) { 0.07, 0.07, 0.07, 0.96 };
 
   // Workings of GDK_RGBA prevent this being static
   GdkRGBA palette[16] = {

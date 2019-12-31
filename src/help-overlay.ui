@@ -19,6 +19,13 @@
                 <property name="title" translatable="yes" context="shortcut window">New Window</property>
               </object>
             </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="visible">True</property>
+                <property name="accelerator">&lt;shift&gt;&lt;primary&gt;t</property>
+                <property name="title" translatable="yes" context="shortcut window">New Tab</property>
+              </object>
+            </child>
           </object>
         </child>
         <child>

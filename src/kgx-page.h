@@ -25,7 +25,12 @@
 
 G_BEGIN_DECLS
 
+typedef struct _KgxPages KgxPages;
+
 #define KGX_TYPE_PAGE (kgx_page_get_type())
+
+G_DECLARE_DERIVABLE_TYPE (KgxPage, kgx_page, KGX, PAGE, GtkBox)
+
 
 /**
  * KgxPageClass:
@@ -35,22 +40,37 @@ G_BEGIN_DECLS
 struct _KgxPageClass
 {
   /*< private >*/
-  GtkBinClass parent;
+  GtkBoxClass parent;
 
   /*< public >*/
+  void (*start)        (KgxPage             *page,
+                        GAsyncReadyCallback  callback,
+                        gpointer             callback_data);
+  GPid (*start_finish) (KgxPage             *self,
+                        GAsyncResult        *res,
+                        GError             **error);
 };
 
-G_DECLARE_DERIVABLE_TYPE (KgxPage, kgx_page, KGX, PAGE, GtkBin)
 
-
-void kgx_page_connect_tab      (KgxPage     *self,
-                                KgxPagesTab *tab);
-void kgx_page_connect_terminal (KgxPage     *self,
-                                KgxTerminal *term);
-void kgx_page_focus_terminal   (KgxPage     *self);
-void kgx_page_search_forward   (KgxPage     *self);
-void kgx_page_search_back      (KgxPage     *self);
-void kgx_page_search           (KgxPage     *self,
-                                const char  *search);
+void      kgx_page_connect_tab      (KgxPage             *self,
+                                     KgxPagesTab         *tab);
+void      kgx_page_connect_terminal (KgxPage             *self,
+                                     KgxTerminal         *term);
+void      kgx_page_focus_terminal   (KgxPage             *self);
+void      kgx_page_search_forward   (KgxPage             *self);
+void      kgx_page_search_back      (KgxPage             *self);
+void      kgx_page_search           (KgxPage             *self,
+                                     const char          *search);
+void      kgx_page_start            (KgxPage             *self,
+                                     GAsyncReadyCallback  callback,
+                                     gpointer             callback_data);
+GPid      kgx_page_start_finish     (KgxPage             *self,
+                                     GAsyncResult        *res,
+                                     GError             **error);
+void      kgx_page_died             (KgxPage             *self,
+                                     GtkMessageType       type,
+                                     const char          *message,
+                                     gboolean             success);
+KgxPages *kgx_page_get_pages        (KgxPage             *self);
 
 G_END_DECLS

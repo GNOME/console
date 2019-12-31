@@ -40,6 +40,9 @@ struct _KgxLocalPage
   char      *title;
   GFile     *path;
 
+  char      *initial_work_dir;
+  GStrv      command;
+
   GtkWidget *terminal;
 };
 

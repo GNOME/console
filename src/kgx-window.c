@@ -60,22 +60,8 @@ enum {
 
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 
-
-static void
-wait_cb (GPid     pid,
-         gint     status,
-         gpointer user_data)
-
-{
-  KgxWindow *self = KGX_WINDOW (user_data);
-  #if HAS_GTOP
-  GtkApplication *app = NULL;
-  #endif
-  g_autoptr (GError) error = NULL;
-  GtkStyleContext *context = NULL;
-
-  g_return_if_fail (KGX_IS_WINDOW (self));
-
+/*
+ON PID CLOSE:
   #if HAS_GTOP
   app = gtk_window_get_application (GTK_WINDOW (self));
 
@@ -84,92 +70,36 @@ wait_cb (GPid     pid,
     kgx_application_remove_watch (KGX_APPLICATION (app), pid);
   }
   #endif
-
-  // If the window has already closed we can't do much
-  if (self->exit_info == NULL) {
-    return;
-  }
-
-  /* wait_check will set @error if it got a signal/non-zero exit */
-  if (!g_spawn_check_exit_status (status, &error)) {
-    g_autofree char *message = NULL;
-
-    context = gtk_widget_get_style_context (GTK_WIDGET (self->exit_info));
-
-    // translators: <b> </b> marks the text as bold, ensure they are
-    // matched please!
-    message = g_strdup_printf (_("<b>Read Only</b> — Command exited with code %i"),
-                               status);
-
-    gtk_label_set_markup (GTK_LABEL (self->exit_message), message);
-    gtk_style_context_add_class (context, "error");
-  } else if (self->close_on_zero) {
-    gtk_widget_destroy (GTK_WIDGET (self));
-
-    return;
-  } else {
-    context = gtk_widget_get_style_context (GTK_WIDGET (self->exit_info));
-
-    gtk_label_set_markup (GTK_LABEL (self->exit_message),
-    // translators: <b> </b> marks the text as bold, ensure they are
-    // matched please!
-                         _("<b>Read Only</b> — Command exited"));
-    gtk_style_context_remove_class (context, "error");
-  }
-
-  gtk_revealer_set_reveal_child (GTK_REVEALER (self->exit_info), TRUE);
-}
+*/
 
 
 static void
-spawned (VtePty       *pty,
+started (GObject      *src,
          GAsyncResult *res,
-         gpointer      data)
-
+         gpointer      win)
 {
-  g_autoptr(GError) error = NULL;
-  KgxWindow *self = KGX_WINDOW (data);
+  g_autoptr (GError) error = NULL;
+  KgxPage *page = KGX_PAGE (src);
   #if HAS_GTOP
   GtkApplication *app = NULL;
   #endif
   GPid pid;
 
-  g_return_if_fail (VTE_IS_PTY (pty));
-  g_return_if_fail (G_IS_ASYNC_RESULT (res));
-
-  fp_vte_pty_spawn_finish (pty, res, &pid, &error);
+  pid = kgx_page_start_finish (page, res, &error);
 
   if (error) {
-    GtkStyleContext *context;
-    g_autofree char *message = NULL;
-
-    g_critical ("Failed to spawn: %s", error->message);
-
-    context = gtk_widget_get_style_context (GTK_WIDGET (self->exit_info));
-
-    gtk_style_context_add_class (context, "error");
-
-    // translators: <b> </b> marks the text as bold, ensure they are
-    // matched please!
-    message = g_strdup_printf (_("<b>Failed to start</b> — %s"),
-                               error->message);
-   
-    gtk_label_set_markup (GTK_LABEL (self->exit_message), message);
-
-    gtk_revealer_set_reveal_child (GTK_REVEALER (self->exit_info), TRUE);
-
-    return;
+    g_critical ("Failed to start %s: %s",
+                G_OBJECT_TYPE_NAME (src),
+                error->message);
   }
 
   #if HAS_GTOP
-  app = gtk_window_get_application (GTK_WINDOW (self));
+  app = gtk_window_get_application (GTK_WINDOW (win));
 
   kgx_application_add_watch (KGX_APPLICATION (app),
                              pid,
-                             KGX_WINDOW (self));
+                             KGX_WINDOW (win));
   #endif
-
-  g_child_watch_add (pid, wait_cb, self);
 }
 
 
@@ -178,19 +108,15 @@ kgx_window_constructed (GObject *object)
 {
   KgxWindow          *self = KGX_WINDOW (object);
   const char         *initial = NULL;
-  g_autoptr (VtePty)  pty = NULL;
   g_autoptr (GError)  error = NULL;
   g_auto (GStrv)      shell = NULL;
-  g_auto (GStrv)      env = NULL;
   g_autofree char    *command = NULL;
   guint               id = 0;
-  GtkWidget *page;
+  GtkWidget          *page;
   
   id = gtk_application_window_get_id (GTK_APPLICATION_WINDOW (self));
 
   self->notification_id = g_strdup_printf ("command-completed-%u", id);
-
-  pty = vte_pty_new_sync (fp_vte_pty_default_flags (), NULL, &error);
 
   if (G_UNLIKELY (self->command != NULL)) {
     // dup the string so we can free command later to handle the
@@ -221,26 +147,19 @@ kgx_window_constructed (GObject *object)
 
   g_debug ("Working in %s", initial);
 
-  env = g_environ_setenv (env, "TERM", "xterm-256color", TRUE);
-
   page = g_object_new (KGX_TYPE_LOCAL_PAGE,
-                                  "visible", TRUE,
-                                  NULL);
-
-  vte_terminal_set_pty (VTE_TERMINAL (KGX_LOCAL_PAGE (page)->terminal), pty);
-  fp_vte_pty_spawn_async (pty,
-                          initial,
-                          (const gchar * const *) shell,
-                          (const gchar * const *) env,
-                          -1,
-                          NULL,
-                          (GAsyncReadyCallback) spawned,
-                          self);
+                       "visible", TRUE,
+                       "initial-work-dir", initial,
+                       "command", shell,
+                       "close-on-quit", self->close_on_zero,
+                       NULL);
+  kgx_page_start (KGX_PAGE (page), started, self);
 
   kgx_pages_add_page (KGX_PAGES (self->pages), KGX_PAGE (page));
 
   G_OBJECT_CLASS (kgx_window_parent_class)->constructed (object);
 }
+
 
 static void
 kgx_window_set_property (GObject      *object,
@@ -614,6 +533,41 @@ new_tab_activated (GSimpleAction *action,
                    GVariant      *parameter,
                    gpointer       data)
 {
+  const char         *initial = NULL;
+  g_autoptr (GError)  error = NULL;
+  g_auto (GStrv)      shell = NULL;
+  g_autofree char    *command = NULL;
+  GtkWidget          *page;
+  KgxWindow          *self = data;
+
+  command = fp_vte_guess_shell (NULL, &error);
+  if (error) {
+    g_warning ("flatterm: %s", error->message);
+  }
+
+  if (command == NULL) {
+    command = g_strdup ("/bin/sh");
+    g_warning ("Defaulting to %s", shell[0]);
+  }
+
+  g_shell_parse_argv (command, NULL, &shell, &error);
+  if (error) {
+    g_warning ("Can't handle %s: %s", command, error->message);
+  }
+
+  initial = g_get_home_dir ();
+
+  g_debug ("Working in %s", initial);
+
+  page = g_object_new (KGX_TYPE_LOCAL_PAGE,
+                       "visible", TRUE,
+                       "initial-work-dir", initial,
+                       "command", shell,
+                       "close-on-quit", TRUE,
+                       NULL);
+  kgx_page_start (KGX_PAGE (page), started, self);
+
+  kgx_pages_add_page (KGX_PAGES (self->pages), KGX_PAGE (page));
 }
 
 
@@ -769,6 +723,10 @@ kgx_window_get_working_dir (KgxWindow *self)
   g_object_get (self->pages,
                 "path", &file,
                 NULL);
+
+  if (!file) {
+    return NULL;
+  }
 
   return g_file_get_path (file);
 }

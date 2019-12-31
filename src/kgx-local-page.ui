@@ -14,6 +14,7 @@
           <object class="KgxTerminal" id="terminal">
             <property name="visible">True</property>
             <property name="allow-hyperlink">True</property>
+            <signal name="notify::path" handler="path_changed" swapped="no"/>
           </object>
         </child>
       </object>

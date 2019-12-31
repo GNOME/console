@@ -48,5 +48,7 @@ void kgx_pages_search         (KgxPages   *self,
                                const char *search);
 void kgx_pages_add_page       (KgxPages   *self,
                                KgxPage    *page);
+void kgx_pages_remove_page    (KgxPages   *self,
+                               KgxPage    *page);
 
 G_END_DECLS

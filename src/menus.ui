@@ -39,4 +39,16 @@
       </item>
     </section>
   </menu>
+  <menu id="tab-menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Close</attribute>
+        <attribute name="action">tab.close</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Detach</attribute>
+        <attribute name="action">tab.detach</attribute>
+      </item>
+    </section>
+  </menu>
 </interface>

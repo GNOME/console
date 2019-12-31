@@ -39,7 +39,10 @@
 
 typedef struct _KgxPagesPrivate KgxPagesPrivate;
 struct _KgxPagesPrivate {
+  GtkWidget            *stack;
   GtkWidget            *notebook;
+  GtkWidget            *empty;
+
   GtkWidget            *status;
 
   int                   last_cols;
@@ -240,8 +243,6 @@ page_changed (GtkNotebook *notebook,
                                             G_BINDING_SYNC_CREATE);
 
   priv->active_page = KGX_PAGE (page);
-
-  g_message ("Change page");
 }
 
 
@@ -263,14 +264,50 @@ update_tabs (KgxPages *self)
 
 
 static void
+died (KgxPage        *page,
+      GtkMessageType  type,
+      const char     *message,
+      gboolean        success,
+      KgxPages       *self)
+{
+  gboolean close_on_quit;
+  int page_count;
+
+  g_object_get (page, "close-on-quit", &close_on_quit, NULL);
+
+  if (!close_on_quit) {
+    return;
+  }
+
+  g_object_get (self, "page-count", &page_count, NULL);
+
+  if (page_count < 1) {
+    return;
+  }
+
+  gtk_widget_destroy (GTK_WIDGET (self));
+}
+
+
+static void
 page_added (GtkNotebook *notebook,
             GtkWidget   *page,
             guint        id,
             KgxPages    *self)
 {
+  KgxPagesPrivate *priv;
+
   g_return_if_fail (KGX_IS_PAGE (page));
 
+  priv = kgx_pages_get_instance_private (self);
+
+  g_signal_connect (page, "died", G_CALLBACK (died), self);
+  gtk_notebook_set_tab_detachable (GTK_NOTEBOOK (priv->notebook), page, TRUE);
+  gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK (priv->notebook), page, TRUE);
+
   update_tabs (self);
+
+  gtk_stack_set_visible_child (GTK_STACK (priv->stack), priv->notebook);
 }
 
 
@@ -280,9 +317,28 @@ page_removed (GtkNotebook *notebook,
               guint        id,
               KgxPages    *self)
 {
+  KgxPagesPrivate *priv;
+
   g_return_if_fail (KGX_IS_PAGE (page));
 
+  priv = kgx_pages_get_instance_private (self);
+
+  g_signal_handlers_disconnect_by_data (page, self);
+
   update_tabs (self);
+
+  if (gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->notebook)) == 0) {
+    gtk_stack_set_visible_child (GTK_STACK (priv->stack), priv->empty);
+
+    g_object_set (self,
+#if IS_GENERIC
+                  "title", (_("Terminal"),
+#else
+                  "title", _("King’s Cross"),
+#endif
+                  "path", NULL,
+                  NULL);
+  }
 }
 
 
@@ -399,12 +455,16 @@ kgx_pages_class_init (KgxPagesClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                RES_PATH "kgx-pages.ui");
 
+  gtk_widget_class_bind_template_child_private (widget_class, KgxPages, stack);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, notebook);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxPages, empty);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, status);
 
   gtk_widget_class_bind_template_callback (widget_class, page_changed);
   gtk_widget_class_bind_template_callback (widget_class, page_added);
   gtk_widget_class_bind_template_callback (widget_class, page_removed);
+
+  gtk_widget_class_set_css_name (widget_class, "pages");
 }
 
 
@@ -502,4 +562,19 @@ kgx_pages_add_page (KgxPages *self,
   gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook),
                             GTK_WIDGET (page),
                             GTK_WIDGET (tab));
+}
+
+
+void
+kgx_pages_remove_page (KgxPages *self,
+                       KgxPage  *page)
+{
+  KgxPagesPrivate *priv;
+  
+  g_return_if_fail (KGX_IS_PAGES (self));
+  g_return_if_fail (KGX_IS_PAGE (page));
+
+  priv = kgx_pages_get_instance_private (self);
+  
+  gtk_container_remove (GTK_CONTAINER (priv->notebook), GTK_WIDGET (page));
 }

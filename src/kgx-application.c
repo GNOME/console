@@ -273,6 +273,7 @@ kgx_application_startup (GApplication *app)
   GSettings      *settings;
   GtkCssProvider *provider;
   const char *const new_window_accels[] = { "<shift><primary>n", NULL };
+  const char *const new_tab_accels[] = { "<shift><primary>t", NULL };
   const char *const copy_accels[] = { "<shift><primary>c", NULL };
   const char *const paste_accels[] = { "<shift><primary>v", NULL };
   const char *const find_accels[] = { "<shift><primary>f", NULL };
@@ -292,6 +293,8 @@ kgx_application_startup (GApplication *app)
 
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "win.new-window", new_window_accels);
+  gtk_application_set_accels_for_action (GTK_APPLICATION (app),
+                                         "win.new-tab", new_tab_accels);
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "term.copy", copy_accels);
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),

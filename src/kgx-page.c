@@ -40,11 +40,13 @@
 typedef struct _KgxPagePrivate KgxPagePrivate;
 struct _KgxPagePrivate {
   char                 *title;
+  char                 *description;
   GFile                *path;
   PangoFontDescription *font;
   double                zoom;
   KgxTheme              theme;
   gboolean              opaque;
+  gboolean              close_on_quit;
 
   KgxTerminal          *terminal;
   gulong                term_size_handler;
@@ -62,21 +64,28 @@ struct _KgxPagePrivate {
   GBinding             *pages_theme_bind;
   GBinding             *pages_opaque_bind;
 
+  GtkWidget            *revealer;
+  GtkWidget            *label;
+
   KgxPagesTab          *tab;
+  GBinding             *tab_title_bind;
+  GBinding             *tab_description_bind;
 };
 
 
-G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (KgxPage, kgx_page, GTK_TYPE_BIN)
+G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (KgxPage, kgx_page, GTK_TYPE_BOX)
 
 
 enum {
   PROP_0,
   PROP_PAGE_TITLE,
   PROP_PAGE_PATH,
+  PROP_DESCRIPTION,
   PROP_FONT,
   PROP_ZOOM,
   PROP_THEME,
   PROP_OPAQUE,
+  PROP_CLOSE_ON_QUIT,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -85,6 +94,7 @@ static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 enum {
   SIZE_CHANGED,
   ZOOM,
+  DIED,
   N_SIGNALS
 };
 static guint signals[N_SIGNALS];
@@ -106,6 +116,9 @@ kgx_page_get_property (GObject    *object,
     case PROP_PAGE_PATH:
       g_value_set_object (value, priv->path);
       break;
+    case PROP_DESCRIPTION:
+      g_value_set_string (value, priv->description);
+      break;
     case PROP_FONT:
       g_value_set_boxed (value, priv->font);
       break;
@@ -117,6 +130,9 @@ kgx_page_get_property (GObject    *object,
       break;
     case PROP_OPAQUE:
       g_value_set_boolean (value, priv->opaque);
+      break;
+    case PROP_CLOSE_ON_QUIT:
+      g_value_set_boolean (value, priv->close_on_quit);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -143,6 +159,10 @@ kgx_page_set_property (GObject      *object,
       g_clear_object (&priv->path);
       priv->path = g_value_dup_object (value);
       break;
+    case PROP_DESCRIPTION:
+      g_clear_pointer (&priv->description, g_free);
+      priv->description = g_value_dup_string (value);
+      break;
     case PROP_FONT:
       if (priv->font) {
         g_boxed_free (PANGO_TYPE_FONT_DESCRIPTION, priv->font);
@@ -158,6 +178,9 @@ kgx_page_set_property (GObject      *object,
     case PROP_OPAQUE:
       priv->opaque = g_value_get_boolean (value);
       break;
+    case PROP_CLOSE_ON_QUIT:
+      priv->close_on_quit = g_value_get_boolean (value);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -166,12 +189,37 @@ kgx_page_set_property (GObject      *object,
 
 
 static void
+kgx_page_real_start (KgxPage             *page,
+                     GAsyncReadyCallback  callback,
+                     gpointer             callback_data)
+{
+  g_critical ("%s doesn't implement start", G_OBJECT_TYPE_NAME (page));
+}
+
+
+static GPid
+kgx_page_real_start_finish (KgxPage             *page,
+                            GAsyncResult        *res,
+                            GError             **error)
+{
+  g_critical ("%s doesn't implement start_finish", G_OBJECT_TYPE_NAME (page));
+
+  return 0;
+}
+
+
+static void
 kgx_page_class_init (KgxPageClass *klass)
 {
-  GObjectClass     *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass   *object_class = G_OBJECT_CLASS   (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  KgxPageClass   *page_class   = KGX_PAGE_CLASS   (klass);
   
   object_class->get_property = kgx_page_get_property;
   object_class->set_property = kgx_page_set_property;
+
+  page_class->start = kgx_page_real_start;
+  page_class->start_finish = kgx_page_real_start_finish;
 
   /**
    * KgxPage:page-title:
@@ -199,6 +247,11 @@ kgx_page_class_init (KgxPageClass *klass)
   pspecs[PROP_PAGE_PATH] =
     g_param_spec_object ("page-path", "Page Path", "Current path",
                          G_TYPE_FILE,
+                         G_PARAM_READWRITE);
+
+  pspecs[PROP_DESCRIPTION] =
+    g_param_spec_string ("description", "Description", "Description of the page",
+                         NULL,
                          G_PARAM_READWRITE);
 
   pspecs[PROP_FONT] =
@@ -242,6 +295,12 @@ kgx_page_class_init (KgxPageClass *klass)
                           FALSE,
                           G_PARAM_READWRITE);
 
+  pspecs[PROP_CLOSE_ON_QUIT] =
+    g_param_spec_boolean ("close-on-quit", "Close on quit",
+                          "Should the page close when dead",
+                          FALSE,
+                          G_PARAM_READWRITE);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   signals[SIZE_CHANGED] = g_signal_new ("size-changed",
@@ -260,6 +319,22 @@ kgx_page_class_init (KgxPageClass *klass)
                                 G_TYPE_NONE,
                                 1,
                                 KGX_TYPE_ZOOM);
+
+  signals[DIED] = g_signal_new ("died",
+                                G_TYPE_FROM_CLASS (klass),
+                                G_SIGNAL_RUN_LAST,
+                                0, NULL, NULL, NULL,
+                                G_TYPE_NONE,
+                                3,
+                                GTK_TYPE_MESSAGE_TYPE,
+                                G_TYPE_STRING,
+                                G_TYPE_BOOLEAN);
+
+  gtk_widget_class_set_template_from_resource (widget_class,
+                                               RES_PATH "kgx-page.ui");
+
+  gtk_widget_class_bind_template_child_private (widget_class, KgxPage, revealer);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxPage, label);
 }
 
 
@@ -290,8 +365,6 @@ parent_set (KgxPage   *self,
 
   g_return_if_fail (KGX_IS_PAGES (parent));
 
-  g_message ("parented");
-
   pages = KGX_PAGES (parent);
 
   priv->pages_font_bind = g_object_bind_property (pages,
@@ -318,12 +391,43 @@ parent_set (KgxPage   *self,
 
 
 static void
+died (KgxPage        *self,
+      GtkMessageType  type,
+      const char     *message,
+      gboolean        success)
+{
+  KgxPagePrivate *priv;
+  GtkStyleContext *context;
+
+  g_return_if_fail (KGX_IS_PAGE (self));
+  
+  priv = kgx_page_get_instance_private (self);
+
+  gtk_label_set_markup (GTK_LABEL (priv->label), message);
+
+  context = gtk_widget_get_style_context (GTK_WIDGET (priv->revealer));
+
+  if (type == GTK_MESSAGE_ERROR) {
+    gtk_style_context_add_class (context, "error");
+  } else {
+    gtk_style_context_remove_class (context, "error");
+  }
+
+  gtk_revealer_set_reveal_child (GTK_REVEALER (priv->revealer), TRUE);
+
+  if (priv->close_on_quit && success) {
+    kgx_pages_remove_page (kgx_page_get_pages (self), self);
+  }
+}
+
+
+static void
 kgx_page_init (KgxPage *self)
 {
-  g_signal_connect (self,
-                    "parent-set",
-                    G_CALLBACK (parent_set),
-                    NULL);
+  gtk_widget_init_template (GTK_WIDGET (self));
+
+  g_signal_connect (self, "parent-set", G_CALLBACK (parent_set), NULL);
+  g_signal_connect (self, "died", G_CALLBACK (died), NULL);
 }
 
 
@@ -341,7 +445,15 @@ kgx_page_connect_tab (KgxPage     *self,
   g_clear_object (&priv->tab);
   priv->tab = g_object_ref (tab);
 
-  g_object_bind_property (self, "page-title", tab, "title", G_BINDING_SYNC_CREATE);
+  g_clear_object (&priv->tab_title_bind);
+  priv->tab_title_bind = g_object_bind_property (self, "page-title",
+                                                 tab, "title",
+                                                 G_BINDING_SYNC_CREATE);
+
+  g_clear_object (&priv->tab_description_bind);
+  priv->tab_description_bind = g_object_bind_property (self, "description",
+                                                       tab, "description",
+                                                       G_BINDING_SYNC_CREATE);
 }
 
 
@@ -510,4 +622,62 @@ kgx_page_search (KgxPage    *self,
 
   vte_terminal_search_set_regex (VTE_TERMINAL (priv->terminal),
                                  regex, 0);
+}
+
+
+void
+kgx_page_start (KgxPage             *self,
+                GAsyncReadyCallback  callback,
+                gpointer             callback_data)
+{
+  g_return_if_fail (KGX_IS_PAGE (self));
+  g_return_if_fail (KGX_PAGE_GET_CLASS (self)->start);
+
+  KGX_PAGE_GET_CLASS (self)->start (self, callback, callback_data);
+}
+
+
+GPid
+kgx_page_start_finish (KgxPage             *self,
+                       GAsyncResult        *res,
+                       GError             **error)
+{
+  g_return_val_if_fail (KGX_IS_PAGE (self), 0);
+  g_return_val_if_fail (KGX_PAGE_GET_CLASS (self)->start, 0);
+
+  return KGX_PAGE_GET_CLASS (self)->start_finish (self, res, error);
+}
+
+
+void
+kgx_page_died (KgxPage        *self,
+               GtkMessageType  type,
+               const char     *message,
+               gboolean        success)
+{
+  g_signal_emit (self, signals[DIED], 0, type, message, success);
+}
+
+
+/**
+ * kgx_page_get_pages:
+ * @self: the #KgxPage
+ * 
+ * Find the #KgxPages @self is (currently) a memember of
+ * 
+ * Returns: (transfer none): the #KgxPages
+ * 
+ * Since: 0.3.0
+ */
+KgxPages *
+kgx_page_get_pages (KgxPage *self)
+{
+  GtkWidget *parent;
+
+  parent = gtk_widget_get_ancestor (GTK_WIDGET (self), KGX_TYPE_PAGES);
+
+  g_return_val_if_fail (parent, NULL);
+  g_return_val_if_fail (KGX_IS_PAGES (parent), NULL);
+
+  return KGX_PAGES (parent);
 }

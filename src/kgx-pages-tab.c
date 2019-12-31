@@ -30,16 +30,24 @@
 #include "kgx-pages-tab.h"
 
 
-G_DEFINE_TYPE (KgxPagesTab, kgx_pages_tab, GTK_TYPE_BOX)
+G_DEFINE_TYPE (KgxPagesTab, kgx_pages_tab, GTK_TYPE_EVENT_BOX)
 
 
 enum {
   PROP_0,
   PROP_TITLE,
+  PROP_DESCRIPTION,
   LAST_PROP
 };
-
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
+
+
+enum {
+  CLOSE,
+  DETACH,
+  N_SIGNALS
+};
+static guint signals[N_SIGNALS];
 
 
 static void
@@ -55,11 +63,16 @@ kgx_pages_tab_set_property (GObject      *object,
       g_clear_pointer (&self->title, g_free);
       self->title = g_value_dup_string (value);
       break;
+    case PROP_DESCRIPTION:
+      gtk_widget_set_tooltip_markup (GTK_WIDGET (object),
+                                     g_value_get_string (value));
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
   }
 }
+
 
 static void
 kgx_pages_tab_get_property (GObject    *object,
@@ -72,6 +85,10 @@ kgx_pages_tab_get_property (GObject    *object,
   switch (property_id) {
     case PROP_TITLE:
       g_value_set_string (value, self->title);
+      break;
+    case PROP_DESCRIPTION:
+      g_value_set_string (value,
+                          gtk_widget_get_tooltip_markup (GTK_WIDGET (object)));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -92,6 +109,47 @@ kgx_pages_tab_finalize (GObject *object)
 
 
 static void
+context_menu (GtkWidget *widget,
+              int        x,
+              int        y,
+              GdkEvent  *event)
+{
+  GtkApplication *app;
+  GMenu          *model;
+  GtkWidget      *menu;
+  GdkRectangle    rect = {x, y, 1, 1};
+
+  app = GTK_APPLICATION (g_application_get_default ());
+  model = gtk_application_get_menu_by_id (app, "tab-menu");
+
+  menu = gtk_popover_new_from_model (widget, G_MENU_MODEL (model));
+  gtk_popover_set_pointing_to (GTK_POPOVER (menu), &rect);
+  gtk_popover_popup (GTK_POPOVER (menu));
+}
+
+
+static gboolean
+kgx_pages_tab_popup_menu (GtkWidget *self)
+{
+  context_menu (self, 1, 1, NULL);
+  return TRUE;
+}
+
+
+static gboolean
+kgx_pages_tab_button_press_event (GtkWidget *self, GdkEventButton *event)
+{
+  if (gdk_event_triggers_context_menu ((GdkEvent *) event) &&
+      event->type == GDK_BUTTON_PRESS) {
+    context_menu (self, event->x, event->y, (GdkEvent *) event);
+    return TRUE;
+  }
+
+  return GTK_WIDGET_CLASS (kgx_pages_tab_parent_class)->button_press_event (self, event);
+}
+
+
+static void
 kgx_pages_tab_class_init (KgxPagesTabClass *klass)
 {
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
@@ -101,19 +159,80 @@ kgx_pages_tab_class_init (KgxPagesTabClass *klass)
   object_class->get_property = kgx_pages_tab_get_property;
   object_class->finalize = kgx_pages_tab_finalize;
 
+  widget_class->popup_menu = kgx_pages_tab_popup_menu;
+  widget_class->button_press_event = kgx_pages_tab_button_press_event;
+
   pspecs[PROP_TITLE] =
     g_param_spec_string ("title", "Title", "Tab title",
                          NULL,
                          G_PARAM_READWRITE);
 
+  pspecs[PROP_DESCRIPTION] =
+    g_param_spec_string ("description", "Description", "Tab description",
+                         NULL,
+                         G_PARAM_READWRITE);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
+
+  signals[CLOSE] = g_signal_new ("close",
+                                 G_TYPE_FROM_CLASS (klass),
+                                 G_SIGNAL_RUN_LAST,
+                                 0, NULL, NULL, NULL,
+                                 G_TYPE_NONE,
+                                 0);
+
+  signals[DETACH] = g_signal_new ("detach",
+                                  G_TYPE_FROM_CLASS (klass),
+                                  G_SIGNAL_RUN_LAST,
+                                  0, NULL, NULL, NULL,
+                                  G_TYPE_NONE,
+                                  0);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                RES_PATH "kgx-pages-tab.ui");
 }
 
+
+static void
+close_activated (GSimpleAction *action,
+                 GVariant      *parameter,
+                 gpointer       data)
+{
+  g_signal_emit (data, signals[CLOSE], 0);
+}
+
+
+static void
+detach_activated (GSimpleAction *action,
+                  GVariant      *parameter,
+                  gpointer       data)
+{
+  g_signal_emit (data, signals[DETACH], 0);
+}
+
+
+static GActionEntry tab_entries[] =
+{
+  { "close", close_activated, NULL, NULL, NULL },
+  { "detach", detach_activated, NULL, NULL, NULL },
+};
+
+
 static void
 kgx_pages_tab_init (KgxPagesTab *self)
 {
+  gtk_widget_set_has_window (GTK_WIDGET (self), TRUE);
+
+  self->actions = G_ACTION_MAP (g_simple_action_group_new ());
+  g_action_map_add_action_entries (self->actions,
+                                   tab_entries,
+                                   G_N_ELEMENTS (tab_entries),
+                                   self);
+  gtk_widget_insert_action_group (GTK_WIDGET (self),
+                                  "tab",
+                                  G_ACTION_GROUP (self->actions));
+
+  gtk_widget_add_events (GTK_WIDGET (self), GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
+
   gtk_widget_init_template (GTK_WIDGET (self));
 }

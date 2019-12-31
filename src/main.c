@@ -48,6 +48,7 @@ main (int   argc,
   app = g_object_new (KGX_TYPE_APPLICATION,
                       "application_id", "org.gnome.zbrown.KingsCross",
                       "flags", G_APPLICATION_HANDLES_COMMAND_LINE,
+                      "register-session", TRUE,
                       NULL);
 
   /*

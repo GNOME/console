@@ -32,13 +32,14 @@ G_BEGIN_DECLS
 struct _KgxPagesTab
 {
   /*< private >*/
-  GtkBox  parent_instance;
+  GtkEventBox  parent_instance;
 
   /*< public >*/
-  char   *title;
+  char        *title;
+  GActionMap  *actions;
 };
 
-G_DECLARE_FINAL_TYPE (KgxPagesTab, kgx_pages_tab, KGX, PAGES_TAB, GtkBox)
+G_DECLARE_FINAL_TYPE (KgxPagesTab, kgx_pages_tab, KGX, PAGES_TAB, GtkEventBox)
 
 
 G_END_DECLS
