@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2019-08-11 14:04+0000\n"
-"PO-Revision-Date: 2019-08-11 15:08+0100\n"
+"POT-Creation-Date: 2019-10-04 06:33+0000\n"
+"PO-Revision-Date: 2019-10-06 18:29+0100\n"
 "Last-Translator: Zander Brown <zbrown@gnome.org>\n"
 "Language-Team: English - United Kingdom <en_GB@li.org>\n"
 "Language: en_GB\n"
@@ -16,26 +16,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 3.32.1\n"
+"X-Generator: Gtranslator 3.34.0\n"
 
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-window.c:611
-#: src/main.c:38
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:422
+#: src/kgx-window.c:744 src/main.c:38
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.zbrown.KingsCross.desktop.in:9
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:8
-msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
-msgstr "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
+#| msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
+msgstr "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 
 #: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3 src/main.c:35
 msgid "Terminal"
 msgstr "Terminal"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-window.c:602
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:8
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
+msgstr "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
+
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:424
+#: src/kgx-window.c:735
 msgid "Terminal Emulator"
 msgstr "Terminal Emulator"
 
@@ -47,7 +53,7 @@ msgstr "A simple user-friendly terminal emulator for the GNOME desktop."
 msgid "Terminal window"
 msgstr "Terminal window"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:31
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:45
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -83,92 +89,103 @@ msgstr "Paste"
 
 #. Translators: This is the name of the timeout that looks for programs
 #. running in the terminal
-#: src/kgx-application.c:288
+#: src/kgx-application.c:255
 msgid "child watcher"
 msgstr "child watcher"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:332
+#: src/kgx-application.c:396
 #, c-format
 msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgstr "# King’s Cross %s using VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:425
-msgid "Execute the argument to this option inside the terminal"
-msgstr "Execute the argument to this option inside the terminal"
-
-#: src/kgx-application.c:434
-msgid "Set the working directory"
-msgstr "Set the working directory"
-
-#. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:436
-msgid "DIRNAME"
-msgstr "DIRNAME"
-
-#: src/kgx-application.c:444
-msgid "Wait until the child exits (TODO)"
-msgstr "Wait until the child exits (TODO)"
-
-#: src/kgx-terminal.c:369
-msgid "You are pasting a command that runs as an administrator"
-msgstr "You are pasting a command that runs as an administrator"
-
-#. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:372
-#, c-format
-msgid ""
-"Make sure you know what the command does:\n"
-"%s"
-msgstr ""
-"Make sure you know what the command does:\n"
-"%s"
-
-#: src/kgx-terminal.c:377
-msgid "_Cancel"
-msgstr "_Cancel"
-
-#: src/kgx-terminal.c:380 src/menus.ui:24
-msgid "_Paste"
-msgstr "_Paste"
-
-#. translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-window.c:141
-#, c-format
-msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr "<b>Read Only</b> — Command exited with code %i"
-
-#. translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-window.c:154
-msgid "<b>Read Only</b> — Command exited"
-msgstr "<b>Read Only</b> — Command exited"
-
-#. translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-window.c:188
-#, c-format
-msgid "<b>Failed to start</b> — %s"
-msgstr "<b>Failed to start</b> — %s"
-
-#: src/kgx-window.c:594
+#: src/kgx-application.c:408 src/kgx-window.c:727
 #, c-format
 msgid "Copyright © %s Zander Brown"
 msgstr "Copyright © %s Zander Brown"
 
+#: src/kgx-application.c:528
+msgid "Execute the argument to this option inside the terminal"
+msgstr "Execute the argument to this option inside the terminal"
+
+#: src/kgx-application.c:537
+msgid "Set the working directory"
+msgstr "Set the working directory"
+
+#. Translators: Placeholder of for a given directory
+#: src/kgx-application.c:539
+msgid "DIRNAME"
+msgstr "DIRNAME"
+
+#: src/kgx-application.c:547
+msgid "Wait until the child exits (TODO)"
+msgstr "Wait until the child exits (TODO)"
+
+#: src/kgx-terminal.c:374
+msgid "You are pasting a command that runs as an administrator"
+msgstr "You are pasting a command that runs as an administrator"
+
+#. TRANSLATORS: %s is the command being pasted
+#: src/kgx-terminal.c:377
+#, c-format
+msgid ""
+"Make sure you know what the command does:\n"
+"%s"
+msgstr ""
+"Make sure you know what the command does:\n"
+"%s"
+
+#: src/kgx-terminal.c:382 src/kgx-close-dialog.ui:56
+msgid "_Cancel"
+msgstr "_Cancel"
+
+#: src/kgx-terminal.c:385 src/menus.ui:24
+msgid "_Paste"
+msgstr "_Paste"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-window.c:150
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Read Only</b> — Command exited with code %i"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-window.c:165
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Read Only</b> — Command exited"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-window.c:202
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Failed to start</b> — %s"
+
 #. Translators: Credit yourself here
-#: src/kgx-window.c:601
+#: src/kgx-window.c:734
 msgid "translator-credits"
 msgstr "Zander Brown <zbrown@gnome.org>"
 
-#. Translators: "by King’s Cross" here is meaning author
-#. or creator of 'Terminal'
-#: src/kgx-window.c:609
-msgid ""
-"Terminal\n"
-"by King’s Cross"
-msgstr ""
-"Terminal\n"
-"by King’s Cross"
+#. Translators: "by King’s Cross" here is meaning
+#. author or creator of 'Terminal'
+#: src/kgx-window.c:742
+#| msgid ""
+#| "Terminal\n"
+#| "by King’s Cross"
+msgid "Terminal (King’s Cross)"
+msgstr "Terminal (King’s Cross)"
+
+#: src/kgx-window.c:844
+#| msgid "Terminal"
+msgid "_About Terminal"
+msgstr "_About Terminal"
+
+#: src/kgx-window.c:1024
+msgid "Command completed"
+msgstr "Command completed"
 
 #: src/kgx-window.ui:61
 msgid "_New Window"
@@ -201,3 +218,20 @@ msgstr "_Select All"
 #: src/menus.ui:36
 msgid "Show in _Files"
 msgstr "Show in _Files"
+
+#: src/kgx-close-dialog.ui:6
+#| msgid "Terminal"
+msgid "Close Terminal"
+msgstr "Close Terminal"
+
+#: src/kgx-close-dialog.ui:25
+msgid ""
+"Some commands are still running, closing this terminal will kill them and "
+"may lead to unexpected outcomes"
+msgstr ""
+"Some commands are still running, closing this terminal will kill them and "
+"may lead to unexpected outcomes"
+
+#: src/kgx-close-dialog.ui:64
+msgid "_OK"
+msgstr "_OK"
