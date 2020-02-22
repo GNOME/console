@@ -48,6 +48,8 @@ else
   kgx_sources += 'kgx-process-dummy.c'
 endif
 
+kgx_sources += config_h
+
 gnome = import('gnome')
 
 kgx_sources += gnome.compile_resources('kgx-resources',
@@ -56,12 +58,16 @@ kgx_sources += gnome.compile_resources('kgx-resources',
 )
 
 kgx_sources += gnome.mkenums_simple('kgx-enums',
-                                    sources: ['kgx-terminal.h', 'kgx-window.h'])
+                                    sources: [
+                                      'kgx-terminal.h',
+                                      'kgx-window.h',
+                                      'kgx-page.h'
+                                    ])
 
 kgx_lib = library ('kgx', kgx_sources, dependencies: kgx_deps)
 kgx_inc = include_directories('.')
 
-kgx_dep = declare_dependency (sources: kgx_sources,
+kgx_dep = declare_dependency (sources: [config_h],
                               include_directories: kgx_inc,
                               link_with: kgx_lib,
                               dependencies: kgx_deps)
