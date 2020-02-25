@@ -19,13 +19,6 @@
         "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
         "--device=dri"
     ],
-    "build-options": {
-        "cflags": "-O2 -g",
-        "cxxflags": "-O2 -g",
-        "env": {
-            "V": "1"
-        }
-    },
     "cleanup": [
         "/include",
         "/lib/pkgconfig",
@@ -40,23 +33,27 @@
     "modules": [
         {
             "name": "vte",
-            "builddir": true,
             "buildsystem": "meson",
+            "build-options" : {
+                "env" : {
+                    "CXXFLAGS" : "-fno-exceptions"
+                }
+            },
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://gitlab.gnome.org/GNOME/vte"
+                    "url": "https://gitlab.gnome.org/GNOME/vte.git"
                 }
             ]
         },
         {
             "name": "handy",
-            "builddir": true,
             "buildsystem": "meson",
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://source.puri.sm/Librem5/libhandy"
+                    "url": "https://source.puri.sm/Librem5/libhandy.git",
+                    "branch": "libhandy-0-0"
                 }
             ]
         },
