@@ -91,7 +91,6 @@
     <property name="can-focus">False</property>
     <property name="default-width">800</property>
     <property name="default-height">450</property>
-    <signal name="notify::application" handler="application_set" swapped="no"/>
     <signal name="notify::is-active" handler="active_changed" swapped="no"/>
     <child type="titlebar">
       <object class="GtkHeaderBar" id="header_bar">
@@ -222,7 +221,9 @@
         <child>
           <object class="KgxPages" id="pages">
             <property name="visible">1</property>
+            <property name="is-active" bind-source="KgxWindow" bind-property="is-active" bind-flags="sync-create" />
             <signal name="zoom" handler="zoom" swapped="no"/>
+            <signal name="notify::status" handler="status_changed" swapped="yes" />
           </object>
         </child>
         <child>

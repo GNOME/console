@@ -28,6 +28,11 @@ G_BEGIN_DECLS
 
 /**
  * KgxLocalPage:
+ * @title: the title of the page
+ * @path: the current directory of the path
+ * @initial_work_dir: the directory to start in
+ * @command: the root/shell command to run
+ * @terminal: the #KgxTerminal
  * 
  * Stability: Private
  */

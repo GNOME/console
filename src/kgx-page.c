@@ -33,17 +33,23 @@
 #include "kgx-pages.h"
 #include "kgx-pages-tab.h"
 #include "kgx-terminal.h"
-#include "kgx-window.h"
+#include "kgx-application.h"
 #include "util.h"
 
 
 typedef struct _KgxPagePrivate KgxPagePrivate;
 struct _KgxPagePrivate {
+  guint                 id;
+
+  KgxApplication       *application;
+
   char                 *title;
   char                 *description;
   GFile                *path;
+  KgxStatus             status;
   PangoFontDescription *font;
   double                zoom;
+  gboolean              is_active;
   KgxTheme              theme;
   gboolean              opaque;
   gboolean              close_on_quit;
@@ -70,6 +76,14 @@ struct _KgxPagePrivate {
   KgxPagesTab          *tab;
   GBinding             *tab_title_bind;
   GBinding             *tab_description_bind;
+  GBinding             *tab_status_bind;
+
+  /* Remote/root states */
+  GHashTable           *root;
+  GHashTable           *remote;
+  GHashTable           *children;
+
+  char                 *notification_id;
 };
 
 
@@ -78,12 +92,15 @@ G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (KgxPage, kgx_page, GTK_TYPE_BOX)
 
 enum {
   PROP_0,
+  PROP_APPLICATION,
   PROP_PAGE_TITLE,
   PROP_PAGE_PATH,
+  PROP_PAGE_STATUS,
   PROP_DESCRIPTION,
   PROP_FONT,
   PROP_ZOOM,
   PROP_THEME,
+  PROP_IS_ACTIVE,
   PROP_OPAQUE,
   PROP_CLOSE_ON_QUIT,
   LAST_PROP
@@ -110,11 +127,17 @@ kgx_page_get_property (GObject    *object,
   KgxPagePrivate *priv = kgx_page_get_instance_private (self);
 
   switch (property_id) {
+    case PROP_APPLICATION:
+      g_value_set_object (value, priv->application);
+      break;
     case PROP_PAGE_TITLE:
       g_value_set_string (value, priv->title);
       break;
     case PROP_PAGE_PATH:
       g_value_set_object (value, priv->path);
+      break;
+    case PROP_PAGE_STATUS:
+      g_value_set_flags (value, priv->status);
       break;
     case PROP_DESCRIPTION:
       g_value_set_string (value, priv->description);
@@ -124,6 +147,9 @@ kgx_page_get_property (GObject    *object,
       break;
     case PROP_ZOOM:
       g_value_set_double (value, priv->zoom);
+      break;
+    case PROP_IS_ACTIVE:
+      g_value_set_boolean (value, priv->is_active);
       break;
     case PROP_THEME:
       g_value_set_enum (value, priv->theme);
@@ -151,6 +177,13 @@ kgx_page_set_property (GObject      *object,
   KgxPagePrivate *priv = kgx_page_get_instance_private (self);
 
   switch (property_id) {
+    case PROP_APPLICATION:
+      if (priv->application) {
+        g_critical ("Application was already set %p", priv->application);
+      }
+      priv->application = g_value_dup_object (value);
+      kgx_application_add_page (priv->application, self);
+      break;
     case PROP_PAGE_TITLE:
       g_clear_pointer (&priv->title, g_free);
       priv->title = g_value_dup_string (value);
@@ -158,6 +191,9 @@ kgx_page_set_property (GObject      *object,
     case PROP_PAGE_PATH:
       g_clear_object (&priv->path);
       priv->path = g_value_dup_object (value);
+      break;
+    case PROP_PAGE_STATUS:
+      priv->status = g_value_get_flags (value);
       break;
     case PROP_DESCRIPTION:
       g_clear_pointer (&priv->description, g_free);
@@ -172,6 +208,9 @@ kgx_page_set_property (GObject      *object,
     case PROP_ZOOM:
       priv->zoom = g_value_get_double (value);
       break;
+    case PROP_IS_ACTIVE:
+      priv->is_active = g_value_get_boolean (value);
+      break;
     case PROP_THEME:
       priv->theme = g_value_get_enum (value);
       break;
@@ -185,6 +224,25 @@ kgx_page_set_property (GObject      *object,
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
   }
+}
+
+
+static void
+kgx_page_finalize (GObject *object)
+{
+  KgxPage *self = KGX_PAGE (object);
+  KgxPagePrivate *priv = kgx_page_get_instance_private (self);
+
+  g_clear_pointer (&priv->root, g_hash_table_unref);
+  g_clear_pointer (&priv->remote, g_hash_table_unref);
+  g_clear_pointer (&priv->children, g_hash_table_unref);
+
+  g_application_withdraw_notification (G_APPLICATION (priv->application),
+                                       priv->notification_id);
+
+  g_clear_object (&priv->application);
+
+  g_clear_pointer (&priv->notification_id, g_free);
 }
 
 
@@ -217,9 +275,24 @@ kgx_page_class_init (KgxPageClass *klass)
   
   object_class->get_property = kgx_page_get_property;
   object_class->set_property = kgx_page_set_property;
+  object_class->finalize = kgx_page_finalize;
 
   page_class->start = kgx_page_real_start;
   page_class->start_finish = kgx_page_real_start_finish;
+
+  /**
+   * KgxPage:application:
+   * 
+   * The #KgxApplication this page is running under
+   * 
+   * Stability: Private
+   * 
+   * Since: 0.3.0
+   */
+  pspecs[PROP_APPLICATION] =
+    g_param_spec_object ("application", "Application", "The application",
+                         KGX_TYPE_APPLICATION,
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
   /**
    * KgxPage:page-title:
@@ -249,6 +322,19 @@ kgx_page_class_init (KgxPageClass *klass)
                          G_TYPE_FILE,
                          G_PARAM_READWRITE);
 
+  /**
+   * KgxPage:page-status:
+   * 
+   * Stability: Private
+   * 
+   * Since: 0.3.0
+   */
+  pspecs[PROP_PAGE_STATUS] =
+    g_param_spec_flags ("page-status", "Page Status", "Session status",
+                        KGX_TYPE_STATUS,
+                        KGX_NONE,
+                        G_PARAM_READWRITE);
+
   pspecs[PROP_DESCRIPTION] =
     g_param_spec_string ("description", "Description", "Description of the page",
                          NULL,
@@ -263,6 +349,20 @@ kgx_page_class_init (KgxPageClass *klass)
     g_param_spec_double ("zoom", "Zoom", "Font scaling",
                          0.5, 2.0, 1.0,
                          G_PARAM_READWRITE);
+
+  /**
+   * KgxPage:is-active:
+   * 
+   * This is the active page of the active window
+   * 
+   * Stability: Private
+   * 
+   * Since: 0.3.0
+   */
+  pspecs[PROP_IS_ACTIVE] =
+    g_param_spec_boolean ("is-active", "Is Active", "Current page",
+                          FALSE,
+                          G_PARAM_READWRITE);
 
   /**
    * KgxPage:theme:
@@ -424,6 +524,22 @@ died (KgxPage        *self,
 static void
 kgx_page_init (KgxPage *self)
 {
+  static guint last_id = 0;
+  KgxPagePrivate *priv = kgx_page_get_instance_private (self);
+
+  last_id++;
+
+  priv->id = last_id;
+
+  priv->root = g_hash_table_new (g_direct_hash, g_direct_equal);
+  priv->remote = g_hash_table_new (g_direct_hash, g_direct_equal);
+  priv->children = g_hash_table_new_full (g_direct_hash,
+                                          g_direct_equal,
+                                          NULL,
+                                          (GDestroyNotify) kgx_process_unref);
+
+  priv->notification_id = g_strdup_printf ("command-completed-%u", priv->id);
+
   gtk_widget_init_template (GTK_WIDGET (self));
 
   g_signal_connect (self, "parent-set", G_CALLBACK (parent_set), NULL);
@@ -454,6 +570,11 @@ kgx_page_connect_tab (KgxPage     *self,
   priv->tab_description_bind = g_object_bind_property (self, "description",
                                                        tab, "description",
                                                        G_BINDING_SYNC_CREATE);
+
+  g_clear_object (&priv->tab_status_bind);
+  priv->tab_status_bind = g_object_bind_property (self, "page-status",
+                                                  tab, "status",
+                                                  G_BINDING_SYNC_CREATE);
 }
 
 
@@ -680,4 +801,214 @@ kgx_page_get_pages (KgxPage *self)
   g_return_val_if_fail (KGX_IS_PAGES (parent), NULL);
 
   return KGX_PAGES (parent);
+}
+
+
+/**
+ * kgx_page_get_id:
+ * @self: the #KgxPage
+ * 
+ * Get the unique (in the instance) id for the page
+ * 
+ * Returns: the identifier for the page
+ */
+guint
+kgx_page_get_id (KgxPage *self)
+{
+  KgxPagePrivate *priv;
+
+  g_return_val_if_fail (KGX_IS_PAGE (self), 0);
+  
+  priv = kgx_page_get_instance_private (self);
+
+  return priv->id;
+}
+
+#if HAS_GTOP
+static inline KgxStatus
+push_type (GHashTable      *table,
+           GPid             pid,
+           KgxProcess      *process,
+           GtkStyleContext *context,
+           KgxStatus        status)
+{
+  g_hash_table_insert (table,
+                       GINT_TO_POINTER (pid),
+                       process != NULL ? g_rc_box_acquire (process) : NULL);
+
+  g_debug ("Now %i %X", g_hash_table_size (table), status);
+
+  return status;
+}
+#endif
+
+
+/**
+ * kgx_page_push_child:
+ * @self: the #KgxPage
+ * @process: the #KgxProcess of the remote process
+ * 
+ * Registers @pid as a child of @self
+ * 
+ * Since: 0.3.0
+ */
+void
+kgx_page_push_child (KgxPage    *self,
+                     KgxProcess *process)
+{
+  #if HAS_GTOP
+  GtkStyleContext *context;
+  GPid pid = 0;
+  const char *exec = NULL;
+  KgxStatus new_status = KGX_NONE;
+  KgxPagePrivate *priv;
+
+  g_return_if_fail (KGX_IS_PAGE (self));
+  
+  priv = kgx_page_get_instance_private (self);
+
+  context = gtk_widget_get_style_context (GTK_WIDGET (self));
+  pid = kgx_process_get_pid (process);
+  exec = kgx_process_get_exec (process);
+
+  if (G_UNLIKELY (g_str_has_prefix (exec, "ssh "))) {
+    new_status |= push_type (priv->remote, pid, NULL, context, KGX_REMOTE);
+  }
+
+  if (G_UNLIKELY (kgx_process_get_is_root (process))) {
+    new_status |= push_type (priv->root, pid, NULL, context, KGX_PRIVILEGED);
+  }
+
+  push_type (priv->children, pid, process, context, KGX_NONE);
+
+  if (priv->status != new_status) {
+    priv->status = new_status;
+    g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_PAGE_STATUS]);
+  }
+  #endif
+}
+
+
+inline static KgxStatus
+pop_type (GHashTable      *table,
+          GPid             pid,
+          GtkStyleContext *context,
+          KgxStatus        status)
+{
+  guint size = 0;
+
+  g_hash_table_remove (table, GINT_TO_POINTER (pid));
+
+  size = g_hash_table_size (table);
+
+  if (G_LIKELY (size <= 0)) {
+    g_debug ("No longer %X", status);
+
+    return KGX_NONE;
+  } else {
+    g_debug ("%i %X remaining", size, status);
+    
+    return status;
+  }
+}
+
+
+/**
+ * kgx_page_pop_child:
+ * @self: the #KgxPage
+ * @process: the #KgxProcess of the child process
+ * 
+ * Remove a child added with kgx_page_push_child()
+ * 
+ * Since: 0.3.0
+ */
+void
+kgx_page_pop_child (KgxPage    *self,
+                    KgxProcess *process)
+{
+  GtkStyleContext *context;
+  GPid pid = 0;
+  KgxStatus new_status = KGX_NONE;
+  KgxPagePrivate *priv;
+
+  g_return_if_fail (KGX_IS_PAGE (self));
+  
+  priv = kgx_page_get_instance_private (self);
+
+  context = gtk_widget_get_style_context (GTK_WIDGET (self));
+  #if HAS_GTOP
+  pid = kgx_process_get_pid (process);
+  #endif
+  
+  new_status |= pop_type (priv->remote, pid, context, KGX_REMOTE);
+  new_status |= pop_type (priv->root, pid, context, KGX_PRIVILEGED);
+  pop_type (priv->children, pid, context, KGX_NONE);
+  
+  if (priv->status != new_status) {
+    priv->status = new_status;
+    g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_PAGE_STATUS]);
+  }
+
+  if (!kgx_page_is_active (self)) {
+    g_autoptr (GNotification) noti = NULL;
+
+    noti = g_notification_new (_("Command completed"));
+    #if HAS_GTOP
+    g_notification_set_body (noti, kgx_process_get_exec (process));
+    #endif
+    g_notification_set_default_action_and_target (noti,
+                                                  "app.focus-page",
+                                                  "u",
+                                                  priv->id);
+
+    g_application_send_notification (G_APPLICATION (priv->application),
+                                     priv->notification_id,
+                                     noti);
+  }
+}
+
+
+gboolean
+kgx_page_is_active (KgxPage *self)
+{
+  KgxPagePrivate *priv;
+
+  g_return_val_if_fail (KGX_IS_PAGE (self), FALSE);
+  
+  priv = kgx_page_get_instance_private (self);
+
+  return priv->is_active;
+}
+
+
+/**
+ * kgx_page_get_children:
+ * @self: the #KgxPage
+ * 
+ * Get a list of child process running in @self
+ * 
+ * NOTE: This doesn't include the shell/root itself
+ * 
+ * Returns: (element-type Kgx.Process) (transfer full): the list of #KgxProcess
+ */
+GPtrArray *
+kgx_page_get_children (KgxPage *self)
+{
+  KgxPagePrivate *priv;
+  GPtrArray *children;
+  GHashTableIter iter;
+  gpointer pid, process;
+
+  g_return_val_if_fail (KGX_IS_PAGE (self), FALSE);
+  
+  priv = kgx_page_get_instance_private (self);
+
+  children = g_ptr_array_new_full (3, (GDestroyNotify) kgx_process_unref);
+
+  g_hash_table_iter_init (&iter, priv->children);
+  while (g_hash_table_iter_next (&iter, &pid, &process)) {
+    g_ptr_array_add (children, g_rc_box_acquire (process));
+  }
+
+  return children;
 }

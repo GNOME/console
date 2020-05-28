@@ -39,16 +39,23 @@ struct _KgxPagesClass
   /*< public >*/
 };
 
+
 G_DECLARE_DERIVABLE_TYPE (KgxPages, kgx_pages, KGX, PAGES, GtkOverlay)
 
-void kgx_pages_focus_terminal (KgxPages   *self);
-void kgx_pages_search_forward (KgxPages   *self);
-void kgx_pages_search_back    (KgxPages   *self);
-void kgx_pages_search         (KgxPages   *self,
-                               const char *search);
-void kgx_pages_add_page       (KgxPages   *self,
-                               KgxPage    *page);
-void kgx_pages_remove_page    (KgxPages   *self,
-                               KgxPage    *page);
+
+void        kgx_pages_focus_terminal (KgxPages   *self);
+void        kgx_pages_search_forward (KgxPages   *self);
+void        kgx_pages_search_back    (KgxPages   *self);
+void        kgx_pages_search         (KgxPages   *self,
+                                      const char *search);
+void        kgx_pages_add_page       (KgxPages   *self,
+                                      KgxPage    *page);
+void        kgx_pages_remove_page    (KgxPages   *self,
+                                      KgxPage    *page);
+GPtrArray  *kgx_pages_get_children   (KgxPages   *self);
+void        kgx_pages_focus_page     (KgxPages   *self,
+                                      KgxPage    *page);
+KgxStatus   kgx_pages_current_status (KgxPages   *self);
+
 
 G_END_DECLS

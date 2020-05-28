@@ -24,22 +24,13 @@ G_BEGIN_DECLS
 
 #define KGX_TYPE_PAGES_TAB (kgx_pages_tab_get_type())
 
-/**
- * KgxPagesTab:
- * 
- * Stability: Private
- */
-struct _KgxPagesTab
-{
+
+G_DECLARE_DERIVABLE_TYPE (KgxPagesTab, kgx_pages_tab, KGX, PAGES_TAB, GtkEventBox)
+
+
+struct _KgxPagesTabClass {
   /*< private >*/
-  GtkEventBox  parent_instance;
-
-  /*< public >*/
-  char        *title;
-  GActionMap  *actions;
+  GtkEventBoxClass parent;
 };
-
-G_DECLARE_FINAL_TYPE (KgxPagesTab, kgx_pages_tab, KGX, PAGES_TAB, GtkEventBox)
-
 
 G_END_DECLS

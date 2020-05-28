@@ -45,13 +45,11 @@
 #include "kgx-pages.h"
 #include "kgx-local-page.h"
 
-#define KGX_WINDOW_STYLE_ROOT "root"
-#define KGX_WINDOW_STYLE_REMOTE "remote"
-
 G_DEFINE_TYPE (KgxWindow, kgx_window, GTK_TYPE_APPLICATION_WINDOW)
 
 enum {
   PROP_0,
+  PROP_APPLICATION,
   PROP_INITIAL_WORK_DIR,
   PROP_COMMAND,
   PROP_CLOSE_ON_ZERO,
@@ -96,10 +94,34 @@ started (GObject      *src,
   #if HAS_GTOP
   app = gtk_window_get_application (GTK_WINDOW (win));
 
-  kgx_application_add_watch (KGX_APPLICATION (app),
-                             pid,
-                             KGX_WINDOW (win));
+  kgx_application_add_watch (KGX_APPLICATION (app), pid, page);
   #endif
+}
+
+
+static void
+update_zoom (KgxWindow      *self,
+             KgxApplication *app)
+{
+  g_autofree char *label = NULL;
+  gdouble zoom;
+
+  g_object_get (app,
+                "font-scale", &zoom,
+                NULL);
+
+  label = g_strdup_printf ("%i%%",
+                           (int) round (zoom * 100));
+  gtk_label_set_label (GTK_LABEL (self->zoom_level), label);
+}
+
+
+static void
+zoomed (GObject *object, GParamSpec *pspec, gpointer data)
+{
+  KgxWindow *self = KGX_WINDOW (data);
+
+  update_zoom (self, KGX_APPLICATION (object));
 }
 
 
@@ -111,12 +133,10 @@ kgx_window_constructed (GObject *object)
   g_autoptr (GError)  error = NULL;
   g_auto (GStrv)      shell = NULL;
   g_autofree char    *command = NULL;
-  guint               id = 0;
   GtkWidget          *page;
-  
-  id = gtk_application_window_get_id (GTK_APPLICATION_WINDOW (self));
+  GtkApplication     *application = NULL;
 
-  self->notification_id = g_strdup_printf ("command-completed-%u", id);
+  G_OBJECT_CLASS (kgx_window_parent_class)->constructed (object);
 
   if (G_UNLIKELY (self->command != NULL)) {
     // dup the string so we can free command later to handle the
@@ -147,7 +167,10 @@ kgx_window_constructed (GObject *object)
 
   g_debug ("Working in %s", initial);
 
+  application = gtk_window_get_application (GTK_WINDOW (self));
+
   page = g_object_new (KGX_TYPE_LOCAL_PAGE,
+                       "application", application,
                        "visible", TRUE,
                        "initial-work-dir", initial,
                        "command", shell,
@@ -157,7 +180,30 @@ kgx_window_constructed (GObject *object)
 
   kgx_pages_add_page (KGX_PAGES (self->pages), KGX_PAGE (page));
 
-  G_OBJECT_CLASS (kgx_window_parent_class)->constructed (object);
+  g_object_bind_property (application,
+                          "theme",
+                          self->pages,
+                          "theme",
+                          G_BINDING_SYNC_CREATE);
+
+  g_object_bind_property (application,
+                          "font",
+                          self->pages,
+                          "font",
+                          G_BINDING_SYNC_CREATE);
+
+  g_object_bind_property (application,
+                          "font-scale",
+                          self->pages,
+                          "zoom",
+                          G_BINDING_SYNC_CREATE);
+
+  g_signal_connect (application,
+                    "notify::font-scale",
+                    G_CALLBACK (zoomed),
+                    self);
+
+  update_zoom (self, KGX_APPLICATION (application));
 }
 
 
@@ -170,6 +216,10 @@ kgx_window_set_property (GObject      *object,
   KgxWindow *self = KGX_WINDOW (object);
 
   switch (property_id) {
+    case PROP_APPLICATION:
+      gtk_window_set_application (GTK_WINDOW (self),
+                                  g_value_get_object (value));
+      break;
     case PROP_INITIAL_WORK_DIR:
       self->working_dir = g_value_dup_string (value);
       break;
@@ -194,6 +244,10 @@ kgx_window_get_property (GObject    *object,
   KgxWindow *self = KGX_WINDOW (object);
 
   switch (property_id) {
+    case PROP_APPLICATION:
+      g_value_set_object (value,
+                          gtk_window_get_application (GTK_WINDOW (self)));
+      break;
     case PROP_INITIAL_WORK_DIR:
       g_value_set_string (value, self->working_dir);
       break;
@@ -216,10 +270,6 @@ kgx_window_finalize (GObject *object)
 
   g_clear_pointer (&self->working_dir, g_free);
   g_clear_pointer (&self->command, g_free);
-  g_clear_pointer (&self->notification_id, g_free);
-
-  g_clear_pointer (&self->root, g_hash_table_unref);
-  g_clear_pointer (&self->remote, g_hash_table_unref);
 
   G_OBJECT_CLASS (kgx_window_parent_class)->finalize (object);
 }
@@ -244,16 +294,12 @@ kgx_window_delete_event (GtkWidget   *widget,
                          GdkEventAny *event)
 {
   KgxWindow *self = KGX_WINDOW (widget);
-  GHashTableIter iter;
   GtkWidget *dlg;
-  gpointer pid, process;
+  g_autoptr (GPtrArray) children = NULL;
 
-  if (g_hash_table_size (self->children) < 1 || self->close_anyway) {
-    GtkApplication *app = gtk_window_get_application (GTK_WINDOW (self));
+  children = kgx_pages_get_children (KGX_PAGES (self->pages));
 
-    g_application_withdraw_notification (G_APPLICATION (app),
-                                         self->notification_id);
-
+  if (children->len < 1 || self->close_anyway) {
     return FALSE; // Aka no, I don't want to block closing
   }
 
@@ -264,8 +310,9 @@ kgx_window_delete_event (GtkWidget   *widget,
 
   g_signal_connect (dlg, "response", G_CALLBACK (delete_response), self);
 
-  g_hash_table_iter_init (&iter, self->children);
-  while (g_hash_table_iter_next (&iter, &pid, &process)) {
+  for (int i = 0; i < children->len; i++) {
+    KgxProcess *process = g_ptr_array_index (children, i);
+    
     kgx_close_dialog_add_command (KGX_CLOSE_DIALOG (dlg),
                                   kgx_process_get_exec (process));
   }
@@ -282,67 +329,6 @@ kgx_window_delete_event (GtkWidget   *widget,
   return FALSE; // Aka no, I don't want to block closing
 }
 #endif
-
-
-static void
-update_zoom (KgxWindow      *self,
-             KgxApplication *app)
-{
-  g_autofree char *label = NULL;
-  gdouble zoom;
-
-  g_object_get (app,
-                "font-scale", &zoom,
-                NULL);
-
-  label = g_strdup_printf ("%i%%",
-                           (int) round (zoom * 100));
-  gtk_label_set_label (GTK_LABEL (self->zoom_level), label);
-}
-
-
-static void
-zoomed (GObject *object, GParamSpec *pspec, gpointer data)
-{
-  KgxWindow *self = KGX_WINDOW (data);
-
-  update_zoom (self, KGX_APPLICATION (object));
-}
-
-
-static void
-application_set (GObject *object, GParamSpec *pspec, gpointer data)
-{
-  GtkApplication *app;
-  KgxWindow *self = KGX_WINDOW (object);
-
-  app = gtk_window_get_application (GTK_WINDOW (object));
-
-  g_object_bind_property (app,
-                          "theme",
-                          self->pages,
-                          "theme",
-                          G_BINDING_SYNC_CREATE);
-
-  g_object_bind_property (app,
-                          "font",
-                          self->pages,
-                          "font",
-                          G_BINDING_SYNC_CREATE);
-
-  g_object_bind_property (app,
-                          "font-scale",
-                          self->pages,
-                          "zoom",
-                          G_BINDING_SYNC_CREATE);
-
-  g_signal_connect (app,
-                    "notify::font-scale",
-                    G_CALLBACK (zoomed),
-                    self);
-
-  update_zoom (self, KGX_APPLICATION (app));
-}
 
 
 static void
@@ -421,6 +407,31 @@ zoom (KgxPages  *pages,
 
 
 static void
+status_changed (GObject *object, GParamSpec *pspec, gpointer data)
+{
+  KgxWindow *self = KGX_WINDOW (object);
+  GtkStyleContext *context;
+  KgxStatus status;
+
+  context = gtk_widget_get_style_context (GTK_WIDGET (self));
+
+  status = kgx_pages_current_status (KGX_PAGES (self->pages));
+
+  if (status & KGX_REMOTE) {
+    gtk_style_context_add_class (context, KGX_WINDOW_STYLE_REMOTE);
+  } else {
+    gtk_style_context_remove_class (context, KGX_WINDOW_STYLE_REMOTE);
+  }
+
+  if (status & KGX_PRIVILEGED) {
+    gtk_style_context_add_class (context, KGX_WINDOW_STYLE_ROOT);
+  } else {
+    gtk_style_context_remove_class (context, KGX_WINDOW_STYLE_ROOT);
+  }
+}
+
+
+static void
 kgx_window_class_init (KgxWindowClass *klass)
 {
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
@@ -432,6 +443,20 @@ kgx_window_class_init (KgxWindowClass *klass)
   object_class->finalize = kgx_window_finalize;
 
   widget_class->delete_event = kgx_window_delete_event;
+
+  /**
+   * KgxWindow:application:
+   * 
+   * Proxy for #GtkWindow #GtkWindow:application but with %G_PARAM_CONSTRUCT,
+   * simple as that
+   * 
+   * Since: 0.3.0
+   */
+  pspecs[PROP_APPLICATION] =
+    g_param_spec_object ("application", "Application",
+                         "The application the window is part of",
+                         KGX_TYPE_APPLICATION,
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
 
   /**
    * KgxWindow:initial-work-dir:
@@ -486,7 +511,6 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, about_item);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, pages);
 
-  gtk_widget_class_bind_template_callback (widget_class, application_set);
   gtk_widget_class_bind_template_callback (widget_class, active_changed);
 
   gtk_widget_class_bind_template_callback (widget_class, search_enabled);
@@ -495,6 +519,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, search_prev);
 
   gtk_widget_class_bind_template_callback (widget_class, zoom);
+  gtk_widget_class_bind_template_callback (widget_class, status_changed);
 }
 
 
@@ -539,6 +564,7 @@ new_tab_activated (GSimpleAction *action,
   g_autofree char    *command = NULL;
   GtkWidget          *page;
   KgxWindow          *self = data;
+  GtkApplication     *application = NULL;
 
   command = fp_vte_guess_shell (NULL, &error);
   if (error) {
@@ -559,7 +585,10 @@ new_tab_activated (GSimpleAction *action,
 
   g_debug ("Working in %s", initial);
 
+  application = gtk_window_get_application (GTK_WINDOW (self));
+
   page = g_object_new (KGX_TYPE_LOCAL_PAGE,
+                       "application", application,
                        "visible", TRUE,
                        "initial-work-dir", initial,
                        "command", shell,
@@ -568,6 +597,7 @@ new_tab_activated (GSimpleAction *action,
   kgx_page_start (KGX_PAGE (page), started, self);
 
   kgx_pages_add_page (KGX_PAGES (self->pages), KGX_PAGE (page));
+  kgx_pages_focus_page (KGX_PAGES (self->pages), KGX_PAGE (page));
 }
 
 
@@ -581,7 +611,7 @@ about_activated (GSimpleAction *action,
   g_autofree char *copyright = NULL;
   
   copyright = g_strdup_printf (_("Copyright © %s Zander Brown"),
-                               "2019");
+                               "2019-2020");
 
   gtk_show_about_dialog (GTK_WINDOW (data),
                          "authors", authors,
@@ -672,13 +702,6 @@ kgx_window_init (KgxWindow *self)
   self->theme = KGX_THEME_NIGHT;
   self->close_on_zero = TRUE;
 
-  self->root = g_hash_table_new (g_direct_hash, g_direct_equal);
-  self->remote = g_hash_table_new (g_direct_hash, g_direct_equal);
-  self->children = g_hash_table_new_full (g_direct_hash,
-                                          g_direct_equal,
-                                          NULL,
-                                          (GDestroyNotify) kgx_process_unref);
-
   pact = g_property_action_new ("find",
                                 G_OBJECT (self->search_bar),
                                 "search-mode-enabled");
@@ -729,131 +752,4 @@ kgx_window_get_working_dir (KgxWindow *self)
   }
 
   return g_file_get_path (file);
-}
-
-
-#if HAS_GTOP
-static inline void
-push_type (GHashTable      *table,
-           GPid             pid,
-           KgxProcess      *process,
-           GtkStyleContext *context,
-           const char      *class_name)
-{
-  g_hash_table_insert (table,
-                       GINT_TO_POINTER (pid),
-                       process != NULL ? g_rc_box_acquire (process) : NULL);
-
-  g_debug ("Now %i %s", g_hash_table_size (table), class_name);
-
-  if (G_LIKELY (class_name != NULL)) {
-    gtk_style_context_add_class (context, class_name);
-  }
-}
-#endif
-
-/**
- * kgx_window_push_child:
- * @self: the #KgxWindow
- * @process: the #KgxProcess of the remote process
- * 
- * Registers @pid as a child of @self
- * 
- * Since: 0.2.0
- */
-void
-kgx_window_push_child (KgxWindow    *self,
-                       KgxProcess   *process)
-{
-  #if HAS_GTOP
-  GtkStyleContext *context;
-  GPid pid = 0;
-  const char *exec = NULL;
-
-  g_return_if_fail (KGX_IS_WINDOW (self));
-
-  context = gtk_widget_get_style_context (GTK_WIDGET (self));
-  pid = kgx_process_get_pid (process);
-  exec = kgx_process_get_exec (process);
-
-  if (G_UNLIKELY (g_str_has_prefix (exec, "ssh "))) {
-    push_type (self->remote, pid, NULL, context, KGX_WINDOW_STYLE_REMOTE);
-  }
-
-  if (G_UNLIKELY (kgx_process_get_is_root (process))) {
-    push_type (self->root, pid, NULL, context, KGX_WINDOW_STYLE_ROOT);
-  }
-
-  push_type (self->children, pid, process, context, NULL);
-  #endif
-}
-
-inline static void
-pop_type (GHashTable      *table,
-          GPid             pid,
-          GtkStyleContext *context,
-          const char      *class_name)
-{
-  guint size = 0;
-
-  g_hash_table_remove (table, GINT_TO_POINTER (pid));
-
-  size = g_hash_table_size (table);
-
-  if (G_LIKELY (size <= 0)) {
-    if (G_LIKELY (class_name)) {
-      gtk_style_context_remove_class (context, class_name);
-    }
-    g_debug ("No longer %s", class_name);
-  } else {
-    g_debug ("%i %s remaining", size, class_name);
-  }
-}
-
-/**
- * kgx_window_pop_child:
- * @self: the #KgxWindow
- * @process: the #KgxProcess of the child process
- * 
- * Remove a child added with kgx_window_push_child()
- * 
- * Since: 0.2.0
- */
-void
-kgx_window_pop_child (KgxWindow    *self,
-                      KgxProcess   *process)
-{
-  GtkStyleContext *context;
-  GPid pid = 0;
-  guint id = 0;
-
-  g_return_if_fail (KGX_IS_WINDOW (self));
-
-  context = gtk_widget_get_style_context (GTK_WIDGET (self));
-  #if HAS_GTOP
-  pid = kgx_process_get_pid (process);
-  #endif
-  
-  pop_type (self->remote, pid, context, KGX_WINDOW_STYLE_REMOTE);
-  pop_type (self->root, pid, context, KGX_WINDOW_STYLE_ROOT);
-  pop_type (self->children, pid, context, NULL);
-  
-  if (!gtk_window_is_active (GTK_WINDOW (self))) {
-    g_autoptr (GNotification) noti = NULL;
-    GtkApplication *app = gtk_window_get_application (GTK_WINDOW (self));
-
-    noti = g_notification_new (_("Command completed"));
-    #if HAS_GTOP
-    g_notification_set_body (noti, kgx_process_get_exec (process));
-    #endif
-    id = gtk_application_window_get_id (GTK_APPLICATION_WINDOW (self));
-    g_notification_set_default_action_and_target (noti,
-                                                  "app.focus-window",
-                                                  "u",
-                                                  id);
-
-    g_application_send_notification (G_APPLICATION (app),
-                                     self->notification_id,
-                                     noti);
-  }
 }

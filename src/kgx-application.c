@@ -140,6 +140,7 @@ kgx_application_finalize (GObject *object)
 
   g_clear_pointer (&self->watching, g_tree_unref);
   g_clear_pointer (&self->children, g_tree_unref);
+  g_clear_pointer (&self->pages, g_tree_unref);
 
   G_OBJECT_CLASS (kgx_application_parent_class)->finalize (object);
 }
@@ -184,23 +185,25 @@ handle_watch_iter (gpointer pid,
       struct ProcessWatch *child_watch = g_new (struct ProcessWatch, 1);
 
       child_watch->process = g_rc_box_acquire (process);
-      child_watch->window = g_object_ref (watch->window);
+      child_watch->page = g_object_ref (watch->page);
 
       g_debug ("Hello %i!", GPOINTER_TO_INT (pid));
 
       g_tree_insert (self->children, pid, child_watch);
     }
 
-    kgx_window_push_child (watch->window, process);
+    kgx_page_push_child (watch->page, process);
   }
 
   return FALSE;
 }
 
+
 struct RemoveDead {
   GTree     *plist;
   GPtrArray *dead;
 };
+
 
 static gboolean
 remove_dead (gpointer pid,
@@ -213,13 +216,14 @@ remove_dead (gpointer pid,
   if (!g_tree_lookup (data->plist, pid)) {
     g_debug ("%i marked as dead", GPOINTER_TO_INT (pid));
 
-    kgx_window_pop_child (watch->window, watch->process);
+    kgx_page_pop_child (watch->page, watch->process);
 
     g_ptr_array_add (data->dead, pid);
   }
 
   return FALSE;
 }
+
 
 static gboolean
 watch (gpointer data)
@@ -420,7 +424,7 @@ kgx_application_handle_local_options (GApplication *app,
   if (g_variant_dict_lookup (options, "about", "b", &about)) {
     if (about) {
       g_autofree char *copyright = g_strdup_printf (_("Copyright © %s Zander Brown"),
-                                                    "2019");
+                                                    "2019-2020");
       struct winsize w;
       int padding = 0;
 
@@ -500,7 +504,7 @@ clear_watch (struct ProcessWatch *watch)
   g_return_if_fail (watch != NULL);
 
   g_clear_pointer (&watch->process, kgx_process_unref);
-  g_clear_object (&watch->window);
+  g_clear_object (&watch->page);
 
   g_clear_pointer (&watch, g_free);
 }
@@ -564,18 +568,23 @@ static GOptionEntry entries[] =
   { NULL }
 };
 
+
 static void
 focus_activated (GSimpleAction *action,
                  GVariant      *parameter,
                  gpointer       data)
 {
   KgxApplication *self = KGX_APPLICATION (data);
-  GtkWindow *win;
+  GtkWidget *window;
+  KgxPages *pages;
+  KgxPage *page;
 
-  win = gtk_application_get_window_by_id (GTK_APPLICATION (self),
-                                          g_variant_get_uint32 (parameter));
+  page = kgx_application_lookup_page (self, g_variant_get_uint32 (parameter));
+  pages = kgx_page_get_pages (page);
+  kgx_pages_focus_page (pages, page);
+  window = gtk_widget_get_toplevel (GTK_WIDGET (pages));
 
-  gtk_window_present_with_time (win, GDK_CURRENT_TIME);
+  gtk_window_present_with_time (GTK_WINDOW (window), GDK_CURRENT_TIME);
 }
 
 
@@ -618,7 +627,7 @@ zoom_in_activated (GSimpleAction *action,
 
 static GActionEntry app_entries[] =
 {
-  { "focus-window", focus_activated, "u", NULL, NULL },
+  { "focus-page", focus_activated, "u", NULL, NULL },
   { "zoom-out", zoom_out_activated, NULL, NULL, NULL },
   { "zoom-normal", zoom_normal_activated, NULL, NULL, NULL },
   { "zoom-in", zoom_in_activated, NULL, NULL, NULL },
@@ -650,6 +659,10 @@ kgx_application_init (KgxApplication *self)
                                     NULL,
                                     NULL,
                                     (GDestroyNotify) clear_watch);
+  self->pages = g_tree_new_full (kgx_pid_cmp,
+                                 NULL,
+                                 NULL,
+                                 (GDestroyNotify) g_object_unref);
 
   self->active = 0;
   self->timeout = 0;
@@ -660,27 +673,29 @@ kgx_application_init (KgxApplication *self)
  * kgx_application_add_watch:
  * @self: the #KgxApplication
  * @pid: the shell process to watch
- * @window: the window the shell is running in
+ * @page: the #KgxPage the shell is running in
  * 
- * registers a new shell process with the pid watcher
+ * Registers a new shell process with the pid watcher
+ * 
+ * Since: 0.3.0
  */
 void
 kgx_application_add_watch (KgxApplication *self,
                            GPid            pid,
-                           KgxWindow      *window)
+                           KgxPage        *page)
 {
   struct ProcessWatch *watch;
 
   g_return_if_fail (KGX_IS_APPLICATION (self));
-  g_return_if_fail (KGX_IS_WINDOW (window));
+  g_return_if_fail (KGX_IS_PAGE (page));
 
   watch = g_new0 (struct ProcessWatch, 1);
   watch->process = kgx_process_new (pid);
-  watch->window = g_object_ref (window);
+  watch->page = g_object_ref (page);
 
   g_debug ("Started watching %i", pid);
 
-  g_return_if_fail (KGX_IS_WINDOW (watch->window));
+  g_return_if_fail (KGX_IS_PAGE (watch->page));
 
   g_tree_insert (self->watching, GINT_TO_POINTER (pid), watch);
 }
@@ -771,4 +786,45 @@ kgx_application_pop_active (KgxApplication *self)
   } else {
     set_watcher (self, TRUE);
   }
-} 
+}
+
+
+/**
+ * kgx_application_add_page:
+ * @self: the instance to look for @id in
+ * @page: the page to add
+ * 
+ * Register a new #KgxPage with @self
+ */
+void
+kgx_application_add_page (KgxApplication *self,
+                          KgxPage        *page)
+{
+  guint id = 0;
+
+  g_return_if_fail (KGX_IS_APPLICATION (self));
+  g_return_if_fail (KGX_IS_PAGE (page));
+
+  id = kgx_page_get_id (page);
+
+  g_tree_insert (self->pages, GINT_TO_POINTER (id), g_object_ref (page));
+}
+
+
+/**
+ * kgx_application_lookup_page:
+ * @self: the instance to look for @id in
+ * @id: the page id to look for
+ * 
+ * Try and find a #KgxPage with @id in @self
+ * 
+ * Returns: (transfer none) (nullable): the found #KgxPage or %NULL
+ */
+KgxPage *
+kgx_application_lookup_page (KgxApplication *self,
+                             guint           id)
+{
+  g_return_val_if_fail (KGX_IS_APPLICATION (self), NULL);
+
+  return g_tree_lookup (self->pages, GUINT_TO_POINTER (id));
+}

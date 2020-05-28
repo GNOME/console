@@ -27,16 +27,28 @@
 #include <glib/gi18n.h>
 
 #include "kgx-config.h"
+#include "kgx-page.h"
 #include "kgx-pages-tab.h"
+#include "kgx-enums.h"
+#include "kgx-window.h"
 
 
-G_DEFINE_TYPE (KgxPagesTab, kgx_pages_tab, GTK_TYPE_EVENT_BOX)
+typedef struct _KgxPagesTabPrivate KgxPagesTabPrivate;
+struct _KgxPagesTabPrivate {
+  char        *title;
+  KgxStatus    status;
+  GActionMap  *actions;
+};
+
+
+G_DEFINE_TYPE_WITH_PRIVATE (KgxPagesTab, kgx_pages_tab, GTK_TYPE_EVENT_BOX)
 
 
 enum {
   PROP_0,
   PROP_TITLE,
   PROP_DESCRIPTION,
+  PROP_STATUS,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -57,15 +69,33 @@ kgx_pages_tab_set_property (GObject      *object,
                             GParamSpec   *pspec)
 {
   KgxPagesTab *self = KGX_PAGES_TAB (object);
+  KgxPagesTabPrivate *priv = kgx_pages_tab_get_instance_private (self);
+  GtkStyleContext *context;
 
   switch (property_id) {
     case PROP_TITLE:
-      g_clear_pointer (&self->title, g_free);
-      self->title = g_value_dup_string (value);
+      g_clear_pointer (&priv->title, g_free);
+      priv->title = g_value_dup_string (value);
       break;
     case PROP_DESCRIPTION:
       gtk_widget_set_tooltip_markup (GTK_WIDGET (object),
                                      g_value_get_string (value));
+      break;
+    case PROP_STATUS:
+      priv->status = g_value_get_flags (value);
+      context = gtk_widget_get_style_context (GTK_WIDGET (self));
+
+      if (priv->status & KGX_REMOTE) {
+        gtk_style_context_add_class (context, KGX_WINDOW_STYLE_REMOTE);
+      } else {
+        gtk_style_context_remove_class (context, KGX_WINDOW_STYLE_REMOTE);
+      }
+
+      if (priv->status & KGX_PRIVILEGED) {
+        gtk_style_context_add_class (context, KGX_WINDOW_STYLE_ROOT);
+      } else {
+        gtk_style_context_remove_class (context, KGX_WINDOW_STYLE_ROOT);
+      }
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -81,14 +111,18 @@ kgx_pages_tab_get_property (GObject    *object,
                             GParamSpec *pspec)
 {
   KgxPagesTab *self = KGX_PAGES_TAB (object);
+  KgxPagesTabPrivate *priv = kgx_pages_tab_get_instance_private (self);
 
   switch (property_id) {
     case PROP_TITLE:
-      g_value_set_string (value, self->title);
+      g_value_set_string (value, priv->title);
       break;
     case PROP_DESCRIPTION:
       g_value_set_string (value,
                           gtk_widget_get_tooltip_markup (GTK_WIDGET (object)));
+      break;
+    case PROP_STATUS:
+      g_value_set_flags (value, priv->status);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -101,8 +135,9 @@ static void
 kgx_pages_tab_finalize (GObject *object)
 {
   KgxPagesTab *self = KGX_PAGES_TAB (object);
+  KgxPagesTabPrivate *priv = kgx_pages_tab_get_instance_private (self);
 
-  g_clear_pointer (&self->title, g_free);
+  g_clear_pointer (&priv->title, g_free);
 
   G_OBJECT_CLASS (kgx_pages_tab_parent_class)->finalize (object);
 }
@@ -172,6 +207,12 @@ kgx_pages_tab_class_init (KgxPagesTabClass *klass)
                          NULL,
                          G_PARAM_READWRITE);
 
+  pspecs[PROP_STATUS] =
+    g_param_spec_flags ("status", "Status", "Special state of the tab",
+                         KGX_TYPE_STATUS,
+                         KGX_NONE,
+                         G_PARAM_READWRITE);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   signals[CLOSE] = g_signal_new ("close",
@@ -221,16 +262,18 @@ static GActionEntry tab_entries[] =
 static void
 kgx_pages_tab_init (KgxPagesTab *self)
 {
+  KgxPagesTabPrivate *priv = kgx_pages_tab_get_instance_private (self);
+
   gtk_widget_set_has_window (GTK_WIDGET (self), TRUE);
 
-  self->actions = G_ACTION_MAP (g_simple_action_group_new ());
-  g_action_map_add_action_entries (self->actions,
+  priv->actions = G_ACTION_MAP (g_simple_action_group_new ());
+  g_action_map_add_action_entries (priv->actions,
                                    tab_entries,
                                    G_N_ELEMENTS (tab_entries),
                                    self);
   gtk_widget_insert_action_group (GTK_WIDGET (self),
                                   "tab",
-                                  G_ACTION_GROUP (self->actions));
+                                  G_ACTION_GROUP (priv->actions));
 
   gtk_widget_add_events (GTK_WIDGET (self), GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK);
 

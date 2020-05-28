@@ -58,6 +58,12 @@ struct _KgxPagesPrivate {
   GFile                *path;
   GBinding             *path_bind;
 
+  KgxStatus             page_status;
+  GBinding             *page_status_bind;
+
+  gboolean              is_active;
+  GBinding             *is_active_bind;
+
   PangoFontDescription *font;
   double                zoom;
   KgxTheme              theme;
@@ -77,6 +83,8 @@ enum {
   PROP_OPAQUE,
   PROP_FONT,
   PROP_ZOOM,
+  PROP_IS_ACTIVE,
+  PROP_STATUS,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -120,6 +128,12 @@ kgx_pages_get_property (GObject    *object,
     case PROP_ZOOM:
       g_value_set_double (value, priv->zoom);
       break;
+    case PROP_IS_ACTIVE:
+      g_value_set_boolean (value, priv->is_active);
+      break;
+    case PROP_STATUS:
+      g_value_set_flags (value, priv->page_status);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -159,6 +173,12 @@ kgx_pages_set_property (GObject      *object,
       break;
     case PROP_ZOOM:
       priv->zoom = g_value_get_double (value);
+      break;
+    case PROP_IS_ACTIVE:
+      priv->is_active = g_value_get_boolean (value);
+      break;
+    case PROP_STATUS:
+      priv->page_status = g_value_get_flags (value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -241,6 +261,24 @@ page_changed (GtkNotebook *notebook,
                                             self,
                                             "path",
                                             G_BINDING_SYNC_CREATE);
+
+  if (priv->active_page) {
+    g_object_set (priv->active_page, "is-active", FALSE, NULL);
+  }
+
+  g_clear_object (&priv->is_active_bind);
+  priv->is_active_bind = g_object_bind_property (self,
+                                                 "is-active",
+                                                 page,
+                                                 "is-active",
+                                                 G_BINDING_SYNC_CREATE);
+
+  g_clear_object (&priv->page_status_bind);
+  priv->page_status_bind = g_object_bind_property (page,
+                                                   "page-status",
+                                                   self,
+                                                   "status",
+                                                   G_BINDING_SYNC_CREATE);
 
   priv->active_page = KGX_PAGE (page);
 }
@@ -329,6 +367,9 @@ page_removed (GtkNotebook *notebook,
 
   if (gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->notebook)) == 0) {
     gtk_stack_set_visible_child (GTK_STACK (priv->stack), priv->empty);
+
+    priv->active_page = NULL;
+    priv->size_watcher = 0;
 
     g_object_set (self,
 #if IS_GENERIC
@@ -441,6 +482,17 @@ kgx_pages_class_init (KgxPagesClass *klass)
     g_param_spec_double ("zoom", "Zoom", "Font scaling",
                          0.5, 2.0, 1.0,
                          G_PARAM_READWRITE);
+
+  pspecs[PROP_IS_ACTIVE] =
+    g_param_spec_boolean ("is-active", "Is Active", "Is active pages",
+                          FALSE,
+                          G_PARAM_READWRITE);
+
+  pspecs[PROP_STATUS] =
+    g_param_spec_flags ("status", "Status", "Active page status",
+                        KGX_TYPE_STATUS,
+                        KGX_NONE,
+                        G_PARAM_READWRITE);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
@@ -577,4 +629,97 @@ kgx_pages_remove_page (KgxPages *self,
   priv = kgx_pages_get_instance_private (self);
   
   gtk_container_remove (GTK_CONTAINER (priv->notebook), GTK_WIDGET (page));
+}
+
+
+/**
+ * kgx_pages_focus_page:
+ * @self: the #KgxPages
+ * @page: the #KgxPage to focus
+ * 
+ * Switch to a page
+ * 
+ * Since: 0.3.0
+ */
+void
+kgx_pages_focus_page (KgxPages *self,
+                      KgxPage  *page)
+{
+  KgxPagesPrivate *priv;
+  int index;
+  
+  g_return_if_fail (KGX_IS_PAGES (self));
+  g_return_if_fail (KGX_IS_PAGE (page));
+
+  priv = kgx_pages_get_instance_private (self);
+
+  index = gtk_notebook_page_num (GTK_NOTEBOOK (priv->notebook),
+                                 GTK_WIDGET (page));
+  
+  g_return_if_fail (index != -1);
+
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), index);
+
+  kgx_page_focus_terminal (page);
+}
+
+
+/**
+ * kgx_pages_current_status:
+ * @self: the #KgxPages
+ * 
+ * Get the #KgxStatus of the current #KgxPage
+ * 
+ * Since: 0.3.0
+ */
+KgxStatus
+kgx_pages_current_status (KgxPages *self)
+{
+  KgxPagesPrivate *priv;
+  
+  g_return_val_if_fail (KGX_IS_PAGES (self), KGX_NONE);
+
+  priv = kgx_pages_get_instance_private (self);
+
+  return priv->page_status;
+}
+
+
+/**
+ * kgx_pages_get_children:
+ * @self: the #KgxPages
+ * 
+ * Call kgx_page_get_children on all #KgxPage s in @self building a
+ * combined list
+ * 
+ * Returns: (element-type Kgx.Process) (transfer full): the list of #KgxProcess
+ */
+GPtrArray *
+kgx_pages_get_children (KgxPages *self)
+{
+  KgxPagesPrivate *priv;
+  GPtrArray *children;
+  GList *pages;
+
+  g_return_val_if_fail (KGX_IS_PAGES (self), KGX_NONE);
+
+  priv = kgx_pages_get_instance_private (self);
+
+  children = g_ptr_array_new_full (10, (GDestroyNotify) kgx_process_unref);
+
+  pages = gtk_container_get_children (GTK_CONTAINER (priv->notebook));
+
+  do {
+    g_autoptr (GPtrArray) page_children = NULL;
+    
+    page_children = kgx_page_get_children (KGX_PAGE (pages->data));
+
+    for (int i = 0; i < page_children->len; i++) {
+      g_ptr_array_add (children, g_ptr_array_steal_index (page_children, i));
+    }
+
+    // 2.62: g_ptr_array_extend_and_steal (children, page_children);
+  } while ((pages = g_list_next (pages)));
+
+  return children;
 }
