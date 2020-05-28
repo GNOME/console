@@ -64,7 +64,12 @@ kgx_sources += gnome.mkenums_simple('kgx-enums',
                                       'kgx-page.h'
                                     ])
 
-kgx_lib = library ('kgx', kgx_sources, dependencies: kgx_deps)
+kgx_lib = library ('kgx', kgx_sources,
+                   dependencies: kgx_deps,
+                   install: true,
+                   install_dir: pkglibdir,
+                   install_rpath: pkglibdir,
+                  )
 kgx_inc = include_directories('.')
 
 kgx_dep = declare_dependency (sources: [config_h],
@@ -92,6 +97,8 @@ if get_option('gir')
       ],
       dependencies: [kgx_dep],
       install: false,
+      install_dir_gir: pkggirdir,
+      install_dir_typelib: pkgtypelibdir,
       build_by_default: true,
       # This is bad but we aren't generating a public GIR
       extra_args: '--accept-unprefixed',
@@ -118,4 +125,6 @@ endif
 executable('kgx', 'main.c',
   dependencies: kgx_dep,
   install: true,
+  install_rpath: pkglibdir,
+  gui_app: true,
 )

@@ -1,17 +1,29 @@
 project('kgx', 'c', version: '0.2.1',
   meson_version: '>= 0.49.0',
-  default_options: ['werror=true', 'c_std=gnu11', 'cpp_std=gnu++17'],
+  default_options: [
+    'werror=true',
+    'buildtype=debugoptimized',
+    'c_std=gnu11',
+    'cpp_std=gnu++17',
+  ],
 )
 
 i18n = import('i18n')
 
+prefix = get_option('prefix')
+libdir = prefix / get_option('libdir')
+datadir = prefix / get_option('datadir')
+pkglibdir = prefix / libdir / meson.project_name()
+pkgdatadir = datadir / meson.project_name()
+pkggirdir =  pkgdatadir / 'gir-1.0'
+pkgtypelibdir = pkglibdir / 'girepository-1.0'
+
 conf = configuration_data()
 conf.set_quoted('PACKAGE_VERSION', '@VCS_TAG@')
 conf.set_quoted('GETTEXT_PACKAGE', 'kgx')
-conf.set_quoted('LOCALEDIR',
-                    join_paths(get_option('prefix'), get_option('localedir')))
+conf.set_quoted('LOCALEDIR', prefix / get_option('localedir'))
 conf.set_quoted('RES_PATH', '/org/gnome/zbrown/KingsCross/')
-conf.set('BINDIR', join_paths(get_option('prefix'), get_option('bindir')))
+conf.set('BINDIR', prefix / get_option('bindir'))
 if get_option('gtop')
   conf.set('HAS_GTOP', 1)
 else
