@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2020-03-15 14:26+0000\n"
-"PO-Revision-Date: 2020-03-30 21:11+0300\n"
+"POT-Creation-Date: 2020-05-28 23:21+0000\n"
+"PO-Revision-Date: 2020-05-29 11:42+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -21,8 +21,8 @@ msgstr ""
 
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:422
-#: src/kgx-window.c:744 src/main.c:38
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:440
+#: src/kgx-window.c:630 src/kgx-window.ui:98 src/main.c:38
 msgid "King’s Cross"
 msgstr "Кінгс-кросс"
 
@@ -30,9 +30,8 @@ msgstr "Кінгс-кросс"
 #: data/org.gnome.zbrown.KingsCross.desktop.in:9
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings"
-" cross;команда;запит;командний рядок;запустити;запуск;оболонка;термінал;кінгс-"
-"кросс;"
+"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;команда;"
+"запит;командний рядок;запустити;запуск;оболонка;термінал;кінгс-кросс;"
 
 #: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3 src/main.c:35
 msgid "Terminal"
@@ -42,11 +41,11 @@ msgstr "Термінал"
 #: data/org.gnome.zbrown.KingsCross-generic.desktop.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
 msgstr ""
-"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings"
-" cross;команда;запит;командний рядок;запустити;запуск;оболонка;термінал;"
+"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;команда;"
+"запит;командний рядок;запустити;запуск;оболонка;термінал;"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:424
-#: src/kgx-window.c:735
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:442
+#: src/kgx-window.c:621
 msgid "Terminal Emulator"
 msgstr "Емулятор термінала"
 
@@ -74,65 +73,70 @@ msgstr "Нове вікно"
 
 #: src/help-overlay.ui:26
 msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Нова вкладка"
+
+#: src/help-overlay.ui:33
+msgctxt "shortcut window"
 msgid "Terminal"
 msgstr "Термінал"
 
-#: src/help-overlay.ui:32
+#: src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Знайти"
 
-#: src/help-overlay.ui:39
+#: src/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Copy"
 msgstr "Копіювати"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:53
 msgctxt "shortcut window"
 msgid "Paste"
 msgstr "Вставити"
 
 #. Translators: This is the name of the timeout that looks for programs
 #. running in the terminal
-#: src/kgx-application.c:255
+#: src/kgx-application.c:269
 msgid "child watcher"
 msgstr "дитячний наглядач"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:396
+#: src/kgx-application.c:414
 #, c-format
 msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgstr "# Кінгс-кросс %s з використанням VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:408 src/kgx-window.c:727
+#: src/kgx-application.c:426 src/kgx-window.c:613
 #, c-format
 msgid "Copyright © %s Zander Brown"
 msgstr "© Zander Brown, %s"
 
-#: src/kgx-application.c:528
+#: src/kgx-application.c:546
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Виконати аргумент цього параметра у терміналі"
 
-#: src/kgx-application.c:537
+#: src/kgx-application.c:555
 msgid "Set the working directory"
 msgstr "Встановити робочий каталог"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:539
+#: src/kgx-application.c:557
 msgid "DIRNAME"
 msgstr "НАЗВА_КАТАЛОГУ"
 
-#: src/kgx-application.c:547
+#: src/kgx-application.c:565
 msgid "Wait until the child exits (TODO)"
 msgstr "Очікувати на завершення дочірнього процесу (ЩЕ НЕ РЕАЛІЗОВАНО)"
 
-#: src/kgx-terminal.c:374
+#: src/kgx-terminal.c:413
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Ви вставили команду, яку слід запускати від імені адміністратора"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:377
+#: src/kgx-terminal.c:416
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -141,64 +145,68 @@ msgstr ""
 "Переконайтеся у тому, що вам відомі наслідки виконання команди:\n"
 "%s"
 
-#: src/kgx-terminal.c:382 src/kgx-close-dialog.ui:56
+#: src/kgx-terminal.c:421 src/kgx-close-dialog.ui:56
 msgid "_Cancel"
 msgstr "_Скасувати"
 
-#: src/kgx-terminal.c:385 src/menus.ui:24
+#: src/kgx-terminal.c:424 src/menus.ui:24
 msgid "_Paste"
 msgstr "Вст_авити"
 
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-window.c:150
-#, c-format
-msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr "<b>Лише читання</b> — виконання команди завершено із кодом %i"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-window.c:165
-msgid "<b>Read Only</b> — Command exited"
-msgstr "<b>Лише читання</b> — виконання команди завершено"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-window.c:202
-#, c-format
-msgid "<b>Failed to start</b> — %s"
-msgstr "<b>Не вдалося запустити</b> – %s"
-
 #. Translators: Credit yourself here
-#: src/kgx-window.c:734
+#: src/kgx-window.c:620
 msgid "translator-credits"
 msgstr "Юрій Чорноіван <yurchor@ukr.net>"
 
 #. Translators: "by King’s Cross" here is meaning
 #. author or creator of 'Terminal'
-#: src/kgx-window.c:742
+#: src/kgx-window.c:628
 msgid "Terminal (King’s Cross)"
 msgstr "Термінал (Кінгс-кросс)"
 
-#: src/kgx-window.c:844
+#: src/kgx-window.c:693
 msgid "_About Terminal"
 msgstr "_Про «Термінал»"
 
-#: src/kgx-window.c:1024
-msgid "Command completed"
-msgstr "Виконання команди завершено"
+#: src/kgx-window.ui:20
+msgid "Shrink text"
+msgstr "Стиснути текст"
 
-#: src/kgx-window.ui:61
+#: src/kgx-window.ui:33
+msgid "Reset size"
+msgstr "Відновити початковий розмір"
+
+#: src/kgx-window.ui:46
+msgid "Enlarge text"
+msgstr "Збільшити текст"
+
+#: src/kgx-window.ui:63
 msgid "_New Window"
 msgstr "_Нове вікно"
 
-#: src/kgx-window.ui:73
+#: src/kgx-window.ui:75
 msgid "_Keyboard Shortcuts"
 msgstr "_Клавіатурні скорочення"
 
-#: src/kgx-window.ui:80
+#: src/kgx-window.ui:82
 msgid "_About King’s Cross"
 msgstr "_Про «Кінгс-кросс»"
+
+#: src/kgx-window.ui:83
+msgid "About this program"
+msgstr "Про цю програму"
+
+#: src/kgx-window.ui:106
+msgid "Find in terminal"
+msgstr "Знайти у терміналі"
+
+#: src/kgx-window.ui:124
+msgid "Menu"
+msgstr "Меню"
+
+#: src/kgx-window.ui:142
+msgid "New Tab"
+msgstr "Нова вкладка"
 
 #: src/menus.ui:7
 msgid "_Open Link"
@@ -220,6 +228,14 @@ msgstr "Ви_брати все"
 msgid "Show in _Files"
 msgstr "Показати у «_Файлах»"
 
+#: src/menus.ui:45
+msgid "_Close"
+msgstr "_Закрити"
+
+#: src/menus.ui:49
+msgid "_Detach"
+msgstr "_Від'єднати"
+
 #: src/kgx-close-dialog.ui:6
 msgid "Close Terminal"
 msgstr "Закрити «Термінал»"
@@ -229,10 +245,22 @@ msgid ""
 "Some commands are still running, closing this terminal will kill them and "
 "may lead to unexpected outcomes"
 msgstr ""
-"Виконання якихось із команд ще не завершено. Закриття вікна термінала"
-" призведе до аварійного завершення роботи цих команд і може мати"
-" непередбачувані наслідки."
+"Виконання якихось із команд ще не завершено. Закриття вікна термінала "
+"призведе до аварійного завершення роботи цих команд і може мати "
+"непередбачувані наслідки."
 
 #: src/kgx-close-dialog.ui:64
 msgid "_OK"
 msgstr "_Гаразд"
+
+#~ msgid "<b>Read Only</b> — Command exited with code %i"
+#~ msgstr "<b>Лише читання</b> — виконання команди завершено із кодом %i"
+
+#~ msgid "<b>Read Only</b> — Command exited"
+#~ msgstr "<b>Лише читання</b> — виконання команди завершено"
+
+#~ msgid "<b>Failed to start</b> — %s"
+#~ msgstr "<b>Не вдалося запустити</b> – %s"
+
+#~ msgid "Command completed"
+#~ msgstr "Виконання команди завершено"
