@@ -26,7 +26,7 @@ kgx_sources = [
 kgx_deps = [
   dependency('gio-2.0', version: '>= 2.58'),
   dependency('gtk+-3.0', version: '>= 3.24'),
-  dependency('libhandy-0.0', version: '>= 0.0.11', fallback: ['handy', 'libhandy_dep']),
+  dependency('libhandy-1.0', version: '>= 0.80', fallback: ['handy', 'libhandy_dep']),
   dependency('libgtop-2.0'),
   cc.find_library('m', required: false),
 ]

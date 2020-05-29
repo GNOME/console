@@ -33,7 +33,7 @@
 #include "kgx-close-dialog.h"
 #include "kgx-close-dialog-row.h"
 
-G_DEFINE_TYPE (KgxCloseDialog, kgx_close_dialog, HDY_TYPE_DIALOG)
+G_DEFINE_TYPE (KgxCloseDialog, kgx_close_dialog, GTK_TYPE_DIALOG)
 
 static void
 kgx_close_dialog_class_init (KgxCloseDialogClass *klass)
