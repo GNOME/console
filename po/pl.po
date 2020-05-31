@@ -1,15 +1,15 @@
 # Polish translation for kgx.
-# Copyright © 2019 the kgx authors.
+# Copyright © 2019-2020 the kgx authors.
 # This file is distributed under the same license as the kgx package.
-# Piotr Drąg <piotrdrag@gmail.com>, 2019.
-# Aviary.pl <community-poland@mozilla.org>, 2019.
+# Piotr Drąg <piotrdrag@gmail.com>, 2019-2020.
+# Aviary.pl <community-poland@mozilla.org>, 2019-2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2019-09-24 16:40+0000\n"
-"PO-Revision-Date: 2019-09-29 16:05+0200\n"
+"POT-Creation-Date: 2020-05-28 23:21+0000\n"
+"PO-Revision-Date: 2020-05-31 14:25+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -21,8 +21,8 @@ msgstr ""
 
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:422
-#: src/kgx-window.c:744 src/main.c:38
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:440
+#: src/kgx-window.c:630 src/kgx-window.ui:98 src/main.c:38
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
@@ -44,8 +44,8 @@ msgstr ""
 "powłoka;shell;prompt;polecenie;komenda;wiersz poleceń;linia poleceń;wiersz "
 "komend;linia komend;cmd;konsola;terminal;kgx;kings cross;"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:424
-#: src/kgx-window.c:735
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:442
+#: src/kgx-window.c:621
 msgid "Terminal Emulator"
 msgstr "Emulator terminala"
 
@@ -57,7 +57,7 @@ msgstr "Prosty, łatwy w użyciu emulator terminala dla środowiska GNOME."
 msgid "Terminal window"
 msgstr "Okno terminala"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:45
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:52
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -73,65 +73,70 @@ msgstr "Nowe okno"
 
 #: src/help-overlay.ui:26
 msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Nowa karta"
+
+#: src/help-overlay.ui:33
+msgctxt "shortcut window"
 msgid "Terminal"
 msgstr "Terminal"
 
-#: src/help-overlay.ui:32
+#: src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Wyszukiwanie"
 
-#: src/help-overlay.ui:39
+#: src/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Copy"
 msgstr "Skopiowanie"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:53
 msgctxt "shortcut window"
 msgid "Paste"
 msgstr "Wklejenie"
 
 #. Translators: This is the name of the timeout that looks for programs
 #. running in the terminal
-#: src/kgx-application.c:255
+#: src/kgx-application.c:269
 msgid "child watcher"
 msgstr "obserwator procesu potomnego"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:396
+#: src/kgx-application.c:414
 #, c-format
 msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgstr "# King’s Cross %s, używa biblioteki VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:408 src/kgx-window.c:727
+#: src/kgx-application.c:426 src/kgx-window.c:613
 #, c-format
 msgid "Copyright © %s Zander Brown"
 msgstr "Copyright © %s Zander Brown"
 
-#: src/kgx-application.c:528
+#: src/kgx-application.c:546
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Wykonuje parametr do tej opcji wewnątrz terminala"
 
-#: src/kgx-application.c:537
+#: src/kgx-application.c:555
 msgid "Set the working directory"
 msgstr "Ustawia katalog roboczy"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:539
+#: src/kgx-application.c:557
 msgid "DIRNAME"
 msgstr "NAZWA-KATALOGU"
 
-#: src/kgx-application.c:547
+#: src/kgx-application.c:565
 msgid "Wait until the child exits (TODO)"
 msgstr "Czeka, aż proces potomny zakończy działanie (niezaimplementowane)"
 
-#: src/kgx-terminal.c:374
+#: src/kgx-terminal.c:413
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Wklejane jest polecenie wykonywane jako administrator"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:377
+#: src/kgx-terminal.c:416
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -140,66 +145,70 @@ msgstr ""
 "Proszę się upewnić, że jest to właściwe polecenie:\n"
 "%s"
 
-#: src/kgx-terminal.c:382 src/kgx-close-dialog.ui:56
+#: src/kgx-terminal.c:421 src/kgx-close-dialog.ui:56
 msgid "_Cancel"
 msgstr "_Anuluj"
 
-#: src/kgx-terminal.c:385 src/menus.ui:24
+#: src/kgx-terminal.c:424 src/menus.ui:24
 msgid "_Paste"
 msgstr "Wk_lej"
 
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-window.c:150
-#, c-format
-msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr "<b>Tylko do odczytu</b> — polecenie zakończyło działanie z kodem %i"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-window.c:165
-msgid "<b>Read Only</b> — Command exited"
-msgstr "<b>Tylko do odczytu</b> — polecenie zakończyło działanie"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-window.c:202
-#, c-format
-msgid "<b>Failed to start</b> — %s"
-msgstr "<b>Uruchomienie się nie powiodło</b> — %s"
-
 #. Translators: Credit yourself here
-#: src/kgx-window.c:734
+#: src/kgx-window.c:620
 msgid "translator-credits"
 msgstr ""
-"Piotr Drąg <piotrdrag@gmail.com>, 2019\n"
-"Aviary.pl <community-poland@mozilla.org>, 2019"
+"Piotr Drąg <piotrdrag@gmail.com>, 2019-2020\n"
+"Aviary.pl <community-poland@mozilla.org>, 2019-2020"
 
 #. Translators: "by King’s Cross" here is meaning
 #. author or creator of 'Terminal'
-#: src/kgx-window.c:742
+#: src/kgx-window.c:628
 msgid "Terminal (King’s Cross)"
 msgstr "Terminal (King’s Cross)"
 
-#: src/kgx-window.c:844
+#: src/kgx-window.c:693
 msgid "_About Terminal"
 msgstr "_O programie"
 
-#: src/kgx-window.c:1024
-msgid "Command completed"
-msgstr "Ukończono polecenie"
+#: src/kgx-window.ui:20
+msgid "Shrink text"
+msgstr "Pomniejsza tekst"
 
-#: src/kgx-window.ui:61
+#: src/kgx-window.ui:33
+msgid "Reset size"
+msgstr "Przywraca zwykły rozmiar tekstu"
+
+#: src/kgx-window.ui:46
+msgid "Enlarge text"
+msgstr "Powiększa tekst"
+
+#: src/kgx-window.ui:63
 msgid "_New Window"
 msgstr "_Nowe okno"
 
-#: src/kgx-window.ui:73
+#: src/kgx-window.ui:75
 msgid "_Keyboard Shortcuts"
 msgstr "_Skróty klawiszowe"
 
-#: src/kgx-window.ui:80
+#: src/kgx-window.ui:82
 msgid "_About King’s Cross"
 msgstr "_O programie"
+
+#: src/kgx-window.ui:83
+msgid "About this program"
+msgstr "Informacje o tym programie"
+
+#: src/kgx-window.ui:106
+msgid "Find in terminal"
+msgstr "Wyszukuje w terminalu"
+
+#: src/kgx-window.ui:124
+msgid "Menu"
+msgstr "Menu"
+
+#: src/kgx-window.ui:142
+msgid "New Tab"
+msgstr "Nowa karta"
 
 #: src/menus.ui:7
 msgid "_Open Link"
@@ -220,6 +229,14 @@ msgstr "Z_aznacz wszystko"
 #: src/menus.ui:36
 msgid "Show in _Files"
 msgstr "_Wyświetl w menedżerze plików"
+
+#: src/menus.ui:45
+msgid "_Close"
+msgstr "Za_mknij"
+
+#: src/menus.ui:49
+msgid "_Detach"
+msgstr "_Odłącz"
 
 #: src/kgx-close-dialog.ui:6
 msgid "Close Terminal"
