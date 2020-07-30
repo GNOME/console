@@ -1,14 +1,14 @@
 # Swedish translation for kgx.
-# Copyright © 2019 kgx's COPYRIGHT HOLDER
+# Copyright © 2019, 2020 kgx's COPYRIGHT HOLDER
 # This file is distributed under the same license as the kgx package.
-# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2019.
+# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2019, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2019-12-25 16:37+0000\n"
-"PO-Revision-Date: 2019-12-27 12:42+0100\n"
+"POT-Creation-Date: 2020-05-28 23:21+0000\n"
+"PO-Revision-Date: 2020-07-30 13:48+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -16,12 +16,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3.1\n"
 
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:422
-#: src/kgx-window.c:744 src/main.c:38
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:440
+#: src/kgx-window.c:630 src/kgx-window.ui:98 src/main.c:38
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
@@ -39,8 +39,8 @@ msgstr "Terminal"
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
 msgstr "kommando;prompt;cmd;kommandorad;kör;skal;terminal;kgx;"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:424
-#: src/kgx-window.c:735
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:442
+#: src/kgx-window.c:621
 msgid "Terminal Emulator"
 msgstr "Terminalemulator"
 
@@ -68,65 +68,70 @@ msgstr "Nytt fönster"
 
 #: src/help-overlay.ui:26
 msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Ny flik"
+
+#: src/help-overlay.ui:33
+msgctxt "shortcut window"
 msgid "Terminal"
 msgstr "Terminal"
 
-#: src/help-overlay.ui:32
+#: src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Sök"
 
-#: src/help-overlay.ui:39
+#: src/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Copy"
 msgstr "Kopiera"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:53
 msgctxt "shortcut window"
 msgid "Paste"
 msgstr "Klistra in"
 
 #. Translators: This is the name of the timeout that looks for programs
 #. running in the terminal
-#: src/kgx-application.c:255
+#: src/kgx-application.c:269
 msgid "child watcher"
 msgstr "barnövervakare"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:396
+#: src/kgx-application.c:414
 #, c-format
 msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgstr "# King’s Cross %s med VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:408 src/kgx-window.c:727
+#: src/kgx-application.c:426 src/kgx-window.c:613
 #, c-format
 msgid "Copyright © %s Zander Brown"
 msgstr "Copyright © %s Zander Brown"
 
-#: src/kgx-application.c:528
+#: src/kgx-application.c:546
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Kör argumentet till denna flagga inuti terminalen"
 
-#: src/kgx-application.c:537
+#: src/kgx-application.c:555
 msgid "Set the working directory"
 msgstr "Ställ in arbetskatalogen"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:539
+#: src/kgx-application.c:557
 msgid "DIRNAME"
 msgstr "KATNAMN"
 
-#: src/kgx-application.c:547
+#: src/kgx-application.c:565
 msgid "Wait until the child exits (TODO)"
 msgstr "Vänta tills barnet avslutar (TODO)"
 
-#: src/kgx-terminal.c:374
+#: src/kgx-terminal.c:413
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Du klistrar in ett kommando som körs som en administratör"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:377
+#: src/kgx-terminal.c:416
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -135,36 +140,16 @@ msgstr ""
 "Säkerställ att du vet vad kommandot gör:\n"
 "%s"
 
-#: src/kgx-terminal.c:382 src/kgx-close-dialog.ui:56
+#: src/kgx-terminal.c:421 src/kgx-close-dialog.ui:56
 msgid "_Cancel"
 msgstr "A_vbryt"
 
-#: src/kgx-terminal.c:385 src/menus.ui:24
+#: src/kgx-terminal.c:424 src/menus.ui:24
 msgid "_Paste"
 msgstr "_Klistra in"
 
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-window.c:150
-#, c-format
-msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr "<b>Skrivskyddad</b> — Kommando avslutades med kod %i"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-window.c:165
-msgid "<b>Read Only</b> — Command exited"
-msgstr "<b>Skrivskyddad</b> — Kommando avslutades"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-window.c:202
-#, c-format
-msgid "<b>Failed to start</b> — %s"
-msgstr "<b>Misslyckades med att starta</b> — %s"
-
 #. Translators: Credit yourself here
-#: src/kgx-window.c:734
+#: src/kgx-window.c:620
 msgid "translator-credits"
 msgstr ""
 "Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
@@ -174,29 +159,53 @@ msgstr ""
 
 #. Translators: "by King’s Cross" here is meaning
 #. author or creator of 'Terminal'
-#: src/kgx-window.c:742
+#: src/kgx-window.c:628
 msgid "Terminal (King’s Cross)"
 msgstr "Terminal (King’s Cross)"
 
-#: src/kgx-window.c:844
+#: src/kgx-window.c:693
 msgid "_About Terminal"
 msgstr "_Om Terminal"
 
-#: src/kgx-window.c:1024
-msgid "Command completed"
-msgstr "Kommando slutfört"
+#: src/kgx-window.ui:20
+msgid "Shrink text"
+msgstr "Krymp text"
 
-#: src/kgx-window.ui:61
+#: src/kgx-window.ui:33
+msgid "Reset size"
+msgstr "Återställ storlek"
+
+#: src/kgx-window.ui:46
+msgid "Enlarge text"
+msgstr "Förstora text"
+
+#: src/kgx-window.ui:63
 msgid "_New Window"
 msgstr "_Nytt fönster"
 
-#: src/kgx-window.ui:73
+#: src/kgx-window.ui:75
 msgid "_Keyboard Shortcuts"
 msgstr "_Tangentbordsgenvägar"
 
-#: src/kgx-window.ui:80
+#: src/kgx-window.ui:82
 msgid "_About King’s Cross"
 msgstr "_Om King’s Cross"
+
+#: src/kgx-window.ui:83
+msgid "About this program"
+msgstr "Om detta program"
+
+#: src/kgx-window.ui:106
+msgid "Find in terminal"
+msgstr "Sök i terminal"
+
+#: src/kgx-window.ui:124
+msgid "Menu"
+msgstr "Meny"
+
+#: src/kgx-window.ui:142
+msgid "New Tab"
+msgstr "Ny flik"
 
 #: src/menus.ui:7
 msgid "_Open Link"
@@ -218,6 +227,14 @@ msgstr "_Markera allt"
 msgid "Show in _Files"
 msgstr "Visa i _Filer"
 
+#: src/menus.ui:45
+msgid "_Close"
+msgstr "S_täng"
+
+#: src/menus.ui:49
+msgid "_Detach"
+msgstr "_Koppla loss"
+
 #: src/kgx-close-dialog.ui:6
 msgid "Close Terminal"
 msgstr "Stäng terminal"
@@ -233,3 +250,15 @@ msgstr ""
 #: src/kgx-close-dialog.ui:64
 msgid "_OK"
 msgstr "_OK"
+
+#~ msgid "<b>Read Only</b> — Command exited with code %i"
+#~ msgstr "<b>Skrivskyddad</b> — Kommando avslutades med kod %i"
+
+#~ msgid "<b>Read Only</b> — Command exited"
+#~ msgstr "<b>Skrivskyddad</b> — Kommando avslutades"
+
+#~ msgid "<b>Failed to start</b> — %s"
+#~ msgstr "<b>Misslyckades med att starta</b> — %s"
+
+#~ msgid "Command completed"
+#~ msgstr "Kommando slutfört"
