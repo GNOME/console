@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2019-09-27 19:28+0000\n"
-"PO-Revision-Date: 2020-02-23 13:50+0200\n"
+"POT-Creation-Date: 2020-05-28 23:21+0000\n"
+"PO-Revision-Date: 2020-08-17 18:01+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: Finnish <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -16,12 +16,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:422
-#: src/kgx-window.c:744 src/main.c:38
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:440
+#: src/kgx-window.c:630 src/kgx-window.ui:98 src/main.c:38
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
@@ -43,8 +43,8 @@ msgstr ""
 "command;prompt;cmd;commandline;run;shell;terminal;kgx;pääte;terminaali;"
 "komentorivi;"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:424
-#: src/kgx-window.c:735
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:442
+#: src/kgx-window.c:621
 msgid "Terminal Emulator"
 msgstr "Pääte-emulaattori"
 
@@ -56,7 +56,7 @@ msgstr "Helppokäyttöinen pääte-emulaattori Gnome-työpöydälle."
 msgid "Terminal window"
 msgstr "Pääteikkuna"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:45
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:52
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -72,65 +72,70 @@ msgstr "Uusi ikkuna"
 
 #: src/help-overlay.ui:26
 msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Uusi välilehti"
+
+#: src/help-overlay.ui:33
+msgctxt "shortcut window"
 msgid "Terminal"
 msgstr "Pääte"
 
-#: src/help-overlay.ui:32
+#: src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Etsi"
 
-#: src/help-overlay.ui:39
+#: src/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Copy"
 msgstr "Kopioi"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:53
 msgctxt "shortcut window"
 msgid "Paste"
 msgstr "Liitä"
 
 #. Translators: This is the name of the timeout that looks for programs
 #. running in the terminal
-#: src/kgx-application.c:255
+#: src/kgx-application.c:269
 msgid "child watcher"
-msgstr ""
+msgstr "päätteen lapsisovellusten tarkkailija"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:396
+#: src/kgx-application.c:414
 #, c-format
 msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgstr "# King’s Cross %s, käytetään VTE:n versiota %u.%u.%u %s\n"
 
-#: src/kgx-application.c:408 src/kgx-window.c:727
+#: src/kgx-application.c:426 src/kgx-window.c:613
 #, c-format
 msgid "Copyright © %s Zander Brown"
 msgstr "Tekijänoikeus © %s Zander Brown"
 
-#: src/kgx-application.c:528
+#: src/kgx-application.c:546
 msgid "Execute the argument to this option inside the terminal"
-msgstr ""
+msgstr "Toteuta tämän valinnan argumentti terminaalin sisällä"
 
-#: src/kgx-application.c:537
+#: src/kgx-application.c:555
 msgid "Set the working directory"
 msgstr "Aseta työskentelyhakemisto"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:539
+#: src/kgx-application.c:557
 msgid "DIRNAME"
-msgstr ""
+msgstr "DIRNAME"
 
-#: src/kgx-application.c:547
+#: src/kgx-application.c:565
 msgid "Wait until the child exits (TODO)"
-msgstr ""
+msgstr "Odota kunnes lapsiprosessi valmistuu (TODO)"
 
-#: src/kgx-terminal.c:374
+#: src/kgx-terminal.c:413
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Olet aikeissa liittää komennon, joka suoritetaan ylläpitäjän oikeuksin"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:377
+#: src/kgx-terminal.c:416
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -139,65 +144,70 @@ msgstr ""
 "Varmista että tiedät mitä komento tekee:\n"
 "%s"
 
-#: src/kgx-terminal.c:382 src/kgx-close-dialog.ui:56
+#: src/kgx-terminal.c:421 src/kgx-close-dialog.ui:56
 msgid "_Cancel"
 msgstr "_Peru"
 
-#: src/kgx-terminal.c:385 src/menus.ui:24
+#: src/kgx-terminal.c:424 src/menus.ui:24
 msgid "_Paste"
 msgstr "_Liitä"
 
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-window.c:150
-#, c-format
-msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr "<b>Vain luku</b> — Komento poistui koodilla %i"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-window.c:165
-msgid "<b>Read Only</b> — Command exited"
-msgstr "<b>Vain luku</b> — Komento poistui"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-window.c:202
-#, c-format
-msgid "<b>Failed to start</b> — %s"
-msgstr "<b>Ei voitu käynnistää</b> — %s"
-
 #. Translators: Credit yourself here
-#: src/kgx-window.c:734
+#: src/kgx-window.c:620
 msgid "translator-credits"
-msgstr "Jiri Grönroos"
+msgstr ""
+"Jiri Grönroos\n"
+"JR-Fi"
 
 #. Translators: "by King’s Cross" here is meaning
 #. author or creator of 'Terminal'
-#: src/kgx-window.c:742
-#| msgid "King’s Cross"
+#: src/kgx-window.c:628
 msgid "Terminal (King’s Cross)"
 msgstr "Pääte (King’s Cross)"
 
-#: src/kgx-window.c:844
+#: src/kgx-window.c:693
 msgid "_About Terminal"
 msgstr "_Tietoja - Pääte"
 
-#: src/kgx-window.c:1024
-msgid "Command completed"
-msgstr "Komento suoritettu"
+#: src/kgx-window.ui:20
+msgid "Shrink text"
+msgstr "Kutista teksti"
 
-#: src/kgx-window.ui:61
+#: src/kgx-window.ui:33
+msgid "Reset size"
+msgstr "Palauta koko"
+
+#: src/kgx-window.ui:46
+msgid "Enlarge text"
+msgstr "Suurenna teksti"
+
+#: src/kgx-window.ui:63
 msgid "_New Window"
 msgstr "_Uusi ikkuna"
 
-#: src/kgx-window.ui:73
+#: src/kgx-window.ui:75
 msgid "_Keyboard Shortcuts"
 msgstr "_Pikanäppäimet"
 
-#: src/kgx-window.ui:80
+#: src/kgx-window.ui:82
 msgid "_About King’s Cross"
 msgstr "_Tietoja - King’s Cross"
+
+#: src/kgx-window.ui:83
+msgid "About this program"
+msgstr "Tietoa tästä ohjelmasta"
+
+#: src/kgx-window.ui:106
+msgid "Find in terminal"
+msgstr "Etsi päätteestä"
+
+#: src/kgx-window.ui:124
+msgid "Menu"
+msgstr "Valikko"
+
+#: src/kgx-window.ui:142
+msgid "New Tab"
+msgstr "Uusi välilehti"
 
 #: src/menus.ui:7
 msgid "_Open Link"
@@ -219,6 +229,14 @@ msgstr "_Valitse kaikki"
 msgid "Show in _Files"
 msgstr "Näytä tie_dostohallinnassa"
 
+#: src/menus.ui:45
+msgid "_Close"
+msgstr "_Sulje"
+
+#: src/menus.ui:49
+msgid "_Detach"
+msgstr "_Irrota"
+
 #: src/kgx-close-dialog.ui:6
 msgid "Close Terminal"
 msgstr "Sulje pääte"
@@ -234,3 +252,15 @@ msgstr ""
 #: src/kgx-close-dialog.ui:64
 msgid "_OK"
 msgstr "_OK"
+
+#~ msgid "<b>Read Only</b> — Command exited with code %i"
+#~ msgstr "<b>Vain luku</b> — Komento poistui koodilla %i"
+
+#~ msgid "<b>Read Only</b> — Command exited"
+#~ msgstr "<b>Vain luku</b> — Komento poistui"
+
+#~ msgid "<b>Failed to start</b> — %s"
+#~ msgstr "<b>Ei voitu käynnistää</b> — %s"
+
+#~ msgid "Command completed"
+#~ msgstr "Komento suoritettu"
