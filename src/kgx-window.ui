@@ -162,9 +162,9 @@
             <property name="visible">1</property>
             <signal name="notify::search-mode-enabled" handler="search_enabled" swapped="no"/>
             <child>
-              <object class="HdyColumn">
+              <object class="HdyClamp">
                 <property name="visible">1</property>
-                <property name="maximum-width">500</property>
+                <property name="maximum-size">500</property>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">1</property>
