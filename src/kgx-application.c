@@ -567,6 +567,22 @@ static GOptionEntry entries[] =
 
 
 static void
+new_window_activated (GSimpleAction *action,
+                      GVariant      *parameter,
+                      gpointer       data)
+{
+  KgxApplication *self = KGX_APPLICATION (data);
+  GtkWindow *window;
+
+  window = gtk_application_get_active_window (GTK_APPLICATION (self));
+  if (window != NULL)
+    {
+      g_action_group_activate_action (G_ACTION_GROUP (window), "new-window", NULL);
+    }
+}
+
+
+static void
 focus_activated (GSimpleAction *action,
                  GVariant      *parameter,
                  gpointer       data)
@@ -624,6 +640,7 @@ zoom_in_activated (GSimpleAction *action,
 
 static GActionEntry app_entries[] =
 {
+  { "new-window", new_window_activated, NULL, NULL, NULL },
   { "focus-page", focus_activated, "u", NULL, NULL },
   { "zoom-out", zoom_out_activated, NULL, NULL, NULL },
   { "zoom-normal", zoom_normal_activated, NULL, NULL, NULL },
