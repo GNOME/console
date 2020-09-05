@@ -373,7 +373,7 @@ page_removed (GtkNotebook *notebook,
 
     g_object_set (self,
 #if IS_GENERIC
-                  "title", (_("Terminal"),
+                  "title", _("Terminal"),
 #else
                   "title", _("King’s Cross"),
 #endif
