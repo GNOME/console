@@ -1,4 +1,4 @@
 [wrap-git]
 directory=handy
-url=https://gitlab.gnome.org/GNOME/libhandy.git
-revision=origin/master
+url=https://gitlab.gnome.org/exalm/libhandy.git
+revision=origin/tabs
