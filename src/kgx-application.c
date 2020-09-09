@@ -286,6 +286,8 @@ kgx_application_startup (GApplication *app)
 
   G_APPLICATION_CLASS (kgx_application_parent_class)->startup (app);
 
+  hdy_init ();
+
   gtk_settings = gtk_settings_get_default ();
 
   g_object_set (G_OBJECT (gtk_settings),

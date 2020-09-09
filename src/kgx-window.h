@@ -19,6 +19,7 @@
 #pragma once
 
 #include <gtk/gtk.h>
+#include "handy.h"
 
 #include "kgx-terminal.h"
 #include "kgx-process.h"
@@ -61,7 +62,7 @@ typedef enum /*< enum,prefix=KGX >*/
  * @last_rows: the row count last time we received #GtkWidget::size-allocate
  * @timeout: the id of the #GSource used to hide the statusbar
  * @close_anyway: ignore running children and close without prompt
- * @header_bar: the #GtkHeaderBar that the styles are applied to
+ * @header_bar: the #HdyHeaderBar that the styles are applied to
  * @search_entry: the #GtkSearchEntry inside @search_bar
  * @search_bar: the windows #GtkSearchBar
  * @exit_info: the #GtkRevealer hat wraps @exit_message
@@ -75,7 +76,7 @@ typedef enum /*< enum,prefix=KGX >*/
 struct _KgxWindow
 {
   /*< private >*/
-  GtkApplicationWindow  parent_instance;
+  HdyApplicationWindow  parent_instance;
 
   /*< public >*/
   KgxTheme              theme;
@@ -101,7 +102,7 @@ struct _KgxWindow
   GtkWidget            *pages;
 };
 
-G_DECLARE_FINAL_TYPE (KgxWindow, kgx_window, KGX, WINDOW, GtkApplicationWindow)
+G_DECLARE_FINAL_TYPE (KgxWindow, kgx_window, KGX, WINDOW, HdyApplicationWindow)
 
 char       *kgx_window_get_working_dir (KgxWindow    *self);
 void        kgx_window_show_status     (KgxWindow    *self,

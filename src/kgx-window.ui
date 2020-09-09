@@ -87,170 +87,176 @@
       </object>
     </child>
   </object>
-  <template class="KgxWindow" parent="GtkApplicationWindow">
+  <template class="KgxWindow" parent="HdyApplicationWindow">
     <property name="can-focus">False</property>
     <property name="default-width">800</property>
     <property name="default-height">450</property>
     <signal name="notify::is-active" handler="active_changed" swapped="no"/>
-    <child type="titlebar">
-      <object class="GtkHeaderBar" id="header_bar">
-        <property name="visible">1</property>
-        <property name="title" translatable="yes">King’s Cross</property>
-        <property name="show-close-button">1</property>
-        <child>
-          <object class="GtkToggleButton">
-            <property name="visible">1</property>
-            <property name="can-focus">0</property>
-            <property name="receives-default">0</property>
-            <property name="action-name">win.find</property>
-            <property name="tooltip-text" translatable="yes">Find in terminal</property>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">1</property>
-                <property name="icon-name">edit-find-symbolic</property>
-              </object>
-            </child>
-          </object>
-          <packing>
-            <property name="pack-type">start</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkMenuButton">
-            <property name="visible">1</property>
-            <property name="can-focus">0</property>
-            <property name="receives-default">1</property>
-            <property name="popover">popover</property>
-            <property name="tooltip-text" translatable="yes">Menu</property>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">1</property>
-                <property name="icon-name">open-menu-symbolic</property>
-              </object>
-            </child>
-          </object>
-          <packing>
-            <property name="pack-type">end</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton">
-            <property name="visible">1</property>
-            <property name="can-focus">0</property>
-            <property name="receives-default">0</property>
-            <property name="action-name">win.new-tab</property>
-            <property name="tooltip-text" translatable="yes">New Tab</property>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">1</property>
-                <property name="icon-name">tab-new-symbolic</property>
-              </object>
-            </child>
-          </object>
-          <packing>
-            <property name="pack-type">end</property>
-          </packing>
-        </child>
-      </object>
-    </child>
     <child>
       <object class="GtkBox">
-        <property name="visible">1</property>
+        <property name="visible">True</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="HdySearchBar" id="search_bar">
+          <object class="HdyHeaderBar" id="header_bar">
             <property name="visible">1</property>
-            <signal name="notify::search-mode-enabled" handler="search_enabled" swapped="no"/>
+            <property name="title" translatable="yes">King’s Cross</property>
+            <property name="show-close-button">1</property>
             <child>
-              <object class="HdyClamp">
+              <object class="GtkToggleButton">
                 <property name="visible">1</property>
-                <property name="maximum-size">500</property>
+                <property name="can-focus">0</property>
+                <property name="receives-default">0</property>
+                <property name="action-name">win.find</property>
+                <property name="tooltip-text" translatable="yes">Find in terminal</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">1</property>
+                    <property name="icon-name">edit-find-symbolic</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="pack-type">start</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkMenuButton">
+                <property name="visible">1</property>
+                <property name="can-focus">0</property>
+                <property name="receives-default">1</property>
+                <property name="popover">popover</property>
+                <property name="tooltip-text" translatable="yes">Menu</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">1</property>
+                    <property name="icon-name">open-menu-symbolic</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="pack-type">end</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="visible">1</property>
+                <property name="can-focus">0</property>
+                <property name="receives-default">0</property>
+                <property name="action-name">win.new-tab</property>
+                <property name="tooltip-text" translatable="yes">New Tab</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">1</property>
+                    <property name="icon-name">tab-new-symbolic</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="pack-type">end</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">1</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="HdySearchBar" id="search_bar">
+                <property name="visible">1</property>
+                <signal name="notify::search-mode-enabled" handler="search_enabled" swapped="no"/>
+                <child>
+                  <object class="HdyClamp">
+                    <property name="visible">1</property>
+                    <property name="maximum-size">500</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">1</property>
+                        <child>
+                          <object class="GtkSearchEntry" id="search_entry">
+                          <property name="visible">1</property>
+                          <property name="can-focus">1</property>
+                          <property name="hexpand">1</property>
+                          <signal name="next-match" handler="search_next" swapped="no"/>
+                          <signal name="previous-match" handler="search_prev" swapped="no"/>
+                          <signal name="search-changed" handler="search_changed" swapped="no"/>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton">
+                          <property name="visible">1</property>
+                          <property name="can-focus">1</property>
+                          <property name="receives-default">1</property>
+                          <child>
+                            <object class="GtkImage">
+                            <property name="visible">1</property>
+                            <property name="icon-name">go-down-symbolic</property>
+                            </object>
+                          </child>
+                          <signal name="clicked" handler="search_next" swapped="no"/>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton">
+                          <property name="visible">1</property>
+                          <property name="can-focus">1</property>
+                          <property name="receives-default">1</property>
+                          <child>
+                            <object class="GtkImage">
+                            <property name="visible">1</property>
+                            <property name="icon-name">go-up-symbolic</property>
+                            </object>
+                          </child>
+                          <signal name="clicked" handler="search_prev" swapped="no"/>
+                          </object>
+                        </child>
+                        <style>
+                          <class name="linked"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <style>
+                  <class name="background"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="KgxPages" id="pages">
+                <property name="visible">1</property>
+                <property name="is-active" bind-source="KgxWindow" bind-property="is-active" bind-flags="sync-create" />
+                <signal name="zoom" handler="zoom" swapped="no"/>
+                <signal name="notify::status" handler="status_changed" swapped="yes" />
+              </object>
+            </child>
+            <child>
+              <object class="GtkRevealer" id="exit_info">
+                <property name="visible">1</property>
+                <property name="reveal_child">False</property>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">1</property>
+                    <property name="can_focus">False</property>
+                    <property name="valign">end</property>
                     <child>
-                      <object class="GtkSearchEntry" id="search_entry">
-                      <property name="visible">1</property>
-                      <property name="can-focus">1</property>
-                      <property name="hexpand">1</property>
-                      <signal name="next-match" handler="search_next" swapped="no"/>
-                      <signal name="previous-match" handler="search_prev" swapped="no"/>
-                      <signal name="search-changed" handler="search_changed" swapped="no"/>
+                      <object class="GtkLabel" id="exit_message">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="hexpand">True</property>
                       </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton">
-                      <property name="visible">1</property>
-                      <property name="can-focus">1</property>
-                      <property name="receives-default">1</property>
-                      <child>
-                        <object class="GtkImage">
-                        <property name="visible">1</property>
-                        <property name="icon-name">go-down-symbolic</property>
-                        </object>
-                      </child>
-                      <signal name="clicked" handler="search_next" swapped="no"/>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton">
-                      <property name="visible">1</property>
-                      <property name="can-focus">1</property>
-                      <property name="receives-default">1</property>
-                      <child>
-                        <object class="GtkImage">
-                        <property name="visible">1</property>
-                        <property name="icon-name">go-up-symbolic</property>
-                        </object>
-                      </child>
-                      <signal name="clicked" handler="search_prev" swapped="no"/>
-                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
                     </child>
                     <style>
-                      <class name="linked"/>
+                      <class name="exit-info"/>
                     </style>
                   </object>
                 </child>
-              </object>
-            </child>
-            <style>
-              <class name="background"/>
-            </style>
-          </object>
-        </child>
-        <child>
-          <object class="KgxPages" id="pages">
-            <property name="visible">1</property>
-            <property name="is-active" bind-source="KgxWindow" bind-property="is-active" bind-flags="sync-create" />
-            <signal name="zoom" handler="zoom" swapped="no"/>
-            <signal name="notify::status" handler="status_changed" swapped="yes" />
-          </object>
-        </child>
-        <child>
-          <object class="GtkRevealer" id="exit_info">
-            <property name="visible">1</property>
-            <property name="reveal_child">False</property>
-            <child>
-              <object class="GtkBox">
-                <property name="visible">1</property>
-                <property name="can_focus">False</property>
-                <property name="valign">end</property>
-                <child>
-                  <object class="GtkLabel" id="exit_message">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="halign">start</property>
-                    <property name="hexpand">True</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <style>
-                  <class name="exit-info"/>
-                </style>
               </object>
             </child>
           </object>

@@ -21,7 +21,7 @@
  * @title: KgxWindow
  * @short_description: Window
  * 
- * The main #GtkApplicationWindow that acts as the terminal
+ * The main #HdyApplicationWindow that acts as the terminal
  * 
  * Since: 0.1.0
  */
@@ -45,7 +45,7 @@
 #include "kgx-pages.h"
 #include "kgx-local-page.h"
 
-G_DEFINE_TYPE (KgxWindow, kgx_window, GTK_TYPE_APPLICATION_WINDOW)
+G_DEFINE_TYPE (KgxWindow, kgx_window, HDY_TYPE_APPLICATION_WINDOW)
 
 enum {
   PROP_0,
