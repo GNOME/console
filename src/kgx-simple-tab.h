@@ -1,6 +1,6 @@
-/* kgx-local-page.h
+/* kgx-simple-tab.h
  *
- * Copyright 2019 Zander Brown
+ * Copyright 2019-2020 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,14 +20,14 @@
 
 #include <gtk/gtk.h>
 
-#include "kgx-page.h"
+#include "kgx-tab.h"
 
 G_BEGIN_DECLS
 
-#define KGX_TYPE_LOCAL_PAGE (kgx_local_page_get_type())
+#define KGX_TYPE_SIMPLE_TAB kgx_simple_tab_get_type ()
 
 /**
- * KgxLocalPage:
+ * KgxSimpleTab:
  * @title: the title of the page
  * @path: the current directory of the path
  * @initial_work_dir: the directory to start in
@@ -36,10 +36,10 @@ G_BEGIN_DECLS
  * 
  * Stability: Private
  */
-struct _KgxLocalPage
+struct _KgxSimpleTab
 {
   /*< private >*/
-  KgxPage    parent_instance;
+  KgxTab     parent_instance;
 
   /*< public >*/
   char      *title;
@@ -51,7 +51,7 @@ struct _KgxLocalPage
   GtkWidget *terminal;
 };
 
-G_DECLARE_FINAL_TYPE (KgxLocalPage, kgx_local_page, KGX, LOCAL_PAGE, KgxPage)
+G_DECLARE_FINAL_TYPE (KgxSimpleTab, kgx_simple_tab, KGX, SIMPLE_TAB, KgxTab)
 
 
 G_END_DECLS

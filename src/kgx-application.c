@@ -192,7 +192,7 @@ handle_watch_iter (gpointer pid,
       g_tree_insert (self->children, pid, child_watch);
     }
 
-    kgx_page_push_child (watch->page, process);
+    kgx_tab_push_child (watch->page, process);
   }
 
   return FALSE;
@@ -216,7 +216,7 @@ remove_dead (gpointer pid,
   if (!g_tree_lookup (data->plist, pid)) {
     g_debug ("%i marked as dead", GPOINTER_TO_INT (pid));
 
-    kgx_page_pop_child (watch->page, watch->process);
+    kgx_tab_pop_child (watch->page, watch->process);
 
     g_ptr_array_add (data->dead, pid);
   }
@@ -592,10 +592,10 @@ focus_activated (GSimpleAction *action,
   KgxApplication *self = KGX_APPLICATION (data);
   GtkWidget *window;
   KgxPages *pages;
-  KgxPage *page;
+  KgxTab *page;
 
   page = kgx_application_lookup_page (self, g_variant_get_uint32 (parameter));
-  pages = kgx_page_get_pages (page);
+  pages = kgx_tab_get_pages (page);
   kgx_pages_focus_page (pages, page);
   window = gtk_widget_get_toplevel (GTK_WIDGET (pages));
 
@@ -689,7 +689,7 @@ kgx_application_init (KgxApplication *self)
  * kgx_application_add_watch:
  * @self: the #KgxApplication
  * @pid: the shell process to watch
- * @page: the #KgxPage the shell is running in
+ * @page: the #KgxTab the shell is running in
  * 
  * Registers a new shell process with the pid watcher
  * 
@@ -698,12 +698,12 @@ kgx_application_init (KgxApplication *self)
 void
 kgx_application_add_watch (KgxApplication *self,
                            GPid            pid,
-                           KgxPage        *page)
+                           KgxTab        *page)
 {
   struct ProcessWatch *watch;
 
   g_return_if_fail (KGX_IS_APPLICATION (self));
-  g_return_if_fail (KGX_IS_PAGE (page));
+  g_return_if_fail (KGX_IS_TAB (page));
 
   watch = g_new0 (struct ProcessWatch, 1);
   watch->process = kgx_process_new (pid);
@@ -711,7 +711,7 @@ kgx_application_add_watch (KgxApplication *self,
 
   g_debug ("Started watching %i", pid);
 
-  g_return_if_fail (KGX_IS_PAGE (watch->page));
+  g_return_if_fail (KGX_IS_TAB (watch->page));
 
   g_tree_insert (self->watching, GINT_TO_POINTER (pid), watch);
 }
@@ -810,18 +810,18 @@ kgx_application_pop_active (KgxApplication *self)
  * @self: the instance to look for @id in
  * @page: the page to add
  * 
- * Register a new #KgxPage with @self
+ * Register a new #KgxTab with @self
  */
 void
 kgx_application_add_page (KgxApplication *self,
-                          KgxPage        *page)
+                          KgxTab        *page)
 {
   guint id = 0;
 
   g_return_if_fail (KGX_IS_APPLICATION (self));
-  g_return_if_fail (KGX_IS_PAGE (page));
+  g_return_if_fail (KGX_IS_TAB (page));
 
-  id = kgx_page_get_id (page);
+  id = kgx_tab_get_id (page);
 
   g_tree_insert (self->pages, GINT_TO_POINTER (id), g_object_ref (page));
 }
@@ -832,11 +832,11 @@ kgx_application_add_page (KgxApplication *self,
  * @self: the instance to look for @id in
  * @id: the page id to look for
  * 
- * Try and find a #KgxPage with @id in @self
+ * Try and find a #KgxTab with @id in @self
  * 
- * Returns: (transfer none) (nullable): the found #KgxPage or %NULL
+ * Returns: (transfer none) (nullable): the found #KgxTab or %NULL
  */
-KgxPage *
+KgxTab *
 kgx_application_lookup_page (KgxApplication *self,
                              guint           id)
 {

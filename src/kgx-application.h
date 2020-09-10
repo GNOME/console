@@ -23,7 +23,7 @@
 #include "kgx-process.h"
 #include "kgx-window.h"
 #include "kgx-terminal.h"
-#include "kgx-page.h"
+#include "kgx-tab.h"
 
 G_BEGIN_DECLS
 
@@ -44,13 +44,13 @@ G_BEGIN_DECLS
 
 /**
  * ProcessWatch:
- * @page: the #KgxPage the #KgxProcess is in
+ * @page: the #KgxTab the #KgxProcess is in
  * @process: what we are watching
  * 
  * Stability: Private
  */
 struct ProcessWatch {
-  KgxPage    *page;
+  KgxTab     *page;
   KgxProcess *process;
 };
 
@@ -93,15 +93,15 @@ G_DECLARE_FINAL_TYPE (KgxApplication, kgx_application, KGX, APPLICATION, GtkAppl
 
 void                  kgx_application_add_watch       (KgxApplication *self,
                                                        GPid            pid,
-                                                       KgxPage        *page);
+                                                       KgxTab         *page);
 void                  kgx_application_remove_watch    (KgxApplication *self,
                                                        GPid            pid);
 PangoFontDescription *kgx_application_get_font        (KgxApplication *self);
 void                  kgx_application_push_active     (KgxApplication *self);
 void                  kgx_application_pop_active      (KgxApplication *self);
 void                  kgx_application_add_page        (KgxApplication *self,
-                                                       KgxPage        *page);
-KgxPage              *kgx_application_lookup_page     (KgxApplication *self,
+                                                       KgxTab         *page);
+KgxTab               *kgx_application_lookup_page     (KgxApplication *self,
                                                        guint           id);
 
 G_END_DECLS

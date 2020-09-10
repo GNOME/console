@@ -27,7 +27,7 @@
 #include <glib/gi18n.h>
 
 #include "kgx-config.h"
-#include "kgx-page.h"
+#include "kgx-tab.h"
 #include "kgx-pages-tab.h"
 #include "kgx-enums.h"
 #include "kgx-window.h"

@@ -1,6 +1,6 @@
 /* kgx-local-page.c
  *
- * Copyright 2019 Zander Brown
+ * Copyright 2019-2020 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,9 +17,9 @@
  */
 
 /**
- * SECTION:kgx-local-page
- * @title: KgxLocalPage
- * @short_description: #KgxPage for an old fashioned local terminal
+ * SECTION:kgx-simple-tab
+ * @title: KgxSimpleTab
+ * @short_description: #KgxTab for an old fashioned local terminal
  * 
  * Since: 0.3.0
  */
@@ -28,11 +28,11 @@
 
 #include "kgx-config.h"
 #include "kgx-terminal.h"
-#include "kgx-local-page.h"
+#include "kgx-simple-tab.h"
 #include "fp-vte-util.h"
 
 
-G_DEFINE_TYPE (KgxLocalPage, kgx_local_page, KGX_TYPE_PAGE)
+G_DEFINE_TYPE (KgxSimpleTab, kgx_simple_tab, KGX_TYPE_TAB)
 
 enum {
   PROP_0,
@@ -44,12 +44,12 @@ static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 
 
 static void
-kgx_local_page_set_property (GObject      *object,
+kgx_simple_tab_set_property (GObject      *object,
                              guint         property_id,
                              const GValue *value,
                              GParamSpec   *pspec)
 {
-  KgxLocalPage *self = KGX_LOCAL_PAGE (object);
+  KgxSimpleTab *self = KGX_SIMPLE_TAB (object);
 
   switch (property_id) {
     case PROP_INITIAL_WORK_DIR:
@@ -66,12 +66,12 @@ kgx_local_page_set_property (GObject      *object,
 
 
 static void
-kgx_local_page_get_property (GObject    *object,
+kgx_simple_tab_get_property (GObject    *object,
                              guint       property_id,
                              GValue     *value,
                              GParamSpec *pspec)
 {
-  KgxLocalPage *self = KGX_LOCAL_PAGE (object);
+  KgxSimpleTab *self = KGX_SIMPLE_TAB (object);
 
   switch (property_id) {
     case PROP_INITIAL_WORK_DIR:
@@ -88,14 +88,14 @@ kgx_local_page_get_property (GObject    *object,
 
 
 static void
-kgx_local_page_finalize (GObject *object)
+kgx_simple_tab_finalize (GObject *object)
 {
-  KgxLocalPage *self = KGX_LOCAL_PAGE (object);
+  KgxSimpleTab *self = KGX_SIMPLE_TAB (object);
 
   g_clear_pointer (&self->initial_work_dir, g_free);
   g_clear_pointer (&self->command, g_strfreev);
 
-  G_OBJECT_CLASS (kgx_local_page_parent_class)->finalize (object);
+  G_OBJECT_CLASS (kgx_simple_tab_parent_class)->finalize (object);
 }
 
 
@@ -105,10 +105,10 @@ wait_cb (GPid     pid,
          gpointer user_data)
 
 {
-  KgxLocalPage *self = user_data;
+  KgxSimpleTab *self = user_data;
   g_autoptr (GError) error = NULL;
 
-  g_return_if_fail (KGX_LOCAL_PAGE (self));
+  g_return_if_fail (KGX_SIMPLE_TAB (self));
 
   /* wait_check will set @error if it got a signal/non-zero exit */
   if (!g_spawn_check_exit_status (status, &error)) {
@@ -119,20 +119,20 @@ wait_cb (GPid     pid,
     message = g_strdup_printf (_("<b>Read Only</b> — Command exited with code %i"),
                                status);
 
-    kgx_page_died (KGX_PAGE (self), GTK_MESSAGE_ERROR, message, TRUE);
+    kgx_tab_died (KGX_TAB (self), GTK_MESSAGE_ERROR, message, TRUE);
   } else {
-    kgx_page_died (KGX_PAGE (self),
-                   GTK_MESSAGE_INFO,
+    kgx_tab_died (KGX_TAB (self),
+                  GTK_MESSAGE_INFO,
     // translators: <b> </b> marks the text as bold, ensure they are
     // matched please!
-                   _("<b>Read Only</b> — Command exited"),
-                   TRUE);
+                  _("<b>Read Only</b> — Command exited"),
+                  TRUE);
   }
 }
 
 
 struct StartData {
-  KgxLocalPage *self;
+  KgxSimpleTab *self;
   GTask *task;
 };
 
@@ -160,7 +160,7 @@ spawned (VtePty       *pty,
     message = g_strdup_printf (_("<b>Failed to start</b> — %s"),
                                error->message);
    
-    kgx_page_died (KGX_PAGE (data->self), GTK_MESSAGE_ERROR, message, TRUE);
+    kgx_tab_died (KGX_TAB (data->self), GTK_MESSAGE_ERROR, message, TRUE);
 
     g_task_return_error (data->task, error);
 
@@ -180,11 +180,11 @@ spawned (VtePty       *pty,
 
 
 static void
-kgx_local_page_start (KgxPage             *page,
+kgx_simple_tab_start (KgxTab              *page,
                       GAsyncReadyCallback  callback,
                       gpointer             callback_data)
 {
-  KgxLocalPage       *self;
+  KgxSimpleTab       *self;
   const char         *initial = NULL;
   g_autoptr (VtePty)  pty = NULL;
   g_autoptr (GError)  error = NULL;
@@ -192,9 +192,9 @@ kgx_local_page_start (KgxPage             *page,
   struct StartData   *data;
   GTask              *task;
 
-  g_return_if_fail (KGX_IS_LOCAL_PAGE (page));
+  g_return_if_fail (KGX_IS_SIMPLE_TAB (page));
 
-  self = KGX_LOCAL_PAGE (page);
+  self = KGX_SIMPLE_TAB (page);
 
   pty = vte_pty_new_sync (fp_vte_pty_default_flags (), NULL, &error);
 
@@ -222,9 +222,9 @@ kgx_local_page_start (KgxPage             *page,
 
 
 static GPid
-kgx_local_page_start_finish (KgxPage             *page,
-                             GAsyncResult        *res,
-                             GError             **error)
+kgx_simple_tab_start_finish (KgxTab        *page,
+                             GAsyncResult  *res,
+                             GError       **error)
 {
   g_return_val_if_fail (g_task_is_valid (res, page), 0);
 
@@ -233,7 +233,7 @@ kgx_local_page_start_finish (KgxPage             *page,
 
 
 static void
-path_changed (GObject *object, GParamSpec *pspec, KgxLocalPage *self)
+path_changed (GObject *object, GParamSpec *pspec, KgxSimpleTab *self)
 {
   g_autofree char *desc = NULL;
   g_autoptr (GFile) path = NULL;
@@ -249,21 +249,21 @@ path_changed (GObject *object, GParamSpec *pspec, KgxLocalPage *self)
 
 
 static void
-kgx_local_page_class_init (KgxLocalPageClass *klass)
+kgx_simple_tab_class_init (KgxSimpleTabClass *klass)
 {
   GObjectClass   *object_class = G_OBJECT_CLASS   (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  KgxPageClass   *page_class   = KGX_PAGE_CLASS   (klass);
+  KgxTabClass    *page_class   = KGX_TAB_CLASS    (klass);
 
-  object_class->set_property = kgx_local_page_set_property;
-  object_class->get_property = kgx_local_page_get_property;
-  object_class->finalize = kgx_local_page_finalize;
+  object_class->set_property = kgx_simple_tab_set_property;
+  object_class->get_property = kgx_simple_tab_get_property;
+  object_class->finalize = kgx_simple_tab_finalize;
 
-  page_class->start = kgx_local_page_start;
-  page_class->start_finish = kgx_local_page_start_finish;
+  page_class->start = kgx_simple_tab_start;
+  page_class->start_finish = kgx_simple_tab_start_finish;
 
   /**
-   * KgxLocalPage:initial-work-dir:
+   * KgxSimpleTab:initial-work-dir:
    * 
    * Used to handle --working-dir
    * 
@@ -276,7 +276,7 @@ kgx_local_page_class_init (KgxLocalPageClass *klass)
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
   /**
-   * KgxLocalPage:command:
+   * KgxSimpleTab:command:
    * 
    * Used to handle -e
    * 
@@ -291,18 +291,18 @@ kgx_local_page_class_init (KgxLocalPageClass *klass)
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               RES_PATH "kgx-local-page.ui");
+                                               RES_PATH "kgx-simple-tab.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, KgxLocalPage, terminal);
+  gtk_widget_class_bind_template_child (widget_class, KgxSimpleTab, terminal);
 
   gtk_widget_class_bind_template_callback (widget_class, path_changed);
 }
 
 
 static void
-kgx_local_page_init (KgxLocalPage *self)
+kgx_simple_tab_init (KgxSimpleTab *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
   
-  kgx_page_connect_terminal (KGX_PAGE (self), KGX_TERMINAL (self->terminal));
+  kgx_tab_connect_terminal (KGX_TAB (self), KGX_TERMINAL (self->terminal));
 }

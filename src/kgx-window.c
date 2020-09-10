@@ -43,7 +43,7 @@
 #include "kgx-process.h"
 #include "kgx-close-dialog.h"
 #include "kgx-pages.h"
-#include "kgx-local-page.h"
+#include "kgx-simple-tab.h"
 
 G_DEFINE_TYPE (KgxWindow, kgx_window, HDY_TYPE_APPLICATION_WINDOW)
 
@@ -77,11 +77,11 @@ started (GObject      *src,
          gpointer      win)
 {
   g_autoptr (GError) error = NULL;
-  KgxPage *page = KGX_PAGE (src);
+  KgxTab *page = KGX_TAB (src);
   GtkApplication *app = NULL;
   GPid pid;
 
-  pid = kgx_page_start_finish (page, res, &error);
+  pid = kgx_tab_start_finish (page, res, &error);
 
   if (error) {
     g_critical ("Failed to start %s: %s",
@@ -165,16 +165,16 @@ kgx_window_constructed (GObject *object)
 
   application = gtk_window_get_application (GTK_WINDOW (self));
 
-  page = g_object_new (KGX_TYPE_LOCAL_PAGE,
+  page = g_object_new (KGX_TYPE_SIMPLE_TAB,
                        "application", application,
                        "visible", TRUE,
                        "initial-work-dir", initial,
                        "command", shell,
                        "close-on-quit", self->close_on_zero,
                        NULL);
-  kgx_page_start (KGX_PAGE (page), started, self);
+  kgx_tab_start (KGX_TAB (page), started, self);
 
-  kgx_pages_add_page (KGX_PAGES (self->pages), KGX_PAGE (page));
+  kgx_pages_add_page (KGX_PAGES (self->pages), KGX_TAB (page));
 
   g_object_bind_property (application,
                           "theme",
@@ -575,17 +575,17 @@ new_tab_activated (GSimpleAction *action,
 
   application = gtk_window_get_application (GTK_WINDOW (self));
 
-  page = g_object_new (KGX_TYPE_LOCAL_PAGE,
+  page = g_object_new (KGX_TYPE_SIMPLE_TAB,
                        "application", application,
                        "visible", TRUE,
                        "initial-work-dir", initial,
                        "command", shell,
                        "close-on-quit", TRUE,
                        NULL);
-  kgx_page_start (KGX_PAGE (page), started, self);
+  kgx_tab_start (KGX_TAB (page), started, self);
 
-  kgx_pages_add_page (KGX_PAGES (self->pages), KGX_PAGE (page));
-  kgx_pages_focus_page (KGX_PAGES (self->pages), KGX_PAGE (page));
+  kgx_pages_add_page (KGX_PAGES (self->pages), KGX_TAB (page));
+  kgx_pages_focus_page (KGX_PAGES (self->pages), KGX_TAB (page));
 }
 
 
