@@ -19,9 +19,9 @@
 /**
  * SECTION:kgx-pages
  * @title: KgxPages
- * @short_description: Container of #KgxPage s
+ * @short_description: Container of #KgxTab s
  * 
- * The container of open #KgxPage , through #GtkNotebook it also provides tabs
+ * The container of open #KgxTab , through #GtkNotebook it also provides tabs
  * in desktop mode
  * 
  * Since: 0.3.0
@@ -31,7 +31,7 @@
 
 #include "kgx-config.h"
 #include "kgx-pages.h"
-#include "kgx-page.h"
+#include "kgx-tab.h"
 #include "kgx-window.h"
 #include "kgx-terminal.h"
 #include "util.h"
@@ -51,7 +51,7 @@ struct _KgxPagesPrivate {
 
   gulong                size_watcher;
 
-  KgxPage              *active_page;
+  KgxTab               *active_page;
 
   char                 *title;
   GBinding             *title_bind;
@@ -76,7 +76,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (KgxPages, kgx_pages, GTK_TYPE_OVERLAY)
 
 enum {
   PROP_0,
-  PROP_PAGE_COUNT,
+  PROP_TAB_COUNT,
   PROP_TITLE,
   PROP_PATH,
   PROP_THEME,
@@ -107,7 +107,7 @@ kgx_pages_get_property (GObject    *object,
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
 
   switch (property_id) {
-    case PROP_PAGE_COUNT:
+    case PROP_TAB_COUNT:
       g_value_set_uint (value, gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->notebook)));
       break;
     case PROP_TITLE:
@@ -201,7 +201,7 @@ size_timeout (KgxPages *self)
 
 
 static void
-size_changed (KgxPage  *page,
+size_changed (KgxTab  *page,
               guint     cols,
               guint     rows,
               KgxPages *self)
@@ -240,7 +240,7 @@ page_changed (GtkNotebook *notebook,
 {
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
 
-  g_return_if_fail (KGX_IS_PAGE (page));
+  g_return_if_fail (KGX_IS_TAB (page));
 
   clear_signal_handler (&priv->size_watcher, priv->active_page);
   priv->size_watcher = g_signal_connect (page,
@@ -250,14 +250,14 @@ page_changed (GtkNotebook *notebook,
 
   g_clear_object (&priv->title_bind);
   priv->title_bind = g_object_bind_property (page,
-                                             "page-title",
+                                             "tab-title",
                                              self,
                                              "title",
                                              G_BINDING_SYNC_CREATE);
 
   g_clear_object (&priv->path_bind);
   priv->path_bind = g_object_bind_property (page,
-                                            "page-path",
+                                            "tab-path",
                                             self,
                                             "path",
                                             G_BINDING_SYNC_CREATE);
@@ -275,12 +275,12 @@ page_changed (GtkNotebook *notebook,
 
   g_clear_object (&priv->page_status_bind);
   priv->page_status_bind = g_object_bind_property (page,
-                                                   "page-status",
+                                                   "tab-status",
                                                    self,
                                                    "status",
                                                    G_BINDING_SYNC_CREATE);
 
-  priv->active_page = KGX_PAGE (page);
+  priv->active_page = KGX_TAB (page);
 }
 
 
@@ -297,19 +297,19 @@ update_tabs (KgxPages *self)
     gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->notebook), FALSE);
   }
 
-  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_PAGE_COUNT]);
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_TAB_COUNT]);
 }
 
 
 static void
-died (KgxPage        *page,
+died (KgxTab        *page,
       GtkMessageType  type,
       const char     *message,
       gboolean        success,
       KgxPages       *self)
 {
   gboolean close_on_quit;
-  int page_count;
+  int tab_count;
 
   g_object_get (page, "close-on-quit", &close_on_quit, NULL);
 
@@ -317,9 +317,9 @@ died (KgxPage        *page,
     return;
   }
 
-  g_object_get (self, "page-count", &page_count, NULL);
+  g_object_get (self, "tab-count", &tab_count, NULL);
 
-  if (page_count < 1) {
+  if (tab_count < 1) {
     return;
   }
 
@@ -335,7 +335,7 @@ page_added (GtkNotebook *notebook,
 {
   KgxPagesPrivate *priv;
 
-  g_return_if_fail (KGX_IS_PAGE (page));
+  g_return_if_fail (KGX_IS_TAB (page));
 
   priv = kgx_pages_get_instance_private (self);
 
@@ -357,7 +357,7 @@ page_removed (GtkNotebook *notebook,
 {
   KgxPagesPrivate *priv;
 
-  g_return_if_fail (KGX_IS_PAGE (page));
+  g_return_if_fail (KGX_IS_TAB (page));
 
   priv = kgx_pages_get_instance_private (self);
 
@@ -393,7 +393,7 @@ kgx_pages_class_init (KgxPagesClass *klass)
   object_class->set_property = kgx_pages_set_property;
 
   /**
-   * KgxPages:page-count:
+   * KgxPages:tab-count:
    * 
    * The number of open pages
    * 
@@ -401,8 +401,8 @@ kgx_pages_class_init (KgxPagesClass *klass)
    * 
    * Since: 0.3.0
    */
-  pspecs[PROP_PAGE_COUNT] =
-    g_param_spec_uint ("page-count", "Page Count", "Number of pages",
+  pspecs[PROP_TAB_COUNT] =
+    g_param_spec_uint ("tab-count", "Page Count", "Number of pages",
                        0,
                        G_MAXUINT32,
                        0,
@@ -411,7 +411,7 @@ kgx_pages_class_init (KgxPagesClass *klass)
   /**
    * KgxPages:title:
    * 
-   * The #KgxPage:page-title of the current #KgxPage
+   * The #KgxTab:tab-title of the current #KgxTab
    * 
    * Note the writability of this property in an implementation detail, DO NOT
    * set this property
@@ -428,7 +428,7 @@ kgx_pages_class_init (KgxPagesClass *klass)
   /**
    * KgxPages:path:
    * 
-   * The #KgxPage:page-path of the current #KgxPage
+   * The #KgxTab:tab-path of the current #KgxTab
    * 
    * Note the writability of this property in an implementation detail, DO NOT
    * set this property
@@ -445,7 +445,7 @@ kgx_pages_class_init (KgxPagesClass *klass)
   /**
    * KgxPages:theme:
    * 
-   * The #KgxTheme to apply to the #KgxTerminal s in the #KgxPage s
+   * The #KgxTheme to apply to the #KgxTerminal s in the #KgxTab s
    * 
    * Stability: Private
    * 
@@ -545,7 +545,7 @@ kgx_pages_focus_terminal (KgxPages *self)
 
   g_return_if_fail (priv->active_page);
 
-  kgx_page_focus_terminal (priv->active_page);
+  kgx_tab_focus_terminal (priv->active_page);
 }
 
 
@@ -560,7 +560,7 @@ kgx_pages_search_forward (KgxPages *self)
 
   g_return_if_fail (priv->active_page);
 
-  kgx_page_search_forward (priv->active_page);
+  kgx_tab_search_forward (priv->active_page);
 }
 
 
@@ -575,7 +575,7 @@ kgx_pages_search_back (KgxPages *self)
 
   g_return_if_fail (priv->active_page);
 
-  kgx_page_search_back (priv->active_page);
+  kgx_tab_search_back (priv->active_page);
 }
 
 
@@ -591,13 +591,13 @@ kgx_pages_search (KgxPages   *self,
 
   g_return_if_fail (priv->active_page);
 
-  kgx_page_search (priv->active_page, search);
+  kgx_tab_search (priv->active_page, search);
 }
 
 
 void
 kgx_pages_add_page (KgxPages *self,
-                    KgxPage  *page)
+                    KgxTab  *page)
 {
   KgxPagesPrivate *priv;
   KgxPagesTab *tab;
@@ -609,7 +609,6 @@ kgx_pages_add_page (KgxPages *self,
   tab = g_object_new (KGX_TYPE_PAGES_TAB,
                       "visible", TRUE,
                       NULL);
-  kgx_page_connect_tab (page, tab);
 
   gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook),
                             GTK_WIDGET (page),
@@ -619,12 +618,12 @@ kgx_pages_add_page (KgxPages *self,
 
 void
 kgx_pages_remove_page (KgxPages *self,
-                       KgxPage  *page)
+                       KgxTab   *page)
 {
   KgxPagesPrivate *priv;
   
   g_return_if_fail (KGX_IS_PAGES (self));
-  g_return_if_fail (KGX_IS_PAGE (page));
+  g_return_if_fail (KGX_IS_TAB (page));
 
   priv = kgx_pages_get_instance_private (self);
   
@@ -635,7 +634,7 @@ kgx_pages_remove_page (KgxPages *self,
 /**
  * kgx_pages_focus_page:
  * @self: the #KgxPages
- * @page: the #KgxPage to focus
+ * @page: the #KgxTab to focus
  * 
  * Switch to a page
  * 
@@ -643,13 +642,13 @@ kgx_pages_remove_page (KgxPages *self,
  */
 void
 kgx_pages_focus_page (KgxPages *self,
-                      KgxPage  *page)
+                      KgxTab  *page)
 {
   KgxPagesPrivate *priv;
   int index;
   
   g_return_if_fail (KGX_IS_PAGES (self));
-  g_return_if_fail (KGX_IS_PAGE (page));
+  g_return_if_fail (KGX_IS_TAB (page));
 
   priv = kgx_pages_get_instance_private (self);
 
@@ -660,7 +659,7 @@ kgx_pages_focus_page (KgxPages *self,
 
   gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), index);
 
-  kgx_page_focus_terminal (page);
+  kgx_tab_focus_terminal (page);
 }
 
 
@@ -668,7 +667,7 @@ kgx_pages_focus_page (KgxPages *self,
  * kgx_pages_current_status:
  * @self: the #KgxPages
  * 
- * Get the #KgxStatus of the current #KgxPage
+ * Get the #KgxStatus of the current #KgxTab
  * 
  * Since: 0.3.0
  */
@@ -689,7 +688,7 @@ kgx_pages_current_status (KgxPages *self)
  * kgx_pages_get_children:
  * @self: the #KgxPages
  * 
- * Call kgx_page_get_children on all #KgxPage s in @self building a
+ * Call kgx_tab_get_children on all #KgxTab s in @self building a
  * combined list
  * 
  * Returns: (element-type Kgx.Process) (transfer full): the list of #KgxProcess
@@ -712,7 +711,7 @@ kgx_pages_get_children (KgxPages *self)
   do {
     g_autoptr (GPtrArray) page_children = NULL;
     
-    page_children = kgx_page_get_children (KGX_PAGE (pages->data));
+    page_children = kgx_tab_get_children (KGX_TAB (pages->data));
 
     for (int i = 0; i < page_children->len; i++) {
       g_ptr_array_add (children, g_ptr_array_steal_index (page_children, i));

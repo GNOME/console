@@ -1,6 +1,6 @@
-/* kgx-page.c
+/* kgx-tab.c
  *
- * Copyright 2019 Zander Brown
+ * Copyright 2019-2020 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 /**
  * SECTION:kgx-page
- * @title: KgxPage
+ * @title: KgxTab
  * @short_description: Base for things in a #KgxPages
  * 
  * Since: 0.3.0
@@ -29,7 +29,7 @@
 #include <pcre2.h>
 
 #include "kgx-config.h"
-#include "kgx-page.h"
+#include "kgx-tab.h"
 #include "kgx-pages.h"
 #include "kgx-pages-tab.h"
 #include "kgx-terminal.h"
@@ -37,8 +37,8 @@
 #include "util.h"
 
 
-typedef struct _KgxPagePrivate KgxPagePrivate;
-struct _KgxPagePrivate {
+typedef struct _KgxTabPrivate KgxTabPrivate;
+struct _KgxTabPrivate {
   guint                 id;
 
   KgxApplication       *application;
@@ -87,15 +87,15 @@ struct _KgxPagePrivate {
 };
 
 
-G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (KgxPage, kgx_page, GTK_TYPE_BOX)
+G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (KgxTab, kgx_tab, GTK_TYPE_BOX)
 
 
 enum {
   PROP_0,
   PROP_APPLICATION,
-  PROP_PAGE_TITLE,
-  PROP_PAGE_PATH,
-  PROP_PAGE_STATUS,
+  PROP_TAB_TITLE,
+  PROP_TAB_PATH,
+  PROP_TAB_STATUS,
   PROP_DESCRIPTION,
   PROP_FONT,
   PROP_ZOOM,
@@ -118,25 +118,25 @@ static guint signals[N_SIGNALS];
 
 
 static void
-kgx_page_get_property (GObject    *object,
-                       guint       property_id,
-                       GValue     *value,
-                       GParamSpec *pspec)
+kgx_tab_get_property (GObject    *object,
+                      guint       property_id,
+                      GValue     *value,
+                      GParamSpec *pspec)
 {
-  KgxPage *self = KGX_PAGE (object);
-  KgxPagePrivate *priv = kgx_page_get_instance_private (self);
+  KgxTab *self = KGX_TAB (object);
+  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
 
   switch (property_id) {
     case PROP_APPLICATION:
       g_value_set_object (value, priv->application);
       break;
-    case PROP_PAGE_TITLE:
+    case PROP_TAB_TITLE:
       g_value_set_string (value, priv->title);
       break;
-    case PROP_PAGE_PATH:
+    case PROP_TAB_PATH:
       g_value_set_object (value, priv->path);
       break;
-    case PROP_PAGE_STATUS:
+    case PROP_TAB_STATUS:
       g_value_set_flags (value, priv->status);
       break;
     case PROP_DESCRIPTION:
@@ -168,13 +168,13 @@ kgx_page_get_property (GObject    *object,
 
 
 static void
-kgx_page_set_property (GObject      *object,
-                       guint         property_id,
-                       const GValue *value,
-                       GParamSpec   *pspec)
+kgx_tab_set_property (GObject      *object,
+                      guint         property_id,
+                      const GValue *value,
+                      GParamSpec   *pspec)
 {
-  KgxPage *self = KGX_PAGE (object);
-  KgxPagePrivate *priv = kgx_page_get_instance_private (self);
+  KgxTab *self = KGX_TAB (object);
+  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
 
   switch (property_id) {
     case PROP_APPLICATION:
@@ -184,15 +184,15 @@ kgx_page_set_property (GObject      *object,
       priv->application = g_value_dup_object (value);
       kgx_application_add_page (priv->application, self);
       break;
-    case PROP_PAGE_TITLE:
+    case PROP_TAB_TITLE:
       g_clear_pointer (&priv->title, g_free);
       priv->title = g_value_dup_string (value);
       break;
-    case PROP_PAGE_PATH:
+    case PROP_TAB_PATH:
       g_clear_object (&priv->path);
       priv->path = g_value_dup_object (value);
       break;
-    case PROP_PAGE_STATUS:
+    case PROP_TAB_STATUS:
       priv->status = g_value_get_flags (value);
       break;
     case PROP_DESCRIPTION:
@@ -228,10 +228,10 @@ kgx_page_set_property (GObject      *object,
 
 
 static void
-kgx_page_finalize (GObject *object)
+kgx_tab_finalize (GObject *object)
 {
-  KgxPage *self = KGX_PAGE (object);
-  KgxPagePrivate *priv = kgx_page_get_instance_private (self);
+  KgxTab *self = KGX_TAB (object);
+  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
 
   g_clear_pointer (&priv->root, g_hash_table_unref);
   g_clear_pointer (&priv->remote, g_hash_table_unref);
@@ -247,43 +247,43 @@ kgx_page_finalize (GObject *object)
 
 
 static void
-kgx_page_real_start (KgxPage             *page,
-                     GAsyncReadyCallback  callback,
-                     gpointer             callback_data)
+kgx_tab_real_start (KgxTab              *tab,
+                    GAsyncReadyCallback  callback,
+                    gpointer             callback_data)
 {
-  g_critical ("%s doesn't implement start", G_OBJECT_TYPE_NAME (page));
+  g_critical ("%s doesn't implement start", G_OBJECT_TYPE_NAME (tab));
 }
 
 
 static GPid
-kgx_page_real_start_finish (KgxPage             *page,
-                            GAsyncResult        *res,
-                            GError             **error)
+kgx_tab_real_start_finish (KgxTab        *tab,
+                           GAsyncResult  *res,
+                           GError       **error)
 {
-  g_critical ("%s doesn't implement start_finish", G_OBJECT_TYPE_NAME (page));
+  g_critical ("%s doesn't implement start_finish", G_OBJECT_TYPE_NAME (tab));
 
   return 0;
 }
 
 
 static void
-kgx_page_class_init (KgxPageClass *klass)
+kgx_tab_class_init (KgxTabClass *klass)
 {
   GObjectClass   *object_class = G_OBJECT_CLASS   (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  KgxPageClass   *page_class   = KGX_PAGE_CLASS   (klass);
+  KgxTabClass    *tab_class    = KGX_TAB_CLASS    (klass);
   
-  object_class->get_property = kgx_page_get_property;
-  object_class->set_property = kgx_page_set_property;
-  object_class->finalize = kgx_page_finalize;
+  object_class->get_property = kgx_tab_get_property;
+  object_class->set_property = kgx_tab_set_property;
+  object_class->finalize = kgx_tab_finalize;
 
-  page_class->start = kgx_page_real_start;
-  page_class->start_finish = kgx_page_real_start_finish;
+  tab_class->start = kgx_tab_real_start;
+  tab_class->start_finish = kgx_tab_real_start_finish;
 
   /**
-   * KgxPage:application:
+   * KgxTab:application:
    * 
-   * The #KgxApplication this page is running under
+   * The #KgxApplication this tab is running under
    * 
    * Stability: Private
    * 
@@ -295,48 +295,48 @@ kgx_page_class_init (KgxPageClass *klass)
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
   /**
-   * KgxPage:page-title:
+   * KgxTab:tab-title:
    * 
-   * Title of this page
+   * Title of this tab
    * 
    * Stability: Private
    * 
    * Since: 0.3.0
    */
-  pspecs[PROP_PAGE_TITLE] =
-    g_param_spec_string ("page-title", "Page Title", "Title for this page",
+  pspecs[PROP_TAB_TITLE] =
+    g_param_spec_string ("tab-title", "Page Title", "Title for this tab",
                          NULL,
                          G_PARAM_READWRITE);
 
   /**
-   * KgxPage:page-path:
+   * KgxTab:tab-path:
    * 
-   * Current path of this page
+   * Current path of this tab
    * 
    * Stability: Private
    * 
    * Since: 0.3.0
    */
-  pspecs[PROP_PAGE_PATH] =
-    g_param_spec_object ("page-path", "Page Path", "Current path",
+  pspecs[PROP_TAB_PATH] =
+    g_param_spec_object ("tab-path", "Page Path", "Current path",
                          G_TYPE_FILE,
                          G_PARAM_READWRITE);
 
   /**
-   * KgxPage:page-status:
+   * KgxTab:tab-status:
    * 
    * Stability: Private
    * 
    * Since: 0.3.0
    */
-  pspecs[PROP_PAGE_STATUS] =
-    g_param_spec_flags ("page-status", "Page Status", "Session status",
+  pspecs[PROP_TAB_STATUS] =
+    g_param_spec_flags ("tab-status", "Page Status", "Session status",
                         KGX_TYPE_STATUS,
                         KGX_NONE,
                         G_PARAM_READWRITE);
 
   pspecs[PROP_DESCRIPTION] =
-    g_param_spec_string ("description", "Description", "Description of the page",
+    g_param_spec_string ("description", "Description", "Description of the tab",
                          NULL,
                          G_PARAM_READWRITE);
 
@@ -351,36 +351,36 @@ kgx_page_class_init (KgxPageClass *klass)
                          G_PARAM_READWRITE);
 
   /**
-   * KgxPage:is-active:
+   * KgxTab:is-active:
    * 
-   * This is the active page of the active window
+   * This is the active tab of the active window
    * 
    * Stability: Private
    * 
    * Since: 0.3.0
    */
   pspecs[PROP_IS_ACTIVE] =
-    g_param_spec_boolean ("is-active", "Is Active", "Current page",
+    g_param_spec_boolean ("is-active", "Is Active", "Current tab",
                           FALSE,
                           G_PARAM_READWRITE);
 
   /**
-   * KgxPage:theme:
+   * KgxTab:theme:
    * 
-   * The #KgxTheme to apply to the #KgxTerminal s in the #KgxPage
+   * The #KgxTheme to apply to the #KgxTerminal s in the #KgxTab
    * 
    * Stability: Private
    * 
    * Since: 0.3.0
    */
   pspecs[PROP_THEME] =
-    g_param_spec_enum ("theme", "Theme", "The path of the active page",
+    g_param_spec_enum ("theme", "Theme", "The path of the active tab",
                        KGX_TYPE_THEME,
                        KGX_THEME_NIGHT,
                        G_PARAM_READWRITE);
 
   /**
-   * KgxPage:opaque:
+   * KgxTab:opaque:
    * 
    * Whether to disable transparency
    * 
@@ -397,7 +397,7 @@ kgx_page_class_init (KgxPageClass *klass)
 
   pspecs[PROP_CLOSE_ON_QUIT] =
     g_param_spec_boolean ("close-on-quit", "Close on quit",
-                          "Should the page close when dead",
+                          "Should the tab close when dead",
                           FALSE,
                           G_PARAM_READWRITE);
 
@@ -431,24 +431,24 @@ kgx_page_class_init (KgxPageClass *klass)
                                 G_TYPE_BOOLEAN);
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               RES_PATH "kgx-page.ui");
+                                               RES_PATH "kgx-tab.ui");
 
-  gtk_widget_class_bind_template_child_private (widget_class, KgxPage, revealer);
-  gtk_widget_class_bind_template_child_private (widget_class, KgxPage, label);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, revealer);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, label);
 }
 
 
 static void
-parent_set (KgxPage   *self,
+parent_set (KgxTab    *self,
             GtkWidget *old_parent)
 {
-  KgxPagePrivate *priv;
+  KgxTabPrivate *priv;
   GtkWidget *parent;
   KgxPages *pages;
 
-  g_return_if_fail (KGX_IS_PAGE (self));
+  g_return_if_fail (KGX_IS_TAB (self));
   
-  priv = kgx_page_get_instance_private (self);
+  priv = kgx_tab_get_instance_private (self);
 
   parent = gtk_widget_get_parent (GTK_WIDGET (self));
 
@@ -491,17 +491,17 @@ parent_set (KgxPage   *self,
 
 
 static void
-died (KgxPage        *self,
+died (KgxTab         *self,
       GtkMessageType  type,
       const char     *message,
       gboolean        success)
 {
-  KgxPagePrivate *priv;
+  KgxTabPrivate *priv;
   GtkStyleContext *context;
 
-  g_return_if_fail (KGX_IS_PAGE (self));
+  g_return_if_fail (KGX_IS_TAB (self));
   
-  priv = kgx_page_get_instance_private (self);
+  priv = kgx_tab_get_instance_private (self);
 
   gtk_label_set_markup (GTK_LABEL (priv->label), message);
 
@@ -516,16 +516,16 @@ died (KgxPage        *self,
   gtk_revealer_set_reveal_child (GTK_REVEALER (priv->revealer), TRUE);
 
   if (priv->close_on_quit && success) {
-    kgx_pages_remove_page (kgx_page_get_pages (self), self);
+    kgx_pages_remove_page (kgx_tab_get_pages (self), self);
   }
 }
 
 
 static void
-kgx_page_init (KgxPage *self)
+kgx_tab_init (KgxTab *self)
 {
   static guint last_id = 0;
-  KgxPagePrivate *priv = kgx_page_get_instance_private (self);
+  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
 
   last_id++;
 
@@ -547,42 +547,11 @@ kgx_page_init (KgxPage *self)
 }
 
 
-void
-kgx_page_connect_tab (KgxPage     *self,
-                      KgxPagesTab *tab)
-{
-  KgxPagePrivate *priv;
-
-  g_return_if_fail (KGX_IS_PAGE (self));
-  g_return_if_fail (KGX_IS_PAGES_TAB (tab));
-  
-  priv = kgx_page_get_instance_private (self);
-
-  g_clear_object (&priv->tab);
-  priv->tab = g_object_ref (tab);
-
-  g_clear_object (&priv->tab_title_bind);
-  priv->tab_title_bind = g_object_bind_property (self, "page-title",
-                                                 tab, "title",
-                                                 G_BINDING_SYNC_CREATE);
-
-  g_clear_object (&priv->tab_description_bind);
-  priv->tab_description_bind = g_object_bind_property (self, "description",
-                                                       tab, "description",
-                                                       G_BINDING_SYNC_CREATE);
-
-  g_clear_object (&priv->tab_status_bind);
-  priv->tab_status_bind = g_object_bind_property (self, "page-status",
-                                                  tab, "status",
-                                                  G_BINDING_SYNC_CREATE);
-}
-
-
 static void
 size_changed (KgxTerminal *term,
               guint        rows,
               guint        cols,
-              KgxPage     *self)
+              KgxTab      *self)
 {
   g_signal_emit (self, signals[SIZE_CHANGED], 0, rows, cols);
 }
@@ -590,7 +559,7 @@ size_changed (KgxTerminal *term,
 
 static void
 font_increase (KgxTerminal *term,
-               KgxPage     *self)
+               KgxTab      *self)
 {
   g_signal_emit (self, signals[ZOOM], 0, KGX_ZOOM_IN);
 }
@@ -598,22 +567,22 @@ font_increase (KgxTerminal *term,
 
 static void
 font_decrease (KgxTerminal *term,
-               KgxPage     *self)
+               KgxTab      *self)
 {
   g_signal_emit (self, signals[ZOOM], 0, KGX_ZOOM_OUT);
 }
 
 
 void
-kgx_page_connect_terminal (KgxPage     *self,
-                           KgxTerminal *term)
+kgx_tab_connect_terminal (KgxTab      *self,
+                          KgxTerminal *term)
 {
-  KgxPagePrivate *priv;
+  KgxTabPrivate *priv;
 
-  g_return_if_fail (KGX_IS_PAGE (self));
+  g_return_if_fail (KGX_IS_TAB (self));
   g_return_if_fail (KGX_IS_TERMINAL (term));
   
-  priv = kgx_page_get_instance_private (self);
+  priv = kgx_tab_get_instance_private (self);
 
   clear_signal_handler (&priv->term_size_handler, priv->terminal);
   clear_signal_handler (&priv->term_font_inc_handler, priv->terminal);
@@ -646,12 +615,12 @@ kgx_page_connect_terminal (KgxPage     *self,
   priv->term_title_bind = g_object_bind_property (term,
                                                   "window-title",
                                                   self,
-                                                  "page-title",
+                                                  "tab-title",
                                                   G_BINDING_SYNC_CREATE);
   priv->term_path_bind = g_object_bind_property (term,
                                                  "path",
                                                  self,
-                                                 "page-path",
+                                                 "tab-path",
                                                  G_BINDING_SYNC_CREATE);
   priv->term_font_bind = g_object_bind_property (self,
                                                  "font",
@@ -678,26 +647,26 @@ kgx_page_connect_terminal (KgxPage     *self,
 
 
 void
-kgx_page_focus_terminal (KgxPage *self)
+kgx_tab_focus_terminal (KgxTab *self)
 {
-  KgxPagePrivate *priv;
+  KgxTabPrivate *priv;
 
-  g_return_if_fail (KGX_IS_PAGE (self));
+  g_return_if_fail (KGX_IS_TAB (self));
   
-  priv = kgx_page_get_instance_private (self);
+  priv = kgx_tab_get_instance_private (self);
 
   gtk_widget_grab_focus (GTK_WIDGET (priv->terminal));
 }
 
 
 void
-kgx_page_search_forward (KgxPage *self)
+kgx_tab_search_forward (KgxTab *self)
 {
-  KgxPagePrivate *priv;
+  KgxTabPrivate *priv;
 
-  g_return_if_fail (KGX_IS_PAGE (self));
+  g_return_if_fail (KGX_IS_TAB (self));
   
-  priv = kgx_page_get_instance_private (self);
+  priv = kgx_tab_get_instance_private (self);
 
   g_return_if_fail (priv->terminal);
 
@@ -706,13 +675,13 @@ kgx_page_search_forward (KgxPage *self)
 
 
 void
-kgx_page_search_back (KgxPage *self)
+kgx_tab_search_back (KgxTab *self)
 {
-  KgxPagePrivate *priv;
+  KgxTabPrivate *priv;
 
-  g_return_if_fail (KGX_IS_PAGE (self));
+  g_return_if_fail (KGX_IS_TAB (self));
   
-  priv = kgx_page_get_instance_private (self);
+  priv = kgx_tab_get_instance_private (self);
 
   g_return_if_fail (priv->terminal);
 
@@ -720,16 +689,16 @@ kgx_page_search_back (KgxPage *self)
 }
 
 void
-kgx_page_search (KgxPage    *self,
-                 const char *search)
+kgx_tab_search (KgxTab     *self,
+                const char *search)
 {
-  KgxPagePrivate *priv;
+  KgxTabPrivate *priv;
   VteRegex *regex;
   g_autoptr (GError) error = NULL;
 
-  g_return_if_fail (KGX_IS_PAGE (self));
+  g_return_if_fail (KGX_IS_TAB (self));
   
-  priv = kgx_page_get_instance_private (self);
+  priv = kgx_tab_get_instance_private (self);
 
   g_return_if_fail (priv->terminal);
 
@@ -747,51 +716,51 @@ kgx_page_search (KgxPage    *self,
 
 
 void
-kgx_page_start (KgxPage             *self,
-                GAsyncReadyCallback  callback,
-                gpointer             callback_data)
+kgx_tab_start (KgxTab              *self,
+               GAsyncReadyCallback  callback,
+               gpointer             callback_data)
 {
-  g_return_if_fail (KGX_IS_PAGE (self));
-  g_return_if_fail (KGX_PAGE_GET_CLASS (self)->start);
+  g_return_if_fail (KGX_IS_TAB (self));
+  g_return_if_fail (KGX_TAB_GET_CLASS (self)->start);
 
-  KGX_PAGE_GET_CLASS (self)->start (self, callback, callback_data);
+  KGX_TAB_GET_CLASS (self)->start (self, callback, callback_data);
 }
 
 
 GPid
-kgx_page_start_finish (KgxPage             *self,
-                       GAsyncResult        *res,
-                       GError             **error)
+kgx_tab_start_finish (KgxTab        *self,
+                      GAsyncResult  *res,
+                      GError       **error)
 {
-  g_return_val_if_fail (KGX_IS_PAGE (self), 0);
-  g_return_val_if_fail (KGX_PAGE_GET_CLASS (self)->start, 0);
+  g_return_val_if_fail (KGX_IS_TAB (self), 0);
+  g_return_val_if_fail (KGX_TAB_GET_CLASS (self)->start, 0);
 
-  return KGX_PAGE_GET_CLASS (self)->start_finish (self, res, error);
+  return KGX_TAB_GET_CLASS (self)->start_finish (self, res, error);
 }
 
 
 void
-kgx_page_died (KgxPage        *self,
-               GtkMessageType  type,
-               const char     *message,
-               gboolean        success)
+kgx_tab_died (KgxTab         *self,
+              GtkMessageType  type,
+              const char     *message,
+              gboolean        success)
 {
   g_signal_emit (self, signals[DIED], 0, type, message, success);
 }
 
 
 /**
- * kgx_page_get_pages:
- * @self: the #KgxPage
+ * kgx_tab_get_pages:
+ * @self: the #KgxTab
  * 
- * Find the #KgxPages @self is (currently) a memember of
+ * Find the #KgxTabs @self is (currently) a memember of
  * 
- * Returns: (transfer none): the #KgxPages
+ * Returns: (transfer none): the #KgxTabs
  * 
  * Since: 0.3.0
  */
 KgxPages *
-kgx_page_get_pages (KgxPage *self)
+kgx_tab_get_pages (KgxTab *self)
 {
   GtkWidget *parent;
 
@@ -805,21 +774,21 @@ kgx_page_get_pages (KgxPage *self)
 
 
 /**
- * kgx_page_get_id:
- * @self: the #KgxPage
+ * kgx_tab_get_id:
+ * @self: the #KgxTab
  * 
  * Get the unique (in the instance) id for the page
  * 
  * Returns: the identifier for the page
  */
 guint
-kgx_page_get_id (KgxPage *self)
+kgx_tab_get_id (KgxTab *self)
 {
-  KgxPagePrivate *priv;
+  KgxTabPrivate *priv;
 
-  g_return_val_if_fail (KGX_IS_PAGE (self), 0);
+  g_return_val_if_fail (KGX_IS_TAB (self), 0);
   
-  priv = kgx_page_get_instance_private (self);
+  priv = kgx_tab_get_instance_private (self);
 
   return priv->id;
 }
@@ -843,8 +812,8 @@ push_type (GHashTable      *table,
 
 
 /**
- * kgx_page_push_child:
- * @self: the #KgxPage
+ * kgx_tab_push_child:
+ * @self: the #KgxTab
  * @process: the #KgxProcess of the remote process
  * 
  * Registers @pid as a child of @self
@@ -852,18 +821,18 @@ push_type (GHashTable      *table,
  * Since: 0.3.0
  */
 void
-kgx_page_push_child (KgxPage    *self,
-                     KgxProcess *process)
+kgx_tab_push_child (KgxTab     *self,
+                    KgxProcess *process)
 {
   GtkStyleContext *context;
   GPid pid = 0;
   const char *exec = NULL;
   KgxStatus new_status = KGX_NONE;
-  KgxPagePrivate *priv;
+  KgxTabPrivate *priv;
 
-  g_return_if_fail (KGX_IS_PAGE (self));
+  g_return_if_fail (KGX_IS_TAB (self));
   
-  priv = kgx_page_get_instance_private (self);
+  priv = kgx_tab_get_instance_private (self);
 
   context = gtk_widget_get_style_context (GTK_WIDGET (self));
   pid = kgx_process_get_pid (process);
@@ -881,7 +850,7 @@ kgx_page_push_child (KgxPage    *self,
 
   if (priv->status != new_status) {
     priv->status = new_status;
-    g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_PAGE_STATUS]);
+    g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_TAB_STATUS]);
   }
 }
 
@@ -911,26 +880,26 @@ pop_type (GHashTable      *table,
 
 
 /**
- * kgx_page_pop_child:
- * @self: the #KgxPage
+ * kgx_tab_pop_child:
+ * @self: the #KgxTab
  * @process: the #KgxProcess of the child process
  * 
- * Remove a child added with kgx_page_push_child()
+ * Remove a child added with kgx_tab_push_child()
  * 
  * Since: 0.3.0
  */
 void
-kgx_page_pop_child (KgxPage    *self,
-                    KgxProcess *process)
+kgx_tab_pop_child (KgxTab     *self,
+                   KgxProcess *process)
 {
   GtkStyleContext *context;
   GPid pid = 0;
   KgxStatus new_status = KGX_NONE;
-  KgxPagePrivate *priv;
+  KgxTabPrivate *priv;
 
-  g_return_if_fail (KGX_IS_PAGE (self));
+  g_return_if_fail (KGX_IS_TAB (self));
   
-  priv = kgx_page_get_instance_private (self);
+  priv = kgx_tab_get_instance_private (self);
 
   context = gtk_widget_get_style_context (GTK_WIDGET (self));
   pid = kgx_process_get_pid (process);
@@ -941,10 +910,10 @@ kgx_page_pop_child (KgxPage    *self,
   
   if (priv->status != new_status) {
     priv->status = new_status;
-    g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_PAGE_STATUS]);
+    g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_TAB_STATUS]);
   }
 
-  if (!kgx_page_is_active (self)) {
+  if (!kgx_tab_is_active (self)) {
     g_autoptr (GNotification) noti = NULL;
 
     noti = g_notification_new (_("Command completed"));
@@ -963,21 +932,21 @@ kgx_page_pop_child (KgxPage    *self,
 
 
 gboolean
-kgx_page_is_active (KgxPage *self)
+kgx_tab_is_active (KgxTab *self)
 {
-  KgxPagePrivate *priv;
+  KgxTabPrivate *priv;
 
-  g_return_val_if_fail (KGX_IS_PAGE (self), FALSE);
+  g_return_val_if_fail (KGX_IS_TAB (self), FALSE);
   
-  priv = kgx_page_get_instance_private (self);
+  priv = kgx_tab_get_instance_private (self);
 
   return priv->is_active;
 }
 
 
 /**
- * kgx_page_get_children:
- * @self: the #KgxPage
+ * kgx_tab_get_children:
+ * @self: the #KgxTab
  * 
  * Get a list of child process running in @self
  * 
@@ -986,16 +955,16 @@ kgx_page_is_active (KgxPage *self)
  * Returns: (element-type Kgx.Process) (transfer full): the list of #KgxProcess
  */
 GPtrArray *
-kgx_page_get_children (KgxPage *self)
+kgx_tab_get_children (KgxTab *self)
 {
-  KgxPagePrivate *priv;
+  KgxTabPrivate *priv;
   GPtrArray *children;
   GHashTableIter iter;
   gpointer pid, process;
 
-  g_return_val_if_fail (KGX_IS_PAGE (self), FALSE);
+  g_return_val_if_fail (KGX_IS_TAB (self), FALSE);
   
-  priv = kgx_page_get_instance_private (self);
+  priv = kgx_tab_get_instance_private (self);
 
   children = g_ptr_array_new_full (3, (GDestroyNotify) kgx_process_unref);
 

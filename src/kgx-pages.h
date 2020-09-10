@@ -20,7 +20,7 @@
 
 #include <gtk/gtk.h>
 
-#include "kgx-page.h"
+#include "kgx-tab.h"
 
 G_BEGIN_DECLS
 
@@ -49,12 +49,12 @@ void        kgx_pages_search_back    (KgxPages   *self);
 void        kgx_pages_search         (KgxPages   *self,
                                       const char *search);
 void        kgx_pages_add_page       (KgxPages   *self,
-                                      KgxPage    *page);
+                                      KgxTab     *page);
 void        kgx_pages_remove_page    (KgxPages   *self,
-                                      KgxPage    *page);
+                                      KgxTab     *page);
 GPtrArray  *kgx_pages_get_children   (KgxPages   *self);
 void        kgx_pages_focus_page     (KgxPages   *self,
-                                      KgxPage    *page);
+                                      KgxTab     *page);
 KgxStatus   kgx_pages_current_status (KgxPages   *self);
 
 
