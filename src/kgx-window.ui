@@ -89,8 +89,8 @@
   </object>
   <template class="KgxWindow" parent="HdyApplicationWindow">
     <property name="can-focus">False</property>
-    <property name="default-width">800</property>
-    <property name="default-height">450</property>
+    <property name="default-width">643</property>
+    <property name="default-height">481</property>
     <signal name="notify::is-active" handler="active_changed" swapped="no"/>
     <child>
       <object class="GtkBox">
