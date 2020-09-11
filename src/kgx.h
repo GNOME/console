@@ -23,6 +23,6 @@
 #include "kgx-enums.h"
 #include "kgx-process.h"
 #include "kgx-pages.h"
-#include "kgx-pages-tab.h"
+#include "kgx-tab.h"
 
 #include "fp-vte-util.h"

@@ -20,7 +20,6 @@
 
 #include <gtk/gtk.h>
 
-#include "kgx-pages-tab.h"
 #include "kgx-terminal.h"
 #include "kgx-process.h"
 #include "kgx-enums.h"

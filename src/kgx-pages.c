@@ -21,8 +21,7 @@
  * @title: KgxPages
  * @short_description: Container of #KgxTab s
  * 
- * The container of open #KgxTab , through #GtkNotebook it also provides tabs
- * in desktop mode
+ * The container of open #KgxTab (uses #HdyTabView internally)
  * 
  * Since: 0.3.0
  */
@@ -40,7 +39,8 @@
 typedef struct _KgxPagesPrivate KgxPagesPrivate;
 struct _KgxPagesPrivate {
   GtkWidget            *stack;
-  GtkWidget            *notebook;
+  GtkWidget            *view;
+  GtkWidget            *tabbar;
   GtkWidget            *empty;
 
   GtkWidget            *status;
@@ -76,6 +76,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (KgxPages, kgx_pages, GTK_TYPE_OVERLAY)
 
 enum {
   PROP_0,
+  PROP_TAB_BAR,
   PROP_TAB_COUNT,
   PROP_TITLE,
   PROP_PATH,
@@ -108,7 +109,10 @@ kgx_pages_get_property (GObject    *object,
 
   switch (property_id) {
     case PROP_TAB_COUNT:
-      g_value_set_uint (value, gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->notebook)));
+      g_value_set_uint (value, hdy_tab_view_get_n_pages (HDY_TAB_VIEW (priv->view)));
+      break;
+    case PROP_TAB_BAR:
+      g_value_set_object (value, priv->tabbar);
       break;
     case PROP_TITLE:
       g_value_set_string (value, priv->title);
@@ -151,6 +155,14 @@ kgx_pages_set_property (GObject      *object,
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
 
   switch (property_id) {
+    case PROP_TAB_BAR:
+      g_clear_object (&priv->tabbar);
+      priv->tabbar = g_value_dup_object (value);
+      if (priv->tabbar) {
+        hdy_tab_bar_set_view (HDY_TAB_BAR (priv->tabbar),
+                              HDY_TAB_VIEW (priv->view));
+      }
+      break;
     case PROP_TITLE:
       g_clear_pointer (&priv->title, g_free);
       priv->title = g_value_dup_string (value);
@@ -201,9 +213,9 @@ size_timeout (KgxPages *self)
 
 
 static void
-size_changed (KgxTab  *page,
-              guint     cols,
+size_changed (KgxTab   *tab,
               guint     rows,
+              guint     cols,
               KgxPages *self)
 {
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
@@ -233,30 +245,27 @@ size_changed (KgxTab  *page,
 
 
 static void
-page_changed (GtkNotebook *notebook,
-              GtkWidget   *page,
-              int          page_num,
-              KgxPages    *self)
+page_changed (GObject *object, GParamSpec *pspec, KgxPages *self)
 {
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
-
-  g_return_if_fail (KGX_IS_TAB (page));
+  HdyTabPage *page = hdy_tab_view_get_selected_page (HDY_TAB_VIEW (priv->view));
+  KgxTab *tab = KGX_TAB (hdy_tab_page_get_child (page));
 
   clear_signal_handler (&priv->size_watcher, priv->active_page);
-  priv->size_watcher = g_signal_connect (page,
+  priv->size_watcher = g_signal_connect (tab,
                                          "size-changed",
                                          G_CALLBACK (size_changed),
                                          self);
 
   g_clear_object (&priv->title_bind);
-  priv->title_bind = g_object_bind_property (page,
+  priv->title_bind = g_object_bind_property (tab,
                                              "tab-title",
                                              self,
                                              "title",
                                              G_BINDING_SYNC_CREATE);
 
   g_clear_object (&priv->path_bind);
-  priv->path_bind = g_object_bind_property (page,
+  priv->path_bind = g_object_bind_property (tab,
                                             "tab-path",
                                             self,
                                             "path",
@@ -269,40 +278,23 @@ page_changed (GtkNotebook *notebook,
   g_clear_object (&priv->is_active_bind);
   priv->is_active_bind = g_object_bind_property (self,
                                                  "is-active",
-                                                 page,
+                                                 tab,
                                                  "is-active",
                                                  G_BINDING_SYNC_CREATE);
 
   g_clear_object (&priv->page_status_bind);
-  priv->page_status_bind = g_object_bind_property (page,
+  priv->page_status_bind = g_object_bind_property (tab,
                                                    "tab-status",
                                                    self,
                                                    "status",
                                                    G_BINDING_SYNC_CREATE);
 
-  priv->active_page = KGX_TAB (page);
+  priv->active_page = KGX_TAB (tab);
 }
 
 
 static void
-update_tabs (KgxPages *self)
-{
-  KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
-  int width = gtk_widget_get_allocated_width (GTK_WIDGET (self));
-
-  if (gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->notebook)) > 1 &&
-      width >= 400) {
-    gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->notebook), TRUE);
-  } else {
-    gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->notebook), FALSE);
-  }
-
-  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_TAB_COUNT]);
-}
-
-
-static void
-died (KgxTab        *page,
+died (KgxTab         *page,
       GtkMessageType  type,
       const char     *message,
       gboolean        success,
@@ -328,44 +320,44 @@ died (KgxTab        *page,
 
 
 static void
-page_added (GtkNotebook *notebook,
-            GtkWidget   *page,
-            guint        id,
-            KgxPages    *self)
+page_added (HdyTabView *view,
+            HdyTabPage *page,
+            int         position,
+            KgxPages   *self)
 {
+  KgxTab *tab;
   KgxPagesPrivate *priv;
 
-  g_return_if_fail (KGX_IS_TAB (page));
+  g_return_if_fail (HDY_IS_TAB_PAGE (page));
+
+  tab = KGX_TAB (hdy_tab_page_get_child (page));
 
   priv = kgx_pages_get_instance_private (self);
 
-  g_signal_connect (page, "died", G_CALLBACK (died), self);
-  gtk_notebook_set_tab_detachable (GTK_NOTEBOOK (priv->notebook), page, TRUE);
-  gtk_notebook_set_tab_reorderable (GTK_NOTEBOOK (priv->notebook), page, TRUE);
+  g_signal_connect (tab, "died", G_CALLBACK (died), self);
 
-  update_tabs (self);
-
-  gtk_stack_set_visible_child (GTK_STACK (priv->stack), priv->notebook);
+  gtk_stack_set_visible_child (GTK_STACK (priv->stack), priv->view);
 }
 
 
 static void
-page_removed (GtkNotebook *notebook,
-              GtkWidget   *page,
-              guint        id,
-              KgxPages    *self)
+page_removed (HdyTabView *view,
+              HdyTabPage *page,
+              int         position,
+              KgxPages   *self)
 {
+  KgxTab *tab;
   KgxPagesPrivate *priv;
 
-  g_return_if_fail (KGX_IS_TAB (page));
+  g_return_if_fail (HDY_IS_TAB_PAGE (page));
+
+  tab = KGX_TAB (hdy_tab_page_get_child (page));
 
   priv = kgx_pages_get_instance_private (self);
 
-  g_signal_handlers_disconnect_by_data (page, self);
+  g_signal_handlers_disconnect_by_data (tab, self);
 
-  update_tabs (self);
-
-  if (gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->notebook)) == 0) {
+  if (hdy_tab_view_get_n_pages (HDY_TAB_VIEW (priv->view)) == 0) {
     gtk_stack_set_visible_child (GTK_STACK (priv->stack), priv->empty);
 
     priv->active_page = NULL;
@@ -391,6 +383,20 @@ kgx_pages_class_init (KgxPagesClass *klass)
 
   object_class->get_property = kgx_pages_get_property;
   object_class->set_property = kgx_pages_set_property;
+
+  /**
+   * KgxPages:tab-bar:
+   * 
+   * The #HdyTabBar
+   * 
+   * Stability: Private
+   * 
+   * Since: 0.3.0
+   */
+  pspecs[PROP_TAB_BAR] =
+    g_param_spec_object ("tab-bar", "Tab Bar", "The tab bar",
+                         HDY_TYPE_TAB_BAR,
+                         G_PARAM_READWRITE);
 
   /**
    * KgxPages:tab-count:
@@ -508,7 +514,7 @@ kgx_pages_class_init (KgxPagesClass *klass)
                                                RES_PATH "kgx-pages.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, stack);
-  gtk_widget_class_bind_template_child_private (widget_class, KgxPages, notebook);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxPages, view);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, empty);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, status);
 
@@ -597,22 +603,18 @@ kgx_pages_search (KgxPages   *self,
 
 void
 kgx_pages_add_page (KgxPages *self,
-                    KgxTab  *page)
+                    KgxTab   *tab)
 {
   KgxPagesPrivate *priv;
-  KgxPagesTab *tab;
+  HdyTabPage *page;
   
   g_return_if_fail (KGX_IS_PAGES (self));
 
   priv = kgx_pages_get_instance_private (self);
 
-  tab = g_object_new (KGX_TYPE_PAGES_TAB,
-                      "visible", TRUE,
-                      NULL);
-
-  gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook),
-                            GTK_WIDGET (page),
-                            GTK_WIDGET (tab));
+  page = hdy_tab_view_append (HDY_TAB_VIEW (priv->view), GTK_WIDGET (tab));
+  g_object_bind_property (tab, "tab-title", page, "title", G_BINDING_SYNC_CREATE);
+  g_object_bind_property (tab, "tab-tooltip", page, "tooltip", G_BINDING_SYNC_CREATE);
 }
 
 
@@ -627,7 +629,7 @@ kgx_pages_remove_page (KgxPages *self,
 
   priv = kgx_pages_get_instance_private (self);
   
-  gtk_container_remove (GTK_CONTAINER (priv->notebook), GTK_WIDGET (page));
+  gtk_container_remove (GTK_CONTAINER (priv->view), GTK_WIDGET (page));
 }
 
 
@@ -645,19 +647,19 @@ kgx_pages_focus_page (KgxPages *self,
                       KgxTab  *page)
 {
   KgxPagesPrivate *priv;
-  int index;
+  HdyTabPage *index;
   
   g_return_if_fail (KGX_IS_PAGES (self));
   g_return_if_fail (KGX_IS_TAB (page));
 
   priv = kgx_pages_get_instance_private (self);
 
-  index = gtk_notebook_page_num (GTK_NOTEBOOK (priv->notebook),
+  index = hdy_tab_view_get_page (HDY_TAB_VIEW (priv->view),
                                  GTK_WIDGET (page));
   
-  g_return_if_fail (index != -1);
+  g_return_if_fail (index != NULL);
 
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), index);
+  hdy_tab_view_set_selected_page (HDY_TAB_VIEW (priv->view), index);
 
   kgx_tab_focus_terminal (page);
 }
@@ -698,7 +700,9 @@ kgx_pages_get_children (KgxPages *self)
 {
   KgxPagesPrivate *priv;
   GPtrArray *children;
-  GList *pages;
+  GListModel *pages;
+  HdyTabPage *page;
+  int n = 0;
 
   g_return_val_if_fail (KGX_IS_PAGES (self), KGX_NONE);
 
@@ -706,19 +710,22 @@ kgx_pages_get_children (KgxPages *self)
 
   children = g_ptr_array_new_full (10, (GDestroyNotify) kgx_process_unref);
 
-  pages = gtk_container_get_children (GTK_CONTAINER (priv->notebook));
+  pages = hdy_tab_view_get_pages (HDY_TAB_VIEW (priv->view));
 
-  do {
+  while ((page = g_list_model_get_item (pages, n))) {
     g_autoptr (GPtrArray) page_children = NULL;
     
-    page_children = kgx_tab_get_children (KGX_TAB (pages->data));
+    page_children = kgx_tab_get_children (KGX_TAB (hdy_tab_page_get_child (page)));
 
     for (int i = 0; i < page_children->len; i++) {
       g_ptr_array_add (children, g_ptr_array_steal_index (page_children, i));
     }
 
+    n++;
+    g_clear_object (&page);
+
     // 2.62: g_ptr_array_extend_and_steal (children, page_children);
-  } while ((pages = g_list_next (pages)));
+  };
 
   return children;
 }

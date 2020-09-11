@@ -31,7 +31,6 @@
 #include "kgx-config.h"
 #include "kgx-tab.h"
 #include "kgx-pages.h"
-#include "kgx-pages-tab.h"
 #include "kgx-terminal.h"
 #include "kgx-application.h"
 #include "util.h"
@@ -44,7 +43,7 @@ struct _KgxTabPrivate {
   KgxApplication       *application;
 
   char                 *title;
-  char                 *description;
+  char                 *tooltip;
   GFile                *path;
   KgxStatus             status;
   PangoFontDescription *font;
@@ -73,11 +72,6 @@ struct _KgxTabPrivate {
   GtkWidget            *revealer;
   GtkWidget            *label;
 
-  KgxPagesTab          *tab;
-  GBinding             *tab_title_bind;
-  GBinding             *tab_description_bind;
-  GBinding             *tab_status_bind;
-
   /* Remote/root states */
   GHashTable           *root;
   GHashTable           *remote;
@@ -96,7 +90,7 @@ enum {
   PROP_TAB_TITLE,
   PROP_TAB_PATH,
   PROP_TAB_STATUS,
-  PROP_DESCRIPTION,
+  PROP_TAB_TOOLTIP,
   PROP_FONT,
   PROP_ZOOM,
   PROP_THEME,
@@ -139,8 +133,8 @@ kgx_tab_get_property (GObject    *object,
     case PROP_TAB_STATUS:
       g_value_set_flags (value, priv->status);
       break;
-    case PROP_DESCRIPTION:
-      g_value_set_string (value, priv->description);
+    case PROP_TAB_TOOLTIP:
+      g_value_set_string (value, priv->tooltip);
       break;
     case PROP_FONT:
       g_value_set_boxed (value, priv->font);
@@ -195,9 +189,9 @@ kgx_tab_set_property (GObject      *object,
     case PROP_TAB_STATUS:
       priv->status = g_value_get_flags (value);
       break;
-    case PROP_DESCRIPTION:
-      g_clear_pointer (&priv->description, g_free);
-      priv->description = g_value_dup_string (value);
+    case PROP_TAB_TOOLTIP:
+      g_clear_pointer (&priv->tooltip, g_free);
+      priv->tooltip = g_value_dup_string (value);
       break;
     case PROP_FONT:
       if (priv->font) {
@@ -335,8 +329,9 @@ kgx_tab_class_init (KgxTabClass *klass)
                         KGX_NONE,
                         G_PARAM_READWRITE);
 
-  pspecs[PROP_DESCRIPTION] =
-    g_param_spec_string ("description", "Description", "Description of the tab",
+  pspecs[PROP_TAB_TOOLTIP] =
+    g_param_spec_string ("tab-tooltip", "Tab Tooltip",
+                         "Extra information to show in the tooltip",
                          NULL,
                          G_PARAM_READWRITE);
 

@@ -244,7 +244,7 @@ path_changed (GObject *object, GParamSpec *pspec, KgxSimpleTab *self)
     desc = g_strdup_printf ("%s", g_file_get_path (path));
   }
 
-  g_object_set (self, "description", desc, NULL);
+  g_object_set (self, "tab-tooltip", desc, NULL);
 }
 
 
