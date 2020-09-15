@@ -1,0 +1,235 @@
+# Croatian translation for kgx.
+# Copyright (C) 2019 kgx's COPYRIGHT HOLDER
+# This file is distributed under the same license as the kgx package.
+# Milo Ivir <mail@milotype.de>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kgx\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
+"POT-Creation-Date: 2019-12-27 11:42+0000\n"
+"PO-Revision-Date: 2020-01-14 21:45+0100\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>\n"
+"Language-Team: \n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.2.4\n"
+
+#. Translators: This is a train station, see README.md for more info
+#: data/org.gnome.zbrown.KingsCross.desktop.in:4
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:422
+#: src/kgx-window.c:744 src/main.c:38
+msgid "King’s Cross"
+msgstr "King’s Cross"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.zbrown.KingsCross.desktop.in:9
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
+msgstr ""
+"naredba;prompt;cmd;naredbeni redak;pokretanje;ljuska;terminal;kgx;kings "
+"cross;"
+
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3 src/main.c:35
+msgid "Terminal"
+msgstr "Terminal"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:8
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
+msgstr "naredba;prompt;cmd;naredbeni redak;pokretanje;ljuska;terminal;kgx;"
+
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:424
+#: src/kgx-window.c:735
+msgid "Terminal Emulator"
+msgstr "Emulator terminala"
+
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:11
+msgid "A simple user-friendly terminal emulator for the GNOME desktop."
+msgstr ""
+"Jednostavan i lako upotrebljiv emulator terminala za GNOME radnu površinu."
+
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:22
+msgid "Terminal window"
+msgstr "Prozor terminala"
+
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:52
+msgid "Zander Brown"
+msgstr "Zander Brown"
+
+#: src/help-overlay.ui:13
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Program"
+
+#: src/help-overlay.ui:19
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Novi prozor"
+
+#: src/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Terminal"
+
+#: src/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Nađi"
+
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Kopiraj"
+
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Umetni"
+
+#. Translators: This is the name of the timeout that looks for programs
+#. running in the terminal
+#: src/kgx-application.c:255
+msgid "child watcher"
+msgstr "promatrač podređenog procesa"
+
+#. Translators: The leading # is intentional, the initial %s is the
+#. version of King's Cross itself, the latter format is the VTE version
+#: src/kgx-application.c:396
+#, c-format
+msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
+msgstr "# King’s Cross %s, koji koristi VTE %u.%u.%u %s\n"
+
+#: src/kgx-application.c:408 src/kgx-window.c:727
+#, c-format
+msgid "Copyright © %s Zander Brown"
+msgstr "Autorsko pravo © %s. Zander Brown"
+
+#: src/kgx-application.c:528
+msgid "Execute the argument to this option inside the terminal"
+msgstr "Izvrši argument do ove opcije unutar terminala"
+
+#: src/kgx-application.c:537
+msgid "Set the working directory"
+msgstr "Postavi radni direktorij"
+
+#. Translators: Placeholder of for a given directory
+#: src/kgx-application.c:539
+msgid "DIRNAME"
+msgstr "NAZIVDIREKTORIJA"
+
+#: src/kgx-application.c:547
+msgid "Wait until the child exits (TODO)"
+msgstr "Pričekaj da podređeni proces izađe (ZADATAK)"
+
+#: src/kgx-terminal.c:374
+msgid "You are pasting a command that runs as an administrator"
+msgstr "Umećeš naredbu, koja se pokreće kao administrator"
+
+#. TRANSLATORS: %s is the command being pasted
+#: src/kgx-terminal.c:377
+#, c-format
+msgid ""
+"Make sure you know what the command does:\n"
+"%s"
+msgstr ""
+"Znaj što naredba izvršava:\n"
+"%s"
+
+#: src/kgx-terminal.c:382 src/kgx-close-dialog.ui:56
+msgid "_Cancel"
+msgstr "_Odustani"
+
+#: src/kgx-terminal.c:385 src/menus.ui:24
+msgid "_Paste"
+msgstr "_Umetni"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-window.c:150
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Samo za čitanje</b> – Naredba je izašla s kodom %i"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-window.c:165
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Samo za čitanje</b> – Naredba je izašla"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-window.c:202
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Neuspjelo pokretanje</b> – %s"
+
+#. Translators: Credit yourself here
+#: src/kgx-window.c:734
+msgid "translator-credits"
+msgstr "Milo Ivir <mail@milotype.de>, 2019., 2020."
+
+#. Translators: "by King’s Cross" here is meaning
+#. author or creator of 'Terminal'
+#: src/kgx-window.c:742
+msgid "Terminal (King’s Cross)"
+msgstr "Terminal (King’s Cross)"
+
+#: src/kgx-window.c:844
+msgid "_About Terminal"
+msgstr "_Informacije o Terminalu"
+
+#: src/kgx-window.c:1024
+msgid "Command completed"
+msgstr "Naredba završena"
+
+#: src/kgx-window.ui:61
+msgid "_New Window"
+msgstr "_Novi prozor"
+
+#: src/kgx-window.ui:73
+msgid "_Keyboard Shortcuts"
+msgstr "_Tipkovni prečaci"
+
+#: src/kgx-window.ui:80
+msgid "_About King’s Cross"
+msgstr "_Informacije o King’s Crossu"
+
+#: src/menus.ui:7
+msgid "_Open Link"
+msgstr "Otvori _poveznicu"
+
+#: src/menus.ui:12
+msgid "Copy _Link"
+msgstr "Kopiraj po_veznicu"
+
+#: src/menus.ui:19
+msgid "_Copy"
+msgstr "_Kopiraj"
+
+#: src/menus.ui:29
+msgid "_Select All"
+msgstr "Odaberi _sve"
+
+#: src/menus.ui:36
+msgid "Show in _Files"
+msgstr "Prikaži u _datotekama"
+
+#: src/kgx-close-dialog.ui:6
+msgid "Close Terminal"
+msgstr "Zatvori terminal"
+
+#: src/kgx-close-dialog.ui:25
+msgid ""
+"Some commands are still running, closing this terminal will kill them and "
+"may lead to unexpected outcomes"
+msgstr ""
+"Neke se naredbe još uvijek izvode, zatvaranjem ovog terminala se one ukidaju "
+"što može prouzročiti neočekivane rezultate"
+
+#: src/kgx-close-dialog.ui:64
+msgid "_OK"
+msgstr "_U redu"
