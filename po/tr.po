@@ -1,14 +1,15 @@
-# Turkish translation of kgx.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# Sabri Ünal <libreajans@gmail.com>, 2019.
+# Turkish translation of King’s Cross.
+# Copyright (C) 2019-2020 King’s Cross COPYRIGHT HOLDER
+# This file is distributed under the same license as the King’s Cross package.
+#
 # Emin Tufan Çetin <etcetin@gmail.com>, 2019, 2020.
+# Sabri Ünal <libreajans@gmail.com>, 2019, 2020.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: kgx master\n"
+"Project-Id-Version: King’s Cross master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2019-11-04 20:13+0000\n"
+"POT-Creation-Date: 2020-09-10 12:52+0000\n"
 "PO-Revision-Date: 2020-02-25 00:31+0300\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -21,8 +22,8 @@ msgstr ""
 
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:422
-#: src/kgx-window.c:744 src/main.c:38
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:439
+#: src/kgx-window.c:618 src/kgx-window.ui:102 src/main.c:38
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
@@ -41,8 +42,8 @@ msgstr "Uçbirim"
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
 msgstr "komut;istem;cmd;komut satırı;çalıştır;kabuk;uçbirim;terminal;kgx;"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:424
-#: src/kgx-window.c:735
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:441
+#: src/kgx-window.c:609
 msgid "Terminal Emulator"
 msgstr "Uçbirim Öykünücü"
 
@@ -70,65 +71,70 @@ msgstr "Yeni Pencere"
 
 #: src/help-overlay.ui:26
 msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Yeni Sekme"
+
+#: src/help-overlay.ui:33
+msgctxt "shortcut window"
 msgid "Terminal"
 msgstr "Uçbirim"
 
-#: src/help-overlay.ui:32
+#: src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Bul"
 
-#: src/help-overlay.ui:39
+#: src/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Copy"
 msgstr "Kopyala"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:53
 msgctxt "shortcut window"
 msgid "Paste"
 msgstr "Yapıştır"
 
 #. Translators: This is the name of the timeout that looks for programs
 #. running in the terminal
-#: src/kgx-application.c:255
+#: src/kgx-application.c:267
 msgid "child watcher"
 msgstr "alt süreç izleyici"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:396
+#: src/kgx-application.c:413
 #, c-format
 msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgstr "# King’s Cross %s VTE %u.%u.%u %s kullanıyor\n"
 
-#: src/kgx-application.c:408 src/kgx-window.c:727
+#: src/kgx-application.c:425 src/kgx-window.c:601
 #, c-format
 msgid "Copyright © %s Zander Brown"
 msgstr "Telif Hakkı © %s Zander Brown"
 
-#: src/kgx-application.c:528
+#: src/kgx-application.c:545
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Argümanı uçbirimin içinde bu seçeneğe çalıştır"
 
-#: src/kgx-application.c:537
+#: src/kgx-application.c:554
 msgid "Set the working directory"
 msgstr "Çalışma dizinini belirle"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:539
+#: src/kgx-application.c:556
 msgid "DIRNAME"
 msgstr "DİZİNADI"
 
-#: src/kgx-application.c:547
+#: src/kgx-application.c:564
 msgid "Wait until the child exits (TODO)"
 msgstr "Alt süreç çıkana dek bekle (TODO)"
 
-#: src/kgx-terminal.c:374
+#: src/kgx-terminal.c:413
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Yönetici olarak çalışan komut yapıştırıyorsunuz"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:377
+#: src/kgx-terminal.c:416
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -137,36 +143,16 @@ msgstr ""
 "Komutun ne yaptığından emin olun:\n"
 "%s"
 
-#: src/kgx-terminal.c:382 src/kgx-close-dialog.ui:56
+#: src/kgx-terminal.c:421 src/kgx-close-dialog.ui:56
 msgid "_Cancel"
 msgstr "_İptal"
 
-#: src/kgx-terminal.c:385 src/menus.ui:24
+#: src/kgx-terminal.c:424 src/menus.ui:24
 msgid "_Paste"
 msgstr "_Yapıştır"
 
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-window.c:150
-#, c-format
-msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr "<b>Salt Okunur</b> — Komut, %i koduyla çıktı"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-window.c:165
-msgid "<b>Read Only</b> — Command exited"
-msgstr "<b>Salt Okunur</b> — Komut çıktı"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-window.c:202
-#, c-format
-msgid "<b>Failed to start</b> — %s"
-msgstr "<b>Başlatma başarısız</b> — %s"
-
 #. Translators: Credit yourself here
-#: src/kgx-window.c:734
+#: src/kgx-window.c:608
 msgid "translator-credits"
 msgstr ""
 "Sabri Ünal <libreajans@gmail.com>\n"
@@ -174,29 +160,53 @@ msgstr ""
 
 #. Translators: "by King’s Cross" here is meaning
 #. author or creator of 'Terminal'
-#: src/kgx-window.c:742
+#: src/kgx-window.c:616
 msgid "Terminal (King’s Cross)"
 msgstr "Uçbirim (Kingʼs Cross)"
 
-#: src/kgx-window.c:844
+#: src/kgx-window.c:681
 msgid "_About Terminal"
 msgstr "Uçbirim _Hakkında"
 
-#: src/kgx-window.c:1024
-msgid "Command completed"
-msgstr "Komut tamamlandı"
+#: src/kgx-window.ui:20
+msgid "Shrink text"
+msgstr "Metni daralt"
 
-#: src/kgx-window.ui:61
+#: src/kgx-window.ui:33
+msgid "Reset size"
+msgstr "Boyutu sıfırla"
+
+#: src/kgx-window.ui:46
+msgid "Enlarge text"
+msgstr "Metni genişlet"
+
+#: src/kgx-window.ui:63
 msgid "_New Window"
 msgstr "_Yeni Pencere"
 
-#: src/kgx-window.ui:73
+#: src/kgx-window.ui:75
 msgid "_Keyboard Shortcuts"
 msgstr "_Klavye Kısayolları"
 
-#: src/kgx-window.ui:80
+#: src/kgx-window.ui:82
 msgid "_About King’s Cross"
 msgstr "Kingʼs Cross _Hakkında"
+
+#: src/kgx-window.ui:83
+msgid "About this program"
+msgstr "Program hakkında"
+
+#: src/kgx-window.ui:110
+msgid "Find in terminal"
+msgstr "Uçbirimde bul"
+
+#: src/kgx-window.ui:128
+msgid "Menu"
+msgstr "Menü"
+
+#: src/kgx-window.ui:146
+msgid "New Tab"
+msgstr "Yeni Sekme"
 
 #: src/menus.ui:7
 msgid "_Open Link"
@@ -218,6 +228,14 @@ msgstr "Tümünü _Seç"
 msgid "Show in _Files"
 msgstr "Dosyalarʼda Göster"
 
+#: src/menus.ui:45
+msgid "_Close"
+msgstr "_Kapat"
+
+#: src/menus.ui:49
+msgid "_Detach"
+msgstr "_Ayır"
+
 #: src/kgx-close-dialog.ui:6
 msgid "Close Terminal"
 msgstr "Uçbirimi Kapat"
@@ -233,3 +251,15 @@ msgstr ""
 #: src/kgx-close-dialog.ui:64
 msgid "_OK"
 msgstr "_Tamam"
+
+#~ msgid "<b>Read Only</b> — Command exited with code %i"
+#~ msgstr "<b>Salt Okunur</b> — Komut, %i koduyla çıktı"
+
+#~ msgid "<b>Read Only</b> — Command exited"
+#~ msgstr "<b>Salt Okunur</b> — Komut çıktı"
+
+#~ msgid "<b>Failed to start</b> — %s"
+#~ msgstr "<b>Başlatma başarısız</b> — %s"
+
+#~ msgid "Command completed"
+#~ msgstr "Komut tamamlandı"
