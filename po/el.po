@@ -1,0 +1,255 @@
+# Greek translation for kgx.
+# Copyright (C) 2020 kgx's COPYRIGHT HOLDER
+# This file is distributed under the same license as the kgx package.
+# Efstathios Iosifidis <eiosifidis@gnome.org>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kgx master\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
+"POT-Creation-Date: 2020-09-27 22:08+0000\n"
+"PO-Revision-Date: 2020-10-01 13:40+0300\n"
+"Language-Team: Greek <gnome-el-list@gnome.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Efstathios Iosifidis <eiosifidis@gnome.org>\n"
+"X-Generator: Poedit 2.3\n"
+
+#. Translators: This is a train station, see README.md for more info
+#: data/org.gnome.zbrown.KingsCross.desktop.in:4
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:439
+#: src/kgx-window.c:618 src/kgx-window.ui:102 src/main.c:38
+msgid "King’s Cross"
+msgstr ""
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.zbrown.KingsCross.desktop.in:9
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
+msgstr ""
+
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3 src/main.c:35
+msgid "Terminal"
+msgstr "Τερματικό"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:8
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
+msgstr ""
+
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:441
+#: src/kgx-window.c:609
+msgid "Terminal Emulator"
+msgstr "Προσομοίωση τερματικού"
+
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:11
+msgid "A simple user-friendly terminal emulator for the GNOME desktop."
+msgstr ""
+"Ένας απλός φιλικός προς τον χρήστη εξομοιωτής τερματικού για το GNOME."
+
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:22
+msgid "Terminal window"
+msgstr "Παράθυρο τερματικού"
+
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:52
+msgid "Zander Brown"
+msgstr "Zander Brown"
+
+#: src/help-overlay.ui:13
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Εφαρμογή"
+
+#: src/help-overlay.ui:19
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Νέο παράθυρο"
+
+#: src/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Νέα καρτέλα"
+
+#: src/help-overlay.ui:33
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Τερματικό"
+
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Εύρεση"
+
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Αντιγραφή"
+
+#: src/help-overlay.ui:53
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Επικόλληση"
+
+#. Translators: This is the name of the timeout that looks for programs
+#. running in the terminal
+#: src/kgx-application.c:267
+msgid "child watcher"
+msgstr ""
+
+#. Translators: The leading # is intentional, the initial %s is the
+#. version of King's Cross itself, the latter format is the VTE version
+#: src/kgx-application.c:413
+#, c-format
+msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
+msgstr ""
+
+#: src/kgx-application.c:425 src/kgx-window.c:601
+#, c-format
+msgid "Copyright © %s Zander Brown"
+msgstr "Πνευματικά δικαιώματα © %s Zander Brown"
+
+#: src/kgx-application.c:545
+msgid "Execute the argument to this option inside the terminal"
+msgstr "Εκτέλεση του ορίσματος σε αυτήν την επιλογή μέσα στο τερματικό"
+
+#: src/kgx-application.c:554
+msgid "Set the working directory"
+msgstr "Ορισμός του καταλόγου εργασίας"
+
+#. Translators: Placeholder of for a given directory
+#: src/kgx-application.c:556
+msgid "DIRNAME"
+msgstr "DIRNAME"
+
+#: src/kgx-application.c:564
+msgid "Wait until the child exits (TODO)"
+msgstr ""
+
+#: src/kgx-terminal.c:413
+msgid "You are pasting a command that runs as an administrator"
+msgstr "Επικολλάτε μια εντολή που εκτελείται ως διαχειριστής"
+
+#. TRANSLATORS: %s is the command being pasted
+#: src/kgx-terminal.c:416
+#, c-format
+msgid ""
+"Make sure you know what the command does:\n"
+"%s"
+msgstr ""
+"Βεβαιωθείτε ότι γνωρίζετε τι κάνει η εντολή:\n"
+"%s"
+
+#: src/kgx-terminal.c:421 src/kgx-close-dialog.ui:56
+msgid "_Cancel"
+msgstr "_Aκύρωση"
+
+#: src/kgx-terminal.c:424 src/menus.ui:24
+msgid "_Paste"
+msgstr "_Επικόλληση"
+
+#. Translators: Credit yourself here
+#: src/kgx-window.c:608
+msgid "translator-credits"
+msgstr ""
+"Ελληνική μεταφραστική ομάδα GNOME\n"
+" Ευστάθιος Ιωσηφίδης <iosifidis@opensuse.org>\n"
+"\n"
+"Για περισσότερες πληροφορίες, επισκεφθείτε τη σελίδα\n"
+"http://gnome.gr/"
+
+#. Translators: "by King’s Cross" here is meaning
+#. author or creator of 'Terminal'
+#: src/kgx-window.c:616
+msgid "Terminal (King’s Cross)"
+msgstr ""
+
+#: src/kgx-window.c:681
+msgid "_About Terminal"
+msgstr "_Περί Τερματικό"
+
+#: src/kgx-window.ui:20
+msgid "Shrink text"
+msgstr "Σμίκρυνση κειμένου"
+
+#: src/kgx-window.ui:33
+msgid "Reset size"
+msgstr "Επαναφορά μεγέθους"
+
+#: src/kgx-window.ui:46
+msgid "Enlarge text"
+msgstr "Μεγέθυνση κειμένου"
+
+#: src/kgx-window.ui:63
+msgid "_New Window"
+msgstr "_Νέο παράθυρο"
+
+#: src/kgx-window.ui:75
+msgid "_Keyboard Shortcuts"
+msgstr "_Συντομεύσεις πληκτρολογίου"
+
+#: src/kgx-window.ui:82
+msgid "_About King’s Cross"
+msgstr ""
+
+#: src/kgx-window.ui:83
+msgid "About this program"
+msgstr "Περί αυτού του προγράμματος"
+
+#: src/kgx-window.ui:110
+msgid "Find in terminal"
+msgstr "Εύρεση στο τερματικό"
+
+#: src/kgx-window.ui:128
+msgid "Menu"
+msgstr "Μενού"
+
+#: src/kgx-window.ui:146
+msgid "New Tab"
+msgstr "Νέα καρτέλα"
+
+#: src/menus.ui:7
+msgid "_Open Link"
+msgstr "Άν_οιγμα συνδέσμου"
+
+#: src/menus.ui:12
+msgid "Copy _Link"
+msgstr "Αντιγραφή _συνδέσμου"
+
+#: src/menus.ui:19
+msgid "_Copy"
+msgstr "_Αντιγραφή"
+
+#: src/menus.ui:29
+msgid "_Select All"
+msgstr "_Επιλογή όλων"
+
+#: src/menus.ui:36
+msgid "Show in _Files"
+msgstr "Εμφάνιση στο _Αρχεία"
+
+#: src/menus.ui:45
+msgid "_Close"
+msgstr "_Κλείσιμο"
+
+#: src/menus.ui:49
+msgid "_Detach"
+msgstr "_Απόσπαση"
+
+#: src/kgx-close-dialog.ui:6
+msgid "Close Terminal"
+msgstr "Κλείσιμο τερματικού"
+
+#: src/kgx-close-dialog.ui:25
+msgid ""
+"Some commands are still running, closing this terminal will kill them and "
+"may lead to unexpected outcomes"
+msgstr ""
+"Ορισμένες εντολές εξακολουθούν να εκτελούνται, το κλείσιμο αυτού του "
+"τερματικού θα τις τερματίσει και μπορεί να οδηγήσει σε απρόσμενα "
+"αποτελέσματα"
+
+#: src/kgx-close-dialog.ui:64
+msgid "_OK"
+msgstr "_Εντάξει"
