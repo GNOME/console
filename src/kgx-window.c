@@ -588,6 +588,16 @@ new_tab_activated (GSimpleAction *action,
   kgx_pages_focus_page (KGX_PAGES (self->pages), KGX_TAB (page));
 }
 
+static void
+close_tab_activated (GSimpleAction *action,
+                     GVariant      *parameter,
+                     gpointer       data)
+{
+  KgxWindow *self = data;
+
+  kgx_pages_remove_page (KGX_PAGES (self->pages), NULL);
+}
+
 
 static void
 about_activated (GSimpleAction *action,
@@ -626,6 +636,7 @@ static GActionEntry win_entries[] =
 {
   { "new-window", new_activated, NULL, NULL, NULL },
   { "new-tab", new_tab_activated, NULL, NULL, NULL },
+  { "close-tab", close_tab_activated, NULL, NULL, NULL },
   { "about", about_activated, NULL, NULL, NULL },
 };
 

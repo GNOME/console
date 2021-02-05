@@ -630,11 +630,19 @@ kgx_pages_remove_page (KgxPages *self,
   HdyTabPage *tab_page;
   
   g_return_if_fail (KGX_IS_PAGES (self));
-  g_return_if_fail (KGX_IS_TAB (page));
 
   priv = kgx_pages_get_instance_private (self);
+
+  if (!page)
+    {
+      tab_page = hdy_tab_view_get_selected_page (HDY_TAB_VIEW (priv->view));
+      hdy_tab_view_close_page (HDY_TAB_VIEW (priv->view), tab_page);
+      return;
+    }
+
+  g_return_if_fail (KGX_IS_TAB (page));
+
   tab_page = hdy_tab_view_get_page (HDY_TAB_VIEW (priv->view), GTK_WIDGET (page));
-  
   hdy_tab_view_close_page (HDY_TAB_VIEW (priv->view), tab_page);
 }
 
