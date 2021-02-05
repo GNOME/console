@@ -247,9 +247,16 @@ size_changed (KgxTab   *tab,
 static void
 page_changed (GObject *object, GParamSpec *pspec, KgxPages *self)
 {
-  KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
-  HdyTabPage *page = hdy_tab_view_get_selected_page (HDY_TAB_VIEW (priv->view));
-  KgxTab *tab = KGX_TAB (hdy_tab_page_get_child (page));
+  KgxPagesPrivate *priv;
+  HdyTabPage *page = NULL;
+  KgxTab *tab;
+
+  priv = kgx_pages_get_instance_private (self);
+  page = hdy_tab_view_get_selected_page (HDY_TAB_VIEW (priv->view));
+  if (!page)
+    return;
+  tab = KGX_TAB (hdy_tab_page_get_child (page));
+
 
   clear_signal_handler (&priv->size_watcher, priv->active_page);
   priv->size_watcher = g_signal_connect (tab,
