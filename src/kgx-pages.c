@@ -320,10 +320,10 @@ died (KgxTab         *page,
 
 
 static void
-page_added (HdyTabView *view,
-            HdyTabPage *page,
-            int         position,
-            KgxPages   *self)
+page_attached (HdyTabView *view,
+               HdyTabPage *page,
+               int         position,
+               KgxPages   *self)
 {
   KgxTab *tab;
   KgxPagesPrivate *priv;
@@ -341,10 +341,10 @@ page_added (HdyTabView *view,
 
 
 static void
-page_removed (HdyTabView *view,
-              HdyTabPage *page,
-              int         position,
-              KgxPages   *self)
+page_detached (HdyTabView *view,
+               HdyTabPage *page,
+               int         position,
+               KgxPages   *self)
 {
   KgxTab *tab;
   KgxPagesPrivate *priv;
@@ -519,8 +519,8 @@ kgx_pages_class_init (KgxPagesClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, status);
 
   gtk_widget_class_bind_template_callback (widget_class, page_changed);
-  gtk_widget_class_bind_template_callback (widget_class, page_added);
-  gtk_widget_class_bind_template_callback (widget_class, page_removed);
+  gtk_widget_class_bind_template_callback (widget_class, page_attached);
+  gtk_widget_class_bind_template_callback (widget_class, page_detached);
 
   gtk_widget_class_set_css_name (widget_class, "pages");
 }
