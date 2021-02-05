@@ -15,31 +15,6 @@
             <signal name="page-detached" handler="page_detached" swapped="no"/>
           </object>
         </child>
-        <child>
-          <object class="GtkBox" id="empty">
-            <property name="expand">True</property>
-            <property name="visible">True</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="pixel_size">128</property>
-                <property name="icon_name">org.gnome.zbrown.KingsCross-symbolic</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-            </child>
-            <style>
-              <class name="empty-state"/>
-            </style>
-          </object>
-        </child>
       </object>
     </child>
     <child type="overlay">

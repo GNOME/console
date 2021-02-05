@@ -41,7 +41,6 @@ struct _KgxPagesPrivate {
   GtkWidget            *stack;
   GtkWidget            *view;
   GtkWidget            *tabbar;
-  GtkWidget            *empty;
 
   GtkWidget            *status;
 
@@ -360,6 +359,7 @@ page_detached (HdyTabView *view,
 {
   KgxTab *tab;
   KgxPagesPrivate *priv;
+  GtkWindow *window;
 
   g_return_if_fail (HDY_IS_TAB_PAGE (page));
 
@@ -370,19 +370,11 @@ page_detached (HdyTabView *view,
   g_signal_handlers_disconnect_by_data (tab, self);
 
   if (hdy_tab_view_get_n_pages (HDY_TAB_VIEW (priv->view)) == 0) {
-    gtk_stack_set_visible_child (GTK_STACK (priv->stack), priv->empty);
+    window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
+    gtk_window_close (window);
 
     priv->active_page = NULL;
     priv->size_watcher = 0;
-
-    g_object_set (self,
-#if IS_GENERIC
-                  "title", _("Terminal"),
-#else
-                  "title", _("King’s Cross"),
-#endif
-                  "path", NULL,
-                  NULL);
   }
 }
 
@@ -527,7 +519,6 @@ kgx_pages_class_init (KgxPagesClass *klass)
 
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, stack);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, view);
-  gtk_widget_class_bind_template_child_private (widget_class, KgxPages, empty);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, status);
 
   gtk_widget_class_bind_template_callback (widget_class, page_changed);
