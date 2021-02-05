@@ -307,8 +307,13 @@ died (KgxTab         *page,
       gboolean        success,
       KgxPages       *self)
 {
+  KgxPagesPrivate *priv;
+  HdyTabPage *tab_page;
   gboolean close_on_quit;
   int tab_count;
+
+  priv = kgx_pages_get_instance_private (self);
+  tab_page = hdy_tab_view_get_page (HDY_TAB_VIEW (priv->view), GTK_WIDGET (page));
 
   g_object_get (page, "close-on-quit", &close_on_quit, NULL);
 
@@ -322,7 +327,7 @@ died (KgxTab         *page,
     return;
   }
 
-  gtk_widget_destroy (GTK_WIDGET (self));
+  hdy_tab_view_close_page (HDY_TAB_VIEW (priv->view), tab_page);
 }
 
 
@@ -630,13 +635,15 @@ kgx_pages_remove_page (KgxPages *self,
                        KgxTab   *page)
 {
   KgxPagesPrivate *priv;
+  HdyTabPage *tab_page;
   
   g_return_if_fail (KGX_IS_PAGES (self));
   g_return_if_fail (KGX_IS_TAB (page));
 
   priv = kgx_pages_get_instance_private (self);
+  tab_page = hdy_tab_view_get_page (HDY_TAB_VIEW (priv->view), GTK_WIDGET (page));
   
-  gtk_container_remove (GTK_CONTAINER (priv->view), GTK_WIDGET (page));
+  hdy_tab_view_close_page (HDY_TAB_VIEW (priv->view), tab_page);
 }
 
 
