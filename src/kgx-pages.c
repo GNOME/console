@@ -359,7 +359,7 @@ page_detached (HdyTabView *view,
 {
   KgxTab *tab;
   KgxPagesPrivate *priv;
-  GtkWindow *window;
+  GtkWidget *toplevel;
 
   g_return_if_fail (HDY_IS_TAB_PAGE (page));
 
@@ -370,8 +370,11 @@ page_detached (HdyTabView *view,
   g_signal_handlers_disconnect_by_data (tab, self);
 
   if (hdy_tab_view_get_n_pages (HDY_TAB_VIEW (priv->view)) == 0) {
-    window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
-    gtk_window_close (window);
+    toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+    if (GTK_IS_WINDOW (toplevel))
+      {
+        gtk_window_close (GTK_WINDOW (toplevel));
+      }
 
     priv->active_page = NULL;
     priv->size_watcher = 0;
