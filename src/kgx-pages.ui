@@ -13,6 +13,7 @@
             <signal name="notify::selected-page" handler="page_changed" swapped="no"/>
             <signal name="page-attached" handler="page_attached" swapped="no"/>
             <signal name="page-detached" handler="page_detached" swapped="no"/>
+            <signal name="create-window" handler="create_window" swapped="no"/>
           </object>
         </child>
       </object>

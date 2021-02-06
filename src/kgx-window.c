@@ -53,6 +53,7 @@ enum {
   PROP_INITIAL_WORK_DIR,
   PROP_COMMAND,
   PROP_CLOSE_ON_ZERO,
+  PROP_INITIALLY_EMPTY,
   LAST_PROP
 };
 
@@ -129,7 +130,6 @@ kgx_window_constructed (GObject *object)
   g_autoptr (GError)  error = NULL;
   g_auto (GStrv)      shell = NULL;
   g_autofree char    *command = NULL;
-  GtkWidget          *page;
   GtkApplication     *application = NULL;
 
   G_OBJECT_CLASS (kgx_window_parent_class)->constructed (object);
@@ -165,16 +165,20 @@ kgx_window_constructed (GObject *object)
 
   application = gtk_window_get_application (GTK_WINDOW (self));
 
-  page = g_object_new (KGX_TYPE_SIMPLE_TAB,
-                       "application", application,
-                       "visible", TRUE,
-                       "initial-work-dir", initial,
-                       "command", shell,
-                       "close-on-quit", self->close_on_zero,
-                       NULL);
-  kgx_tab_start (KGX_TAB (page), started, self);
+  if (!self->initially_empty) {
+    GtkWidget *page;
 
-  kgx_pages_add_page (KGX_PAGES (self->pages), KGX_TAB (page));
+    page = g_object_new (KGX_TYPE_SIMPLE_TAB,
+                         "application", application,
+                         "visible", TRUE,
+                         "initial-work-dir", initial,
+                         "command", shell,
+                         "close-on-quit", self->close_on_zero,
+                         NULL);
+    kgx_tab_start (KGX_TAB (page), started, self);
+
+    kgx_pages_add_page (KGX_PAGES (self->pages), KGX_TAB (page));
+  }
 
   g_object_bind_property (application,
                           "theme",
@@ -225,6 +229,9 @@ kgx_window_set_property (GObject      *object,
     case PROP_CLOSE_ON_ZERO:
       self->close_on_zero = g_value_get_boolean (value);
       break;
+    case PROP_INITIALLY_EMPTY:
+      self->initially_empty = g_value_get_boolean (value);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -252,6 +259,9 @@ kgx_window_get_property (GObject    *object,
       break;
     case PROP_CLOSE_ON_ZERO:
       g_value_set_boolean (value, self->close_on_zero);
+      break;
+    case PROP_INITIALLY_EMPTY:
+      g_value_set_boolean (value, self->initially_empty);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -484,6 +494,19 @@ kgx_window_class_init (KgxWindowClass *klass)
                           "Should close when child exits with 0",
                           TRUE,
                           G_PARAM_READWRITE);
+
+  /**
+   * KgxWindow:initially-empty:
+   * 
+   * Used to create new windows via drag-n-drop
+   * 
+   * Since: 0.3.0
+   */
+  pspecs[PROP_INITIALLY_EMPTY] =
+    g_param_spec_boolean ("initially-empty", "Initially empty",
+                          "Whether the window is initially empty",
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
@@ -751,4 +774,21 @@ kgx_window_get_working_dir (KgxWindow *self)
   }
 
   return g_file_get_path (file);
+}
+
+
+/**
+ * kgx_window_get_pages:
+ * @self: the #KgxWindow
+ * 
+ * Get the tabbed widget inside @self
+ * 
+ * Since: 0.3.0
+ */
+KgxPages *
+kgx_window_get_pages (KgxWindow *self)
+{
+  g_return_val_if_fail (KGX_IS_WINDOW (self), NULL);
+
+  return KGX_PAGES (self->pages);
 }

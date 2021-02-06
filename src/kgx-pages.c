@@ -379,6 +379,35 @@ page_detached (HdyTabView *view,
 }
 
 
+static HdyTabView *
+create_window (HdyTabView *view,
+               KgxPages   *self)
+{
+  GtkWindow *window;
+  KgxWindow *new_window;
+  GtkApplication *app;
+  KgxPages *new_pages;
+  KgxPagesPrivate *priv;
+
+  window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
+  app = gtk_window_get_application (window);
+
+  new_window = g_object_new (KGX_TYPE_WINDOW,
+                             "application", app,
+                             "close-on-zero", TRUE,
+                             "initially-empty", TRUE,
+                             NULL);
+
+  new_pages = kgx_window_get_pages (new_window);
+  priv = kgx_pages_get_instance_private (new_pages);
+
+  gtk_window_set_position (GTK_WINDOW (new_window), GTK_WIN_POS_MOUSE);
+  gtk_window_present (GTK_WINDOW (new_window));
+
+  return HDY_TAB_VIEW (priv->view);
+}
+
+
 static void
 kgx_pages_class_init (KgxPagesClass *klass)
 {
@@ -524,6 +553,7 @@ kgx_pages_class_init (KgxPagesClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, page_changed);
   gtk_widget_class_bind_template_callback (widget_class, page_attached);
   gtk_widget_class_bind_template_callback (widget_class, page_detached);
+  gtk_widget_class_bind_template_callback (widget_class, create_window);
 
   gtk_widget_class_set_css_name (widget_class, "pages");
 }

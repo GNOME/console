@@ -24,6 +24,7 @@
 #include "kgx-terminal.h"
 #include "kgx-process.h"
 #include "kgx-enums.h"
+#include "kgx-pages.h"
 
 G_BEGIN_DECLS
 
@@ -83,6 +84,7 @@ struct _KgxWindow
   char                 *working_dir;
   char                 *command;
   gboolean              close_on_zero;
+  gboolean              initially_empty;
 
   /* Size indicator */
   int                   last_cols;
@@ -107,5 +109,6 @@ G_DECLARE_FINAL_TYPE (KgxWindow, kgx_window, KGX, WINDOW, HdyApplicationWindow)
 char       *kgx_window_get_working_dir (KgxWindow    *self);
 void        kgx_window_show_status     (KgxWindow    *self,
                                         const char   *status);
+KgxPages   *kgx_window_get_pages       (KgxWindow    *self);
 
 G_END_DECLS
