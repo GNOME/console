@@ -15,6 +15,7 @@ Build-Depends:
  libvte-2.91-dev (>= 0.54.2),
  libgtop2-dev,
  meson,
+ valac,
 # Tests:
  gobject-introspection,
  libgirepository1.0-dev,
