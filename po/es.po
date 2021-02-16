@@ -2,14 +2,14 @@
 # Copyright (C) 2019 kgx's COPYRIGHT HOLDER
 # This file is distributed under the same license as the kgx package.
 # Rodrigo Lledó <rodhos92@gmail.com>, 2020.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2019-2020.
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2019-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2020-09-09 13:35+0000\n"
-"PO-Revision-Date: 2020-09-10 08:23+0200\n"
+"POT-Creation-Date: 2021-02-16 10:18+0000\n"
+"PO-Revision-Date: 2021-02-16 16:32+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 3.36.0\n"
+"X-Generator: Gtranslator 3.38.0\n"
 
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:439
-#: src/kgx-window.c:618 src/kgx-window.ui:102 src/main.c:38
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:442
+#: src/kgx-window.c:651 src/kgx-window.ui:102 src/main.c:38
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
@@ -40,8 +40,8 @@ msgstr "Terminal"
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
 msgstr "comando;prompt;cmd;línea;ejecutar;shell;terminal;kgx;"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:441
-#: src/kgx-window.c:609
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:444
+#: src/kgx-window.c:642
 msgid "Terminal Emulator"
 msgstr "Emulador de terminal"
 
@@ -73,21 +73,27 @@ msgid "New Tab"
 msgstr "Pestaña nueva"
 
 #: src/help-overlay.ui:33
+#| msgid "Close Terminal"
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Cerrar pestaña"
+
+#: src/help-overlay.ui:40
 msgctxt "shortcut window"
 msgid "Terminal"
 msgstr "Terminal"
 
-#: src/help-overlay.ui:39
+#: src/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Buscar"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:53
 msgctxt "shortcut window"
 msgid "Copy"
 msgstr "Copiar"
 
-#: src/help-overlay.ui:53
+#: src/help-overlay.ui:60
 msgctxt "shortcut window"
 msgid "Paste"
 msgstr "Pegar"
@@ -100,30 +106,30 @@ msgstr "monitor de los hijos"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:413
+#: src/kgx-application.c:416
 #, c-format
 msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgstr "# King’s Cross %s usando VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:425 src/kgx-window.c:601
+#: src/kgx-application.c:428 src/kgx-window.c:634
 #, c-format
 msgid "Copyright © %s Zander Brown"
 msgstr "Copyright © %s Zander Brown"
 
-#: src/kgx-application.c:545
+#: src/kgx-application.c:548
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Ejecutar el argumento de esta opción en la terminal"
 
-#: src/kgx-application.c:554
+#: src/kgx-application.c:557
 msgid "Set the working directory"
 msgstr "Establecer la carpeta de trabajo"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:556
+#: src/kgx-application.c:559
 msgid "DIRNAME"
 msgstr "NOMBRE_CARPETA"
 
-#: src/kgx-application.c:564
+#: src/kgx-application.c:567
 msgid "Wait until the child exits (TODO)"
 msgstr "Esperar a que el hijo termine (POR_HACER)"
 
@@ -150,17 +156,17 @@ msgid "_Paste"
 msgstr "_Pegar"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:608
+#: src/kgx-window.c:641
 msgid "translator-credits"
 msgstr "Daniel Mustieles <daniel.musiteles@gmail.com>, 2019"
 
 #. Translators: "by King’s Cross" here is meaning
 #. author or creator of 'Terminal'
-#: src/kgx-window.c:616
+#: src/kgx-window.c:649
 msgid "Terminal (King’s Cross)"
 msgstr "Terminal (King’s Cross)"
 
-#: src/kgx-window.c:681
+#: src/kgx-window.c:715
 msgid "_About Terminal"
 msgstr "_Acerca de Terminal"
 
