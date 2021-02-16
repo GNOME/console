@@ -12,6 +12,7 @@ debian:
     - apt -y upgrade
     - apt -y build-dep .
   script:
+    - meson subprojects download
     - dpkg-buildpackage -uc -us
     - cp ../*.deb .
   artifacts:
