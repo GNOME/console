@@ -2,27 +2,26 @@
 # Copyright (C) 2020 kgx's COPYRIGHT HOLDER
 # This file is distributed under the same license as the kgx package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2020.
+# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2020-05-28 23:21+0000\n"
-"PO-Revision-Date: 2020-05-29 11:42+0300\n"
+"POT-Creation-Date: 2021-02-16 10:18+0000\n"
+"PO-Revision-Date: 2021-02-16 12:26+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
-"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 20.07.70\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Lokalize 20.11.70\n"
 
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:440
-#: src/kgx-window.c:630 src/kgx-window.ui:98 src/main.c:38
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:442
+#: src/kgx-window.c:651 src/kgx-window.ui:102 src/main.c:38
 msgid "King’s Cross"
 msgstr "Кінгс-кросс"
 
@@ -44,8 +43,8 @@ msgstr ""
 "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;команда;"
 "запит;командний рядок;запустити;запуск;оболонка;термінал;"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:442
-#: src/kgx-window.c:621
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:444
+#: src/kgx-window.c:642
 msgid "Terminal Emulator"
 msgstr "Емулятор термінала"
 
@@ -77,57 +76,63 @@ msgid "New Tab"
 msgstr "Нова вкладка"
 
 #: src/help-overlay.ui:33
+#| msgid "Close Terminal"
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Закрити вкладку"
+
+#: src/help-overlay.ui:40
 msgctxt "shortcut window"
 msgid "Terminal"
 msgstr "Термінал"
 
-#: src/help-overlay.ui:39
+#: src/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Знайти"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:53
 msgctxt "shortcut window"
 msgid "Copy"
 msgstr "Копіювати"
 
-#: src/help-overlay.ui:53
+#: src/help-overlay.ui:60
 msgctxt "shortcut window"
 msgid "Paste"
 msgstr "Вставити"
 
 #. Translators: This is the name of the timeout that looks for programs
 #. running in the terminal
-#: src/kgx-application.c:269
+#: src/kgx-application.c:267
 msgid "child watcher"
 msgstr "дитячний наглядач"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:414
+#: src/kgx-application.c:416
 #, c-format
 msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgstr "# Кінгс-кросс %s з використанням VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:426 src/kgx-window.c:613
+#: src/kgx-application.c:428 src/kgx-window.c:634
 #, c-format
 msgid "Copyright © %s Zander Brown"
 msgstr "© Zander Brown, %s"
 
-#: src/kgx-application.c:546
+#: src/kgx-application.c:548
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Виконати аргумент цього параметра у терміналі"
 
-#: src/kgx-application.c:555
+#: src/kgx-application.c:557
 msgid "Set the working directory"
 msgstr "Встановити робочий каталог"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:557
+#: src/kgx-application.c:559
 msgid "DIRNAME"
 msgstr "НАЗВА_КАТАЛОГУ"
 
-#: src/kgx-application.c:565
+#: src/kgx-application.c:567
 msgid "Wait until the child exits (TODO)"
 msgstr "Очікувати на завершення дочірнього процесу (ЩЕ НЕ РЕАЛІЗОВАНО)"
 
@@ -154,17 +159,17 @@ msgid "_Paste"
 msgstr "Вст_авити"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:620
+#: src/kgx-window.c:641
 msgid "translator-credits"
 msgstr "Юрій Чорноіван <yurchor@ukr.net>"
 
 #. Translators: "by King’s Cross" here is meaning
 #. author or creator of 'Terminal'
-#: src/kgx-window.c:628
+#: src/kgx-window.c:649
 msgid "Terminal (King’s Cross)"
 msgstr "Термінал (Кінгс-кросс)"
 
-#: src/kgx-window.c:693
+#: src/kgx-window.c:715
 msgid "_About Terminal"
 msgstr "_Про «Термінал»"
 
@@ -196,15 +201,15 @@ msgstr "_Про «Кінгс-кросс»"
 msgid "About this program"
 msgstr "Про цю програму"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:110
 msgid "Find in terminal"
 msgstr "Знайти у терміналі"
 
-#: src/kgx-window.ui:124
+#: src/kgx-window.ui:128
 msgid "Menu"
 msgstr "Меню"
 
-#: src/kgx-window.ui:142
+#: src/kgx-window.ui:146
 msgid "New Tab"
 msgstr "Нова вкладка"
 
