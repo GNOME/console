@@ -35,11 +35,10 @@
     <xi:include href="xml/kgx-terminal.xml"/>
     <xi:include href="xml/kgx-process.xml"/>
     <xi:include href="xml/kgx-pages.xml"/>
-    <xi:include href="xml/kgx-pages-tab.xml"/>
     <chapter>
-      <title>Pages</title>
-      <xi:include href="xml/kgx-page.xml"/>
-      <xi:include href="xml/kgx-local-page.xml"/>
+      <title>Tabs</title>
+      <xi:include href="xml/kgx-tab.xml"/>
+      <xi:include href="xml/kgx-simple-tab.xml"/>
     </chapter>
     <chapter>
       <title>Confirm Close Dialog</title>
