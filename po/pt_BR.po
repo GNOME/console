@@ -1,15 +1,15 @@
 # Brazilian Portuguese translation for kgx.
-# Copyright (C) 2019 kgx's COPYRIGHT HOLDER
+# Copyright (C) 2021 kgx's COPYRIGHT HOLDER
 # This file is distributed under the same license as the kgx package.
-# Rafael Fontenelle <rafaelff@gnome.org>, 2019-2020.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2019-2021.
 # Enrico Nicoletto <liverig@gmail.com>, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-02-16 10:18+0000\n"
-"PO-Revision-Date: 2021-02-16 18:49-0300\n"
+"POT-Creation-Date: 2021-02-17 17:38+0000\n"
+"PO-Revision-Date: 2021-02-17 23:57-0300\n"
 "Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -136,6 +136,50 @@ msgstr "NOME-DIR"
 msgid "Wait until the child exits (TODO)"
 msgstr "Aguarda até o filho sair (ToDo)"
 
+#: src/kgx-close-dialog.ui:6
+msgid "Close Terminal"
+msgstr "Fechar o terminal"
+
+#: src/kgx-close-dialog.ui:25
+msgid ""
+"Some commands are still running, closing this terminal will kill them and "
+"may lead to unexpected outcomes"
+msgstr ""
+"Alguns comandos ainda estão em execução, de forma que fechar este terminal "
+"vai encerrá-los e pode levar a resultados inesperados"
+
+#: src/kgx-close-dialog.ui:56 src/kgx-terminal.c:421
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#: src/kgx-close-dialog.ui:64
+msgid "_OK"
+msgstr "_OK"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:119
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Somente leitura</b> — Comando encerrado com código %i"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:128
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Somente leitura</b> — Comando encerrado"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:160
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Falha ao iniciar</b> — %s"
+
+#: src/kgx-tab.c:914
+msgid "Command completed"
+msgstr "Comando concluído"
+
 #: src/kgx-terminal.c:413
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Você está colando um comando que executa como um administrador"
@@ -149,10 +193,6 @@ msgid ""
 msgstr ""
 "Certifique-se que você sabe o que o comando faz:\n"
 "%s"
-
-#: src/kgx-terminal.c:421 src/kgx-close-dialog.ui:56
-msgid "_Cancel"
-msgstr "_Cancelar"
 
 #: src/kgx-terminal.c:424 src/menus.ui:24
 msgid "_Paste"
@@ -240,31 +280,3 @@ msgstr "_Fechar"
 #: src/menus.ui:49
 msgid "_Detach"
 msgstr "_Desanexar"
-
-#: src/kgx-close-dialog.ui:6
-msgid "Close Terminal"
-msgstr "Fechar o terminal"
-
-#: src/kgx-close-dialog.ui:25
-msgid ""
-"Some commands are still running, closing this terminal will kill them and "
-"may lead to unexpected outcomes"
-msgstr ""
-"Alguns comandos ainda estão em execução, de forma que fechar este terminal "
-"vai encerrá-los e pode levar a resultados inesperados"
-
-#: src/kgx-close-dialog.ui:64
-msgid "_OK"
-msgstr "_OK"
-
-#~ msgid "<b>Read Only</b> — Command exited with code %i"
-#~ msgstr "<b>Somente leitura</b> — Comando encerrado com código %i"
-
-#~ msgid "<b>Read Only</b> — Command exited"
-#~ msgstr "<b>Somente leitura</b> — Comando encerrado"
-
-#~ msgid "<b>Failed to start</b> — %s"
-#~ msgstr "<b>Falha ao iniciar</b> — %s"
-
-#~ msgid "Command completed"
-#~ msgstr "Comando concluído"
