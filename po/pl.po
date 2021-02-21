@@ -1,15 +1,15 @@
 # Polish translation for kgx.
-# Copyright © 2019-2020 the kgx authors.
+# Copyright © 2019-2021 the kgx authors.
 # This file is distributed under the same license as the kgx package.
-# Piotr Drąg <piotrdrag@gmail.com>, 2019-2020.
-# Aviary.pl <community-poland@mozilla.org>, 2019-2020.
+# Piotr Drąg <piotrdrag@gmail.com>, 2019-2021.
+# Aviary.pl <community-poland@mozilla.org>, 2019-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2020-05-28 23:21+0000\n"
-"PO-Revision-Date: 2020-05-31 14:25+0200\n"
+"POT-Creation-Date: 2021-02-17 17:38+0000\n"
+"PO-Revision-Date: 2021-02-21 13:02+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -21,8 +21,8 @@ msgstr ""
 
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:440
-#: src/kgx-window.c:630 src/kgx-window.ui:98 src/main.c:38
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:442
+#: src/kgx-window.c:651 src/kgx-window.ui:102 src/main.c:38
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
@@ -44,8 +44,8 @@ msgstr ""
 "powłoka;shell;prompt;polecenie;komenda;wiersz poleceń;linia poleceń;wiersz "
 "komend;linia komend;cmd;konsola;terminal;kgx;kings cross;"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:442
-#: src/kgx-window.c:621
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:444
+#: src/kgx-window.c:642
 msgid "Terminal Emulator"
 msgstr "Emulator terminala"
 
@@ -78,58 +78,107 @@ msgstr "Nowa karta"
 
 #: src/help-overlay.ui:33
 msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Zamknięcie karty"
+
+#: src/help-overlay.ui:40
+msgctxt "shortcut window"
 msgid "Terminal"
 msgstr "Terminal"
 
-#: src/help-overlay.ui:39
+#: src/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Wyszukiwanie"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:53
 msgctxt "shortcut window"
 msgid "Copy"
 msgstr "Skopiowanie"
 
-#: src/help-overlay.ui:53
+#: src/help-overlay.ui:60
 msgctxt "shortcut window"
 msgid "Paste"
 msgstr "Wklejenie"
 
 #. Translators: This is the name of the timeout that looks for programs
 #. running in the terminal
-#: src/kgx-application.c:269
+#: src/kgx-application.c:267
 msgid "child watcher"
 msgstr "obserwator procesu potomnego"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:414
+#: src/kgx-application.c:416
 #, c-format
 msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgstr "# King’s Cross %s, używa biblioteki VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:426 src/kgx-window.c:613
+#: src/kgx-application.c:428 src/kgx-window.c:634
 #, c-format
 msgid "Copyright © %s Zander Brown"
 msgstr "Copyright © %s Zander Brown"
 
-#: src/kgx-application.c:546
+#: src/kgx-application.c:548
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Wykonuje parametr do tej opcji wewnątrz terminala"
 
-#: src/kgx-application.c:555
+#: src/kgx-application.c:557
 msgid "Set the working directory"
 msgstr "Ustawia katalog roboczy"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:557
+#: src/kgx-application.c:559
 msgid "DIRNAME"
 msgstr "NAZWA-KATALOGU"
 
-#: src/kgx-application.c:565
+#: src/kgx-application.c:567
 msgid "Wait until the child exits (TODO)"
 msgstr "Czeka, aż proces potomny zakończy działanie (niezaimplementowane)"
+
+#: src/kgx-close-dialog.ui:6
+msgid "Close Terminal"
+msgstr "Zamknąć terminal?"
+
+#: src/kgx-close-dialog.ui:25
+msgid ""
+"Some commands are still running, closing this terminal will kill them and "
+"may lead to unexpected outcomes"
+msgstr ""
+"W terminalu uruchomione są polecenia. Zamknięcie go spowoduje ich "
+"zakończenie i może doprowadzić do ich błędnego działania."
+
+#: src/kgx-close-dialog.ui:56 src/kgx-terminal.c:421
+msgid "_Cancel"
+msgstr "_Anuluj"
+
+#: src/kgx-close-dialog.ui:64
+msgid "_OK"
+msgstr "_OK"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:119
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Tylko do odczytu</b> — polecenie zakończyło działanie z kodem %i"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:128
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Tylko do odczytu</b> — polecenie zakończyło działanie"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:160
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Uruchomienie się nie powiodło</b> — %s"
+
+#: src/kgx-tab.c:914
+msgid "Command completed"
+msgstr "Ukończono polecenie"
 
 #: src/kgx-terminal.c:413
 msgid "You are pasting a command that runs as an administrator"
@@ -145,28 +194,24 @@ msgstr ""
 "Proszę się upewnić, że jest to właściwe polecenie:\n"
 "%s"
 
-#: src/kgx-terminal.c:421 src/kgx-close-dialog.ui:56
-msgid "_Cancel"
-msgstr "_Anuluj"
-
 #: src/kgx-terminal.c:424 src/menus.ui:24
 msgid "_Paste"
 msgstr "Wk_lej"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:620
+#: src/kgx-window.c:641
 msgid "translator-credits"
 msgstr ""
-"Piotr Drąg <piotrdrag@gmail.com>, 2019-2020\n"
-"Aviary.pl <community-poland@mozilla.org>, 2019-2020"
+"Piotr Drąg <piotrdrag@gmail.com>, 2019-2021\n"
+"Aviary.pl <community-poland@mozilla.org>, 2019-2021"
 
 #. Translators: "by King’s Cross" here is meaning
 #. author or creator of 'Terminal'
-#: src/kgx-window.c:628
+#: src/kgx-window.c:649
 msgid "Terminal (King’s Cross)"
 msgstr "Terminal (King’s Cross)"
 
-#: src/kgx-window.c:693
+#: src/kgx-window.c:715
 msgid "_About Terminal"
 msgstr "_O programie"
 
@@ -198,15 +243,15 @@ msgstr "_O programie"
 msgid "About this program"
 msgstr "Informacje o tym programie"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:110
 msgid "Find in terminal"
 msgstr "Wyszukuje w terminalu"
 
-#: src/kgx-window.ui:124
+#: src/kgx-window.ui:128
 msgid "Menu"
 msgstr "Menu"
 
-#: src/kgx-window.ui:142
+#: src/kgx-window.ui:146
 msgid "New Tab"
 msgstr "Nowa karta"
 
@@ -237,19 +282,3 @@ msgstr "Za_mknij"
 #: src/menus.ui:49
 msgid "_Detach"
 msgstr "_Odłącz"
-
-#: src/kgx-close-dialog.ui:6
-msgid "Close Terminal"
-msgstr "Zamknąć terminal?"
-
-#: src/kgx-close-dialog.ui:25
-msgid ""
-"Some commands are still running, closing this terminal will kill them and "
-"may lead to unexpected outcomes"
-msgstr ""
-"W terminalu uruchomione są polecenia. Zamknięcie go spowoduje ich "
-"zakończenie i może doprowadzić do ich błędnego działania."
-
-#: src/kgx-close-dialog.ui:64
-msgid "_OK"
-msgstr "_OK"
