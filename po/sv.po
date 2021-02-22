@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-02-16 10:18+0000\n"
-"PO-Revision-Date: 2021-02-16 22:50+0100\n"
+"POT-Creation-Date: 2021-02-17 17:38+0000\n"
+"PO-Revision-Date: 2021-02-22 22:23+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -131,6 +131,50 @@ msgstr "KATNAMN"
 msgid "Wait until the child exits (TODO)"
 msgstr "Vänta tills barnet avslutar (TODO)"
 
+#: src/kgx-close-dialog.ui:6
+msgid "Close Terminal"
+msgstr "Stäng terminal"
+
+#: src/kgx-close-dialog.ui:25
+msgid ""
+"Some commands are still running, closing this terminal will kill them and "
+"may lead to unexpected outcomes"
+msgstr ""
+"Några kommandon körs ännu, att stänga denna terminal kommer att döda dem och "
+"kan leda till oväntade resultat"
+
+#: src/kgx-close-dialog.ui:56 src/kgx-terminal.c:421
+msgid "_Cancel"
+msgstr "A_vbryt"
+
+#: src/kgx-close-dialog.ui:64
+msgid "_OK"
+msgstr "_OK"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:119
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Skrivskyddad</b> — Kommando avslutades med kod %i"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:128
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Skrivskyddad</b> — Kommando avslutades"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:160
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Misslyckades med att starta</b> — %s"
+
+#: src/kgx-tab.c:914
+msgid "Command completed"
+msgstr "Kommando slutfört"
+
 #: src/kgx-terminal.c:413
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Du klistrar in ett kommando som körs som en administratör"
@@ -144,10 +188,6 @@ msgid ""
 msgstr ""
 "Säkerställ att du vet vad kommandot gör:\n"
 "%s"
-
-#: src/kgx-terminal.c:421 src/kgx-close-dialog.ui:56
-msgid "_Cancel"
-msgstr "A_vbryt"
 
 #: src/kgx-terminal.c:424 src/menus.ui:24
 msgid "_Paste"
@@ -239,19 +279,3 @@ msgstr "S_täng"
 #: src/menus.ui:49
 msgid "_Detach"
 msgstr "_Koppla loss"
-
-#: src/kgx-close-dialog.ui:6
-msgid "Close Terminal"
-msgstr "Stäng terminal"
-
-#: src/kgx-close-dialog.ui:25
-msgid ""
-"Some commands are still running, closing this terminal will kill them and "
-"may lead to unexpected outcomes"
-msgstr ""
-"Några kommandon körs ännu, att stänga denna terminal kommer att döda dem och "
-"kan leda till oväntade resultat"
-
-#: src/kgx-close-dialog.ui:64
-msgid "_OK"
-msgstr "_OK"
