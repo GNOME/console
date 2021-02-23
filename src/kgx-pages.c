@@ -642,14 +642,13 @@ kgx_pages_add_page (KgxPages *self,
                     KgxTab   *tab)
 {
   KgxPagesPrivate *priv;
-  HdyTabPage *page, *parent;
-  
+  HdyTabPage *page;
+
   g_return_if_fail (KGX_IS_PAGES (self));
 
   priv = kgx_pages_get_instance_private (self);
-  parent = hdy_tab_view_get_selected_page (HDY_TAB_VIEW (priv->view));
 
-  page = hdy_tab_view_add_page (HDY_TAB_VIEW (priv->view), GTK_WIDGET (tab), parent);
+  page = hdy_tab_view_add_page (HDY_TAB_VIEW (priv->view), GTK_WIDGET (tab), NULL);
   g_object_bind_property (tab, "tab-title", page, "title", G_BINDING_SYNC_CREATE);
   g_object_bind_property (tab, "tab-tooltip", page, "tooltip", G_BINDING_SYNC_CREATE);
 }
