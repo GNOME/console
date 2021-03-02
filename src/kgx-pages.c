@@ -411,6 +411,25 @@ create_window (HdyTabView *view,
 }
 
 
+static gboolean
+status_to_icon (GBinding     *binding,
+                const GValue *from_value,
+                GValue       *to_value,
+                gpointer      user_data)
+{
+  KgxStatus status = g_value_get_flags (from_value);
+
+  if (status & KGX_REMOTE)
+    g_value_take_object (to_value, g_themed_icon_new ("status-remote-symbolic"));
+  else if (status & KGX_PRIVILEGED)
+    g_value_take_object (to_value, g_themed_icon_new ("status-privileged-symbolic"));
+  else
+    g_value_set_object (to_value, NULL);
+
+  return TRUE;
+}
+
+
 static void
 kgx_pages_class_init (KgxPagesClass *klass)
 {
@@ -652,6 +671,8 @@ kgx_pages_add_page (KgxPages *self,
   g_object_bind_property (tab, "tab-title", page, "title", G_BINDING_SYNC_CREATE);
   g_object_bind_property (tab, "tab-tooltip", page, "tooltip", G_BINDING_SYNC_CREATE);
   g_object_bind_property (tab, "needs-attention", page, "needs-attention", G_BINDING_SYNC_CREATE);
+  g_object_bind_property_full (tab, "tab-status", page, "icon", G_BINDING_SYNC_CREATE,
+                               status_to_icon, NULL, NULL, NULL);
 }
 
 
