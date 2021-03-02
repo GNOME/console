@@ -14,6 +14,7 @@
             <signal name="page-attached" handler="page_attached" swapped="no"/>
             <signal name="page-detached" handler="page_detached" swapped="no"/>
             <signal name="create-window" handler="create_window" swapped="no"/>
+            <signal name="close-page" handler="close_page" swapped="no"/>
           </object>
         </child>
       </object>

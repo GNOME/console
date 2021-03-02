@@ -28,6 +28,7 @@
 
 #include <glib/gi18n.h>
 
+#include "kgx-close-dialog.h"
 #include "kgx-config.h"
 #include "kgx-pages.h"
 #include "kgx-tab.h"
@@ -411,6 +412,59 @@ create_window (HdyTabView *view,
 }
 
 
+static void
+close_response (GtkWidget  *dlg,
+                int         response,
+                HdyTabPage *page)
+{
+  KgxTab *tab = KGX_TAB (hdy_tab_page_get_child (page));
+  KgxPages *self = kgx_tab_get_pages (tab);
+  KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
+
+  gtk_widget_destroy (dlg);
+
+  hdy_tab_view_close_page_finish (HDY_TAB_VIEW (priv->view), page,
+                                  response == GTK_RESPONSE_OK);
+}
+
+
+static gboolean
+close_page (HdyTabView *view,
+            HdyTabPage *page,
+            KgxPages   *self)
+{
+  GtkWidget *dlg;
+  g_autoptr (GPtrArray) children = NULL;
+  GtkWidget *toplevel;
+
+  children = kgx_tab_get_children (KGX_TAB (hdy_tab_page_get_child (page)));
+
+  if (children->len < 1) {
+    return FALSE; // Aka no, I don't want to block closing
+  }
+
+  toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+
+  dlg = g_object_new (KGX_TYPE_CLOSE_DIALOG,
+                      "transient-for", toplevel,
+                      "use-header-bar", TRUE,
+                      NULL);
+
+  g_signal_connect (dlg, "response", G_CALLBACK (close_response), page);
+
+  for (int i = 0; i < children->len; i++) {
+    KgxProcess *process = g_ptr_array_steal_index (children, i);
+
+    kgx_close_dialog_add_command (KGX_CLOSE_DIALOG (dlg),
+                                  kgx_process_get_exec (process));
+  }
+
+  gtk_widget_show (dlg);
+
+  return TRUE; // Block the close
+}
+
+
 static gboolean
 status_to_icon (GBinding     *binding,
                 const GValue *from_value,
@@ -576,6 +630,7 @@ kgx_pages_class_init (KgxPagesClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, page_attached);
   gtk_widget_class_bind_template_callback (widget_class, page_detached);
   gtk_widget_class_bind_template_callback (widget_class, create_window);
+  gtk_widget_class_bind_template_callback (widget_class, close_page);
 
   gtk_widget_class_set_css_name (widget_class, "pages");
 }
