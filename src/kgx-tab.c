@@ -52,6 +52,7 @@ struct _KgxTabPrivate {
   KgxTheme              theme;
   gboolean              opaque;
   gboolean              close_on_quit;
+  gboolean              needs_attention;
 
   KgxTerminal          *terminal;
   gulong                term_size_handler;
@@ -97,6 +98,7 @@ enum {
   PROP_IS_ACTIVE,
   PROP_OPAQUE,
   PROP_CLOSE_ON_QUIT,
+  PROP_NEEDS_ATTENTION,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -153,6 +155,9 @@ kgx_tab_get_property (GObject    *object,
       break;
     case PROP_CLOSE_ON_QUIT:
       g_value_set_boolean (value, priv->close_on_quit);
+      break;
+    case PROP_NEEDS_ATTENTION:
+      g_value_set_boolean (value, priv->needs_attention);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -214,6 +219,9 @@ kgx_tab_set_property (GObject      *object,
     case PROP_CLOSE_ON_QUIT:
       priv->close_on_quit = g_value_get_boolean (value);
       break;
+    case PROP_NEEDS_ATTENTION:
+      priv->needs_attention = g_value_get_boolean (value);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -237,6 +245,15 @@ kgx_tab_finalize (GObject *object)
   g_clear_object (&priv->application);
 
   g_clear_pointer (&priv->notification_id, g_free);
+}
+
+
+static void
+kgx_tab_map (GtkWidget *widget)
+{
+  GTK_WIDGET_CLASS (kgx_tab_parent_class)->map (widget);
+
+  g_object_set (widget, "needs-attention", FALSE, NULL);
 }
 
 
@@ -270,6 +287,8 @@ kgx_tab_class_init (KgxTabClass *klass)
   object_class->get_property = kgx_tab_get_property;
   object_class->set_property = kgx_tab_set_property;
   object_class->finalize = kgx_tab_finalize;
+
+  widget_class->map = kgx_tab_map;
 
   tab_class->start = kgx_tab_real_start;
   tab_class->start_finish = kgx_tab_real_start_finish;
@@ -393,6 +412,12 @@ kgx_tab_class_init (KgxTabClass *klass)
   pspecs[PROP_CLOSE_ON_QUIT] =
     g_param_spec_boolean ("close-on-quit", "Close on quit",
                           "Should the tab close when dead",
+                          FALSE,
+                          G_PARAM_READWRITE);
+
+  pspecs[PROP_NEEDS_ATTENTION] =
+    g_param_spec_boolean ("needs-attention", "Needs attention",
+                          "Whether the tab needs attention",
                           FALSE,
                           G_PARAM_READWRITE);
 
@@ -922,6 +947,9 @@ kgx_tab_pop_child (KgxTab     *self,
     g_application_send_notification (G_APPLICATION (priv->application),
                                      priv->notification_id,
                                      noti);
+
+    if (!gtk_widget_get_mapped (GTK_WIDGET (self)))
+      g_object_set (self, "needs-attention", TRUE, NULL);
   }
 }
 

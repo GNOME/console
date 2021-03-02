@@ -651,6 +651,7 @@ kgx_pages_add_page (KgxPages *self,
   page = hdy_tab_view_add_page (HDY_TAB_VIEW (priv->view), GTK_WIDGET (tab), NULL);
   g_object_bind_property (tab, "tab-title", page, "title", G_BINDING_SYNC_CREATE);
   g_object_bind_property (tab, "tab-tooltip", page, "tooltip", G_BINDING_SYNC_CREATE);
+  g_object_bind_property (tab, "needs-attention", page, "needs-attention", G_BINDING_SYNC_CREATE);
 }
 
 
