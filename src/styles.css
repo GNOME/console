@@ -63,3 +63,7 @@
   border-top: 2px solid #ed333b;
   background: rgba(104, 13, 13, 0.96);
 }
+
+label.numeric {
+  font-feature-settings: "tnum";
+}

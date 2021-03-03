@@ -25,6 +25,7 @@
         <property name="label">WxH</property>
         <style>
           <class name="floating-bar"/>
+          <class name="numeric"/>
         </style>
       </object>
     </child>
