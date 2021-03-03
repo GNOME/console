@@ -611,6 +611,8 @@ kgx_terminal_init (KgxTerminal *self)
   vte_terminal_set_mouse_autohide (VTE_TERMINAL (self), TRUE);
   vte_terminal_search_set_wrap_around (VTE_TERMINAL (self), TRUE);
   vte_terminal_set_allow_hyperlink (VTE_TERMINAL (self), TRUE);
+  vte_terminal_set_enable_fallback_scrolling (VTE_TERMINAL (self), FALSE);
+  vte_terminal_set_scroll_unit_is_pixels (VTE_TERMINAL (self), TRUE);
 
   g_signal_connect (self, "selection-changed",
                     G_CALLBACK (selection_changed), NULL);
