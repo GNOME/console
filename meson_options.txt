@@ -23,3 +23,8 @@ option('tests',
        type: 'boolean',
        value: false,
        description: 'Enable tests')
+
+option('sassc',
+       type: 'feature',
+       value: 'auto',
+       description: 'Rebuild styles using sassc')

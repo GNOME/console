@@ -1,0 +1,3 @@
+@function themecolor($s) {
+  @return unquote("@" + "#{$s}");
+}

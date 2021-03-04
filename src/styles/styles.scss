@@ -23,10 +23,10 @@
 /* Taken from nautilus */
 .floating-bar {
   padding: 6px;
-  background-color: @theme_base_color;
+  background-color: themecolor(theme_base_color);
   border-width: 1px;
   border-style: solid solid none;
-  border-color: @borders;
+  border-color: themecolor(borders);
   border-radius: 3px 3px 0 0;
 }
 
@@ -40,14 +40,14 @@
 }
 
 .floating-bar:backdrop {
-  background-color: @theme_unfocused_base_color;
-  border-color: @unfocused_borders;
+  background-color: themecolor(theme_unfocused_base_color);
+  border-color: themecolor(unfocused_borders);
 }
 
 .floating-bar button {
   padding: 0px;
 }
-  
+
 .exit-info {
   padding: 6px;
   border-top: 2px solid #1e78e4;

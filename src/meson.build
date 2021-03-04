@@ -1,3 +1,5 @@
+subdir('styles')
+
 kgx_sources = [
   'kgx-application.c',
   'kgx-application.h',
@@ -47,7 +49,8 @@ gnome = import('gnome')
 
 kgx_sources += gnome.compile_resources('kgx-resources',
   'kgx.gresource.xml',
-  c_name: 'kgx'
+  c_name: 'kgx',
+  dependencies: style_deps
 )
 
 kgx_sources += gnome.mkenums_simple('kgx-enums',
@@ -121,3 +124,4 @@ executable('kgx', 'main.c',
   install_rpath: pkglibdir,
   gui_app: true,
 )
+
