@@ -345,45 +345,6 @@ active_changed (GObject *object, GParamSpec *pspec, gpointer data)
 
 
 static void
-search_enabled (GObject    *object,
-                GParamSpec *pspec,
-                KgxWindow  *self)
-{
-  if (!hdy_search_bar_get_search_mode (HDY_SEARCH_BAR (self->search_bar))) {
-    kgx_pages_focus_terminal (KGX_PAGES (self->pages));
-  }
-}
-
-
-static void
-search_changed (HdySearchBar *bar,
-                KgxWindow    *self)
-{
-  const char *search = NULL;
-
-  search = gtk_entry_get_text (GTK_ENTRY (self->search_entry));
-
-  kgx_pages_search (KGX_PAGES (self->pages), search);
-}
-
-
-static void
-search_next (HdySearchBar *bar,
-             KgxWindow    *self)
-{
-  kgx_pages_search_forward (KGX_PAGES (self->pages));
-}
-
-
-static void
-search_prev (HdySearchBar *bar,
-             KgxWindow    *self)
-{
-  kgx_pages_search_back (KGX_PAGES (self->pages));
-}
-
-
-static void
 zoom (KgxPages  *pages,
       KgxZoom    dir,
       KgxWindow *self)
@@ -514,8 +475,6 @@ kgx_window_class_init (KgxWindowClass *klass)
                                                RES_PATH "kgx-window.ui");
 
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, header_bar);
-  gtk_widget_class_bind_template_child (widget_class, KgxWindow, search_entry);
-  gtk_widget_class_bind_template_child (widget_class, KgxWindow, search_bar);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_info);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_message);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, zoom_level);
@@ -523,11 +482,6 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, pages);
 
   gtk_widget_class_bind_template_callback (widget_class, active_changed);
-
-  gtk_widget_class_bind_template_callback (widget_class, search_enabled);
-  gtk_widget_class_bind_template_callback (widget_class, search_changed);
-  gtk_widget_class_bind_template_callback (widget_class, search_next);
-  gtk_widget_class_bind_template_callback (widget_class, search_prev);
 
   gtk_widget_class_bind_template_callback (widget_class, zoom);
   gtk_widget_class_bind_template_callback (widget_class, status_changed);
@@ -725,7 +679,7 @@ kgx_window_init (KgxWindow *self)
   self->close_on_zero = TRUE;
 
   pact = g_property_action_new ("find",
-                                G_OBJECT (self->search_bar),
+                                G_OBJECT (self->pages),
                                 "search-mode-enabled");
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (pact));
 
@@ -746,9 +700,6 @@ kgx_window_init (KgxWindow *self)
   g_object_bind_property (self, "is-maximized",
                           self->pages, "opaque",
                           G_BINDING_SYNC_CREATE);
-
-  hdy_search_bar_connect_entry (HDY_SEARCH_BAR (self->search_bar),
-                                GTK_ENTRY (self->search_entry));
 }
 
 

@@ -85,10 +85,6 @@ guint       kgx_tab_get_id           (KgxTab               *self);
 void        kgx_tab_connect_terminal (KgxTab               *self,
                                       KgxTerminal          *term);
 void        kgx_tab_focus_terminal   (KgxTab               *self);
-void        kgx_tab_search_forward   (KgxTab               *self);
-void        kgx_tab_search_back      (KgxTab               *self);
-void        kgx_tab_search           (KgxTab               *self,
-                                      const char           *search);
 void        kgx_tab_start            (KgxTab               *self,
                                       GAsyncReadyCallback   callback,
                                       gpointer              callback_data);

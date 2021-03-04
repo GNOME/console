@@ -53,6 +53,7 @@ struct _KgxTabPrivate {
   gboolean              opaque;
   gboolean              close_on_quit;
   gboolean              needs_attention;
+  gboolean              search_mode_enabled;
 
   KgxTerminal          *terminal;
   gulong                term_size_handler;
@@ -72,6 +73,8 @@ struct _KgxTabPrivate {
 
   GtkWidget            *revealer;
   GtkWidget            *label;
+  GtkWidget            *search_entry;
+  GtkWidget            *search_bar;
 
   /* Remote/root states */
   GHashTable           *root;
@@ -99,6 +102,7 @@ enum {
   PROP_OPAQUE,
   PROP_CLOSE_ON_QUIT,
   PROP_NEEDS_ATTENTION,
+  PROP_SEARCH_MODE_ENABLED,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -111,6 +115,62 @@ enum {
   N_SIGNALS
 };
 static guint signals[N_SIGNALS];
+
+
+static void
+search_enabled (GObject    *object,
+                GParamSpec *pspec,
+                KgxTab     *self)
+{
+  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
+
+  if (!hdy_search_bar_get_search_mode (HDY_SEARCH_BAR (priv->search_bar))) {
+    kgx_tab_focus_terminal (self);
+  }
+}
+
+
+static void
+search_changed (HdySearchBar *bar,
+                KgxTab       *self)
+{
+  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
+  const char *search = NULL;
+  VteRegex *regex;
+  g_autoptr (GError) error = NULL;
+
+  search = gtk_entry_get_text (GTK_ENTRY (priv->search_entry));
+  regex = vte_regex_new_for_search (g_regex_escape_string (search, -1),
+                                    -1, PCRE2_MULTILINE, &error);
+
+  if (error) {
+    g_warning ("Search error: %s", error->message);
+    return;
+  }
+
+  vte_terminal_search_set_regex (VTE_TERMINAL (priv->terminal),
+                                 regex, 0);
+}
+
+
+static void
+search_next (HdySearchBar *bar,
+             KgxTab       *self)
+{
+  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
+
+  vte_terminal_search_find_next (VTE_TERMINAL (priv->terminal));
+}
+
+
+static void
+search_prev (HdySearchBar *bar,
+             KgxTab       *self)
+{
+  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
+
+  vte_terminal_search_find_previous (VTE_TERMINAL (priv->terminal));
+}
 
 
 static void
@@ -158,6 +218,9 @@ kgx_tab_get_property (GObject    *object,
       break;
     case PROP_NEEDS_ATTENTION:
       g_value_set_boolean (value, priv->needs_attention);
+      break;
+    case PROP_SEARCH_MODE_ENABLED:
+      g_value_set_boolean (value, priv->search_mode_enabled);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -221,6 +284,9 @@ kgx_tab_set_property (GObject      *object,
       break;
     case PROP_NEEDS_ATTENTION:
       priv->needs_attention = g_value_get_boolean (value);
+      break;
+    case PROP_SEARCH_MODE_ENABLED:
+      priv->search_mode_enabled = g_value_get_boolean (value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -421,6 +487,12 @@ kgx_tab_class_init (KgxTabClass *klass)
                           FALSE,
                           G_PARAM_READWRITE);
 
+  pspecs[PROP_SEARCH_MODE_ENABLED] =
+    g_param_spec_boolean ("search-mode-enabled", "Search mode enabled",
+                          "Whether the search mode is enabled for active page",
+                          FALSE,
+                          G_PARAM_READWRITE);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   signals[SIZE_CHANGED] = g_signal_new ("size-changed",
@@ -455,6 +527,13 @@ kgx_tab_class_init (KgxTabClass *klass)
 
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, revealer);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, label);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, search_entry);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, search_bar);
+
+  gtk_widget_class_bind_template_callback (widget_class, search_enabled);
+  gtk_widget_class_bind_template_callback (widget_class, search_changed);
+  gtk_widget_class_bind_template_callback (widget_class, search_next);
+  gtk_widget_class_bind_template_callback (widget_class, search_prev);
 }
 
 
@@ -564,6 +643,9 @@ kgx_tab_init (KgxTab *self)
 
   g_signal_connect (self, "parent-set", G_CALLBACK (parent_set), NULL);
   g_signal_connect (self, "died", G_CALLBACK (died), NULL);
+
+  hdy_search_bar_connect_entry (HDY_SEARCH_BAR (priv->search_bar),
+                                GTK_ENTRY (priv->search_entry));
 }
 
 
@@ -676,62 +758,6 @@ kgx_tab_focus_terminal (KgxTab *self)
   priv = kgx_tab_get_instance_private (self);
 
   gtk_widget_grab_focus (GTK_WIDGET (priv->terminal));
-}
-
-
-void
-kgx_tab_search_forward (KgxTab *self)
-{
-  KgxTabPrivate *priv;
-
-  g_return_if_fail (KGX_IS_TAB (self));
-  
-  priv = kgx_tab_get_instance_private (self);
-
-  g_return_if_fail (priv->terminal);
-
-  vte_terminal_search_find_next (VTE_TERMINAL (priv->terminal));
-}
-
-
-void
-kgx_tab_search_back (KgxTab *self)
-{
-  KgxTabPrivate *priv;
-
-  g_return_if_fail (KGX_IS_TAB (self));
-  
-  priv = kgx_tab_get_instance_private (self);
-
-  g_return_if_fail (priv->terminal);
-
-  vte_terminal_search_find_previous (VTE_TERMINAL (priv->terminal));
-}
-
-void
-kgx_tab_search (KgxTab     *self,
-                const char *search)
-{
-  KgxTabPrivate *priv;
-  VteRegex *regex;
-  g_autoptr (GError) error = NULL;
-
-  g_return_if_fail (KGX_IS_TAB (self));
-  
-  priv = kgx_tab_get_instance_private (self);
-
-  g_return_if_fail (priv->terminal);
-
-  regex = vte_regex_new_for_search (g_regex_escape_string (search, -1),
-                                    -1, PCRE2_MULTILINE, &error);
-
-  if (error) {
-    g_warning ("Search error: %s", error->message);
-    return;
-  }
-
-  vte_terminal_search_set_regex (VTE_TERMINAL (priv->terminal),
-                                 regex, 0);
 }
 
 

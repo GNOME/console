@@ -64,6 +64,9 @@ struct _KgxPagesPrivate {
   gboolean              is_active;
   GBinding             *is_active_bind;
 
+  gboolean              search_mode_enabled;
+  GBinding             *search_bind;
+
   PangoFontDescription *font;
   double                zoom;
   KgxTheme              theme;
@@ -86,6 +89,7 @@ enum {
   PROP_ZOOM,
   PROP_IS_ACTIVE,
   PROP_STATUS,
+  PROP_SEARCH_MODE_ENABLED,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -137,6 +141,9 @@ kgx_pages_get_property (GObject    *object,
       break;
     case PROP_STATUS:
       g_value_set_flags (value, priv->page_status);
+      break;
+    case PROP_SEARCH_MODE_ENABLED:
+      g_value_set_boolean (value, priv->search_mode_enabled);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -191,6 +198,9 @@ kgx_pages_set_property (GObject      *object,
       break;
     case PROP_STATUS:
       priv->page_status = g_value_get_flags (value);
+      break;
+    case PROP_SEARCH_MODE_ENABLED:
+      priv->search_mode_enabled = g_value_get_boolean (value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -295,6 +305,13 @@ page_changed (GObject *object, GParamSpec *pspec, KgxPages *self)
                                                    self,
                                                    "status",
                                                    G_BINDING_SYNC_CREATE);
+
+  g_clear_object (&priv->search_bind);
+  priv->search_bind = g_object_bind_property (tab,
+                                              "search-mode-enabled",
+                                              self,
+                                              "search-mode-enabled",
+                                              G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
   priv->active_page = KGX_TAB (tab);
 }
@@ -609,6 +626,12 @@ kgx_pages_class_init (KgxPagesClass *klass)
                         KGX_NONE,
                         G_PARAM_READWRITE);
 
+  pspecs[PROP_SEARCH_MODE_ENABLED] =
+    g_param_spec_boolean ("search-mode-enabled", "Search mode enabled",
+                          "Whether the search mode is enabled for active page",
+                          FALSE,
+                          G_PARAM_READWRITE);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   signals[ZOOM] = g_signal_new ("zoom",
@@ -647,67 +670,6 @@ kgx_pages_init (KgxPages *self)
   priv->opaque = FALSE;
 
   gtk_widget_init_template (GTK_WIDGET (self));
-}
-
-
-void
-kgx_pages_focus_terminal (KgxPages *self)
-{
-  KgxPagesPrivate *priv;
-  
-  g_return_if_fail (KGX_IS_PAGES (self));
-
-  priv = kgx_pages_get_instance_private (self);
-
-  g_return_if_fail (priv->active_page);
-
-  kgx_tab_focus_terminal (priv->active_page);
-}
-
-
-void
-kgx_pages_search_forward (KgxPages *self)
-{
-  KgxPagesPrivate *priv;
-  
-  g_return_if_fail (KGX_IS_PAGES (self));
-
-  priv = kgx_pages_get_instance_private (self);
-
-  g_return_if_fail (priv->active_page);
-
-  kgx_tab_search_forward (priv->active_page);
-}
-
-
-void
-kgx_pages_search_back (KgxPages *self)
-{
-  KgxPagesPrivate *priv;
-  
-  g_return_if_fail (KGX_IS_PAGES (self));
-
-  priv = kgx_pages_get_instance_private (self);
-
-  g_return_if_fail (priv->active_page);
-
-  kgx_tab_search_back (priv->active_page);
-}
-
-
-void
-kgx_pages_search (KgxPages   *self,
-                  const char *search)
-{
-  KgxPagesPrivate *priv;
-  
-  g_return_if_fail (KGX_IS_PAGES (self));
-
-  priv = kgx_pages_get_instance_private (self);
-
-  g_return_if_fail (priv->active_page);
-
-  kgx_tab_search (priv->active_page, search);
 }
 
 

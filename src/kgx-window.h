@@ -95,8 +95,6 @@ struct _KgxWindow
 
   /* Template widgets */
   GtkWidget            *header_bar;
-  GtkWidget            *search_entry;
-  GtkWidget            *search_bar;
   GtkWidget            *exit_info;
   GtkWidget            *exit_message;
   GtkWidget            *zoom_level;

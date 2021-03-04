@@ -43,11 +43,6 @@ struct _KgxPagesClass
 G_DECLARE_DERIVABLE_TYPE (KgxPages, kgx_pages, KGX, PAGES, GtkOverlay)
 
 
-void        kgx_pages_focus_terminal (KgxPages   *self);
-void        kgx_pages_search_forward (KgxPages   *self);
-void        kgx_pages_search_back    (KgxPages   *self);
-void        kgx_pages_search         (KgxPages   *self,
-                                      const char *search);
 void        kgx_pages_add_page       (KgxPages   *self,
                                       KgxTab     *page);
 void        kgx_pages_remove_page    (KgxPages   *self,
