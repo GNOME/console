@@ -15,11 +15,14 @@
   }
 
   scrolledwindow overshoot {
-    undershoot.top,
-    undershoot.bottom,
-    overshoot.top,
-    overshoot.bottom {
-      background: none;
+    $sides: "top", "bottom", "left", "right";
+
+    @each $side in $sides {
+      &.#{$side} {
+        @include overshoot($side, normal, #cccccc);
+
+        &:backdrop { @include overshoot($side, backdrop, #cccccc); }
+      }
     }
   }
 }
