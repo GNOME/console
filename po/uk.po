@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-02-16 10:18+0000\n"
-"PO-Revision-Date: 2021-02-16 12:26+0200\n"
+"POT-Creation-Date: 2021-03-04 18:14+0000\n"
+"PO-Revision-Date: 2021-03-04 20:34+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -21,7 +21,7 @@ msgstr ""
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in:4
 #: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:442
-#: src/kgx-window.c:651 src/kgx-window.ui:102 src/main.c:38
+#: src/kgx-window.c:607 src/kgx-window.ui:102 src/main.c:38
 msgid "King’s Cross"
 msgstr "Кінгс-кросс"
 
@@ -44,7 +44,7 @@ msgstr ""
 "запит;командний рядок;запустити;запуск;оболонка;термінал;"
 
 #: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:444
-#: src/kgx-window.c:642
+#: src/kgx-window.c:595
 msgid "Terminal Emulator"
 msgstr "Емулятор термінала"
 
@@ -76,7 +76,6 @@ msgid "New Tab"
 msgstr "Нова вкладка"
 
 #: src/help-overlay.ui:33
-#| msgid "Close Terminal"
 msgctxt "shortcut window"
 msgid "Close Tab"
 msgstr "Закрити вкладку"
@@ -114,10 +113,16 @@ msgstr "дитячний наглядач"
 msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgstr "# Кінгс-кросс %s з використанням VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:428 src/kgx-window.c:634
+#: src/kgx-application.c:428 src/kgx-window.c:588
 #, c-format
-msgid "Copyright © %s Zander Brown"
+#| msgid "Zander Brown"
+msgid "© %s Zander Brown"
 msgstr "© Zander Brown, %s"
+
+#: src/kgx-application.c:446
+msgid "GPL 3.0 or later"
+msgstr ""
+"GPL 3.0 або новіша"
 
 #: src/kgx-application.c:548
 msgid "Execute the argument to this option inside the terminal"
@@ -136,6 +141,51 @@ msgstr "НАЗВА_КАТАЛОГУ"
 msgid "Wait until the child exits (TODO)"
 msgstr "Очікувати на завершення дочірнього процесу (ЩЕ НЕ РЕАЛІЗОВАНО)"
 
+#: src/kgx-close-dialog.ui:6
+msgid "Close Terminal"
+msgstr "Закрити «Термінал»"
+
+#: src/kgx-close-dialog.ui:25
+msgid ""
+"Some commands are still running, closing this terminal will kill them and "
+"may lead to unexpected outcomes"
+msgstr ""
+"Виконання якихось із команд ще не завершено. Закриття вікна термінала "
+"призведе до аварійного завершення роботи цих команд і може мати "
+"непередбачувані наслідки."
+
+#: src/kgx-close-dialog.ui:56 src/kgx-terminal.c:421
+msgid "_Cancel"
+msgstr "_Скасувати"
+
+#: src/kgx-close-dialog.ui:64
+msgid "_OK"
+msgstr "_Гаразд"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:119
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Лише читання</b> — виконання команди завершено із кодом %i"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:128
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Лише читання</b> — виконання команди завершено"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:160
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Не вдалося запустити</b> – %s"
+
+#: src/kgx-tab.c:965
+msgid "Command completed"
+msgstr "Виконання команди завершено"
+
 #: src/kgx-terminal.c:413
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Ви вставили команду, яку слід запускати від імені адміністратора"
@@ -150,26 +200,25 @@ msgstr ""
 "Переконайтеся у тому, що вам відомі наслідки виконання команди:\n"
 "%s"
 
-#: src/kgx-terminal.c:421 src/kgx-close-dialog.ui:56
-msgid "_Cancel"
-msgstr "_Скасувати"
-
 #: src/kgx-terminal.c:424 src/menus.ui:24
 msgid "_Paste"
 msgstr "Вст_авити"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:641
+#: src/kgx-window.c:594
 msgid "translator-credits"
 msgstr "Юрій Чорноіван <yurchor@ukr.net>"
 
-#. Translators: "by King’s Cross" here is meaning
-#. author or creator of 'Terminal'
-#: src/kgx-window.c:649
+#. Translators: “King’s Cross” here is to distinguish from
+#. * gnome-terminal when using generic branding (such as on phones,
+#. * where g-t is unsuitable) - it may be best to leave it untranslated
+#. * (unlike Terminal, which should be)
+#.
+#: src/kgx-window.c:605
 msgid "Terminal (King’s Cross)"
 msgstr "Термінал (Кінгс-кросс)"
 
-#: src/kgx-window.c:715
+#: src/kgx-window.c:671
 msgid "_About Terminal"
 msgstr "_Про «Термінал»"
 
@@ -241,31 +290,5 @@ msgstr "_Закрити"
 msgid "_Detach"
 msgstr "_Від'єднати"
 
-#: src/kgx-close-dialog.ui:6
-msgid "Close Terminal"
-msgstr "Закрити «Термінал»"
-
-#: src/kgx-close-dialog.ui:25
-msgid ""
-"Some commands are still running, closing this terminal will kill them and "
-"may lead to unexpected outcomes"
-msgstr ""
-"Виконання якихось із команд ще не завершено. Закриття вікна термінала "
-"призведе до аварійного завершення роботи цих команд і може мати "
-"непередбачувані наслідки."
-
-#: src/kgx-close-dialog.ui:64
-msgid "_OK"
-msgstr "_Гаразд"
-
-#~ msgid "<b>Read Only</b> — Command exited with code %i"
-#~ msgstr "<b>Лише читання</b> — виконання команди завершено із кодом %i"
-
-#~ msgid "<b>Read Only</b> — Command exited"
-#~ msgstr "<b>Лише читання</b> — виконання команди завершено"
-
-#~ msgid "<b>Failed to start</b> — %s"
-#~ msgstr "<b>Не вдалося запустити</b> – %s"
-
-#~ msgid "Command completed"
-#~ msgstr "Виконання команди завершено"
+#~ msgid "Copyright © %s Zander Brown"
+#~ msgstr "© Zander Brown, %s"
