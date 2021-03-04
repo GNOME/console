@@ -16,6 +16,8 @@ if sassc.found()
       ],
       depend_files: files([
        '_definitions.scss',
+       '_drawing.scss',
+       '_recoloring.scss',
        'styles.scss'
       ]),
     ),

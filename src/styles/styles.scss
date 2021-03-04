@@ -1,18 +1,17 @@
 @import 'definitions';
+@import 'drawing';
 
 .terminal-window {
   background: transparent;
 
   &.root {
-    headerbar, headerbar button {
-      background: #a51d2d;
-    }
+    $window_color: darken(#a51d2d, 15%);
+    @import 'recoloring';
   }
 
   &.remote {
-    headerbar, headerbar button {
-      background: #613583;
-    }
+    $window_color: darken(#613583, 10%);
+    @import 'recoloring';
   }
 
   scrolledwindow overshoot {
