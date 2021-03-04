@@ -733,6 +733,10 @@ kgx_window_init (KgxWindow *self)
                           self, "title",
                           G_BINDING_SYNC_CREATE);
 
+  g_object_bind_property (self, "title",
+                          self->header_bar, "title",
+                          G_BINDING_SYNC_CREATE);
+
   g_object_bind_property_full (self->pages, "path",
                                self->header_bar, "subtitle",
                                G_BINDING_SYNC_CREATE,
