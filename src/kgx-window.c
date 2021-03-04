@@ -152,7 +152,7 @@ kgx_window_constructed (GObject *object)
 
   g_shell_parse_argv (command, NULL, &shell, &error);
   if (error) {
-    g_warning ("Can't handle %s: %s", command, error->message);
+    g_warning ("Can’t handle %s: %s", command, error->message);
   }
 
   if (self->working_dir) {
@@ -306,7 +306,7 @@ kgx_window_delete_event (GtkWidget   *widget,
   children = kgx_pages_get_children (KGX_PAGES (self->pages));
 
   if (children->len < 1 || self->close_anyway) {
-    return FALSE; // Aka no, I don't want to block closing
+    return FALSE; // Aka no, I don’t want to block closing
   }
 
   dlg = g_object_new (KGX_TYPE_CLOSE_DIALOG,
@@ -499,7 +499,7 @@ new_activated (GSimpleAction *action,
   g_autofree char *dir = NULL;
 
   /* Slightly "wrong" but hopefully by taking the time before
-   * we spend non-zero time initing the window it's far enough in the
+   * we spend non-zero time initing the window it’s far enough in the
    * past for shell to do-the-right-thing
    */
   timestamp = GDK_CURRENT_TIME;
@@ -543,7 +543,7 @@ new_tab_activated (GSimpleAction *action,
 
   g_shell_parse_argv (command, NULL, &shell, &error);
   if (error) {
-    g_warning ("Can't handle %s: %s", command, error->message);
+    g_warning ("Can’t handle %s: %s", command, error->message);
   }
 
   initial = g_get_home_dir ();
@@ -585,8 +585,7 @@ about_activated (GSimpleAction *action,
   const char *artists[] = { "Tobias Bernard", NULL };
   g_autofree char *copyright = NULL;
   
-  copyright = g_strdup_printf (_("Copyright © %s Zander Brown"),
-                               "2019-2020");
+  copyright = g_strdup_printf (_("© %s Zander Brown"), "2019-2021");
 
   gtk_show_about_dialog (GTK_WINDOW (data),
                          "authors", authors,
@@ -598,8 +597,11 @@ about_activated (GSimpleAction *action,
                          "license-type", GTK_LICENSE_GPL_3_0,
                          "logo-icon-name", "kgx-original",
                          #if IS_GENERIC
-                         // Translators: "by King’s Cross" here is meaning
-                         // author or creator of 'Terminal'
+                         /* Translators: “King’s Cross” here is to distinguish from
+                          * gnome-terminal when using generic branding (such as on phones,
+                          * where g-t is unsuitable) - it may be best to leave it untranslated
+                          * (unlike Terminal, which should be)
+                          */
                          "program-name", _("Terminal (King’s Cross)"),
                          #else
                          "program-name", _("King’s Cross"),

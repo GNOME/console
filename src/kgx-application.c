@@ -425,8 +425,8 @@ kgx_application_handle_local_options (GApplication *app,
 
   if (g_variant_dict_lookup (options, "about", "b", &about)) {
     if (about) {
-      g_autofree char *copyright = g_strdup_printf (_("Copyright © %s Zander Brown"),
-                                                    "2019-2020");
+      g_autofree char *copyright = g_strdup_printf (_("© %s Zander Brown"),
+                                                    "2019-2021");
       struct winsize w;
       int padding = 0;
 
@@ -434,7 +434,7 @@ kgx_application_handle_local_options (GApplication *app,
 
       padding = ((w.ws_row -1) - (LOGO_ROW_SIZE + 5)) / 2;
 
-      for (int i = 0; i < padding - 1; i++) {
+      for (int i = 0; i < padding; i++) {
         g_print ("\n");
       }
 
@@ -443,7 +443,7 @@ kgx_application_handle_local_options (GApplication *app,
       print_center (PACKAGE_VERSION, -1, w.ws_col);
       print_center (_("Terminal Emulator"), -1, w.ws_col);
       print_center (copyright, -1, w.ws_col);
-      print_center ("GPL 3+\n", -1, w.ws_col);
+      print_center (_("GPL 3.0 or later"), -1, w.ws_col);
 
       for (int i = 0; i < padding; i++) {
         g_print ("\n");
