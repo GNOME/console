@@ -1,26 +1,31 @@
+@import 'definitions';
+
 .terminal-window {
   background: transparent;
+
+  &.root {
+    headerbar, headerbar button {
+      background: #a51d2d;
+    }
+  }
+
+  &.remote {
+    headerbar, headerbar button {
+      background: #613583;
+    }
+  }
+
+  scrolledwindow overshoot {
+    undershoot.top,
+    undershoot.bottom,
+    overshoot.top,
+    overshoot.bottom {
+      background: none;
+    }
+  }
 }
 
-.terminal-window.root headerbar,
-.terminal-window.root headerbar button {
-  background: #a51d2d;
-}
-
-.terminal-window.remote headerbar,
-.terminal-window.remote headerbar button {
-  background: #613583;
-}
-
-.terminal-window scrolledwindow undershoot.top,
-.terminal-window scrolledwindow undershoot.bottom,
-.terminal-window scrolledwindow overshoot.top,
-.terminal-window scrolledwindow overshoot.bottom
-{
-  background: none;
-}
-
-/* Taken from nautilus */
+// Taken from nautilus
 .floating-bar {
   padding: 6px;
   background-color: themecolor(theme_base_color);
@@ -28,24 +33,25 @@
   border-style: solid solid none;
   border-color: themecolor(borders);
   border-radius: 3px 3px 0 0;
-}
 
-.floating-bar.bottom.left { /* axes left border and border radius */
-  border-left-style: none;
-  border-top-left-radius: 0;
-}
-.floating-bar.bottom.right { /* axes right border and border radius */
-  border-right-style: none;
-  border-top-right-radius: 0;
-}
+  &:backdrop {
+    background-color: themecolor(theme_unfocused_base_color);
+    border-color: themecolor(unfocused_borders);
+  }
 
-.floating-bar:backdrop {
-  background-color: themecolor(theme_unfocused_base_color);
-  border-color: themecolor(unfocused_borders);
-}
+  &.bottom.left { // axes left border and border radius
+    border-left-style: none;
+    border-top-left-radius: 0;
+  }
 
-.floating-bar button {
-  padding: 0px;
+  &.bottom.right { // axes right border and border radius
+    border-right-style: none;
+    border-top-right-radius: 0;
+  }
+
+  button {
+    padding: 0px;
+  }
 }
 
 .exit-info {
@@ -53,15 +59,15 @@
   border-top: 2px solid #1e78e4;
   background: rgba(13, 54, 104, 0.96);
   color: #ffffff;
-}
 
-.exit-info label:backdrop {
-  color: #ffffff;
-}
+  label:backdrop {
+    color: #ffffff;
+  }
 
-.error .exit-info {
-  border-top: 2px solid #ed333b;
-  background: rgba(104, 13, 13, 0.96);
+  .error & {
+    border-top: 2px solid #ed333b;
+    background: rgba(104, 13, 13, 0.96);
+  }
 }
 
 label.numeric {
