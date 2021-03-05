@@ -76,7 +76,7 @@ kgx_application_set_scale (KgxApplication *self,
 
   g_return_if_fail (KGX_IS_APPLICATION (self));
 
-  self->scale = scale;
+  self->scale = CLAMP (scale, 0.5, 2.0);
 
   action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-out");
   g_simple_action_set_enabled (G_SIMPLE_ACTION (action), self->scale > 0.5);
