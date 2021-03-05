@@ -1,26 +1,26 @@
 # Indonesian translation for kgx.
 # Copyright (C) 2020 kgx's COPYRIGHT HOLDER
 # This file is distributed under the same license as the kgx package.
-# Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020.
+# Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2020-05-28 23:21+0000\n"
-"PO-Revision-Date: 2020-07-31 20:08+0700\n"
+"POT-Creation-Date: 2021-03-05 03:31+0000\n"
+"PO-Revision-Date: 2021-03-05 20:07+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:440
-#: src/kgx-window.c:630 src/kgx-window.ui:98 src/main.c:38
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:456
+#: src/kgx-window.c:588 src/kgx-window.ui:102 src/main.c:38
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
@@ -39,8 +39,8 @@ msgstr "Terminal"
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
 msgstr "perintah;prompt;cmd;baris perintah;jalankan;shell;terminal;kgx;"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:442
-#: src/kgx-window.c:621
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:458
+#: src/kgx-window.c:576
 msgid "Terminal Emulator"
 msgstr "Emulator Terminal"
 
@@ -73,58 +73,109 @@ msgstr "Tab Baru"
 
 #: src/help-overlay.ui:33
 msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Tutup Tab"
+
+#: src/help-overlay.ui:40
+msgctxt "shortcut window"
 msgid "Terminal"
 msgstr "Terminal"
 
-#: src/help-overlay.ui:39
+#: src/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Cari"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:53
 msgctxt "shortcut window"
 msgid "Copy"
 msgstr "Salin"
 
-#: src/help-overlay.ui:53
+#: src/help-overlay.ui:60
 msgctxt "shortcut window"
 msgid "Paste"
 msgstr "Tempel"
 
-#. Translators: This is the name of the timeout that looks for programs
-#. running in the terminal
-#: src/kgx-application.c:269
-msgid "child watcher"
-msgstr "pengamat anak"
-
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:414
+#: src/kgx-application.c:430
 #, c-format
 msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgstr "# King's Cross %s menggunakan VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:426 src/kgx-window.c:613
+#: src/kgx-application.c:442 src/kgx-window.c:569
 #, c-format
-msgid "Copyright © %s Zander Brown"
-msgstr "Hak Cipta © %s Zander Brown"
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:546
+#: src/kgx-application.c:460
+msgid "GPL 3.0 or later"
+msgstr "GPL 3.0 atau yang lebih baru"
+
+#: src/kgx-application.c:565
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Jalankan argumen untuk opsi ini di dalam terminal"
 
-#: src/kgx-application.c:555
+#: src/kgx-application.c:574
 msgid "Set the working directory"
 msgstr "Atur direktori kerja"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:557
+#: src/kgx-application.c:576
 msgid "DIRNAME"
 msgstr "NAMA-DIREKTORI"
 
-#: src/kgx-application.c:565
+#: src/kgx-application.c:584
 msgid "Wait until the child exits (TODO)"
 msgstr "Tunggu sampai anak keluar (TODO)"
+
+#: src/kgx-application.c:593
+msgid "ADVANCED: Set the shell to launch"
+msgstr "LANJUTAN: Setel shell untuk diluncurkan"
+
+#: src/kgx-close-dialog.ui:6
+msgid "Close Terminal"
+msgstr "Tutup Terminal"
+
+#: src/kgx-close-dialog.ui:25
+msgid ""
+"Some commands are still running, closing this terminal will kill them and "
+"may lead to unexpected outcomes"
+msgstr ""
+"Beberapa perintah masih berjalan, menutup terminal ini akan membunuh mereka "
+"dan dapat menyebabkan hasil yang tak terduga"
+
+#: src/kgx-close-dialog.ui:56 src/kgx-terminal.c:421
+msgid "_Cancel"
+msgstr "_Batal"
+
+#: src/kgx-close-dialog.ui:64
+msgid "_OK"
+msgstr "_Ok"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:119
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Hanya Baca</b> — Perintah keluar dengan kode %i"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:128
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Hanya Baca</b> — Perintah keluar"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:160
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Gagal untuk memulai</b> — %s"
+
+#: src/kgx-tab.c:985
+msgid "Command completed"
+msgstr "Perintah selesai"
 
 #: src/kgx-terminal.c:413
 msgid "You are pasting a command that runs as an administrator"
@@ -140,26 +191,25 @@ msgstr ""
 "Pastikan Anda tahu apa yang dilakukan perintah:\n"
 "%s"
 
-#: src/kgx-terminal.c:421 src/kgx-close-dialog.ui:56
-msgid "_Cancel"
-msgstr "_Batal"
-
 #: src/kgx-terminal.c:424 src/menus.ui:24
 msgid "_Paste"
 msgstr "Tem_pel"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:620
+#: src/kgx-window.c:575
 msgid "translator-credits"
-msgstr "Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020."
+msgstr "Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2021."
 
-#. Translators: "by King’s Cross" here is meaning
-#. author or creator of 'Terminal'
-#: src/kgx-window.c:628
+#. Translators: “King’s Cross” here is to distinguish from
+#. * gnome-terminal when using generic branding (such as on phones,
+#. * where g-t is unsuitable) - it may be best to leave it untranslated
+#. * (unlike Terminal, which should be)
+#.
+#: src/kgx-window.c:586
 msgid "Terminal (King’s Cross)"
 msgstr "Terminal (King's Cross)"
 
-#: src/kgx-window.c:693
+#: src/kgx-window.c:651
 msgid "_About Terminal"
 msgstr "Tent_ang Terminal"
 
@@ -191,15 +241,15 @@ msgstr "Tent_ang King's Cross"
 msgid "About this program"
 msgstr "Tentang program ini"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:110
 msgid "Find in terminal"
 msgstr "Cari di terminal"
 
-#: src/kgx-window.ui:124
+#: src/kgx-window.ui:128
 msgid "Menu"
 msgstr "Menu"
 
-#: src/kgx-window.ui:142
+#: src/kgx-window.ui:146
 msgid "New Tab"
 msgstr "Tab Baru"
 
@@ -231,30 +281,8 @@ msgstr "_Tutup"
 msgid "_Detach"
 msgstr "_Lepas"
 
-#: src/kgx-close-dialog.ui:6
-msgid "Close Terminal"
-msgstr "Tutup Terminal"
+#~ msgid "child watcher"
+#~ msgstr "pengamat anak"
 
-#: src/kgx-close-dialog.ui:25
-msgid ""
-"Some commands are still running, closing this terminal will kill them and "
-"may lead to unexpected outcomes"
-msgstr ""
-"Beberapa perintah masih berjalan, menutup terminal ini akan membunuh mereka "
-"dan dapat menyebabkan hasil yang tak terduga"
-
-#: src/kgx-close-dialog.ui:64
-msgid "_OK"
-msgstr "_Ok"
-
-#~ msgid "<b>Read Only</b> — Command exited with code %i"
-#~ msgstr "<b>Hanya Baca</b> — Perintah keluar dengan kode %i"
-
-#~ msgid "<b>Read Only</b> — Command exited"
-#~ msgstr "<b>Hanya Baca</b> — Perintah keluar"
-
-#~ msgid "<b>Failed to start</b> — %s"
-#~ msgstr "<b>Gagal untuk memulai</b> — %s"
-
-#~ msgid "Command completed"
-#~ msgstr "Perintah selesai"
+#~ msgid "Copyright © %s Zander Brown"
+#~ msgstr "Hak Cipta © %s Zander Brown"
