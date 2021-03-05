@@ -134,6 +134,8 @@ kgx_window_constructed (GObject *object)
 
   G_OBJECT_CLASS (kgx_window_parent_class)->constructed (object);
 
+  application = gtk_window_get_application (GTK_WINDOW (self));
+
   if (G_UNLIKELY (self->command != NULL)) {
     // dup the string so we can free command later to handle the
     // (more likely) fp_vte_guess_shell case
@@ -161,9 +163,7 @@ kgx_window_constructed (GObject *object)
     initial = g_get_home_dir ();
   }
 
-  g_debug ("Working in %s", initial);
-
-  application = gtk_window_get_application (GTK_WINDOW (self));
+  g_debug ("Working in “%s”", initial);
 
   if (!self->initially_empty) {
     GtkWidget *page;
@@ -180,27 +180,20 @@ kgx_window_constructed (GObject *object)
     kgx_pages_add_page (KGX_PAGES (self->pages), KGX_TAB (page));
   }
 
-  g_object_bind_property (application,
-                          "theme",
-                          self->pages,
-                          "theme",
+  g_object_bind_property (application, "theme",
+                          self->pages, "theme",
                           G_BINDING_SYNC_CREATE);
 
-  g_object_bind_property (application,
-                          "font",
-                          self->pages,
-                          "font",
+  g_object_bind_property (application, "font",
+                          self->pages, "font",
                           G_BINDING_SYNC_CREATE);
 
-  g_object_bind_property (application,
-                          "font-scale",
-                          self->pages,
-                          "zoom",
+  g_object_bind_property (application, "font-scale",
+                          self->pages, "zoom",
                           G_BINDING_SYNC_CREATE);
 
   g_signal_connect (application,
-                    "notify::font-scale",
-                    G_CALLBACK (zoomed),
+                    "notify::font-scale", G_CALLBACK (zoomed),
                     self);
 
   update_zoom (self, KGX_APPLICATION (application));
@@ -238,6 +231,7 @@ kgx_window_set_property (GObject      *object,
   }
 }
 
+
 static void
 kgx_window_get_property (GObject    *object,
                          guint       property_id,
@@ -269,6 +263,7 @@ kgx_window_get_property (GObject    *object,
   }
 }
 
+
 static void
 kgx_window_finalize (GObject *object)
 {
@@ -294,6 +289,7 @@ delete_response (GtkWidget *dlg,
     gtk_widget_destroy (GTK_WIDGET (self));
   }
 }
+
 
 static gboolean
 kgx_window_delete_event (GtkWidget   *widget,
@@ -565,6 +561,7 @@ new_tab_activated (GSimpleAction *action,
   kgx_pages_focus_page (KGX_PAGES (self->pages), KGX_TAB (page));
 }
 
+
 static void
 close_tab_activated (GSimpleAction *action,
                      GVariant      *parameter,
@@ -611,8 +608,7 @@ about_activated (GSimpleAction *action,
 }
 
 
-static GActionEntry win_entries[] =
-{
+static GActionEntry win_entries[] = {
   { "new-window", new_activated, NULL, NULL, NULL },
   { "new-tab", new_tab_activated, NULL, NULL, NULL },
   { "close-tab", close_tab_activated, NULL, NULL, NULL },

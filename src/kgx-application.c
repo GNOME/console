@@ -55,6 +55,7 @@ enum {
 
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 
+
 static void
 kgx_application_set_theme (KgxApplication *self,
                            KgxTheme        theme)
@@ -65,6 +66,7 @@ kgx_application_set_theme (KgxApplication *self,
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_THEME]);
 }
+
 
 static void
 kgx_application_set_scale (KgxApplication *self,
@@ -85,6 +87,7 @@ kgx_application_set_scale (KgxApplication *self,
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_FONT_SCALE]);
 }
+
 
 static void
 kgx_application_set_property (GObject      *object,
@@ -131,6 +134,7 @@ kgx_application_get_property (GObject    *object,
   }
 }
 
+
 static void
 kgx_application_finalize (GObject *object)
 {
@@ -144,6 +148,7 @@ kgx_application_finalize (GObject *object)
 
   G_OBJECT_CLASS (kgx_application_parent_class)->finalize (object);
 }
+
 
 static void
 kgx_application_activate (GApplication *app)
@@ -262,10 +267,9 @@ set_watcher (KgxApplication *self, gboolean focused)
 
   // Slow down polling when nothing is focused
   self->timeout = g_timeout_add (focused ? 500 : 2000, watch, self);
-  // Translators: This is the name of the timeout that looks for programs
-  // running in the terminal
-  g_source_set_name_by_id (self->timeout, _("child watcher"));
+  g_source_set_name_by_id (self->timeout, "[kgx] child watcher");
 }
+
 
 static void
 kgx_application_startup (GApplication *app)
@@ -456,6 +460,7 @@ kgx_application_handle_local_options (GApplication *app,
   return G_APPLICATION_CLASS (kgx_application_parent_class)->handle_local_options (app, options);
 }
 
+
 static void
 kgx_application_class_init (KgxApplicationClass *klass)
 {
@@ -500,6 +505,7 @@ kgx_application_class_init (KgxApplicationClass *klass)
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 }
 
+
 static void
 clear_watch (struct ProcessWatch *watch)
 {
@@ -511,6 +517,7 @@ clear_watch (struct ProcessWatch *watch)
   g_clear_pointer (&watch, g_free);
 }
 
+
 static void
 font_changed (GSettings      *settings,
               const char     *key,
@@ -519,8 +526,8 @@ font_changed (GSettings      *settings,
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_FONT]);
 }
 
-static GOptionEntry entries[] =
-{
+
+static GOptionEntry entries[] = {
   {
     "version",
     0,
@@ -784,6 +791,7 @@ kgx_application_push_active (KgxApplication *self)
     set_watcher (self, FALSE);
   }
 }
+
 
 /**
  * kgx_application_pop_active:
