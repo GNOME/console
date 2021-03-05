@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-03-04 18:14+0000\n"
-"PO-Revision-Date: 2021-03-04 20:34+0200\n"
+"POT-Creation-Date: 2021-03-05 03:31+0000\n"
+"PO-Revision-Date: 2021-03-05 13:34+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -20,8 +20,8 @@ msgstr ""
 
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:442
-#: src/kgx-window.c:607 src/kgx-window.ui:102 src/main.c:38
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:456
+#: src/kgx-window.c:588 src/kgx-window.ui:102 src/main.c:38
 msgid "King’s Cross"
 msgstr "Кінгс-кросс"
 
@@ -43,8 +43,8 @@ msgstr ""
 "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;команда;"
 "запит;командний рядок;запустити;запуск;оболонка;термінал;"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:444
-#: src/kgx-window.c:595
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:458
+#: src/kgx-window.c:576
 msgid "Terminal Emulator"
 msgstr "Емулятор термінала"
 
@@ -100,46 +100,43 @@ msgctxt "shortcut window"
 msgid "Paste"
 msgstr "Вставити"
 
-#. Translators: This is the name of the timeout that looks for programs
-#. running in the terminal
-#: src/kgx-application.c:267
-msgid "child watcher"
-msgstr "дитячний наглядач"
-
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:416
+#: src/kgx-application.c:430
 #, c-format
 msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgstr "# Кінгс-кросс %s з використанням VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:428 src/kgx-window.c:588
+#: src/kgx-application.c:442 src/kgx-window.c:569
 #, c-format
-#| msgid "Zander Brown"
 msgid "© %s Zander Brown"
 msgstr "© Zander Brown, %s"
 
-#: src/kgx-application.c:446
+#: src/kgx-application.c:460
 msgid "GPL 3.0 or later"
-msgstr ""
-"GPL 3.0 або новіша"
+msgstr "GPL 3.0 або новіша"
 
-#: src/kgx-application.c:548
+#: src/kgx-application.c:565
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Виконати аргумент цього параметра у терміналі"
 
-#: src/kgx-application.c:557
+#: src/kgx-application.c:574
 msgid "Set the working directory"
 msgstr "Встановити робочий каталог"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:559
+#: src/kgx-application.c:576
 msgid "DIRNAME"
 msgstr "НАЗВА_КАТАЛОГУ"
 
-#: src/kgx-application.c:567
+#: src/kgx-application.c:584
 msgid "Wait until the child exits (TODO)"
 msgstr "Очікувати на завершення дочірнього процесу (ЩЕ НЕ РЕАЛІЗОВАНО)"
+
+#: src/kgx-application.c:593
+msgid "ADVANCED: Set the shell to launch"
+msgstr ""
+"ДЛЯ ДОСВІДЧЕНИХ: встановити командну оболонку для запуску"
 
 #: src/kgx-close-dialog.ui:6
 msgid "Close Terminal"
@@ -182,7 +179,7 @@ msgstr "<b>Лише читання</b> — виконання команди з�
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Не вдалося запустити</b> – %s"
 
-#: src/kgx-tab.c:965
+#: src/kgx-tab.c:985
 msgid "Command completed"
 msgstr "Виконання команди завершено"
 
@@ -205,7 +202,7 @@ msgid "_Paste"
 msgstr "Вст_авити"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:594
+#: src/kgx-window.c:575
 msgid "translator-credits"
 msgstr "Юрій Чорноіван <yurchor@ukr.net>"
 
@@ -214,11 +211,11 @@ msgstr "Юрій Чорноіван <yurchor@ukr.net>"
 #. * where g-t is unsuitable) - it may be best to leave it untranslated
 #. * (unlike Terminal, which should be)
 #.
-#: src/kgx-window.c:605
+#: src/kgx-window.c:586
 msgid "Terminal (King’s Cross)"
 msgstr "Термінал (Кінгс-кросс)"
 
-#: src/kgx-window.c:671
+#: src/kgx-window.c:651
 msgid "_About Terminal"
 msgstr "_Про «Термінал»"
 
@@ -289,6 +286,9 @@ msgstr "_Закрити"
 #: src/menus.ui:49
 msgid "_Detach"
 msgstr "_Від'єднати"
+
+#~ msgid "child watcher"
+#~ msgstr "дитячний наглядач"
 
 #~ msgid "Copyright © %s Zander Brown"
 #~ msgstr "© Zander Brown, %s"
