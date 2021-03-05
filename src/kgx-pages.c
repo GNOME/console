@@ -34,7 +34,6 @@
 #include "kgx-tab.h"
 #include "kgx-window.h"
 #include "kgx-terminal.h"
-#include "util.h"
 
 
 typedef struct _KgxPagesPrivate KgxPagesPrivate;
@@ -100,6 +99,27 @@ enum {
   N_SIGNALS
 };
 static guint signals[N_SIGNALS];
+
+
+static void
+kgx_pages_dispose (GObject *object)
+{
+  KgxPages *self = KGX_PAGES (object);
+  KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
+
+  g_clear_handle_id (&priv->timeout, g_source_remove);
+
+  if (priv->active_page) {
+    g_clear_signal_handler (&priv->size_watcher, priv->active_page);
+  }
+
+  g_clear_pointer (&priv->title, g_free);
+  g_clear_object (&priv->path);
+
+  g_clear_pointer (&priv->font, pango_font_description_free);
+
+  G_OBJECT_CLASS (kgx_pages_parent_class)->dispose (object);
+}
 
 
 static void
@@ -231,8 +251,9 @@ size_changed (KgxTab   *tab,
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
   g_autofree char *label = NULL;
  
-  if (cols == priv->last_cols && rows == priv->last_rows)
+  if (cols == priv->last_cols && rows == priv->last_rows) {
     return;
+  }
 
   priv->last_cols = cols;
   priv->last_rows = rows;
@@ -242,10 +263,9 @@ size_changed (KgxTab   *tab,
     return;
   }
 
-  if (priv->timeout != 0) {
-    g_source_remove (priv->timeout);
-  }
+  g_clear_handle_id (&priv->timeout, g_source_remove);
   priv->timeout = g_timeout_add (800, G_SOURCE_FUNC (size_timeout), self);
+  g_source_set_name_by_id (priv->timeout, "[kgx] resize label timeout");
 
   label = g_strdup_printf ("%i × %i", cols, rows);
 
@@ -268,7 +288,8 @@ page_changed (GObject *object, GParamSpec *pspec, KgxPages *self)
   tab = KGX_TAB (hdy_tab_page_get_child (page));
 
 
-  clear_signal_handler (&priv->size_watcher, priv->active_page);
+  g_clear_handle_id (&priv->timeout, g_source_remove);
+  g_clear_signal_handler (&priv->size_watcher, priv->active_page);
   priv->size_watcher = g_signal_connect (tab,
                                          "size-changed",
                                          G_CALLBACK (size_changed),
@@ -507,6 +528,7 @@ kgx_pages_class_init (KgxPagesClass *klass)
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
+  object_class->dispose = kgx_pages_dispose;
   object_class->get_property = kgx_pages_get_property;
   object_class->set_property = kgx_pages_set_property;
 

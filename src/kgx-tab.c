@@ -33,7 +33,6 @@
 #include "kgx-pages.h"
 #include "kgx-terminal.h"
 #include "kgx-application.h"
-#include "util.h"
 
 
 typedef struct _KgxTabPrivate KgxTabPrivate;
@@ -115,6 +114,39 @@ enum {
   N_SIGNALS
 };
 static guint signals[N_SIGNALS];
+
+
+static void
+kgx_tab_dispose (GObject *object)
+{
+  KgxTab *self = KGX_TAB (object);
+  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
+
+  if (priv->notification_id) {
+    g_application_withdraw_notification (G_APPLICATION (priv->application),
+                                         priv->notification_id);
+    g_clear_pointer (&priv->notification_id, g_free);
+  }
+
+  g_clear_object (&priv->application);
+
+  g_clear_pointer (&priv->title, g_free);
+  g_clear_pointer (&priv->tooltip, g_free);
+  g_clear_object (&priv->path);
+  g_clear_pointer (&priv->font, pango_font_description_free);
+
+  g_clear_signal_handler (&priv->term_size_handler, priv->terminal);
+  g_clear_signal_handler (&priv->term_font_inc_handler, priv->terminal);
+  g_clear_signal_handler (&priv->term_font_dec_handler, priv->terminal);
+  g_clear_object (&priv->terminal);
+
+  g_clear_pointer (&priv->root, g_hash_table_unref);
+  g_clear_pointer (&priv->remote, g_hash_table_unref);
+  g_clear_pointer (&priv->children, g_hash_table_unref);
+
+
+  G_OBJECT_CLASS (kgx_tab_parent_class)->dispose (object);
+}
 
 
 static void
@@ -296,30 +328,20 @@ kgx_tab_set_property (GObject      *object,
 
 
 static void
-kgx_tab_finalize (GObject *object)
-{
-  KgxTab *self = KGX_TAB (object);
-  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
-
-  g_clear_pointer (&priv->root, g_hash_table_unref);
-  g_clear_pointer (&priv->remote, g_hash_table_unref);
-  g_clear_pointer (&priv->children, g_hash_table_unref);
-
-  g_application_withdraw_notification (G_APPLICATION (priv->application),
-                                       priv->notification_id);
-
-  g_clear_object (&priv->application);
-
-  g_clear_pointer (&priv->notification_id, g_free);
-}
-
-
-static void
 kgx_tab_map (GtkWidget *widget)
 {
+  KgxTab *self = KGX_TAB (widget);
+  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
+
   GTK_WIDGET_CLASS (kgx_tab_parent_class)->map (widget);
 
   g_object_set (widget, "needs-attention", FALSE, NULL);
+
+  if (priv->notification_id) {
+    g_application_withdraw_notification (G_APPLICATION (priv->application),
+                                         priv->notification_id);
+    g_clear_pointer (&priv->notification_id, g_free);
+  }
 }
 
 
@@ -350,9 +372,9 @@ kgx_tab_class_init (KgxTabClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   KgxTabClass    *tab_class    = KGX_TAB_CLASS    (klass);
   
+  object_class->dispose = kgx_tab_dispose;
   object_class->get_property = kgx_tab_get_property;
   object_class->set_property = kgx_tab_set_property;
-  object_class->finalize = kgx_tab_finalize;
 
   widget_class->map = kgx_tab_map;
 
@@ -637,8 +659,6 @@ kgx_tab_init (KgxTab *self)
                                           NULL,
                                           (GDestroyNotify) kgx_process_unref);
 
-  priv->notification_id = g_strdup_printf ("command-completed-%u", priv->id);
-
   gtk_widget_init_template (GTK_WIDGET (self));
 
   g_signal_connect (self, "parent-set", G_CALLBACK (parent_set), NULL);
@@ -686,9 +706,9 @@ kgx_tab_connect_terminal (KgxTab      *self,
   
   priv = kgx_tab_get_instance_private (self);
 
-  clear_signal_handler (&priv->term_size_handler, priv->terminal);
-  clear_signal_handler (&priv->term_font_inc_handler, priv->terminal);
-  clear_signal_handler (&priv->term_font_dec_handler, priv->terminal);
+  g_clear_signal_handler (&priv->term_size_handler, priv->terminal);
+  g_clear_signal_handler (&priv->term_font_inc_handler, priv->terminal);
+  g_clear_signal_handler (&priv->term_font_dec_handler, priv->terminal);
 
   g_clear_object (&priv->term_title_bind);
   g_clear_object (&priv->term_path_bind);
@@ -970,6 +990,7 @@ kgx_tab_pop_child (KgxTab     *self,
                                                   "u",
                                                   priv->id);
 
+    priv->notification_id = g_strdup_printf ("command-completed-%u", priv->id);
     g_application_send_notification (G_APPLICATION (priv->application),
                                      priv->notification_id,
                                      noti);
