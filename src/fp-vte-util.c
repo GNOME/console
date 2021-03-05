@@ -13,22 +13,9 @@
 
 #define G_LOG_DOMAIN "fp-vte-util"
 
-#ifndef _GNU_SOURCE
-# define _GNU_SOURCE
-#endif
-
-#include <errno.h>
-#include <fcntl.h>
-#include <glib-unix.h>
-#include <sys/ioctl.h>
-#ifdef __linux__
-# include <sys/prctl.h>
-#endif
-#include <stdlib.h>
-#include <termios.h>
-#include <unistd.h>
 
 #include "fp-vte-util.h"
+
 
 /**
  * SECTION:fp-vte-util
@@ -57,21 +44,6 @@
  * to the caller to conveniently wait/wait-check for the child.
  */
 
-static gboolean
-is_flatpak (void)
-{
-  static gsize initialized;
-  static gboolean _is_flatpak;
-
-  if (g_once_init_enter (&initialized))
-    {
-      _is_flatpak = g_file_test ("/.flatpak-info", G_FILE_TEST_EXISTS);
-      g_once_init_leave (&initialized, TRUE);
-    }
-
-  return _is_flatpak;
-}
-
 /**
  * fp_vte_guess_shell:
  * @cancellable: (nullable): a #GCancellable or %NULL
@@ -86,69 +58,30 @@ gchar *
 fp_vte_guess_shell (GCancellable  *cancellable,
                     GError       **error)
 {
-  g_autoptr(GPtrArray) argv = NULL;
-  g_autoptr(GSubprocessLauncher) launcher = NULL;
-  g_autoptr(GSubprocess) subprocess = NULL;
-  g_autofree gchar *stdout_buf = NULL;
-  g_auto(GStrv) parts = NULL;
-
-  if (!is_flatpak ())
-    return vte_get_user_shell ();
-
-  argv = g_ptr_array_new ();
-  g_ptr_array_add (argv, (gchar *)"flatpak-spawn");
-  g_ptr_array_add (argv, (gchar *)"--host");
-  g_ptr_array_add (argv, (gchar *)"getent");
-  g_ptr_array_add (argv, (gchar *)"passwd");
-  g_ptr_array_add (argv, (gchar *)g_get_user_name ());
-  g_ptr_array_add (argv, NULL);
-
-  launcher = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_STDOUT_PIPE |
-                                        G_SUBPROCESS_FLAGS_STDERR_SILENCE);
-  /* Be certain that G_MESSAGES_DEBUG cannot effect stdout */
-  g_subprocess_launcher_unsetenv (launcher, "G_MESSAGES_DEBUG");
-  subprocess = g_subprocess_launcher_spawnv (launcher,
-                                             (const gchar * const *)argv->pdata,
-                                             error);
-
-  if (subprocess == NULL)
-    return NULL;
-
-  if (!g_subprocess_communicate_utf8 (subprocess, NULL, cancellable, &stdout_buf, NULL, error))
-    return NULL;
-
-  parts = g_strsplit (stdout_buf, ":", 0);
-
-  if (g_strv_length (parts) < 7)
-    {
-      g_set_error (error,
-                   G_IO_ERROR,
-                   G_IO_ERROR_FAILED,
-                   "Failed to locate user entry");
-      return NULL;
-    }
-
-  return g_strdup (g_strstrip (parts[6]));
+  return vte_get_user_shell ();
 }
+
 
 static void
 fp_vte_pty_spawn_cb (VtePty       *pty,
                      GAsyncResult *result,
                      gpointer      user_data)
 {
-  g_autoptr(GTask) task = user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GTask) task = user_data;
+  g_autoptr (GError) error = NULL;
   GPid child_pid;
 
   g_assert (VTE_IS_PTY (pty));
   g_assert (G_IS_ASYNC_RESULT (result));
   g_assert (G_IS_TASK (task));
 
-  if (!vte_pty_spawn_finish (pty, result, &child_pid, &error))
+  if (!vte_pty_spawn_finish (pty, result, &child_pid, &error)) {
     g_task_return_error (task, g_steal_pointer (&error));
-  else
+  } else {
     g_task_return_int (task, child_pid);
+  }
 }
+
 
 /**
  * fp_vte_pty_spawn_async:
@@ -171,61 +104,41 @@ fp_vte_pty_spawn_cb (VtePty       *pty,
  */
 void
 fp_vte_pty_spawn_async (VtePty              *pty,
-                        const gchar         *working_directory,
-                        const gchar * const *argv,
-                        const gchar * const *env,
-                        gint                 timeout,
+                        const char          *working_directory,
+                        const char *const   *argv,
+                        const char *const   *env,
+                        int                  timeout,
                         GCancellable        *cancellable,
                         GAsyncReadyCallback  callback,
                         gpointer             user_data)
 {
-  g_autoptr(GPtrArray) real_argv = NULL;
-  g_autoptr(GTask) task = NULL;
-  g_auto(GStrv) copy_env = NULL;
+  g_autoptr (GTask) task = NULL;
+  g_auto (GStrv) copy_env = NULL;
 
   g_return_if_fail (VTE_IS_PTY (pty));
   g_return_if_fail (argv != NULL);
   g_return_if_fail (argv[0] != NULL);
 
-  if (timeout < 0)
+  if (timeout < 0) {
     timeout = -1;
+  }
 
-  if (working_directory == NULL)
+  if (working_directory == NULL) {
     working_directory = g_get_home_dir ();
+  }
 
-  if (env == NULL)
-    {
-      copy_env = g_get_environ ();
-      env = (const gchar * const *)copy_env;
-    }
+  if (env == NULL)  {
+    copy_env = g_get_environ ();
+    env = (const char * const *) copy_env;
+  }
 
   task = g_task_new (pty, cancellable, callback, user_data);
   g_task_set_source_tag (task, fp_vte_pty_spawn_async);
 
-  /* Setup argv[] for the child process, possibly running via
-   * flatpak-spawn to call via the host and proxy signals to/from
-   * the host process. We might need to pass along some environment
-   * variables to the host using --env=FOO=BAR to flatpak-spawn.
-   * You might want to pre-filter those in your application to some
-   * limited set (like DISPLAY, WAYLAND_DISPLAY, etc).
-   */
-  real_argv = g_ptr_array_new_with_free_func (g_free);
-  if (is_flatpak ())
-    {
-      g_ptr_array_add (real_argv, g_strdup ("/usr/bin/flatpak-spawn"));
-      g_ptr_array_add (real_argv, g_strdup ("--host"));
-      g_ptr_array_add (real_argv, g_strdup ("--watch-bus"));
-      for (guint i = 0; env[i]; i++)
-        g_ptr_array_add (real_argv, g_strdup_printf ("--env=%s", env[i]));
-    }
-  for (guint i = 0; argv[i]; i++)
-    g_ptr_array_add (real_argv, g_strdup (argv[i]));
-  g_ptr_array_add (real_argv, NULL);
-
   vte_pty_spawn_async (pty,
                        working_directory,
-                       (gchar **)real_argv->pdata,
-                       NULL,
+                       (char **) argv,
+                       (char **) env,
                        G_SPAWN_SEARCH_PATH | G_SPAWN_SEARCH_PATH_FROM_ENVP,
                        NULL, NULL, NULL,
                        -1,
@@ -233,6 +146,7 @@ fp_vte_pty_spawn_async (VtePty              *pty,
                        (GAsyncReadyCallback) fp_vte_pty_spawn_cb,
                        g_steal_pointer (&task));
 }
+
 
 /**
  * fp_vte_pty_spawn_finish:
@@ -261,20 +175,13 @@ fp_vte_pty_spawn_finish (VtePty        *pty,
 
   pid = g_task_propagate_int (G_TASK (result), error);
 
-  if (pid > 0)
-    {
-      if (child_pid != NULL)
-        *child_pid = pid;
-      return TRUE;
+  if (pid > 0) {
+    if (child_pid != NULL) {
+      *child_pid = pid;
     }
 
-  return FALSE;
-}
+    return TRUE;
+  }
 
-VtePtyFlags
-fp_vte_pty_default_flags (void)
-{
-  if (is_flatpak ())
-    return VTE_PTY_NO_CTTY;
-  return VTE_PTY_DEFAULT;
+  return FALSE;
 }

@@ -15,14 +15,15 @@
 
 #include <vte/vte.h>
 
-VtePtyFlags  fp_vte_pty_default_flags (void);
+G_BEGIN_DECLS
+
 gchar       *fp_vte_guess_shell       (GCancellable         *cancellable,
                                        GError              **error);
 void         fp_vte_pty_spawn_async   (VtePty               *pty,
-                                       const gchar          *working_directory,
-                                       const gchar * const  *argv,
-                                       const gchar * const  *env,
-                                       gint                  timeout,
+                                       const char           *working_directory,
+                                       const char *const    *argv,
+                                       const char *const    *env,
+                                       int                   timeout,
                                        GCancellable         *cancellable,
                                        GAsyncReadyCallback   callback,
                                        gpointer              user_data);
@@ -30,3 +31,5 @@ gboolean     fp_vte_pty_spawn_finish  (VtePty               *pty,
                                        GAsyncResult         *result,
                                        GPid                 *child_pid,
                                        GError              **error);
+
+G_END_DECLS

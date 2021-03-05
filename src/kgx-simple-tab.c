@@ -196,7 +196,7 @@ kgx_simple_tab_start (KgxTab              *page,
 
   self = KGX_SIMPLE_TAB (page);
 
-  pty = vte_pty_new_sync (fp_vte_pty_default_flags (), NULL, &error);
+  pty = vte_pty_new_sync (VTE_PTY_DEFAULT, NULL, &error);
 
   g_debug ("Working in %s", initial);
 
