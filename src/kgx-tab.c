@@ -74,6 +74,7 @@ struct _KgxTabPrivate {
   GtkWidget            *label;
   GtkWidget            *search_entry;
   GtkWidget            *search_bar;
+  char                 *last_search;
 
   /* Remote/root states */
   GHashTable           *root;
@@ -144,6 +145,7 @@ kgx_tab_dispose (GObject *object)
   g_clear_pointer (&priv->remote, g_hash_table_unref);
   g_clear_pointer (&priv->children, g_hash_table_unref);
 
+  g_clear_pointer (&priv->last_search, g_free);
 
   G_OBJECT_CLASS (kgx_tab_parent_class)->dispose (object);
 }
@@ -170,6 +172,7 @@ search_changed (HdySearchBar *bar,
   const char *search = NULL;
   VteRegex *regex;
   g_autoptr (GError) error = NULL;
+  gboolean narrowing_down;
 
   search = gtk_entry_get_text (GTK_ENTRY (priv->search_entry));
   regex = vte_regex_new_for_search (g_regex_escape_string (search, -1),
@@ -180,8 +183,38 @@ search_changed (HdySearchBar *bar,
     return;
   }
 
+  /* Since VTE doesn't automatically highlight the search match and doesn't have
+   * an API to do that or select text manually, we have to be creative.
+   *
+   * The goals are to:
+   * 1. immediately highlight text for type-to-search
+   * 2. make sure we don't jump to another match when pressing backspace
+   *
+   * Achieving 1. is easy by going to the previous match before setting the
+   * regex and the next match after setting it. However, this fails with 2:
+   * consider a buffer like "foo bar baz". If "baz" is currently highlighted and
+   * we press backspace, our regex is "ba" so "ba" in "bar" starts to match as
+   * well. If we go to the previous match, change regex from "bar" to "ba" and
+   * go next, it will select the occurence in "bar" while we want it to stay on
+   * "baz". Hence, if we're narrowing down the search, go previous/next after
+   * setting the regex and not before. */
+
+  narrowing_down = search && priv->last_search &&
+                   g_strrstr (priv->last_search, search);
+
+  g_clear_pointer (&priv->last_search, g_free);
+  priv->last_search = g_strdup (search);
+
+  if (!narrowing_down)
+    vte_terminal_search_find_previous (VTE_TERMINAL (priv->terminal));
+
   vte_terminal_search_set_regex (VTE_TERMINAL (priv->terminal),
                                  regex, 0);
+
+  if (narrowing_down)
+    vte_terminal_search_find_previous (VTE_TERMINAL (priv->terminal));
+
+  vte_terminal_search_find_next (VTE_TERMINAL (priv->terminal));
 }
 
 
