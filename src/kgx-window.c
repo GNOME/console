@@ -384,6 +384,26 @@ status_changed (GObject *object, GParamSpec *pspec, gpointer data)
 }
 
 
+static gboolean
+kgx_window_window_state_event (GtkWidget           *widget,
+                               GdkEventWindowState *event)
+{
+  KgxWindow *self = KGX_WINDOW (widget);
+  gboolean opaque =
+    event->new_window_state & (GDK_WINDOW_STATE_FULLSCREEN |
+                               GDK_WINDOW_STATE_MAXIMIZED |
+                               GDK_WINDOW_STATE_TILED |
+                               GDK_WINDOW_STATE_TOP_TILED |
+                               GDK_WINDOW_STATE_RIGHT_TILED |
+                               GDK_WINDOW_STATE_BOTTOM_TILED |
+                               GDK_WINDOW_STATE_LEFT_TILED);
+
+  g_object_set (self->pages, "opaque", !!opaque, NULL);
+
+  return GTK_WIDGET_CLASS (kgx_window_parent_class)->window_state_event (widget, event);
+}
+
+
 static void
 kgx_window_class_init (KgxWindowClass *klass)
 {
@@ -396,6 +416,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   object_class->finalize = kgx_window_finalize;
 
   widget_class->delete_event = kgx_window_delete_event;
+  widget_class->window_state_event = kgx_window_window_state_event;
 
   /**
    * KgxWindow:application:
@@ -678,10 +699,6 @@ kgx_window_init (KgxWindow *self)
                                G_BINDING_SYNC_CREATE,
                                update_subtitle,
                                NULL, NULL, NULL);
-
-  g_object_bind_property (self, "is-maximized",
-                          self->pages, "opaque",
-                          G_BINDING_SYNC_CREATE);
 }
 
 
