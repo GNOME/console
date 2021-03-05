@@ -173,10 +173,19 @@ search_changed (HdySearchBar *bar,
   VteRegex *regex;
   g_autoptr (GError) error = NULL;
   gboolean narrowing_down;
+  guint32 flags = PCRE2_MULTILINE;
 
   search = gtk_entry_get_text (GTK_ENTRY (priv->search_entry));
+
+  if (search) {
+    g_autofree char *lowercase = g_utf8_strdown (search, -1);
+
+    if (!g_strcmp0 (lowercase, search))
+      flags |= PCRE2_CASELESS;
+  }
+
   regex = vte_regex_new_for_search (g_regex_escape_string (search, -1),
-                                    -1, PCRE2_MULTILINE, &error);
+                                    -1, flags, &error);
 
   if (error) {
     g_warning ("Search error: %s", error->message);
