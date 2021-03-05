@@ -337,9 +337,11 @@ static int
 kgx_application_command_line (GApplication            *app,
                               GApplicationCommandLine *cli)
 {
+  KgxApplication *self = KGX_APPLICATION (app);
   GVariantDict *options = NULL;
   const char *working_dir = NULL;
   const char *command = NULL;
+  const char *const *shell = NULL;
   GtkWidget *window;
   g_autofree char *abs_path = NULL;
 
@@ -347,6 +349,13 @@ kgx_application_command_line (GApplication            *app,
 
   g_variant_dict_lookup (options, "working-directory", "^&ay", &working_dir);
   g_variant_dict_lookup (options, "command", "^&ay", &command);
+  g_variant_dict_lookup (options, "set-shell", "^as", &shell);
+
+  if (shell) {
+    g_settings_set_strv (self->settings, "shell", shell);
+
+    return 0;
+  }
 
   if (working_dir != NULL) {
     abs_path = g_canonicalize_filename (working_dir, NULL);
@@ -573,6 +582,15 @@ static GOptionEntry entries[] = {
     G_OPTION_ARG_NONE,
     NULL,
     N_("Wait until the child exits (TODO)"),
+    NULL
+  },
+  {
+    "set-shell",
+    0,
+    0,
+    G_OPTION_ARG_STRING_ARRAY,
+    NULL,
+    N_("ADVANCED: Set the shell to launch"),
     NULL
   },
   { NULL }
