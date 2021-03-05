@@ -159,10 +159,10 @@ spawned (VtePty       *pty,
     // matched please!
     message = g_strdup_printf (_("<b>Failed to start</b> — %s"),
                                error->message);
-   
-    kgx_tab_died (KGX_TAB (data->self), GTK_MESSAGE_ERROR, message, TRUE);
 
-    g_task_return_error (data->task, error);
+    kgx_tab_died (KGX_TAB (data->self), GTK_MESSAGE_ERROR, message, FALSE);
+
+    g_task_return_error (data->task, g_steal_pointer (&error));
 
     g_object_unref (data->self);
     g_free (data);
