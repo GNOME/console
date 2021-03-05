@@ -10,6 +10,9 @@
         <property name="propagate-natural-width">1</property>
         <property name="propagate-natural-height">1</property>
         <property name="hscrollbar-policy">never</property>
+        <style>
+          <class name="terminal"/>
+        </style>
         <child>
           <object class="KgxTerminal" id="terminal">
             <property name="visible">True</property>

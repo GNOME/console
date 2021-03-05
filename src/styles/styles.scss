@@ -14,7 +14,7 @@
     @import 'recoloring';
   }
 
-  scrolledwindow overshoot {
+  scrolledwindow.terminal overshoot {
     $sides: "top", "bottom", "left", "right";
 
     @each $side in $sides {
