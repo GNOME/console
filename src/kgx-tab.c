@@ -55,9 +55,6 @@ struct _KgxTabPrivate {
   gboolean              search_mode_enabled;
 
   KgxTerminal          *terminal;
-  gulong                term_size_handler;
-  gulong                term_font_inc_handler;
-  gulong                term_font_dec_handler;
   GBinding             *term_title_bind;
   GBinding             *term_path_bind;
   GBinding             *term_font_bind;
@@ -118,6 +115,32 @@ static guint signals[N_SIGNALS];
 
 
 static void
+size_changed (KgxTerminal *term,
+              guint        rows,
+              guint        cols,
+              KgxTab      *self)
+{
+  g_signal_emit (self, signals[SIZE_CHANGED], 0, rows, cols);
+}
+
+
+static void
+font_increase (KgxTerminal *term,
+               KgxTab      *self)
+{
+  g_signal_emit (self, signals[ZOOM], 0, KGX_ZOOM_IN);
+}
+
+
+static void
+font_decrease (KgxTerminal *term,
+               KgxTab      *self)
+{
+  g_signal_emit (self, signals[ZOOM], 0, KGX_ZOOM_OUT);
+}
+
+
+static void
 kgx_tab_dispose (GObject *object)
 {
   KgxTab *self = KGX_TAB (object);
@@ -136,9 +159,13 @@ kgx_tab_dispose (GObject *object)
   g_clear_object (&priv->path);
   g_clear_pointer (&priv->font, pango_font_description_free);
 
-  g_clear_signal_handler (&priv->term_size_handler, priv->terminal);
-  g_clear_signal_handler (&priv->term_font_inc_handler, priv->terminal);
-  g_clear_signal_handler (&priv->term_font_dec_handler, priv->terminal);
+  if (priv->terminal) {
+    g_object_disconnect (priv->terminal,
+                        "signal::size-changed", G_CALLBACK (size_changed), self,
+                        "signal::increase-font-size", G_CALLBACK (font_increase), self,
+                        "signal::decrease-font-size", G_CALLBACK (font_decrease), self,
+                        NULL);
+  }
   g_clear_object (&priv->terminal);
 
   g_clear_pointer (&priv->root, g_hash_table_unref);
@@ -630,25 +657,17 @@ parent_set (KgxTab    *self,
 
   pages = KGX_PAGES (parent);
 
-  priv->pages_font_bind = g_object_bind_property (pages,
-                                                  "font",
-                                                  self,
-                                                  "font",
+  priv->pages_font_bind = g_object_bind_property (pages, "font",
+                                                  self, "font",
                                                   G_BINDING_SYNC_CREATE);
-  priv->pages_zoom_bind = g_object_bind_property (pages,
-                                                  "zoom",
-                                                  self,
-                                                  "zoom",
+  priv->pages_zoom_bind = g_object_bind_property (pages, "zoom",
+                                                  self, "zoom",
                                                   G_BINDING_SYNC_CREATE);
-  priv->pages_theme_bind = g_object_bind_property (pages,
-                                                   "theme",
-                                                   self,
-                                                   "theme",
+  priv->pages_theme_bind = g_object_bind_property (pages, "theme",
+                                                   self, "theme",
                                                    G_BINDING_SYNC_CREATE);
-  priv->pages_opaque_bind = g_object_bind_property (pages,
-                                                    "opaque",
-                                                    self,
-                                                    "opaque",
+  priv->pages_opaque_bind = g_object_bind_property (pages, "opaque",
+                                                    self, "opaque",
                                                     G_BINDING_SYNC_CREATE);
 }
 
@@ -711,32 +730,6 @@ kgx_tab_init (KgxTab *self)
 }
 
 
-static void
-size_changed (KgxTerminal *term,
-              guint        rows,
-              guint        cols,
-              KgxTab      *self)
-{
-  g_signal_emit (self, signals[SIZE_CHANGED], 0, rows, cols);
-}
-
-
-static void
-font_increase (KgxTerminal *term,
-               KgxTab      *self)
-{
-  g_signal_emit (self, signals[ZOOM], 0, KGX_ZOOM_IN);
-}
-
-
-static void
-font_decrease (KgxTerminal *term,
-               KgxTab      *self)
-{
-  g_signal_emit (self, signals[ZOOM], 0, KGX_ZOOM_OUT);
-}
-
-
 void
 kgx_tab_connect_terminal (KgxTab      *self,
                           KgxTerminal *term)
@@ -748,9 +741,17 @@ kgx_tab_connect_terminal (KgxTab      *self,
   
   priv = kgx_tab_get_instance_private (self);
 
-  g_clear_signal_handler (&priv->term_size_handler, priv->terminal);
-  g_clear_signal_handler (&priv->term_font_inc_handler, priv->terminal);
-  g_clear_signal_handler (&priv->term_font_dec_handler, priv->terminal);
+  if (priv->terminal == term) {
+    return;
+  }
+
+  if (priv->terminal) {
+    g_object_disconnect (priv->terminal,
+                         "signal::size-changed", G_CALLBACK (size_changed), self,
+                         "signal::increase-font-size", G_CALLBACK (font_increase), self,
+                         "signal::decrease-font-size", G_CALLBACK (font_decrease), self,
+                         NULL);
+  }
 
   g_clear_object (&priv->term_title_bind);
   g_clear_object (&priv->term_path_bind);
@@ -759,52 +760,31 @@ kgx_tab_connect_terminal (KgxTab      *self,
   g_clear_object (&priv->term_theme_bind);
   g_clear_object (&priv->term_opaque_bind);
 
-  g_clear_object (&priv->terminal);
+  g_set_object (&priv->terminal, term);
 
-  priv->terminal = g_object_ref (term);
+  g_object_connect (term,
+                    "signal::size-changed", G_CALLBACK (size_changed), self,
+                    "signal::increase-font-size", G_CALLBACK (font_increase), self,
+                    "signal::decrease-font-size", G_CALLBACK (font_decrease), self,
+                    NULL);
 
-  priv->term_size_handler = g_signal_connect (term,
-                                              "size-changed",
-                                              G_CALLBACK (size_changed),
-                                              self);
-  priv->term_font_inc_handler = g_signal_connect (term,
-                                                  "increase-font-size",
-                                                  G_CALLBACK (font_increase),
-                                                  self);
-  priv->term_font_dec_handler = g_signal_connect (term,
-                                                  "decrease-font-size",
-                                                  G_CALLBACK (font_decrease),
-                                                  self);
-
-  priv->term_title_bind = g_object_bind_property (term,
-                                                  "window-title",
-                                                  self,
-                                                  "tab-title",
+  priv->term_title_bind = g_object_bind_property (term, "window-title",
+                                                  self, "tab-title",
                                                   G_BINDING_SYNC_CREATE);
-  priv->term_path_bind = g_object_bind_property (term,
-                                                 "path",
-                                                 self,
-                                                 "tab-path",
+  priv->term_path_bind = g_object_bind_property (term, "path",
+                                                 self, "tab-path",
                                                  G_BINDING_SYNC_CREATE);
-  priv->term_font_bind = g_object_bind_property (self,
-                                                 "font",
-                                                 term,
-                                                 "font-desc",
+  priv->term_font_bind = g_object_bind_property (self, "font",
+                                                 term, "font-desc",
                                                  G_BINDING_SYNC_CREATE);
-  priv->term_zoom_bind = g_object_bind_property (self,
-                                                 "zoom",
-                                                 term,
-                                                 "font-scale",
+  priv->term_zoom_bind = g_object_bind_property (self, "zoom",
+                                                 term, "font-scale",
                                                  G_BINDING_SYNC_CREATE);
-  priv->term_theme_bind = g_object_bind_property (self,
-                                                  "theme",
-                                                  term,
-                                                  "theme",
+  priv->term_theme_bind = g_object_bind_property (self, "theme",
+                                                  term, "theme",
                                                   G_BINDING_SYNC_CREATE);
-  priv->term_opaque_bind = g_object_bind_property (self,
-                                                   "opaque",
-                                                   term,
-                                                   "opaque",
+  priv->term_opaque_bind = g_object_bind_property (self, "opaque",
+                                                   term, "opaque",
                                                    G_BINDING_SYNC_CREATE);
 
 }
@@ -1037,8 +1017,9 @@ kgx_tab_pop_child (KgxTab     *self,
                                      priv->notification_id,
                                      noti);
 
-    if (!gtk_widget_get_mapped (GTK_WIDGET (self)))
+    if (!gtk_widget_get_mapped (GTK_WIDGET (self))) {
       g_object_set (self, "needs-attention", TRUE, NULL);
+    }
   }
 }
 
@@ -1074,7 +1055,7 @@ kgx_tab_get_children (KgxTab *self)
   GHashTableIter iter;
   gpointer pid, process;
 
-  g_return_val_if_fail (KGX_IS_TAB (self), FALSE);
+  g_return_val_if_fail (KGX_IS_TAB (self), NULL);
   
   priv = kgx_tab_get_instance_private (self);
 
