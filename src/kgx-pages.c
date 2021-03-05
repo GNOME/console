@@ -283,30 +283,28 @@ page_changed (GObject *object, GParamSpec *pspec, KgxPages *self)
 
   priv = kgx_pages_get_instance_private (self);
   page = hdy_tab_view_get_selected_page (HDY_TAB_VIEW (priv->view));
-  if (!page)
+
+  if (!page) {
     return;
+  }
+
   tab = KGX_TAB (hdy_tab_page_get_child (page));
 
 
   g_clear_handle_id (&priv->timeout, g_source_remove);
   g_clear_signal_handler (&priv->size_watcher, priv->active_page);
   priv->size_watcher = g_signal_connect (tab,
-                                         "size-changed",
-                                         G_CALLBACK (size_changed),
+                                         "size-changed", G_CALLBACK (size_changed),
                                          self);
 
   g_clear_object (&priv->title_bind);
-  priv->title_bind = g_object_bind_property (tab,
-                                             "tab-title",
-                                             self,
-                                             "title",
+  priv->title_bind = g_object_bind_property (tab, "tab-title",
+                                             self, "title",
                                              G_BINDING_SYNC_CREATE);
 
   g_clear_object (&priv->path_bind);
-  priv->path_bind = g_object_bind_property (tab,
-                                            "tab-path",
-                                            self,
-                                            "path",
+  priv->path_bind = g_object_bind_property (tab, "tab-path",
+                                            self, "path",
                                             G_BINDING_SYNC_CREATE);
 
   if (priv->active_page) {
@@ -314,24 +312,18 @@ page_changed (GObject *object, GParamSpec *pspec, KgxPages *self)
   }
 
   g_clear_object (&priv->is_active_bind);
-  priv->is_active_bind = g_object_bind_property (self,
-                                                 "is-active",
-                                                 tab,
-                                                 "is-active",
+  priv->is_active_bind = g_object_bind_property (self, "is-active",
+                                                 tab, "is-active",
                                                  G_BINDING_SYNC_CREATE);
 
   g_clear_object (&priv->page_status_bind);
-  priv->page_status_bind = g_object_bind_property (tab,
-                                                   "tab-status",
-                                                   self,
-                                                   "status",
+  priv->page_status_bind = g_object_bind_property (tab, "tab-status",
+                                                   self, "status",
                                                    G_BINDING_SYNC_CREATE);
 
   g_clear_object (&priv->search_bind);
-  priv->search_bind = g_object_bind_property (tab,
-                                              "search-mode-enabled",
-                                              self,
-                                              "search-mode-enabled",
+  priv->search_bind = g_object_bind_property (tab, "search-mode-enabled",
+                                              self, "search-mode-enabled",
                                               G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
   priv->active_page = KGX_TAB (tab);
@@ -422,10 +414,11 @@ page_detached (HdyTabView *view,
 
   if (hdy_tab_view_get_n_pages (HDY_TAB_VIEW (priv->view)) == 0) {
     toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
-    if (GTK_IS_WINDOW (toplevel))
-      {
-        gtk_window_close (GTK_WINDOW (toplevel));
-      }
+
+    if (GTK_IS_WINDOW (toplevel)) {
+      /* Not a massive fan, would prefer it if window observed pages is empty */
+      gtk_window_close (GTK_WINDOW (toplevel));
+    }
 
     priv->active_page = NULL;
     priv->size_watcher = 0;
@@ -437,6 +430,7 @@ static HdyTabView *
 create_window (HdyTabView *view,
                KgxPages   *self)
 {
+  /* Perhaps this should be handled via KgxWindow? */
   GtkWindow *window;
   KgxWindow *new_window;
   GtkApplication *app;
@@ -490,7 +484,7 @@ close_page (HdyTabView *view,
   children = kgx_tab_get_children (KGX_TAB (hdy_tab_page_get_child (page)));
 
   if (children->len < 1) {
-    return FALSE; // Aka no, I don't want to block closing
+    return FALSE; // Aka no, I don’t want to block closing
   }
 
   toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
