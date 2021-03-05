@@ -370,6 +370,15 @@ died (KgxTab         *page,
 
 
 static void
+zoom (KgxTab   *tab,
+      KgxZoom   dir,
+      KgxPages *self)
+{
+  g_signal_emit (self, signals[ZOOM], 0, dir);
+}
+
+
+static void
 page_attached (HdyTabView *view,
                HdyTabPage *page,
                int         position,
@@ -384,7 +393,10 @@ page_attached (HdyTabView *view,
 
   priv = kgx_pages_get_instance_private (self);
 
-  g_signal_connect (tab, "died", G_CALLBACK (died), self);
+  g_object_connect (tab,
+                    "signal::died", G_CALLBACK (died), self,
+                    "signal::zoom", G_CALLBACK (zoom), self,
+                    NULL);
 
   gtk_stack_set_visible_child (GTK_STACK (priv->stack), priv->view);
 }

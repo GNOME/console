@@ -344,13 +344,14 @@ zoom (KgxPages  *pages,
       KgxWindow *self)
 {
   GAction *action = NULL;
+  GtkApplication *app = gtk_window_get_application (GTK_WINDOW (self));
 
   switch (dir) {
     case KGX_ZOOM_IN:
-      action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-in");
+      action = g_action_map_lookup_action (G_ACTION_MAP (app), "zoom-in");
       break;
     case KGX_ZOOM_OUT:
-      action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-out");
+      action = g_action_map_lookup_action (G_ACTION_MAP (app), "zoom-out");
       break;
     default:
       g_return_if_reached ();
