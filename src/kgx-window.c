@@ -85,9 +85,11 @@ started (GObject      *src,
   pid = kgx_tab_start_finish (page, res, &error);
 
   if (error) {
-    g_critical ("Failed to start %s: %s",
-                G_OBJECT_TYPE_NAME (src),
-                error->message);
+    g_warning ("Failed to start %s: %s",
+               G_OBJECT_TYPE_NAME (src),
+               error->message);
+    
+    return;
   }
 
   app = gtk_window_get_application (GTK_WINDOW (win));
