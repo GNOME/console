@@ -1,5 +1,5 @@
 debian:
-  image: debian:buster
+  image: debian:bullseye
   stage: build
   before_script:
     - export DEBIAN_FRONTEND=noninteractive
