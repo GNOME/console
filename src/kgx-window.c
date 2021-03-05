@@ -129,7 +129,6 @@ kgx_window_constructed (GObject *object)
   const char         *initial = NULL;
   g_autoptr (GError)  error = NULL;
   g_auto (GStrv)      shell = NULL;
-  g_autofree char    *command = NULL;
   GtkApplication     *application = NULL;
 
   G_OBJECT_CLASS (kgx_window_parent_class)->constructed (object);
@@ -137,24 +136,21 @@ kgx_window_constructed (GObject *object)
   application = gtk_window_get_application (GTK_WINDOW (self));
 
   if (G_UNLIKELY (self->command != NULL)) {
-    // dup the string so we can free command later to handle the
-    // (more likely) fp_vte_guess_shell case
-    command = g_strdup (self->command);
-  } else {
-    command = fp_vte_guess_shell (NULL, &error);
+    g_shell_parse_argv (self->command, NULL, &shell, &error);
     if (error) {
-      g_warning ("flatterm: %s", error->message);
+      g_warning ("Failed to parse “%s” as a command", self->command);
+      shell = NULL;
+      g_clear_error (&error);
     }
-  }
-
-  if (command == NULL) {
-    command = g_strdup ("/bin/sh");
-    g_warning ("Defaulting to %s", shell[0]);
-  }
-
-  g_shell_parse_argv (command, NULL, &shell, &error);
-  if (error) {
-    g_warning ("Can’t handle %s: %s", command, error->message);
+    /* We should probably do something other than /bin/sh  */
+    if (shell == NULL) {
+      shell = g_new0 (char *, 2);
+      shell[0] = g_strdup ("/bin/sh");
+      shell[1] = NULL;
+      g_warning ("Defaulting to “%s”", shell[0]);
+    }
+  } else {
+    shell = kgx_application_get_shell (KGX_APPLICATION (application));
   }
 
   if (self->working_dir) {
@@ -450,7 +446,7 @@ kgx_window_class_init (KgxWindowClass *klass)
     g_param_spec_boolean ("close-on-zero", "Close on zero",
                           "Should close when child exits with 0",
                           TRUE,
-                          G_PARAM_READWRITE);
+                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
   /**
    * KgxWindow:initially-empty:
@@ -522,31 +518,17 @@ new_tab_activated (GSimpleAction *action,
   const char         *initial = NULL;
   g_autoptr (GError)  error = NULL;
   g_auto (GStrv)      shell = NULL;
-  g_autofree char    *command = NULL;
   GtkWidget          *page;
   KgxWindow          *self = data;
   GtkApplication     *application = NULL;
 
-  command = fp_vte_guess_shell (NULL, &error);
-  if (error) {
-    g_warning ("flatterm: %s", error->message);
-  }
+  application = gtk_window_get_application (GTK_WINDOW (self));
 
-  if (command == NULL) {
-    command = g_strdup ("/bin/sh");
-    g_warning ("Defaulting to %s", shell[0]);
-  }
-
-  g_shell_parse_argv (command, NULL, &shell, &error);
-  if (error) {
-    g_warning ("Can’t handle %s: %s", command, error->message);
-  }
+  shell = kgx_application_get_shell (KGX_APPLICATION (application));
 
   initial = g_get_home_dir ();
 
   g_debug ("Working in %s", initial);
-
-  application = gtk_window_get_application (GTK_WINDOW (self));
 
   page = g_object_new (KGX_TYPE_SIMPLE_TAB,
                        "application", application,

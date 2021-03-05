@@ -44,23 +44,6 @@
  * to the caller to conveniently wait/wait-check for the child.
  */
 
-/**
- * fp_vte_guess_shell:
- * @cancellable: (nullable): a #GCancellable or %NULL
- * @error: a location for a #GError, or %NULL
- *
- * Guesses the users preferred shell, possibly querying the host.
- *
- * Returns: (transfer full): a string containing the shell or %NULL
- *   and @error is set.
- */
-gchar *
-fp_vte_guess_shell (GCancellable  *cancellable,
-                    GError       **error)
-{
-  return vte_get_user_shell ();
-}
-
 
 static void
 fp_vte_pty_spawn_cb (VtePty       *pty,

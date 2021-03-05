@@ -17,8 +17,6 @@
 
 G_BEGIN_DECLS
 
-gchar       *fp_vte_guess_shell       (GCancellable         *cancellable,
-                                       GError              **error);
 void         fp_vte_pty_spawn_async   (VtePty               *pty,
                                        const char           *working_directory,
                                        const char *const    *argv,

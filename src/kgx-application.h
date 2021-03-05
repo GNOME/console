@@ -77,7 +77,7 @@ struct _KgxApplication
   KgxTheme                  theme;
   gdouble                   scale;
 
-  
+  GSettings                *settings;
   GSettings                *desktop_interface;
 
   GTree                    *watching;
@@ -97,6 +97,7 @@ void                  kgx_application_add_watch       (KgxApplication *self,
 void                  kgx_application_remove_watch    (KgxApplication *self,
                                                        GPid            pid);
 PangoFontDescription *kgx_application_get_font        (KgxApplication *self);
+GStrv                 kgx_application_get_shell       (KgxApplication *self);
 void                  kgx_application_push_active     (KgxApplication *self);
 void                  kgx_application_pop_active      (KgxApplication *self);
 void                  kgx_application_add_page        (KgxApplication *self,

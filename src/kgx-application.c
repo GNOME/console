@@ -140,6 +140,7 @@ kgx_application_finalize (GObject *object)
 {
   KgxApplication *self = KGX_APPLICATION (object);
 
+  g_clear_object (&self->settings);
   g_clear_object (&self->desktop_interface);
 
   g_clear_pointer (&self->watching, g_tree_unref);
@@ -274,8 +275,8 @@ set_watcher (KgxApplication *self, gboolean focused)
 static void
 kgx_application_startup (GApplication *app)
 {
+  KgxApplication *self = KGX_APPLICATION (app);
   GtkSettings    *gtk_settings;
-  GSettings      *settings;
   GtkCssProvider *provider;
   const char *const new_window_accels[] = { "<shift><primary>n", NULL };
   const char *const new_tab_accels[] = { "<shift><primary>t", NULL };
@@ -316,9 +317,9 @@ kgx_application_startup (GApplication *app)
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "win.zoom-out", zoom_out_accels);
 
-  settings = g_settings_new ("org.gnome.zbrown.KingsCross");
-  g_settings_bind (settings, "theme", app, "theme", G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind (settings, "font-scale", app, "font-scale", G_SETTINGS_BIND_DEFAULT);
+  self->settings = g_settings_new ("org.gnome.zbrown.KingsCross");
+  g_settings_bind (self->settings, "theme", app, "theme", G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (self->settings, "font-scale", app, "font-scale", G_SETTINGS_BIND_DEFAULT);
 
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (provider, RES_PATH "styles.css");
@@ -769,6 +770,47 @@ kgx_application_get_font (KgxApplication *self)
 
   return pango_font_description_from_string (font);
 }
+
+
+/**
+ * kgx_application_get_shell:
+ * @self: the #KgxApplication
+ *
+ * Figure out what shell to launch for #KgxSimpleTabs, this is generally
+ * whatever vte decides is the users default shell. Alternatively it may
+ * be a custom command or if all else fails: /bin/sh
+ *
+ * Returns: (transfer full): the #GStrv shell vector
+ * 
+ * Since: 0.5.0
+ */
+GStrv
+kgx_application_get_shell (KgxApplication *self)
+{
+  g_autofree char *user = vte_get_user_shell ();
+  g_auto (GStrv) argv  =  NULL;
+  g_auto (GStrv) custom  =  NULL;
+  g_autoptr (GError) error = NULL;
+
+  g_return_val_if_fail (KGX_IS_APPLICATION (self), NULL);
+
+  g_shell_parse_argv (user, NULL, &argv, &error);
+  if (error) {
+    g_warning ("Failed to parse “%s” as a command", user);
+    argv = g_new0 (char *, 2);
+    argv[0] = g_strdup ("/bin/sh");
+    argv[1] = NULL;
+  }
+
+  custom = g_settings_get_strv (self->settings, "shell");
+
+  if (g_strv_length (custom) > 0) {
+    return g_steal_pointer (&custom);
+  } else {
+    return g_steal_pointer (&argv);
+  }
+}
+
 
 /**
  * kgx_application_push_active:
