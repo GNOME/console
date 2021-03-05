@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-02-17 17:38+0000\n"
-"PO-Revision-Date: 2021-02-22 22:23+0100\n"
+"POT-Creation-Date: 2021-03-04 18:14+0000\n"
+"PO-Revision-Date: 2021-03-05 01:50+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -21,7 +21,7 @@ msgstr ""
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in:4
 #: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:442
-#: src/kgx-window.c:651 src/kgx-window.ui:102 src/main.c:38
+#: src/kgx-window.c:607 src/kgx-window.ui:102 src/main.c:38
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
@@ -40,7 +40,7 @@ msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
 msgstr "kommando;prompt;cmd;kommandorad;kör;skal;terminal;kgx;"
 
 #: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:444
-#: src/kgx-window.c:642
+#: src/kgx-window.c:595
 msgid "Terminal Emulator"
 msgstr "Terminalemulator"
 
@@ -109,10 +109,15 @@ msgstr "barnövervakare"
 msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgstr "# King’s Cross %s med VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:428 src/kgx-window.c:634
+#: src/kgx-application.c:428 src/kgx-window.c:588
 #, c-format
-msgid "Copyright © %s Zander Brown"
-msgstr "Copyright © %s Zander Brown"
+#| msgid "Zander Brown"
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
+
+#: src/kgx-application.c:446
+msgid "GPL 3.0 or later"
+msgstr "GPL 3.0 eller senare"
 
 #: src/kgx-application.c:548
 msgid "Execute the argument to this option inside the terminal"
@@ -171,7 +176,7 @@ msgstr "<b>Skrivskyddad</b> — Kommando avslutades"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Misslyckades med att starta</b> — %s"
 
-#: src/kgx-tab.c:914
+#: src/kgx-tab.c:965
 msgid "Command completed"
 msgstr "Kommando slutfört"
 
@@ -194,7 +199,7 @@ msgid "_Paste"
 msgstr "_Klistra in"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:641
+#: src/kgx-window.c:594
 msgid "translator-credits"
 msgstr ""
 "Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
@@ -202,13 +207,16 @@ msgstr ""
 "Skicka synpunkter på översättningen till\n"
 "<tp-sv@listor.tp-sv.se>"
 
-#. Translators: "by King’s Cross" here is meaning
-#. author or creator of 'Terminal'
-#: src/kgx-window.c:649
+#. Translators: “King’s Cross” here is to distinguish from
+#. * gnome-terminal when using generic branding (such as on phones,
+#. * where g-t is unsuitable) - it may be best to leave it untranslated
+#. * (unlike Terminal, which should be)
+#.
+#: src/kgx-window.c:605
 msgid "Terminal (King’s Cross)"
 msgstr "Terminal (King’s Cross)"
 
-#: src/kgx-window.c:715
+#: src/kgx-window.c:671
 msgid "_About Terminal"
 msgstr "_Om Terminal"
 
@@ -279,3 +287,6 @@ msgstr "S_täng"
 #: src/menus.ui:49
 msgid "_Detach"
 msgstr "_Koppla loss"
+
+#~ msgid "Copyright © %s Zander Brown"
+#~ msgstr "Copyright © %s Zander Brown"
