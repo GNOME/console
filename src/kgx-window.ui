@@ -156,14 +156,15 @@
           </object>
         </child>
         <child>
-          <object class="HdyTabBar" id="bar">
+          <object class="HdyTabBar" id="tab_bar">
             <property name="visible">1</property>
+            <signal name="extra-drag-data-received" handler="extra_drag_data_received" swapped="no"/>
           </object>
         </child>
         <child>
           <object class="KgxPages" id="pages">
             <property name="visible">1</property>
-            <property name="tab-bar">bar</property>
+            <property name="tab-bar">tab_bar</property>
             <property name="is-active" bind-source="KgxWindow" bind-property="is-active" bind-flags="sync-create" />
             <signal name="zoom" handler="zoom" swapped="no"/>
             <signal name="notify::status" handler="status_changed" swapped="yes" />

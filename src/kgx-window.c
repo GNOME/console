@@ -389,6 +389,21 @@ status_changed (GObject *object, GParamSpec *pspec, gpointer data)
 }
 
 
+static void
+extra_drag_data_received (HdyTabBar        *bar,
+                          HdyTabPage       *page,
+                          GdkDragContext   *context,
+                          GtkSelectionData *selection_data,
+                          guint             info,
+                          guint             time,
+                          KgxWindow        *self)
+{
+  KgxTab *tab = KGX_TAB (hdy_tab_page_get_child (page));
+
+  kgx_tab_accept_drop (tab, selection_data);
+}
+
+
 static gboolean
 kgx_window_window_state_event (GtkWidget           *widget,
                                GdkEventWindowState *event)
@@ -499,12 +514,14 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_message);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, zoom_level);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, about_item);
+  gtk_widget_class_bind_template_child (widget_class, KgxWindow, tab_bar);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, pages);
 
   gtk_widget_class_bind_template_callback (widget_class, active_changed);
 
   gtk_widget_class_bind_template_callback (widget_class, zoom);
   gtk_widget_class_bind_template_callback (widget_class, status_changed);
+  gtk_widget_class_bind_template_callback (widget_class, extra_drag_data_received);
 }
 
 
@@ -668,6 +685,7 @@ update_subtitle (GBinding     *binding,
 static void
 kgx_window_init (KgxWindow *self)
 {
+  GtkTargetList *target_list;
   GPropertyAction *pact;
 
   gtk_widget_init_template (GTK_WIDGET (self));
@@ -704,6 +722,14 @@ kgx_window_init (KgxWindow *self)
                                G_BINDING_SYNC_CREATE,
                                update_subtitle,
                                NULL, NULL, NULL);
+
+  target_list = gtk_target_list_new (NULL, 0);
+  gtk_target_list_add_text_targets (target_list, 0);
+
+  hdy_tab_bar_set_extra_drag_dest_targets (HDY_TAB_BAR (self->tab_bar),
+                                           target_list);
+
+  gtk_target_list_unref (target_list);
 }
 
 

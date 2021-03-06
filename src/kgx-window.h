@@ -99,6 +99,7 @@ struct _KgxWindow
   GtkWidget            *exit_message;
   GtkWidget            *zoom_level;
   GtkWidget            *about_item;
+  GtkWidget            *tab_bar;
   GtkWidget            *pages;
 };
 
