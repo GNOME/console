@@ -21,13 +21,14 @@
     </child>
     <child type="overlay">
       <object class="GtkRevealer" id="status_revealer">
-        <property name="visible">True</property>
+        <property name="visible">False</property>
+        <property name="halign">end</property>
+        <property name="valign">end</property>
         <property name="transition-type">crossfade</property>
+        <signal name="notify::child-revealed" handler="check_revealer" swapped="no"/>
         <child>
           <object class="GtkLabel" id="status">
             <property name="visible">True</property>
-            <property name="halign">end</property>
-            <property name="valign">end</property>
             <property name="label">WxH</property>
             <style>
               <class name="floating-bar"/>

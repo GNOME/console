@@ -282,6 +282,7 @@ size_changed (KgxTab   *tab,
   label = g_strdup_printf ("%i × %i", cols, rows);
 
   gtk_label_set_label (GTK_LABEL (priv->status), label);
+  gtk_widget_show (priv->status_revealer);
   gtk_revealer_set_reveal_child (GTK_REVEALER (priv->status_revealer), TRUE);
 }
 
@@ -519,6 +520,16 @@ close_page (HdyTabView *view,
 }
 
 
+static void
+check_revealer (GtkRevealer *revealer,
+                GParamSpec  *pspec,
+                KgxPages    *self)
+{
+  if (!gtk_revealer_get_child_revealed (revealer))
+    gtk_widget_hide (GTK_WIDGET (revealer));
+}
+
+
 static gboolean
 status_to_icon (GBinding     *binding,
                 const GValue *from_value,
@@ -709,6 +720,7 @@ kgx_pages_class_init (KgxPagesClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, page_detached);
   gtk_widget_class_bind_template_callback (widget_class, create_window);
   gtk_widget_class_bind_template_callback (widget_class, close_page);
+  gtk_widget_class_bind_template_callback (widget_class, check_revealer);
 
   gtk_widget_class_set_css_name (widget_class, "pages");
 }
