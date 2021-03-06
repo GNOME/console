@@ -392,44 +392,15 @@ paste_response (GtkDialog    *dlg,
   g_free (paste);
 }
 
+
 static void
 got_text (GtkClipboard *clipboard,
-          const gchar  *text,
+          const char   *text,
           gpointer      data)
 {
-  g_autofree char *striped = g_strchug (g_strdup (text));
-  struct Paste    *paste = g_new (struct Paste, 1);
-
-  paste->dest = VTE_TERMINAL (data);
-  paste->text = g_strdup (text);
-
-  if (g_strstr_len (striped, -1, "sudo") != NULL &&
-      g_strstr_len (striped, -1, "\n") != NULL) {
-    GtkWidget *accept = NULL;
-    GtkWidget *dlg = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (data))),
-                                             GTK_DIALOG_MODAL,
-                                             GTK_MESSAGE_QUESTION,
-                                             GTK_BUTTONS_NONE,
-                                             _("You are pasting a command that runs as an administrator"));
-    gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dlg),
-                                              // TRANSLATORS: %s is the command being pasted
-                                              _("Make sure you know what the command does:\n%s"),
-                                              text);
-
-    g_signal_connect (dlg, "response", G_CALLBACK (paste_response), paste);
-    gtk_dialog_add_button (GTK_DIALOG (dlg),
-                           _("_Cancel"),
-                           GTK_RESPONSE_DELETE_EVENT);
-    accept = gtk_dialog_add_button (GTK_DIALOG (dlg),
-                                    _("_Paste"),
-                                    GTK_RESPONSE_ACCEPT);
-    gtk_style_context_add_class (gtk_widget_get_style_context (accept),
-                                 GTK_STYLE_CLASS_DESTRUCTIVE_ACTION);
-    gtk_widget_show (dlg);
-  } else {
-    paste_response (NULL, GTK_RESPONSE_ACCEPT, paste);
-  }
+  kgx_terminal_accept_paste (KGX_TERMINAL (data), text);
 }
+
 
 static void
 paste_activated (GSimpleAction *action,
@@ -638,5 +609,44 @@ kgx_terminal_init (KgxTerminal *self)
     vte_terminal_match_set_cursor_name (VTE_TERMINAL (self),
                                         self->match_id[i],
                                         "pointer");
+  }
+}
+
+
+void
+kgx_terminal_accept_paste (KgxTerminal *self,
+                           const char  *text)
+{
+  g_autofree char *striped = g_strchug (g_strdup (text));
+  struct Paste    *paste = g_new (struct Paste, 1);
+
+  paste->dest = VTE_TERMINAL (self);
+  paste->text = g_strdup (text);
+
+  if (g_strstr_len (striped, -1, "sudo") != NULL &&
+      g_strstr_len (striped, -1, "\n") != NULL) {
+    GtkWidget *accept = NULL;
+    GtkWidget *dlg = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
+                                             GTK_DIALOG_MODAL,
+                                             GTK_MESSAGE_QUESTION,
+                                             GTK_BUTTONS_NONE,
+                                             _("You are pasting a command that runs as an administrator"));
+    gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dlg),
+                                              // TRANSLATORS: %s is the command being pasted
+                                              _("Make sure you know what the command does:\n%s"),
+                                              text);
+
+    g_signal_connect (dlg, "response", G_CALLBACK (paste_response), paste);
+    gtk_dialog_add_button (GTK_DIALOG (dlg),
+                           _("_Cancel"),
+                           GTK_RESPONSE_DELETE_EVENT);
+    accept = gtk_dialog_add_button (GTK_DIALOG (dlg),
+                                    _("_Paste"),
+                                    GTK_RESPONSE_ACCEPT);
+    gtk_style_context_add_class (gtk_widget_get_style_context (accept),
+                                 GTK_STYLE_CLASS_DESTRUCTIVE_ACTION);
+    gtk_widget_show (dlg);
+  } else {
+    paste_response (NULL, GTK_RESPONSE_ACCEPT, paste);
   }
 }

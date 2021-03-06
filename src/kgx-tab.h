@@ -102,6 +102,7 @@ void        kgx_tab_pop_child        (KgxTab               *self,
                                       KgxProcess           *process);
 gboolean    kgx_tab_is_active        (KgxTab               *self);
 GPtrArray  *kgx_tab_get_children     (KgxTab               *self);
-
+void        kgx_tab_accept_drop      (KgxTab               *self,
+                                      GtkSelectionData     *selection_data);
 
 G_END_DECLS

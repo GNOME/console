@@ -426,6 +426,24 @@ kgx_tab_map (GtkWidget *widget)
 
 
 static void
+kgx_tab_drag_data_received (GtkWidget        *widget,
+                            GdkDragContext   *context,
+                            gint              x,
+                            gint              y,
+                            GtkSelectionData *selection_data,
+                            guint             info,
+                            guint             time)
+{
+  KgxTab *self = KGX_TAB (widget);
+  GdkDragAction action = gdk_drag_context_get_selected_action (context);
+
+  kgx_tab_accept_drop (self, selection_data);
+
+  gtk_drag_finish (context, TRUE, action == GDK_ACTION_MOVE, time);
+}
+
+
+static void
 kgx_tab_real_start (KgxTab              *tab,
                     GAsyncReadyCallback  callback,
                     gpointer             callback_data)
@@ -457,6 +475,7 @@ kgx_tab_class_init (KgxTabClass *klass)
   object_class->set_property = kgx_tab_set_property;
 
   widget_class->map = kgx_tab_map;
+  widget_class->drag_data_received = kgx_tab_drag_data_received;
 
   tab_class->start = kgx_tab_real_start;
   tab_class->start_finish = kgx_tab_real_start_finish;
@@ -758,6 +777,10 @@ kgx_tab_init (KgxTab *self)
 
   hdy_search_bar_connect_entry (HDY_SEARCH_BAR (priv->search_bar),
                                 GTK_ENTRY (priv->search_entry));
+
+  gtk_drag_dest_set (GTK_WIDGET (self), GTK_DEST_DEFAULT_ALL, NULL, 0,
+                     GDK_ACTION_COPY);
+  gtk_drag_dest_add_text_targets (GTK_WIDGET (self));
 }
 
 
@@ -1101,4 +1124,25 @@ kgx_tab_get_children (KgxTab *self)
   }
 
   return children;
+}
+
+
+void
+kgx_tab_accept_drop (KgxTab           *self,
+                     GtkSelectionData *selection_data)
+{
+  KgxTabPrivate *priv;
+  g_autofree char *text = NULL;
+
+  g_return_if_fail (KGX_IS_TAB (self));
+
+  priv = kgx_tab_get_instance_private (self);
+
+  if (gtk_selection_data_get_length (selection_data) < 0)
+    return;
+
+  text = (char *) gtk_selection_data_get_text (selection_data);
+
+  if (priv->terminal)
+    kgx_terminal_accept_paste (KGX_TERMINAL (priv->terminal), text);
 }

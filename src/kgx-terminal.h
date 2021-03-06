@@ -83,4 +83,7 @@ struct _KgxTerminal
 
 G_DECLARE_FINAL_TYPE (KgxTerminal, kgx_terminal, KGX, TERMINAL, VteTerminal)
 
+void kgx_terminal_accept_paste (KgxTerminal *self,
+                                const char  *text);
+
 G_END_DECLS
