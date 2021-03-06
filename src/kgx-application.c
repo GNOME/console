@@ -348,6 +348,7 @@ kgx_application_command_line (GApplication            *app,
   KgxApplication *self = KGX_APPLICATION (app);
   GVariantDict *options = NULL;
   const char *working_dir = NULL;
+  const char *title = NULL;
   const char *command = NULL;
   const char *const *shell = NULL;
   gint64 scrollback;
@@ -357,6 +358,7 @@ kgx_application_command_line (GApplication            *app,
   options = g_application_command_line_get_options_dict (cli);
 
   g_variant_dict_lookup (options, "working-directory", "^&ay", &working_dir);
+  g_variant_dict_lookup (options, "title", "&s", &title);
   g_variant_dict_lookup (options, "command", "^&ay", &command);
 
   if (g_variant_dict_lookup (options, "set-shell", "^as", &shell) && shell) {
@@ -379,6 +381,11 @@ kgx_application_command_line (GApplication            *app,
                          "application", app,
                          "close-on-zero", command == NULL,
                          "initial-work-dir", abs_path,
+  #if IS_GENERIC
+                         "title", title ? title : _("Terminal"),
+  #else
+                         "title", title ? title : _("King’s Cross"),
+  #endif
                          "command", command,
                          NULL);
   gtk_widget_show (window);
@@ -612,6 +619,15 @@ static GOptionEntry entries[] = {
     G_OPTION_ARG_NONE,
     NULL,
     N_("Wait until the child exits (TODO)"),
+    NULL
+  },
+  {
+    "title",
+    'T',
+    0,
+    G_OPTION_ARG_STRING,
+    NULL,
+    N_("Set the iniitial window title"),
     NULL
   },
   {
