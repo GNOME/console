@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-03-06 02:12+0000\n"
-"PO-Revision-Date: 2021-03-06 09:54+0200\n"
+"POT-Creation-Date: 2021-03-06 09:51+0000\n"
+"PO-Revision-Date: 2021-03-06 11:52+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -136,16 +136,15 @@ msgid "Wait until the child exits (TODO)"
 msgstr "Очікувати на завершення дочірнього процесу (ЩЕ НЕ РЕАЛІЗОВАНО)"
 
 #: src/kgx-application.c:630
-msgid "Set the iniitial window title"
-msgstr ""
-"Встановити початковий заголовок вікна"
+#| msgid "Set the iniitial window title"
+msgid "Set the initial window title"
+msgstr "Встановити початковий заголовок вікна"
 
 #: src/kgx-application.c:639
 msgid "ADVANCED: Set the shell to launch"
 msgstr "ДЛЯ ДОСВІДЧЕНИХ: встановити командну оболонку для запуску"
 
 #: src/kgx-application.c:648
-#| msgid "ADVANCED: Set the shell to launch"
 msgid "ADVANCED: Set the scrollback length"
 msgstr "ДЛЯ ДОСВІДЧЕНИХ: встановити довжину буфера гортання"
 
