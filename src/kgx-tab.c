@@ -463,7 +463,7 @@ kgx_tab_drag_data_received (GtkWidget        *widget,
 
   kgx_tab_accept_drop (self, selection_data);
 
-  gtk_drag_finish (context, TRUE, action == GDK_ACTION_MOVE, time);
+  gtk_drag_finish (context, TRUE, action == GDK_ACTION_COPY, time);
 }
 
 
