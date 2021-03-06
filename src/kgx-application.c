@@ -627,7 +627,7 @@ static GOptionEntry entries[] = {
     0,
     G_OPTION_ARG_STRING,
     NULL,
-    N_("Set the iniitial window title"),
+    N_("Set the initial window title"),
     NULL
   },
   {
