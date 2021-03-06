@@ -75,3 +75,19 @@
 label.numeric {
   font-feature-settings: "tnum";
 }
+
+box.tab:drop(active) {
+  outline: 1px solid $drop_target_color;
+  outline-offset: -1px;
+  -gtk-outline-radius: 0;
+
+  window:not(.tiled)
+        :not(.tiled-top)
+        :not(.tiled-bottom)
+        :not(.tiled-left)
+        :not(.tiled-right)
+        :not(.maximized) & {
+    -gtk-outline-bottom-left-radius: 8px;
+    -gtk-outline-bottom-right-radius: 8px;
+  }
+}

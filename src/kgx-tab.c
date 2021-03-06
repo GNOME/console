@@ -425,6 +425,30 @@ kgx_tab_map (GtkWidget *widget)
 }
 
 
+static gboolean
+kgx_tab_draw (GtkWidget *widget,
+              cairo_t   *cr)
+{
+  GtkStateFlags flags;
+
+  GTK_WIDGET_CLASS (kgx_tab_parent_class)->draw (widget, cr);
+
+  flags = gtk_widget_get_state_flags (widget);
+
+  /* FIXME this is a workaround for the fact GTK3 css outline is used for focus
+   * only by default. This can be removed in GTK4 as it just works there. */
+  if (flags & GTK_STATE_FLAG_DROP_ACTIVE) {
+    GtkStyleContext *context = gtk_widget_get_style_context (widget);
+    int width = gtk_widget_get_allocated_width (widget);
+    int height = gtk_widget_get_allocated_height (widget);
+
+    gtk_render_focus (context, cr, 0, 0, width, height);
+  }
+
+  return GDK_EVENT_PROPAGATE;
+}
+
+
 static void
 kgx_tab_drag_data_received (GtkWidget        *widget,
                             GdkDragContext   *context,
@@ -475,6 +499,7 @@ kgx_tab_class_init (KgxTabClass *klass)
   object_class->set_property = kgx_tab_set_property;
 
   widget_class->map = kgx_tab_map;
+  widget_class->draw = kgx_tab_draw;
   widget_class->drag_data_received = kgx_tab_drag_data_received;
 
   tab_class->start = kgx_tab_real_start;

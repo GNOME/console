@@ -12,6 +12,7 @@ $borders_edge: if($variant == 'light', transparentize(white, 0.2), transparentiz
 $backdrop_borders_color: mix($borders_color, $bg_color, 80%);
 $shadow_color: transparentize(black, 0.9);
 $top_hilight: $borders_edge;
+$drop_target_color: #4e9a06;
 
 @if $high_contrast {
   $fg_color: if($variant == 'light', darken($fg_color, 3%), lighten($fg_color, 2%));
