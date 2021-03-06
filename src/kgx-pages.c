@@ -259,7 +259,10 @@ size_changed (KgxTab   *tab,
 {
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
   g_autofree char *label = NULL;
- 
+
+  if (gtk_widget_in_destruction (GTK_WIDGET (self)))
+    return;
+
   if (cols == priv->last_cols && rows == priv->last_rows) {
     return;
   }
@@ -299,8 +302,6 @@ page_changed (GObject *object, GParamSpec *pspec, KgxPages *self)
 
   tab = KGX_TAB (hdy_tab_page_get_child (page));
 
-
-  g_clear_handle_id (&priv->timeout, g_source_remove);
   g_clear_signal_handler (&priv->size_watcher, priv->active_page);
   priv->size_watcher = g_signal_connect (tab,
                                          "size-changed", G_CALLBACK (size_changed),
