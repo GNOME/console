@@ -41,12 +41,12 @@
     border-color: themecolor(unfocused_borders);
   }
 
-  &.bottom.left { // axes left border and border radius
+  &:dir(rtl) { // axes left border and border radius
     border-left-style: none;
     border-top-left-radius: 0;
   }
 
-  &.bottom.right { // axes right border and border radius
+  &:dir(ltr) { // axes right border and border radius
     border-right-style: none;
     border-top-right-radius: 0;
   }

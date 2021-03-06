@@ -20,14 +20,21 @@
       </object>
     </child>
     <child type="overlay">
-      <object class="GtkLabel" id="status">
-        <property name="halign">end</property>
-        <property name="valign">end</property>
-        <property name="label">WxH</property>
-        <style>
-          <class name="floating-bar"/>
-          <class name="numeric"/>
-        </style>
+      <object class="GtkRevealer" id="status_revealer">
+        <property name="visible">True</property>
+        <property name="transition-type">crossfade</property>
+        <child>
+          <object class="GtkLabel" id="status">
+            <property name="visible">True</property>
+            <property name="halign">end</property>
+            <property name="valign">end</property>
+            <property name="label">WxH</property>
+            <style>
+              <class name="floating-bar"/>
+              <class name="numeric"/>
+            </style>
+          </object>
+        </child>
       </object>
     </child>
   </template>

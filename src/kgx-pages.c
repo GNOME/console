@@ -43,6 +43,7 @@ struct _KgxPagesPrivate {
   GtkWidget            *tabbar;
 
   GtkWidget            *status;
+  GtkWidget            *status_revealer;
 
   int                   last_cols;
   int                   last_rows;
@@ -244,7 +245,7 @@ size_timeout (KgxPages *self)
 
   priv->timeout = 0;
 
-  gtk_widget_hide (priv->status);
+  gtk_revealer_set_reveal_child (GTK_REVEALER (priv->status_revealer), FALSE);
 
   return G_SOURCE_REMOVE;
 }
@@ -278,7 +279,7 @@ size_changed (KgxTab   *tab,
   label = g_strdup_printf ("%i × %i", cols, rows);
 
   gtk_label_set_label (GTK_LABEL (priv->status), label);
-  gtk_widget_show (priv->status);
+  gtk_revealer_set_reveal_child (GTK_REVEALER (priv->status_revealer), TRUE);
 }
 
 
@@ -700,6 +701,7 @@ kgx_pages_class_init (KgxPagesClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, stack);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, view);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, status);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxPages, status_revealer);
 
   gtk_widget_class_bind_template_callback (widget_class, page_changed);
   gtk_widget_class_bind_template_callback (widget_class, page_attached);
