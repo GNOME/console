@@ -33,12 +33,12 @@
   background-color: themecolor(theme_base_color);
   border-width: 1px;
   border-style: solid solid none;
-  border-color: themecolor(borders);
+  background-clip: padding-box;
+  border-color: transparentize(black, .25);
   border-radius: 3px 3px 0 0;
 
   &:backdrop {
     background-color: themecolor(theme_unfocused_base_color);
-    border-color: themecolor(unfocused_borders);
   }
 
   &:dir(rtl) { // axes left border and border radius
