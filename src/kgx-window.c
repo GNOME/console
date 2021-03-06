@@ -190,6 +190,10 @@ kgx_window_constructed (GObject *object)
                           self->pages, "zoom",
                           G_BINDING_SYNC_CREATE);
 
+  g_object_bind_property (application, "scrollback-lines",
+                          self->pages, "scrollback-lines",
+                          G_BINDING_SYNC_CREATE);
+
   g_signal_connect (application,
                     "notify::font-scale", G_CALLBACK (zoomed),
                     self);

@@ -16,5 +16,8 @@
     <key name="shell" type="as">
       <default>[]</default>
     </key>
+    <key name="scrollback-lines" type="x">
+      <default>10000</default>
+    </key>
   </schema>
 </schemalist>

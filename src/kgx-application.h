@@ -75,7 +75,8 @@ struct _KgxApplication
 
   /*< public >*/
   KgxTheme                  theme;
-  gdouble                   scale;
+  double                    scale;
+  gint64                    scrollback_lines;
 
   GSettings                *settings;
   GSettings                *desktop_interface;

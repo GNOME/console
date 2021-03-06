@@ -44,12 +44,14 @@ struct _KgxTabPrivate {
   char                 *title;
   char                 *tooltip;
   GFile                *path;
-  KgxStatus             status;
   PangoFontDescription *font;
   double                zoom;
-  gboolean              is_active;
+  KgxStatus             status;
   KgxTheme              theme;
   gboolean              opaque;
+  gint64                scrollback_lines;
+
+  gboolean              is_active;
   gboolean              close_on_quit;
   gboolean              needs_attention;
   gboolean              search_mode_enabled;
@@ -61,11 +63,13 @@ struct _KgxTabPrivate {
   GBinding             *term_zoom_bind;
   GBinding             *term_theme_bind;
   GBinding             *term_opaque_bind;
+  GBinding             *term_scrollback_bind;
 
   GBinding             *pages_font_bind;
   GBinding             *pages_zoom_bind;
   GBinding             *pages_theme_bind;
   GBinding             *pages_opaque_bind;
+  GBinding             *pages_scrollback_bind;
 
   GtkWidget            *revealer;
   GtkWidget            *label;
@@ -100,6 +104,7 @@ enum {
   PROP_CLOSE_ON_QUIT,
   PROP_NEEDS_ATTENTION,
   PROP_SEARCH_MODE_ENABLED,
+  PROP_SCROLLBACK_LINES,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -323,6 +328,9 @@ kgx_tab_get_property (GObject    *object,
     case PROP_SEARCH_MODE_ENABLED:
       g_value_set_boolean (value, priv->search_mode_enabled);
       break;
+    case PROP_SCROLLBACK_LINES:
+      g_value_set_int64 (value, priv->scrollback_lines);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -388,6 +396,9 @@ kgx_tab_set_property (GObject      *object,
       break;
     case PROP_SEARCH_MODE_ENABLED:
       priv->search_mode_enabled = g_value_get_boolean (value);
+      break;
+    case PROP_SCROLLBACK_LINES:
+      priv->scrollback_lines = g_value_get_int64 (value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -584,6 +595,22 @@ kgx_tab_class_init (KgxTabClass *klass)
                           FALSE,
                           G_PARAM_READWRITE);
 
+  /**
+   * KgxTab:scrollback-lines:
+   * 
+   * How many lines of scrollback #KgxTerminal should keep
+   * 
+   * Bound to /org/gnome/zbrown/KingsCross/scrollback-lines so changes persist
+   * 
+   * Stability: Private
+   * 
+   * Since: 0.5.0
+   */
+  pspecs[PROP_SCROLLBACK_LINES] =
+    g_param_spec_int64 ("scrollback-lines", "Scrollback Lines", "Size of the scrollback",
+                        G_MININT64, G_MAXINT64, 512,
+                        G_PARAM_READWRITE);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   signals[SIZE_CHANGED] = g_signal_new ("size-changed",
@@ -646,6 +673,7 @@ parent_set (KgxTab    *self,
   g_clear_object (&priv->pages_zoom_bind);
   g_clear_object (&priv->pages_theme_bind);
   g_clear_object (&priv->pages_opaque_bind);
+  g_clear_object (&priv->pages_scrollback_bind);
 
   if (parent == NULL) {
     return;
@@ -669,6 +697,9 @@ parent_set (KgxTab    *self,
   priv->pages_opaque_bind = g_object_bind_property (pages, "opaque",
                                                     self, "opaque",
                                                     G_BINDING_SYNC_CREATE);
+  priv->pages_scrollback_bind = g_object_bind_property (pages, "scrollback-lines",
+                                                        self, "scrollback-lines",
+                                                        G_BINDING_SYNC_CREATE);
 }
 
 
@@ -759,6 +790,7 @@ kgx_tab_connect_terminal (KgxTab      *self,
   g_clear_object (&priv->term_zoom_bind);
   g_clear_object (&priv->term_theme_bind);
   g_clear_object (&priv->term_opaque_bind);
+  g_clear_object (&priv->term_scrollback_bind);
 
   g_set_object (&priv->terminal, term);
 
@@ -786,7 +818,9 @@ kgx_tab_connect_terminal (KgxTab      *self,
   priv->term_opaque_bind = g_object_bind_property (self, "opaque",
                                                    term, "opaque",
                                                    G_BINDING_SYNC_CREATE);
-
+  priv->term_scrollback_bind = g_object_bind_property (self, "scrollback-lines",
+                                                       term, "scrollback-lines",
+                                                       G_BINDING_SYNC_CREATE);
 }
 
 

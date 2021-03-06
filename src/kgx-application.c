@@ -50,6 +50,7 @@ enum {
   PROP_THEME,
   PROP_FONT,
   PROP_FONT_SCALE,
+  PROP_SCROLLBACK_LINES,
   LAST_PROP
 };
 
@@ -104,6 +105,9 @@ kgx_application_set_property (GObject      *object,
     case PROP_FONT_SCALE:
       kgx_application_set_scale (self, g_value_get_double (value));
       break;
+    case PROP_SCROLLBACK_LINES:
+      self->scrollback_lines = g_value_get_int64 (value);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -127,6 +131,9 @@ kgx_application_get_property (GObject    *object,
       break;
     case PROP_FONT_SCALE:
       g_value_set_double (value, self->scale);
+      break;
+    case PROP_SCROLLBACK_LINES:
+      g_value_set_int64 (value, self->scrollback_lines);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -320,6 +327,7 @@ kgx_application_startup (GApplication *app)
   self->settings = g_settings_new ("org.gnome.zbrown.KingsCross");
   g_settings_bind (self->settings, "theme", app, "theme", G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (self->settings, "font-scale", app, "font-scale", G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (self->settings, "scrollback-lines", app, "scrollback-lines", G_SETTINGS_BIND_DEFAULT);
 
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (provider, RES_PATH "styles.css");
@@ -342,6 +350,7 @@ kgx_application_command_line (GApplication            *app,
   const char *working_dir = NULL;
   const char *command = NULL;
   const char *const *shell = NULL;
+  gint64 scrollback;
   GtkWidget *window;
   g_autofree char *abs_path = NULL;
 
@@ -349,10 +358,15 @@ kgx_application_command_line (GApplication            *app,
 
   g_variant_dict_lookup (options, "working-directory", "^&ay", &working_dir);
   g_variant_dict_lookup (options, "command", "^&ay", &command);
-  g_variant_dict_lookup (options, "set-shell", "^as", &shell);
 
-  if (shell) {
+  if (g_variant_dict_lookup (options, "set-shell", "^as", &shell) && shell) {
     g_settings_set_strv (self->settings, "shell", shell);
+
+    return 0;
+  }
+
+  if (g_variant_dict_lookup (options, "set-scrollback", "x", &scrollback)) {
+    g_settings_set_int64 (self->settings, "scrollback-lines", scrollback);
 
     return 0;
   }
@@ -512,6 +526,22 @@ kgx_application_class_init (KgxApplicationClass *klass)
                          0.5, 2.0, 1.0,
                          G_PARAM_READWRITE);
 
+  /**
+   * KgxApplication:scrollback-lines:
+   * 
+   * How many lines of scrollback #KgxTerminal should keep
+   * 
+   * Bound to /org/gnome/zbrown/KingsCross/scrollback-lines so changes persist
+   * 
+   * Stability: Private
+   * 
+   * Since: 0.5.0
+   */
+  pspecs[PROP_SCROLLBACK_LINES] =
+    g_param_spec_int64 ("scrollback-lines", "Scrollback Lines", "Size of the scrollback",
+                        G_MININT64, G_MAXINT64, 512,
+                        G_PARAM_READWRITE);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 }
 
@@ -591,6 +621,15 @@ static GOptionEntry entries[] = {
     G_OPTION_ARG_STRING_ARRAY,
     NULL,
     N_("ADVANCED: Set the shell to launch"),
+    NULL
+  },
+  {
+    "set-scrollback",
+    0,
+    0,
+    G_OPTION_ARG_INT64,
+    NULL,
+    N_("ADVANCED: Set the scrollback length"),
     NULL
   },
   { NULL }
