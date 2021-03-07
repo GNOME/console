@@ -26,7 +26,7 @@
  * there children) running in the open #KgxWindow s
  */
 
-#define G_LOG_DOMAIN "Kgx"
+#include "kgx-config.h"
 
 #include <glib/gi18n.h>
 #include <vte/vte.h>
@@ -35,7 +35,6 @@
 
 #include "rgba.h"
 
-#include "kgx-config.h"
 #include "kgx-application.h"
 #include "kgx-window.h"
 #include "kgx-pages.h"

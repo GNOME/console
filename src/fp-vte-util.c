@@ -11,6 +11,7 @@
  * SPDX-License-Identifier: (MIT OR Apache-2.0)
  */
 
+#undef G_LOG_DOMAIN
 #define G_LOG_DOMAIN "fp-vte-util"
 
 

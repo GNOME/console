@@ -26,18 +26,16 @@
  * Since: 0.1.0
  */
 
-#define G_LOG_DOMAIN "Kgx"
+#include "kgx-config.h"
 
 #include <glib/gi18n.h>
 #include <vte/vte.h>
 #include <math.h>
-#define HANDY_USE_UNSTABLE_API
 #include <handy.h>
 
 #include "rgba.h"
 #include "fp-vte-util.h"
 
-#include "kgx-config.h"
 #include "kgx-window.h"
 #include "kgx-application.h"
 #include "kgx-process.h"
