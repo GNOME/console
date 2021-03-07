@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-02-17 17:38+0000\n"
-"PO-Revision-Date: 2021-02-21 13:02+0100\n"
+"POT-Creation-Date: 2021-03-06 09:51+0000\n"
+"PO-Revision-Date: 2021-03-07 13:02+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -21,8 +21,9 @@ msgstr ""
 
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:442
-#: src/kgx-window.c:651 src/kgx-window.ui:102 src/main.c:38
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:387
+#: src/kgx-application.c:477 src/kgx-window.c:614 src/kgx-window.ui:100
+#: src/main.c:38
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
@@ -33,7 +34,8 @@ msgstr ""
 "powłoka;shell;prompt;polecenie;komenda;wiersz poleceń;linia poleceń;wiersz "
 "komend;linia komend;cmd;konsola;terminal;kgx;kings cross;"
 
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3 src/main.c:35
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3
+#: src/kgx-application.c:385 src/main.c:35
 msgid "Terminal"
 msgstr "Terminal"
 
@@ -44,8 +46,8 @@ msgstr ""
 "powłoka;shell;prompt;polecenie;komenda;wiersz poleceń;linia poleceń;wiersz "
 "komend;linia komend;cmd;konsola;terminal;kgx;kings cross;"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:444
-#: src/kgx-window.c:642
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:479
+#: src/kgx-window.c:602
 msgid "Terminal Emulator"
 msgstr "Emulator terminala"
 
@@ -101,40 +103,50 @@ msgctxt "shortcut window"
 msgid "Paste"
 msgstr "Wklejenie"
 
-#. Translators: This is the name of the timeout that looks for programs
-#. running in the terminal
-#: src/kgx-application.c:267
-msgid "child watcher"
-msgstr "obserwator procesu potomnego"
-
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:416
+#: src/kgx-application.c:451
 #, c-format
 msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgstr "# King’s Cross %s, używa biblioteki VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:428 src/kgx-window.c:634
+#: src/kgx-application.c:463 src/kgx-window.c:595
 #, c-format
-msgid "Copyright © %s Zander Brown"
-msgstr "Copyright © %s Zander Brown"
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:548
+#: src/kgx-application.c:481
+msgid "GPL 3.0 or later"
+msgstr "GPL, wersja 3.0 lub późniejsza"
+
+#: src/kgx-application.c:602
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Wykonuje parametr do tej opcji wewnątrz terminala"
 
-#: src/kgx-application.c:557
+#: src/kgx-application.c:611
 msgid "Set the working directory"
 msgstr "Ustawia katalog roboczy"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:559
+#: src/kgx-application.c:613
 msgid "DIRNAME"
 msgstr "NAZWA-KATALOGU"
 
-#: src/kgx-application.c:567
+#: src/kgx-application.c:621
 msgid "Wait until the child exits (TODO)"
 msgstr "Czeka, aż proces potomny zakończy działanie (niezaimplementowane)"
+
+#: src/kgx-application.c:630
+msgid "Set the initial window title"
+msgstr "Ustawia początkowy tytuł okna"
+
+#: src/kgx-application.c:639
+msgid "ADVANCED: Set the shell to launch"
+msgstr "ZAAWANSOWANE: ustawia uruchamianą powłokę"
+
+#: src/kgx-application.c:648
+msgid "ADVANCED: Set the scrollback length"
+msgstr "ZAAWANSOWANE: ustawia długość buforu przewijania"
 
 #: src/kgx-close-dialog.ui:6
 msgid "Close Terminal"
@@ -176,7 +188,7 @@ msgstr "<b>Tylko do odczytu</b> — polecenie zakończyło działanie"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Uruchomienie się nie powiodło</b> — %s"
 
-#: src/kgx-tab.c:914
+#: src/kgx-tab.c:1041
 msgid "Command completed"
 msgstr "Ukończono polecenie"
 
@@ -199,19 +211,22 @@ msgid "_Paste"
 msgstr "Wk_lej"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:641
+#: src/kgx-window.c:601
 msgid "translator-credits"
 msgstr ""
 "Piotr Drąg <piotrdrag@gmail.com>, 2019-2021\n"
 "Aviary.pl <community-poland@mozilla.org>, 2019-2021"
 
-#. Translators: "by King’s Cross" here is meaning
-#. author or creator of 'Terminal'
-#: src/kgx-window.c:649
+#. Translators: “King’s Cross” here is to distinguish from
+#. * gnome-terminal when using generic branding (such as on phones,
+#. * where g-t is unsuitable) - it may be best to leave it untranslated
+#. * (unlike Terminal, which should be)
+#.
+#: src/kgx-window.c:612
 msgid "Terminal (King’s Cross)"
 msgstr "Terminal (King’s Cross)"
 
-#: src/kgx-window.c:715
+#: src/kgx-window.c:677
 msgid "_About Terminal"
 msgstr "_O programie"
 
@@ -243,15 +258,15 @@ msgstr "_O programie"
 msgid "About this program"
 msgstr "Informacje o tym programie"
 
-#: src/kgx-window.ui:110
+#: src/kgx-window.ui:108
 msgid "Find in terminal"
 msgstr "Wyszukuje w terminalu"
 
-#: src/kgx-window.ui:128
+#: src/kgx-window.ui:126
 msgid "Menu"
 msgstr "Menu"
 
-#: src/kgx-window.ui:146
+#: src/kgx-window.ui:144
 msgid "New Tab"
 msgstr "Nowa karta"
 
