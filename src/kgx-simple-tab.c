@@ -185,7 +185,6 @@ kgx_simple_tab_start (KgxTab              *page,
                       gpointer             callback_data)
 {
   KgxSimpleTab       *self;
-  const char         *initial = NULL;
   g_autoptr (VtePty)  pty = NULL;
   g_autoptr (GError)  error = NULL;
   g_auto (GStrv)      env = NULL;
@@ -198,8 +197,6 @@ kgx_simple_tab_start (KgxTab              *page,
 
   pty = vte_pty_new_sync (VTE_PTY_DEFAULT, NULL, &error);
 
-  g_debug ("Working in %s", initial);
-
   env = g_environ_setenv (env, "TERM", "xterm-256color", TRUE);
 
   vte_terminal_set_pty (VTE_TERMINAL (self->terminal), pty);
@@ -211,9 +208,9 @@ kgx_simple_tab_start (KgxTab              *page,
   data->task = task;
 
   fp_vte_pty_spawn_async (pty,
-                          initial,
-                          (const gchar * const *) self->command,
-                          (const gchar * const *) env,
+                          self->initial_work_dir,
+                          (const char *const *) self->command,
+                          (const char *const *) env,
                           -1,
                           NULL,
                           (GAsyncReadyCallback) spawned,
