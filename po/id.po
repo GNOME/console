@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-03-05 03:31+0000\n"
-"PO-Revision-Date: 2021-03-05 20:07+0700\n"
+"POT-Creation-Date: 2021-03-06 09:51+0000\n"
+"PO-Revision-Date: 2021-03-08 18:34+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -19,8 +19,9 @@ msgstr ""
 
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:456
-#: src/kgx-window.c:588 src/kgx-window.ui:102 src/main.c:38
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:387
+#: src/kgx-application.c:477 src/kgx-window.c:614 src/kgx-window.ui:100
+#: src/main.c:38
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
@@ -30,7 +31,8 @@ msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
 "perintah;prompt;cmd;baris perintah;jalankan;shell;terminal;kgx;kings cross;"
 
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3 src/main.c:35
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3
+#: src/kgx-application.c:385 src/main.c:35
 msgid "Terminal"
 msgstr "Terminal"
 
@@ -39,8 +41,8 @@ msgstr "Terminal"
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
 msgstr "perintah;prompt;cmd;baris perintah;jalankan;shell;terminal;kgx;"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:458
-#: src/kgx-window.c:576
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:479
+#: src/kgx-window.c:602
 msgid "Terminal Emulator"
 msgstr "Emulator Terminal"
 
@@ -98,40 +100,48 @@ msgstr "Tempel"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:430
+#: src/kgx-application.c:451
 #, c-format
 msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgstr "# King's Cross %s menggunakan VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:442 src/kgx-window.c:569
+#: src/kgx-application.c:463 src/kgx-window.c:595
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:460
+#: src/kgx-application.c:481
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 atau yang lebih baru"
 
-#: src/kgx-application.c:565
+#: src/kgx-application.c:602
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Jalankan argumen untuk opsi ini di dalam terminal"
 
-#: src/kgx-application.c:574
+#: src/kgx-application.c:611
 msgid "Set the working directory"
 msgstr "Atur direktori kerja"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:576
+#: src/kgx-application.c:613
 msgid "DIRNAME"
 msgstr "NAMA-DIREKTORI"
 
-#: src/kgx-application.c:584
+#: src/kgx-application.c:621
 msgid "Wait until the child exits (TODO)"
 msgstr "Tunggu sampai anak keluar (TODO)"
 
-#: src/kgx-application.c:593
+#: src/kgx-application.c:630
+msgid "Set the initial window title"
+msgstr "Atur judul jendela awal"
+
+#: src/kgx-application.c:639
 msgid "ADVANCED: Set the shell to launch"
 msgstr "LANJUTAN: Setel shell untuk diluncurkan"
+
+#: src/kgx-application.c:648
+msgid "ADVANCED: Set the scrollback length"
+msgstr "TINGKAT LANJUT: Atur panjang gulir balik"
 
 #: src/kgx-close-dialog.ui:6
 msgid "Close Terminal"
@@ -173,7 +183,7 @@ msgstr "<b>Hanya Baca</b> — Perintah keluar"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Gagal untuk memulai</b> — %s"
 
-#: src/kgx-tab.c:985
+#: src/kgx-tab.c:1041
 msgid "Command completed"
 msgstr "Perintah selesai"
 
@@ -196,7 +206,7 @@ msgid "_Paste"
 msgstr "Tem_pel"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:575
+#: src/kgx-window.c:601
 msgid "translator-credits"
 msgstr "Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2021."
 
@@ -205,11 +215,11 @@ msgstr "Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2021."
 #. * where g-t is unsuitable) - it may be best to leave it untranslated
 #. * (unlike Terminal, which should be)
 #.
-#: src/kgx-window.c:586
+#: src/kgx-window.c:612
 msgid "Terminal (King’s Cross)"
 msgstr "Terminal (King's Cross)"
 
-#: src/kgx-window.c:651
+#: src/kgx-window.c:677
 msgid "_About Terminal"
 msgstr "Tent_ang Terminal"
 
@@ -241,15 +251,15 @@ msgstr "Tent_ang King's Cross"
 msgid "About this program"
 msgstr "Tentang program ini"
 
-#: src/kgx-window.ui:110
+#: src/kgx-window.ui:108
 msgid "Find in terminal"
 msgstr "Cari di terminal"
 
-#: src/kgx-window.ui:128
+#: src/kgx-window.ui:126
 msgid "Menu"
 msgstr "Menu"
 
-#: src/kgx-window.ui:146
+#: src/kgx-window.ui:144
 msgid "New Tab"
 msgstr "Tab Baru"
 
