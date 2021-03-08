@@ -158,6 +158,30 @@ kgx_application_finalize (GObject *object)
 
 
 static void
+open_terminal (KgxApplication *self,
+               guint32         timestamp,
+               GFile          *working_directory,
+               const char     *command,
+               const char     *title)
+{
+  GtkWindow *window;
+
+  window = g_object_new (KGX_TYPE_WINDOW,
+                         "application", self,
+                         "close-on-zero", command == NULL,
+                         "initial-directory", working_directory,
+  #if IS_GENERIC
+                         "title", title ? title : _("Terminal"),
+  #else
+                         "title", title ? title : _("King’s Cross"),
+  #endif
+                         "command", command,
+                         NULL);
+  gtk_window_present_with_time (window, timestamp);
+}
+
+
+static void
 kgx_application_activate (GApplication *app)
 {
   GtkWindow *window;
@@ -168,10 +192,9 @@ kgx_application_activate (GApplication *app)
   /* Get the current window or create one if necessary. */
   window = gtk_application_get_active_window (GTK_APPLICATION (app));
   if (window == NULL) {
-    window = g_object_new (KGX_TYPE_WINDOW,
-                           "application", app,
-                           "close-on-zero", TRUE,
-                           NULL);
+    open_terminal (KGX_APPLICATION (app), timestamp, NULL, NULL, NULL);
+
+    return;
   }
 
   gtk_window_present_with_time (window, timestamp);
@@ -345,16 +368,18 @@ kgx_application_command_line (GApplication            *app,
                               GApplicationCommandLine *cli)
 {
   KgxApplication *self = KGX_APPLICATION (app);
+  guint32 timestamp = GDK_CURRENT_TIME;
   GVariantDict *options = NULL;
   const char *working_dir = NULL;
   const char *title = NULL;
   const char *command = NULL;
   const char *const *shell = NULL;
+  const char *cwd = NULL;
   gint64 scrollback;
-  GtkWidget *window;
-  g_autofree char *abs_path = NULL;
+  g_autoptr (GFile) path = NULL;
 
   options = g_application_command_line_get_options_dict (cli);
+  cwd = g_application_command_line_get_cwd (cli);
 
   g_variant_dict_lookup (options, "working-directory", "^&ay", &working_dir);
   g_variant_dict_lookup (options, "title", "&s", &title);
@@ -373,24 +398,18 @@ kgx_application_command_line (GApplication            *app,
   }
 
   if (working_dir != NULL) {
-    abs_path = g_canonicalize_filename (working_dir, NULL);
+    path = g_file_new_for_commandline_arg_and_cwd (working_dir, cwd);
   }
 
-  window = g_object_new (KGX_TYPE_WINDOW,
-                         "application", app,
-                         "close-on-zero", command == NULL,
-                         "initial-work-dir", abs_path,
-  #if IS_GENERIC
-                         "title", title ? title : _("Terminal"),
-  #else
-                         "title", title ? title : _("King’s Cross"),
-  #endif
-                         "command", command,
-                         NULL);
-  gtk_widget_show (window);
+  if (path == NULL) {
+    path = g_file_new_for_path (cwd);
+  }
+
+  open_terminal (self, timestamp, path, command, title);
 
   return 0;
 }
+
 
 static void
 print_center (char *msg, int ign, short width)
@@ -453,7 +472,7 @@ kgx_application_handle_local_options (GApplication *app,
                vte_get_minor_version (),
                vte_get_micro_version (),
                vte_get_features ());
-      return 0;
+      return EXIT_SUCCESS;
     }
   }
 
@@ -483,7 +502,7 @@ kgx_application_handle_local_options (GApplication *app,
         g_print ("\n");
       }
 
-      return 0;
+      return EXIT_SUCCESS;
     }
   }
 

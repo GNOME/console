@@ -81,7 +81,7 @@ struct _KgxWindow
 
   /*< public >*/
   KgxTheme              theme;
-  char                 *working_dir;
+  GFile                *working_dir;
   char                 *command;
   gboolean              close_on_zero;
   gboolean              initially_empty;
@@ -105,7 +105,7 @@ struct _KgxWindow
 
 G_DECLARE_FINAL_TYPE (KgxWindow, kgx_window, KGX, WINDOW, HdyApplicationWindow)
 
-char       *kgx_window_get_working_dir (KgxWindow    *self);
+GFile      *kgx_window_get_working_dir (KgxWindow    *self);
 void        kgx_window_show_status     (KgxWindow    *self,
                                         const char   *status);
 KgxPages   *kgx_window_get_pages       (KgxWindow    *self);

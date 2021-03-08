@@ -48,7 +48,7 @@ G_DEFINE_TYPE (KgxWindow, kgx_window, HDY_TYPE_APPLICATION_WINDOW)
 enum {
   PROP_0,
   PROP_APPLICATION,
-  PROP_INITIAL_WORK_DIR,
+  PROP_INITIAL_DIRECTORY,
   PROP_COMMAND,
   PROP_CLOSE_ON_ZERO,
   PROP_INITIALLY_EMPTY,
@@ -126,48 +126,46 @@ static void
 kgx_window_constructed (GObject *object)
 {
   KgxWindow          *self = KGX_WINDOW (object);
-  const char         *initial = NULL;
   g_autoptr (GError)  error = NULL;
-  g_auto (GStrv)      shell = NULL;
   GtkApplication     *application = NULL;
 
   G_OBJECT_CLASS (kgx_window_parent_class)->constructed (object);
 
   application = gtk_window_get_application (GTK_WINDOW (self));
 
-  if (G_UNLIKELY (self->command != NULL)) {
-    g_shell_parse_argv (self->command, NULL, &shell, &error);
-    if (error) {
-      g_warning ("Failed to parse “%s” as a command", self->command);
-      shell = NULL;
-      g_clear_error (&error);
-    }
-    /* We should probably do something other than /bin/sh  */
-    if (shell == NULL) {
-      shell = g_new0 (char *, 2);
-      shell[0] = g_strdup ("/bin/sh");
-      shell[1] = NULL;
-      g_warning ("Defaulting to “%s”", shell[0]);
-    }
-  } else {
-    shell = kgx_application_get_shell (KGX_APPLICATION (application));
-  }
-
-  if (self->working_dir) {
-    initial = self->working_dir;
-  } else {
-    initial = g_get_home_dir ();
-  }
-
-  g_debug ("Working in “%s”", initial);
-
-  if (!self->initially_empty) {
+  if (G_LIKELY (!self->initially_empty)) {
+    g_autofree char *directory = NULL;
+    g_auto (GStrv) shell = NULL;
     GtkWidget *page;
+
+    if (G_UNLIKELY (self->command != NULL)) {
+      g_shell_parse_argv (self->command, NULL, &shell, &error);
+      if (error) {
+        g_warning ("Failed to parse “%s” as a command", self->command);
+        shell = NULL;
+        g_clear_error (&error);
+      }
+      /* We should probably do something other than /bin/sh  */
+      if (shell == NULL) {
+        shell = g_new0 (char *, 2);
+        shell[0] = g_strdup ("/bin/sh");
+        shell[1] = NULL;
+        g_warning ("Defaulting to “%s”", shell[0]);
+      }
+    } else {
+      shell = kgx_application_get_shell (KGX_APPLICATION (application));
+    }
+
+    if (self->working_dir) {
+      directory = g_file_get_path (self->working_dir);
+    } else {
+      directory = g_strdup (g_get_home_dir ());
+    }
 
     page = g_object_new (KGX_TYPE_SIMPLE_TAB,
                          "application", application,
                          "visible", TRUE,
-                         "initial-work-dir", initial,
+                         "initial-work-dir", directory,
                          "command", shell,
                          "close-on-quit", self->close_on_zero,
                          NULL);
@@ -213,8 +211,8 @@ kgx_window_set_property (GObject      *object,
       gtk_window_set_application (GTK_WINDOW (self),
                                   g_value_get_object (value));
       break;
-    case PROP_INITIAL_WORK_DIR:
-      self->working_dir = g_value_dup_string (value);
+    case PROP_INITIAL_DIRECTORY:
+      self->working_dir = g_value_dup_object (value);
       break;
     case PROP_COMMAND:
       self->command = g_value_dup_string (value);
@@ -245,8 +243,8 @@ kgx_window_get_property (GObject    *object,
       g_value_set_object (value,
                           gtk_window_get_application (GTK_WINDOW (self)));
       break;
-    case PROP_INITIAL_WORK_DIR:
-      g_value_set_string (value, self->working_dir);
+    case PROP_INITIAL_DIRECTORY:
+      g_value_set_object (value, self->working_dir);
       break;
     case PROP_COMMAND:
       g_value_set_string (value, self->command);
@@ -269,7 +267,7 @@ kgx_window_finalize (GObject *object)
 {
   KgxWindow *self = KGX_WINDOW (object);
 
-  g_clear_pointer (&self->working_dir, g_free);
+  g_clear_object (&self->working_dir);
   g_clear_pointer (&self->command, g_free);
 
   G_OBJECT_CLASS (kgx_window_parent_class)->finalize (object);
@@ -451,16 +449,16 @@ kgx_window_class_init (KgxWindowClass *klass)
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
 
   /**
-   * KgxWindow:initial-work-dir:
+   * KgxWindow:initial-directory:
    * 
    * Used to handle --working-dir
    * 
-   * Since: 0.1.0
+   * Since: 0.5.0
    */
-  pspecs[PROP_INITIAL_WORK_DIR] =
-    g_param_spec_string ("initial-work-dir", "Initial directory",
+  pspecs[PROP_INITIAL_DIRECTORY] =
+    g_param_spec_object ("initial-directory", "Initial directory",
                          "Initial working directory",
-                         NULL,
+                         G_TYPE_FILE,
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
   /**
@@ -531,7 +529,7 @@ new_activated (GSimpleAction *action,
   GtkWindow       *window = NULL;
   GtkApplication  *app = NULL;
   guint32          timestamp;
-  g_autofree char *dir = NULL;
+  g_autoptr (GFile) dir = NULL;
 
   /* Slightly "wrong" but hopefully by taking the time before
    * we spend non-zero time initing the window it’s far enough in the
@@ -544,10 +542,10 @@ new_activated (GSimpleAction *action,
   dir = kgx_window_get_working_dir (KGX_WINDOW (data));
 
   window = g_object_new (KGX_TYPE_WINDOW,
-                        "application", app,
-                        "initial-work-dir", dir,
-                        "close-on-zero", TRUE,
-                        NULL);
+                         "application", app,
+                         "initial-directory", dir,
+                         "close-on-zero", TRUE,
+                         NULL);
 
   gtk_window_present_with_time (window, timestamp);
 }
@@ -738,25 +736,18 @@ kgx_window_init (KgxWindow *self)
  * Get the working directory path of this window, used to open new windows
  * in the same directory
  * 
- * Since: 0.1.0
+ * Since: 0.5.0
  */
-char *
+GFile *
 kgx_window_get_working_dir (KgxWindow *self)
 {
-  // TODO: page.similar() ?
-  g_autoptr (GFile) file = NULL;
+  GFile *file = NULL;
 
   g_return_val_if_fail (KGX_IS_WINDOW (self), NULL);
 
-  g_object_get (self->pages,
-                "path", &file,
-                NULL);
+  g_object_get (self->pages, "path", &file, NULL);
 
-  if (!file) {
-    return NULL;
-  }
-
-  return g_file_get_path (file);
+  return file;
 }
 
 
