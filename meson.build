@@ -91,6 +91,12 @@ gi_runner = configure_file(
 
 subdir('data')
 subdir('src')
+
+nautilus_dep = dependency('libnautilus-extension', required: get_option('nautilus'))
+if nautilus_dep.found()
+  subdir('nautilus')
+endif
+
 subdir('po')
 subdir('doc')
 if get_option('tests')

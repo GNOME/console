@@ -28,3 +28,8 @@ option('sassc',
        type: 'feature',
        value: 'auto',
        description: 'Rebuild styles using sassc')
+
+option('nautilus',
+       type: 'feature',
+       value: 'auto',
+       description: 'Nautilus plug-in')
