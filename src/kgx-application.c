@@ -363,6 +363,21 @@ kgx_application_startup (GApplication *app)
   set_watcher (KGX_APPLICATION (app), TRUE);
 }
 
+
+static void
+kgx_application_open (GApplication  *app,
+                      GFile        **files,
+                      int            n_files,
+                      const char    *hint)
+{
+  guint32 timestamp = GDK_CURRENT_TIME;
+
+  for (int i = 0; i < n_files; i++) {
+    open_terminal (KGX_APPLICATION (app), timestamp, files[i], NULL, NULL);
+  }
+}
+
+
 static int
 kgx_application_command_line (GApplication            *app,
                               GApplicationCommandLine *cli)
@@ -522,6 +537,7 @@ kgx_application_class_init (KgxApplicationClass *klass)
 
   app_class->activate = kgx_application_activate;
   app_class->startup = kgx_application_startup;
+  app_class->open = kgx_application_open;
   app_class->command_line = kgx_application_command_line;
   app_class->handle_local_options = kgx_application_handle_local_options;
 
