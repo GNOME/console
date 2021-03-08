@@ -117,9 +117,9 @@ kgx_nautilus_menu_item_constructed (GObject *object)
 
   g_object_set (self,
   #if IS_GENERIC
-                "label", _("Open in Terminal"),
+                "label", _("Open in T_erminal"),
   #else
-                "label", _("Open in King’s Cross"),
+                "label", _("Op_en in King’s Cross"),
   #endif
                 "tip", _("Start a terminal session for this location"),
                 NULL);
