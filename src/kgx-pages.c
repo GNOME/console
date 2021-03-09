@@ -38,7 +38,6 @@
 
 typedef struct _KgxPagesPrivate KgxPagesPrivate;
 struct _KgxPagesPrivate {
-  GtkWidget            *stack;
   GtkWidget            *view;
   GtkWidget            *tabbar;
 
@@ -387,21 +386,12 @@ page_attached (HdyTabView *view,
                int         position,
                KgxPages   *self)
 {
-  KgxTab *tab;
-  KgxPagesPrivate *priv;
-
   g_return_if_fail (HDY_IS_TAB_PAGE (page));
 
-  tab = KGX_TAB (hdy_tab_page_get_child (page));
-
-  priv = kgx_pages_get_instance_private (self);
-
-  g_object_connect (tab,
+  g_object_connect (hdy_tab_page_get_child (page),
                     "signal::died", G_CALLBACK (died), self,
                     "signal::zoom", G_CALLBACK (zoom), self,
                     NULL);
-
-  gtk_stack_set_visible_child (GTK_STACK (priv->stack), priv->view);
 }
 
 
@@ -710,7 +700,6 @@ kgx_pages_class_init (KgxPagesClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                RES_PATH "kgx-pages.ui");
 
-  gtk_widget_class_bind_template_child_private (widget_class, KgxPages, stack);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, view);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, status);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, status_revealer);
