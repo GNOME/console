@@ -39,7 +39,6 @@
 typedef struct _KgxPagesPrivate KgxPagesPrivate;
 struct _KgxPagesPrivate {
   GtkWidget            *view;
-  GtkWidget            *tabbar;
 
   GtkWidget            *status;
   GtkWidget            *status_revealer;
@@ -79,7 +78,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (KgxPages, kgx_pages, GTK_TYPE_OVERLAY)
 
 enum {
   PROP_0,
-  PROP_TAB_BAR,
+  PROP_TAB_VIEW,
   PROP_TAB_COUNT,
   PROP_TITLE,
   PROP_PATH,
@@ -137,8 +136,8 @@ kgx_pages_get_property (GObject    *object,
     case PROP_TAB_COUNT:
       g_value_set_uint (value, hdy_tab_view_get_n_pages (HDY_TAB_VIEW (priv->view)));
       break;
-    case PROP_TAB_BAR:
-      g_value_set_object (value, priv->tabbar);
+    case PROP_TAB_VIEW:
+      g_value_set_object (value, priv->view);
       break;
     case PROP_TITLE:
       g_value_set_string (value, priv->title);
@@ -187,14 +186,6 @@ kgx_pages_set_property (GObject      *object,
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
 
   switch (property_id) {
-    case PROP_TAB_BAR:
-      g_clear_object (&priv->tabbar);
-      priv->tabbar = g_value_dup_object (value);
-      if (priv->tabbar) {
-        hdy_tab_bar_set_view (HDY_TAB_BAR (priv->tabbar),
-                              HDY_TAB_VIEW (priv->view));
-      }
-      break;
     case PROP_TITLE:
       g_clear_pointer (&priv->title, g_free);
       priv->title = g_value_dup_string (value);
@@ -550,18 +541,18 @@ kgx_pages_class_init (KgxPagesClass *klass)
   object_class->set_property = kgx_pages_set_property;
 
   /**
-   * KgxPages:tab-bar:
+   * KgxPages:tab-view:
    * 
-   * The #HdyTabBar
+   * The #HdyTabView
    * 
    * Stability: Private
    * 
    * Since: 0.3.0
    */
-  pspecs[PROP_TAB_BAR] =
-    g_param_spec_object ("tab-bar", "Tab Bar", "The tab bar",
-                         HDY_TYPE_TAB_BAR,
-                         G_PARAM_READWRITE);
+  pspecs[PROP_TAB_VIEW] =
+    g_param_spec_object ("tab-view", "Tab View", "The tab view",
+                         HDY_TYPE_TAB_VIEW,
+                         G_PARAM_READABLE);
 
   /**
    * KgxPages:tab-count:

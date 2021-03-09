@@ -719,6 +719,10 @@ kgx_window_init (KgxWindow *self)
                                update_subtitle,
                                NULL, NULL, NULL);
 
+  g_object_bind_property (self->pages, "tab-view",
+                          self->tab_bar, "view",
+                          G_BINDING_SYNC_CREATE);
+
   target_list = gtk_target_list_new (NULL, 0);
   gtk_target_list_add_text_targets (target_list, 0);
 
