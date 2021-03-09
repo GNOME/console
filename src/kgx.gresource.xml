@@ -16,7 +16,7 @@
     <file compressed="true">menus.ui</file>
     <file>help-overlay.ui</file>
   </gresource>
-  <gresource prefix="/org/gnome/zbrown/KingsCross/icons">
+  <gresource prefix="/org/gnome/zbrown/KingsCross/icons/scalable/apps/">
     <file preprocess="xml-stripblanks" alias="kgx-original.svg">../data/org.gnome.zbrown.KingsCross.svg</file>
     <file preprocess="xml-stripblanks" alias="org.gnome.zbrown.KingsCross.svg">../data/org.gnome.zbrown.KingsCross.svg</file>
     <file preprocess="xml-stripblanks" alias="org.gnome.zbrown.KingsCross.Generic.svg">../data/org.gnome.zbrown.KingsCross.Generic.svg</file>

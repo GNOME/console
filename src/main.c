@@ -33,11 +33,10 @@ main (int   argc,
 
   #if IS_GENERIC
   g_set_application_name (_("Terminal"));
-  gtk_window_set_default_icon_name ("org.gnome.zbrown.KingsCross.Generic");
   #else
   g_set_application_name (_("King’s Cross"));
-  gtk_window_set_default_icon_name ("org.gnome.zbrown.KingsCross");
   #endif
+  gtk_window_set_default_icon_name ("org.gnome.zbrown.KingsCross");
   g_set_prgname ("org.gnome.zbrown.KingsCross");
 
   /*

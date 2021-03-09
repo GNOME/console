@@ -2,9 +2,9 @@
 Name=Terminal
 Exec=kgx
 # Translators: Do NOT translate or transliterate this text (this is an icon file name)!
-Icon=org.gnome.zbrown.KingsCross.Generic
+Icon=org.gnome.zbrown.KingsCross
 # Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-Keywords=command;prompt;cmd;commandline;run;shell;terminal;kgx;
+Keywords=command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;
 Terminal=false
 Type=Application
 Categories=System;TerminalEmulator;X-GNOME-Utilities;GTK;GNOME;

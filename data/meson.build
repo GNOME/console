@@ -1,22 +1,21 @@
 if get_option('generic')
-  desktop_file = i18n.merge_file(
-    input: 'org.gnome.zbrown.KingsCross-generic.desktop.in',
-    output: 'org.gnome.zbrown.KingsCross.desktop',
-    type: 'desktop',
-    po_dir: '../po',
-    install: true,
-    install_dir: join_paths(get_option('datadir'), 'applications')
-  )
+  desktop_filename = 'org.gnome.zbrown.KingsCross-generic.desktop.in'
+  icon_filename = 'org.gnome.zbrown.KingsCross.Generic.svg'
+  icon_symbolic_filename = 'org.gnome.zbrown.KingsCross.Generic-symbolic.svg'
 else
-  desktop_file = i18n.merge_file(
-    input: 'org.gnome.zbrown.KingsCross.desktop.in',
-    output: 'org.gnome.zbrown.KingsCross.desktop',
-    type: 'desktop',
-    po_dir: '../po',
-    install: true,
-    install_dir: join_paths(get_option('datadir'), 'applications')
-  )
+  desktop_filename = 'org.gnome.zbrown.KingsCross.desktop.in'
+  icon_filename = 'org.gnome.zbrown.KingsCross.svg'
+  icon_symbolic_filename = 'org.gnome.zbrown.KingsCross-symbolic.svg'
 endif
+
+desktop_file = i18n.merge_file(
+                    input: desktop_filename,
+                   output: 'org.gnome.zbrown.KingsCross.desktop',
+                     type: 'desktop',
+                   po_dir: '../po',
+                  install: true,
+              install_dir: datadir / 'applications'
+)
 
 desktop_utils = find_program('desktop-file-validate', required: false)
 if desktop_utils.found() and get_option('tests')
@@ -26,11 +25,11 @@ if desktop_utils.found() and get_option('tests')
 endif
 
 appstream_file = i18n.merge_file(
-  input: 'org.gnome.zbrown.KingsCross.appdata.xml.in',
-  output: 'org.gnome.zbrown.KingsCross.appdata.xml',
-  po_dir: '../po',
-  install: true,
-  install_dir: join_paths(get_option('datadir'), 'metainfo')
+                    input: 'org.gnome.zbrown.KingsCross.appdata.xml.in',
+                   output: 'org.gnome.zbrown.KingsCross.appdata.xml',
+                   po_dir: '../po',
+                  install: true,
+              install_dir: datadir / 'metainfo'
 )
 
 appstream_util = find_program('appstream-util', required: false)
@@ -41,8 +40,7 @@ if appstream_util.found() and get_option('tests')
 endif
 
 install_data('org.gnome.zbrown.KingsCross.gschema.xml',
-  install_dir: join_paths(get_option('datadir'), 'glib-2.0/schemas')
-)
+              install_dir: datadir / 'glib-2.0/schemas')
 
 compile_schemas = find_program('glib-compile-schemas', required: false)
 if compile_schemas.found() and get_option('tests')
@@ -51,20 +49,19 @@ if compile_schemas.found() and get_option('tests')
   )
 endif
 
-configure_file(input: 'org.gnome.zbrown.KingsCross.service.in',
-               output: 'org.gnome.zbrown.KingsCross.service',
-               configuration: conf,
-               install_dir: join_paths([get_option('datadir'),'dbus-1/services']))
+configure_file(
+                    input: 'org.gnome.zbrown.KingsCross.service.in',
+                   output: 'org.gnome.zbrown.KingsCross.service',
+            configuration: conf,
+              install_dir: datadir / 'dbus-1/services'
+)
 
-install_data('org.gnome.zbrown.KingsCross.svg',
-             install_dir: join_paths([get_option('datadir'),'icons/hicolor/scalable/apps']))
+install_data(icon_filename,
+              install_dir: datadir / 'icons/hicolor/scalable/apps',
+                   rename: 'org.gnome.zbrown.KingsCross.svg',
+)
 
-install_data('org.gnome.zbrown.KingsCross-symbolic.svg',
-             install_dir: join_paths([get_option('datadir'),'icons/hicolor/symbolic/apps']))
-
-install_data('org.gnome.zbrown.KingsCross.Generic.svg',
-             install_dir: join_paths([get_option('datadir'),'icons/hicolor/scalable/apps']))
-
-install_data('org.gnome.zbrown.KingsCross.Generic-symbolic.svg',
-             install_dir: join_paths([get_option('datadir'),'icons/hicolor/symbolic/apps']))
-
+install_data(icon_symbolic_filename,
+              install_dir: datadir / 'icons/hicolor/symbolic/apps',
+                   rename: 'org.gnome.zbrown.KingsCross-symbolic.svg',
+)
