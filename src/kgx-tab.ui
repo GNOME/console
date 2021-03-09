@@ -71,6 +71,46 @@
       </object>
     </child>
     <child>
+      <object class="GtkStack" id="stack">
+        <property name="expand">True</property>
+        <property name="visible">True</property>
+        <property name="transition-type">crossfade</property>
+        <child>
+          <object class="GtkBox" id="empty">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="expand">True</property>
+                <property name="visible">True</property>
+                <property name="orientation">vertical</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="spacing">18</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixel_size">128</property>
+                    <property name="icon_name">org.gnome.zbrown.KingsCross-symbolic</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkSpinner" id="spinner">
+                    <property name="visible">True</property>
+                    <property name="active">True</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <style>
+              <class name="empty-state"/>
+            </style>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
       <object class="GtkRevealer" id="revealer">
         <property name="visible">True</property>
         <property name="can_focus">False</property>

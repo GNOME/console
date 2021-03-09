@@ -71,6 +71,10 @@ struct _KgxTabPrivate {
   GBinding             *pages_opaque_bind;
   GBinding             *pages_scrollback_bind;
 
+  GtkWidget            *stack;
+  GtkWidget            *spinner;
+  GtkWidget            *content;
+
   GtkWidget            *revealer;
   GtkWidget            *label;
   GtkWidget            *search_entry;
@@ -86,7 +90,12 @@ struct _KgxTabPrivate {
 };
 
 
-G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (KgxTab, kgx_tab, GTK_TYPE_BOX)
+static void kgx_tab_buildable_iface_init (GtkBuildableIface *iface);
+
+G_DEFINE_ABSTRACT_TYPE_WITH_CODE (KgxTab, kgx_tab, GTK_TYPE_BOX,
+                                  G_ADD_PRIVATE (KgxTab)
+                                  G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                                         kgx_tab_buildable_iface_init))
 
 
 enum {
@@ -703,7 +712,8 @@ kgx_tab_class_init (KgxTabClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                RES_PATH "kgx-tab.ui");
 
-  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, revealer);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, stack);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, spinner);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, label);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, search_entry);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, search_bar);
@@ -712,6 +722,36 @@ kgx_tab_class_init (KgxTabClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, search_changed);
   gtk_widget_class_bind_template_callback (widget_class, search_next);
   gtk_widget_class_bind_template_callback (widget_class, search_prev);
+}
+
+
+static void
+kgx_tab_add_child (GtkBuildable *buildable,
+                   GtkBuilder   *builder,
+                   GObject      *child,
+                   const char   *type)
+{
+  KgxTab *self = KGX_TAB (buildable);
+  KgxTabPrivate *priv;
+
+  g_return_if_fail (KGX_IS_TAB (self));
+  g_return_if_fail (GTK_IS_WIDGET (child));
+  
+  priv = kgx_tab_get_instance_private (self);
+  
+  if (type && g_str_equal (type, "content")) {
+    g_set_weak_pointer (&priv->content, GTK_WIDGET (child));
+    gtk_stack_add_named (GTK_STACK (priv->stack), GTK_WIDGET (child), "content");
+  } else {
+    gtk_container_add (GTK_CONTAINER (self), GTK_WIDGET (child));
+  }
+}
+
+
+static void
+kgx_tab_buildable_iface_init (GtkBuildableIface *iface)
+{
+  iface->add_child = kgx_tab_add_child;
 }
 
 
@@ -893,8 +933,14 @@ kgx_tab_start (KgxTab              *self,
                GAsyncReadyCallback  callback,
                gpointer             callback_data)
 {
+  KgxTabPrivate *priv;
+
   g_return_if_fail (KGX_IS_TAB (self));
   g_return_if_fail (KGX_TAB_GET_CLASS (self)->start);
+
+  priv = kgx_tab_get_instance_private (self);
+
+  gtk_spinner_start (GTK_SPINNER (priv->spinner));
 
   KGX_TAB_GET_CLASS (self)->start (self, callback, callback_data);
 }
@@ -905,10 +951,21 @@ kgx_tab_start_finish (KgxTab        *self,
                       GAsyncResult  *res,
                       GError       **error)
 {
+  KgxTabPrivate *priv;
+  GPid pid;  
+  
   g_return_val_if_fail (KGX_IS_TAB (self), 0);
   g_return_val_if_fail (KGX_TAB_GET_CLASS (self)->start, 0);
 
-  return KGX_TAB_GET_CLASS (self)->start_finish (self, res, error);
+  priv = kgx_tab_get_instance_private (self);
+
+  pid = KGX_TAB_GET_CLASS (self)->start_finish (self, res, error);
+
+  gtk_spinner_stop (GTK_SPINNER (priv->spinner));
+  gtk_stack_set_visible_child (GTK_STACK (priv->stack), priv->content);
+  gtk_widget_grab_focus (GTK_WIDGET (self));
+
+  return pid;
 }
 
 

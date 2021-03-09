@@ -56,6 +56,14 @@
   }
 }
 
+.empty-state {
+  & image {
+    color: rgba(40, 40, 40, 0.8);
+  }
+  /* Sync to KgxTerminal! */
+  background: rgba(17.85,17.85,17.85,0.96);
+}
+
 .exit-info {
   padding: 6px;
   border-top: 2px solid #1e78e4;
