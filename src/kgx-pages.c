@@ -793,7 +793,7 @@ kgx_pages_focus_page (KgxPages *self,
 
   hdy_tab_view_set_selected_page (HDY_TAB_VIEW (priv->view), index);
 
-  kgx_tab_focus_terminal (page);
+  gtk_widget_grab_focus (GTK_WIDGET (page));
 }
 
 

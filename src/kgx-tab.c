@@ -191,7 +191,7 @@ search_enabled (GObject    *object,
   KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
 
   if (!hdy_search_bar_get_search_mode (HDY_SEARCH_BAR (priv->search_bar))) {
-    kgx_tab_focus_terminal (self);
+    gtk_widget_grab_focus (GTK_WIDGET (self));
   }
 }
 
@@ -468,6 +468,21 @@ kgx_tab_drag_data_received (GtkWidget        *widget,
 
 
 static void
+kgx_tab_grab_focus (GtkWidget *widget)
+{
+  KgxTab *self = KGX_TAB (widget);
+  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
+
+  if (priv->terminal) {
+    gtk_widget_grab_focus (GTK_WIDGET (priv->terminal));
+    return;
+  }
+
+  GTK_WIDGET_CLASS (kgx_tab_parent_class)->grab_focus (widget);
+}
+
+
+static void
 kgx_tab_real_start (KgxTab              *tab,
                     GAsyncReadyCallback  callback,
                     gpointer             callback_data)
@@ -501,6 +516,7 @@ kgx_tab_class_init (KgxTabClass *klass)
   widget_class->map = kgx_tab_map;
   widget_class->draw = kgx_tab_draw;
   widget_class->drag_data_received = kgx_tab_drag_data_received;
+  widget_class->grab_focus = kgx_tab_grab_focus;
 
   tab_class->start = kgx_tab_real_start;
   tab_class->start_finish = kgx_tab_real_start_finish;
@@ -869,19 +885,6 @@ kgx_tab_connect_terminal (KgxTab      *self,
   priv->term_scrollback_bind = g_object_bind_property (self, "scrollback-lines",
                                                        term, "scrollback-lines",
                                                        G_BINDING_SYNC_CREATE);
-}
-
-
-void
-kgx_tab_focus_terminal (KgxTab *self)
-{
-  KgxTabPrivate *priv;
-
-  g_return_if_fail (KGX_IS_TAB (self));
-  
-  priv = kgx_tab_get_instance_private (self);
-
-  gtk_widget_grab_focus (GTK_WIDGET (priv->terminal));
 }
 
 

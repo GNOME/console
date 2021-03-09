@@ -84,7 +84,6 @@ struct _KgxTabClass
 guint       kgx_tab_get_id           (KgxTab               *self);
 void        kgx_tab_connect_terminal (KgxTab               *self,
                                       KgxTerminal          *term);
-void        kgx_tab_focus_terminal   (KgxTab               *self);
 void        kgx_tab_start            (KgxTab               *self,
                                       GAsyncReadyCallback   callback,
                                       gpointer              callback_data);
