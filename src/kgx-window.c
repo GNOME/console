@@ -681,7 +681,8 @@ update_subtitle (GBinding     *binding,
 static void
 kgx_window_init (KgxWindow *self)
 {
-  GtkTargetList *target_list;
+  g_autoptr (GtkWindowGroup) group = NULL;
+  g_autoptr (GtkTargetList) target_list = NULL;
   GPropertyAction *pact;
 
   gtk_widget_init_template (GTK_WIDGET (self));
@@ -729,7 +730,8 @@ kgx_window_init (KgxWindow *self)
   hdy_tab_bar_set_extra_drag_dest_targets (HDY_TAB_BAR (self->tab_bar),
                                            target_list);
 
-  gtk_target_list_unref (target_list);
+  group = gtk_window_group_new ();
+  gtk_window_group_add_window (group, GTK_WINDOW (self));
 }
 
 
