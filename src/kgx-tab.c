@@ -348,6 +348,33 @@ kgx_tab_get_property (GObject    *object,
 
 
 static void
+kgx_tab_set_is_active (KgxTab   *self,
+                       gboolean active)
+{
+  KgxTabPrivate *priv;
+
+  g_return_if_fail (KGX_IS_TAB (self));
+
+  priv = kgx_tab_get_instance_private (self);
+
+  if (active == priv->is_active) {
+    return;
+  }
+
+  priv->is_active = active;
+
+  if (!active && priv->notification_id) {
+    g_application_withdraw_notification (G_APPLICATION (priv->application),
+                                          priv->notification_id);
+    g_clear_pointer (&priv->notification_id, g_free);
+  }
+  g_object_set (self, "needs-attention", FALSE, NULL);
+
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_IS_ACTIVE]);
+}
+
+
+static void
 kgx_tab_set_property (GObject      *object,
                       guint         property_id,
                       const GValue *value,
@@ -389,7 +416,7 @@ kgx_tab_set_property (GObject      *object,
       priv->zoom = g_value_get_double (value);
       break;
     case PROP_IS_ACTIVE:
-      priv->is_active = g_value_get_boolean (value);
+      kgx_tab_set_is_active (self, g_value_get_boolean (value));
       break;
     case PROP_THEME:
       priv->theme = g_value_get_enum (value);
@@ -412,24 +439,6 @@ kgx_tab_set_property (GObject      *object,
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
-  }
-}
-
-
-static void
-kgx_tab_map (GtkWidget *widget)
-{
-  KgxTab *self = KGX_TAB (widget);
-  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
-
-  GTK_WIDGET_CLASS (kgx_tab_parent_class)->map (widget);
-
-  g_object_set (widget, "needs-attention", FALSE, NULL);
-
-  if (priv->notification_id) {
-    g_application_withdraw_notification (G_APPLICATION (priv->application),
-                                         priv->notification_id);
-    g_clear_pointer (&priv->notification_id, g_free);
   }
 }
 
@@ -522,7 +531,6 @@ kgx_tab_class_init (KgxTabClass *klass)
   object_class->get_property = kgx_tab_get_property;
   object_class->set_property = kgx_tab_set_property;
 
-  widget_class->map = kgx_tab_map;
   widget_class->draw = kgx_tab_draw;
   widget_class->drag_data_received = kgx_tab_drag_data_received;
   widget_class->grab_focus = kgx_tab_grab_focus;
@@ -613,7 +621,7 @@ kgx_tab_class_init (KgxTabClass *klass)
   pspecs[PROP_IS_ACTIVE] =
     g_param_spec_boolean ("is-active", "Is Active", "Current tab",
                           FALSE,
-                          G_PARAM_READWRITE);
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
 
   /**
    * KgxTab:theme:
