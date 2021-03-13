@@ -316,6 +316,8 @@ kgx_application_startup (GApplication *app)
   const char *const zoom_in_accels[] = { "<primary>plus", NULL };
   const char *const zoom_out_accels[] = { "<primary>minus", NULL };
 
+  g_set_prgname (g_application_get_application_id (app));
+
   g_type_ensure (KGX_TYPE_TERMINAL);
   g_type_ensure (KGX_TYPE_PAGES);
 
@@ -403,13 +405,13 @@ kgx_application_command_line (GApplication            *app,
   if (g_variant_dict_lookup (options, "set-shell", "^as", &shell) && shell) {
     g_settings_set_strv (self->settings, "shell", shell);
 
-    return 0;
+    return EXIT_SUCCESS;
   }
 
   if (g_variant_dict_lookup (options, "set-scrollback", "x", &scrollback)) {
     g_settings_set_int64 (self->settings, "scrollback-lines", scrollback);
 
-    return 0;
+    return EXIT_SUCCESS;
   }
 
   if (working_dir != NULL) {
@@ -422,7 +424,7 @@ kgx_application_command_line (GApplication            *app,
 
   open_terminal (self, timestamp, path, command, title);
 
-  return 0;
+  return EXIT_SUCCESS;
 }
 
 

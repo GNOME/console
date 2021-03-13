@@ -37,7 +37,6 @@ main (int   argc,
   g_set_application_name (_("King’s Cross"));
   #endif
   gtk_window_set_default_icon_name ("org.gnome.zbrown.KingsCross");
-  g_set_prgname ("org.gnome.zbrown.KingsCross");
 
   /*
    * Create a new GtkApplication. The application manages our main loop,
