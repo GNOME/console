@@ -722,6 +722,7 @@ kgx_tab_class_init (KgxTabClass *klass)
 
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, stack);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, spinner);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, revealer);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, label);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, search_entry);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, search_bar);
