@@ -94,6 +94,7 @@ subdir('src')
 
 nautilus_dep = dependency('libnautilus-extension', required: get_option('nautilus'))
 if nautilus_dep.found()
+  gio_unix = dependency('gio-unix-2.0')
   subdir('nautilus')
 endif
 

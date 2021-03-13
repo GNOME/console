@@ -7,7 +7,7 @@ nautilus_sources = [
 ]
 
 nautilus_extension = shared_library('kgx-nautilus', nautilus_sources,
-                                     dependencies: [nautilus_dep],
+                                     dependencies: [nautilus_dep, gio_unix],
                               include_directories: kgx_inc,
                                           install: true,
                                       install_dir: libdir / 'nautilus' / 'extensions-3.0')
