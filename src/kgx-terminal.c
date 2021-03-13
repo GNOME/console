@@ -579,6 +579,7 @@ kgx_terminal_init (KgxTerminal *self)
   act = g_action_map_lookup_action (self->actions, "show-in-files");
   g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
 
+  vte_terminal_set_mouse_autohide (VTE_TERMINAL (self), TRUE);
   vte_terminal_search_set_wrap_around (VTE_TERMINAL (self), TRUE);
   vte_terminal_set_allow_hyperlink (VTE_TERMINAL (self), TRUE);
 
