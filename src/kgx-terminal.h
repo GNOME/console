@@ -66,8 +66,7 @@ typedef enum /*< enum,prefix=KGX >*/
  * 
  * Since: 0.1.0
  */
-struct _KgxTerminal
-{
+struct _KgxTerminal {
   /*< private >*/
   VteTerminal parent_instance;
 
@@ -77,7 +76,7 @@ struct _KgxTerminal
   GActionMap *actions;
 
   /* Hyperlinks */
-  const char *current_url;
+  char       *current_url;
   int         match_id[KGX_TERMINAL_N_LINK_REGEX];
 };
 

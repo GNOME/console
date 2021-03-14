@@ -85,6 +85,18 @@ static guint signals[N_SIGNALS];
 
 
 static void
+kgx_terminal_dispose (GObject *object)
+{
+  KgxTerminal *self = KGX_TERMINAL (object);
+
+  g_clear_object (&self->actions);
+  g_clear_pointer (&self->current_url, g_free);
+
+  G_OBJECT_CLASS (kgx_terminal_parent_class)->dispose (object);
+}
+
+
+static void
 kgx_terminal_set_theme (KgxTerminal *self,
                         KgxTheme     theme,
                         gboolean     opaque)
@@ -195,33 +207,43 @@ kgx_terminal_get_property (GObject    *object,
   }
 }
 
+
 static void
 context_menu (GtkWidget *widget,
               int        x,
               int        y,
               GdkEvent  *event)
 {
-  KgxTerminal    *self = KGX_TERMINAL (widget);
-  GAction        *act;
-  GtkWidget      *menu;
+  KgxTerminal *self = KGX_TERMINAL (widget);
+  GAction *act;
+  GtkWidget *menu;
   GtkApplication *app;
-  GMenu          *model;
-  GdkRectangle    rect = {x, y, 1, 1};
-  gboolean        value;
-  const char     *match;
-  int             match_id;
+  GMenu *model;
+  GdkRectangle rect = {x, y, 1, 1};
+  gboolean value;
+  g_autofree char *hyperlink = NULL;
+  g_autofree char *match = NULL;
+  int match_id;
 
-  match = vte_terminal_match_check_event (VTE_TERMINAL (self),
-                                          event,
-                                          &match_id);
+  g_clear_pointer (&self->current_url, g_free);
 
-  self->current_url = NULL;
-  for (int i = 0; i < KGX_TERMINAL_N_LINK_REGEX; i++) {
-    if (self->match_id[i] == match_id) {
-      self->current_url = match;
-      break;
+  hyperlink = vte_terminal_hyperlink_check_event (VTE_TERMINAL (self), event);
+
+  if (G_UNLIKELY (hyperlink)) {
+    self->current_url = g_steal_pointer (&hyperlink);
+  } else {
+    match = vte_terminal_match_check_event (VTE_TERMINAL (self),
+                                            event,
+                                            &match_id);
+
+    for (int i = 0; i < KGX_TERMINAL_N_LINK_REGEX; i++) {
+      if (self->match_id[i] == match_id) {
+        self->current_url = g_steal_pointer (&match);
+        break;
+      }
     }
   }
+  
   value = self->current_url != NULL;
 
   act = g_action_map_lookup_action (G_ACTION_MAP (self->actions), "open-link");
@@ -237,25 +259,29 @@ context_menu (GtkWidget *widget,
   gtk_popover_popup (GTK_POPOVER (menu));
 }
 
+
 static gboolean
 kgx_terminal_popup_menu (GtkWidget *self)
 {
   context_menu (self, 1, 1, NULL);
+
   return TRUE;
 }
+
 
 static gboolean
 kgx_terminal_button_press_event (GtkWidget *self, GdkEventButton *event)
 {
   if (gdk_event_triggers_context_menu ((GdkEvent *) event) &&
-      event->type == GDK_BUTTON_PRESS)
-    {
-      context_menu (self, event->x, event->y, (GdkEvent *) event);
-      return TRUE;
-    }
+      event->type == GDK_BUTTON_PRESS) {
+    context_menu (self, event->x, event->y, (GdkEvent *) event);
+
+    return TRUE;
+  }
 
   return GTK_WIDGET_CLASS (kgx_terminal_parent_class)->button_press_event (self, event);
 }
+
 
 static void
 kgx_terminal_class_init (KgxTerminalClass *klass)
@@ -263,6 +289,7 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
+  object_class->dispose = kgx_terminal_dispose;
   object_class->set_property = kgx_terminal_set_property;
   object_class->get_property = kgx_terminal_get_property;
 
@@ -483,8 +510,8 @@ show_in_files_activated (GSimpleAction *action,
   g_variant_unref (retval);
 }
 
-static GActionEntry term_entries[] =
-{
+
+static GActionEntry term_entries[] = {
   { "open-link", open_link_activated, NULL, NULL, NULL },
   { "copy-link", copy_link_activated, NULL, NULL, NULL },
   { "copy", copy_activated, NULL, NULL, NULL },
@@ -492,6 +519,7 @@ static GActionEntry term_entries[] =
   { "select-all", select_all_activated, NULL, NULL, NULL },
   { "show-in-files", show_in_files_activated, NULL, NULL, NULL },
 };
+
 
 static void
 long_pressed (GtkGestureLongPress *gesture,
@@ -501,6 +529,7 @@ long_pressed (GtkGestureLongPress *gesture,
 {
   context_menu (GTK_WIDGET (self), (int) x, (int) y, NULL);
 }
+
 
 static void
 selection_changed (KgxTerminal *self)
