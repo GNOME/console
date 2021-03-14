@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-03-06 09:51+0000\n"
-"PO-Revision-Date: 2021-03-08 18:34+0700\n"
+"POT-Creation-Date: 2021-03-14 02:24+0000\n"
+"PO-Revision-Date: 2021-03-14 19:27+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -19,30 +19,37 @@ msgstr ""
 
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:387
-#: src/kgx-application.c:477 src/kgx-window.c:614 src/kgx-window.ui:100
-#: src/main.c:38
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:512
+#: src/kgx-application.c:1076 src/kgx-application.c:1090 src/kgx-window.c:413
+#: src/kgx-window.ui:100 src/main.c:37
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.zbrown.KingsCross.desktop.in:9
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
 "perintah;prompt;cmd;baris perintah;jalankan;shell;terminal;kgx;kings cross;"
 
+#: data/org.gnome.zbrown.KingsCross.desktop.in:20
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:19
+msgid "New Window"
+msgstr "Jendela Baru"
+
+#: data/org.gnome.zbrown.KingsCross.desktop.in:26
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:25 src/kgx-window.ui:144
+msgid "New Tab"
+msgstr "Tab Baru"
+
 #: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3
-#: src/kgx-application.c:385 src/main.c:35
+#: src/kgx-application.c:1074 src/kgx-application.c:1088 src/kgx-window.c:411
+#: src/main.c:35
 msgid "Terminal"
 msgstr "Terminal"
 
-#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:8
-msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
-msgstr "perintah;prompt;cmd;baris perintah;jalankan;shell;terminal;kgx;"
-
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:479
-#: src/kgx-window.c:602
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:514
+#: src/kgx-window.c:405
 msgid "Terminal Emulator"
 msgstr "Emulator Terminal"
 
@@ -100,46 +107,47 @@ msgstr "Tempel"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:451
+#: src/kgx-application.c:486
 #, c-format
 msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgstr "# King's Cross %s menggunakan VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:463 src/kgx-window.c:595
+#. Translators: %s is the year range
+#: src/kgx-application.c:498 src/kgx-window.c:393
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:516
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 atau yang lebih baru"
 
-#: src/kgx-application.c:602
+#: src/kgx-application.c:647
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Jalankan argumen untuk opsi ini di dalam terminal"
 
-#: src/kgx-application.c:611
+#: src/kgx-application.c:656
 msgid "Set the working directory"
 msgstr "Atur direktori kerja"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:613
+#: src/kgx-application.c:658
 msgid "DIRNAME"
 msgstr "NAMA-DIREKTORI"
 
-#: src/kgx-application.c:621
+#: src/kgx-application.c:666
 msgid "Wait until the child exits (TODO)"
 msgstr "Tunggu sampai anak keluar (TODO)"
 
-#: src/kgx-application.c:630
+#: src/kgx-application.c:675
 msgid "Set the initial window title"
 msgstr "Atur judul jendela awal"
 
-#: src/kgx-application.c:639
+#: src/kgx-application.c:684
 msgid "ADVANCED: Set the shell to launch"
 msgstr "LANJUTAN: Setel shell untuk diluncurkan"
 
-#: src/kgx-application.c:648
+#: src/kgx-application.c:693
 msgid "ADVANCED: Set the scrollback length"
 msgstr "TINGKAT LANJUT: Atur panjang gulir balik"
 
@@ -155,7 +163,7 @@ msgstr ""
 "Beberapa perintah masih berjalan, menutup terminal ini akan membunuh mereka "
 "dan dapat menyebabkan hasil yang tak terduga"
 
-#: src/kgx-close-dialog.ui:56 src/kgx-terminal.c:421
+#: src/kgx-close-dialog.ui:56 src/kgx-terminal.c:642
 msgid "_Cancel"
 msgstr "_Batal"
 
@@ -183,16 +191,16 @@ msgstr "<b>Hanya Baca</b> — Perintah keluar"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Gagal untuk memulai</b> — %s"
 
-#: src/kgx-tab.c:1041
+#: src/kgx-tab.c:1158
 msgid "Command completed"
 msgstr "Perintah selesai"
 
-#: src/kgx-terminal.c:413
+#: src/kgx-terminal.c:634
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Anda menempelkan perintah yang dijalankan sebagai administrator"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:416
+#: src/kgx-terminal.c:637
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -201,25 +209,22 @@ msgstr ""
 "Pastikan Anda tahu apa yang dilakukan perintah:\n"
 "%s"
 
-#: src/kgx-terminal.c:424 src/menus.ui:24
+#: src/kgx-terminal.c:645 src/menus.ui:24
 msgid "_Paste"
 msgstr "Tem_pel"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:601
+#: src/kgx-window.c:399
 msgid "translator-credits"
 msgstr "Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2021."
 
-#. Translators: “King’s Cross” here is to distinguish from
-#. * gnome-terminal when using generic branding (such as on phones,
-#. * where g-t is unsuitable) - it may be best to leave it untranslated
-#. * (unlike Terminal, which should be)
-#.
-#: src/kgx-window.c:612
-msgid "Terminal (King’s Cross)"
-msgstr "Terminal (King's Cross)"
+#. Translators: Don’t attempt to translate KGX,
+#. * treat it as a proper noun
+#: src/kgx-window.c:403
+msgid "KGX Terminal Emulator"
+msgstr "Emulator Terminal KGX"
 
-#: src/kgx-window.c:677
+#: src/kgx-window.c:477
 msgid "_About Terminal"
 msgstr "Tent_ang Terminal"
 
@@ -259,10 +264,6 @@ msgstr "Cari di terminal"
 msgid "Menu"
 msgstr "Menu"
 
-#: src/kgx-window.ui:144
-msgid "New Tab"
-msgstr "Tab Baru"
-
 #: src/menus.ui:7
 msgid "_Open Link"
 msgstr "_Buka Tautan"
@@ -290,6 +291,24 @@ msgstr "_Tutup"
 #: src/menus.ui:49
 msgid "_Detach"
 msgstr "_Lepas"
+
+#: nautilus/kgx-nautilus-menu-item.c:120
+msgid "Open in T_erminal"
+msgstr "Buka dalam T_erminal"
+
+#: nautilus/kgx-nautilus-menu-item.c:122
+msgid "Op_en in King’s Cross"
+msgstr "Buk_a King’s Cross"
+
+#: nautilus/kgx-nautilus-menu-item.c:124
+msgid "Start a terminal session for this location"
+msgstr "Memulai sesi terminal untuk lokasi ini"
+
+#~ msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
+#~ msgstr "perintah;prompt;cmd;baris perintah;jalankan;shell;terminal;kgx;"
+
+#~ msgid "Terminal (King’s Cross)"
+#~ msgstr "Terminal (King's Cross)"
 
 #~ msgid "child watcher"
 #~ msgstr "pengamat anak"
