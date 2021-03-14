@@ -34,66 +34,22 @@
 #include <handy.h>
 
 #include "rgba.h"
-#include "fp-vte-util.h"
 
 #include "kgx-window.h"
 #include "kgx-application.h"
 #include "kgx-process.h"
 #include "kgx-close-dialog.h"
 #include "kgx-pages.h"
-#include "kgx-simple-tab.h"
 
 G_DEFINE_TYPE (KgxWindow, kgx_window, HDY_TYPE_APPLICATION_WINDOW)
 
 enum {
   PROP_0,
   PROP_APPLICATION,
-  PROP_INITIAL_DIRECTORY,
-  PROP_COMMAND,
-  PROP_CLOSE_ON_ZERO,
-  PROP_INITIALLY_EMPTY,
   LAST_PROP
 };
 
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
-
-/*
-ON PID CLOSE:
-  #if HAS_GTOP
-  app = gtk_window_get_application (GTK_WINDOW (self));
-
-  // If the application is in closing the app may already be null
-  if (app) {
-    kgx_application_remove_watch (KGX_APPLICATION (app), pid);
-  }
-  #endif
-*/
-
-
-static void
-started (GObject      *src,
-         GAsyncResult *res,
-         gpointer      win)
-{
-  g_autoptr (GError) error = NULL;
-  KgxTab *page = KGX_TAB (src);
-  GtkApplication *app = NULL;
-  GPid pid;
-
-  pid = kgx_tab_start_finish (page, res, &error);
-
-  if (error) {
-    g_warning ("Failed to start %s: %s",
-               G_OBJECT_TYPE_NAME (src),
-               error->message);
-    
-    return;
-  }
-
-  app = gtk_window_get_application (GTK_WINDOW (win));
-
-  kgx_application_add_watch (KGX_APPLICATION (app), pid, page);
-}
 
 
 static void
@@ -133,47 +89,6 @@ kgx_window_constructed (GObject *object)
 
   application = gtk_window_get_application (GTK_WINDOW (self));
 
-  if (G_LIKELY (!self->initially_empty)) {
-    g_autofree char *directory = NULL;
-    g_auto (GStrv) shell = NULL;
-    GtkWidget *page;
-
-    if (G_UNLIKELY (self->command != NULL)) {
-      g_shell_parse_argv (self->command, NULL, &shell, &error);
-      if (error) {
-        g_warning ("Failed to parse “%s” as a command", self->command);
-        shell = NULL;
-        g_clear_error (&error);
-      }
-      /* We should probably do something other than /bin/sh  */
-      if (shell == NULL) {
-        shell = g_new0 (char *, 2);
-        shell[0] = g_strdup ("/bin/sh");
-        shell[1] = NULL;
-        g_warning ("Defaulting to “%s”", shell[0]);
-      }
-    } else {
-      shell = kgx_application_get_shell (KGX_APPLICATION (application));
-    }
-
-    if (self->working_dir) {
-      directory = g_file_get_path (self->working_dir);
-    } else {
-      directory = g_strdup (g_get_home_dir ());
-    }
-
-    page = g_object_new (KGX_TYPE_SIMPLE_TAB,
-                         "application", application,
-                         "visible", TRUE,
-                         "initial-work-dir", directory,
-                         "command", shell,
-                         "close-on-quit", self->close_on_zero,
-                         NULL);
-    kgx_tab_start (KGX_TAB (page), started, self);
-
-    kgx_pages_add_page (KGX_PAGES (self->pages), KGX_TAB (page));
-  }
-
   g_object_bind_property (application, "theme",
                           self->pages, "theme",
                           G_BINDING_SYNC_CREATE);
@@ -211,18 +126,6 @@ kgx_window_set_property (GObject      *object,
       gtk_window_set_application (GTK_WINDOW (self),
                                   g_value_get_object (value));
       break;
-    case PROP_INITIAL_DIRECTORY:
-      self->working_dir = g_value_dup_object (value);
-      break;
-    case PROP_COMMAND:
-      self->command = g_value_dup_string (value);
-      break;
-    case PROP_CLOSE_ON_ZERO:
-      self->close_on_zero = g_value_get_boolean (value);
-      break;
-    case PROP_INITIALLY_EMPTY:
-      self->initially_empty = g_value_get_boolean (value);
-      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -243,34 +146,10 @@ kgx_window_get_property (GObject    *object,
       g_value_set_object (value,
                           gtk_window_get_application (GTK_WINDOW (self)));
       break;
-    case PROP_INITIAL_DIRECTORY:
-      g_value_set_object (value, self->working_dir);
-      break;
-    case PROP_COMMAND:
-      g_value_set_string (value, self->command);
-      break;
-    case PROP_CLOSE_ON_ZERO:
-      g_value_set_boolean (value, self->close_on_zero);
-      break;
-    case PROP_INITIALLY_EMPTY:
-      g_value_set_boolean (value, self->initially_empty);
-      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
   }
-}
-
-
-static void
-kgx_window_finalize (GObject *object)
-{
-  KgxWindow *self = KGX_WINDOW (object);
-
-  g_clear_object (&self->working_dir);
-  g_clear_pointer (&self->command, g_free);
-
-  G_OBJECT_CLASS (kgx_window_parent_class)->finalize (object);
 }
 
 
@@ -429,7 +308,6 @@ kgx_window_class_init (KgxWindowClass *klass)
   object_class->constructed = kgx_window_constructed;
   object_class->set_property = kgx_window_set_property;
   object_class->get_property = kgx_window_get_property;
-  object_class->finalize = kgx_window_finalize;
 
   widget_class->delete_event = kgx_window_delete_event;
   widget_class->window_state_event = kgx_window_window_state_event;
@@ -447,58 +325,6 @@ kgx_window_class_init (KgxWindowClass *klass)
                          "The application the window is part of",
                          KGX_TYPE_APPLICATION,
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
-
-  /**
-   * KgxWindow:initial-directory:
-   * 
-   * Used to handle --working-dir
-   * 
-   * Since: 0.5.0
-   */
-  pspecs[PROP_INITIAL_DIRECTORY] =
-    g_param_spec_object ("initial-directory", "Initial directory",
-                         "Initial working directory",
-                         G_TYPE_FILE,
-                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
-
-  /**
-   * KgxWindow:command:
-   * 
-   * Used to handle -e
-   * 
-   * Since: 0.1.0
-   */
-  pspecs[PROP_COMMAND] =
-    g_param_spec_string ("command", "Command",
-                         "Command to run",
-                         NULL,
-                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
-
-  /**
-   * KgxWindow:close-on-zero:
-   * 
-   * Should the window autoclose when the terminal complete
-   * 
-   * Since: 0.1.0
-   */
-  pspecs[PROP_CLOSE_ON_ZERO] =
-    g_param_spec_boolean ("close-on-zero", "Close on zero",
-                          "Should close when child exits with 0",
-                          TRUE,
-                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
-
-  /**
-   * KgxWindow:initially-empty:
-   * 
-   * Used to create new windows via drag-n-drop
-   * 
-   * Since: 0.3.0
-   */
-  pspecs[PROP_INITIALLY_EMPTY] =
-    g_param_spec_boolean ("initially-empty", "Initially empty",
-                          "Whether the window is initially empty",
-                          FALSE,
-                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
@@ -526,28 +352,20 @@ new_activated (GSimpleAction *action,
                GVariant      *parameter,
                gpointer       data)
 {
-  GtkWindow       *window = NULL;
-  GtkApplication  *app = NULL;
-  guint32          timestamp;
+  KgxWindow *self = data;
+  guint32 timestamp = GDK_CURRENT_TIME;
+  GtkApplication *application = NULL;
   g_autoptr (GFile) dir = NULL;
 
-  /* Slightly "wrong" but hopefully by taking the time before
-   * we spend non-zero time initing the window it’s far enough in the
-   * past for shell to do-the-right-thing
-   */
-  timestamp = GDK_CURRENT_TIME;
-
-  app = gtk_window_get_application (GTK_WINDOW (data));
-
+  application = gtk_window_get_application (GTK_WINDOW (self));
   dir = kgx_window_get_working_dir (KGX_WINDOW (data));
 
-  window = g_object_new (KGX_TYPE_WINDOW,
-                         "application", app,
-                         "initial-directory", dir,
-                         "close-on-zero", TRUE,
-                         NULL);
-
-  gtk_window_present_with_time (window, timestamp);
+  kgx_application_add_terminal (KGX_APPLICATION (application),
+                                NULL,
+                                timestamp,
+                                dir,
+                                NULL,
+                                NULL);
 }
 
 
@@ -556,32 +374,20 @@ new_tab_activated (GSimpleAction *action,
                    GVariant      *parameter,
                    gpointer       data)
 {
-  const char         *initial = NULL;
-  g_autoptr (GError)  error = NULL;
-  g_auto (GStrv)      shell = NULL;
-  GtkWidget          *page;
-  KgxWindow          *self = data;
-  GtkApplication     *application = NULL;
+  KgxWindow *self = data;
+  guint32 timestamp = GDK_CURRENT_TIME;
+  GtkApplication *application = NULL;
+  g_autoptr (GFile) dir = NULL;
 
   application = gtk_window_get_application (GTK_WINDOW (self));
+  dir = kgx_window_get_working_dir (KGX_WINDOW (data));
 
-  shell = kgx_application_get_shell (KGX_APPLICATION (application));
-
-  initial = g_get_home_dir ();
-
-  g_debug ("Working in %s", initial);
-
-  page = g_object_new (KGX_TYPE_SIMPLE_TAB,
-                       "application", application,
-                       "visible", TRUE,
-                       "initial-work-dir", initial,
-                       "command", shell,
-                       "close-on-quit", TRUE,
-                       NULL);
-  kgx_tab_start (KGX_TAB (page), started, self);
-
-  kgx_pages_add_page (KGX_PAGES (self->pages), KGX_TAB (page));
-  kgx_pages_focus_page (KGX_PAGES (self->pages), KGX_TAB (page));
+  kgx_application_add_terminal (KGX_APPLICATION (application),
+                                self,
+                                timestamp,
+                                dir,
+                                NULL,
+                                NULL);
 }
 
 
@@ -701,7 +507,6 @@ kgx_window_init (KgxWindow *self)
                                    self);
 
   self->theme = KGX_THEME_NIGHT;
-  self->close_on_zero = TRUE;
 
   pact = g_property_action_new ("find",
                                 G_OBJECT (self->pages),

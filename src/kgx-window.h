@@ -81,10 +81,6 @@ struct _KgxWindow
 
   /*< public >*/
   KgxTheme              theme;
-  GFile                *working_dir;
-  char                 *command;
-  gboolean              close_on_zero;
-  gboolean              initially_empty;
 
   /* Size indicator */
   int                   last_cols;

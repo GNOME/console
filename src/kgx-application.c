@@ -38,6 +38,7 @@
 #include "kgx-application.h"
 #include "kgx-window.h"
 #include "kgx-pages.h"
+#include "kgx-simple-tab.h"
 
 #define LOGO_COL_SIZE 28
 #define LOGO_ROW_SIZE 14
@@ -158,30 +159,6 @@ kgx_application_finalize (GObject *object)
 
 
 static void
-open_terminal (KgxApplication *self,
-               guint32         timestamp,
-               GFile          *working_directory,
-               const char     *command,
-               const char     *title)
-{
-  GtkWindow *window;
-
-  window = g_object_new (KGX_TYPE_WINDOW,
-                         "application", self,
-                         "close-on-zero", command == NULL,
-                         "initial-directory", working_directory,
-  #if IS_GENERIC
-                         "title", title ? title : _("Terminal"),
-  #else
-                         "title", title ? title : _("King’s Cross"),
-  #endif
-                         "command", command,
-                         NULL);
-  gtk_window_present_with_time (window, timestamp);
-}
-
-
-static void
 kgx_application_activate (GApplication *app)
 {
   GtkWindow *window;
@@ -192,7 +169,12 @@ kgx_application_activate (GApplication *app)
   /* Get the current window or create one if necessary. */
   window = gtk_application_get_active_window (GTK_APPLICATION (app));
   if (window == NULL) {
-    open_terminal (KGX_APPLICATION (app), timestamp, NULL, NULL, NULL);
+    kgx_application_add_terminal (KGX_APPLICATION (app),
+                                  NULL,
+                                  timestamp,
+                                  NULL,
+                                  NULL,
+                                  NULL);
 
     return;
   }
@@ -373,9 +355,17 @@ kgx_application_open (GApplication  *app,
                       const char    *hint)
 {
   guint32 timestamp = GDK_CURRENT_TIME;
+  GtkWindow *window;
 
   for (int i = 0; i < n_files; i++) {
-    open_terminal (KGX_APPLICATION (app), timestamp, files[i], NULL, NULL);
+    window = gtk_application_get_active_window (GTK_APPLICATION (app));
+
+    kgx_application_add_terminal (KGX_APPLICATION (app),
+                                  window ? KGX_WINDOW (window) : NULL,
+                                  timestamp,
+                                  files[i],
+                                  NULL,
+                                  NULL);
   }
 }
 
@@ -422,7 +412,7 @@ kgx_application_command_line (GApplication            *app,
     path = g_file_new_for_path (cwd);
   }
 
-  open_terminal (self, timestamp, path, command, title);
+  kgx_application_add_terminal (self, NULL, timestamp, path, command, title);
 
   return EXIT_SUCCESS;
 }
@@ -882,46 +872,6 @@ kgx_application_get_font (KgxApplication *self)
 
 
 /**
- * kgx_application_get_shell:
- * @self: the #KgxApplication
- *
- * Figure out what shell to launch for #KgxSimpleTabs, this is generally
- * whatever vte decides is the users default shell. Alternatively it may
- * be a custom command or if all else fails: /bin/sh
- *
- * Returns: (transfer full): the #GStrv shell vector
- * 
- * Since: 0.5.0
- */
-GStrv
-kgx_application_get_shell (KgxApplication *self)
-{
-  g_autofree char *user = vte_get_user_shell ();
-  g_auto (GStrv) argv  =  NULL;
-  g_auto (GStrv) custom  =  NULL;
-  g_autoptr (GError) error = NULL;
-
-  g_return_val_if_fail (KGX_IS_APPLICATION (self), NULL);
-
-  g_shell_parse_argv (user, NULL, &argv, &error);
-  if (error) {
-    g_warning ("Failed to parse “%s” as a command", user);
-    argv = g_new0 (char *, 2);
-    argv[0] = g_strdup ("/bin/sh");
-    argv[1] = NULL;
-  }
-
-  custom = g_settings_get_strv (self->settings, "shell");
-
-  if (g_strv_length (custom) > 0) {
-    return g_steal_pointer (&custom);
-  } else {
-    return g_steal_pointer (&argv);
-  }
-}
-
-
-/**
  * kgx_application_push_active:
  * @self: the #KgxApplication
  *
@@ -1005,4 +955,113 @@ kgx_application_lookup_page (KgxApplication *self,
   g_return_val_if_fail (KGX_IS_APPLICATION (self), NULL);
 
   return g_tree_lookup (self->pages, GUINT_TO_POINTER (id));
+}
+
+
+static void
+started (GObject      *src,
+         GAsyncResult *res,
+         gpointer      app)
+{
+  g_autoptr (GError) error = NULL;
+  KgxTab *page = KGX_TAB (src);
+  GPid pid;
+
+  pid = kgx_tab_start_finish (page, res, &error);
+
+  if (error) {
+    g_warning ("Failed to start %s: %s",
+               G_OBJECT_TYPE_NAME (src),
+               error->message);
+    
+    return;
+  }
+
+  kgx_application_add_watch (KGX_APPLICATION (app), pid, page);
+}
+
+
+KgxTab *
+kgx_application_add_terminal (KgxApplication *self,
+                              KgxWindow      *existing_window,
+                              guint32         timestamp,
+                              GFile          *working_directory,
+                              const char     *command,
+                              const char     *title)
+{
+  g_autofree char *user_shell = vte_get_user_shell ();
+  g_autofree char *directory = NULL;
+  g_autoptr (GError) error = NULL;
+  g_auto (GStrv) shell = NULL;
+  g_auto (GStrv) custom_shell = NULL;
+  GtkWindow *window;
+  GtkWidget *tab;
+  KgxPages *pages;
+
+  g_shell_parse_argv (command ? command : user_shell, NULL, &shell, &error);
+
+  if (error) {
+    g_warning ("Failed to parse “%s” as a command",
+               command ? command : user_shell);
+    shell = NULL;
+    g_clear_error (&error);
+  }
+
+  if (G_LIKELY (command == NULL)) {
+    custom_shell = g_settings_get_strv (self->settings, "shell");
+
+    if (g_strv_length (custom_shell) > 0) {
+      shell = g_steal_pointer (&custom_shell);
+    }
+  }
+
+  /* We should probably do something other than /bin/sh  */
+  if (shell == NULL) {
+    shell = g_new0 (char *, 2);
+    shell[0] = g_strdup ("/bin/sh");
+    shell[1] = NULL;
+    g_warning ("Defaulting to “%s”", shell[0]);
+  }
+
+  if (working_directory) {
+    directory = g_file_get_path (working_directory);
+  } else {
+    directory = g_strdup (g_get_home_dir ());
+  }
+
+  tab = g_object_new (KGX_TYPE_SIMPLE_TAB,
+                      "application", self,
+                      "visible", TRUE,
+                      "initial-work-dir", directory,
+                      "command", shell,
+  #if IS_GENERIC
+                      "tab-title", title ? title : _("Terminal"),
+  #else
+                      "tab-title", title ? title : _("King’s Cross"),
+  #endif
+                      "close-on-quit", command == NULL,
+                      NULL);
+  kgx_tab_start (KGX_TAB (tab), started, self);
+
+  if (existing_window) {
+    window = GTK_WINDOW (existing_window);
+  } else {
+    window = g_object_new (KGX_TYPE_WINDOW,
+                           "application", self,
+    #if IS_GENERIC
+                           "title", title ? title : _("Terminal"),
+    #else
+                           "title", title ? title : _("King’s Cross"),
+    #endif
+                           NULL);
+  }
+
+  pages = kgx_window_get_pages (KGX_WINDOW (window));
+
+  kgx_pages_add_page (pages, KGX_TAB (tab));
+  kgx_pages_focus_page (pages, KGX_TAB (tab));
+
+  gtk_window_present_with_time (window, timestamp);
+
+  return KGX_TAB (tab);
 }

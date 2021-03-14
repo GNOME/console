@@ -98,12 +98,17 @@ void                  kgx_application_add_watch       (KgxApplication *self,
 void                  kgx_application_remove_watch    (KgxApplication *self,
                                                        GPid            pid);
 PangoFontDescription *kgx_application_get_font        (KgxApplication *self);
-GStrv                 kgx_application_get_shell       (KgxApplication *self);
 void                  kgx_application_push_active     (KgxApplication *self);
 void                  kgx_application_pop_active      (KgxApplication *self);
 void                  kgx_application_add_page        (KgxApplication *self,
                                                        KgxTab         *page);
 KgxTab               *kgx_application_lookup_page     (KgxApplication *self,
                                                        guint           id);
+KgxTab *              kgx_application_add_terminal    (KgxApplication *self,
+                                                       KgxWindow      *existing_window,
+                                                       guint32         timestamp,
+                                                       GFile          *working_directory,
+                                                       const char     *command,
+                                                       const char     *title);
 
 G_END_DECLS
