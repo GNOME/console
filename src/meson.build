@@ -27,21 +27,10 @@ kgx_deps = [
   dependency('gio-2.0', version: '>= 2.62'),
   dependency('gtk+-3.0', version: '>= 3.24'),
   dependency('libhandy-1', version: '>= 1.1', fallback: ['handy', 'libhandy_dep']),
+  dependency('vte-2.91', version: '>= 0.65', fallback: ['vte', 'libvte_gtk3_dep']),
   dependency('libgtop-2.0'),
   cc.find_library('m', required: false),
 ]
-
-ideal_vte = dependency('vte-2.91', version: '>= 0.57',
-                       fallback: ['vte', 'libvte_gtk3_dep'],
-                       required: false)
-
-if not ideal_vte.found()
-  message('Using old vte, this is only supported for PureOS!')
-  add_project_arguments(['-DVTE_PTY_NO_CTTY=0'], language: 'c')
-  kgx_deps += [dependency('vte-2.91', version: '>= 0.54.2')]
-else
-  kgx_deps += [ideal_vte]
-endif
 
 kgx_sources += config_h
 
