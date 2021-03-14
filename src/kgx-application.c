@@ -383,6 +383,7 @@ kgx_application_command_line (GApplication            *app,
   const char *const *shell = NULL;
   const char *cwd = NULL;
   gint64 scrollback;
+  gboolean tab;
   g_autoptr (GFile) path = NULL;
 
   options = g_application_command_line_get_options_dict (cli);
@@ -412,7 +413,16 @@ kgx_application_command_line (GApplication            *app,
     path = g_file_new_for_path (cwd);
   }
 
-  kgx_application_add_terminal (self, NULL, timestamp, path, command, title);
+  if (g_variant_dict_lookup (options, "tab", "b", &tab) && tab) {
+    kgx_application_add_terminal (self,
+                                  KGX_WINDOW (gtk_application_get_active_window (GTK_APPLICATION (self))),
+                                  timestamp,
+                                  path,
+                                  command,
+                                  title);
+  } else {
+    kgx_application_add_terminal (self, NULL, timestamp, path, command, title);
+  }
 
   return EXIT_SUCCESS;
 }
@@ -620,6 +630,15 @@ static GOptionEntry entries[] = {
     NULL
   },
   {
+    "tab",
+    0,
+    0,
+    G_OPTION_ARG_NONE,
+    NULL,
+    NULL,
+    NULL
+  },
+  {
     "command",
     'e',
     0,
@@ -684,13 +703,30 @@ new_window_activated (GSimpleAction *action,
                       gpointer       data)
 {
   KgxApplication *self = KGX_APPLICATION (data);
+  guint32 timestamp = GDK_CURRENT_TIME;
+
+  kgx_application_add_terminal (self, NULL, timestamp, NULL, NULL, NULL);
+}
+
+
+static void
+new_tab_activated (GSimpleAction *action,
+                   GVariant      *parameter,
+                   gpointer       data)
+{
+  KgxApplication *self = KGX_APPLICATION (data);
+  guint32 timestamp = GDK_CURRENT_TIME;
+  g_autoptr (GFile) dir = NULL;
   GtkWindow *window;
 
   window = gtk_application_get_active_window (GTK_APPLICATION (self));
-  if (window != NULL)
-    {
-      g_action_group_activate_action (G_ACTION_GROUP (window), "new-window", NULL);
-    }
+  if (window) {
+    dir = kgx_window_get_working_dir (KGX_WINDOW (window));
+
+    kgx_application_add_terminal (self, KGX_WINDOW (window), timestamp, dir, NULL, NULL);
+  } else {
+    kgx_application_add_terminal (self, NULL, timestamp, NULL, NULL, NULL);
+  }
 }
 
 
@@ -750,9 +786,9 @@ zoom_in_activated (GSimpleAction *action,
 }
 
 
-static GActionEntry app_entries[] =
-{
+static GActionEntry app_entries[] = {
   { "new-window", new_window_activated, NULL, NULL, NULL },
+  { "new-tab", new_tab_activated, NULL, NULL, NULL },
   { "focus-page", focus_activated, "u", NULL, NULL },
   { "zoom-out", zoom_out_activated, NULL, NULL, NULL },
   { "zoom-normal", zoom_normal_activated, NULL, NULL, NULL },

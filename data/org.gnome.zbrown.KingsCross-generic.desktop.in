@@ -11,3 +11,16 @@ Categories=System;TerminalEmulator;X-GNOME-Utilities;GTK;GNOME;
 StartupNotify=true
 DBusActivatable=true
 X-GNOME-UsesNotifications=true
+Actions=new-window;new-tab;
+
+[Desktop Action new-window]
+Exec=kgx
+Name=New Window
+# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+Icon=window-new
+
+[Desktop Action new-tab]
+Exec=kgx --tab
+Name=New Tab
+# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+Icon=tab-new
