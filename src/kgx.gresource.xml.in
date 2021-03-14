@@ -18,9 +18,7 @@
   </gresource>
   <gresource prefix="/org/gnome/zbrown/KingsCross/icons/scalable/apps/">
     <file preprocess="xml-stripblanks" alias="kgx-original.svg">../data/org.gnome.zbrown.KingsCross.svg</file>
-    <file preprocess="xml-stripblanks" alias="org.gnome.zbrown.KingsCross.svg">../data/org.gnome.zbrown.KingsCross.svg</file>
-    <file preprocess="xml-stripblanks" alias="org.gnome.zbrown.KingsCross.Generic.svg">../data/org.gnome.zbrown.KingsCross.Generic.svg</file>
-    <file preprocess="xml-stripblanks" alias="org.gnome.zbrown.KingsCross-symbolic.svg">../data/org.gnome.zbrown.KingsCross-symbolic.svg</file>
-    <file preprocess="xml-stripblanks" alias="org.gnome.zbrown.KingsCross.Generic-symbolic.svg">../data/org.gnome.zbrown.KingsCross.Generic-symbolic.svg</file>
+    <file preprocess="xml-stripblanks" alias="org.gnome.zbrown.KingsCross.svg">@COLOUR_ICON@</file>
+    <file preprocess="xml-stripblanks" alias="org.gnome.zbrown.KingsCross.Generic.svg">@SYMBOLIC_ICON@</file>
   </gresource>
 </gresources>

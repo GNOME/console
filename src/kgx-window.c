@@ -605,24 +605,26 @@ about_activated (GSimpleAction *action,
   const char *artists[] = { "Tobias Bernard", NULL };
   g_autofree char *copyright = NULL;
   
+  /* Translators: %s is the year range */
   copyright = g_strdup_printf (_("© %s Zander Brown"), "2019-2021");
 
   gtk_show_about_dialog (GTK_WINDOW (data),
                          "authors", authors,
                          "artists", artists,
-                         // Translators: Credit yourself here
+                         /* Translators: Credit yourself here */
                          "translator-credits", _("translator-credits"),
+                         #if IS_GENERIC
+                         /* Translators: Don’t attempt to translate KGX,
+                          * treat it as a proper noun */
+                         "comments", _("KGX Terminal Emulator"),
+                         #else
                          "comments", _("Terminal Emulator"),
+                         #endif
                          "copyright", copyright,
                          "license-type", GTK_LICENSE_GPL_3_0,
                          "logo-icon-name", "kgx-original",
                          #if IS_GENERIC
-                         /* Translators: “King’s Cross” here is to distinguish from
-                          * gnome-terminal when using generic branding (such as on phones,
-                          * where g-t is unsuitable) - it may be best to leave it untranslated
-                          * (unlike Terminal, which should be)
-                          */
-                         "program-name", _("Terminal (King’s Cross)"),
+                         "program-name", _("Terminal"),
                          #else
                          "program-name", _("King’s Cross"),
                          #endif

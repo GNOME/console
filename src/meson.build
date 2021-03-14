@@ -47,8 +47,17 @@ kgx_sources += config_h
 
 gnome = import('gnome')
 
+resources_file = configure_file(
+                       input: 'kgx.gresource.xml.in',
+                      output: 'kgx.gresource.xml',
+               configuration: {
+                                'COLOUR_ICON': icon_filename,
+                                'SYMBOLIC_ICON': icon_symbolic_filename,
+                              }
+)
+
 kgx_sources += gnome.compile_resources('kgx-resources',
-  'kgx.gresource.xml',
+  resources_file,
   c_name: 'kgx',
   dependencies: style_deps
 )

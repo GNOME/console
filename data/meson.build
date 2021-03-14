@@ -1,11 +1,13 @@
+src_datadir = meson.current_source_dir()
+
 if get_option('generic')
   desktop_filename = 'org.gnome.zbrown.KingsCross-generic.desktop.in'
-  icon_filename = 'org.gnome.zbrown.KingsCross.Generic.svg'
-  icon_symbolic_filename = 'org.gnome.zbrown.KingsCross.Generic-symbolic.svg'
+  icon_filename = src_datadir / 'org.gnome.zbrown.KingsCross.Generic.svg'
+  icon_symbolic_filename = src_datadir / 'org.gnome.zbrown.KingsCross.Generic-symbolic.svg'
 else
   desktop_filename = 'org.gnome.zbrown.KingsCross.desktop.in'
-  icon_filename = 'org.gnome.zbrown.KingsCross.svg'
-  icon_symbolic_filename = 'org.gnome.zbrown.KingsCross-symbolic.svg'
+  icon_filename = src_datadir / 'org.gnome.zbrown.KingsCross.svg'
+  icon_symbolic_filename = src_datadir / 'org.gnome.zbrown.KingsCross-symbolic.svg'
 endif
 
 desktop_file = i18n.merge_file(
@@ -45,7 +47,7 @@ install_data('org.gnome.zbrown.KingsCross.gschema.xml',
 compile_schemas = find_program('glib-compile-schemas', required: false)
 if compile_schemas.found() and get_option('tests')
   test('Validate schema file', compile_schemas,
-    args: ['--strict', '--dry-run', meson.current_source_dir()]
+    args: ['--strict', '--dry-run', src_datadir]
   )
 endif
 
