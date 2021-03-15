@@ -43,7 +43,6 @@
     <chapter>
       <title>Confirm Close Dialog</title>
       <xi:include href="xml/kgx-close-dialog.xml"/>
-      <xi:include href="xml/kgx-close-dialog-row.xml"/>
     </chapter>
   </part>
 

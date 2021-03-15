@@ -31,9 +31,9 @@
 
 #include "kgx-config.h"
 #include "kgx-close-dialog.h"
-#include "kgx-close-dialog-row.h"
+#include <handy.h>
 
-G_DEFINE_TYPE (KgxCloseDialog, kgx_close_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (KgxCloseDialog, kgx_close_dialog, GTK_TYPE_MESSAGE_DIALOG)
 
 static void
 kgx_close_dialog_class_init (KgxCloseDialogClass *klass)
@@ -47,37 +47,9 @@ kgx_close_dialog_class_init (KgxCloseDialogClass *klass)
 }
 
 static void
-separator_header (GtkListBoxRow *row,
-                  GtkListBoxRow *before,
-                  gpointer       data)
-{
-  GtkWidget *header;
-
-  g_return_if_fail (GTK_IS_LIST_BOX_ROW (row));
-
-  if (before == NULL) {
-    gtk_list_box_row_set_header (row, NULL);
-
-    return;
-  } else if (gtk_list_box_row_get_header (row) != NULL) {
-    return;
-  }
-
-  header = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-  gtk_widget_show (header);
-
-  gtk_list_box_row_set_header (row, header);
-}
-
-static void
 kgx_close_dialog_init (KgxCloseDialog *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  gtk_list_box_set_header_func (GTK_LIST_BOX (self->list),
-                                separator_header,
-                                NULL,
-                                NULL);
 }
 
 /**
@@ -97,8 +69,10 @@ kgx_close_dialog_add_command (KgxCloseDialog *self,
 
   g_return_if_fail (KGX_IS_CLOSE_DIALOG (self));
 
-  row = g_object_new (KGX_TYPE_CLOSE_DIALOG_ROW,
-                      "command", command,
+  row = g_object_new (HDY_TYPE_ACTION_ROW,
+                      "visible", TRUE,
+                      "can-focus", FALSE,
+                      "title", command,
                       NULL);
 
   gtk_container_add (GTK_CONTAINER (self->list), row);

@@ -34,13 +34,13 @@ G_BEGIN_DECLS
 struct _KgxCloseDialog
 {
   /*< private >*/
-  GtkDialog parent_instance;
+  GtkMessageDialog parent_instance;
 
   /*< public >*/
   GtkWidget *list;
 };
 
-G_DECLARE_FINAL_TYPE (KgxCloseDialog, kgx_close_dialog, KGX, CLOSE_DIALOG, GtkDialog)
+G_DECLARE_FINAL_TYPE (KgxCloseDialog, kgx_close_dialog, KGX, CLOSE_DIALOG, GtkMessageDialog)
 
 void kgx_close_dialog_add_command (KgxCloseDialog *self,
                                    const char     *command);

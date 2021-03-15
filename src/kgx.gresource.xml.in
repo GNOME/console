@@ -3,7 +3,6 @@
   <gresource prefix="/org/gnome/zbrown/KingsCross">
     <file compressed="true">kgx-window.ui</file>
     <file compressed="true">kgx-close-dialog.ui</file>
-    <file compressed="true">kgx-close-dialog-row.ui</file>
     <file compressed="true">kgx-pages.ui</file>
     <file compressed="true">kgx-tab.ui</file>
     <file compressed="true">kgx-simple-tab.ui</file>

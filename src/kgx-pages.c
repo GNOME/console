@@ -479,7 +479,6 @@ close_page (HdyTabView *view,
 
   dlg = g_object_new (KGX_TYPE_CLOSE_DIALOG,
                       "transient-for", toplevel,
-                      "use-header-bar", TRUE,
                       NULL);
 
   g_signal_connect (dlg, "response", G_CALLBACK (close_response), page);

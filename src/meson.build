@@ -15,8 +15,6 @@ kgx_sources = [
   'kgx-pages.h',
   'kgx-close-dialog.c',
   'kgx-close-dialog.h',
-  'kgx-close-dialog-row.c',
-  'kgx-close-dialog-row.h',
   'kgx-window.c',
   'kgx-window.h',
   'kgx-process.c',

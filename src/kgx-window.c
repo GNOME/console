@@ -184,7 +184,6 @@ kgx_window_delete_event (GtkWidget   *widget,
 
   dlg = g_object_new (KGX_TYPE_CLOSE_DIALOG,
                       "transient-for", self,
-                      "use-header-bar", TRUE,
                       NULL);
 
   g_signal_connect (dlg, "response", G_CALLBACK (delete_response), self);

@@ -99,3 +99,13 @@ box.tab:drop(active) {
     -gtk-outline-bottom-right-radius: 8px;
   }
 }
+
+.process-list row {
+  .header {
+    min-height: 0;
+  }
+
+  .title {
+    font-family: Monospace;
+  }
+}
