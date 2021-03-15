@@ -477,18 +477,11 @@ close_page (HdyTabView *view,
 
   toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
 
-  dlg = g_object_new (KGX_TYPE_CLOSE_DIALOG,
-                      "transient-for", toplevel,
-                      NULL);
+  dlg = kgx_close_dialog_new (children);
+
+  gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (toplevel));
 
   g_signal_connect (dlg, "response", G_CALLBACK (close_response), page);
-
-  for (int i = 0; i < children->len; i++) {
-    KgxProcess *process = g_ptr_array_steal_index (children, i);
-
-    kgx_close_dialog_add_command (KGX_CLOSE_DIALOG (dlg),
-                                  kgx_process_get_exec (process));
-  }
 
   gtk_widget_show (dlg);
 

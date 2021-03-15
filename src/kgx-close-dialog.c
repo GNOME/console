@@ -31,49 +31,32 @@
 
 #include "kgx-config.h"
 #include "kgx-close-dialog.h"
+#include "kgx-process.h"
 #include <handy.h>
 
-G_DEFINE_TYPE (KgxCloseDialog, kgx_close_dialog, GTK_TYPE_MESSAGE_DIALOG)
-
-static void
-kgx_close_dialog_class_init (KgxCloseDialogClass *klass)
+GtkWidget *
+kgx_close_dialog_new (GPtrArray *commands)
 {
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  g_autoptr (GtkBuilder) builder = NULL;
+  GtkWidget *dialog, *list;
 
-  gtk_widget_class_set_template_from_resource (widget_class,
-                                               RES_PATH "kgx-close-dialog.ui");
+  builder = gtk_builder_new_from_resource (RES_PATH "kgx-close-dialog.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, KgxCloseDialog, list);
-}
+  dialog = GTK_WIDGET (gtk_builder_get_object (builder, "dialog"));
+  list = GTK_WIDGET (gtk_builder_get_object (builder, "list"));
 
-static void
-kgx_close_dialog_init (KgxCloseDialog *self)
-{
-  gtk_widget_init_template (GTK_WIDGET (self));
-}
+  for (int i = 0; i < commands->len; i++) {
+    KgxProcess *process = g_ptr_array_index (commands, i);
+    GtkWidget *row;
 
-/**
- * kgx_close_dialog_add_command:
- * @self: the #KgxCloseDialog
- * @command: the command the row is for
- * 
- * Adds a row to the #GtkListBox
- * 
- * Since: 0.2.0
- */
-void
-kgx_close_dialog_add_command (KgxCloseDialog *self,
-                              const char     *command)
-{
-  GtkWidget *row;
+    row = g_object_new (HDY_TYPE_ACTION_ROW,
+                        "visible", TRUE,
+                        "can-focus", FALSE,
+                        "title", kgx_process_get_exec (process),
+                        NULL);
 
-  g_return_if_fail (KGX_IS_CLOSE_DIALOG (self));
+    gtk_container_add (GTK_CONTAINER (list), row);
+  }
 
-  row = g_object_new (HDY_TYPE_ACTION_ROW,
-                      "visible", TRUE,
-                      "can-focus", FALSE,
-                      "title", command,
-                      NULL);
-
-  gtk_container_add (GTK_CONTAINER (self->list), row);
+  return dialog;
 }

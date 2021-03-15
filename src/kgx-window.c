@@ -182,18 +182,11 @@ kgx_window_delete_event (GtkWidget   *widget,
     return FALSE; // Aka no, I don’t want to block closing
   }
 
-  dlg = g_object_new (KGX_TYPE_CLOSE_DIALOG,
-                      "transient-for", self,
-                      NULL);
+  dlg = kgx_close_dialog_new (children);
+
+  gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (self));
 
   g_signal_connect (dlg, "response", G_CALLBACK (delete_response), self);
-
-  for (int i = 0; i < children->len; i++) {
-    KgxProcess *process = g_ptr_array_index (children, i);
-    
-    kgx_close_dialog_add_command (KGX_CLOSE_DIALOG (dlg),
-                                  kgx_process_get_exec (process));
-  }
 
   gtk_widget_show (dlg);
   
