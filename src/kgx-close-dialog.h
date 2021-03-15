@@ -19,9 +19,16 @@
 #pragma once
 
 #include <gtk/gtk.h>
+#include "kgx-enums.h"
 
 G_BEGIN_DECLS
 
-GtkWidget *kgx_close_dialog_new (GPtrArray *commands);
+typedef enum {
+  KGX_CONTEXT_WINDOW,
+  KGX_CONTEXT_TAB,
+} KgxCloseDialogContext;
+
+GtkWidget *kgx_close_dialog_new (KgxCloseDialogContext  context,
+                                 GPtrArray             *commands);
 
 G_END_DECLS

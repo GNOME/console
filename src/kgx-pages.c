@@ -477,7 +477,7 @@ close_page (HdyTabView *view,
 
   toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
 
-  dlg = kgx_close_dialog_new (children);
+  dlg = kgx_close_dialog_new (KGX_CONTEXT_TAB, children);
 
   gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (toplevel));
 

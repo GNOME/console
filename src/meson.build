@@ -51,6 +51,7 @@ kgx_sources += gnome.compile_resources('kgx-resources',
 
 kgx_sources += gnome.mkenums_simple('kgx-enums',
                                     sources: [
+                                      'kgx-close-dialog.h',
                                       'kgx-terminal.h',
                                       'kgx-window.h',
                                       'kgx-tab.h'

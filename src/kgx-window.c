@@ -182,7 +182,7 @@ kgx_window_delete_event (GtkWidget   *widget,
     return FALSE; // Aka no, I don’t want to block closing
   }
 
-  dlg = kgx_close_dialog_new (children);
+  dlg = kgx_close_dialog_new (KGX_CONTEXT_WINDOW, children);
 
   gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (self));
 

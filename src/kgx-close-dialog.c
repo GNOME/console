@@ -35,7 +35,8 @@
 #include <handy.h>
 
 GtkWidget *
-kgx_close_dialog_new (GPtrArray *commands)
+kgx_close_dialog_new (KgxCloseDialogContext  context,
+                      GPtrArray             *commands)
 {
   g_autoptr (GtkBuilder) builder = NULL;
   GtkWidget *dialog, *list;
@@ -44,6 +45,23 @@ kgx_close_dialog_new (GPtrArray *commands)
 
   dialog = GTK_WIDGET (gtk_builder_get_object (builder, "dialog"));
   list = GTK_WIDGET (gtk_builder_get_object (builder, "list"));
+
+  switch (context) {
+    case KGX_CONTEXT_WINDOW:
+      g_object_set (dialog,
+                    "text", _("Close Window?"),
+                    "secondary-text", _("Some commands are still running, closing this window will kill them and may lead to unexpected outcomes"),
+                    NULL);
+      break;
+    case KGX_CONTEXT_TAB:
+      g_object_set (dialog,
+                    "text", _("Close Tab?"),
+                    "secondary-text", _("Some commands are still running, closing this tab will kill them and may lead to unexpected outcomes"),
+                    NULL);
+      break;
+    default:
+      g_assert_not_reached ();
+  }
 
   for (int i = 0; i < commands->len; i++) {
     KgxProcess *process = g_ptr_array_index (commands, i);
