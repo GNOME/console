@@ -73,7 +73,9 @@ struct _KgxTabPrivate {
 
   GtkWidget            *stack;
   GtkWidget            *spinner;
+  GtkWidget            *spinner_revealer;
   GtkWidget            *content;
+  guint                 spinner_timeout;
 
   GtkWidget            *revealer;
   GtkWidget            *label;
@@ -285,6 +287,27 @@ search_prev (HdySearchBar *bar,
   KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
 
   vte_terminal_search_find_previous (VTE_TERMINAL (priv->terminal));
+}
+
+
+static void
+spinner_unmapped (GtkSpinner *spinner,
+                  KgxTab     *self)
+{
+  gtk_spinner_stop (spinner);
+}
+
+
+static gboolean
+start_spinner_timeout_cb (KgxTab *self)
+{
+  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
+
+  gtk_spinner_start (GTK_SPINNER (priv->spinner));
+  gtk_revealer_set_reveal_child (GTK_REVEALER (priv->spinner_revealer), TRUE);
+  priv->spinner_timeout = 0;
+
+  return G_SOURCE_REMOVE;
 }
 
 
@@ -722,6 +745,7 @@ kgx_tab_class_init (KgxTabClass *klass)
 
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, stack);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, spinner);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, spinner_revealer);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, revealer);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, label);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, search_entry);
@@ -731,6 +755,7 @@ kgx_tab_class_init (KgxTabClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, search_changed);
   gtk_widget_class_bind_template_callback (widget_class, search_next);
   gtk_widget_class_bind_template_callback (widget_class, search_prev);
+  gtk_widget_class_bind_template_callback (widget_class, spinner_unmapped);
 }
 
 
@@ -949,7 +974,8 @@ kgx_tab_start (KgxTab              *self,
 
   priv = kgx_tab_get_instance_private (self);
 
-  gtk_spinner_start (GTK_SPINNER (priv->spinner));
+  priv->spinner_timeout =
+    g_timeout_add (100, G_SOURCE_FUNC (start_spinner_timeout_cb), self);
 
   KGX_TAB_GET_CLASS (self)->start (self, callback, callback_data);
 }
@@ -970,7 +996,7 @@ kgx_tab_start_finish (KgxTab        *self,
 
   pid = KGX_TAB_GET_CLASS (self)->start_finish (self, res, error);
 
-  gtk_spinner_stop (GTK_SPINNER (priv->spinner));
+  g_clear_handle_id (&priv->spinner_timeout, g_source_remove);
   gtk_stack_set_visible_child (GTK_STACK (priv->stack), priv->content);
   gtk_widget_grab_focus (GTK_WIDGET (self));
 
