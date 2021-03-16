@@ -57,11 +57,15 @@
 }
 
 .empty-state {
-  & image {
-    color: rgba(40, 40, 40, 0.8);
-  }
   /* Sync to KgxTerminal! */
-  background: rgba(12.75, 12.75, 12.75, 0.96);
+  $bg: rgb(0.05 * 255, 0.05 * 255, 0.05 * 255);
+
+  background: transparentize($bg, 0.04);
+  color: gtkalpha(currentColor, .5);
+
+  window.opaque & {
+    background: $bg;
+  }
 }
 
 .exit-info {

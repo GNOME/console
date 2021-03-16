@@ -287,6 +287,11 @@ kgx_window_window_state_event (GtkWidget           *widget,
 
   g_object_set (self->pages, "opaque", !!opaque, NULL);
 
+  if (opaque)
+    gtk_style_context_add_class (gtk_widget_get_style_context (widget), "opaque");
+  else
+    gtk_style_context_remove_class (gtk_widget_get_style_context (widget), "opaque");
+
   return GTK_WIDGET_CLASS (kgx_window_parent_class)->window_state_event (widget, event);
 }
 
