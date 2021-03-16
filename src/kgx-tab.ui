@@ -88,8 +88,9 @@
                 <property name="transition-type">crossfade</property>
                 <property name="transition-duration">1000</property>
                 <child>
-                  <object class="GtkSpinner" id="spinner">
+                  <object class="GtkSpinner">
                     <property name="visible">True</property>
+                    <signal name="map" handler="spinner_mapped" swapped="no"/>
                     <signal name="unmap" handler="spinner_unmapped" swapped="no"/>
                   </object>
                 </child>
