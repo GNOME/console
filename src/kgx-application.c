@@ -1070,11 +1070,7 @@ kgx_application_add_terminal (KgxApplication *self,
                       "visible", TRUE,
                       "initial-work-dir", directory,
                       "command", shell,
-  #if IS_GENERIC
-                      "tab-title", title ? title : _("Terminal"),
-  #else
-                      "tab-title", title ? title : _("King’s Cross"),
-  #endif
+                      "tab-title", title,
                       "close-on-quit", command == NULL,
                       NULL);
   kgx_tab_start (KGX_TAB (tab), started, self);
@@ -1084,11 +1080,6 @@ kgx_application_add_terminal (KgxApplication *self,
   } else {
     window = g_object_new (KGX_TYPE_WINDOW,
                            "application", self,
-    #if IS_GENERIC
-                           "title", title ? title : _("Terminal"),
-    #else
-                           "title", title ? title : _("King’s Cross"),
-    #endif
                            NULL);
   }
 

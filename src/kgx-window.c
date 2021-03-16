@@ -445,6 +445,28 @@ static GActionEntry win_entries[] = {
 
 
 static gboolean
+update_title (GBinding     *binding,
+              const GValue *from_value,
+              GValue       *to_value,
+              gpointer      data)
+{
+  const char *title = g_value_get_string (from_value);
+
+  if (!title) {
+#if IS_GENERIC
+    title = _("Terminal");
+#else
+    title = _("King’s Cross");
+#endif
+  }
+
+  g_value_set_string (to_value, title);
+
+  return TRUE;
+}
+
+
+static gboolean
 update_subtitle (GBinding     *binding,
                  const GValue *from_value,
                  GValue       *to_value,
@@ -510,9 +532,11 @@ kgx_window_init (KgxWindow *self)
                                 "search-mode-enabled");
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (pact));
 
-  g_object_bind_property (self->pages, "title",
-                          self, "title",
-                          G_BINDING_SYNC_CREATE);
+  g_object_bind_property_full (self->pages, "title",
+                               self, "title",
+                               G_BINDING_SYNC_CREATE,
+                               update_title,
+                               NULL, NULL, NULL);
 
   g_object_bind_property (self, "title",
                           self->header_bar, "title",

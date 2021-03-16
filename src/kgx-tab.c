@@ -1274,3 +1274,24 @@ kgx_tab_accept_drop (KgxTab           *self,
   if (priv->terminal)
     kgx_terminal_accept_paste (KGX_TERMINAL (priv->terminal), text);
 }
+
+
+void
+kgx_tab_set_initial_title (KgxTab     *self,
+                           const char *title,
+                           GFile      *path)
+{
+  KgxTabPrivate *priv;
+
+  g_return_if_fail (KGX_IS_TAB (self));
+
+  priv = kgx_tab_get_instance_private (self);
+
+  if (priv->title || priv->path)
+    return;
+
+  g_object_set (self,
+                "tab-title", title,
+                "tab-path", path,
+                NULL);
+}

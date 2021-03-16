@@ -719,6 +719,8 @@ kgx_pages_add_page (KgxPages *self,
 
   priv = kgx_pages_get_instance_private (self);
 
+  kgx_tab_set_initial_title (tab, priv->title, priv->path);
+
   page = hdy_tab_view_add_page (HDY_TAB_VIEW (priv->view), GTK_WIDGET (tab), NULL);
   g_object_bind_property (tab, "tab-title", page, "title", G_BINDING_SYNC_CREATE);
   g_object_bind_property (tab, "tab-tooltip", page, "tooltip", G_BINDING_SYNC_CREATE);
