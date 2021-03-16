@@ -162,6 +162,8 @@ kgx_tab_dispose (GObject *object)
   KgxTab *self = KGX_TAB (object);
   KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
 
+  g_clear_handle_id (&priv->spinner_timeout, g_source_remove);
+
   if (priv->notification_id) {
     g_application_withdraw_notification (G_APPLICATION (priv->application),
                                          priv->notification_id);
