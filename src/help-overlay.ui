@@ -62,6 +62,47 @@
             </child>
           </object>
         </child>
+        <child>
+          <object class="GtkShortcutsGroup">
+            <property name="title" translatable="yes" context="shortcut window">Tabs</property>
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="visible">True</property>
+                <property name="accelerator">&lt;primary&gt;Page_Down &lt;primary&gt;Tab</property>
+                <property name="title" translatable="yes" context="shortcut window">Next Tab</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="visible">True</property>
+                <property name="accelerator">&lt;primary&gt;Page_Up &lt;shift&gt;&lt;primary&gt;Tab</property>
+                <property name="title" translatable="yes" context="shortcut window">Previous Tab</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="visible">True</property>
+                <property name="accelerator">&lt;primary&gt;Home</property>
+                <property name="title" translatable="yes" context="shortcut window">First Tab</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="visible">True</property>
+                <property name="accelerator">&lt;primary&gt;End</property>
+                <property name="title" translatable="yes" context="shortcut window">Last Tab</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="visible">True</property>
+                <property name="accelerator">&lt;alt&gt;1...9</property>
+                <property name="title" translatable="yes" context="shortcut window">Switch to Tab</property>
+              </object>
+            </child>
+          </object>
+        </child>
       </object>
     </child>
   </object>
