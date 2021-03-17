@@ -560,6 +560,8 @@ kgx_window_init (KgxWindow *self)
 
   group = gtk_window_group_new ();
   gtk_window_group_add_window (group, GTK_WINDOW (self));
+
+  kgx_pages_set_shortcut_widget (KGX_PAGES (self->pages), GTK_WIDGET (self));
 }
 
 

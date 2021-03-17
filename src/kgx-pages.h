@@ -51,6 +51,7 @@ GPtrArray  *kgx_pages_get_children   (KgxPages   *self);
 void        kgx_pages_focus_page     (KgxPages   *self,
                                       KgxTab     *page);
 KgxStatus   kgx_pages_current_status (KgxPages   *self);
-
+void        kgx_pages_set_shortcut_widget (KgxPages  *self,
+                                           GtkWidget *widget);
 
 G_END_DECLS

@@ -851,3 +851,18 @@ kgx_pages_get_children (KgxPages *self)
 
   return children;
 }
+
+
+void
+kgx_pages_set_shortcut_widget (KgxPages  *self,
+                               GtkWidget *widget)
+{
+  KgxPagesPrivate *priv;
+
+  g_return_if_fail (KGX_IS_PAGES (self));
+  g_return_if_fail (GTK_IS_WIDGET (widget) || widget == NULL);
+
+  priv = kgx_pages_get_instance_private (self);
+
+  hdy_tab_view_set_shortcut_widget (HDY_TAB_VIEW (priv->view), widget);
+}
