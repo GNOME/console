@@ -53,5 +53,7 @@ void        kgx_pages_focus_page     (KgxPages   *self,
 KgxStatus   kgx_pages_current_status (KgxPages   *self);
 void        kgx_pages_set_shortcut_widget (KgxPages  *self,
                                            GtkWidget *widget);
+gboolean    kgx_pages_key_press_event     (KgxPages  *self,
+                                           GdkEvent  *event);
 
 G_END_DECLS

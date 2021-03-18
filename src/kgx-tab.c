@@ -1295,3 +1295,28 @@ kgx_tab_set_initial_title (KgxTab     *self,
                 "tab-path", path,
                 NULL);
 }
+
+
+gboolean
+kgx_tab_key_press_event (KgxTab   *self,
+                         GdkEvent *event)
+{
+  KgxTabPrivate *priv;
+  GtkWidget *toplevel, *focus;
+
+  g_return_val_if_fail (KGX_IS_TAB (self), GDK_EVENT_PROPAGATE);
+  g_return_val_if_fail (event != NULL, GDK_EVENT_PROPAGATE);
+
+  priv = kgx_tab_get_instance_private (self);
+  toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+
+  if (!GTK_IS_WINDOW (toplevel))
+    return GDK_EVENT_PROPAGATE;
+
+  focus = gtk_window_get_focus (GTK_WINDOW (toplevel));
+
+  if (focus == GTK_WIDGET (priv->terminal))
+    return gtk_widget_event (GTK_WIDGET (priv->terminal), event);
+
+  return GDK_EVENT_PROPAGATE;
+}

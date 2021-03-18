@@ -106,5 +106,7 @@ void        kgx_tab_accept_drop      (KgxTab               *self,
 void        kgx_tab_set_initial_title (KgxTab              *self,
                                        const char          *title,
                                        GFile               *path);
+gboolean    kgx_tab_key_press_event   (KgxTab              *self,
+                                       GdkEvent            *event);
 
 G_END_DECLS

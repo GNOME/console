@@ -209,6 +209,53 @@ active_changed (GObject *object, GParamSpec *pspec, gpointer data)
 }
 
 
+static gboolean
+key_press_event (GtkWidget   *widget,
+                 GdkEventKey *event,
+                 KgxWindow   *self)
+{
+  GdkModifierType default_modifiers = gtk_accelerator_get_default_mod_mask ();
+  guint keyval;
+  GdkModifierType state;
+  GdkModifierType consumed;
+  GdkKeymap *keymap;
+
+  gdk_event_get_state ((GdkEvent *) event, &state);
+
+  keymap = gdk_keymap_get_for_display (gtk_widget_get_display (widget));
+
+  gdk_keymap_translate_keyboard_state (keymap,
+                                       event->hardware_keycode,
+                                       state,
+                                       event->group,
+                                       &keyval, NULL, NULL, &consumed);
+
+  state &= ~consumed & default_modifiers;
+
+  /* Override some shortcuts from HdyTabView:shortcut-widget back, as they are
+   * needed for terminal apps. This should be fixed on libhandy side, but would
+   * likely require API changes, so carry this for now.
+   *
+   * See https://gitlab.gnome.org/GNOME/libhandy/-/issues/422
+   */
+  if ((keyval == GDK_KEY_Page_Up ||
+       keyval == GDK_KEY_KP_Page_Up ||
+       keyval == GDK_KEY_Page_Down ||
+       keyval == GDK_KEY_KP_Page_Down ||
+       keyval == GDK_KEY_Home ||
+       keyval == GDK_KEY_KP_Home ||
+       keyval == GDK_KEY_End ||
+       keyval == GDK_KEY_KP_End) &&
+      (state == GDK_CONTROL_MASK ||
+       state == (GDK_CONTROL_MASK | GDK_SHIFT_MASK))) {
+    return kgx_pages_key_press_event (KGX_PAGES (self->pages),
+                                      (GdkEvent *) event);
+  }
+
+  return GDK_EVENT_PROPAGATE;
+}
+
+
 static void
 zoom (KgxPages  *pages,
       KgxZoom    dir,
@@ -337,6 +384,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, pages);
 
   gtk_widget_class_bind_template_callback (widget_class, active_changed);
+  gtk_widget_class_bind_template_callback (widget_class, key_press_event);
 
   gtk_widget_class_bind_template_callback (widget_class, zoom);
   gtk_widget_class_bind_template_callback (widget_class, status_changed);

@@ -866,3 +866,21 @@ kgx_pages_set_shortcut_widget (KgxPages  *self,
 
   hdy_tab_view_set_shortcut_widget (HDY_TAB_VIEW (priv->view), widget);
 }
+
+
+gboolean
+kgx_pages_key_press_event (KgxPages *self,
+                           GdkEvent *event)
+{
+  KgxPagesPrivate *priv;
+
+  g_return_val_if_fail (KGX_IS_PAGES (self), GDK_EVENT_PROPAGATE);
+  g_return_val_if_fail (event != NULL, GDK_EVENT_PROPAGATE);
+
+  priv = kgx_pages_get_instance_private (self);
+
+  if (!priv->active_page)
+    return GDK_EVENT_PROPAGATE;
+
+  return kgx_tab_key_press_event (priv->active_page, event);
+}

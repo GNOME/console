@@ -90,6 +90,7 @@
   <template class="KgxWindow" parent="HdyApplicationWindow">
     <property name="can-focus">False</property>
     <signal name="notify::is-active" handler="active_changed" swapped="no"/>
+    <signal name="key-press-event" handler="key_press_event" swapped="no"/>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
