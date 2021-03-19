@@ -97,6 +97,10 @@ struct _KgxWindow
   GtkWidget            *about_item;
   GtkWidget            *tab_bar;
   GtkWidget            *pages;
+
+  int                   current_width;
+  int                   current_height;
+  gboolean              is_maximized_or_tiled;
 };
 
 G_DECLARE_FINAL_TYPE (KgxWindow, kgx_window, KGX, WINDOW, HdyApplicationWindow)
@@ -105,5 +109,9 @@ GFile      *kgx_window_get_working_dir (KgxWindow    *self);
 void        kgx_window_show_status     (KgxWindow    *self,
                                         const char   *status);
 KgxPages   *kgx_window_get_pages       (KgxWindow    *self);
+
+void        kgx_window_get_size        (KgxWindow    *self,
+                                        int          *width,
+                                        int          *height);
 
 G_END_DECLS

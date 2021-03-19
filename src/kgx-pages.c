@@ -428,11 +428,18 @@ create_window (HdyTabView *view,
   GtkApplication *app;
   KgxPages *new_pages;
   KgxPagesPrivate *priv;
+  int width, height;
 
   window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
   app = gtk_window_get_application (window);
 
-  new_window = g_object_new (KGX_TYPE_WINDOW, "application", app, NULL);
+  kgx_window_get_size (KGX_WINDOW (window), &width, &height);
+
+  new_window = g_object_new (KGX_TYPE_WINDOW,
+                             "application", app,
+                             "default-width", width,
+                             "default-height", height,
+                             NULL);
 
   new_pages = kgx_window_get_pages (new_window);
   priv = kgx_pages_get_instance_private (new_pages);

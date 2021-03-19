@@ -323,23 +323,39 @@ kgx_window_window_state_event (GtkWidget           *widget,
                                GdkEventWindowState *event)
 {
   KgxWindow *self = KGX_WINDOW (widget);
-  gboolean opaque =
-    event->new_window_state & (GDK_WINDOW_STATE_FULLSCREEN |
-                               GDK_WINDOW_STATE_MAXIMIZED |
-                               GDK_WINDOW_STATE_TILED |
-                               GDK_WINDOW_STATE_TOP_TILED |
-                               GDK_WINDOW_STATE_RIGHT_TILED |
-                               GDK_WINDOW_STATE_BOTTOM_TILED |
-                               GDK_WINDOW_STATE_LEFT_TILED);
 
-  g_object_set (self->pages, "opaque", !!opaque, NULL);
+  self->is_maximized_or_tiled =
+    (event->new_window_state & (GDK_WINDOW_STATE_FULLSCREEN |
+                                GDK_WINDOW_STATE_MAXIMIZED |
+                                GDK_WINDOW_STATE_TILED |
+                                GDK_WINDOW_STATE_TOP_TILED |
+                                GDK_WINDOW_STATE_RIGHT_TILED |
+                                GDK_WINDOW_STATE_BOTTOM_TILED |
+                                GDK_WINDOW_STATE_LEFT_TILED)) > 0;
 
-  if (opaque)
+  g_object_set (self->pages, "opaque", self->is_maximized_or_tiled, NULL);
+
+  if (self->is_maximized_or_tiled)
     gtk_style_context_add_class (gtk_widget_get_style_context (widget), "opaque");
   else
     gtk_style_context_remove_class (gtk_widget_get_style_context (widget), "opaque");
 
   return GTK_WIDGET_CLASS (kgx_window_parent_class)->window_state_event (widget, event);
+}
+
+
+static void
+kgx_window_size_allocate (GtkWidget     *widget,
+                          GtkAllocation *alloc)
+{
+  KgxWindow *self = KGX_WINDOW (widget);
+
+  GTK_WIDGET_CLASS (kgx_window_parent_class)->size_allocate (widget, alloc);
+
+  if (!self->is_maximized_or_tiled)
+    gtk_window_get_size (GTK_WINDOW (self),
+                         &self->current_width,
+                         &self->current_height);
 }
 
 
@@ -355,6 +371,7 @@ kgx_window_class_init (KgxWindowClass *klass)
 
   widget_class->delete_event = kgx_window_delete_event;
   widget_class->window_state_event = kgx_window_window_state_event;
+  widget_class->size_allocate = kgx_window_size_allocate;
 
   /**
    * KgxWindow:application:
@@ -649,4 +666,18 @@ kgx_window_get_pages (KgxWindow *self)
   g_return_val_if_fail (KGX_IS_WINDOW (self), NULL);
 
   return KGX_PAGES (self->pages);
+}
+
+
+void
+kgx_window_get_size (KgxWindow *self,
+                     int       *width,
+                     int       *height)
+{
+  g_return_if_fail (KGX_IS_WINDOW (self));
+
+  if (width)
+    *width = self->current_width;
+  if (height)
+    *height = self->current_height;
 }
