@@ -91,6 +91,7 @@ kgx_terminal_dispose (GObject *object)
 
   g_clear_object (&self->actions);
   g_clear_pointer (&self->current_url, g_free);
+  g_clear_object (&self->long_press_gesture);
 
   G_OBJECT_CLASS (kgx_terminal_parent_class)->dispose (object);
 }
@@ -598,6 +599,7 @@ kgx_terminal_init (KgxTerminal *self)
   gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (gesture),
                                               GTK_PHASE_TARGET);
   g_signal_connect (gesture, "pressed", G_CALLBACK (long_pressed), self);
+  self->long_press_gesture = gesture;
 
   act = g_action_map_lookup_action (self->actions, "open-link");
   g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
