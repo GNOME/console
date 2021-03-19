@@ -114,6 +114,17 @@ kgx_window_constructed (GObject *object)
 
 
 static void
+kgx_window_dispose (GObject *object)
+{
+  KgxWindow *self = KGX_WINDOW (object);
+
+  g_clear_object (&self->tab_actions);
+
+  G_OBJECT_CLASS (kgx_window_parent_class)->dispose (object);
+}
+
+
+static void
 kgx_window_set_property (GObject      *object,
                          guint         property_id,
                          const GValue *value,
@@ -366,6 +377,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->constructed = kgx_window_constructed;
+  object_class->dispose = kgx_window_dispose;
   object_class->set_property = kgx_window_set_property;
   object_class->get_property = kgx_window_get_property;
 
@@ -460,7 +472,18 @@ close_tab_activated (GSimpleAction *action,
 {
   KgxWindow *self = data;
 
-  kgx_pages_remove_page (KGX_PAGES (self->pages), NULL);
+  kgx_pages_close_page (KGX_PAGES (self->pages));
+}
+
+
+static void
+detach_tab_activated (GSimpleAction *action,
+                      GVariant      *parameter,
+                      gpointer       data)
+{
+  KgxWindow *self = data;
+
+  kgx_pages_detach_page (KGX_PAGES (self->pages));
 }
 
 
@@ -506,6 +529,12 @@ static GActionEntry win_entries[] = {
   { "new-tab", new_tab_activated, NULL, NULL, NULL },
   { "close-tab", close_tab_activated, NULL, NULL, NULL },
   { "about", about_activated, NULL, NULL, NULL },
+};
+
+
+static GActionEntry tab_entries[] = {
+  { "close", close_tab_activated, NULL, NULL, NULL },
+  { "detach", detach_tab_activated, NULL, NULL, NULL },
 };
 
 
@@ -627,6 +656,15 @@ kgx_window_init (KgxWindow *self)
   gtk_window_group_add_window (group, GTK_WINDOW (self));
 
   kgx_pages_set_shortcut_widget (KGX_PAGES (self->pages), GTK_WIDGET (self));
+
+  self->tab_actions = G_ACTION_MAP (g_simple_action_group_new ());
+  g_action_map_add_action_entries (self->tab_actions,
+                                   tab_entries,
+                                   G_N_ELEMENTS (tab_entries),
+                                   self);
+  gtk_widget_insert_action_group (GTK_WIDGET (self),
+                                  "tab",
+                                  G_ACTION_GROUP (self->tab_actions));
 }
 
 

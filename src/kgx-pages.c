@@ -70,6 +70,8 @@ struct _KgxPagesPrivate {
   KgxTheme              theme;
   gboolean              opaque;
   gint64                scrollback_lines;
+
+  HdyTabPage           *action_page;
 };
 
 
@@ -497,6 +499,17 @@ close_page (HdyTabView *view,
 
 
 static void
+setup_menu (HdyTabView *view,
+            HdyTabPage *page,
+            KgxPages   *self)
+{
+  KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
+
+  priv->action_page = page;
+}
+
+
+static void
 check_revealer (GtkRevealer *revealer,
                 GParamSpec  *pspec,
                 KgxPages    *self)
@@ -695,6 +708,7 @@ kgx_pages_class_init (KgxPagesClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, page_detached);
   gtk_widget_class_bind_template_callback (widget_class, create_window);
   gtk_widget_class_bind_template_callback (widget_class, close_page);
+  gtk_widget_class_bind_template_callback (widget_class, setup_menu);
   gtk_widget_class_bind_template_callback (widget_class, check_revealer);
 
   gtk_widget_class_set_css_name (widget_class, "pages");
@@ -890,4 +904,42 @@ kgx_pages_key_press_event (KgxPages *self,
     return GDK_EVENT_PROPAGATE;
 
   return kgx_tab_key_press_event (priv->active_page, event);
+}
+
+
+void
+kgx_pages_close_page (KgxPages *self)
+{
+  KgxPagesPrivate *priv;
+  HdyTabPage *page;
+
+  g_return_if_fail (KGX_IS_PAGES (self));
+
+  priv = kgx_pages_get_instance_private (self);
+  page = priv->action_page;
+
+  if (!page)
+    page = hdy_tab_view_get_selected_page (HDY_TAB_VIEW (priv->view));
+
+  hdy_tab_view_close_page (HDY_TAB_VIEW (priv->view), page);
+}
+
+
+void
+kgx_pages_detach_page (KgxPages *self)
+{
+  KgxPagesPrivate *priv;
+  HdyTabPage *page;
+  HdyTabView *new_view;
+
+  g_return_if_fail (KGX_IS_PAGES (self));
+
+  priv = kgx_pages_get_instance_private (self);
+  page = priv->action_page;
+
+  if (!page)
+    page = hdy_tab_view_get_selected_page (HDY_TAB_VIEW (priv->view));
+
+  new_view = create_window (HDY_TAB_VIEW (priv->view), self);
+  hdy_tab_view_transfer_page (HDY_TAB_VIEW (priv->view), page, new_view, 0);
 }

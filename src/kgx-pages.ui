@@ -6,11 +6,13 @@
     <child>
       <object class="HdyTabView" id="view">
         <property name="visible">True</property>
+        <property name="menu-model">tab-menu</property>
         <signal name="notify::selected-page" handler="page_changed" swapped="no"/>
         <signal name="page-attached" handler="page_attached" swapped="no"/>
         <signal name="page-detached" handler="page_detached" swapped="no"/>
         <signal name="create-window" handler="create_window" swapped="no"/>
         <signal name="close-page" handler="close_page" swapped="no"/>
+        <signal name="setup-menu" handler="setup_menu" swapped="no"/>
       </object>
     </child>
     <child type="overlay">
@@ -33,4 +35,18 @@
       </object>
     </child>
   </template>
+  <menu id="tab-menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Detach Tab</attribute>
+        <attribute name="action">tab.detach</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Close</attribute>
+        <attribute name="action">tab.close</attribute>
+      </item>
+    </section>
+  </menu>
 </interface>

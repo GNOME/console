@@ -55,5 +55,7 @@ void        kgx_pages_set_shortcut_widget (KgxPages  *self,
                                            GtkWidget *widget);
 gboolean    kgx_pages_key_press_event     (KgxPages  *self,
                                            GdkEvent  *event);
+void        kgx_pages_close_page          (KgxPages  *self);
+void        kgx_pages_detach_page         (KgxPages  *self);
 
 G_END_DECLS

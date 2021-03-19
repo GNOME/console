@@ -101,6 +101,8 @@ struct _KgxWindow
   int                   current_width;
   int                   current_height;
   gboolean              is_maximized_or_tiled;
+
+  GActionMap           *tab_actions;
 };
 
 G_DECLARE_FINAL_TYPE (KgxWindow, kgx_window, KGX, WINDOW, HdyApplicationWindow)
