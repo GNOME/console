@@ -7,6 +7,8 @@ kgx_sources = [
   'kgx-application.h',
   'kgx-close-dialog.c',
   'kgx-close-dialog.h',
+  'kgx-depot.c',
+  'kgx-depot.h',
   'kgx-despatcher.c',
   'kgx-despatcher.h',
   'kgx-drop-target.c',
