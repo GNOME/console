@@ -678,7 +678,7 @@ kgx_terminal_accept_paste (KgxTerminal *self,
                                     _("_Paste"),
                                     GTK_RESPONSE_ACCEPT);
     gtk_style_context_add_class (gtk_widget_get_style_context (accept),
-                                 GTK_STYLE_CLASS_DESTRUCTIVE_ACTION);
+                                 "destructive-action");
     gtk_widget_show (dlg);
   } else {
     paste_response (NULL, GTK_RESPONSE_ACCEPT, paste);
