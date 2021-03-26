@@ -33,7 +33,7 @@ G_BEGIN_DECLS
  * @initial_work_dir: the directory to start in
  * @command: the root/shell command to run
  * @terminal: the #KgxTerminal
- * 
+ *
  * Stability: Private
  */
 struct _KgxSimpleTab

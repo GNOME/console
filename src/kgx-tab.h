@@ -33,11 +33,11 @@ G_BEGIN_DECLS
  * @KGX_REMOTE: The #KgxTab is connected to a "remote" session
  * @KGX_PRIVILEGED: The #KgxTab is running as someone other than the current
  *                  user
- * 
+ *
  * Indicates the status of the session the #KgxTab represents
- * 
+ *
  * Since: 0.3.0
- * 
+ *
  * Stability: Private
  */
 typedef enum /*< flags,prefix=KGX >*/
@@ -61,9 +61,9 @@ G_DECLARE_DERIVABLE_TYPE (KgxTab, kgx_tab, KGX, TAB, GtkBox)
  * KgxTabClass:
  * @start: start whatever it is that run in the tab
  * @start_finish: complete @start
- * 
+ *
  * Stability: Private
- * 
+ *
  * Since: 0.3.0
  */
 struct _KgxTabClass

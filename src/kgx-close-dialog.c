@@ -20,10 +20,10 @@
  * SECTION:kgx-close-dialog
  * @title: KgxCloseDialog
  * @short_description: Confirmation dialog to close a terminal with children
- * 
+ *
  * The "are you sure?" dialog when a terminal is closed whilst commands are
  * still running within it
- * 
+ *
  * Since: 0.2.0
  */
 

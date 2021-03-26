@@ -20,9 +20,9 @@
  * SECTION:kgx-window
  * @title: KgxWindow
  * @short_description: Window
- * 
+ *
  * The main #HdyApplicationWindow that acts as the terminal
- * 
+ *
  * Since: 0.1.0
  */
 
@@ -200,7 +200,7 @@ kgx_window_delete_event (GtkWidget   *widget,
   g_signal_connect (dlg, "response", G_CALLBACK (delete_response), self);
 
   gtk_widget_show (dlg);
-  
+
   return TRUE; // Block the close
 }
 
@@ -387,10 +387,10 @@ kgx_window_class_init (KgxWindowClass *klass)
 
   /**
    * KgxWindow:application:
-   * 
+   *
    * Proxy for #GtkWindow #GtkWindow:application but with %G_PARAM_CONSTRUCT,
    * simple as that
-   * 
+   *
    * Since: 0.3.0
    */
   pspecs[PROP_APPLICATION] =
@@ -495,7 +495,7 @@ about_activated (GSimpleAction *action,
   const char *authors[] = { "Zander Brown <zbrown@gnome.org>", NULL };
   const char *artists[] = { "Tobias Bernard", NULL };
   g_autofree char *copyright = NULL;
-  
+
   /* Translators: %s is the year range */
   copyright = g_strdup_printf (_("© %s Zander Brown"), "2019-2021");
 
@@ -671,10 +671,10 @@ kgx_window_init (KgxWindow *self)
 /**
  * kgx_window_get_working_dir:
  * @self: the #KgxWindow
- * 
+ *
  * Get the working directory path of this window, used to open new windows
  * in the same directory
- * 
+ *
  * Since: 0.5.0
  */
 GFile *
@@ -693,9 +693,9 @@ kgx_window_get_working_dir (KgxWindow *self)
 /**
  * kgx_window_get_pages:
  * @self: the #KgxWindow
- * 
+ *
  * Get the tabbed widget inside @self
- * 
+ *
  * Since: 0.3.0
  */
 KgxPages *

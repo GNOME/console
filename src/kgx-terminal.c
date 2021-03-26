@@ -20,10 +20,10 @@
  * SECTION:kgx-terminal
  * @title: KgxTerminal
  * @short_description: The terminal
- * 
+ *
  * The main terminal widget with various features added such as a context
  * menu (via #GtkPopover) and link detection
- * 
+ *
  * Since: 0.1.0
  */
 
@@ -149,7 +149,7 @@ kgx_terminal_set_theme (KgxTerminal *self,
     self->theme = theme;
     g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_THEME]);
   }
-  
+
   if (self->opaque != opaque) {
     self->opaque = opaque;
     g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_OPAQUE]);
@@ -244,7 +244,7 @@ context_menu (GtkWidget *widget,
       }
     }
   }
-  
+
   value = self->current_url != NULL;
 
   act = g_action_map_lookup_action (G_ACTION_MAP (self->actions), "open-link");
@@ -299,15 +299,15 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
 
   /**
    * KgxTerminal:theme:
-   * 
+   *
    * The palette to use, one of the values of #KgxTheme
-   * 
+   *
    * Officially only "night" exists, "hacker" is just a little fun
-   * 
+   *
    * Bound to #KgxApplication:theme on the #KgxApplication
-   * 
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.1.0
    */
   pspecs[PROP_THEME] =
@@ -317,13 +317,13 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
 
   /**
    * KgxTerminal:opaque:
-   * 
+   *
    * Whether to disable transparency
-   * 
+   *
    * Bound to #GtkWindow:is-maximized on the #KgxWindow
-   * 
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.1.0
    */
   pspecs[PROP_OPAQUE] =
@@ -333,10 +333,10 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
 
   /**
    * KgxTerminal:path:
-   * 
-   * 
+   *
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.3.0
    */
   pspecs[PROP_PATH] =

@@ -29,11 +29,11 @@ G_BEGIN_DECLS
  * KgxTheme:
  * @KGX_THEME_NIGHT: The default, public, theme
  * @KGX_THEME_HACKER: Little easter egg theme
- * 
+ *
  * Until [meson#1687](https://github.com/mesonbuild/meson/issues/1687) is
  * resolved this enum must be manually kept in sync with
  * org.gnome.zbrown.KingsCross.Theme in the gschema
- * 
+ *
  * Since: 0.1.0
  */
 typedef enum /*< enum,prefix=KGX >*/
@@ -45,9 +45,9 @@ typedef enum /*< enum,prefix=KGX >*/
 /**
  * KGX_TERMINAL_N_LINK_REGEX:
  * The number of regexs use to search for hyperlinks
- * 
+ *
  * Stability: Private
- * 
+ *
  * Since: 0.1.0
  */
 #define KGX_TERMINAL_N_LINK_REGEX 5
@@ -61,9 +61,9 @@ typedef enum /*< enum,prefix=KGX >*/
  * @actions: action map for the context menu
  * @current_url: the address under the cursor
  * @match_id: regex ids for finding hyperlinks
- * 
+ *
  * Stability: Private
- * 
+ *
  * Since: 0.1.0
  */
 struct _KgxTerminal {

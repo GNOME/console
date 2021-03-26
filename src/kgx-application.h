@@ -46,7 +46,7 @@ G_BEGIN_DECLS
  * ProcessWatch:
  * @page: the #KgxTab the #KgxProcess is in
  * @process: what we are watching
- * 
+ *
  * Stability: Private
  */
 struct ProcessWatch {
@@ -65,7 +65,7 @@ struct ProcessWatch {
  * @active: counter of #KgxWindow's with #GtkWindow:is-active = %TRUE,
  *          obviously this should only ever be 1 or but we can't be certain
  * @timeout: the current #GSource id of the watcher
- * 
+ *
  * Stability: Private
  */
 struct _KgxApplication

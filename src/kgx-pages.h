@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 
 /**
  * KgxPagesClass:
- * 
+ *
  * Since: 0.3.0
  */
 struct _KgxPagesClass

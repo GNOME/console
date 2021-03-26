@@ -20,7 +20,7 @@
  * SECTION:kgx-process
  * @title: KgxProcess
  * @short_description: Information about running processes
- * 
+ *
  * Provides an abstraction of libgtop to fetch information about running
  * process, this is used by #KgxApplication to monitor things happening in
  * a #KgxTerminal for the purposes of styling a #KgxWindow
@@ -49,13 +49,13 @@ clear_process (KgxProcess *self)
 /**
  * kgx_process_unref:
  * @self: the #KgxProcess
- * 
+ *
  * Reduce the refrence count of @self, possibly freeing @self
- * 
+ *
  * See g_rc_box_acquire() and g_rc_box_release_full()
- * 
+ *
  * Since: 0.1.0
- * 
+ *
  * Stability: Private
  */
 void
@@ -71,11 +71,11 @@ G_DEFINE_BOXED_TYPE (KgxProcess, kgx_process, g_rc_box_acquire, kgx_process_unre
 /**
  * kgx_process_new:
  * @pid: The #GPid to get info about
- * 
+ *
  * Populate a new #KgxProcess with details about the process @pid
- * 
+ *
  * Since: 0.1.0
- * 
+ *
  * Stability: Private
  */
 inline KgxProcess *
@@ -83,7 +83,7 @@ kgx_process_new (GPid pid)
 {
   glibtop_proc_uid   info;
   KgxProcess        *self = NULL;
-  
+
   self = g_rc_box_new0 (KgxProcess);
 
   self->pid = pid;
@@ -100,11 +100,11 @@ kgx_process_new (GPid pid)
 /**
  * kgx_process_get_pid:
  * @self: the #KgxProcess
- * 
+ *
  * Returns: The process id
- * 
+ *
  * Since: 0.1.0
- * 
+ *
  * Stability: Private
  */
 inline GPid
@@ -118,11 +118,11 @@ kgx_process_get_pid (KgxProcess *self)
 /**
  * kgx_process_get_uid:
  * @self: the #KgxProcess
- * 
+ *
  * Returns: The user id of the process
- * 
+ *
  * Since: 0.1.0
- * 
+ *
  * Stability: Private
  */
 inline gint32
@@ -136,11 +136,11 @@ kgx_process_get_uid (KgxProcess *self)
 /**
  * kgx_process_get_is_root:
  * @self: the #KgxProcess
- * 
+ *
  * Returns: %TRUE if this process is running as root
- * 
+ *
  * Stability: Private
- * 
+ *
  * Since: 0.1.0
  */
 inline gboolean
@@ -154,16 +154,16 @@ kgx_process_get_is_root (KgxProcess *self)
 /**
  * kgx_process_get_parent:
  * @self: the #KgxProcess
- * 
+ *
  * Get information about the processes parent
- * 
+ *
  * Note a previous version (0.1.0) returned a #KgxProcess, this has been
  * changed in favour of lazy loading
- * 
+ *
  * Returns: the parent #GPid
- * 
+ *
  * Stability: Private
- * 
+ *
  * Since: 0.1.0
  */
 inline GPid
@@ -177,11 +177,11 @@ kgx_process_get_parent (KgxProcess *self)
 /**
  * kgx_process_get_exec:
  * @self: the #KgxProcess
- * 
+ *
  * Get the command line used to invoke to process
- * 
+ *
  * Stability: Private
- * 
+ *
  * Since: 0.1.0
  */
 inline const char *
@@ -206,14 +206,14 @@ kgx_process_get_exec (KgxProcess *self)
  * @a: the first #GPid
  * @b: the second #GPid
  * @data: unused
- * 
+ *
  * Implementation of #GCompareDataFunc for comparing #GPid encoded with
  * GINT_TO_POINTER()
- * 
+ *
  * Returns: difference between @a and @b
- * 
+ *
  * Stability: Private
- * 
+ *
  * Since: 0.2.0
  */
 int
@@ -224,22 +224,22 @@ kgx_pid_cmp (gconstpointer a, gconstpointer b, gpointer data)
 
 /**
  * kgx_process_get_list: (skip)
- * 
+ *
  * Get the list of running processes
- * 
+ *
  * Note: This originally (0.1.0) returned #GPtrArray but now returns #GTree
  * for faster lookup
- * 
+ *
  * Note: (skip) due to
  * https://gitlab.gnome.org/GNOME/gobject-introspection/issues/310
- * 
+ *
  * #GTree is map of #GPid -> #KgxProcess
- * 
+ *
  * Returns: ~ (transfer full) (element-type GLib.Pid Kgx.Process)
  * List of processes, free with g_tree_unref()
- * 
+ *
  * Stability: Private
- * 
+ *
  * Since: 0.1.0
  */
 GTree *
@@ -248,7 +248,7 @@ kgx_process_get_list (void)
   glibtop_proclist pid_list;
   g_autofree GPid *pids = NULL;
   GTree *list = NULL;
-  
+
   list = g_tree_new_full (kgx_pid_cmp,
                           NULL,
                           NULL,

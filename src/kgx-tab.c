@@ -20,7 +20,7 @@
  * SECTION:kgx-page
  * @title: KgxTab
  * @short_description: Base for things in a #KgxPages
- * 
+ *
  * Since: 0.3.0
  */
 
@@ -557,7 +557,7 @@ kgx_tab_class_init (KgxTabClass *klass)
   GObjectClass   *object_class = G_OBJECT_CLASS   (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   KgxTabClass    *tab_class    = KGX_TAB_CLASS    (klass);
-  
+
   object_class->dispose = kgx_tab_dispose;
   object_class->get_property = kgx_tab_get_property;
   object_class->set_property = kgx_tab_set_property;
@@ -571,11 +571,11 @@ kgx_tab_class_init (KgxTabClass *klass)
 
   /**
    * KgxTab:application:
-   * 
+   *
    * The #KgxApplication this tab is running under
-   * 
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.3.0
    */
   pspecs[PROP_APPLICATION] =
@@ -585,11 +585,11 @@ kgx_tab_class_init (KgxTabClass *klass)
 
   /**
    * KgxTab:tab-title:
-   * 
+   *
    * Title of this tab
-   * 
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.3.0
    */
   pspecs[PROP_TAB_TITLE] =
@@ -599,11 +599,11 @@ kgx_tab_class_init (KgxTabClass *klass)
 
   /**
    * KgxTab:tab-path:
-   * 
+   *
    * Current path of this tab
-   * 
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.3.0
    */
   pspecs[PROP_TAB_PATH] =
@@ -613,9 +613,9 @@ kgx_tab_class_init (KgxTabClass *klass)
 
   /**
    * KgxTab:tab-status:
-   * 
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.3.0
    */
   pspecs[PROP_TAB_STATUS] =
@@ -642,11 +642,11 @@ kgx_tab_class_init (KgxTabClass *klass)
 
   /**
    * KgxTab:is-active:
-   * 
+   *
    * This is the active tab of the active window
-   * 
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.3.0
    */
   pspecs[PROP_IS_ACTIVE] =
@@ -656,11 +656,11 @@ kgx_tab_class_init (KgxTabClass *klass)
 
   /**
    * KgxTab:theme:
-   * 
+   *
    * The #KgxTheme to apply to the #KgxTerminal s in the #KgxTab
-   * 
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.3.0
    */
   pspecs[PROP_THEME] =
@@ -671,13 +671,13 @@ kgx_tab_class_init (KgxTabClass *klass)
 
   /**
    * KgxTab:opaque:
-   * 
+   *
    * Whether to disable transparency
-   * 
+   *
    * Bound to #GtkWindow:is-maximized on the #KgxWindow
-   * 
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.3.0
    */
   pspecs[PROP_OPAQUE] =
@@ -705,13 +705,13 @@ kgx_tab_class_init (KgxTabClass *klass)
 
   /**
    * KgxTab:scrollback-lines:
-   * 
+   *
    * How many lines of scrollback #KgxTerminal should keep
-   * 
+   *
    * Bound to /org/gnome/zbrown/KingsCross/scrollback-lines so changes persist
-   * 
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.5.0
    */
   pspecs[PROP_SCROLLBACK_LINES] =
@@ -778,9 +778,9 @@ kgx_tab_add_child (GtkBuildable *buildable,
 
   g_return_if_fail (KGX_IS_TAB (self));
   g_return_if_fail (GTK_IS_WIDGET (child));
-  
+
   priv = kgx_tab_get_instance_private (self);
-  
+
   if (type && g_str_equal (type, "content")) {
     g_set_weak_pointer (&priv->content, GTK_WIDGET (child));
     gtk_stack_add_named (GTK_STACK (priv->stack), GTK_WIDGET (child), "content");
@@ -807,7 +807,7 @@ died (KgxTab         *self,
   GtkStyleContext *context;
 
   g_return_if_fail (KGX_IS_TAB (self));
-  
+
   priv = kgx_tab_get_instance_private (self);
 
   gtk_label_set_markup (GTK_LABEL (priv->label), message);
@@ -866,7 +866,7 @@ kgx_tab_connect_terminal (KgxTab      *self,
 
   g_return_if_fail (KGX_IS_TAB (self));
   g_return_if_fail (KGX_IS_TERMINAL (term));
-  
+
   priv = kgx_tab_get_instance_private (self);
 
   if (priv->terminal == term) {
@@ -985,8 +985,8 @@ kgx_tab_start_finish (KgxTab        *self,
                       GError       **error)
 {
   KgxTabPrivate *priv;
-  GPid pid;  
-  
+  GPid pid;
+
   g_return_val_if_fail (KGX_IS_TAB (self), 0);
   g_return_val_if_fail (KGX_TAB_GET_CLASS (self)->start, 0);
 
@@ -1015,11 +1015,11 @@ kgx_tab_died (KgxTab         *self,
 /**
  * kgx_tab_get_pages:
  * @self: the #KgxTab
- * 
+ *
  * Find the #KgxTabs @self is (currently) a memember of
- * 
+ *
  * Returns: (transfer none): the #KgxTabs
- * 
+ *
  * Since: 0.3.0
  */
 KgxPages *
@@ -1039,9 +1039,9 @@ kgx_tab_get_pages (KgxTab *self)
 /**
  * kgx_tab_get_id:
  * @self: the #KgxTab
- * 
+ *
  * Get the unique (in the instance) id for the page
- * 
+ *
  * Returns: the identifier for the page
  */
 guint
@@ -1050,7 +1050,7 @@ kgx_tab_get_id (KgxTab *self)
   KgxTabPrivate *priv;
 
   g_return_val_if_fail (KGX_IS_TAB (self), 0);
-  
+
   priv = kgx_tab_get_instance_private (self);
 
   return priv->id;
@@ -1078,9 +1078,9 @@ push_type (GHashTable      *table,
  * kgx_tab_push_child:
  * @self: the #KgxTab
  * @process: the #KgxProcess of the remote process
- * 
+ *
  * Registers @pid as a child of @self
- * 
+ *
  * Since: 0.3.0
  */
 void
@@ -1094,7 +1094,7 @@ kgx_tab_push_child (KgxTab     *self,
   KgxTabPrivate *priv;
 
   g_return_if_fail (KGX_IS_TAB (self));
-  
+
   priv = kgx_tab_get_instance_private (self);
 
   context = gtk_widget_get_style_context (GTK_WIDGET (self));
@@ -1136,7 +1136,7 @@ pop_type (GHashTable      *table,
     return KGX_NONE;
   } else {
     g_debug ("%i %X remaining", size, status);
-    
+
     return status;
   }
 }
@@ -1146,9 +1146,9 @@ pop_type (GHashTable      *table,
  * kgx_tab_pop_child:
  * @self: the #KgxTab
  * @process: the #KgxProcess of the child process
- * 
+ *
  * Remove a child added with kgx_tab_push_child()
- * 
+ *
  * Since: 0.3.0
  */
 void
@@ -1161,16 +1161,16 @@ kgx_tab_pop_child (KgxTab     *self,
   KgxTabPrivate *priv;
 
   g_return_if_fail (KGX_IS_TAB (self));
-  
+
   priv = kgx_tab_get_instance_private (self);
 
   context = gtk_widget_get_style_context (GTK_WIDGET (self));
   pid = kgx_process_get_pid (process);
-  
+
   new_status |= pop_type (priv->remote, pid, context, KGX_REMOTE);
   new_status |= pop_type (priv->root, pid, context, KGX_PRIVILEGED);
   pop_type (priv->children, pid, context, KGX_NONE);
-  
+
   if (priv->status != new_status) {
     priv->status = new_status;
     g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_TAB_STATUS]);
@@ -1205,7 +1205,7 @@ kgx_tab_is_active (KgxTab *self)
   KgxTabPrivate *priv;
 
   g_return_val_if_fail (KGX_IS_TAB (self), FALSE);
-  
+
   priv = kgx_tab_get_instance_private (self);
 
   return priv->is_active;
@@ -1215,11 +1215,11 @@ kgx_tab_is_active (KgxTab *self)
 /**
  * kgx_tab_get_children:
  * @self: the #KgxTab
- * 
+ *
  * Get a list of child process running in @self
- * 
+ *
  * NOTE: This doesn't include the shell/root itself
- * 
+ *
  * Returns: (element-type Kgx.Process) (transfer full): the list of #KgxProcess
  */
 GPtrArray *
@@ -1231,7 +1231,7 @@ kgx_tab_get_children (KgxTab *self)
   gpointer pid, process;
 
   g_return_val_if_fail (KGX_IS_TAB (self), NULL);
-  
+
   priv = kgx_tab_get_instance_private (self);
 
   children = g_ptr_array_new_full (3, (GDestroyNotify) kgx_process_unref);

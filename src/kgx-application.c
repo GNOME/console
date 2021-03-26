@@ -20,7 +20,7 @@
  * SECTION:kgx-application
  * @title: KgxApplication
  * @short_description: Application
- * 
+ *
  * The application, on the face of it nothing particularly interesting but
  * under the hood it contains a #GSource used to monitor the shells (and
  * there children) running in the open #KgxWindow s
@@ -545,13 +545,13 @@ kgx_application_class_init (KgxApplicationClass *klass)
 
   /**
    * KgxApplication:theme:
-   * 
+   *
    * The palette to use, one of the values of #KgxTheme
-   * 
+   *
    * Officially only "night" exists, "hacker" is just a little fun
-   * 
+   *
    * Bound to /org/gnome/zbrown/KingsCross/theme so changes persist
-   * 
+   *
    * Stability: Private
    */
   pspecs[PROP_THEME] =
@@ -571,13 +571,13 @@ kgx_application_class_init (KgxApplicationClass *klass)
 
   /**
    * KgxApplication:scrollback-lines:
-   * 
+   *
    * How many lines of scrollback #KgxTerminal should keep
-   * 
+   *
    * Bound to /org/gnome/zbrown/KingsCross/scrollback-lines so changes persist
-   * 
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.5.0
    */
   pspecs[PROP_SCROLLBACK_LINES] =
@@ -836,9 +836,9 @@ kgx_application_init (KgxApplication *self)
  * @self: the #KgxApplication
  * @pid: the shell process to watch
  * @page: the #KgxTab the shell is running in
- * 
+ *
  * Registers a new shell process with the pid watcher
- * 
+ *
  * Since: 0.3.0
  */
 void
@@ -866,7 +866,7 @@ kgx_application_add_watch (KgxApplication *self,
  * kgx_application_remove_watch:
  * @self: the #KgxApplication
  * @pid: the shell process to stop watch watching
- * 
+ *
  * unregisters the shell with #GPid pid
  */
 void
@@ -957,7 +957,7 @@ kgx_application_pop_active (KgxApplication *self)
  * kgx_application_add_page:
  * @self: the instance to look for @id in
  * @page: the page to add
- * 
+ *
  * Register a new #KgxTab with @self
  */
 void
@@ -979,9 +979,9 @@ kgx_application_add_page (KgxApplication *self,
  * kgx_application_lookup_page:
  * @self: the instance to look for @id in
  * @id: the page id to look for
- * 
+ *
  * Try and find a #KgxTab with @id in @self
- * 
+ *
  * Returns: (transfer none) (nullable): the found #KgxTab or %NULL
  */
 KgxTab *
@@ -1009,7 +1009,7 @@ started (GObject      *src,
     g_warning ("Failed to start %s: %s",
                G_OBJECT_TYPE_NAME (src),
                error->message);
-    
+
     return;
   }
 

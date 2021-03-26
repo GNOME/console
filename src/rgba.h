@@ -39,7 +39,7 @@
 /**
  * GDK_RGBA:
  * @str: Hex string
- * 
+ *
  * Compile time parsing of hex encoded colours
  */
 # define GDK_RGBA(str) ((sizeof(str) == 9) ? _GDK_RGBA8(str) : \

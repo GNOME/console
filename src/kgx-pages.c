@@ -20,9 +20,9 @@
  * SECTION:kgx-pages
  * @title: KgxPages
  * @short_description: Container of #KgxTab s
- * 
+ *
  * The container of open #KgxTab (uses #HdyTabView internally)
- * 
+ *
  * Since: 0.3.0
  */
 
@@ -558,11 +558,11 @@ kgx_pages_class_init (KgxPagesClass *klass)
 
   /**
    * KgxPages:tab-view:
-   * 
+   *
    * The #HdyTabView
-   * 
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.3.0
    */
   pspecs[PROP_TAB_VIEW] =
@@ -572,11 +572,11 @@ kgx_pages_class_init (KgxPagesClass *klass)
 
   /**
    * KgxPages:tab-count:
-   * 
+   *
    * The number of open pages
-   * 
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.3.0
    */
   pspecs[PROP_TAB_COUNT] =
@@ -588,14 +588,14 @@ kgx_pages_class_init (KgxPagesClass *klass)
 
   /**
    * KgxPages:title:
-   * 
+   *
    * The #KgxTab:tab-title of the current #KgxTab
-   * 
+   *
    * Note the writability of this property in an implementation detail, DO NOT
    * set this property
-   * 
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.3.0
    */
   pspecs[PROP_TITLE] =
@@ -605,14 +605,14 @@ kgx_pages_class_init (KgxPagesClass *klass)
 
   /**
    * KgxPages:path:
-   * 
+   *
    * The #KgxTab:tab-path of the current #KgxTab
-   * 
+   *
    * Note the writability of this property in an implementation detail, DO NOT
    * set this property
-   * 
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.3.0
    */
   pspecs[PROP_PATH] =
@@ -622,11 +622,11 @@ kgx_pages_class_init (KgxPagesClass *klass)
 
   /**
    * KgxPages:theme:
-   * 
+   *
    * The #KgxTheme to apply to the #KgxTerminal s in the #KgxTab s
-   * 
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.3.0
    */
   pspecs[PROP_THEME] =
@@ -637,13 +637,13 @@ kgx_pages_class_init (KgxPagesClass *klass)
 
   /**
    * KgxPages:opaque:
-   * 
+   *
    * Whether to disable transparency
-   * 
+   *
    * Bound to #GtkWindow:is-maximized on the #KgxWindow
-   * 
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.3.0
    */
   pspecs[PROP_OPAQUE] =
@@ -680,13 +680,13 @@ kgx_pages_class_init (KgxPagesClass *klass)
 
   /**
    * KgxTab:scrollback-lines:
-   * 
+   *
    * How many lines of scrollback #KgxTerminal should keep
-   * 
+   *
    * Bound to /org/gnome/zbrown/KingsCross/scrollback-lines so changes persist
-   * 
+   *
    * Stability: Private
-   * 
+   *
    * Since: 0.5.0
    */
   pspecs[PROP_SCROLLBACK_LINES] =
@@ -765,7 +765,7 @@ kgx_pages_remove_page (KgxPages *self,
 {
   KgxPagesPrivate *priv;
   HdyTabPage *tab_page;
-  
+
   g_return_if_fail (KGX_IS_PAGES (self));
 
   priv = kgx_pages_get_instance_private (self);
@@ -788,9 +788,9 @@ kgx_pages_remove_page (KgxPages *self,
  * kgx_pages_focus_page:
  * @self: the #KgxPages
  * @page: the #KgxTab to focus
- * 
+ *
  * Switch to a page
- * 
+ *
  * Since: 0.3.0
  */
 void
@@ -799,7 +799,7 @@ kgx_pages_focus_page (KgxPages *self,
 {
   KgxPagesPrivate *priv;
   HdyTabPage *index;
-  
+
   g_return_if_fail (KGX_IS_PAGES (self));
   g_return_if_fail (KGX_IS_TAB (page));
 
@@ -807,7 +807,7 @@ kgx_pages_focus_page (KgxPages *self,
 
   index = hdy_tab_view_get_page (HDY_TAB_VIEW (priv->view),
                                  GTK_WIDGET (page));
-  
+
   g_return_if_fail (index != NULL);
 
   hdy_tab_view_set_selected_page (HDY_TAB_VIEW (priv->view), index);
@@ -819,16 +819,16 @@ kgx_pages_focus_page (KgxPages *self,
 /**
  * kgx_pages_current_status:
  * @self: the #KgxPages
- * 
+ *
  * Get the #KgxStatus of the current #KgxTab
- * 
+ *
  * Since: 0.3.0
  */
 KgxStatus
 kgx_pages_current_status (KgxPages *self)
 {
   KgxPagesPrivate *priv;
-  
+
   g_return_val_if_fail (KGX_IS_PAGES (self), KGX_NONE);
 
   priv = kgx_pages_get_instance_private (self);
@@ -840,10 +840,10 @@ kgx_pages_current_status (KgxPages *self)
 /**
  * kgx_pages_get_children:
  * @self: the #KgxPages
- * 
+ *
  * Call kgx_tab_get_children on all #KgxTab s in @self building a
  * combined list
- * 
+ *
  * Returns: (element-type Kgx.Process) (transfer full): the list of #KgxProcess
  */
 GPtrArray *
@@ -864,7 +864,7 @@ kgx_pages_get_children (KgxPages *self)
   for (uint i = 0; i < n; i++) {
     HdyTabPage *page = hdy_tab_view_get_nth_page (HDY_TAB_VIEW (priv->view), i);
     g_autoptr (GPtrArray) page_children = NULL;
-    
+
     page_children = kgx_tab_get_children (KGX_TAB (hdy_tab_page_get_child (page)));
 
     for (int j = 0; j < page_children->len; j++) {
