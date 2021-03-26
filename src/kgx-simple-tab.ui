@@ -6,7 +6,7 @@
     <child type="content">
       <object class="GtkScrolledWindow">
         <property name="visible">1</property>
-        <property name="expand">1</property>
+        <property name="vexpand">1</property>
         <property name="propagate-natural-width">1</property>
         <property name="propagate-natural-height">1</property>
         <property name="hscrollbar-policy">never</property>
