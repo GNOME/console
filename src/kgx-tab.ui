@@ -3,7 +3,6 @@
   <requires lib="gtk+" version="3.20"/>
   <template class="KgxTab" parent="GtkBox">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
     <property name="orientation">vertical</property>
     <style>
       <class name="tab"/>
@@ -23,7 +22,6 @@
                 <child>
                   <object class="GtkSearchEntry" id="search_entry">
                     <property name="visible">1</property>
-                    <property name="can-focus">1</property>
                     <property name="hexpand">1</property>
                     <signal name="next-match" handler="search_next" swapped="no"/>
                     <signal name="previous-match" handler="search_prev" swapped="no"/>
@@ -33,7 +31,6 @@
                 <child>
                   <object class="GtkButton">
                     <property name="visible">1</property>
-                    <property name="can-focus">1</property>
                     <property name="receives-default">1</property>
                     <child>
                       <object class="GtkImage">
@@ -47,7 +44,6 @@
                 <child>
                   <object class="GtkButton">
                     <property name="visible">1</property>
-                    <property name="can-focus">1</property>
                     <property name="receives-default">1</property>
                     <child>
                       <object class="GtkImage">
@@ -102,24 +98,20 @@
     <child>
       <object class="GtkRevealer" id="revealer">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="valign">end</property>
         <property name="transition_type">slide-up</property>
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
             <child>
               <object class="GtkSeparator">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
               </object>
             </child>
             <child>
               <object class="GtkLabel" id="label">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="use_markup">True</property>
                 <property name="wrap">True</property>
                 <property name="xalign">0</property>
