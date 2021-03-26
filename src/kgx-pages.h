@@ -34,13 +34,13 @@ G_BEGIN_DECLS
 struct _KgxPagesClass
 {
   /*< private >*/
-  GtkOverlayClass parent;
+  GtkBinClass parent;
 
   /*< public >*/
 };
 
 
-G_DECLARE_DERIVABLE_TYPE (KgxPages, kgx_pages, KGX, PAGES, GtkOverlay)
+G_DECLARE_DERIVABLE_TYPE (KgxPages, kgx_pages, KGX, PAGES, GtkBin)
 
 
 void        kgx_pages_add_page       (KgxPages   *self,

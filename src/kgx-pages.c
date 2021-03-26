@@ -75,7 +75,7 @@ struct _KgxPagesPrivate {
 };
 
 
-G_DEFINE_TYPE_WITH_PRIVATE (KgxPages, kgx_pages, GTK_TYPE_OVERLAY)
+G_DEFINE_TYPE_WITH_PRIVATE (KgxPages, kgx_pages, GTK_TYPE_BIN)
 
 
 enum {
