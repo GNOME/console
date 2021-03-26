@@ -8,6 +8,7 @@
         <child>
           <object class="GtkListBox" id="list">
             <property name="visible">True</property>
+            <property name="can-focus">False</property>
             <property name="selection-mode">none</property>
             <property name="width-request">300</property>
             <style>
