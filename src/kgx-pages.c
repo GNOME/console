@@ -851,9 +851,7 @@ kgx_pages_get_children (KgxPages *self)
 {
   KgxPagesPrivate *priv;
   GPtrArray *children;
-  GListModel *pages;
-  HdyTabPage *page;
-  int n = 0;
+  uint n;
 
   g_return_val_if_fail (KGX_IS_PAGES (self), KGX_NONE);
 
@@ -861,19 +859,17 @@ kgx_pages_get_children (KgxPages *self)
 
   children = g_ptr_array_new_full (10, (GDestroyNotify) kgx_process_unref);
 
-  pages = hdy_tab_view_get_pages (HDY_TAB_VIEW (priv->view));
+  n = hdy_tab_view_get_n_pages (HDY_TAB_VIEW (priv->view));
 
-  while ((page = g_list_model_get_item (pages, n))) {
+  for (uint i = 0; i < n; i++) {
+    HdyTabPage *page = hdy_tab_view_get_nth_page (HDY_TAB_VIEW (priv->view), i);
     g_autoptr (GPtrArray) page_children = NULL;
     
     page_children = kgx_tab_get_children (KGX_TAB (hdy_tab_page_get_child (page)));
 
-    for (int i = 0; i < page_children->len; i++) {
-      g_ptr_array_add (children, g_ptr_array_steal_index (page_children, i));
+    for (int j = 0; j < page_children->len; j++) {
+      g_ptr_array_add (children, g_ptr_array_steal_index (page_children, j));
     }
-
-    n++;
-    g_clear_object (&page);
 
     // 2.62: g_ptr_array_extend_and_steal (children, page_children);
   };
