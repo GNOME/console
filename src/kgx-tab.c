@@ -798,54 +798,6 @@ kgx_tab_buildable_iface_init (GtkBuildableIface *iface)
 
 
 static void
-parent_set (KgxTab    *self,
-            GtkWidget *old_parent)
-{
-  KgxTabPrivate *priv;
-  GtkWidget *parent;
-  KgxPages *pages;
-
-  g_return_if_fail (KGX_IS_TAB (self));
-  
-  priv = kgx_tab_get_instance_private (self);
-
-  parent = gtk_widget_get_parent (GTK_WIDGET (self));
-
-  g_clear_object (&priv->pages_font_bind);
-  g_clear_object (&priv->pages_zoom_bind);
-  g_clear_object (&priv->pages_theme_bind);
-  g_clear_object (&priv->pages_opaque_bind);
-  g_clear_object (&priv->pages_scrollback_bind);
-
-  if (parent == NULL) {
-    return;
-  }
-
-  parent = gtk_widget_get_ancestor (parent, KGX_TYPE_PAGES);
-
-  g_return_if_fail (KGX_IS_PAGES (parent));
-
-  pages = KGX_PAGES (parent);
-
-  priv->pages_font_bind = g_object_bind_property (pages, "font",
-                                                  self, "font",
-                                                  G_BINDING_SYNC_CREATE);
-  priv->pages_zoom_bind = g_object_bind_property (pages, "zoom",
-                                                  self, "zoom",
-                                                  G_BINDING_SYNC_CREATE);
-  priv->pages_theme_bind = g_object_bind_property (pages, "theme",
-                                                   self, "theme",
-                                                   G_BINDING_SYNC_CREATE);
-  priv->pages_opaque_bind = g_object_bind_property (pages, "opaque",
-                                                    self, "opaque",
-                                                    G_BINDING_SYNC_CREATE);
-  priv->pages_scrollback_bind = g_object_bind_property (pages, "scrollback-lines",
-                                                        self, "scrollback-lines",
-                                                        G_BINDING_SYNC_CREATE);
-}
-
-
-static void
 died (KgxTab         *self,
       GtkMessageType  type,
       const char     *message,
@@ -895,7 +847,6 @@ kgx_tab_init (KgxTab *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  g_signal_connect (self, "parent-set", G_CALLBACK (parent_set), NULL);
   g_signal_connect (self, "died", G_CALLBACK (died), NULL);
 
   hdy_search_bar_connect_entry (HDY_SEARCH_BAR (priv->search_bar),
@@ -967,6 +918,45 @@ kgx_tab_connect_terminal (KgxTab      *self,
   priv->term_scrollback_bind = g_object_bind_property (self, "scrollback-lines",
                                                        term, "scrollback-lines",
                                                        G_BINDING_SYNC_CREATE);
+}
+
+
+void
+kgx_tab_set_pages (KgxTab   *self,
+                   KgxPages *pages)
+{
+  KgxTabPrivate *priv;
+
+  g_return_if_fail (KGX_IS_TAB (self));
+  g_return_if_fail (KGX_IS_PAGES (pages) || !pages);
+
+  priv = kgx_tab_get_instance_private (self);
+
+  g_clear_object (&priv->pages_font_bind);
+  g_clear_object (&priv->pages_zoom_bind);
+  g_clear_object (&priv->pages_theme_bind);
+  g_clear_object (&priv->pages_opaque_bind);
+  g_clear_object (&priv->pages_scrollback_bind);
+
+  if (pages == NULL) {
+    return;
+  }
+
+  priv->pages_font_bind = g_object_bind_property (pages, "font",
+                                                  self, "font",
+                                                  G_BINDING_SYNC_CREATE);
+  priv->pages_zoom_bind = g_object_bind_property (pages, "zoom",
+                                                  self, "zoom",
+                                                  G_BINDING_SYNC_CREATE);
+  priv->pages_theme_bind = g_object_bind_property (pages, "theme",
+                                                   self, "theme",
+                                                   G_BINDING_SYNC_CREATE);
+  priv->pages_opaque_bind = g_object_bind_property (pages, "opaque",
+                                                    self, "opaque",
+                                                    G_BINDING_SYNC_CREATE);
+  priv->pages_scrollback_bind = g_object_bind_property (pages, "scrollback-lines",
+                                                        self, "scrollback-lines",
+                                                        G_BINDING_SYNC_CREATE);
 }
 
 

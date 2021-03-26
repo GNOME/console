@@ -379,12 +379,18 @@ page_attached (HdyTabView *view,
                int         position,
                KgxPages   *self)
 {
+  KgxTab *tab;
+
   g_return_if_fail (HDY_IS_TAB_PAGE (page));
 
-  g_object_connect (hdy_tab_page_get_child (page),
+  tab = KGX_TAB (hdy_tab_page_get_child (page));
+
+  g_object_connect (tab,
                     "signal::died", G_CALLBACK (died), self,
                     "signal::zoom", G_CALLBACK (zoom), self,
                     NULL);
+
+  kgx_tab_set_pages (tab, self);
 }
 
 
@@ -403,6 +409,8 @@ page_detached (HdyTabView *view,
   tab = KGX_TAB (hdy_tab_page_get_child (page));
 
   priv = kgx_pages_get_instance_private (self);
+
+  kgx_tab_set_pages (tab, NULL);
 
   g_signal_handlers_disconnect_by_data (tab, self);
 
