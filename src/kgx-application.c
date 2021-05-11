@@ -29,6 +29,7 @@
 #include "kgx-config.h"
 
 #include <glib/gi18n.h>
+#include <gio/gdesktopappinfo.h>
 #include <vte/vte.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
@@ -37,6 +38,7 @@
 
 #include "kgx-application.h"
 #include "kgx-window.h"
+#include "kgx-term-app-window.h"
 #include "kgx-pages.h"
 #include "kgx-simple-tab.h"
 #include "kgx-resources.h"
@@ -330,8 +332,6 @@ kgx_application_startup (GApplication *app)
   const char *const zoom_out_accels[] = { "<primary>minus", NULL };
   const char *const zoom_normal_accels[] = { "<primary>0", NULL };
 
-  g_set_prgname (g_application_get_application_id (app));
-
   g_resources_register (kgx_get_resource ());
 
   g_type_ensure (KGX_TYPE_TERMINAL);
@@ -386,6 +386,98 @@ kgx_application_open (GApplication  *app,
                                   NULL,
                                   NULL);
   }
+}
+
+
+static void
+handle_launch (XdgTerminal1          *xdg_term,
+               GDBusMethodInvocation *invocation,
+               const char *const     *exec,
+               const char            *working_directory,
+               const char            *desktop_entry,
+               const char *const     *env,
+               GVariant              *options,
+               GVariant              *platform_data,
+               KgxApplication        *self)
+{
+  g_autofree char *title = NULL;
+  g_autoptr (GFile) working = NULL;
+  KgxWindow *window = NULL;
+  guint32 timezone = GDK_CURRENT_TIME;
+
+  if (working_directory) {
+    working = g_file_new_for_path (working_directory);
+  }
+
+  /* TODO: env */
+  /* TODO: options - keep open? */
+
+  if (desktop_entry && desktop_entry[0] != '\0') {
+    g_autoptr (GDesktopAppInfo) entry = NULL;
+
+    entry = g_desktop_app_info_new_from_filename (desktop_entry);
+
+    window = g_object_new (KGX_TYPE_TERM_APP_WINDOW,
+                           "application", self,
+                           "desktop-entry", entry,
+                           NULL);
+
+    title = g_strdup (g_app_info_get_name (G_APP_INFO (entry)));
+  } else {
+    window = g_object_new (KGX_TYPE_WINDOW,
+                           "application", self,
+                           NULL);
+
+    title = g_path_get_basename (exec[0]);
+  }
+
+  kgx_application_add_terminal (self, window, timezone, working, (GStrv) exec, title);
+
+  xdg_terminal1_complete_launch_command (xdg_term, invocation);
+}
+
+
+static gboolean
+kgx_application_dbus_register (GApplication     *app,
+                               GDBusConnection  *connection,
+                               const char       *object_path,
+                               GError          **error)
+{
+  KgxApplication *self = KGX_APPLICATION (app);
+
+  self->xdg_term = xdg_terminal1_skeleton_new ();
+
+  g_signal_connect (self->xdg_term,
+                    "handle-launch-command", G_CALLBACK (handle_launch),
+                    self);
+
+  if (!g_dbus_interface_skeleton_export (G_DBUS_INTERFACE_SKELETON (self->xdg_term),
+                                         connection,
+                                         object_path,
+                                         error)) {
+    return FALSE;
+  }
+
+  return G_APPLICATION_CLASS (kgx_application_parent_class)->dbus_register (app,
+                                                                            connection,
+                                                                            object_path,
+                                                                            error);
+}
+
+
+static void
+kgx_application_dbus_unregister (GApplication    *app,
+                                 GDBusConnection *connection,
+                                 const char      *object_path)
+{
+  KgxApplication *self = KGX_APPLICATION (app);
+
+  g_dbus_interface_skeleton_unexport (G_DBUS_INTERFACE_SKELETON (self->xdg_term));
+  g_clear_object (&self->xdg_term);
+
+  return G_APPLICATION_CLASS (kgx_application_parent_class)->dbus_unregister (app,
+                                                                              connection,
+                                                                              object_path);
 }
 
 
@@ -631,6 +723,8 @@ kgx_application_class_init (KgxApplicationClass *klass)
   app_class->activate = kgx_application_activate;
   app_class->startup = kgx_application_startup;
   app_class->open = kgx_application_open;
+  app_class->dbus_register = kgx_application_dbus_register;
+  app_class->dbus_unregister = kgx_application_dbus_unregister;
   app_class->local_command_line = kgx_application_local_command_line;
   app_class->command_line = kgx_application_command_line;
   app_class->handle_local_options = kgx_application_handle_local_options;

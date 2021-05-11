@@ -57,6 +57,12 @@ kgx_sources += gnome.compile_resources('kgx-resources',
   c_name: 'kgx'
 )
 
+kgx_sources += gnome.gdbus_codegen('xdg-term1',
+           sources: 'org.freedesktop.Terminal1.xml',
+  interface_prefix: 'org.freedesktop.',
+         namespace: 'Xdg',
+)
+
 kgx_enums = gnome.mkenums_simple('kgx-enums',
                                     sources: [
                                       'kgx-close-dialog.h',

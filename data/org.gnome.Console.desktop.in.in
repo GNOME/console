@@ -14,6 +14,7 @@ X-GNOME-UsesNotifications=true
 Actions=new-window;new-tab;
 # Translators: Do NOT translate or transliterate this text (these are enum types)!
 X-Purism-FormFactor=Workstation;Mobile;
+Implements=org.freedesktop.Terminal1
 
 [Desktop Action new-window]
 Exec=@BIN_NAME@
