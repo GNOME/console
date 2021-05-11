@@ -4,7 +4,7 @@ debian:
   before_script:
     - export DEBIAN_FRONTEND=noninteractive
     - apt -y update
-    - apt -y install wget ca-certificates gnupg
+    - apt -y install wget ca-certificates gnupg sassc
     - echo "deb http://ci.puri.sm/ scratch librem5" > /etc/apt/sources.list.d/ci.list
     - wget -O- https://ci.puri.sm/ci-repo.key | apt-key add -
     - echo "deb http://debug.mirrors.debian.org/debian-debug/ buster-debug main" > /etc/apt/sources.list.d/debug.list
@@ -28,7 +28,7 @@ fedora:
       desktop-file-utils gtk-doc gperf vala "pkgconfig(gtk+-3.0)"
       "pkgconfig(vte-2.91)" "pkgconfig(libgtop-2.0)" "pkgconfig(fribidi)"
       "pkgconfig(gnutls)" "pkgconfig(gobject-introspection-1.0)"
-      "pkgconfig(libsystemd)" "pkgconfig(libpcre2-8)"
+      "pkgconfig(libsystemd)" "pkgconfig(libpcre2-8)" sassc
   script:
     - meson --buildtype=release -Dgtk_doc=true _build .
     - ninja -C _build
