@@ -42,7 +42,43 @@
 #include "kgx-tab-switcher.h"
 #include "kgx-theme-switcher.h"
 
-G_DEFINE_TYPE (KgxWindow, kgx_window, HDY_TYPE_APPLICATION_WINDOW)
+
+typedef struct _KgxWindowPrivate KgxWindowPrivate;
+struct _KgxWindowPrivate {
+  /*< private >*/
+  HdyApplicationWindow  parent_instance;
+
+  /*< public >*/
+  KgxTheme              theme;
+
+  /* Size indicator */
+  int                   last_cols;
+  int                   last_rows;
+  guint                 timeout;
+
+  gboolean              close_anyway;
+
+  /* Template widgets */
+  GtkWidget            *header_bar;
+  GtkWidget            *exit_info;
+  GtkWidget            *exit_message;
+  GtkWidget            *theme_switcher;
+  GtkWidget            *zoom_level;
+  GtkWidget            *about_item;
+  GtkWidget            *tab_bar;
+  GtkWidget            *tab_button;
+  GtkWidget            *tab_switcher;
+  GtkWidget            *pages;
+
+  int                   current_width;
+  int                   current_height;
+  gboolean              is_maximized_or_tiled;
+
+  GActionMap           *tab_actions;
+};
+
+
+G_DEFINE_TYPE_WITH_PRIVATE (KgxWindow, kgx_window, HDY_TYPE_APPLICATION_WINDOW)
 
 enum {
   PROP_0,
@@ -57,6 +93,7 @@ static void
 update_zoom (KgxWindow      *self,
              KgxApplication *app)
 {
+  KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
   g_autofree char *label = NULL;
   gdouble zoom;
 
@@ -66,7 +103,7 @@ update_zoom (KgxWindow      *self,
 
   label = g_strdup_printf ("%i%%",
                            (int) round (zoom * 100));
-  gtk_label_set_label (GTK_LABEL (self->zoom_level), label);
+  gtk_label_set_label (GTK_LABEL (priv->zoom_level), label);
 }
 
 
@@ -82,8 +119,9 @@ zoomed (GObject *object, GParamSpec *pspec, gpointer data)
 static void
 kgx_window_constructed (GObject *object)
 {
-  KgxWindow       *self = KGX_WINDOW (object);
-  GtkApplication  *application = NULL;
+  KgxWindow *self = KGX_WINDOW (object);
+  KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
+  GtkApplication *application;
   HdyStyleManager *style_manager;
 
   G_OBJECT_CLASS (kgx_window_parent_class)->constructed (object);
@@ -92,7 +130,7 @@ kgx_window_constructed (GObject *object)
   style_manager = hdy_style_manager_get_default ();
 
   g_object_bind_property (application, "theme",
-                          self->pages, "theme",
+                          priv->pages, "theme",
                           G_BINDING_SYNC_CREATE);
   g_object_bind_property (application, "theme",
                           self->theme_switcher, "theme",
@@ -103,15 +141,15 @@ kgx_window_constructed (GObject *object)
                           G_BINDING_SYNC_CREATE);
 
   g_object_bind_property (application, "font",
-                          self->pages, "font",
+                          priv->pages, "font",
                           G_BINDING_SYNC_CREATE);
 
   g_object_bind_property (application, "font-scale",
-                          self->pages, "zoom",
+                          priv->pages, "zoom",
                           G_BINDING_SYNC_CREATE);
 
   g_object_bind_property (application, "scrollback-lines",
-                          self->pages, "scrollback-lines",
+                          priv->pages, "scrollback-lines",
                           G_BINDING_SYNC_CREATE);
 
   g_signal_connect_object (application,
@@ -127,8 +165,9 @@ static void
 kgx_window_dispose (GObject *object)
 {
   KgxWindow *self = KGX_WINDOW (object);
+  KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
 
-  g_clear_object (&self->tab_actions);
+  g_clear_object (&priv->tab_actions);
 
   G_OBJECT_CLASS (kgx_window_parent_class)->dispose (object);
 }
@@ -179,10 +218,12 @@ delete_response (GtkWidget *dlg,
                  int        response,
                  KgxWindow *self)
 {
+  KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
+
   gtk_widget_destroy (dlg);
 
   if (response == GTK_RESPONSE_OK) {
-    self->close_anyway = TRUE;
+    priv->close_anyway = TRUE;
 
     gtk_widget_destroy (GTK_WIDGET (self));
   }
@@ -194,12 +235,13 @@ kgx_window_delete_event (GtkWidget   *widget,
                          GdkEventAny *event)
 {
   KgxWindow *self = KGX_WINDOW (widget);
+  KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
   GtkWidget *dlg;
   g_autoptr (GPtrArray) children = NULL;
 
-  children = kgx_pages_get_children (KGX_PAGES (self->pages));
+  children = kgx_pages_get_children (KGX_PAGES (priv->pages));
 
-  if (children->len < 1 || self->close_anyway) {
+  if (children->len < 1 || priv->close_anyway) {
     return FALSE; // Aka no, I don’t want to block closing
   }
 
@@ -235,6 +277,7 @@ key_press_event (GtkWidget   *widget,
                  GdkEventKey *event,
                  KgxWindow   *self)
 {
+  KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
   GdkModifierType default_modifiers = gtk_accelerator_get_default_mod_mask ();
   guint keyval;
   GdkModifierType state;
@@ -263,14 +306,14 @@ key_press_event (GtkWidget   *widget,
          keyval == GDK_KEY_KP_Page_Up ||
          keyval == GDK_KEY_Page_Down ||
          keyval == GDK_KEY_KP_Page_Down) &&
-        kgx_pages_count (KGX_PAGES (self->pages)) <= 1) ||
+        kgx_pages_count (KGX_PAGES (priv->pages)) <= 1) ||
        keyval == GDK_KEY_Home ||
        keyval == GDK_KEY_KP_Home ||
        keyval == GDK_KEY_End ||
        keyval == GDK_KEY_KP_End) &&
       (state == GDK_CONTROL_MASK ||
        state == (GDK_CONTROL_MASK | GDK_SHIFT_MASK))) {
-    return kgx_pages_key_press_event (KGX_PAGES (self->pages),
+    return kgx_pages_key_press_event (KGX_PAGES (priv->pages),
                                       (GdkEvent *) event);
   }
 
@@ -304,12 +347,13 @@ static void
 status_changed (GObject *object, GParamSpec *pspec, gpointer data)
 {
   KgxWindow *self = KGX_WINDOW (object);
+  KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
   GtkStyleContext *context;
   KgxStatus status;
 
   context = gtk_widget_get_style_context (GTK_WIDGET (self));
 
-  status = kgx_pages_current_status (KGX_PAGES (self->pages));
+  status = kgx_pages_current_status (KGX_PAGES (priv->pages));
 
   if (status & KGX_REMOTE) {
     gtk_style_context_add_class (context, KGX_WINDOW_STYLE_REMOTE);
@@ -358,8 +402,9 @@ kgx_window_window_state_event (GtkWidget           *widget,
                                GdkEventWindowState *event)
 {
   KgxWindow *self = KGX_WINDOW (widget);
+  KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
 
-  self->is_maximized_or_tiled =
+  priv->is_maximized_or_tiled =
     (event->new_window_state & (GDK_WINDOW_STATE_FULLSCREEN |
                                 GDK_WINDOW_STATE_MAXIMIZED |
                                 GDK_WINDOW_STATE_TILED |
@@ -368,9 +413,9 @@ kgx_window_window_state_event (GtkWidget           *widget,
                                 GDK_WINDOW_STATE_BOTTOM_TILED |
                                 GDK_WINDOW_STATE_LEFT_TILED)) > 0;
 
-  g_object_set (self->pages, "opaque", self->is_maximized_or_tiled, NULL);
+  g_object_set (priv->pages, "opaque", priv->is_maximized_or_tiled, NULL);
 
-  if (self->is_maximized_or_tiled)
+  if (priv->is_maximized_or_tiled)
     gtk_style_context_add_class (gtk_widget_get_style_context (widget), "opaque");
   else
     gtk_style_context_remove_class (gtk_widget_get_style_context (widget), "opaque");
@@ -384,13 +429,14 @@ kgx_window_size_allocate (GtkWidget     *widget,
                           GtkAllocation *alloc)
 {
   KgxWindow *self = KGX_WINDOW (widget);
+  KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
 
   GTK_WIDGET_CLASS (kgx_window_parent_class)->size_allocate (widget, alloc);
 
-  if (!self->is_maximized_or_tiled)
+  if (!priv->is_maximized_or_tiled)
     gtk_window_get_size (GTK_WINDOW (self),
-                         &self->current_width,
-                         &self->current_height);
+                         &priv->current_width,
+                         &priv->current_height);
 }
 
 
@@ -426,15 +472,15 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                KGX_APPLICATION_PATH "kgx-window.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, KgxWindow, header_bar);
-  gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_info);
-  gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_message);
-  gtk_widget_class_bind_template_child (widget_class, KgxWindow, theme_switcher);
-  gtk_widget_class_bind_template_child (widget_class, KgxWindow, zoom_level);
-  gtk_widget_class_bind_template_child (widget_class, KgxWindow, tab_bar);
-  gtk_widget_class_bind_template_child (widget_class, KgxWindow, tab_button);
-  gtk_widget_class_bind_template_child (widget_class, KgxWindow, tab_switcher);
-  gtk_widget_class_bind_template_child (widget_class, KgxWindow, pages);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, header_bar);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, exit_info);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, exit_message);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, theme_switcher);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, zoom_level);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, tab_bar);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, tab_button);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, tab_switcher);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, pages);
 
   gtk_widget_class_bind_template_callback (widget_class, active_changed);
   gtk_widget_class_bind_template_callback (widget_class, key_press_event);
@@ -496,8 +542,9 @@ close_tab_activated (GSimpleAction *action,
                      gpointer       data)
 {
   KgxWindow *self = data;
+  KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
 
-  kgx_pages_close_page (KGX_PAGES (self->pages));
+  kgx_pages_close_page (KGX_PAGES (priv->pages));
 }
 
 
@@ -507,8 +554,9 @@ detach_tab_activated (GSimpleAction *action,
                       gpointer       data)
 {
   KgxWindow *self = data;
+  KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
 
-  kgx_pages_detach_page (KGX_PAGES (self->pages));
+  kgx_pages_detach_page (KGX_PAGES (priv->pages));
 }
 
 
@@ -624,6 +672,7 @@ update_subtitle (GBinding     *binding,
 static void
 kgx_window_init (KgxWindow *self)
 {
+  KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
   g_autoptr (GtkWindowGroup) group = NULL;
   g_autoptr (GtkTargetList) target_list = NULL;
   g_autoptr (GPropertyAction) pact = NULL;
@@ -643,7 +692,7 @@ kgx_window_init (KgxWindow *self)
                                    self);
 
   pact = g_property_action_new ("find",
-                                G_OBJECT (self->pages),
+                                G_OBJECT (priv->pages),
                                 "search-mode-enabled");
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (pact));
 
@@ -652,24 +701,24 @@ kgx_window_init (KgxWindow *self)
   gtk_style_context_add_class (context, "devel");
   #endif
 
-  g_object_bind_property_full (self->pages, "title",
+  g_object_bind_property_full (priv->pages, "title",
                                self, "title",
                                G_BINDING_SYNC_CREATE,
                                update_title,
                                NULL, NULL, NULL);
 
   g_object_bind_property (self, "title",
-                          self->header_bar, "title",
+                          priv->header_bar, "title",
                           G_BINDING_SYNC_CREATE);
 
-  g_object_bind_property_full (self->pages, "path",
-                               self->header_bar, "subtitle",
+  g_object_bind_property_full (priv->pages, "path",
+                               priv->header_bar, "subtitle",
                                G_BINDING_SYNC_CREATE,
                                update_subtitle,
                                NULL, NULL, NULL);
 
-  g_object_bind_property (self->pages, "tab-view",
-                          self->tab_bar, "view",
+  g_object_bind_property (priv->pages, "tab-view",
+                          priv->tab_bar, "view",
                           G_BINDING_SYNC_CREATE);
   g_object_bind_property (self->pages, "tab-view",
                           self->tab_button, "view",
@@ -681,22 +730,22 @@ kgx_window_init (KgxWindow *self)
   target_list = gtk_target_list_new (NULL, 0);
   gtk_target_list_add_text_targets (target_list, 0);
 
-  hdy_tab_bar_set_extra_drag_dest_targets (HDY_TAB_BAR (self->tab_bar),
+  hdy_tab_bar_set_extra_drag_dest_targets (HDY_TAB_BAR (priv->tab_bar),
                                            target_list);
 
   group = gtk_window_group_new ();
   gtk_window_group_add_window (group, GTK_WINDOW (self));
 
-  kgx_pages_set_shortcut_widget (KGX_PAGES (self->pages), GTK_WIDGET (self));
+  kgx_pages_set_shortcut_widget (KGX_PAGES (priv->pages), GTK_WIDGET (self));
 
-  self->tab_actions = G_ACTION_MAP (g_simple_action_group_new ());
-  g_action_map_add_action_entries (self->tab_actions,
+  priv->tab_actions = G_ACTION_MAP (g_simple_action_group_new ());
+  g_action_map_add_action_entries (priv->tab_actions,
                                    tab_entries,
                                    G_N_ELEMENTS (tab_entries),
                                    self);
   gtk_widget_insert_action_group (GTK_WIDGET (self),
                                   "tab",
-                                  G_ACTION_GROUP (self->tab_actions));
+                                  G_ACTION_GROUP (priv->tab_actions));
 }
 
 
@@ -710,11 +759,14 @@ kgx_window_init (KgxWindow *self)
 GFile *
 kgx_window_get_working_dir (KgxWindow *self)
 {
+  KgxWindowPrivate *priv;
   GFile *file = NULL;
 
   g_return_val_if_fail (KGX_IS_WINDOW (self), NULL);
 
-  g_object_get (self->pages, "path", &file, NULL);
+  priv = kgx_window_get_instance_private (self);
+
+  g_object_get (priv->pages, "path", &file, NULL);
 
   return file;
 }
@@ -729,9 +781,13 @@ kgx_window_get_working_dir (KgxWindow *self)
 KgxPages *
 kgx_window_get_pages (KgxWindow *self)
 {
+  KgxWindowPrivate *priv;
+
   g_return_val_if_fail (KGX_IS_WINDOW (self), NULL);
 
-  return KGX_PAGES (self->pages);
+  priv = kgx_window_get_instance_private (self);
+
+  return KGX_PAGES (priv->pages);
 }
 
 
@@ -740,10 +796,14 @@ kgx_window_get_size (KgxWindow *self,
                      int       *width,
                      int       *height)
 {
+  KgxWindowPrivate *priv;
+
   g_return_if_fail (KGX_IS_WINDOW (self));
 
+  priv = kgx_window_get_instance_private (self);
+
   if (width)
-    *width = self->current_width;
+    *width = priv->current_width;
   if (height)
-    *height = self->current_height;
+    *height = priv->current_height;
 }

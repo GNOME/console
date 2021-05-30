@@ -51,60 +51,12 @@ typedef enum /*< enum,prefix=KGX >*/
 
 #define KGX_TYPE_WINDOW (kgx_window_get_type())
 
-/**
- * KgxWindow:
- * @theme: the palette
- * @working_dir: the working directory of the #KgxTerminal
- * @command: the command to run, %NULL for default shell
- * @close_on_zero: should the window close when the command exits with 0
- * @last_cols: the column width last time we received #GtkWidget::size-allocate
- * @last_rows: the row count last time we received #GtkWidget::size-allocate
- * @timeout: the id of the #GSource used to hide the statusbar
- * @close_anyway: ignore running children and close without prompt
- * @header_bar: the #HdyHeaderBar that the styles are applied to
- * @search_entry: the #GtkSearchEntry inside @search_bar
- * @search_bar: the windows #GtkSearchBar
- * @exit_info: the #GtkRevealer hat wraps @exit_message
- * @exit_message: the #GtkLabel for showing important messages
- * @zoom_level: the #GtkLabel in the #GtkPopover showing the current zoom level
- * @pages: the #KgxPages of #KgxPage current in the window
- * @about_item: the #GtkModelButton for the about item
- */
-struct _KgxWindow
-{
-  /*< private >*/
-  HdyApplicationWindow  parent_instance;
-
-  /*< public >*/
-  KgxTheme              theme;
-
-  /* Size indicator */
-  int                   last_cols;
-  int                   last_rows;
-  guint                 timeout;
-
-  gboolean              close_anyway;
-
-  /* Template widgets */
-  GtkWidget            *header_bar;
-  GtkWidget            *exit_info;
-  GtkWidget            *exit_message;
-  GtkWidget            *theme_switcher;
-  GtkWidget            *zoom_level;
-  GtkWidget            *about_item;
-  GtkWidget            *tab_bar;
-  GtkWidget            *tab_button;
-  GtkWidget            *tab_switcher;
-  GtkWidget            *pages;
-
-  int                   current_width;
-  int                   current_height;
-  gboolean              is_maximized_or_tiled;
-
-  GActionMap           *tab_actions;
+typedef struct _KgxWindowClass KgxWindowClass;
+struct _KgxWindowClass {
+  HdyApplicationWindowClass parent;
 };
 
-G_DECLARE_FINAL_TYPE (KgxWindow, kgx_window, KGX, WINDOW, HdyApplicationWindow)
+G_DECLARE_DERIVABLE_TYPE (KgxWindow, kgx_window, KGX, WINDOW, HdyApplicationWindow)
 
 GFile      *kgx_window_get_working_dir (KgxWindow    *self);
 void        kgx_window_show_status     (KgxWindow    *self,
