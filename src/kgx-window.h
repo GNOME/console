@@ -29,10 +29,13 @@ G_BEGIN_DECLS
 #define KGX_WINDOW_STYLE_RINGING "bell"
 
 
-#define KGX_TYPE_WINDOW (kgx_window_get_type())
+#define KGX_TYPE_WINDOW (kgx_window_get_type ())
 
-G_DECLARE_FINAL_TYPE (KgxWindow, kgx_window, KGX, WINDOW, AdwApplicationWindow)
+struct _KgxWindowClass {
+  AdwApplicationWindowClass parent;
+};
 
+G_DECLARE_DERIVABLE_TYPE (KgxWindow, kgx_window, KGX, WINDOW, AdwApplicationWindow)
 
 GFile      *kgx_window_get_working_dir (KgxWindow    *self);
 void        kgx_window_add_tab         (KgxWindow    *self,
