@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-03-26 15:38+0000\n"
-"PO-Revision-Date: 2021-05-05 20:41+0200\n"
+"POT-Creation-Date: 2021-06-13 02:28+0000\n"
+"PO-Revision-Date: 2021-06-13 17:35+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -20,48 +20,47 @@ msgstr ""
 "X-Generator: Poedit 2.4.2\n"
 
 #. Translators: This is a train station, see README.md for more info
-#: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:512
-#: src/kgx-window.c:520 src/kgx-window.c:553 src/kgx-window.ui:100
-#: src/main.c:37
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:4
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:8
+#: src/kgx-application.c:512 src/kgx-window.ui:100
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.zbrown.KingsCross.desktop.in:9
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:8
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:9
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr "kommando;prompt;cmd;kommandorad;kör;skal;terminal;kgx;kings cross;"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in:20
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:19
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:20
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:19
 msgid "New Window"
 msgstr "Nytt fönster"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in:26
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:25 src/kgx-window.ui:144
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:26
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:25
+#: src/kgx-window.ui:144
 msgid "New Tab"
 msgstr "Ny flik"
 
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3 src/kgx-window.c:518
-#: src/kgx-window.c:551 src/main.c:35
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:3
 msgid "Terminal"
 msgstr "Terminal"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:514
-#: src/kgx-window.c:512
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:9
+#: src/kgx-application.c:514 src/kgx-window.c:512
 msgid "Terminal Emulator"
 msgstr "Terminalemulator"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:11
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr "En enkel användarvänlig terminalemulator för GNOME-skrivbordet."
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:22
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:22
 msgid "Terminal window"
 msgstr "Terminalfönster"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:52
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:52
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -126,11 +125,11 @@ msgid "Switch to Tab"
 msgstr "Växla till flik"
 
 #. Translators: The leading # is intentional, the initial %s is the
-#. version of King's Cross itself, the latter format is the VTE version
+#. version of KGX itself, the latter format is the VTE version
 #: src/kgx-application.c:486
 #, c-format
-msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
-msgstr "# King’s Cross %s med VTE %u.%u.%u %s\n"
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s med VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
 #: src/kgx-application.c:498 src/kgx-window.c:500
@@ -268,7 +267,7 @@ msgstr ""
 msgid "KGX Terminal Emulator"
 msgstr "KGX Terminalemulator"
 
-#: src/kgx-window.c:613
+#: src/kgx-window.c:605
 msgid "_About Terminal"
 msgstr "_Om Terminal"
 
