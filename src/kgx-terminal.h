@@ -32,7 +32,7 @@ G_BEGIN_DECLS
  *
  * Until [meson#1687](https://github.com/mesonbuild/meson/issues/1687) is
  * resolved this enum must be manually kept in sync with
- * org.gnome.zbrown.KingsCross.Theme in the gschema
+ * the ‘Theme’ enum in the gschema
  *
  * Since: 0.1.0
  */

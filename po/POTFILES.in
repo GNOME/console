@@ -1,7 +1,7 @@
-data/org.gnome.zbrown.KingsCross.desktop.in
-data/org.gnome.zbrown.KingsCross-generic.desktop.in
-data/org.gnome.zbrown.KingsCross.appdata.xml.in
-data/org.gnome.zbrown.KingsCross.gschema.xml
+data/org.gnome.zbrown.KingsCross.desktop.in.in
+data/org.gnome.zbrown.KingsCross-generic.desktop.in.in
+data/org.gnome.zbrown.KingsCross.appdata.xml.in.in
+data/org.gnome.zbrown.KingsCross.gschema.xml.in
 src/help-overlay.ui
 src/kgx-application.c
 src/kgx-close-dialog.c

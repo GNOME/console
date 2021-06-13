@@ -708,7 +708,7 @@ kgx_tab_class_init (KgxTabClass *klass)
    *
    * How many lines of scrollback #KgxTerminal should keep
    *
-   * Bound to /org/gnome/zbrown/KingsCross/scrollback-lines so changes persist
+   * Bound to ‘scrollback-lines’ GSetting so changes persist
    *
    * Stability: Private
    *
@@ -749,7 +749,7 @@ kgx_tab_class_init (KgxTabClass *klass)
                                 G_TYPE_BOOLEAN);
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               RES_PATH "kgx-tab.ui");
+                                               KGX_APPLICATION_PATH "kgx-tab.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, stack);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, spinner_revealer);

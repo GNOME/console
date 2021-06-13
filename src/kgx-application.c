@@ -330,13 +330,13 @@ kgx_application_startup (GApplication *app)
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "win.zoom-out", zoom_out_accels);
 
-  self->settings = g_settings_new ("org.gnome.zbrown.KingsCross");
+  self->settings = g_settings_new (KGX_APPLICATION_ID);
   g_settings_bind (self->settings, "theme", app, "theme", G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (self->settings, "font-scale", app, "font-scale", G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (self->settings, "scrollback-lines", app, "scrollback-lines", G_SETTINGS_BIND_DEFAULT);
 
   provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, RES_PATH "styles.css");
+  gtk_css_provider_load_from_resource (provider, KGX_APPLICATION_PATH "styles.css");
   gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
                                              GTK_STYLE_PROVIDER (provider),
                                              /* Is this stupid? Yes
@@ -452,7 +452,7 @@ print_logo (short width)
   int i = 0;
   int half_screen = width / 2;
 
-  logo = g_file_new_for_uri ("resource:/" RES_PATH "logo.txt");
+  logo = g_file_new_for_uri ("resource:/" KGX_APPLICATION_PATH "logo.txt");
 
   g_file_load_contents (logo, NULL, &logo_text, NULL, NULL, &error);
 
@@ -482,8 +482,8 @@ kgx_application_handle_local_options (GApplication *app,
   if (g_variant_dict_lookup (options, "version", "b", &version)) {
     if (version) {
       // Translators: The leading # is intentional, the initial %s is the
-      // version of King's Cross itself, the latter format is the VTE version
-      g_print (_("# King’s Cross %s using VTE %u.%u.%u %s\n"),
+      // version of KGX itself, the latter format is the VTE version
+      g_print (_("# KGX %s using VTE %u.%u.%u %s\n"),
                PACKAGE_VERSION,
                vte_get_major_version (),
                vte_get_minor_version (),
@@ -550,7 +550,7 @@ kgx_application_class_init (KgxApplicationClass *klass)
    *
    * Officially only "night" exists, "hacker" is just a little fun
    *
-   * Bound to /org/gnome/zbrown/KingsCross/theme so changes persist
+   * Bound to ‘theme’ GSetting so changes persist
    *
    * Stability: Private
    */
@@ -574,7 +574,7 @@ kgx_application_class_init (KgxApplicationClass *klass)
    *
    * How many lines of scrollback #KgxTerminal should keep
    *
-   * Bound to /org/gnome/zbrown/KingsCross/scrollback-lines so changes persist
+   * Bound to ‘scrollback-lines’ GSetting so changes persist
    *
    * Stability: Private
    *

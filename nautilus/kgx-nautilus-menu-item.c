@@ -191,6 +191,6 @@ kgx_nautilus_menu_item_new (KgxNautilus *extension,
                        "window", window,
                        "file", file,
                        "name", is_back ? "Kgx:Open" : "Kgx:OpenItem",
-                       "icon", "org.gnome.zbrown.KingsCross",
+                       "icon", KGX_APPLICATION_ID,
                        NULL);
 }

@@ -288,7 +288,7 @@ kgx_simple_tab_class_init (KgxSimpleTabClass *klass)
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               RES_PATH "kgx-simple-tab.ui");
+                                               KGX_APPLICATION_PATH "kgx-simple-tab.ui");
 
   gtk_widget_class_bind_template_child (widget_class, KgxSimpleTab, terminal);
 

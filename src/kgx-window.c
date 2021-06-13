@@ -402,7 +402,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               RES_PATH "kgx-window.ui");
+                                               KGX_APPLICATION_PATH "kgx-window.ui");
 
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, header_bar);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_info);
@@ -514,11 +514,7 @@ about_activated (GSimpleAction *action,
                          "copyright", copyright,
                          "license-type", GTK_LICENSE_GPL_3_0,
                          "logo-icon-name", "kgx-original",
-                         #if IS_GENERIC
-                         "program-name", _("Terminal"),
-                         #else
-                         "program-name", _("King’s Cross"),
-                         #endif
+                         "program-name", KGX_DISPLAY_NAME,
                          "version", PACKAGE_VERSION,
                          NULL);
 }
@@ -547,11 +543,7 @@ update_title (GBinding     *binding,
   const char *title = g_value_get_string (from_value);
 
   if (!title) {
-#if IS_GENERIC
-    title = _("Terminal");
-#else
-    title = _("King’s Cross");
-#endif
+    title = KGX_DISPLAY_NAME;
   }
 
   g_value_set_string (to_value, title);

@@ -683,7 +683,7 @@ kgx_pages_class_init (KgxPagesClass *klass)
    *
    * How many lines of scrollback #KgxTerminal should keep
    *
-   * Bound to /org/gnome/zbrown/KingsCross/scrollback-lines so changes persist
+   * Bound to ‘scrollback-lines’ GSetting so changes persist
    *
    * Stability: Private
    *
@@ -705,7 +705,7 @@ kgx_pages_class_init (KgxPagesClass *klass)
                                 KGX_TYPE_ZOOM);
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               RES_PATH "kgx-pages.ui");
+                                               KGX_APPLICATION_PATH "kgx-pages.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, view);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, status);

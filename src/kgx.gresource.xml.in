@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/org/gnome/zbrown/KingsCross">
+  <gresource prefix="@KGX_APPLICATION_PATH_RAW@">
     <file compressed="true">kgx-window.ui</file>
     <file compressed="true">kgx-close-dialog.ui</file>
     <file compressed="true">kgx-pages.ui</file>
@@ -11,13 +11,16 @@
     <file preprocess="xml-stripblanks">icons/scalable/status/status-privileged-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/status-remote-symbolic.svg</file>
   </gresource>
-  <gresource prefix="/org/gnome/zbrown/KingsCross/gtk">
+  <gresource prefix="@KGX_APPLICATION_PATH_RAW@gtk">
     <file compressed="true">menus.ui</file>
     <file>help-overlay.ui</file>
   </gresource>
-  <gresource prefix="/org/gnome/zbrown/KingsCross/icons/scalable/apps/">
-    <file preprocess="xml-stripblanks" alias="kgx-original.svg">../data/org.gnome.zbrown.KingsCross.svg</file>
-    <file preprocess="xml-stripblanks" alias="org.gnome.zbrown.KingsCross.svg">@COLOUR_ICON@</file>
-    <file preprocess="xml-stripblanks" alias="org.gnome.zbrown.KingsCross.Generic.svg">@SYMBOLIC_ICON@</file>
+  <gresource prefix="@KGX_APPLICATION_PATH_RAW@icons/scalable/apps/">
+    <file preprocess="xml-stripblanks" alias="kgx-original.svg">../data/kgx-original.svg</file>
+    <file preprocess="xml-stripblanks" alias="@KGX_APPLICATION_ID_RAW@.svg">../data/org.gnome.zbrown.KingsCross.svg</file>
+  </gresource>
+  <gresource prefix="@KGX_APPLICATION_PATH_RAW@icons/symbolic/apps/">
+    <file preprocess="xml-stripblanks" alias="kgx-original-symbolic.svg">../data/kgx-original-symbolic.svg</file>
+    <file preprocess="xml-stripblanks" alias="@KGX_APPLICATION_ID_RAW@-symbolic.svg">../data/org.gnome.zbrown.KingsCross-symbolic.svg</file>
   </gresource>
 </gresources>

@@ -41,7 +41,7 @@ kgx_close_dialog_new (KgxCloseDialogContext  context,
   g_autoptr (GtkBuilder) builder = NULL;
   GtkWidget *dialog, *list;
 
-  builder = gtk_builder_new_from_resource (RES_PATH "kgx-close-dialog.ui");
+  builder = gtk_builder_new_from_resource (KGX_APPLICATION_PATH "kgx-close-dialog.ui");
 
   dialog = GTK_WIDGET (gtk_builder_get_object (builder, "dialog"));
   list = GTK_WIDGET (gtk_builder_get_object (builder, "list"));

@@ -1,6 +1,6 @@
 /* main.c
  *
- * Copyright 2019 Zander Brown
+ * Copyright 2019-2021 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,51 +17,29 @@
  */
 
 #include <glib/gi18n.h>
+
 #include <kgx.h>
 
 int
-main (int   argc,
-      char *argv[])
+main (int argc, char *argv[])
 {
-  g_autoptr(GtkApplication) app = NULL;
-  int ret;
+  g_autoptr (GtkApplication) app = NULL;
 
   /* Set up gettext translations */
   bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-  #if IS_GENERIC
-  g_set_application_name (_("Terminal"));
-  #else
-  g_set_application_name (_("King’s Cross"));
-  #endif
-  gtk_window_set_default_icon_name ("org.gnome.zbrown.KingsCross");
+  g_set_application_name (KGX_DISPLAY_NAME);
+  gtk_window_set_default_icon_name (KGX_APPLICATION_ID);
 
-  /*
-   * Create a new GtkApplication. The application manages our main loop,
-   * application windows, integration with the window manager/compositor, and
-   * desktop features such as file opening and single-instance applications.
-   */
   app = g_object_new (KGX_TYPE_APPLICATION,
-                      "application_id", "org.gnome.zbrown.KingsCross",
+                      "application_id", KGX_APPLICATION_ID,
                       "flags", G_APPLICATION_HANDLES_COMMAND_LINE |
                                G_APPLICATION_HANDLES_OPEN |
                                G_APPLICATION_CAN_OVERRIDE_APP_ID,
                       "register-session", TRUE,
                       NULL);
 
-  /*
-  * Run the application. This function will block until the application
-   * exits. Upon return, we have our exit code to return to the shell. (This
-   * is the code you see when you do `echo $?` after running a command in a
-   * terminal.
-   *
-   * Since GtkApplication inherits from GApplication, we use the parent class
-   * method "run". But we need to cast, which is what the "G_APPLICATION()"
-   * macro does.
-   */
-  ret = g_application_run (G_APPLICATION (app), argc, argv);
-
-  return ret;
+  return g_application_run (G_APPLICATION (app), argc, argv);
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2019 Zander Brown -->
+<!-- Copyright 2019-2021 Zander Brown -->
 <component type="desktop-application">
-  <id>org.gnome.zbrown.KingsCross</id>
+  <id>@KGX_APPLICATION_ID_RAW@</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0</project_license>
   <project_group>GNOME</project_group>
@@ -43,9 +43,9 @@
       </description>
     </release>
   </releases>
-  <launchable type="desktop-id">org.gnome.zbrown.KingsCross.desktop</launchable>
-  <url type="homepage">https://gitlab.gnome.org/ZanderBrown/kgx/</url>
-  <url type="bugtracker">https://gitlab.gnome.org/ZanderBrown/kgx/issues</url>
+  <launchable type="desktop-id">@KGX_APPLICATION_ID_RAW@.desktop</launchable>
+  <url type="homepage">https://gitlab.gnome.org/ZanderBrown/KGX/</url>
+  <url type="bugtracker">https://gitlab.gnome.org/ZanderBrown/KGX/issues</url>
   <update_contact>zbrown@gnome.org</update_contact>
   <translation type="gettext">kgx</translation>
   <content_rating type="oars-1.1" />

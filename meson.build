@@ -10,6 +10,9 @@ project('kgx', 'c', version: '0.2.1',
 
 i18n = import('i18n')
 
+app_id = 'org.gnome.zbrown.KingsCross'
+app_path = '/org/gnome/zbrown/KingsCross/'
+
 prefix = get_option('prefix')
 libdir = prefix / get_option('libdir')
 datadir = prefix / get_option('datadir')
@@ -21,8 +24,11 @@ pkgtypelibdir = pkglibdir / 'girepository-1.0'
 conf = configuration_data()
 conf.set_quoted('PACKAGE_VERSION', '@VCS_TAG@')
 conf.set_quoted('GETTEXT_PACKAGE', 'kgx')
+conf.set_quoted('KGX_APPLICATION_ID', app_id)
+conf.set('KGX_APPLICATION_ID_RAW', app_id)
+conf.set_quoted('KGX_APPLICATION_PATH', app_path)
+conf.set('KGX_APPLICATION_PATH_RAW', app_path)
 conf.set_quoted('LOCALEDIR', prefix / get_option('localedir'))
-conf.set_quoted('RES_PATH', '/org/gnome/zbrown/KingsCross/')
 conf.set('BINDIR', prefix / get_option('bindir'))
 if get_option('generic')
   conf.set('IS_GENERIC', 1)
