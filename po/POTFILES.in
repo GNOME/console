@@ -4,6 +4,7 @@ data/org.gnome.zbrown.KingsCross.appdata.xml.in.in
 data/org.gnome.zbrown.KingsCross.gschema.xml.in
 src/help-overlay.ui
 src/kgx-application.c
+src/kgx-application.h
 src/kgx-close-dialog.c
 src/kgx-close-dialog.ui
 src/kgx-pages.ui
