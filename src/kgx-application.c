@@ -297,6 +297,7 @@ kgx_application_startup (GApplication *app)
   const char *const find_accels[] = { "<shift><primary>f", NULL };
   const char *const zoom_in_accels[] = { "<primary>plus", NULL };
   const char *const zoom_out_accels[] = { "<primary>minus", NULL };
+  const char *const zoom_normal_accels[] = { "<primary>0", NULL };
 
   g_set_prgname (g_application_get_application_id (app));
 
@@ -326,9 +327,11 @@ kgx_application_startup (GApplication *app)
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "win.find", find_accels);
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
-                                         "win.zoom-in", zoom_in_accels);
+                                         "app.zoom-in", zoom_in_accels);
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
-                                         "win.zoom-out", zoom_out_accels);
+                                         "app.zoom-out", zoom_out_accels);
+  gtk_application_set_accels_for_action (GTK_APPLICATION (app),
+                                         "app.zoom-normal", zoom_normal_accels);
 
   self->settings = g_settings_new (KGX_APPLICATION_ID);
   g_settings_bind (self->settings, "theme", app, "theme", G_SETTINGS_BIND_DEFAULT);
