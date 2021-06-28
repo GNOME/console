@@ -1,69 +1,69 @@
 # Brazilian Portuguese translation for kgx.
 # Copyright (C) 2021 kgx's COPYRIGHT HOLDER
 # This file is distributed under the same license as the kgx package.
-# Rafael Fontenelle <rafaelff@gnome.org>, 2019-2021.
 # Enrico Nicoletto <liverig@gmail.com>, 2021.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2019-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-03-20 13:09+0000\n"
-"PO-Revision-Date: 2021-03-22 11:46-0300\n"
-"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
+"POT-Creation-Date: 2021-06-14 11:32+0000\n"
+"PO-Revision-Date: 2021-06-28 08:42-0300\n"
+"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"X-Generator: Gtranslator 40.0\n"
 
 #. Translators: This is a train station, see README.md for more info
-#: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:512
-#: src/kgx-window.c:520 src/kgx-window.c:553 src/kgx-window.ui:101
-#: src/main.c:37
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:4
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:8
+#: src/kgx-application.c:512 src/kgx-application.h:46 src/kgx-window.ui:100
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.zbrown.KingsCross.desktop.in:9
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:8
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:9
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
 "comando;command;prompt;cmd;linha de comando;commandline;executar;run;shell;"
 "terminal;kgx;kings cross;"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in:20
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:19
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:20
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:19
 msgid "New Window"
 msgstr "Nova janela"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in:26
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:25 src/kgx-window.ui:145
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:26
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:25
+#: src/kgx-window.ui:144
 msgid "New Tab"
 msgstr "Nova aba"
 
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3 src/kgx-window.c:518
-#: src/kgx-window.c:551 src/main.c:35
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:3
+#: src/kgx-application.h:44
 msgid "Terminal"
 msgstr "Terminal"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:514
-#: src/kgx-window.c:512
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:9
+#: src/kgx-application.c:514 src/kgx-window.c:512
 msgid "Terminal Emulator"
 msgstr "Emulador de terminal"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:11
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr "Um simples emulador de terminal fácil de usar para o ambiente GNOME."
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:22
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:22
 msgid "Terminal window"
 msgstr "Janela do terminal"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:52
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:52
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -128,11 +128,12 @@ msgid "Switch to Tab"
 msgstr "Alternar para aba"
 
 #. Translators: The leading # is intentional, the initial %s is the
-#. version of King's Cross itself, the latter format is the VTE version
+#. version of KGX itself, the latter format is the VTE version
 #: src/kgx-application.c:486
 #, c-format
-msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
-msgstr "# King’s Cross %s usando VTE %u.%u.%u %s\n"
+#| msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s usando VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
 #: src/kgx-application.c:498 src/kgx-window.c:500
@@ -197,19 +198,19 @@ msgstr ""
 "Alguns comandos ainda estão em execução, de forma que fechar esta aba vai "
 "encerrá-los e pode levar a resultados inesperados"
 
-#: src/kgx-close-dialog.ui:23 src/kgx-terminal.c:675
+#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:675
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: src/kgx-close-dialog.ui:31
+#: src/kgx-close-dialog.ui:32
 msgid "C_lose"
 msgstr "_Fechar"
 
-#: src/kgx-pages.ui:41
+#: src/kgx-pages.ui:46
 msgid "_Detach Tab"
 msgstr "_Desanexar aba"
 
-#: src/kgx-pages.ui:47
+#: src/kgx-pages.ui:52
 msgid "_Close"
 msgstr "_Fechar"
 
@@ -233,7 +234,7 @@ msgstr "<b>Somente leitura</b> — Comando encerrado"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Falha ao iniciar</b> — %s"
 
-#: src/kgx-tab.c:1192
+#: src/kgx-tab.c:1182
 msgid "Command completed"
 msgstr "Comando concluído"
 
@@ -268,7 +269,7 @@ msgstr ""
 msgid "KGX Terminal Emulator"
 msgstr "Emulador de terminal KGX"
 
-#: src/kgx-window.c:613
+#: src/kgx-window.c:605
 msgid "_About Terminal"
 msgstr "_Sobre o Terminal"
 
@@ -300,11 +301,11 @@ msgstr "_Sobre o King’s Cross"
 msgid "About this program"
 msgstr "Sobre este programa"
 
-#: src/kgx-window.ui:109
+#: src/kgx-window.ui:108
 msgid "Find in terminal"
 msgstr "Encontrar no terminal"
 
-#: src/kgx-window.ui:127
+#: src/kgx-window.ui:126
 msgid "Menu"
 msgstr "Menu"
 
