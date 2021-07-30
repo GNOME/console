@@ -358,13 +358,10 @@ kgx_application_open (GApplication  *app,
                       const char    *hint)
 {
   guint32 timestamp = GDK_CURRENT_TIME;
-  GtkWindow *window;
 
   for (int i = 0; i < n_files; i++) {
-    window = gtk_application_get_active_window (GTK_APPLICATION (app));
-
     kgx_application_add_terminal (KGX_APPLICATION (app),
-                                  window ? KGX_WINDOW (window) : NULL,
+                                  NULL,
                                   timestamp,
                                   files[i],
                                   NULL,
