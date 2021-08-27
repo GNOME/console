@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-03-20 13:09+0000\n"
-"PO-Revision-Date: 2021-05-10 10:55+0200\n"
+"POT-Creation-Date: 2021-06-14 11:32+0000\n"
+"PO-Revision-Date: 2021-08-27 21:27+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -17,53 +17,51 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 40.0\n"
+"X-Generator: Poedit 3.0\n"
 
 #. Translators: This is a train station, see README.md for more info
-#: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:512
-#: src/kgx-window.c:520 src/kgx-window.c:553 src/kgx-window.ui:101
-#: src/main.c:37
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:4
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:8
+#: src/kgx-application.c:512 src/kgx-application.h:46 src/kgx-window.ui:100
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.zbrown.KingsCross.desktop.in:9
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:8
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:9
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr "comando;prompt;cmd;línea;ejecutar;shell;terminal;kgx;kings cross;"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in:20
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:19
-#| msgctxt "shortcut window"
-#| msgid "New Window"
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:20
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:19
 msgid "New Window"
 msgstr "Ventana nueva"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in:26
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:25 src/kgx-window.ui:145
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:26
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:25
+#: src/kgx-window.ui:144
 msgid "New Tab"
 msgstr "Pestaña nueva"
 
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3 src/kgx-window.c:518
-#: src/kgx-window.c:551 src/main.c:35
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:3
+#: src/kgx-application.h:44
 msgid "Terminal"
 msgstr "Terminal"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:514
-#: src/kgx-window.c:512
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:9
+#: src/kgx-application.c:514 src/kgx-window.c:512
 msgid "Terminal Emulator"
 msgstr "Emulador de terminal"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:11
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr "Un emulador de terminal sencillo y amigable para el escritorio GNOME."
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:22
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:22
 msgid "Terminal window"
 msgstr "Ventana de la terminal"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:52
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:52
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -113,8 +111,6 @@ msgid "Close Tab"
 msgstr "Cerrar pestaña"
 
 #: src/help-overlay.ui:73
-#| msgctxt "shortcut window"
-#| msgid "New Tab"
 msgctxt "shortcut window"
 msgid "Next Tab"
 msgstr "Pestaña siguiente"
@@ -130,16 +126,15 @@ msgid "Switch to Tab"
 msgstr "Cambiar a la pestaña"
 
 #. Translators: The leading # is intentional, the initial %s is the
-#. version of King's Cross itself, the latter format is the VTE version
+#. version of KGX itself, the latter format is the VTE version
 #: src/kgx-application.c:486
 #, c-format
-msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
-msgstr "# King’s Cross %s usando VTE %u.%u.%u %s\n"
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s usando VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
 #: src/kgx-application.c:498 src/kgx-window.c:500
 #, c-format
-#| msgid "Zander Brown"
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
@@ -177,15 +172,10 @@ msgid "ADVANCED: Set the scrollback length"
 msgstr "AVANZADO: establecer la longitud del desplazamiento hacia atrás"
 
 #: src/kgx-close-dialog.c:52
-#| msgctxt "shortcut window"
-#| msgid "New Window"
 msgid "Close Window?"
 msgstr "¿Quiere cerrar la ventana?"
 
 #: src/kgx-close-dialog.c:53
-#| msgid ""
-#| "Some commands are still running, closing this terminal will kill them and "
-#| "may lead to unexpected outcomes"
 msgid ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
@@ -194,15 +184,10 @@ msgstr ""
 "puede provocar comportamientos inesperados"
 
 #: src/kgx-close-dialog.c:58
-#| msgctxt "shortcut window"
-#| msgid "Close Tab"
 msgid "Close Tab?"
 msgstr "¿Quiere cerrar la pestaña?"
 
 #: src/kgx-close-dialog.c:59
-#| msgid ""
-#| "Some commands are still running, closing this terminal will kill them and "
-#| "may lead to unexpected outcomes"
 msgid ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
@@ -210,21 +195,19 @@ msgstr ""
 "Algunos comandos siguen en ejecución. Cerrar esta pestaña los matará y esto "
 "puede provocar comportamientos inesperados"
 
-#: src/kgx-close-dialog.ui:23 src/kgx-terminal.c:675
+#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:675
 msgid "_Cancel"
 msgstr "C_ancelar"
 
-#: src/kgx-close-dialog.ui:31
-#| msgid "_Close"
+#: src/kgx-close-dialog.ui:32
 msgid "C_lose"
 msgstr "C_errar"
 
-#: src/kgx-pages.ui:41
-#| msgid "_Detach"
+#: src/kgx-pages.ui:46
 msgid "_Detach Tab"
 msgstr "_Desacoplar pestaña"
 
-#: src/kgx-pages.ui:47
+#: src/kgx-pages.ui:52
 msgid "_Close"
 msgstr "_Cerrar"
 
@@ -248,7 +231,7 @@ msgstr "<b>Sólo lectura</b> — el comando ha terminado"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Falló al iniciar</b> — %s"
 
-#: src/kgx-tab.c:1192
+#: src/kgx-tab.c:1182
 msgid "Command completed"
 msgstr "Comando completado"
 
@@ -278,11 +261,10 @@ msgstr "Daniel Mustieles <daniel.musiteles@gmail.com>, 2019"
 #. Translators: Don’t attempt to translate KGX,
 #. * treat it as a proper noun
 #: src/kgx-window.c:510
-#| msgid "Terminal Emulator"
 msgid "KGX Terminal Emulator"
 msgstr "Emulador de terminal KGX"
 
-#: src/kgx-window.c:613
+#: src/kgx-window.c:605
 msgid "_About Terminal"
 msgstr "_Acerca de Terminal"
 
@@ -314,11 +296,11 @@ msgstr "_Acerca de King’s Cross"
 msgid "About this program"
 msgstr "Sobre este programa"
 
-#: src/kgx-window.ui:109
+#: src/kgx-window.ui:108
 msgid "Find in terminal"
 msgstr "Buscar en la terminal"
 
-#: src/kgx-window.ui:127
+#: src/kgx-window.ui:126
 msgid "Menu"
 msgstr "Menú"
 
@@ -343,12 +325,10 @@ msgid "Show in _Files"
 msgstr "Mostrar en _Archivos"
 
 #: nautilus/kgx-nautilus-menu-item.c:120
-#| msgid "Find in terminal"
 msgid "Open in T_erminal"
 msgstr "Abrir en la t_erminal"
 
 #: nautilus/kgx-nautilus-menu-item.c:122
-#| msgid "King’s Cross"
 msgid "Op_en in King’s Cross"
 msgstr "A_brir en King’s Cross"
 
