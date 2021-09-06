@@ -1,14 +1,15 @@
 # Czech translation for kgx.
 # Copyright (C) 2020 kgx's COPYRIGHT HOLDER
 # This file is distributed under the same license as the kgx package.
-# Marek Černocký <marek@manet.cz>, 2020.
+#
+# Marek Černocký <marek@manet.cz>, 2020, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2020-11-11 20:06+0000\n"
-"PO-Revision-Date: 2020-11-16 13:25+0100\n"
+"POT-Creation-Date: 2021-06-14 11:32+0000\n"
+"PO-Revision-Date: 2021-09-06 14:59+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -18,46 +19,52 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #. Translators: This is a train station, see README.md for more info
-#: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:439
-#: src/kgx-window.c:618 src/kgx-window.ui:102 src/main.c:38
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:4
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:8
+#: src/kgx-application.c:512 src/kgx-application.h:46 src/kgx-window.ui:100
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.zbrown.KingsCross.desktop.in:9
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:9
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
 "příkaz;výzva;cmd;command;prompt;commandline;cli;spustit;spouštění;shell;"
 "terminál;kgx;kings cross;"
 
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3 src/main.c:35
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:20
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:19
+msgid "New Window"
+msgstr "Nové okno"
+
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:26
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:25
+#: src/kgx-window.ui:144
+msgid "New Tab"
+msgstr "Nová karta"
+
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:3
+#: src/kgx-application.h:44
 msgid "Terminal"
 msgstr "Terminál"
 
-#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:8
-msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
-msgstr ""
-"příkaz;výzva;cmd;command;prompt;commandline;cli;spustit;spouštění;shell;"
-"terminál;kgx;"
-
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:441
-#: src/kgx-window.c:609
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:9
+#: src/kgx-application.c:514 src/kgx-window.c:512
 msgid "Terminal Emulator"
 msgstr "Emulátor terminálu"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:11
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr ""
 "Jednoduchý, uživatelsky přívětivý emulátor terminálu pro uživatelské "
 "prostředí GNOME."
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:22
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:22
 msgid "Terminal window"
 msgstr "Terminálové okno"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:52
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:52
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -73,70 +80,170 @@ msgstr "Nové okno"
 
 #: src/help-overlay.ui:26
 msgctxt "shortcut window"
-msgid "New Tab"
-msgstr "Nová karta"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
 msgid "Terminal"
 msgstr "Terminál"
 
-#: src/help-overlay.ui:39
+#: src/help-overlay.ui:32
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Hledat"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Copy"
 msgstr "Zkopírovat"
 
-#: src/help-overlay.ui:53
+#: src/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Paste"
 msgstr "Vložit"
 
-#. Translators: This is the name of the timeout that looks for programs
-#. running in the terminal
-#: src/kgx-application.c:267
-msgid "child watcher"
-msgstr "sledování potomků"
+#: src/help-overlay.ui:53
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Karty"
+
+#: src/help-overlay.ui:59
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Nová karta"
+
+#: src/help-overlay.ui:66
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Zavřít kartu"
+
+#: src/help-overlay.ui:73
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Následující karta"
+
+#: src/help-overlay.ui:80
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Předchozí karta"
+
+#: src/help-overlay.ui:87
+msgctxt "shortcut window"
+msgid "Switch to Tab"
+msgstr "Přepnout na kartu"
 
 #. Translators: The leading # is intentional, the initial %s is the
-#. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:413
+#. version of KGX itself, the latter format is the VTE version
+#: src/kgx-application.c:486
 #, c-format
-msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
-msgstr "# King’s Cross %s using VTE %u.%u.%u %s\n"
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s používá VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:425 src/kgx-window.c:601
+#. Translators: %s is the year range
+#: src/kgx-application.c:498 src/kgx-window.c:500
 #, c-format
-msgid "Copyright © %s Zander Brown"
-msgstr "Copyright © %s Zander Brown"
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:545
+#: src/kgx-application.c:516
+msgid "GPL 3.0 or later"
+msgstr "GPL 3.0 nebo novější"
+
+#: src/kgx-application.c:647
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Provést argument této volby jako příkaz uvnitř terminálu"
 
-#: src/kgx-application.c:554
+#: src/kgx-application.c:656
 msgid "Set the working directory"
 msgstr "Nastavit pracovní složku"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:556
+#: src/kgx-application.c:658
 msgid "DIRNAME"
 msgstr "SLOŽKA"
 
-#: src/kgx-application.c:564
+#: src/kgx-application.c:666
 msgid "Wait until the child exits (TODO)"
-msgstr "Počkat, dokud potomek neskončí (DODĚLAT)"
+msgstr "Počkat, dokud potomek neskončí (NENÍ HOTOVÉ)"
 
-#: src/kgx-terminal.c:413
+#: src/kgx-application.c:675
+msgid "Set the initial window title"
+msgstr "Nastavit oknu počáteční titulek"
+
+#: src/kgx-application.c:684
+msgid "ADVANCED: Set the shell to launch"
+msgstr "POKROČILÉ: Nastavit shell, který se má spustit"
+
+#: src/kgx-application.c:693
+msgid "ADVANCED: Set the scrollback length"
+msgstr "POKROČILÉ: Nastavit délku historie pro posuv zpět"
+
+#: src/kgx-close-dialog.c:52
+msgid "Close Window?"
+msgstr "Zavřít okno?"
+
+#: src/kgx-close-dialog.c:53
+msgid ""
+"Some commands are still running, closing this window will kill them and may "
+"lead to unexpected outcomes"
+msgstr ""
+"Některé příkazy doposud běží. Zavřením tohoto okna je zabijete, což může vést "
+"k neočekávaným důsledkům."
+
+#: src/kgx-close-dialog.c:58
+msgid "Close Tab?"
+msgstr "Zavřít kartu?"
+
+#: src/kgx-close-dialog.c:59
+msgid ""
+"Some commands are still running, closing this tab will kill them and may "
+"lead to unexpected outcomes"
+msgstr ""
+"Některé příkazy doposud běží. Zavřením této karty je zabijete, což může vést "
+"k neočekávaným důsledkům."
+
+#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:675
+msgid "_Cancel"
+msgstr "_Zrušit"
+
+#: src/kgx-close-dialog.ui:32
+msgid "C_lose"
+msgstr "Zavří_t"
+
+#: src/kgx-pages.ui:46
+msgid "_Detach Tab"
+msgstr "O_dpoutat kartu"
+
+#: src/kgx-pages.ui:52
+msgid "_Close"
+msgstr "_Zavřít"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:119
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Jen ke čtení</b> — příkaz skončil s kódem %i"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:128
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Jen ke čtení</b> — příkaz skončil"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:160
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Selhalo spuštění</b> — %s"
+
+#: src/kgx-tab.c:1182
+msgid "Command completed"
+msgstr "Příkaz byl dokončen"
+
+#: src/kgx-terminal.c:667
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Vkládáte příkaz, který běží pod administrátorským účtem"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:416
+#: src/kgx-terminal.c:670
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -145,26 +252,22 @@ msgstr ""
 "Ujistěte se, že víte, co přesně příkaz dělá:\n"
 "%s"
 
-#: src/kgx-terminal.c:421 src/kgx-close-dialog.ui:56
-msgid "_Cancel"
-msgstr "_Zrušit"
-
-#: src/kgx-terminal.c:424 src/menus.ui:24
+#: src/kgx-terminal.c:678 src/menus.ui:24
 msgid "_Paste"
 msgstr "V_ložit"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:608
+#: src/kgx-window.c:506
 msgid "translator-credits"
 msgstr "Marek Černocký <marek@manet.cz>"
 
-#. Translators: "by King’s Cross" here is meaning
-#. author or creator of 'Terminal'
-#: src/kgx-window.c:616
-msgid "Terminal (King’s Cross)"
-msgstr "Terminál (King’s Cross)"
+#. Translators: Don’t attempt to translate KGX,
+#. * treat it as a proper noun
+#: src/kgx-window.c:510
+msgid "KGX Terminal Emulator"
+msgstr "Emulátor terminálu KGX"
 
-#: src/kgx-window.c:681
+#: src/kgx-window.c:605
 msgid "_About Terminal"
 msgstr "O Terminálu"
 
@@ -196,17 +299,13 @@ msgstr "O aplikaci King’s Cross"
 msgid "About this program"
 msgstr "O této aplikaci"
 
-#: src/kgx-window.ui:110
+#: src/kgx-window.ui:108
 msgid "Find in terminal"
 msgstr "Hledat v terminálu"
 
-#: src/kgx-window.ui:128
+#: src/kgx-window.ui:126
 msgid "Menu"
 msgstr "Nabídka"
-
-#: src/kgx-window.ui:146
-msgid "New Tab"
-msgstr "Nová karta"
 
 #: src/menus.ui:7
 msgid "_Open Link"
@@ -228,26 +327,15 @@ msgstr "_Vybrat vše"
 msgid "Show in _Files"
 msgstr "Zobrazit v _Souborech"
 
-#: src/menus.ui:45
-msgid "_Close"
-msgstr "_Zavřít"
+#: nautilus/kgx-nautilus-menu-item.c:120
+msgid "Open in T_erminal"
+msgstr "Otevřít v T_erminálu"
 
-#: src/menus.ui:49
-msgid "_Detach"
-msgstr "O_dpoutat"
+#: nautilus/kgx-nautilus-menu-item.c:122
+msgid "Op_en in King’s Cross"
+msgstr "Ot_evřít v King’s Cross"
 
-#: src/kgx-close-dialog.ui:6
-msgid "Close Terminal"
-msgstr "Zavření terminálu"
+#: nautilus/kgx-nautilus-menu-item.c:124
+msgid "Start a terminal session for this location"
+msgstr "Spustit terminálové sezení pro toto umístění"
 
-#: src/kgx-close-dialog.ui:25
-msgid ""
-"Some commands are still running, closing this terminal will kill them and "
-"may lead to unexpected outcomes"
-msgstr ""
-"Některé příkazy doposud běží. Zavřením terminálu je zabijete, což může vést k "
-"neočekávaným důsledkům."
-
-#: src/kgx-close-dialog.ui:64
-msgid "_OK"
-msgstr "_Budiž"
