@@ -12,6 +12,8 @@ StartupNotify=true
 DBusActivatable=true
 X-GNOME-UsesNotifications=true
 Actions=new-window;new-tab;
+# Translators: Do NOT translate or transliterate this text (these are enum types)!
+X-Purism-FormFactor=Workstation;Mobile;
 
 [Desktop Action new-window]
 Exec=kgx
