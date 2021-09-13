@@ -1,13 +1,13 @@
 # Danish translation for kgx.
 # Copyright (C) 2019 kgx's COPYRIGHT HOLDER
 # This file is distributed under the same license as the kgx package.
-# scootergrisen, 2019-2020.
+# scootergrisen, 2019-2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2020-05-28 23:21+0000\n"
-"PO-Revision-Date: 2020-10-10 00:00+0200\n"
+"POT-Creation-Date: 2021-03-20 13:09+0000\n"
+"PO-Revision-Date: 2021-04-24 00:00+0200\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -18,28 +18,37 @@ msgstr ""
 
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:440
-#: src/kgx-window.c:630 src/kgx-window.ui:98 src/main.c:38
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:512
+#: src/kgx-window.c:520 src/kgx-window.c:553 src/kgx-window.ui:101
+#: src/main.c:37
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.zbrown.KingsCross.desktop.in:9
-#| msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr "kommando;prompt;cmd;kommandolinje;kør;skal;terminal;kgx;kings cross;"
 
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3 src/main.c:35
+#: data/org.gnome.zbrown.KingsCross.desktop.in:20
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:19
+#| msgctxt "shortcut window"
+#| msgid "New Window"
+msgid "New Window"
+msgstr "Nyt vindue"
+
+#: data/org.gnome.zbrown.KingsCross.desktop.in:26
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:25 src/kgx-window.ui:145
+msgid "New Tab"
+msgstr "Nyt faneblad"
+
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3 src/kgx-window.c:518
+#: src/kgx-window.c:551 src/main.c:35
 msgid "Terminal"
 msgstr "Terminal"
 
-#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:8
-msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
-msgstr "kommando;prompt;cmd;kommandolinje;kør;skal;terminal;rdg;"
-
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:442
-#: src/kgx-window.c:621
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:514
+#: src/kgx-window.c:512
 msgid "Terminal Emulator"
 msgstr "Terminalemulator"
 
@@ -67,70 +76,190 @@ msgstr "Nyt vindue"
 
 #: src/help-overlay.ui:26
 msgctxt "shortcut window"
-msgid "New Tab"
-msgstr "Nyt faneblad"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
 msgid "Terminal"
 msgstr "Terminal"
 
-#: src/help-overlay.ui:39
+#: src/help-overlay.ui:32
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Find"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Copy"
 msgstr "Kopiér"
 
-#: src/help-overlay.ui:53
+#: src/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Paste"
 msgstr "Indsæt"
 
-#. Translators: This is the name of the timeout that looks for programs
-#. running in the terminal
-#: src/kgx-application.c:269
-msgid "child watcher"
-msgstr "underprogramovervåger"
+#: src/help-overlay.ui:53
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Faneblade"
+
+#: src/help-overlay.ui:59
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Nyt faneblad"
+
+#: src/help-overlay.ui:66
+#| msgid "Close Terminal"
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Luk faneblad"
+
+#: src/help-overlay.ui:73
+#| msgctxt "shortcut window"
+#| msgid "New Tab"
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Næste faneblad"
+
+#: src/help-overlay.ui:80
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Forrige faneblad"
+
+#: src/help-overlay.ui:87
+msgctxt "shortcut window"
+msgid "Switch to Tab"
+msgstr "Skift til faneblad"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:414
+#: src/kgx-application.c:486
 #, c-format
 msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgstr "# King’s Cross %s bruger VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:426 src/kgx-window.c:613
+#. Translators: %s is the year range
+#: src/kgx-application.c:498 src/kgx-window.c:500
 #, c-format
-msgid "Copyright © %s Zander Brown"
-msgstr "Ophavsret © %s Zander Brown"
+#| msgid "Zander Brown"
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:546
+#: src/kgx-application.c:516
+msgid "GPL 3.0 or later"
+msgstr "GPL 3.0 eller senere"
+
+#: src/kgx-application.c:647
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Udfør argumentet til valgmuligheden i terminalen"
 
-#: src/kgx-application.c:555
+#: src/kgx-application.c:656
 msgid "Set the working directory"
 msgstr "Indstil arbejdsmappen"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:557
+#: src/kgx-application.c:658
 msgid "DIRNAME"
 msgstr "MAPPENAVN"
 
-#: src/kgx-application.c:565
+#: src/kgx-application.c:666
 msgid "Wait until the child exits (TODO)"
 msgstr "Vent indtil underprogrammet afslutter (TODO)"
 
-#: src/kgx-terminal.c:413
+# scootergrisen: tjek at det er oversat godt
+#: src/kgx-application.c:675
+msgid "Set the initial window title"
+msgstr "Indstil den indledende vinduestitel"
+
+# scootergrisen: tjek at det er oversat godt
+#: src/kgx-application.c:684
+msgid "ADVANCED: Set the shell to launch"
+msgstr "AVANCERET: Indstil den skal der skal startes"
+
+# scootergrisen: tjek at det er oversat godt
+#: src/kgx-application.c:693
+msgid "ADVANCED: Set the scrollback length"
+msgstr "AVANCERET: Indstil længden for tilbagerulning"
+
+#: src/kgx-close-dialog.c:52
+#| msgctxt "shortcut window"
+#| msgid "New Window"
+msgid "Close Window?"
+msgstr "Luk vindue?"
+
+# scootergrisen: tjek om der skal tilføjes punktum i slutningen af kilden
+#: src/kgx-close-dialog.c:53
+#| msgid ""
+#| "Some commands are still running, closing this terminal will kill them and "
+#| "may lead to unexpected outcomes"
+msgid ""
+"Some commands are still running, closing this window will kill them and may "
+"lead to unexpected outcomes"
+msgstr ""
+"Nogle kommandoer kører stadigvæk. De dræbes hvis vinduet lukkes, hvilket "
+"kan føre til uventede resultater."
+
+#: src/kgx-close-dialog.c:58
+#| msgid "Close Terminal"
+msgid "Close Tab?"
+msgstr "Luk faneblad?"
+
+# scootergrisen: tjek om der skal tilføjes punktum i slutningen af kilden
+#: src/kgx-close-dialog.c:59
+#| msgid ""
+#| "Some commands are still running, closing this terminal will kill them and "
+#| "may lead to unexpected outcomes"
+msgid ""
+"Some commands are still running, closing this tab will kill them and may "
+"lead to unexpected outcomes"
+msgstr ""
+"Nogle kommandoer kører stadigvæk. De dræbes hvis fanebladet lukkes, hvilket "
+"kan føre til uventede resultater."
+
+#: src/kgx-close-dialog.ui:23 src/kgx-terminal.c:675
+msgid "_Cancel"
+msgstr "_Annullér"
+
+#: src/kgx-close-dialog.ui:31
+#| msgid "_Close"
+msgid "C_lose"
+msgstr "_Luk"
+
+#: src/kgx-pages.ui:41
+#| msgid "_Detach"
+msgid "_Detach Tab"
+msgstr "_Løsriv faneblad"
+
+#: src/kgx-pages.ui:47
+msgid "_Close"
+msgstr "_Luk"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:119
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Skrivebeskyttet</b> — Kommandoen afsluttede med koden %i"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:128
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Skrivebeskyttet</b> — Kommandoen afsluttede"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:160
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Kunne ikke starte</b> — %s"
+
+#: src/kgx-tab.c:1192
+msgid "Command completed"
+msgstr "Kommando fuldført"
+
+#: src/kgx-terminal.c:667
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Du er ved at indsætte en kommando, der kører som en administrator"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:416
+#: src/kgx-terminal.c:670
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -139,30 +268,27 @@ msgstr ""
 "Sørg for, at du ved hvad kommandoen gør:\n"
 "%s"
 
-#: src/kgx-terminal.c:421 src/kgx-close-dialog.ui:56
-msgid "_Cancel"
-msgstr "_Annullér"
-
-#: src/kgx-terminal.c:424 src/menus.ui:24
+#: src/kgx-terminal.c:678 src/menus.ui:24
 msgid "_Paste"
 msgstr "_Indsæt"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:620
+#: src/kgx-window.c:506
 msgid "translator-credits"
 msgstr "scootergrisen"
 
-#. Translators: "by King’s Cross" here is meaning
-#. author or creator of 'Terminal'
-#: src/kgx-window.c:628
-#| msgid ""
-#| "Terminal\n"
-#| "by King’s Cross"
-msgid "Terminal (King’s Cross)"
-msgstr "Terminal (King’s Cross)"
+# scootergrisen: er ikke sikker på hvordan strengen skal oversættes
+# scootergrisen: måske "KGX-terminalemulator"
+# scootergrisen: måske "KGX Terminalemulator"
+# scootergrisen: måske "KGX Terminal Emulator"
+#. Translators: Don’t attempt to translate KGX,
+#. * treat it as a proper noun
+#: src/kgx-window.c:510
+#| msgid "Terminal Emulator"
+msgid "KGX Terminal Emulator"
+msgstr "KGX-terminalemulator"
 
-#: src/kgx-window.c:693
-#| msgid "Terminal"
+#: src/kgx-window.c:613
 msgid "_About Terminal"
 msgstr "_Om Terminal"
 
@@ -196,17 +322,13 @@ msgstr "Om programmet"
 
 # scootergrisen: tjek om "Find in terminal" skal være "Søg in terminal"
 # scootergrisen: tjek om "Find in terminal" skal være "Find in terminal"
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:109
 msgid "Find in terminal"
 msgstr "Find i terminal"
 
-#: src/kgx-window.ui:124
+#: src/kgx-window.ui:127
 msgid "Menu"
 msgstr "Menu"
-
-#: src/kgx-window.ui:142
-msgid "New Tab"
-msgstr "Nyt faneblad"
 
 #: src/menus.ui:7
 msgid "_Open Link"
@@ -228,27 +350,17 @@ msgstr "_Markér alt"
 msgid "Show in _Files"
 msgstr "Vis i _Filer"
 
-#: src/menus.ui:45
-msgid "_Close"
-msgstr "_Luk"
+#: nautilus/kgx-nautilus-menu-item.c:120
+#| msgid "Find in terminal"
+msgid "Open in T_erminal"
+msgstr "Åbn i _Terminal"
 
-#: src/menus.ui:49
-msgid "_Detach"
-msgstr "_Løsriv"
+#: nautilus/kgx-nautilus-menu-item.c:122
+#| msgid "King’s Cross"
+msgid "Op_en in King’s Cross"
+msgstr "_Åbn i King’s Cross"
 
-#: src/kgx-close-dialog.ui:6
-#| msgid "Terminal"
-msgid "Close Terminal"
-msgstr "Luk Terminal"
-
-#: src/kgx-close-dialog.ui:25
-msgid ""
-"Some commands are still running, closing this terminal will kill them and "
-"may lead to unexpected outcomes"
-msgstr ""
-"Nogle kommandoer kører stadigvæk. De dræbes hvis terminalen lukkes, hvilket "
-"kan føre til uventede resultater."
-
-#: src/kgx-close-dialog.ui:64
-msgid "_OK"
-msgstr "_OK"
+# scootergrisen: tjek at oversættelsen af "for this location" er god
+#: nautilus/kgx-nautilus-menu-item.c:124
+msgid "Start a terminal session for this location"
+msgstr "Start en terminalsession på denne placering"
