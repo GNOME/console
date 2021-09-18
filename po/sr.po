@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-02-17 17:38+0000\n"
-"PO-Revision-Date: 2021-02-23 06:35+0200\n"
+"POT-Creation-Date: 2021-06-14 11:32+0000\n"
+"PO-Revision-Date: 2021-09-18 21:06+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: српски <gnome-sr@googlegroups.org>\n"
 "Language: sr\n"
@@ -19,44 +19,52 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. Translators: This is a train station, see README.md for more info
-#: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:442
-#: src/kgx-window.c:651 src/kgx-window.ui:102 src/main.c:38
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:4
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:8
+#: src/kgx-application.c:512 src/kgx-application.h:46 src/kgx-window.ui:100
 msgid "King’s Cross"
 msgstr "Краљевски Крст"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.zbrown.KingsCross.desktop.in:9
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:9
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
 "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;команда;"
 "наредба;линија;цмд;командлајн;покрени;шел;шкољка;терминал;кгџ;краљев крст;"
 
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3 src/main.c:35
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:20
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:19
+#| msgctxt "shortcut window"
+#| msgid "New Window"
+msgid "New Window"
+msgstr "Нови прозор"
+
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:26
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:25
+#: src/kgx-window.ui:144
+msgid "New Tab"
+msgstr "Нови језичак"
+
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:3
+#: src/kgx-application.h:44
 msgid "Terminal"
 msgstr "Терминал"
 
-#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:8
-msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
-msgstr ""
-"command;prompt;cmd;commandline;run;shell;terminal;kgx;команда;наредба;линија;"
-"цмд;командлајн;покрени;шел;шкољка;терминал;кгџ;"
-
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:444
-#: src/kgx-window.c:642
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:9
+#: src/kgx-application.c:514 src/kgx-window.c:512
 msgid "Terminal Emulator"
 msgstr "Опонашавач терминала"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:11
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr "Једноставан опонашавач терминала за Гномову радну површ."
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:22
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:22
 msgid "Terminal window"
 msgstr "Прозор терминала"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:52
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:52
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -72,89 +80,155 @@ msgstr "Нови прозор"
 
 #: src/help-overlay.ui:26
 msgctxt "shortcut window"
-msgid "New Tab"
-msgstr "Нови језичак"
-
-#: src/help-overlay.ui:33
-#| msgid "Close Terminal"
-msgctxt "shortcut window"
-msgid "Close Tab"
-msgstr "Затвори језичак"
-
-#: src/help-overlay.ui:40
-msgctxt "shortcut window"
 msgid "Terminal"
 msgstr "Терминал"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:32
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Пронађи"
 
-#: src/help-overlay.ui:53
+#: src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Copy"
 msgstr "Копирај"
 
-#: src/help-overlay.ui:60
+#: src/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Paste"
 msgstr "Убаци"
 
-#. Translators: This is the name of the timeout that looks for programs
-#. running in the terminal
-#: src/kgx-application.c:267
-msgid "child watcher"
-msgstr "надзорник деце"
+#: src/help-overlay.ui:53
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Језичци"
+
+#: src/help-overlay.ui:59
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Нови језичак"
+
+#: src/help-overlay.ui:66
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Затвори језичак"
+
+#: src/help-overlay.ui:73
+#| msgctxt "shortcut window"
+#| msgid "New Tab"
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Следећи језичак"
+
+#: src/help-overlay.ui:80
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Претходни језичак"
+
+#: src/help-overlay.ui:87
+msgctxt "shortcut window"
+msgid "Switch to Tab"
+msgstr "Пређи на језичак"
 
 #. Translators: The leading # is intentional, the initial %s is the
-#. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:416
+#. version of KGX itself, the latter format is the VTE version
+#: src/kgx-application.c:486
 #, c-format
-msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
+#| msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# Краљев Крст %s уз помоћ VTE-а %u.%u.%u %s\n"
 
-#: src/kgx-application.c:428 src/kgx-window.c:634
+#. Translators: %s is the year range
+#: src/kgx-application.c:498 src/kgx-window.c:500
 #, c-format
-msgid "Copyright © %s Zander Brown"
-msgstr "Право на копирање © %s Zander Brown"
+#| msgid "Zander Brown"
+msgid "© %s Zander Brown"
+msgstr "© %s Зандер Браун"
 
-#: src/kgx-application.c:548
+#: src/kgx-application.c:516
+msgid "GPL 3.0 or later"
+msgstr "ОЈЛ 3.0 или каснија"
+
+#: src/kgx-application.c:647
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Изврши аргумент ове опције унутар терминала"
 
-#: src/kgx-application.c:557
+#: src/kgx-application.c:656
 msgid "Set the working directory"
 msgstr "Подеси радни директоријум"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:559
+#: src/kgx-application.c:658
 msgid "DIRNAME"
 msgstr "ДИРНАЗИВ"
 
-#: src/kgx-application.c:567
+#: src/kgx-application.c:666
 msgid "Wait until the child exits (TODO)"
 msgstr "Сачекај да дете изађе (УРАДИТИ)"
 
-#: src/kgx-close-dialog.ui:6
-msgid "Close Terminal"
-msgstr "Затвори терминал"
+#: src/kgx-application.c:675
+msgid "Set the initial window title"
+msgstr "Постави почетни наслов прозора"
 
-#: src/kgx-close-dialog.ui:25
+#: src/kgx-application.c:684
+msgid "ADVANCED: Set the shell to launch"
+msgstr "НАПРЕДНО: Постави шкољку за покретање"
+
+#: src/kgx-application.c:693
+msgid "ADVANCED: Set the scrollback length"
+msgstr "НАПРЕДНО: Постави дужину премицања"
+
+#: src/kgx-close-dialog.c:52
+#| msgctxt "shortcut window"
+#| msgid "New Window"
+msgid "Close Window?"
+msgstr "Да затворим прозор?"
+
+#: src/kgx-close-dialog.c:53
+#| msgid ""
+#| "Some commands are still running, closing this terminal will kill them and "
+#| "may lead to unexpected outcomes"
 msgid ""
-"Some commands are still running, closing this terminal will kill them and "
-"may lead to unexpected outcomes"
+"Some commands are still running, closing this window will kill them and may "
+"lead to unexpected outcomes"
 msgstr ""
-"Неке наредбе су и даље покренуте, затварањем терминала их окончавате и то "
-"може довести до неочекиваних исхода."
+"Неке наредбе су и даље покренуте, затварање овог прозора ће их окончати и то "
+"може довести до неочекиваних исхода"
 
-#: src/kgx-close-dialog.ui:56 src/kgx-terminal.c:421
+#: src/kgx-close-dialog.c:58
+#| msgctxt "shortcut window"
+#| msgid "Close Tab"
+msgid "Close Tab?"
+msgstr "Да затворим језичак?"
+
+#: src/kgx-close-dialog.c:59
+#| msgid ""
+#| "Some commands are still running, closing this terminal will kill them and "
+#| "may lead to unexpected outcomes"
+msgid ""
+"Some commands are still running, closing this tab will kill them and may "
+"lead to unexpected outcomes"
+msgstr ""
+"Неке наредбе су и даље покренуте, затварање овог језичка ће их окончати и то "
+"може довести до неочекиваних исхода"
+
+#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:675
 msgid "_Cancel"
 msgstr "_Откажи"
 
-#: src/kgx-close-dialog.ui:64
-msgid "_OK"
-msgstr "У _реду"
+#: src/kgx-close-dialog.ui:32
+#| msgid "_Close"
+msgid "C_lose"
+msgstr "_Затвори"
+
+#: src/kgx-pages.ui:46
+#| msgid "_Detach"
+msgid "_Detach Tab"
+msgstr "_Откачи језичак"
+
+#: src/kgx-pages.ui:52
+msgid "_Close"
+msgstr "_Затвори"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
@@ -176,41 +250,42 @@ msgstr "<b>Само за читање</b> — Наредба је изашла"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Нисам успео да покренем</b> — %s"
 
-#: src/kgx-tab.c:914
+#: src/kgx-tab.c:1182
 msgid "Command completed"
 msgstr "Наредба је обављена"
 
-#: src/kgx-terminal.c:413
+#: src/kgx-terminal.c:667
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Убацујете наредбу која се извршава са админ правима"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:416
+#: src/kgx-terminal.c:670
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
 "%s"
 msgstr "Постарајте се да разумете шта наредба ради: %s"
 
-#: src/kgx-terminal.c:424 src/menus.ui:24
+#: src/kgx-terminal.c:678 src/menus.ui:24
 msgid "_Paste"
 msgstr "_Убаци"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:641
+#: src/kgx-window.c:506
 msgid "translator-credits"
 msgstr ""
 "Марко М. Костић <marko.m.kostic@gmail.com>\n"
 "\n"
 "https://гном.срб — превод Гнома на српски језик"
 
-#. Translators: "by King’s Cross" here is meaning
-#. author or creator of 'Terminal'
-#: src/kgx-window.c:649
-msgid "Terminal (King’s Cross)"
-msgstr "Терминал (Краљевски Крст)"
+#. Translators: Don’t attempt to translate KGX,
+#. * treat it as a proper noun
+#: src/kgx-window.c:510
+#| msgid "Terminal Emulator"
+msgid "KGX Terminal Emulator"
+msgstr "Опонашавач терминала – KGX"
 
-#: src/kgx-window.c:715
+#: src/kgx-window.c:605
 msgid "_About Terminal"
 msgstr "О Термин_алу"
 
@@ -242,17 +317,13 @@ msgstr "О Кр_аљевом Крсту"
 msgid "About this program"
 msgstr "О овом програму"
 
-#: src/kgx-window.ui:110
+#: src/kgx-window.ui:108
 msgid "Find in terminal"
 msgstr "Нађи у терминалу"
 
-#: src/kgx-window.ui:128
+#: src/kgx-window.ui:126
 msgid "Menu"
 msgstr "Мени"
-
-#: src/kgx-window.ui:146
-msgid "New Tab"
-msgstr "Нови језичак"
 
 #: src/menus.ui:7
 msgid "_Open Link"
@@ -274,10 +345,36 @@ msgstr "Изабери _све"
 msgid "Show in _Files"
 msgstr "Прикажи у _Датотекама"
 
-#: src/menus.ui:45
-msgid "_Close"
-msgstr "_Затвори"
+#: nautilus/kgx-nautilus-menu-item.c:120
+#| msgid "Find in terminal"
+msgid "Open in T_erminal"
+msgstr "Отвори у _терминалу"
 
-#: src/menus.ui:49
-msgid "_Detach"
-msgstr "О_ткачи"
+#: nautilus/kgx-nautilus-menu-item.c:122
+#| msgid "King’s Cross"
+msgid "Op_en in King’s Cross"
+msgstr "Отвори у _Краљевском Крсту"
+
+#: nautilus/kgx-nautilus-menu-item.c:124
+msgid "Start a terminal session for this location"
+msgstr "Покрени сесију терминала за ово место"
+
+#~ msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
+#~ msgstr ""
+#~ "command;prompt;cmd;commandline;run;shell;terminal;kgx;команда;наредба;"
+#~ "линија;цмд;командлајн;покрени;шел;шкољка;терминал;кгџ;"
+
+#~ msgid "child watcher"
+#~ msgstr "надзорник деце"
+
+#~ msgid "Copyright © %s Zander Brown"
+#~ msgstr "Право на копирање © %s Zander Brown"
+
+#~ msgid "Close Terminal"
+#~ msgstr "Затвори терминал"
+
+#~ msgid "_OK"
+#~ msgstr "У _реду"
+
+#~ msgid "Terminal (King’s Cross)"
+#~ msgstr "Терминал (Краљевски Крст)"
