@@ -103,7 +103,7 @@ kgx_terminal_set_theme (KgxTerminal *self,
                         gboolean     opaque)
 {
   GdkRGBA fg;
-  GdkRGBA bg = (GdkRGBA) { 0.05, 0.05, 0.05, 0.96 };
+  GdkRGBA bg;
 
   // Workings of GDK_RGBA prevent this being static
   GdkRGBA palette[16] = {
@@ -129,19 +129,26 @@ kgx_terminal_set_theme (KgxTerminal *self,
     return;
   }
 
-  if (opaque) {
-    bg.alpha = 1.0;
-  }
-
   switch (theme) {
     case KGX_THEME_HACKER:
       fg = (GdkRGBA) { 0.1, 1.0, 0.1, 1.0};
+      bg = (GdkRGBA) { 0.05, 0.05, 0.05, 0.96 };
+      break;
+    case KGX_THEME_DAY:
+      fg = (GdkRGBA) { 0.0, 0.0, 0.0, 0.0 };
+      bg = (GdkRGBA) { 1.0, 1.0, 1.0, 0.96 };
       break;
     case KGX_THEME_NIGHT:
     default:
       fg = (GdkRGBA) { 1.0, 1.0, 1.0, 1.0};
+      bg = (GdkRGBA) { 0.05, 0.05, 0.05, 0.96 };
       break;
   }
+
+  if (opaque) {
+    bg.alpha = 1.0;
+  }
+
 
   vte_terminal_set_colors (VTE_TERMINAL (self), &fg, &bg, palette, 16);
 
