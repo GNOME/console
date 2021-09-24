@@ -5,6 +5,7 @@ project('kgx', 'c', version: '0.2.1',
     'buildtype=debugoptimized',
     'c_std=gnu11',
     'cpp_std=gnu++17',
+    'vte:werror=false',
   ],
 )
 
