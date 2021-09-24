@@ -6,6 +6,10 @@ project('kgx', 'c', version: '0.2.1',
     'c_std=gnu11',
     'cpp_std=gnu++17',
     'vte:werror=false',
+    'vte:gir=false',
+    'vte:vapi=false',
+    'handy:vapi=false',
+    'handy:introspection=disabled',
   ],
 )
 
