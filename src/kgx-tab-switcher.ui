@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <template class="KgxTabSwitcher" parent="GtkBin">
+    <child>
+      <object class="HdyFlap" id="flap">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <property name="swipe-to-open">False</property>
+        <property name="swipe-to-close">False</property>
+        <property name="modal">True</property>
+        <property name="flap-position">end</property>
+        <property name="fold-policy">always</property>
+        <signal name="notify::reveal-flap" handler="reveal_flap_cb" swapped="true"/>
+        <child type="flap">
+          <object class="GtkOverlay">
+            <property name="visible">True</property>
+            <style>
+              <class name="tab-switcher"/>
+            </style>
+            <child>
+              <object class="GtkScrolledWindow">
+                <property name="visible">True</property>
+                <property name="hscrollbar-policy">never</property>
+                <property name="propagate-natural-width">True</property>
+                <property name="propagate-natural-height">True</property>
+                <style>
+                  <class name="view"/>
+                </style>
+                <child>
+                  <object class="GtkListBox" id="list">
+                    <property name="visible">True</property>
+                    <property name="selection-mode">single</property>
+                    <signal name="row-selected" handler="row_selected_cb" swapped="true"/>
+                    <signal name="row-activated" handler="row_activated_cb" swapped="true"/>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child type="overlay">
+              <object class="GtkButton">
+                <property name="visible">True</property>
+                <property name="halign">center</property>
+                <property name="valign">start</property>
+                <property name="can-focus">False</property>
+                <signal name="clicked" handler="collapse_cb" swapped="true" />
+                <style>
+                  <class name="collapse-button"/>
+                </style>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="pixel-size">24</property>
+                    <property name="icon-name">tab-switcher-collapse-symbolic</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child type="overlay">
+              <object class="GtkButton">
+                <property name="visible">True</property>
+                <property name="halign">end</property>
+                <property name="valign">end</property>
+                <signal name="clicked" handler="new_tab_cb" swapped="true" />
+                <style>
+                  <class name="suggested-action"/>
+                  <class name="new-tab-button"/>
+                </style>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="icon-name">list-add-symbolic</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

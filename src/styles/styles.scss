@@ -122,3 +122,96 @@ box.tab:drop(active) {
     font-size: 6pt;
   }
 }
+
+@mixin flat_round_button() {
+  background: none;
+  border: none;
+  box-shadow: none;
+  -gtk-icon-shadow: none;
+  text-shadow: none;
+  border-radius: 99px;
+  -gtk-outline-radius: 99px;
+  color: inherit;
+  padding: 0;
+
+  &:hover {
+    background: gtkalpha(currentColor, .15);
+
+    &:active {
+      background: gtkalpha(black, .2);
+    }
+  }
+}
+
+.tab-switcher {
+  min-height: 180px;
+
+  list {
+    padding-top: 48px;
+    padding-bottom: 84px;
+
+    row {
+      background: none;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      outline-color: transparent;
+      color: themecolor(theme_text_color);
+
+      .content {
+        min-height: 40px;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 2px;
+        padding: 3px;
+        border-radius: 5px;
+        -gtk-outline-radius: 5px;
+        border: none;
+        box-shadow: none;
+        transition: 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+        &:dir(ltr) { padding-left: 11px; }
+        &:dir(rtl) { padding-right: 11px; }
+      }
+
+      &:selected .content {
+        background: gtkalpha(currentColor, .06);
+      }
+
+      &:hover .content {
+        background: gtkalpha(currentColor, .1);
+      }
+
+      &:active .content {
+        background: gtkalpha(black, .15);
+      }
+
+      &.needs-attention {
+        // Blue 4 | Blue 1
+        color: if($variant == 'light', #1c71d8, #99c1f1);
+      }
+
+      .close-btn,
+      .indicator-btn {
+        @include flat_round_button();
+        min-width: 36px;
+        min-height: 36px;
+      }
+    }
+  }
+
+  .collapse-button {
+    @include flat_round_button();
+    padding: 6px 30px;
+    margin: 6px;
+  }
+
+  .new-tab-button {
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 100%;
+    -gtk-outline-radius: 100%;
+    padding: 0;
+    margin: 18px;
+  }
+}
