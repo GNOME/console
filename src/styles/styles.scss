@@ -113,3 +113,12 @@ box.tab:drop(active) {
     font-family: Monospace;
   }
 }
+
+.tab-button label {
+  font-weight: 800;
+  font-size: 8pt;
+
+  &.small {
+    font-size: 6pt;
+  }
+}

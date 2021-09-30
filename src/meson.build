@@ -9,6 +9,8 @@ kgx_sources = [
   'kgx-terminal.h',
   'kgx-tab.c',
   'kgx-tab.h',
+  'kgx-tab-button.c',
+  'kgx-tab-button.h',
   'kgx-simple-tab.c',
   'kgx-simple-tab.h',
   'kgx-pages.c',
