@@ -10,6 +10,7 @@ src/kgx-close-dialog.ui
 src/kgx-pages.ui
 src/kgx-simple-tab.c
 src/kgx-tab.c
+src/kgx-tab-button.ui
 src/kgx-terminal.c
 src/kgx-window.c
 src/kgx-window.ui
