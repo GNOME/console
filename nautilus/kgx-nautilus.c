@@ -107,7 +107,7 @@ kgx_nautilus_init (KgxNautilus *self)
 {
   g_autoptr (GDesktopAppInfo) info = NULL;
   
-  info = g_desktop_app_info_new (KGX_APPLICATION_ID);
+  info = g_desktop_app_info_new (KGX_APPLICATION_ID ".desktop");
 
   if (G_LIKELY (info)) {
     self->kgx = G_APP_INFO (g_steal_pointer (&info));
