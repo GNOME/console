@@ -851,7 +851,7 @@ kgx_pages_get_children (KgxPages *self)
 {
   KgxPagesPrivate *priv;
   GPtrArray *children;
-  uint n;
+  guint n;
 
   g_return_val_if_fail (KGX_IS_PAGES (self), KGX_NONE);
 
@@ -861,7 +861,7 @@ kgx_pages_get_children (KgxPages *self)
 
   n = hdy_tab_view_get_n_pages (HDY_TAB_VIEW (priv->view));
 
-  for (uint i = 0; i < n; i++) {
+  for (guint i = 0; i < n; i++) {
     HdyTabPage *page = hdy_tab_view_get_nth_page (HDY_TAB_VIEW (priv->view), i);
     g_autoptr (GPtrArray) page_children = NULL;
 
