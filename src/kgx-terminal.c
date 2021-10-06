@@ -477,24 +477,25 @@ select_all_activated (GSimpleAction *action,
   vte_terminal_select_all (VTE_TERMINAL (data));
 }
 
+
 static void
 show_in_files_activated (GSimpleAction *action,
                          GVariant      *parameter,
                          gpointer       data)
 {
-  GDBusProxy      *proxy;
-  GVariant        *retval;
-  GVariantBuilder *builder;
-  GError          *error = NULL;
-  KgxTerminal     *term = KGX_TERMINAL (data);
-  const gchar     *uri = NULL;
-  const gchar     *method;
+  KgxTerminal *self = KGX_TERMINAL (data);
+  g_autoptr (GDBusProxy) proxy = NULL;
+  g_autoptr (GVariant) retval = NULL;
+  g_autoptr (GVariantBuilder) builder = NULL;
+  g_autoptr (GError) error = NULL;
+  const char *uri = NULL;
+  const char *method;
 
-  uri = vte_terminal_get_current_file_uri (VTE_TERMINAL (term));
+  uri = vte_terminal_get_current_file_uri (VTE_TERMINAL (self));
   method = "ShowItems";
 
   if (uri == NULL) {
-    uri = vte_terminal_get_current_directory_uri (VTE_TERMINAL (term));
+    uri = vte_terminal_get_current_directory_uri (VTE_TERMINAL (self));
     method = "ShowFolders";
   }
 
@@ -527,15 +528,10 @@ show_in_files_activated (GSimpleAction *action,
                                    G_DBUS_CALL_FLAGS_NONE,
                                    -1, NULL, &error);
 
-  g_variant_builder_unref (builder);
-  g_object_unref (proxy);
-
   if (!retval) {
     g_warning ("win.show-in-files: D-Bus call failed %s", error->message);
     return;
   }
-
-  g_variant_unref (retval);
 }
 
 
