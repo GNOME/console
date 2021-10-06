@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-06-13 02:28+0000\n"
-"PO-Revision-Date: 2021-06-13 11:21+0300\n"
+"POT-Creation-Date: 2021-10-04 23:53+0000\n"
+"PO-Revision-Date: 2021-10-06 15:05+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -21,7 +21,7 @@ msgstr ""
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in.in:4
 #: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:8
-#: src/kgx-application.c:512 src/kgx-window.ui:100
+#: src/kgx-application.c:512 src/kgx-application.h:46 src/kgx-window.ui:104
 msgid "King’s Cross"
 msgstr "Кінгс-кросс"
 
@@ -33,23 +33,24 @@ msgstr ""
 "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;команда;"
 "запит;командний рядок;запустити;запуск;оболонка;термінал;кінгс-кросс;"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:20
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:19
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:22
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:21
 msgid "New Window"
 msgstr "Нове вікно"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:26
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:25
-#: src/kgx-window.ui:144
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:28
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:27
+#: src/kgx-window.ui:157
 msgid "New Tab"
 msgstr "Нова вкладка"
 
 #: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:3
+#: src/kgx-application.h:44
 msgid "Terminal"
 msgstr "Термінал"
 
 #: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:9
-#: src/kgx-application.c:514 src/kgx-window.c:512
+#: src/kgx-application.c:514 src/kgx-window.c:530
 msgid "Terminal Emulator"
 msgstr "Емулятор термінала"
 
@@ -57,11 +58,11 @@ msgstr "Емулятор термінала"
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr "Простий зручний для користувачів термінал для стільниці GNOME."
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:22
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:30
 msgid "Terminal window"
 msgstr "Вікно термінала"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:52
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:60
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -129,12 +130,11 @@ msgstr "Перемкнутися на вкладку"
 #. version of KGX itself, the latter format is the VTE version
 #: src/kgx-application.c:486
 #, c-format
-#| msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s з використанням VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:498 src/kgx-window.c:500
+#: src/kgx-application.c:498 src/kgx-window.c:518
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© Zander Brown, %s"
@@ -206,11 +206,11 @@ msgstr "_Скасувати"
 msgid "C_lose"
 msgstr "_Закрити"
 
-#: src/kgx-pages.ui:46
+#: src/kgx-pages.ui:47
 msgid "_Detach Tab"
 msgstr "_Від'єднати вкладку"
 
-#: src/kgx-pages.ui:52
+#: src/kgx-pages.ui:53
 msgid "_Close"
 msgstr "_Закрити"
 
@@ -238,6 +238,11 @@ msgstr "<b>Не вдалося запустити</b> – %s"
 msgid "Command completed"
 msgstr "Виконання команди завершено"
 
+#: src/kgx-tab-button.ui:5
+msgid "View open tabs"
+msgstr ""
+"Переглянути відкриті вкладки"
+
 #: src/kgx-terminal.c:667
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Ви вставили команду, яку слід запускати від імені адміністратора"
@@ -257,17 +262,17 @@ msgid "_Paste"
 msgstr "Вст_авити"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:506
+#: src/kgx-window.c:524
 msgid "translator-credits"
 msgstr "Юрій Чорноіван <yurchor@ukr.net>"
 
 #. Translators: Don’t attempt to translate KGX,
 #. * treat it as a proper noun
-#: src/kgx-window.c:510
+#: src/kgx-window.c:528
 msgid "KGX Terminal Emulator"
 msgstr "Емулятор термінала KGX"
 
-#: src/kgx-window.c:605
+#: src/kgx-window.c:638
 msgid "_About Terminal"
 msgstr "_Про «Термінал»"
 
@@ -299,11 +304,11 @@ msgstr "_Про «Кінгс-кросс»"
 msgid "About this program"
 msgstr "Про цю програму"
 
-#: src/kgx-window.ui:108
+#: src/kgx-window.ui:112
 msgid "Find in terminal"
 msgstr "Знайти у терміналі"
 
-#: src/kgx-window.ui:126
+#: src/kgx-window.ui:130
 msgid "Menu"
 msgstr "Меню"
 
