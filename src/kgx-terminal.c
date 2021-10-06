@@ -209,19 +209,9 @@ kgx_terminal_get_property (GObject    *object,
 }
 
 
-static void
-context_menu (GtkWidget *widget,
-              int        x,
-              int        y,
-              GdkEvent  *event)
+static gboolean
+have_url_under_pointer (KgxTerminal *self, GdkEvent *event)
 {
-  KgxTerminal *self = KGX_TERMINAL (widget);
-  GAction *act;
-  GtkWidget *menu;
-  GtkApplication *app;
-  GMenu *model;
-  GdkRectangle rect = {x, y, 1, 1};
-  gboolean value;
   g_autofree char *hyperlink = NULL;
   g_autofree char *match = NULL;
   int match_id;
@@ -245,7 +235,25 @@ context_menu (GtkWidget *widget,
     }
   }
 
-  value = self->current_url != NULL;
+  return self->current_url != NULL;
+}
+
+
+static void
+context_menu (GtkWidget *widget,
+              int        x,
+              int        y,
+              GdkEvent  *event)
+{
+  KgxTerminal *self = KGX_TERMINAL (widget);
+  GAction *act;
+  GtkWidget *menu;
+  GtkApplication *app;
+  GMenu *model;
+  GdkRectangle rect = {x, y, 1, 1};
+  gboolean value;
+
+  value = have_url_under_pointer (self, event);
 
   act = g_action_map_lookup_action (G_ACTION_MAP (self->actions), "open-link");
   g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
@@ -270,17 +278,47 @@ kgx_terminal_popup_menu (GtkWidget *self)
 }
 
 
-static gboolean
-kgx_terminal_button_press_event (GtkWidget *self, GdkEventButton *event)
+static void
+open_link (KgxTerminal *self, guint32 timestamp)
 {
+  g_autoptr (GError) error = NULL;
+
+  gtk_show_uri_on_window (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
+                          self->current_url,
+                          timestamp,
+                          &error);
+
+  if (error) {
+    g_warning ("Failed to open link %s", error->message);
+  }
+}
+
+
+static gboolean
+kgx_terminal_button_press_event (GtkWidget *widget, GdkEventButton *event)
+{
+  KgxTerminal *self = KGX_TERMINAL (widget);
+  GdkModifierType state;
+
   if (gdk_event_triggers_context_menu ((GdkEvent *) event) &&
       event->type == GDK_BUTTON_PRESS) {
-    context_menu (self, event->x, event->y, (GdkEvent *) event);
+    context_menu (widget, event->x, event->y, (GdkEvent *) event);
 
     return TRUE;
   }
 
-  return GTK_WIDGET_CLASS (kgx_terminal_parent_class)->button_press_event (self, event);
+  state = event->state & gtk_accelerator_get_default_mod_mask ();
+
+  if (have_url_under_pointer (self, (GdkEvent *) event) &&
+      (event->button == 1 || event->button == 2) &&
+      state & GDK_CONTROL_MASK) {
+    open_link (self, event->time);
+
+    return GDK_EVENT_STOP;
+  }
+
+  return GTK_WIDGET_CLASS (kgx_terminal_parent_class)->button_press_event (widget,
+                                                                           event);
 }
 
 
@@ -356,26 +394,15 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
                                         G_TYPE_UINT);
 }
 
+
 static void
 open_link_activated (GSimpleAction *action,
                      GVariant      *parameter,
                      gpointer       data)
 {
-  GError *error = NULL;
-  KgxTerminal *self = KGX_TERMINAL (data);
-  guint32 timestamp;
-
-  timestamp = GDK_CURRENT_TIME;
-
-  gtk_show_uri_on_window (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
-                          self->current_url,
-                          timestamp,
-                          &error);
-
-  if (error) {
-    g_warning ("Failed to open link %s", error->message);
-  }
+  open_link (KGX_TERMINAL (data), GDK_CURRENT_TIME);
 }
+
 
 static void
 copy_link_activated (GSimpleAction *action,
