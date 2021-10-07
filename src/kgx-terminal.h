@@ -27,8 +27,9 @@ G_BEGIN_DECLS
 
 /**
  * KgxTheme:
- * @KGX_THEME_NIGHT: The default, public, theme
+ * @KGX_THEME_NIGHT: The default dark theme
  * @KGX_THEME_HACKER: Little easter egg theme
+ * @KGX_THEME_DAY: Day theme
  *
  * Until [meson#1687](https://github.com/mesonbuild/meson/issues/1687) is
  * resolved this enum must be manually kept in sync with
@@ -40,6 +41,7 @@ typedef enum /*< enum,prefix=KGX >*/
 {
   KGX_THEME_NIGHT = 1,  /*< nick=night >*/
   KGX_THEME_HACKER = 2, /*< nick=hacker >*/
+  KGX_THEME_DAY = 4,    /*< nick=day >*/
 } KgxTheme;
 
 /**

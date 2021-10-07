@@ -72,6 +72,27 @@
         <child>
           <object class="GtkModelButton">
             <property name="visible">True</property>
+            <property name="text" translatable="yes">N_ight</property>
+            <property name="action-name">app.theme</property>
+            <property name="action-target">'night'</property>
+          </object>
+        </child>    
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="text" translatable="yes">_Day</property>
+            <property name="action-name">app.theme</property>
+            <property name="action-target">'day'</property>
+          </object>
+        </child>    
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
             <property name="text" translatable="yes">_Keyboard Shortcuts</property>
             <property name="action-name">win.show-help-overlay</property>
           </object>

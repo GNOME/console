@@ -3,6 +3,7 @@
   <enum id="@KGX_APPLICATION_ID_RAW@.Theme">
     <value nick="night" value="1"/>
     <value nick="hacker" value="2"/>
+    <value nick="day" value="4"/>
   </enum>
 
   <schema id="@KGX_APPLICATION_ID_RAW@" path="@KGX_APPLICATION_PATH_RAW@">

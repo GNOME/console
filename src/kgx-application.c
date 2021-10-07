@@ -53,7 +53,6 @@ enum {
   PROP_SCROLLBACK_LINES,
   LAST_PROP
 };
-
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 
 
@@ -61,9 +60,28 @@ static void
 kgx_application_set_theme (KgxApplication *self,
                            KgxTheme        theme)
 {
+  GtkSettings *settings;
+
   g_return_if_fail (KGX_IS_APPLICATION (self));
 
   self->theme = theme;
+
+  settings = gtk_settings_get_default ();
+
+  switch (theme) {
+    case KGX_THEME_NIGHT:
+    case KGX_THEME_HACKER:
+      g_object_set (G_OBJECT (settings),
+                    "gtk-application-prefer-dark-theme", TRUE,
+                    NULL);
+      break;
+    case KGX_THEME_DAY:
+    default:
+      g_object_set (G_OBJECT (settings),
+                    "gtk-application-prefer-dark-theme", FALSE,
+                    NULL);
+      break;
+  }
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_THEME]);
 }
@@ -287,7 +305,6 @@ static void
 kgx_application_startup (GApplication *app)
 {
   KgxApplication *self = KGX_APPLICATION (app);
-  GtkSettings    *gtk_settings;
   GtkCssProvider *provider;
   const char *const new_window_accels[] = { "<shift><primary>n", NULL };
   const char *const new_tab_accels[] = { "<shift><primary>t", NULL };
@@ -307,12 +324,6 @@ kgx_application_startup (GApplication *app)
   G_APPLICATION_CLASS (kgx_application_parent_class)->startup (app);
 
   hdy_init ();
-
-  gtk_settings = gtk_settings_get_default ();
-
-  g_object_set (G_OBJECT (gtk_settings),
-                "gtk-application-prefer-dark-theme", TRUE,
-                NULL);
 
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "win.new-window", new_window_accels);
@@ -799,12 +810,18 @@ static GActionEntry app_entries[] = {
 static void
 kgx_application_init (KgxApplication *self)
 {
+  GPropertyAction *pact;
+
   g_application_add_main_option_entries (G_APPLICATION (self), entries);
 
   g_action_map_add_action_entries (G_ACTION_MAP (self),
                                    app_entries,
                                    G_N_ELEMENTS (app_entries),
                                    self);
+
+
+  pact = g_property_action_new ("theme", G_OBJECT (self), "theme");
+  g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (pact));
 
   self->desktop_interface = g_settings_new (DESKTOP_INTERFACE_SETTINGS_SCHEMA);
 
