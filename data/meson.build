@@ -31,11 +31,11 @@ endif
 
 appstream_file = i18n.merge_file(
             input: configure_file(
-                           input: 'org.gnome.zbrown.KingsCross.appdata.xml.in.in',
+                           input: 'org.gnome.zbrown.KingsCross.metainfo.xml.in.in',
                            output: '@BASENAME@',
                            configuration: conf
                    ),
-           output: app_id + '.appdata.xml',
+           output: app_id + '.metainfo.xml',
            po_dir: '../po',
           install: true,
       install_dir: datadir / 'metainfo'
