@@ -706,7 +706,7 @@ kgx_window_init (KgxWindow *self)
  * Get the working directory path of this window, used to open new windows
  * in the same directory
  *
- * Since: 0.5.0
+ * Since: 0.4.0
  */
 GFile *
 kgx_window_get_working_dir (KgxWindow *self)

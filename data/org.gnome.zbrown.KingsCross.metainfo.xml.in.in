@@ -31,6 +31,21 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="0.4.0" date="2021-10-24">
+      <description>
+        <p>More Terminals! KGX can now host multiple sessions per window with nifty tabs on larger screens and a neat list for those on the narrower side</p>
+        <p>Also in this release:</p>
+        <ul>
+          <li>🎨 Shiny new — yet familiar — icon</li>
+          <li>📜 More scrollback</li>
+          <li>🔗 Mouse users can ctrl-click links</li>
+          <li>🗄️ Handy little Files (Nautilus) extension to launch KGX in a folder</li>
+          <li>🤦‍♀️ Assorted bugs have been wrangled and scrolling behaviour (especially on touch) has been improved</li>
+          <li>💬 GNOME l10n teams have added many more translations</li>
+          <li>🪛 Adventurous users can set a custom shell (such as fish) and tweak the scrollback size</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.2.1" date="2019-10-06">
       <description>
         <p>Use HdySearchBar to match the behaviour in other apps.</p>

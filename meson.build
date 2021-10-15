@@ -1,4 +1,4 @@
-project('kgx', 'c', version: '0.2.1',
+project('kgx', 'c', version: '0.4.0',
   meson_version: '>= 0.49.0',
   default_options: [
     'werror=true',

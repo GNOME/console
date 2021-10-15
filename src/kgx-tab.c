@@ -712,7 +712,7 @@ kgx_tab_class_init (KgxTabClass *klass)
    *
    * Stability: Private
    *
-   * Since: 0.5.0
+   * Since: 0.4.0
    */
   pspecs[PROP_SCROLLBACK_LINES] =
     g_param_spec_int64 ("scrollback-lines", "Scrollback Lines", "Size of the scrollback",
