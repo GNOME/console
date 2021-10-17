@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-06-14 11:32+0000\n"
-"PO-Revision-Date: 2021-09-06 14:59+0200\n"
+"POT-Creation-Date: 2021-10-04 23:53+0000\n"
+"PO-Revision-Date: 2021-10-17 16:44+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -21,7 +21,7 @@ msgstr ""
 #. Translators: This is a train station, see README.md for more info
 #: data/org.gnome.zbrown.KingsCross.desktop.in.in:4
 #: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:8
-#: src/kgx-application.c:512 src/kgx-application.h:46 src/kgx-window.ui:100
+#: src/kgx-application.c:512 src/kgx-application.h:46 src/kgx-window.ui:104
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
@@ -33,14 +33,14 @@ msgstr ""
 "příkaz;výzva;cmd;command;prompt;commandline;cli;spustit;spouštění;shell;"
 "terminál;kgx;kings cross;"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:20
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:19
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:22
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:21
 msgid "New Window"
 msgstr "Nové okno"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:26
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:25
-#: src/kgx-window.ui:144
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:28
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:27
+#: src/kgx-window.ui:157
 msgid "New Tab"
 msgstr "Nová karta"
 
@@ -50,7 +50,7 @@ msgid "Terminal"
 msgstr "Terminál"
 
 #: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:9
-#: src/kgx-application.c:514 src/kgx-window.c:512
+#: src/kgx-application.c:514 src/kgx-window.c:530
 msgid "Terminal Emulator"
 msgstr "Emulátor terminálu"
 
@@ -60,11 +60,11 @@ msgstr ""
 "Jednoduchý, uživatelsky přívětivý emulátor terminálu pro uživatelské "
 "prostředí GNOME."
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:22
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:30
 msgid "Terminal window"
 msgstr "Terminálové okno"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:52
+#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:60
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -136,7 +136,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s používá VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:498 src/kgx-window.c:500
+#: src/kgx-application.c:498 src/kgx-window.c:518
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -183,8 +183,8 @@ msgid ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
 msgstr ""
-"Některé příkazy doposud běží. Zavřením tohoto okna je zabijete, což může vést "
-"k neočekávaným důsledkům."
+"Některé příkazy doposud běží. Zavřením tohoto okna je zabijete, což může "
+"vést k neočekávaným důsledkům."
 
 #: src/kgx-close-dialog.c:58
 msgid "Close Tab?"
@@ -206,11 +206,11 @@ msgstr "_Zrušit"
 msgid "C_lose"
 msgstr "Zavří_t"
 
-#: src/kgx-pages.ui:46
+#: src/kgx-pages.ui:47
 msgid "_Detach Tab"
 msgstr "O_dpoutat kartu"
 
-#: src/kgx-pages.ui:52
+#: src/kgx-pages.ui:53
 msgid "_Close"
 msgstr "_Zavřít"
 
@@ -238,6 +238,10 @@ msgstr "<b>Selhalo spuštění</b> — %s"
 msgid "Command completed"
 msgstr "Příkaz byl dokončen"
 
+#: src/kgx-tab-button.ui:5
+msgid "View open tabs"
+msgstr "Zobrazit otevřené karty"
+
 #: src/kgx-terminal.c:667
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Vkládáte příkaz, který běží pod administrátorským účtem"
@@ -257,17 +261,17 @@ msgid "_Paste"
 msgstr "V_ložit"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:506
+#: src/kgx-window.c:524
 msgid "translator-credits"
 msgstr "Marek Černocký <marek@manet.cz>"
 
 #. Translators: Don’t attempt to translate KGX,
 #. * treat it as a proper noun
-#: src/kgx-window.c:510
+#: src/kgx-window.c:528
 msgid "KGX Terminal Emulator"
 msgstr "Emulátor terminálu KGX"
 
-#: src/kgx-window.c:605
+#: src/kgx-window.c:638
 msgid "_About Terminal"
 msgstr "O Terminálu"
 
@@ -299,11 +303,11 @@ msgstr "O aplikaci King’s Cross"
 msgid "About this program"
 msgstr "O této aplikaci"
 
-#: src/kgx-window.ui:108
+#: src/kgx-window.ui:112
 msgid "Find in terminal"
 msgstr "Hledat v terminálu"
 
-#: src/kgx-window.ui:126
+#: src/kgx-window.ui:130
 msgid "Menu"
 msgstr "Nabídka"
 
@@ -338,4 +342,3 @@ msgstr "Ot_evřít v King’s Cross"
 #: nautilus/kgx-nautilus-menu-item.c:124
 msgid "Start a terminal session for this location"
 msgstr "Spustit terminálové sezení pro toto umístění"
-
