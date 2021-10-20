@@ -1,0 +1,343 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
+"POT-Creation-Date: 2021-10-17 14:45+0000\n"
+"PO-Revision-Date: 2021-10-20 18:52+0200\n"
+"Last-Translator: Ícar N. S. <icar.nin@protonmail.com>\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0\n"
+
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:3
+#: src/kgx-application.h:44
+msgid "Terminal"
+msgstr "Terminal"
+
+#. Translators: Search terms to find this application. Do NOT translate or
+#. localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:8
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:9
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
+msgstr ""
+"ordre;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;rei;creu;"
+"commanda;"
+
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:21
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:22
+msgid "New Window"
+msgstr "Finestra nova"
+
+#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:27
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:28 src/kgx-window.ui:157
+msgid "New Tab"
+msgstr "Pestanya nova"
+
+#. Translators: This is a train station, see README.md for more info
+#: data/org.gnome.zbrown.KingsCross.desktop.in.in:4
+#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:8
+#: src/kgx-application.c:512 src/kgx-application.h:46 src/kgx-window.ui:104
+msgid "King’s Cross"
+msgstr "King's Cross"
+
+#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:9
+#: src/kgx-application.c:514 src/kgx-window.c:530
+msgid "Terminal Emulator"
+msgstr "Emulador de terminal"
+
+#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:11
+msgid "A simple user-friendly terminal emulator for the GNOME desktop."
+msgstr ""
+"Un emulador de terminal fàcil d'utilitzar per a l'escriptori del GNOME."
+
+#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:30
+msgid "Terminal window"
+msgstr "Finestra de terminal"
+
+#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:75
+msgid "Zander Brown"
+msgstr "Zander Brown"
+
+#: src/help-overlay.ui:13
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Aplicació"
+
+#: src/help-overlay.ui:19
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Finestra nova"
+
+#: src/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Terminal"
+
+#: src/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Cerca"
+
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Copia"
+
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Enganxa"
+
+#: src/help-overlay.ui:53
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Pestanyes"
+
+#: src/help-overlay.ui:59
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Pestanya nova"
+
+#: src/help-overlay.ui:66
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Tanca la pestanya"
+
+#: src/help-overlay.ui:73
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Pestanya següent"
+
+#: src/help-overlay.ui:80
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Pestanya anterior"
+
+#: src/help-overlay.ui:87
+msgctxt "shortcut window"
+msgid "Switch to Tab"
+msgstr "Canvia a la pestanya"
+
+#. Translators: The leading # is intentional, the initial %s is the
+#. version of KGX itself, the latter format is the VTE version
+#: src/kgx-application.c:486
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s usant el VTE %u.%u.%u %s\n"
+
+#. Translators: %s is the year range
+#: src/kgx-application.c:498 src/kgx-window.c:518
+#, c-format
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
+
+#: src/kgx-application.c:516
+msgid "GPL 3.0 or later"
+msgstr "GPL 3.0 o posterior"
+
+#: src/kgx-application.c:647
+msgid "Execute the argument to this option inside the terminal"
+msgstr "Executa l'argument d'aquesta opció dins del terminal"
+
+#: src/kgx-application.c:656
+msgid "Set the working directory"
+msgstr "Estableix el directori de treball"
+
+#. Translators: Placeholder of for a given directory
+#: src/kgx-application.c:658
+msgid "DIRNAME"
+msgstr "NOMDIRECTORI"
+
+#: src/kgx-application.c:666
+msgid "Wait until the child exits (TODO)"
+msgstr "Espera fins que el fill surti (TODO)"
+
+#: src/kgx-application.c:675
+msgid "Set the initial window title"
+msgstr "Estableix el títol inicial de la finestra"
+
+#: src/kgx-application.c:684
+msgid "ADVANCED: Set the shell to launch"
+msgstr "AVANÇAT: Estableix l'intèrpret d'ordres a llançar"
+
+#: src/kgx-application.c:693
+msgid "ADVANCED: Set the scrollback length"
+msgstr "AVANÇAT: Estableix la longitud del desplaçament enrere"
+
+#: src/kgx-close-dialog.c:52
+msgid "Close Window?"
+msgstr "Voleu tancar la finestra?"
+
+#: src/kgx-close-dialog.c:53
+msgid ""
+"Some commands are still running, closing this window will kill them and may "
+"lead to unexpected outcomes"
+msgstr ""
+"Algunes ordres encara s'estan executant, el tancament d'aquesta finestra "
+"les matarà i pot produir resultats inesperats"
+
+#: src/kgx-close-dialog.c:58
+msgid "Close Tab?"
+msgstr "Voleu tancar la pestanya?"
+
+#: src/kgx-close-dialog.c:59
+msgid ""
+"Some commands are still running, closing this tab will kill them and may "
+"lead to unexpected outcomes"
+msgstr ""
+"Algunes ordres encara s'estan executant, el tancament d'aquesta pestanya "
+"les matarà i pot produir resultats inesperats"
+
+#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:698
+msgid "_Cancel"
+msgstr "_Cancel·la"
+
+#: src/kgx-close-dialog.ui:32
+msgid "C_lose"
+msgstr "_Tanca"
+
+#: src/kgx-pages.ui:47
+msgid "_Detach Tab"
+msgstr "_Desacobla la pestanya"
+
+#: src/kgx-pages.ui:53
+msgid "_Close"
+msgstr "_Tanca"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:119
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Només de lectura</b> - L'ordre ha sortit amb el codi %i"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:128
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Només de lectura</b> - L'ordre ha sortit"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:160
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Ha fallat iniciar-ho</b> - %s"
+
+#: src/kgx-tab.c:1182
+msgid "Command completed"
+msgstr "Ordre completada"
+
+#: src/kgx-tab-button.ui:5
+msgid "View open tabs"
+msgstr "Mostra les pestanyes obertes"
+
+#: src/kgx-terminal.c:690
+msgid "You are pasting a command that runs as an administrator"
+msgstr "Esteu enganxant una ordre que s'executa com a administrador"
+
+#. TRANSLATORS: %s is the command being pasted
+#: src/kgx-terminal.c:693
+#, c-format
+msgid ""
+"Make sure you know what the command does:\n"
+"%s"
+msgstr ""
+"Assegura't de saber què fa l'ordre:\n"
+"%s"
+
+#: src/kgx-terminal.c:701 src/menus.ui:24
+msgid "_Paste"
+msgstr "_Enganxa"
+
+#. Translators: Credit yourself here
+#: src/kgx-window.c:524
+msgid "translator-credits"
+msgstr "Ícar N. S. <icar.nin@protonmail.com>"
+
+#. Translators: Don’t attempt to translate KGX,
+#. * treat it as a proper noun
+#: src/kgx-window.c:528
+msgid "KGX Terminal Emulator"
+msgstr "Emulador de terminal KGX"
+
+#: src/kgx-window.c:638
+msgid "_About Terminal"
+msgstr "_Quant al terminal"
+
+#: src/kgx-window.ui:20
+msgid "Shrink text"
+msgstr "Redueix el text"
+
+#: src/kgx-window.ui:33
+msgid "Reset size"
+msgstr "Restableix la mida"
+
+#: src/kgx-window.ui:46
+msgid "Enlarge text"
+msgstr "Augmenta el text"
+
+#: src/kgx-window.ui:63
+msgid "_New Window"
+msgstr "_Finestra nova"
+
+#: src/kgx-window.ui:75
+msgid "_Keyboard Shortcuts"
+msgstr "_Dreceres de teclat"
+
+#: src/kgx-window.ui:82
+msgid "_About King’s Cross"
+msgstr "_Sobre el King's Cross"
+
+#: src/kgx-window.ui:83
+msgid "About this program"
+msgstr "Sobre aquest programa"
+
+#: src/kgx-window.ui:112
+msgid "Find in terminal"
+msgstr "Cerca al terminal"
+
+#: src/kgx-window.ui:130
+msgid "Menu"
+msgstr "Menú"
+
+#: src/menus.ui:7
+msgid "_Open Link"
+msgstr "_Obre l'enllaç"
+
+#: src/menus.ui:12
+msgid "Copy _Link"
+msgstr "_Copia l'enllaç"
+
+#: src/menus.ui:19
+msgid "_Copy"
+msgstr "_Copia"
+
+#: src/menus.ui:29
+msgid "_Select All"
+msgstr "_Selecciona-ho tot"
+
+#: src/menus.ui:36
+msgid "Show in _Files"
+msgstr "_Mostra als fitxers"
+
+#: nautilus/kgx-nautilus-menu-item.c:120
+msgid "Open in T_erminal"
+msgstr "_Obre al terminal"
+
+#: nautilus/kgx-nautilus-menu-item.c:122
+msgid "Op_en in King’s Cross"
+msgstr "_Obre al King's Cross"
+
+#: nautilus/kgx-nautilus-menu-item.c:124
+msgid "Start a terminal session for this location"
+msgstr "Inicia una sessió de terminal per a aquesta ubicació"
