@@ -289,9 +289,10 @@ set_watcher (KgxApplication *self, gboolean focused)
 static void
 kgx_application_startup (GApplication *app)
 {
-  KgxApplication *self = KGX_APPLICATION (app);
-  GtkSettings    *gtk_settings;
-  GtkCssProvider *provider;
+  KgxApplication  *self = KGX_APPLICATION (app);
+  HdyStyleManager *style_manager;
+  GtkCssProvider  *provider;
+
   const char *const new_window_accels[] = { "<shift><primary>n", NULL };
   const char *const new_tab_accels[] = { "<shift><primary>t", NULL };
   const char *const close_tab_accels[] = { "<shift><primary>w", NULL };
@@ -311,11 +312,10 @@ kgx_application_startup (GApplication *app)
 
   hdy_init ();
 
-  gtk_settings = gtk_settings_get_default ();
+  style_manager = hdy_style_manager_get_default ();
 
-  g_object_set (G_OBJECT (gtk_settings),
-                "gtk-application-prefer-dark-theme", TRUE,
-                NULL);
+  hdy_style_manager_set_color_scheme (style_manager,
+                                      HDY_COLOR_SCHEME_PREFER_DARK);
 
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "win.new-window", new_window_accels);
