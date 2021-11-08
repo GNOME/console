@@ -28,6 +28,7 @@
  */
 
 #include <glib/gi18n.h>
+#include <handy.h>
 #include <vte/vte.h>
 #define PCRE2_CODE_UNIT_WIDTH 0
 #include <pcre2.h>
@@ -98,10 +99,9 @@ kgx_terminal_dispose (GObject *object)
 
 
 static void
-kgx_terminal_set_theme (KgxTerminal *self,
-                        KgxTheme     theme,
-                        gboolean     opaque)
+update_terminal_colors (KgxTerminal *self)
 {
+  KgxTheme resolved_theme;
   GdkRGBA fg;
   GdkRGBA bg;
 
@@ -125,32 +125,51 @@ kgx_terminal_set_theme (KgxTerminal *self,
     GDK_RGBA ("f6f5f4"), // Bright White
   };
 
-  if (self->theme == theme && self->opaque == opaque) {
-    return;
+  if (self->theme == KGX_THEME_AUTO) {
+    HdyStyleManager *manager = hdy_style_manager_get_default ();
+
+    if (hdy_style_manager_get_dark (manager)) {
+      resolved_theme = KGX_THEME_NIGHT;
+    } else {
+      resolved_theme = KGX_THEME_DAY;
+    }
+  } else {
+    resolved_theme = self->theme;
   }
 
-  switch (theme) {
+  switch (resolved_theme) {
     case KGX_THEME_HACKER:
       fg = (GdkRGBA) { 0.1, 1.0, 0.1, 1.0};
       bg = (GdkRGBA) { 0.05, 0.05, 0.05, 0.96 };
       break;
     case KGX_THEME_DAY:
       fg = (GdkRGBA) { 0.0, 0.0, 0.0, 0.0 };
-      bg = (GdkRGBA) { 1.0, 1.0, 1.0, 0.96 };
+      bg = (GdkRGBA) { 1.0, 1.0, 1.0, 1.0 };
       break;
     case KGX_THEME_NIGHT:
+    case KGX_THEME_AUTO:
     default:
       fg = (GdkRGBA) { 1.0, 1.0, 1.0, 1.0};
       bg = (GdkRGBA) { 0.05, 0.05, 0.05, 0.96 };
       break;
   }
 
-  if (opaque) {
+  if (self->opaque) {
     bg.alpha = 1.0;
   }
 
-
   vte_terminal_set_colors (VTE_TERMINAL (self), &fg, &bg, palette, 16);
+}
+
+
+static void
+kgx_terminal_set_theme (KgxTerminal *self,
+                        KgxTheme     theme,
+                        gboolean     opaque)
+{
+  if (self->theme == theme && self->opaque == opaque) {
+    return;
+  }
 
   if (self->theme != theme) {
     self->theme = theme;
@@ -161,7 +180,10 @@ kgx_terminal_set_theme (KgxTerminal *self,
     self->opaque = opaque;
     g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_OPAQUE]);
   }
+
+  update_terminal_colors (self);
 }
+
 
 static void
 kgx_terminal_set_property (GObject      *object,
@@ -608,12 +630,19 @@ size_changed (GtkWidget    *widget,
 
 
 static void
+dark_changed (KgxTerminal *self)
+{
+  if (self->theme == KGX_THEME_AUTO) {
+    update_terminal_colors (self);
+  }
+}
+
+
+static void
 kgx_terminal_init (KgxTerminal *self)
 {
   GAction *act;
   GtkGesture *gesture;
-
-  kgx_terminal_set_theme (self, KGX_THEME_NIGHT, FALSE);
 
   self->actions = G_ACTION_MAP (g_simple_action_group_new ());
   g_action_map_add_action_entries (self->actions,
@@ -674,6 +703,12 @@ kgx_terminal_init (KgxTerminal *self)
                                         self->match_id[i],
                                         "pointer");
   }
+
+  g_signal_connect_object (hdy_style_manager_get_default (),
+                           "notify::dark", G_CALLBACK (dark_changed),
+                           self, G_CONNECT_SWAPPED);
+
+  update_terminal_colors (self);
 }
 
 

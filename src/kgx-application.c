@@ -61,9 +61,27 @@ static void
 kgx_application_set_theme (KgxApplication *self,
                            KgxTheme        theme)
 {
+  HdyStyleManager *style_manager;
+
   g_return_if_fail (KGX_IS_APPLICATION (self));
 
   self->theme = theme;
+
+  style_manager = hdy_style_manager_get_default ();
+
+  switch (theme) {
+    case KGX_THEME_AUTO:
+      hdy_style_manager_set_color_scheme (style_manager, HDY_COLOR_SCHEME_PREFER_LIGHT);
+      break;
+    case KGX_THEME_DAY:
+      hdy_style_manager_set_color_scheme (style_manager, HDY_COLOR_SCHEME_FORCE_LIGHT);
+      break;
+    case KGX_THEME_NIGHT:
+    case KGX_THEME_HACKER:
+    default:
+      hdy_style_manager_set_color_scheme (style_manager, HDY_COLOR_SCHEME_FORCE_DARK);
+      break;
+  }
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_THEME]);
 }
@@ -308,8 +326,9 @@ update_styles (KgxApplication *self)
 static void
 kgx_application_startup (GApplication *app)
 {
-  KgxApplication  *self = KGX_APPLICATION (app);
-  HdyStyleManager *style_manager;
+  KgxApplication    *self = KGX_APPLICATION (app);
+  HdyStyleManager   *style_manager;
+  g_autoptr(GAction) settings_action;
 
   const char *const new_window_accels[] = { "<shift><primary>n", NULL };
   const char *const new_tab_accels[] = { "<shift><primary>t", NULL };
@@ -329,11 +348,6 @@ kgx_application_startup (GApplication *app)
   G_APPLICATION_CLASS (kgx_application_parent_class)->startup (app);
 
   hdy_init ();
-
-  style_manager = hdy_style_manager_get_default ();
-
-  hdy_style_manager_set_color_scheme (style_manager,
-                                      HDY_COLOR_SCHEME_PREFER_DARK);
 
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "win.new-window", new_window_accels);
@@ -359,6 +373,9 @@ kgx_application_startup (GApplication *app)
   g_settings_bind (self->settings, "font-scale", app, "font-scale", G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (self->settings, "scrollback-lines", app, "scrollback-lines", G_SETTINGS_BIND_DEFAULT);
 
+  settings_action = g_settings_create_action (self->settings, "theme");
+  g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (settings_action));
+
   self->provider = gtk_css_provider_new ();
   gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
                                              GTK_STYLE_PROVIDER (self->provider),
@@ -367,6 +384,7 @@ kgx_application_startup (GApplication *app)
                                               * priority for fallback styles? Yes*/
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
 
+  style_manager = hdy_style_manager_get_default ();
   g_signal_connect_swapped (style_manager, "notify::dark", G_CALLBACK (update_styles), self);
   g_signal_connect_swapped (style_manager, "notify::high-contrast", G_CALLBACK (update_styles), self);
   update_styles (self);

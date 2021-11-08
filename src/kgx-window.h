@@ -93,6 +93,7 @@ struct _KgxWindow
   GtkWidget            *header_bar;
   GtkWidget            *exit_info;
   GtkWidget            *exit_message;
+  GtkWidget            *theme_switcher;
   GtkWidget            *zoom_level;
   GtkWidget            *about_item;
   GtkWidget            *tab_bar;

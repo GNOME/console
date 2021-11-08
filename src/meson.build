@@ -15,6 +15,8 @@ kgx_sources = [
   'kgx-tab-switcher.h',
   'kgx-tab-switcher-row.c',
   'kgx-tab-switcher-row.h',
+  'kgx-theme-switcher.c',
+  'kgx-theme-switcher.h',
   'kgx-simple-tab.c',
   'kgx-simple-tab.h',
   'kgx-pages.c',

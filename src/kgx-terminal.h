@@ -27,6 +27,8 @@ G_BEGIN_DECLS
 
 /**
  * KgxTheme:
+ * @KGX_THEME_AUTO: Matches %KGX_THEME_DAY or %KGX_THEME_NIGHT depending on the
+ *     system preferences
  * @KGX_THEME_NIGHT: The default, public, theme
  * @KGX_THEME_DAY: Alternate, light theme
  * @KGX_THEME_HACKER: Little easter egg theme
@@ -39,6 +41,7 @@ G_BEGIN_DECLS
  */
 typedef enum /*< enum,prefix=KGX >*/
 {
+  KGX_THEME_AUTO = 0,   /*< nick=auto >*/
   KGX_THEME_NIGHT = 1,  /*< nick=night >*/
   KGX_THEME_DAY = 2,    /*< nick=day >*/
   KGX_THEME_HACKER = 3, /*< nick=hacker >*/

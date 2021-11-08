@@ -8,10 +8,16 @@
         <property name="margin">10</property>
         <property name="orientation">vertical</property>
         <child>
+          <object class="KgxThemeSwitcher" id="theme_switcher">
+            <property name="visible">True</property>
+            <property name="margin-bottom">12</property>
+          </object>
+        </child>
+        <child>
           <object class="GtkBox">
             <property name="visible">True</property>
             <property name="orientation">horizontal</property>
-            <property name="margin-bottom">10</property>
+            <property name="margin-bottom">6</property>
             <property name="homogeneous">True</property>
             <child>
               <object class="GtkButton">
@@ -55,6 +61,11 @@
             <style>
               <class name="linked"/>
             </style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
           </object>
         </child>
         <child>

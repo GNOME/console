@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="kgx">
   <enum id="@KGX_APPLICATION_ID_RAW@.Theme">
+    <value nick="auto" value="0"/>
     <value nick="night" value="1"/>
     <value nick="day" value="2"/>
     <value nick="hacker" value="3"/>

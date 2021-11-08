@@ -42,6 +42,7 @@
 #include "kgx-pages.h"
 #include "kgx-tab-button.h"
 #include "kgx-tab-switcher.h"
+#include "kgx-theme-switcher.h"
 
 G_DEFINE_TYPE (KgxWindow, kgx_window, HDY_TYPE_APPLICATION_WINDOW)
 
@@ -94,6 +95,10 @@ kgx_window_constructed (GObject *object)
   g_object_bind_property (application, "theme",
                           self->pages, "theme",
                           G_BINDING_SYNC_CREATE);
+  g_object_bind_property (application, "theme",
+                          self->theme_switcher, "theme",
+                          G_BINDING_SYNC_CREATE |
+                          G_BINDING_BIDIRECTIONAL);
 
   g_object_bind_property (application, "font",
                           self->pages, "font",
@@ -423,6 +428,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, header_bar);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_info);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_message);
+  gtk_widget_class_bind_template_child (widget_class, KgxWindow, theme_switcher);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, zoom_level);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, about_item);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, tab_bar);
@@ -631,6 +637,7 @@ kgx_window_init (KgxWindow *self)
 
   g_type_ensure (KGX_TYPE_TAB_BUTTON);
   g_type_ensure (KGX_TYPE_TAB_SWITCHER);
+  g_type_ensure (KGX_TYPE_THEME_SWITCHER);
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -644,8 +651,6 @@ kgx_window_init (KgxWindow *self)
                                    win_entries,
                                    G_N_ELEMENTS (win_entries),
                                    self);
-
-  self->theme = KGX_THEME_NIGHT;
 
   pact = g_property_action_new ("find",
                                 G_OBJECT (self->pages),

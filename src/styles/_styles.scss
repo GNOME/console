@@ -5,11 +5,13 @@
   background: transparent;
 
   &.root {
+    $variant: 'dark';
     $window_color: darken(#a51d2d, 15%);
     @import 'recoloring';
   }
 
   &.remote {
+    $variant: 'dark';
     $window_color: darken(#613583, 10%);
     @import 'recoloring';
   }
@@ -58,14 +60,19 @@
 
 .empty-state {
   /* Sync to KgxTerminal! */
-  $bg: rgb(0.05 * 255, 0.05 * 255, 0.05 * 255);
+  @if $variant == 'light' {
+    background: white;
+  } @else {
+    $bg: rgb(0.05 * 255, 0.05 * 255, 0.05 * 255);
 
-  background: transparentize($bg, 0.04);
-  color: gtkalpha(currentColor, .5);
+    background: transparentize($bg, 0.04);
 
-  window.opaque & {
-    background: $bg;
+    window.opaque & {
+      background: $bg;
+    }
   }
+
+  color: gtkalpha(currentColor, .5);
 }
 
 .exit-info {
@@ -213,5 +220,67 @@ box.tab:drop(active) {
     -gtk-outline-radius: 100%;
     padding: 0;
     margin: 18px;
+  }
+}
+
+themeswitcher {
+  $_light_bg: white;
+  $_light_fg: transparentize(black, .1);
+  $_dark_bg: #2e3436;
+  $_dark_fg: white;
+  $_selected_color: #3584e4;
+
+  /* Adapted from https://gitlab.gnome.org/GNOME/gnome-text-editor/-/blob/bf8c0c249f06a0be69e65aed3b786ba02a9f999e/src/TextEditor.css#L51 */
+  radiobutton {
+    -gtk-outline-radius: 100px;
+
+    radio {
+      -gtk-icon-source: none;
+      background: none;
+      box-shadow: none;
+      padding: 12px;
+      min-height: 24px;
+      min-width: 24px;
+      border: none;
+      outline-color: currentColor;
+
+      @if $high_contrast {
+        @if $variant == 'light' {
+          box-shadow: inset 0 0 0 1px transparentize(black, .3);
+        } @else {
+          box-shadow: inset 0 0 0 1px transparentize(white, .7);
+        }
+      } @else {
+        @if $variant == 'light' {
+          box-shadow: inset 0 0 0 1px transparentize(black, .8);
+        } @else {
+          box-shadow: 0 0 0 1px transparentize(black, .3);
+        }
+      }
+
+      &:checked {
+        box-shadow: inset 0 0 0 2px $_selected_color;
+        -gtk-icon-source: -gtk-icontheme("object-select-symbolic");
+      }
+    }
+
+    &.system radio {
+      color: $_light_fg;
+      background: linear-gradient(-45deg, $_dark_bg 49.99%, $_light_bg 50.01%);
+
+      &:checked {
+        background: linear-gradient(-45deg, #c0bfbc 49.99%, #f6f5f4 50.01%);
+      }
+    }
+
+    &.light radio {
+      color: $_light_fg;
+      background-color: $_light_bg;
+    }
+
+    &.dark radio {
+      color: $_dark_fg;
+      background-color: $_dark_bg;
+    }
   }
 }
