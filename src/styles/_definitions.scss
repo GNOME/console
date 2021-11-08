@@ -1,6 +1,3 @@
-$variant: 'dark';
-$high_contrast: false;
-
 /* Copy of Adwaita colors for _drawing.scss */
 
 $base_color: if($variant == 'light', #ffffff, lighten(desaturate(#241f31, 100%), 2%));

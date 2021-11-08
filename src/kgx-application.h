@@ -94,6 +94,8 @@ struct _KgxApplication
 
   guint                     timeout;
   int                       active;
+
+  GtkCssProvider           *provider;
 };
 
 G_DECLARE_FINAL_TYPE (KgxApplication, kgx_application, KGX, APPLICATION, GtkApplication)

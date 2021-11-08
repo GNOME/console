@@ -287,11 +287,29 @@ set_watcher (KgxApplication *self, gboolean focused)
 
 
 static void
+update_styles (KgxApplication *self)
+{
+  HdyStyleManager *style_manager = hdy_style_manager_get_default ();
+  gboolean dark = hdy_style_manager_get_dark (style_manager);
+  gboolean hc = hdy_style_manager_get_high_contrast (style_manager);
+
+  if (hc && dark) {
+    gtk_css_provider_load_from_resource (self->provider, KGX_APPLICATION_PATH "styles-hc-dark.css");
+  } else if (hc) {
+    gtk_css_provider_load_from_resource (self->provider, KGX_APPLICATION_PATH "styles-hc.css");
+  } else if (dark) {
+    gtk_css_provider_load_from_resource (self->provider, KGX_APPLICATION_PATH "styles-dark.css");
+  } else {
+    gtk_css_provider_load_from_resource (self->provider, KGX_APPLICATION_PATH "styles-light.css");
+  }
+}
+
+
+static void
 kgx_application_startup (GApplication *app)
 {
   KgxApplication  *self = KGX_APPLICATION (app);
   HdyStyleManager *style_manager;
-  GtkCssProvider  *provider;
 
   const char *const new_window_accels[] = { "<shift><primary>n", NULL };
   const char *const new_tab_accels[] = { "<shift><primary>t", NULL };
@@ -341,14 +359,17 @@ kgx_application_startup (GApplication *app)
   g_settings_bind (self->settings, "font-scale", app, "font-scale", G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (self->settings, "scrollback-lines", app, "scrollback-lines", G_SETTINGS_BIND_DEFAULT);
 
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, KGX_APPLICATION_PATH "styles.css");
+  self->provider = gtk_css_provider_new ();
   gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
-                                             GTK_STYLE_PROVIDER (provider),
+                                             GTK_STYLE_PROVIDER (self->provider),
                                              /* Is this stupid? Yes
                                               * Does it fix vte using the wrong
                                               * priority for fallback styles? Yes*/
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
+
+  g_signal_connect_swapped (style_manager, "notify::dark", G_CALLBACK (update_styles), self);
+  g_signal_connect_swapped (style_manager, "notify::high-contrast", G_CALLBACK (update_styles), self);
+  update_styles (self);
 
   set_watcher (KGX_APPLICATION (app), TRUE);
 }
