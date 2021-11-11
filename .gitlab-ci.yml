@@ -2,22 +2,11 @@ debian:
   image: debian:bullseye
   stage: build
   before_script:
-    - export DEBIAN_FRONTEND=noninteractive
     - apt -y update
-    - apt -y install wget ca-certificates gnupg sassc
-    - echo "deb http://ci.puri.sm/ scratch librem5" > /etc/apt/sources.list.d/ci.list
-    - wget -O- https://ci.puri.sm/ci-repo.key | apt-key add -
-    - echo "deb http://debug.mirrors.debian.org/debian-debug/ buster-debug main" > /etc/apt/sources.list.d/debug.list
-    - apt -y update
-    - apt -y upgrade
-    - apt -y build-dep .
+    - apt -y install gcc g++ gettext git libgnutls28-dev libgtk-3-dev libsystemd-dev libgtop2-dev meson sassc
   script:
-    - meson subprojects download
-    - dpkg-buildpackage -uc -us
-    - cp ../*.deb .
-  artifacts:
-    paths:
-      - "*.deb"
+    - meson --buildtype=release _build .
+    - ninja -C _build
 
 fedora:
   image: fedora:latest
