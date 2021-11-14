@@ -107,9 +107,10 @@ kgx_window_constructed (GObject *object)
                           self->pages, "scrollback-lines",
                           G_BINDING_SYNC_CREATE);
 
-  g_signal_connect (application,
-                    "notify::font-scale", G_CALLBACK (zoomed),
-                    self);
+  g_signal_connect_object (application,
+                           "notify::font-scale", G_CALLBACK (zoomed),
+                           self,
+                           0);
 
   update_zoom (self, KGX_APPLICATION (application));
 }
