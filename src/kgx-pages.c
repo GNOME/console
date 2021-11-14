@@ -658,7 +658,9 @@ kgx_pages_class_init (KgxPagesClass *klass)
 
   pspecs[PROP_ZOOM] =
     g_param_spec_double ("zoom", "Zoom", "Font scaling",
-                         0.5, 2.0, 1.0,
+                         KGX_FONT_SCALE_MIN,
+                         KGX_FONT_SCALE_MAX,
+                         KGX_FONT_SCALE_DEFAULT,
                          G_PARAM_READWRITE);
 
   pspecs[PROP_IS_ACTIVE] =
@@ -729,7 +731,7 @@ kgx_pages_init (KgxPages *self)
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
 
   priv->font = NULL;
-  priv->zoom = 1.0;
+  priv->zoom = KGX_FONT_SCALE_DEFAULT;
   priv->theme = KGX_THEME_NIGHT;
   priv->opaque = FALSE;
 

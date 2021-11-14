@@ -637,7 +637,9 @@ kgx_tab_class_init (KgxTabClass *klass)
 
   pspecs[PROP_ZOOM] =
     g_param_spec_double ("zoom", "Zoom", "Font scaling",
-                         0.5, 2.0, 1.0,
+                         KGX_FONT_SCALE_MIN,
+                         KGX_FONT_SCALE_MAX,
+                         KGX_FONT_SCALE_DEFAULT,
                          G_PARAM_READWRITE);
 
   /**

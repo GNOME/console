@@ -52,6 +52,40 @@ typedef enum /*< enum,prefix=KGX >*/
  */
 #define KGX_TERMINAL_N_LINK_REGEX 5
 
+
+/**
+ * KGX_FONT_SCALE_MIN:
+ * The smallest font scale/zoom
+ *
+ * Stability: Private
+ *
+ * Since: 0.5.0
+ */
+#define KGX_FONT_SCALE_MIN 0.5
+
+
+/**
+ * KGX_FONT_SCALE_MAX:
+ * The largest font scale/zoom
+ *
+ * Stability: Private
+ *
+ * Since: 0.5.0
+ */
+#define KGX_FONT_SCALE_MAX 4.0
+
+
+/**
+ * KGX_FONT_SCALE_DEFAULT:
+ * The standard font scale/zoom
+ *
+ * Stability: Private
+ *
+ * Since: 0.5.0
+ */
+#define KGX_FONT_SCALE_DEFAULT 1.0
+
+
 #define KGX_TYPE_TERMINAL (kgx_terminal_get_type())
 
 /**

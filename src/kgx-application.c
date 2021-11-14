@@ -77,14 +77,17 @@ kgx_application_set_scale (KgxApplication *self,
 
   g_return_if_fail (KGX_IS_APPLICATION (self));
 
-  self->scale = CLAMP (scale, 0.5, 2.0);
+  self->scale = CLAMP (scale, KGX_FONT_SCALE_MIN, KGX_FONT_SCALE_MAX);
 
   action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-out");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), self->scale > 0.5);
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action),
+                               self->scale > KGX_FONT_SCALE_MIN);
   action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-normal");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), self->scale != 1.0);
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action),
+                               self->scale != KGX_FONT_SCALE_DEFAULT);
   action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-in");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), self->scale < 2.0);
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action),
+                               self->scale < KGX_FONT_SCALE_MAX);
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_FONT_SCALE]);
 }
@@ -566,7 +569,9 @@ kgx_application_class_init (KgxApplicationClass *klass)
 
   pspecs[PROP_FONT_SCALE] =
     g_param_spec_double ("font-scale", "Font scale", "Font scaling",
-                         0.5, 2.0, 1.0,
+                         KGX_FONT_SCALE_MIN,
+                         KGX_FONT_SCALE_MAX,
+                         KGX_FONT_SCALE_DEFAULT,
                          G_PARAM_READWRITE);
 
   /**
@@ -771,7 +776,7 @@ zoom_normal_activated (GSimpleAction *action,
 {
   KgxApplication *self = KGX_APPLICATION (data);
 
-  kgx_application_set_scale (self, 1.0);
+  kgx_application_set_scale (self, KGX_FONT_SCALE_DEFAULT);
 }
 
 
