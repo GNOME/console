@@ -37,6 +37,7 @@ struct _KgxProcess {
   GPid    pid;
   GPid    parent;
   gint32  uid;
+  gint32  euid;
   char   *exec;
 };
 
@@ -92,6 +93,7 @@ kgx_process_new (GPid pid)
 
   self->parent = info.ppid;
   self->uid = info.uid;
+  self->euid = info.euid;
   self->exec = NULL;
 
   return self;
@@ -148,7 +150,7 @@ kgx_process_get_is_root (KgxProcess *self)
 {
   g_return_val_if_fail (self != NULL, FALSE);
 
-  return self->uid == 0;
+  return self->euid == 0;
 }
 
 /**
