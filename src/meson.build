@@ -66,6 +66,7 @@ kgx_lib = library ('kgx', kgx_sources,
                    dependencies: kgx_deps,
                    install: true,
                    install_dir: pkglibdir,
+                   install_rpath: pkglibdir + ':' + libdir,
                   )
 kgx_inc = include_directories('.')
 
