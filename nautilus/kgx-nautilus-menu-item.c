@@ -116,11 +116,7 @@ kgx_nautilus_menu_item_constructed (GObject *object)
   G_OBJECT_CLASS (kgx_nautilus_menu_item_parent_class)->constructed (object);
 
   g_object_set (self,
-  #if IS_GENERIC
                 "label", _("Open in T_erminal"),
-  #else
-                "label", _("Op_en in King’s Cross"),
-  #endif
                 "tip", _("Start a terminal session for this location"),
                 NULL);
 }

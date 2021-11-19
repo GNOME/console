@@ -4,11 +4,7 @@ desktop_utils = find_program('desktop-file-validate', required: false)
 appstream_util = find_program('appstream-util', required: false)
 compile_schemas = find_program('glib-compile-schemas', required: false)
 
-if get_option('generic')
-  desktop_filename = 'org.gnome.zbrown.KingsCross-generic.desktop.in.in'
-else
-  desktop_filename = 'org.gnome.zbrown.KingsCross.desktop.in.in'
-endif
+desktop_filename = 'org.gnome.zbrown.KingsCross.desktop.in.in'
 
 desktop_file = i18n.merge_file(
             input: configure_file(

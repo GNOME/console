@@ -36,11 +36,6 @@ conf.set_quoted('KGX_APPLICATION_PATH', app_path)
 conf.set('KGX_APPLICATION_PATH_RAW', app_path)
 conf.set_quoted('LOCALEDIR', prefix / get_option('localedir'))
 conf.set('BINDIR', prefix / get_option('bindir'))
-if get_option('generic')
-  conf.set('IS_GENERIC', 1)
-else
-  conf.set('IS_GENERIC', 0)
-endif
 config_h_in = configure_file(
   output: 'kgx-config.h.in',
   configuration: conf,

@@ -40,11 +40,7 @@ G_BEGIN_DECLS
  */
 #define MONOSPACE_FONT_KEY_NAME "monospace-font-name"
 
-#if IS_GENERIC
 #define KGX_DISPLAY_NAME _("Terminal")
-#else
-#define KGX_DISPLAY_NAME _("King’s Cross")
-#endif
 
 
 #define KGX_TYPE_APPLICATION (kgx_application_get_type())

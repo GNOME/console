@@ -23,12 +23,6 @@ So of you will notice the icon is an [Underground Roundel](https://tfl.gov.uk/co
 We did experiment with a centre aligned ~ (as you would expect for a station roundel) but we felt left aligned >_ better represented a terminal
 
 
-## Packagers
-
-Are you a ‘mobile distro’ wanting to ship KGX as your terminal? Great!
-
-We would suggest in such environments you make use of the `-Dgeneric=true` option. This uses an alternative Desktop Entry and icon similar to that of GNOME Terminal (i.e., a generic terminal) which will be more familar for your users
-
 ## Roadmap
 
 - [ ] ‘API’ compatible with GNOME Terminal

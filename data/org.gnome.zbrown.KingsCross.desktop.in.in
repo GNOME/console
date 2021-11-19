@@ -1,6 +1,5 @@
 [Desktop Entry]
-# Translators: This is a train station, see README.md for more info
-Name=King’s Cross
+Name=Terminal
 Exec=kgx
 # Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 Icon=@KGX_APPLICATION_ID_RAW@

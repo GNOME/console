@@ -430,7 +430,6 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_message);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, theme_switcher);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, zoom_level);
-  gtk_widget_class_bind_template_child (widget_class, KgxWindow, about_item);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, tab_bar);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, tab_button);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, tab_switcher);
@@ -529,16 +528,12 @@ about_activated (GSimpleAction *action,
                          "artists", artists,
                          /* Translators: Credit yourself here */
                          "translator-credits", _("translator-credits"),
-                         #if IS_GENERIC
                          /* Translators: Don’t attempt to translate KGX,
                           * treat it as a proper noun */
                          "comments", _("KGX Terminal Emulator"),
-                         #else
-                         "comments", _("Terminal Emulator"),
-                         #endif
                          "copyright", copyright,
                          "license-type", GTK_LICENSE_GPL_3_0,
-                         "logo-icon-name", "kgx-original",
+                         "logo-icon-name", KGX_APPLICATION_ID,
                          "program-name", KGX_DISPLAY_NAME,
                          "version", PACKAGE_VERSION,
                          NULL);
@@ -640,12 +635,6 @@ kgx_window_init (KgxWindow *self)
   g_type_ensure (KGX_TYPE_THEME_SWITCHER);
 
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  #if IS_GENERIC
-  g_object_set (self->about_item,
-                "text", _("_About Terminal"),
-                NULL);
-  #endif
 
   g_action_map_add_action_entries (G_ACTION_MAP (self),
                                    win_entries,
