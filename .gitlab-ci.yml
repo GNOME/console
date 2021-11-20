@@ -3,7 +3,8 @@ debian:
   stage: build
   before_script:
     - apt -y update
-    - apt -y install gcc g++ gettext git libgnutls28-dev libgtk-3-dev libsystemd-dev libgtop2-dev meson sassc
+    - apt -y install gcc g++ gettext git libgnutls28-dev libgtk-3-dev
+      libsystemd-dev libgtop2-dev meson sassc desktop-file-utils appstream-util
   script:
     - meson --buildtype=release _build .
     - ninja -C _build
@@ -14,27 +15,10 @@ fedora:
   before_script:
     - dnf update -y --nogpgcheck
     - dnf install -y --nogpgcheck meson gettext glib2-devel gcc gcc-c++ git
-      desktop-file-utils gtk-doc gperf "pkgconfig(gtk+-3.0)"
+      desktop-file-utils gperf "pkgconfig(gtk+-3.0)" libappstream-glib
       "pkgconfig(vte-2.91)" "pkgconfig(libgtop-2.0)" "pkgconfig(fribidi)"
       "pkgconfig(gnutls)" "pkgconfig(libsystemd)" "pkgconfig(libpcre2-8)" sassc
   script:
-    - meson --buildtype=release -Dgtk_doc=true _build .
-    - ninja -C _build
-    - ninja -C _build kgx-doc
-    - mkdir -p _reference/kgx
-    - mv _build/doc/html/ _reference/kgx
-  artifacts:
-    paths:
-    - _reference
-
-pages:
-  stage: deploy
-  dependencies:
-  - fedora
-  script:
-  - mv _reference public
-  artifacts:
-    paths:
-    - public
-  only:
-  - master
+    - meson --buildtype=release -Dtests=true _build .
+    - meson compile -C _build
+    - meson test -C _build

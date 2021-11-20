@@ -113,7 +113,6 @@ if nautilus_dep.found()
 endif
 
 subdir('po')
-subdir('doc')
 
 gnome.post_install(
      glib_compile_schemas: true,
