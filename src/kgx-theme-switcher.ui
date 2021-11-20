@@ -10,7 +10,7 @@
         <property name="spacing">18</property>
         <child>
           <object class="GtkRadioButton" id="system_selector">
-            <property name="visible">True</property>
+            <property name="visible" bind-source="KgxThemeSwitcher" bind-property="show-system" bind-flags="sync-create"/>
             <property name="tooltip-text" translatable="yes">Use System Colors</property>
             <signal name="notify::active" handler="theme_radio_active_changed" swapped="yes"/>
             <style>

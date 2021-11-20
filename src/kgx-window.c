@@ -87,10 +87,12 @@ kgx_window_constructed (GObject *object)
   KgxWindow          *self = KGX_WINDOW (object);
   g_autoptr (GError)  error = NULL;
   GtkApplication     *application = NULL;
+  HdyStyleManager    *style_manager;
 
   G_OBJECT_CLASS (kgx_window_parent_class)->constructed (object);
 
   application = gtk_window_get_application (GTK_WINDOW (self));
+  style_manager = hdy_style_manager_get_default ();
 
   g_object_bind_property (application, "theme",
                           self->pages, "theme",
@@ -99,6 +101,9 @@ kgx_window_constructed (GObject *object)
                           self->theme_switcher, "theme",
                           G_BINDING_SYNC_CREATE |
                           G_BINDING_BIDIRECTIONAL);
+  g_object_bind_property (style_manager, "system-supports-color-schemes",
+                          self->theme_switcher, "show-system",
+                          G_BINDING_SYNC_CREATE);
 
   g_object_bind_property (application, "font",
                           self->pages, "font",
