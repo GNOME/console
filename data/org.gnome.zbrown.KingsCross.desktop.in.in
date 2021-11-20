@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Terminal
-Exec=kgx
+Exec=@BIN_NAME@
 # Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 Icon=@KGX_APPLICATION_ID_RAW@
 # Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
@@ -16,13 +16,13 @@ Actions=new-window;new-tab;
 X-Purism-FormFactor=Workstation;Mobile;
 
 [Desktop Action new-window]
-Exec=kgx
+Exec=@BIN_NAME@
 Name=New Window
 # Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 Icon=window-new
 
 [Desktop Action new-tab]
-Exec=kgx --tab
+Exec=@BIN_NAME@ --tab
 Name=New Tab
 # Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 Icon=tab-new

@@ -1,4 +1,3 @@
 [D-BUS Service]
 Name=@KGX_APPLICATION_ID_RAW@
-Exec=@BINDIR@/kgx --gapplication-service
-
+Exec=@BIN_DIR@/@BIN_NAME@ --gapplication-service

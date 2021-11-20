@@ -1,5 +1,5 @@
 project('kgx', 'c', version: '0.4.0',
-  meson_version: '>= 0.49.0',
+  meson_version: '>= 0.59.0',
   default_options: [
     'werror=true',
     'buildtype=debugoptimized',
@@ -13,29 +13,45 @@ project('kgx', 'c', version: '0.4.0',
     'handy:werror=false',
     'handy:vapi=false',
     'handy:introspection=disabled',
+    'handy:tests=false',
   ],
 )
 
 i18n = import('i18n')
+gnome = import('gnome')
 
-app_id = 'org.gnome.zbrown.KingsCross'
-app_path = '/org/gnome/zbrown/KingsCross/'
+
+if get_option('devel')
+  app_id = 'org.gnome.zbrown.KingsCross.Devel'
+  app_path = '/org/gnome/zbrown/KingsCross/Devel/'
+  bin_name = meson.project_name() + '-devel'
+  log_domain = 'KgxDevel'
+else
+  app_id = 'org.gnome.zbrown.KingsCross'
+  app_path = '/org/gnome/zbrown/KingsCross/'
+  bin_name = meson.project_name()
+  log_domain = 'Kgx'
+endif
 
 prefix = get_option('prefix')
+bindir = prefix / get_option('bindir')
 libdir = prefix / get_option('libdir')
 datadir = prefix / get_option('datadir')
-pkglibdir = prefix / libdir / meson.project_name()
-pkgdatadir = datadir / meson.project_name()
+pkglibdir = prefix / libdir / bin_name
+pkgdatadir = datadir / bin_name
 
 conf = configuration_data()
 conf.set_quoted('PACKAGE_VERSION', '@VCS_TAG@')
-conf.set_quoted('GETTEXT_PACKAGE', 'kgx')
+conf.set_quoted('GETTEXT_PACKAGE', bin_name)
 conf.set_quoted('KGX_APPLICATION_ID', app_id)
 conf.set('KGX_APPLICATION_ID_RAW', app_id)
 conf.set_quoted('KGX_APPLICATION_PATH', app_path)
 conf.set('KGX_APPLICATION_PATH_RAW', app_path)
 conf.set_quoted('LOCALEDIR', prefix / get_option('localedir'))
-conf.set('BINDIR', prefix / get_option('bindir'))
+conf.set('BIN_DIR', prefix / bindir)
+conf.set('BIN_NAME', bin_name)
+conf.set('IS_DEVEL', get_option('devel'))
+
 config_h_in = configure_file(
   output: 'kgx-config.h.in',
   configuration: conf,
@@ -45,13 +61,12 @@ config_h = vcs_tag(input: config_h_in, output: 'kgx-config.h')
 gtk_ver = 'GDK_VERSION_3_24'
 glib_ver = 'GLIB_VERSION_2_62'
 add_project_arguments([
-  '-I' + meson.build_root(),
   '-DGDK_VERSION_MIN_REQUIRED=@0@'.format(gtk_ver),
   '-DGDK_VERSION_MAX_ALLOWED=@0@'.format(gtk_ver),
   '-DGLIB_VERSION_MIN_REQUIRED=@0@'.format(glib_ver),
   '-DGLIB_VERSION_MAX_ALLOWED=@0@'.format(glib_ver),
   '-DG_LOG_USE_STRUCTURED',
-  '-DG_LOG_DOMAIN="Kgx"',
+  '-DG_LOG_DOMAIN="@0@"'.format(log_domain),
 ], language: 'c')
 
 cc = meson.get_compiler('c')
@@ -100,4 +115,8 @@ endif
 subdir('po')
 subdir('doc')
 
-meson.add_install_script('build-aux/meson/postinstall.py')
+gnome.post_install(
+     glib_compile_schemas: true,
+    gtk_update_icon_cache: true,
+  update_desktop_database: true,
+)

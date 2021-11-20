@@ -1,5 +1,5 @@
 debian:
-  image: debian:bullseye
+  image: debian:testing
   stage: build
   before_script:
     - apt -y update

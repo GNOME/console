@@ -40,8 +40,6 @@ kgx_deps = [
 
 kgx_sources += config_h
 
-gnome = import('gnome')
-
 resources_file = configure_file(
                        input: 'kgx.gresource.xml.in',
                       output: 'kgx.gresource.xml',
@@ -62,12 +60,13 @@ kgx_sources += gnome.mkenums_simple('kgx-enums',
                                       'kgx-tab.h'
                                     ])
 
-kgx_lib = library ('kgx', kgx_sources,
-                   dependencies: kgx_deps,
-                   install: true,
-                   install_dir: pkglibdir,
-                   install_rpath: pkglibdir + ':' + libdir,
-                  )
+kgx_lib = library (bin_name,
+                   kgx_sources,
+     dependencies: kgx_deps,
+          install: true,
+      install_dir: pkglibdir,
+    install_rpath: pkglibdir + ':' + libdir,
+)
 kgx_inc = include_directories('.')
 
 kgx_dep = declare_dependency (sources: [config_h],
@@ -75,10 +74,9 @@ kgx_dep = declare_dependency (sources: [config_h],
                               link_with: kgx_lib,
                               dependencies: kgx_deps)
 
-executable('kgx', 'main.c',
-  dependencies: kgx_dep,
-  install: true,
-  install_rpath: pkglibdir,
-  gui_app: true,
+executable(        bin_name,
+                   'main.c',
+     dependencies: kgx_dep,
+          install: true,
+    install_rpath: pkglibdir,
 )
-

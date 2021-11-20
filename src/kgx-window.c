@@ -528,9 +528,14 @@ about_activated (GSimpleAction *action,
                          "artists", artists,
                          /* Translators: Credit yourself here */
                          "translator-credits", _("translator-credits"),
+                         #ifdef IS_DEVEL
                          /* Translators: Don’t attempt to translate KGX,
-                          * treat it as a proper noun */
-                         "comments", _("KGX Terminal Emulator"),
+                          * treat it as a proper noun. This string is used
+                          * for developer/preview releases/builds */
+                         "comments", _("🚧 KGX Devel Build 🚧"),
+                         #else
+                         "comments", _("Terminal Emulator"),
+                         #endif
                          "copyright", copyright,
                          "license-type", GTK_LICENSE_GPL_3_0,
                          "logo-icon-name", KGX_APPLICATION_ID,
@@ -628,7 +633,10 @@ kgx_window_init (KgxWindow *self)
 {
   g_autoptr (GtkWindowGroup) group = NULL;
   g_autoptr (GtkTargetList) target_list = NULL;
-  GPropertyAction *pact;
+  g_autoptr (GPropertyAction) pact = NULL;
+  #ifdef IS_DEVEL
+  GtkStyleContext *context;
+  #endif
 
   g_type_ensure (KGX_TYPE_TAB_BUTTON);
   g_type_ensure (KGX_TYPE_TAB_SWITCHER);
@@ -645,6 +653,11 @@ kgx_window_init (KgxWindow *self)
                                 G_OBJECT (self->pages),
                                 "search-mode-enabled");
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (pact));
+
+  #ifdef IS_DEVEL
+  context = gtk_widget_get_style_context (GTK_WIDGET (self));
+  gtk_style_context_add_class (context, "devel");
+  #endif
 
   g_object_bind_property_full (self->pages, "title",
                                self, "title",

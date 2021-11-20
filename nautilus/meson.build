@@ -6,7 +6,7 @@ nautilus_sources = [
     config_h
 ]
 
-nautilus_extension = shared_library('kgx-nautilus', nautilus_sources,
+nautilus_extension = shared_library(bin_name + '-nautilus', nautilus_sources,
                                      dependencies: [nautilus_dep, gio_unix],
                               include_directories: kgx_inc,
                                           install: true,

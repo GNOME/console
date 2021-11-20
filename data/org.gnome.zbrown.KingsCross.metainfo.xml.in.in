@@ -70,7 +70,7 @@
   <url type="homepage">https://gitlab.gnome.org/ZanderBrown/KGX/</url>
   <url type="bugtracker">https://gitlab.gnome.org/ZanderBrown/KGX/issues</url>
   <update_contact>zbrown@gnome.org</update_contact>
-  <translation type="gettext">kgx</translation>
+  <translation type="gettext">@BIN_NAME@</translation>
   <content_rating type="oars-1.1" />
   <developer_name>Zander Brown</developer_name>
   <custom>

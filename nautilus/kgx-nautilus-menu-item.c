@@ -116,7 +116,11 @@ kgx_nautilus_menu_item_constructed (GObject *object)
   G_OBJECT_CLASS (kgx_nautilus_menu_item_parent_class)->constructed (object);
 
   g_object_set (self,
+#ifdef IS_DEVEL
+                "label", _("Open in T_erminal (Devel)"),
+#else
                 "label", _("Open in T_erminal"),
+#endif
                 "tip", _("Start a terminal session for this location"),
                 NULL);
 }
@@ -186,7 +190,11 @@ kgx_nautilus_menu_item_new (KgxNautilus *extension,
                        "extension", extension,
                        "window", window,
                        "file", file,
+#ifdef IS_DEVEL
+                       "name", is_back ? "KgxDevel:Open" : "KgxDevel:OpenItem",
+#else
                        "name", is_back ? "Kgx:Open" : "Kgx:OpenItem",
+#endif
                        "icon", KGX_APPLICATION_ID,
                        NULL);
 }

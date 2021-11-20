@@ -1,3 +1,7 @@
+option('devel',
+       type: 'boolean',
+       value: false,
+       description: 'Produce a parallel installable development build')
 
 option('gtk_doc',
        type: 'boolean',

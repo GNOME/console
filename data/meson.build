@@ -2,9 +2,14 @@ src_datadir = meson.current_source_dir()
 
 desktop_utils = find_program('desktop-file-validate', required: false)
 appstream_util = find_program('appstream-util', required: false)
-compile_schemas = find_program('glib-compile-schemas', required: false)
+compile_schemas = find_program('glib-compile-schemas')
 
 desktop_filename = 'org.gnome.zbrown.KingsCross.desktop.in.in'
+if get_option('devel')
+  icon_filename = 'org.gnome.zbrown.KingsCross.Devel.svg'
+else
+  icon_filename = 'org.gnome.zbrown.KingsCross.svg'
+endif
 
 desktop_file = i18n.merge_file(
             input: configure_file(
@@ -43,18 +48,24 @@ if appstream_util.found() and get_option('tests')
   )
 endif
 
-configure_file(
+schema_file = configure_file(
            input: 'org.gnome.zbrown.KingsCross.gschema.xml.in',
           output: app_id + '.gschema.xml',
    configuration: conf,
      install_dir: datadir / 'glib-2.0/schemas'
 )
 
-if compile_schemas.found() and get_option('tests')
-  test('Validate schema file', compile_schemas,
-    args: ['--strict', '--dry-run', src_datadir]
-  )
-endif
+# gnome.compile_schemas only looks at the source tree
+custom_target('kgx-schemas',
+           input: schema_file,
+          output: 'gschemas.compiled',
+         command: [compile_schemas, meson.current_build_dir()],
+)
+meson.add_devenv({'GSETTINGS_SCHEMA_DIR': meson.current_build_dir()})
+
+test('Validate schema file', compile_schemas,
+            args: ['--strict', '--dry-run', meson.current_build_dir()]
+)
 
 configure_file(
            input: 'org.gnome.zbrown.KingsCross.service.in',
@@ -63,7 +74,7 @@ configure_file(
      install_dir: datadir / 'dbus-1/services'
 )
 
-install_data('org.gnome.zbrown.KingsCross.svg',
+install_data(icon_filename,
      install_dir: datadir / 'icons/hicolor/scalable/apps',
           rename: app_id + '.svg',
 )
