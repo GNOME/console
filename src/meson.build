@@ -52,7 +52,7 @@ kgx_sources += gnome.compile_resources('kgx-resources',
   dependencies: style_deps
 )
 
-kgx_sources += gnome.mkenums_simple('kgx-enums',
+kgx_enums = gnome.mkenums_simple('kgx-enums',
                                     sources: [
                                       'kgx-close-dialog.h',
                                       'kgx-terminal.h',
@@ -61,7 +61,7 @@ kgx_sources += gnome.mkenums_simple('kgx-enums',
                                     ])
 
 kgx_lib = library (bin_name,
-                   kgx_sources,
+                   kgx_sources + kgx_enums,
      dependencies: kgx_deps,
           install: true,
       install_dir: pkglibdir,
@@ -69,7 +69,7 @@ kgx_lib = library (bin_name,
 )
 kgx_inc = include_directories('.')
 
-kgx_dep = declare_dependency (sources: [config_h],
+kgx_dep = declare_dependency (sources: [config_h, kgx_enums],
                               include_directories: kgx_inc,
                               link_with: kgx_lib,
                               dependencies: kgx_deps)
