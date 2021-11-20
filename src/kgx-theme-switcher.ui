@@ -5,13 +5,14 @@
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
-        <property name="halign">center</property>
         <property name="orientation">horizontal</property>
+        <property name="homogeneous">True</property>
         <property name="spacing">18</property>
         <child>
           <object class="GtkRadioButton" id="system_selector">
             <property name="visible" bind-source="KgxThemeSwitcher" bind-property="show-system" bind-flags="sync-create"/>
             <property name="tooltip-text" translatable="yes">Use System Colors</property>
+            <property name="halign">center</property>
             <signal name="notify::active" handler="theme_radio_active_changed" swapped="yes"/>
             <style>
               <class name="system"/>
@@ -23,6 +24,7 @@
             <property name="visible">True</property>
             <property name="group">system_selector</property>
             <property name="tooltip-text" translatable="yes">Use Light Colors</property>
+            <property name="halign">center</property>
             <signal name="notify::active" handler="theme_radio_active_changed" swapped="yes"/>
             <style>
               <class name="light"/>
@@ -34,6 +36,7 @@
             <property name="visible">True</property>
             <property name="group">system_selector</property>
             <property name="tooltip-text" translatable="yes">Use Dark Colors</property>
+            <property name="halign">center</property>
             <signal name="notify::active" handler="theme_radio_active_changed" swapped="yes"/>
             <style>
               <class name="dark"/>
