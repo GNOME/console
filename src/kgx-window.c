@@ -533,18 +533,14 @@ about_activated (GSimpleAction *action,
                          "artists", artists,
                          /* Translators: Credit yourself here */
                          "translator-credits", _("translator-credits"),
-                         #ifdef IS_DEVEL
-                         /* Translators: Don’t attempt to translate KGX,
-                          * treat it as a proper noun. This string is used
-                          * for developer/preview releases/builds */
-                         "comments", _("🚧 Console Devel Build 🚧"),
-                         #else
-                         "comments", _("Terminal Emulator"),
-                         #endif
                          "copyright", copyright,
                          "license-type", GTK_LICENSE_GPL_3_0,
                          "logo-icon-name", KGX_APPLICATION_ID,
+                         #ifdef IS_DEVEL
+                         "program-name", _("Console (Development)"),
+                         #else
                          "program-name", KGX_DISPLAY_NAME,
+                         #endif
                          "version", PACKAGE_VERSION,
                          NULL);
 }
