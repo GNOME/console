@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-11-19 01:03+0000\n"
-"PO-Revision-Date: 2021-11-19 16:22+0200\n"
+"POT-Creation-Date: 2021-11-20 08:29+0000\n"
+"PO-Revision-Date: 2021-11-21 16:21+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -40,7 +40,7 @@ msgid "New Tab"
 msgstr "Нова вкладка"
 
 #: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:9
-#: src/kgx-application.c:556
+#: src/kgx-application.c:556 src/kgx-window.c:537
 msgid "Terminal Emulator"
 msgstr "Емулятор термінала"
 
@@ -256,18 +256,15 @@ msgstr "Вст_авити"
 
 #: src/kgx-theme-switcher.ui:14
 msgid "Use System Colors"
-msgstr ""
-"Використовувати кольори системи"
+msgstr "Використовувати кольори системи"
 
 #: src/kgx-theme-switcher.ui:25
 msgid "Use Light Colors"
-msgstr ""
-"Використовувати світлі кольори"
+msgstr "Використовувати світлі кольори"
 
 #: src/kgx-theme-switcher.ui:36
 msgid "Use Dark Colors"
-msgstr ""
-"Використовувати темні кольори"
+msgstr "Використовувати темні кольори"
 
 #. Translators: Credit yourself here
 #: src/kgx-window.c:530
@@ -275,10 +272,12 @@ msgid "translator-credits"
 msgstr "Юрій Чорноіван <yurchor@ukr.net>"
 
 #. Translators: Don’t attempt to translate KGX,
-#. * treat it as a proper noun
-#: src/kgx-window.c:533
-msgid "KGX Terminal Emulator"
-msgstr "Емулятор термінала KGX"
+#. * treat it as a proper noun. This string is used
+#. * for developer/preview releases/builds
+#: src/kgx-window.c:535
+msgid "🚧 KGX Devel Build 🚧"
+msgstr ""
+"🚧 Тестова збірка KGX 🚧"
 
 #: src/kgx-window.ui:26
 msgid "Shrink text"
@@ -336,13 +335,21 @@ msgstr "Ви_брати все"
 msgid "Show in _Files"
 msgstr "Показати у «_Файлах»"
 
-#: nautilus/kgx-nautilus-menu-item.c:119
+#: nautilus/kgx-nautilus-menu-item.c:120
+#| msgid "Open in T_erminal"
+msgid "Open in T_erminal (Devel)"
+msgstr "Відкрити у _Терміналі (тестова збірка)"
+
+#: nautilus/kgx-nautilus-menu-item.c:122
 msgid "Open in T_erminal"
 msgstr "Відкрити у _Терміналі"
 
-#: nautilus/kgx-nautilus-menu-item.c:120
+#: nautilus/kgx-nautilus-menu-item.c:124
 msgid "Start a terminal session for this location"
 msgstr "Розпочати сеанс термінала для цієї адреси"
+
+#~ msgid "KGX Terminal Emulator"
+#~ msgstr "Емулятор термінала KGX"
 
 #~ msgid "_About King’s Cross"
 #~ msgstr "_Про «Кінгс-кросс»"
