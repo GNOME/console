@@ -1,6 +1,6 @@
-data/org.gnome.zbrown.KingsCross.desktop.in.in
-data/org.gnome.zbrown.KingsCross.gschema.xml.in
-data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in
+data/org.gnome.Console.desktop.in.in
+data/org.gnome.Console.gschema.xml.in
+data/org.gnome.Console.metainfo.xml.in.in
 src/help-overlay.ui
 src/kgx-application.c
 src/kgx-application.h

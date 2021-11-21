@@ -90,7 +90,7 @@
         <child>
           <object class="GtkModelButton" id="about_item">
             <property name="visible">True</property>
-            <property name="text" translatable="yes">_About Terminal</property>
+            <property name="text" translatable="yes">_About Console</property>
             <property name="tooltip-text" translatable="yes">About this program</property>
             <property name="action-name">win.about</property>
           </object>

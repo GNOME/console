@@ -117,9 +117,9 @@ kgx_nautilus_menu_item_constructed (GObject *object)
 
   g_object_set (self,
 #ifdef IS_DEVEL
-                "label", _("Open in T_erminal (Devel)"),
+                "label", _("Open in Co_nsole (Devel)"),
 #else
-                "label", _("Open in T_erminal"),
+                "label", _("Open in Co_nsole"),
 #endif
                 "tip", _("Start a terminal session for this location"),
                 NULL);

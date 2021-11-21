@@ -537,7 +537,7 @@ about_activated (GSimpleAction *action,
                          /* Translators: Don’t attempt to translate KGX,
                           * treat it as a proper noun. This string is used
                           * for developer/preview releases/builds */
-                         "comments", _("🚧 KGX Devel Build 🚧"),
+                         "comments", _("🚧 Console Devel Build 🚧"),
                          #else
                          "comments", _("Terminal Emulator"),
                          #endif

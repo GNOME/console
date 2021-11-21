@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Terminal
+Name=Console
 Exec=@BIN_NAME@
 # Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 Icon=@KGX_APPLICATION_ID_RAW@

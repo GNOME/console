@@ -4,11 +4,11 @@ desktop_utils = find_program('desktop-file-validate', required: false)
 appstream_util = find_program('appstream-util', required: false)
 compile_schemas = find_program('glib-compile-schemas')
 
-desktop_filename = 'org.gnome.zbrown.KingsCross.desktop.in.in'
+desktop_filename = 'org.gnome.Console.desktop.in.in'
 if get_option('devel')
-  icon_filename = 'org.gnome.zbrown.KingsCross.Devel.svg'
+  icon_filename = 'org.gnome.Console.Devel.svg'
 else
-  icon_filename = 'org.gnome.zbrown.KingsCross.svg'
+  icon_filename = 'org.gnome.Console.svg'
 endif
 
 desktop_file = i18n.merge_file(
@@ -32,7 +32,7 @@ endif
 
 appstream_file = i18n.merge_file(
             input: configure_file(
-                           input: 'org.gnome.zbrown.KingsCross.metainfo.xml.in.in',
+                           input: 'org.gnome.Console.metainfo.xml.in.in',
                            output: '@BASENAME@',
                            configuration: conf
                    ),
@@ -49,7 +49,7 @@ if appstream_util.found() and get_option('tests')
 endif
 
 schema_file = configure_file(
-           input: 'org.gnome.zbrown.KingsCross.gschema.xml.in',
+           input: 'org.gnome.Console.gschema.xml.in',
           output: app_id + '.gschema.xml',
    configuration: conf,
      install_dir: datadir / 'glib-2.0/schemas'
@@ -68,7 +68,7 @@ test('Validate schema file', compile_schemas,
 )
 
 configure_file(
-           input: 'org.gnome.zbrown.KingsCross.service.in',
+           input: 'org.gnome.Console.service.in',
           output: app_id + '.service',
    configuration: conf,
      install_dir: datadir / 'dbus-1/services'
@@ -79,7 +79,7 @@ install_data(icon_filename,
           rename: app_id + '.svg',
 )
 
-install_data('org.gnome.zbrown.KingsCross-symbolic.svg',
+install_data('org.gnome.Console-symbolic.svg',
      install_dir: datadir / 'icons/hicolor/symbolic/apps',
           rename: app_id + '-symbolic.svg',
 )

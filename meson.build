@@ -1,4 +1,4 @@
-project('kgx', 'c', version: '0.4.0',
+project('gnome-console', 'c', version: '0.4.0',
   meson_version: '>= 0.59.0',
   default_options: [
     'werror=true',
@@ -22,13 +22,13 @@ gnome = import('gnome')
 
 
 if get_option('devel')
-  app_id = 'org.gnome.zbrown.KingsCross.Devel'
-  app_path = '/org/gnome/zbrown/KingsCross/Devel/'
+  app_id = 'org.gnome.Console.Devel'
+  app_path = '/org/gnome/Console/Devel/'
   bin_name = meson.project_name() + '-devel'
   log_domain = 'KgxDevel'
 else
-  app_id = 'org.gnome.zbrown.KingsCross'
-  app_path = '/org/gnome/zbrown/KingsCross/'
+  app_id = 'org.gnome.Console'
+  app_path = '/org/gnome/Console/'
   bin_name = meson.project_name()
   log_domain = 'Kgx'
 endif

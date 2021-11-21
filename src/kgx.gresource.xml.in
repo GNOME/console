@@ -28,9 +28,9 @@
     <file>help-overlay.ui</file>
   </gresource>
   <gresource prefix="@KGX_APPLICATION_PATH_RAW@icons/scalable/apps/">
-    <file preprocess="xml-stripblanks" alias="@KGX_APPLICATION_ID_RAW@.svg">../data/org.gnome.zbrown.KingsCross.svg</file>
+    <file preprocess="xml-stripblanks" alias="@KGX_APPLICATION_ID_RAW@.svg">../data/org.gnome.Console.svg</file>
   </gresource>
   <gresource prefix="@KGX_APPLICATION_PATH_RAW@icons/symbolic/apps/">
-    <file preprocess="xml-stripblanks" alias="@KGX_APPLICATION_ID_RAW@-symbolic.svg">../data/org.gnome.zbrown.KingsCross-symbolic.svg</file>
+    <file preprocess="xml-stripblanks" alias="@KGX_APPLICATION_ID_RAW@-symbolic.svg">../data/org.gnome.Console-symbolic.svg</file>
   </gresource>
 </gresources>
