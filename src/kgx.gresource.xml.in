@@ -21,6 +21,7 @@
     <file preprocess="xml-stripblanks">icons/scalable/status/tab-counter-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/tab-overflow-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/tab-switcher-collapse-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/status/theme-check-symbolic.svg</file>
   </gresource>
   <gresource prefix="@KGX_APPLICATION_PATH_RAW@gtk">
     <file compressed="true">menus.ui</file>

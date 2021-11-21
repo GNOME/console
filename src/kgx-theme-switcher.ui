@@ -9,38 +9,90 @@
         <property name="homogeneous">True</property>
         <property name="spacing">18</property>
         <child>
-          <object class="GtkRadioButton" id="system_selector">
+          <object class="GtkOverlay">
             <property name="visible" bind-source="KgxThemeSwitcher" bind-property="show-system" bind-flags="sync-create"/>
-            <property name="tooltip-text" translatable="yes">Use System Colors</property>
             <property name="halign">center</property>
-            <signal name="notify::active" handler="theme_radio_active_changed" swapped="yes"/>
-            <style>
-              <class name="system"/>
-            </style>
+            <child>
+              <object class="GtkRadioButton" id="system_selector">
+                <property name="visible">True</property>
+                <property name="tooltip-text" translatable="yes">Use System Colors</property>
+                <signal name="notify::active" handler="theme_radio_active_changed" swapped="yes"/>
+                <style>
+                  <class name="system"/>
+                </style>
+              </object>
+            </child>
+            <child type="overlay">
+              <object class="GtkImage">
+                <property name="visible" bind-source="system_selector" bind-property="active" bind-flags="sync-create"/>
+                <property name="icon-name">theme-check-symbolic</property>
+                <property name="pixel-size">13</property>
+                <property name="halign">end</property>
+                <property name="valign">end</property>
+                <style>
+                  <class name="check"/>
+                </style>
+              </object>
+            </child>
           </object>
         </child>
         <child>
-          <object class="GtkRadioButton" id="light_selector">
+          <object class="GtkOverlay">
             <property name="visible">True</property>
-            <property name="group">system_selector</property>
-            <property name="tooltip-text" translatable="yes">Use Light Colors</property>
             <property name="halign">center</property>
-            <signal name="notify::active" handler="theme_radio_active_changed" swapped="yes"/>
-            <style>
-              <class name="light"/>
-            </style>
+            <child>
+              <object class="GtkRadioButton" id="light_selector">
+                <property name="visible">True</property>
+                <property name="group">system_selector</property>
+                <property name="tooltip-text" translatable="yes">Use Light Colors</property>
+                <signal name="notify::active" handler="theme_radio_active_changed" swapped="yes"/>
+                <style>
+                  <class name="light"/>
+                </style>
+              </object>
+            </child>
+            <child type="overlay">
+              <object class="GtkImage">
+                <property name="visible" bind-source="light_selector" bind-property="active" bind-flags="sync-create"/>
+                <property name="icon-name">theme-check-symbolic</property>
+                <property name="pixel-size">13</property>
+                <property name="halign">end</property>
+                <property name="valign">end</property>
+                <style>
+                  <class name="check"/>
+                </style>
+              </object>
+            </child>
           </object>
         </child>
         <child>
-          <object class="GtkRadioButton" id="dark_selector">
+          <object class="GtkOverlay">
             <property name="visible">True</property>
-            <property name="group">system_selector</property>
-            <property name="tooltip-text" translatable="yes">Use Dark Colors</property>
             <property name="halign">center</property>
-            <signal name="notify::active" handler="theme_radio_active_changed" swapped="yes"/>
-            <style>
-              <class name="dark"/>
-            </style>
+            <child>
+              <object class="GtkRadioButton" id="dark_selector">
+                <property name="visible">True</property>
+                <property name="group">system_selector</property>
+                <property name="tooltip-text" translatable="yes">Use Dark Colors</property>
+                <property name="halign">center</property>
+                <signal name="notify::active" handler="theme_radio_active_changed" swapped="yes"/>
+                <style>
+                  <class name="dark"/>
+                </style>
+              </object>
+            </child>
+            <child type="overlay">
+              <object class="GtkImage">
+                <property name="visible" bind-source="dark_selector" bind-property="active" bind-flags="sync-create"/>
+                <property name="icon-name">theme-check-symbolic</property>
+                <property name="pixel-size">13</property>
+                <property name="halign">end</property>
+                <property name="valign">end</property>
+                <style>
+                  <class name="check"/>
+                </style>
+              </object>
+            </child>
           </object>
         </child>
       </object>
