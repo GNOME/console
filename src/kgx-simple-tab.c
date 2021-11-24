@@ -24,10 +24,12 @@
  * Since: 0.3.0
  */
 
+#include "kgx-config.h"
+
 #include <glib/gi18n.h>
 
-#include "kgx-config.h"
 #include "kgx-terminal.h"
+#include "kgx-proxy-info.h"
 #include "kgx-simple-tab.h"
 #include "fp-vte-util.h"
 
@@ -206,6 +208,8 @@ kgx_simple_tab_start (KgxTab              *page,
   data = g_new (struct StartData, 1);
   data->self = g_object_ref (self);
   data->task = task;
+
+  kgx_proxy_info_apply_to_environ (kgx_proxy_info_get_default (), &env);
 
   fp_vte_pty_spawn_async (pty,
                           self->initial_work_dir,

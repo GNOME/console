@@ -59,7 +59,7 @@ config_h_in = configure_file(
 config_h = vcs_tag(input: config_h_in, output: 'kgx-config.h')
 
 gtk_ver = 'GDK_VERSION_3_24'
-glib_ver = 'GLIB_VERSION_2_62'
+glib_ver = 'GLIB_VERSION_2_66'
 add_project_arguments([
   '-DGDK_VERSION_MIN_REQUIRED=@0@'.format(gtk_ver),
   '-DGDK_VERSION_MAX_ALLOWED=@0@'.format(gtk_ver),
