@@ -536,11 +536,7 @@ about_activated (GSimpleAction *action,
                          "copyright", copyright,
                          "license-type", GTK_LICENSE_GPL_3_0,
                          "logo-icon-name", KGX_APPLICATION_ID,
-                         #ifdef IS_DEVEL
-                         "program-name", _("Console (Development)"),
-                         #else
                          "program-name", KGX_DISPLAY_NAME,
-                         #endif
                          "version", PACKAGE_VERSION,
                          NULL);
 }
