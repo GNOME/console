@@ -469,7 +469,7 @@ paste_response (GtkDialog    *dlg,
   }
 
   if (response == GTK_RESPONSE_ACCEPT) {
-    vte_terminal_feed_child (paste->dest, paste->text, -1);
+    vte_terminal_paste_text (paste->dest, paste->text);
   }
 
   g_free (paste->text);
