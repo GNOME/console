@@ -1,4 +1,4 @@
-project('gnome-console', 'c', version: '0.4.0',
+project('kgx', 'c', version: '0.4.0',
   meson_version: '>= 0.59.0',
   default_options: [
     'werror=true',
