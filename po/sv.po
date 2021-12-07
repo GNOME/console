@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-11-24 02:14+0000\n"
-"PO-Revision-Date: 2021-11-24 13:26+0100\n"
-"Last-Translator: Luna Jernberg <droidbittin@gmail.com>\n"
+"POT-Creation-Date: 2021-12-07 00:09+0000\n"
+"PO-Revision-Date: 2021-12-07 02:04+0100\n"
+"Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -19,39 +19,37 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0\n"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:3
-#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:8
-#: src/kgx-application.h:43
-msgid "Terminal"
-msgstr "Terminal"
+#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
+msgid "Console"
+msgstr "Konsol"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr "kommando;prompt;cmd;kommandorad;kör;skal;terminal;kgx;kings cross;"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:21
 msgid "New Window"
 msgstr "Nytt fönster"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:27 src/kgx-window.ui:168
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:168
 msgid "New Tab"
 msgstr "Ny flik"
 
-#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:9
-#: src/kgx-application.c:556 src/kgx-window.c:542
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:556
 msgid "Terminal Emulator"
 msgstr "Terminalemulator"
 
-#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:11
+#: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr "En enkel användarvänlig terminalemulator för GNOME-skrivbordet."
 
-#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:30
 msgid "Terminal window"
 msgstr "Terminalfönster"
 
-#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:75
+#: data/org.gnome.Console.metainfo.xml.in.in:75
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -165,6 +163,10 @@ msgstr "AVANCERAT: Ställ in skalet att starta"
 msgid "ADVANCED: Set the scrollback length"
 msgstr "AVANCERAT: Ställ in längd på rullningshistorik"
 
+#: src/kgx-application.h:44
+msgid "Console (Development)"
+msgstr "Konsol (Utveckling)"
+
 #: src/kgx-close-dialog.c:52
 msgid "Close Window?"
 msgstr "Stäng fönster?"
@@ -272,13 +274,6 @@ msgstr ""
 "Skicka synpunkter på översättningen till\n"
 "<tp-sv@listor.tp-sv.se>"
 
-#. Translators: Don’t attempt to translate KGX,
-#. * treat it as a proper noun. This string is used
-#. * for developer/preview releases/builds
-#: src/kgx-window.c:540
-msgid "🚧 KGX Devel Build 🚧"
-msgstr "🚧 KGX Utvecklingsbygge 🚧"
-
 #: src/kgx-window.ui:26
 msgid "Shrink text"
 msgstr "Krymp text"
@@ -300,8 +295,8 @@ msgid "_Keyboard Shortcuts"
 msgstr "_Tangentbordsgenvägar"
 
 #: src/kgx-window.ui:93
-msgid "_About Terminal"
-msgstr "_Om Terminal"
+msgid "_About Console"
+msgstr "_Om Konsol"
 
 #: src/kgx-window.ui:94
 msgid "About this program"
@@ -336,16 +331,22 @@ msgid "Show in _Files"
 msgstr "Visa i _Filer"
 
 #: nautilus/kgx-nautilus-menu-item.c:120
-msgid "Open in T_erminal (Devel)"
-msgstr "Öppna i T_erminal (Utveckling)"
+msgid "Open in Co_nsole (Devel)"
+msgstr "Öppna i Ko_nsol (Utveckling)"
 
 #: nautilus/kgx-nautilus-menu-item.c:122
-msgid "Open in T_erminal"
-msgstr "Öppna i T_erminal"
+msgid "Open in Co_nsole"
+msgstr "Öppna i Ko_nsol"
 
 #: nautilus/kgx-nautilus-menu-item.c:124
 msgid "Start a terminal session for this location"
 msgstr "Starta en terminalsession för den här platsen"
+
+#~ msgid "Terminal"
+#~ msgstr "Terminal"
+
+#~ msgid "🚧 KGX Devel Build 🚧"
+#~ msgstr "🚧 KGX Utvecklingsbygge 🚧"
 
 #~ msgid "KGX Terminal Emulator"
 #~ msgstr "KGX Terminalemulator"
