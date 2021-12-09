@@ -1,4 +1,4 @@
-project('kgx', 'c', version: '0.4.0',
+project('gnome-console', 'c', version: '0.4.0',
   meson_version: '>= 0.59.0',
   default_options: [
     'werror=true',
@@ -25,11 +25,13 @@ if get_option('devel')
   app_id = 'org.gnome.Console.Devel'
   app_path = '/org/gnome/Console/Devel/'
   bin_name = meson.project_name() + '-devel'
+  alias_name = 'kgx-devel'
   log_domain = 'KgxDevel'
 else
   app_id = 'org.gnome.Console'
   app_path = '/org/gnome/Console/'
   bin_name = meson.project_name()
+  alias_name = 'kgx'
   log_domain = 'Kgx'
 endif
 

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+@BIN_DIR@/@BIN_NAME@ "$@"

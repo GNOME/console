@@ -83,3 +83,13 @@ executable(        bin_name,
           install: true,
     install_rpath: pkglibdir,
 )
+
+# TODO: use `install_symlink` when a compatible meson version is available
+# See https://github.com/mesonbuild/meson/pull/9608
+configure_file(
+          input: 'kgx.sh.in',
+         output: alias_name,
+  configuration: conf,
+        install: true,
+    install_dir: bindir
+)
