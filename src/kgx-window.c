@@ -133,11 +133,11 @@ kgx_window_constructed (GObject *object)
                           priv->pages, "theme",
                           G_BINDING_SYNC_CREATE);
   g_object_bind_property (application, "theme",
-                          self->theme_switcher, "theme",
+                          priv->theme_switcher, "theme",
                           G_BINDING_SYNC_CREATE |
                           G_BINDING_BIDIRECTIONAL);
   g_object_bind_property (style_manager, "system-supports-color-schemes",
-                          self->theme_switcher, "show-system",
+                          priv->theme_switcher, "show-system",
                           G_BINDING_SYNC_CREATE);
 
   g_object_bind_property (application, "font",
@@ -592,8 +592,9 @@ tab_switcher_activated (GSimpleAction *action,
                         gpointer       data)
 {
   KgxWindow *self = data;
+  KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
 
-  kgx_tab_switcher_open (KGX_TAB_SWITCHER (self->tab_switcher));
+  kgx_tab_switcher_open (KGX_TAB_SWITCHER (priv->tab_switcher));
 }
 
 
@@ -720,11 +721,11 @@ kgx_window_init (KgxWindow *self)
   g_object_bind_property (priv->pages, "tab-view",
                           priv->tab_bar, "view",
                           G_BINDING_SYNC_CREATE);
-  g_object_bind_property (self->pages, "tab-view",
-                          self->tab_button, "view",
+  g_object_bind_property (priv->pages, "tab-view",
+                          priv->tab_button, "view",
                           G_BINDING_SYNC_CREATE);
-  g_object_bind_property (self->pages, "tab-view",
-                          self->tab_switcher, "view",
+  g_object_bind_property (priv->pages, "tab-view",
+                          priv->tab_switcher, "view",
                           G_BINDING_SYNC_CREATE);
 
   target_list = gtk_target_list_new (NULL, 0);
