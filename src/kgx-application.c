@@ -29,6 +29,7 @@
 #include "kgx-config.h"
 
 #include <glib/gi18n.h>
+#include <gio/gdesktopappinfo.h>
 #include <vte/vte.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
@@ -37,6 +38,7 @@
 
 #include "kgx-application.h"
 #include "kgx-window.h"
+#include "kgx-term-app-window.h"
 #include "kgx-pages.h"
 #include "kgx-simple-tab.h"
 #include "kgx-resources.h"
@@ -435,16 +437,45 @@ handle_launch (XdgTerminal1          *xdg_term,
                GVariant              *platform_data,
                KgxApplication        *self)
 {
-  /* TODO: entry - new instance? title? */
+  g_autofree char *title = NULL;
+  g_autoptr (GFile) working = NULL;
+  KgxWindow *window = NULL;
+  guint32 timezone = GDK_CURRENT_TIME;
+
+  if (working_directory) {
+    working = g_file_new_for_path (working_directory);
+  }
+
   /* TODO: env */
   /* TODO: options - keep open? */
 
-  kgx_application_add_terminal (self,
-                                NULL,
-                                -1,
-                                g_file_new_for_path (working_directory),
-                                exec,
-                                NULL);
+  if (desktop_entry && desktop_entry[0] != '\0') {
+    g_autoptr (GDesktopAppInfo) entry = NULL;
+
+    entry = g_desktop_app_info_new_from_filename (desktop_entry);
+
+    window = g_object_new (KGX_TYPE_TERM_APP_WINDOW,
+                           "application", self,
+                           "desktop-entry", entry,
+                           "can-have-tabs", FALSE,
+                           NULL);
+
+    title = g_strdup (g_app_info_get_name (G_APP_INFO (entry)));
+  } else {
+    g_auto (GStrv) parts = NULL;
+    g_autoptr (GError) error = NULL;
+
+    g_shell_parse_argv (exec, NULL, &parts, &error);
+
+    window = g_object_new (KGX_TYPE_WINDOW,
+                           "application", self,
+                           "can-have-tabs", FALSE,
+                           NULL);
+
+    title = g_path_get_basename (parts[0]);
+  }
+
+  kgx_application_add_terminal (self, window, timezone, working, exec, title);
 
   xdg_terminal1_complete_launch_command (xdg_term, invocation);
 }
