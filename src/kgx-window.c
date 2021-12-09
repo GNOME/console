@@ -65,10 +65,12 @@ struct _KgxWindowPrivate {
   GtkWidget            *tab_switcher;
   GtkWidget            *pages;
   GMenu                *primary_menu;
+  GtkWidget            *new_tab;
 
   int                   current_width;
   int                   current_height;
   gboolean              is_maximized_or_tiled;
+  gboolean              can_have_tabs;
 
   GActionMap           *tab_actions;
 };
@@ -79,6 +81,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (KgxWindow, kgx_window, ADW_TYPE_APPLICATION_WINDOW)
 enum {
   PROP_0,
   PROP_APPLICATION,
+  PROP_CAN_HAVE_TABS,
   LAST_PROP
 };
 
@@ -119,6 +122,7 @@ kgx_window_constructed (GObject *object)
   KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
   GtkApplication *application = NULL;
   AdwStyleManager *style_manager;
+  GAction *action;
 
   G_OBJECT_CLASS (kgx_window_parent_class)->constructed (object);
 
@@ -154,6 +158,11 @@ kgx_window_constructed (GObject *object)
                            0);
 
   update_zoom (self, KGX_APPLICATION (application));
+
+  action = g_action_map_lookup_action (G_ACTION_MAP (self), "new-tab");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), priv->can_have_tabs);
+
+  gtk_widget_set_visible (priv->new_tab, priv->can_have_tabs);
 }
 
 
@@ -176,11 +185,15 @@ kgx_window_set_property (GObject      *object,
                          GParamSpec   *pspec)
 {
   KgxWindow *self = KGX_WINDOW (object);
+  KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
 
   switch (property_id) {
     case PROP_APPLICATION:
       gtk_window_set_application (GTK_WINDOW (self),
                                   g_value_get_object (value));
+      break;
+    case PROP_CAN_HAVE_TABS:
+      priv->can_have_tabs = g_value_get_boolean (value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -196,11 +209,15 @@ kgx_window_get_property (GObject    *object,
                          GParamSpec *pspec)
 {
   KgxWindow *self = KGX_WINDOW (object);
+  KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
 
   switch (property_id) {
     case PROP_APPLICATION:
       g_value_set_object (value,
                           gtk_window_get_application (GTK_WINDOW (self)));
+      break;
+    case PROP_CAN_HAVE_TABS:
+      g_value_set_boolean (value, priv->can_have_tabs);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -428,6 +445,12 @@ kgx_window_class_init (KgxWindowClass *klass)
                          KGX_TYPE_APPLICATION,
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
 
+  pspecs[PROP_CAN_HAVE_TABS] =
+    g_param_spec_boolean ("can-have-tabs", "Can have tabs",
+                          "Can this window contain multiple tabs",
+                          TRUE,
+                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   gtk_widget_class_set_template_from_resource (widget_class,
@@ -443,6 +466,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, tab_switcher);
   gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, pages);
   gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, primary_menu);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, new_tab);
 
   gtk_widget_class_bind_template_callback (widget_class, active_changed);
 
@@ -643,6 +667,8 @@ kgx_window_init (KgxWindow *self)
   g_type_ensure (KGX_TYPE_TAB_BUTTON);
   g_type_ensure (KGX_TYPE_TAB_SWITCHER);
   g_type_ensure (KGX_TYPE_THEME_SWITCHER);
+
+  priv->can_have_tabs = TRUE;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 

@@ -420,12 +420,14 @@ handle_launch (XdgTerminal1          *xdg_term,
     window = g_object_new (KGX_TYPE_TERM_APP_WINDOW,
                            "application", self,
                            "desktop-entry", entry,
+                           "can-have-tabs", FALSE,
                            NULL);
 
     title = g_strdup (g_app_info_get_name (G_APP_INFO (entry)));
   } else {
     window = g_object_new (KGX_TYPE_WINDOW,
                            "application", self,
+                           "can-have-tabs", FALSE,
                            NULL);
 
     title = g_path_get_basename (exec[0]);
