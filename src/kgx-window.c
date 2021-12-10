@@ -711,7 +711,6 @@ kgx_window_init (KgxWindow *self)
 
   priv->can_have_tabs = TRUE;
 
-
   gtk_widget_init_template (GTK_WIDGET (self));
 
   g_action_map_add_action_entries (G_ACTION_MAP (self),
