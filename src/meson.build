@@ -17,6 +17,8 @@ kgx_sources = [
   'kgx-theme-switcher.h',
   'kgx-simple-tab.c',
   'kgx-simple-tab.h',
+  'kgx-term-app-window.c',
+  'kgx-term-app-window.h',
   'kgx-pages.c',
   'kgx-pages.h',
   'kgx-proxy-info.c',
