@@ -24,14 +24,12 @@ gnome = import('gnome')
 if get_option('devel')
   app_id = 'org.gnome.Console.Devel'
   app_path = '/org/gnome/Console/Devel/'
-  bin_name = meson.project_name() + '-devel'
-  alias_name = 'kgx-devel'
+  bin_name = 'kgx-devel'
   log_domain = 'KgxDevel'
 else
   app_id = 'org.gnome.Console'
   app_path = '/org/gnome/Console/'
-  bin_name = meson.project_name()
-  alias_name = 'kgx'
+  bin_name = 'kgx'
   log_domain = 'Kgx'
 endif
 
