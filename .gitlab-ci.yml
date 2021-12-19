@@ -1,3 +1,5 @@
+include: 'https://gitlab.gnome.org/GNOME/citemplates/raw/master/flatpak/flatpak_ci_initiative.yml'
+
 debian:
   image: debian:testing
   stage: build
@@ -24,3 +26,15 @@ fedora:
     - meson --buildtype=release -Dtests=true _build .
     - meson compile -C _build
     - meson test -C _build
+
+flatpak:
+    image: 'registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master'
+    stage: build
+    variables:
+        MANIFEST_PATH: "build-aux/flatpak/org.gnome.Console.Devel.json"
+        FLATPAK_MODULE: "gnome-console"
+        RUNTIME_REPO: "https://nightly.gnome.org/gnome-nightly.flatpakrepo"
+        GIT_SUBMODULE_STRATEGY: recursive
+        APP_ID: "org.gnome.Console.Devel"
+        BUNDLE: "org.gnome.Console.Devel.flatpak"
+    extends: .flatpak
