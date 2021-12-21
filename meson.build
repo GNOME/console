@@ -26,11 +26,13 @@ if get_option('devel')
   app_path = '/org/gnome/Console/Devel/'
   bin_name = 'kgx-devel'
   log_domain = 'KgxDevel'
+  package_version = meson.project_version() + '-@0@'.format(run_command('git', 'rev-parse', '--short', 'HEAD').stdout().strip())
 else
   app_id = 'org.gnome.Console'
   app_path = '/org/gnome/Console/'
   bin_name = 'kgx'
   log_domain = 'Kgx'
+  package_version = meson.project_version()
 endif
 
 prefix = get_option('prefix')
@@ -41,7 +43,7 @@ pkglibdir = prefix / libdir / bin_name
 pkgdatadir = datadir / bin_name
 
 conf = configuration_data()
-conf.set_quoted('PACKAGE_VERSION', '@VCS_TAG@')
+conf.set_quoted('PACKAGE_VERSION', package_version)
 conf.set_quoted('GETTEXT_PACKAGE', bin_name)
 conf.set_quoted('KGX_APPLICATION_ID', app_id)
 conf.set('KGX_APPLICATION_ID_RAW', app_id)
