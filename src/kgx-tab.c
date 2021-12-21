@@ -20,8 +20,6 @@
  * SECTION:kgx-page
  * @title: KgxTab
  * @short_description: Base for things in a #KgxPages
- *
- * Since: 0.3.0
  */
 
 #include <glib/gi18n.h>
@@ -575,8 +573,6 @@ kgx_tab_class_init (KgxTabClass *klass)
    * The #KgxApplication this tab is running under
    *
    * Stability: Private
-   *
-   * Since: 0.3.0
    */
   pspecs[PROP_APPLICATION] =
     g_param_spec_object ("application", "Application", "The application",
@@ -589,8 +585,6 @@ kgx_tab_class_init (KgxTabClass *klass)
    * Title of this tab
    *
    * Stability: Private
-   *
-   * Since: 0.3.0
    */
   pspecs[PROP_TAB_TITLE] =
     g_param_spec_string ("tab-title", "Page Title", "Title for this tab",
@@ -603,8 +597,6 @@ kgx_tab_class_init (KgxTabClass *klass)
    * Current path of this tab
    *
    * Stability: Private
-   *
-   * Since: 0.3.0
    */
   pspecs[PROP_TAB_PATH] =
     g_param_spec_object ("tab-path", "Page Path", "Current path",
@@ -615,8 +607,6 @@ kgx_tab_class_init (KgxTabClass *klass)
    * KgxTab:tab-status:
    *
    * Stability: Private
-   *
-   * Since: 0.3.0
    */
   pspecs[PROP_TAB_STATUS] =
     g_param_spec_flags ("tab-status", "Page Status", "Session status",
@@ -648,8 +638,6 @@ kgx_tab_class_init (KgxTabClass *klass)
    * This is the active tab of the active window
    *
    * Stability: Private
-   *
-   * Since: 0.3.0
    */
   pspecs[PROP_IS_ACTIVE] =
     g_param_spec_boolean ("is-active", "Is Active", "Current tab",
@@ -662,8 +650,6 @@ kgx_tab_class_init (KgxTabClass *klass)
    * The #KgxTheme to apply to the #KgxTerminal s in the #KgxTab
    *
    * Stability: Private
-   *
-   * Since: 0.3.0
    */
   pspecs[PROP_THEME] =
     g_param_spec_enum ("theme", "Theme", "The path of the active tab",
@@ -679,8 +665,6 @@ kgx_tab_class_init (KgxTabClass *klass)
    * Bound to #GtkWindow:is-maximized on the #KgxWindow
    *
    * Stability: Private
-   *
-   * Since: 0.3.0
    */
   pspecs[PROP_OPAQUE] =
     g_param_spec_boolean ("opaque", "Opaque", "Terminal opaqueness",
@@ -713,8 +697,6 @@ kgx_tab_class_init (KgxTabClass *klass)
    * Bound to ‘scrollback-lines’ GSetting so changes persist
    *
    * Stability: Private
-   *
-   * Since: 0.4.0
    */
   pspecs[PROP_SCROLLBACK_LINES] =
     g_param_spec_int64 ("scrollback-lines", "Scrollback Lines", "Size of the scrollback",
@@ -1021,8 +1003,6 @@ kgx_tab_died (KgxTab         *self,
  * Find the #KgxTabs @self is (currently) a memember of
  *
  * Returns: (transfer none): the #KgxTabs
- *
- * Since: 0.3.0
  */
 KgxPages *
 kgx_tab_get_pages (KgxTab *self)
@@ -1082,8 +1062,6 @@ push_type (GHashTable      *table,
  * @process: the #KgxProcess of the remote process
  *
  * Registers @pid as a child of @self
- *
- * Since: 0.3.0
  */
 void
 kgx_tab_push_child (KgxTab     *self,
@@ -1150,8 +1128,6 @@ pop_type (GHashTable      *table,
  * @process: the #KgxProcess of the child process
  *
  * Remove a child added with kgx_tab_push_child()
- *
- * Since: 0.3.0
  */
 void
 kgx_tab_pop_child (KgxTab     *self,

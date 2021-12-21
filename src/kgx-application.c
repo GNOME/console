@@ -621,8 +621,6 @@ kgx_application_class_init (KgxApplicationClass *klass)
    * Bound to ‘scrollback-lines’ GSetting so changes persist
    *
    * Stability: Private
-   *
-   * Since: 0.4.0
    */
   pspecs[PROP_SCROLLBACK_LINES] =
     g_param_spec_int64 ("scrollback-lines", "Scrollback Lines", "Size of the scrollback",
@@ -882,8 +880,6 @@ kgx_application_init (KgxApplication *self)
  * @page: the #KgxTab the shell is running in
  *
  * Registers a new shell process with the pid watcher
- *
- * Since: 0.3.0
  */
 void
 kgx_application_add_watch (KgxApplication *self,

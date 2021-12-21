@@ -23,8 +23,6 @@
  *
  * The "are you sure?" dialog when a terminal is closed whilst commands are
  * still running within it
- *
- * Since: 0.2.0
  */
 
 #include <glib/gi18n.h>

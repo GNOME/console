@@ -40,8 +40,6 @@ G_BEGIN_DECLS
  *
  * See #KgxPage:zoom, #KgxPages:zoom
  *
- * Since: 0.3.0
- *
  * Stability: Private
  */
 typedef enum /*< enum,prefix=KGX >*/
@@ -71,8 +69,6 @@ typedef enum /*< enum,prefix=KGX >*/
  * @zoom_level: the #GtkLabel in the #GtkPopover showing the current zoom level
  * @pages: the #KgxPages of #KgxPage current in the window
  * @about_item: the #GtkModelButton for the about item
- *
- * Since: 0.1.0
  */
 struct _KgxWindow
 {

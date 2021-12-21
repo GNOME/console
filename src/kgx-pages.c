@@ -22,8 +22,6 @@
  * @short_description: Container of #KgxTab s
  *
  * The container of open #KgxTab (uses #HdyTabView internally)
- *
- * Since: 0.3.0
  */
 
 #include <glib/gi18n.h>
@@ -562,8 +560,6 @@ kgx_pages_class_init (KgxPagesClass *klass)
    * The #HdyTabView
    *
    * Stability: Private
-   *
-   * Since: 0.3.0
    */
   pspecs[PROP_TAB_VIEW] =
     g_param_spec_object ("tab-view", "Tab View", "The tab view",
@@ -576,8 +572,6 @@ kgx_pages_class_init (KgxPagesClass *klass)
    * The number of open pages
    *
    * Stability: Private
-   *
-   * Since: 0.3.0
    */
   pspecs[PROP_TAB_COUNT] =
     g_param_spec_uint ("tab-count", "Page Count", "Number of pages",
@@ -595,8 +589,6 @@ kgx_pages_class_init (KgxPagesClass *klass)
    * set this property
    *
    * Stability: Private
-   *
-   * Since: 0.3.0
    */
   pspecs[PROP_TITLE] =
     g_param_spec_string ("title", "Title", "The title of the active page",
@@ -612,8 +604,6 @@ kgx_pages_class_init (KgxPagesClass *klass)
    * set this property
    *
    * Stability: Private
-   *
-   * Since: 0.3.0
    */
   pspecs[PROP_PATH] =
     g_param_spec_object ("path", "Path", "The path of the active page",
@@ -626,8 +616,6 @@ kgx_pages_class_init (KgxPagesClass *klass)
    * The #KgxTheme to apply to the #KgxTerminal s in the #KgxTab s
    *
    * Stability: Private
-   *
-   * Since: 0.3.0
    */
   pspecs[PROP_THEME] =
     g_param_spec_enum ("theme", "Theme", "The path of the active page",
@@ -643,8 +631,6 @@ kgx_pages_class_init (KgxPagesClass *klass)
    * Bound to #GtkWindow:is-maximized on the #KgxWindow
    *
    * Stability: Private
-   *
-   * Since: 0.3.0
    */
   pspecs[PROP_OPAQUE] =
     g_param_spec_boolean ("opaque", "Opaque", "Terminal opaqueness",
@@ -688,8 +674,6 @@ kgx_pages_class_init (KgxPagesClass *klass)
    * Bound to ‘scrollback-lines’ GSetting so changes persist
    *
    * Stability: Private
-   *
-   * Since: 0.4.0
    */
   pspecs[PROP_SCROLLBACK_LINES] =
     g_param_spec_int64 ("scrollback-lines", "Scrollback Lines", "Size of the scrollback",
@@ -792,8 +776,6 @@ kgx_pages_remove_page (KgxPages *self,
  * @page: the #KgxTab to focus
  *
  * Switch to a page
- *
- * Since: 0.3.0
  */
 void
 kgx_pages_focus_page (KgxPages *self,
@@ -823,8 +805,6 @@ kgx_pages_focus_page (KgxPages *self,
  * @self: the #KgxPages
  *
  * Get the #KgxStatus of the current #KgxTab
- *
- * Since: 0.3.0
  */
 KgxStatus
 kgx_pages_current_status (KgxPages *self)

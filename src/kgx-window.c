@@ -22,8 +22,6 @@
  * @short_description: Window
  *
  * The main #HdyApplicationWindow that acts as the terminal
- *
- * Since: 0.1.0
  */
 
 #include "kgx-config.h"
@@ -416,8 +414,6 @@ kgx_window_class_init (KgxWindowClass *klass)
    *
    * Proxy for #GtkWindow #GtkWindow:application but with %G_PARAM_CONSTRUCT,
    * simple as that
-   *
-   * Since: 0.3.0
    */
   pspecs[PROP_APPLICATION] =
     g_param_spec_object ("application", "Application",
@@ -710,8 +706,6 @@ kgx_window_init (KgxWindow *self)
  *
  * Get the working directory path of this window, used to open new windows
  * in the same directory
- *
- * Since: 0.4.0
  */
 GFile *
 kgx_window_get_working_dir (KgxWindow *self)
@@ -731,8 +725,6 @@ kgx_window_get_working_dir (KgxWindow *self)
  * @self: the #KgxWindow
  *
  * Get the tabbed widget inside @self
- *
- * Since: 0.3.0
  */
 KgxPages *
 kgx_window_get_pages (KgxWindow *self)

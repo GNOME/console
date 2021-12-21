@@ -20,8 +20,6 @@
  * SECTION:kgx-simple-tab
  * @title: KgxSimpleTab
  * @short_description: #KgxTab for an old fashioned local terminal
- *
- * Since: 0.3.0
  */
 
 #include "kgx-config.h"
@@ -267,8 +265,6 @@ kgx_simple_tab_class_init (KgxSimpleTabClass *klass)
    * KgxSimpleTab:initial-work-dir:
    *
    * Used to handle --working-dir
-   *
-   * Since: 0.3.0
    */
   pspecs[PROP_INITIAL_WORK_DIR] =
     g_param_spec_string ("initial-work-dir", "Initial directory",
@@ -280,8 +276,6 @@ kgx_simple_tab_class_init (KgxSimpleTabClass *klass)
    * KgxSimpleTab:command:
    *
    * Used to handle -e
-   *
-   * Since: 0.3.0
    */
   pspecs[PROP_COMMAND] =
     g_param_spec_boxed ("command", "Command",
