@@ -1,4 +1,4 @@
-project('gnome-console', 'c', version: '0.4.0',
+project('gnome-console', 'c', version: '42.alpha',
   meson_version: '>= 0.59.0',
   default_options: [
     'werror=true',
