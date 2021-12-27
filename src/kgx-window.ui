@@ -23,7 +23,7 @@
               <object class="GtkButton">
                 <property name="visible">True</property>
                 <property name="action-name">app.zoom-out</property>
-                <property name="tooltip-text" translatable="yes">Shrink text</property>
+                <property name="tooltip-text" translatable="yes">Shrink Text</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
@@ -36,7 +36,7 @@
               <object class="GtkButton">
                 <property name="visible">True</property>
                 <property name="action-name">app.zoom-normal</property>
-                <property name="tooltip-text" translatable="yes">Reset size</property>
+                <property name="tooltip-text" translatable="yes">Reset Size</property>
                 <child>
                   <object class="GtkLabel" id="zoom_level">
                     <property name="visible">True</property>
@@ -49,7 +49,7 @@
               <object class="GtkButton">
                 <property name="visible">True</property>
                 <property name="action-name">app.zoom-in</property>
-                <property name="tooltip-text" translatable="yes">Enlarge text</property>
+                <property name="tooltip-text" translatable="yes">Enlarge Text</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
@@ -91,7 +91,7 @@
           <object class="GtkModelButton" id="about_item">
             <property name="visible">True</property>
             <property name="text" translatable="yes">_About Console</property>
-            <property name="tooltip-text" translatable="yes">About this program</property>
+            <property name="tooltip-text" translatable="yes">About this Program</property>
             <property name="action-name">win.about</property>
           </object>
         </child>
@@ -120,7 +120,7 @@
                     <property name="can-focus">0</property>
                     <property name="receives-default">0</property>
                     <property name="action-name">win.find</property>
-                    <property name="tooltip-text" translatable="yes">Find in terminal</property>
+                    <property name="tooltip-text" translatable="yes">Find in Terminal</property>
                     <child>
                       <object class="GtkImage">
                         <property name="visible">1</property>

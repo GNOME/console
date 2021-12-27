@@ -2,7 +2,7 @@
 <interface>
   <requires lib="gtk+" version="3.24"/>
   <template class="KgxTabButton" parent="GtkButton">
-    <property name="tooltip_text" translatable="yes">View open tabs</property>
+    <property name="tooltip_text" translatable="yes">View Open Tabs</property>
     <style>
       <class name="tab-button"/>
     </style>
