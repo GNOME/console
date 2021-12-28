@@ -15,7 +15,7 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="accelerator">&lt;shift&gt;&lt;primary&gt;n</property>
+                <property name="action-name">win.new-window</property>
                 <property name="title" translatable="yes" context="shortcut window">New Window</property>
               </object>
             </child>
@@ -28,21 +28,21 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="accelerator">&lt;shift&gt;&lt;primary&gt;f</property>
+                <property name="action-name">win.find</property>
                 <property name="title" translatable="yes" context="shortcut window">Find</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="accelerator">&lt;shift&gt;&lt;primary&gt;c</property>
+                <property name="action-name">term.copy</property>
                 <property name="title" translatable="yes" context="shortcut window">Copy</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="accelerator">&lt;shift&gt;&lt;primary&gt;v</property>
+                <property name="action-name">term.paste</property>
                 <property name="title" translatable="yes" context="shortcut window">Paste</property>
               </object>
             </child>
@@ -55,14 +55,14 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="accelerator">&lt;shift&gt;&lt;primary&gt;t</property>
+                <property name="action-name">win.new-tab</property>
                 <property name="title" translatable="yes" context="shortcut window">New Tab</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
-                <property name="accelerator">&lt;shift&gt;&lt;primary&gt;w</property>
+                <property name="action-name">win.close-tab</property>
                 <property name="title" translatable="yes" context="shortcut window">Close Tab</property>
               </object>
             </child>
