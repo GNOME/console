@@ -1,15 +1,15 @@
-# Swedish translation for kgx.
-# Copyright © 2019-2021 kgx's COPYRIGHT HOLDER
-# This file is distributed under the same license as the kgx package.
+# Swedish translation for console.
+# Copyright © 2019-2021 console's COPYRIGHT HOLDER
+# This file is distributed under the same license as the console package.
 # Anders Jonsson <anders.jonsson@norsjovallen.se>, 2019, 2020, 2021.
 # Luna Jernberg <droidbittin@gmail.com>, 2021.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: kgx master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-12-07 00:09+0000\n"
-"PO-Revision-Date: 2021-12-07 02:04+0100\n"
+"Project-Id-Version: console main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
+"POT-Creation-Date: 2021-12-30 21:38+0000\n"
+"PO-Revision-Date: 2021-12-30 23:17+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
@@ -232,7 +232,7 @@ msgid "Command completed"
 msgstr "Kommando slutfört"
 
 #: src/kgx-tab-button.ui:5
-msgid "View open tabs"
+msgid "View Open Tabs"
 msgstr "Visa öppna flikar"
 
 #: src/kgx-terminal.c:732
@@ -275,15 +275,15 @@ msgstr ""
 "<tp-sv@listor.tp-sv.se>"
 
 #: src/kgx-window.ui:26
-msgid "Shrink text"
+msgid "Shrink Text"
 msgstr "Krymp text"
 
 #: src/kgx-window.ui:39
-msgid "Reset size"
+msgid "Reset Size"
 msgstr "Återställ storlek"
 
 #: src/kgx-window.ui:52
-msgid "Enlarge text"
+msgid "Enlarge Text"
 msgstr "Förstora text"
 
 #: src/kgx-window.ui:74
@@ -299,11 +299,11 @@ msgid "_About Console"
 msgstr "_Om Konsol"
 
 #: src/kgx-window.ui:94
-msgid "About this program"
+msgid "About this Program"
 msgstr "Om detta program"
 
 #: src/kgx-window.ui:123
-msgid "Find in terminal"
+msgid "Find in Terminal"
 msgstr "Sök i terminal"
 
 #: src/kgx-window.ui:141
@@ -341,18 +341,3 @@ msgstr "Öppna i Ko_nsol"
 #: nautilus/kgx-nautilus-menu-item.c:124
 msgid "Start a terminal session for this location"
 msgstr "Starta en terminalsession för den här platsen"
-
-#~ msgid "Terminal"
-#~ msgstr "Terminal"
-
-#~ msgid "🚧 KGX Devel Build 🚧"
-#~ msgstr "🚧 KGX Utvecklingsbygge 🚧"
-
-#~ msgid "KGX Terminal Emulator"
-#~ msgstr "KGX Terminalemulator"
-
-#~ msgid "_About King’s Cross"
-#~ msgstr "_Om King’s Cross"
-
-#~ msgid "Op_en in King’s Cross"
-#~ msgstr "Ö_ppna i King’s Cross"
