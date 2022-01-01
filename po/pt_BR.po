@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-11-20 08:29+0000\n"
-"PO-Revision-Date: 2021-11-26 09:27-0300\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
+"POT-Creation-Date: 2021-12-30 21:38+0000\n"
+"PO-Revision-Date: 2021-12-31 18:04-0300\n"
 "Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -17,43 +17,41 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:3
-#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:8
-#: src/kgx-application.h:43
-msgid "Terminal"
-msgstr "Terminal"
+#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
+msgid "Console"
+msgstr "Console"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
 "comando;command;prompt;cmd;linha de comando;commandline;executar;run;shell;"
 "terminal;kgx;kings cross;"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:21
 msgid "New Window"
 msgstr "Nova janela"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:27 src/kgx-window.ui:168
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:168
 msgid "New Tab"
 msgstr "Nova aba"
 
-#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:9
-#: src/kgx-application.c:556 src/kgx-window.c:537
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:556
 msgid "Terminal Emulator"
 msgstr "Emulador de terminal"
 
-#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:11
+#: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr "Um simples emulador de terminal fácil de usar para o ambiente GNOME."
 
-#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:30
 msgid "Terminal window"
 msgstr "Janela do terminal"
 
-#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:75
+#: data/org.gnome.Console.metainfo.xml.in.in:75
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -125,7 +123,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s usando VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:540 src/kgx-window.c:524
+#: src/kgx-application.c:540 src/kgx-window.c:529
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -166,6 +164,10 @@ msgstr "AVANÇADO: Define o shell a lançar"
 #: src/kgx-application.c:737
 msgid "ADVANCED: Set the scrollback length"
 msgstr "AVANÇADO: Define o comprimento do buffer de rolagem (scrollback)"
+
+#: src/kgx-application.h:44
+msgid "Console (Development)"
+msgstr "Console (Desenvolvimento)"
 
 #: src/kgx-close-dialog.c:52
 msgid "Close Window?"
@@ -209,20 +211,20 @@ msgstr "_Fechar"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:119
+#: src/kgx-simple-tab.c:121
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Somente leitura</b> — Comando encerrado com código %i"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:128
+#: src/kgx-simple-tab.c:130
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Somente leitura</b> — Comando encerrado"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:160
+#: src/kgx-simple-tab.c:162
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Falha ao iniciar</b> — %s"
@@ -232,7 +234,7 @@ msgid "Command completed"
 msgstr "Comando concluído"
 
 #: src/kgx-tab-button.ui:5
-msgid "View open tabs"
+msgid "View Open Tabs"
 msgstr "Ver abas abertas"
 
 #: src/kgx-terminal.c:732
@@ -253,43 +255,36 @@ msgstr ""
 msgid "_Paste"
 msgstr "C_olar"
 
-#: src/kgx-theme-switcher.ui:14
+#: src/kgx-theme-switcher.ui:18
 msgid "Use System Colors"
 msgstr "Usar cores do sistema"
 
-#: src/kgx-theme-switcher.ui:25
+#: src/kgx-theme-switcher.ui:47
 msgid "Use Light Colors"
 msgstr "Usar cores claras"
 
-#: src/kgx-theme-switcher.ui:36
+#: src/kgx-theme-switcher.ui:76
 msgid "Use Dark Colors"
 msgstr "Usar cores escuras"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:530
+#: src/kgx-window.c:535
 msgid "translator-credits"
 msgstr ""
 "Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Enrico Nicoletto <liverig@gmail.com>"
 
-#. Translators: Don’t attempt to translate KGX,
-#. * treat it as a proper noun. This string is used
-#. * for developer/preview releases/builds
-#: src/kgx-window.c:535
-msgid "🚧 KGX Devel Build 🚧"
-msgstr "🚧 Build de Desenv. KGX 🚧"
-
 #: src/kgx-window.ui:26
-msgid "Shrink text"
-msgstr "Reduz o texto"
+msgid "Shrink Text"
+msgstr "Reduzir texto"
 
 #: src/kgx-window.ui:39
-msgid "Reset size"
-msgstr "Redefine o tamanho"
+msgid "Reset Size"
+msgstr "Redefinir tamanho"
 
 #: src/kgx-window.ui:52
-msgid "Enlarge text"
-msgstr "Aumenta o texto"
+msgid "Enlarge Text"
+msgstr "Aumentar texto"
 
 #: src/kgx-window.ui:74
 msgid "_New Window"
@@ -300,16 +295,16 @@ msgid "_Keyboard Shortcuts"
 msgstr "Atalhos de _teclado"
 
 #: src/kgx-window.ui:93
-msgid "_About Terminal"
-msgstr "_Sobre o Terminal"
+msgid "_About Console"
+msgstr "_Sobre o Console"
 
 #: src/kgx-window.ui:94
-msgid "About this program"
+msgid "About this Program"
 msgstr "Sobre este programa"
 
 #: src/kgx-window.ui:123
-msgid "Find in terminal"
-msgstr "Encontrar no terminal"
+msgid "Find in Terminal"
+msgstr "Localizar no terminal"
 
 #: src/kgx-window.ui:141
 msgid "Menu"
@@ -336,16 +331,22 @@ msgid "Show in _Files"
 msgstr "Mostrar no _Arquivos"
 
 #: nautilus/kgx-nautilus-menu-item.c:120
-msgid "Open in T_erminal (Devel)"
-msgstr "Abrir no T_erminal (Desenv.)"
+msgid "Open in Co_nsole (Devel)"
+msgstr "Abrir no Co_nsole (Desenv.)"
 
 #: nautilus/kgx-nautilus-menu-item.c:122
-msgid "Open in T_erminal"
-msgstr "Abrir no T_erminal"
+msgid "Open in Co_nsole"
+msgstr "Abrir no Co_nsole"
 
 #: nautilus/kgx-nautilus-menu-item.c:124
 msgid "Start a terminal session for this location"
 msgstr "Inicia uma sessão de terminal para este local"
+
+#~ msgid "Terminal"
+#~ msgstr "Terminal"
+
+#~ msgid "🚧 KGX Devel Build 🚧"
+#~ msgstr "🚧 Build de Desenv. KGX 🚧"
 
 #~ msgid "KGX Terminal Emulator"
 #~ msgstr "Emulador de terminal KGX"
