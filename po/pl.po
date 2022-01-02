@@ -1,14 +1,14 @@
-# Polish translation for kgx.
-# Copyright © 2019-2021 the kgx authors.
-# This file is distributed under the same license as the kgx package.
+# Polish translation for console.
+# Copyright © 2019-2021 the console authors.
+# This file is distributed under the same license as the console package.
 # Piotr Drąg <piotrdrag@gmail.com>, 2019-2021.
 # Aviary.pl <community-poland@mozilla.org>, 2019-2021.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: kgx\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-12-07 00:09+0000\n"
+"Project-Id-Version: console\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
+"POT-Creation-Date: 2021-12-30 21:38+0000\n"
 "PO-Revision-Date: 2021-12-12 14:40+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
@@ -234,7 +234,7 @@ msgid "Command completed"
 msgstr "Ukończono polecenie"
 
 #: src/kgx-tab-button.ui:5
-msgid "View open tabs"
+msgid "View Open Tabs"
 msgstr "Wyświetla otwarte karty"
 
 #: src/kgx-terminal.c:732
@@ -275,15 +275,15 @@ msgstr ""
 "Aviary.pl <community-poland@mozilla.org>, 2019-2021"
 
 #: src/kgx-window.ui:26
-msgid "Shrink text"
+msgid "Shrink Text"
 msgstr "Pomniejsza tekst"
 
 #: src/kgx-window.ui:39
-msgid "Reset size"
+msgid "Reset Size"
 msgstr "Przywraca zwykły rozmiar tekstu"
 
 #: src/kgx-window.ui:52
-msgid "Enlarge text"
+msgid "Enlarge Text"
 msgstr "Powiększa tekst"
 
 #: src/kgx-window.ui:74
@@ -299,11 +299,11 @@ msgid "_About Console"
 msgstr "_O programie"
 
 #: src/kgx-window.ui:94
-msgid "About this program"
+msgid "About this Program"
 msgstr "Informacje o tym programie"
 
 #: src/kgx-window.ui:123
-msgid "Find in terminal"
+msgid "Find in Terminal"
 msgstr "Wyszukuje w terminalu"
 
 #: src/kgx-window.ui:141
