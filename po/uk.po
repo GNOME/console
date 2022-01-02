@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-12-07 00:09+0000\n"
-"PO-Revision-Date: 2021-12-07 19:23+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
+"POT-Creation-Date: 2021-12-30 21:38+0000\n"
+"PO-Revision-Date: 2021-12-31 16:47+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -21,8 +21,7 @@ msgstr ""
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
 msgid "Console"
-msgstr ""
-"Консоль"
+msgstr "Консоль"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Console.desktop.in.in:8
@@ -167,8 +166,7 @@ msgstr "ДЛЯ ДОСВІДЧЕНИХ: встановити довжину бу�
 
 #: src/kgx-application.h:44
 msgid "Console (Development)"
-msgstr ""
-"Консоль (розробка)"
+msgstr "Консоль (розробка)"
 
 #: src/kgx-close-dialog.c:52
 msgid "Close Window?"
@@ -237,7 +235,8 @@ msgid "Command completed"
 msgstr "Виконання команди завершено"
 
 #: src/kgx-tab-button.ui:5
-msgid "View open tabs"
+#| msgid "View open tabs"
+msgid "View Open Tabs"
 msgstr "Переглянути відкриті вкладки"
 
 #: src/kgx-terminal.c:732
@@ -276,15 +275,18 @@ msgid "translator-credits"
 msgstr "Юрій Чорноіван <yurchor@ukr.net>"
 
 #: src/kgx-window.ui:26
-msgid "Shrink text"
+#| msgid "Shrink text"
+msgid "Shrink Text"
 msgstr "Стиснути текст"
 
 #: src/kgx-window.ui:39
-msgid "Reset size"
+#| msgid "Reset size"
+msgid "Reset Size"
 msgstr "Відновити початковий розмір"
 
 #: src/kgx-window.ui:52
-msgid "Enlarge text"
+#| msgid "Enlarge text"
+msgid "Enlarge Text"
 msgstr "Збільшити текст"
 
 #: src/kgx-window.ui:74
@@ -296,16 +298,17 @@ msgid "_Keyboard Shortcuts"
 msgstr "_Клавіатурні скорочення"
 
 #: src/kgx-window.ui:93
-#| msgid "_About Terminal"
 msgid "_About Console"
 msgstr "_Про «Консоль»"
 
 #: src/kgx-window.ui:94
-msgid "About this program"
+#| msgid "About this program"
+msgid "About this Program"
 msgstr "Про цю програму"
 
 #: src/kgx-window.ui:123
-msgid "Find in terminal"
+#| msgid "Find in terminal"
+msgid "Find in Terminal"
 msgstr "Знайти у терміналі"
 
 #: src/kgx-window.ui:141
@@ -333,12 +336,10 @@ msgid "Show in _Files"
 msgstr "Показати у «_Файлах»"
 
 #: nautilus/kgx-nautilus-menu-item.c:120
-#| msgid "Open in T_erminal (Devel)"
 msgid "Open in Co_nsole (Devel)"
 msgstr "Відкрити у _Консолі (тестова збірка)"
 
 #: nautilus/kgx-nautilus-menu-item.c:122
-#| msgid "Open in T_erminal"
 msgid "Open in Co_nsole"
 msgstr "Відкрити у _Консолі"
 
