@@ -26,7 +26,7 @@ if get_option('devel')
   app_path = '/org/gnome/Console/Devel/'
   bin_name = 'kgx-devel'
   log_domain = 'KgxDevel'
-  package_version = meson.project_version() + '-@0@'.format(run_command('git', 'rev-parse', '--short', 'HEAD').stdout().strip())
+  package_version = meson.project_version() + '-@VCS_TAG@'
 else
   app_id = 'org.gnome.Console'
   app_path = '/org/gnome/Console/'
@@ -58,7 +58,10 @@ config_h_in = configure_file(
   output: 'kgx-config.h.in',
   configuration: conf,
 )
-config_h = vcs_tag(input: config_h_in, output: 'kgx-config.h')
+config_h = vcs_tag( input: config_h_in,
+                   output: 'kgx-config.h',
+                  command: ['git', 'rev-parse', '--short', 'HEAD'],
+                 fallback: 'Devel')
 
 gtk_ver = 'GDK_VERSION_3_24'
 glib_ver = 'GLIB_VERSION_2_66'
