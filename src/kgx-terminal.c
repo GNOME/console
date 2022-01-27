@@ -270,6 +270,7 @@ static void
 context_menu (GtkWidget *widget,
               int        x,
               int        y,
+              gboolean   touch,
               GdkEvent  *event)
 {
   KgxTerminal *self = KGX_TERMINAL (widget);
@@ -277,7 +278,6 @@ context_menu (GtkWidget *widget,
   GtkWidget *menu;
   GtkApplication *app;
   GMenu *model;
-  GdkRectangle rect = {x, y, 1, 1};
   gboolean value;
 
   value = have_url_under_pointer (self, event);
@@ -290,16 +290,38 @@ context_menu (GtkWidget *widget,
   app = GTK_APPLICATION (g_application_get_default ());
   model = gtk_application_get_menu_by_id (app, "context-menu");
 
-  menu = gtk_popover_new_from_model (widget, G_MENU_MODEL (model));
-  gtk_popover_set_pointing_to (GTK_POPOVER (menu), &rect);
-  gtk_popover_popup (GTK_POPOVER (menu));
+  if (touch) {
+    GdkRectangle rect = {x, y, 1, 1};
+
+    menu = gtk_popover_new_from_model (widget, G_MENU_MODEL (model));
+    gtk_popover_set_pointing_to (GTK_POPOVER (menu), &rect);
+    gtk_popover_popup (GTK_POPOVER (menu));
+  } else {
+    menu = gtk_menu_new_from_model (G_MENU_MODEL (model));
+    gtk_style_context_add_class (gtk_widget_get_style_context (menu),
+                                 GTK_STYLE_CLASS_CONTEXT_MENU);
+
+    gtk_menu_attach_to_widget (GTK_MENU (menu), widget, NULL);
+
+    if (event && gdk_event_triggers_context_menu (event)) {
+      gtk_menu_popup_at_pointer (GTK_MENU (menu), event);
+    } else {
+      gtk_menu_popup_at_widget (GTK_MENU (menu),
+                                widget,
+                                GDK_GRAVITY_SOUTH_WEST,
+                                GDK_GRAVITY_NORTH_WEST,
+                                event);
+
+      gtk_menu_shell_select_first (GTK_MENU_SHELL (menu), FALSE);
+    }
+  }
 }
 
 
 static gboolean
 kgx_terminal_popup_menu (GtkWidget *self)
 {
-  context_menu (self, 1, 1, NULL);
+  context_menu (self, 1, 1, FALSE, NULL);
 
   return TRUE;
 }
@@ -329,7 +351,7 @@ kgx_terminal_button_press_event (GtkWidget *widget, GdkEventButton *event)
 
   if (gdk_event_triggers_context_menu ((GdkEvent *) event) &&
       event->type == GDK_BUTTON_PRESS) {
-    context_menu (widget, event->x, event->y, (GdkEvent *) event);
+    context_menu (widget, event->x, event->y, FALSE, (GdkEvent *) event);
 
     return TRUE;
   }
@@ -572,7 +594,7 @@ long_pressed (GtkGestureLongPress *gesture,
               gdouble              y,
               KgxTerminal         *self)
 {
-  context_menu (GTK_WIDGET (self), (int) x, (int) y, NULL);
+  context_menu (GTK_WIDGET (self), (int) x, (int) y, TRUE, NULL);
 }
 
 
