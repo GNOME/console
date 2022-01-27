@@ -92,6 +92,16 @@ kgx_terminal_dispose (GObject *object)
   g_clear_pointer (&self->current_url, g_free);
   g_clear_object (&self->long_press_gesture);
 
+  if (self->menu) {
+    gtk_menu_detach (GTK_MENU (self->menu));
+    self->menu = NULL;
+  }
+
+  if (self->touch_menu) {
+    gtk_popover_set_relative_to (GTK_POPOVER (self->touch_menu), NULL);
+    self->touch_menu = NULL;
+  }
+
   G_OBJECT_CLASS (kgx_terminal_parent_class)->dispose (object);
 }
 
@@ -267,6 +277,14 @@ have_url_under_pointer (KgxTerminal *self, GdkEvent *event)
 
 
 static void
+context_menu_detach (KgxTerminal *self,
+                     GtkMenu     *menu)
+{
+  self->menu = NULL;
+}
+
+
+static void
 context_menu (GtkWidget *widget,
               int        x,
               int        y,
@@ -275,7 +293,6 @@ context_menu (GtkWidget *widget,
 {
   KgxTerminal *self = KGX_TERMINAL (widget);
   GAction *act;
-  GtkWidget *menu;
   GtkApplication *app;
   GMenu *model;
   gboolean value;
@@ -287,32 +304,41 @@ context_menu (GtkWidget *widget,
   act = g_action_map_lookup_action (G_ACTION_MAP (self->actions), "copy-link");
   g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
 
-  app = GTK_APPLICATION (g_application_get_default ());
-  model = gtk_application_get_menu_by_id (app, "context-menu");
-
   if (touch) {
     GdkRectangle rect = {x, y, 1, 1};
 
-    menu = gtk_popover_new_from_model (widget, G_MENU_MODEL (model));
-    gtk_popover_set_pointing_to (GTK_POPOVER (menu), &rect);
-    gtk_popover_popup (GTK_POPOVER (menu));
-  } else {
-    menu = gtk_menu_new_from_model (G_MENU_MODEL (model));
-    gtk_style_context_add_class (gtk_widget_get_style_context (menu),
-                                 GTK_STYLE_CLASS_CONTEXT_MENU);
+    if (!self->touch_menu) {
+      app = GTK_APPLICATION (g_application_get_default ());
+      model = gtk_application_get_menu_by_id (app, "context-menu");
 
-    gtk_menu_attach_to_widget (GTK_MENU (menu), widget, NULL);
+      self->touch_menu = gtk_popover_new_from_model (widget, G_MENU_MODEL (model));
+    }
+
+    gtk_popover_set_pointing_to (GTK_POPOVER (self->touch_menu), &rect);
+    gtk_popover_popup (GTK_POPOVER (self->touch_menu));
+  } else {
+    if (!self->menu) {
+      app = GTK_APPLICATION (g_application_get_default ());
+      model = gtk_application_get_menu_by_id (app, "context-menu");
+
+      self->menu = gtk_menu_new_from_model (G_MENU_MODEL (model));
+      gtk_style_context_add_class (gtk_widget_get_style_context (self->menu),
+                                   GTK_STYLE_CLASS_CONTEXT_MENU);
+
+      gtk_menu_attach_to_widget (GTK_MENU (self->menu), widget,
+                                 (GtkMenuDetachFunc) context_menu_detach);
+    }
 
     if (event && gdk_event_triggers_context_menu (event)) {
-      gtk_menu_popup_at_pointer (GTK_MENU (menu), event);
+      gtk_menu_popup_at_pointer (GTK_MENU (self->menu), event);
     } else {
-      gtk_menu_popup_at_widget (GTK_MENU (menu),
+      gtk_menu_popup_at_widget (GTK_MENU (self->menu),
                                 widget,
                                 GDK_GRAVITY_SOUTH_WEST,
                                 GDK_GRAVITY_NORTH_WEST,
                                 event);
 
-      gtk_menu_shell_select_first (GTK_MENU_SHELL (menu), FALSE);
+      gtk_menu_shell_select_first (GTK_MENU_SHELL (self->menu), FALSE);
     }
   }
 }

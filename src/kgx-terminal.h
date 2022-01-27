@@ -108,6 +108,10 @@ struct _KgxTerminal {
 
   /* Gestures */
   GtkGesture *long_press_gesture;
+
+  /* Menus */
+  GtkWidget *menu;
+  GtkWidget *touch_menu;
 };
 
 G_DECLARE_FINAL_TYPE (KgxTerminal, kgx_terminal, KGX, TERMINAL, VteTerminal)
