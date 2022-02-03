@@ -1,68 +1,54 @@
 #
-#  <>, 2020-2021.
+# lumingzh <lumingzh@qq.com>, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-03-20 13:09+0000\n"
-"PO-Revision-Date: 2021-04-16 21:17+0800\n"
-"Last-Translator:  <>\n"
-"Language-Team: English <>\n"
-"Language: en\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
+"POT-Creation-Date: 2022-01-27 15:01+0000\n"
+"PO-Revision-Date: 2022-02-03 10:10+0800\n"
+"Last-Translator: lumingzh <lumingzh@qq.com>\n"
+"Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Gtranslator 40.0\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 41.0\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 
-#. Translators: This is a train station, see README.md for more info
-#: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:512
-#: src/kgx-window.c:520 src/kgx-window.c:553 src/kgx-window.ui:101
-#: src/main.c:37
-msgid "King’s Cross"
-msgstr "King’s Cross"
+#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
+msgid "Console"
+msgstr "控制台"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.zbrown.KingsCross.desktop.in:9
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:8
+#: data/org.gnome.Console.desktop.in.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
 "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;命令;提示"
 "符;命令行;运行;终端;"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in:20
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:19
-#| msgctxt "shortcut window"
-#| msgid "New Window"
+#: data/org.gnome.Console.desktop.in.in:21
 msgid "New Window"
 msgstr "新建窗口"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in:26
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:25 src/kgx-window.ui:145
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:168
 msgid "New Tab"
 msgstr "新建标签页"
 
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3 src/kgx-window.c:518
-#: src/kgx-window.c:551 src/main.c:35
-msgid "Terminal"
-msgstr "终端"
-
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:514
-#: src/kgx-window.c:512
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:556
 msgid "Terminal Emulator"
 msgstr "终端模拟器"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:11
+#: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr "GNOME 桌面的简单、用户友好的终端模拟器。"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:22
+#: data/org.gnome.Console.metainfo.xml.in.in:30
 msgid "Terminal window"
 msgstr "终端窗口"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:52
+#: data/org.gnome.Console.metainfo.xml.in.in:75
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -107,14 +93,11 @@ msgid "New Tab"
 msgstr "新建标签页"
 
 #: src/help-overlay.ui:66
-#| msgid "Close Terminal"
 msgctxt "shortcut window"
 msgid "Close Tab"
 msgstr "关闭标签页"
 
 #: src/help-overlay.ui:73
-#| msgctxt "shortcut window"
-#| msgid "New Tab"
 msgctxt "shortcut window"
 msgid "Next Tab"
 msgstr "下一个标签页"
@@ -130,96 +113,92 @@ msgid "Switch to Tab"
 msgstr "切换到标签页"
 
 #. Translators: The leading # is intentional, the initial %s is the
-#. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:486
+#. version of KGX itself, the latter format is the VTE version
+#: src/kgx-application.c:528
 #, c-format
-msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
-msgstr "# King’s Cross %s 使用 VTE %u.%u.%u %s\n"
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s 使用 VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:498 src/kgx-window.c:500
+#: src/kgx-application.c:540 src/kgx-window.c:525
 #, c-format
-#| msgid "Zander Brown"
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:516
+#: src/kgx-application.c:554 src/kgx-window.ui:115
+msgid "King’s Cross"
+msgstr "King’s Cross"
+
+#: src/kgx-application.c:558
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 或更高版本"
 
-#: src/kgx-application.c:647
+#: src/kgx-application.c:689
 msgid "Execute the argument to this option inside the terminal"
 msgstr "在终端内执行此选项的参数"
 
-#: src/kgx-application.c:656
+#: src/kgx-application.c:698
 msgid "Set the working directory"
 msgstr "设置工作目录"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:658
+#: src/kgx-application.c:700
 msgid "DIRNAME"
 msgstr "DIRNAME"
 
-#: src/kgx-application.c:666
+#: src/kgx-application.c:708
 msgid "Wait until the child exits (TODO)"
 msgstr "等待子命令退出 (TODO)"
 
-#: src/kgx-application.c:675
+#: src/kgx-application.c:717
 msgid "Set the initial window title"
 msgstr "设置初始窗口标题"
 
-#: src/kgx-application.c:684
+#: src/kgx-application.c:726
 msgid "ADVANCED: Set the shell to launch"
 msgstr "高级：设置要启动的 shell"
 
-#: src/kgx-application.c:693
+#: src/kgx-application.c:735
 msgid "ADVANCED: Set the scrollback length"
 msgstr "高级：设置回滚长度"
 
-#: src/kgx-close-dialog.c:52
-#| msgctxt "shortcut window"
-#| msgid "New Window"
+#: src/kgx-application.h:44
+msgid "Console (Development)"
+msgstr "控制台（开发版）"
+
+#: src/kgx-close-dialog.c:50
 msgid "Close Window?"
 msgstr "关闭窗口？"
 
-#: src/kgx-close-dialog.c:53
-#| msgid ""
-#| "Some commands are still running, closing this terminal will kill them and "
-#| "may lead to unexpected outcomes"
+#: src/kgx-close-dialog.c:51
 msgid ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
 msgstr "某些命令仍在运行，关闭此窗口会将其杀死并可能导致意外结果"
 
-#: src/kgx-close-dialog.c:58
-#| msgid "Close Terminal"
+#: src/kgx-close-dialog.c:56
 msgid "Close Tab?"
 msgstr "关闭标签页？"
 
-#: src/kgx-close-dialog.c:59
-#| msgid ""
-#| "Some commands are still running, closing this terminal will kill them and "
-#| "may lead to unexpected outcomes"
+#: src/kgx-close-dialog.c:57
 msgid ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
 msgstr "某些命令仍在运行，关闭此标签页会将其杀死并可能导致意外结果"
 
-#: src/kgx-close-dialog.ui:23 src/kgx-terminal.c:675
+#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:732
 msgid "_Cancel"
 msgstr "取消(_C)"
 
-#: src/kgx-close-dialog.ui:31
-#| msgid "_Close"
+#: src/kgx-close-dialog.ui:32
 msgid "C_lose"
 msgstr "关闭(_L)"
 
-#: src/kgx-pages.ui:41
-#| msgid "_Detach"
+#: src/kgx-pages.ui:47
 msgid "_Detach Tab"
 msgstr "分离标签页(_D)"
 
-#: src/kgx-pages.ui:47
+#: src/kgx-pages.ui:53
 msgid "_Close"
 msgstr "关闭(_C)"
 
@@ -243,16 +222,20 @@ msgstr "<b>只读</b> — 命令已退出"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>启动失败</b> — %s"
 
-#: src/kgx-tab.c:1192
+#: src/kgx-tab.c:1160
 msgid "Command completed"
 msgstr "命令已完成"
 
-#: src/kgx-terminal.c:667
+#: src/kgx-tab-button.ui:5
+msgid "View Open Tabs"
+msgstr "查看打开的标签页"
+
+#: src/kgx-terminal.c:724
 msgid "You are pasting a command that runs as an administrator"
 msgstr "您正在粘贴以管理员权限运行的命令"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:670
+#: src/kgx-terminal.c:727
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -261,59 +244,62 @@ msgstr ""
 "确保您知道该命令做了什么：\n"
 "%s"
 
-#: src/kgx-terminal.c:678 src/menus.ui:24
+#: src/kgx-terminal.c:735 src/menus.ui:24
 msgid "_Paste"
 msgstr "粘贴(_P)"
 
+#: src/kgx-theme-switcher.ui:18
+msgid "Use System Colors"
+msgstr "使用系统配色"
+
+#: src/kgx-theme-switcher.ui:47
+msgid "Use Light Colors"
+msgstr "使用亮色配色"
+
+#: src/kgx-theme-switcher.ui:76
+msgid "Use Dark Colors"
+msgstr "使用暗色配色"
+
 #. Translators: Credit yourself here
-#: src/kgx-window.c:506
+#: src/kgx-window.c:531
 msgid "translator-credits"
-msgstr "Damned <damnedlies@163.com>, 2020."
+msgstr ""
+"Damned <damnedlies@163.com>, 2020.\n"
+"lumingzh <lumingzh@qq.com>, 2022."
 
-#. Translators: Don’t attempt to translate KGX,
-#. * treat it as a proper noun
-#: src/kgx-window.c:510
-#| msgid "Terminal Emulator"
-msgid "KGX Terminal Emulator"
-msgstr "KGX 终端模拟器"
-
-#: src/kgx-window.c:613
-msgid "_About Terminal"
-msgstr "关于终端(_A)"
-
-#: src/kgx-window.ui:20
-msgid "Shrink text"
+#: src/kgx-window.ui:26
+msgid "Shrink Text"
 msgstr "缩小文本"
 
-#: src/kgx-window.ui:33
-msgid "Reset size"
+#: src/kgx-window.ui:39
+msgid "Reset Size"
 msgstr "重置大小"
 
-#: src/kgx-window.ui:46
-msgid "Enlarge text"
+#: src/kgx-window.ui:52
+msgid "Enlarge Text"
 msgstr "放大文本"
 
-#: src/kgx-window.ui:63
+#: src/kgx-window.ui:74
 msgid "_New Window"
 msgstr "新建窗口(_N)"
 
-#: src/kgx-window.ui:75
+#: src/kgx-window.ui:86
 msgid "_Keyboard Shortcuts"
 msgstr "键盘快捷键(_K)"
 
-#: src/kgx-window.ui:82
-msgid "_About King’s Cross"
-msgstr "关于 King’s Cross(_A)"
+#: src/kgx-window.ui:93
+msgid "_About Console"
+msgstr "关于控制台(_A)"
 
-#: src/kgx-window.ui:83
-msgid "About this program"
+#: src/kgx-window.ui:94
+msgid "About this Program"
 msgstr "关于此程序"
 
-#: src/kgx-window.ui:109
-msgid "Find in terminal"
+#: src/kgx-window.ui:123
+msgid "Find in Terminal"
 msgstr "在终端中查找"
 
-#: src/kgx-window.ui:127
+#: src/kgx-window.ui:141
 msgid "Menu"
 msgstr "菜单"
 
@@ -338,18 +324,30 @@ msgid "Show in _Files"
 msgstr "在文件中显示(_F)"
 
 #: nautilus/kgx-nautilus-menu-item.c:120
-#| msgid "Find in terminal"
-msgid "Open in T_erminal"
-msgstr "在终端中打开(_E)"
+msgid "Open in Co_nsole (Devel)"
+msgstr "在控制台中打开（开发）(_N)"
 
 #: nautilus/kgx-nautilus-menu-item.c:122
-#| msgid "King’s Cross"
-msgid "Op_en in King’s Cross"
-msgstr "在 King’s Cross 中打开(_E)"
+msgid "Open in Co_nsole"
+msgstr "在控制台中打开(_N)"
 
 #: nautilus/kgx-nautilus-menu-item.c:124
 msgid "Start a terminal session for this location"
 msgstr "为此位置启动终端会话"
+
+#~ msgid "Terminal"
+#~ msgstr "终端"
+
+#~| msgid "Terminal Emulator"
+#~ msgid "KGX Terminal Emulator"
+#~ msgstr "KGX 终端模拟器"
+
+#~ msgid "_About King’s Cross"
+#~ msgstr "关于 King’s Cross(_A)"
+
+#~| msgid "King’s Cross"
+#~ msgid "Op_en in King’s Cross"
+#~ msgstr "在 King’s Cross 中打开(_E)"
 
 #~ msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
 #~ msgstr ""
