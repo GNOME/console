@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2021-12-30 21:38+0000\n"
-"PO-Revision-Date: 2022-02-07 09:21+0100\n"
+"POT-Creation-Date: 2022-02-07 10:11+0000\n"
+"PO-Revision-Date: 2022-02-07 13:51+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
 msgid "Console"
-msgstr ""
+msgstr "Consola"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Console.desktop.in.in:8
@@ -121,7 +121,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s usando VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:540 src/kgx-window.c:529
+#: src/kgx-application.c:540 src/kgx-window.c:525
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -134,32 +134,32 @@ msgstr "King’s Cross"
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 o posterior"
 
-#: src/kgx-application.c:691
+#: src/kgx-application.c:689
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Ejecutar el argumento de esta opción en la terminal"
 
-#: src/kgx-application.c:700
+#: src/kgx-application.c:698
 msgid "Set the working directory"
 msgstr "Establecer la carpeta de trabajo"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:702
+#: src/kgx-application.c:700
 msgid "DIRNAME"
 msgstr "NOMBRE_CARPETA"
 
-#: src/kgx-application.c:710
+#: src/kgx-application.c:708
 msgid "Wait until the child exits (TODO)"
 msgstr "Esperar a que el hijo termine (POR_HACER)"
 
-#: src/kgx-application.c:719
+#: src/kgx-application.c:717
 msgid "Set the initial window title"
 msgstr "Establecer el título inicial de la ventana"
 
-#: src/kgx-application.c:728
+#: src/kgx-application.c:726
 msgid "ADVANCED: Set the shell to launch"
 msgstr "AVANZADO: establecer la shell que ejecutar"
 
-#: src/kgx-application.c:737
+#: src/kgx-application.c:735
 msgid "ADVANCED: Set the scrollback length"
 msgstr "AVANZADO: establecer la longitud del desplazamiento hacia atrás"
 
@@ -167,11 +167,11 @@ msgstr "AVANZADO: establecer la longitud del desplazamiento hacia atrás"
 msgid "Console (Development)"
 msgstr "Consola (desarrollo)"
 
-#: src/kgx-close-dialog.c:52
+#: src/kgx-close-dialog.c:50
 msgid "Close Window?"
 msgstr "¿Quiere cerrar la ventana?"
 
-#: src/kgx-close-dialog.c:53
+#: src/kgx-close-dialog.c:51
 msgid ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
@@ -179,11 +179,11 @@ msgstr ""
 "Algunos comandos siguen en ejecución. Cerrar esta ventana los matará y esto "
 "puede provocar comportamientos inesperados"
 
-#: src/kgx-close-dialog.c:58
+#: src/kgx-close-dialog.c:56
 msgid "Close Tab?"
 msgstr "¿Quiere cerrar la pestaña?"
 
-#: src/kgx-close-dialog.c:59
+#: src/kgx-close-dialog.c:57
 msgid ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
@@ -191,7 +191,7 @@ msgstr ""
 "Algunos comandos siguen en ejecución. Cerrar esta pestaña los matará y esto "
 "puede provocar comportamientos inesperados"
 
-#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:740
+#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:732
 msgid "_Cancel"
 msgstr "C_ancelar"
 
@@ -209,25 +209,25 @@ msgstr "_Cerrar"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:121
+#: src/kgx-simple-tab.c:119
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Sólo lectura</b> — el comando ha terminado con código %i"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:130
+#: src/kgx-simple-tab.c:128
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Sólo lectura</b> — el comando ha terminado"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:162
+#: src/kgx-simple-tab.c:160
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Falló al iniciar</b> — %s"
 
-#: src/kgx-tab.c:1184
+#: src/kgx-tab.c:1160
 msgid "Command completed"
 msgstr "Comando completado"
 
@@ -235,12 +235,12 @@ msgstr "Comando completado"
 msgid "View Open Tabs"
 msgstr "Ver pestañas abiertas"
 
-#: src/kgx-terminal.c:732
+#: src/kgx-terminal.c:724
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Está pegando un comando que se ejecuta como administrador"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:735
+#: src/kgx-terminal.c:727
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -249,7 +249,7 @@ msgstr ""
 "Asegúrese de que sabe lo que hace el comando:\n"
 "%s"
 
-#: src/kgx-terminal.c:743 src/menus.ui:24
+#: src/kgx-terminal.c:735 src/menus.ui:24
 msgid "_Paste"
 msgstr "_Pegar"
 
@@ -266,22 +266,19 @@ msgid "Use Dark Colors"
 msgstr "Usar colores oscuros"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:535
+#: src/kgx-window.c:531
 msgid "translator-credits"
 msgstr "Daniel Mustieles <daniel.musiteles@gmail.com>, 2019"
 
 #: src/kgx-window.ui:26
-#| msgid "Shrink text"
 msgid "Shrink Text"
 msgstr "Reducir texto"
 
 #: src/kgx-window.ui:39
-#| msgid "Reset size"
 msgid "Reset Size"
 msgstr "Restaurar tamaño"
 
 #: src/kgx-window.ui:52
-#| msgid "Enlarge text"
 msgid "Enlarge Text"
 msgstr "Alargar texto"
 
@@ -294,17 +291,14 @@ msgid "_Keyboard Shortcuts"
 msgstr "Atajos del _teclado"
 
 #: src/kgx-window.ui:93
-#| msgid "_About Terminal"
 msgid "_About Console"
 msgstr "_Acerca de Consola"
 
 #: src/kgx-window.ui:94
-#| msgid "About this program"
 msgid "About this Program"
 msgstr "Acerca de este programa"
 
 #: src/kgx-window.ui:123
-#| msgid "Find in terminal"
 msgid "Find in Terminal"
 msgstr "Buscar en la terminal"
 
@@ -337,7 +331,6 @@ msgid "Open in Co_nsole (Devel)"
 msgstr "Abrir en Co_nsola (desarrollo)"
 
 #: nautilus/kgx-nautilus-menu-item.c:122
-#| msgid "Open in T_erminal"
 msgid "Open in Co_nsole"
 msgstr "Abrir en Co_nsola"
 
