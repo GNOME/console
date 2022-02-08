@@ -2,20 +2,27 @@
 # Copyright (C) 2022 console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the console package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Fran Diéguez <frandieguez@gnome.org>, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-01-02 16:15+0000\n"
-"PO-Revision-Date: 2022-01-03 00:24+0100\n"
-"Last-Translator: \n"
-"Language-Team: Galician <gnome-gl-list@gnome.org>\n"
+"POT-Creation-Date: 2022-01-02 23:25+0000\n"
+"PO-Revision-Date: 2022-02-07 07:21+0100\n"
+"Last-Translator: Fran Diéguez <frandieguez@gnome.org>\n"
+"Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Gtranslator 41.0\n"
+"X-DL-Team: gl\n"
+"X-DL-Module: console\n"
+"X-DL-Branch: main\n"
+"X-DL-Domain: po\n"
+"X-DL-State: Translating\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
@@ -159,7 +166,7 @@ msgstr "AVANZADO: Estabelece a shell a iniciar"
 
 #: src/kgx-application.c:737
 msgid "ADVANCED: Set the scrollback length"
-msgstr ""
+msgstr "AVANZADO: Estabelecer a lonxitude do desprazamento cara atrás"
 
 #: src/kgx-application.h:44
 msgid "Console (Development)"
