@@ -95,20 +95,69 @@ kgx_simple_tab_finalize (GObject *object)
   g_clear_pointer (&self->initial_work_dir, g_free);
   g_clear_pointer (&self->command, g_strfreev);
 
+  if (self->spawn_cancellable) {
+    g_cancellable_cancel (self->spawn_cancellable);
+  }
+  g_clear_object (&self->spawn_cancellable);
+
   G_OBJECT_CLASS (kgx_simple_tab_parent_class)->finalize (object);
 }
 
 
+typedef struct {
+  KgxSimpleTab *self;
+  GTask *task;
+} StartData;
+
+
+static void
+clear_start_data (gpointer data)
+{
+  StartData *self = data;
+
+  g_clear_weak_pointer (&self->self);
+  g_clear_object (&self->task);
+
+  g_free (self);
+}
+
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (StartData, clear_start_data)
+
+
+typedef struct {
+  KgxSimpleTab *self;
+} WaitData;
+
+
+static void
+clear_wait_data (gpointer data)
+{
+  WaitData *self = data;
+
+  g_clear_weak_pointer (&self->self);
+
+  g_free (self);
+} 
+
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (WaitData, clear_wait_data)
+
+
 static void
 wait_cb (GPid     pid,
-         gint     status,
+         int      status,
          gpointer user_data)
 
 {
-  KgxSimpleTab *self = user_data;
+  g_autoptr (WaitData) data = user_data;
   g_autoptr (GError) error = NULL;
 
-  g_return_if_fail (KGX_SIMPLE_TAB (self));
+  if (!data->self) {
+    return; /* Tab destroyed before the process actually died */
+  }
+
+  g_return_if_fail (KGX_SIMPLE_TAB (data->self));
 
   /* wait_check will set @error if it got a signal/non-zero exit */
   if (!g_spawn_check_exit_status (status, &error)) {
@@ -119,9 +168,9 @@ wait_cb (GPid     pid,
     message = g_strdup_printf (_("<b>Read Only</b> — Command exited with code %i"),
                                status);
 
-    kgx_tab_died (KGX_TAB (self), GTK_MESSAGE_ERROR, message, TRUE);
+    kgx_tab_died (KGX_TAB (data->self), GTK_MESSAGE_ERROR, message, TRUE);
   } else {
-    kgx_tab_died (KGX_TAB (self),
+    kgx_tab_died (KGX_TAB (data->self),
                   GTK_MESSAGE_INFO,
     // translators: <b> </b> marks the text as bold, ensure they are
     // matched please!
@@ -131,19 +180,14 @@ wait_cb (GPid     pid,
 }
 
 
-struct StartData {
-  KgxSimpleTab *self;
-  GTask *task;
-};
-
-
 static void
 spawned (VtePty       *pty,
          GAsyncResult *res,
          gpointer      udata)
 
 {
-  struct StartData *data = udata;
+  g_autoptr (StartData) start_data = udata;
+  g_autoptr (WaitData) wait_data = NULL;
   g_autoptr (GError) error = NULL;
   GPid pid;
 
@@ -151,6 +195,12 @@ spawned (VtePty       *pty,
   g_return_if_fail (G_IS_ASYNC_RESULT (res));
 
   fp_vte_pty_spawn_finish (pty, res, &pid, &error);
+
+  if (!start_data->self) {
+    return; /* The tab went away whilst we were spawning */
+  }
+
+  g_return_if_fail (KGX_SIMPLE_TAB (start_data->self));
 
   if (error) {
     g_autofree char *message = NULL;
@@ -160,22 +210,22 @@ spawned (VtePty       *pty,
     message = g_strdup_printf (_("<b>Failed to start</b> — %s"),
                                error->message);
 
-    kgx_tab_died (KGX_TAB (data->self), GTK_MESSAGE_ERROR, message, FALSE);
+    kgx_tab_died (KGX_TAB (start_data->self),
+                  GTK_MESSAGE_ERROR,
+                  message,
+                  FALSE);
 
-    g_task_return_error (data->task, g_steal_pointer (&error));
-
-    g_object_unref (data->self);
-    g_free (data);
+    g_task_return_error (start_data->task, g_steal_pointer (&error));
 
     return;
   }
 
-  g_task_return_int (G_TASK (data->task), pid);
+  wait_data = g_new0 (WaitData, 1);
+  g_set_weak_pointer (&wait_data->self, start_data->self);
 
-  g_child_watch_add (pid, wait_cb, data->self);
+  g_child_watch_add (pid, wait_cb, g_steal_pointer (&wait_data));
 
-  g_object_unref (data->self);
-  g_free (data);
+  g_task_return_int (G_TASK (start_data->task), pid);
 }
 
 
@@ -184,28 +234,41 @@ kgx_simple_tab_start (KgxTab              *page,
                       GAsyncReadyCallback  callback,
                       gpointer             callback_data)
 {
-  KgxSimpleTab       *self;
-  g_autoptr (VtePty)  pty = NULL;
-  g_autoptr (GError)  error = NULL;
-  g_auto (GStrv)      env = NULL;
-  struct StartData   *data;
-  GTask              *task;
+  KgxSimpleTab *self;
+  g_autoptr (VtePty) pty = NULL;
+  g_autoptr (GError) error = NULL;
+  g_auto (GStrv) env = NULL;
+  g_autoptr (StartData) data = NULL;
+  g_autoptr (GTask) task = NULL;
 
   g_return_if_fail (KGX_IS_SIMPLE_TAB (page));
 
   self = KGX_SIMPLE_TAB (page);
 
-  pty = vte_pty_new_sync (VTE_PTY_DEFAULT, NULL, &error);
+  if (self->spawn_cancellable) {
+    g_cancellable_reset (self->spawn_cancellable);
+  } else {
+    self->spawn_cancellable = g_cancellable_new ();
+  }
+
+  task = g_task_new (self, self->spawn_cancellable, callback, callback_data);
+  g_task_set_source_tag (task, kgx_simple_tab_start);
+
+  pty = vte_pty_new_sync (VTE_PTY_DEFAULT, self->spawn_cancellable, &error);
+  if (error) {
+    g_task_return_error (task, error);
+    g_clear_object (&self->spawn_cancellable);
+
+    return;
+  }
 
   env = g_environ_setenv (env, "TERM", "xterm-256color", TRUE);
 
   vte_terminal_set_pty (VTE_TERMINAL (self->terminal), pty);
 
-  task = g_task_new (self, NULL, callback, callback_data);
-
-  data = g_new (struct StartData, 1);
-  data->self = g_object_ref (self);
-  data->task = task;
+  data = g_new0 (StartData, 1);
+  g_set_weak_pointer (&data->self, self);
+  g_set_object (&data->task, task);
 
   kgx_proxy_info_apply_to_environ (kgx_proxy_info_get_default (), &env);
 
@@ -214,9 +277,9 @@ kgx_simple_tab_start (KgxTab              *page,
                           (const char *const *) self->command,
                           (const char *const *) env,
                           -1,
-                          NULL,
+                          self->spawn_cancellable,
                           (GAsyncReadyCallback) spawned,
-                          data);
+                          g_steal_pointer (&data));
 }
 
 

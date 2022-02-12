@@ -176,9 +176,9 @@ kgx_tab_dispose (GObject *object)
 
   if (priv->terminal) {
     g_object_disconnect (priv->terminal,
-                        "signal::size-changed", G_CALLBACK (size_changed), self,
-                        "signal::increase-font-size", G_CALLBACK (font_increase), self,
-                        "signal::decrease-font-size", G_CALLBACK (font_decrease), self,
+                        "any-signal::size-changed", G_CALLBACK (size_changed), self,
+                        "any-signal::increase-font-size", G_CALLBACK (font_increase), self,
+                        "any-signal::decrease-font-size", G_CALLBACK (font_decrease), self,
                         NULL);
   }
   g_clear_object (&priv->terminal);
@@ -859,9 +859,9 @@ kgx_tab_connect_terminal (KgxTab      *self,
 
   if (priv->terminal) {
     g_object_disconnect (priv->terminal,
-                         "signal::size-changed", G_CALLBACK (size_changed), self,
-                         "signal::increase-font-size", G_CALLBACK (font_increase), self,
-                         "signal::decrease-font-size", G_CALLBACK (font_decrease), self,
+                         "any-signal::size-changed", G_CALLBACK (size_changed), self,
+                         "any-signal::increase-font-size", G_CALLBACK (font_increase), self,
+                         "any-signal::decrease-font-size", G_CALLBACK (font_decrease), self,
                          NULL);
   }
 

@@ -49,6 +49,7 @@ struct _KgxSimpleTab
   GStrv      command;
 
   GtkWidget *terminal;
+  GCancellable *spawn_cancellable;
 };
 
 G_DECLARE_FINAL_TYPE (KgxSimpleTab, kgx_simple_tab, KGX, SIMPLE_TAB, KgxTab)
