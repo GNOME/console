@@ -63,12 +63,9 @@ kgx_enums = gnome.mkenums_simple('kgx-enums',
                                       'kgx-tab.h'
                                     ])
 
-kgx_lib = library (bin_name,
+kgx_lib = static_library (bin_name,
                    kgx_sources + kgx_enums,
      dependencies: kgx_deps,
-          install: true,
-      install_dir: pkglibdir,
-    install_rpath: pkglibdir + ':' + libdir,
 )
 kgx_inc = include_directories('.')
 

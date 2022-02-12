@@ -39,6 +39,7 @@
 #include "kgx-window.h"
 #include "kgx-pages.h"
 #include "kgx-simple-tab.h"
+#include "kgx-resources.h"
 
 #define LOGO_COL_SIZE 28
 #define LOGO_ROW_SIZE 14
@@ -350,6 +351,8 @@ kgx_application_startup (GApplication *app)
   const char *const zoom_normal_accels[] = { "<primary>0", NULL };
 
   g_set_prgname (g_application_get_application_id (app));
+
+  g_resources_register (kgx_get_resource ());
 
   g_type_ensure (KGX_TYPE_TERMINAL);
   g_type_ensure (KGX_TYPE_PAGES);
