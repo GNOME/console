@@ -56,7 +56,7 @@ G_BEGIN_DECLS
  * Stability: Private
  */
 struct ProcessWatch {
-  KgxTab     *page;
+  KgxTab /*weak*/ *page;
   KgxProcess *process;
 };
 

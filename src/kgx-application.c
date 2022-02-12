@@ -219,11 +219,20 @@ handle_watch_iter (gpointer pid,
   // There are far more processes on the system than there are children
   // of watches, thus lookup are unlikly
   if (G_UNLIKELY (watch != NULL)) {
+
+    /* If the page died we stop caring about its processes */
+    if (G_UNLIKELY (watch->page == NULL)) {
+      g_tree_remove (self->watching, GINT_TO_POINTER (parent));
+      g_tree_remove (self->children, pid);
+
+      return FALSE;
+    }
+
     if (!g_tree_lookup (self->children, pid)) {
-      struct ProcessWatch *child_watch = g_new (struct ProcessWatch, 1);
+      struct ProcessWatch *child_watch = g_new0 (struct ProcessWatch, 1);
 
       child_watch->process = g_rc_box_acquire (process);
-      child_watch->page = g_object_ref (watch->page);
+      g_set_weak_pointer (&child_watch->page, watch->page);
 
       g_debug ("Hello %i!", GPOINTER_TO_INT (pid));
 
@@ -637,7 +646,7 @@ clear_watch (struct ProcessWatch *watch)
   g_return_if_fail (watch != NULL);
 
   g_clear_pointer (&watch->process, kgx_process_unref);
-  g_clear_object (&watch->page);
+  g_clear_weak_pointer (&watch->page);
 
   g_clear_pointer (&watch, g_free);
 }
@@ -863,10 +872,7 @@ kgx_application_init (KgxApplication *self)
                                     NULL,
                                     NULL,
                                     (GDestroyNotify) clear_watch);
-  self->pages = g_tree_new_full (kgx_pid_cmp,
-                                 NULL,
-                                 NULL,
-                                 (GDestroyNotify) g_object_unref);
+  self->pages = g_tree_new_full (kgx_pid_cmp, NULL, NULL, NULL);
 
   self->active = 0;
   self->timeout = 0;
@@ -893,11 +899,9 @@ kgx_application_add_watch (KgxApplication *self,
 
   watch = g_new0 (struct ProcessWatch, 1);
   watch->process = kgx_process_new (pid);
-  watch->page = g_object_ref (page);
+  g_set_weak_pointer (&watch->page, page);
 
   g_debug ("Started watching %i", pid);
-
-  g_return_if_fail (KGX_IS_TAB (watch->page));
 
   g_tree_insert (self->watching, GINT_TO_POINTER (pid), watch);
 }
@@ -993,6 +997,15 @@ kgx_application_pop_active (KgxApplication *self)
 }
 
 
+static void
+page_died (gpointer data, GObject *dead_object)
+{
+  KgxApplication *self = KGX_APPLICATION (g_application_get_default ());
+
+  g_tree_remove (self->pages, data);
+}
+
+
 /**
  * kgx_application_add_page:
  * @self: the instance to look for @id in
@@ -1002,7 +1015,7 @@ kgx_application_pop_active (KgxApplication *self)
  */
 void
 kgx_application_add_page (KgxApplication *self,
-                          KgxTab        *page)
+                          KgxTab         *page)
 {
   guint id = 0;
 
@@ -1011,7 +1024,8 @@ kgx_application_add_page (KgxApplication *self,
 
   id = kgx_tab_get_id (page);
 
-  g_tree_insert (self->pages, GINT_TO_POINTER (id), g_object_ref (page));
+  g_tree_insert (self->pages, GINT_TO_POINTER (id), page);
+  g_object_weak_ref (G_OBJECT (page), page_died, GINT_TO_POINTER (id));
 }
 
 
