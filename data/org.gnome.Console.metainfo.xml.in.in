@@ -31,6 +31,35 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="42.beta" date="2022-02-14">
+      <description>
+        <p>KGX now goes by Console and we have restored the legendary ‘Day’ mode</p>
+        <p>Also in this release:</p>
+        <ul>
+          <li>👓 Much better High Contrast support</li>
+          <li>🔬 Increased Zoom range</li>
+          <li>📋 Paste is now less pernickety</li>
+          <li>🩹 Fixed a couple leaks and assorted issues</li>
+        </ul>
+        <p>GNOME l10n Teams have updated translations:</p>
+        <ul>
+          <li>Basque</li>
+          <li>Chinese (China)</li>
+          <li>Finnish</li>
+          <li>Galician</li>
+          <li>Hebrew</li>
+          <li>Polish</li>
+          <li>Portuguese</li>
+          <li>Portuguese (Brazil)</li>
+          <li>Russian</li>
+          <li>Slovenian</li>
+          <li>Spanish</li>
+          <li>Swedish</li>
+          <li>Turkish</li>
+          <li>Ukrainian</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.4.0" date="2021-10-24">
       <description>
         <p>More Terminals! KGX can now host multiple sessions per window with nifty tabs on larger screens and a neat list for those on the narrower side</p>

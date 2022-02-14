@@ -1,0 +1,73 @@
+Version 42.beta
+~~~~~~~~~~~~~~~
+Released: 2022-02-14
+
+KGX now goes by Console and we have restored the legendary ‘Day’ mode
+
+Also in this release:
+ * 👓 Much better High Contrast support
+ * 🔬 Increased Zoom range
+ * 📋 Paste is now less pernickety
+ * 🩹 Fixed a couple leaks and assorted issues
+
+GNOME l10n Teams have updated translations:
+ * Basque
+ * Chinese (China)
+ * Finnish
+ * Galician
+ * Hebrew
+ * Polish
+ * Portuguese
+ * Portuguese (Brazil)
+ * Russian
+ * Slovenian
+ * Spanish
+ * Swedish
+ * Turkish
+ * Ukrainian
+
+Version 0.4.0
+~~~~~~~~~~~~~
+Released: 2021-10-24
+
+More Terminals! KGX can now host multiple sessions per window with nifty tabs on larger screens and
+a neat list for those on the narrower side
+
+Also in this release:
+ * 🎨 Shiny new — yet familiar — icon
+ * 📜 More scrollback
+ * 🔗 Mouse users can ctrl-click links
+ * 🗄️ Handy little Files (Nautilus) extension to launch KGX in a folder
+ * 🤦‍♀️ Assorted bugs have been wrangled and scrolling behaviour (especially on touch) has been
+   improved
+ * 💬 GNOME l10n teams have added many more translations
+ * 🪛 Adventurous users can set a custom shell (such as fish) and tweak the scrollback size
+
+Version 0.2.1
+~~~~~~~~~~~~~
+Released: 2019-10-06
+
+Use HdySearchBar to match the behaviour in other apps.
+
+Improved generic banding (no weird symbols in about dialog).
+
+Translation updates from the wonderful d-l team (except en_GB, that translator seems to have
+dropped the ball....).
+
+Version 0.2.0
+~~~~~~~~~~~~~
+Released: 2019-09-15
+
+Impoved tracking of running commands reducing resource usage, especially when running in the
+background.
+
+Command complete notifications and query close when commands are still running.
+
+Translations for de, en_GB, es, fi, hu, pl & pt_BR from various users on l10n.gnome.org (thanks
+guys!).
+
+Version 0.1.0
+~~~~~~~~~~~~~
+Released: 2019-07-30
+
+The first release of our little terminal emulator with basic functionality.
