@@ -78,5 +78,4 @@ executable(        bin_name,
                    'main.c',
      dependencies: kgx_dep,
           install: true,
-    install_rpath: pkglibdir,
 )
