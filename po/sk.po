@@ -1,0 +1,356 @@
+# Slovak translation for console.
+# Copyright (C) 2022 console's COPYRIGHT HOLDER
+# This file is distributed under the same license as the console package.
+# Dušan Kazik <prescott66@gmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: console main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
+"POT-Creation-Date: 2022-02-22 18:05+0000\n"
+"PO-Revision-Date: 2022-02-23 13:58+0100\n"
+"Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
+"Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
+"X-Generator: Poedit 3.0\n"
+
+#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
+msgid "Console"
+msgstr "Konzola"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Console.desktop.in.in:8
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
+msgstr ""
+"príkaz;príkazový;riadok;cmd;spustiť;spustenie;shell;terminál;kgx;kings "
+"cross;"
+
+#: data/org.gnome.Console.desktop.in.in:21
+msgid "New Window"
+msgstr "Nové okno"
+
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:168
+msgid "New Tab"
+msgstr "Nová karta"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:568
+msgid "Terminal Emulator"
+msgstr "Emulátor terminálu"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:11
+msgid "A simple user-friendly terminal emulator for the GNOME desktop."
+msgstr ""
+"Jednoduchý a priateľský emulátor terminálu pre pracovné prostredie GNOME."
+
+#: data/org.gnome.Console.metainfo.xml.in.in:30
+msgid "Terminal window"
+msgstr "Okno terminálu"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:104
+msgid "Zander Brown"
+msgstr "Zander Brown"
+
+#: src/help-overlay.ui:13
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Aplikácia"
+
+#: src/help-overlay.ui:19
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Nové okno"
+
+#: src/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Terminál"
+
+#: src/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Nájdenie"
+
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Kopírovanie"
+
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Vloženie"
+
+#: src/help-overlay.ui:53
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Karty"
+
+#: src/help-overlay.ui:59
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Nová karta"
+
+#: src/help-overlay.ui:66
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Zavretie karty"
+
+#: src/help-overlay.ui:73
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Nasledujúca karta"
+
+#: src/help-overlay.ui:80
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Predchádzajúca karta"
+
+#: src/help-overlay.ui:87
+msgctxt "shortcut window"
+msgid "Switch to Tab"
+msgstr "Prepnutie na kartu"
+
+#. Translators: The leading # is intentional, the initial %s is the
+#. version of KGX itself, the latter format is the VTE version
+#: src/kgx-application.c:540
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s s použitím VTE %u.%u.%u %s\n"
+
+#. Translators: %s is the year range
+#: src/kgx-application.c:552 src/kgx-window.c:525
+#, c-format
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
+
+#: src/kgx-application.c:566 src/kgx-window.ui:115
+msgid "King’s Cross"
+msgstr "King’s Cross"
+
+#: src/kgx-application.c:570
+msgid "GPL 3.0 or later"
+msgstr "GPL 3.0 alebo novšia"
+
+# cmd line desc
+#: src/kgx-application.c:701
+msgid "Execute the argument to this option inside the terminal"
+msgstr "Vykoná parameter pre túto voľbu v termináli"
+
+# cmd line desc
+#: src/kgx-application.c:710
+msgid "Set the working directory"
+msgstr "Nastaví pracovný adresár"
+
+#. Translators: Placeholder of for a given directory
+#: src/kgx-application.c:712
+msgid "DIRNAME"
+msgstr "NÁZOV_PRIEČINKU"
+
+# cmd line desc
+#: src/kgx-application.c:720
+msgid "Wait until the child exits (TODO)"
+msgstr "Počká, kým potomok neskončí (TODO)"
+
+# cmd line desc
+#: src/kgx-application.c:729
+msgid "Set the initial window title"
+msgstr "Nastaví titulok počiatočného okna"
+
+# cmd line desc
+#: src/kgx-application.c:738
+msgid "ADVANCED: Set the shell to launch"
+msgstr "POKROČILÉ: Nastaví príkazový riadok, ktorý sa má spustiť"
+
+# cmd line desc
+#: src/kgx-application.c:747
+msgid "ADVANCED: Set the scrollback length"
+msgstr "POKROČILÉ: Nastaví dĺžku spätného rolovania"
+
+#: src/kgx-application.h:44
+msgid "Console (Development)"
+msgstr "Konzola (vo vývoji)"
+
+#: src/kgx-close-dialog.c:50
+msgid "Close Window?"
+msgstr "Zavrieť okno?"
+
+#: src/kgx-close-dialog.c:51
+msgid ""
+"Some commands are still running, closing this window will kill them and may "
+"lead to unexpected outcomes"
+msgstr ""
+"Niektoré príkazy sú stále spustené. Zavretím tohto okna ich zabijete, čo "
+"môže viesť k neočakávaným výsledkom."
+
+#: src/kgx-close-dialog.c:56
+msgid "Close Tab?"
+msgstr "Zavrieť kartu?"
+
+#: src/kgx-close-dialog.c:57
+msgid ""
+"Some commands are still running, closing this tab will kill them and may "
+"lead to unexpected outcomes"
+msgstr ""
+"Niektoré príkazy sú stále spustené. Zavretím tejto karty ich zabijete, čo "
+"môže viesť k neočakávaným výsledkom."
+
+#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:780
+msgid "_Cancel"
+msgstr "_Zrušiť"
+
+#: src/kgx-close-dialog.ui:32
+msgid "C_lose"
+msgstr "Zav_rieť"
+
+#: src/kgx-pages.ui:47
+msgid "_Detach Tab"
+msgstr "_Odpojiť kartu"
+
+#: src/kgx-pages.ui:53
+msgid "_Close"
+msgstr "_Zavrieť"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:168
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Iba načítanie</b> — Príkaz skončil s kódom %i"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:177
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Iba načítanie</b> — Príkaz skončil"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:210
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Zlyhalo spustenie</b> — %s"
+
+#: src/kgx-tab.c:1160
+msgid "Command completed"
+msgstr "Príkaz dokončený"
+
+# tooltip
+#: src/kgx-tab-button.ui:5
+msgid "View Open Tabs"
+msgstr "Zobrazí otvorené karty"
+
+#: src/kgx-terminal.c:772
+msgid "You are pasting a command that runs as an administrator"
+msgstr "Vkladáte príkaz, ktorý sa spúšťa ako správca"
+
+#. TRANSLATORS: %s is the command being pasted
+#: src/kgx-terminal.c:775
+#, c-format
+msgid ""
+"Make sure you know what the command does:\n"
+"%s"
+msgstr ""
+"Uistite sa, že viete, čo príkaz vykoná:\n"
+"%s"
+
+#: src/kgx-terminal.c:783 src/menus.ui:24
+msgid "_Paste"
+msgstr "_Vložiť"
+
+# tooltip
+#: src/kgx-theme-switcher.ui:18
+msgid "Use System Colors"
+msgstr "Použije systémové farby"
+
+# tooltip
+#: src/kgx-theme-switcher.ui:47
+msgid "Use Light Colors"
+msgstr "Použije svetlé farby"
+
+# tooltip
+#: src/kgx-theme-switcher.ui:76
+msgid "Use Dark Colors"
+msgstr "Použije tmavé farby"
+
+#. Translators: Credit yourself here
+#: src/kgx-window.c:531
+msgid "translator-credits"
+msgstr "Dušan Kazik <prescott66@gmail.com>"
+
+# tooltip
+#: src/kgx-window.ui:26
+msgid "Shrink Text"
+msgstr "Zmenší text"
+
+# tooltip
+#: src/kgx-window.ui:39
+msgid "Reset Size"
+msgstr "Obnoví veľkosť"
+
+# tooltip
+#: src/kgx-window.ui:52
+msgid "Enlarge Text"
+msgstr "Zväčší text"
+
+#: src/kgx-window.ui:74
+msgid "_New Window"
+msgstr "_Nové okno"
+
+#: src/kgx-window.ui:86
+msgid "_Keyboard Shortcuts"
+msgstr "_Klávesové skratky"
+
+#: src/kgx-window.ui:93
+msgid "_About Console"
+msgstr "_O aplikácii Konzola"
+
+#: src/kgx-window.ui:94
+msgid "About this Program"
+msgstr "O tomto programe"
+
+# tooltip
+#: src/kgx-window.ui:123
+msgid "Find in Terminal"
+msgstr "Nájde v termináli"
+
+#: src/kgx-window.ui:141
+msgid "Menu"
+msgstr "Ponuka"
+
+#: src/menus.ui:7
+msgid "_Open Link"
+msgstr "_Otvoriť odkaz"
+
+#: src/menus.ui:12
+msgid "Copy _Link"
+msgstr "_Kopírovať odkaz"
+
+#: src/menus.ui:19
+msgid "_Copy"
+msgstr "_Kopírovať"
+
+#: src/menus.ui:29
+msgid "_Select All"
+msgstr "Vybr_ať všetko"
+
+#: src/menus.ui:36
+msgid "Show in _Files"
+msgstr "Zobraziť v aplikácii _Súbory"
+
+#: nautilus/kgx-nautilus-menu-item.c:120
+msgid "Open in Co_nsole (Devel)"
+msgstr "Otvoriť v aplikácii _Konzola (vo vývoji)"
+
+#: nautilus/kgx-nautilus-menu-item.c:122
+msgid "Open in Co_nsole"
+msgstr "Otvoriť v aplikácii _Konzola"
+
+# tooltip
+#: nautilus/kgx-nautilus-menu-item.c:124
+msgid "Start a terminal session for this location"
+msgstr "Spustí reláciu terminálu v tomto umiestnení"
