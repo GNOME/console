@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-11-20 08:29+0000\n"
-"PO-Revision-Date: 2021-11-22 13:59+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
+"POT-Creation-Date: 2021-12-30 21:38+0000\n"
+"PO-Revision-Date: 2022-02-27 18:43+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: Finnish <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -16,43 +16,41 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:3
-#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:8
-#: src/kgx-application.h:43
-msgid "Terminal"
-msgstr "Pääte"
+#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
+msgid "Console"
+msgstr "Konsoli"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
 "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;pääte;"
 "terminaali;komentorivi;"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:21
 msgid "New Window"
 msgstr "Uusi ikkuna"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:27 src/kgx-window.ui:168
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:168
 msgid "New Tab"
 msgstr "Uusi välilehti"
 
-#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:9
-#: src/kgx-application.c:556 src/kgx-window.c:537
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:556
 msgid "Terminal Emulator"
 msgstr "Pääte-emulaattori"
 
-#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:11
+#: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr "Helppokäyttöinen pääte-emulaattori Gnome-työpöydälle."
 
-#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:30
 msgid "Terminal window"
 msgstr "Pääteikkuna"
 
-#: data/org.gnome.zbrown.KingsCross.metainfo.xml.in.in:75
+#: data/org.gnome.Console.metainfo.xml.in.in:75
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -120,12 +118,11 @@ msgstr "Vaihda välilehteen"
 #. version of KGX itself, the latter format is the VTE version
 #: src/kgx-application.c:528
 #, c-format
-#| msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s käyttäen VTE:n versiota %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:540 src/kgx-window.c:524
+#: src/kgx-application.c:540 src/kgx-window.c:529
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -166,6 +163,10 @@ msgstr "EDISTYNYT: Aseta pääte avautumaan"
 #: src/kgx-application.c:737
 msgid "ADVANCED: Set the scrollback length"
 msgstr "EDISTYNYT: Aseta takaisinkelauksen määrä"
+
+#: src/kgx-application.h:44
+msgid "Console (Development)"
+msgstr "Konsoli (kehitys)"
 
 #: src/kgx-close-dialog.c:52
 msgid "Close Window?"
@@ -209,20 +210,20 @@ msgstr "_Sulje"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:119
+#: src/kgx-simple-tab.c:121
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Vain luku</b> — Komento poistui koodilla %i"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:128
+#: src/kgx-simple-tab.c:130
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Vain luku</b> — Komento poistui"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:160
+#: src/kgx-simple-tab.c:162
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Ei voitu käynnistää</b> — %s"
@@ -232,7 +233,7 @@ msgid "Command completed"
 msgstr "Komento suoritettu"
 
 #: src/kgx-tab-button.ui:5
-msgid "View open tabs"
+msgid "View Open Tabs"
 msgstr "Näytä avoimet välilehdet"
 
 #: src/kgx-terminal.c:732
@@ -253,42 +254,35 @@ msgstr ""
 msgid "_Paste"
 msgstr "_Liitä"
 
-#: src/kgx-theme-switcher.ui:14
+#: src/kgx-theme-switcher.ui:18
 msgid "Use System Colors"
 msgstr "Käytä järjestelmän värejä"
 
-#: src/kgx-theme-switcher.ui:25
+#: src/kgx-theme-switcher.ui:47
 msgid "Use Light Colors"
 msgstr "Käytä vaaleita värejä"
 
-#: src/kgx-theme-switcher.ui:36
+#: src/kgx-theme-switcher.ui:76
 msgid "Use Dark Colors"
 msgstr "Käytä tummia värejä"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:530
+#: src/kgx-window.c:535
 msgid "translator-credits"
 msgstr ""
 "Jiri Grönroos\n"
 "JR-Fi"
 
-#. Translators: Don’t attempt to translate KGX,
-#. * treat it as a proper noun. This string is used
-#. * for developer/preview releases/builds
-#: src/kgx-window.c:535
-msgid "🚧 KGX Devel Build 🚧"
-msgstr ""
-
 #: src/kgx-window.ui:26
-msgid "Shrink text"
+msgid "Shrink Text"
 msgstr "Kutista teksti"
 
 #: src/kgx-window.ui:39
-msgid "Reset size"
+msgid "Reset Size"
 msgstr "Palauta koko"
 
 #: src/kgx-window.ui:52
-msgid "Enlarge text"
+msgid "Enlarge Text"
 msgstr "Suurenna teksti"
 
 #: src/kgx-window.ui:74
@@ -300,15 +294,15 @@ msgid "_Keyboard Shortcuts"
 msgstr "_Pikanäppäimet"
 
 #: src/kgx-window.ui:93
-msgid "_About Terminal"
-msgstr "_Tietoja - Pääte"
+msgid "_About Console"
+msgstr "_Tietoja - Konsoli"
 
 #: src/kgx-window.ui:94
-msgid "About this program"
+msgid "About this Program"
 msgstr "Tietoa tästä ohjelmasta"
 
 #: src/kgx-window.ui:123
-msgid "Find in terminal"
+msgid "Find in Terminal"
 msgstr "Etsi päätteestä"
 
 #: src/kgx-window.ui:141
@@ -336,16 +330,19 @@ msgid "Show in _Files"
 msgstr "Näytä tie_dostohallinnassa"
 
 #: nautilus/kgx-nautilus-menu-item.c:120
-msgid "Open in T_erminal (Devel)"
-msgstr "Avaa _päätteessä (Devel)"
+msgid "Open in Co_nsole (Devel)"
+msgstr "Avaa _konsolissa (kehitys)"
 
 #: nautilus/kgx-nautilus-menu-item.c:122
-msgid "Open in T_erminal"
-msgstr "Avaa _päätteessä"
+msgid "Open in Co_nsole"
+msgstr "Avaa _konsolissa"
 
 #: nautilus/kgx-nautilus-menu-item.c:124
 msgid "Start a terminal session for this location"
 msgstr "Aloita pääteistunto tässä sijainnissa"
+
+#~ msgid "Terminal"
+#~ msgstr "Pääte"
 
 #~ msgid "KGX Terminal Emulator"
 #~ msgstr "KGX Pääte-emulaattori"
