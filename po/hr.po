@@ -6,64 +6,52 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-06-14 11:32+0000\n"
-"PO-Revision-Date: 2021-10-01 18:12+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
+"POT-Creation-Date: 2021-12-30 21:38+0000\n"
+"PO-Revision-Date: 2022-03-02 13:23+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#. Translators: This is a train station, see README.md for more info
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:8
-#: src/kgx-application.c:512 src/kgx-application.h:46 src/kgx-window.ui:100
-msgid "King’s Cross"
-msgstr "King’s Cross"
+#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
+msgid "Console"
+msgstr "Konzola"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:9
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
 "naredba;upit;cmd;naredbeni redak;pokreni;ljuska;terminal;kgx;kings cross;"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:20
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:19
+#: data/org.gnome.Console.desktop.in.in:21
 msgid "New Window"
 msgstr "Novi prozor"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in.in:26
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:25
-#: src/kgx-window.ui:144
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:168
 msgid "New Tab"
 msgstr "Nova kartica"
 
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in.in:3
-#: src/kgx-application.h:44
-msgid "Terminal"
-msgstr "Terminal"
-
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:9
-#: src/kgx-application.c:514 src/kgx-window.c:512
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:556
 msgid "Terminal Emulator"
 msgstr "Emulator terminala"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:11
+#: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr ""
 "Jednostavan korisniku prilagođen emulator terminala za GNOME radno okruženje."
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:22
+#: data/org.gnome.Console.metainfo.xml.in.in:30
 msgid "Terminal window"
 msgstr "Prozor terminala"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in.in:52
+#: data/org.gnome.Console.metainfo.xml.in.in:75
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -129,49 +117,57 @@ msgstr "Prebaci na karticu"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:486
+#: src/kgx-application.c:528
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s koristi VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:498 src/kgx-window.c:500
+#: src/kgx-application.c:540 src/kgx-window.c:529
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:516
+#: src/kgx-application.c:554 src/kgx-window.ui:115
+msgid "King’s Cross"
+msgstr "King’s Cross"
+
+#: src/kgx-application.c:558
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 ili novija"
 
-#: src/kgx-application.c:647
+#: src/kgx-application.c:691
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Izvrši argument za ovu mogućnost unutar terminala"
 
-#: src/kgx-application.c:656
+#: src/kgx-application.c:700
 msgid "Set the working directory"
 msgstr "Postavi radni direktorij"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:658
+#: src/kgx-application.c:702
 msgid "DIRNAME"
 msgstr "NAZIV DIREKTORIJA"
 
-#: src/kgx-application.c:666
+#: src/kgx-application.c:710
 msgid "Wait until the child exits (TODO)"
 msgstr "Čekaj dok sadržajni proces postoji (ZADATAK)"
 
-#: src/kgx-application.c:675
+#: src/kgx-application.c:719
 msgid "Set the initial window title"
 msgstr "Postavi početni naslov prozora"
 
-#: src/kgx-application.c:684
+#: src/kgx-application.c:728
 msgid "ADVANCED: Set the shell to launch"
 msgstr "NAPREDNO: Postavi ljusku za pokretanje"
 
-#: src/kgx-application.c:693
+#: src/kgx-application.c:737
 msgid "ADVANCED: Set the scrollback length"
 msgstr "NAPREDNO: Postavi duljinu vraćanja pomicanja"
+
+#: src/kgx-application.h:44
+msgid "Console (Development)"
+msgstr "Konzola (razvoj)"
 
 #: src/kgx-close-dialog.c:52
 msgid "Close Window?"
@@ -197,7 +193,7 @@ msgstr ""
 "Pojedine naredbe još uvijek se izvode, zatvaranje ove kartice će ih ubiti "
 "što može dovesti do neočekivanog ishoda"
 
-#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:675
+#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:740
 msgid "_Cancel"
 msgstr "_Odustani"
 
@@ -205,45 +201,49 @@ msgstr "_Odustani"
 msgid "C_lose"
 msgstr "Z_atvori"
 
-#: src/kgx-pages.ui:46
+#: src/kgx-pages.ui:47
 msgid "_Detach Tab"
 msgstr "_Odvoji karticu"
 
-#: src/kgx-pages.ui:52
+#: src/kgx-pages.ui:53
 msgid "_Close"
 msgstr "_Zatvori"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:119
+#: src/kgx-simple-tab.c:121
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Samo čitanje</b> — Naredba je izašla s kôdom %i"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:128
+#: src/kgx-simple-tab.c:130
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Samo čitanje</b> — Naredba je završila"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:160
+#: src/kgx-simple-tab.c:162
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Neuspjelo pokretanje</b> — %s"
 
-#: src/kgx-tab.c:1182
+#: src/kgx-tab.c:1184
 msgid "Command completed"
 msgstr "Naredba je završena"
 
-#: src/kgx-terminal.c:667
+#: src/kgx-tab-button.ui:5
+msgid "View Open Tabs"
+msgstr "Prikaži otvorene kartice"
+
+#: src/kgx-terminal.c:732
 msgid "You are pasting a command that runs as an administrator"
 msgstr ""
 "Pokušavate zalijepiti naredbu koja je pokrenuta s administratorskim ovlastima"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:670
+#: src/kgx-terminal.c:735
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -252,60 +252,62 @@ msgstr ""
 "Pobrinite se da znate što naredba radi:\n"
 "%s"
 
-#: src/kgx-terminal.c:678 src/menus.ui:24
+#: src/kgx-terminal.c:743 src/menus.ui:24
 msgid "_Paste"
 msgstr "_Zalijepi"
 
+#: src/kgx-theme-switcher.ui:18
+msgid "Use System Colors"
+msgstr "Koristi boje sustava"
+
+#: src/kgx-theme-switcher.ui:47
+msgid "Use Light Colors"
+msgstr "Koristi svijetle boje"
+
+#: src/kgx-theme-switcher.ui:76
+msgid "Use Dark Colors"
+msgstr "Koristi tamne boje"
+
 #. Translators: Credit yourself here
-#: src/kgx-window.c:506
+#: src/kgx-window.c:535
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
 "  gogo https://launchpad.net/~trebelnik-stefina"
 
-#. Translators: Don’t attempt to translate KGX,
-#. * treat it as a proper noun
-#: src/kgx-window.c:510
-msgid "KGX Terminal Emulator"
-msgstr "KGX emulator terminala"
-
-#: src/kgx-window.c:605
-msgid "_About Terminal"
-msgstr "_O Terminalu"
-
-#: src/kgx-window.ui:20
-msgid "Shrink text"
+#: src/kgx-window.ui:26
+msgid "Shrink Text"
 msgstr "Smanji tekst"
 
-#: src/kgx-window.ui:33
-msgid "Reset size"
+#: src/kgx-window.ui:39
+msgid "Reset Size"
 msgstr "Izvorna veličina"
 
-#: src/kgx-window.ui:46
-msgid "Enlarge text"
+#: src/kgx-window.ui:52
+msgid "Enlarge Text"
 msgstr "Uvećaj tekst"
 
-#: src/kgx-window.ui:63
+#: src/kgx-window.ui:74
 msgid "_New Window"
 msgstr "_Novi prozor"
 
-#: src/kgx-window.ui:75
+#: src/kgx-window.ui:86
 msgid "_Keyboard Shortcuts"
 msgstr "_Prečaci tipkovnice"
 
-#: src/kgx-window.ui:82
-msgid "_About King’s Cross"
-msgstr "_O King’s Crossu"
+#: src/kgx-window.ui:93
+msgid "_About Console"
+msgstr "_O Konzoli"
 
-#: src/kgx-window.ui:83
-msgid "About this program"
+#: src/kgx-window.ui:94
+msgid "About this Program"
 msgstr "O ovom programu"
 
-#: src/kgx-window.ui:108
-msgid "Find in terminal"
+#: src/kgx-window.ui:123
+msgid "Find in Terminal"
 msgstr "Pretraži u terminalu"
 
-#: src/kgx-window.ui:126
+#: src/kgx-window.ui:141
 msgid "Menu"
 msgstr "Izbornik"
 
@@ -330,16 +332,28 @@ msgid "Show in _Files"
 msgstr "Prikaži u _Datotekama"
 
 #: nautilus/kgx-nautilus-menu-item.c:120
-msgid "Open in T_erminal"
-msgstr "Otvori u t_erminalu"
+msgid "Open in Co_nsole (Devel)"
+msgstr "Otvori u Ko_nzoli (razvoj)"
 
 #: nautilus/kgx-nautilus-menu-item.c:122
-msgid "Op_en in King’s Cross"
-msgstr "King’s Cross"
+msgid "Open in Co_nsole"
+msgstr "Otvori u Ko_nzoli"
 
 #: nautilus/kgx-nautilus-menu-item.c:124
 msgid "Start a terminal session for this location"
 msgstr "Pokreni sesiju terminala za ovu lokaciju"
+
+#~ msgid "Terminal"
+#~ msgstr "Terminal"
+
+#~ msgid "KGX Terminal Emulator"
+#~ msgstr "KGX emulator terminala"
+
+#~ msgid "_About King’s Cross"
+#~ msgstr "_O King’s Crossu"
+
+#~ msgid "Op_en in King’s Cross"
+#~ msgstr "King’s Cross"
 
 #~ msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
 #~ msgstr "naredba;upit;cmd;naredbeni redak;pokreni;ljuska;terminal;kgx;"
