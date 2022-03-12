@@ -1,0 +1,341 @@
+# Japanese translation for console.
+# Copyright (C) 2022 console's COPYRIGHT HOLDER
+# This file is distributed under the same license as the console package.
+# sicklylife <translation@sicklylife.jp>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: console main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
+"POT-Creation-Date: 2022-03-12 09:36+0000\n"
+"PO-Revision-Date: 2022-03-12 21:00+0900\n"
+"Last-Translator: sicklylife <translation@sicklylife.jp>\n"
+"Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
+msgid "Console"
+msgstr "コンソール"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Console.desktop.in.in:8
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
+msgstr ""
+"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
+"コマンド;プロンプト;コマンドライン;実行;シェル;ターミナル;端末;"
+
+#: data/org.gnome.Console.desktop.in.in:21
+msgid "New Window"
+msgstr "新しいウィンドウ"
+
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:168
+msgid "New Tab"
+msgstr "新しいタブ"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:568
+msgid "Terminal Emulator"
+msgstr "端末エミュレーター"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:11
+msgid "A simple user-friendly terminal emulator for the GNOME desktop."
+msgstr ""
+"GNOME デスクトップ向けのシンプルでユーザーフレンドリーな端末エミュレーターです。"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:30
+msgid "Terminal window"
+msgstr "端末ウィンドウ"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:104
+msgid "Zander Brown"
+msgstr "Zander Brown"
+
+#: src/help-overlay.ui:13
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "アプリケーション"
+
+#: src/help-overlay.ui:19
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "新しいウィンドウ"
+
+#: src/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "端末"
+
+#: src/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "検索"
+
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "コピー"
+
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "貼り付け"
+
+#: src/help-overlay.ui:53
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "タブ"
+
+#: src/help-overlay.ui:59
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "新しいタブ"
+
+#: src/help-overlay.ui:66
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "タブを閉じる"
+
+#: src/help-overlay.ui:73
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "次のタブ"
+
+#: src/help-overlay.ui:80
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "前のタブ"
+
+#: src/help-overlay.ui:87
+msgctxt "shortcut window"
+msgid "Switch to Tab"
+msgstr "タブを切り替える"
+
+#. Translators: The leading # is intentional, the initial %s is the
+#. version of KGX itself, the latter format is the VTE version
+#: src/kgx-application.c:540
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s (VTE %u.%u.%u %s を使用)\n"
+
+#. Translators: %s is the year range
+#: src/kgx-application.c:552 src/kgx-window.c:525
+#, c-format
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
+
+#: src/kgx-application.c:566 src/kgx-window.ui:115
+msgid "King’s Cross"
+msgstr "King’s Cross"
+
+#: src/kgx-application.c:570
+msgid "GPL 3.0 or later"
+msgstr "GPL 3.0 or later"
+
+#: src/kgx-application.c:701
+msgid "Execute the argument to this option inside the terminal"
+msgstr "このオプションの引数を端末内で実行する"
+
+#: src/kgx-application.c:710
+msgid "Set the working directory"
+msgstr "作業用ディレクトリを設定する"
+
+#. Translators: Placeholder of for a given directory
+#: src/kgx-application.c:712
+msgid "DIRNAME"
+msgstr "DIRNAME"
+
+#: src/kgx-application.c:720
+msgid "Wait until the child exits (TODO)"
+msgstr "子が終了するまで待つ (TODO)"
+
+#: src/kgx-application.c:729
+msgid "Set the initial window title"
+msgstr "ウィンドウの初期タイトルを設定する"
+
+#: src/kgx-application.c:738
+msgid "ADVANCED: Set the shell to launch"
+msgstr "高度: 起動する Shell を設定する"
+
+#: src/kgx-application.c:747
+msgid "ADVANCED: Set the scrollback length"
+msgstr "高度: Scrollback Length を設定する"
+
+#: src/kgx-application.h:44
+msgid "Console (Development)"
+msgstr "Console (開発版)"
+
+#: src/kgx-close-dialog.c:50
+msgid "Close Window?"
+msgstr "ウィンドウを閉じますか?"
+
+#: src/kgx-close-dialog.c:51
+msgid ""
+"Some commands are still running, closing this window will kill them and may "
+"lead to unexpected outcomes"
+msgstr ""
+"このウィンドウを閉じると未だ実行中のコマンドが強制終了され想定外の結果につな"
+"がる可能性があります"
+
+#: src/kgx-close-dialog.c:56
+msgid "Close Tab?"
+msgstr "タブを閉じますか?"
+
+#: src/kgx-close-dialog.c:57
+msgid ""
+"Some commands are still running, closing this tab will kill them and may "
+"lead to unexpected outcomes"
+msgstr ""
+"このタブを閉じると未だ実行中のコマンドが強制終了され想定外の結果につながる可"
+"能性があります"
+
+#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:780
+msgid "_Cancel"
+msgstr "キャンセル(_C)"
+
+#: src/kgx-close-dialog.ui:32
+msgid "C_lose"
+msgstr "閉じる(_L)"
+
+#: src/kgx-pages.ui:47
+msgid "_Detach Tab"
+msgstr "タブを分離(_D)"
+
+#: src/kgx-pages.ui:53
+msgid "_Close"
+msgstr "閉じる(_C)"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:168
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>読み取り専用</b> — コマンドがコード %i で終了しました"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:177
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>読み取り専用</b> — コマンドが終了しました"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:210
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>起動に失敗しました</b> — %s"
+
+#: src/kgx-tab.c:1160
+msgid "Command completed"
+msgstr "コマンドが完了しました"
+
+#: src/kgx-tab-button.ui:5
+msgid "View Open Tabs"
+msgstr "開いているタブを表示する"
+
+#: src/kgx-terminal.c:772
+msgid "You are pasting a command that runs as an administrator"
+msgstr "管理者として実行されるコマンドを貼り付けています"
+
+#. TRANSLATORS: %s is the command being pasted
+#: src/kgx-terminal.c:775
+#, c-format
+msgid ""
+"Make sure you know what the command does:\n"
+"%s"
+msgstr ""
+"何をするコマンドなのか必ず確認してください:\n"
+"%s"
+
+#: src/kgx-terminal.c:783 src/menus.ui:24
+msgid "_Paste"
+msgstr "貼り付け(_P)"
+
+#: src/kgx-theme-switcher.ui:18
+msgid "Use System Colors"
+msgstr "システムの色を使用する"
+
+#: src/kgx-theme-switcher.ui:47
+msgid "Use Light Colors"
+msgstr "明るい色を使用する"
+
+#: src/kgx-theme-switcher.ui:76
+msgid "Use Dark Colors"
+msgstr "暗い色を使用する"
+
+#. Translators: Credit yourself here
+#: src/kgx-window.c:531
+msgid "translator-credits"
+msgstr ""
+"sicklylife <translation@sicklylife.jp>"
+
+#: src/kgx-window.ui:26
+msgid "Shrink Text"
+msgstr "文字を縮小する"
+
+#: src/kgx-window.ui:39
+msgid "Reset Size"
+msgstr "サイズを元に戻す"
+
+#: src/kgx-window.ui:52
+msgid "Enlarge Text"
+msgstr "文字を拡大する"
+
+#: src/kgx-window.ui:74
+msgid "_New Window"
+msgstr "新しいウィンドウ(_N)"
+
+#: src/kgx-window.ui:86
+msgid "_Keyboard Shortcuts"
+msgstr "キーボードショートカット(_K)"
+
+#: src/kgx-window.ui:93
+msgid "_About Console"
+msgstr "“コンソール”について(_A)"
+
+#: src/kgx-window.ui:94
+msgid "About this Program"
+msgstr "このプログラムについて"
+
+#: src/kgx-window.ui:123
+msgid "Find in Terminal"
+msgstr "端末内で検索する"
+
+#: src/kgx-window.ui:141
+msgid "Menu"
+msgstr "メニュー"
+
+#: src/menus.ui:7
+msgid "_Open Link"
+msgstr "リンクを開く(_O)"
+
+#: src/menus.ui:12
+msgid "Copy _Link"
+msgstr "リンクをコピー(_L)"
+
+#: src/menus.ui:19
+msgid "_Copy"
+msgstr "コピー(_C)"
+
+#: src/menus.ui:29
+msgid "_Select All"
+msgstr "すべて選択(_S)"
+
+#: src/menus.ui:36
+msgid "Show in _Files"
+msgstr "“ファイル”で表示(_F)"
+
+#: nautilus/kgx-nautilus-menu-item.c:120
+msgid "Open in Co_nsole (Devel)"
+msgstr "“コンソール (開発版)”で開く(_N)"
+
+#: nautilus/kgx-nautilus-menu-item.c:122
+msgid "Open in Co_nsole"
+msgstr "“コンソール”で開く(_N)"
+
+#: nautilus/kgx-nautilus-menu-item.c:124
+msgid "Start a terminal session for this location"
+msgstr "この場所で端末セッションを開始します"
