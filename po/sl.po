@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-02-23 12:59+0000\n"
-"PO-Revision-Date: 2022-02-25 22:24+0100\n"
+"POT-Creation-Date: 2022-03-14 15:42+0000\n"
+"PO-Revision-Date: 2022-03-15 22:46+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -45,7 +45,7 @@ msgstr "Posnemovalnik terminala"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
-msgstr ""
+msgstr "Preprost uporabniku prijazen posnemovalnik terminala za namizje GNOME."
 
 #: data/org.gnome.Console.metainfo.xml.in.in:30
 msgid "Terminal window"
@@ -120,7 +120,7 @@ msgstr "Preklopi na zavihek"
 #: src/kgx-application.c:540
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
-msgstr ""
+msgstr "# KGX %s z uporabo VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
 #: src/kgx-application.c:552 src/kgx-window.c:525
@@ -178,6 +178,8 @@ msgid ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
 msgstr ""
+"Nekateri ukazi se še izvajajo, z zapiranjem tega okna jih boste prekinili, "
+"kar lahko privede do nepričakovanih posledic"
 
 #: src/kgx-close-dialog.c:56
 msgid "Close Tab?"
@@ -188,6 +190,8 @@ msgid ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
 msgstr ""
+"Nekateri ukazi se še izvajajo, z zapiranjem tega zavihka jih boste "
+"prekinili, kar lahko privede do nepričakovanih posledic"
 
 #: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:780
 msgid "_Cancel"
@@ -210,20 +214,20 @@ msgstr "_Zapri"
 #: src/kgx-simple-tab.c:168
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr ""
+msgstr "<b>Samo za branje</b> – izvajanje ukaza je ustavljeno s kodo %i"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
 #: src/kgx-simple-tab.c:177
 msgid "<b>Read Only</b> — Command exited"
-msgstr ""
+msgstr "<b>Samo za branje</b> – izvajanje ukaza je ustavljeno"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
 #: src/kgx-simple-tab.c:210
 #, c-format
 msgid "<b>Failed to start</b> — %s"
-msgstr ""
+msgstr "<b>Zagon ni uspel</b> – %s"
 
 #: src/kgx-tab.c:1160
 msgid "Command completed"
@@ -235,7 +239,7 @@ msgstr "Pogled odprtih zavihkov"
 
 #: src/kgx-terminal.c:772
 msgid "You are pasting a command that runs as an administrator"
-msgstr ""
+msgstr "Prilepiti želite ukaz, ki se izvaja s skrbniškimi dovoljenji."
 
 #. TRANSLATORS: %s is the command being pasted
 #: src/kgx-terminal.c:775
@@ -244,6 +248,8 @@ msgid ""
 "Make sure you know what the command does:\n"
 "%s"
 msgstr ""
+"Prepričajte se, da razumete, kaj ukaz izvaja:\n"
+"%s"
 
 #: src/kgx-terminal.c:783 src/menus.ui:24
 msgid "_Paste"
@@ -332,7 +338,7 @@ msgstr "Odpri v _konzoli"
 
 #: nautilus/kgx-nautilus-menu-item.c:124
 msgid "Start a terminal session for this location"
-msgstr ""
+msgstr "Zaženi sejo terminala za to mesto"
 
 #~ msgid "Terminal"
 #~ msgstr "Terminal"
