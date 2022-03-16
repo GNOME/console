@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-02-16 17:39+0000\n"
-"PO-Revision-Date: 2022-02-16 18:44+0100\n"
+"POT-Creation-Date: 2022-02-16 17:44+0000\n"
+"PO-Revision-Date: 2022-03-16 15:13+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Occitan <totenoc@gmail.com>\n"
 "Language: oc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
@@ -26,6 +26,8 @@ msgstr "Consòla"
 #: data/org.gnome.Console.desktop.in.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
+"comanda;prompt;convit;cmd;linha;executar;shell;run;terminal;kgx;kings cross;"
+"linha de comanda;consòla;"
 
 #: data/org.gnome.Console.desktop.in.in:21
 msgid "New Window"
@@ -41,11 +43,11 @@ msgstr "Emulator de Terminal"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
-msgstr ""
+msgstr "Un emulator de terminal simple e de bon utilizaire pel burèu GNOME."
 
 #: data/org.gnome.Console.metainfo.xml.in.in:30
 msgid "Terminal window"
-msgstr "fenèstra de terminal"
+msgstr "Fenèstra de terminal"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:104
 msgid "Zander Brown"
@@ -109,14 +111,14 @@ msgstr "Onglet precedent"
 #: src/help-overlay.ui:87
 msgctxt "shortcut window"
 msgid "Switch to Tab"
-msgstr ""
+msgstr "Bascular d'onglet"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
 #: src/kgx-application.c:540
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
-msgstr ""
+msgstr "# KGX %s en utilizant VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
 #: src/kgx-application.c:552 src/kgx-window.c:525
@@ -147,23 +149,23 @@ msgstr "REPTRABALH"
 
 #: src/kgx-application.c:720
 msgid "Wait until the child exits (TODO)"
-msgstr ""
+msgstr "Esperar fins que l'enfant quite (TODO)"
 
 #: src/kgx-application.c:729
 msgid "Set the initial window title"
-msgstr ""
+msgstr "Definir lo títol de la fenèstra iniciala"
 
 #: src/kgx-application.c:738
 msgid "ADVANCED: Set the shell to launch"
-msgstr ""
+msgstr "AVANÇAT : definir lo shell d’aviar"
 
 #: src/kgx-application.c:747
 msgid "ADVANCED: Set the scrollback length"
-msgstr ""
+msgstr "AVANÇAT : definir la longor del desplaçament enrèire"
 
 #: src/kgx-application.h:44
 msgid "Console (Development)"
-msgstr ""
+msgstr "Consòla (Desvolopament)"
 
 #: src/kgx-close-dialog.c:50
 msgid "Close Window?"
@@ -174,6 +176,8 @@ msgid ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
 msgstr ""
+"D’unas comanda son encara en execucion, tampar aquesta fenèstra las tuarà e "
+"pòt menar a de sortidas inesperadas."
 
 #: src/kgx-close-dialog.c:56
 msgid "Close Tab?"
@@ -184,6 +188,8 @@ msgid ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
 msgstr ""
+"D’unas comanda son encara en execucion, tampar aqueste onglet las tuarà e "
+"pòt menar a de sortidas inesperadas."
 
 #: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:780
 msgid "_Cancel"
@@ -206,24 +212,24 @@ msgstr "_Tampar"
 #: src/kgx-simple-tab.c:168
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr ""
+msgstr "<b>Lectura sòla</b> — La comanda a terminat amb lo còdi %i"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
 #: src/kgx-simple-tab.c:177
 msgid "<b>Read Only</b> — Command exited"
-msgstr ""
+msgstr "<b>Lectura sola</b> — La comanda a terminat"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
 #: src/kgx-simple-tab.c:210
 #, c-format
 msgid "<b>Failed to start</b> — %s"
-msgstr ""
+msgstr "<b>Lançament pas reüssit</b> — %s"
 
 #: src/kgx-tab.c:1160
 msgid "Command completed"
-msgstr ""
+msgstr "Comanda acabada"
 
 #: src/kgx-tab-button.ui:5
 msgid "View Open Tabs"
@@ -231,7 +237,7 @@ msgstr "Afichar los onglets dobèrts"
 
 #: src/kgx-terminal.c:772
 msgid "You are pasting a command that runs as an administrator"
-msgstr ""
+msgstr "Sètz a pegar una comanda que s'executa coma administrator"
 
 #. TRANSLATORS: %s is the command being pasted
 #: src/kgx-terminal.c:775
@@ -240,6 +246,8 @@ msgid ""
 "Make sure you know what the command does:\n"
 "%s"
 msgstr ""
+"Asseguratz-vos de saber çò que la comanda fa :\n"
+"%s"
 
 #: src/kgx-terminal.c:783 src/menus.ui:24
 msgid "_Paste"
