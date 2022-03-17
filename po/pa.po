@@ -1,0 +1,334 @@
+# Punjabi translation for console.
+# Copyright (C) 2022 console's COPYRIGHT HOLDER
+# This file is distributed under the same license as the console package.
+#
+# A S Alam <aalam@fedoraproject.org>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: console main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
+"POT-Creation-Date: 2022-03-17 13:51+0000\n"
+"PO-Revision-Date: 2022-03-17 08:03-0700\n"
+"Last-Translator: A S Alam <aalam@satluj.org>\n"
+"Language-Team: Punjabi <punjab-translation@googlegroups.com>\n"
+"Language: pa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 21.12.2\n"
+
+#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
+msgid "Console"
+msgstr "ਕਨਸੋਲ"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Console.desktop.in.in:8
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
+msgstr "ਕਮਾਂਡ;ਪਰੌਂਟ;ਕਮਾਂਡ-ਲਾਈਨ;ਕਮਾਂਡ ਲਾਈਨ;ਚਲਾਓ;ਰਨ;ਸ਼ੈੱਲ;ਸ਼ੈਲ;ਟਰਮੀਨਲ;ਕਰਾਸ;"
+
+#: data/org.gnome.Console.desktop.in.in:21
+msgid "New Window"
+msgstr "ਨਵੀਂ ਵਿੰਡੋ"
+
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:168
+msgid "New Tab"
+msgstr "ਨਵੀਂ ਟੈਬ"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:568
+msgid "Terminal Emulator"
+msgstr "ਟਰਮੀਨਲ ਈਮੂਲੇਟਰ"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:11
+msgid "A simple user-friendly terminal emulator for the GNOME desktop."
+msgstr "ਗਨੋਮ ਡੈਸਕਟਾਪ ਲਈ ਸਰਲ ਵਰਤੋਂਕਾਰ ਲਈ ਸੌਖਾ ਟਰਮੀਨਲ ਈਮੂਲੇਟਰ ਹੈ।"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:30
+msgid "Terminal window"
+msgstr "ਟਰਮੀਨਲ ਵਿੰਡੋ"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:104
+msgid "Zander Brown"
+msgstr ""
+
+#: src/help-overlay.ui:13
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "ਐਪਲੀਕੇਸ਼ਨ"
+
+#: src/help-overlay.ui:19
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "ਨਵੀਂ ਵਿੰਡੋ"
+
+#: src/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "ਟਰਮੀਨਲ"
+
+#: src/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "ਲੱਭੋ"
+
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "ਕਾਪੀ ਕਰੋ"
+
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "ਚੇਪੋ"
+
+#: src/help-overlay.ui:53
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "ਟੈਬਾਂ"
+
+#: src/help-overlay.ui:59
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "ਨਵੀਂ ਟੈਬ"
+
+#: src/help-overlay.ui:66
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "ਟੈਬ ਬੰਦ ਕਰੋ"
+
+#: src/help-overlay.ui:73
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "ਅਗਲੀ ਟੈਬ"
+
+#: src/help-overlay.ui:80
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "ਪਿਛਲੀ ਟੈਬ"
+
+#: src/help-overlay.ui:87
+msgctxt "shortcut window"
+msgid "Switch to Tab"
+msgstr "ਟੈਬ ਉੱਤੇ ਜਾਓ"
+
+#. Translators: The leading # is intentional, the initial %s is the
+#. version of KGX itself, the latter format is the VTE version
+#: src/kgx-application.c:540
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s,  VTE %u.%u.%u %s ਵਰਤ ਕੇ\n"
+
+#. Translators: %s is the year range
+#: src/kgx-application.c:552 src/kgx-window.c:525
+#, c-format
+msgid "© %s Zander Brown"
+msgstr ""
+
+#: src/kgx-application.c:566 src/kgx-window.ui:115
+msgid "King’s Cross"
+msgstr "ਕਿੰਗ ਦਾ ਕਰਾਸ"
+
+#: src/kgx-application.c:570
+msgid "GPL 3.0 or later"
+msgstr "GPL 3.0 ਜਾਂ ਨਵਾਂ"
+
+#: src/kgx-application.c:701
+msgid "Execute the argument to this option inside the terminal"
+msgstr ""
+
+#: src/kgx-application.c:710
+msgid "Set the working directory"
+msgstr "ਕਾਰਜਕਾਰੀ ਡਾਇਰੈਕਟਰੀ ਸੈੱਟ ਕਰੋ"
+
+#. Translators: Placeholder of for a given directory
+#: src/kgx-application.c:712
+msgid "DIRNAME"
+msgstr ""
+
+#: src/kgx-application.c:720
+msgid "Wait until the child exits (TODO)"
+msgstr ""
+
+#: src/kgx-application.c:729
+msgid "Set the initial window title"
+msgstr ""
+
+#: src/kgx-application.c:738
+msgid "ADVANCED: Set the shell to launch"
+msgstr ""
+
+#: src/kgx-application.c:747
+msgid "ADVANCED: Set the scrollback length"
+msgstr ""
+
+#: src/kgx-application.h:44
+msgid "Console (Development)"
+msgstr "ਕਨਸੋਲ (ਵਿਕਾਸ)"
+
+#: src/kgx-close-dialog.c:50
+msgid "Close Window?"
+msgstr "ਵਿੰਡੋ ਬੰਦ ਕਰਨੀ ਹੈ?"
+
+#: src/kgx-close-dialog.c:51
+msgid ""
+"Some commands are still running, closing this window will kill them and may "
+"lead to unexpected outcomes"
+msgstr ""
+
+#: src/kgx-close-dialog.c:56
+msgid "Close Tab?"
+msgstr "ਟੈਬ ਬੰਦ ਕਰਨੀ ਹੈ?"
+
+#: src/kgx-close-dialog.c:57
+msgid ""
+"Some commands are still running, closing this tab will kill them and may "
+"lead to unexpected outcomes"
+msgstr ""
+
+#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:780
+msgid "_Cancel"
+msgstr "ਰੱਦ ਕਰੋ(_C)"
+
+#: src/kgx-close-dialog.ui:32
+msgid "C_lose"
+msgstr "ਬੰਦ ਕਰੋ(_l)"
+
+#: src/kgx-pages.ui:47
+msgid "_Detach Tab"
+msgstr "ਟੈਬ ਵੱਖ ਕਰੋ(_D)"
+
+#: src/kgx-pages.ui:53
+msgid "_Close"
+msgstr "ਬੰਦ ਕਰੋ(_C)"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:168
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr ""
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:177
+msgid "<b>Read Only</b> — Command exited"
+msgstr ""
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:210
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਅਸਫ਼ਲ</b> — %s"
+
+#: src/kgx-tab.c:1160
+msgid "Command completed"
+msgstr "ਕਮਾਂਡ ਪੂਰੀ ਹੋਈ"
+
+#: src/kgx-tab-button.ui:5
+msgid "View Open Tabs"
+msgstr "ਖੁੱਲ੍ਹੀਆਂ ਟੈਬਾਂ ਵੇਖੋ"
+
+#: src/kgx-terminal.c:772
+msgid "You are pasting a command that runs as an administrator"
+msgstr "ਤੁਸੀਂ ਉਹ ਕਮਾਂਡ ਚੇਪ ਰਹੇ ਹੋ, ਜੋ ਕਿ ਪਰਸ਼ਾਸ਼ਕ ਚਲਾਉਂਦਾ ਹੈ"
+
+#. TRANSLATORS: %s is the command being pasted
+#: src/kgx-terminal.c:775
+#, c-format
+msgid ""
+"Make sure you know what the command does:\n"
+"%s"
+msgstr ""
+
+#: src/kgx-terminal.c:783 src/menus.ui:24
+msgid "_Paste"
+msgstr "ਚੇਪੋ(_P)"
+
+#: src/kgx-theme-switcher.ui:18
+msgid "Use System Colors"
+msgstr "ਸਿਸਟਮ ਰੰਗ ਵਰਤੋਂ"
+
+#: src/kgx-theme-switcher.ui:47
+msgid "Use Light Colors"
+msgstr "ਹਲਕੇ ਰੰਗ ਵਰਤੋਂ"
+
+#: src/kgx-theme-switcher.ui:76
+msgid "Use Dark Colors"
+msgstr "ਗੂੜ੍ਹੇ ਰੰਗ ਵਰਤੋਂ"
+
+#. Translators: Credit yourself here
+#: src/kgx-window.c:531
+msgid "translator-credits"
+msgstr ""
+"ਅ ਸ ਆਲਮ (A S Alam) ੨੦੨੨\n"
+"Punjabi OpenSource Team (POST) www.satluj.org"
+
+#: src/kgx-window.ui:26
+msgid "Shrink Text"
+msgstr "ਲਿਖਤ ਨੂੰ ਸੁੰਘੜੋ"
+
+#: src/kgx-window.ui:39
+msgid "Reset Size"
+msgstr "ਆਕਾਰ ਮੁੜ-ਸੈੱਟ ਕਰੋ"
+
+#: src/kgx-window.ui:52
+msgid "Enlarge Text"
+msgstr "ਲਿਖਤ ਆਕਾਰ ਵਧਾਓ"
+
+#: src/kgx-window.ui:74
+msgid "_New Window"
+msgstr "ਨਵੀਂ ਵਿੰਡੋ(_N)"
+
+#: src/kgx-window.ui:86
+msgid "_Keyboard Shortcuts"
+msgstr "ਕੀਬੋਰਡ ਸ਼ਾਰਟਕੱਟ(_K)"
+
+#: src/kgx-window.ui:93
+msgid "_About Console"
+msgstr "ਕਨਸੋਲ ਬਾਰੇ(_A)"
+
+#: src/kgx-window.ui:94
+msgid "About this Program"
+msgstr "ਇਸ ਪਰਗੋਰਾਮ ਬਾਰੇ"
+
+#: src/kgx-window.ui:123
+msgid "Find in Terminal"
+msgstr "ਟਰਮੀਨਲ ਵਿੱਚ ਲੱਭੋ"
+
+#: src/kgx-window.ui:141
+msgid "Menu"
+msgstr "ਮੇਨੂ"
+
+#: src/menus.ui:7
+msgid "_Open Link"
+msgstr "ਲਿੰਕ ਖੋਲ੍ਹੋ(_O)"
+
+#: src/menus.ui:12
+msgid "Copy _Link"
+msgstr "ਲਿੰਕ ਕਾਪੀ ਕਰੋ(_L)"
+
+#: src/menus.ui:19
+msgid "_Copy"
+msgstr "ਕਾਪੀ ਕਰੋ(_C)"
+
+#: src/menus.ui:29
+msgid "_Select All"
+msgstr "ਸਭ ਚੁਣੋ(_S)"
+
+#: src/menus.ui:36
+msgid "Show in _Files"
+msgstr "ਫਾਇਲਾਂ ਵਿੱਚ ਵੇਖੋ(_F)"
+
+#: nautilus/kgx-nautilus-menu-item.c:120
+msgid "Open in Co_nsole (Devel)"
+msgstr "ਕਨਸੋਲ ਵਿੱਚ ਖੋਲ੍ਹੋ(_n) (Devel)"
+
+#: nautilus/kgx-nautilus-menu-item.c:122
+msgid "Open in Co_nsole"
+msgstr "ਕਨਸੋਲ ਵਿੱਚ ਖੋਲ੍ਹੋ(_n)"
+
+#: nautilus/kgx-nautilus-menu-item.c:124
+msgid "Start a terminal session for this location"
+msgstr "ਇਸ ਟਿਕਾਣੇ ਲਈ ਟਰਮੀਨਲ ਸ਼ੈਸ਼ਨ ਸ਼ੁਰੂ ਕਰੋ"
