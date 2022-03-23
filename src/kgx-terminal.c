@@ -494,26 +494,40 @@ copy_activated (GSimpleAction *action,
   vte_terminal_copy_clipboard_format (VTE_TERMINAL (data), VTE_FORMAT_TEXT);
 }
 
-struct Paste {
-  VteTerminal *dest;
+
+typedef struct {
+  KgxTerminal *dest;
   char        *text;
-};
+} PasteData;
+
 
 static void
-paste_response (GtkDialog    *dlg,
-                int           response,
-                struct Paste *paste)
+clear_paste_data (gpointer data)
 {
+  PasteData *self = data;
+
+  g_clear_weak_pointer (&self->dest);
+  g_free (self->text);
+  g_free (self);
+} 
+
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (PasteData, clear_paste_data)
+
+static void
+paste_response (GtkDialog *dlg,
+                int        response,
+                PasteData *data)
+{
+  g_autoptr (PasteData) paste = data;
+
   if (dlg && GTK_IS_DIALOG (dlg)) {
     gtk_widget_destroy (GTK_WIDGET (dlg));
   }
 
   if (response == GTK_RESPONSE_ACCEPT) {
-    vte_terminal_paste_text (paste->dest, paste->text);
+    vte_terminal_paste_text (VTE_TERMINAL (paste->dest), paste->text);
   }
-
-  g_free (paste->text);
-  g_free (paste);
 }
 
 
@@ -757,13 +771,20 @@ kgx_terminal_accept_paste (KgxTerminal *self,
                            const char  *text)
 {
   g_autofree char *striped = g_strchug (g_strdup (text));
-  struct Paste    *paste = g_new (struct Paste, 1);
+  g_autoptr (PasteData) paste = g_new0 (PasteData, 1);
+  gsize len;
 
-  paste->dest = VTE_TERMINAL (self);
+  if (!text || !text[0]) {
+    return;
+  }
+
+  len = strlen (text);
+
+  g_set_weak_pointer (&paste->dest, self);
   paste->text = g_strdup (text);
 
-  if (g_strstr_len (striped, -1, "sudo") != NULL &&
-      g_strstr_len (striped, -1, "\n") != NULL) {
+  if (g_strstr_len (striped, len, "sudo") != NULL &&
+      g_strstr_len (striped, len, "\n") != NULL) {
     GtkWidget *accept = NULL;
     GtkWidget *dlg = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
                                              GTK_DIALOG_MODAL,
@@ -775,7 +796,10 @@ kgx_terminal_accept_paste (KgxTerminal *self,
                                               _("Make sure you know what the command does:\n%s"),
                                               text);
 
-    g_signal_connect (dlg, "response", G_CALLBACK (paste_response), paste);
+    g_signal_connect (dlg,
+                      "response",
+                      G_CALLBACK (paste_response),
+                      g_steal_pointer (&paste));
     gtk_dialog_add_button (GTK_DIALOG (dlg),
                            _("_Cancel"),
                            GTK_RESPONSE_DELETE_EVENT);
@@ -786,6 +810,6 @@ kgx_terminal_accept_paste (KgxTerminal *self,
                                  "destructive-action");
     gtk_widget_show (dlg);
   } else {
-    paste_response (NULL, GTK_RESPONSE_ACCEPT, paste);
+    paste_response (NULL, GTK_RESPONSE_ACCEPT, g_steal_pointer (&paste));
   }
 }
