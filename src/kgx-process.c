@@ -38,12 +38,14 @@ struct _KgxProcess {
   GPid    parent;
   gint32  uid;
   gint32  euid;
+  GStrv   argv;
   char   *exec;
 };
 
 static void
 clear_process (KgxProcess *self)
 {
+  g_clear_pointer (&self->argv, g_strfreev);
   g_clear_pointer (&self->exec, g_free);
 }
 
@@ -165,10 +167,32 @@ kgx_process_get_parent (KgxProcess *self)
 }
 
 /**
+ * kgx_process_get_argv:
+ * @self: the #KgxProcess
+ *
+ * Get the command line used to invoke to process, as an array
+ *
+ * Stability: Private
+ */
+inline GStrv
+kgx_process_get_argv (KgxProcess *self)
+{
+  g_return_val_if_fail (self != NULL, NULL);
+
+  if (G_LIKELY (self->argv == NULL)) {
+    glibtop_proc_args args_size;
+
+    self->argv = glibtop_get_proc_argv (&args_size, self->pid, 0);
+  }
+
+  return self->argv;
+}
+
+/**
  * kgx_process_get_exec:
  * @self: the #KgxProcess
  *
- * Get the command line used to invoke to process
+ * Get the command line used to invoke to process, as a space-joined string
  *
  * Stability: Private
  */
@@ -178,12 +202,7 @@ kgx_process_get_exec (KgxProcess *self)
   g_return_val_if_fail (self != NULL, NULL);
 
   if (G_LIKELY (self->exec == NULL)) {
-    g_auto(GStrv)     args = NULL;
-    glibtop_proc_args args_size;
-
-    args = glibtop_get_proc_argv (&args_size, self->pid, 0);
-
-    self->exec = g_strjoinv (" ", args);
+    self->exec = g_strjoinv (" ", kgx_process_get_argv (self));
   }
 
   return self->exec;

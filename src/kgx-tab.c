@@ -968,7 +968,8 @@ kgx_tab_push_child (KgxTab     *self,
 {
   GtkStyleContext *context;
   GPid pid = 0;
-  const char *exec = NULL;
+  GStrv argv;
+  g_autofree char *program = NULL;
   KgxStatus new_status = KGX_NONE;
   KgxTabPrivate *priv;
 
@@ -978,9 +979,13 @@ kgx_tab_push_child (KgxTab     *self,
 
   context = gtk_widget_get_style_context (GTK_WIDGET (self));
   pid = kgx_process_get_pid (process);
-  exec = kgx_process_get_exec (process);
+  argv = kgx_process_get_argv (process);
 
-  if (G_UNLIKELY (g_str_has_prefix (exec, "ssh "))) {
+  if (G_LIKELY (argv[0] != NULL)) {
+    program = g_path_get_basename (argv[0]);
+  }
+
+  if (G_UNLIKELY (g_strcmp0 (program, "ssh") == 0)) {
     new_status |= push_type (priv->remote, pid, NULL, context, KGX_REMOTE);
   }
 
