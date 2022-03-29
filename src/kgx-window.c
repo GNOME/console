@@ -260,10 +260,11 @@ key_press_event (GtkWidget   *widget,
    *
    * See https://gitlab.gnome.org/GNOME/libhandy/-/issues/422
    */
-  if ((keyval == GDK_KEY_Page_Up ||
-       keyval == GDK_KEY_KP_Page_Up ||
-       keyval == GDK_KEY_Page_Down ||
-       keyval == GDK_KEY_KP_Page_Down ||
+  if ((((keyval == GDK_KEY_Page_Up ||
+         keyval == GDK_KEY_KP_Page_Up ||
+         keyval == GDK_KEY_Page_Down ||
+         keyval == GDK_KEY_KP_Page_Down) &&
+        kgx_pages_count (KGX_PAGES (self->pages)) <= 1) ||
        keyval == GDK_KEY_Home ||
        keyval == GDK_KEY_KP_Home ||
        keyval == GDK_KEY_End ||

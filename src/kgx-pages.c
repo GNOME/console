@@ -820,6 +820,25 @@ kgx_pages_current_status (KgxPages *self)
 
 
 /**
+ * kgx_pages_count:
+ * @self: the #KgxPages
+ *
+ * Returns: number of #KgxTab s in @self
+ */
+int
+kgx_pages_count (KgxPages *self)
+{
+  KgxPagesPrivate *priv;
+
+  g_return_val_if_fail (KGX_IS_PAGES (self), KGX_NONE);
+
+  priv = kgx_pages_get_instance_private (self);
+
+  return hdy_tab_view_get_n_pages (HDY_TAB_VIEW (priv->view));
+}
+
+
+/**
  * kgx_pages_get_children:
  * @self: the #KgxPages
  *
