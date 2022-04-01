@@ -1,72 +1,61 @@
-# German translation for kgx.
-# Copyright (C) 2020 kgx's COPYRIGHT HOLDER
-# This file is distributed under the same license as the kgx package.
+# German translation for console.
+# Copyright (C) 2020 console's COPYRIGHT HOLDER
+# This file is distributed under the same license as the console package.
 #
 # Tim Sabsch <tim@sabsch.com>, 2020-2021.
-# Philipp Kiemle <philipp.kiemle@gmail.com>, 2020-2021
+# Philipp Kiemle <philipp.kiemle@gmail.com>, 2020-2022.
+# Christian Kirbach <christian.kirbach@gmail.com>, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/ZanderBrown/kgx/issues\n"
-"POT-Creation-Date: 2021-03-26 15:38+0000\n"
-"PO-Revision-Date: 2021-03-28 18:30+0200\n"
-"Last-Translator: Tim Sabsch <tim@sabsch.com>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
+"POT-Creation-Date: 2022-03-18 08:29+0000\n"
+"PO-Revision-Date: 2022-04-01 11:20+0200\n"
+"Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0\n"
 
-#. Translators: This is a train station, see README.md for more info
-#: data/org.gnome.zbrown.KingsCross.desktop.in:4
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:8 src/kgx-application.c:512
-#: src/kgx-window.c:520 src/kgx-window.c:553 src/kgx-window.ui:100
-#: src/main.c:37
-msgid "King’s Cross"
-msgstr "King’s Cross"
+#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
+msgid "Console"
+msgstr "Konsole"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.zbrown.KingsCross.desktop.in:9
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:8
+#: data/org.gnome.Console.desktop.in.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
 "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;befehl;"
 "kommando;befehlszeile;kommandozeile;ausführen;"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in:20
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:19
+#: data/org.gnome.Console.desktop.in.in:21
 msgid "New Window"
 msgstr "Neues Fenster"
 
-#: data/org.gnome.zbrown.KingsCross.desktop.in:26
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:25 src/kgx-window.ui:144
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:168
 msgid "New Tab"
 msgstr "Neuer Reiter"
 
-#: data/org.gnome.zbrown.KingsCross-generic.desktop.in:3 src/kgx-window.c:518
-#: src/kgx-window.c:551 src/main.c:35
-msgid "Terminal"
-msgstr "Terminal"
-
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:9 src/kgx-application.c:514
-#: src/kgx-window.c:512
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:568
 msgid "Terminal Emulator"
-msgstr "Terminalemulator"
+msgstr "Terminal-Emulator"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:11
+#: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr ""
 "Ein einfacher, nutzerfreundlicher Terminal-Emulator für die GNOME "
 "Arbeitsumgebung."
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:22
+#: data/org.gnome.Console.metainfo.xml.in.in:30
 msgid "Terminal window"
 msgstr "Terminalfenster"
 
-#: data/org.gnome.zbrown.KingsCross.appdata.xml.in:52
+#: data/org.gnome.Console.metainfo.xml.in.in:104
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -131,58 +120,66 @@ msgid "Switch to Tab"
 msgstr "Zum Reiter wechseln"
 
 #. Translators: The leading # is intentional, the initial %s is the
-#. version of King's Cross itself, the latter format is the VTE version
-#: src/kgx-application.c:486
+#. version of KGX itself, the latter format is the VTE version
+#: src/kgx-application.c:540
 #, c-format
-msgid "# King’s Cross %s using VTE %u.%u.%u %s\n"
-msgstr "# King's Cross %s auf Basis von VTE %u.%u.%u %s\n"
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s auf Basis von VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:498 src/kgx-window.c:500
+#: src/kgx-application.c:552 src/kgx-window.c:525
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:516
+#: src/kgx-application.c:566 src/kgx-window.ui:115
+msgid "King’s Cross"
+msgstr "King’s Cross"
+
+#: src/kgx-application.c:570
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 oder neuer"
 
-#: src/kgx-application.c:647
+#: src/kgx-application.c:701
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Das Argument dieser Option im Terminal ausführen"
 
-#: src/kgx-application.c:656
+#: src/kgx-application.c:710
 msgid "Set the working directory"
 msgstr "Den Arbeitsordner festlegen"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:658
+#: src/kgx-application.c:712
 msgid "DIRNAME"
 msgstr "ORDNERNAME"
 
-#: src/kgx-application.c:666
+#: src/kgx-application.c:720
 msgid "Wait until the child exits (TODO)"
 msgstr "Auf Beenden des Unterprozesses warten (TODO)"
 
-#: src/kgx-application.c:675
+#: src/kgx-application.c:729
 msgid "Set the initial window title"
 msgstr "Anfänglichen Titel des Fensters festlegen"
 
 # Nach meinem Verständnis gehts hier um bash vs zsh vs fish ...
-#: src/kgx-application.c:684
+#: src/kgx-application.c:738
 msgid "ADVANCED: Set the shell to launch"
 msgstr "FORTGESCHRITTEN: Zu startende Shell einstellen"
 
 # Konsistent mit GNOME Terminal
-#: src/kgx-application.c:693
+#: src/kgx-application.c:747
 msgid "ADVANCED: Set the scrollback length"
 msgstr "FORTGESCHRITTEN: Anzahl der vorzuhaltenden Zeilen einstellen"
 
-#: src/kgx-close-dialog.c:52
+#: src/kgx-application.h:44
+msgid "Console (Development)"
+msgstr "Konsole (Entwicklung)"
+
+#: src/kgx-close-dialog.c:50
 msgid "Close Window?"
 msgstr "Fenster schließen?"
 
-#: src/kgx-close-dialog.c:53
+#: src/kgx-close-dialog.c:51
 msgid ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
@@ -190,11 +187,11 @@ msgstr ""
 "Einige Befehle laufen immer noch. Dieses Fenster zu schließen würde sie "
 "beenden, was zu unerwarteten Ergebnissen führen kann"
 
-#: src/kgx-close-dialog.c:58
+#: src/kgx-close-dialog.c:56
 msgid "Close Tab?"
 msgstr "Reiter schließen?"
 
-#: src/kgx-close-dialog.c:59
+#: src/kgx-close-dialog.c:57
 msgid ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
@@ -202,7 +199,7 @@ msgstr ""
 "Einige Befehle laufen immer noch. Diesen Reiter zu schließen würde sie "
 "beenden, was zu unerwarteten Ergebnissen führen kann"
 
-#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:675
+#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:780
 msgid "_Cancel"
 msgstr "A_bbrechen"
 
@@ -210,44 +207,48 @@ msgstr "A_bbrechen"
 msgid "C_lose"
 msgstr "S_chließen"
 
-#: src/kgx-pages.ui:46
+#: src/kgx-pages.ui:47
 msgid "_Detach Tab"
 msgstr "Reiter abtr_ennen"
 
-#: src/kgx-pages.ui:52
+#: src/kgx-pages.ui:53
 msgid "_Close"
 msgstr "S_chließen"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:119
+#: src/kgx-simple-tab.c:168
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Nur Lesen</b> — Befehl beendet mit Code %i"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:128
+#: src/kgx-simple-tab.c:177
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Nur Lesen</b> — Befehl beendet"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:160
+#: src/kgx-simple-tab.c:210
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Starten gescheitert</b> — %s"
 
-#: src/kgx-tab.c:1182
+#: src/kgx-tab.c:1160
 msgid "Command completed"
 msgstr "Befehl abgeschlossen"
 
-#: src/kgx-terminal.c:667
+#: src/kgx-tab-button.ui:5
+msgid "View Open Tabs"
+msgstr "Geöffnete Reiter anzeigen"
+
+#: src/kgx-terminal.c:772
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Sie kopieren einen Befehl, der als Administrator ausgeführt wird"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:670
+#: src/kgx-terminal.c:775
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -256,60 +257,63 @@ msgstr ""
 "Gehen Sie sicher, dass Sie wissen, was dieser Befehl bewirkt:\n"
 "%s"
 
-#: src/kgx-terminal.c:678 src/menus.ui:24
+#: src/kgx-terminal.c:783 src/menus.ui:24
 msgid "_Paste"
 msgstr "E_infügen"
 
+#: src/kgx-theme-switcher.ui:18
+msgid "Use System Colors"
+msgstr "Systemfarben verwenden"
+
+#: src/kgx-theme-switcher.ui:47
+msgid "Use Light Colors"
+msgstr "Helle Farben verwenden"
+
+#: src/kgx-theme-switcher.ui:76
+msgid "Use Dark Colors"
+msgstr "Dunkle Farben verwenden"
+
 #. Translators: Credit yourself here
-#: src/kgx-window.c:506
+#: src/kgx-window.c:531
 msgid "translator-credits"
 msgstr ""
-"Philipp Kiemle <philipp.kiemle@gmail.com>, 2020-2021\n"
-"Tim Sabsch <tim@sabsch.com>, 2021"
+"Philipp Kiemle <philipp.kiemle@gmail.com>\n"
+"Tim Sabsch <tim@sabsch.com>\n"
+"Christian Kirbach <christian.kirbach@gmail.com>"
 
-#. Translators: Don’t attempt to translate KGX,
-#. * treat it as a proper noun
-#: src/kgx-window.c:510
-msgid "KGX Terminal Emulator"
-msgstr "KGX-Terminal-Emulator"
-
-#: src/kgx-window.c:613
-msgid "_About Terminal"
-msgstr "_Info zu Terminal"
-
-#: src/kgx-window.ui:20
-msgid "Shrink text"
+#: src/kgx-window.ui:26
+msgid "Shrink Text"
 msgstr "Text verkleinern"
 
-#: src/kgx-window.ui:33
-msgid "Reset size"
+#: src/kgx-window.ui:39
+msgid "Reset Size"
 msgstr "Größe zurücksetzen"
 
-#: src/kgx-window.ui:46
-msgid "Enlarge text"
+#: src/kgx-window.ui:52
+msgid "Enlarge Text"
 msgstr "Text vergrößern"
 
-#: src/kgx-window.ui:63
+#: src/kgx-window.ui:74
 msgid "_New Window"
 msgstr "_Neues Fenster"
 
-#: src/kgx-window.ui:75
+#: src/kgx-window.ui:86
 msgid "_Keyboard Shortcuts"
 msgstr "_Tastaturkürzel"
 
-#: src/kgx-window.ui:82
-msgid "_About King’s Cross"
-msgstr "_Info zu King's Cross"
+#: src/kgx-window.ui:93
+msgid "_About Console"
+msgstr "_Info zu Konsole"
 
-#: src/kgx-window.ui:83
-msgid "About this program"
-msgstr "Über dieses Programm"
+#: src/kgx-window.ui:94
+msgid "About this Program"
+msgstr "Info zu dieser Anwendung"
 
-#: src/kgx-window.ui:108
-msgid "Find in terminal"
+#: src/kgx-window.ui:123
+msgid "Find in Terminal"
 msgstr "Im Terminal suchen"
 
-#: src/kgx-window.ui:126
+#: src/kgx-window.ui:141
 msgid "Menu"
 msgstr "Menü"
 
@@ -334,16 +338,28 @@ msgid "Show in _Files"
 msgstr "In Date_ien anzeigen"
 
 #: nautilus/kgx-nautilus-menu-item.c:120
-msgid "Open in T_erminal"
-msgstr "In _Terminal öffnen"
+msgid "Open in Co_nsole (Devel)"
+msgstr "In _Konsole (Entwicklung) öffnen"
 
 #: nautilus/kgx-nautilus-menu-item.c:122
-msgid "Op_en in King’s Cross"
-msgstr "I_n King's Cross öffnen"
+msgid "Open in Co_nsole"
+msgstr "In _Konsole öffnen"
 
 #: nautilus/kgx-nautilus-menu-item.c:124
 msgid "Start a terminal session for this location"
 msgstr "Eine Terminal-Sitzung für diesen Ort starten"
+
+#~ msgid "Terminal"
+#~ msgstr "Terminal"
+
+#~ msgid "KGX Terminal Emulator"
+#~ msgstr "KGX-Terminal-Emulator"
+
+#~ msgid "_About King’s Cross"
+#~ msgstr "_Info zu King's Cross"
+
+#~ msgid "Op_en in King’s Cross"
+#~ msgstr "I_n King's Cross öffnen"
 
 #~ msgctxt "shortcut window"
 #~ msgid "First Tab"
