@@ -425,15 +425,49 @@ kgx_application_open (GApplication  *app,
 
 
 static int
+kgx_application_local_command_line (GApplication   *app,
+                                    char         ***arguments,
+                                    int            *exit_status)
+{
+  for (size_t i = 0; (*arguments)[i] != NULL; i++) {
+    /* Don't edit argv[0], but also don't start the loop with i = 1,
+     * because it's technically possible to run a program with argc == 0 */
+    if (i == 0) {
+      continue;
+    }
+
+    if (strcmp ((*arguments)[i], "-e") == 0) {
+      /* For xterm-compatible handling of -e, we want to stop parsing
+       * other command-line options at this point, so that
+       *
+       *     kgx -T "Directory listing" -e ls -al /
+       *
+       * passes "-al" to ls instead of trying to parse them as kgx
+       * options. To do this, turn -e into the "--" pseudo-argument. */
+      (*arguments)[i][1] = '-';
+      break;
+    } else if (strcmp ((*arguments)[i], "--") == 0) {
+      /* Don't continue to edit arguments after the -- separator,
+       * so you can do: kgx -- some-command ... -e ... */
+      break;
+    }
+  }
+
+  return G_APPLICATION_CLASS (kgx_application_parent_class)->local_command_line (app, arguments, exit_status);
+}
+
+
+static int
 kgx_application_command_line (GApplication            *app,
                               GApplicationCommandLine *cli)
 {
   KgxApplication *self = KGX_APPLICATION (app);
   guint32 timestamp = GDK_CURRENT_TIME;
   GVariantDict *options = NULL;
+  g_autofree const char **argv = NULL;
+  g_autofree char *command = NULL;
   const char *working_dir = NULL;
   const char *title = NULL;
-  const char *command = NULL;
   const char *const *shell = NULL;
   const char *cwd = NULL;
   gint64 scrollback;
@@ -445,7 +479,8 @@ kgx_application_command_line (GApplication            *app,
 
   g_variant_dict_lookup (options, "working-directory", "^&ay", &working_dir);
   g_variant_dict_lookup (options, "title", "&s", &title);
-  g_variant_dict_lookup (options, "command", "^&ay", &command);
+  g_variant_dict_lookup (options, "command", "^ay", &command);
+  g_variant_dict_lookup (options, G_OPTION_REMAINING, "^a&ay", &argv);
 
   if (g_variant_dict_lookup (options, "set-shell", "^as", &shell) && shell) {
     g_settings_set_strv (self->settings, "shell", shell);
@@ -465,6 +500,30 @@ kgx_application_command_line (GApplication            *app,
 
   if (path == NULL) {
     path = g_file_new_for_path (cwd);
+  }
+
+  /* TODO: These should be passed in as argv, rather than building and
+   * then re-parsing as if for a shell */
+  if (argv != NULL && argv[0] != NULL) {
+    g_autoptr (GString) buf = g_string_new ("");
+
+    if (command != NULL) {
+      g_warning (_("Cannot use both --command and positional parameters"));
+      return EXIT_FAILURE;
+    }
+
+    for (size_t i = 0; argv[i] != NULL; i++) {
+      g_autofree char *quoted = g_shell_quote (argv[i]);
+
+      g_string_append (buf, quoted);
+
+      if (buf->len > 0) {
+        g_string_append_c (buf, ' ');
+      }
+    }
+
+    g_debug ("Built command-line: %s", buf->str);
+    command = g_string_free (g_steal_pointer (&buf), FALSE);
   }
 
   if (g_variant_dict_lookup (options, "tab", "b", &tab) && tab) {
@@ -594,6 +653,7 @@ kgx_application_class_init (KgxApplicationClass *klass)
   app_class->activate = kgx_application_activate;
   app_class->startup = kgx_application_startup;
   app_class->open = kgx_application_open;
+  app_class->local_command_line = kgx_application_local_command_line;
   app_class->command_line = kgx_application_command_line;
   app_class->handle_local_options = kgx_application_handle_local_options;
 
@@ -694,7 +754,7 @@ static GOptionEntry entries[] = {
   },
   {
     "command",
-    'e',
+    0,
     0,
     G_OPTION_ARG_FILENAME,
     NULL,
@@ -746,6 +806,15 @@ static GOptionEntry entries[] = {
     NULL,
     N_("ADVANCED: Set the scrollback length"),
     N_("LINES")
+  },
+  {
+    G_OPTION_REMAINING,
+    0,
+    0,
+    G_OPTION_ARG_FILENAME_ARRAY,
+    NULL,
+    NULL,
+    N_("[-e|-- COMMAND [ARGUMENT...]]")
   },
   { NULL }
 };
