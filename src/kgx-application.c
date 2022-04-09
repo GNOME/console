@@ -1160,20 +1160,25 @@ kgx_application_add_terminal (KgxApplication *self,
   GtkWidget *tab;
   KgxPages *pages;
 
-  g_shell_parse_argv (command ? command : user_shell, NULL, &shell, &error);
+  if (command != NULL) {
+    g_shell_parse_argv (command, NULL, &shell, &error);
 
-  if (error) {
-    g_warning ("Failed to parse “%s” as a command",
-               command ? command : user_shell);
-    shell = NULL;
-    g_clear_error (&error);
+    if (error) {
+      g_warning ("Failed to parse “%s” as a command", command);
+      shell = NULL;
+      g_clear_error (&error);
+    }
   }
 
-  if (G_LIKELY (command == NULL)) {
+  if (G_LIKELY (shell == NULL)) {
     custom_shell = g_settings_get_strv (self->settings, "shell");
 
     if (g_strv_length (custom_shell) > 0) {
       shell = g_steal_pointer (&custom_shell);
+    } else if (user_shell != NULL) {
+      shell = g_new0 (char *, 2);
+      shell[0] = g_steal_pointer (&user_shell);
+      shell[1] = NULL;
     }
   }
 
