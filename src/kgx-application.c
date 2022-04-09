@@ -503,17 +503,34 @@ kgx_application_command_line (GApplication            *app,
   }
 
   if (command != NULL) {
+    gboolean can_exec_directly;
+
     if (argv != NULL && argv[0] != NULL) {
       g_warning (_("Cannot use both --command and positional parameters"));
       return EXIT_FAILURE;
     }
 
     g_clear_pointer (&argv, g_strfreev);
-    argv = g_new0 (char *, 4);
-    argv[0] = g_strdup ("/bin/sh");
-    argv[1] = g_strdup ("-c");
-    argv[2] = g_strdup (command);
-    argv[3] = NULL;
+
+    if (strchr (command, '/') != NULL) {
+      can_exec_directly = g_file_test (command, G_FILE_TEST_IS_EXECUTABLE);
+    } else {
+      g_autofree char *program = g_find_program_in_path (command);
+
+      can_exec_directly = (program != NULL);
+    }
+
+    if (can_exec_directly) {
+      argv = g_new0 (char *, 2);
+      argv[0] = g_strdup (command);
+      argv[1] = NULL;
+    } else {
+      argv = g_new0 (char *, 4);
+      argv[0] = g_strdup ("/bin/sh");
+      argv[1] = g_strdup ("-c");
+      argv[2] = g_strdup (command);
+      argv[3] = NULL;
+    }
   }
 
   if (g_variant_dict_lookup (options, "tab", "b", &tab) && tab) {
