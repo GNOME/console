@@ -116,7 +116,7 @@ KgxTab *              kgx_application_add_terminal    (KgxApplication *self,
                                                        KgxWindow      *existing_window,
                                                        guint32         timestamp,
                                                        GFile          *working_directory,
-                                                       const char     *command,
+                                                       GStrv           command,
                                                        const char     *title);
 
 G_END_DECLS

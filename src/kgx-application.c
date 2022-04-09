@@ -464,8 +464,8 @@ kgx_application_command_line (GApplication            *app,
   KgxApplication *self = KGX_APPLICATION (app);
   guint32 timestamp = GDK_CURRENT_TIME;
   GVariantDict *options = NULL;
-  g_autofree const char **argv = NULL;
-  g_autofree char *command = NULL;
+  g_auto (GStrv) argv = NULL;
+  const char *command = NULL;
   const char *working_dir = NULL;
   const char *title = NULL;
   const char *const *shell = NULL;
@@ -479,8 +479,8 @@ kgx_application_command_line (GApplication            *app,
 
   g_variant_dict_lookup (options, "working-directory", "^&ay", &working_dir);
   g_variant_dict_lookup (options, "title", "&s", &title);
-  g_variant_dict_lookup (options, "command", "^ay", &command);
-  g_variant_dict_lookup (options, G_OPTION_REMAINING, "^a&ay", &argv);
+  g_variant_dict_lookup (options, "command", "^&ay", &command);
+  g_variant_dict_lookup (options, G_OPTION_REMAINING, "^aay", &argv);
 
   if (g_variant_dict_lookup (options, "set-shell", "^as", &shell) && shell) {
     g_settings_set_strv (self->settings, "shell", shell);
@@ -502,28 +502,21 @@ kgx_application_command_line (GApplication            *app,
     path = g_file_new_for_path (cwd);
   }
 
-  /* TODO: These should be passed in as argv, rather than building and
-   * then re-parsing as if for a shell */
-  if (argv != NULL && argv[0] != NULL) {
-    g_autoptr (GString) buf = g_string_new ("");
+  if (command != NULL) {
+    g_autoptr (GError) error = NULL;
 
-    if (command != NULL) {
+    if (argv != NULL && argv[0] != NULL) {
       g_warning (_("Cannot use both --command and positional parameters"));
       return EXIT_FAILURE;
     }
 
-    for (size_t i = 0; argv[i] != NULL; i++) {
-      g_autofree char *quoted = g_shell_quote (argv[i]);
+    g_clear_pointer (&argv, g_strfreev);
 
-      g_string_append (buf, quoted);
-
-      if (buf->len > 0) {
-        g_string_append_c (buf, ' ');
-      }
+    if (!g_shell_parse_argv (command, NULL, &argv, &error)) {
+      g_warning ("Failed to parse “%s” as a command: %s", command, error->message);
+      g_clear_error (&error);
+      g_clear_pointer (&argv, g_strfreev);
     }
-
-    g_debug ("Built command-line: %s", buf->str);
-    command = g_string_free (g_steal_pointer (&buf), FALSE);
   }
 
   if (g_variant_dict_lookup (options, "tab", "b", &tab) && tab) {
@@ -531,10 +524,10 @@ kgx_application_command_line (GApplication            *app,
                                   KGX_WINDOW (gtk_application_get_active_window (GTK_APPLICATION (self))),
                                   timestamp,
                                   path,
-                                  command,
+                                  argv,
                                   title);
   } else {
-    kgx_application_add_terminal (self, NULL, timestamp, path, command, title);
+    kgx_application_add_terminal (self, NULL, timestamp, path, argv, title);
   }
 
   return EXIT_SUCCESS;
@@ -1148,29 +1141,18 @@ kgx_application_add_terminal (KgxApplication *self,
                               KgxWindow      *existing_window,
                               guint32         timestamp,
                               GFile          *working_directory,
-                              const char     *command,
+                              GStrv           argv,
                               const char     *title)
 {
   g_autofree char *user_shell = vte_get_user_shell ();
   g_autofree char *directory = NULL;
-  g_autoptr (GError) error = NULL;
   g_auto (GStrv) shell = NULL;
   g_auto (GStrv) custom_shell = NULL;
   GtkWindow *window;
   GtkWidget *tab;
   KgxPages *pages;
 
-  if (command != NULL) {
-    g_shell_parse_argv (command, NULL, &shell, &error);
-
-    if (error) {
-      g_warning ("Failed to parse “%s” as a command", command);
-      shell = NULL;
-      g_clear_error (&error);
-    }
-  }
-
-  if (G_LIKELY (shell == NULL)) {
+  if (argv == NULL) {
     custom_shell = g_settings_get_strv (self->settings, "shell");
 
     if (g_strv_length (custom_shell) > 0) {
@@ -1183,7 +1165,7 @@ kgx_application_add_terminal (KgxApplication *self,
   }
 
   /* We should probably do something other than /bin/sh  */
-  if (shell == NULL) {
+  if (argv == NULL && shell == NULL) {
     shell = g_new0 (char *, 2);
     shell[0] = g_strdup ("/bin/sh");
     shell[1] = NULL;
@@ -1200,9 +1182,9 @@ kgx_application_add_terminal (KgxApplication *self,
                       "application", self,
                       "visible", TRUE,
                       "initial-work-dir", directory,
-                      "command", shell,
+                      "command", shell != NULL ? shell : argv,
                       "tab-title", title,
-                      "close-on-quit", command == NULL,
+                      "close-on-quit", argv == NULL,
                       NULL);
   kgx_tab_start (KGX_TAB (tab), started, self);
 
