@@ -443,8 +443,14 @@ kgx_application_local_command_line (GApplication   *app,
        *     kgx -T "Directory listing" -e ls -al /
        *
        * passes "-al" to ls instead of trying to parse them as kgx
-       * options. To do this, turn -e into the "--" pseudo-argument. */
-      (*arguments)[i][1] = '-';
+       * options. To do this, turn -e into the "--" pseudo-argument -
+       * unless there is exactly one argument following it, in which
+       * case leave it as -e, which the GOptionContext will treat
+       * like --command. */
+      if (!((*arguments)[i + 1] != NULL && (*arguments)[i + 2] == NULL)) {
+        (*arguments)[i][1] = '-';
+      }
+
       break;
     } else if (strcmp ((*arguments)[i], "--") == 0) {
       /* Don't continue to edit arguments after the -- separator,
@@ -761,7 +767,7 @@ static GOptionEntry entries[] = {
   },
   {
     "command",
-    0,
+    'e',
     0,
     G_OPTION_ARG_FILENAME,
     NULL,
