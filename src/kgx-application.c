@@ -699,7 +699,7 @@ static GOptionEntry entries[] = {
     G_OPTION_ARG_FILENAME,
     NULL,
     N_("Execute the argument to this option inside the terminal"),
-    NULL
+    N_("COMMAND")
   },
   {
     "working-directory",
@@ -727,7 +727,7 @@ static GOptionEntry entries[] = {
     G_OPTION_ARG_STRING,
     NULL,
     N_("Set the initial window title"),
-    NULL
+    N_("TITLE")
   },
   {
     "set-shell",
@@ -736,7 +736,7 @@ static GOptionEntry entries[] = {
     G_OPTION_ARG_STRING_ARRAY,
     NULL,
     N_("ADVANCED: Set the shell to launch"),
-    NULL
+    N_("SHELL")
   },
   {
     "set-scrollback",
@@ -745,7 +745,7 @@ static GOptionEntry entries[] = {
     G_OPTION_ARG_INT64,
     NULL,
     N_("ADVANCED: Set the scrollback length"),
-    NULL
+    N_("LINES")
   },
   { NULL }
 };
