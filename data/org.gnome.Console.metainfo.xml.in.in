@@ -96,8 +96,8 @@
     </release>
   </releases>
   <launchable type="desktop-id">@KGX_APPLICATION_ID_RAW@.desktop</launchable>
-  <url type="homepage">https://gitlab.gnome.org/ZanderBrown/KGX/</url>
-  <url type="bugtracker">https://gitlab.gnome.org/ZanderBrown/KGX/issues</url>
+  <url type="homepage">https://gitlab.gnome.org/GNOME/console/</url>
+  <url type="bugtracker">https://gitlab.gnome.org/GNOME/console/issues</url>
   <update_contact>zbrown@gnome.org</update_contact>
   <translation type="gettext">@BIN_NAME@</translation>
   <content_rating type="oars-1.1" />
