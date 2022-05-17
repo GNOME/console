@@ -29,6 +29,8 @@ kgx_sources = [
   'kgx-window.h',
   'kgx-process.c',
   'kgx-process.h',
+  'kgx-util.c',
+  'kgx-util.h',
 ]
 
 kgx_deps = [

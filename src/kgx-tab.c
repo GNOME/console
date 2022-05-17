@@ -30,6 +30,7 @@
 #include "kgx-tab.h"
 #include "kgx-pages.h"
 #include "kgx-terminal.h"
+#include "kgx-util.h"
 #include "kgx-application.h"
 
 
@@ -1224,67 +1225,6 @@ kgx_tab_get_children (KgxTab *self)
 }
 
 
-/**
- * terminal_util_transform_uris_to_quoted_fuse_paths:
- * @uris:
- *
- * Transforms those URIs in @uris to shell-quoted paths that point to
- * GIO fuse paths.
- */
-static void
-terminal_util_transform_uris_to_quoted_fuse_paths (GStrv uris)
-{
-  guint i;
-
-  if (!uris)
-    return;
-
-  for (i = 0; uris[i]; ++i)
-    {
-      g_autoptr (GFile) file = NULL;
-      g_autofree char *path = NULL;
-
-      file = g_file_new_for_uri (uris[i]);
-
-      path = g_file_get_path (file);
-      if (path)
-        {
-          char *quoted;
-
-          quoted = g_shell_quote (path);
-          g_free (uris[i]);
-
-          uris[i] = quoted;
-        }
-    }
-}
-
-
-static char *
-terminal_util_concat_uris (GStrv uris,
-                           gsize *length)
-{
-  GString *string;
-  gsize len;
-  guint i;
-
-  len = 0;
-  for (i = 0; uris[i]; ++i)
-    len += strlen (uris[i]) + 1;
-
-  if (length)
-    *length = len;
-
-  string = g_string_sized_new (len + 1);
-  for (i = 0; uris[i]; ++i)
-    {
-      g_string_append (string, uris[i]);
-      g_string_append_c (string, ' ');
-    }
-
-  return g_string_free (string, FALSE);
-}
-
 void
 kgx_tab_accept_drop (KgxTab           *self,
                      GtkSelectionData *selection_data)
@@ -1302,21 +1242,21 @@ kgx_tab_accept_drop (KgxTab           *self,
   if (gtk_selection_data_get_length (selection_data) < 0)
     return;
 
-  if (gtk_targets_include_uri (&selection_data_target, 1))
-  {
+  if (gtk_targets_include_uri (&selection_data_target, 1)) {
     g_auto (GStrv) uris = NULL;
 
     uris = gtk_selection_data_get_uris (selection_data);
 
-    terminal_util_transform_uris_to_quoted_fuse_paths (uris);
+    kgx_util_transform_uris_to_quoted_fuse_paths (uris);
 
-    text = terminal_util_concat_uris (uris, NULL);
-  }
-  else
+    text = kgx_util_concat_uris (uris, NULL);
+  } else {
     text = (char *) gtk_selection_data_get_text (selection_data);
+  }
 
-  if (priv->terminal)
+  if (priv->terminal) {
     kgx_terminal_accept_paste (KGX_TERMINAL (priv->terminal), text);
+  }
 }
 
 
