@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-02-14 22:03+0000\n"
-"PO-Revision-Date: 2022-02-15 13:18+0000\n"
+"POT-Creation-Date: 2022-05-17 18:12+0000\n"
+"PO-Revision-Date: 2022-05-18 14:40+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "Language: pt\n"
@@ -52,7 +52,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Janela do terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:75
+#: data/org.gnome.Console.metainfo.xml.in.in:104
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -124,7 +124,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s a usar VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:552 src/kgx-window.c:525
+#: src/kgx-application.c:552 src/kgx-window.c:526
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -140,6 +140,10 @@ msgstr "GPL 3.0 ou posterior"
 #: src/kgx-application.c:701
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Executa o argumento para esta opção dentro do terminal"
+
+#: src/kgx-application.c:702
+msgid "COMMAND"
+msgstr "COMMANDO"
 
 #: src/kgx-application.c:710
 msgid "Set the working directory"
@@ -158,13 +162,25 @@ msgstr "Aguarda até o sub-processo sair (ToDo)"
 msgid "Set the initial window title"
 msgstr "Define o título da janela inicial"
 
+#: src/kgx-application.c:730
+msgid "TITLE"
+msgstr "TÍTULO"
+
 #: src/kgx-application.c:738
 msgid "ADVANCED: Set the shell to launch"
 msgstr "AVANÇADO: Define o shell a lançar"
 
+#: src/kgx-application.c:739
+msgid "SHELL"
+msgstr "SHELL"
+
 #: src/kgx-application.c:747
 msgid "ADVANCED: Set the scrollback length"
 msgstr "AVANÇADO: Define o comprimento do buffer de deslocamento (scrollback)"
+
+#: src/kgx-application.c:748
+msgid "LINES"
+msgstr "LINHAS"
 
 #: src/kgx-application.h:44
 msgid "Console (Development)"
@@ -194,7 +210,7 @@ msgstr ""
 "Alguns comandos ainda estão em execução, fechar este separador vai terminá-"
 "los e pode levar a resultados inesperados"
 
-#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:780
+#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:804
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -230,7 +246,7 @@ msgstr "<b>Apenas leitura</b> — Comando encerrado"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Falha ao iniciar</b> — %s"
 
-#: src/kgx-tab.c:1160
+#: src/kgx-tab.c:1162
 msgid "Command completed"
 msgstr "Comando concluído"
 
@@ -238,12 +254,12 @@ msgstr "Comando concluído"
 msgid "View Open Tabs"
 msgstr "Ver separadores abertos"
 
-#: src/kgx-terminal.c:772
+#: src/kgx-terminal.c:793
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Está a colar um comando que executa como administrador"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:775
+#: src/kgx-terminal.c:796
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -252,7 +268,7 @@ msgstr ""
 "Certifique-se de que sabe o que o comando faz:\n"
 "%s"
 
-#: src/kgx-terminal.c:783 src/menus.ui:24
+#: src/kgx-terminal.c:807 src/menus.ui:24
 msgid "_Paste"
 msgstr "C_olar"
 
@@ -269,7 +285,7 @@ msgid "Use Dark Colors"
 msgstr "Usar cores escuras"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:531
+#: src/kgx-window.c:532
 msgid "translator-credits"
 msgstr "Hugo Carvalho <hugokarvalho@hotmail.com>"
 
