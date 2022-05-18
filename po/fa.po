@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-02-18 02:00+0000\n"
-"PO-Revision-Date: 2022-02-20 15:36+0330\n"
+"POT-Creation-Date: 2022-05-17 18:12+0000\n"
+"PO-Revision-Date: 2022-05-18 14:06+0430\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "Language: fa\n"
@@ -121,7 +121,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s با استفاده از VTE %Iu.%Iu.%Iu %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:552 src/kgx-window.c:525
+#: src/kgx-application.c:552 src/kgx-window.c:526
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s زندر برون"
@@ -137,6 +137,10 @@ msgstr "نگارش ۳ یا بالاتر جی‌پی‌ال"
 #: src/kgx-application.c:701
 msgid "Execute the argument to this option inside the terminal"
 msgstr "اجرای آرگومان این گزینه داخل پایانه"
+
+#: src/kgx-application.c:702
+msgid "COMMAND"
+msgstr "COMMAND"
 
 #: src/kgx-application.c:710
 msgid "Set the working directory"
@@ -155,13 +159,25 @@ msgstr "انتظار تا هنگام وجود فرزند (TODO)"
 msgid "Set the initial window title"
 msgstr "تنظیم عنوان نخستینِ پنجره"
 
+#: src/kgx-application.c:730
+msgid "TITLE"
+msgstr "TITLE"
+
 #: src/kgx-application.c:738
 msgid "ADVANCED: Set the shell to launch"
 msgstr "پیشرفته: تنظیم پوسته برای اجرا"
 
+#: src/kgx-application.c:739
+msgid "SHELL"
+msgstr "SHELL"
+
 #: src/kgx-application.c:747
 msgid "ADVANCED: Set the scrollback length"
 msgstr "پیشرفته: تنظیم درازای لغزش به عقب"
+
+#: src/kgx-application.c:748
+msgid "LINES"
+msgstr "LINES"
 
 #: src/kgx-application.h:44
 msgid "Console (Development)"
@@ -191,7 +207,7 @@ msgstr ""
 "برخی دستورها هنوز در حال اجرایند. بستن این زبانه خواهد کشتشان و ممکن است "
 "منجر به نتیجه‌های غیرمنتظره‌ای شود"
 
-#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:780
+#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:804
 msgid "_Cancel"
 msgstr "_لغو"
 
@@ -227,7 +243,7 @@ msgstr "<b>فقط خواندنی</b> — دستور خارج شد"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>شکست در آغاز</b> — %s"
 
-#: src/kgx-tab.c:1160
+#: src/kgx-tab.c:1162
 msgid "Command completed"
 msgstr "دستور کامل شد"
 
@@ -235,12 +251,12 @@ msgstr "دستور کامل شد"
 msgid "View Open Tabs"
 msgstr "دیدن زبانه‌های باز"
 
-#: src/kgx-terminal.c:772
+#: src/kgx-terminal.c:793
 msgid "You are pasting a command that runs as an administrator"
 msgstr "دارید دستوری را جای‌گذاری می‌کنید که به عنوان مدیر اجرا می‌شود"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:775
+#: src/kgx-terminal.c:796
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -249,7 +265,7 @@ msgstr ""
 "مطممئن شوید که می‌دانید دستور چه می‌کند:\n"
 "%s"
 
-#: src/kgx-terminal.c:783 src/menus.ui:24
+#: src/kgx-terminal.c:807 src/menus.ui:24
 msgid "_Paste"
 msgstr "_جای‌گذاری"
 
@@ -266,7 +282,7 @@ msgid "Use Dark Colors"
 msgstr "استفاده از رنگ‌های تیره"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:531
+#: src/kgx-window.c:532
 msgid "translator-credits"
 msgstr "دانیال بهزادی <dani.behzi@ubuntu.com>"
 
