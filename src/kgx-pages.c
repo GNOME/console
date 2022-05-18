@@ -854,7 +854,7 @@ kgx_pages_get_children (KgxPages *self)
   GPtrArray *children;
   guint n;
 
-  g_return_val_if_fail (KGX_IS_PAGES (self), KGX_NONE);
+  g_return_val_if_fail (KGX_IS_PAGES (self), NULL);
 
   priv = kgx_pages_get_instance_private (self);
 

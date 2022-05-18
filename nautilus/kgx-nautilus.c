@@ -51,7 +51,6 @@ get_items (KgxNautilus      *self,
            gboolean          is_back)
 {
   g_autoptr (GFile) file = NULL;
-  g_autofree char *path = NULL;
   GList *items = NULL;
   NautilusMenuItem *item;
 

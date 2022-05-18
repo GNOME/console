@@ -82,10 +82,9 @@ zoomed (GObject *object, GParamSpec *pspec, gpointer data)
 static void
 kgx_window_constructed (GObject *object)
 {
-  KgxWindow          *self = KGX_WINDOW (object);
-  g_autoptr (GError)  error = NULL;
-  GtkApplication     *application = NULL;
-  HdyStyleManager    *style_manager;
+  KgxWindow       *self = KGX_WINDOW (object);
+  GtkApplication  *application = NULL;
+  HdyStyleManager *style_manager;
 
   G_OBJECT_CLASS (kgx_window_parent_class)->constructed (object);
 
