@@ -3,21 +3,22 @@
 # This file is distributed under the same license as the kgx package.
 # Rodrigo Lledó <rodhos92@gmail.com>, 2020.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2019-2022.
+# Daniel Mustieles García <daniel.mustieles@gmail.com>, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-02-07 10:11+0000\n"
-"PO-Revision-Date: 2022-02-07 13:51+0100\n"
-"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
+"POT-Creation-Date: 2022-05-17 18:12+0000\n"
+"PO-Revision-Date: 2022-05-19 08:58+0200\n"
+"Last-Translator: Daniel Mustieles García <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 41.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Gtranslator 42.0\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
@@ -37,7 +38,7 @@ msgstr "Ventana nueva"
 msgid "New Tab"
 msgstr "Pestaña nueva"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:556
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:568
 msgid "Terminal Emulator"
 msgstr "Emulador de terminal"
 
@@ -49,7 +50,7 @@ msgstr "Un emulador de terminal sencillo y amigable para el escritorio GNOME."
 msgid "Terminal window"
 msgstr "Ventana de la terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:75
+#: data/org.gnome.Console.metainfo.xml.in.in:104
 msgid "Zander Brown"
 msgstr "Zander Brown"
 
@@ -115,53 +116,69 @@ msgstr "Cambiar a la pestaña"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:528
+#: src/kgx-application.c:540
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s usando VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:540 src/kgx-window.c:525
+#: src/kgx-application.c:552 src/kgx-window.c:526
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:554 src/kgx-window.ui:115
+#: src/kgx-application.c:566 src/kgx-window.ui:115
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
-#: src/kgx-application.c:558
+#: src/kgx-application.c:570
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 o posterior"
 
-#: src/kgx-application.c:689
+#: src/kgx-application.c:701
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Ejecutar el argumento de esta opción en la terminal"
 
-#: src/kgx-application.c:698
+#: src/kgx-application.c:702
+msgid "COMMAND"
+msgstr "COMANDO"
+
+#: src/kgx-application.c:710
 msgid "Set the working directory"
 msgstr "Establecer la carpeta de trabajo"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:700
+#: src/kgx-application.c:712
 msgid "DIRNAME"
 msgstr "NOMBRE_CARPETA"
 
-#: src/kgx-application.c:708
+#: src/kgx-application.c:720
 msgid "Wait until the child exits (TODO)"
 msgstr "Esperar a que el hijo termine (POR_HACER)"
 
-#: src/kgx-application.c:717
+#: src/kgx-application.c:729
 msgid "Set the initial window title"
 msgstr "Establecer el título inicial de la ventana"
 
-#: src/kgx-application.c:726
+#: src/kgx-application.c:730
+msgid "TITLE"
+msgstr "TITULO"
+
+#: src/kgx-application.c:738
 msgid "ADVANCED: Set the shell to launch"
 msgstr "AVANZADO: establecer la shell que ejecutar"
 
-#: src/kgx-application.c:735
+#: src/kgx-application.c:739
+msgid "SHELL"
+msgstr "SHELL"
+
+#: src/kgx-application.c:747
 msgid "ADVANCED: Set the scrollback length"
 msgstr "AVANZADO: establecer la longitud del desplazamiento hacia atrás"
+
+#: src/kgx-application.c:748
+msgid "LINES"
+msgstr "LÍNEAS"
 
 #: src/kgx-application.h:44
 msgid "Console (Development)"
@@ -191,7 +208,7 @@ msgstr ""
 "Algunos comandos siguen en ejecución. Cerrar esta pestaña los matará y esto "
 "puede provocar comportamientos inesperados"
 
-#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:732
+#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:804
 msgid "_Cancel"
 msgstr "C_ancelar"
 
@@ -209,25 +226,25 @@ msgstr "_Cerrar"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:119
+#: src/kgx-simple-tab.c:168
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Sólo lectura</b> — el comando ha terminado con código %i"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:128
+#: src/kgx-simple-tab.c:177
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Sólo lectura</b> — el comando ha terminado"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:160
+#: src/kgx-simple-tab.c:210
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Falló al iniciar</b> — %s"
 
-#: src/kgx-tab.c:1160
+#: src/kgx-tab.c:1162
 msgid "Command completed"
 msgstr "Comando completado"
 
@@ -235,12 +252,12 @@ msgstr "Comando completado"
 msgid "View Open Tabs"
 msgstr "Ver pestañas abiertas"
 
-#: src/kgx-terminal.c:724
+#: src/kgx-terminal.c:793
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Está pegando un comando que se ejecuta como administrador"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:727
+#: src/kgx-terminal.c:796
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -249,7 +266,7 @@ msgstr ""
 "Asegúrese de que sabe lo que hace el comando:\n"
 "%s"
 
-#: src/kgx-terminal.c:735 src/menus.ui:24
+#: src/kgx-terminal.c:807 src/menus.ui:24
 msgid "_Paste"
 msgstr "_Pegar"
 
@@ -266,7 +283,7 @@ msgid "Use Dark Colors"
 msgstr "Usar colores oscuros"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:531
+#: src/kgx-window.c:532
 msgid "translator-credits"
 msgstr "Daniel Mustieles <daniel.musiteles@gmail.com>, 2019"
 
