@@ -1,0 +1,343 @@
+# Vietnamese translation for console.
+# Copyright (C) 2022 console's COPYRIGHT HOLDER
+# This file is distributed under the same license as the console package.
+# Ngọc Quân Trần <vnwildman@gmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: console gnome-42\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
+"POT-Creation-Date: 2022-05-20 09:17+0000\n"
+"PO-Revision-Date: 2022-05-21 13:52+0700\n"
+"Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
+"Language-Team: Vietnamese <gnome-vi-list@gnome.org>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 3.38.0\n"
+
+#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
+msgid "Console"
+msgstr "Bàn giao tiếp"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Console.desktop.in.in:8
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
+msgstr ""
+"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;lệnh;lenh;"
+"thiết bị cuối;thiet bi cuoi;hệ vỏ;he vo;chạy;nhắc;nhắc;bàn giao tiếp;ban "
+"giao tiep;"
+
+#: data/org.gnome.Console.desktop.in.in:21
+msgid "New Window"
+msgstr "Cửa sổ mới"
+
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:168
+msgid "New Tab"
+msgstr "Thẻ mới"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:568
+msgid "Terminal Emulator"
+msgstr "Trình mô phỏng thiết bị cuối"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:11
+msgid "A simple user-friendly terminal emulator for the GNOME desktop."
+msgstr ""
+"Một bộ mô phỏng thiết bị cuối đơn giản và thân thiện người dùng dành cho "
+"môi trường máy tính để bàn GNOME."
+
+#: data/org.gnome.Console.metainfo.xml.in.in:30
+msgid "Terminal window"
+msgstr "Cửa sổ thiết bị cuối"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:104
+msgid "Zander Brown"
+msgstr "Zander Brown"
+
+#: src/help-overlay.ui:13
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Ứng dụng"
+
+#: src/help-overlay.ui:19
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Cửa sổ mới"
+
+#: src/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Thiết bị cuối"
+
+#: src/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Tìm kiếm"
+
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Sao chép"
+
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Dán"
+
+#: src/help-overlay.ui:53
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Thanh"
+
+#: src/help-overlay.ui:59
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Thanh mới"
+
+#: src/help-overlay.ui:66
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Đóng thanh"
+
+#: src/help-overlay.ui:73
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Thẻ kế tiếp"
+
+#: src/help-overlay.ui:80
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Thẻ kế trước"
+
+#: src/help-overlay.ui:87
+msgctxt "shortcut window"
+msgid "Switch to Tab"
+msgstr "Chuyển sang Thẻ"
+
+#. Translators: The leading # is intentional, the initial %s is the
+#. version of KGX itself, the latter format is the VTE version
+#: src/kgx-application.c:540
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s sử dụng VTE %u.%u.%u %s\n"
+
+#. Translators: %s is the year range
+#: src/kgx-application.c:552 src/kgx-window.c:525
+#, c-format
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
+
+#: src/kgx-application.c:566 src/kgx-window.ui:115
+msgid "King’s Cross"
+msgstr "King’s Cross"
+
+#: src/kgx-application.c:570
+msgid "GPL 3.0 or later"
+msgstr "GPL 3.0 hay mới hơn"
+
+#: src/kgx-application.c:701
+msgid "Execute the argument to this option inside the terminal"
+msgstr "Thực thi đối số cho tùy chọn này bên trong thiết bị cuối"
+
+#: src/kgx-application.c:710
+msgid "Set the working directory"
+msgstr "Đặt thư mục làm việc"
+
+#. Translators: Placeholder of for a given directory
+#: src/kgx-application.c:712
+msgid "DIRNAME"
+msgstr "TÊN_THƯ_MỤC"
+
+#: src/kgx-application.c:720
+msgid "Wait until the child exits (TODO)"
+msgstr "Chờ đến khi tiến trình con kết thúc (CẦN LÀM)"
+
+#: src/kgx-application.c:729
+msgid "Set the initial window title"
+msgstr "Đặt tựa đề cửa số khởi tạo"
+
+#: src/kgx-application.c:738
+msgid "ADVANCED: Set the shell to launch"
+msgstr "CAO CẤP: Đặt hệ vỏ để chạy"
+
+#: src/kgx-application.c:747
+msgid "ADVANCED: Set the scrollback length"
+msgstr "CAO CẤP: Đặt chiều dài cuộn"
+
+#: src/kgx-application.h:44
+msgid "Console (Development)"
+msgstr "Bàn điều khiển (Phát triển)"
+
+#: src/kgx-close-dialog.c:50
+msgid "Close Window?"
+msgstr "Đóng cửa sổ?"
+
+#: src/kgx-close-dialog.c:51
+msgid ""
+"Some commands are still running, closing this window will kill them and may "
+"lead to unexpected outcomes"
+msgstr ""
+"Một số lệnh vẫn còn đang chạy, đóng cửa sổ này sẽ giết chúng và có thể dẫn "
+"đến hậu quả không mong muốn"
+
+#: src/kgx-close-dialog.c:56
+msgid "Close Tab?"
+msgstr "Đóng thẻ?"
+
+#: src/kgx-close-dialog.c:57
+msgid ""
+"Some commands are still running, closing this tab will kill them and may "
+"lead to unexpected outcomes"
+msgstr ""
+"Một số lệnh vẫn còn đang chạy, đóng thẻ này sẽ giết chúng và có thể dẫn đến "
+"hậu quả không mong muốn"
+
+#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:780
+msgid "_Cancel"
+msgstr "Thô_i"
+
+#: src/kgx-close-dialog.ui:32
+msgid "C_lose"
+msgstr "Đó_ng"
+
+#: src/kgx-pages.ui:47
+msgid "_Detach Tab"
+msgstr "_Tách thẻ"
+
+#: src/kgx-pages.ui:53
+msgid "_Close"
+msgstr "Đó_ng"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:168
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Chỉ đọc</b> — Lệnh đã thoát với mã %i"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:177
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Chỉ đọc</b> — Lệnh đã thoát"
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:210
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Gặp lỗi khi chạy</b> — %s"
+
+#: src/kgx-tab.c:1160
+msgid "Command completed"
+msgstr "Lệnh hoàn thành"
+
+#: src/kgx-tab-button.ui:5
+msgid "View Open Tabs"
+msgstr "Xem các thẻ mở"
+
+#: src/kgx-terminal.c:772
+msgid "You are pasting a command that runs as an administrator"
+msgstr "Bạn đang dán một lệnh mà nó lại chạy dưới quyền của quản trị viên"
+
+#. TRANSLATORS: %s is the command being pasted
+#: src/kgx-terminal.c:775
+#, c-format
+msgid ""
+"Make sure you know what the command does:\n"
+"%s"
+msgstr ""
+"Hãy đảm bảo chắc chắn là bạn biết các lệnh làm gì:\n"
+"%s"
+
+#: src/kgx-terminal.c:783 src/menus.ui:24
+msgid "_Paste"
+msgstr "_Dán"
+
+#: src/kgx-theme-switcher.ui:18
+msgid "Use System Colors"
+msgstr "Dùng các màu của hệ thống"
+
+#: src/kgx-theme-switcher.ui:47
+msgid "Use Light Colors"
+msgstr "Sử dụng màu sáng"
+
+#: src/kgx-theme-switcher.ui:76
+msgid "Use Dark Colors"
+msgstr "Sử dụng màu tối"
+
+#. Translators: Credit yourself here
+#: src/kgx-window.c:531
+msgid "translator-credits"
+msgstr "Nhóm Việt hóa GNOME <gnome-vi-list@gnome.org>"
+
+#: src/kgx-window.ui:26
+msgid "Shrink Text"
+msgstr "Co nhỏ chữ"
+
+#: src/kgx-window.ui:39
+msgid "Reset Size"
+msgstr "Đặt lại cỡ"
+
+#: src/kgx-window.ui:52
+msgid "Enlarge Text"
+msgstr "Chữ lớn hơn"
+
+#: src/kgx-window.ui:74
+msgid "_New Window"
+msgstr "_Cửa sổ mới"
+
+#: src/kgx-window.ui:86
+msgid "_Keyboard Shortcuts"
+msgstr "_Phím tắt"
+
+#: src/kgx-window.ui:93
+msgid "_About Console"
+msgstr "_Giới thiệu về Bàn giao tiếp"
+
+#: src/kgx-window.ui:94
+msgid "About this Program"
+msgstr "Giới thiệu về chương trình này"
+
+#: src/kgx-window.ui:123
+msgid "Find in Terminal"
+msgstr "Tìm trong Thiết bị cuối"
+
+#: src/kgx-window.ui:141
+msgid "Menu"
+msgstr "Trình đơn"
+
+#: src/menus.ui:7
+msgid "_Open Link"
+msgstr "_Mở liên kết"
+
+#: src/menus.ui:12
+msgid "Copy _Link"
+msgstr "Chép địa chỉ liên _kết"
+
+#: src/menus.ui:19
+msgid "_Copy"
+msgstr "_Sao chép"
+
+#: src/menus.ui:29
+msgid "_Select All"
+msgstr "C_họn tất cả"
+
+#: src/menus.ui:36
+msgid "Show in _Files"
+msgstr "Hiển thị trong \"_Tập tin\""
+
+#: nautilus/kgx-nautilus-menu-item.c:120
+msgid "Open in Co_nsole (Devel)"
+msgstr "Mở tro_ng Bàn giao tiếp (PhTriển)"
+
+#: nautilus/kgx-nautilus-menu-item.c:122
+msgid "Open in Co_nsole"
+msgstr "Mở tro_ng Bàn giao tiếp"
+
+#: nautilus/kgx-nautilus-menu-item.c:124
+msgid "Start a terminal session for this location"
+msgstr "Chạy một phiên thiết bị cuối mới cho vị trí này"
