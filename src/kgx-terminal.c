@@ -59,7 +59,7 @@ static const gchar* links[KGX_TERMINAL_N_LINK_REGEX] = {
   "(?:www|ftp)" HOSTCHARS_CLASS "*\\." HOST PORT URLPATH,
   "(?:callto:|h323:|sip:)" USERCHARS_CLASS "[" USERCHARS ".]*(?:" PORT "/[a-z0-9]+)?\\@" HOST,
   "(?:mailto:)?" USERCHARS_CLASS "[" USERCHARS ".]*\\@" HOSTCHARS_CLASS "+\\." HOST,
-  "(?:news:|man:|info:)[[:alnum:]\\Q^_{|}~!\"#$%&'()*+,./;:=?`\\E]+"
+  "(?:news:|man:|info:)[-[:alnum:]\\Q^_{|}~!\"#$%&'()*+,./;:=?`\\E]+"
 };
 
 /*       Regex adapted from TerminalWidget.vala in Pantheon Terminal       */
