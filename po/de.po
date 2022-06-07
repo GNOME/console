@@ -5,13 +5,14 @@
 # Tim Sabsch <tim@sabsch.com>, 2020-2021.
 # Philipp Kiemle <philipp.kiemle@gmail.com>, 2020-2022.
 # Christian Kirbach <christian.kirbach@gmail.com>, 2022.
+# Jürgen Benvenuti <gastornis@posteo.org>, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-03-18 08:29+0000\n"
-"PO-Revision-Date: 2022-04-01 11:20+0200\n"
+"POT-Creation-Date: 2022-05-24 09:36+0000\n"
+"PO-Revision-Date: 2022-05-30 00:03+0200\n"
 "Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
@@ -144,6 +145,10 @@ msgstr "GPL 3.0 oder neuer"
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Das Argument dieser Option im Terminal ausführen"
 
+#: src/kgx-application.c:702
+msgid "COMMAND"
+msgstr "BEFEHL"
+
 #: src/kgx-application.c:710
 msgid "Set the working directory"
 msgstr "Den Arbeitsordner festlegen"
@@ -161,15 +166,27 @@ msgstr "Auf Beenden des Unterprozesses warten (TODO)"
 msgid "Set the initial window title"
 msgstr "Anfänglichen Titel des Fensters festlegen"
 
+#: src/kgx-application.c:730
+msgid "TITLE"
+msgstr "TITEL"
+
 # Nach meinem Verständnis gehts hier um bash vs zsh vs fish ...
 #: src/kgx-application.c:738
 msgid "ADVANCED: Set the shell to launch"
 msgstr "FORTGESCHRITTEN: Zu startende Shell einstellen"
 
+#: src/kgx-application.c:739
+msgid "SHELL"
+msgstr "SHELL"
+
 # Konsistent mit GNOME Terminal
 #: src/kgx-application.c:747
 msgid "ADVANCED: Set the scrollback length"
 msgstr "FORTGESCHRITTEN: Anzahl der vorzuhaltenden Zeilen einstellen"
+
+#: src/kgx-application.c:748
+msgid "LINES"
+msgstr "ZEILEN"
 
 #: src/kgx-application.h:44
 msgid "Console (Development)"
@@ -199,7 +216,7 @@ msgstr ""
 "Einige Befehle laufen immer noch. Diesen Reiter zu schließen würde sie "
 "beenden, was zu unerwarteten Ergebnissen führen kann"
 
-#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:780
+#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:804
 msgid "_Cancel"
 msgstr "A_bbrechen"
 
@@ -235,7 +252,7 @@ msgstr "<b>Nur Lesen</b> — Befehl beendet"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Starten gescheitert</b> — %s"
 
-#: src/kgx-tab.c:1160
+#: src/kgx-tab.c:1162
 msgid "Command completed"
 msgstr "Befehl abgeschlossen"
 
@@ -243,12 +260,12 @@ msgstr "Befehl abgeschlossen"
 msgid "View Open Tabs"
 msgstr "Geöffnete Reiter anzeigen"
 
-#: src/kgx-terminal.c:772
+#: src/kgx-terminal.c:793
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Sie kopieren einen Befehl, der als Administrator ausgeführt wird"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:775
+#: src/kgx-terminal.c:796
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -257,7 +274,7 @@ msgstr ""
 "Gehen Sie sicher, dass Sie wissen, was dieser Befehl bewirkt:\n"
 "%s"
 
-#: src/kgx-terminal.c:783 src/menus.ui:24
+#: src/kgx-terminal.c:807 src/menus.ui:24
 msgid "_Paste"
 msgstr "E_infügen"
 
@@ -279,7 +296,8 @@ msgid "translator-credits"
 msgstr ""
 "Philipp Kiemle <philipp.kiemle@gmail.com>\n"
 "Tim Sabsch <tim@sabsch.com>\n"
-"Christian Kirbach <christian.kirbach@gmail.com>"
+"Christian Kirbach <christian.kirbach@gmail.com>\n"
+"Jürgen Benvenuti <gastornis@posteo.org>"
 
 #: src/kgx-window.ui:26
 msgid "Shrink Text"
