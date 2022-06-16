@@ -338,7 +338,7 @@ kgx_application_startup (GApplication *app)
 {
   KgxApplication    *self = KGX_APPLICATION (app);
   HdyStyleManager   *style_manager;
-  g_autoptr(GAction) settings_action;
+  g_autoptr (GAction) settings_action = NULL;
 
   const char *const new_window_accels[] = { "<shift><primary>n", NULL };
   const char *const new_tab_accels[] = { "<shift><primary>t", NULL };
