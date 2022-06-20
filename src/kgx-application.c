@@ -503,20 +503,17 @@ kgx_application_command_line (GApplication            *app,
   }
 
   if (command != NULL) {
-    g_autoptr (GError) error = NULL;
-
     if (argv != NULL && argv[0] != NULL) {
       g_warning (_("Cannot use both --command and positional parameters"));
       return EXIT_FAILURE;
     }
 
     g_clear_pointer (&argv, g_strfreev);
-
-    if (!g_shell_parse_argv (command, NULL, &argv, &error)) {
-      g_warning ("Failed to parse “%s” as a command: %s", command, error->message);
-      g_clear_error (&error);
-      g_clear_pointer (&argv, g_strfreev);
-    }
+    argv = g_new0 (char *, 4);
+    argv[0] = g_strdup ("/bin/sh");
+    argv[1] = g_strdup ("-c");
+    argv[2] = g_strdup (command);
+    argv[3] = NULL;
   }
 
   if (g_variant_dict_lookup (options, "tab", "b", &tab) && tab) {
