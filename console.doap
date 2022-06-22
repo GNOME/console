@@ -7,6 +7,8 @@
   <download-page rdf:resource="https://gitlab.gnome.org/GNOME/console" />
   <bug-database rdf:resource="https://gitlab.gnome.org/GNOME/console/issues/" />
   <programming-language>C</programming-language>
+  <platform>GTK 3</platform>
+  <platform>Libhandy</platform>
   <description xml:lang="en">
     A simple user-friendly terminal emulator for the GNOME desktop.
   </description>
