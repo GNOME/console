@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-05-17 18:12+0000\n"
-"PO-Revision-Date: 2022-05-18 15:28+0300\n"
+"POT-Creation-Date: 2022-06-20 13:45+0000\n"
+"PO-Revision-Date: 2022-06-20 17:12+0300\n"
 "Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -37,7 +37,7 @@ msgstr "Новое Окно"
 msgid "New Tab"
 msgstr "Новая Вкладка"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:568
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:640
 msgid "Terminal Emulator"
 msgstr "Эмулятор Терминала"
 
@@ -113,71 +113,79 @@ msgctxt "shortcut window"
 msgid "Switch to Tab"
 msgstr "Переключиться на Вкладку"
 
+#: src/kgx-application.c:515
+msgid "Cannot use both --command and positional parameters"
+msgstr "Невозможно использовать как --команда, так и позиционные параметры"
+
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:540
+#: src/kgx-application.c:612
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s с использованием VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:552 src/kgx-window.c:526
+#: src/kgx-application.c:624 src/kgx-window.c:525
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:566 src/kgx-window.ui:115
+#: src/kgx-application.c:638 src/kgx-window.ui:115
 msgid "King’s Cross"
 msgstr "Кингс-Кросс"
 
-#: src/kgx-application.c:570
+#: src/kgx-application.c:642
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 или более поздняя"
 
-#: src/kgx-application.c:701
+#: src/kgx-application.c:774
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Выполнить аргумент этой опции в терминале"
 
-#: src/kgx-application.c:702
+#: src/kgx-application.c:775
 msgid "COMMAND"
 msgstr "КОМАНДА"
 
-#: src/kgx-application.c:710
+#: src/kgx-application.c:783
 msgid "Set the working directory"
 msgstr "Установить рабочую папку"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:712
+#: src/kgx-application.c:785
 msgid "DIRNAME"
 msgstr "ИМЯ ПАПКИ"
 
-#: src/kgx-application.c:720
+#: src/kgx-application.c:793
 msgid "Wait until the child exits (TODO)"
 msgstr "Подождите, пока дочерний процесс завершится (ЗАДАЧА)"
 
-#: src/kgx-application.c:729
+#: src/kgx-application.c:802
 msgid "Set the initial window title"
 msgstr "Установить начальный заголовок окна"
 
-#: src/kgx-application.c:730
+#: src/kgx-application.c:803
 msgid "TITLE"
 msgstr "ЗАГОЛОВОК"
 
-#: src/kgx-application.c:738
+#: src/kgx-application.c:811
 msgid "ADVANCED: Set the shell to launch"
 msgstr "ДОПОЛНИТЕЛЬНО: Установить оболочку для запуска"
 
-#: src/kgx-application.c:739
+#: src/kgx-application.c:812
 msgid "SHELL"
 msgstr "ОБОЛОЧКА"
 
-#: src/kgx-application.c:747
+#: src/kgx-application.c:820
 msgid "ADVANCED: Set the scrollback length"
 msgstr "ДОПОЛНИТЕЛЬНО: Установить длину прокрутки"
 
-#: src/kgx-application.c:748
+#: src/kgx-application.c:821
 msgid "LINES"
 msgstr "СТРОКИ"
+
+#: src/kgx-application.c:830
+msgid "[-e|-- COMMAND [ARGUMENT...]]"
+msgstr "[-e|-- КОМАНДА [АРГУМЕНТ...]]"
 
 #: src/kgx-application.h:44
 msgid "Console (Development)"
@@ -282,7 +290,7 @@ msgid "Use Dark Colors"
 msgstr "Использовать Темные Цвета"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:532
+#: src/kgx-window.c:531
 msgid "translator-credits"
 msgstr "Aleksandr Melman <alexmelman88@gmail.com>, 2022"
 
