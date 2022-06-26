@@ -1,5 +1,11 @@
 include: 'https://gitlab.gnome.org/GNOME/citemplates/raw/master/flatpak/flatpak_ci_initiative.yml'
 
+.only-origin:
+  only:
+    - branches@GNOME/console
+  except:
+    - tags
+
 debian:
   image: debian:testing
   stage: build
@@ -26,6 +32,33 @@ fedora:
     - meson --buildtype=release -Dtests=true _build .
     - meson compile -C _build
     - meson test -C _build
+
+freebsd-13-x86_64:
+  extends: .only-origin
+  stage: build
+  tags:
+    - freebsd-13
+  needs: []
+  variables:
+    CPPFLAGS: -I/usr/local/include
+    LDFLAGS: -L/usr/local/lib -Wl,--disable-new-dtags
+    LANG: C.UTF-8
+  before_script:
+    - pkg install gtk3 libgtop
+  script:
+    - meson --buildtype=release -Dtests=true _build .
+    - meson compile -C _build
+    - meson test -C _build
+  artifacts:
+    reports:
+      junit: "_build/meson-logs/testlog.junit.xml"
+    name: "kgx-${CI_JOB_NAME}-${CI_COMMIT_REF_NAME}"
+    when: always
+    expire_in: 1 week
+    paths:
+      - "_build/kgx-config.h"
+      - "_build/meson-logs"
+
 
 flatpak:
     image: 'registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master'
