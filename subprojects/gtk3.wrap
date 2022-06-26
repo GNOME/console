@@ -1,0 +1,7 @@
+[wrap-git]
+directory=gtk3
+url=https://gitlab.gnome.org/GNOME/gtk
+revision=origin/gtk-3-24
+
+[provide]
+dependency_names=gtk+-3.0
