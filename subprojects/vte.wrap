@@ -4,4 +4,4 @@ url=https://gitlab.gnome.org/GNOME/vte
 revision=origin/master
 
 [provide]
-dependency_names=vte-2.91
+vte-2.91=libvte_gtk3_dep

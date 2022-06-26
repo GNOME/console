@@ -4,4 +4,4 @@ url=https://gitlab.gnome.org/GNOME/libhandy.git
 revision=origin/main
 
 [provide]
-dependency_names=libhandy-1
+libhandy-1=libhandy_dep
