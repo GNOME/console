@@ -2,3 +2,6 @@
 directory=handy
 url=https://gitlab.gnome.org/GNOME/libhandy.git
 revision=origin/main
+
+[provide]
+dependency_names=libhandy-1

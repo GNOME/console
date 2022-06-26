@@ -36,8 +36,8 @@ kgx_sources = [
 kgx_deps = [
   dependency('gio-2.0', version: '>= 2.66'),
   dependency('gtk+-3.0', version: '>= 3.24'),
-  dependency('libhandy-1', version: '>= 1.5', fallback: ['handy', 'libhandy_dep']),
-  dependency('vte-2.91', version: '>= 0.67', fallback: ['vte', 'libvte_gtk3_dep']),
+  dependency('libhandy-1', version: '>= 1.5'),
+  dependency('vte-2.91', version: '>= 0.67'),
   dependency('libgtop-2.0'),
   dependency('gsettings-desktop-schemas'),
   cc.find_library('m', required: false),

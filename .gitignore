@@ -2,5 +2,7 @@
 *~
 build
 .vscode
-/subprojects/vte
+/subprojects/glib
+/subprojects/gtk
 /subprojects/handy
+/subprojects/vte

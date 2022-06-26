@@ -2,3 +2,6 @@
 directory=vte
 url=https://gitlab.gnome.org/GNOME/vte
 revision=origin/master
+
+[provide]
+dependency_names=vte-2.91

@@ -1,8 +1,4 @@
-sassc = find_program('sassc', required: false)
-if not sassc.found() and not get_option('sassc').disabled()
-  subproject('sassc')
-  sassc = find_program('sassc', required: get_option('sassc').enabled())
-endif
+sassc = find_program('sassc', required: get_option('sassc'))
 
 if sassc.found()
   styles = [

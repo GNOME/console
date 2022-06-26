@@ -43,8 +43,6 @@ freebsd-13-x86_64:
     CPPFLAGS: -I/usr/local/include
     LDFLAGS: -L/usr/local/lib -Wl,--disable-new-dtags
     LANG: C.UTF-8
-  before_script:
-    - pkg install gtk3 libgtop
   script:
     - meson --buildtype=release -Dtests=true _build .
     - meson compile -C _build
