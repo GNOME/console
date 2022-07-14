@@ -39,6 +39,7 @@ kgx_deps = [
   dependency('libhandy-1', version: '>= 1.5', fallback: ['handy', 'libhandy_dep']),
   dependency('vte-2.91', version: '>= 0.67', fallback: ['vte', 'libvte_gtk3_dep']),
   dependency('libgtop-2.0'),
+  dependency('libpcre2-8', version: '>= 10.32')
   dependency('gsettings-desktop-schemas'),
   cc.find_library('m', required: false),
 ]
