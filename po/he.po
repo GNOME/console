@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-05-17 18:12+0000\n"
-"PO-Revision-Date: 2022-05-30 21:45+0300\n"
+"POT-Creation-Date: 2022-07-13 15:41+0000\n"
+"PO-Revision-Date: 2022-07-14 13:51+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <>\n"
 "Language: he\n"
@@ -37,7 +37,7 @@ msgstr "חלון חדש"
 msgid "New Tab"
 msgstr "לשונית חדשה"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:568
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:640
 msgid "Terminal Emulator"
 msgstr "מדמה מסוף"
 
@@ -113,71 +113,79 @@ msgctxt "shortcut window"
 msgid "Switch to Tab"
 msgstr "מעבר ללשונית"
 
+#: src/kgx-application.c:515
+msgid "Cannot use both --command and positional parameters"
+msgstr "Cannot use both --command and positional parameters"
+
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:540
+#: src/kgx-application.c:612
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s using VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:552 src/kgx-window.c:526
+#: src/kgx-application.c:624 src/kgx-window.c:525
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:566 src/kgx-window.ui:115
+#: src/kgx-application.c:638 src/kgx-window.ui:115
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
-#: src/kgx-application.c:570
+#: src/kgx-application.c:642
 msgid "GPL 3.0 or later"
 msgstr "‫GPL-3.0‎ או גרסה מאוחרת יותר"
 
-#: src/kgx-application.c:701
+#: src/kgx-application.c:774
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Execute the argument to this option inside the terminal"
 
-#: src/kgx-application.c:702
+#: src/kgx-application.c:775
 msgid "COMMAND"
 msgstr "COMMAND"
 
-#: src/kgx-application.c:710
+#: src/kgx-application.c:783
 msgid "Set the working directory"
 msgstr "Set the working directory"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:712
+#: src/kgx-application.c:785
 msgid "DIRNAME"
 msgstr "DIRNAME"
 
-#: src/kgx-application.c:720
+#: src/kgx-application.c:793
 msgid "Wait until the child exits (TODO)"
 msgstr "Wait until the child exits (TODO)"
 
-#: src/kgx-application.c:729
+#: src/kgx-application.c:802
 msgid "Set the initial window title"
 msgstr "Set the initial window title"
 
-#: src/kgx-application.c:730
+#: src/kgx-application.c:803
 msgid "TITLE"
 msgstr "TITLE"
 
-#: src/kgx-application.c:738
+#: src/kgx-application.c:811
 msgid "ADVANCED: Set the shell to launch"
 msgstr "ADVANCED: Set the shell to launch"
 
-#: src/kgx-application.c:739
+#: src/kgx-application.c:812
 msgid "SHELL"
 msgstr "SHELL"
 
-#: src/kgx-application.c:747
+#: src/kgx-application.c:820
 msgid "ADVANCED: Set the scrollback length"
 msgstr "ADVANCED: Set the scrollback length"
 
-#: src/kgx-application.c:748
+#: src/kgx-application.c:821
 msgid "LINES"
 msgstr "LINES"
+
+#: src/kgx-application.c:830
+msgid "[-e|-- COMMAND [ARGUMENT...]]"
+msgstr ""
 
 #: src/kgx-application.h:44
 msgid "Console (Development)"
@@ -282,7 +290,7 @@ msgid "Use Dark Colors"
 msgstr "שימוש בצבעים כהים"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:532
+#: src/kgx-window.c:531
 msgid "translator-credits"
 msgstr ""
 "יוסף אור בוצ׳קו <yoseforb@gmail.com>\n"
