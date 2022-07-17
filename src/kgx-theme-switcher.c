@@ -23,10 +23,11 @@
 
 
 struct _KgxThemeSwitcher {
-  GtkBin   parent_instance;
+  GtkWidget parent_instance;
 
   KgxTheme theme;
 
+  GtkWidget *box;
   GtkWidget *system_selector;
   GtkWidget *light_selector;
   GtkWidget *dark_selector;
@@ -34,7 +35,7 @@ struct _KgxThemeSwitcher {
 };
 
 
-G_DEFINE_TYPE (KgxThemeSwitcher, kgx_theme_switcher, GTK_TYPE_BIN)
+G_DEFINE_TYPE (KgxThemeSwitcher, kgx_theme_switcher, GTK_TYPE_WIDGET)
 
 
 enum {
@@ -47,13 +48,13 @@ static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 
 
 static void
-theme_radio_active_changed (KgxThemeSwitcher *self)
+theme_check_active_changed (KgxThemeSwitcher *self)
 {
   KgxTheme theme;
 
-  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->system_selector))) {
+  if (gtk_check_button_get_active (GTK_CHECK_BUTTON (self->system_selector))) {
       theme = KGX_THEME_AUTO;
-  } else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->light_selector))) {
+  } else if (gtk_check_button_get_active (GTK_CHECK_BUTTON (self->light_selector))) {
       theme = KGX_THEME_DAY;
   } else {
       theme = KGX_THEME_NIGHT;
@@ -77,15 +78,15 @@ set_theme (KgxThemeSwitcher *self,
 
   switch (theme) {
     case KGX_THEME_AUTO:
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->system_selector), TRUE);
+      gtk_check_button_set_active (GTK_CHECK_BUTTON (self->system_selector), TRUE);
       break;
     case KGX_THEME_DAY:
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->light_selector), TRUE);
+      gtk_check_button_set_active (GTK_CHECK_BUTTON (self->light_selector), TRUE);
       break;
     case KGX_THEME_NIGHT:
     case KGX_THEME_HACKER:
     default:
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->dark_selector), TRUE);
+      gtk_check_button_set_active (GTK_CHECK_BUTTON (self->dark_selector), TRUE);
       break;
   }
 
@@ -137,6 +138,18 @@ kgx_theme_switcher_set_property (GObject      *object,
 
 
 static void
+kgx_theme_switcher_dispose (GObject *object)
+{
+  KgxThemeSwitcher *self = KGX_THEME_SWITCHER (object);
+
+  if (self->box)
+    gtk_widget_unparent (self->box);
+
+  G_OBJECT_CLASS (kgx_theme_switcher_parent_class)->dispose (object);
+}
+
+
+static void
 kgx_theme_switcher_class_init (KgxThemeSwitcherClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -144,6 +157,7 @@ kgx_theme_switcher_class_init (KgxThemeSwitcherClass *klass)
 
   object_class->get_property = kgx_theme_switcher_get_property;
   object_class->set_property = kgx_theme_switcher_set_property;
+  object_class->dispose = kgx_theme_switcher_dispose;
 
   pspecs[PROP_THEME] =
     g_param_spec_enum ("theme",
@@ -165,13 +179,15 @@ kgx_theme_switcher_class_init (KgxThemeSwitcherClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                KGX_APPLICATION_PATH "kgx-theme-switcher.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, KgxThemeSwitcher, box);
   gtk_widget_class_bind_template_child (widget_class, KgxThemeSwitcher, system_selector);
   gtk_widget_class_bind_template_child (widget_class, KgxThemeSwitcher, light_selector);
   gtk_widget_class_bind_template_child (widget_class, KgxThemeSwitcher, dark_selector);
 
-  gtk_widget_class_bind_template_callback (widget_class, theme_radio_active_changed);
+  gtk_widget_class_bind_template_callback (widget_class, theme_check_active_changed);
 
   gtk_widget_class_set_css_name (widget_class, "themeswitcher");
+  gtk_widget_class_set_layout_manager_type (widget_class, GTK_TYPE_BIN_LAYOUT);
 }
 
 

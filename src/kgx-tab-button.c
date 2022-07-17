@@ -18,12 +18,12 @@
  */
 
 /**
- * SECTION:hdy-tab-button
- * @short_description: A button that displays the number of #HdyTabView pages
+ * SECTION:kgx-tab-button
+ * @short_description: A button that displays the number of #AdwTabView pages
  * @title: KgxTabButton
  *
  * The #KgxTabButton widget is a #GtkButton subclass that displays the number
- * of pages in a given #HdyTabView.
+ * of pages in a given #AdwTabView.
  *
  * It can be used to open a tab switcher view in a mobile UI.
  *
@@ -50,7 +50,7 @@ struct _KgxTabButton {
   GtkLabel *label;
   GtkImage *icon;
 
-  HdyTabView *view;
+  AdwTabView *view;
 };
 
 
@@ -107,7 +107,7 @@ update_icon (KgxTabButton *self)
   GtkStyleContext *context;
 
   if (self->view) {
-    guint n_pages = hdy_tab_view_get_n_pages (self->view);
+    guint n_pages = adw_tab_view_get_n_pages (self->view);
 
     small_label = n_pages >= 10;
 
@@ -129,7 +129,7 @@ update_icon (KgxTabButton *self)
 
   gtk_widget_set_visible (GTK_WIDGET (self->label), display_label);
   gtk_label_set_text (self->label, label_text);
-  gtk_image_set_from_icon_name (self->icon, icon_name, GTK_ICON_SIZE_BUTTON);
+  gtk_image_set_from_icon_name (self->icon, icon_name);
 }
 
 
@@ -193,13 +193,13 @@ kgx_tab_button_class_init (KgxTabButtonClass *klass)
   /**
    * KgxTabButton:view:
    *
-   * The #HdyTabView the tab button displays.
+   * The #AdwTabView the tab button displays.
    */
   pspecs[PROP_VIEW] =
     g_param_spec_object ("view",
                          "View",
                          "The view the tab button displays.",
-                         HDY_TYPE_TAB_VIEW,
+                         ADW_TYPE_TAB_VIEW,
                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
@@ -248,11 +248,11 @@ kgx_tab_button_new (void)
  * kgx_tab_button_get_view:
  * @self: a #KgxTabButton
  *
- * Gets the #HdyTabView @self displays.
+ * Gets the #AdwTabView @self displays.
  *
- * Returns: (transfer none) (nullable): the #HdyTabView @self displays
+ * Returns: (transfer none) (nullable): the #AdwTabView @self displays
  */
-HdyTabView *
+AdwTabView *
 kgx_tab_button_get_view (KgxTabButton *self)
 {
   g_return_val_if_fail (KGX_IS_TAB_BUTTON (self), NULL);
@@ -264,16 +264,16 @@ kgx_tab_button_get_view (KgxTabButton *self)
 /**
  * kgx_tab_button_set_view:
  * @self: a #KgxTabButton
- * @view: (nullable): a #HdyTabView
+ * @view: (nullable): a #AdwTabView
  *
- * Sets the #HdyTabView @self displays.
+ * Sets the #AdwTabView @self displays.
  */
 void
 kgx_tab_button_set_view (KgxTabButton *self,
-                         HdyTabView   *view)
+                         AdwTabView   *view)
 {
   g_return_if_fail (KGX_IS_TAB_BUTTON (self));
-  g_return_if_fail (view == NULL || HDY_IS_TAB_VIEW (view));
+  g_return_if_fail (view == NULL || ADW_IS_TAB_VIEW (view));
 
   if (self->view == view) {
     return;

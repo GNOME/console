@@ -35,9 +35,9 @@ kgx_sources = [
 
 kgx_deps = [
   dependency('gio-2.0', version: '>= 2.66'),
-  dependency('gtk+-3.0', version: '>= 3.24'),
-  dependency('libhandy-1', version: '>= 1.5', fallback: ['handy', 'libhandy_dep']),
-  dependency('vte-2.91', version: '>= 0.67', fallback: ['vte', 'libvte_gtk3_dep']),
+  dependency('gtk4'),
+  dependency('libadwaita-1', version: '>= 1.2.alpha', fallback: ['adwaita', 'libadwaita_dep']),
+  dependency('vte-2.91-gtk4', version: '>= 0.69.91', fallback: ['vte', 'libvte_gtk4_dep']),
   dependency('libgtop-2.0'),
   dependency('libpcre2-8', version: '>= 10.32'),
   dependency('gsettings-desktop-schemas'),
@@ -66,8 +66,14 @@ kgx_enums = gnome.mkenums_simple('kgx-enums',
                                       'kgx-tab.h'
                                     ])
 
+kgx_cargs = [
+  '-DGDK_VERSION_MIN_REQUIRED=@0@'.format(gtk_ver),
+  '-DGDK_VERSION_MAX_ALLOWED=@0@'.format(gtk_ver)
+]
+
 kgx_lib = static_library (bin_name,
                    kgx_sources + kgx_enums,
+           c_args: kgx_cargs,
      dependencies: kgx_deps,
 )
 kgx_inc = include_directories('.')
@@ -80,5 +86,6 @@ kgx_dep = declare_dependency (sources: [config_h, kgx_enums],
 executable(        bin_name,
                    'main.c',
      dependencies: kgx_dep,
+           c_args: kgx_cargs,
           install: true,
 )

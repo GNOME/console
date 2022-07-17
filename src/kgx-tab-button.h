@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <handy.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
@@ -28,8 +28,8 @@ G_DECLARE_FINAL_TYPE (KgxTabButton, kgx_tab_button, KGX, TAB_BUTTON, GtkButton)
 
 GtkWidget  *kgx_tab_button_new      (void);
 
-HdyTabView *kgx_tab_button_get_view (KgxTabButton *self);
+AdwTabView *kgx_tab_button_get_view (KgxTabButton *self);
 void        kgx_tab_button_set_view (KgxTabButton *self,
-                                     HdyTabView   *view);
+                                     AdwTabView   *view);
 
 G_END_DECLS

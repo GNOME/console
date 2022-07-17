@@ -21,7 +21,7 @@
  * @title: KgxPages
  * @short_description: Container of #KgxTab s
  *
- * The container of open #KgxTab (uses #HdyTabView internally)
+ * The container of open #KgxTab (uses #AdwTabView internally)
  */
 
 #include <glib/gi18n.h>
@@ -69,11 +69,11 @@ struct _KgxPagesPrivate {
   gboolean              opaque;
   gint64                scrollback_lines;
 
-  HdyTabPage           *action_page;
+  AdwTabPage           *action_page;
 };
 
 
-G_DEFINE_TYPE_WITH_PRIVATE (KgxPages, kgx_pages, GTK_TYPE_BIN)
+G_DEFINE_TYPE_WITH_PRIVATE (KgxPages, kgx_pages, ADW_TYPE_BIN)
 
 
 enum {
@@ -134,7 +134,7 @@ kgx_pages_get_property (GObject    *object,
 
   switch (property_id) {
     case PROP_TAB_COUNT:
-      g_value_set_uint (value, hdy_tab_view_get_n_pages (HDY_TAB_VIEW (priv->view)));
+      g_value_set_uint (value, adw_tab_view_get_n_pages (ADW_TAB_VIEW (priv->view)));
       break;
     case PROP_TAB_VIEW:
       g_value_set_object (value, priv->view);
@@ -260,7 +260,7 @@ size_changed (KgxTab   *tab,
   priv->last_cols = cols;
   priv->last_rows = rows;
 
-  if (gtk_window_is_maximized (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))))) {
+  if (gtk_window_is_maximized (GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))))) {
     // Don't show when maximised as it isn't very interesting
     return;
   }
@@ -281,17 +281,17 @@ static void
 page_changed (GObject *object, GParamSpec *pspec, KgxPages *self)
 {
   KgxPagesPrivate *priv;
-  HdyTabPage *page = NULL;
+  AdwTabPage *page = NULL;
   KgxTab *tab;
 
   priv = kgx_pages_get_instance_private (self);
-  page = hdy_tab_view_get_selected_page (HDY_TAB_VIEW (priv->view));
+  page = adw_tab_view_get_selected_page (ADW_TAB_VIEW (priv->view));
 
   if (!page) {
     return;
   }
 
-  tab = KGX_TAB (hdy_tab_page_get_child (page));
+  tab = KGX_TAB (adw_tab_page_get_child (page));
 
   g_clear_signal_handler (&priv->size_watcher, priv->active_page);
   priv->size_watcher = g_signal_connect (tab,
@@ -339,12 +339,12 @@ died (KgxTab         *page,
       KgxPages       *self)
 {
   KgxPagesPrivate *priv;
-  HdyTabPage *tab_page;
+  AdwTabPage *tab_page;
   gboolean close_on_quit;
   int tab_count;
 
   priv = kgx_pages_get_instance_private (self);
-  tab_page = hdy_tab_view_get_page (HDY_TAB_VIEW (priv->view), GTK_WIDGET (page));
+  tab_page = adw_tab_view_get_page (ADW_TAB_VIEW (priv->view), GTK_WIDGET (page));
 
   g_object_get (page, "close-on-quit", &close_on_quit, NULL);
 
@@ -358,7 +358,7 @@ died (KgxTab         *page,
     return;
   }
 
-  hdy_tab_view_close_page (HDY_TAB_VIEW (priv->view), tab_page);
+  adw_tab_view_close_page (ADW_TAB_VIEW (priv->view), tab_page);
 }
 
 
@@ -372,16 +372,16 @@ zoom (KgxTab   *tab,
 
 
 static void
-page_attached (HdyTabView *view,
-               HdyTabPage *page,
+page_attached (AdwTabView *view,
+               AdwTabPage *page,
                int         position,
                KgxPages   *self)
 {
   KgxTab *tab;
 
-  g_return_if_fail (HDY_IS_TAB_PAGE (page));
+  g_return_if_fail (ADW_IS_TAB_PAGE (page));
 
-  tab = KGX_TAB (hdy_tab_page_get_child (page));
+  tab = KGX_TAB (adw_tab_page_get_child (page));
 
   g_object_connect (tab,
                     "signal::died", G_CALLBACK (died), self,
@@ -393,18 +393,18 @@ page_attached (HdyTabView *view,
 
 
 static void
-page_detached (HdyTabView *view,
-               HdyTabPage *page,
+page_detached (AdwTabView *view,
+               AdwTabPage *page,
                int         position,
                KgxPages   *self)
 {
   KgxTab *tab;
   KgxPagesPrivate *priv;
-  GtkWidget *toplevel;
+  GtkRoot *root;
 
-  g_return_if_fail (HDY_IS_TAB_PAGE (page));
+  g_return_if_fail (ADW_IS_TAB_PAGE (page));
 
-  tab = KGX_TAB (hdy_tab_page_get_child (page));
+  tab = KGX_TAB (adw_tab_page_get_child (page));
 
   priv = kgx_pages_get_instance_private (self);
 
@@ -412,12 +412,12 @@ page_detached (HdyTabView *view,
 
   g_signal_handlers_disconnect_by_data (tab, self);
 
-  if (hdy_tab_view_get_n_pages (HDY_TAB_VIEW (priv->view)) == 0) {
-    toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+  if (adw_tab_view_get_n_pages (ADW_TAB_VIEW (priv->view)) == 0) {
+    root = gtk_widget_get_root (GTK_WIDGET (self));
 
-    if (GTK_IS_WINDOW (toplevel)) {
+    if (GTK_IS_WINDOW (root)) {
       /* Not a massive fan, would prefer it if window observed pages is empty */
-      gtk_window_close (GTK_WINDOW (toplevel));
+      gtk_window_close (GTK_WINDOW (root));
     }
 
     priv->active_page = NULL;
@@ -426,8 +426,8 @@ page_detached (HdyTabView *view,
 }
 
 
-static HdyTabView *
-create_window (HdyTabView *view,
+static AdwTabView *
+create_window (AdwTabView *view,
                KgxPages   *self)
 {
   /* Perhaps this should be handled via KgxWindow? */
@@ -438,7 +438,7 @@ create_window (HdyTabView *view,
   KgxPagesPrivate *priv;
   int width, height;
 
-  window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
+  window = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
   app = gtk_window_get_application (window);
 
   kgx_window_get_size (KGX_WINDOW (window), &width, &height);
@@ -452,49 +452,48 @@ create_window (HdyTabView *view,
   new_pages = kgx_window_get_pages (new_window);
   priv = kgx_pages_get_instance_private (new_pages);
 
-  gtk_window_set_position (GTK_WINDOW (new_window), GTK_WIN_POS_MOUSE);
   gtk_window_present (GTK_WINDOW (new_window));
 
-  return HDY_TAB_VIEW (priv->view);
+  return ADW_TAB_VIEW (priv->view);
 }
 
 
 static void
 close_response (GtkWidget  *dlg,
                 int         response,
-                HdyTabPage *page)
+                AdwTabPage *page)
 {
-  KgxTab *tab = KGX_TAB (hdy_tab_page_get_child (page));
+  KgxTab *tab = KGX_TAB (adw_tab_page_get_child (page));
   KgxPages *self = kgx_tab_get_pages (tab);
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
 
-  gtk_widget_destroy (dlg);
+  gtk_window_destroy (GTK_WINDOW (dlg));
 
-  hdy_tab_view_close_page_finish (HDY_TAB_VIEW (priv->view), page,
+  adw_tab_view_close_page_finish (ADW_TAB_VIEW (priv->view), page,
                                   response == GTK_RESPONSE_OK);
 }
 
 
 static gboolean
-close_page (HdyTabView *view,
-            HdyTabPage *page,
+close_page (AdwTabView *view,
+            AdwTabPage *page,
             KgxPages   *self)
 {
   GtkWidget *dlg;
   g_autoptr (GPtrArray) children = NULL;
-  GtkWidget *toplevel;
+  GtkRoot *root;
 
-  children = kgx_tab_get_children (KGX_TAB (hdy_tab_page_get_child (page)));
+  children = kgx_tab_get_children (KGX_TAB (adw_tab_page_get_child (page)));
 
   if (children->len < 1) {
     return FALSE; // Aka no, I don’t want to block closing
   }
 
-  toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+  root = gtk_widget_get_root (GTK_WIDGET (self));
 
   dlg = kgx_close_dialog_new (KGX_CONTEXT_TAB, children);
 
-  gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (toplevel));
+  gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (root));
 
   g_signal_connect (dlg, "response", G_CALLBACK (close_response), page);
 
@@ -505,8 +504,8 @@ close_page (HdyTabView *view,
 
 
 static void
-setup_menu (HdyTabView *view,
-            HdyTabPage *page,
+setup_menu (AdwTabView *view,
+            AdwTabPage *page,
             KgxPages   *self)
 {
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
@@ -557,13 +556,13 @@ kgx_pages_class_init (KgxPagesClass *klass)
   /**
    * KgxPages:tab-view:
    *
-   * The #HdyTabView
+   * The #AdwTabView
    *
    * Stability: Private
    */
   pspecs[PROP_TAB_VIEW] =
     g_param_spec_object ("tab-view", "Tab View", "The tab view",
-                         HDY_TYPE_TAB_VIEW,
+                         ADW_TYPE_TAB_VIEW,
                          G_PARAM_READABLE);
 
   /**
@@ -720,6 +719,14 @@ kgx_pages_init (KgxPages *self)
   priv->opaque = FALSE;
 
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  adw_tab_view_remove_shortcuts (ADW_TAB_VIEW (priv->view),
+                                 ADW_TAB_VIEW_SHORTCUT_CONTROL_HOME |
+                                 ADW_TAB_VIEW_SHORTCUT_CONTROL_END |
+                                 ADW_TAB_VIEW_SHORTCUT_CONTROL_SHIFT_PAGE_UP |
+                                 ADW_TAB_VIEW_SHORTCUT_CONTROL_SHIFT_PAGE_DOWN |
+                                 ADW_TAB_VIEW_SHORTCUT_CONTROL_SHIFT_HOME |
+                                 ADW_TAB_VIEW_SHORTCUT_CONTROL_SHIFT_END);
 }
 
 
@@ -728,7 +735,7 @@ kgx_pages_add_page (KgxPages *self,
                     KgxTab   *tab)
 {
   KgxPagesPrivate *priv;
-  HdyTabPage *page;
+  AdwTabPage *page;
 
   g_return_if_fail (KGX_IS_PAGES (self));
 
@@ -736,7 +743,7 @@ kgx_pages_add_page (KgxPages *self,
 
   kgx_tab_set_initial_title (tab, priv->title, priv->path);
 
-  page = hdy_tab_view_add_page (HDY_TAB_VIEW (priv->view), GTK_WIDGET (tab), NULL);
+  page = adw_tab_view_add_page (ADW_TAB_VIEW (priv->view), GTK_WIDGET (tab), NULL);
   g_object_bind_property (tab, "tab-title", page, "title", G_BINDING_SYNC_CREATE);
   g_object_bind_property (tab, "tab-tooltip", page, "tooltip", G_BINDING_SYNC_CREATE);
   g_object_bind_property (tab, "needs-attention", page, "needs-attention", G_BINDING_SYNC_CREATE);
@@ -750,7 +757,7 @@ kgx_pages_remove_page (KgxPages *self,
                        KgxTab   *page)
 {
   KgxPagesPrivate *priv;
-  HdyTabPage *tab_page;
+  AdwTabPage *tab_page;
 
   g_return_if_fail (KGX_IS_PAGES (self));
 
@@ -758,15 +765,15 @@ kgx_pages_remove_page (KgxPages *self,
 
   if (!page)
     {
-      tab_page = hdy_tab_view_get_selected_page (HDY_TAB_VIEW (priv->view));
-      hdy_tab_view_close_page (HDY_TAB_VIEW (priv->view), tab_page);
+      tab_page = adw_tab_view_get_selected_page (ADW_TAB_VIEW (priv->view));
+      adw_tab_view_close_page (ADW_TAB_VIEW (priv->view), tab_page);
       return;
     }
 
   g_return_if_fail (KGX_IS_TAB (page));
 
-  tab_page = hdy_tab_view_get_page (HDY_TAB_VIEW (priv->view), GTK_WIDGET (page));
-  hdy_tab_view_close_page (HDY_TAB_VIEW (priv->view), tab_page);
+  tab_page = adw_tab_view_get_page (ADW_TAB_VIEW (priv->view), GTK_WIDGET (page));
+  adw_tab_view_close_page (ADW_TAB_VIEW (priv->view), tab_page);
 }
 
 
@@ -782,19 +789,19 @@ kgx_pages_focus_page (KgxPages *self,
                       KgxTab  *page)
 {
   KgxPagesPrivate *priv;
-  HdyTabPage *index;
+  AdwTabPage *index;
 
   g_return_if_fail (KGX_IS_PAGES (self));
   g_return_if_fail (KGX_IS_TAB (page));
 
   priv = kgx_pages_get_instance_private (self);
 
-  index = hdy_tab_view_get_page (HDY_TAB_VIEW (priv->view),
+  index = adw_tab_view_get_page (ADW_TAB_VIEW (priv->view),
                                  GTK_WIDGET (page));
 
   g_return_if_fail (index != NULL);
 
-  hdy_tab_view_set_selected_page (HDY_TAB_VIEW (priv->view), index);
+  adw_tab_view_set_selected_page (ADW_TAB_VIEW (priv->view), index);
 
   gtk_widget_grab_focus (GTK_WIDGET (page));
 }
@@ -834,7 +841,7 @@ kgx_pages_count (KgxPages *self)
 
   priv = kgx_pages_get_instance_private (self);
 
-  return hdy_tab_view_get_n_pages (HDY_TAB_VIEW (priv->view));
+  return adw_tab_view_get_n_pages (ADW_TAB_VIEW (priv->view));
 }
 
 
@@ -860,13 +867,13 @@ kgx_pages_get_children (KgxPages *self)
 
   children = g_ptr_array_new_full (10, (GDestroyNotify) kgx_process_unref);
 
-  n = hdy_tab_view_get_n_pages (HDY_TAB_VIEW (priv->view));
+  n = adw_tab_view_get_n_pages (ADW_TAB_VIEW (priv->view));
 
   for (guint i = 0; i < n; i++) {
-    HdyTabPage *page = hdy_tab_view_get_nth_page (HDY_TAB_VIEW (priv->view), i);
+    AdwTabPage *page = adw_tab_view_get_nth_page (ADW_TAB_VIEW (priv->view), i);
     g_autoptr (GPtrArray) page_children = NULL;
 
-    page_children = kgx_tab_get_children (KGX_TAB (hdy_tab_page_get_child (page)));
+    page_children = kgx_tab_get_children (KGX_TAB (adw_tab_page_get_child (page)));
 
     for (int j = 0; j < page_children->len; j++) {
       g_ptr_array_add (children, g_ptr_array_steal_index (page_children, j));
@@ -880,43 +887,10 @@ kgx_pages_get_children (KgxPages *self)
 
 
 void
-kgx_pages_set_shortcut_widget (KgxPages  *self,
-                               GtkWidget *widget)
-{
-  KgxPagesPrivate *priv;
-
-  g_return_if_fail (KGX_IS_PAGES (self));
-  g_return_if_fail (GTK_IS_WIDGET (widget) || widget == NULL);
-
-  priv = kgx_pages_get_instance_private (self);
-
-  hdy_tab_view_set_shortcut_widget (HDY_TAB_VIEW (priv->view), widget);
-}
-
-
-gboolean
-kgx_pages_key_press_event (KgxPages *self,
-                           GdkEvent *event)
-{
-  KgxPagesPrivate *priv;
-
-  g_return_val_if_fail (KGX_IS_PAGES (self), GDK_EVENT_PROPAGATE);
-  g_return_val_if_fail (event != NULL, GDK_EVENT_PROPAGATE);
-
-  priv = kgx_pages_get_instance_private (self);
-
-  if (!priv->active_page)
-    return GDK_EVENT_PROPAGATE;
-
-  return kgx_tab_key_press_event (priv->active_page, event);
-}
-
-
-void
 kgx_pages_close_page (KgxPages *self)
 {
   KgxPagesPrivate *priv;
-  HdyTabPage *page;
+  AdwTabPage *page;
 
   g_return_if_fail (KGX_IS_PAGES (self));
 
@@ -924,9 +898,9 @@ kgx_pages_close_page (KgxPages *self)
   page = priv->action_page;
 
   if (!page)
-    page = hdy_tab_view_get_selected_page (HDY_TAB_VIEW (priv->view));
+    page = adw_tab_view_get_selected_page (ADW_TAB_VIEW (priv->view));
 
-  hdy_tab_view_close_page (HDY_TAB_VIEW (priv->view), page);
+  adw_tab_view_close_page (ADW_TAB_VIEW (priv->view), page);
 }
 
 
@@ -934,8 +908,8 @@ void
 kgx_pages_detach_page (KgxPages *self)
 {
   KgxPagesPrivate *priv;
-  HdyTabPage *page;
-  HdyTabView *new_view;
+  AdwTabPage *page;
+  AdwTabView *new_view;
 
   g_return_if_fail (KGX_IS_PAGES (self));
 
@@ -943,8 +917,8 @@ kgx_pages_detach_page (KgxPages *self)
   page = priv->action_page;
 
   if (!page)
-    page = hdy_tab_view_get_selected_page (HDY_TAB_VIEW (priv->view));
+    page = adw_tab_view_get_selected_page (ADW_TAB_VIEW (priv->view));
 
-  new_view = create_window (HDY_TAB_VIEW (priv->view), self);
-  hdy_tab_view_transfer_page (HDY_TAB_VIEW (priv->view), page, new_view, 0);
+  new_view = create_window (ADW_TAB_VIEW (priv->view), self);
+  adw_tab_view_transfer_page (ADW_TAB_VIEW (priv->view), page, new_view, 0);
 }

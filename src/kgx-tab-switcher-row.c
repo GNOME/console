@@ -32,8 +32,8 @@ struct _KgxTabSwitcherRow {
   GtkImage *indicator_icon;
   GtkWidget *close_btn;
 
-  HdyTabPage *page;
-  HdyTabView *view;
+  AdwTabPage *page;
+  AdwTabView *view;
 };
 
 
@@ -68,22 +68,22 @@ static void
 update_pinned (KgxTabSwitcherRow *self)
 {
   set_style_class (GTK_WIDGET (self), "pinned",
-                   hdy_tab_page_get_pinned (self->page));
+                   adw_tab_page_get_pinned (self->page));
 }
 
 
 static void
 update_icon (KgxTabSwitcherRow *self)
 {
-  GIcon *gicon = hdy_tab_page_get_icon (self->page);
-  gboolean loading = hdy_tab_page_get_loading (self->page);
+  GIcon *gicon = adw_tab_page_get_icon (self->page);
+  gboolean loading = adw_tab_page_get_loading (self->page);
   const char *name = loading ? "spinner" : "icon";
 
   if (!gicon) {
-    gicon = hdy_tab_view_get_default_icon (self->view);
+    gicon = adw_tab_view_get_default_icon (self->view);
   }
 
-  gtk_image_set_from_gicon (self->icon, gicon, GTK_ICON_SIZE_BUTTON);
+  gtk_image_set_from_gicon (self->icon, gicon);
   gtk_stack_set_visible_child_name (self->icon_stack, name);
 }
 
@@ -91,7 +91,7 @@ update_icon (KgxTabSwitcherRow *self)
 static void
 update_spinner (KgxTabSwitcherRow *self)
 {
-  gboolean loading = self->page && hdy_tab_page_get_loading (self->page);
+  gboolean loading = self->page && adw_tab_page_get_loading (self->page);
   gboolean mapped = gtk_widget_get_mapped (GTK_WIDGET (self));
 
   /* Don't use CPU when not needed */
@@ -109,17 +109,17 @@ update_loading (KgxTabSwitcherRow *self)
   update_icon (self);
   update_spinner (self);
   set_style_class (GTK_WIDGET (self), "loading",
-                   hdy_tab_page_get_loading (self->page));
+                   adw_tab_page_get_loading (self->page));
 }
 
 
 static void
 update_indicator (KgxTabSwitcherRow *self)
 {
-  GIcon *indicator = hdy_tab_page_get_indicator_icon (self->page);
-  gboolean activatable = hdy_tab_page_get_indicator_activatable (self->page);
+  GIcon *indicator = adw_tab_page_get_indicator_icon (self->page);
+  gboolean activatable = adw_tab_page_get_indicator_activatable (self->page);
 
-  gtk_image_set_from_gicon (self->indicator_icon, indicator, GTK_ICON_SIZE_BUTTON);
+  gtk_image_set_from_gicon (self->indicator_icon, indicator);
   gtk_widget_set_visible (GTK_WIDGET (self->indicator_btn), indicator != NULL);
   gtk_widget_set_sensitive (GTK_WIDGET (self->indicator_btn), activatable);
 }
@@ -129,7 +129,7 @@ static void
 update_needs_attention (KgxTabSwitcherRow *self)
 {
   set_style_class (GTK_WIDGET (self), "needs-attention",
-                   hdy_tab_page_get_needs_attention (self->page));
+                   adw_tab_page_get_needs_attention (self->page));
 }
 
 
@@ -151,7 +151,18 @@ close_clicked_cb (KgxTabSwitcherRow *self)
     return;
   }
 
-  hdy_tab_view_close_page (self->view, self->page);
+  adw_tab_view_close_page (self->view, self->page);
+}
+
+
+static void
+destroy_cb (KgxTabSwitcherRow *self)
+{
+  GtkWidget *parent = gtk_widget_get_parent (GTK_WIDGET (self));
+
+  g_assert (GTK_IS_LIST_BOX (parent));
+
+  gtk_list_box_remove (GTK_LIST_BOX (parent), GTK_WIDGET (self));
 }
 
 
@@ -280,14 +291,14 @@ kgx_tab_switcher_row_class_init (KgxTabSwitcherRowClass *klass)
     g_param_spec_object ("page",
                          "Page",
                          "The page the row displays.",
-                         HDY_TYPE_TAB_PAGE,
+                         ADW_TYPE_TAB_PAGE,
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
   pspecs[PROP_VIEW] =
     g_param_spec_object ("view",
                          "View",
                          "The view containing the page.",
-                         HDY_TYPE_TAB_VIEW,
+                         ADW_TYPE_TAB_VIEW,
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
@@ -317,11 +328,11 @@ kgx_tab_switcher_row_init (KgxTabSwitcherRow *self)
 
 
 GtkWidget *
-kgx_tab_switcher_row_new (HdyTabPage *page,
-                          HdyTabView *view)
+kgx_tab_switcher_row_new (AdwTabPage *page,
+                          AdwTabView *view)
 {
-  g_return_val_if_fail (HDY_IS_TAB_PAGE (page), NULL);
-  g_return_val_if_fail (HDY_IS_TAB_VIEW (view), NULL);
+  g_return_val_if_fail (ADW_IS_TAB_PAGE (page), NULL);
+  g_return_val_if_fail (ADW_IS_TAB_VIEW (view), NULL);
 
   return g_object_new (KGX_TYPE_TAB_SWITCHER_ROW,
                        "page", page,
@@ -330,7 +341,7 @@ kgx_tab_switcher_row_new (HdyTabPage *page,
 }
 
 
-HdyTabPage *
+AdwTabPage *
 kgx_tab_switcher_row_get_page (KgxTabSwitcherRow *self)
 {
   g_return_val_if_fail (KGX_IS_TAB_SWITCHER_ROW (self), NULL);
@@ -359,7 +370,7 @@ kgx_tab_switcher_row_animate_close (KgxTabSwitcherRow *self)
   self->page = NULL;
 
   g_signal_connect_swapped (self->revealer, "notify::child-revealed",
-                            G_CALLBACK (gtk_widget_destroy), self);
+                            G_CALLBACK (destroy_cb), self);
 
   gtk_revealer_set_reveal_child (self->revealer, FALSE);
 }

@@ -77,7 +77,7 @@ struct ProcessWatch {
 struct _KgxApplication
 {
   /*< private >*/
-  GtkApplication            parent_instance;
+  AdwApplication            parent_instance;
 
   /*< public >*/
   KgxTheme                  theme;
@@ -97,7 +97,7 @@ struct _KgxApplication
   GtkCssProvider           *provider;
 };
 
-G_DECLARE_FINAL_TYPE (KgxApplication, kgx_application, KGX, APPLICATION, GtkApplication)
+G_DECLARE_FINAL_TYPE (KgxApplication, kgx_application, KGX, APPLICATION, AdwApplication)
 
 
 void                  kgx_application_add_watch       (KgxApplication *self,

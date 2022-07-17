@@ -44,7 +44,7 @@
 #define LOGO_COL_SIZE 28
 #define LOGO_ROW_SIZE 14
 
-G_DEFINE_TYPE (KgxApplication, kgx_application, GTK_TYPE_APPLICATION)
+G_DEFINE_TYPE (KgxApplication, kgx_application, ADW_TYPE_APPLICATION)
 
 enum {
   PROP_0,
@@ -62,25 +62,25 @@ static void
 kgx_application_set_theme (KgxApplication *self,
                            KgxTheme        theme)
 {
-  HdyStyleManager *style_manager;
+  AdwStyleManager *style_manager;
 
   g_return_if_fail (KGX_IS_APPLICATION (self));
 
   self->theme = theme;
 
-  style_manager = hdy_style_manager_get_default ();
+  style_manager = adw_style_manager_get_default ();
 
   switch (theme) {
     case KGX_THEME_AUTO:
-      hdy_style_manager_set_color_scheme (style_manager, HDY_COLOR_SCHEME_PREFER_LIGHT);
+      adw_style_manager_set_color_scheme (style_manager, ADW_COLOR_SCHEME_PREFER_LIGHT);
       break;
     case KGX_THEME_DAY:
-      hdy_style_manager_set_color_scheme (style_manager, HDY_COLOR_SCHEME_FORCE_LIGHT);
+      adw_style_manager_set_color_scheme (style_manager, ADW_COLOR_SCHEME_FORCE_LIGHT);
       break;
     case KGX_THEME_NIGHT:
     case KGX_THEME_HACKER:
     default:
-      hdy_style_manager_set_color_scheme (style_manager, HDY_COLOR_SCHEME_FORCE_DARK);
+      adw_style_manager_set_color_scheme (style_manager, ADW_COLOR_SCHEME_FORCE_DARK);
       break;
   }
 
@@ -317,15 +317,10 @@ set_watcher (KgxApplication *self, gboolean focused)
 static void
 update_styles (KgxApplication *self)
 {
-  HdyStyleManager *style_manager = hdy_style_manager_get_default ();
-  gboolean dark = hdy_style_manager_get_dark (style_manager);
-  gboolean hc = hdy_style_manager_get_high_contrast (style_manager);
+  AdwStyleManager *style_manager = adw_style_manager_get_default ();
+  gboolean dark = adw_style_manager_get_dark (style_manager);
 
-  if (hc && dark) {
-    gtk_css_provider_load_from_resource (self->provider, KGX_APPLICATION_PATH "styles-hc-dark.css");
-  } else if (hc) {
-    gtk_css_provider_load_from_resource (self->provider, KGX_APPLICATION_PATH "styles-hc.css");
-  } else if (dark) {
+  if (dark) {
     gtk_css_provider_load_from_resource (self->provider, KGX_APPLICATION_PATH "styles-dark.css");
   } else {
     gtk_css_provider_load_from_resource (self->provider, KGX_APPLICATION_PATH "styles-light.css");
@@ -337,7 +332,7 @@ static void
 kgx_application_startup (GApplication *app)
 {
   KgxApplication    *self = KGX_APPLICATION (app);
-  HdyStyleManager   *style_manager;
+  AdwStyleManager   *style_manager;
   g_autoptr (GAction) settings_action = NULL;
 
   const char *const new_window_accels[] = { "<shift><primary>n", NULL };
@@ -358,8 +353,6 @@ kgx_application_startup (GApplication *app)
   g_type_ensure (KGX_TYPE_PAGES);
 
   G_APPLICATION_CLASS (kgx_application_parent_class)->startup (app);
-
-  hdy_init ();
 
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "win.new-window", new_window_accels);
@@ -389,14 +382,14 @@ kgx_application_startup (GApplication *app)
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (settings_action));
 
   self->provider = gtk_css_provider_new ();
-  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
-                                             GTK_STYLE_PROVIDER (self->provider),
-                                             /* Is this stupid? Yes
-                                              * Does it fix vte using the wrong
-                                              * priority for fallback styles? Yes*/
-                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
+  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
+                                              GTK_STYLE_PROVIDER (self->provider),
+                                              /* Is this stupid? Yes
+                                               * Does it fix vte using the wrong
+                                               * priority for fallback styles? Yes*/
+                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
 
-  style_manager = hdy_style_manager_get_default ();
+  style_manager = adw_style_manager_get_default ();
   g_signal_connect_swapped (style_manager, "notify::dark", G_CALLBACK (update_styles), self);
   g_signal_connect_swapped (style_manager, "notify::high-contrast", G_CALLBACK (update_styles), self);
   update_styles (self);
@@ -872,16 +865,16 @@ focus_activated (GSimpleAction *action,
                  gpointer       data)
 {
   KgxApplication *self = KGX_APPLICATION (data);
-  GtkWidget *window;
+  GtkRoot *root;
   KgxPages *pages;
   KgxTab *page;
 
   page = kgx_application_lookup_page (self, g_variant_get_uint32 (parameter));
   pages = kgx_tab_get_pages (page);
   kgx_pages_focus_page (pages, page);
-  window = gtk_widget_get_toplevel (GTK_WIDGET (pages));
+  root = gtk_widget_get_root (GTK_WIDGET (pages));
 
-  gtk_window_present_with_time (GTK_WINDOW (window), GDK_CURRENT_TIME);
+  gtk_window_present_with_time (GTK_WINDOW (root), GDK_CURRENT_TIME);
 }
 
 
@@ -1200,7 +1193,6 @@ kgx_application_add_terminal (KgxApplication *self,
 
   tab = g_object_new (KGX_TYPE_SIMPLE_TAB,
                       "application", self,
-                      "visible", TRUE,
                       "initial-work-dir", directory,
                       "command", shell != NULL ? shell : argv,
                       "tab-title", title,

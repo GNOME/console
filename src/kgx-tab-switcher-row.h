@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <handy.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
@@ -26,10 +26,10 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (KgxTabSwitcherRow, kgx_tab_switcher_row, KGX, TAB_SWITCHER_ROW, GtkListBoxRow)
 
-GtkWidget  *kgx_tab_switcher_row_new           (HdyTabPage        *page,
-                                                HdyTabView        *view);
+GtkWidget  *kgx_tab_switcher_row_new           (AdwTabPage        *page,
+                                                AdwTabView        *view);
 
-HdyTabPage *kgx_tab_switcher_row_get_page      (KgxTabSwitcherRow *self);
+AdwTabPage *kgx_tab_switcher_row_get_page      (KgxTabSwitcherRow *self);
 
 gboolean    kgx_tab_switcher_row_is_animating  (KgxTabSwitcherRow *self);
 

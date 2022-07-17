@@ -18,12 +18,12 @@
 
 /**
  * SECTION:kgx-tab-switcher
- * @short_description: A mobile tab switcher for HdyTabView
+ * @short_description: A mobile tab switcher for AdwTabView
  * @title: KgxTabSwitcher
  *
- * The #KgxTabSwitcher widget is a mobile tab switcher for HdyTabView. It's
+ * The #KgxTabSwitcher widget is a mobile tab switcher for AdwTabView. It's
  * supposed to be used in conjunction with #KgxTabButton to open it, and a
- * #HdyTabBar to provide UI for larger screens.
+ * #AdwTabBar to provide UI for larger screens.
  */
 
 #include "kgx-config.h"
@@ -32,26 +32,26 @@
 
 
 struct _KgxTabSwitcher {
-  GtkBin parent_instance;
+  GtkWidget parent_instance;
 
-  HdyFlap *flap;
+  AdwFlap *flap;
   GtkListBox *list;
 
   GtkGesture *click_gesture;
   GtkGesture *long_press_gesture;
-  GtkMenu *context_menu;
-  GtkPopover *touch_menu;
+  GtkPopover *context_menu;
 
-  HdyTabView *view;
+  AdwTabView *view;
   gboolean narrow;
 };
 
 
-G_DEFINE_TYPE (KgxTabSwitcher, kgx_tab_switcher, GTK_TYPE_BIN)
+G_DEFINE_TYPE (KgxTabSwitcher, kgx_tab_switcher, GTK_TYPE_WIDGET)
 
 
 enum {
   PROP_0,
+  PROP_CHILD,
   PROP_VIEW,
   PROP_NARROW,
   LAST_PROP
@@ -75,66 +75,12 @@ reset_setup_menu_cb (KgxTabSwitcher *self)
 
 
 static void
-touch_menu_notify_visible_cb (KgxTabSwitcher *self)
+context_menu_notify_visible_cb (KgxTabSwitcher *self)
 {
-  if (!self->touch_menu || gtk_widget_get_visible (GTK_WIDGET (self->touch_menu))) {
+  if (!self->context_menu || gtk_widget_get_visible (GTK_WIDGET (self->context_menu))) {
     return;
   }
 
-  g_idle_add (G_SOURCE_FUNC (reset_setup_menu_cb), self);
-}
-
-
-static void
-destroy_cb (KgxTabSwitcher *self)
-{
-  self->touch_menu = NULL;
-}
-
-
-static void
-do_touch_popup (KgxTabSwitcher    *self,
-                KgxTabSwitcherRow *row)
-{
-  GMenuModel *model = hdy_tab_view_get_menu_model (self->view);
-  HdyTabPage *page = kgx_tab_switcher_row_get_page (row);
-
-  if (!G_IS_MENU_MODEL (model)) {
-    return;
-  }
-
-  g_signal_emit_by_name (self->view, "setup-menu", page);
-
-  if (!self->touch_menu) {
-    self->touch_menu = GTK_POPOVER (gtk_popover_new_from_model (GTK_WIDGET (row), model));
-    gtk_popover_set_constrain_to (self->touch_menu, GTK_POPOVER_CONSTRAINT_WINDOW);
-
-    g_signal_connect_object (self->touch_menu, "notify::visible",
-                             G_CALLBACK (touch_menu_notify_visible_cb), self,
-                             G_CONNECT_AFTER | G_CONNECT_SWAPPED);
-
-    g_signal_connect_object (self->touch_menu, "destroy",
-                             G_CALLBACK (destroy_cb), self,
-                             G_CONNECT_AFTER | G_CONNECT_SWAPPED);
-  } else {
-    gtk_popover_set_relative_to (self->touch_menu, GTK_WIDGET (row));
-  }
-
-  gtk_popover_popup (self->touch_menu);
-}
-
-
-static void
-popup_menu_detach (KgxTabSwitcher *self,
-                   GtkMenu        *menu)
-{
-  self->context_menu = NULL;
-}
-
-
-static void
-popup_menu_deactivate_cb (KgxTabSwitcher *self)
-{
   g_idle_add (G_SOURCE_FUNC (reset_setup_menu_cb), self);
 }
 
@@ -142,10 +88,12 @@ popup_menu_deactivate_cb (KgxTabSwitcher *self)
 static void
 do_popup (KgxTabSwitcher    *self,
           KgxTabSwitcherRow *row,
-          GdkEvent          *event)
+          double             x,
+          double             y)
 {
-  GMenuModel *model = hdy_tab_view_get_menu_model (self->view);
-  HdyTabPage *page = kgx_tab_switcher_row_get_page (row);
+  GMenuModel *model = adw_tab_view_get_menu_model (self->view);
+  AdwTabPage *page = kgx_tab_switcher_row_get_page (row);
+  GdkRectangle rect;
 
   if (!G_IS_MENU_MODEL (model)) {
     return;
@@ -154,48 +102,67 @@ do_popup (KgxTabSwitcher    *self,
   g_signal_emit_by_name (self->view, "setup-menu", page);
 
   if (!self->context_menu) {
-    self->context_menu = GTK_MENU (gtk_menu_new_from_model (model));
-    gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self->context_menu)),
-                                 GTK_STYLE_CLASS_CONTEXT_MENU);
+    self->context_menu = GTK_POPOVER (gtk_popover_menu_new_from_model (model));
+    gtk_popover_set_position (self->context_menu, GTK_POS_BOTTOM);
+    gtk_popover_set_has_arrow (self->context_menu, FALSE);
+    gtk_widget_set_parent (GTK_WIDGET (self->context_menu) , GTK_WIDGET (self));
 
-    g_signal_connect_object (self->context_menu,
-                             "deactivate",
-                             G_CALLBACK (popup_menu_deactivate_cb),
-                             self,
-                             G_CONNECT_SWAPPED);
+    if (gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL) {
+      gtk_widget_set_halign (GTK_WIDGET (self->context_menu), GTK_ALIGN_END);
+    } else {
+      gtk_widget_set_halign (GTK_WIDGET (self->context_menu), GTK_ALIGN_START);
+    }
 
-    gtk_menu_attach_to_widget (self->context_menu, GTK_WIDGET (self),
-                               (GtkMenuDetachFunc) popup_menu_detach);
+    g_signal_connect_object (self->context_menu, "notify::visible",
+                             G_CALLBACK (context_menu_notify_visible_cb), self,
+                             G_CONNECT_AFTER | G_CONNECT_SWAPPED);
   }
 
-  if (event && gdk_event_triggers_context_menu (event)) {
-    gtk_menu_popup_at_pointer (self->context_menu, event);
+  if (x >= 0 && y >= 0) {
+    graphene_rect_t bounds;
+
+    g_assert (gtk_widget_compute_bounds (GTK_WIDGET (self->list),
+                                         GTK_WIDGET (self), &bounds));
+
+    rect.x = bounds.origin.x + x;
+    rect.y = bounds.origin.y + y;
   } else {
-    gtk_menu_popup_at_widget (self->context_menu,
-                              GTK_WIDGET (row),
-                              GDK_GRAVITY_SOUTH_WEST,
-                              GDK_GRAVITY_NORTH_WEST,
-                              event);
+    graphene_rect_t bounds;
 
-    gtk_menu_shell_select_first (GTK_MENU_SHELL (self->context_menu), FALSE);
+    g_assert (gtk_widget_compute_bounds (GTK_WIDGET (row),
+                                         GTK_WIDGET (self), &bounds));
+
+    rect.x = bounds.origin.x;
+    rect.y = bounds.origin.y + bounds.size.height;
+
+    if (gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL) {
+      rect.x += bounds.size.width;
+    }
   }
+
+  rect.width = 0;
+  rect.height = 0;
+
+  gtk_popover_set_pointing_to (self->context_menu, &rect);
+
+  gtk_popover_popup (self->context_menu);
 }
 
 
 static void
 reveal_flap_cb (KgxTabSwitcher *self)
 {
-  HdyTabPage *page;
+  AdwTabPage *page;
   GtkWidget *child;
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->view),
-                            !hdy_flap_get_reveal_flap (self->flap));
+                            !adw_flap_get_reveal_flap (self->flap));
 
-  if (hdy_flap_get_reveal_flap (self->flap)) {
+  if (adw_flap_get_reveal_flap (self->flap)) {
     gtk_widget_grab_focus (GTK_WIDGET (self->list));
   } else {
-    page = hdy_tab_view_get_selected_page (self->view);
-    child = hdy_tab_page_get_child (page);
+    page = adw_tab_view_get_selected_page (self->view);
+    child = adw_tab_page_get_child (page);
 
     gtk_widget_grab_focus (GTK_WIDGET (child));
   }
@@ -222,7 +189,7 @@ static void
 row_selected_cb (KgxTabSwitcher    *self,
                  KgxTabSwitcherRow *row)
 {
-  HdyTabPage *page;
+  AdwTabPage *page;
 
   if (!row) {
     return;
@@ -235,7 +202,7 @@ row_selected_cb (KgxTabSwitcher    *self,
   }
 
   page = kgx_tab_switcher_row_get_page (row);
-  hdy_tab_view_set_selected_page (self->view, page);
+  adw_tab_view_set_selected_page (self->view, page);
 }
 
 
@@ -280,7 +247,7 @@ pages_changed_cb (KgxTabSwitcher *self,
   }
 
   for (i = 0; i < added; i++) {
-    g_autoptr (HdyTabPage) page = g_list_model_get_item (pages, position + i);
+    g_autoptr (AdwTabPage) page = g_list_model_get_item (pages, position + i);
     GtkWidget *row = kgx_tab_switcher_row_new (page, self->view);
 
     gtk_list_box_insert (self->list, row, position + i);
@@ -290,16 +257,16 @@ pages_changed_cb (KgxTabSwitcher *self,
 
 
 static void
-notify_selected_page_cb (KgxTabSwitcher *self)
+selection_changed_cb (KgxTabSwitcher *self)
 {
-  HdyTabPage *page = NULL;
+  AdwTabPage *page = NULL;
 
   if (self->view) {
-    page = hdy_tab_view_get_selected_page (self->view);
+    page = adw_tab_view_get_selected_page (self->view);
   }
 
   if (page) {
-    int index = hdy_tab_view_get_page_position (self->view, page);
+    int index = adw_tab_view_get_page_position (self->view, page);
     KgxTabSwitcherRow *row = find_nth_alive_row (self, index);
 
     gtk_list_box_select_row (self->list, GTK_LIST_BOX_ROW (row));
@@ -315,9 +282,10 @@ click_pressed_cb (KgxTabSwitcher *self,
                   double          x,
                   double          y)
 {
-  g_autoptr (GdkEvent) event = NULL;
+  GdkEventSequence *sequence;
+  GdkEvent *event;
   GtkListBoxRow *row;
-  HdyTabPage *page;
+  AdwTabPage *page;
   guint button;
 
   if (n_press > 1) {
@@ -334,20 +302,21 @@ click_pressed_cb (KgxTabSwitcher *self,
     return;
   }
 
-  event = gtk_get_current_event ();
+  sequence = gtk_gesture_single_get_current_sequence (GTK_GESTURE_SINGLE (self->click_gesture));
+  event = gtk_gesture_get_last_event (self->click_gesture, sequence);
   button = gtk_gesture_single_get_current_button (GTK_GESTURE_SINGLE (self->click_gesture));
   page = kgx_tab_switcher_row_get_page (KGX_TAB_SWITCHER_ROW (row));
 
   if (event && gdk_event_triggers_context_menu (event)) {
     gtk_gesture_set_state (self->click_gesture, GTK_EVENT_SEQUENCE_CLAIMED);
-    do_popup (self, KGX_TAB_SWITCHER_ROW (row), event);
+    do_popup (self, KGX_TAB_SWITCHER_ROW (row), x, y);
 
     return;
   }
 
   if (button == GDK_BUTTON_MIDDLE) {
     gtk_gesture_set_state (self->click_gesture, GTK_EVENT_SEQUENCE_CLAIMED);
-    hdy_tab_view_close_page (self->view, page);
+    adw_tab_view_close_page (self->view, page);
 
     return;
   }
@@ -369,9 +338,18 @@ long_press_cb (KgxTabSwitcher *self,
     return;
   }
 
-  do_touch_popup (self, KGX_TAB_SWITCHER_ROW (row));
+  do_popup (self, KGX_TAB_SWITCHER_ROW (row), -1, -1);
 
   gtk_gesture_set_state (self->long_press_gesture, GTK_EVENT_SEQUENCE_CLAIMED);
+}
+
+
+static void
+popup_menu_cb (KgxTabSwitcher *self)
+{
+  GtkListBoxRow *row = gtk_list_box_get_selected_row (self->list);
+
+  do_popup (self, KGX_TAB_SWITCHER_ROW (row), -1, -1);
 }
 
 
@@ -400,8 +378,10 @@ kgx_tab_switcher_dispose (GObject *object)
 
   kgx_tab_switcher_set_view (self, NULL);
 
-  g_clear_object (&self->click_gesture);
-  g_clear_object (&self->long_press_gesture);
+  g_clear_pointer ((GtkWidget **) &self->flap, gtk_widget_unparent);
+  g_clear_pointer ((GtkWidget **) &self->context_menu, gtk_widget_unparent);
+  self->click_gesture = NULL;
+  self->long_press_gesture = NULL;
 
   G_OBJECT_CLASS (kgx_tab_switcher_parent_class)->dispose (object);
 }
@@ -416,6 +396,9 @@ kgx_tab_switcher_get_property (GObject    *object,
   KgxTabSwitcher *self = KGX_TAB_SWITCHER (object);
 
   switch (prop_id) {
+    case PROP_CHILD:
+      g_value_set_object (value, kgx_tab_switcher_get_child (self));
+      break;
     case PROP_VIEW:
       g_value_set_object (value, kgx_tab_switcher_get_view (self));
       break;
@@ -437,6 +420,9 @@ kgx_tab_switcher_set_property (GObject      *object,
   KgxTabSwitcher *self = KGX_TAB_SWITCHER (object);
 
   switch (prop_id) {
+    case PROP_CHILD:
+      kgx_tab_switcher_set_child (self, g_value_get_object (value));
+      break;
     case PROP_VIEW:
       kgx_tab_switcher_set_view (self, g_value_get_object (value));
       break;
@@ -447,102 +433,58 @@ kgx_tab_switcher_set_property (GObject      *object,
 
 
 static void
-kgx_tab_switcher_destroy (GtkWidget *widget)
-{
-  gtk_container_forall (GTK_CONTAINER (widget), (GtkCallback) gtk_widget_destroy, NULL);
-
-  GTK_WIDGET_CLASS (kgx_tab_switcher_parent_class)->destroy (widget);
-}
-
-
-static gboolean
-kgx_tab_switcher_popup_menu (GtkWidget *widget)
-{
-  KgxTabSwitcher *self = KGX_TAB_SWITCHER (widget);
-  GtkListBoxRow *row = gtk_list_box_get_selected_row (self->list);
-
-  if (row) {
-    do_popup (self, KGX_TAB_SWITCHER_ROW (row), NULL);
-
-    return GDK_EVENT_STOP;
-  }
-
-  return GDK_EVENT_PROPAGATE;
-}
-
-
-static void
-kgx_tab_switcher_size_allocate (GtkWidget     *widget,
-                                GtkAllocation *alloc)
+kgx_tab_switcher_measure (GtkWidget      *widget,
+                          GtkOrientation  orientation,
+                          int             for_size,
+                          int            *min,
+                          int            *nat,
+                          int            *min_baseline,
+                          int            *nat_baseline)
 {
   KgxTabSwitcher *self = KGX_TAB_SWITCHER (widget);
 
-  set_narrow (self, alloc->width < 400);
-
-  GTK_WIDGET_CLASS (kgx_tab_switcher_parent_class)->size_allocate (widget, alloc);
+  gtk_widget_measure (GTK_WIDGET (self->flap), orientation, for_size,
+                      min, nat, min_baseline, nat_baseline);
 }
 
 
 static void
-kgx_tab_switcher_add (GtkContainer *container,
-                      GtkWidget    *widget)
+kgx_tab_switcher_size_allocate (GtkWidget *widget,
+                                int        width,
+                                int        height,
+                                int        baseline)
 {
-  KgxTabSwitcher *self = KGX_TAB_SWITCHER (container);
+  KgxTabSwitcher *self = KGX_TAB_SWITCHER (widget);
 
-  if (!self->flap) {
-    GTK_CONTAINER_CLASS (kgx_tab_switcher_parent_class)->add (container, widget);
+  set_narrow (self, width < 400);
 
-    return;
+  if (self->context_menu) {
+    gtk_popover_present (self->context_menu);
   }
 
-  hdy_flap_set_content (self->flap, widget);
+  gtk_widget_allocate (GTK_WIDGET (self->flap), width, height, baseline, NULL);
 }
 
 
 static void
-kgx_tab_switcher_remove (GtkContainer *container,
-                         GtkWidget    *widget)
+kgx_tab_switcher_direction_changed (GtkWidget        *widget,
+                                    GtkTextDirection  previous_direction)
 {
-  KgxTabSwitcher *self = KGX_TAB_SWITCHER (container);
+  KgxTabSwitcher *self = KGX_TAB_SWITCHER (widget);
 
-  if (widget == GTK_WIDGET (self->flap)) {
-    GTK_CONTAINER_CLASS (kgx_tab_switcher_parent_class)->remove (container, widget);
-
+  if (gtk_widget_get_direction (widget) == previous_direction) {
     return;
   }
 
-  hdy_flap_set_content (self->flap, NULL);
+  if (self->context_menu) {
+    if (gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL) {
+      gtk_widget_set_halign (GTK_WIDGET (self->context_menu), GTK_ALIGN_END);
+    } else {
+      gtk_widget_set_halign (GTK_WIDGET (self->context_menu), GTK_ALIGN_START);
+    }
+  }
 }
 
-
-static void
-kgx_tab_switcher_forall (GtkContainer *container,
-                         gboolean      include_internals,
-                         GtkCallback   callback,
-                         gpointer      callback_data)
-{
-  KgxTabSwitcher *self = KGX_TAB_SWITCHER (container);
-  GtkWidget *content;
-
-  if (include_internals) {
-    GTK_CONTAINER_CLASS (kgx_tab_switcher_parent_class)->forall (container,
-                                                                 include_internals,
-                                                                 callback,
-                                                                 callback_data);
-
-    return;
-  }
-
-  if (!self->flap) {
-    return;
-  }
-
-  content = hdy_flap_get_content (self->flap);
-
-  if (content) {
-    callback (content, callback_data);
-  }
-}
 
 
 static void
@@ -550,30 +492,32 @@ kgx_tab_switcher_class_init (KgxTabSwitcherClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  GtkContainerClass *container_class = GTK_CONTAINER_CLASS (klass);
 
   object_class->dispose = kgx_tab_switcher_dispose;
   object_class->get_property = kgx_tab_switcher_get_property;
   object_class->set_property = kgx_tab_switcher_set_property;
 
-  widget_class->destroy = kgx_tab_switcher_destroy;
-  widget_class->popup_menu = kgx_tab_switcher_popup_menu;
+  widget_class->measure = kgx_tab_switcher_measure;
   widget_class->size_allocate = kgx_tab_switcher_size_allocate;
+  widget_class->direction_changed = kgx_tab_switcher_direction_changed;
 
-  container_class->add = kgx_tab_switcher_add;
-  container_class->remove = kgx_tab_switcher_remove;
-  container_class->forall = kgx_tab_switcher_forall;
+  pspecs[PROP_CHILD] =
+    g_param_spec_object ("child",
+                         "Child",
+                         "The tab switcher child",
+                         GTK_TYPE_WIDGET,
+                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
 
   /**
    * KgxTabSwitcher:view:
    *
-   * The #HdyTabView the tab switcher controls;
+   * The #AdwTabView the tab switcher controls;
    */
   pspecs[PROP_VIEW] =
     g_param_spec_object ("view",
                          "View",
                          "The view the tab switcher controls.",
-                         HDY_TYPE_TAB_VIEW,
+                         ADW_TYPE_TAB_VIEW,
                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
 
   pspecs[PROP_NARROW] =
@@ -605,6 +549,11 @@ kgx_tab_switcher_class_init (KgxTabSwitcherClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, new_tab_cb);
   gtk_widget_class_bind_template_callback (widget_class, row_selected_cb);
   gtk_widget_class_bind_template_callback (widget_class, row_activated_cb);
+
+  gtk_widget_class_install_action (widget_class, "menu.popup", NULL, (GtkWidgetActionActivateFunc) popup_menu_cb);
+
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_F10, GDK_SHIFT_MASK, "menu.popup", NULL);
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Menu, 0, "menu.popup", NULL);
 }
 
 
@@ -615,13 +564,15 @@ kgx_tab_switcher_init (KgxTabSwitcher *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->click_gesture = gtk_gesture_multi_press_new (GTK_WIDGET (self->list));
+  self->click_gesture = gtk_gesture_click_new ();
   gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (self->click_gesture), 0);
   g_signal_connect_swapped (self->click_gesture, "pressed", G_CALLBACK (click_pressed_cb), self);
+  gtk_widget_add_controller (GTK_WIDGET (self->list), GTK_EVENT_CONTROLLER (self->click_gesture));
 
-  self->long_press_gesture = gtk_gesture_long_press_new (GTK_WIDGET (self->list));
+  self->long_press_gesture = gtk_gesture_long_press_new ();
   gtk_gesture_single_set_touch_only (GTK_GESTURE_SINGLE (self->long_press_gesture), TRUE);
   g_signal_connect_swapped (self->long_press_gesture, "pressed", G_CALLBACK (long_press_cb), self);
+  gtk_widget_add_controller (GTK_WIDGET (self->list), GTK_EVENT_CONTROLLER (self->long_press_gesture));
 }
 
 
@@ -639,15 +590,41 @@ kgx_tab_switcher_new (void)
 }
 
 
+GtkWidget *
+kgx_tab_switcher_get_child (KgxTabSwitcher *self)
+{
+  g_return_val_if_fail (KGX_IS_TAB_SWITCHER (self), NULL);
+
+  return adw_flap_get_content (self->flap);
+}
+
+
+void
+kgx_tab_switcher_set_child (KgxTabSwitcher *self,
+                            GtkWidget      *child)
+{
+  g_return_if_fail (KGX_IS_TAB_SWITCHER (self));
+  g_return_if_fail (child == NULL || GTK_IS_WIDGET (child));
+
+  if (child == kgx_tab_switcher_get_child (self)) {
+    return;
+  }
+
+  adw_flap_set_content (self->flap, child);
+
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_CHILD]);
+}
+
+
 /**
  * kgx_tab_switcher_get_view:
  * @self: a #KgxTabSwitcher
  *
- * Gets the #HdyTabView @self controls.
+ * Gets the #AdwTabView @self controls.
  *
- * Returns: (transfer none) (nullable): the #HdyTabView @self controls
+ * Returns: (transfer none) (nullable): the #AdwTabView @self controls
  */
-HdyTabView *
+AdwTabView *
 kgx_tab_switcher_get_view (KgxTabSwitcher *self)
 {
   g_return_val_if_fail (KGX_IS_TAB_SWITCHER (self), NULL);
@@ -659,43 +636,43 @@ kgx_tab_switcher_get_view (KgxTabSwitcher *self)
 /**
  * kgx_tab_switcher_set_view:
  * @self: a #KgxTabSwitcher
- * @view: (nullable): a #HdyTabView
+ * @view: (nullable): a #AdwTabView
  *
- * Sets the #HdyTabView @self controls.
+ * Sets the #AdwTabView @self controls.
  */
 void
 kgx_tab_switcher_set_view (KgxTabSwitcher *self,
-                           HdyTabView     *view)
+                           AdwTabView     *view)
 {
   g_return_if_fail (KGX_IS_TAB_SWITCHER (self));
-  g_return_if_fail (view == NULL || HDY_IS_TAB_VIEW (view));
+  g_return_if_fail (view == NULL || ADW_IS_TAB_VIEW (view));
 
   if (self->view == view) {
     return;
   }
 
   if (self->view) {
-    GListModel *pages = hdy_tab_view_get_pages (self->view);
+    GtkSelectionModel *pages = adw_tab_view_get_pages (self->view);
 
-    g_signal_handlers_disconnect_by_func (self->view, G_CALLBACK (notify_selected_page_cb), self);
+    g_signal_handlers_disconnect_by_func (pages, G_CALLBACK (selection_changed_cb), self);
     g_signal_handlers_disconnect_by_func (pages, G_CALLBACK (pages_changed_cb), self);
   }
 
   g_set_object (&self->view, view);
 
   if (self->view) {
-    GListModel *pages = hdy_tab_view_get_pages (self->view);
+    GtkSelectionModel *pages = adw_tab_view_get_pages (self->view);
 
     g_signal_connect_object (pages, "items-changed",
                              G_CALLBACK (pages_changed_cb), self,
                              G_CONNECT_SWAPPED);
 
-    g_signal_connect_object (self->view, "notify::selected-page",
-                             G_CALLBACK (notify_selected_page_cb), self,
+    g_signal_connect_object (pages, "selection-changed",
+                             G_CALLBACK (selection_changed_cb), self,
                              G_CONNECT_SWAPPED);
   }
 
-  notify_selected_page_cb (self);
+  selection_changed_cb (self);
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_VIEW]);
 }
@@ -706,7 +683,7 @@ kgx_tab_switcher_open (KgxTabSwitcher *self)
 {
   g_return_if_fail (KGX_IS_TAB_SWITCHER (self));
 
-  hdy_flap_set_reveal_flap (self->flap, TRUE);
+  adw_flap_set_reveal_flap (self->flap, TRUE);
 }
 
 
@@ -715,7 +692,7 @@ kgx_tab_switcher_close (KgxTabSwitcher *self)
 {
   g_return_if_fail (KGX_IS_TAB_SWITCHER (self));
 
-  hdy_flap_set_reveal_flap (self->flap, FALSE);
+  adw_flap_set_reveal_flap (self->flap, FALSE);
 }
 
 

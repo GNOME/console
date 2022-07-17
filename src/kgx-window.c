@@ -21,7 +21,7 @@
  * @title: KgxWindow
  * @short_description: Window
  *
- * The main #HdyApplicationWindow that acts as the terminal
+ * The main #AdwApplicationWindow that acts as the terminal
  */
 
 #include "kgx-config.h"
@@ -29,7 +29,7 @@
 #include <glib/gi18n.h>
 #include <vte/vte.h>
 #include <math.h>
-#include <handy.h>
+#include <adwaita.h>
 
 #include "rgba.h"
 
@@ -42,7 +42,7 @@
 #include "kgx-tab-switcher.h"
 #include "kgx-theme-switcher.h"
 
-G_DEFINE_TYPE (KgxWindow, kgx_window, HDY_TYPE_APPLICATION_WINDOW)
+G_DEFINE_TYPE (KgxWindow, kgx_window, ADW_TYPE_APPLICATION_WINDOW)
 
 enum {
   PROP_0,
@@ -84,12 +84,12 @@ kgx_window_constructed (GObject *object)
 {
   KgxWindow       *self = KGX_WINDOW (object);
   GtkApplication  *application = NULL;
-  HdyStyleManager *style_manager;
+  AdwStyleManager *style_manager;
 
   G_OBJECT_CLASS (kgx_window_parent_class)->constructed (object);
 
   application = gtk_window_get_application (GTK_WINDOW (self));
-  style_manager = hdy_style_manager_get_default ();
+  style_manager = adw_style_manager_get_default ();
 
   g_object_bind_property (application, "theme",
                           self->pages, "theme",
@@ -179,21 +179,20 @@ delete_response (GtkWidget *dlg,
                  int        response,
                  KgxWindow *self)
 {
-  gtk_widget_destroy (dlg);
+  gtk_window_destroy (GTK_WINDOW (dlg));
 
   if (response == GTK_RESPONSE_OK) {
     self->close_anyway = TRUE;
 
-    gtk_widget_destroy (GTK_WIDGET (self));
+    gtk_window_destroy (GTK_WINDOW (self));
   }
 }
 
 
 static gboolean
-kgx_window_delete_event (GtkWidget   *widget,
-                         GdkEventAny *event)
+kgx_window_close_request (GtkWindow *window)
 {
-  KgxWindow *self = KGX_WINDOW (widget);
+  KgxWindow *self = KGX_WINDOW (window);
   GtkWidget *dlg;
   g_autoptr (GPtrArray) children = NULL;
 
@@ -230,51 +229,32 @@ active_changed (GObject *object, GParamSpec *pspec, gpointer data)
 }
 
 
-static gboolean
-key_press_event (GtkWidget   *widget,
-                 GdkEventKey *event,
-                 KgxWindow   *self)
+static void
+state_or_size_changed (KgxWindow  *self)
 {
-  GdkModifierType default_modifiers = gtk_accelerator_get_default_mod_mask ();
-  guint keyval;
-  GdkModifierType state;
-  GdkModifierType consumed;
-  GdkKeymap *keymap;
+  GdkSurface *surface = gtk_native_get_surface (GTK_NATIVE (self));
+  GdkToplevelState state = gdk_toplevel_get_state (GDK_TOPLEVEL (surface));
 
-  gdk_event_get_state ((GdkEvent *) event, &state);
+  self->is_maximized_or_tiled =
+    (state & (GDK_TOPLEVEL_STATE_FULLSCREEN |
+              GDK_TOPLEVEL_STATE_MAXIMIZED |
+              GDK_TOPLEVEL_STATE_TILED |
+              GDK_TOPLEVEL_STATE_TOP_TILED |
+              GDK_TOPLEVEL_STATE_RIGHT_TILED |
+              GDK_TOPLEVEL_STATE_BOTTOM_TILED |
+              GDK_TOPLEVEL_STATE_LEFT_TILED)) > 0;
 
-  keymap = gdk_keymap_get_for_display (gtk_widget_get_display (widget));
+  g_object_set (self->pages, "opaque", self->is_maximized_or_tiled, NULL);
 
-  gdk_keymap_translate_keyboard_state (keymap,
-                                       event->hardware_keycode,
-                                       state,
-                                       event->group,
-                                       &keyval, NULL, NULL, &consumed);
-
-  state &= ~consumed & default_modifiers;
-
-  /* Override some shortcuts from HdyTabView:shortcut-widget back, as they are
-   * needed for terminal apps. This should be fixed on libhandy side, but would
-   * likely require API changes, so carry this for now.
-   *
-   * See https://gitlab.gnome.org/GNOME/libhandy/-/issues/422
-   */
-  if ((((keyval == GDK_KEY_Page_Up ||
-         keyval == GDK_KEY_KP_Page_Up ||
-         keyval == GDK_KEY_Page_Down ||
-         keyval == GDK_KEY_KP_Page_Down) &&
-        kgx_pages_count (KGX_PAGES (self->pages)) <= 1) ||
-       keyval == GDK_KEY_Home ||
-       keyval == GDK_KEY_KP_Home ||
-       keyval == GDK_KEY_End ||
-       keyval == GDK_KEY_KP_End) &&
-      (state == GDK_CONTROL_MASK ||
-       state == (GDK_CONTROL_MASK | GDK_SHIFT_MASK))) {
-    return kgx_pages_key_press_event (KGX_PAGES (self->pages),
-                                      (GdkEvent *) event);
+  if (self->is_maximized_or_tiled) {
+    gtk_widget_add_css_class (GTK_WIDGET (self), "opaque");
+  } else {
+    gtk_widget_remove_css_class (GTK_WIDGET (self), "opaque");
   }
 
-  return GDK_EVENT_PROPAGATE;
+  gtk_window_get_default_size (GTK_WINDOW (self),
+                               &self->current_width,
+                               &self->current_height);
 }
 
 
@@ -304,39 +284,33 @@ static void
 status_changed (GObject *object, GParamSpec *pspec, gpointer data)
 {
   KgxWindow *self = KGX_WINDOW (object);
-  GtkStyleContext *context;
   KgxStatus status;
-
-  context = gtk_widget_get_style_context (GTK_WIDGET (self));
 
   status = kgx_pages_current_status (KGX_PAGES (self->pages));
 
   if (status & KGX_REMOTE) {
-    gtk_style_context_add_class (context, KGX_WINDOW_STYLE_REMOTE);
+    gtk_widget_add_css_class (GTK_WIDGET (self), KGX_WINDOW_STYLE_REMOTE);
   } else {
-    gtk_style_context_remove_class (context, KGX_WINDOW_STYLE_REMOTE);
+    gtk_widget_remove_css_class (GTK_WIDGET (self), KGX_WINDOW_STYLE_REMOTE);
   }
 
   if (status & KGX_PRIVILEGED) {
-    gtk_style_context_add_class (context, KGX_WINDOW_STYLE_ROOT);
+    gtk_widget_add_css_class (GTK_WIDGET (self), KGX_WINDOW_STYLE_ROOT);
   } else {
-    gtk_style_context_remove_class (context, KGX_WINDOW_STYLE_ROOT);
+    gtk_widget_remove_css_class (GTK_WIDGET (self), KGX_WINDOW_STYLE_ROOT);
   }
 }
 
 
 static void
-extra_drag_data_received (HdyTabBar        *bar,
-                          HdyTabPage       *page,
-                          GdkDragContext   *context,
-                          GtkSelectionData *selection_data,
-                          guint             info,
-                          guint             time,
-                          KgxWindow        *self)
+extra_drag_drop (AdwTabBar        *bar,
+                 AdwTabPage       *page,
+                 GValue           *value,
+                 KgxWindow        *self)
 {
-  KgxTab *tab = KGX_TAB (hdy_tab_page_get_child (page));
+  KgxTab *tab = KGX_TAB (adw_tab_page_get_child (page));
 
-  kgx_tab_accept_drop (tab, selection_data);
+  kgx_tab_accept_drop (tab, value);
 }
 
 
@@ -353,44 +327,41 @@ new_tab_cb (KgxTabSwitcher *switcher,
 }
 
 
-static gboolean
-kgx_window_window_state_event (GtkWidget           *widget,
-                               GdkEventWindowState *event)
+static void
+kgx_window_realize (GtkWidget *widget)
 {
   KgxWindow *self = KGX_WINDOW (widget);
+  GdkSurface *surface;
 
-  self->is_maximized_or_tiled =
-    (event->new_window_state & (GDK_WINDOW_STATE_FULLSCREEN |
-                                GDK_WINDOW_STATE_MAXIMIZED |
-                                GDK_WINDOW_STATE_TILED |
-                                GDK_WINDOW_STATE_TOP_TILED |
-                                GDK_WINDOW_STATE_RIGHT_TILED |
-                                GDK_WINDOW_STATE_BOTTOM_TILED |
-                                GDK_WINDOW_STATE_LEFT_TILED)) > 0;
+  GTK_WIDGET_CLASS (kgx_window_parent_class)->realize (widget);
 
-  g_object_set (self->pages, "opaque", self->is_maximized_or_tiled, NULL);
+  surface = gtk_native_get_surface (GTK_NATIVE (self));
 
-  if (self->is_maximized_or_tiled)
-    gtk_style_context_add_class (gtk_widget_get_style_context (widget), "opaque");
-  else
-    gtk_style_context_remove_class (gtk_widget_get_style_context (widget), "opaque");
+  g_signal_connect_swapped (surface, "notify::state",
+                            G_CALLBACK (state_or_size_changed), self);
+  g_signal_connect_swapped (self, "notify::default-width",
+                            G_CALLBACK (state_or_size_changed), self);
+  g_signal_connect_swapped (self, "notify::default-height",
+                            G_CALLBACK (state_or_size_changed), self);
 
-  return GTK_WIDGET_CLASS (kgx_window_parent_class)->window_state_event (widget, event);
+  state_or_size_changed (self);
 }
 
 
 static void
-kgx_window_size_allocate (GtkWidget     *widget,
-                          GtkAllocation *alloc)
+kgx_window_unrealize (GtkWidget *widget)
 {
   KgxWindow *self = KGX_WINDOW (widget);
+  GdkSurface *surface = gtk_native_get_surface (GTK_NATIVE (self));
 
-  GTK_WIDGET_CLASS (kgx_window_parent_class)->size_allocate (widget, alloc);
+  g_signal_handlers_disconnect_by_func (surface,
+                                        G_CALLBACK (state_or_size_changed),
+                                        self);
+  g_signal_handlers_disconnect_by_func (self,
+                                        G_CALLBACK (state_or_size_changed),
+                                        self);
 
-  if (!self->is_maximized_or_tiled)
-    gtk_window_get_size (GTK_WINDOW (self),
-                         &self->current_width,
-                         &self->current_height);
+  GTK_WIDGET_CLASS (kgx_window_parent_class)->unrealize (widget);
 }
 
 
@@ -399,15 +370,17 @@ kgx_window_class_init (KgxWindowClass *klass)
 {
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  GtkWindowClass *window_class = GTK_WINDOW_CLASS (klass);
 
   object_class->constructed = kgx_window_constructed;
   object_class->dispose = kgx_window_dispose;
   object_class->set_property = kgx_window_set_property;
   object_class->get_property = kgx_window_get_property;
 
-  widget_class->delete_event = kgx_window_delete_event;
-  widget_class->window_state_event = kgx_window_window_state_event;
-  widget_class->size_allocate = kgx_window_size_allocate;
+  widget_class->realize = kgx_window_realize;
+  widget_class->unrealize = kgx_window_unrealize;
+
+  window_class->close_request = kgx_window_close_request;
 
   /**
    * KgxWindow:application:
@@ -426,7 +399,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                KGX_APPLICATION_PATH "kgx-window.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, KgxWindow, header_bar);
+  gtk_widget_class_bind_template_child (widget_class, KgxWindow, window_title);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_info);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_message);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, theme_switcher);
@@ -435,13 +408,13 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, tab_button);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, tab_switcher);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, pages);
+  gtk_widget_class_bind_template_child (widget_class, KgxWindow, primary_menu);
 
   gtk_widget_class_bind_template_callback (widget_class, active_changed);
-  gtk_widget_class_bind_template_callback (widget_class, key_press_event);
 
   gtk_widget_class_bind_template_callback (widget_class, zoom);
   gtk_widget_class_bind_template_callback (widget_class, status_changed);
-  gtk_widget_class_bind_template_callback (widget_class, extra_drag_data_received);
+  gtk_widget_class_bind_template_callback (widget_class, extra_drag_drop);
   gtk_widget_class_bind_template_callback (widget_class, new_tab_cb);
 }
 
@@ -625,11 +598,7 @@ static void
 kgx_window_init (KgxWindow *self)
 {
   g_autoptr (GtkWindowGroup) group = NULL;
-  g_autoptr (GtkTargetList) target_list = NULL;
   g_autoptr (GPropertyAction) pact = NULL;
-  #ifdef IS_DEVEL
-  GtkStyleContext *context;
-  #endif
 
   g_type_ensure (KGX_TYPE_TAB_BUTTON);
   g_type_ensure (KGX_TYPE_TAB_SWITCHER);
@@ -648,8 +617,7 @@ kgx_window_init (KgxWindow *self)
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (pact));
 
   #ifdef IS_DEVEL
-  context = gtk_widget_get_style_context (GTK_WIDGET (self));
-  gtk_style_context_add_class (context, "devel");
+  gtk_widget_add_css_class (GTK_WIDGET (self), "devel");
   #endif
 
   g_object_bind_property_full (self->pages, "title",
@@ -659,11 +627,11 @@ kgx_window_init (KgxWindow *self)
                                NULL, NULL, NULL);
 
   g_object_bind_property (self, "title",
-                          self->header_bar, "title",
+                          self->window_title, "title",
                           G_BINDING_SYNC_CREATE);
 
   g_object_bind_property_full (self->pages, "path",
-                               self->header_bar, "subtitle",
+                               self->window_title, "subtitle",
                                G_BINDING_SYNC_CREATE,
                                update_subtitle,
                                NULL, NULL, NULL);
@@ -678,16 +646,12 @@ kgx_window_init (KgxWindow *self)
                           self->tab_switcher, "view",
                           G_BINDING_SYNC_CREATE);
 
-  target_list = gtk_target_list_new (NULL, 0);
-  gtk_target_list_add_text_targets (target_list, 0);
-
-  hdy_tab_bar_set_extra_drag_dest_targets (HDY_TAB_BAR (self->tab_bar),
-                                           target_list);
+  adw_tab_bar_setup_extra_drop_target (ADW_TAB_BAR (self->tab_bar),
+                                       GDK_ACTION_COPY,
+                                       (GType[1]) { G_TYPE_STRING }, 1);
 
   group = gtk_window_group_new ();
   gtk_window_group_add_window (group, GTK_WINDOW (self));
-
-  kgx_pages_set_shortcut_widget (KGX_PAGES (self->pages), GTK_WIDGET (self));
 
   self->tab_actions = G_ACTION_MAP (g_simple_action_group_new ());
   g_action_map_add_action_entries (self->tab_actions,

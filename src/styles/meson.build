@@ -8,8 +8,6 @@ if sassc.found()
   styles = [
     'styles-light',
     'styles-dark',
-    'styles-hc',
-    'styles-hc-dark',
   ]
 
   style_deps = []
@@ -25,9 +23,6 @@ if sassc.found()
           sassc, sassc_opts, '@INPUT@', '@OUTPUT@',
         ],
         depend_files: files([
-         '_definitions.scss',
-         '_drawing.scss',
-         '_recoloring.scss',
          '_styles.scss',
         ]),
       ),

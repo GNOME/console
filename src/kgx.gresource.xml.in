@@ -12,8 +12,6 @@
     <file compressed="true">kgx-simple-tab.ui</file>
     <file compressed="true">styles-light.css</file>
     <file compressed="true">styles-dark.css</file>
-    <file compressed="true">styles-hc.css</file>
-    <file compressed="true">styles-hc-dark.css</file>
     <file compressed="true">logo.txt</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/status-privileged-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/status-regular-symbolic.svg</file>

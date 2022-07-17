@@ -10,10 +10,12 @@ project('gnome-console', 'c', version: '42.beta',
     'vte:gir=false',
     'vte:vapi=false',
     'libsass:werror=false',
-    'handy:werror=false',
-    'handy:vapi=false',
-    'handy:introspection=disabled',
-    'handy:tests=false',
+    'vte:gtk3=false',
+    'vte:gtk4=true',
+    'adwaita:werror=false',
+    'adwaita:vapi=false',
+    'adwaita:introspection=disabled',
+    'adwaita:tests=false',
   ],
 )
 
@@ -63,11 +65,9 @@ config_h = vcs_tag( input: config_h_in,
                   command: ['git', 'rev-parse', '--short', 'HEAD'],
                  fallback: 'Devel')
 
-gtk_ver = 'GDK_VERSION_3_24'
+gtk_ver = 'GDK_VERSION_4_0'
 glib_ver = 'GLIB_VERSION_2_66'
 add_project_arguments([
-  '-DGDK_VERSION_MIN_REQUIRED=@0@'.format(gtk_ver),
-  '-DGDK_VERSION_MAX_ALLOWED=@0@'.format(gtk_ver),
   '-DGLIB_VERSION_MIN_REQUIRED=@0@'.format(glib_ver),
   '-DGLIB_VERSION_MAX_ALLOWED=@0@'.format(glib_ver),
   '-DG_LOG_USE_STRUCTURED',

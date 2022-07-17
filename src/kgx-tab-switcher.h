@@ -18,19 +18,23 @@
 
 #pragma once
 
-#include <handy.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define KGX_TYPE_TAB_SWITCHER (kgx_tab_switcher_get_type())
 
-G_DECLARE_FINAL_TYPE (KgxTabSwitcher, kgx_tab_switcher, KGX, TAB_SWITCHER, GtkBin)
+G_DECLARE_FINAL_TYPE (KgxTabSwitcher, kgx_tab_switcher, KGX, TAB_SWITCHER, GtkWidget)
 
 GtkWidget   *kgx_tab_switcher_new       (void);
 
-HdyTabView *kgx_tab_switcher_get_view   (KgxTabSwitcher *self);
+GtkWidget  *kgx_tab_switcher_get_child  (KgxTabSwitcher *self);
+void        kgx_tab_switcher_set_child  (KgxTabSwitcher *self,
+                                         GtkWidget      *child);
+
+AdwTabView *kgx_tab_switcher_get_view   (KgxTabSwitcher *self);
 void        kgx_tab_switcher_set_view   (KgxTabSwitcher *self,
-                                         HdyTabView     *view);
+                                         AdwTabView     *view);
 
 void        kgx_tab_switcher_open       (KgxTabSwitcher *self);
 void        kgx_tab_switcher_close      (KgxTabSwitcher *self);
