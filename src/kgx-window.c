@@ -175,17 +175,11 @@ kgx_window_get_property (GObject    *object,
 
 
 static void
-delete_response (GtkWidget *dlg,
-                 int        response,
-                 KgxWindow *self)
+close_response (KgxWindow *self)
 {
-  gtk_window_destroy (GTK_WINDOW (dlg));
+  self->close_anyway = TRUE;
 
-  if (response == GTK_RESPONSE_OK) {
-    self->close_anyway = TRUE;
-
-    gtk_window_destroy (GTK_WINDOW (self));
-  }
+  gtk_window_destroy (GTK_WINDOW (self));
 }
 
 
@@ -206,7 +200,7 @@ kgx_window_close_request (GtkWindow *window)
 
   gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (self));
 
-  g_signal_connect (dlg, "response", G_CALLBACK (delete_response), self);
+  g_signal_connect_swapped (dlg, "response::close", G_CALLBACK (close_response), self);
 
   gtk_widget_show (dlg);
 

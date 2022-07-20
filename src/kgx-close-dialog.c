@@ -47,14 +47,14 @@ kgx_close_dialog_new (KgxCloseDialogContext  context,
   switch (context) {
     case KGX_CONTEXT_WINDOW:
       g_object_set (dialog,
-                    "text", _("Close Window?"),
-                    "secondary-text", _("Some commands are still running, closing this window will kill them and may lead to unexpected outcomes"),
+                    "heading", _("Close Window?"),
+                    "body", _("Some commands are still running, closing this window will kill them and may lead to unexpected outcomes"),
                     NULL);
       break;
     case KGX_CONTEXT_TAB:
       g_object_set (dialog,
-                    "text", _("Close Tab?"),
-                    "secondary-text", _("Some commands are still running, closing this tab will kill them and may lead to unexpected outcomes"),
+                    "heading", _("Close Tab?"),
+                    "body", _("Some commands are still running, closing this tab will kill them and may lead to unexpected outcomes"),
                     NULL);
       break;
     default:

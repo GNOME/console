@@ -459,18 +459,15 @@ create_window (AdwTabView *view,
 
 
 static void
-close_response (GtkWidget  *dlg,
-                int         response,
-                AdwTabPage *page)
+close_response (AdwTabPage *page,
+                const char *response)
 {
   KgxTab *tab = KGX_TAB (adw_tab_page_get_child (page));
   KgxPages *self = kgx_tab_get_pages (tab);
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
 
-  gtk_window_destroy (GTK_WINDOW (dlg));
-
   adw_tab_view_close_page_finish (ADW_TAB_VIEW (priv->view), page,
-                                  response == GTK_RESPONSE_OK);
+                                  !g_strcmp0 (response, "close"));
 }
 
 
@@ -495,7 +492,7 @@ close_page (AdwTabView *view,
 
   gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (root));
 
-  g_signal_connect (dlg, "response", G_CALLBACK (close_response), page);
+  g_signal_connect_swapped (dlg, "response", G_CALLBACK (close_response), page);
 
   gtk_widget_show (dlg);
 

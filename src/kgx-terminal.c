@@ -520,19 +520,11 @@ clear_paste_data (gpointer data)
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (PasteData, clear_paste_data)
 
 static void
-paste_response (GtkDialog *dlg,
-                int        response,
-                PasteData *data)
+paste_response (PasteData *data)
 {
   g_autoptr (PasteData) paste = data;
 
-  if (dlg && GTK_IS_DIALOG (dlg)) {
-    gtk_window_destroy (GTK_WINDOW (dlg));
-  }
-
-  if (response == GTK_RESPONSE_ACCEPT) {
-    vte_terminal_paste_text (VTE_TERMINAL (paste->dest), paste->text);
-  }
+  vte_terminal_paste_text (VTE_TERMINAL (paste->dest), paste->text);
 }
 
 
@@ -828,31 +820,28 @@ kgx_terminal_accept_paste (KgxTerminal *self,
 
   if (g_strstr_len (striped, len, "sudo") != NULL &&
       g_strstr_len (striped, len, "\n") != NULL) {
-    GtkWidget *accept = NULL;
-    GtkWidget *dlg = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
-                                             GTK_DIALOG_MODAL,
-                                             GTK_MESSAGE_QUESTION,
-                                             GTK_BUTTONS_NONE,
-                                             _("You are pasting a command that runs as an administrator"));
-    gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dlg),
-                                              // TRANSLATORS: %s is the command being pasted
-                                              _("Make sure you know what the command does:\n%s"),
-                                              text);
+    GtkWidget *dlg = adw_message_dialog_new (GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
+                                             _("You are pasting a command that runs as an administrator"),
+                                             NULL);
+    adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dlg),
+                                    // TRANSLATORS: %s is the command being pasted
+                                    _("Make sure you know what the command does:\n%s"),
+                                    text);
+    adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dlg),
+                                      "cancel", _("_Cancel"),
+                                      "paste", _("_Paste"),
+                                      NULL);
+    adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dlg),
+                                                "paste",
+                                                ADW_RESPONSE_DESTRUCTIVE);
 
-    g_signal_connect (dlg,
-                      "response",
-                      G_CALLBACK (paste_response),
-                      g_steal_pointer (&paste));
-    gtk_dialog_add_button (GTK_DIALOG (dlg),
-                           _("_Cancel"),
-                           GTK_RESPONSE_DELETE_EVENT);
-    accept = gtk_dialog_add_button (GTK_DIALOG (dlg),
-                                    _("_Paste"),
-                                    GTK_RESPONSE_ACCEPT);
-    gtk_widget_add_css_class (accept, "destructive-action");
+    g_signal_connect_swapped (dlg,
+                              "response::paste",
+                              G_CALLBACK (paste_response),
+                              g_steal_pointer (&paste));
 
     gtk_widget_show (dlg);
   } else {
-    paste_response (NULL, GTK_RESPONSE_ACCEPT, g_steal_pointer (&paste));
+    paste_response (g_steal_pointer (&paste));
   }
 }
