@@ -484,23 +484,25 @@ about_activated (GSimpleAction *action,
                  GVariant      *parameter,
                  gpointer       data)
 {
-  const char *authors[] = { "Zander Brown <zbrown@gnome.org>", NULL };
-  const char *artists[] = { "Tobias Bernard", NULL };
+  const char *developers[] = { "Zander Brown <zbrown@gnome.org>", NULL };
+  const char *designers[] = { "Tobias Bernard", NULL };
   g_autofree char *copyright = NULL;
 
   /* Translators: %s is the year range */
   copyright = g_strdup_printf (_("© %s Zander Brown"), "2019-2021");
 
-  gtk_show_about_dialog (GTK_WINDOW (data),
-                         "authors", authors,
-                         "artists", artists,
+  adw_show_about_window (GTK_WINDOW (data),
+                         "application-name", KGX_DISPLAY_NAME,
+                         "application-icon", KGX_APPLICATION_ID,
+                         "developer-name", _("Zander Brown"),
+                         "issue-url", "https://gitlab.gnome.org/GNOME/console/-/issues/new",
+                         "version", PACKAGE_VERSION,
+                         "developers", developers,
+                         "designers", designers,
                          /* Translators: Credit yourself here */
                          "translator-credits", _("translator-credits"),
                          "copyright", copyright,
                          "license-type", GTK_LICENSE_GPL_3_0,
-                         "logo-icon-name", KGX_APPLICATION_ID,
-                         "program-name", KGX_DISPLAY_NAME,
-                         "version", PACKAGE_VERSION,
                          NULL);
 }
 
