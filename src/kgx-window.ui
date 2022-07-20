@@ -6,6 +6,8 @@
       <item>
         <attribute name="custom">theme-switcher</attribute>
       </item>
+    </section>
+    <section>
       <item>
         <attribute name="custom">zoom-controls</attribute>
       </item>
@@ -61,25 +63,35 @@
                       <object class="GtkPopoverMenu">
                         <property name="menu-model">primary_menu</property>
                         <child type="theme-switcher">
-                          <object class="KgxThemeSwitcher" id="theme_switcher">
-                            <property name="margin-bottom">6</property>
-                          </object>
+                          <object class="KgxThemeSwitcher" id="theme_switcher"/>
                         </child>
                         <child type="zoom-controls">
                           <object class="GtkBox">
                             <property name="orientation">horizontal</property>
                             <property name="homogeneous">True</property>
+                            <property name="margin-top">3</property>
+                            <property name="margin-bottom">3</property>
                             <child>
                               <object class="GtkButton">
                                 <property name="action-name">app.zoom-out</property>
                                 <property name="icon-name">zoom-out-symbolic</property>
                                 <property name="tooltip-text" translatable="yes">Shrink Text</property>
+                                <property name="halign">center</property>
+                                <style>
+                                  <class name="circular"/>
+                                  <class name="flat"/>
+                                </style>
                               </object>
                             </child>
                             <child>
                               <object class="GtkButton">
                                 <property name="action-name">app.zoom-normal</property>
                                 <property name="tooltip-text" translatable="yes">Reset Size</property>
+                                <property name="halign">center</property>
+                                <style>
+                                  <class name="flat"/>
+                                  <class name="numeric"/>
+                                </style>
                                 <child>
                                   <object class="GtkLabel" id="zoom_level">
                                     <property name="width_chars">5</property>
@@ -92,11 +104,13 @@
                                 <property name="action-name">app.zoom-in</property>
                                 <property name="icon-name">zoom-in-symbolic</property>
                                 <property name="tooltip-text" translatable="yes">Enlarge Text</property>
+                                <property name="halign">center</property>
+                                <style>
+                                  <class name="circular"/>
+                                  <class name="flat"/>
+                                </style>
                               </object>
                             </child>
-                            <style>
-                              <class name="linked"/>
-                            </style>
                           </object>
                         </child>
                       </object>
