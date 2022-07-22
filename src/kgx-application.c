@@ -429,7 +429,7 @@ kgx_application_open (GApplication  *app,
 static void
 handle_launch (XdgTerminal1          *xdg_term,
                GDBusMethodInvocation *invocation,
-               const char            *exec,
+               const char *const     *exec,
                const char            *working_directory,
                const char            *desktop_entry,
                const char *const     *env,
@@ -462,20 +462,15 @@ handle_launch (XdgTerminal1          *xdg_term,
 
     title = g_strdup (g_app_info_get_name (G_APP_INFO (entry)));
   } else {
-    g_auto (GStrv) parts = NULL;
-    g_autoptr (GError) error = NULL;
-
-    g_shell_parse_argv (exec, NULL, &parts, &error);
-
     window = g_object_new (KGX_TYPE_WINDOW,
                            "application", self,
                            "can-have-tabs", FALSE,
                            NULL);
 
-    title = g_path_get_basename (parts[0]);
+    title = g_path_get_basename (exec[0]);
   }
 
-  kgx_application_add_terminal (self, window, timezone, working, exec, title);
+  kgx_application_add_terminal (self, window, timezone, working, (GStrv) exec, title);
 
   xdg_terminal1_complete_launch_command (xdg_term, invocation);
 }
