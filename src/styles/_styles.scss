@@ -38,6 +38,11 @@
       @include colored_header(#{'shade(@purple_1, 1.27)'}, #{'shade(@purple_1, 1.35)'});
     }
   }
+
+  vte-terminal {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
 }
 
 // Taken from nautilus
