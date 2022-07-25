@@ -315,24 +315,9 @@ set_watcher (KgxApplication *self, gboolean focused)
 
 
 static void
-update_styles (KgxApplication *self)
-{
-  AdwStyleManager *style_manager = adw_style_manager_get_default ();
-  gboolean dark = adw_style_manager_get_dark (style_manager);
-
-  if (dark) {
-    gtk_css_provider_load_from_resource (self->provider, KGX_APPLICATION_PATH "styles-dark.css");
-  } else {
-    gtk_css_provider_load_from_resource (self->provider, KGX_APPLICATION_PATH "styles-light.css");
-  }
-}
-
-
-static void
 kgx_application_startup (GApplication *app)
 {
   KgxApplication    *self = KGX_APPLICATION (app);
-  AdwStyleManager   *style_manager;
   g_autoptr (GAction) settings_action = NULL;
 
   const char *const new_window_accels[] = { "<shift><primary>n", NULL };
@@ -380,19 +365,6 @@ kgx_application_startup (GApplication *app)
 
   settings_action = g_settings_create_action (self->settings, "theme");
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (settings_action));
-
-  self->provider = gtk_css_provider_new ();
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (self->provider),
-                                              /* Is this stupid? Yes
-                                               * Does it fix vte using the wrong
-                                               * priority for fallback styles? Yes*/
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
-
-  style_manager = adw_style_manager_get_default ();
-  g_signal_connect_swapped (style_manager, "notify::dark", G_CALLBACK (update_styles), self);
-  g_signal_connect_swapped (style_manager, "notify::high-contrast", G_CALLBACK (update_styles), self);
-  update_styles (self);
 
   set_watcher (KGX_APPLICATION (app), TRUE);
 }

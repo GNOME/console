@@ -1,5 +1,3 @@
-subdir('styles')
-
 kgx_sources = [
   'kgx-application.c',
   'kgx-application.h',
@@ -54,8 +52,7 @@ resources_file = configure_file(
 
 kgx_sources += gnome.compile_resources('kgx-resources',
   resources_file,
-  c_name: 'kgx',
-  dependencies: style_deps
+  c_name: 'kgx'
 )
 
 kgx_enums = gnome.mkenums_simple('kgx-enums',

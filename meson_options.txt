@@ -8,11 +8,6 @@ option('tests',
        value: false,
        description: 'Enable tests')
 
-option('sassc',
-       type: 'feature',
-       value: 'auto',
-       description: 'Rebuild styles using sassc')
-
 option('nautilus',
        type: 'feature',
        value: 'auto',

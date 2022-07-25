@@ -1,0 +1,202 @@
+@define-color root_headerbar_bg_color       shade(@red_1, 1.37);
+@define-color root_headerbar_backdrop_color shade(@red_1, 1.45);
+
+@define-color remote_headerbar_bg_color       shade(@purple_1, 1.27);
+@define-color remote_headerbar_backdrop_color shade(@purple_1, 1.35);
+
+.terminal-window {
+  background: transparent;
+}
+
+.terminal-window.root headerbar,
+.terminal-window.root searchbar > revealer > box,
+.terminal-window.root tabbar > revealer > box {
+  background-color: @root_headerbar_bg_color;
+}
+
+.terminal-window.root:backdrop headerbar,
+.terminal-window.root:backdrop searchbar > revealer > box,
+.terminal-window.root:backdrop tabbar > revealer > box {
+  background-color: @root_headerbar_backdrop_color;
+}
+
+.terminal-window.remote headerbar,
+.terminal-window.remote searchbar > revealer > box,
+.terminal-window.remote tabbar > revealer > box {
+  background-color: @remote_headerbar_bg_color;
+}
+
+.terminal-window.remote:backdrop headerbar,
+.terminal-window.remote:backdrop searchbar > revealer > box,
+.terminal-window.remote:backdrop tabbar > revealer > box {
+  background-color: @remote_headerbar_backdrop_color;
+}
+
+.terminal-window vte-terminal {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+/* Taken from nautilus */
+.floating-bar {
+  padding: 6px;
+  background-color: @view_bg_color;
+  color: @view_fg_color;
+  box-shadow: 0 0 0 1px @borders;
+  margin-top: 1px;
+}
+
+.floating-bar:dir(rtl) {
+  border-top-right-radius: 6px;
+  margin-right: 1px;
+}
+
+.floating-bar:dir(ltr) {
+  border-top-left-radius: 6px;
+  margin-left: 1px;
+}
+
+/* Sync to KgxTerminal! */
+.empty-state {
+  background: @view_bg_color;
+  color: alpha(currentColor, .5);
+}
+
+.exit-info {
+  padding: 6px;
+  border-top: 2px solid #1e78e4;
+  background: rgba(13, 54, 104, 0.96);
+  color: #ffffff;
+}
+
+.error .exit-info {
+  border-top: 2px solid #ed333b;
+  background: rgba(104, 13, 13, 0.96);
+}
+
+box.tab:drop(active) {
+  outline: 1px solid @accent_bg_color;
+  outline-offset: -1px;
+}
+
+window:not(.tiled)
+      :not(.tiled-top)
+      :not(.tiled-bottom)
+      :not(.tiled-left)
+      :not(.tiled-right)
+      :not(.fullscreen)
+      :not(.maximized) box.tab:drop(active) {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.process-list row .header {
+  min-height: 0;
+}
+
+.process-list row .title {
+  font-family: monospace;
+}
+
+.tab-button label {
+  font-weight: 800;
+  font-size: 8pt;
+}
+
+.tab-button label.small {
+  font-size: 6pt;
+}
+
+.tab-switcher {
+  min-height: 180px;
+}
+
+.tab-switcher list {
+  padding-top: 48px;
+  padding-bottom: 84px;
+  background-color: @popover_bg_color;
+  color: @popover_fg_color;
+}
+
+.tab-switcher list row {
+  min-height: 40px;
+  padding: 3px;
+}
+
+.tab-switcher list row:dir(ltr) { padding-left: 11px; }
+.tab-switcher list row:dir(rtl) { padding-right: 11px; }
+
+.tab-switcher list row.needs-attention {
+  color: @accent_color;
+}
+
+.tab-switcher list row .close-btn,
+.tab-switcher list row .indicator-btn {
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 99px;
+  padding: 0;
+}
+
+.tab-switcher .collapse-button {
+  border-radius: 99px;
+  padding: 6px 30px;
+  margin: 6px;
+}
+
+.tab-switcher .new-tab-button {
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 100%;
+  padding: 0;
+  margin: 18px;
+}
+
+themeswitcher {
+  padding: 6px;
+}
+
+themeswitcher .check {
+  background: @accent_bg_color;
+  color: white;
+  padding: 2px;
+  border-radius: 17px;
+  margin: 3px;
+}
+
+/* Adapted from https://gitlab.gnome.org/GNOME/gnome-text-editor/-/blob/bf8c0c249f06a0be69e65aed3b786ba02a9f999e/src/TextEditor.css#L51 */
+
+themeswitcher checkbutton {
+  outline-offset: 1px;
+  transition: none;
+}
+
+themeswitcher checkbutton radio {
+  -gtk-icon-source: none;
+  background: none;
+  padding: 12px;
+  min-height: 24px;
+  min-width: 24px;
+  border: none;
+  outline-color: currentColor;
+  transition: none;
+  box-shadow: inset 0 0 0 1px @borders;
+}
+
+themeswitcher checkbutton radio:checked {
+  box-shadow: inset 0 0 0 2px @accent_bg_color;
+}
+
+themeswitcher checkbutton.system radio {
+  background: linear-gradient(-45deg, #1e1e1e 49.99%, white 50.01%);
+}
+
+themeswitcher checkbutton.light radio {
+  color: alpha(black, .8);
+  background-color: white;
+}
+
+themeswitcher checkbutton.dark radio {
+  color: white;
+  background-color: #1e1e1e;
+}
