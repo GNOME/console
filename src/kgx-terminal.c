@@ -148,7 +148,7 @@ update_terminal_colors (KgxTerminal *self)
     case KGX_THEME_AUTO:
     default:
       fg = (GdkRGBA) { 1.0, 1.0, 1.0, 1.0};
-      bg = (GdkRGBA) { 0.05, 0.05, 0.05, 0.96 };
+      bg = (GdkRGBA) { 0.12, 0.12, 0.12, 0.96 };
       break;
   }
 

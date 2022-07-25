@@ -73,12 +73,10 @@
   @if $variant == 'light' {
     background: white;
   } @else {
-    $bg: rgb(0.05 * 255, 0.05 * 255, 0.05 * 255);
-
-    background: transparentize($bg, 0.04);
+    background: gtkalpha(themecolor(view_bg_color), 0.96);
 
     window.opaque & {
-      background: $bg;
+      background: themecolor(view_bg_color);
     }
   }
 
