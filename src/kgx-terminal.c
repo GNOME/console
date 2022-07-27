@@ -88,7 +88,6 @@ kgx_terminal_dispose (GObject *object)
 {
   KgxTerminal *self = KGX_TERMINAL (object);
 
-  g_clear_object (&self->actions);
   g_clear_pointer (&self->current_url, g_free);
   g_clear_pointer (&self->popup_menu, gtk_widget_unparent);
 
@@ -293,16 +292,13 @@ context_menu (KgxTerminal *self,
               double       y,
               gboolean     touch)
 {
-  GAction *act;
   GtkApplication *app;
   gboolean value;
 
   value = have_url_under_pointer (self, x, y);
 
-  act = g_action_map_lookup_action (G_ACTION_MAP (self->actions), "open-link");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
-  act = g_action_map_lookup_action (G_ACTION_MAP (self->actions), "copy-link");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
+  gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.open-link", value);
+  gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.copy-link", value);
 
   app = GTK_APPLICATION (g_application_get_default ());
 
@@ -330,11 +326,9 @@ context_menu (KgxTerminal *self,
 
 
 static void
-menu_popup_activated (GtkWidget  *self,
-                      const char *action_name,
-                      GVariant   *parameters)
+menu_popup_activated (KgxTerminal *self)
 {
-  context_menu (KGX_TERMINAL (self), 1, 1, FALSE);
+  context_menu (self, 1, 1, FALSE);
 }
 
 
@@ -344,6 +338,121 @@ open_link (KgxTerminal *self, guint32 timestamp)
   gtk_show_uri (GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
                 self->current_url,
                 timestamp);
+}
+
+
+static void
+open_link_activated (KgxTerminal *self)
+{
+  open_link (self, GDK_CURRENT_TIME);
+}
+
+
+static void
+copy_link_activated (KgxTerminal *self)
+{
+  GdkClipboard *cb = gtk_widget_get_clipboard (GTK_WIDGET (self));
+
+  gdk_clipboard_set_text (cb, self->current_url);
+}
+
+static void
+copy_activated (KgxTerminal *self)
+{
+  GdkClipboard *clipboard = gtk_widget_get_clipboard (GTK_WIDGET (self));
+  g_autofree char *text = vte_terminal_get_text_selected (VTE_TERMINAL (self),
+                                                          VTE_FORMAT_TEXT);
+  gdk_clipboard_set_text (clipboard, text);
+}
+
+
+static void
+got_text (GdkClipboard *cb,
+          GAsyncResult *result,
+          KgxTerminal  *self)
+{
+  g_autofree char *text = NULL;
+  g_autoptr (GError) error = NULL;
+
+  /* Get the resulting text of the read operation */
+  text = gdk_clipboard_read_text_finish (cb, result, &error);
+
+  if (error) {
+    g_critical ("Couldn't paste text: %s\n", error->message);
+    return;
+  }
+
+  kgx_terminal_accept_paste (self, text);
+}
+
+
+static void
+paste_activated (KgxTerminal *self)
+{
+  GdkClipboard *cb = gtk_widget_get_clipboard (GTK_WIDGET (self));
+
+  gdk_clipboard_read_text_async (cb, NULL, (GAsyncReadyCallback) got_text, self);
+}
+
+
+static void
+select_all_activated (KgxTerminal *self)
+{
+  vte_terminal_select_all (VTE_TERMINAL (self));
+}
+
+
+static void
+show_in_files_activated (KgxTerminal *self)
+{
+  g_autoptr (GDBusProxy) proxy = NULL;
+  g_autoptr (GVariant) retval = NULL;
+  g_autoptr (GVariantBuilder) builder = NULL;
+  g_autoptr (GError) error = NULL;
+  const char *uri = NULL;
+  const char *method;
+
+  uri = vte_terminal_get_current_file_uri (VTE_TERMINAL (self));
+  method = "ShowItems";
+
+  if (uri == NULL) {
+    uri = vte_terminal_get_current_directory_uri (VTE_TERMINAL (self));
+    method = "ShowFolders";
+  }
+
+  if (uri == NULL) {
+    g_warning ("win.show-in-files: no file");
+    return;
+  }
+
+  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                         G_DBUS_PROXY_FLAGS_NONE,
+                                         NULL,
+                                         "org.freedesktop.FileManager1",
+                                         "/org/freedesktop/FileManager1",
+                                         "org.freedesktop.FileManager1",
+                                         NULL, &error);
+
+  if (!proxy) {
+    g_warning ("win.show-in-files: D-Bus connect failed %s", error->message);
+    return;
+  }
+
+  builder = g_variant_builder_new (G_VARIANT_TYPE ("as"));
+  g_variant_builder_add (builder, "s", uri);
+
+  retval = g_dbus_proxy_call_sync (proxy,
+                                   method,
+                                   g_variant_new ("(ass)",
+                                                  builder,
+                                                  ""),
+                                   G_DBUS_CALL_FLAGS_NONE,
+                                   -1, NULL, &error);
+
+  if (!retval) {
+    g_warning ("win.show-in-files: D-Bus call failed %s", error->message);
+    return;
+  }
 }
 
 
@@ -447,15 +556,34 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
                                         G_TYPE_UINT,
                                         G_TYPE_UINT);
 
-  /**
-   * KgxTerminal|menu.popup:
-   *
-   * Opens the context menu.
-   */
   gtk_widget_class_install_action (widget_class,
                                    "menu.popup",
                                    NULL,
-                                   menu_popup_activated);
+                                   (GtkWidgetActionActivateFunc) menu_popup_activated);
+  gtk_widget_class_install_action (widget_class,
+                                   "term.open-link",
+                                   NULL,
+                                   (GtkWidgetActionActivateFunc) open_link_activated);
+  gtk_widget_class_install_action (widget_class,
+                                   "term.copy-link",
+                                   NULL,
+                                   (GtkWidgetActionActivateFunc) copy_link_activated);
+  gtk_widget_class_install_action (widget_class,
+                                   "term.copy",
+                                   NULL,
+                                   (GtkWidgetActionActivateFunc) copy_activated);
+  gtk_widget_class_install_action (widget_class,
+                                   "term.paste",
+                                   NULL,
+                                   (GtkWidgetActionActivateFunc) paste_activated);
+  gtk_widget_class_install_action (widget_class,
+                                   "term.select-all",
+                                   NULL,
+                                   (GtkWidgetActionActivateFunc) select_all_activated);
+  gtk_widget_class_install_action (widget_class,
+                                   "term.show-in-files",
+                                   NULL,
+                                   (GtkWidgetActionActivateFunc) show_in_files_activated);
 
   gtk_widget_class_add_binding_action (widget_class,
                                        GDK_KEY_F10, GDK_SHIFT_MASK,
@@ -465,38 +593,6 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
                                        GDK_KEY_Menu, 0,
                                        "menu.popup",
                                        NULL);
-}
-
-
-static void
-open_link_activated (GSimpleAction *action,
-                     GVariant      *parameter,
-                     gpointer       data)
-{
-  open_link (KGX_TERMINAL (data), GDK_CURRENT_TIME);
-}
-
-
-static void
-copy_link_activated (GSimpleAction *action,
-                     GVariant      *parameter,
-                     gpointer       data)
-{
-  KgxTerminal *self = KGX_TERMINAL (data);
-  GdkClipboard *cb = gtk_widget_get_clipboard (GTK_WIDGET (self));
-
-  gdk_clipboard_set_text (cb, self->current_url);
-}
-
-static void
-copy_activated (GSimpleAction *action,
-                GVariant      *parameter,
-                gpointer       data)
-{
-  GdkClipboard *clipboard = gtk_widget_get_clipboard (GTK_WIDGET (data));
-  g_autofree char *text = vte_terminal_get_text_selected (VTE_TERMINAL (data),
-                                                          VTE_FORMAT_TEXT);
-  gdk_clipboard_set_text (clipboard, text);
 }
 
 
@@ -526,112 +622,6 @@ paste_response (PasteData *data)
 
   vte_terminal_paste_text (VTE_TERMINAL (paste->dest), paste->text);
 }
-
-
-static void
-got_text (GdkClipboard *cb,
-          GAsyncResult *result,
-          KgxTerminal  *self)
-{
-  g_autofree char *text = NULL;
-  g_autoptr (GError) error = NULL;
-
-  /* Get the resulting text of the read operation */
-  text = gdk_clipboard_read_text_finish (cb, result, &error);
-
-  if (error) {
-    g_critical ("Couldn't paste text: %s\n", error->message);
-    return;
-  }
-
-  kgx_terminal_accept_paste (self, text);
-}
-
-
-static void
-paste_activated (GSimpleAction *action,
-                 GVariant      *parameter,
-                 gpointer       data)
-{
-  GdkClipboard *cb = gtk_widget_get_clipboard (GTK_WIDGET (data));
-
-  gdk_clipboard_read_text_async (cb, NULL, (GAsyncReadyCallback) got_text, data);
-}
-
-static void
-select_all_activated (GSimpleAction *action,
-                      GVariant      *parameter,
-                      gpointer       data)
-{
-  vte_terminal_select_all (VTE_TERMINAL (data));
-}
-
-
-static void
-show_in_files_activated (GSimpleAction *action,
-                         GVariant      *parameter,
-                         gpointer       data)
-{
-  KgxTerminal *self = KGX_TERMINAL (data);
-  g_autoptr (GDBusProxy) proxy = NULL;
-  g_autoptr (GVariant) retval = NULL;
-  g_autoptr (GVariantBuilder) builder = NULL;
-  g_autoptr (GError) error = NULL;
-  const char *uri = NULL;
-  const char *method;
-
-  uri = vte_terminal_get_current_file_uri (VTE_TERMINAL (self));
-  method = "ShowItems";
-
-  if (uri == NULL) {
-    uri = vte_terminal_get_current_directory_uri (VTE_TERMINAL (self));
-    method = "ShowFolders";
-  }
-
-  if (uri == NULL) {
-    g_warning ("win.show-in-files: no file");
-    return;
-  }
-
-  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-                                         G_DBUS_PROXY_FLAGS_NONE,
-                                         NULL,
-                                         "org.freedesktop.FileManager1",
-                                         "/org/freedesktop/FileManager1",
-                                         "org.freedesktop.FileManager1",
-                                         NULL, &error);
-
-  if (!proxy) {
-    g_warning ("win.show-in-files: D-Bus connect failed %s", error->message);
-    return;
-  }
-
-  builder = g_variant_builder_new (G_VARIANT_TYPE ("as"));
-  g_variant_builder_add (builder, "s", uri);
-
-  retval = g_dbus_proxy_call_sync (proxy,
-                                   method,
-                                   g_variant_new ("(ass)",
-                                                  builder,
-                                                  ""),
-                                   G_DBUS_CALL_FLAGS_NONE,
-                                   -1, NULL, &error);
-
-  if (!retval) {
-    g_warning ("win.show-in-files: D-Bus call failed %s", error->message);
-    return;
-  }
-}
-
-
-static GActionEntry term_entries[] = {
-  { "open-link", open_link_activated, NULL, NULL, NULL },
-  { "copy-link", copy_link_activated, NULL, NULL, NULL },
-  { "copy", copy_activated, NULL, NULL, NULL },
-  { "paste", paste_activated, NULL, NULL, NULL },
-  { "select-all", select_all_activated, NULL, NULL, NULL },
-  { "show-in-files", show_in_files_activated, NULL, NULL, NULL },
-};
 
 
 static void
@@ -691,27 +681,20 @@ long_pressed (GtkGestureLongPress *gesture,
 static void
 selection_changed (KgxTerminal *self)
 {
-  GAction *act;
-
-  act = g_action_map_lookup_action (self->actions, "copy");
-
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act),
-                               vte_terminal_get_has_selection (VTE_TERMINAL (self)));
+  gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.copy",
+                                 vte_terminal_get_has_selection (VTE_TERMINAL (self)));
 }
 
 
 static void
 location_changed (KgxTerminal *self)
 {
-  GAction *act;
   gboolean value;
-
-  act = g_action_map_lookup_action (self->actions, "show-in-files");
 
   value = vte_terminal_get_current_file_uri (VTE_TERMINAL (self)) ||
             vte_terminal_get_current_directory_uri (VTE_TERMINAL (self));
 
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), value);
+  gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.show-in-file", value);
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_PATH]);
 }
@@ -729,17 +712,7 @@ dark_changed (KgxTerminal *self)
 static void
 kgx_terminal_init (KgxTerminal *self)
 {
-  GAction *act;
   GtkGesture *gesture;
-
-  self->actions = G_ACTION_MAP (g_simple_action_group_new ());
-  g_action_map_add_action_entries (self->actions,
-                                   term_entries,
-                                   G_N_ELEMENTS (term_entries),
-                                   self);
-  gtk_widget_insert_action_group (GTK_WIDGET (self),
-                                  "term",
-                                  G_ACTION_GROUP (self->actions));
 
   gesture = gtk_gesture_click_new ();
   gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (gesture), 0);
@@ -751,14 +724,10 @@ kgx_terminal_init (KgxTerminal *self)
   g_signal_connect (gesture, "pressed", G_CALLBACK (long_pressed), self);
   gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (gesture));
 
-  act = g_action_map_lookup_action (self->actions, "open-link");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
-  act = g_action_map_lookup_action (self->actions, "copy-link");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
-  act = g_action_map_lookup_action (self->actions, "copy");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
-  act = g_action_map_lookup_action (self->actions, "show-in-files");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (act), FALSE);
+  gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.open-link", FALSE);
+  gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.copy-link", FALSE);
+  gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.copy", FALSE);
+  gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.show-in-files", FALSE);
 
   vte_terminal_set_mouse_autohide (VTE_TERMINAL (self), TRUE);
   vte_terminal_search_set_wrap_around (VTE_TERMINAL (self), TRUE);

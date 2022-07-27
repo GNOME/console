@@ -100,7 +100,6 @@ struct _KgxTerminal {
   /*< public >*/
   KgxTheme    theme;
   gboolean    opaque;
-  GActionMap *actions;
   GtkWidget  *popup_menu;
 
   /* Hyperlinks */
