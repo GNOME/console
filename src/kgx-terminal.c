@@ -713,6 +713,8 @@ static void
 kgx_terminal_init (KgxTerminal *self)
 {
   GtkGesture *gesture;
+  GtkEventController *controller;
+  GtkShortcut *shortcut;
 
   gesture = gtk_gesture_click_new ();
   gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (gesture), 0);
@@ -723,6 +725,18 @@ kgx_terminal_init (KgxTerminal *self)
   gtk_gesture_single_set_touch_only (GTK_GESTURE_SINGLE (gesture), TRUE);
   g_signal_connect (gesture, "pressed", G_CALLBACK (long_pressed), self);
   gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (gesture));
+
+  controller = gtk_shortcut_controller_new ();
+  gtk_event_controller_set_propagation_phase (controller, GTK_PHASE_CAPTURE);
+  gtk_widget_add_controller (GTK_WIDGET (self), controller);
+
+  shortcut = gtk_shortcut_new (gtk_keyval_trigger_new (GDK_KEY_C, GDK_CONTROL_MASK | GDK_SHIFT_MASK),
+                               gtk_named_action_new ("term.copy"));
+  gtk_shortcut_controller_add_shortcut (GTK_SHORTCUT_CONTROLLER (controller), shortcut);
+
+  shortcut = gtk_shortcut_new (gtk_keyval_trigger_new (GDK_KEY_V, GDK_CONTROL_MASK | GDK_SHIFT_MASK),
+                               gtk_named_action_new ("term.paste"));
+  gtk_shortcut_controller_add_shortcut (GTK_SHORTCUT_CONTROLLER (controller), shortcut);
 
   gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.open-link", FALSE);
   gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.copy-link", FALSE);
