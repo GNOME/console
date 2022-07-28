@@ -40,11 +40,7 @@ G_BEGIN_DECLS
  */
 #define MONOSPACE_FONT_KEY_NAME "monospace-font-name"
 
-#ifdef IS_DEVEL
-#define KGX_DISPLAY_NAME _("Console (Development)")
-#else
 #define KGX_DISPLAY_NAME _("Console")
-#endif
 
 #define KGX_TYPE_APPLICATION (kgx_application_get_type())
 
