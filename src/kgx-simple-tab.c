@@ -42,6 +42,7 @@ struct _KgxSimpleTab {
 
   char         *initial_work_dir;
   GStrv         command;
+  GStrv         environ;
 
   GtkWidget    *terminal;
   GCancellable *spawn_cancellable;
@@ -54,6 +55,7 @@ enum {
   PROP_0,
   PROP_INITIAL_WORK_DIR,
   PROP_COMMAND,
+  PROP_ENVIRON,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -66,6 +68,7 @@ kgx_simple_tab_dispose (GObject *object)
 
   g_clear_pointer (&self->initial_work_dir, g_free);
   g_clear_pointer (&self->command, g_strfreev);
+  g_clear_pointer (&self->environ, g_strfreev);
 
   g_cancellable_cancel (self->spawn_cancellable);
   g_clear_object (&self->spawn_cancellable);
@@ -89,6 +92,9 @@ kgx_simple_tab_set_property (GObject      *object,
     case PROP_COMMAND:
       self->command = g_value_dup_boxed (value);
       break;
+    case PROP_ENVIRON:
+      self->environ = g_value_dup_boxed (value);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -110,6 +116,9 @@ kgx_simple_tab_get_property (GObject    *object,
       break;
     case PROP_COMMAND:
       g_value_set_boxed (value, self->command);
+      break;
+    case PROP_ENVIRON:
+      g_value_set_boxed (value, self->environ);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -269,6 +278,7 @@ kgx_simple_tab_start (KgxTab              *page,
     return;
   }
 
+  env = g_strdupv (self->environ);
   env = g_environ_setenv (env, "TERM", "xterm-256color", TRUE);
   env = g_environ_setenv (env, "TERM_PROGRAM", "kgx", TRUE);
   env = g_environ_setenv (env, "TERM_PROGRAM_VERSION", PACKAGE_VERSION, TRUE);
@@ -356,6 +366,11 @@ kgx_simple_tab_class_init (KgxSimpleTabClass *klass)
    */
   pspecs[PROP_COMMAND] =
     g_param_spec_boxed ("command", NULL, NULL,
+                        G_TYPE_STRV,
+                        G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
+  pspecs[PROP_ENVIRON] =
+    g_param_spec_boxed ("environ", NULL, NULL,
                         G_TYPE_STRV,
                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
