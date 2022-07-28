@@ -25,11 +25,11 @@
 #include "kgx-nautilus-menu-item.h"
 
 
-static void kgx_nautilus_menu_provider_iface_init (NautilusMenuProviderIface *iface);
+static void kgx_nautilus_menu_provider_interface_init (NautilusMenuProviderInterface *interface);
 
 G_DEFINE_DYNAMIC_TYPE_EXTENDED (KgxNautilus, kgx_nautilus, G_TYPE_OBJECT, 0,
                                 G_IMPLEMENT_INTERFACE_DYNAMIC (NAUTILUS_TYPE_MENU_PROVIDER,
-                                                               kgx_nautilus_menu_provider_iface_init))
+                                                               kgx_nautilus_menu_provider_interface_init))
 
 
 static void
@@ -94,10 +94,10 @@ kgx_nautilus_get_file_items (NautilusMenuProvider *provider,
 
 
 static void
-kgx_nautilus_menu_provider_iface_init (NautilusMenuProviderIface *iface)
+kgx_nautilus_menu_provider_interface_init (NautilusMenuProviderInterface *interface)
 {
-  iface->get_background_items = kgx_nautilus_get_background_items;
-  iface->get_file_items = kgx_nautilus_get_file_items;
+  interface->get_background_items = kgx_nautilus_get_background_items;
+  interface->get_file_items = kgx_nautilus_get_file_items;
 }
 
 
