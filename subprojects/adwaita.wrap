@@ -2,3 +2,6 @@
 directory=adwaita
 url=https://gitlab.gnome.org/GNOME/libadwaita.git
 revision=origin/main
+
+[provide]
+libadwaita-1=libadwaita_dep

@@ -34,8 +34,8 @@ kgx_sources = [
 kgx_deps = [
   dependency('gio-2.0', version: '>= 2.66'),
   dependency('gtk4'),
-  dependency('libadwaita-1', version: '>= 1.2.alpha', fallback: ['adwaita', 'libadwaita_dep']),
-  dependency('vte-2.91-gtk4', version: '>= 0.69.91', fallback: ['vte', 'libvte_gtk4_dep']),
+  dependency('libadwaita-1', version: '>= 1.2.alpha'),
+  dependency('vte-2.91-gtk4', version: '>= 0.69.91'),
   dependency('libgtop-2.0'),
   dependency('libpcre2-8', version: '>= 10.32'),
   dependency('gsettings-desktop-schemas'),

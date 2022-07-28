@@ -2,3 +2,6 @@
 directory=vte
 url=https://gitlab.gnome.org/GNOME/vte
 revision=origin/master
+
+[provide]
+vte-2.91-gtk4=libvte_gtk4_dep
