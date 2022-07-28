@@ -405,6 +405,8 @@ handle_launch (XdgTerminal1          *xdg_term,
   KgxWindow *window = NULL;
   guint32 timezone = GDK_CURRENT_TIME;
 
+  g_debug ("Got launch");
+
   if (working_directory) {
     working = g_file_new_for_path (working_directory);
   }
@@ -430,12 +432,17 @@ handle_launch (XdgTerminal1          *xdg_term,
                            "can-have-tabs", FALSE,
                            NULL);
 
+    // TODO: Maybe discount things like sh, python?
     title = g_path_get_basename (exec[0]);
   }
 
   kgx_application_add_terminal (self, window, timezone, working, (GStrv) exec, title);
 
-  xdg_terminal1_complete_launch_command (xdg_term, invocation);
+  g_debug ("…complete launch");
+
+  xdg_terminal1_complete_launch_command (xdg_term, g_object_ref (invocation));
+
+  g_debug ("done");
 }
 
 
