@@ -21,5 +21,11 @@
     <key name="scrollback-lines" type="x">
       <default>10000</default>
     </key>
+    <key name="window-width" type="i">
+      <default>-1</default>
+    </key>
+    <key name="window-height" type="i">
+      <default>-1</default>
+    </key>
   </schema>
 </schemalist>

@@ -81,6 +81,24 @@ zoomed (GObject *object, GParamSpec *pspec, gpointer data)
 
 
 static void
+save_window_size (KgxWindow *self)
+{
+  GtkApplication *application;
+  int width, height;
+
+  if (!gtk_window_is_active (GTK_WINDOW (self))) {
+    return;
+  }
+
+  application = gtk_window_get_application (GTK_WINDOW (self));
+
+  gtk_window_get_default_size (GTK_WINDOW (self), &width, &height);
+  kgx_application_set_window_size (KGX_APPLICATION (application), width,
+                                   height);
+}
+
+
+static void
 kgx_window_constructed (GObject *object)
 {
   KgxWindow       *self = KGX_WINDOW (object);
@@ -180,6 +198,8 @@ close_response (KgxWindow *self)
 {
   self->close_anyway = TRUE;
 
+  save_window_size (self);
+
   gtk_window_destroy (GTK_WINDOW (self));
 }
 
@@ -194,6 +214,7 @@ kgx_window_close_request (GtkWindow *window)
   children = kgx_pages_get_children (KGX_PAGES (self->pages));
 
   if (children->len < 1 || self->close_anyway) {
+    save_window_size (self);
     return FALSE; // Aka no, I don’t want to block closing
   }
 

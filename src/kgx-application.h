@@ -84,5 +84,13 @@ KgxTab *              kgx_application_add_terminal    (KgxApplication *self,
                                                        GFile          *working_directory,
                                                        GStrv           command,
                                                        const char     *title);
+KgxWindow            *kgx_application_new_window      (KgxApplication *self);
+void                  kgx_application_get_window_size (KgxApplication *self,
+                                                       int            *width,
+                                                       int            *height);
+void                  kgx_application_set_window_size (KgxApplication *self,
+                                                       int             width,
+                                                       int             height);
+
 
 G_END_DECLS

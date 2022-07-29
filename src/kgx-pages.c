@@ -26,6 +26,7 @@
 
 #include <glib/gi18n.h>
 
+#include "kgx-application.h"
 #include "kgx-close-dialog.h"
 #include "kgx-config.h"
 #include "kgx-pages.h"
@@ -428,18 +429,11 @@ create_window (AdwTabView *view,
   GtkApplication *app;
   KgxPages *new_pages;
   KgxPagesPrivate *priv;
-  int width, height;
 
   window = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
   app = gtk_window_get_application (window);
 
-  gtk_window_get_default_size (GTK_WINDOW (window), &width, &height);
-
-  new_window = g_object_new (KGX_TYPE_WINDOW,
-                             "application", app,
-                             "default-width", width,
-                             "default-height", height,
-                             NULL);
+  new_window = kgx_application_new_window (KGX_APPLICATION (app));
 
   new_pages = kgx_window_get_pages (new_window);
   priv = kgx_pages_get_instance_private (new_pages);

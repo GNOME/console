@@ -952,9 +952,7 @@ kgx_application_add_terminal (KgxApplication *self,
   if (existing_window) {
     window = GTK_WINDOW (existing_window);
   } else {
-    window = g_object_new (KGX_TYPE_WINDOW,
-                           "application", self,
-                           NULL);
+    window = GTK_WINDOW (kgx_application_new_window (self));
   }
 
   pages = kgx_window_get_pages (KGX_WINDOW (window));
@@ -965,4 +963,67 @@ kgx_application_add_terminal (KgxApplication *self,
   gtk_window_present_with_time (window, timestamp);
 
   return KGX_TAB (tab);
+}
+
+
+/**
+ * kgx_application_new_window:
+ * @self: an application
+ *
+ * Creates a new #KgxWindow.
+ *
+ * Returns: the newly created #KgxWindow
+ */
+KgxWindow *
+kgx_application_new_window (KgxApplication *self)
+{
+  GtkWindow *active_window;
+  int width, height;
+
+  g_return_val_if_fail (KGX_IS_APPLICATION (self), NULL);
+
+  active_window = gtk_application_get_active_window (GTK_APPLICATION (self));
+  if (active_window) {
+    gtk_window_get_default_size (active_window, &width, &height);
+  } else {
+    kgx_application_get_window_size (self, &width, &height);
+  }
+
+  g_debug ("Loading window geometry: %i×%i", width, height);
+
+  return g_object_new (KGX_TYPE_WINDOW,
+                       "application", self,
+                       "default-width", width,
+                       "default-height", height,
+                       NULL);
+}
+
+
+void
+kgx_application_get_window_size (KgxApplication *self,
+                                 int            *width,
+                                 int            *height)
+{
+  g_return_if_fail (KGX_IS_APPLICATION (self));
+
+  if (width) {
+    *width = g_settings_get_int (self->settings, "window-width");
+  }
+  if (height) {
+    *height = g_settings_get_int (self->settings, "window-height");
+  }
+}
+
+
+void
+kgx_application_set_window_size (KgxApplication *self,
+                                 int             width,
+                                 int             height)
+{
+  g_return_if_fail (KGX_IS_APPLICATION (self));
+
+  g_debug ("Saving window geometry: %i×%i", width, height);
+
+  g_settings_set_int (self->settings, "window-width", width);
+  g_settings_set_int (self->settings, "window-height", height);
 }
