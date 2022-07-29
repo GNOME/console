@@ -230,7 +230,7 @@ kgx_application_startup (GApplication *app)
   G_APPLICATION_CLASS (kgx_application_parent_class)->startup (app);
 
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
-                                         "win.new-window", new_window_accels);
+                                         "app.new-window", new_window_accels);
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "win.new-tab", new_tab_accels);
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
@@ -681,8 +681,15 @@ new_window_activated (GSimpleAction *action,
 {
   KgxApplication *self = KGX_APPLICATION (data);
   guint32 timestamp = GDK_CURRENT_TIME;
+  GtkWindow *active_window;
+  g_autoptr (GFile) dir = NULL;
 
-  kgx_application_add_terminal (self, NULL, timestamp, NULL, NULL, NULL);
+  active_window = gtk_application_get_active_window (GTK_APPLICATION (self));
+  if (active_window) {
+    dir = kgx_window_get_working_dir (KGX_WINDOW (active_window));
+  }
+
+  kgx_application_add_terminal (self, NULL, timestamp, dir, NULL, NULL);
 }
 
 

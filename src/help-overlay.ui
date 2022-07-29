@@ -12,7 +12,7 @@
             <property name="title" translatable="yes" context="shortcut window">Application</property>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="action-name">win.new-window</property>
+                <property name="action-name">app.new-window</property>
                 <property name="title" translatable="yes" context="shortcut window">New Window</property>
               </object>
             </child>

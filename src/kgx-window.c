@@ -341,28 +341,6 @@ kgx_window_class_init (KgxWindowClass *klass)
 
 
 static void
-new_activated (GSimpleAction *action,
-               GVariant      *parameter,
-               gpointer       data)
-{
-  KgxWindow *self = data;
-  guint32 timestamp = GDK_CURRENT_TIME;
-  GtkApplication *application = NULL;
-  g_autoptr (GFile) dir = NULL;
-
-  application = gtk_window_get_application (GTK_WINDOW (self));
-  dir = kgx_window_get_working_dir (KGX_WINDOW (data));
-
-  kgx_application_add_terminal (KGX_APPLICATION (application),
-                                NULL,
-                                timestamp,
-                                dir,
-                                NULL,
-                                NULL);
-}
-
-
-static void
 new_tab_activated (GSimpleAction *action,
                    GVariant      *parameter,
                    gpointer       data)
@@ -446,7 +424,6 @@ tab_switcher_activated (GSimpleAction *action,
 
 
 static GActionEntry win_entries[] = {
-  { "new-window", new_activated, NULL, NULL, NULL },
   { "new-tab", new_tab_activated, NULL, NULL, NULL },
   { "close-tab", close_tab_activated, NULL, NULL, NULL },
   { "about", about_activated, NULL, NULL, NULL },
