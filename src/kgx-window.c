@@ -221,15 +221,6 @@ active_changed (GObject *object, GParamSpec *pspec, gpointer data)
 
 
 static void
-size_changed (KgxWindow  *self)
-{
-  gtk_window_get_default_size (GTK_WINDOW (self),
-                               &self->current_width,
-                               &self->current_height);
-}
-
-
-static void
 zoom (KgxPages  *pages,
       KgxZoom    dir,
       KgxWindow *self)
@@ -341,7 +332,6 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, primary_menu);
 
   gtk_widget_class_bind_template_callback (widget_class, active_changed);
-  gtk_widget_class_bind_template_callback (widget_class, size_changed);
 
   gtk_widget_class_bind_template_callback (widget_class, zoom);
   gtk_widget_class_bind_template_callback (widget_class, status_changed);
@@ -629,18 +619,4 @@ kgx_window_get_pages (KgxWindow *self)
   g_return_val_if_fail (KGX_IS_WINDOW (self), NULL);
 
   return KGX_PAGES (self->pages);
-}
-
-
-void
-kgx_window_get_size (KgxWindow *self,
-                     int       *width,
-                     int       *height)
-{
-  g_return_if_fail (KGX_IS_WINDOW (self));
-
-  if (width)
-    *width = self->current_width;
-  if (height)
-    *height = self->current_height;
 }

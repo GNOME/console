@@ -433,7 +433,7 @@ create_window (AdwTabView *view,
   window = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
   app = gtk_window_get_application (window);
 
-  kgx_window_get_size (KGX_WINDOW (window), &width, &height);
+  gtk_window_get_default_size (GTK_WINDOW (window), &width, &height);
 
   new_window = g_object_new (KGX_TYPE_WINDOW,
                              "application", app,

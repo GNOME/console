@@ -97,9 +97,6 @@ struct _KgxWindow
   GtkWidget            *pages;
   GMenu                *primary_menu;
 
-  int                   current_width;
-  int                   current_height;
-
   GActionMap           *tab_actions;
 };
 
@@ -109,9 +106,5 @@ GFile      *kgx_window_get_working_dir (KgxWindow    *self);
 void        kgx_window_show_status     (KgxWindow    *self,
                                         const char   *status);
 KgxPages   *kgx_window_get_pages       (KgxWindow    *self);
-
-void        kgx_window_get_size        (KgxWindow    *self,
-                                        int          *width,
-                                        int          *height);
 
 G_END_DECLS
