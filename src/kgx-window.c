@@ -122,6 +122,12 @@ kgx_window_close_request (GtkWindow *window)
   children = kgx_pages_get_children (KGX_PAGES (self->pages));
 
   if (children->len < 1 || self->close_anyway) {
+    if (gtk_window_is_active (GTK_WINDOW (self))) {
+      int width, height;
+      gtk_window_get_default_size (GTK_WINDOW (self), &width, &height);
+      kgx_settings_set_custom_size (self->settings, width, height);
+    }
+
     return FALSE; // Aka no, I don’t want to block closing
   }
 
