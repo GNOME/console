@@ -29,7 +29,7 @@ msgstr "Consola"
 #: data/org.gnome.Console.desktop.in.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"ordre;prompt;cmd;línia d'ordres;executa;shell;terminal;kgx;kings cross;"
+"ordre;intèrpret;cmd;línia d'ordres;executa;shell;terminal;kgx;kings cross;"
 
 #: data/org.gnome.Console.desktop.in.in:21
 msgid "New Window"
@@ -204,7 +204,7 @@ msgid ""
 "lead to unexpected outcomes"
 msgstr ""
 "Algunes ordres encara s'estan executant, el tancament d'aquesta finestra les"
-" matarà i pot produir resultats inesperats"
+" finalitzarà i pot produir resultats inesperats"
 
 #: src/kgx-close-dialog.c:56
 msgid "Close Tab?"
@@ -216,7 +216,7 @@ msgid ""
 "lead to unexpected outcomes"
 msgstr ""
 "Algunes ordres encara s'estan executant, el tancament d'aquesta pestanya les"
-" matarà i pot produir resultats inesperats"
+" finalitzarà i pot produir resultats inesperats"
 
 #: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:804
 msgid "_Cancel"
