@@ -35,6 +35,7 @@ kgx_sources = [
 
 kgx_deps = [
   dependency('gio-2.0', version: '>= 2.66'),
+  dependency('gio-unix-2.0'),
   dependency('gtk4'),
   dependency('libadwaita-1', version: '>= 1.2.alpha'),
   dependency('vte-2.91-gtk4', version: '>= 0.69.91'),
