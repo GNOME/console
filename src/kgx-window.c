@@ -26,6 +26,7 @@
 #include "kgx-application.h"
 #include "kgx-close-dialog.h"
 #include "kgx-file-closures.h"
+#include "kgx-fullscreen-box.h"
 #include "kgx-pages.h"
 #include "kgx-settings.h"
 #include "kgx-shared-closures.h"
@@ -228,6 +229,15 @@ kgx_window_close_request (GtkWindow *window)
                         g_object_ref (self));
 
   return TRUE; /* Block the close */
+}
+
+
+static void
+fullscreened_changed (KgxWindow *self)
+{
+  gboolean fullscreen = gtk_window_is_fullscreen (GTK_WINDOW (self));
+  gtk_widget_action_set_enabled (GTK_WIDGET (self), "win.fullscreen", !fullscreen);
+  gtk_widget_action_set_enabled (GTK_WIDGET (self), "win.unfullscreen", fullscreen);
 }
 
 
@@ -518,6 +528,7 @@ kgx_window_class_init (KgxWindowClass *klass)
                                             "win.find",
                                             "search-mode-enabled");
 
+  g_type_ensure (KGX_TYPE_FULLSCREEN_BOX);
   g_type_ensure (KGX_TYPE_PAGES);
   g_type_ensure (KGX_TYPE_THEME_SWITCHER);
 
@@ -531,6 +542,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, settings_binds);
   gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, surface_binds);
 
+  gtk_widget_class_bind_template_callback (widget_class, fullscreened_changed);
   gtk_widget_class_bind_template_callback (widget_class, zoom);
   gtk_widget_class_bind_template_callback (widget_class, create_tearoff_host);
   gtk_widget_class_bind_template_callback (widget_class, maybe_close_window);
@@ -579,6 +591,15 @@ kgx_window_class_init (KgxWindowClass *klass)
                                    "win.show-preferences-window",
                                    NULL,
                                    show_preferences_window_activated);
+
+  gtk_widget_class_install_action (widget_class,
+                                   "win.fullscreen",
+                                   NULL,
+                                   (GtkWidgetActionActivateFunc) gtk_window_fullscreen);
+  gtk_widget_class_install_action (widget_class,
+                                   "win.unfullscreen",
+                                   NULL,
+                                   (GtkWidgetActionActivateFunc) gtk_window_unfullscreen);
 }
 
 
@@ -635,6 +656,8 @@ kgx_window_init (KgxWindow *self)
                                             GDK_ACTION_COPY,
                                             drop_types,
                                             G_N_ELEMENTS (drop_types));
+
+  fullscreened_changed (self);
 
   group = gtk_window_group_new ();
   gtk_window_group_add_window (group, GTK_WINDOW (self));
