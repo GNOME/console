@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-06-20 13:45+0000\n"
-"PO-Revision-Date: 2022-06-20 18:28+0300\n"
+"POT-Creation-Date: 2022-08-05 12:30+0000\n"
+"PO-Revision-Date: 2022-08-05 17:16+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Lokalize 20.12.0\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:43
 msgid "Console"
 msgstr "Консоль"
 
@@ -35,11 +35,11 @@ msgstr ""
 msgid "New Window"
 msgstr "Нове вікно"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:168
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:132
 msgid "New Tab"
 msgstr "Нова вкладка"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:640
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:605
 msgid "Terminal Emulator"
 msgstr "Емулятор термінала"
 
@@ -51,147 +51,143 @@ msgstr "Простий зручний для користувачів термі
 msgid "Terminal window"
 msgstr "Вікно термінала"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:104
-msgid "Zander Brown"
-msgstr "Zander Brown"
+#: data/org.gnome.Console.metainfo.xml.in.in:104 src/kgx-window.c:497
+msgid "The GNOME Project"
+msgstr "Проєкт GNOME"
 
-#: src/help-overlay.ui:13
+#: src/help-overlay.ui:12
 msgctxt "shortcut window"
 msgid "Application"
 msgstr "Програма"
 
-#: src/help-overlay.ui:19
+#: src/help-overlay.ui:16
 msgctxt "shortcut window"
 msgid "New Window"
 msgstr "Нове вікно"
 
-#: src/help-overlay.ui:26
+#: src/help-overlay.ui:23
 msgctxt "shortcut window"
 msgid "Terminal"
 msgstr "Термінал"
 
-#: src/help-overlay.ui:32
+#: src/help-overlay.ui:27
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Знайти"
 
-#: src/help-overlay.ui:39
+#: src/help-overlay.ui:33
 msgctxt "shortcut window"
 msgid "Copy"
 msgstr "Копіювати"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Paste"
 msgstr "Вставити"
 
-#: src/help-overlay.ui:53
+#: src/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Tabs"
 msgstr "Вкладки"
 
-#: src/help-overlay.ui:59
+#: src/help-overlay.ui:50
 msgctxt "shortcut window"
 msgid "New Tab"
 msgstr "Нова вкладка"
 
-#: src/help-overlay.ui:66
+#: src/help-overlay.ui:56
 msgctxt "shortcut window"
 msgid "Close Tab"
 msgstr "Закрити вкладку"
 
-#: src/help-overlay.ui:73
+#: src/help-overlay.ui:62
 msgctxt "shortcut window"
 msgid "Next Tab"
 msgstr "Наступна вкладка"
 
-#: src/help-overlay.ui:80
+#: src/help-overlay.ui:68
 msgctxt "shortcut window"
 msgid "Previous Tab"
 msgstr "Попередня вкладка"
 
-#: src/help-overlay.ui:87
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Switch to Tab"
 msgstr "Перемкнутися на вкладку"
 
-#: src/kgx-application.c:515
+#: src/kgx-application.c:480
 msgid "Cannot use both --command and positional parameters"
 msgstr "Не можна використовувати одночасно --command і позиційні аргументи"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:612
+#: src/kgx-application.c:577
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s з використанням VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:624 src/kgx-window.c:525
+#: src/kgx-application.c:589 src/kgx-window.c:492
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© Zander Brown, %s"
 
-#: src/kgx-application.c:638 src/kgx-window.ui:115
+#: src/kgx-application.c:603 src/kgx-window.ui:44
 msgid "King’s Cross"
 msgstr "Кінгс-кросс"
 
-#: src/kgx-application.c:642
+#: src/kgx-application.c:607
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 або новіша"
 
-#: src/kgx-application.c:774
+#: src/kgx-application.c:739
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Виконати аргумент цього параметра у терміналі"
 
-#: src/kgx-application.c:775
+#: src/kgx-application.c:740
 msgid "COMMAND"
 msgstr "КОМАНДА"
 
-#: src/kgx-application.c:783
+#: src/kgx-application.c:748
 msgid "Set the working directory"
 msgstr "Встановити робочий каталог"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:785
+#: src/kgx-application.c:750
 msgid "DIRNAME"
 msgstr "НАЗВА_КАТАЛОГУ"
 
-#: src/kgx-application.c:793
+#: src/kgx-application.c:758
 msgid "Wait until the child exits (TODO)"
 msgstr "Очікувати на завершення дочірнього процесу (ЩЕ НЕ РЕАЛІЗОВАНО)"
 
-#: src/kgx-application.c:802
+#: src/kgx-application.c:767
 msgid "Set the initial window title"
 msgstr "Встановити початковий заголовок вікна"
 
-#: src/kgx-application.c:803
+#: src/kgx-application.c:768
 msgid "TITLE"
 msgstr "ЗАГОЛОВОК"
 
-#: src/kgx-application.c:811
+#: src/kgx-application.c:776
 msgid "ADVANCED: Set the shell to launch"
 msgstr "ДЛЯ ДОСВІДЧЕНИХ: встановити командну оболонку для запуску"
 
-#: src/kgx-application.c:812
+#: src/kgx-application.c:777
 msgid "SHELL"
 msgstr "ОБОЛОНКА"
 
-#: src/kgx-application.c:820
+#: src/kgx-application.c:785
 msgid "ADVANCED: Set the scrollback length"
 msgstr "ДЛЯ ДОСВІДЧЕНИХ: встановити довжину буфера гортання"
 
-#: src/kgx-application.c:821
+#: src/kgx-application.c:786
 msgid "LINES"
 msgstr "РЯДКИ"
 
-#: src/kgx-application.c:830
+#: src/kgx-application.c:795
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- КОМАНДА [АРГУМЕНТ...]]"
-
-#: src/kgx-application.h:44
-msgid "Console (Development)"
-msgstr "Консоль (розробка)"
 
 #: src/kgx-close-dialog.c:50
 msgid "Close Window?"
@@ -219,19 +215,19 @@ msgstr ""
 "до аварійного завершення роботи цих команд і може мати непередбачувані "
 "наслідки."
 
-#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:804
+#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:814
 msgid "_Cancel"
 msgstr "_Скасувати"
 
-#: src/kgx-close-dialog.ui:32
+#: src/kgx-close-dialog.ui:19
 msgid "C_lose"
 msgstr "_Закрити"
 
-#: src/kgx-pages.ui:47
+#: src/kgx-pages.ui:42
 msgid "_Detach Tab"
 msgstr "_Від'єднати вкладку"
 
-#: src/kgx-pages.ui:53
+#: src/kgx-pages.ui:48
 msgid "_Close"
 msgstr "_Закрити"
 
@@ -255,7 +251,7 @@ msgstr "<b>Лише читання</b> — виконання команди з�
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Не вдалося запустити</b> – %s"
 
-#: src/kgx-tab.c:1162
+#: src/kgx-tab.c:1087
 msgid "Command completed"
 msgstr "Виконання команди завершено"
 
@@ -263,12 +259,12 @@ msgstr "Виконання команди завершено"
 msgid "View Open Tabs"
 msgstr "Переглянути відкриті вкладки"
 
-#: src/kgx-terminal.c:793
+#: src/kgx-terminal.c:807
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Ви вставили команду, яку слід запускати від імені адміністратора"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:796
+#: src/kgx-terminal.c:811
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -277,62 +273,58 @@ msgstr ""
 "Переконайтеся у тому, що вам відомі наслідки виконання команди:\n"
 "%s"
 
-#: src/kgx-terminal.c:807 src/menus.ui:24
+#: src/kgx-terminal.c:815 src/menus.ui:24
 msgid "_Paste"
 msgstr "Вст_авити"
 
-#: src/kgx-theme-switcher.ui:18
+#: src/kgx-theme-switcher.ui:16
 msgid "Use System Colors"
 msgstr "Використовувати кольори системи"
 
-#: src/kgx-theme-switcher.ui:47
+#: src/kgx-theme-switcher.ui:44
 msgid "Use Light Colors"
 msgstr "Використовувати світлі кольори"
 
-#: src/kgx-theme-switcher.ui:76
+#: src/kgx-theme-switcher.ui:71
 msgid "Use Dark Colors"
 msgstr "Використовувати темні кольори"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:531
+#: src/kgx-window.c:503
 msgid "translator-credits"
 msgstr "Юрій Чорноіван <yurchor@ukr.net>"
 
-#: src/kgx-window.ui:26
-msgid "Shrink Text"
-msgstr "Стиснути текст"
-
-#: src/kgx-window.ui:39
-msgid "Reset Size"
-msgstr "Відновити початковий розмір"
-
-#: src/kgx-window.ui:52
-msgid "Enlarge Text"
-msgstr "Збільшити текст"
-
-#: src/kgx-window.ui:74
+#: src/kgx-window.ui:17
 msgid "_New Window"
 msgstr "_Нове вікно"
 
-#: src/kgx-window.ui:86
+#: src/kgx-window.ui:23
 msgid "_Keyboard Shortcuts"
 msgstr "_Клавіатурні скорочення"
 
-#: src/kgx-window.ui:93
+#: src/kgx-window.ui:27
 msgid "_About Console"
 msgstr "_Про «Консоль»"
 
-#: src/kgx-window.ui:94
-msgid "About this Program"
-msgstr "Про цю програму"
-
-#: src/kgx-window.ui:123
+#: src/kgx-window.ui:52
 msgid "Find in Terminal"
 msgstr "Знайти у терміналі"
 
-#: src/kgx-window.ui:141
+#: src/kgx-window.ui:60
 msgid "Menu"
 msgstr "Меню"
+
+#: src/kgx-window.ui:78
+msgid "Shrink Text"
+msgstr "Стиснути текст"
+
+#: src/kgx-window.ui:89
+msgid "Reset Size"
+msgstr "Відновити початковий розмір"
+
+#: src/kgx-window.ui:106
+msgid "Enlarge Text"
+msgstr "Збільшити текст"
 
 #: src/menus.ui:7
 msgid "_Open Link"
@@ -354,17 +346,23 @@ msgstr "Ви_брати все"
 msgid "Show in _Files"
 msgstr "Показати у «_Файлах»"
 
-#: nautilus/kgx-nautilus-menu-item.c:120
-msgid "Open in Co_nsole (Devel)"
-msgstr "Відкрити у _Консолі (тестова збірка)"
+#~ msgid "Zander Brown"
+#~ msgstr "Zander Brown"
 
-#: nautilus/kgx-nautilus-menu-item.c:122
-msgid "Open in Co_nsole"
-msgstr "Відкрити у _Консолі"
+#~ msgid "Console (Development)"
+#~ msgstr "Консоль (розробка)"
 
-#: nautilus/kgx-nautilus-menu-item.c:124
-msgid "Start a terminal session for this location"
-msgstr "Розпочати сеанс термінала для цієї адреси"
+#~ msgid "About this Program"
+#~ msgstr "Про цю програму"
+
+#~ msgid "Open in Co_nsole (Devel)"
+#~ msgstr "Відкрити у _Консолі (тестова збірка)"
+
+#~ msgid "Open in Co_nsole"
+#~ msgstr "Відкрити у _Консолі"
+
+#~ msgid "Start a terminal session for this location"
+#~ msgstr "Розпочати сеанс термінала для цієї адреси"
 
 #~ msgid "Terminal"
 #~ msgstr "Термінал"
