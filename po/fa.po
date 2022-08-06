@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-06-20 13:45+0000\n"
-"PO-Revision-Date: 2022-06-28 15:02+0430\n"
+"POT-Creation-Date: 2022-08-06 14:46+0000\n"
+"PO-Revision-Date: 2022-08-07 03:23+0430\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:43
 msgid "Console"
 msgstr "کنسول"
 
@@ -33,11 +33,11 @@ msgstr ""
 msgid "New Window"
 msgstr "پنجرهٔ جدید"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:168
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:132
 msgid "New Tab"
 msgstr "زبانهٔ جدید"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:640
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:605
 msgid "Terminal Emulator"
 msgstr "شبیه‌ساز پایانه"
 
@@ -49,147 +49,143 @@ msgstr "شبیه‌ساز پایانه‌ای کاربرپسند برای میز
 msgid "Terminal window"
 msgstr "پنجرهٔ پایانه"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:104
-msgid "Zander Brown"
-msgstr "زندر برون"
+#: data/org.gnome.Console.metainfo.xml.in.in:104 src/kgx-window.c:497
+msgid "The GNOME Project"
+msgstr "پروژهٔ گنوم"
 
-#: src/help-overlay.ui:13
+#: src/help-overlay.ui:12
 msgctxt "shortcut window"
 msgid "Application"
 msgstr "برنامه"
 
-#: src/help-overlay.ui:19
+#: src/help-overlay.ui:16
 msgctxt "shortcut window"
 msgid "New Window"
 msgstr "پنجرهٔ جدید"
 
-#: src/help-overlay.ui:26
+#: src/help-overlay.ui:23
 msgctxt "shortcut window"
 msgid "Terminal"
 msgstr "پایانه"
 
-#: src/help-overlay.ui:32
+#: src/help-overlay.ui:27
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "یافتن"
 
-#: src/help-overlay.ui:39
+#: src/help-overlay.ui:33
 msgctxt "shortcut window"
 msgid "Copy"
 msgstr "رونوشت"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Paste"
 msgstr "جای‌گذاری"
 
-#: src/help-overlay.ui:53
+#: src/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Tabs"
 msgstr "زبانه‌ها"
 
-#: src/help-overlay.ui:59
+#: src/help-overlay.ui:50
 msgctxt "shortcut window"
 msgid "New Tab"
 msgstr "زبانهٔ جدید"
 
-#: src/help-overlay.ui:66
+#: src/help-overlay.ui:56
 msgctxt "shortcut window"
 msgid "Close Tab"
 msgstr "بستن زبانه"
 
-#: src/help-overlay.ui:73
+#: src/help-overlay.ui:62
 msgctxt "shortcut window"
 msgid "Next Tab"
 msgstr "زبانهٔ بعدی"
 
-#: src/help-overlay.ui:80
+#: src/help-overlay.ui:68
 msgctxt "shortcut window"
 msgid "Previous Tab"
 msgstr "زبانهٔ پیشین"
 
-#: src/help-overlay.ui:87
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Switch to Tab"
 msgstr "تعویض به زبانه"
 
-#: src/kgx-application.c:515
+#: src/kgx-application.c:480
 msgid "Cannot use both --command and positional parameters"
 msgstr "نمی‌توان با ‪--command‬ از پارامترهای ترتیبی استفاده کرد"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:612
+#: src/kgx-application.c:577
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s با استفاده از VTE %Iu.%Iu.%Iu %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:624 src/kgx-window.c:525
+#: src/kgx-application.c:589 src/kgx-window.c:492
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s زندر برون"
 
-#: src/kgx-application.c:638 src/kgx-window.ui:115
+#: src/kgx-application.c:603 src/kgx-window.ui:44
 msgid "King’s Cross"
 msgstr "صلیب پادشاه"
 
-#: src/kgx-application.c:642
+#: src/kgx-application.c:607
 msgid "GPL 3.0 or later"
 msgstr "نگارش ۳ یا بالاتر جی‌پی‌ال"
 
-#: src/kgx-application.c:774
+#: src/kgx-application.c:739
 msgid "Execute the argument to this option inside the terminal"
 msgstr "اجرای آرگومان این گزینه داخل پایانه"
 
-#: src/kgx-application.c:775
+#: src/kgx-application.c:740
 msgid "COMMAND"
 msgstr "COMMAND"
 
-#: src/kgx-application.c:783
+#: src/kgx-application.c:748
 msgid "Set the working directory"
 msgstr "شاخهٔ کاری پایانه را تنظیم کنید"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:785
+#: src/kgx-application.c:750
 msgid "DIRNAME"
 msgstr "DIRNAME"
 
-#: src/kgx-application.c:793
+#: src/kgx-application.c:758
 msgid "Wait until the child exits (TODO)"
 msgstr "انتظار تا هنگام وجود فرزند (TODO)"
 
-#: src/kgx-application.c:802
+#: src/kgx-application.c:767
 msgid "Set the initial window title"
 msgstr "تنظیم عنوان نخستینِ پنجره"
 
-#: src/kgx-application.c:803
+#: src/kgx-application.c:768
 msgid "TITLE"
 msgstr "TITLE"
 
-#: src/kgx-application.c:811
+#: src/kgx-application.c:776
 msgid "ADVANCED: Set the shell to launch"
 msgstr "پیشرفته: تنظیم پوسته برای اجرا"
 
-#: src/kgx-application.c:812
+#: src/kgx-application.c:777
 msgid "SHELL"
 msgstr "SHELL"
 
-#: src/kgx-application.c:820
+#: src/kgx-application.c:785
 msgid "ADVANCED: Set the scrollback length"
 msgstr "پیشرفته: تنظیم درازای لغزش به عقب"
 
-#: src/kgx-application.c:821
+#: src/kgx-application.c:786
 msgid "LINES"
 msgstr "LINES"
 
-#: src/kgx-application.c:830
+#: src/kgx-application.c:795
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- COMMAND [ARGUMENT...]]"
-
-#: src/kgx-application.h:44
-msgid "Console (Development)"
-msgstr "کنسول (در حال توسعه)"
 
 #: src/kgx-close-dialog.c:50
 msgid "Close Window?"
@@ -215,19 +211,19 @@ msgstr ""
 "برخی دستورها هنوز در حال اجرایند. بستن این زبانه خواهد کشتشان و ممکن است "
 "منجر به نتیجه‌های غیرمنتظره‌ای شود"
 
-#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:804
+#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:814
 msgid "_Cancel"
 msgstr "_لغو"
 
-#: src/kgx-close-dialog.ui:32
+#: src/kgx-close-dialog.ui:19
 msgid "C_lose"
 msgstr "_بستن"
 
-#: src/kgx-pages.ui:47
+#: src/kgx-pages.ui:42
 msgid "_Detach Tab"
 msgstr "_تفکیک زبانه"
 
-#: src/kgx-pages.ui:53
+#: src/kgx-pages.ui:48
 msgid "_Close"
 msgstr "_بستن"
 
@@ -251,7 +247,7 @@ msgstr "<b>فقط خواندنی</b> — دستور خارج شد"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>شکست در آغاز</b> — %s"
 
-#: src/kgx-tab.c:1162
+#: src/kgx-tab.c:1087
 msgid "Command completed"
 msgstr "دستور کامل شد"
 
@@ -259,12 +255,12 @@ msgstr "دستور کامل شد"
 msgid "View Open Tabs"
 msgstr "دیدن زبانه‌های باز"
 
-#: src/kgx-terminal.c:793
+#: src/kgx-terminal.c:807
 msgid "You are pasting a command that runs as an administrator"
 msgstr "دارید دستوری را جای‌گذاری می‌کنید که به عنوان مدیر اجرا می‌شود"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:796
+#: src/kgx-terminal.c:811
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -273,62 +269,58 @@ msgstr ""
 "مطممئن شوید که می‌دانید دستور چه می‌کند:\n"
 "%s"
 
-#: src/kgx-terminal.c:807 src/menus.ui:24
+#: src/kgx-terminal.c:815 src/menus.ui:24
 msgid "_Paste"
 msgstr "_جای‌گذاری"
 
-#: src/kgx-theme-switcher.ui:18
+#: src/kgx-theme-switcher.ui:16
 msgid "Use System Colors"
 msgstr "استفاده از رنگ‌های سامانه"
 
-#: src/kgx-theme-switcher.ui:47
+#: src/kgx-theme-switcher.ui:44
 msgid "Use Light Colors"
 msgstr "استفاده از رنگ‌های روشن"
 
-#: src/kgx-theme-switcher.ui:76
+#: src/kgx-theme-switcher.ui:71
 msgid "Use Dark Colors"
 msgstr "استفاده از رنگ‌های تیره"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:531
+#: src/kgx-window.c:503
 msgid "translator-credits"
 msgstr "دانیال بهزادی <dani.behzi@ubuntu.com>"
 
-#: src/kgx-window.ui:26
-msgid "Shrink Text"
-msgstr "کوچک کردن متن"
-
-#: src/kgx-window.ui:39
-msgid "Reset Size"
-msgstr "بازنشانی اندازه"
-
-#: src/kgx-window.ui:52
-msgid "Enlarge Text"
-msgstr "بزرگ کردن متن"
-
-#: src/kgx-window.ui:74
+#: src/kgx-window.ui:17
 msgid "_New Window"
 msgstr "_پنجرهٔ جدید"
 
-#: src/kgx-window.ui:86
+#: src/kgx-window.ui:23
 msgid "_Keyboard Shortcuts"
 msgstr "_میان‌برهای صفحه‌کلید"
 
-#: src/kgx-window.ui:93
+#: src/kgx-window.ui:27
 msgid "_About Console"
 msgstr "_دربارهٔ کنسول"
 
-#: src/kgx-window.ui:94
-msgid "About this Program"
-msgstr "دربارهٔ این برنامه"
-
-#: src/kgx-window.ui:123
+#: src/kgx-window.ui:52
 msgid "Find in Terminal"
 msgstr "یافتن در پایانه"
 
-#: src/kgx-window.ui:141
+#: src/kgx-window.ui:60
 msgid "Menu"
 msgstr "فهرست"
+
+#: src/kgx-window.ui:78
+msgid "Shrink Text"
+msgstr "کوچک کردن متن"
+
+#: src/kgx-window.ui:89
+msgid "Reset Size"
+msgstr "بازنشانی اندازه"
+
+#: src/kgx-window.ui:106
+msgid "Enlarge Text"
+msgstr "بزرگ کردن متن"
 
 #: src/menus.ui:7
 msgid "_Open Link"
@@ -350,14 +342,20 @@ msgstr "_گزینش همه"
 msgid "Show in _Files"
 msgstr "_نمایش پرونده‌ها"
 
-#: nautilus/kgx-nautilus-menu-item.c:120
-msgid "Open in Co_nsole (Devel)"
-msgstr "گشودن در _کنسول (توسعه)"
+#~ msgid "Zander Brown"
+#~ msgstr "زندر برون"
 
-#: nautilus/kgx-nautilus-menu-item.c:122
-msgid "Open in Co_nsole"
-msgstr "گشودن در _کنسول"
+#~ msgid "Console (Development)"
+#~ msgstr "کنسول (در حال توسعه)"
 
-#: nautilus/kgx-nautilus-menu-item.c:124
-msgid "Start a terminal session for this location"
-msgstr "آغاز یک نشست پایانه برای این موقعیت"
+#~ msgid "About this Program"
+#~ msgstr "دربارهٔ این برنامه"
+
+#~ msgid "Open in Co_nsole (Devel)"
+#~ msgstr "گشودن در _کنسول (توسعه)"
+
+#~ msgid "Open in Co_nsole"
+#~ msgstr "گشودن در _کنسول"
+
+#~ msgid "Start a terminal session for this location"
+#~ msgstr "آغاز یک نشست پایانه برای این موقعیت"
