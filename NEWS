@@ -1,3 +1,87 @@
+Version 43.beta
+~~~~~~~~~~~~
+
+Port to Gtk4/Adwaita, taking advantage of Adwaita's recolouring
+features and thus removing our dependency on sassc. We now
+require that Vte is be built with gtk4 support.
+
+Nautilus Plug-in has been moved upstream.
+
+Simon McVittie improved our handeling of custom shells/commands,
+fixing several bugs and providing a more predictable experience.
+
+Colin Kinloch provided fixes for drag-n-drop, with local URIs now
+being converted to regular fileystem paths.
+
+Assorted other fixes were contributed, including detection of man
+page links, keyboard shortcuts, clipboard oddities, building with
+clang, and assorted ancillary data updates.
+
+Updated Translations:
+ * Abkhazian  (Nart Tlisha)
+ * Basque  (Asier Sarasua Garmendia)
+ * Catalan  (Jordi Mas)
+ * Chinese (China)  (Luming Zh)
+ * Dutch  (Hannie Dumoleyn)
+ * French  (Irénée THIRION)
+ * Galician  (Fran Dieguez)
+ * Georgian  (Zurab Kargareteli)
+ * German  (Jürgen Benvenuti)
+ * Hebrew  (Yosef Or Boczko)
+ * Indonesian  (Kukuh Syafaat)
+ * Nepali  (Pawan Chitrakar)
+ * Persian  (Danial Behzadi)
+ * Portuguese  (Hugo Carvalho)
+ * Russian  (Aleksandr Melman)
+ * Serbian  (Марко Костић)
+ * Spanish  (Daniel Mustieles)
+ * Turkish  (Emin Tufan Çetin)
+ * Ukrainian  (Yuri Chornoivan)
+ * Vietnamese  (Ngọc Quân Trần)
+
+Version 42.2
+~~~~~~~~~~~~
+
+ * Fix GCC warning
+ * Check for pcre2 during configure
+
+Version 42.1
+~~~~~~~~~~~~
+
+ * Fixed release notes in metainfo
+
+Version 42.0
+~~~~~~~~~~~~
+
+ * Drop unneeded custom RPATH
+ * Translation updates:
+   * Bulgarian
+   * Catalan
+   * Croatian
+   * Czech
+   * Danish
+   * Dutch
+   * Finnish
+   * French
+   * Friulian
+   * German
+   * Hungarian
+   * Indonesian
+   * Italian
+   * Japanese
+   * Kazakh
+   * Korean
+   * Lithuanian
+   * Nepali
+   * Norwegian Bokmål
+   * Occitan
+   * Persian
+   * Punjabi
+   * Serbian
+   * Slovak
+   * Slovenian
+   * Vietnamese
+
 Version 42.beta
 ~~~~~~~~~~~~~~~
 Released: 2022-02-14

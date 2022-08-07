@@ -26,35 +26,95 @@
   </requires>
   <screenshots>
     <screenshot type="default">
-      <image height="509" width="694">https://gitlab.gnome.org/GNOME/console/raw/HEAD/data/screenshots/01-Terminal.png</image>
+      <image height="561" width="732">https://gitlab.gnome.org/GNOME/console/raw/gnome-43/data/screenshots/01-Terminal.png</image>
       <caption>Terminal window</caption>
     </screenshot>
   </screenshots>
   <releases>
-    <release version="42.beta" date="2022-02-14">
+    <release version="43.beta" date="2022-08-07">
       <description>
-        <p>KGX now goes by Console and we have restored the legendary ‘Day’ mode</p>
-        <p>Also in this release:</p>
+        <p>Ported to Gtk4/Adwaita</p>
+        <p>File drag and drop now pastes paths instead of URIs</p>
+        <p>Files extension has been upstreamed</p>
+        <p>Various other bugfixes and improvements</p>
+        <p>Updated Translations:</p>
         <ul>
-          <li>👓 Much better High Contrast support</li>
-          <li>🔬 Increased Zoom range</li>
-          <li>📋 Paste is now less pernickety</li>
-          <li>🩹 Fixed a couple leaks and assorted issues</li>
+          <li>Abkhazian</li>
+          <li>Basque</li>
+          <li>Catalan</li>
+          <li>Chinese (China)</li>
+          <li>Dutch</li>
+          <li>French</li>
+          <li>Galician</li>
+          <li>Georgian</li>
+          <li>German</li>
+          <li>Hebrew</li>
+          <li>Indonesian</li>
+          <li>Nepali</li>
+          <li>Persian</li>
+          <li>Portuguese</li>
+          <li>Russian</li>
+          <li>Serbian</li>
+          <li>Spanish</li>
+          <li>Turkish</li>
+          <li>Ukrainian</li>
+          <li>Vietnamese</li>
         </ul>
-        <p>GNOME l10n Teams have updated translations:</p>
+      </description>
+    </release>
+    <release version="42.2" date="2022-07-14">
+      <description>
+        <p>Bug fix release</p>
+      </description>
+    </release>
+    <release version="42.1" date="2022-07-13">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Renamed to Console</li>
+          <li>Better high contrast support</li>
+          <li>Increased zoom range</li>
+          <li>Improved text paste</li>
+        </ul>
+        <p>Assorted bug fixes</p>
+        <p>Translation updates</p>
         <ul>
           <li>Basque</li>
+          <li>Brazilian Portuguese</li>
+          <li>Bulgarian</li>
+          <li>Catalan</li>
           <li>Chinese (China)</li>
+          <li>Croatian</li>
+          <li>Czech</li>
+          <li>Danish</li>
+          <li>Dutch</li>
           <li>Finnish</li>
+          <li>French</li>
+          <li>Friulian</li>
           <li>Galician</li>
+          <li>German</li>
           <li>Hebrew</li>
+          <li>Hungarian</li>
+          <li>Indonesian</li>
+          <li>Italian</li>
+          <li>Japanese</li>
+          <li>Kazakh</li>
+          <li>Korean</li>
+          <li>Lithuanian</li>
+          <li>Nepali</li>
+          <li>Norwegian Bokmål</li>
+          <li>Occitan</li>
+          <li>Persian</li>
           <li>Polish</li>
           <li>Portuguese</li>
-          <li>Portuguese (Brazil)</li>
+          <li>Punjabi</li>
           <li>Russian</li>
+          <li>Serbian</li>
+          <li>Slovak</li>
           <li>Slovenian</li>
           <li>Spanish</li>
           <li>Swedish</li>
+          <li>Vietnamese</li>
           <li>Turkish</li>
           <li>Ukrainian</li>
         </ul>
