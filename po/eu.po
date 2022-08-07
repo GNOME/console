@@ -6,8 +6,8 @@
 msgid ""
 msgstr "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-07-29 01:21+0000\n"
-"PO-Revision-Date: 2022-07-31 10:00+0100\n"
+"POT-Creation-Date: 2022-08-06 14:46+0000\n"
+"PO-Revision-Date: 2022-08-07 10:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -46,8 +46,8 @@ msgid "Terminal window"
 msgstr "Terminalaren leihoa"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:104 src/kgx-window.c:497
-msgid "Zander Brown"
-msgstr "Zander Brown"
+msgid "The GNOME Project"
+msgstr "GNOME proiektua"
 
 #: src/help-overlay.ui:12
 msgctxt "shortcut window"
@@ -333,17 +333,17 @@ msgstr "_Hautatu denak"
 msgid "Show in _Files"
 msgstr "Erakutsi _Fitxategiak aplikazioan"
 
-#: nautilus/kgx-nautilus-menu-item.c:120
-msgid "Open in Co_nsole (Devel)"
-msgstr "Ireki ko_ntsolan (garapena)"
+#~ msgid "Zander Brown"
+#~ msgstr "Zander Brown"
 
-#: nautilus/kgx-nautilus-menu-item.c:122
-msgid "Open in Co_nsole"
-msgstr "Ireki ko_ntsolan"
+#~ msgid "Open in Co_nsole (Devel)"
+#~ msgstr "Ireki ko_ntsolan (garapena)"
 
-#: nautilus/kgx-nautilus-menu-item.c:124
-msgid "Start a terminal session for this location"
-msgstr "Abiarazi terminalaren saio bat kokaleku honetarako"
+#~ msgid "Open in Co_nsole"
+#~ msgstr "Ireki ko_ntsolan"
+
+#~ msgid "Start a terminal session for this location"
+#~ msgstr "Abiarazi terminalaren saio bat kokaleku honetarako"
 
 #~ msgid "Console (Development)"
 #~ msgstr "Kontsola (garapena)"
