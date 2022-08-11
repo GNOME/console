@@ -27,5 +27,8 @@
     <key name="window-height" type="i">
       <default>-1</default>
     </key>
+    <key name="remember-window-size" type="b">
+      <default>true</default>
+    </key>
   </schema>
 </schemalist>

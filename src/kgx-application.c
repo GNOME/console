@@ -205,6 +205,15 @@ kgx_application_activate (GApplication *app)
 
 
 static void
+remember_window_size_changed (KgxApplication *self)
+{
+  if (!g_settings_get_boolean (self->settings, "remember-window-size")) {
+    kgx_application_set_window_size (self, -1, -1);
+  }
+}
+
+
+static void
 kgx_application_startup (GApplication *app)
 {
   KgxApplication    *self = KGX_APPLICATION (app);
@@ -247,6 +256,9 @@ kgx_application_startup (GApplication *app)
                                          "app.zoom-out", zoom_out_accels);
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "app.zoom-normal", zoom_normal_accels);
+
+  g_signal_connect_swapped (self->settings, "changed::remember-window-size",
+                            G_CALLBACK (remember_window_size_changed), self);
 
   self->settings = g_settings_new (KGX_APPLICATION_ID);
   g_settings_bind (self->settings, "theme", app, "theme", G_SETTINGS_BIND_DEFAULT);
@@ -978,14 +990,14 @@ KgxWindow *
 kgx_application_new_window (KgxApplication *self)
 {
   GtkWindow *active_window;
-  int width, height;
+  int width = -1, height = -1;
 
   g_return_val_if_fail (KGX_IS_APPLICATION (self), NULL);
 
   active_window = gtk_application_get_active_window (GTK_APPLICATION (self));
   if (active_window) {
     gtk_window_get_default_size (active_window, &width, &height);
-  } else {
+  } else if (g_settings_get_boolean (self->settings, "remember-window-size")) {
     kgx_application_get_window_size (self, &width, &height);
   }
 
@@ -1024,6 +1036,10 @@ kgx_application_set_window_size (KgxApplication *self,
 
   g_debug ("Saving window geometry: %i×%i", width, height);
 
-  g_settings_set_int (self->settings, "window-width", width);
-  g_settings_set_int (self->settings, "window-height", height);
+  if (g_settings_get_boolean (self->settings, "remember-window-size")) {
+    g_debug ("Saving window geometry: %i×%i", width, height);
+
+    g_settings_set_int (self->settings, "window-width", width);
+    g_settings_set_int (self->settings, "window-height", height);
+  }
 }
