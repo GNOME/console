@@ -51,6 +51,8 @@
  */
 #define MONOSPACE_FONT_KEY_NAME "monospace-font-name"
 
+#define RESTORE_SIZE_KEY "restore-window-size"
+#define LAST_SIZE_KEY "last-window-size"
 
 struct _KgxSettings {
   GObject      parent_instance;
@@ -240,6 +242,17 @@ font_changed (GSettings    *settings,
 
 
 static void
+restore_window_size_changed (GSettings   *settings,
+                             const char  *key,
+                             KgxSettings *self)
+{
+  if (!g_settings_get_boolean (self->settings, RESTORE_SIZE_KEY)) {
+    g_settings_set (self->settings, LAST_SIZE_KEY, "(ii)", -1, -1);
+  }
+}
+
+
+static void
 kgx_settings_init (KgxSettings *self)
 {
   self->settings = g_settings_new (KGX_APPLICATION_ID);
@@ -252,6 +265,11 @@ kgx_settings_init (KgxSettings *self)
   g_settings_bind (self->settings, "scrollback-lines",
                    self, "scrollback-lines",
                    G_SETTINGS_BIND_DEFAULT);
+
+  g_signal_connect (self->settings,
+                    "changed::restore-window-size",
+                    G_CALLBACK (restore_window_size_changed),
+                    self);
 
   self->desktop_interface = g_settings_new (DESKTOP_INTERFACE_SETTINGS_SCHEMA);
   g_signal_connect (self->desktop_interface,
@@ -371,4 +389,39 @@ kgx_settings_set_scrollback (KgxSettings *self,
   self->scrollback_lines = value;
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_SCROLLBACK_LINES]);
+}
+
+
+void
+kgx_settings_get_size (KgxSettings *self,
+                       int         *width,
+                       int         *height)
+{
+  g_return_if_fail (KGX_IS_SETTINGS (self));
+  g_return_if_fail (width != NULL && height != NULL);
+
+  if (!g_settings_get_boolean (self->settings, RESTORE_SIZE_KEY)) {
+    *width = -1;
+    *height = -1;
+    return;
+  }
+
+  g_settings_get (self->settings, LAST_SIZE_KEY, "(ii)", width, height);
+}
+
+
+void
+kgx_settings_set_custom_size (KgxSettings *self,
+                              int          width,
+                              int          height)
+{
+  g_return_if_fail (KGX_IS_SETTINGS (self));
+
+  if (!g_settings_get_boolean (self->settings, RESTORE_SIZE_KEY)) {
+    return;
+  }
+
+  g_debug ("Store window size: %i×%i", width, height);
+
+  g_settings_set (self->settings, LAST_SIZE_KEY, "(ii)", width, height);
 }

@@ -21,5 +21,11 @@
     <key name="scrollback-lines" type="x">
       <default>10000</default>
     </key>
+    <key name="last-window-size" type="(ii)">
+      <default>(-1, -1)</default>
+    </key>
+    <key name="restore-window-size" type="b">
+      <default>true</default>
+    </key>
   </schema>
 </schemalist>
