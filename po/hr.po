@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
 "POT-Creation-Date: 2022-08-05 12:30+0000\n"
-"PO-Revision-Date: 2022-08-13 01:28+0200\n"
+"PO-Revision-Date: 2022-08-13 01:30+0200\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
@@ -117,7 +117,7 @@ msgstr "Prebaci na karticu"
 
 #: src/kgx-application.c:480
 msgid "Cannot use both --command and positional parameters"
-msgstr "Nemoguće korištenje obojeg --naredba i položajni parametar"
+msgstr "Nemoguće korištenje obojeg --naredbe i položajnog parametra"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
