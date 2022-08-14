@@ -1,22 +1,29 @@
-project('gnome-console', 'c', version: '43.beta',
-  meson_version: '>= 0.59.0',
-  default_options: [
-    'werror=true',
-    'buildtype=debugoptimized',
-    'c_std=c17',
-    'vte:c_std=gnu11',
-    'vte:cpp_std=gnu++17',
-    'vte:werror=false',
-    'vte:gir=false',
-    'vte:vapi=false',
-    'vte:gtk3=false',
-    'vte:gtk4=true',
-    'adwaita:werror=false',
-    'adwaita:vapi=false',
-    'adwaita:introspection=disabled',
-    'adwaita:tests=false',
-    'libsass:werror=false',
-  ],
+project('gnome-console', 'c',
+                  version: '43.beta',
+            meson_version: '>= 0.59.0',
+                  license: 'GPL-3.0-or-later',
+          default_options: [
+                             'werror=true',
+                             'buildtype=debugoptimized',
+                             'c_std=c17',
+                             # So, apparently these two don’t currently do
+                             # anything — Yet somehow vte works anyway?
+                             # Mysterious
+                             # https://github.com/mesonbuild/meson/pull/7521
+                             'vte:c_std=gnu11',
+                             'vte:cpp_std=gnu++17',
+                             'vte:werror=false',
+                             'vte:gir=false',
+                             'vte:vapi=false',
+                             'vte:gtk3=false',
+                             'vte:gtk4=true',
+                             'adwaita:werror=false',
+                             'adwaita:vapi=false',
+                             'adwaita:introspection=disabled',
+                             'adwaita:tests=false',
+                             # libsass may be pulled in via adwaita
+                             'libsass:werror=false',
+                           ],
 )
 
 i18n = import('i18n')
@@ -65,18 +72,20 @@ config_h = vcs_tag( input: config_h_in,
                   command: ['git', 'rev-parse', '--short', 'HEAD'],
                  fallback: 'Devel')
 
-gtk_ver = 'GDK_VERSION_4_0'
-glib_ver = 'GLIB_VERSION_2_66'
-add_project_arguments([
+gtk_ver = 'GDK_VERSION_4_6'
+glib_ver = 'GLIB_VERSION_2_72'
+
+kgx_cargs = [
+  '-DG_LOG_DOMAIN="@0@"'.format(log_domain),
+  '-DG_LOG_USE_STRUCTURED',
   '-DGLIB_VERSION_MIN_REQUIRED=@0@'.format(glib_ver),
   '-DGLIB_VERSION_MAX_ALLOWED=@0@'.format(glib_ver),
-  '-DG_LOG_USE_STRUCTURED',
-  '-DG_LOG_DOMAIN="@0@"'.format(log_domain),
-], language: 'c')
+  '-DGDK_VERSION_MIN_REQUIRED=@0@'.format(gtk_ver),
+  '-DGDK_VERSION_MAX_ALLOWED=@0@'.format(gtk_ver)
+]
 
 cc = meson.get_compiler('c')
 
-global_c_args = []
 test_c_args = [
   '-Wdeclaration-after-statement',
   ['-Werror=format-security', '-Werror=format=2'],
@@ -94,19 +103,33 @@ test_c_args = [
   '-Wswitch-enum',
   '-Wunused-function',
 ]
-if get_option('buildtype') != 'plain'
-  test_c_args += '-fstack-protector-strong'
-endif
 
 foreach arg: test_c_args
   if cc.has_multi_arguments(arg)
-    global_c_args += arg
+    kgx_cargs += arg
   endif
 endforeach
-add_project_arguments(
-  global_c_args,
-  language: 'c'
-)
+
+global_cargs = []
+
+if get_option('buildtype') != 'plain'
+  foreach arg: ['-fstack-protector-strong', '-fno-omit-frame-pointer']
+    if cc.has_multi_arguments(arg)
+      global_cargs += arg
+    endif
+  endforeach
+endif
+
+add_project_arguments(global_cargs, language: 'c')
+
+gio_dep = dependency('gio-2.0', version: '>= 2.72')
+gio_unix_dep = dependency('gio-unix-2.0', version: '>= 2.72')
+gtk_dep = dependency('gtk4', version: '>= 4.6')
+adw_dep = dependency('libadwaita-1', version: '>= 1.2.beta')
+vte_dep = dependency('vte-2.91-gtk4', version: '>= 0.69.91')
+gtop_dep = dependency('libgtop-2.0')
+pcre_dep = dependency('libpcre2-8', version: '>= 10.32')
+schemas_dep = dependency('gsettings-desktop-schemas')
 
 subdir('data')
 subdir('src')

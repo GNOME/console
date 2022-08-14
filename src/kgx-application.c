@@ -220,8 +220,6 @@ kgx_application_startup (GApplication *app)
   const char *const zoom_out_accels[] = { "<primary>minus", NULL };
   const char *const zoom_normal_accels[] = { "<primary>0", NULL };
 
-  g_set_prgname (g_application_get_application_id (app));
-
   g_resources_register (kgx_get_resource ());
 
   g_type_ensure (KGX_TYPE_TERMINAL);
@@ -475,7 +473,7 @@ kgx_application_handle_local_options (GApplication *app,
   if (g_variant_dict_lookup (options, "about", "b", &about)) {
     if (about) {
       g_autofree char *copyright = g_strdup_printf (_("© %s Zander Brown"),
-                                                    "2019-2021");
+                                                    "2019-2022");
       struct winsize w;
       int padding = 0;
 

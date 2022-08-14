@@ -160,7 +160,7 @@ wait_cb (GPid     pid,
   g_return_if_fail (KGX_SIMPLE_TAB (data->self));
 
   /* wait_check will set @error if it got a signal/non-zero exit */
-  if (!g_spawn_check_exit_status (status, &error)) {
+  if (!g_spawn_check_wait_status (status, &error)) {
     g_autofree char *message = NULL;
 
     // translators: <b> </b> marks the text as bold, ensure they are
