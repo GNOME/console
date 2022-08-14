@@ -2,13 +2,32 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <template class="KgxPages" parent="AdwBin">
+    <binding name="active-page">
+      <lookup name="child">
+        <lookup name="selected-page">view</lookup>
+      </lookup>
+    </binding>
+    <binding name="title">
+      <lookup name="tab-title">
+        <lookup name="active-page">KgxPages</lookup>
+      </lookup>
+    </binding>
+    <binding name="path">
+      <lookup name="tab-path">
+        <lookup name="active-page">KgxPages</lookup>
+      </lookup>
+    </binding>
+    <binding name="status">
+      <lookup name="tab-status">
+        <lookup name="active-page">KgxPages</lookup>
+      </lookup>
+    </binding>
     <property name="child">
       <object class="GtkOverlay">
         <child>
           <object class="AdwTabView" id="view">
             <property name="menu-model">tab-menu</property>
             <property name="default-icon">view_default_icon</property>
-            <signal name="notify::selected-page" handler="page_changed" swapped="no"/>
             <signal name="page-attached" handler="page_attached" swapped="no"/>
             <signal name="page-detached" handler="page_detached" swapped="no"/>
             <signal name="create-window" handler="create_window" swapped="no"/>
@@ -52,5 +71,12 @@
   </menu>
   <object class="GThemedIcon" id="view_default_icon">
     <property name="name">status-regular-symbolic</property>
+  </object>
+  <object class="GSignalGroup" id="active_page_signals">
+    <property name="target-type">KgxTab</property>
+    <property name="target" bind-source="KgxPages" bind-property="active-page" bind-flags="sync-create"/>
+  </object>
+  <object class="GBindingGroup" id="active_page_binds">
+    <property name="source" bind-source="KgxPages" bind-property="active-page" bind-flags="sync-create"/>
   </object>
 </interface>

@@ -53,6 +53,7 @@ struct _KgxWindow
 
   /*< public >*/
   KgxSettings          *settings;
+  GBindingGroup        *settings_binds;
 
   /* Size indicator */
   int                   last_cols;

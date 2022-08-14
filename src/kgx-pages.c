@@ -38,6 +38,12 @@
 typedef struct _KgxPagesPrivate KgxPagesPrivate;
 struct _KgxPagesPrivate {
   GtkWidget            *view;
+  char                 *title;
+  GFile                *path;
+  KgxTab               *active_page;
+  gboolean              is_active;
+  KgxStatus             page_status;
+  gboolean              search_mode_enabled;
 
   GtkWidget            *status;
   GtkWidget            *status_revealer;
@@ -46,28 +52,10 @@ struct _KgxPagesPrivate {
   int                   last_rows;
   guint                 timeout;
 
-  gulong                size_watcher;
+  GSignalGroup         *active_page_signals;
+  GBindingGroup        *active_page_binds;
 
-  KgxTab               *active_page;
-
-  char                 *title;
-  GBinding             *title_bind;
-  GFile                *path;
-  GBinding             *path_bind;
-
-  KgxStatus             page_status;
-  GBinding             *page_status_bind;
-
-  gboolean              is_active;
   GBinding             *is_active_bind;
-
-  gboolean              search_mode_enabled;
-  GBinding             *search_bind;
-
-  PangoFontDescription *font;
-  double                zoom;
-  KgxTheme              theme;
-  gint64                scrollback_lines;
 
   AdwTabPage           *action_page;
 };
@@ -82,13 +70,10 @@ enum {
   PROP_TAB_COUNT,
   PROP_TITLE,
   PROP_PATH,
-  PROP_THEME,
-  PROP_FONT,
-  PROP_ZOOM,
+  PROP_ACTIVE_PAGE,
   PROP_IS_ACTIVE,
   PROP_STATUS,
   PROP_SEARCH_MODE_ENABLED,
-  PROP_SCROLLBACK_LINES,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -110,14 +95,10 @@ kgx_pages_dispose (GObject *object)
 
   g_clear_handle_id (&priv->timeout, g_source_remove);
 
-  if (priv->active_page) {
-    g_clear_signal_handler (&priv->size_watcher, priv->active_page);
-  }
-
   g_clear_pointer (&priv->title, g_free);
   g_clear_object (&priv->path);
 
-  g_clear_pointer (&priv->font, pango_font_description_free);
+  g_clear_weak_pointer (&priv->active_page);
 
   G_OBJECT_CLASS (kgx_pages_parent_class)->dispose (object);
 }
@@ -145,14 +126,8 @@ kgx_pages_get_property (GObject    *object,
     case PROP_PATH:
       g_value_set_object (value, priv->path);
       break;
-    case PROP_THEME:
-      g_value_set_enum (value, priv->theme);
-      break;
-    case PROP_FONT:
-      g_value_set_boxed (value, priv->font);
-      break;
-    case PROP_ZOOM:
-      g_value_set_double (value, priv->zoom);
+    case PROP_ACTIVE_PAGE:
+      g_value_set_object (value, priv->active_page);
       break;
     case PROP_IS_ACTIVE:
       g_value_set_boolean (value, priv->is_active);
@@ -162,9 +137,6 @@ kgx_pages_get_property (GObject    *object,
       break;
     case PROP_SEARCH_MODE_ENABLED:
       g_value_set_boolean (value, priv->search_mode_enabled);
-      break;
-    case PROP_SCROLLBACK_LINES:
-      g_value_set_int64 (value, priv->scrollback_lines);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -188,20 +160,20 @@ kgx_pages_set_property (GObject      *object,
       priv->title = g_value_dup_string (value);
       break;
     case PROP_PATH:
-      g_clear_object (&priv->path);
-      priv->path = g_value_dup_object (value);
+      g_set_object (&priv->path, g_value_get_object (value));
       break;
-    case PROP_THEME:
-      priv->theme = g_value_get_enum (value);
-      break;
-    case PROP_FONT:
-      if (priv->font) {
-        g_boxed_free (PANGO_TYPE_FONT_DESCRIPTION, priv->font);
+    case PROP_ACTIVE_PAGE:
+      if (priv->active_page) {
+        g_object_set (priv->active_page, "is-active", FALSE, NULL);
       }
-      priv->font = g_value_dup_boxed (value);
-      break;
-    case PROP_ZOOM:
-      priv->zoom = g_value_get_double (value);
+      g_clear_object (&priv->is_active_bind);
+      g_set_weak_pointer (&priv->active_page, g_value_get_object (value));
+      if (priv->active_page) {
+        priv->is_active_bind =
+          g_object_bind_property (self, "is-active",
+                                  priv->active_page, "is-active",
+                                  G_BINDING_SYNC_CREATE);
+      }
       break;
     case PROP_IS_ACTIVE:
       priv->is_active = g_value_get_boolean (value);
@@ -211,9 +183,6 @@ kgx_pages_set_property (GObject      *object,
       break;
     case PROP_SEARCH_MODE_ENABLED:
       priv->search_mode_enabled = g_value_get_boolean (value);
-      break;
-    case PROP_SCROLLBACK_LINES:
-      priv->scrollback_lines = g_value_get_int64 (value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -268,60 +237,6 @@ size_changed (KgxTab   *tab,
   gtk_label_set_label (GTK_LABEL (priv->status), label);
   gtk_widget_show (priv->status_revealer);
   gtk_revealer_set_reveal_child (GTK_REVEALER (priv->status_revealer), TRUE);
-}
-
-
-static void
-page_changed (GObject *object, GParamSpec *pspec, KgxPages *self)
-{
-  KgxPagesPrivate *priv;
-  AdwTabPage *page = NULL;
-  KgxTab *tab;
-
-  priv = kgx_pages_get_instance_private (self);
-  page = adw_tab_view_get_selected_page (ADW_TAB_VIEW (priv->view));
-
-  if (!page) {
-    return;
-  }
-
-  tab = KGX_TAB (adw_tab_page_get_child (page));
-
-  g_clear_signal_handler (&priv->size_watcher, priv->active_page);
-  priv->size_watcher = g_signal_connect (tab,
-                                         "size-changed", G_CALLBACK (size_changed),
-                                         self);
-
-  g_clear_object (&priv->title_bind);
-  priv->title_bind = g_object_bind_property (tab, "tab-title",
-                                             self, "title",
-                                             G_BINDING_SYNC_CREATE);
-
-  g_clear_object (&priv->path_bind);
-  priv->path_bind = g_object_bind_property (tab, "tab-path",
-                                            self, "path",
-                                            G_BINDING_SYNC_CREATE);
-
-  if (priv->active_page) {
-    g_object_set (priv->active_page, "is-active", FALSE, NULL);
-  }
-
-  g_clear_object (&priv->is_active_bind);
-  priv->is_active_bind = g_object_bind_property (self, "is-active",
-                                                 tab, "is-active",
-                                                 G_BINDING_SYNC_CREATE);
-
-  g_clear_object (&priv->page_status_bind);
-  priv->page_status_bind = g_object_bind_property (tab, "tab-status",
-                                                   self, "status",
-                                                   G_BINDING_SYNC_CREATE);
-
-  g_clear_object (&priv->search_bind);
-  priv->search_bind = g_object_bind_property (tab, "search-mode-enabled",
-                                              self, "search-mode-enabled",
-                                              G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
-
-  priv->active_page = KGX_TAB (tab);
 }
 
 
@@ -390,17 +305,12 @@ page_detached (AdwTabView *view,
                int         position,
                KgxPages   *self)
 {
-  KgxTab *tab;
   KgxPagesPrivate *priv;
   GtkRoot *root;
 
   g_return_if_fail (ADW_IS_TAB_PAGE (page));
 
-  tab = KGX_TAB (adw_tab_page_get_child (page));
-
   priv = kgx_pages_get_instance_private (self);
-
-  g_signal_handlers_disconnect_by_data (tab, self);
 
   if (adw_tab_view_get_n_pages (ADW_TAB_VIEW (priv->view)) == 0) {
     root = gtk_widget_get_root (GTK_WIDGET (self));
@@ -409,9 +319,6 @@ page_detached (AdwTabView *view,
       /* Not a massive fan, would prefer it if window observed pages is empty */
       gtk_window_close (GTK_WINDOW (root));
     }
-
-    priv->active_page = NULL;
-    priv->size_watcher = 0;
   }
 }
 
@@ -594,29 +501,17 @@ kgx_pages_class_init (KgxPagesClass *klass)
                          G_PARAM_READWRITE);
 
   /**
-   * KgxPages:theme:
+   * KgxPages:active-page:
    *
-   * The #KgxTheme to apply to the #KgxTerminal s in the #KgxTab s
+   * The #KgxTab in #KgxPages:tab-view's current #AdwTabPage
    *
-   * Stability: Private
+   * Note the writability of this property in an implementation detail, DO NOT
+   * set this property
    */
-  pspecs[PROP_THEME] =
-    g_param_spec_enum ("theme", "Theme", "The path of the active page",
-                       KGX_TYPE_THEME,
-                       KGX_THEME_NIGHT,
-                       G_PARAM_READWRITE);
-
-  pspecs[PROP_FONT] =
-    g_param_spec_boxed ("font", "Font", "Monospace font",
-                         PANGO_TYPE_FONT_DESCRIPTION,
-                         G_PARAM_READWRITE);
-
-  pspecs[PROP_ZOOM] =
-    g_param_spec_double ("zoom", "Zoom", "Font scaling",
-                         KGX_FONT_SCALE_MIN,
-                         KGX_FONT_SCALE_MAX,
-                         KGX_FONT_SCALE_DEFAULT,
-                         G_PARAM_READWRITE);
+  pspecs[PROP_ACTIVE_PAGE] =
+    g_param_spec_object ("active-page", NULL, NULL,
+                         KGX_TYPE_TAB,
+                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_IS_ACTIVE] =
     g_param_spec_boolean ("is-active", "Is Active", "Is active pages",
@@ -634,20 +529,6 @@ kgx_pages_class_init (KgxPagesClass *klass)
                           "Whether the search mode is enabled for active page",
                           FALSE,
                           G_PARAM_READWRITE);
-
-  /**
-   * KgxTab:scrollback-lines:
-   *
-   * How many lines of scrollback #KgxTerminal should keep
-   *
-   * Bound to ‘scrollback-lines’ GSetting so changes persist
-   *
-   * Stability: Private
-   */
-  pspecs[PROP_SCROLLBACK_LINES] =
-    g_param_spec_int64 ("scrollback-lines", "Scrollback Lines", "Size of the scrollback",
-                        G_MININT64, G_MAXINT64, 512,
-                        G_PARAM_READWRITE);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
@@ -675,8 +556,9 @@ kgx_pages_class_init (KgxPagesClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, view);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, status);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, status_revealer);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxPages, active_page_signals);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxPages, active_page_binds);
 
-  gtk_widget_class_bind_template_callback (widget_class, page_changed);
   gtk_widget_class_bind_template_callback (widget_class, page_attached);
   gtk_widget_class_bind_template_callback (widget_class, page_detached);
   gtk_widget_class_bind_template_callback (widget_class, create_window);
@@ -693,11 +575,15 @@ kgx_pages_init (KgxPages *self)
 {
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
 
-  priv->font = NULL;
-  priv->zoom = KGX_FONT_SCALE_DEFAULT;
-  priv->theme = KGX_THEME_NIGHT;
-
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  g_signal_group_connect (priv->active_page_signals,
+                          "size-changed", G_CALLBACK (size_changed),
+                          self);
+
+  g_binding_group_bind (priv->active_page_binds, "search-mode-enabled",
+                        self, "search-mode-enabled",
+                        G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
 
   adw_tab_view_remove_shortcuts (ADW_TAB_VIEW (priv->view),
                                  ADW_TAB_VIEW_SHORTCUT_CONTROL_HOME |

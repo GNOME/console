@@ -183,4 +183,7 @@
       <class name="terminal-window"/>
     </style>
   </template>
+  <object class="GBindingGroup" id="settings_binds">
+    <property name="source" bind-source="KgxWindow" bind-property="settings" bind-flags="sync-create"/>
+  </object>
 </interface>

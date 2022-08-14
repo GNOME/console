@@ -47,11 +47,7 @@ struct _KgxTabPrivate {
   char                 *title;
   char                 *tooltip;
   GFile                *path;
-  PangoFontDescription *font;
-  double                zoom;
   KgxStatus             status;
-  KgxTheme              theme;
-  gint64                scrollback_lines;
 
   gboolean              is_active;
   gboolean              close_on_quit;
@@ -100,14 +96,10 @@ enum {
   PROP_TAB_PATH,
   PROP_TAB_STATUS,
   PROP_TAB_TOOLTIP,
-  PROP_FONT,
-  PROP_ZOOM,
-  PROP_THEME,
   PROP_IS_ACTIVE,
   PROP_CLOSE_ON_QUIT,
   PROP_NEEDS_ATTENTION,
   PROP_SEARCH_MODE_ENABLED,
-  PROP_SCROLLBACK_LINES,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -143,7 +135,6 @@ kgx_tab_dispose (GObject *object)
   g_clear_pointer (&priv->title, g_free);
   g_clear_pointer (&priv->tooltip, g_free);
   g_clear_object (&priv->path);
-  g_clear_pointer (&priv->font, pango_font_description_free);
 
   g_clear_pointer (&priv->root, g_hash_table_unref);
   g_clear_pointer (&priv->remote, g_hash_table_unref);
@@ -310,17 +301,8 @@ kgx_tab_get_property (GObject    *object,
     case PROP_TAB_TOOLTIP:
       g_value_set_string (value, priv->tooltip);
       break;
-    case PROP_FONT:
-      g_value_set_boxed (value, priv->font);
-      break;
-    case PROP_ZOOM:
-      g_value_set_double (value, priv->zoom);
-      break;
     case PROP_IS_ACTIVE:
       g_value_set_boolean (value, priv->is_active);
-      break;
-    case PROP_THEME:
-      g_value_set_enum (value, priv->theme);
       break;
     case PROP_CLOSE_ON_QUIT:
       g_value_set_boolean (value, priv->close_on_quit);
@@ -330,9 +312,6 @@ kgx_tab_get_property (GObject    *object,
       break;
     case PROP_SEARCH_MODE_ENABLED:
       g_value_set_boolean (value, priv->search_mode_enabled);
-      break;
-    case PROP_SCROLLBACK_LINES:
-      g_value_set_int64 (value, priv->scrollback_lines);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -417,20 +396,8 @@ kgx_tab_set_property (GObject      *object,
       g_clear_pointer (&priv->tooltip, g_free);
       priv->tooltip = g_value_dup_string (value);
       break;
-    case PROP_FONT:
-      if (priv->font) {
-        g_boxed_free (PANGO_TYPE_FONT_DESCRIPTION, priv->font);
-      }
-      priv->font = g_value_dup_boxed (value);
-      break;
-    case PROP_ZOOM:
-      priv->zoom = g_value_get_double (value);
-      break;
     case PROP_IS_ACTIVE:
       kgx_tab_set_is_active (self, g_value_get_boolean (value));
-      break;
-    case PROP_THEME:
-      priv->theme = g_value_get_enum (value);
       break;
     case PROP_CLOSE_ON_QUIT:
       priv->close_on_quit = g_value_get_boolean (value);
@@ -440,9 +407,6 @@ kgx_tab_set_property (GObject      *object,
       break;
     case PROP_SEARCH_MODE_ENABLED:
       priv->search_mode_enabled = g_value_get_boolean (value);
-      break;
-    case PROP_SCROLLBACK_LINES:
-      priv->scrollback_lines = g_value_get_int64 (value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -601,18 +565,6 @@ kgx_tab_class_init (KgxTabClass *klass)
                          NULL,
                          G_PARAM_READWRITE);
 
-  pspecs[PROP_FONT] =
-    g_param_spec_boxed ("font", "Font", "Monospace font",
-                         PANGO_TYPE_FONT_DESCRIPTION,
-                         G_PARAM_READWRITE);
-
-  pspecs[PROP_ZOOM] =
-    g_param_spec_double ("zoom", "Zoom", "Font scaling",
-                         KGX_FONT_SCALE_MIN,
-                         KGX_FONT_SCALE_MAX,
-                         KGX_FONT_SCALE_DEFAULT,
-                         G_PARAM_READWRITE);
-
   /**
    * KgxTab:is-active:
    *
@@ -624,19 +576,6 @@ kgx_tab_class_init (KgxTabClass *klass)
     g_param_spec_boolean ("is-active", "Is Active", "Current tab",
                           FALSE,
                           G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
-
-  /**
-   * KgxTab:theme:
-   *
-   * The #KgxTheme to apply to the #KgxTerminal s in the #KgxTab
-   *
-   * Stability: Private
-   */
-  pspecs[PROP_THEME] =
-    g_param_spec_enum ("theme", "Theme", "The path of the active tab",
-                       KGX_TYPE_THEME,
-                       KGX_THEME_NIGHT,
-                       G_PARAM_READWRITE);
 
   pspecs[PROP_CLOSE_ON_QUIT] =
     g_param_spec_boolean ("close-on-quit", "Close on quit",
@@ -655,20 +594,6 @@ kgx_tab_class_init (KgxTabClass *klass)
                           "Whether the search mode is enabled for active page",
                           FALSE,
                           G_PARAM_READWRITE);
-
-  /**
-   * KgxTab:scrollback-lines:
-   *
-   * How many lines of scrollback #KgxTerminal should keep
-   *
-   * Bound to ‘scrollback-lines’ GSetting so changes persist
-   *
-   * Stability: Private
-   */
-  pspecs[PROP_SCROLLBACK_LINES] =
-    g_param_spec_int64 ("scrollback-lines", "Scrollback Lines", "Size of the scrollback",
-                        G_MININT64, G_MAXINT64, 512,
-                        G_PARAM_READWRITE);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 

@@ -53,59 +53,6 @@ enum {
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 
 
-static gboolean
-scale_to_label (GBinding     *binding,
-                const GValue *from_value,
-                GValue       *to_value,
-                gpointer      user_data)
-{
-  int zoom = round (g_value_get_double (from_value) * 100);
-
-  g_value_take_string (to_value, g_strdup_printf ("%i%%", zoom));
-
-  return TRUE;
-}
-
-
-static void
-kgx_window_constructed (GObject *object)
-{
-  KgxWindow *self = KGX_WINDOW (object);
-  AdwStyleManager *style_manager;
-
-  G_OBJECT_CLASS (kgx_window_parent_class)->constructed (object);
-
-  style_manager = adw_style_manager_get_default ();
-
-  g_object_bind_property (self->settings, "theme",
-                          self->pages, "theme",
-                          G_BINDING_SYNC_CREATE);
-  g_object_bind_property (self->settings, "theme",
-                          self->theme_switcher, "theme",
-                          G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
-  g_object_bind_property (style_manager, "system-supports-color-schemes",
-                          self->theme_switcher, "show-system",
-                          G_BINDING_SYNC_CREATE);
-
-  g_object_bind_property (self->settings, "font",
-                          self->pages, "font",
-                          G_BINDING_SYNC_CREATE);
-
-  g_object_bind_property (self->settings, "font-scale",
-                          self->pages, "zoom",
-                          G_BINDING_SYNC_CREATE);
-
-  g_object_bind_property (self->settings, "scrollback-lines",
-                          self->pages, "scrollback-lines",
-                          G_BINDING_SYNC_CREATE);
-
-  g_object_bind_property_full (self->settings, "font-scale",
-                               self->zoom_level, "label",
-                               G_BINDING_SYNC_CREATE,
-                               scale_to_label, NULL, NULL, NULL);
-}
-
-
 static void
 kgx_window_dispose (GObject *object)
 {
@@ -307,7 +254,6 @@ kgx_window_class_init (KgxWindowClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GtkWindowClass *window_class = GTK_WINDOW_CLASS (klass);
 
-  object_class->constructed = kgx_window_constructed;
   object_class->dispose = kgx_window_dispose;
   object_class->set_property = kgx_window_set_property;
   object_class->get_property = kgx_window_get_property;
@@ -334,6 +280,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, tab_switcher);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, pages);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, primary_menu);
+  gtk_widget_class_bind_template_child (widget_class, KgxWindow, settings_binds);
 
   gtk_widget_class_bind_template_callback (widget_class, active_changed);
   gtk_widget_class_bind_template_callback (widget_class, size_changed);
@@ -343,6 +290,20 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, status_changed);
   gtk_widget_class_bind_template_callback (widget_class, extra_drag_drop);
   gtk_widget_class_bind_template_callback (widget_class, new_tab_cb);
+}
+
+
+static gboolean
+scale_to_label (GBinding     *binding,
+                const GValue *from_value,
+                GValue       *to_value,
+                gpointer      user_data)
+{
+  int zoom = round (g_value_get_double (from_value) * 100);
+
+  g_value_take_string (to_value, g_strdup_printf ("%i%%", zoom));
+
+  return TRUE;
 }
 
 
@@ -528,12 +489,28 @@ kgx_window_init (KgxWindow *self)
 {
   g_autoptr (GtkWindowGroup) group = NULL;
   g_autoptr (GPropertyAction) pact = NULL;
+  AdwStyleManager *style_manager;
 
   g_type_ensure (KGX_TYPE_TAB_BUTTON);
   g_type_ensure (KGX_TYPE_TAB_SWITCHER);
   g_type_ensure (KGX_TYPE_THEME_SWITCHER);
 
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  style_manager = adw_style_manager_get_default ();
+
+  g_object_bind_property (style_manager, "system-supports-color-schemes",
+                          self->theme_switcher, "show-system",
+                          G_BINDING_SYNC_CREATE);
+
+  g_binding_group_bind (self->settings_binds, "theme",
+                        self->theme_switcher, "theme",
+                        G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+
+  g_binding_group_bind_full (self->settings_binds, "font-scale",
+                             self->zoom_level, "label",
+                             G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL,
+                             scale_to_label, NULL, NULL, NULL);
 
   g_action_map_add_action_entries (G_ACTION_MAP (self),
                                    win_entries,
