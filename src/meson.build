@@ -11,6 +11,8 @@ kgx_sources = [
   'kgx-process.h',
   'kgx-proxy-info.c',
   'kgx-proxy-info.h',
+  'kgx-settings.c',
+  'kgx-settings.h',
   'kgx-simple-tab.c',
   'kgx-simple-tab.h',
   'kgx-tab-button.c',
