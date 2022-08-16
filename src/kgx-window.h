@@ -60,6 +60,7 @@ struct _KgxWindow
   int                   last_rows;
   guint                 timeout;
 
+  gboolean              narrow;
   gboolean              close_anyway;
 
   /* Template widgets */
@@ -70,7 +71,7 @@ struct _KgxWindow
   GtkWidget            *zoom_level;
   GtkWidget            *tab_bar;
   GtkWidget            *tab_button;
-  GtkWidget            *tab_switcher;
+  GtkWidget            *tab_overview;
   GtkWidget            *pages;
   GMenu                *primary_menu;
 

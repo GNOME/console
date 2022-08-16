@@ -37,6 +37,8 @@
 
 typedef struct _KgxPagesPrivate KgxPagesPrivate;
 struct _KgxPagesPrivate {
+  KgxSettings          *settings;
+
   GtkWidget            *view;
   char                 *title;
   GFile                *path;
@@ -54,6 +56,7 @@ struct _KgxPagesPrivate {
 
   GSignalGroup         *active_page_signals;
   GBindingGroup        *active_page_binds;
+  GSignalGroup         *settings_signals;
 
   GBinding             *is_active_bind;
 
@@ -66,6 +69,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (KgxPages, kgx_pages, ADW_TYPE_BIN)
 
 enum {
   PROP_0,
+  PROP_SETTINGS,
   PROP_TAB_VIEW,
   PROP_TAB_COUNT,
   PROP_TITLE,
@@ -82,6 +86,7 @@ static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 enum {
   ZOOM,
   CREATE_TEAROFF_HOST,
+  MAYBE_CLOSE_WINDOW,
   N_SIGNALS
 };
 static guint signals[N_SIGNALS];
@@ -93,12 +98,15 @@ kgx_pages_dispose (GObject *object)
   KgxPages *self = KGX_PAGES (object);
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
 
+  g_clear_object (&priv->settings);
+
   g_clear_handle_id (&priv->timeout, g_source_remove);
 
   g_clear_pointer (&priv->title, g_free);
   g_clear_object (&priv->path);
 
-  g_clear_weak_pointer (&priv->active_page);
+  g_clear_object (&priv->is_active_bind);
+  g_clear_object (&priv->active_page);
 
   G_OBJECT_CLASS (kgx_pages_parent_class)->dispose (object);
 }
@@ -114,6 +122,9 @@ kgx_pages_get_property (GObject    *object,
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
 
   switch (property_id) {
+    case PROP_SETTINGS:
+      g_value_set_object (value, priv->settings);
+      break;
     case PROP_TAB_COUNT:
       g_value_set_uint (value, adw_tab_view_get_n_pages (ADW_TAB_VIEW (priv->view)));
       break;
@@ -155,6 +166,9 @@ kgx_pages_set_property (GObject      *object,
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
 
   switch (property_id) {
+    case PROP_SETTINGS:
+      g_set_object (&priv->settings, g_value_get_object (value));
+      break;
     case PROP_TITLE:
       g_clear_pointer (&priv->title, g_free);
       priv->title = g_value_dup_string (value);
@@ -167,7 +181,7 @@ kgx_pages_set_property (GObject      *object,
         g_object_set (priv->active_page, "is-active", FALSE, NULL);
       }
       g_clear_object (&priv->is_active_bind);
-      g_set_weak_pointer (&priv->active_page, g_value_get_object (value));
+      g_set_object (&priv->active_page, g_value_get_object (value));
       if (priv->active_page) {
         priv->is_active_bind =
           g_object_bind_property (self, "is-active",
@@ -306,19 +320,13 @@ page_detached (AdwTabView *view,
                KgxPages   *self)
 {
   KgxPagesPrivate *priv;
-  GtkRoot *root;
 
   g_return_if_fail (ADW_IS_TAB_PAGE (page));
 
   priv = kgx_pages_get_instance_private (self);
 
   if (adw_tab_view_get_n_pages (ADW_TAB_VIEW (priv->view)) == 0) {
-    root = gtk_widget_get_root (GTK_WIDGET (self));
-
-    if (GTK_IS_WINDOW (root)) {
-      /* Not a massive fan, would prefer it if window observed pages is empty */
-      gtk_window_close (GTK_WINDOW (root));
-    }
+    g_signal_emit (self, signals[MAYBE_CLOSE_WINDOW], 0);
   }
 }
 
@@ -421,6 +429,24 @@ status_to_icon (GBinding     *binding,
 
 
 static gboolean
+path_to_keyword (GBinding     *binding,
+                 const GValue *from_value,
+                 GValue       *to_value,
+                 gpointer      user_data)
+{
+  GFile *path = g_value_get_object (from_value);
+
+  if (path) {
+    g_value_take_string (to_value, g_file_get_path (path));
+  } else {
+    g_value_set_static_string (to_value, "");
+  }
+
+  return TRUE;
+}
+
+
+static gboolean
 object_accumulator (GSignalInvocationHint *ihint,
                     GValue                *return_value,
                     const GValue          *signal_value,
@@ -443,6 +469,11 @@ kgx_pages_class_init (KgxPagesClass *klass)
   object_class->dispose = kgx_pages_dispose;
   object_class->get_property = kgx_pages_get_property;
   object_class->set_property = kgx_pages_set_property;
+
+  pspecs[PROP_SETTINGS] =
+    g_param_spec_object ("settings", NULL, NULL,
+                         KGX_TYPE_SETTINGS,
+                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   /**
    * KgxPages:tab-view:
@@ -550,6 +581,15 @@ kgx_pages_class_init (KgxPagesClass *klass)
                                                KGX_TYPE_PAGES,
                                                0);
 
+  signals[MAYBE_CLOSE_WINDOW] = g_signal_new ("maybe-close-window",
+                                              G_TYPE_FROM_CLASS (klass),
+                                              G_SIGNAL_RUN_LAST,
+                                              0,
+                                              NULL, NULL,
+                                              kgx_marshals_VOID__VOID,
+                                              G_TYPE_NONE,
+                                              0);
+
   gtk_widget_class_set_template_from_resource (widget_class,
                                                KGX_APPLICATION_PATH "kgx-pages.ui");
 
@@ -558,6 +598,7 @@ kgx_pages_class_init (KgxPagesClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, status_revealer);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, active_page_signals);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, active_page_binds);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxPages, settings_signals);
 
   gtk_widget_class_bind_template_callback (widget_class, page_attached);
   gtk_widget_class_bind_template_callback (widget_class, page_detached);
@@ -574,12 +615,29 @@ static void
 kgx_pages_init (KgxPages *self)
 {
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
+  AdwStyleManager *style_manager = adw_style_manager_get_default ();
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
   g_signal_group_connect (priv->active_page_signals,
                           "size-changed", G_CALLBACK (size_changed),
                           self);
+
+  g_signal_group_connect_swapped (priv->settings_signals, "notify::theme",
+                                  G_CALLBACK (adw_tab_view_invalidate_thumbnails),
+                                  priv->view);
+
+  g_signal_connect_object (style_manager,
+                           "notify::dark",
+                           G_CALLBACK (adw_tab_view_invalidate_thumbnails),
+                           priv->view,
+                           G_CONNECT_SWAPPED);
+
+  g_signal_connect_object (style_manager,
+                           "notify::high-contrast",
+                           G_CALLBACK (adw_tab_view_invalidate_thumbnails),
+                           priv->view,
+                           G_CONNECT_SWAPPED);
 
   g_binding_group_bind (priv->active_page_binds, "search-mode-enabled",
                         self, "search-mode-enabled",
@@ -614,6 +672,8 @@ kgx_pages_add_page (KgxPages *self,
   g_object_bind_property (tab, "needs-attention", page, "needs-attention", G_BINDING_SYNC_CREATE);
   g_object_bind_property_full (tab, "tab-status", page, "icon", G_BINDING_SYNC_CREATE,
                                status_to_icon, NULL, NULL, NULL);
+  g_object_bind_property_full (tab, "tab-path", page, "keyword", G_BINDING_SYNC_CREATE,
+                               path_to_keyword, NULL, NULL, NULL);
 }
 
 
@@ -765,6 +825,9 @@ kgx_pages_close_page (KgxPages *self)
   if (!page)
     page = adw_tab_view_get_selected_page (ADW_TAB_VIEW (priv->view));
 
+  if (!page)
+    return;
+
   adw_tab_view_close_page (ADW_TAB_VIEW (priv->view), page);
 }
 
@@ -784,6 +847,22 @@ kgx_pages_detach_page (KgxPages *self)
   if (!page)
     page = adw_tab_view_get_selected_page (ADW_TAB_VIEW (priv->view));
 
+  if (!page)
+    return;
+
   new_view = create_window (ADW_TAB_VIEW (priv->view), self);
   adw_tab_view_transfer_page (ADW_TAB_VIEW (priv->view), page, new_view, 0);
+}
+
+
+AdwTabPage *
+kgx_pages_get_selected_page (KgxPages  *self)
+{
+  KgxPagesPrivate *priv;
+
+  g_return_val_if_fail (KGX_IS_PAGES (self), NULL);
+
+  priv = kgx_pages_get_instance_private (self);
+
+  return adw_tab_view_get_selected_page (ADW_TAB_VIEW (priv->view));
 }

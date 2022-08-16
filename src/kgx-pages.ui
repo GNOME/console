@@ -79,4 +79,8 @@
   <object class="GBindingGroup" id="active_page_binds">
     <property name="source" bind-source="KgxPages" bind-property="active-page" bind-flags="sync-create"/>
   </object>
+  <object class="GSignalGroup" id="settings_signals">
+    <property name="target-type">KgxSettings</property>
+    <property name="target" bind-source="KgxPages" bind-property="settings" bind-flags="sync-create"/>
+  </object>
 </interface>
