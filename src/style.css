@@ -4,31 +4,27 @@
 @define-color remote_headerbar_bg_color       shade(@purple_1, 1.27);
 @define-color remote_headerbar_backdrop_color shade(@purple_1, 1.35);
 
-.terminal-window {
-  background: transparent;
-}
-
-.terminal-window.root headerbar,
-.terminal-window.root searchbar > revealer > box,
-.terminal-window.root tabbar > revealer > box {
+.terminal-window.root .main-box headerbar,
+.terminal-window.root .main-box tabbar > revealer > box,
+.tab.root searchbar > revealer > box {
   background-color: @root_headerbar_bg_color;
 }
 
-.terminal-window.root:backdrop headerbar,
-.terminal-window.root:backdrop searchbar > revealer > box,
-.terminal-window.root:backdrop tabbar > revealer > box {
+.terminal-window.root:backdrop .main-box headerbar,
+.terminal-window.root:backdrop .main-box tabbar > revealer > box,
+.tab.root:backdrop searchbar > revealer > box {
   background-color: @root_headerbar_backdrop_color;
 }
 
-.terminal-window.remote headerbar,
-.terminal-window.remote searchbar > revealer > box,
-.terminal-window.remote tabbar > revealer > box {
+.terminal-window.remote .main-box  headerbar,
+.terminal-window.remote .main-box tabbar > revealer > box,
+.tab.remote searchbar > revealer > box {
   background-color: @remote_headerbar_bg_color;
 }
 
-.terminal-window.remote:backdrop headerbar,
-.terminal-window.remote:backdrop searchbar > revealer > box,
-.terminal-window.remote:backdrop tabbar > revealer > box {
+.terminal-window.remote:backdrop .main-box headerbar,
+.terminal-window.remote:backdrop .main-box tabbar > revealer > box,
+.tab.remote:backdrop searchbar > revealer > box {
   background-color: @remote_headerbar_backdrop_color;
 }
 
@@ -96,60 +92,6 @@ window:not(.tiled)
 
 .process-list row .title {
   font-family: monospace;
-}
-
-.tab-button label {
-  font-weight: 800;
-  font-size: 8pt;
-}
-
-.tab-button label.small {
-  font-size: 6pt;
-}
-
-.tab-switcher {
-  min-height: 180px;
-}
-
-.tab-switcher list {
-  padding-top: 48px;
-  padding-bottom: 84px;
-  background-color: @popover_bg_color;
-  color: @popover_fg_color;
-}
-
-.tab-switcher list row {
-  min-height: 40px;
-  padding: 3px;
-}
-
-.tab-switcher list row:dir(ltr) { padding-left: 11px; }
-.tab-switcher list row:dir(rtl) { padding-right: 11px; }
-
-.tab-switcher list row.needs-attention {
-  color: @accent_color;
-}
-
-.tab-switcher list row .close-btn,
-.tab-switcher list row .indicator-btn {
-  min-width: 36px;
-  min-height: 36px;
-  border-radius: 99px;
-  padding: 0;
-}
-
-.tab-switcher .collapse-button {
-  border-radius: 99px;
-  padding: 6px 30px;
-  margin: 6px;
-}
-
-.tab-switcher .new-tab-button {
-  min-width: 48px;
-  min-height: 48px;
-  border-radius: 100%;
-  padding: 0;
-  margin: 18px;
 }
 
 themeswitcher {

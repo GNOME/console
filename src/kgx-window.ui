@@ -32,11 +32,15 @@
   <template class="KgxWindow" parent="AdwApplicationWindow">
     <signal name="notify::is-active" handler="active_changed" swapped="no"/>
     <property name="content">
-      <object class="KgxTabSwitcher" id="tab_switcher">
-        <signal name="new-tab" handler="new_tab_cb" swapped="no"/>
+      <object class="AdwTabOverview" id="tab_overview">
+        <property name="enable-new-tab">True</property>
+        <signal name="create-tab" handler="create_tab_cb" swapped="yes"/>
         <property name="child">
           <object class="GtkBox">
             <property name="orientation">vertical</property>
+            <style>
+              <class name="main-box"/>
+            </style>
             <child>
               <object class="GtkHeaderBar" id="header_bar">
                 <property name="title-widget">
@@ -118,14 +122,14 @@
                   </object>
                 </child>
                 <child type="end">
-                  <object class="KgxTabButton" id="tab_button">
-                    <property name="visible" bind-source="tab_switcher" bind-property="narrow" bind-flags="sync-create"/>
+                  <object class="AdwTabButton" id="tab_button">
+                    <property name="visible" bind-source="KgxWindow" bind-property="narrow" bind-flags="sync-create"/>
                     <property name="action-name">win.tab-switcher</property>
                   </object>
                 </child>
                 <child type="end">
                   <object class="GtkButton">
-                    <property name="visible" bind-source="tab_switcher" bind-property="narrow" bind-flags="sync-create|invert-boolean"/>
+                    <property name="visible" bind-source="KgxWindow" bind-property="narrow" bind-flags="sync-create|invert-boolean"/>
                     <property name="can-focus">0</property>
                     <property name="receives-default">0</property>
                     <property name="action-name">win.new-tab</property>
@@ -137,7 +141,7 @@
             </child>
             <child>
               <object class="GtkRevealer">
-                <property name="reveal-child" bind-source="tab_switcher" bind-property="narrow" bind-flags="sync-create|invert-boolean"/>
+                <property name="reveal-child" bind-source="KgxWindow" bind-property="narrow" bind-flags="sync-create|invert-boolean"/>
                 <property name="child">
                   <object class="AdwTabBar" id="tab_bar">
                     <signal name="extra-drag-drop" handler="extra_drag_drop" swapped="no"/>
@@ -147,9 +151,11 @@
             </child>
             <child>
               <object class="KgxPages" id="pages">
+                <property name="settings" bind-source="KgxWindow" bind-property="settings" bind-flags="sync-create" />
                 <property name="is-active" bind-source="KgxWindow" bind-property="is-active" bind-flags="sync-create" />
                 <signal name="zoom" handler="zoom" swapped="no"/>
                 <signal name="create-tearoff-host" handler="create_tearoff_host" swapped="no"/>
+                <signal name="maybe-close-window" handler="maybe_close_window" swapped="yes"/>
                 <signal name="notify::status" handler="status_changed" swapped="yes" />
               </object>
             </child>

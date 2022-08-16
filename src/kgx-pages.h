@@ -53,5 +53,6 @@ void        kgx_pages_focus_page     (KgxPages   *self,
 KgxStatus   kgx_pages_current_status (KgxPages   *self);
 void        kgx_pages_close_page          (KgxPages  *self);
 void        kgx_pages_detach_page         (KgxPages  *self);
+AdwTabPage *kgx_pages_get_selected_page   (KgxPages  *self);
 
 G_END_DECLS
