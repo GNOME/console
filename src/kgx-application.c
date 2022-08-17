@@ -47,123 +47,6 @@
 
 G_DEFINE_TYPE (KgxApplication, kgx_application, ADW_TYPE_APPLICATION)
 
-enum {
-  PROP_0,
-  PROP_THEME,
-  PROP_FONT,
-  PROP_FONT_SCALE,
-  PROP_SCROLLBACK_LINES,
-  LAST_PROP
-};
-
-static GParamSpec *pspecs[LAST_PROP] = { NULL, };
-
-
-static void
-kgx_application_set_theme (KgxApplication *self,
-                           KgxTheme        theme)
-{
-  AdwStyleManager *style_manager;
-
-  g_return_if_fail (KGX_IS_APPLICATION (self));
-
-  self->theme = theme;
-
-  style_manager = adw_style_manager_get_default ();
-
-  switch (theme) {
-    case KGX_THEME_AUTO:
-      adw_style_manager_set_color_scheme (style_manager, ADW_COLOR_SCHEME_PREFER_LIGHT);
-      break;
-    case KGX_THEME_DAY:
-      adw_style_manager_set_color_scheme (style_manager, ADW_COLOR_SCHEME_FORCE_LIGHT);
-      break;
-    case KGX_THEME_NIGHT:
-    case KGX_THEME_HACKER:
-    default:
-      adw_style_manager_set_color_scheme (style_manager, ADW_COLOR_SCHEME_FORCE_DARK);
-      break;
-  }
-
-  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_THEME]);
-}
-
-
-static void
-kgx_application_set_scale (KgxApplication *self,
-                           gdouble         scale)
-{
-  GAction *action;
-
-  g_return_if_fail (KGX_IS_APPLICATION (self));
-
-  self->scale = CLAMP (scale, KGX_FONT_SCALE_MIN, KGX_FONT_SCALE_MAX);
-
-  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-out");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (action),
-                               self->scale > KGX_FONT_SCALE_MIN);
-  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-normal");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (action),
-                               self->scale != KGX_FONT_SCALE_DEFAULT);
-  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-in");
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (action),
-                               self->scale < KGX_FONT_SCALE_MAX);
-
-  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_FONT_SCALE]);
-}
-
-
-static void
-kgx_application_set_property (GObject      *object,
-                              guint         property_id,
-                              const GValue *value,
-                              GParamSpec   *pspec)
-{
-  KgxApplication *self = KGX_APPLICATION (object);
-
-  switch (property_id) {
-    case PROP_THEME:
-      kgx_application_set_theme (self, g_value_get_enum (value));
-      break;
-    case PROP_FONT_SCALE:
-      kgx_application_set_scale (self, g_value_get_double (value));
-      break;
-    case PROP_SCROLLBACK_LINES:
-      self->scrollback_lines = g_value_get_int64 (value);
-      break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
-  }
-}
-
-static void
-kgx_application_get_property (GObject    *object,
-                              guint       property_id,
-                              GValue     *value,
-                              GParamSpec *pspec)
-{
-  KgxApplication *self = KGX_APPLICATION (object);
-
-  switch (property_id) {
-    case PROP_THEME:
-      g_value_set_enum (value, self->theme);
-      break;
-    case PROP_FONT:
-      g_value_take_boxed (value, kgx_application_get_font (self));
-      break;
-    case PROP_FONT_SCALE:
-      g_value_set_double (value, self->scale);
-      break;
-    case PROP_SCROLLBACK_LINES:
-      g_value_set_int64 (value, self->scrollback_lines);
-      break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
-  }
-}
-
 
 static void
 kgx_application_finalize (GObject *object)
@@ -171,8 +54,6 @@ kgx_application_finalize (GObject *object)
   KgxApplication *self = KGX_APPLICATION (object);
 
   g_clear_object (&self->settings);
-  g_clear_object (&self->desktop_interface);
-
   g_clear_pointer (&self->pages, g_tree_unref);
 
   G_OBJECT_CLASS (kgx_application_parent_class)->finalize (object);
@@ -207,9 +88,6 @@ kgx_application_activate (GApplication *app)
 static void
 kgx_application_startup (GApplication *app)
 {
-  KgxApplication    *self = KGX_APPLICATION (app);
-  g_autoptr (GAction) settings_action = NULL;
-
   const char *const new_window_accels[] = { "<shift><primary>n", NULL };
   const char *const new_tab_accels[] = { "<shift><primary>t", NULL };
   const char *const close_tab_accels[] = { "<shift><primary>w", NULL };
@@ -245,14 +123,6 @@ kgx_application_startup (GApplication *app)
                                          "app.zoom-out", zoom_out_accels);
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "app.zoom-normal", zoom_normal_accels);
-
-  self->settings = g_settings_new (KGX_APPLICATION_ID);
-  g_settings_bind (self->settings, "theme", app, "theme", G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind (self->settings, "font-scale", app, "font-scale", G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind (self->settings, "scrollback-lines", app, "scrollback-lines", G_SETTINGS_BIND_DEFAULT);
-
-  settings_action = g_settings_create_action (self->settings, "theme");
-  g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (settings_action));
 }
 
 
@@ -340,13 +210,13 @@ kgx_application_command_line (GApplication            *app,
   g_variant_dict_lookup (options, G_OPTION_REMAINING, "^aay", &argv);
 
   if (g_variant_dict_lookup (options, "set-shell", "^as", &shell) && shell) {
-    g_settings_set_strv (self->settings, "shell", shell);
+    kgx_settings_set_custom_shell (self->settings, shell);
 
     return EXIT_SUCCESS;
   }
 
   if (g_variant_dict_lookup (options, "set-scrollback", "x", &scrollback)) {
-    g_settings_set_int64 (self->settings, "scrollback-lines", scrollback);
+    kgx_settings_set_scrollback (self->settings, scrollback);
 
     return EXIT_SUCCESS;
   }
@@ -507,11 +377,9 @@ kgx_application_handle_local_options (GApplication *app,
 static void
 kgx_application_class_init (KgxApplicationClass *klass)
 {
-  GObjectClass      *object_class = G_OBJECT_CLASS (klass);
-  GApplicationClass *app_class    = G_APPLICATION_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GApplicationClass *app_class = G_APPLICATION_CLASS (klass);
 
-  object_class->set_property = kgx_application_set_property;
-  object_class->get_property = kgx_application_get_property;
   object_class->finalize = kgx_application_finalize;
 
   app_class->activate = kgx_application_activate;
@@ -520,59 +388,6 @@ kgx_application_class_init (KgxApplicationClass *klass)
   app_class->local_command_line = kgx_application_local_command_line;
   app_class->command_line = kgx_application_command_line;
   app_class->handle_local_options = kgx_application_handle_local_options;
-
-  /**
-   * KgxApplication:theme:
-   *
-   * The palette to use, one of the values of #KgxTheme
-   *
-   * Officially only "night" exists, "hacker" is just a little fun
-   *
-   * Bound to ‘theme’ GSetting so changes persist
-   *
-   * Stability: Private
-   */
-  pspecs[PROP_THEME] =
-    g_param_spec_enum ("theme", "Theme", "Terminal theme",
-                       KGX_TYPE_THEME, KGX_THEME_NIGHT,
-                       G_PARAM_READWRITE);
-
-  pspecs[PROP_FONT] =
-    g_param_spec_boxed ("font", "Font", "Monospace font",
-                         PANGO_TYPE_FONT_DESCRIPTION,
-                         G_PARAM_READABLE);
-
-  pspecs[PROP_FONT_SCALE] =
-    g_param_spec_double ("font-scale", "Font scale", "Font scaling",
-                         KGX_FONT_SCALE_MIN,
-                         KGX_FONT_SCALE_MAX,
-                         KGX_FONT_SCALE_DEFAULT,
-                         G_PARAM_READWRITE);
-
-  /**
-   * KgxApplication:scrollback-lines:
-   *
-   * How many lines of scrollback #KgxTerminal should keep
-   *
-   * Bound to ‘scrollback-lines’ GSetting so changes persist
-   *
-   * Stability: Private
-   */
-  pspecs[PROP_SCROLLBACK_LINES] =
-    g_param_spec_int64 ("scrollback-lines", "Scrollback Lines", "Size of the scrollback",
-                        G_MININT64, G_MAXINT64, 512,
-                        G_PARAM_READWRITE);
-
-  g_object_class_install_properties (object_class, LAST_PROP, pspecs);
-}
-
-
-static void
-font_changed (GSettings      *settings,
-              const char     *key,
-              KgxApplication *self)
-{
-  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_FONT]);
 }
 
 
@@ -731,11 +546,7 @@ zoom_out_activated (GSimpleAction *action,
 {
   KgxApplication *self = KGX_APPLICATION (data);
 
-  if (self->scale < 0.1) {
-    return;
-  }
-
-  kgx_application_set_scale (self, self->scale - 0.1);
+  kgx_settings_decrease_scale (self->settings);
 }
 
 
@@ -746,7 +557,7 @@ zoom_normal_activated (GSimpleAction *action,
 {
   KgxApplication *self = KGX_APPLICATION (data);
 
-  kgx_application_set_scale (self, KGX_FONT_SCALE_DEFAULT);
+  kgx_settings_reset_scale (self->settings);
 }
 
 
@@ -757,7 +568,7 @@ zoom_in_activated (GSimpleAction *action,
 {
   KgxApplication *self = KGX_APPLICATION (data);
 
-  kgx_application_set_scale (self, self->scale + 0.1);
+  kgx_settings_increase_scale (self->settings);
 }
 
 
@@ -771,9 +582,52 @@ static GActionEntry app_entries[] = {
 };
 
 
+static gboolean
+theme_to_colour_scheme (GBinding     *binding,
+                        const GValue *from_value,
+                        GValue       *to_value,
+                        gpointer      user_data)
+{
+  switch (g_value_get_enum (from_value)) {
+    case KGX_THEME_AUTO:
+      g_value_set_enum (to_value, ADW_COLOR_SCHEME_PREFER_LIGHT);
+      break;
+    case KGX_THEME_DAY:
+      g_value_set_enum (to_value, ADW_COLOR_SCHEME_FORCE_LIGHT);
+      break;
+    case KGX_THEME_NIGHT:
+    case KGX_THEME_HACKER:
+    default:
+      g_value_set_enum (to_value, ADW_COLOR_SCHEME_FORCE_DARK);
+      break;
+  }
+
+  return TRUE;
+}
+
+
+static gboolean
+scale_to_can_reset (GBinding     *binding,
+                    const GValue *from_value,
+                    GValue       *to_value,
+                    gpointer      user_data)
+{
+  double scale = g_value_get_double (from_value);
+
+  g_value_set_boolean (to_value,
+                       fabs (scale - KGX_FONT_SCALE_DEFAULT) > 0.05);
+
+  return TRUE;
+}
+
+
 static void
 kgx_application_init (KgxApplication *self)
 {
+  g_autoptr (GPropertyAction) theme_action = NULL;
+  AdwStyleManager *style_manager = adw_style_manager_get_default ();
+  GAction *action;
+
   g_application_add_main_option_entries (G_APPLICATION (self), entries);
 
   g_action_map_add_action_entries (G_ACTION_MAP (self),
@@ -781,37 +635,32 @@ kgx_application_init (KgxApplication *self)
                                    G_N_ELEMENTS (app_entries),
                                    self);
 
-  self->desktop_interface = g_settings_new (DESKTOP_INTERFACE_SETTINGS_SCHEMA);
+  self->settings = g_object_new (KGX_TYPE_SETTINGS, NULL);
+  g_object_bind_property_full (self->settings, "theme",
+                               style_manager, "color-scheme",
+                               G_BINDING_SYNC_CREATE,
+                               theme_to_colour_scheme, NULL, NULL, NULL);
 
-  g_signal_connect (self->desktop_interface,
-                    "changed::" MONOSPACE_FONT_KEY_NAME,
-                    G_CALLBACK (font_changed),
-                    self);
+  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-out");
+  g_object_bind_property (self->settings, "scale-can-decrease",
+                          action, "enabled",
+                          G_BINDING_SYNC_CREATE);
+
+  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-normal");
+  g_object_bind_property_full (self->settings, "font-scale",
+                               action, "enabled",
+                               G_BINDING_SYNC_CREATE,
+                               scale_to_can_reset, NULL, NULL, NULL);
+
+  action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-in");
+  g_object_bind_property (self->settings, "scale-can-increase",
+                          action, "enabled",
+                          G_BINDING_SYNC_CREATE);
+
+  theme_action = g_property_action_new ("theme", self->settings, "theme");
+  g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (theme_action));
 
   self->pages = g_tree_new_full (kgx_pid_cmp, NULL, NULL, NULL);
-}
-
-
-/**
- * kgx_application_get_font:
- * @self: the #KgxApplication
- *
- * Creates a #PangoFontDescription for the system monospace font.
- *
- * Returns: (transfer full): a new #PangoFontDescription
- */
-PangoFontDescription *
-kgx_application_get_font (KgxApplication *self)
-{
-  // Taken from gnome-terminal
-  g_autofree char *font = NULL;
-
-  g_return_val_if_fail (KGX_IS_APPLICATION (self), NULL);
-
-  font = g_settings_get_string (self->desktop_interface,
-                                MONOSPACE_FONT_KEY_NAME);
-
-  return pango_font_description_from_string (font);
 }
 
 
@@ -897,32 +746,14 @@ kgx_application_add_terminal (KgxApplication *self,
                               GStrv           argv,
                               const char     *title)
 {
-  g_autofree char *user_shell = vte_get_user_shell ();
   g_autofree char *directory = NULL;
   g_auto (GStrv) shell = NULL;
-  g_auto (GStrv) custom_shell = NULL;
   GtkWindow *window;
   GtkWidget *tab;
   KgxPages *pages;
 
-  if (argv == NULL) {
-    custom_shell = g_settings_get_strv (self->settings, "shell");
-
-    if (g_strv_length (custom_shell) > 0) {
-      shell = g_steal_pointer (&custom_shell);
-    } else if (user_shell != NULL) {
-      shell = g_new0 (char *, 2);
-      shell[0] = g_steal_pointer (&user_shell);
-      shell[1] = NULL;
-    }
-  }
-
-  /* We should probably do something other than /bin/sh  */
-  if (argv == NULL && shell == NULL) {
-    shell = g_new0 (char *, 2);
-    shell[0] = g_strdup ("/bin/sh");
-    shell[1] = NULL;
-    g_warning ("Defaulting to “%s”", shell[0]);
+  if (G_LIKELY (argv == NULL)) {
+    shell = kgx_settings_get_shell (self->settings);
   }
 
   if (working_directory) {
@@ -945,6 +776,7 @@ kgx_application_add_terminal (KgxApplication *self,
   } else {
     window = g_object_new (KGX_TYPE_WINDOW,
                            "application", self,
+                           "settings", self->settings,
                            NULL);
   }
 

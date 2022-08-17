@@ -26,19 +26,6 @@
 
 G_BEGIN_DECLS
 
-/**
- * DESKTOP_INTERFACE_SETTINGS_SCHEMA:
- * The schema that defines the system fonts
- */
-#define DESKTOP_INTERFACE_SETTINGS_SCHEMA "org.gnome.desktop.interface"
-
-/**
- * MONOSPACE_FONT_KEY_NAME:
- * The name of the key in %DESKTOP_INTERFACE_SETTINGS_SCHEMA for the monospace
- * font
- */
-#define MONOSPACE_FONT_KEY_NAME "monospace-font-name"
-
 #define KGX_DISPLAY_NAME _("Console")
 
 #define KGX_TYPE_APPLICATION (kgx_application_get_type())
@@ -59,20 +46,13 @@ struct _KgxApplication
   AdwApplication            parent_instance;
 
   /*< public >*/
-  KgxTheme                  theme;
-  double                    scale;
-  gint64                    scrollback_lines;
-
-  GSettings                *settings;
-  GSettings                *desktop_interface;
-
   GTree                    *pages;
+  KgxSettings              *settings;
 };
 
 G_DECLARE_FINAL_TYPE (KgxApplication, kgx_application, KGX, APPLICATION, AdwApplication)
 
 
-PangoFontDescription *kgx_application_get_font        (KgxApplication *self);
 void                  kgx_application_add_page        (KgxApplication *self,
                                                        KgxTab         *page);
 KgxTab               *kgx_application_lookup_page     (KgxApplication *self,

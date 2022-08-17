@@ -34,10 +34,6 @@ G_BEGIN_DECLS
 
 /**
  * KgxWindow:
- * @theme: the palette
- * @working_dir: the working directory of the #KgxTerminal
- * @command: the command to run, %NULL for default shell
- * @close_on_zero: should the window close when the command exits with 0
  * @last_cols: the column width last time we received #GtkWidget::size-allocate
  * @last_rows: the row count last time we received #GtkWidget::size-allocate
  * @timeout: the id of the #GSource used to hide the statusbar
@@ -49,7 +45,6 @@ G_BEGIN_DECLS
  * @exit_message: the #GtkLabel for showing important messages
  * @zoom_level: the #GtkLabel in the #GtkPopover showing the current zoom level
  * @pages: the #KgxPages of #KgxPage current in the window
- * @about_item: the #GtkModelButton for the about item
  */
 struct _KgxWindow
 {
@@ -57,7 +52,7 @@ struct _KgxWindow
   AdwApplicationWindow  parent_instance;
 
   /*< public >*/
-  KgxTheme              theme;
+  KgxSettings          *settings;
 
   /* Size indicator */
   int                   last_cols;
