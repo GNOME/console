@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-07-29 01:21+0000\n"
-"PO-Revision-Date: 2022-08-01 13:57+0200\n"
+"POT-Creation-Date: 2022-08-06 14:46+0000\n"
+"PO-Revision-Date: 2022-08-22 13:40+0200\n"
 "Last-Translator: Daniel Mustieles García <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -51,8 +51,8 @@ msgid "Terminal window"
 msgstr "Ventana de la terminal"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:104 src/kgx-window.c:497
-msgid "Zander Brown"
-msgstr "Zander Brown"
+msgid "The GNOME Project"
+msgstr "El Proyecto GNOME"
 
 #: src/help-overlay.ui:12
 msgctxt "shortcut window"
@@ -343,17 +343,17 @@ msgstr "Seleccionar _todo"
 msgid "Show in _Files"
 msgstr "Mostrar en _Archivos"
 
-#: nautilus/kgx-nautilus-menu-item.c:120
-msgid "Open in Co_nsole (Devel)"
-msgstr "Abrir en Co_nsola (desarrollo)"
+#~ msgid "Zander Brown"
+#~ msgstr "Zander Brown"
 
-#: nautilus/kgx-nautilus-menu-item.c:122
-msgid "Open in Co_nsole"
-msgstr "Abrir en Co_nsola"
+#~ msgid "Open in Co_nsole (Devel)"
+#~ msgstr "Abrir en Co_nsola (desarrollo)"
 
-#: nautilus/kgx-nautilus-menu-item.c:124
-msgid "Start a terminal session for this location"
-msgstr "Iniciar una sesión de terminal para esta ubicación"
+#~ msgid "Open in Co_nsole"
+#~ msgstr "Abrir en Co_nsola"
+
+#~ msgid "Start a terminal session for this location"
+#~ msgstr "Iniciar una sesión de terminal para esta ubicación"
 
 #~ msgid "Console (Development)"
 #~ msgstr "Consola (desarrollo)"
