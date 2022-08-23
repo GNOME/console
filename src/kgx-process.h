@@ -32,7 +32,6 @@ typedef struct _KgxProcess KgxProcess;
 GTree      *kgx_process_get_list    (void);
 KgxProcess *kgx_process_new         (GPid        pid);
 GPid        kgx_process_get_pid     (KgxProcess *self);
-gint32      kgx_process_get_uid     (KgxProcess *self);
 gboolean    kgx_process_get_is_root (KgxProcess *self);
 GPid        kgx_process_get_parent  (KgxProcess *self);
 GStrv       kgx_process_get_argv    (KgxProcess *self);

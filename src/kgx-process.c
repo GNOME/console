@@ -36,7 +36,6 @@
 struct _KgxProcess {
   GPid    pid;
   GPid    parent;
-  gint32  uid;
   gint32  euid;
   GStrv   argv;
   char   *exec;
@@ -90,9 +89,7 @@ kgx_process_new (GPid pid)
   glibtop_get_proc_uid (&info, pid);
 
   self->parent = info.ppid;
-  self->uid = info.uid;
   self->euid = info.euid;
-  self->exec = NULL;
 
   return self;
 }
@@ -113,21 +110,6 @@ kgx_process_get_pid (KgxProcess *self)
   return self->pid;
 }
 
-/**
- * kgx_process_get_uid:
- * @self: the #KgxProcess
- *
- * Returns: The user id of the process
- *
- * Stability: Private
- */
-inline gint32
-kgx_process_get_uid (KgxProcess *self)
-{
-  g_return_val_if_fail (self != NULL, 0);
-
-  return self->uid;
-}
 
 /**
  * kgx_process_get_is_root:
