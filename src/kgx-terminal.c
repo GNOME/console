@@ -32,6 +32,7 @@
 #include <pcre2.h>
 
 #include "rgba.h"
+#include "xdg-fm1.h"
 
 #include "kgx-config.h"
 #include "kgx-terminal.h"
@@ -383,57 +384,110 @@ select_all_activated (KgxTerminal *self)
 }
 
 
+typedef struct {
+  GStrv     uris;
+  gboolean  show_folders;
+} ShowData;
+
+
+static void
+clear_show_data (gpointer data)
+{
+  ShowData *self = data;
+
+  g_clear_pointer (&self->uris, g_strfreev);
+  g_free (self);
+}
+
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (ShowData, clear_show_data)
+
+
+static void
+complete_call (GObject *source, GAsyncResult *res, gpointer data)
+{
+  g_autoptr (GError) error = NULL;
+  g_autoptr (ShowData) show = data;
+
+  if (show->show_folders) {
+    xdg_file_manager1_call_show_folders_finish (XDG_FILE_MANAGER1 (source),
+                                                res,
+                                                &error);
+  } else {
+    xdg_file_manager1_call_show_items_finish (XDG_FILE_MANAGER1 (source),
+                                              res,
+                                              &error);
+  }
+
+  if (error) {
+    g_warning ("term.show-in-files: D-Bus call failed %s", error->message);
+  }
+}
+
+
+static void
+got_proxy (GObject *source, GAsyncResult *res, gpointer data)
+{
+  g_autoptr (GError) error = NULL;
+  g_autoptr (XdgFileManager1) fm = NULL;
+  g_autoptr (ShowData) show = data;
+  g_auto (GStrv) uris = g_steal_pointer (&show->uris);
+
+  fm = xdg_file_manager1_proxy_new_finish (res, &error);
+
+  if (error) {
+    g_warning ("term.show-in-files: D-Bus connect failed %s", error->message);
+    return;
+  }
+
+  if (show->show_folders) {
+    xdg_file_manager1_call_show_folders (fm,
+                                         (const char *const *) uris,
+                                         "",
+                                         NULL,
+                                         complete_call,
+                                         g_steal_pointer (&show));
+  } else {
+    xdg_file_manager1_call_show_items (fm,
+                                       (const char *const *) uris,
+                                       "",
+                                       NULL,
+                                       complete_call,
+                                       g_steal_pointer (&show));
+  }
+}
+
+
 static void
 show_in_files_activated (KgxTerminal *self)
 {
-  g_autoptr (GDBusProxy) proxy = NULL;
-  g_autoptr (GVariant) retval = NULL;
-  g_autoptr (GVariantBuilder) builder = NULL;
-  g_autoptr (GError) error = NULL;
+  g_autoptr (ShowData) data = g_new0 (ShowData, 1);
+  g_autoptr (GStrvBuilder) builder = g_strv_builder_new ();
   const char *uri = NULL;
-  const char *method;
 
+  data->show_folders = FALSE;
   uri = vte_terminal_get_current_file_uri (VTE_TERMINAL (self));
-  method = "ShowItems";
 
   if (uri == NULL) {
+    data->show_folders = TRUE;
     uri = vte_terminal_get_current_directory_uri (VTE_TERMINAL (self));
-    method = "ShowFolders";
   }
 
   if (uri == NULL) {
-    g_warning ("win.show-in-files: no file");
+    g_warning ("term.show-in-files: no file");
     return;
   }
 
-  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-                                         G_DBUS_PROXY_FLAGS_NONE,
-                                         NULL,
-                                         "org.freedesktop.FileManager1",
-                                         "/org/freedesktop/FileManager1",
-                                         "org.freedesktop.FileManager1",
-                                         NULL, &error);
+  g_strv_builder_add (builder, uri);
+  data->uris = g_strv_builder_end (builder);
 
-  if (!proxy) {
-    g_warning ("win.show-in-files: D-Bus connect failed %s", error->message);
-    return;
-  }
-
-  builder = g_variant_builder_new (G_VARIANT_TYPE ("as"));
-  g_variant_builder_add (builder, "s", uri);
-
-  retval = g_dbus_proxy_call_sync (proxy,
-                                   method,
-                                   g_variant_new ("(ass)",
-                                                  builder,
-                                                  ""),
-                                   G_DBUS_CALL_FLAGS_NONE,
-                                   -1, NULL, &error);
-
-  if (!retval) {
-    g_warning ("win.show-in-files: D-Bus call failed %s", error->message);
-    return;
-  }
+  xdg_file_manager1_proxy_new_for_bus (G_BUS_TYPE_SESSION,
+                                       G_DBUS_PROXY_FLAGS_NONE,
+                                       "org.freedesktop.FileManager1",
+                                       "/org/freedesktop/FileManager1",
+                                       NULL,
+                                       got_proxy,
+                                       g_steal_pointer (&data));
 }
 
 
@@ -661,7 +715,7 @@ location_changed (KgxTerminal *self)
   value = vte_terminal_get_current_file_uri (VTE_TERMINAL (self)) ||
             vte_terminal_get_current_directory_uri (VTE_TERMINAL (self));
 
-  gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.show-in-file", value);
+  gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.show-in-files", value);
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_PATH]);
 }
