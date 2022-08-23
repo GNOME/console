@@ -31,7 +31,6 @@
 #include "kgx-close-dialog.h"
 #include "kgx-pages.h"
 #include "kgx-tab.h"
-#include "kgx-window.h"
 #include "kgx-terminal.h"
 #include "kgx-marshals.h"
 
@@ -97,6 +96,7 @@ static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 
 enum {
   ZOOM,
+  CREATE_TEAROFF_HOST,
   N_SIGNALS
 };
 static guint signals[N_SIGNALS];
@@ -424,29 +424,12 @@ static AdwTabView *
 create_window (AdwTabView *view,
                KgxPages   *self)
 {
-  /* Perhaps this should be handled via KgxWindow? */
-  GtkWindow *window;
-  KgxWindow *new_window;
-  GtkApplication *app;
   KgxPages *new_pages;
   KgxPagesPrivate *priv;
-  int width, height;
 
-  window = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
-  app = gtk_window_get_application (window);
+  g_signal_emit (self, signals[CREATE_TEAROFF_HOST], 0, &new_pages);
 
-  kgx_window_get_size (KGX_WINDOW (window), &width, &height);
-
-  new_window = g_object_new (KGX_TYPE_WINDOW,
-                             "application", app,
-                             "default-width", width,
-                             "default-height", height,
-                             NULL);
-
-  new_pages = kgx_window_get_pages (new_window);
   priv = kgx_pages_get_instance_private (new_pages);
-
-  gtk_window_present (GTK_WINDOW (new_window));
 
   return ADW_TAB_VIEW (priv->view);
 }
@@ -531,6 +514,20 @@ status_to_icon (GBinding     *binding,
     g_value_set_object (to_value, NULL);
 
   return TRUE;
+}
+
+
+static gboolean
+object_accumulator (GSignalInvocationHint *ihint,
+                    GValue                *return_value,
+                    const GValue          *signal_value,
+                    gpointer               data)
+{
+  GObject *object = g_value_get_object (signal_value);
+
+  g_value_set_object (return_value, object);
+
+  return !object;
 }
 
 
@@ -666,6 +663,15 @@ kgx_pages_class_init (KgxPagesClass *klass)
                                 G_TYPE_NONE,
                                 1,
                                 KGX_TYPE_ZOOM);
+
+  signals[CREATE_TEAROFF_HOST] = g_signal_new ("create-tearoff-host",
+                                               G_TYPE_FROM_CLASS (klass),
+                                               G_SIGNAL_RUN_LAST,
+                                               0,
+                                               object_accumulator, NULL,
+                                               kgx_marshals_OBJECT__VOID,
+                                               KGX_TYPE_PAGES,
+                                               0);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                KGX_APPLICATION_PATH "kgx-pages.ui");

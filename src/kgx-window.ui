@@ -151,6 +151,7 @@
               <object class="KgxPages" id="pages">
                 <property name="is-active" bind-source="KgxWindow" bind-property="is-active" bind-flags="sync-create" />
                 <signal name="zoom" handler="zoom" swapped="no"/>
+                <signal name="create-tearoff-host" handler="create_tearoff_host" swapped="no"/>
                 <signal name="notify::status" handler="status_changed" swapped="yes" />
               </object>
             </child>

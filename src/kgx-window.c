@@ -251,6 +251,26 @@ zoom (KgxPages  *pages,
 }
 
 
+static KgxPages *
+create_tearoff_host (KgxPages *pages, KgxWindow *self)
+{
+  GtkApplication *application = gtk_window_get_application (GTK_WINDOW (self));
+  KgxWindow *new_window;
+  int width, height;
+
+  kgx_window_get_size (self, &width, &height);
+
+  new_window = g_object_new (KGX_TYPE_WINDOW,
+                             "application", application,
+                             "default-width", width,
+                             "default-height", height,
+                             NULL);
+  gtk_window_present (GTK_WINDOW (new_window));
+
+  return KGX_PAGES (new_window->pages);
+}
+
+
 static void
 status_changed (GObject *object, GParamSpec *pspec, gpointer data)
 {
@@ -344,6 +364,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, size_changed);
 
   gtk_widget_class_bind_template_callback (widget_class, zoom);
+  gtk_widget_class_bind_template_callback (widget_class, create_tearoff_host);
   gtk_widget_class_bind_template_callback (widget_class, status_changed);
   gtk_widget_class_bind_template_callback (widget_class, extra_drag_drop);
   gtk_widget_class_bind_template_callback (widget_class, new_tab_cb);
