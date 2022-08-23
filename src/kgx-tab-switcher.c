@@ -29,6 +29,7 @@
 #include "kgx-config.h"
 #include "kgx-tab-switcher.h"
 #include "kgx-tab-switcher-row.h"
+#include "kgx-marshals.h"
 
 
 struct _KgxTabSwitcher {
@@ -529,14 +530,14 @@ kgx_tab_switcher_class_init (KgxTabSwitcherClass *klass)
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
-  signals[NEW_TAB] =
-    g_signal_new ("new-tab",
-                  G_TYPE_FROM_CLASS (klass),
-                  G_SIGNAL_RUN_LAST,
-                  0,
-                  NULL, NULL, NULL,
-                  G_TYPE_NONE,
-                  0);
+  signals[NEW_TAB] = g_signal_new ("new-tab",
+                                   G_TYPE_FROM_CLASS (klass),
+                                   G_SIGNAL_RUN_LAST,
+                                   0,
+                                   NULL, NULL,
+                                   kgx_marshals_VOID__VOID,
+                                   G_TYPE_NONE,
+                                   0);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                KGX_APPLICATION_PATH "kgx-tab-switcher.ui");

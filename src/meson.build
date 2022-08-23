@@ -58,6 +58,12 @@ kgx_sources += gnome.compile_resources('kgx-resources',
   c_name: 'kgx'
 )
 
+kgx_sources += gnome.genmarshal('kgx-marshals',
+                  sources: 'kgx-marshals.list',
+                 internal: true,
+                   prefix: 'kgx_marshals',
+)
+
 kgx_sources += gnome.gdbus_codegen('xdg-fm1',
            sources: 'org.freedesktop.FileManager1.xml',
   interface_prefix: 'org.freedesktop.',

@@ -24,14 +24,16 @@
  * The container of open #KgxTab (uses #AdwTabView internally)
  */
 
+#include "kgx-config.h"
+
 #include <glib/gi18n.h>
 
 #include "kgx-close-dialog.h"
-#include "kgx-config.h"
 #include "kgx-pages.h"
 #include "kgx-tab.h"
 #include "kgx-window.h"
 #include "kgx-terminal.h"
+#include "kgx-marshals.h"
 
 
 typedef struct _KgxPagesPrivate KgxPagesPrivate;
@@ -659,7 +661,8 @@ kgx_pages_class_init (KgxPagesClass *klass)
   signals[ZOOM] = g_signal_new ("zoom",
                                 G_TYPE_FROM_CLASS (klass),
                                 G_SIGNAL_RUN_LAST,
-                                0, NULL, NULL, NULL,
+                                0, NULL, NULL,
+                                kgx_marshals_VOID__ENUM,
                                 G_TYPE_NONE,
                                 1,
                                 KGX_TYPE_ZOOM);

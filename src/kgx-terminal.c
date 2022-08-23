@@ -36,6 +36,7 @@
 
 #include "kgx-config.h"
 #include "kgx-terminal.h"
+#include "kgx-marshals.h"
 
 /*       Regex adapted from TerminalWidget.vala in Pantheon Terminal       */
 
@@ -571,7 +572,8 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
   signals[SIZE_CHANGED] = g_signal_new ("size-changed",
                                         G_TYPE_FROM_CLASS (klass),
                                         G_SIGNAL_RUN_LAST,
-                                        0, NULL, NULL, NULL,
+                                        0, NULL, NULL,
+                                        kgx_marshals_VOID__UINT_UINT,
                                         G_TYPE_NONE,
                                         2,
                                         G_TYPE_UINT,
@@ -631,7 +633,7 @@ clear_paste_data (gpointer data)
   g_clear_weak_pointer (&self->dest);
   g_free (self->text);
   g_free (self);
-} 
+}
 
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (PasteData, clear_paste_data)
