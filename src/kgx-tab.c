@@ -22,14 +22,16 @@
  * @short_description: Base for things in a #KgxPages
  */
 
+#include "kgx-config.h"
+
 #include <glib/gi18n.h>
 #define PCRE2_CODE_UNIT_WIDTH 0
 #include <pcre2.h>
 
-#include "kgx-config.h"
 #include "kgx-tab.h"
 #include "kgx-pages.h"
 #include "kgx-terminal.h"
+#include "kgx-settings.h"
 #include "kgx-util.h"
 #include "kgx-application.h"
 #include "kgx-marshals.h"

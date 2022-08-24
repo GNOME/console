@@ -21,7 +21,7 @@
 #include <gtk/gtk.h>
 #include <adwaita.h>
 
-#include "kgx-terminal.h"
+#include "kgx-settings.h"
 #include "kgx-pages.h"
 
 G_BEGIN_DECLS

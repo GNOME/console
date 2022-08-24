@@ -31,7 +31,7 @@
 #include "kgx-close-dialog.h"
 #include "kgx-pages.h"
 #include "kgx-tab.h"
-#include "kgx-terminal.h"
+#include "kgx-settings.h"
 #include "kgx-marshals.h"
 
 

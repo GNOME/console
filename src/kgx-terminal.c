@@ -25,6 +25,8 @@
  * menu (via #GtkPopover) and link detection
  */
 
+#include "kgx-config.h"
+
 #include <glib/gi18n.h>
 #include <adwaita.h>
 #include <vte/vte.h>
@@ -34,8 +36,8 @@
 #include "rgba.h"
 #include "xdg-fm1.h"
 
-#include "kgx-config.h"
 #include "kgx-terminal.h"
+#include "kgx-settings.h"
 #include "kgx-marshals.h"
 
 /*       Regex adapted from TerminalWidget.vala in Pantheon Terminal       */
@@ -56,7 +58,9 @@
 #define USERPASS USERCHARS_CLASS "+(?:" PASSCHARS_CLASS "+)?"
 #define URLPATH "(?:(/" PATHCHARS_CLASS "+(?:[(]" PATHCHARS_CLASS "*[)])*" PATHCHARS_CLASS "*)*" PATHTERM_CLASS ")?"
 
-static const gchar* links[KGX_TERMINAL_N_LINK_REGEX] = {
+#define KGX_TERMINAL_N_LINK_REGEX 5
+
+static const char *links[KGX_TERMINAL_N_LINK_REGEX] = {
   SCHEME "//(?:" USERPASS "\\@)?" HOST PORT URLPATH,
   "(?:www|ftp)" HOSTCHARS_CLASS "*\\." HOST PORT URLPATH,
   "(?:callto:|h323:|sip:)" USERCHARS_CLASS "[" USERCHARS ".]*(?:" PORT "/[a-z0-9]+)?\\@" HOST,
@@ -65,6 +69,31 @@ static const gchar* links[KGX_TERMINAL_N_LINK_REGEX] = {
 };
 
 /*       Regex adapted from TerminalWidget.vala in Pantheon Terminal       */
+
+/**
+ * KgxTerminal:
+ * @theme: the palette to use, see #KgxTerminal:theme
+ * @actions: action map for the context menu
+ * @current_url: the address under the cursor
+ * @match_id: regex ids for finding hyperlinks
+ *
+ * Stability: Private
+ */
+struct _KgxTerminal {
+  /*< private >*/
+  VteTerminal parent_instance;
+
+  /*< public >*/
+  KgxTheme    theme;
+  GtkWidget  *popup_menu;
+
+  /* Hyperlinks */
+  char       *current_url;
+  int         match_id[KGX_TERMINAL_N_LINK_REGEX];
+
+  gboolean    popup_is_touch;
+};
+
 
 G_DEFINE_TYPE (KgxTerminal, kgx_terminal, VTE_TYPE_TERMINAL)
 

@@ -33,9 +33,9 @@
 #include "kgx-config.h"
 
 #include <gio/gio.h>
+#include <vte/vte.h>
 
 #include "kgx-settings.h"
-#include "kgx-terminal.h"
 
 
 /**

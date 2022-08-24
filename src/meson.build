@@ -75,7 +75,7 @@ kgx_sources += gnome.gdbus_codegen('xdg-fm1',
 kgx_enums = gnome.mkenums_simple('kgx-enums',
                                     sources: [
                                       'kgx-close-dialog.h',
-                                      'kgx-terminal.h',
+                                      'kgx-settings.h',
                                       'kgx-tab.h'
                                     ])
 

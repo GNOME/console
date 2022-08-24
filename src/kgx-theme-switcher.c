@@ -17,9 +17,9 @@
  */
 
 #include "kgx-config.h"
-#include "kgx-theme-switcher.h"
 
-#include "kgx-terminal.h"
+#include "kgx-theme-switcher.h"
+#include "kgx-settings.h"
 
 
 struct _KgxThemeSwitcher {

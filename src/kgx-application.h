@@ -20,10 +20,9 @@
 
 #include <gtk/gtk.h>
 
-#include "kgx-process.h"
 #include "kgx-window.h"
-#include "kgx-terminal.h"
 #include "kgx-tab.h"
+#include "kgx-settings.h"
 
 G_BEGIN_DECLS
 

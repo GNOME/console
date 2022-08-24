@@ -21,9 +21,51 @@
 #include <glib-object.h>
 #include <pango/pango.h>
 
-#include "kgx-terminal.h"
+#include "kgx-enums.h"
 
 G_BEGIN_DECLS
+
+
+/**
+ * KgxTheme:
+ * @KGX_THEME_AUTO: Matches %KGX_THEME_DAY or %KGX_THEME_NIGHT depending on
+ *                  the user's global setting
+ * @KGX_THEME_NIGHT: The default, dark, theme
+ * @KGX_THEME_DAY: Alternate, light, theme
+ * @KGX_THEME_HACKER: Little easter egg theme
+ *
+ * Until [meson#1687](https://github.com/mesonbuild/meson/issues/1687) is
+ * resolved this enum must be manually kept in sync with
+ * the ‘Theme’ enum in our gschema
+ */
+typedef enum /*< enum,prefix=KGX >*/ {
+  KGX_THEME_AUTO = 0,   /*< nick=auto >*/
+  KGX_THEME_NIGHT = 1,  /*< nick=night >*/
+  KGX_THEME_DAY = 2,    /*< nick=day >*/
+  KGX_THEME_HACKER = 3, /*< nick=hacker >*/
+} KgxTheme;
+
+
+/**
+ * KGX_FONT_SCALE_MIN:
+ * The smallest font scale/zoom
+ */
+#define KGX_FONT_SCALE_MIN 0.5
+
+
+/**
+ * KGX_FONT_SCALE_MAX:
+ * The largest font scale/zoom
+ */
+#define KGX_FONT_SCALE_MAX 4.0
+
+
+/**
+ * KGX_FONT_SCALE_DEFAULT:
+ * The standard font scale/zoom
+ */
+#define KGX_FONT_SCALE_DEFAULT 1.0
+
 
 #define KGX_TYPE_SETTINGS kgx_settings_get_type ()
 
