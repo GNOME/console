@@ -80,11 +80,11 @@ static const char *links[KGX_TERMINAL_N_LINK_REGEX] = {
  * Stability: Private
  */
 struct _KgxTerminal {
-  /*< private >*/
   VteTerminal parent_instance;
 
-  /*< public >*/
-  KgxTheme    theme;
+  KgxSettings   *settings;
+  GSignalGroup  *settings_signals;
+  GBindingGroup *settings_binds;
   GtkWidget  *popup_menu;
 
   /* Hyperlinks */
@@ -99,7 +99,7 @@ G_DEFINE_TYPE (KgxTerminal, kgx_terminal, VTE_TYPE_TERMINAL)
 
 enum {
   PROP_0,
-  PROP_THEME,
+  PROP_SETTINGS,
   PROP_PATH,
   LAST_PROP
 };
@@ -121,13 +121,18 @@ kgx_terminal_dispose (GObject *object)
   g_clear_pointer (&self->current_url, g_free);
   g_clear_pointer (&self->popup_menu, gtk_widget_unparent);
 
+  g_clear_object (&self->settings);
+  g_clear_object (&self->settings_signals);
+  g_clear_object (&self->settings_binds);
+
   G_OBJECT_CLASS (kgx_terminal_parent_class)->dispose (object);
 }
 
 
 static void
-update_terminal_colors (KgxTerminal *self)
+update_terminal_colours (KgxTerminal *self)
 {
+  KgxTheme current_theme;
   KgxTheme resolved_theme;
   GdkRGBA fg;
   GdkRGBA bg;
@@ -152,7 +157,13 @@ update_terminal_colors (KgxTerminal *self)
     GDK_RGBA ("f6f5f4"), // Bright White
   };
 
-  if (self->theme == KGX_THEME_AUTO) {
+  if (!self->settings) {
+    return;
+  }
+
+  g_object_get (self->settings, "theme", &current_theme, NULL);
+
+  if (current_theme == KGX_THEME_AUTO) {
     AdwStyleManager *manager = adw_style_manager_get_default ();
 
     if (adw_style_manager_get_dark (manager)) {
@@ -161,7 +172,7 @@ update_terminal_colors (KgxTerminal *self)
       resolved_theme = KGX_THEME_DAY;
     }
   } else {
-    resolved_theme = self->theme;
+    resolved_theme = current_theme;
   }
 
   switch (resolved_theme) {
@@ -186,21 +197,6 @@ update_terminal_colors (KgxTerminal *self)
 
 
 static void
-kgx_terminal_set_theme (KgxTerminal *self,
-                        KgxTheme     theme)
-{
-  if (self->theme == theme) {
-    return;
-  }
-
-  self->theme = theme;
-  update_terminal_colors (self);
-
-  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_THEME]);
-}
-
-
-static void
 kgx_terminal_set_property (GObject      *object,
                            guint         property_id,
                            const GValue *value,
@@ -209,14 +205,16 @@ kgx_terminal_set_property (GObject      *object,
   KgxTerminal *self = KGX_TERMINAL (object);
 
   switch (property_id) {
-    case PROP_THEME:
-      kgx_terminal_set_theme (self, g_value_get_enum (value));
+    case PROP_SETTINGS:
+      g_set_object (&self->settings, g_value_get_object (value));
+      update_terminal_colours (self);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
   }
 }
+
 
 static void
 kgx_terminal_get_property (GObject    *object,
@@ -229,8 +227,8 @@ kgx_terminal_get_property (GObject    *object,
   g_autoptr (GFile) path = NULL;
 
   switch (property_id) {
-    case PROP_THEME:
-      g_value_set_enum (value, self->theme);
+    case PROP_SETTINGS:
+      g_value_set_object (value, self->settings);
       break;
     case PROP_PATH:
       if ((uri = vte_terminal_get_current_file_uri (VTE_TERMINAL (self)))) {
@@ -569,21 +567,10 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
   widget_class->size_allocate = kgx_terminal_size_allocate;
   widget_class->direction_changed = kgx_terminal_direction_changed;
 
-  /**
-   * KgxTerminal:theme:
-   *
-   * The palette to use, one of the values of #KgxTheme
-   *
-   * Officially only "night" exists, "hacker" is just a little fun
-   *
-   * Bound to #KgxApplication:theme on the #KgxApplication
-   *
-   * Stability: Private
-   */
-  pspecs[PROP_THEME] =
-    g_param_spec_enum ("theme", "Theme", "Terminal theme",
-                       KGX_TYPE_THEME, KGX_THEME_NIGHT,
-                       G_PARAM_READWRITE);
+  pspecs[PROP_SETTINGS] =
+    g_param_spec_object ("settings", NULL, NULL,
+                         KGX_TYPE_SETTINGS,
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_STRINGS);
 
   /**
    * KgxTerminal:path:
@@ -755,8 +742,12 @@ location_changed (KgxTerminal *self)
 static void
 dark_changed (KgxTerminal *self)
 {
-  if (self->theme == KGX_THEME_AUTO) {
-    update_terminal_colors (self);
+  KgxTheme theme;
+
+  g_object_get (self->settings, "theme", &theme, NULL);
+
+  if (theme == KGX_THEME_AUTO) {
+    update_terminal_colours (self);
   }
 }
 
@@ -832,7 +823,27 @@ kgx_terminal_init (KgxTerminal *self)
                            "notify::dark", G_CALLBACK (dark_changed),
                            self, G_CONNECT_SWAPPED);
 
-  update_terminal_colors (self);
+  self->settings_signals = g_signal_group_new (KGX_TYPE_SETTINGS);
+  g_object_bind_property (self, "settings",
+                          self->settings_signals, "target",
+                          G_BINDING_DEFAULT);
+  g_signal_group_connect_swapped (self->settings_signals,
+                                  "notify::theme", G_CALLBACK (update_terminal_colours),
+                                  self);
+
+  self->settings_binds = g_binding_group_new ();
+  g_object_bind_property (self, "settings",
+                          self->settings_binds, "source",
+                          G_BINDING_DEFAULT);
+  g_binding_group_bind (self->settings_binds, "font",
+                        self, "font-desc",
+                        G_BINDING_SYNC_CREATE);
+  g_binding_group_bind (self->settings_binds, "font-scale",
+                        self, "font-scale",
+                        G_BINDING_SYNC_CREATE);
+  g_binding_group_bind (self->settings_binds, "scrollback-lines",
+                        self, "scrollback-lines",
+                        G_BINDING_SYNC_CREATE);
 }
 
 

@@ -57,7 +57,6 @@ struct _KgxTabPrivate {
   KgxTerminal          *terminal;
   GSignalGroup         *terminal_signals;
   GBindingGroup        *terminal_binds;
-  GBindingGroup        *settings_binds;
 
   GtkWidget            *stack;
   GtkWidget            *spinner_revealer;
@@ -369,18 +368,6 @@ kgx_tab_set_property (GObject      *object,
       break;
     case PROP_TERMINAL:
       g_set_object (&priv->terminal, g_value_get_object (value));
-      g_binding_group_bind (priv->settings_binds, "font",
-                            priv->terminal, "font-desc",
-                            G_BINDING_SYNC_CREATE);
-      g_binding_group_bind (priv->settings_binds, "font-scale",
-                            priv->terminal, "font-scale",
-                            G_BINDING_SYNC_CREATE);
-      g_binding_group_bind (priv->settings_binds, "theme",
-                            priv->terminal, "theme",
-                            G_BINDING_SYNC_CREATE);
-      g_binding_group_bind (priv->settings_binds, "scrollback-lines",
-                            priv->terminal, "scrollback-lines",
-                            G_BINDING_SYNC_CREATE);
       break;
     case PROP_TAB_TITLE:
       g_clear_pointer (&priv->title, g_free);
@@ -639,7 +626,6 @@ kgx_tab_class_init (KgxTabClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, search_bar);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, terminal_signals);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, terminal_binds);
-  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, settings_binds);
 
   gtk_widget_class_bind_template_callback (widget_class, search_enabled);
   gtk_widget_class_bind_template_callback (widget_class, search_changed);

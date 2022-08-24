@@ -101,7 +101,4 @@
   <object class="GBindingGroup" id="terminal_binds">
     <property name="source" bind-source="KgxTab" bind-property="terminal" bind-flags="sync-create"/>
   </object>
-  <object class="GBindingGroup" id="settings_binds">
-    <property name="source" bind-source="KgxTab" bind-property="settings" bind-flags="sync-create"/>
-  </object>
 </interface>

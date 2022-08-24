@@ -16,6 +16,9 @@
           <object class="KgxTerminal" id="terminal">
             <property name="vexpand">True</property>
             <property name="allow-hyperlink">True</property>
+            <binding name="settings">
+              <lookup name="settings">KgxSimpleTab</lookup>
+            </binding>
             <signal name="notify::path" handler="path_changed" swapped="no"/>
           </object>
         </property>
