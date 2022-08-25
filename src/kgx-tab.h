@@ -88,6 +88,11 @@ struct _KgxTabClass
   GPid (*start_finish) (KgxTab               *tab,
                         GAsyncResult         *res,
                         GError              **error);
+
+  void (*died)         (KgxTab               *self,
+                        GtkMessageType        type,
+                        const char           *message,
+                        gboolean              success);
 };
 
 

@@ -342,7 +342,7 @@ died (KgxTab         *page,
 
   g_object_get (page, "close-on-quit", &close_on_quit, NULL);
 
-  if (!close_on_quit) {
+  if (!(close_on_quit && success)) {
     return;
   }
 

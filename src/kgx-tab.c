@@ -32,6 +32,7 @@
 #include "kgx-terminal.h"
 #include "kgx-util.h"
 #include "kgx-application.h"
+#include "kgx-marshals.h"
 
 
 typedef struct _KgxTabPrivate KgxTabPrivate;
@@ -510,6 +511,30 @@ kgx_tab_real_start_finish (KgxTab        *tab,
 
 
 static void
+kgx_tab_real_died (KgxTab         *self,
+                   GtkMessageType  type,
+                   const char     *message,
+                   gboolean        success)
+{
+  KgxTabPrivate *priv;
+
+  g_return_if_fail (KGX_IS_TAB (self));
+
+  priv = kgx_tab_get_instance_private (self);
+
+  gtk_label_set_markup (GTK_LABEL (priv->label), message);
+
+  if (type == GTK_MESSAGE_ERROR) {
+    gtk_widget_add_css_class (priv->revealer, "error");
+  } else {
+    gtk_widget_remove_css_class (priv->revealer, "error");
+  }
+
+  gtk_revealer_set_reveal_child (GTK_REVEALER (priv->revealer), TRUE);
+}
+
+
+static void
 kgx_tab_class_init (KgxTabClass *klass)
 {
   GObjectClass   *object_class = G_OBJECT_CLASS   (klass);
@@ -524,6 +549,7 @@ kgx_tab_class_init (KgxTabClass *klass)
 
   tab_class->start = kgx_tab_real_start;
   tab_class->start_finish = kgx_tab_real_start_finish;
+  tab_class->died = kgx_tab_real_died;
 
   /**
    * KgxTab:application:
@@ -652,7 +678,8 @@ kgx_tab_class_init (KgxTabClass *klass)
   signals[SIZE_CHANGED] = g_signal_new ("size-changed",
                                         G_TYPE_FROM_CLASS (klass),
                                         G_SIGNAL_RUN_LAST,
-                                        0, NULL, NULL, NULL,
+                                        0, NULL, NULL,
+                                        kgx_marshals_VOID__UINT_UINT,
                                         G_TYPE_NONE,
                                         2,
                                         G_TYPE_UINT,
@@ -661,7 +688,8 @@ kgx_tab_class_init (KgxTabClass *klass)
   signals[ZOOM] = g_signal_new ("zoom",
                                 G_TYPE_FROM_CLASS (klass),
                                 G_SIGNAL_RUN_LAST,
-                                0, NULL, NULL, NULL,
+                                0, NULL, NULL,
+                                kgx_marshals_VOID__ENUM,
                                 G_TYPE_NONE,
                                 1,
                                 KGX_TYPE_ZOOM);
@@ -669,7 +697,9 @@ kgx_tab_class_init (KgxTabClass *klass)
   signals[DIED] = g_signal_new ("died",
                                 G_TYPE_FROM_CLASS (klass),
                                 G_SIGNAL_RUN_LAST,
-                                0, NULL, NULL, NULL,
+                                G_STRUCT_OFFSET (KgxTabClass, died),
+                                NULL, NULL,
+                                kgx_marshals_VOID__ENUM_STRING_BOOLEAN,
                                 G_TYPE_NONE,
                                 3,
                                 GTK_TYPE_MESSAGE_TYPE,
@@ -726,34 +756,6 @@ kgx_tab_buildable_iface_init (GtkBuildableIface *iface)
 
 
 static void
-died (KgxTab         *self,
-      GtkMessageType  type,
-      const char     *message,
-      gboolean        success)
-{
-  KgxTabPrivate *priv;
-
-  g_return_if_fail (KGX_IS_TAB (self));
-
-  priv = kgx_tab_get_instance_private (self);
-
-  gtk_label_set_markup (GTK_LABEL (priv->label), message);
-
-  if (type == GTK_MESSAGE_ERROR) {
-    gtk_widget_add_css_class (priv->revealer, "error");
-  } else {
-    gtk_widget_remove_css_class (priv->revealer, "error");
-  }
-
-  gtk_revealer_set_reveal_child (GTK_REVEALER (priv->revealer), TRUE);
-
-  if (priv->close_on_quit && success) {
-    kgx_pages_remove_page (kgx_tab_get_pages (self), self);
-  }
-}
-
-
-static void
 kgx_tab_init (KgxTab *self)
 {
   static guint last_id = 0;
@@ -772,8 +774,6 @@ kgx_tab_init (KgxTab *self)
                                           (GDestroyNotify) kgx_process_unref);
 
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  g_signal_connect (self, "died", G_CALLBACK (died), NULL);
 
   gtk_search_bar_connect_entry (GTK_SEARCH_BAR (priv->search_bar),
                                 GTK_EDITABLE (priv->search_entry));
