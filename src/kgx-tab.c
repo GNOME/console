@@ -42,6 +42,7 @@ struct _KgxTabPrivate {
   guint                 id;
 
   KgxApplication       *application;
+  KgxSettings          *settings;
 
   char                 *title;
   char                 *tooltip;
@@ -58,17 +59,9 @@ struct _KgxTabPrivate {
   gboolean              search_mode_enabled;
 
   KgxTerminal          *terminal;
-  GBinding             *term_title_bind;
-  GBinding             *term_path_bind;
-  GBinding             *term_font_bind;
-  GBinding             *term_zoom_bind;
-  GBinding             *term_theme_bind;
-  GBinding             *term_scrollback_bind;
-
-  GBinding             *pages_font_bind;
-  GBinding             *pages_zoom_bind;
-  GBinding             *pages_theme_bind;
-  GBinding             *pages_scrollback_bind;
+  GSignalGroup         *terminal_signals;
+  GBindingGroup        *terminal_binds;
+  GBindingGroup        *settings_binds;
 
   GtkWidget            *stack;
   GtkWidget            *spinner_revealer;
@@ -101,6 +94,8 @@ G_DEFINE_ABSTRACT_TYPE_WITH_CODE (KgxTab, kgx_tab, GTK_TYPE_BOX,
 enum {
   PROP_0,
   PROP_APPLICATION,
+  PROP_SETTINGS,
+  PROP_TERMINAL,
   PROP_TAB_TITLE,
   PROP_TAB_PATH,
   PROP_TAB_STATUS,
@@ -128,32 +123,6 @@ static guint signals[N_SIGNALS];
 
 
 static void
-size_changed (KgxTerminal *term,
-              guint        rows,
-              guint        cols,
-              KgxTab      *self)
-{
-  g_signal_emit (self, signals[SIZE_CHANGED], 0, rows, cols);
-}
-
-
-static void
-font_increase (KgxTerminal *term,
-               KgxTab      *self)
-{
-  g_signal_emit (self, signals[ZOOM], 0, KGX_ZOOM_IN);
-}
-
-
-static void
-font_decrease (KgxTerminal *term,
-               KgxTab      *self)
-{
-  g_signal_emit (self, signals[ZOOM], 0, KGX_ZOOM_OUT);
-}
-
-
-static void
 kgx_tab_dispose (GObject *object)
 {
   KgxTab *self = KGX_TAB (object);
@@ -168,20 +137,13 @@ kgx_tab_dispose (GObject *object)
   }
 
   g_clear_object (&priv->application);
+  g_clear_object (&priv->settings);
+  g_clear_object (&priv->terminal);
 
   g_clear_pointer (&priv->title, g_free);
   g_clear_pointer (&priv->tooltip, g_free);
   g_clear_object (&priv->path);
   g_clear_pointer (&priv->font, pango_font_description_free);
-
-  if (priv->terminal) {
-    g_object_disconnect (priv->terminal,
-                        "any-signal::size-changed", G_CALLBACK (size_changed), self,
-                        "any-signal::increase-font-size", G_CALLBACK (font_increase), self,
-                        "any-signal::decrease-font-size", G_CALLBACK (font_decrease), self,
-                        NULL);
-  }
-  g_clear_object (&priv->terminal);
 
   g_clear_pointer (&priv->root, g_hash_table_unref);
   g_clear_pointer (&priv->remote, g_hash_table_unref);
@@ -330,6 +292,12 @@ kgx_tab_get_property (GObject    *object,
     case PROP_APPLICATION:
       g_value_set_object (value, priv->application);
       break;
+    case PROP_SETTINGS:
+      g_value_set_object (value, priv->settings);
+      break;
+    case PROP_TERMINAL:
+      g_value_set_object (value, priv->terminal);
+      break;
     case PROP_TAB_TITLE:
       g_value_set_string (value, priv->title);
       break;
@@ -417,13 +385,30 @@ kgx_tab_set_property (GObject      *object,
       priv->application = g_value_dup_object (value);
       kgx_application_add_page (priv->application, self);
       break;
+    case PROP_SETTINGS:
+      g_set_object (&priv->settings, g_value_get_object (value));
+      break;
+    case PROP_TERMINAL:
+      g_set_object (&priv->terminal, g_value_get_object (value));
+      g_binding_group_bind (priv->settings_binds, "font",
+                            priv->terminal, "font-desc",
+                            G_BINDING_SYNC_CREATE);
+      g_binding_group_bind (priv->settings_binds, "font-scale",
+                            priv->terminal, "font-scale",
+                            G_BINDING_SYNC_CREATE);
+      g_binding_group_bind (priv->settings_binds, "theme",
+                            priv->terminal, "theme",
+                            G_BINDING_SYNC_CREATE);
+      g_binding_group_bind (priv->settings_binds, "scrollback-lines",
+                            priv->terminal, "scrollback-lines",
+                            G_BINDING_SYNC_CREATE);
+      break;
     case PROP_TAB_TITLE:
       g_clear_pointer (&priv->title, g_free);
       priv->title = g_value_dup_string (value);
       break;
     case PROP_TAB_PATH:
-      g_clear_object (&priv->path);
-      priv->path = g_value_dup_object (value);
+      g_set_object (&priv->path, g_value_get_object (value));
       break;
     case PROP_TAB_STATUS:
       priv->status = g_value_get_flags (value);
@@ -564,6 +549,16 @@ kgx_tab_class_init (KgxTabClass *klass)
     g_param_spec_object ("application", "Application", "The application",
                          KGX_TYPE_APPLICATION,
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+
+  pspecs[PROP_SETTINGS] =
+    g_param_spec_object ("settings", NULL, NULL,
+                         KGX_TYPE_SETTINGS,
+                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
+  pspecs[PROP_TERMINAL] =
+    g_param_spec_object ("terminal", NULL, NULL,
+                         KGX_TYPE_TERMINAL,
+                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   /**
    * KgxTab:tab-title:
@@ -717,6 +712,9 @@ kgx_tab_class_init (KgxTabClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, label);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, search_entry);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, search_bar);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, terminal_signals);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, terminal_binds);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, settings_binds);
 
   gtk_widget_class_bind_template_callback (widget_class, search_enabled);
   gtk_widget_class_bind_template_callback (widget_class, search_changed);
@@ -758,6 +756,32 @@ kgx_tab_buildable_iface_init (GtkBuildableIface *iface)
 
 
 static void
+size_changed (KgxTerminal *term,
+              guint        rows,
+              guint        cols,
+              KgxTab      *self)
+{
+  g_signal_emit (self, signals[SIZE_CHANGED], 0, rows, cols);
+}
+
+
+static void
+font_increase (KgxTerminal *term,
+               KgxTab      *self)
+{
+  g_signal_emit (self, signals[ZOOM], 0, KGX_ZOOM_IN);
+}
+
+
+static void
+font_decrease (KgxTerminal *term,
+               KgxTab      *self)
+{
+  g_signal_emit (self, signals[ZOOM], 0, KGX_ZOOM_OUT);
+}
+
+
+static void
 kgx_tab_init (KgxTab *self)
 {
   static guint last_id = 0;
@@ -777,71 +801,29 @@ kgx_tab_init (KgxTab *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
+  g_signal_group_connect (priv->terminal_signals,
+                          "size-changed", G_CALLBACK (size_changed),
+                          self),
+  g_signal_group_connect (priv->terminal_signals,
+                          "increase-font-size", G_CALLBACK (font_increase),
+                          self),
+  g_signal_group_connect (priv->terminal_signals,
+                          "decrease-font-size", G_CALLBACK (font_decrease),
+                          self),
+
+  g_binding_group_bind (priv->terminal_binds, "window-title",
+                        self, "tab-title",
+                        G_BINDING_SYNC_CREATE);
+  g_binding_group_bind (priv->terminal_binds, "path",
+                        self, "tab-path",
+                        G_BINDING_SYNC_CREATE);
+
   gtk_search_bar_connect_entry (GTK_SEARCH_BAR (priv->search_bar),
                                 GTK_EDITABLE (priv->search_entry));
 
   target = gtk_drop_target_new (G_TYPE_STRING, GDK_ACTION_COPY);
   g_signal_connect (target, "drop", G_CALLBACK (drop), self);
   gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (target));
-}
-
-
-void
-kgx_tab_connect_terminal (KgxTab      *self,
-                          KgxTerminal *term)
-{
-  KgxTabPrivate *priv;
-
-  g_return_if_fail (KGX_IS_TAB (self));
-  g_return_if_fail (KGX_IS_TERMINAL (term));
-
-  priv = kgx_tab_get_instance_private (self);
-
-  if (priv->terminal == term) {
-    return;
-  }
-
-  if (priv->terminal) {
-    g_object_disconnect (priv->terminal,
-                         "any-signal::size-changed", G_CALLBACK (size_changed), self,
-                         "any-signal::increase-font-size", G_CALLBACK (font_increase), self,
-                         "any-signal::decrease-font-size", G_CALLBACK (font_decrease), self,
-                         NULL);
-  }
-
-  g_clear_object (&priv->term_title_bind);
-  g_clear_object (&priv->term_path_bind);
-  g_clear_object (&priv->term_font_bind);
-  g_clear_object (&priv->term_zoom_bind);
-  g_clear_object (&priv->term_theme_bind);
-  g_clear_object (&priv->term_scrollback_bind);
-
-  g_set_object (&priv->terminal, term);
-
-  g_object_connect (term,
-                    "signal::size-changed", G_CALLBACK (size_changed), self,
-                    "signal::increase-font-size", G_CALLBACK (font_increase), self,
-                    "signal::decrease-font-size", G_CALLBACK (font_decrease), self,
-                    NULL);
-
-  priv->term_title_bind = g_object_bind_property (term, "window-title",
-                                                  self, "tab-title",
-                                                  G_BINDING_SYNC_CREATE);
-  priv->term_path_bind = g_object_bind_property (term, "path",
-                                                 self, "tab-path",
-                                                 G_BINDING_SYNC_CREATE);
-  priv->term_font_bind = g_object_bind_property (self, "font",
-                                                 term, "font-desc",
-                                                 G_BINDING_SYNC_CREATE);
-  priv->term_zoom_bind = g_object_bind_property (self, "zoom",
-                                                 term, "font-scale",
-                                                 G_BINDING_SYNC_CREATE);
-  priv->term_theme_bind = g_object_bind_property (self, "theme",
-                                                  term, "theme",
-                                                  G_BINDING_SYNC_CREATE);
-  priv->term_scrollback_bind = g_object_bind_property (self, "scrollback-lines",
-                                                       term, "scrollback-lines",
-                                                       G_BINDING_SYNC_CREATE);
 }
 
 
@@ -1173,39 +1155,4 @@ kgx_tab_set_initial_title (KgxTab     *self,
                 "tab-title", title,
                 "tab-path", path,
                 NULL);
-}
-
-
-void
-kgx_tab_set_pages (KgxTab   *self,
-                   KgxPages *pages)
-{
-  KgxTabPrivate *priv;
-
-  g_return_if_fail (KGX_IS_TAB (self));
-  g_return_if_fail (KGX_IS_PAGES (pages) || !pages);
-
-  priv = kgx_tab_get_instance_private (self);
-
-  g_clear_object (&priv->pages_font_bind);
-  g_clear_object (&priv->pages_zoom_bind);
-  g_clear_object (&priv->pages_theme_bind);
-  g_clear_object (&priv->pages_scrollback_bind);
-
-  if (pages == NULL) {
-    return;
-  }
-
-  priv->pages_font_bind = g_object_bind_property (pages, "font",
-                                                  self, "font",
-                                                  G_BINDING_SYNC_CREATE);
-  priv->pages_zoom_bind = g_object_bind_property (pages, "zoom",
-                                                  self, "zoom",
-                                                  G_BINDING_SYNC_CREATE);
-  priv->pages_theme_bind = g_object_bind_property (pages, "theme",
-                                                   self, "theme",
-                                                   G_BINDING_SYNC_CREATE);
-  priv->pages_scrollback_bind = g_object_bind_property (pages, "scrollback-lines",
-                                                        self, "scrollback-lines",
-                                                        G_BINDING_SYNC_CREATE);
 }

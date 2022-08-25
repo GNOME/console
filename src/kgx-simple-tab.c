@@ -138,7 +138,7 @@ clear_wait_data (gpointer data)
   g_clear_weak_pointer (&self->self);
 
   g_free (self);
-} 
+}
 
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (WaitData, clear_wait_data)
@@ -361,6 +361,4 @@ static void
 kgx_simple_tab_init (KgxSimpleTab *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  kgx_tab_connect_terminal (KGX_TAB (self), KGX_TERMINAL (self->terminal));
 }

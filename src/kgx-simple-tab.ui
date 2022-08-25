@@ -2,6 +2,7 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <template class="KgxSimpleTab" parent="KgxTab">
+    <property name="terminal">terminal</property>
     <child type="content">
       <object class="GtkScrolledWindow">
         <property name="vexpand">1</property>

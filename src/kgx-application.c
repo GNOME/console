@@ -764,6 +764,7 @@ kgx_application_add_terminal (KgxApplication *self,
 
   tab = g_object_new (KGX_TYPE_SIMPLE_TAB,
                       "application", self,
+                      "settings", self->settings,
                       "initial-work-dir", directory,
                       "command", shell != NULL ? shell : argv,
                       "tab-title", title,
