@@ -1,3 +1,31 @@
+Version 43.rc
+~~~~~~~~~~~~
+
+Take advantage of some newer GLib/GObject features, with a corresponding 
+dependency bump, to simplify some code.
+
+Thanks to Maximiliano we now store the size of the last window, and use it
+for future windows rather than unconditionally using 80×24.
+
+A bug in 43.beta where ‘Show in Files’ was mistakenly unavailable has been
+fixed, as well as a longstanding edge case when a background tab closes.
+
+Updated Translations:
+ * Catalan  (Jordi Mas)
+ * Chinese (China)  (Luming Zh)
+ * Croatian  (Goran Vidović)
+ * Danish  (Ask Hjorth Larsen)
+ * Dutch  (Nathan Follens)
+ * French  (Irénée THIRION)
+ * Galician  (Fran Dieguez)
+ * Hebrew  (Yosef Or Boczko)
+ * Hungarian  (Balázs Úr)
+ * Indonesian  (Kukuh Syafaat)
+ * Occitan  (Quentin PAGÈS)
+ * Polish  (Piotr Drąg)
+ * Spanish  (Daniel Mustieles)
+ * Turkish  (Emin Tufan Çetin)
+
 Version 43.beta
 ~~~~~~~~~~~~
 

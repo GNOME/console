@@ -1,5 +1,5 @@
 project('gnome-console', 'c',
-                  version: '43.beta',
+                  version: '43.rc',
             meson_version: '>= 0.59.0',
                   license: 'GPL-3.0-or-later',
           default_options: [
