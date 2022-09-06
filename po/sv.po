@@ -1,15 +1,15 @@
 # Swedish translation for console.
-# Copyright © 2019-2021 console's COPYRIGHT HOLDER
+# Copyright © 2019-2022 console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the console package.
-# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2019, 2020, 2021.
-# Luna Jernberg <droidbittin@gmail.com>, 2021.
+# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2019, 2020, 2021, 2022.
+# Luna Jernberg <droidbittin@gmail.com>, 2021, 2022.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2021-12-30 21:38+0000\n"
-"PO-Revision-Date: 2021-12-30 23:17+0100\n"
+"POT-Creation-Date: 2022-09-03 16:32+0000\n"
+"PO-Revision-Date: 2022-09-04 22:20+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -17,10 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:29
 msgid "Console"
 msgstr "Konsol"
 
@@ -33,11 +33,11 @@ msgstr "kommando;prompt;cmd;kommandorad;kör;skal;terminal;kgx;kings cross;"
 msgid "New Window"
 msgstr "Nytt fönster"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:168
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:132
 msgid "New Tab"
 msgstr "Ny flik"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:556
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:361
 msgid "Terminal Emulator"
 msgstr "Terminalemulator"
 
@@ -49,129 +49,149 @@ msgstr "En enkel användarvänlig terminalemulator för GNOME-skrivbordet."
 msgid "Terminal window"
 msgstr "Terminalfönster"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:75
-msgid "Zander Brown"
-msgstr "Zander Brown"
+#: data/org.gnome.Console.metainfo.xml.in.in:187 src/kgx-window.c:387
+msgid "The GNOME Project"
+msgstr "GNOME-projektet"
 
-#: src/help-overlay.ui:13
+#: src/help-overlay.ui:12
 msgctxt "shortcut window"
 msgid "Application"
 msgstr "Program"
 
-#: src/help-overlay.ui:19
+#: src/help-overlay.ui:16
 msgctxt "shortcut window"
 msgid "New Window"
 msgstr "Nytt fönster"
 
-#: src/help-overlay.ui:26
+#: src/help-overlay.ui:23
 msgctxt "shortcut window"
 msgid "Terminal"
 msgstr "Terminal"
 
-#: src/help-overlay.ui:32
+#: src/help-overlay.ui:27
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "Sök"
 
-#: src/help-overlay.ui:39
+#: src/help-overlay.ui:33
 msgctxt "shortcut window"
 msgid "Copy"
 msgstr "Kopiera"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Paste"
 msgstr "Klistra in"
 
-#: src/help-overlay.ui:53
+#: src/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Tabs"
 msgstr "Flikar"
 
-#: src/help-overlay.ui:59
+#: src/help-overlay.ui:50
 msgctxt "shortcut window"
 msgid "New Tab"
 msgstr "Ny flik"
 
-#: src/help-overlay.ui:66
+#: src/help-overlay.ui:56
 msgctxt "shortcut window"
 msgid "Close Tab"
 msgstr "Stäng flik"
 
-#: src/help-overlay.ui:73
+#: src/help-overlay.ui:62
 msgctxt "shortcut window"
 msgid "Next Tab"
 msgstr "Nästa flik"
 
-#: src/help-overlay.ui:80
+#: src/help-overlay.ui:68
 msgctxt "shortcut window"
 msgid "Previous Tab"
 msgstr "Föregående flik"
 
-#: src/help-overlay.ui:87
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Switch to Tab"
 msgstr "Växla till flik"
 
+#: src/kgx-application.c:236
+msgid "Cannot use both --command and positional parameters"
+msgstr "Kan inte använda både --command och positionsparametrar"
+
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:528
+#: src/kgx-application.c:333
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s med VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:540 src/kgx-window.c:529
+#: src/kgx-application.c:345 src/kgx-window.c:382
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:554 src/kgx-window.ui:115
+#: src/kgx-application.c:359 src/kgx-window.ui:44
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
-#: src/kgx-application.c:558
+#: src/kgx-application.c:363
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 eller senare"
 
-#: src/kgx-application.c:691
+#: src/kgx-application.c:428
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Kör argumentet till denna flagga inuti terminalen"
 
-#: src/kgx-application.c:700
+#: src/kgx-application.c:429
+msgid "COMMAND"
+msgstr "KOMMANDO"
+
+#: src/kgx-application.c:437
 msgid "Set the working directory"
 msgstr "Ställ in arbetskatalogen"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:702
+#: src/kgx-application.c:439
 msgid "DIRNAME"
 msgstr "KATNAMN"
 
-#: src/kgx-application.c:710
+#: src/kgx-application.c:447
 msgid "Wait until the child exits (TODO)"
 msgstr "Vänta tills barnet avslutar (TODO)"
 
-#: src/kgx-application.c:719
+#: src/kgx-application.c:456
 msgid "Set the initial window title"
 msgstr "Ställ in fönstrets ursprungliga titel"
 
-#: src/kgx-application.c:728
+#: src/kgx-application.c:457
+msgid "TITLE"
+msgstr "TITEL"
+
+#: src/kgx-application.c:465
 msgid "ADVANCED: Set the shell to launch"
 msgstr "AVANCERAT: Ställ in skalet att starta"
 
-#: src/kgx-application.c:737
+#: src/kgx-application.c:466
+msgid "SHELL"
+msgstr "SKAL"
+
+#: src/kgx-application.c:474
 msgid "ADVANCED: Set the scrollback length"
 msgstr "AVANCERAT: Ställ in längd på rullningshistorik"
 
-#: src/kgx-application.h:44
-msgid "Console (Development)"
-msgstr "Konsol (Utveckling)"
+#: src/kgx-application.c:475
+msgid "LINES"
+msgstr "RADER"
 
-#: src/kgx-close-dialog.c:52
+#: src/kgx-application.c:484
+msgid "[-e|-- COMMAND [ARGUMENT...]]"
+msgstr "[-e|-- KOMMANDO [ARGUMENT…]]"
+
+#: src/kgx-close-dialog.c:50
 msgid "Close Window?"
 msgstr "Stäng fönster?"
 
-#: src/kgx-close-dialog.c:53
+#: src/kgx-close-dialog.c:51
 msgid ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
@@ -179,11 +199,11 @@ msgstr ""
 "Några kommandon körs ännu, att stänga detta fönster kommer att döda dem och "
 "kan leda till oväntade resultat"
 
-#: src/kgx-close-dialog.c:58
+#: src/kgx-close-dialog.c:56
 msgid "Close Tab?"
 msgstr "Stäng flik?"
 
-#: src/kgx-close-dialog.c:59
+#: src/kgx-close-dialog.c:57
 msgid ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
@@ -191,43 +211,43 @@ msgstr ""
 "Några kommandon körs ännu, att stänga denna flik kommer att döda dem och kan "
 "leda till oväntade resultat"
 
-#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:740
+#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:877
 msgid "_Cancel"
 msgstr "A_vbryt"
 
-#: src/kgx-close-dialog.ui:32
+#: src/kgx-close-dialog.ui:19
 msgid "C_lose"
 msgstr "S_täng"
 
-#: src/kgx-pages.ui:47
+#: src/kgx-pages.ui:61
 msgid "_Detach Tab"
 msgstr "_Koppla loss flik"
 
-#: src/kgx-pages.ui:53
+#: src/kgx-pages.ui:67
 msgid "_Close"
 msgstr "S_täng"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:121
+#: src/kgx-simple-tab.c:168
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Skrivskyddad</b> — Kommando avslutades med kod %i"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:130
+#: src/kgx-simple-tab.c:177
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Skrivskyddad</b> — Kommando avslutades"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:162
+#: src/kgx-simple-tab.c:210
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Misslyckades med att starta</b> — %s"
 
-#: src/kgx-tab.c:1184
+#: src/kgx-tab.c:961
 msgid "Command completed"
 msgstr "Kommando slutfört"
 
@@ -235,12 +255,12 @@ msgstr "Kommando slutfört"
 msgid "View Open Tabs"
 msgstr "Visa öppna flikar"
 
-#: src/kgx-terminal.c:732
+#: src/kgx-terminal.c:870
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Du klistrar in ett kommando som körs som en administratör"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:735
+#: src/kgx-terminal.c:874
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -249,24 +269,24 @@ msgstr ""
 "Säkerställ att du vet vad kommandot gör:\n"
 "%s"
 
-#: src/kgx-terminal.c:743 src/menus.ui:24
+#: src/kgx-terminal.c:878 src/menus.ui:24
 msgid "_Paste"
 msgstr "_Klistra in"
 
-#: src/kgx-theme-switcher.ui:18
+#: src/kgx-theme-switcher.ui:16
 msgid "Use System Colors"
 msgstr "Använd systemfärger"
 
-#: src/kgx-theme-switcher.ui:47
+#: src/kgx-theme-switcher.ui:44
 msgid "Use Light Colors"
 msgstr "Använd ljusa färger"
 
-#: src/kgx-theme-switcher.ui:76
+#: src/kgx-theme-switcher.ui:71
 msgid "Use Dark Colors"
 msgstr "Använd mörka färger"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:535
+#: src/kgx-window.c:393
 msgid "translator-credits"
 msgstr ""
 "Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
@@ -274,41 +294,37 @@ msgstr ""
 "Skicka synpunkter på översättningen till\n"
 "<tp-sv@listor.tp-sv.se>"
 
-#: src/kgx-window.ui:26
-msgid "Shrink Text"
-msgstr "Krymp text"
-
-#: src/kgx-window.ui:39
-msgid "Reset Size"
-msgstr "Återställ storlek"
-
-#: src/kgx-window.ui:52
-msgid "Enlarge Text"
-msgstr "Förstora text"
-
-#: src/kgx-window.ui:74
+#: src/kgx-window.ui:17
 msgid "_New Window"
 msgstr "_Nytt fönster"
 
-#: src/kgx-window.ui:86
+#: src/kgx-window.ui:23
 msgid "_Keyboard Shortcuts"
 msgstr "_Tangentbordsgenvägar"
 
-#: src/kgx-window.ui:93
+#: src/kgx-window.ui:27
 msgid "_About Console"
 msgstr "_Om Konsol"
 
-#: src/kgx-window.ui:94
-msgid "About this Program"
-msgstr "Om detta program"
-
-#: src/kgx-window.ui:123
+#: src/kgx-window.ui:52
 msgid "Find in Terminal"
 msgstr "Sök i terminal"
 
-#: src/kgx-window.ui:141
+#: src/kgx-window.ui:60
 msgid "Menu"
 msgstr "Meny"
+
+#: src/kgx-window.ui:78
+msgid "Shrink Text"
+msgstr "Krymp text"
+
+#: src/kgx-window.ui:89
+msgid "Reset Size"
+msgstr "Återställ storlek"
+
+#: src/kgx-window.ui:106
+msgid "Enlarge Text"
+msgstr "Förstora text"
 
 #: src/menus.ui:7
 msgid "_Open Link"
@@ -329,15 +345,3 @@ msgstr "_Markera allt"
 #: src/menus.ui:36
 msgid "Show in _Files"
 msgstr "Visa i _Filer"
-
-#: nautilus/kgx-nautilus-menu-item.c:120
-msgid "Open in Co_nsole (Devel)"
-msgstr "Öppna i Ko_nsol (Utveckling)"
-
-#: nautilus/kgx-nautilus-menu-item.c:122
-msgid "Open in Co_nsole"
-msgstr "Öppna i Ko_nsol"
-
-#: nautilus/kgx-nautilus-menu-item.c:124
-msgid "Start a terminal session for this location"
-msgstr "Starta en terminalsession för den här platsen"
