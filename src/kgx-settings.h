@@ -80,6 +80,7 @@ void                  kgx_settings_set_custom_shell  (KgxSettings       *self,
                                                       const char *const *shell);
 void                  kgx_settings_set_scrollback    (KgxSettings       *self,
                                                       int64_t            value);
+gboolean              kgx_settings_get_restore_size  (KgxSettings       *self);
 void                  kgx_settings_get_size          (KgxSettings       *self,
                                                       int               *width,
                                                       int               *height);

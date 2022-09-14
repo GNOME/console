@@ -392,6 +392,15 @@ kgx_settings_set_scrollback (KgxSettings *self,
 }
 
 
+gboolean
+kgx_settings_get_restore_size (KgxSettings *self)
+{
+  g_return_val_if_fail (KGX_IS_SETTINGS (self), FALSE);
+
+  return g_settings_get_boolean (self->settings, RESTORE_SIZE_KEY);
+}
+
+
 void
 kgx_settings_get_size (KgxSettings *self,
                        int         *width,

@@ -783,11 +783,13 @@ kgx_application_add_terminal (KgxApplication *self,
     GtkWindow *active_window;
     int width = -1, height = -1;
 
-    kgx_settings_get_size (self->settings, &width, &height);
-
-    active_window = gtk_application_get_active_window (GTK_APPLICATION (self));
-    if (active_window) {
-      gtk_window_get_default_size (active_window, &width, &height);
+    if (kgx_settings_get_restore_size (self->settings)) {
+      active_window = gtk_application_get_active_window (GTK_APPLICATION (self));
+      if (active_window) {
+        gtk_window_get_default_size (active_window, &width, &height);
+      } else {
+        kgx_settings_get_size (self->settings, &width, &height);
+      }
     }
 
     g_debug ("new window (%i×%i)", width, height);
