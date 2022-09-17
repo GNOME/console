@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-08-05 12:30+0000\n"
-"PO-Revision-Date: 2022-08-05 15:45+0300\n"
+"POT-Creation-Date: 2022-08-06 14:46+0000\n"
+"PO-Revision-Date: 2022-09-13 14:58+0300\n"
 "Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -31,15 +31,15 @@ msgstr "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 
 #: data/org.gnome.Console.desktop.in.in:21
 msgid "New Window"
-msgstr "Новое Окно"
+msgstr "Новое окно"
 
 #: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:132
 msgid "New Tab"
-msgstr "Новая Вкладка"
+msgstr "Новая вкладка"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:605
 msgid "Terminal Emulator"
-msgstr "Эмулятор Терминала"
+msgstr "Эмулятор терминала"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
@@ -61,7 +61,7 @@ msgstr "Приложение"
 #: src/help-overlay.ui:16
 msgctxt "shortcut window"
 msgid "New Window"
-msgstr "Новое Окно"
+msgstr "Новое окно"
 
 #: src/help-overlay.ui:23
 msgctxt "shortcut window"
@@ -91,27 +91,27 @@ msgstr "Вкладки"
 #: src/help-overlay.ui:50
 msgctxt "shortcut window"
 msgid "New Tab"
-msgstr "Новая Вкладка"
+msgstr "Новая вкладка"
 
 #: src/help-overlay.ui:56
 msgctxt "shortcut window"
 msgid "Close Tab"
-msgstr "Закрыть Вкладку"
+msgstr "Закрыть вкладку"
 
 #: src/help-overlay.ui:62
 msgctxt "shortcut window"
 msgid "Next Tab"
-msgstr "Следующая Вкладка"
+msgstr "Следующая вкладка"
 
 #: src/help-overlay.ui:68
 msgctxt "shortcut window"
 msgid "Previous Tab"
-msgstr "Предыдущая Вкладка"
+msgstr "Предыдущая вкладка"
 
 #: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Switch to Tab"
-msgstr "Переключиться на Вкладку"
+msgstr "Переключиться на вкладку"
 
 #: src/kgx-application.c:480
 msgid "Cannot use both --command and positional parameters"
@@ -189,7 +189,7 @@ msgstr "[-e|-- КОМАНДА [АРГУМЕНТ...]]"
 
 #: src/kgx-close-dialog.c:50
 msgid "Close Window?"
-msgstr "Закрыть Окно?"
+msgstr "Закрыть окно?"
 
 #: src/kgx-close-dialog.c:51
 msgid ""
@@ -201,7 +201,7 @@ msgstr ""
 
 #: src/kgx-close-dialog.c:56
 msgid "Close Tab?"
-msgstr "Закрыть Вкладку?"
+msgstr "Закрыть вкладку?"
 
 #: src/kgx-close-dialog.c:57
 msgid ""
@@ -221,7 +221,7 @@ msgstr "З_акрыть"
 
 #: src/kgx-pages.ui:42
 msgid "_Detach Tab"
-msgstr "_Отсоединить Вкладку"
+msgstr "_Отсоединить вкладку"
 
 #: src/kgx-pages.ui:48
 msgid "_Close"
@@ -253,7 +253,7 @@ msgstr "Команда выполнена"
 
 #: src/kgx-tab-button.ui:5
 msgid "View Open Tabs"
-msgstr "Просмотреть Открытые Вкладки"
+msgstr "Просмотреть открытые вкладки"
 
 #: src/kgx-terminal.c:807
 msgid "You are pasting a command that runs as an administrator"
@@ -275,15 +275,15 @@ msgstr "_Вставить"
 
 #: src/kgx-theme-switcher.ui:16
 msgid "Use System Colors"
-msgstr "Использовать Системные Цвета"
+msgstr "Использовать системные цвета"
 
 #: src/kgx-theme-switcher.ui:44
 msgid "Use Light Colors"
-msgstr "Использовать Светлые Цвета"
+msgstr "Использовать светлые цвета"
 
 #: src/kgx-theme-switcher.ui:71
 msgid "Use Dark Colors"
-msgstr "Использовать Темные Цвета"
+msgstr "Использовать темные цвета"
 
 #. Translators: Credit yourself here
 #: src/kgx-window.c:503
@@ -292,19 +292,19 @@ msgstr "Aleksandr Melman <alexmelman88@gmail.com>, 2022"
 
 #: src/kgx-window.ui:17
 msgid "_New Window"
-msgstr "_Новое Окно"
+msgstr "_Новое окно"
 
 #: src/kgx-window.ui:23
 msgid "_Keyboard Shortcuts"
-msgstr "_Комбинации Клавиш"
+msgstr "_Комбинации клавиш"
 
 #: src/kgx-window.ui:27
 msgid "_About Console"
-msgstr "_О Программе"
+msgstr "_О консоли"
 
 #: src/kgx-window.ui:52
 msgid "Find in Terminal"
-msgstr "Найти в Терминале"
+msgstr "Найти в терминале"
 
 #: src/kgx-window.ui:60
 msgid "Menu"
@@ -312,23 +312,23 @@ msgstr "Меню"
 
 #: src/kgx-window.ui:78
 msgid "Shrink Text"
-msgstr "Уменьшить Текст"
+msgstr "Уменьшить текст"
 
 #: src/kgx-window.ui:89
 msgid "Reset Size"
-msgstr "Сброс Размера"
+msgstr "Сбросить размер"
 
 #: src/kgx-window.ui:106
 msgid "Enlarge Text"
-msgstr "Увеличить Текст"
+msgstr "Увеличить текст"
 
 #: src/menus.ui:7
 msgid "_Open Link"
-msgstr "_Открыть Ссылку"
+msgstr "_Открыть ссылку"
 
 #: src/menus.ui:12
 msgid "Copy _Link"
-msgstr "Копировать _Ссылку"
+msgstr "Копировать _ссылку"
 
 #: src/menus.ui:19
 msgid "_Copy"
@@ -336,9 +336,8 @@ msgstr "_Копировать"
 
 #: src/menus.ui:29
 msgid "_Select All"
-msgstr "_Выбрать Все"
+msgstr "_Выделить все"
 
 #: src/menus.ui:36
 msgid "Show in _Files"
 msgstr "Показать в _Файлах"
-
