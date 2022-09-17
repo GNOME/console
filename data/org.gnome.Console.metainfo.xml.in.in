@@ -31,7 +31,30 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="43.rc" date="2022-09-03">
+    <release version="43.0" date="2022-09-17" type="stable">
+      <description>
+        <p>Updated Translations:</p>
+        <ul>
+          <li>Brazilian Portuguese</li>
+          <li>Bulgarian</li>
+          <li>Chinese (Taiwan)</li>
+          <li>Czech</li>
+          <li>Georgian</li>
+          <li>German</li>
+          <li>Greek</li>
+          <li>Kazakh</li>
+          <li>Korean</li>
+          <li>Latvian</li>
+          <li>Lithuanian</li>
+          <li>Nepali</li>
+          <li>Russian</li>
+          <li>Slovenian</li>
+          <li>Swedish</li>
+          <li>Turkish</li>
+        </ul>
+      </description>
+    </release>
+    <release version="43~rc" date="2022-09-03" type="development">
       <description>
         <p>Restore window size from prior session</p>
         <p>Various other bugfixes and improvements</p>
@@ -54,7 +77,7 @@
         </ul>
       </description>
     </release>
-    <release version="43.beta" date="2022-08-07">
+    <release version="43~beta" date="2022-08-07" type="development">
       <description>
         <p>Ported to Gtk4/Adwaita</p>
         <p>File drag and drop now pastes paths instead of URIs</p>
