@@ -1,5 +1,5 @@
 # Turkish translation of Console.
-# Copyright (C) 2019-2020 Console COPYRIGHT HOLDER
+# Copyright (C) 2019-2022 Console COPYRIGHT HOLDER
 # This file is distributed under the same license as the Console package.
 #
 # Sabri Ünal <libreajans@gmail.com>, 2019, 2020.
@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Console master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-08-06 14:46+0000\n"
+"POT-Creation-Date: 2022-09-01 22:42+0000\n"
 "PO-Revision-Date: 2022-09-01 01:39+0300\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <gnometurk@gnome.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:43
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:29
 msgid "Console"
 msgstr "Konsol"
 
@@ -40,7 +40,7 @@ msgstr "Yeni Pencere"
 msgid "New Tab"
 msgstr "Yeni Sekme"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:605
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:361
 msgid "Terminal Emulator"
 msgstr "Uçbirim Öykünücü"
 
@@ -52,7 +52,7 @@ msgstr "GNOME masaüstü için basit, kullanıcı dostu uçbirim öykünücü."
 msgid "Terminal window"
 msgstr "Uçbirim penceresi"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:104 src/kgx-window.c:497
+#: data/org.gnome.Console.metainfo.xml.in.in:164 src/kgx-window.c:387
 msgid "The GNOME Project"
 msgstr "GNOME Projesi"
 
@@ -116,77 +116,77 @@ msgctxt "shortcut window"
 msgid "Switch to Tab"
 msgstr "Sekmeye Geç"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:236
 msgid "Cannot use both --command and positional parameters"
 msgstr "--command ve konumsal parametreler birlikte kullanılamaz"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:577
+#: src/kgx-application.c:333
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s VTE %u.%u.%u %s kullanıyor\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:589 src/kgx-window.c:492
+#: src/kgx-application.c:345 src/kgx-window.c:382
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:603 src/kgx-window.ui:44
+#: src/kgx-application.c:359 src/kgx-window.ui:44
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
-#: src/kgx-application.c:607
+#: src/kgx-application.c:363
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 veya daha yenisi"
 
-#: src/kgx-application.c:739
+#: src/kgx-application.c:428
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Argümanı uçbirimin içinde bu seçeneğe çalıştır"
 
-#: src/kgx-application.c:740
+#: src/kgx-application.c:429
 msgid "COMMAND"
 msgstr "KOMUT"
 
-#: src/kgx-application.c:748
+#: src/kgx-application.c:437
 msgid "Set the working directory"
 msgstr "Çalışma dizinini belirle"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:750
+#: src/kgx-application.c:439
 msgid "DIRNAME"
 msgstr "DİZİNADI"
 
-#: src/kgx-application.c:758
+#: src/kgx-application.c:447
 msgid "Wait until the child exits (TODO)"
 msgstr "Alt süreç çıkana dek bekle (TODO)"
 
-#: src/kgx-application.c:767
+#: src/kgx-application.c:456
 msgid "Set the initial window title"
 msgstr "İlk pencere başlığını belirle"
 
-#: src/kgx-application.c:768
+#: src/kgx-application.c:457
 msgid "TITLE"
 msgstr "BAŞLIK"
 
-#: src/kgx-application.c:776
+#: src/kgx-application.c:465
 msgid "ADVANCED: Set the shell to launch"
 msgstr "GELİŞMİŞ: Başlatılacak kabuğu belirle"
 
-#: src/kgx-application.c:777
+#: src/kgx-application.c:466
 msgid "SHELL"
 msgstr "KABUK"
 
-#: src/kgx-application.c:785
+#: src/kgx-application.c:474
 msgid "ADVANCED: Set the scrollback length"
 msgstr "GELİŞMİŞ: Geri kaydırma uzunluğunu belirle"
 
-#: src/kgx-application.c:786
+#: src/kgx-application.c:475
 msgid "LINES"
 msgstr "SATIRLAR"
 
-#: src/kgx-application.c:795
+#: src/kgx-application.c:484
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- KOMUT [ARGÜMAN...]]"
 
@@ -214,7 +214,7 @@ msgstr ""
 "Bazı komutlar hala çalışıyor, bu sekmeyi kapatmak onları öldürebilir ve "
 "beklenmedik sonuçlara neden olabilir"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:814
+#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:877
 msgid "_Cancel"
 msgstr "_İptal"
 
@@ -222,11 +222,11 @@ msgstr "_İptal"
 msgid "C_lose"
 msgstr "_Kapat"
 
-#: src/kgx-pages.ui:42
+#: src/kgx-pages.ui:61
 msgid "_Detach Tab"
 msgstr "Sekmeyi _Ayır"
 
-#: src/kgx-pages.ui:48
+#: src/kgx-pages.ui:67
 msgid "_Close"
 msgstr "_Kapat"
 
@@ -250,7 +250,7 @@ msgstr "<b>Salt Okunur</b> — Komut çıktı"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Başlatma başarısız</b> — %s"
 
-#: src/kgx-tab.c:1087
+#: src/kgx-tab.c:961
 msgid "Command completed"
 msgstr "Komut tamamlandı"
 
@@ -258,12 +258,12 @@ msgstr "Komut tamamlandı"
 msgid "View Open Tabs"
 msgstr "Açık Sekmeleri Gör"
 
-#: src/kgx-terminal.c:807
+#: src/kgx-terminal.c:870
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Yönetici olarak çalışan komut yapıştırıyorsunuz"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:811
+#: src/kgx-terminal.c:874
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -272,7 +272,7 @@ msgstr ""
 "Komutun ne yaptığından emin olun:\n"
 "%s"
 
-#: src/kgx-terminal.c:815 src/menus.ui:24
+#: src/kgx-terminal.c:878 src/menus.ui:24
 msgid "_Paste"
 msgstr "_Yapıştır"
 
@@ -289,7 +289,7 @@ msgid "Use Dark Colors"
 msgstr "Koyu Renkler Kullan"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:503
+#: src/kgx-window.c:393
 msgid "translator-credits"
 msgstr ""
 "Sabri Ünal <libreajans@gmail.com>\n"
@@ -345,53 +345,4 @@ msgstr "Tümünü _Seç"
 
 #: src/menus.ui:36
 msgid "Show in _Files"
-msgstr "Dosyalarʼda Göster"
-
-#~ msgid "Zander Brown"
-#~ msgstr "Zander Brown"
-
-#~ msgid "Console (Development)"
-#~ msgstr "Konsol (Geliştirme)"
-
-#~ msgid "About this Program"
-#~ msgstr "Bu program hakkında"
-
-#~ msgid "Open in Co_nsole (Devel)"
-#~ msgstr "Ko_nsol (Geliştirme)’de Aç"
-
-#~ msgid "Open in Co_nsole"
-#~ msgstr "Ko_nsol’da Aç"
-
-#~ msgid "Start a terminal session for this location"
-#~ msgstr "Bu konum için uçbirim oturumu başlat"
-
-#~ msgid "Terminal"
-#~ msgstr "Uçbirim"
-
-#, fuzzy
-#~| msgid "Terminal Emulator"
-#~ msgid "KGX Terminal Emulator"
-#~ msgstr "Uçbirim Öykünücü"
-
-#~ msgid "_About King’s Cross"
-#~ msgstr "Kingʼs Cross _Hakkında"
-
-#, fuzzy
-#~| msgid "King’s Cross"
-#~ msgid "Op_en in King’s Cross"
-#~ msgstr "King’s Cross"
-
-#~ msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
-#~ msgstr "komut;istem;cmd;komut satırı;çalıştır;kabuk;uçbirim;terminal;kgx;"
-
-#~ msgid "child watcher"
-#~ msgstr "alt süreç izleyici"
-
-#~ msgid "Copyright © %s Zander Brown"
-#~ msgstr "Telif Hakkı © %s Zander Brown"
-
-#~ msgid "Terminal (King’s Cross)"
-#~ msgstr "Uçbirim (Kingʼs Cross)"
-
-#~ msgid "_OK"
-#~ msgstr "_Tamam"
+msgstr "_Dosyalarʼda Göster"
