@@ -28,15 +28,15 @@
                 <child>
                   <object class="GtkButton">
                     <property name="receives-default">1</property>
-                    <property name="icon-name">go-down-symbolic</property>
-                    <signal name="clicked" handler="search_next" swapped="no"/>
+                    <property name="icon-name">go-up-symbolic</property>
+                    <signal name="clicked" handler="search_prev" swapped="no"/>
                   </object>
                 </child>
                 <child>
                   <object class="GtkButton">
                     <property name="receives-default">1</property>
-                    <property name="icon-name">go-up-symbolic</property>
-                    <signal name="clicked" handler="search_prev" swapped="no"/>
+                    <property name="icon-name">go-down-symbolic</property>
+                    <signal name="clicked" handler="search_next" swapped="no"/>
                   </object>
                 </child>
               </object>
