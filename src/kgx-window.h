@@ -60,7 +60,6 @@ struct _KgxWindow
   int                   last_rows;
   guint                 timeout;
 
-  gboolean              narrow;
   gboolean              close_anyway;
 
   /* Template widgets */

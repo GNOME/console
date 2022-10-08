@@ -45,7 +45,6 @@ G_DEFINE_TYPE (KgxWindow, kgx_window, ADW_TYPE_APPLICATION_WINDOW)
 enum {
   PROP_0,
   PROP_SETTINGS,
-  PROP_NARROW,
   LAST_PROP
 };
 
@@ -95,9 +94,6 @@ kgx_window_get_property (GObject    *object,
     case PROP_SETTINGS:
       g_value_set_object (value, self->settings);
       break;
-    case PROP_NARROW:
-      g_value_set_boolean (value, self->narrow);
-      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -117,28 +113,6 @@ close_response (KgxWindow *self)
 static void new_tab_activated (GSimpleAction *action,
                                GVariant      *parameter,
                                gpointer       data);
-
-
-static void
-kgx_window_size_allocate (GtkWidget *widget,
-                          int        width,
-                          int        height,
-                          int        baseline)
-{
-  KgxWindow *self = KGX_WINDOW (widget);
-  gboolean narrow = width < 400;
-
-  if (narrow != self->narrow) {
-    self->narrow = narrow;
-    g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_NARROW]);
-
-    if (!narrow && kgx_pages_count (KGX_PAGES (self->pages)) > 0) {
-      adw_tab_overview_set_open (ADW_TAB_OVERVIEW (self->tab_overview), FALSE);
-    }
-  }
-
-  GTK_WIDGET_CLASS (kgx_window_parent_class)->size_allocate (widget, width, height, baseline);
-}
 
 
 static gboolean
@@ -279,6 +253,12 @@ create_tab_cb (KgxWindow *self)
   return kgx_pages_get_selected_page (KGX_PAGES (self->pages));
 }
 
+static void
+narrow_state_exited (KgxWindow *self)
+{
+  if (kgx_pages_count (KGX_PAGES (self->pages)) > 0)
+    adw_tab_overview_set_open (ADW_TAB_OVERVIEW (self->tab_overview), FALSE);
+}
 
 static void
 kgx_window_class_init (KgxWindowClass *klass)
@@ -291,19 +271,12 @@ kgx_window_class_init (KgxWindowClass *klass)
   object_class->set_property = kgx_window_set_property;
   object_class->get_property = kgx_window_get_property;
 
-  widget_class->size_allocate = kgx_window_size_allocate;
-
   window_class->close_request = kgx_window_close_request;
 
   pspecs[PROP_SETTINGS] =
     g_param_spec_object ("settings", NULL, NULL,
                          KGX_TYPE_SETTINGS,
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_STRINGS);
-
-  pspecs[PROP_NARROW] =
-    g_param_spec_boolean ("narrow", NULL, NULL,
-                          FALSE,
-                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
@@ -330,6 +303,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, status_changed);
   gtk_widget_class_bind_template_callback (widget_class, extra_drag_drop);
   gtk_widget_class_bind_template_callback (widget_class, create_tab_cb);
+  gtk_widget_class_bind_template_callback (widget_class, narrow_state_exited);
 }
 
 
@@ -450,7 +424,6 @@ tab_switcher_activated (GSimpleAction *action,
 
   adw_tab_overview_set_open (ADW_TAB_OVERVIEW (self->tab_overview), TRUE);
 }
-
 
 static GActionEntry win_entries[] = {
   { "new-window", new_activated, NULL, NULL, NULL },

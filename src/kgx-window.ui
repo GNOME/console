@@ -31,6 +31,8 @@
   </menu>
   <template class="KgxWindow" parent="AdwApplicationWindow">
     <signal name="notify::is-active" handler="active_changed" swapped="no"/>
+    <property name="width-request">360</property>
+    <property name="height-request">294</property>
     <property name="content">
       <object class="AdwTabOverview" id="tab_overview">
         <property name="enable-new-tab">True</property>
@@ -123,13 +125,12 @@
                 </child>
                 <child type="end">
                   <object class="AdwTabButton" id="tab_button">
-                    <property name="visible" bind-source="KgxWindow" bind-property="narrow" bind-flags="sync-create"/>
+                    <property name="visible">False</property>
                     <property name="action-name">win.tab-switcher</property>
                   </object>
                 </child>
                 <child type="end">
-                  <object class="GtkButton">
-                    <property name="visible" bind-source="KgxWindow" bind-property="narrow" bind-flags="sync-create|invert-boolean"/>
+                  <object class="GtkButton" id="new_tab_button">
                     <property name="can-focus">0</property>
                     <property name="receives-default">0</property>
                     <property name="action-name">win.new-tab</property>
@@ -140,13 +141,8 @@
               </object>
             </child>
             <child>
-              <object class="GtkRevealer">
-                <property name="reveal-child" bind-source="KgxWindow" bind-property="narrow" bind-flags="sync-create|invert-boolean"/>
-                <property name="child">
-                  <object class="AdwTabBar" id="tab_bar">
-                    <signal name="extra-drag-drop" handler="extra_drag_drop" swapped="no"/>
-                  </object>
-                </property>
+              <object class="AdwTabBar" id="tab_bar">
+                <signal name="extra-drag-drop" handler="extra_drag_drop" swapped="no"/>
               </object>
             </child>
             <child>
@@ -183,6 +179,17 @@
         </property>
       </object>
     </property>
+    <child>
+      <object class="AdwAdaptiveState" id="narrow_state">
+        <conditions>
+          <condition type="max-width">400</condition>
+        </conditions>
+        <setter object="tab_button" property="visible">True</setter>
+        <setter object="new_tab_button" property="visible">False</setter>
+        <setter object="tab_bar" property="visible">False</setter>
+        <signal name="exit" handler="narrow_state_exited" swapped="yes"/>
+      </object>
+    </child>
     <style>
       <class name="terminal-window"/>
     </style>
