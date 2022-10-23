@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-08-06 14:46+0000\n"
-"PO-Revision-Date: 2022-08-09 20:36+0300\n"
+"POT-Creation-Date: 2022-09-25 14:12+0000\n"
+"PO-Revision-Date: 2022-10-23 20:41+0300\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <>\n"
 "Language: he\n"
@@ -17,10 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
 "2 : 3)\n"
-"X-Generator: Gtranslator 40.0\n"
+"X-Generator: Gtranslator 42.0\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:43
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:29
 msgid "Console"
 msgstr "מסוף"
 
@@ -37,7 +37,7 @@ msgstr "חלון חדש"
 msgid "New Tab"
 msgstr "לשונית חדשה"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:605
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:361
 msgid "Terminal Emulator"
 msgstr "מדמה מסוף"
 
@@ -49,7 +49,7 @@ msgstr "מדמה מסוף פשוט וידידותי למשתמש עבוד שול
 msgid "Terminal window"
 msgstr "חלון המסוף"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:104 src/kgx-window.c:497
+#: data/org.gnome.Console.metainfo.xml.in.in:210 src/kgx-window.c:387
 msgid "The GNOME Project"
 msgstr "מיזם GNOME"
 
@@ -113,77 +113,77 @@ msgctxt "shortcut window"
 msgid "Switch to Tab"
 msgstr "מעבר ללשונית"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:236
 msgid "Cannot use both --command and positional parameters"
 msgstr "Cannot use both --command and positional parameters"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:577
+#: src/kgx-application.c:333
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s using VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:589 src/kgx-window.c:492
+#: src/kgx-application.c:345 src/kgx-window.c:382
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:603 src/kgx-window.ui:44
+#: src/kgx-application.c:359 src/kgx-window.ui:44
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
-#: src/kgx-application.c:607
+#: src/kgx-application.c:363
 msgid "GPL 3.0 or later"
 msgstr "‫GPL-3.0‎ או גרסה מאוחרת יותר"
 
-#: src/kgx-application.c:739
+#: src/kgx-application.c:428
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Execute the argument to this option inside the terminal"
 
-#: src/kgx-application.c:740
+#: src/kgx-application.c:429
 msgid "COMMAND"
 msgstr "COMMAND"
 
-#: src/kgx-application.c:748
+#: src/kgx-application.c:437
 msgid "Set the working directory"
 msgstr "Set the working directory"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:750
+#: src/kgx-application.c:439
 msgid "DIRNAME"
 msgstr "DIRNAME"
 
-#: src/kgx-application.c:758
+#: src/kgx-application.c:447
 msgid "Wait until the child exits (TODO)"
 msgstr "Wait until the child exits (TODO)"
 
-#: src/kgx-application.c:767
+#: src/kgx-application.c:456
 msgid "Set the initial window title"
 msgstr "Set the initial window title"
 
-#: src/kgx-application.c:768
+#: src/kgx-application.c:457
 msgid "TITLE"
 msgstr "TITLE"
 
-#: src/kgx-application.c:776
+#: src/kgx-application.c:465
 msgid "ADVANCED: Set the shell to launch"
 msgstr "ADVANCED: Set the shell to launch"
 
-#: src/kgx-application.c:777
+#: src/kgx-application.c:466
 msgid "SHELL"
 msgstr "SHELL"
 
-#: src/kgx-application.c:785
+#: src/kgx-application.c:474
 msgid "ADVANCED: Set the scrollback length"
 msgstr "ADVANCED: Set the scrollback length"
 
-#: src/kgx-application.c:786
+#: src/kgx-application.c:475
 msgid "LINES"
 msgstr "LINES"
 
-#: src/kgx-application.c:795
+#: src/kgx-application.c:484
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- COMMAND [ARGUMENT...]]"
 
@@ -211,7 +211,7 @@ msgstr ""
 "מספר תהליכים עדיין פועלים. סגירת הלשונית תחסל אותם, דבר שעשוי להוביל לתוצאות "
 "בלתי צפויות."
 
-#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:814
+#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:877
 msgid "_Cancel"
 msgstr "_ביטול"
 
@@ -219,11 +219,11 @@ msgstr "_ביטול"
 msgid "C_lose"
 msgstr "_סגירה"
 
-#: src/kgx-pages.ui:42
+#: src/kgx-pages.ui:61
 msgid "_Detach Tab"
 msgstr "_ניתוק לשונית"
 
-#: src/kgx-pages.ui:48
+#: src/kgx-pages.ui:67
 msgid "_Close"
 msgstr "_סגירה"
 
@@ -247,7 +247,7 @@ msgstr "‏<b>קריאה בלבד</b> — הפקודה הסתיימה"
 msgid "<b>Failed to start</b> — %s"
 msgstr "‏<b>ארע כשל בהפעלה</b> -‏ %s"
 
-#: src/kgx-tab.c:1087
+#: src/kgx-tab.c:961
 msgid "Command completed"
 msgstr "פקודה הושלמה"
 
@@ -255,12 +255,12 @@ msgstr "פקודה הושלמה"
 msgid "View Open Tabs"
 msgstr "הצגת לשוניות פתוחות"
 
-#: src/kgx-terminal.c:807
+#: src/kgx-terminal.c:870
 msgid "You are pasting a command that runs as an administrator"
 msgstr "הדבקת פקודה שרצה כמנהל"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:811
+#: src/kgx-terminal.c:874
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -269,7 +269,7 @@ msgstr ""
 "יש לוודא כי הנך יודע מה הפקודה עושה:\n"
 "%s"
 
-#: src/kgx-terminal.c:815 src/menus.ui:24
+#: src/kgx-terminal.c:878 src/menus.ui:24
 msgid "_Paste"
 msgstr "ה_דבקה"
 
@@ -286,12 +286,11 @@ msgid "Use Dark Colors"
 msgstr "שימוש בצבעים כהים"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:503
+#: src/kgx-window.c:393
 msgid "translator-credits"
 msgstr ""
 "יוסף אור בוצ׳קו <yoseforb@gmail.com>\n"
-"\n"
-"<a href=\"https://l10n.gnome.org/teams/he/\">מיזם תרגום GNOME לעברית</a>"
+"מיזם תרגום GNOME לעברית https://l10n.gnome.org/teams/he/"
 
 #: src/kgx-window.ui:17
 msgid "_New Window"
