@@ -54,7 +54,7 @@
             "builddir" : true,
             "buildsystem" : "meson",
             "config-opts" : [
-                "-Ddevel=True"
+                "-Ddevel=true"
             ],
             "sources" : [
                 {

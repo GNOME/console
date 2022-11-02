@@ -9,7 +9,7 @@ debian:
       libsystemd-dev libgtop2-dev meson desktop-file-utils appstream-util
       gsettings-desktop-schemas-dev
   script:
-    - meson --buildtype=release _build .
+    - meson -Dwerror=true --buildtype=release _build .
     - ninja -C _build
 
 fedora:
@@ -23,7 +23,7 @@ fedora:
       "pkgconfig(libsystemd)" "pkgconfig(libpcre2-8)"
       "pkgconfig(gsettings-desktop-schemas)"
   script:
-    - meson --buildtype=release -Dtests=true _build .
+    - meson -Dwerror=true --buildtype=release -Dtests=true _build .
     - meson compile -C _build
     - meson test -C _build
 
@@ -34,6 +34,7 @@ flatpak:
         FLATPAK_MODULE: "gnome-console"
         RUNTIME_REPO: "https://nightly.gnome.org/gnome-nightly.flatpakrepo"
         GIT_SUBMODULE_STRATEGY: recursive
+        CONFIG_OPTS: "-Ddevel=true -Dwerror=true"
         APP_ID: "org.gnome.Console.Devel"
         BUNDLE: "org.gnome.Console.Devel.flatpak"
     extends: .flatpak
