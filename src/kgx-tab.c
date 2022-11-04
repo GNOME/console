@@ -886,6 +886,17 @@ kgx_tab_push_child (KgxTab     *self,
     new_status |= push_type (priv->remote, pid, NULL, context, KGX_REMOTE);
   }
 
+  if (G_UNLIKELY (g_strcmp0 (program, "waypipe") == 0)) {
+    int i;
+
+    for (i = 1; argv[i]; i++) {
+      if (G_UNLIKELY (g_strcmp0 (argv[i], "ssh") == 0)) {
+        new_status |= push_type (priv->remote, pid, NULL, context, KGX_REMOTE);
+        break;
+      }
+    }
+  }
+
   if (G_UNLIKELY (kgx_process_get_is_root (process))) {
     new_status |= push_type (priv->root, pid, NULL, context, KGX_PRIVILEGED);
   }
