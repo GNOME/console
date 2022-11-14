@@ -34,6 +34,8 @@ kgx_status_as_icon (G_GNUC_UNUSED GObject *self,
 {
   if (status & KGX_REMOTE) {
     return g_themed_icon_new ("status-remote-symbolic");
+  } else if (status & KGX_PLAYBOX) {
+    return g_themed_icon_new ("status-playbox-symbolic");
   } else if (status & KGX_PRIVILEGED) {
     return g_themed_icon_new ("status-privileged-symbolic");
   }

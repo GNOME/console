@@ -22,6 +22,7 @@
 
 #include "kgx-enums.h"
 #include "kgx-marshals.h"
+#include "kgx-playbox.h"
 #include "kgx-utils.h"
 
 #include "kgx-train.h"
@@ -36,6 +37,7 @@ struct _KgxTrainPrivate {
 
   GHashTable *root;
   GHashTable *remote;
+  GHashTable *playbox;
   GHashTable *children;
 };
 
@@ -77,6 +79,7 @@ kgx_train_dispose (GObject *object)
 
   g_clear_pointer (&priv->root, g_hash_table_unref);
   g_clear_pointer (&priv->remote, g_hash_table_unref);
+  g_clear_pointer (&priv->playbox, g_hash_table_unref);
   g_clear_pointer (&priv->children, g_hash_table_unref);
 
   G_OBJECT_CLASS (kgx_train_parent_class)->dispose (object);
@@ -295,6 +298,7 @@ kgx_train_init (KgxTrain *self)
 
   priv->root = g_hash_table_new (g_direct_hash, g_direct_equal);
   priv->remote = g_hash_table_new (g_direct_hash, g_direct_equal);
+  priv->playbox = g_hash_table_new (g_direct_hash, g_direct_equal);
   priv->children = g_hash_table_new_full (g_direct_hash,
                                           g_direct_equal,
                                           NULL,
@@ -441,6 +445,10 @@ kgx_train_push_child (KgxTrain   *self,
           break;
         }
       }
+    }
+
+    if (G_UNLIKELY (kgx_is_playbox (program, argv))) {
+      new_status |= push_type (priv->playbox, pid, NULL, KGX_PLAYBOX);
     }
   }
 

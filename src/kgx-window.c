@@ -323,6 +323,12 @@ status_changed (GObject *object, GParamSpec *pspec, gpointer data)
 
   status = kgx_pages_current_status (KGX_PAGES (priv->pages));
 
+  if (status & KGX_PLAYBOX) {
+    gtk_widget_add_css_class (GTK_WIDGET (self), KGX_WINDOW_STYLE_PLAYBOX);
+  } else {
+    gtk_widget_remove_css_class (GTK_WIDGET (self), KGX_WINDOW_STYLE_PLAYBOX);
+  }
+
   if (status & KGX_REMOTE) {
     gtk_widget_add_css_class (GTK_WIDGET (self), KGX_WINDOW_STYLE_REMOTE);
   } else {

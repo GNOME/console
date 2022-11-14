@@ -21,6 +21,7 @@
     <file preprocess="xml-stripblanks">icons/scalable/status/bell-outline-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/emblem-ok-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/external-link-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/status/status-playbox-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/status-privileged-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/status-regular-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/status-remote-symbolic.svg</file>

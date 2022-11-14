@@ -31,14 +31,21 @@ kgx-tab .top-bar {
   --headerbar-backdrop-color: oklch(from var(--accent-purple) var(--headerbar-backdrop-oklch));
 }
 
+.terminal-window.playbox {
+  --headerbar-bg-color: oklch(from var(--accent-blue) var(--headerbar-bg-oklch));
+  --headerbar-backdrop-color: oklch(from var(--accent-blue) var(--headerbar-backdrop-oklch));
+}
+
 .terminal-window.root .top-bar.raised,
-.terminal-window.remote .top-bar.raised {
+.terminal-window.remote .top-bar.raised,
+.terminal-window.playbox .top-bar.raised {
   --accent-bg-color: color-mix(in srgb, currentColor 75%, transparent);
   --accent-color: oklab(from var(--accent-bg-color) var(--standalone-color-oklab));
 }
 
 .terminal-window.root .top-bar.raised popover,
-.terminal-window.remote .top-bar.raised popover {
+.terminal-window.remote .top-bar.raised popover,
+.terminal-window.playbox .top-bar.raised popover {
   --accent-bg-color: var(--system-accent);
   --accent-color: oklab(from var(--accent-bg-color) var(--standalone-color-oklab));
 }

@@ -26,6 +26,7 @@ G_BEGIN_DECLS
 
 #define KGX_WINDOW_STYLE_ROOT "root"
 #define KGX_WINDOW_STYLE_REMOTE "remote"
+#define KGX_WINDOW_STYLE_PLAYBOX "playbox"
 #define KGX_WINDOW_STYLE_RINGING "bell"
 
 
