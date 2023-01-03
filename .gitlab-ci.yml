@@ -7,7 +7,7 @@ debian:
     - apt -y update
     - apt -y install gcc g++ gettext git libgnutls28-dev libgtk-4-dev
       libsystemd-dev libgtop2-dev meson desktop-file-utils appstream-util
-      gsettings-desktop-schemas-dev
+      gsettings-desktop-schemas-dev libvte-2.91-gtk4-dev libadwaita-1-dev
   script:
     - meson -Dwerror=true --buildtype=release _build .
     - ninja -C _build
@@ -21,6 +21,7 @@ fedora:
       desktop-file-utils gperf "pkgconfig(gtk4)" libappstream-glib
       "pkgconfig(libgtop-2.0)" "pkgconfig(fribidi)" "pkgconfig(gnutls)"
       "pkgconfig(libsystemd)" "pkgconfig(libpcre2-8)"
+      "pkgconfig(vte-2.91-gtk4)" "pkgconfig(libadwaita-1)"
       "pkgconfig(gsettings-desktop-schemas)"
   script:
     - meson -Dwerror=true --buildtype=release -Dtests=true _build .
