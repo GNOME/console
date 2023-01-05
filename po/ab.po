@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-10-23 17:41+0000\n"
+"POT-Creation-Date: 2022-12-16 10:37+0000\n"
 "Last-Translator: Нанба Наала <naala-nanba@rambler.ru>\n"
 "Language-Team: Abkhazian <daniel.abzakh@gmail.com>\n"
 "Language: ab\n"
@@ -295,7 +295,7 @@ msgstr "Атерминал аҟны аартра"
 
 #: src/kgx-window.ui:60
 msgid "Menu"
-msgstr ""
+msgstr "Амениу"
 
 #: src/kgx-window.ui:78
 msgid "Shrink Text"
@@ -315,7 +315,7 @@ msgstr "_Азхьарԥш аартра"
 
 #: src/menus.ui:12
 msgid "Copy _Link"
-msgstr ""
+msgstr "_Ахьарԥш ахкьыԥхьаара"
 
 #: src/menus.ui:19
 msgid "_Copy"
@@ -323,8 +323,8 @@ msgstr "_Ахкьыҧхьаара"
 
 #: src/menus.ui:29
 msgid "_Select All"
-msgstr "_Зегьы ралхра"
+msgstr "_Зегьы алкаара"
 
 #: src/menus.ui:36
 msgid "Show in _Files"
-msgstr ""
+msgstr "Афаилқәа _рҟны арбара"
