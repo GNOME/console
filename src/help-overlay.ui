@@ -58,6 +58,12 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
+                <property name="action-name">win.show-tabs</property>
+                <property name="title" translatable="yes" context="shortcut window">Show All Tabs</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
                 <property name="accelerator">&lt;primary&gt;Tab</property>
                 <property name="title" translatable="yes" context="shortcut window">Next Tab</property>
               </object>

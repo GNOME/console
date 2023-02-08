@@ -20,6 +20,13 @@
     </section>
     <section>
       <item>
+        <attribute name="label" translatable="yes">_Show All Tabs</attribute>
+        <attribute name="action">win.show-tabs-desktop</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
         <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
         <attribute name="action">win.show-help-overlay</attribute>
       </item>
@@ -124,7 +131,7 @@
                 <child type="end">
                   <object class="AdwTabButton" id="tab_button">
                     <property name="visible" bind-source="KgxWindow" bind-property="narrow" bind-flags="sync-create"/>
-                    <property name="action-name">win.tab-switcher</property>
+                    <property name="action-name">win.show-tabs</property>
                   </object>
                 </child>
                 <child type="end">

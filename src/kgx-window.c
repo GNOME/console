@@ -122,6 +122,7 @@ kgx_window_size_allocate (GtkWidget *widget,
 {
   KgxWindow *self = KGX_WINDOW (widget);
   gboolean narrow = width < 400;
+  GAction *action;
 
   if (narrow != self->narrow) {
     self->narrow = narrow;
@@ -131,6 +132,10 @@ kgx_window_size_allocate (GtkWidget *widget,
       adw_tab_overview_set_open (ADW_TAB_OVERVIEW (self->tab_overview), FALSE);
     }
   }
+
+  action = g_action_map_lookup_action (G_ACTION_MAP (self), "show-tabs-desktop");
+
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), !narrow);
 
   GTK_WIDGET_CLASS (kgx_window_parent_class)->size_allocate (widget, width, height, baseline);
 }
@@ -457,7 +462,8 @@ static GActionEntry win_entries[] = {
   { "new-tab", new_tab_activated, NULL, NULL, NULL },
   { "close-tab", close_tab_activated, NULL, NULL, NULL },
   { "about", about_activated, NULL, NULL, NULL },
-  { "tab-switcher", tab_switcher_activated, NULL, NULL, NULL },
+  { "show-tabs", tab_switcher_activated, NULL, NULL, NULL },
+  { "show-tabs-desktop", tab_switcher_activated, NULL, NULL, NULL },
 };
 
 
