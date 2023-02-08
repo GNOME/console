@@ -4,22 +4,22 @@
 #
 # Sabri Ünal <libreajans@gmail.com>, 2019, 2020.
 # Muhammet Kara <muhammetk@gmail.com>, 2021.
-# Emin Tufan Çetin <etcetin@gmail.com>, 2019, 2020, 2022.
+# Emin Tufan Çetin <etcetin@gmail.com>, 2019-2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Console master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-09-01 22:42+0000\n"
-"PO-Revision-Date: 2022-09-01 01:39+0300\n"
+"POT-Creation-Date: 2023-02-08 21:12+0000\n"
+"PO-Revision-Date: 2023-02-09 01:35+0300\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
-"Language-Team: Turkish <gnometurk@gnome.org>\n"
+"Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0.1\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Gtranslator 42.0\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:29
@@ -52,7 +52,7 @@ msgstr "GNOME masaüstü için basit, kullanıcı dostu uçbirim öykünücü."
 msgid "Terminal window"
 msgstr "Uçbirim penceresi"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:164 src/kgx-window.c:387
+#: data/org.gnome.Console.metainfo.xml.in.in:210 src/kgx-window.c:387
 msgid "The GNOME Project"
 msgstr "GNOME Projesi"
 
@@ -312,8 +312,8 @@ msgid "Find in Terminal"
 msgstr "Uçbirimde Bul"
 
 #: src/kgx-window.ui:60
-msgid "Menu"
-msgstr "Menü"
+msgid "Main Menu"
+msgstr "Ana Menü"
 
 #: src/kgx-window.ui:78
 msgid "Shrink Text"
