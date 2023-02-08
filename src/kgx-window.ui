@@ -57,7 +57,7 @@
                   <object class="GtkMenuButton">
                     <property name="can-focus">0</property>
                     <property name="receives-default">1</property>
-                    <property name="tooltip-text" translatable="yes">Menu</property>
+                    <property name="tooltip-text" translatable="yes">Main Menu</property>
                     <property name="icon-name">open-menu-symbolic</property>
                     <property name="popover">
                       <object class="GtkPopoverMenu">
