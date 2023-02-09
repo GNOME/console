@@ -1,14 +1,14 @@
 # Portuguese translation for console.
 # Copyright (C) 2022 console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the console package.
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-08-06 14:46+0000\n"
-"PO-Revision-Date: 2022-08-06 23:49+0100\n"
+"POT-Creation-Date: 2023-02-08 21:12+0000\n"
+"PO-Revision-Date: 2023-02-09 13:39+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "Language: pt\n"
@@ -16,10 +16,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:43
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:29
 msgid "Console"
 msgstr "Consola"
 
@@ -38,7 +38,7 @@ msgstr "Nova janela"
 msgid "New Tab"
 msgstr "Novo separador"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:605
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:361
 msgid "Terminal Emulator"
 msgstr "Emulador de terminal"
 
@@ -52,7 +52,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Janela do terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:104 src/kgx-window.c:497
+#: data/org.gnome.Console.metainfo.xml.in.in:210 src/kgx-window.c:387
 msgid "The GNOME Project"
 msgstr "O Projeto GNOME"
 
@@ -116,77 +116,77 @@ msgctxt "shortcut window"
 msgid "Switch to Tab"
 msgstr "Mudar para separador"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:236
 msgid "Cannot use both --command and positional parameters"
 msgstr "Não é possível ambos os parâmetros --comando e posicional"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:577
+#: src/kgx-application.c:333
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s a usar VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:589 src/kgx-window.c:492
+#: src/kgx-application.c:345 src/kgx-window.c:382
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:603 src/kgx-window.ui:44
+#: src/kgx-application.c:359 src/kgx-window.ui:44
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
-#: src/kgx-application.c:607
+#: src/kgx-application.c:363
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 ou posterior"
 
-#: src/kgx-application.c:739
+#: src/kgx-application.c:428
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Executa o argumento para esta opção dentro do terminal"
 
-#: src/kgx-application.c:740
+#: src/kgx-application.c:429
 msgid "COMMAND"
 msgstr "COMMANDO"
 
-#: src/kgx-application.c:748
+#: src/kgx-application.c:437
 msgid "Set the working directory"
 msgstr "Define o diretório de trabalho"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:750
+#: src/kgx-application.c:439
 msgid "DIRNAME"
 msgstr "NOME-DIR"
 
-#: src/kgx-application.c:758
+#: src/kgx-application.c:447
 msgid "Wait until the child exits (TODO)"
 msgstr "Aguarda até o sub-processo sair (ToDo)"
 
-#: src/kgx-application.c:767
+#: src/kgx-application.c:456
 msgid "Set the initial window title"
 msgstr "Define o título da janela inicial"
 
-#: src/kgx-application.c:768
+#: src/kgx-application.c:457
 msgid "TITLE"
 msgstr "TÍTULO"
 
-#: src/kgx-application.c:776
+#: src/kgx-application.c:465
 msgid "ADVANCED: Set the shell to launch"
 msgstr "AVANÇADO: Define o shell a lançar"
 
-#: src/kgx-application.c:777
+#: src/kgx-application.c:466
 msgid "SHELL"
 msgstr "SHELL"
 
-#: src/kgx-application.c:785
+#: src/kgx-application.c:474
 msgid "ADVANCED: Set the scrollback length"
 msgstr "AVANÇADO: Define o comprimento do buffer de deslocamento (scrollback)"
 
-#: src/kgx-application.c:786
+#: src/kgx-application.c:475
 msgid "LINES"
 msgstr "LINHAS"
 
-#: src/kgx-application.c:795
+#: src/kgx-application.c:484
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- COMANDO [ARGUMENTO...]]"
 
@@ -214,7 +214,7 @@ msgstr ""
 "Alguns comandos ainda estão em execução, fechar este separador vai terminá-"
 "los e pode levar a resultados inesperados"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:814
+#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:877
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -222,11 +222,11 @@ msgstr "_Cancelar"
 msgid "C_lose"
 msgstr "_Fechar"
 
-#: src/kgx-pages.ui:42
+#: src/kgx-pages.ui:61
 msgid "_Detach Tab"
 msgstr "_Desanexar separador"
 
-#: src/kgx-pages.ui:48
+#: src/kgx-pages.ui:67
 msgid "_Close"
 msgstr "_Fechar"
 
@@ -250,7 +250,7 @@ msgstr "<b>Apenas leitura</b> — Comando encerrado"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Falha ao iniciar</b> — %s"
 
-#: src/kgx-tab.c:1087
+#: src/kgx-tab.c:961
 msgid "Command completed"
 msgstr "Comando concluído"
 
@@ -258,12 +258,12 @@ msgstr "Comando concluído"
 msgid "View Open Tabs"
 msgstr "Ver separadores abertos"
 
-#: src/kgx-terminal.c:807
+#: src/kgx-terminal.c:870
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Está a colar um comando que executa como administrador"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:811
+#: src/kgx-terminal.c:874
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -272,7 +272,7 @@ msgstr ""
 "Certifique-se de que sabe o que o comando faz:\n"
 "%s"
 
-#: src/kgx-terminal.c:815 src/menus.ui:24
+#: src/kgx-terminal.c:878 src/menus.ui:24
 msgid "_Paste"
 msgstr "C_olar"
 
@@ -289,7 +289,7 @@ msgid "Use Dark Colors"
 msgstr "Usar cores escuras"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:503
+#: src/kgx-window.c:393
 msgid "translator-credits"
 msgstr "Hugo Carvalho <hugokarvalho@hotmail.com>"
 
@@ -310,8 +310,8 @@ msgid "Find in Terminal"
 msgstr "Localizar no terminal"
 
 #: src/kgx-window.ui:60
-msgid "Menu"
-msgstr "Menu"
+msgid "Main Menu"
+msgstr "Menu principal"
 
 #: src/kgx-window.ui:78
 msgid "Shrink Text"
