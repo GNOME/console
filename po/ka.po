@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Georgian translation for Console.
+# Copyright (C) 2023 console's authors
+# This file is distributed under the same license as the console package.
+# Ekaterine Papava <papava.e@gtu.ge>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-09-18 07:50+0000\n"
-"PO-Revision-Date: 2022-09-24 12:00+0200\n"
+"POT-Creation-Date: 2023-02-08 21:12+0000\n"
+"PO-Revision-Date: 2023-02-09 13:28+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: \n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:29
@@ -48,7 +48,7 @@ msgstr "მარტივი და ადვილად მოსახმა
 msgid "Terminal window"
 msgstr "ტერმინალის ფანჯარა"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:187 src/kgx-window.c:387
+#: data/org.gnome.Console.metainfo.xml.in.in:210 src/kgx-window.c:387
 msgid "The GNOME Project"
 msgstr "პროექტი \"GNOME\""
 
@@ -304,8 +304,8 @@ msgid "Find in Terminal"
 msgstr "ტერმინალში ძებნა"
 
 #: src/kgx-window.ui:60
-msgid "Menu"
-msgstr "მენიუ"
+msgid "Main Menu"
+msgstr "მთავარი მენიუ"
 
 #: src/kgx-window.ui:78
 msgid "Shrink Text"
