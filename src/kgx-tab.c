@@ -882,6 +882,7 @@ kgx_tab_push_child (KgxTab     *self,
 
   if (G_UNLIKELY (g_strcmp0 (program, "ssh") == 0 ||
                   g_strcmp0 (program, "mosh-client") == 0 ||
+                  g_strcmp0 (program, "mosh") == 0 ||
                   g_strcmp0 (program, "et") == 0)) {
     new_status |= push_type (priv->remote, pid, NULL, context, KGX_REMOTE);
   }
