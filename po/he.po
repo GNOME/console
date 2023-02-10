@@ -1,14 +1,14 @@
 # Hebrew translation for console.
 # Copyright (C) 2022 console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the console package.
-# Yosef Or Boczko <yoseforb@gmail.com>, 2022.
+# Yosef Or Boczko <yoseforb@gmail.com>, 2022-2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-09-25 14:12+0000\n"
-"PO-Revision-Date: 2022-10-23 20:41+0300\n"
+"POT-Creation-Date: 2023-02-08 21:12+0000\n"
+"PO-Revision-Date: 2023-02-10 14:18+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <>\n"
 "Language: he\n"
@@ -309,8 +309,8 @@ msgid "Find in Terminal"
 msgstr "למצוא במסוף"
 
 #: src/kgx-window.ui:60
-msgid "Menu"
-msgstr "תפריט"
+msgid "Main Menu"
+msgstr "תפריט ראשי"
 
 #: src/kgx-window.ui:78
 msgid "Shrink Text"
