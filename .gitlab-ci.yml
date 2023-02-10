@@ -2,6 +2,15 @@ include:
   - project: 'gnome/citemplates'
     file: 'flatpak/flatpak_ci_initiative.yml'
 
+variables:
+  MANIFEST_PATH: "build-aux/flatpak/org.gnome.Console.Devel.json"
+  FLATPAK_MODULE: "gnome-console"
+  RUNTIME_REPO: "https://nightly.gnome.org/gnome-nightly.flatpakrepo"
+  GIT_SUBMODULE_STRATEGY: recursive
+  CONFIG_OPTS: "-Ddevel=true -Dwerror=true"
+  APP_ID: "org.gnome.Console.Devel"
+  BUNDLE: "org.gnome.Console.Devel.flatpak"
+
 debian:
   image: debian:testing
   stage: build
@@ -31,13 +40,9 @@ fedora:
     - meson test -C _build
 
 flatpak:
-    stage: build
-    variables:
-        MANIFEST_PATH: "build-aux/flatpak/org.gnome.Console.Devel.json"
-        FLATPAK_MODULE: "gnome-console"
-        RUNTIME_REPO: "https://nightly.gnome.org/gnome-nightly.flatpakrepo"
-        GIT_SUBMODULE_STRATEGY: recursive
-        CONFIG_OPTS: "-Ddevel=true -Dwerror=true"
-        APP_ID: "org.gnome.Console.Devel"
-        BUNDLE: "org.gnome.Console.Devel.flatpak"
-    extends: .flatpak
+  stage: build
+  extends: .flatpak
+
+flatpak-aarch64:
+  stage: build
+  extends: '.flatpak@aarch64'
