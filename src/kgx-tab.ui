@@ -30,6 +30,7 @@
                   <object class="GtkButton">
                     <property name="receives-default">1</property>
                     <property name="icon-name">go-up-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Previous Match</property>
                     <signal name="clicked" handler="search_prev" swapped="no"/>
                   </object>
                 </child>
@@ -37,6 +38,7 @@
                   <object class="GtkButton">
                     <property name="receives-default">1</property>
                     <property name="icon-name">go-down-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Next Match</property>
                     <signal name="clicked" handler="search_next" swapped="no"/>
                   </object>
                 </child>
