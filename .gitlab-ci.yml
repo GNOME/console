@@ -11,34 +11,6 @@ variables:
   APP_ID: "org.gnome.Console.Devel"
   BUNDLE: "org.gnome.Console.Devel.flatpak"
 
-debian:
-  image: debian:testing
-  stage: build
-  before_script:
-    - apt -y update
-    - apt -y install gcc g++ gettext git libgnutls28-dev libgtk-4-dev
-      libsystemd-dev libgtop2-dev meson desktop-file-utils appstream-util
-      gsettings-desktop-schemas-dev libvte-2.91-gtk4-dev libadwaita-1-dev
-  script:
-    - meson -Dwerror=true --buildtype=release _build .
-    - ninja -C _build
-
-fedora:
-  image: fedora:latest
-  stage: build
-  before_script:
-    - dnf update -y --nogpgcheck
-    - dnf install -y --nogpgcheck meson gettext glib2-devel gcc gcc-c++ git
-      desktop-file-utils gperf "pkgconfig(gtk4)" libappstream-glib
-      "pkgconfig(libgtop-2.0)" "pkgconfig(fribidi)" "pkgconfig(gnutls)"
-      "pkgconfig(libsystemd)" "pkgconfig(libpcre2-8)"
-      "pkgconfig(vte-2.91-gtk4)" "pkgconfig(libadwaita-1)"
-      "pkgconfig(gsettings-desktop-schemas)"
-  script:
-    - meson -Dwerror=true --buildtype=release -Dtests=true _build .
-    - meson compile -C _build
-    - meson test -C _build
-
 flatpak:
   stage: build
   extends: .flatpak
