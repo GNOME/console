@@ -19,6 +19,7 @@
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkSearchEntry" id="search_entry">
+                    <property name="placeholder-text" translatable="yes">Find text</property>
                     <property name="hexpand">1</property>
                     <signal name="next-match" handler="search_next" swapped="no"/>
                     <signal name="previous-match" handler="search_prev" swapped="no"/>
