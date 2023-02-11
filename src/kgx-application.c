@@ -348,7 +348,7 @@ kgx_application_handle_local_options (GApplication *app,
   if (g_variant_dict_lookup (options, "about", "b", &about)) {
     if (about) {
       g_autofree char *copyright = g_strdup_printf (_("© %s Zander Brown"),
-                                                    "2019-2022");
+                                                    "2019-2023");
       struct winsize w;
       int padding = 0;
 

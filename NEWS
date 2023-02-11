@@ -1,3 +1,32 @@
+Version 44.beta
+~~~~~~~~~~~~~~~
+
+Alexander Mikhaylenko kept us up to date with libadwaita changes, including
+the new tab overview that replaces the existing mobile switcher, and
+supplements the tab bar.
+
+Cleanups for ‘Find’ were provided by Daniel Christodoulopoulos and
+‘sunflowerskater’, whilst Michel Dänzer and Tomasz Torcz expanded the
+scenarios considered to be ‘remote’ to include mosh and waypipe.
+
+Other assorted fixes were provided by Hari Rana, Jordan Petridis,
+Mazhar Hussain, and Sergio Costas Rodriguez.
+
+Updated Translations:
+ * Belarusian  (Vasil Pupkin)
+ * Friulian  (Fabio Tomat)
+ * Galician  (Fran Dieguez)
+ * Georgian  (Ekaterine Papava)
+ * German  (Jürgen Benvenuti)
+ * Hebrew  (Yosef Or Boczko)
+ * Hindi  (Hemish)
+ * Indonesian  (Kukuh Syafaat)
+ * Interlingue  (Olga Smirnova)
+ * Portuguese  (Hugo Carvalho)
+ * Slovak  (Dušan Kazik)
+ * Turkish  (Emin Tufan Çetin)
+ * Ukrainian  (Yuri Chornoivan)
+
 Version 43.0
 ~~~~~~~~~~~~
 
