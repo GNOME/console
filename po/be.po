@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console gnome-43\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-01-12 17:20+0000\n"
-"PO-Revision-Date: 2023-01-17 13:33+0300\n"
+"POT-Creation-Date: 2023-02-12 12:31+0000\n"
+"PO-Revision-Date: 2023-02-13 16:21+0300\n"
 "Last-Translator: Yuras Shumovich <shumovichy@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -35,11 +35,11 @@ msgstr ""
 msgid "New Window"
 msgstr "Новае акно"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:132
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:143
 msgid "New Tab"
 msgstr "Новая ўкладка"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:361
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:366
 msgid "Terminal Emulator"
 msgstr "Эмулятар тэрмінала"
 
@@ -51,7 +51,7 @@ msgstr "Просты і зручны тэрмінал для асяроддзя 
 msgid "Terminal window"
 msgstr "Акно тэрмінала"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:210 src/kgx-window.c:387
+#: data/org.gnome.Console.metainfo.xml.in.in:210 src/kgx-window.c:436
 msgid "The GNOME Project"
 msgstr "Праект GNOME"
 
@@ -102,90 +102,95 @@ msgstr "Закрыць укладку"
 
 #: src/help-overlay.ui:62
 msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Паказаць усе ўкладкі"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
 msgid "Next Tab"
 msgstr "Наступная ўкладка"
 
-#: src/help-overlay.ui:68
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Previous Tab"
 msgstr "Папярэдняя ўкладка"
 
-#: src/help-overlay.ui:74
+#: src/help-overlay.ui:80
 msgctxt "shortcut window"
 msgid "Switch to Tab"
 msgstr "Пераключыцца на ўкладку"
 
-#: src/kgx-application.c:236
+#: src/kgx-application.c:241
 msgid "Cannot use both --command and positional parameters"
 msgstr "Нельга адначасова выкарыстоўваць --каманду і пазіцыйныя параметры"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:333
+#: src/kgx-application.c:338
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s праз VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:345 src/kgx-window.c:382
+#: src/kgx-application.c:350 src/kgx-window.c:431
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:359 src/kgx-window.ui:44
+#: src/kgx-application.c:364 src/kgx-window.ui:55
 msgid "King’s Cross"
 msgstr "Кінгс-Крос"
 
-#: src/kgx-application.c:363
+#: src/kgx-application.c:368
 msgid "GPL 3.0 or later"
 msgstr "GPL версіі 3.0 або любой пазнейшай"
 
-#: src/kgx-application.c:428
+#: src/kgx-application.c:433
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Выканаць аргумент гэтага параметра ў тэрмінале"
 
-#: src/kgx-application.c:429
+#: src/kgx-application.c:434
 msgid "COMMAND"
 msgstr "КАМАНДА"
 
-#: src/kgx-application.c:437
+#: src/kgx-application.c:442
 msgid "Set the working directory"
 msgstr "Задаць працоўны каталог"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:439
+#: src/kgx-application.c:444
 msgid "DIRNAME"
 msgstr "НАЗВА_ПАПКІ"
 
-#: src/kgx-application.c:447
+#: src/kgx-application.c:452
 msgid "Wait until the child exits (TODO)"
 msgstr "Пачакайце пакуль завершыцца даччыны працэс (ЗАДАЧА)"
 
-#: src/kgx-application.c:456
+#: src/kgx-application.c:461
 msgid "Set the initial window title"
 msgstr "Задаць першапачатковы загаловак акна"
 
-#: src/kgx-application.c:457
+#: src/kgx-application.c:462
 msgid "TITLE"
 msgstr "ЗАГАЛОВАК"
 
-#: src/kgx-application.c:465
+#: src/kgx-application.c:470
 msgid "ADVANCED: Set the shell to launch"
 msgstr "ДАДАТКОВЫ: Задаць абалонку запуску"
 
-#: src/kgx-application.c:466
+#: src/kgx-application.c:471
 msgid "SHELL"
 msgstr "АБАЛОНКА"
 
-#: src/kgx-application.c:474
+#: src/kgx-application.c:479
 msgid "ADVANCED: Set the scrollback length"
 msgstr "ДАДАТКОВЫ: Задаць даўжыню поля прагорткі"
 
-#: src/kgx-application.c:475
+#: src/kgx-application.c:480
 msgid "LINES"
 msgstr "РАДКОЎ"
 
-#: src/kgx-application.c:484
+#: src/kgx-application.c:489
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- КАМАНДА [АРГУМЕНТ...]]"
 
@@ -249,13 +254,21 @@ msgstr "<b>Толькі для чытання</b> — Выкананне кам�
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Не ўдалося запусціць</b> — %s"
 
-#: src/kgx-tab.c:961
+#: src/kgx-tab.c:993
 msgid "Command completed"
 msgstr "Каманда выканана"
 
-#: src/kgx-tab-button.ui:5
-msgid "View Open Tabs"
-msgstr "Паказаць адкрытыя ўкладкі"
+#: src/kgx-tab.ui:22
+msgid "Find text"
+msgstr "Пошук тэксту"
+
+#: src/kgx-tab.ui:33
+msgid "Previous Match"
+msgstr "Папярэдняе супадзенне"
+
+#: src/kgx-tab.ui:41
+msgid "Next Match"
+msgstr "Наступнае супадзенне"
 
 #: src/kgx-terminal.c:870
 msgid "You are pasting a command that runs as an administrator"
@@ -288,7 +301,7 @@ msgid "Use Dark Colors"
 msgstr "Выкарыстоўваць цёмныя колеры"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:393
+#: src/kgx-window.c:442
 msgid "translator-credits"
 msgstr "Юрась Шумовіч <shumovichy@gmail.com>"
 
@@ -297,30 +310,34 @@ msgid "_New Window"
 msgstr "_Новае акно"
 
 #: src/kgx-window.ui:23
+msgid "_Show All Tabs"
+msgstr "Паказаць _усе ўкладкі"
+
+#: src/kgx-window.ui:30
 msgid "_Keyboard Shortcuts"
 msgstr "_Спалучэнні клавіш"
 
-#: src/kgx-window.ui:27
+#: src/kgx-window.ui:34
 msgid "_About Console"
 msgstr "_Пра Кансоль"
 
-#: src/kgx-window.ui:52
+#: src/kgx-window.ui:63
 msgid "Find in Terminal"
 msgstr "Пошук у тэрмінале"
 
-#: src/kgx-window.ui:60
-msgid "Menu"
-msgstr "Меню"
+#: src/kgx-window.ui:71
+msgid "Main Menu"
+msgstr "Галоўнае меню"
 
-#: src/kgx-window.ui:78
+#: src/kgx-window.ui:89
 msgid "Shrink Text"
 msgstr "Паменшыць тэкст"
 
-#: src/kgx-window.ui:89
+#: src/kgx-window.ui:100
 msgid "Reset Size"
 msgstr "Скінуць маштабаванне"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:117
 msgid "Enlarge Text"
 msgstr "Павялічыць тэкст"
 
@@ -343,3 +360,6 @@ msgstr "Вылучыць усё"
 #: src/menus.ui:36
 msgid "Show in _Files"
 msgstr "Паказаць праз «_Файлы»"
+
+#~ msgid "View Open Tabs"
+#~ msgstr "Паказаць адкрытыя ўкладкі"
