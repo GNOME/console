@@ -263,6 +263,8 @@ kgx_simple_tab_start (KgxTab              *page,
   }
 
   env = g_environ_setenv (env, "TERM", "xterm-256color", TRUE);
+  env = g_environ_setenv (env, "TERM_PROGRAM", "kgx", TRUE);
+  env = g_environ_setenv (env, "TERM_PROGRAM_VERSION", PACKAGE_VERSION, TRUE);
 
   vte_terminal_set_pty (VTE_TERMINAL (self->terminal), pty);
 
