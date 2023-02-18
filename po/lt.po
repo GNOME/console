@@ -1,14 +1,14 @@
 # Lithuanian translation for console.
 # Copyright (C) 2022 console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the console package.
-# Aurimas Černius <aurisc4@gmail.com>, 2022.
+# Aurimas Černius <aurisc4@gmail.com>, 2022-2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-08-05 12:30+0000\n"
-"PO-Revision-Date: 2022-09-11 15:43+0300\n"
+"POT-Creation-Date: 2023-02-12 12:31+0000\n"
+"PO-Revision-Date: 2023-02-18 22:34+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -17,10 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2)\n"
-"X-Generator: Gtranslator 40.0\n"
+"X-Generator: Gtranslator 42.0\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:43
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:29
 msgid "Console"
 msgstr "Konsolė"
 
@@ -34,11 +34,11 @@ msgstr ""
 msgid "New Window"
 msgstr "Naujas langas"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:132
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:143
 msgid "New Tab"
 msgstr "Nauja kortelė"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:605
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:366
 msgid "Terminal Emulator"
 msgstr "Terminalo emuliatorius"
 
@@ -50,7 +50,7 @@ msgstr "Paprastas terminalo emulatorius GNOME darbalaukio naudotojams."
 msgid "Terminal window"
 msgstr "Terminalo langas"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:104 src/kgx-window.c:497
+#: data/org.gnome.Console.metainfo.xml.in.in:210 src/kgx-window.c:436
 msgid "The GNOME Project"
 msgstr "GNOME projektas"
 
@@ -101,90 +101,95 @@ msgstr "Užverti kortelę"
 
 #: src/help-overlay.ui:62
 msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Rodyti visas korteles"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
 msgid "Next Tab"
 msgstr "Kita kortelė"
 
-#: src/help-overlay.ui:68
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Previous Tab"
 msgstr "Ankstesnė kortelė"
 
-#: src/help-overlay.ui:74
+#: src/help-overlay.ui:80
 msgctxt "shortcut window"
 msgid "Switch to Tab"
 msgstr "Pereiti į kortelę"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:241
 msgid "Cannot use both --command and positional parameters"
 msgstr "Negalima naudoti ir --command, ir pozicinių parametrų"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:577
+#: src/kgx-application.c:338
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s naudojant VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:589 src/kgx-window.c:492
+#: src/kgx-application.c:350 src/kgx-window.c:431
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:603 src/kgx-window.ui:44
+#: src/kgx-application.c:364 src/kgx-window.ui:55
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
-#: src/kgx-application.c:607
+#: src/kgx-application.c:368
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 arba vėlesnė"
 
-#: src/kgx-application.c:739
+#: src/kgx-application.c:433
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Vykdyti šio parametro argumentą terminale"
 
-#: src/kgx-application.c:740
+#: src/kgx-application.c:434
 msgid "COMMAND"
 msgstr "KOMANDA"
 
-#: src/kgx-application.c:748
+#: src/kgx-application.c:442
 msgid "Set the working directory"
 msgstr "Nustatyti darbinį katalogą"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:750
+#: src/kgx-application.c:444
 msgid "DIRNAME"
 msgstr "KATALOGAS"
 
-#: src/kgx-application.c:758
+#: src/kgx-application.c:452
 msgid "Wait until the child exits (TODO)"
 msgstr "Laukti, kol vaikas išeis (NEPADARYTA)"
 
-#: src/kgx-application.c:767
+#: src/kgx-application.c:461
 msgid "Set the initial window title"
 msgstr "Nustatyti pradinį lango pavadinimą"
 
-#: src/kgx-application.c:768
+#: src/kgx-application.c:462
 msgid "TITLE"
 msgstr "PAVADINIMAS"
 
-#: src/kgx-application.c:776
+#: src/kgx-application.c:470
 msgid "ADVANCED: Set the shell to launch"
 msgstr "SUDĖTINGESNIS: nustatyti paleidžiamą apvalkalą"
 
-#: src/kgx-application.c:777
+#: src/kgx-application.c:471
 msgid "SHELL"
 msgstr "APVALKALAS"
 
-#: src/kgx-application.c:785
+#: src/kgx-application.c:479
 msgid "ADVANCED: Set the scrollback length"
 msgstr "SUDĖTINGESNIS: nustatyti grįžimo atgal ilgį"
 
-#: src/kgx-application.c:786
+#: src/kgx-application.c:480
 msgid "LINES"
 msgstr "EILUTĖS"
 
-#: src/kgx-application.c:795
+#: src/kgx-application.c:489
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- KOMANDA [ARGUMENTAI...]]"
 
@@ -212,7 +217,7 @@ msgstr ""
 "Kai kurios komandos vis dar veikia, kortelės užvėrimas jas nutrauks su "
 "nenuspėjamu rezultatu"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:814
+#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:877
 msgid "_Cancel"
 msgstr "_Atsisakyti"
 
@@ -220,11 +225,11 @@ msgstr "_Atsisakyti"
 msgid "C_lose"
 msgstr "Už_verti"
 
-#: src/kgx-pages.ui:42
+#: src/kgx-pages.ui:61
 msgid "_Detach Tab"
 msgstr "_Atkabinti kortelę"
 
-#: src/kgx-pages.ui:48
+#: src/kgx-pages.ui:67
 msgid "_Close"
 msgstr "_Užverti"
 
@@ -248,20 +253,28 @@ msgstr "<b>Tik skaitymui</b> – komanda baigėsi"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Nepavyko paleisti</b> – %s"
 
-#: src/kgx-tab.c:1087
+#: src/kgx-tab.c:993
 msgid "Command completed"
 msgstr "Komanda baigėsi"
 
-#: src/kgx-tab-button.ui:5
-msgid "View Open Tabs"
-msgstr "Rodyti atvertas korteles"
+#: src/kgx-tab.ui:22
+msgid "Find text"
+msgstr "Rasti tekstą"
 
-#: src/kgx-terminal.c:807
+#: src/kgx-tab.ui:33
+msgid "Previous Match"
+msgstr "Ankstesnė atitiktis"
+
+#: src/kgx-tab.ui:41
+msgid "Next Match"
+msgstr "Kita atitiktis"
+
+#: src/kgx-terminal.c:870
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Jūs įdėjote komandą, kuri vykdoma kaip administratoriaus"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:811
+#: src/kgx-terminal.c:874
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -270,7 +283,7 @@ msgstr ""
 "Įsitikinkite, kad žinote, ką komanda daro:\n"
 "%s"
 
-#: src/kgx-terminal.c:815 src/menus.ui:24
+#: src/kgx-terminal.c:878 src/menus.ui:24
 msgid "_Paste"
 msgstr "Į_dėti"
 
@@ -287,7 +300,7 @@ msgid "Use Dark Colors"
 msgstr "Naudoti tamsias spalvas"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:503
+#: src/kgx-window.c:442
 msgid "translator-credits"
 msgstr ""
 "Išvertė:\n"
@@ -298,30 +311,34 @@ msgid "_New Window"
 msgstr "_Naujas langas"
 
 #: src/kgx-window.ui:23
+msgid "_Show All Tabs"
+msgstr "_Rodyti visas korteles"
+
+#: src/kgx-window.ui:30
 msgid "_Keyboard Shortcuts"
 msgstr "_Klaviatūros trumpiniai"
 
-#: src/kgx-window.ui:27
+#: src/kgx-window.ui:34
 msgid "_About Console"
 msgstr "_Apie konsolę"
 
-#: src/kgx-window.ui:52
+#: src/kgx-window.ui:63
 msgid "Find in Terminal"
 msgstr "Rasti terminale"
 
-#: src/kgx-window.ui:60
-msgid "Menu"
-msgstr "Meniu"
+#: src/kgx-window.ui:71
+msgid "Main Menu"
+msgstr "Pagrindinis meniu"
 
-#: src/kgx-window.ui:78
+#: src/kgx-window.ui:89
 msgid "Shrink Text"
 msgstr "Sumažinti tekstą"
 
-#: src/kgx-window.ui:89
+#: src/kgx-window.ui:100
 msgid "Reset Size"
 msgstr "Atstatyti dydį"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:117
 msgid "Enlarge Text"
 msgstr "Padidinti tekstą"
 
@@ -344,6 +361,9 @@ msgstr "Žymėti _viską"
 #: src/menus.ui:36
 msgid "Show in _Files"
 msgstr "Rodyti _failuose"
+
+#~ msgid "View Open Tabs"
+#~ msgstr "Rodyti atvertas korteles"
 
 #~ msgid "Zander Brown"
 #~ msgstr "Zander Brown"
