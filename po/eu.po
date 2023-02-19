@@ -1,13 +1,13 @@
 # Basque translation for kgx.
 # Copyright (C) 2019 kgx's COPYRIGHT HOLDER
 # This file is distributed under the same license as the kgx package.
-# Asier Sarasua Garmendia <asiersarasua@ni.eus>, 2019, 2022.
+# Asier Sarasua Garmendia <asiersarasua@ni.eus>, 2019, 2022, 2023.
 #
 msgid ""
 msgstr "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-08-06 14:46+0000\n"
-"PO-Revision-Date: 2022-08-07 10:00+0100\n"
+"POT-Creation-Date: 2023-02-12 12:31+0000\n"
+"PO-Revision-Date: 2023-02-12 10:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -16,7 +16,7 @@ msgstr "Project-Id-Version: kgx master\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:43
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:29
 msgid "Console"
 msgstr "Kontsola"
 
@@ -29,11 +29,11 @@ msgstr "komandoa;gonbitea;cmd;komando-lerroa;exekutatu;shell-a;terminala;kgx;kin
 msgid "New Window"
 msgstr "Leiho berria"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:132
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:143
 msgid "New Tab"
 msgstr "Fitxa berria"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:605
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:366
 msgid "Terminal Emulator"
 msgstr "Terminalaren emulatzailea"
 
@@ -45,7 +45,7 @@ msgstr "Terminalaren emuladore sinple eta erraza GNOME mahaigainerako."
 msgid "Terminal window"
 msgstr "Terminalaren leihoa"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:104 src/kgx-window.c:497
+#: data/org.gnome.Console.metainfo.xml.in.in:210 src/kgx-window.c:436
 msgid "The GNOME Project"
 msgstr "GNOME proiektua"
 
@@ -57,7 +57,7 @@ msgstr "Aplikazioa"
 #: src/help-overlay.ui:16
 msgctxt "shortcut window"
 msgid "New Window"
-msgstr "_Leiho berria"
+msgstr "Leiho berria"
 
 #: src/help-overlay.ui:23
 msgctxt "shortcut window"
@@ -96,90 +96,95 @@ msgstr "Itxi fitxa"
 
 #: src/help-overlay.ui:62
 msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Erakutsi fitxa guztiak"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
 msgid "Next Tab"
 msgstr "Hurrengo fitxa"
 
-#: src/help-overlay.ui:68
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Previous Tab"
 msgstr "Aurreko fitxa"
 
-#: src/help-overlay.ui:74
+#: src/help-overlay.ui:80
 msgctxt "shortcut window"
 msgid "Switch to Tab"
 msgstr "Aldatu fitxara"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:241
 msgid "Cannot use both --command and positional parameters"
 msgstr "Ezin da aldi berean --command eta posizioko parametroak erabili"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:577
+#: src/kgx-application.c:338
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s, VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:589 src/kgx-window.c:492
+#: src/kgx-application.c:350 src/kgx-window.c:431
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:603 src/kgx-window.ui:44
+#: src/kgx-application.c:364 src/kgx-window.ui:55
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
-#: src/kgx-application.c:607
+#: src/kgx-application.c:368
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 edo berriagoa"
 
-#: src/kgx-application.c:739
+#: src/kgx-application.c:433
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Exekutatu aukera honen argumentua terminalaren barruan"
 
-#: src/kgx-application.c:740
+#: src/kgx-application.c:434
 msgid "COMMAND"
 msgstr "KOMANDOA"
 
-#: src/kgx-application.c:748
+#: src/kgx-application.c:442
 msgid "Set the working directory"
 msgstr "Ezarri laneko direktorioa"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:750
+#: src/kgx-application.c:444
 msgid "DIRNAME"
 msgstr "DIRIZENA"
 
-#: src/kgx-application.c:758
+#: src/kgx-application.c:452
 msgid "Wait until the child exits (TODO)"
 msgstr "Itxaron haurrak amaitu arte (EGITEKO)"
 
-#: src/kgx-application.c:767
+#: src/kgx-application.c:461
 msgid "Set the initial window title"
 msgstr "Ezarri leihoaren hasierako izenburua"
 
-#: src/kgx-application.c:768
+#: src/kgx-application.c:462
 msgid "TITLE"
 msgstr "TITULUA"
 
-#: src/kgx-application.c:776
+#: src/kgx-application.c:470
 msgid "ADVANCED: Set the shell to launch"
 msgstr "AURRERATUA: Ezarri abiaraziko den shell-a"
 
-#: src/kgx-application.c:777
+#: src/kgx-application.c:471
 msgid "SHELL"
 msgstr "SHELLA"
 
-#: src/kgx-application.c:785
+#: src/kgx-application.c:479
 msgid "ADVANCED: Set the scrollback length"
 msgstr "AURRERATUA: Ezarri atzeranzko korritzearen luzera"
 
-#: src/kgx-application.c:786
+#: src/kgx-application.c:480
 msgid "LINES"
 msgstr "LERROAK"
 
-#: src/kgx-application.c:795
+#: src/kgx-application.c:489
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- KOMANDOA [ARGUMENTUA...]]"
 
@@ -203,7 +208,7 @@ msgid ""
 "lead to unexpected outcomes"
 msgstr "Zenbait komando exekutatzen ari dira oraindik, fitxa ixten bada hil egingo dira eta espero gabeko emaitzak egon daitezke"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:814
+#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:877
 msgid "_Cancel"
 msgstr "_Utzi"
 
@@ -211,11 +216,11 @@ msgstr "_Utzi"
 msgid "C_lose"
 msgstr "It_xi"
 
-#: src/kgx-pages.ui:42
+#: src/kgx-pages.ui:61
 msgid "_Detach Tab"
 msgstr "Askat_u fitxa"
 
-#: src/kgx-pages.ui:48
+#: src/kgx-pages.ui:67
 msgid "_Close"
 msgstr "I_txi"
 
@@ -239,20 +244,28 @@ msgstr "<b>Irakurtzeko soilik</b> — Komandoa amaitu da"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Huts egin du abioak</b> — %s"
 
-#: src/kgx-tab.c:1087
+#: src/kgx-tab.c:993
 msgid "Command completed"
 msgstr "Komandoa osatu da"
 
-#: src/kgx-tab-button.ui:5
-msgid "View Open Tabs"
-msgstr "Ikusi irekitako fitxak"
+#: src/kgx-tab.ui:22
+msgid "Find text"
+msgstr "Bilatu testua"
 
-#: src/kgx-terminal.c:807
+#: src/kgx-tab.ui:33
+msgid "Previous Match"
+msgstr "Aurreko parekatzea"
+
+#: src/kgx-tab.ui:41
+msgid "Next Match"
+msgstr "Hurrengo parekatzea"
+
+#: src/kgx-terminal.c:870
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Administratzaile modura exekutatzen den komando bat itsasten ari zara"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:811
+#: src/kgx-terminal.c:874
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -260,7 +273,7 @@ msgid ""
 msgstr "Ziurtatu badakizula komandoak zer egiten duen:\n"
 "%s"
 
-#: src/kgx-terminal.c:815 src/menus.ui:24
+#: src/kgx-terminal.c:878 src/menus.ui:24
 msgid "_Paste"
 msgstr "_Itsatsi"
 
@@ -277,7 +290,7 @@ msgid "Use Dark Colors"
 msgstr "Erabili kolore ilunak"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:503
+#: src/kgx-window.c:442
 msgid "translator-credits"
 msgstr "Asier Sarasua Garmendia <asier.sarasua@gmail.com>"
 
@@ -286,30 +299,34 @@ msgid "_New Window"
 msgstr "_Leiho berria"
 
 #: src/kgx-window.ui:23
+msgid "_Show All Tabs"
+msgstr "Erakutsi fitxa g_uztiak"
+
+#: src/kgx-window.ui:30
 msgid "_Keyboard Shortcuts"
 msgstr "Las_ter-teklak"
 
-#: src/kgx-window.ui:27
+#: src/kgx-window.ui:34
 msgid "_About Console"
 msgstr "Kontsola aplikazioari b_uruz"
 
-#: src/kgx-window.ui:52
+#: src/kgx-window.ui:63
 msgid "Find in Terminal"
 msgstr "Bilatu terminalean"
 
-#: src/kgx-window.ui:60
-msgid "Menu"
-msgstr "Menua"
+#: src/kgx-window.ui:71
+msgid "Main Menu"
+msgstr "Menu nagusia"
 
-#: src/kgx-window.ui:78
+#: src/kgx-window.ui:89
 msgid "Shrink Text"
 msgstr "Txikiagotu testua"
 
-#: src/kgx-window.ui:89
+#: src/kgx-window.ui:100
 msgid "Reset Size"
 msgstr "Berrezarri tamaina"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:117
 msgid "Enlarge Text"
 msgstr "Handiagotu testua"
 
@@ -332,6 +349,9 @@ msgstr "_Hautatu denak"
 #: src/menus.ui:36
 msgid "Show in _Files"
 msgstr "Erakutsi _Fitxategiak aplikazioan"
+
+#~ msgid "View Open Tabs"
+#~ msgstr "Ikusi irekitako fitxak"
 
 #~ msgid "Zander Brown"
 #~ msgstr "Zander Brown"
