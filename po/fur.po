@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-09-25 14:12+0000\n"
-"PO-Revision-Date: 2022-09-28 12:37+0200\n"
-"Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2023-02-12 12:31+0000\n"
+"PO-Revision-Date: 2023-02-20 20:34+0000\n"
+"Last-Translator: Fabio T. <f.t.public@gmail.com>\n"
+"Language-Team: Friulian <f.t.public@gmail.com>\n"
 "Language: fur\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Editor: HaiPO 1.4 beta\n"
 "X-Generator: Poedit 3.1.1\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
@@ -23,7 +24,8 @@ msgstr ""
 msgid "Console"
 msgstr "Console"
 
-#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or
+#. localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Console.desktop.in.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr "comant:prompt;cmd;rie di comant;shell;terminâl;kgx;kings cross;"
@@ -32,11 +34,11 @@ msgstr "comant:prompt;cmd;rie di comant;shell;terminâl;kgx;kings cross;"
 msgid "New Window"
 msgstr "Gnûf barcon"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:132
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:143
 msgid "New Tab"
 msgstr "Gnove schede"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:361
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:366
 msgid "Terminal Emulator"
 msgstr "Emuladôr di terminâl"
 
@@ -48,7 +50,7 @@ msgstr "Un sempliç e facil emuladôr di terminâl pal scritori GNOME."
 msgid "Terminal window"
 msgstr "Barcon dal terminâl"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:210 src/kgx-window.c:387
+#: data/org.gnome.Console.metainfo.xml.in.in:210 src/kgx-window.c:436
 msgid "The GNOME Project"
 msgstr "Il progjet GNOME"
 
@@ -99,90 +101,95 @@ msgstr "Siere la schede"
 
 #: src/help-overlay.ui:62
 msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Mostre dutis lis schedis"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
 msgid "Next Tab"
 msgstr "Schede sucessive"
 
-#: src/help-overlay.ui:68
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Previous Tab"
 msgstr "Schede precedente"
 
-#: src/help-overlay.ui:74
+#: src/help-overlay.ui:80
 msgctxt "shortcut window"
 msgid "Switch to Tab"
 msgstr "Passe ae schede"
 
-#: src/kgx-application.c:236
+#: src/kgx-application.c:241
 msgid "Cannot use both --command and positional parameters"
 msgstr "Impussibil doprâ adun --command e i parametris di posizion"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:333
+#: src/kgx-application.c:338
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s che al dopre VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:345 src/kgx-window.c:382
+#: src/kgx-application.c:350 src/kgx-window.c:431
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:359 src/kgx-window.ui:44
+#: src/kgx-application.c:364 src/kgx-window.ui:55
 msgid "King’s Cross"
 msgstr "King's Cross"
 
-#: src/kgx-application.c:363
+#: src/kgx-application.c:368
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 o sucessive"
 
-#: src/kgx-application.c:428
+#: src/kgx-application.c:433
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Al eseguìs l'argoment di cheste opzion tal terminâl"
 
-#: src/kgx-application.c:429
+#: src/kgx-application.c:434
 msgid "COMMAND"
 msgstr "COMANT"
 
-#: src/kgx-application.c:437
+#: src/kgx-application.c:442
 msgid "Set the working directory"
 msgstr "Configure la cartele di lavôr"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:439
+#: src/kgx-application.c:444
 msgid "DIRNAME"
 msgstr "NONDIR"
 
-#: src/kgx-application.c:447
+#: src/kgx-application.c:452
 msgid "Wait until the child exits (TODO)"
 msgstr "Spiete fintremai che il procès fi al finissi (DI FÂ)"
 
-#: src/kgx-application.c:456
+#: src/kgx-application.c:461
 msgid "Set the initial window title"
 msgstr "Stabilìs il titul dal barcon iniziâl"
 
-#: src/kgx-application.c:457
+#: src/kgx-application.c:462
 msgid "TITLE"
 msgstr "TITUL"
 
-#: src/kgx-application.c:465
+#: src/kgx-application.c:470
 msgid "ADVANCED: Set the shell to launch"
 msgstr "AVANZADIS: stabilìs la shell di inviâ"
 
-#: src/kgx-application.c:466
+#: src/kgx-application.c:471
 msgid "SHELL"
 msgstr "SHELL"
 
-#: src/kgx-application.c:474
+#: src/kgx-application.c:479
 msgid "ADVANCED: Set the scrollback length"
 msgstr "AVANZADIS: stabilìs trop scori indaûr"
 
-#: src/kgx-application.c:475
+#: src/kgx-application.c:480
 msgid "LINES"
 msgstr "LINIIS"
 
-#: src/kgx-application.c:484
+#: src/kgx-application.c:489
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- COMANT [ARGOMENT...]]"
 
@@ -246,13 +253,21 @@ msgstr "<b>Dome leture</b> — Comant jessût"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Impussibil inviâ</b> — %s"
 
-#: src/kgx-tab.c:961
+#: src/kgx-tab.c:993
 msgid "Command completed"
 msgstr "Comant completât"
 
-#: src/kgx-tab-button.ui:5
-msgid "View Open Tabs"
-msgstr "Viôt lis schedis viertis"
+#: src/kgx-tab.ui:22
+msgid "Find text"
+msgstr "Cjate test"
+
+#: src/kgx-tab.ui:33
+msgid "Previous Match"
+msgstr "Câs precedent"
+
+#: src/kgx-tab.ui:41
+msgid "Next Match"
+msgstr "Câs sucessîf"
 
 #: src/kgx-terminal.c:870
 msgid "You are pasting a command that runs as an administrator"
@@ -285,7 +300,7 @@ msgid "Use Dark Colors"
 msgstr "Dopre colôrs scûrs"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:393
+#: src/kgx-window.c:442
 msgid "translator-credits"
 msgstr "Fabio Tomat <f.t.public@gmail.com>, 2022."
 
@@ -294,30 +309,34 @@ msgid "_New Window"
 msgstr "_Gnûf barcon"
 
 #: src/kgx-window.ui:23
+msgid "_Show All Tabs"
+msgstr "_Mostre dutis lis schedis"
+
+#: src/kgx-window.ui:30
 msgid "_Keyboard Shortcuts"
 msgstr "Scurtis di _tastiere"
 
-#: src/kgx-window.ui:27
+#: src/kgx-window.ui:34
 msgid "_About Console"
 msgstr "I_nformazions su Console"
 
-#: src/kgx-window.ui:52
+#: src/kgx-window.ui:63
 msgid "Find in Terminal"
 msgstr "Cjate tal terminâl"
 
-#: src/kgx-window.ui:60
-msgid "Menu"
-msgstr "Menù"
+#: src/kgx-window.ui:71
+msgid "Main Menu"
+msgstr "Menù principâl"
 
-#: src/kgx-window.ui:78
+#: src/kgx-window.ui:89
 msgid "Shrink Text"
 msgstr "Scurte il test"
 
-#: src/kgx-window.ui:89
+#: src/kgx-window.ui:100
 msgid "Reset Size"
 msgstr "Ripristine dimension"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:117
 msgid "Enlarge Text"
 msgstr "Slargje il test"
 
@@ -340,6 +359,9 @@ msgstr "_Selezione dut"
 #: src/menus.ui:36
 msgid "Show in _Files"
 msgstr "Mostre in _Files"
+
+#~ msgid "View Open Tabs"
+#~ msgstr "Viôt lis schedis viertis"
 
 #~ msgid "Zander Brown"
 #~ msgstr "Zander Brown"
