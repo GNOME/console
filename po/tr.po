@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Console master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-02-12 12:31+0000\n"
-"PO-Revision-Date: 2023-02-12 16:31+0300\n"
+"POT-Creation-Date: 2023-02-13 18:11+0000\n"
+"PO-Revision-Date: 2023-02-20 03:44+0300\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
@@ -253,7 +253,7 @@ msgstr "<b>Salt Okunur</b> — Komut çıktı"
 #: src/kgx-simple-tab.c:210
 #, c-format
 msgid "<b>Failed to start</b> — %s"
-msgstr "<b>Başlatma başarısız</b> — %s"
+msgstr "<b>Başlatılamadı</b> — %s"
 
 #: src/kgx-tab.c:993
 msgid "Command completed"
