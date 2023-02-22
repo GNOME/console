@@ -13,7 +13,7 @@
             <property name="halign">center</property>
             <child>
               <object class="GtkCheckButton" id="system_selector">
-                <property name="tooltip-text" translatable="yes">Use System Colors</property>
+                <property name="tooltip-text" translatable="yes">Follow System Style</property>
                 <property name="active">True</property>
                 <signal name="notify::active" handler="theme_check_active_changed" swapped="yes"/>
                 <style>
@@ -41,7 +41,7 @@
             <child>
               <object class="GtkCheckButton" id="light_selector">
                 <property name="group">system_selector</property>
-                <property name="tooltip-text" translatable="yes">Use Light Colors</property>
+                <property name="tooltip-text" translatable="yes">Light Style</property>
                 <signal name="notify::active" handler="theme_check_active_changed" swapped="yes"/>
                 <style>
                   <class name="light"/>
@@ -68,7 +68,7 @@
             <child>
               <object class="GtkCheckButton" id="dark_selector">
                 <property name="group">system_selector</property>
-                <property name="tooltip-text" translatable="yes">Use Dark Colors</property>
+                <property name="tooltip-text" translatable="yes">Dark Style</property>
                 <property name="halign">center</property>
                 <signal name="notify::active" handler="theme_check_active_changed" swapped="yes"/>
                 <style>

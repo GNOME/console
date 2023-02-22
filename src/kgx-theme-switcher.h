@@ -23,8 +23,9 @@
 
 G_BEGIN_DECLS
 
-#define KGX_TYPE_THEME_SWITCHER (kgx_theme_switcher_get_type())
+#define KGX_TYPE_THEME_SWITCHER (kgx_theme_switcher_get_type ())
 
 G_DECLARE_FINAL_TYPE (KgxThemeSwitcher, kgx_theme_switcher, KGX, THEME_SWITCHER, AdwBin)
+
 
 G_END_DECLS
