@@ -2,14 +2,14 @@
 # Copyright (C) 2020 kgx's COPYRIGHT HOLDER
 # This file is distributed under the same license as the kgx package.
 #
-# Matej Urbančič <mateju@svn.gnome.org>, 2020–2022.
+# Matej Urbančič <mateju@svn.gnome.org>, 2020–2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-09-09 10:42+0000\n"
-"PO-Revision-Date: 2022-09-09 22:21+0200\n"
+"POT-Creation-Date: 2023-02-25 17:21+0000\n"
+"PO-Revision-Date: 2023-02-27 21:43+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -35,11 +35,11 @@ msgstr "ukaz;cmd;ukazna vrstica;zagon;lupina;terminal;kgx;"
 msgid "New Window"
 msgstr "Novo okno"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:132
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:143
 msgid "New Tab"
 msgstr "Nov zavihek"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:361
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:366
 msgid "Terminal Emulator"
 msgstr "Posnemovalnik terminala"
 
@@ -51,7 +51,7 @@ msgstr "Preprost uporabniku prijazen posnemovalnik terminala za namizje GNOME."
 msgid "Terminal window"
 msgstr "Okno terminala"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:187 src/kgx-window.c:387
+#: data/org.gnome.Console.metainfo.xml.in.in:230 src/kgx-window.c:436
 msgid "The GNOME Project"
 msgstr "Projekt GNOME"
 
@@ -102,90 +102,95 @@ msgstr "Zapre zavihek"
 
 #: src/help-overlay.ui:62
 msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Pokaže vse zavihke"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
 msgid "Next Tab"
 msgstr "Odpre naslednji zavihek"
 
-#: src/help-overlay.ui:68
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Previous Tab"
 msgstr "Premakne na predhodni zavihek"
 
-#: src/help-overlay.ui:74
+#: src/help-overlay.ui:80
 msgctxt "shortcut window"
 msgid "Switch to Tab"
 msgstr "Preklopi na zavihek"
 
-#: src/kgx-application.c:236
+#: src/kgx-application.c:241
 msgid "Cannot use both --command and positional parameters"
 msgstr "Ni mogoče uporabiti obeh -- ukaznega in pozicijskih parametrov"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:333
+#: src/kgx-application.c:338
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s z uporabo VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:345 src/kgx-window.c:382
+#: src/kgx-application.c:350 src/kgx-window.c:431
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:359 src/kgx-window.ui:44
+#: src/kgx-application.c:364 src/kgx-window.ui:55
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
-#: src/kgx-application.c:363
+#: src/kgx-application.c:368
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 ali višje"
 
-#: src/kgx-application.c:428
+#: src/kgx-application.c:433
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Izvedi argument možnosti znotraj terminala"
 
-#: src/kgx-application.c:429
+#: src/kgx-application.c:434
 msgid "COMMAND"
 msgstr "UKAZ"
 
-#: src/kgx-application.c:437
+#: src/kgx-application.c:442
 msgid "Set the working directory"
 msgstr "Nastavi delovni imenik terminala"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:439
+#: src/kgx-application.c:444
 msgid "DIRNAME"
 msgstr "IMEIMENIKA"
 
-#: src/kgx-application.c:447
+#: src/kgx-application.c:452
 msgid "Wait until the child exits (TODO)"
 msgstr "Počakajte na končanje podrejenega opravila (v pripravi)"
 
-#: src/kgx-application.c:456
+#: src/kgx-application.c:461
 msgid "Set the initial window title"
 msgstr "Nastavi začetni naslov okna"
 
-#: src/kgx-application.c:457
+#: src/kgx-application.c:462
 msgid "TITLE"
 msgstr "NASLOV"
 
-#: src/kgx-application.c:465
+#: src/kgx-application.c:470
 msgid "ADVANCED: Set the shell to launch"
 msgstr "NAPREDNO: Nastavi lupino z zagon"
 
-#: src/kgx-application.c:466
+#: src/kgx-application.c:471
 msgid "SHELL"
 msgstr "LUPINA"
 
-#: src/kgx-application.c:474
+#: src/kgx-application.c:479
 msgid "ADVANCED: Set the scrollback length"
 msgstr "NAPREDNO: Nastavi dolžino povrnitvenega drsenja"
 
-#: src/kgx-application.c:475
+#: src/kgx-application.c:480
 msgid "LINES"
 msgstr "VRSTICE"
 
-#: src/kgx-application.c:484
+#: src/kgx-application.c:489
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- UKAZ [ARGUMENT ...]]"
 
@@ -249,13 +254,21 @@ msgstr "<b>Samo za branje</b> – izvajanje ukaza je ustavljeno"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Zagon ni uspel</b> – %s"
 
-#: src/kgx-tab.c:961
+#: src/kgx-tab.c:993
 msgid "Command completed"
 msgstr "Ukaz je končan"
 
-#: src/kgx-tab-button.ui:5
-msgid "View Open Tabs"
-msgstr "Pogled odprtih zavihkov"
+#: src/kgx-tab.ui:22
+msgid "Find text"
+msgstr "Najdi besedilo"
+
+#: src/kgx-tab.ui:33
+msgid "Previous Match"
+msgstr "Predhodni zadetek"
+
+#: src/kgx-tab.ui:41
+msgid "Next Match"
+msgstr "Naslednji zadetek"
 
 #: src/kgx-terminal.c:870
 msgid "You are pasting a command that runs as an administrator"
@@ -288,7 +301,7 @@ msgid "Use Dark Colors"
 msgstr "Uporabi temne barve"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:393
+#: src/kgx-window.c:442
 msgid "translator-credits"
 msgstr "Matej Urbančič <mateju@src.gnome.org>"
 
@@ -297,30 +310,34 @@ msgid "_New Window"
 msgstr "_Novo okno"
 
 #: src/kgx-window.ui:23
+msgid "_Show All Tabs"
+msgstr "Pokaži _vse zavihke"
+
+#: src/kgx-window.ui:30
 msgid "_Keyboard Shortcuts"
 msgstr "_Tipkovne bližnjice"
 
-#: src/kgx-window.ui:27
+#: src/kgx-window.ui:34
 msgid "_About Console"
 msgstr "_O programu"
 
-#: src/kgx-window.ui:52
+#: src/kgx-window.ui:63
 msgid "Find in Terminal"
 msgstr "Najdi v terminalu"
 
-#: src/kgx-window.ui:60
-msgid "Menu"
-msgstr "Meni"
+#: src/kgx-window.ui:71
+msgid "Main Menu"
+msgstr "Glavni meni"
 
-#: src/kgx-window.ui:78
+#: src/kgx-window.ui:89
 msgid "Shrink Text"
 msgstr "Skrči besedilo"
 
-#: src/kgx-window.ui:89
+#: src/kgx-window.ui:100
 msgid "Reset Size"
 msgstr "Ponastavi velikost"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:117
 msgid "Enlarge Text"
 msgstr "Povečaj besedilo"
 
@@ -343,6 +360,9 @@ msgstr "Izberi _vse"
 #: src/menus.ui:36
 msgid "Show in _Files"
 msgstr "Pokaži v _mapi"
+
+#~ msgid "View Open Tabs"
+#~ msgstr "Pogled odprtih zavihkov"
 
 #~ msgid "Zander Brown"
 #~ msgstr "Zander Brown"
