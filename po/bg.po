@@ -1,14 +1,14 @@
 # Bulgarian translation of console po-file.
-# Copyright (C) 2022 Alexander Shopov.
+# Copyright (C) 2022, 2023 Alexander Shopov.
 # This file is distributed under the same license as the console package.
-# Alexander Shopov <ash@kambanaria.org> 2022.
+# Alexander Shopov <ash@kambanaria.org> 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-09-12 09:32+0000\n"
-"PO-Revision-Date: 2022-09-12 22:42+0200\n"
+"POT-Creation-Date: 2023-03-04 13:40+0000\n"
+"PO-Revision-Date: 2023-03-04 20:24+0200\n"
 "Last-Translator: Alexander Shopov <ash@kambanaria.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "Language: bg\n"
@@ -33,11 +33,11 @@ msgstr ""
 msgid "New Window"
 msgstr "Нов прозорец"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:132
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:143
 msgid "New Tab"
 msgstr "Нов подпрозорец"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:361
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:366
 msgid "Terminal Emulator"
 msgstr "Терминален емулатор"
 
@@ -49,7 +49,7 @@ msgstr "Лесен за ползване емулатор на терминал 
 msgid "Terminal window"
 msgstr "Прозорец на терминала"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:187 src/kgx-window.c:387
+#: data/org.gnome.Console.metainfo.xml.in.in:230 src/kgx-window.c:436
 msgid "The GNOME Project"
 msgstr "Проектът GNOME"
 
@@ -100,90 +100,95 @@ msgstr "Затваряне на подпрозорец"
 
 #: src/help-overlay.ui:62
 msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Показване на всички подпрозорци"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
 msgid "Next Tab"
 msgstr "Следващ подпрозорец"
 
-#: src/help-overlay.ui:68
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Previous Tab"
 msgstr "Предишен подпрозорец"
 
-#: src/help-overlay.ui:74
+#: src/help-overlay.ui:80
 msgctxt "shortcut window"
 msgid "Switch to Tab"
 msgstr "Преход към подпрозорец"
 
-#: src/kgx-application.c:236
+#: src/kgx-application.c:241
 msgid "Cannot use both --command and positional parameters"
 msgstr "Позиционните аргументи и опцията „--command“ са несъвместими"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:333
+#: src/kgx-application.c:338
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX: %s, VTE: %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:345 src/kgx-window.c:382
+#: src/kgx-application.c:350 src/kgx-window.c:431
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:359 src/kgx-window.ui:44
+#: src/kgx-application.c:364 src/kgx-window.ui:55
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
-#: src/kgx-application.c:363
+#: src/kgx-application.c:368
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 или по-късен"
 
-#: src/kgx-application.c:428
+#: src/kgx-application.c:433
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Изпълняване на аргумента на тази опция в терминала"
 
-#: src/kgx-application.c:429
+#: src/kgx-application.c:434
 msgid "COMMAND"
 msgstr "КОМАНДА"
 
-#: src/kgx-application.c:437
+#: src/kgx-application.c:442
 msgid "Set the working directory"
 msgstr "Задаване на работната папка на терминала"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:439
+#: src/kgx-application.c:444
 msgid "DIRNAME"
 msgstr "ПАПКА"
 
-#: src/kgx-application.c:447
+#: src/kgx-application.c:452
 msgid "Wait until the child exits (TODO)"
 msgstr "Изчакване докато дъщерният процес завърши (предстои)"
 
-#: src/kgx-application.c:456
+#: src/kgx-application.c:461
 msgid "Set the initial window title"
 msgstr "Начално заглавие на терминала"
 
-#: src/kgx-application.c:457
+#: src/kgx-application.c:462
 msgid "TITLE"
 msgstr "ЗАГЛАВИЕ"
 
-#: src/kgx-application.c:465
+#: src/kgx-application.c:470
 msgid "ADVANCED: Set the shell to launch"
 msgstr "НАПРЕДНАЛИ: коя обвивка да се стартира"
 
-#: src/kgx-application.c:466
+#: src/kgx-application.c:471
 msgid "SHELL"
 msgstr "ОБВИВКА"
 
-#: src/kgx-application.c:474
+#: src/kgx-application.c:479
 msgid "ADVANCED: Set the scrollback length"
 msgstr "НАПРЕДНАЛИ: буфер за придвижване назад"
 
-#: src/kgx-application.c:475
+#: src/kgx-application.c:480
 msgid "LINES"
 msgstr "РЕДОВЕ"
 
-#: src/kgx-application.c:484
+#: src/kgx-application.c:489
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- КОМАНДА [АРГУМЕНТ…]]"
 
@@ -247,13 +252,21 @@ msgstr "<b>Само за четене</b> — командата завърши"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Неуспешно стартиране</b>: %s"
 
-#: src/kgx-tab.c:961
+#: src/kgx-tab.c:993
 msgid "Command completed"
 msgstr "Командата завърши"
 
-#: src/kgx-tab-button.ui:5
-msgid "View Open Tabs"
-msgstr "Преглед на отворените подпрозорци"
+#: src/kgx-tab.ui:22
+msgid "Find text"
+msgstr "Търсене нататък"
+
+#: src/kgx-tab.ui:33
+msgid "Previous Match"
+msgstr "Предишна поява"
+
+#: src/kgx-tab.ui:41
+msgid "Next Match"
+msgstr "Следваща поява"
 
 #: src/kgx-terminal.c:870
 msgid "You are pasting a command that runs as an administrator"
@@ -286,7 +299,7 @@ msgid "Use Dark Colors"
 msgstr "Тъмна тема"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:393
+#: src/kgx-window.c:442
 msgid "translator-credits"
 msgstr ""
 "Александър Шопов &lt;<a href='mailto:ash@kambanaria.org'>ash@kambanaria.org</"
@@ -304,30 +317,34 @@ msgid "_New Window"
 msgstr "_Нов прозорец"
 
 #: src/kgx-window.ui:23
+msgid "_Show All Tabs"
+msgstr "Показване на _всички подпрозорци"
+
+#: src/kgx-window.ui:30
 msgid "_Keyboard Shortcuts"
 msgstr "_Клавишни комбинации"
 
-#: src/kgx-window.ui:27
+#: src/kgx-window.ui:34
 msgid "_About Console"
 msgstr "_Относно „Конзолата“"
 
-#: src/kgx-window.ui:52
+#: src/kgx-window.ui:63
 msgid "Find in Terminal"
 msgstr "Търсене в терминала"
 
-#: src/kgx-window.ui:60
-msgid "Menu"
-msgstr "Меню"
+#: src/kgx-window.ui:71
+msgid "Main Menu"
+msgstr "Основно меню"
 
-#: src/kgx-window.ui:78
+#: src/kgx-window.ui:89
 msgid "Shrink Text"
 msgstr "Намаляване"
 
-#: src/kgx-window.ui:89
+#: src/kgx-window.ui:100
 msgid "Reset Size"
 msgstr "Стандартен размер"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:117
 msgid "Enlarge Text"
 msgstr "Увеличаване"
 
