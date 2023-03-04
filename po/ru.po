@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-08-06 14:46+0000\n"
-"PO-Revision-Date: 2022-09-13 14:58+0300\n"
+"POT-Creation-Date: 2023-02-12 12:31+0000\n"
+"PO-Revision-Date: 2023-02-12 18:44+0300\n"
 "Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -17,10 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:43
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:29
 msgid "Console"
 msgstr "Консоль"
 
@@ -33,11 +33,11 @@ msgstr "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgid "New Window"
 msgstr "Новое окно"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:132
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:143
 msgid "New Tab"
 msgstr "Новая вкладка"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:605
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:366
 msgid "Terminal Emulator"
 msgstr "Эмулятор терминала"
 
@@ -49,7 +49,7 @@ msgstr "Простой и удобный эмулятор терминала д�
 msgid "Terminal window"
 msgstr "Окно терминала"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:104 src/kgx-window.c:497
+#: data/org.gnome.Console.metainfo.xml.in.in:210 src/kgx-window.c:436
 msgid "The GNOME Project"
 msgstr "The GNOME Project"
 
@@ -100,90 +100,95 @@ msgstr "Закрыть вкладку"
 
 #: src/help-overlay.ui:62
 msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Показать все вкладки"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
 msgid "Next Tab"
 msgstr "Следующая вкладка"
 
-#: src/help-overlay.ui:68
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Previous Tab"
 msgstr "Предыдущая вкладка"
 
-#: src/help-overlay.ui:74
+#: src/help-overlay.ui:80
 msgctxt "shortcut window"
 msgid "Switch to Tab"
 msgstr "Переключиться на вкладку"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:241
 msgid "Cannot use both --command and positional parameters"
 msgstr "Невозможно использовать как --команда, так и позиционные параметры"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:577
+#: src/kgx-application.c:338
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s с использованием VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:589 src/kgx-window.c:492
+#: src/kgx-application.c:350 src/kgx-window.c:431
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:603 src/kgx-window.ui:44
+#: src/kgx-application.c:364 src/kgx-window.ui:55
 msgid "King’s Cross"
 msgstr "Кингс-Кросс"
 
-#: src/kgx-application.c:607
+#: src/kgx-application.c:368
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 или более поздняя"
 
-#: src/kgx-application.c:739
+#: src/kgx-application.c:433
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Выполнить аргумент этой опции в терминале"
 
-#: src/kgx-application.c:740
+#: src/kgx-application.c:434
 msgid "COMMAND"
 msgstr "КОМАНДА"
 
-#: src/kgx-application.c:748
+#: src/kgx-application.c:442
 msgid "Set the working directory"
 msgstr "Установить рабочую папку"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:750
+#: src/kgx-application.c:444
 msgid "DIRNAME"
 msgstr "ИМЯ ПАПКИ"
 
-#: src/kgx-application.c:758
+#: src/kgx-application.c:452
 msgid "Wait until the child exits (TODO)"
 msgstr "Подождите, пока дочерний процесс завершится (ЗАДАЧА)"
 
-#: src/kgx-application.c:767
+#: src/kgx-application.c:461
 msgid "Set the initial window title"
 msgstr "Установить начальный заголовок окна"
 
-#: src/kgx-application.c:768
+#: src/kgx-application.c:462
 msgid "TITLE"
 msgstr "ЗАГОЛОВОК"
 
-#: src/kgx-application.c:776
+#: src/kgx-application.c:470
 msgid "ADVANCED: Set the shell to launch"
 msgstr "ДОПОЛНИТЕЛЬНО: Установить оболочку для запуска"
 
-#: src/kgx-application.c:777
+#: src/kgx-application.c:471
 msgid "SHELL"
 msgstr "ОБОЛОЧКА"
 
-#: src/kgx-application.c:785
+#: src/kgx-application.c:479
 msgid "ADVANCED: Set the scrollback length"
 msgstr "ДОПОЛНИТЕЛЬНО: Установить длину прокрутки"
 
-#: src/kgx-application.c:786
+#: src/kgx-application.c:480
 msgid "LINES"
 msgstr "СТРОКИ"
 
-#: src/kgx-application.c:795
+#: src/kgx-application.c:489
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- КОМАНДА [АРГУМЕНТ...]]"
 
@@ -211,7 +216,7 @@ msgstr ""
 "Некоторые команды все еще выполняются, закрытие этой вкладки приведет к их "
 "завершению и может привести к неожиданным последствиям"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:814
+#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:877
 msgid "_Cancel"
 msgstr "_Отменить"
 
@@ -219,11 +224,11 @@ msgstr "_Отменить"
 msgid "C_lose"
 msgstr "З_акрыть"
 
-#: src/kgx-pages.ui:42
+#: src/kgx-pages.ui:61
 msgid "_Detach Tab"
 msgstr "_Отсоединить вкладку"
 
-#: src/kgx-pages.ui:48
+#: src/kgx-pages.ui:67
 msgid "_Close"
 msgstr "_Закрыть"
 
@@ -247,20 +252,28 @@ msgstr "<b>Только для Чтения</b> — Команда заверш�
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Не удалось начать</b> — %s"
 
-#: src/kgx-tab.c:1087
+#: src/kgx-tab.c:993
 msgid "Command completed"
 msgstr "Команда выполнена"
 
-#: src/kgx-tab-button.ui:5
-msgid "View Open Tabs"
-msgstr "Просмотреть открытые вкладки"
+#: src/kgx-tab.ui:22
+msgid "Find text"
+msgstr "Найти текст"
 
-#: src/kgx-terminal.c:807
+#: src/kgx-tab.ui:33
+msgid "Previous Match"
+msgstr "Предыдущее совпадение"
+
+#: src/kgx-tab.ui:41
+msgid "Next Match"
+msgstr "Следующее совпадение"
+
+#: src/kgx-terminal.c:870
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Вы вставляете команду, которая выполняется от имени администратора"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:811
+#: src/kgx-terminal.c:874
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -269,7 +282,7 @@ msgstr ""
 "Убедитесь, что вы знаете, что делает команда:\n"
 "%s"
 
-#: src/kgx-terminal.c:815 src/menus.ui:24
+#: src/kgx-terminal.c:878 src/menus.ui:24
 msgid "_Paste"
 msgstr "_Вставить"
 
@@ -286,39 +299,43 @@ msgid "Use Dark Colors"
 msgstr "Использовать темные цвета"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:503
+#: src/kgx-window.c:442
 msgid "translator-credits"
-msgstr "Aleksandr Melman <alexmelman88@gmail.com>, 2022"
+msgstr "Aleksandr Melman <alexmelman88@gmail.com>, 2022-2023"
 
 #: src/kgx-window.ui:17
 msgid "_New Window"
 msgstr "_Новое окно"
 
 #: src/kgx-window.ui:23
+msgid "_Show All Tabs"
+msgstr "_Показать все вкладки"
+
+#: src/kgx-window.ui:30
 msgid "_Keyboard Shortcuts"
 msgstr "_Комбинации клавиш"
 
-#: src/kgx-window.ui:27
+#: src/kgx-window.ui:34
 msgid "_About Console"
-msgstr "_О консоли"
+msgstr "_О приложении"
 
-#: src/kgx-window.ui:52
+#: src/kgx-window.ui:63
 msgid "Find in Terminal"
 msgstr "Найти в терминале"
 
-#: src/kgx-window.ui:60
-msgid "Menu"
-msgstr "Меню"
+#: src/kgx-window.ui:71
+msgid "Main Menu"
+msgstr "Главное меню"
 
-#: src/kgx-window.ui:78
+#: src/kgx-window.ui:89
 msgid "Shrink Text"
 msgstr "Уменьшить текст"
 
-#: src/kgx-window.ui:89
+#: src/kgx-window.ui:100
 msgid "Reset Size"
 msgstr "Сбросить размер"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:117
 msgid "Enlarge Text"
 msgstr "Увеличить текст"
 
@@ -341,3 +358,6 @@ msgstr "_Выделить все"
 #: src/menus.ui:36
 msgid "Show in _Files"
 msgstr "Показать в _Файлах"
+
+#~ msgid "View Open Tabs"
+#~ msgstr "Просмотреть открытые вкладки"
