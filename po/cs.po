@@ -104,7 +104,7 @@ msgstr "Zavřít kartu"
 #: src/help-overlay.ui:62
 msgctxt "shortcut window"
 msgid "Show All Tabs"
-msgstr ""
+msgstr "Zobrazit všechny karty"
 
 #: src/help-overlay.ui:68
 msgctxt "shortcut window"
