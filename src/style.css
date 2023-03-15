@@ -75,13 +75,7 @@ box.tab:drop(active) {
   outline-offset: -1px;
 }
 
-window:not(.tiled)
-      :not(.tiled-top)
-      :not(.tiled-bottom)
-      :not(.tiled-left)
-      :not(.tiled-right)
-      :not(.fullscreen)
-      :not(.maximized) box.tab:drop(active) {
+window:not(.tiled):not(.tiled-top):not(.tiled-bottom):not(.tiled-left):not(.tiled-right):not(.fullscreen):not(.maximized) box.tab:drop(active) {
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
 }
