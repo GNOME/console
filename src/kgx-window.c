@@ -163,9 +163,11 @@ kgx_window_close_request (GtkWindow *window)
 
   if (children->len < 1 || priv->close_anyway) {
     if (gtk_window_is_active (GTK_WINDOW (self))) {
+      gboolean maximised = gtk_window_is_maximized (GTK_WINDOW (self));
       int width, height;
+
       gtk_window_get_default_size (GTK_WINDOW (self), &width, &height);
-      kgx_settings_set_custom_size (priv->settings, width, height);
+      kgx_settings_set_custom_size (priv->settings, width, height, maximised);
     }
 
     return FALSE; /* Aka no, I don’t want to block closing */

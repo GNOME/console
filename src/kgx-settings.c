@@ -39,6 +39,7 @@
 
 #define RESTORE_SIZE_KEY "restore-window-size"
 #define LAST_SIZE_KEY "last-window-size"
+#define LAST_MAXIMISED_KEY "last-window-maximised"
 
 #define AUDIBLE_BELL "audible-bell"
 
@@ -512,25 +513,29 @@ kgx_settings_get_restore_size (KgxSettings *self)
 void
 kgx_settings_get_size (KgxSettings *self,
                        int         *width,
-                       int         *height)
+                       int         *height,
+                       gboolean    *maximised)
 {
   g_return_if_fail (KGX_IS_SETTINGS (self));
-  g_return_if_fail (width != NULL && height != NULL);
+  g_return_if_fail (width != NULL && height != NULL && maximised != NULL);
 
   if (!g_settings_get_boolean (self->settings, RESTORE_SIZE_KEY)) {
     *width = -1;
     *height = -1;
+    *maximised = FALSE;
     return;
   }
 
   g_settings_get (self->settings, LAST_SIZE_KEY, "(ii)", width, height);
+  g_settings_get (self->settings, LAST_MAXIMISED_KEY, "b", maximised);
 }
 
 
 void
 kgx_settings_set_custom_size (KgxSettings *self,
                               int          width,
-                              int          height)
+                              int          height,
+                              gboolean     maximised)
 {
   g_return_if_fail (KGX_IS_SETTINGS (self));
 
@@ -541,6 +546,7 @@ kgx_settings_set_custom_size (KgxSettings *self,
   g_debug ("settings: store size (%i×%i)", width, height);
 
   g_settings_set (self->settings, LAST_SIZE_KEY, "(ii)", width, height);
+  g_settings_set (self->settings, LAST_MAXIMISED_KEY, "b", maximised);
 }
 
 

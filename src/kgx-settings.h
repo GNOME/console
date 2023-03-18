@@ -81,12 +81,14 @@ void                  kgx_settings_set_custom_shell  (KgxSettings       *self,
 void                  kgx_settings_set_scrollback    (KgxSettings       *self,
                                                       int64_t            value);
 gboolean              kgx_settings_get_restore_size  (KgxSettings       *self);
-void                  kgx_settings_get_size          (KgxSettings       *self,
-                                                      int               *width,
-                                                      int               *height);
-void                  kgx_settings_set_custom_size   (KgxSettings       *self,
-                                                      int                width,
-                                                      int                height);
+void                  kgx_settings_get_size             (KgxSettings       *self,
+                                                         int               *width,
+                                                         int               *height,
+                                                         gboolean          *maximised);
+void                  kgx_settings_set_custom_size      (KgxSettings       *self,
+                                                         int                width,
+                                                         int                height,
+                                                         gboolean           maximised);
 gboolean              kgx_settings_get_audible_bell  (KgxSettings       *self);
 void                  kgx_settings_set_audible_bell  (KgxSettings       *self,
                                                       gboolean           audible_bell);

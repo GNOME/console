@@ -30,6 +30,9 @@
     <key name="last-window-size" type="(ii)">
       <default>(-1, -1)</default>
     </key>
+    <key name="last-window-maximised" type="b">
+      <default>false</default>
+    </key>
     <key name="restore-window-size" type="b">
       <default>true</default>
     </key>
