@@ -1,13 +1,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>, 2022.
+# Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-09-06 17:22+0000\n"
-"PO-Revision-Date: 2022-09-07 22:18+0300\n"
+"POT-Creation-Date: 2023-02-12 12:31+0000\n"
+"PO-Revision-Date: 2023-03-24 22:55+0200\n"
 "Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 :"
 " 2);\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:29
@@ -33,11 +33,11 @@ msgstr ""
 msgid "New Window"
 msgstr "Jauns logs"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:132
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:143
 msgid "New Tab"
 msgstr "Jauna cilne"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:361
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:366
 msgid "Terminal Emulator"
 msgstr "Termināļa emulatori"
 
@@ -49,7 +49,7 @@ msgstr "Vienkāršs, lietotājam draudzīgs termināļa emulators GNOME darbvirs
 msgid "Terminal window"
 msgstr "Termināļa logs"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:187 src/kgx-window.c:387
+#: data/org.gnome.Console.metainfo.xml.in.in:210 src/kgx-window.c:436
 msgid "The GNOME Project"
 msgstr "GNOME projekts"
 
@@ -100,90 +100,95 @@ msgstr "Aizvērt cilni"
 
 #: src/help-overlay.ui:62
 msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Rādīt visas cilnes"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
 msgid "Next Tab"
 msgstr "Nākamā cilne"
 
-#: src/help-overlay.ui:68
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Previous Tab"
 msgstr "Iepriekšējā cilne"
 
-#: src/help-overlay.ui:74
+#: src/help-overlay.ui:80
 msgctxt "shortcut window"
 msgid "Switch to Tab"
 msgstr "Pārslēgties uz cilni"
 
-#: src/kgx-application.c:236
+#: src/kgx-application.c:241
 msgid "Cannot use both --command and positional parameters"
 msgstr "Nevar vienlaicīgi izmantot --command un pozīcijas parametrus"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:333
+#: src/kgx-application.c:338
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s izmanto VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:345 src/kgx-window.c:382
+#: src/kgx-application.c:350 src/kgx-window.c:431
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:359 src/kgx-window.ui:44
+#: src/kgx-application.c:364 src/kgx-window.ui:55
 msgid "King’s Cross"
 msgstr "King’s Cross"
 
-#: src/kgx-application.c:363
+#: src/kgx-application.c:368
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 vai jaunāks"
 
-#: src/kgx-application.c:428
+#: src/kgx-application.c:433
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Izpildīt parametru šai opcijai terminālī."
 
-#: src/kgx-application.c:429
+#: src/kgx-application.c:434
 msgid "COMMAND"
 msgstr "KOMANDA"
 
-#: src/kgx-application.c:437
+#: src/kgx-application.c:442
 msgid "Set the working directory"
 msgstr "Iestatīt termināļa darba direktoriju"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:439
+#: src/kgx-application.c:444
 msgid "DIRNAME"
 msgstr "DIRNOSAUKUMS"
 
-#: src/kgx-application.c:447
+#: src/kgx-application.c:452
 msgid "Wait until the child exits (TODO)"
 msgstr "Pagaidīt, līdz iziet bērna process (TODO)"
 
-#: src/kgx-application.c:456
+#: src/kgx-application.c:461
 msgid "Set the initial window title"
 msgstr "Sākotnējais loga virsraksts"
 
-#: src/kgx-application.c:457
+#: src/kgx-application.c:462
 msgid "TITLE"
 msgstr "VIRSRAKSTS"
 
-#: src/kgx-application.c:465
+#: src/kgx-application.c:470
 msgid "ADVANCED: Set the shell to launch"
 msgstr "PAPLAŠINĀTS: Iestatīt čaulu palaišanai"
 
-#: src/kgx-application.c:466
+#: src/kgx-application.c:471
 msgid "SHELL"
 msgstr "ČAULA"
 
-#: src/kgx-application.c:474
+#: src/kgx-application.c:479
 msgid "ADVANCED: Set the scrollback length"
 msgstr "PAPLAŠINĀTS: Iestatīt atpakaļritināšanas garumu"
 
-#: src/kgx-application.c:475
+#: src/kgx-application.c:480
 msgid "LINES"
 msgstr "RINDAS"
 
-#: src/kgx-application.c:484
+#: src/kgx-application.c:489
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- KOMANDA [ARGUMENTS...]]"
 
@@ -196,8 +201,8 @@ msgid ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
 msgstr ""
-"Dažas komandas vēl aizvien darbojas; šī loga aizvēršana tās apturēs un tas"
-" var radīt negaidītas sekas"
+"Dažas komandas vēl aizvien darbojas; šī loga aizvēršana tās apturēs un tas "
+"var radīt negaidītas sekas"
 
 #: src/kgx-close-dialog.c:56
 msgid "Close Tab?"
@@ -208,8 +213,8 @@ msgid ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
 msgstr ""
-"Dažas komandas vēl aizvien darbojas; šīs cilnes aizvēršana tās apturēs un tas"
-" var radīt negaidītas sekas"
+"Dažas komandas vēl aizvien darbojas; šīs cilnes aizvēršana tās apturēs un "
+"tas var radīt negaidītas sekas"
 
 #: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:877
 msgid "_Cancel"
@@ -247,13 +252,27 @@ msgstr "<b>Tikai lasāms</b> — Komanda beidza darbu"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Neizdevās startēt</b> — %s"
 
-#: src/kgx-tab.c:961
+#: src/kgx-tab.c:993
 msgid "Command completed"
 msgstr "Komanda izpildīta"
 
-#: src/kgx-tab-button.ui:5
-msgid "View Open Tabs"
-msgstr "Skatīt atvērtās cilnes"
+#: src/kgx-tab.ui:22
+#| msgctxt "shortcut window"
+#| msgid "Find"
+msgid "Find text"
+msgstr "Meklēt tekstu"
+
+#: src/kgx-tab.ui:33
+#| msgctxt "shortcut window"
+#| msgid "Previous Tab"
+msgid "Previous Match"
+msgstr "Iepriekšējā atbilsme"
+
+#: src/kgx-tab.ui:41
+#| msgctxt "shortcut window"
+#| msgid "Next Tab"
+msgid "Next Match"
+msgstr "Nākamā atbilsme"
 
 #: src/kgx-terminal.c:870
 msgid "You are pasting a command that runs as an administrator"
@@ -286,7 +305,7 @@ msgid "Use Dark Colors"
 msgstr "Lietot tumšas krāsas"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:393
+#: src/kgx-window.c:442
 msgid "translator-credits"
 msgstr "Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>"
 
@@ -295,30 +314,35 @@ msgid "_New Window"
 msgstr "Jau_ns logs"
 
 #: src/kgx-window.ui:23
+msgid "_Show All Tabs"
+msgstr "Rādīt vi_sas cilnes"
+
+#: src/kgx-window.ui:30
 msgid "_Keyboard Shortcuts"
 msgstr "_Tastatūras īsinājumtaustiņi"
 
-#: src/kgx-window.ui:27
+#: src/kgx-window.ui:34
 msgid "_About Console"
 msgstr "P_ar Konsoli"
 
-#: src/kgx-window.ui:52
+#: src/kgx-window.ui:63
 msgid "Find in Terminal"
 msgstr "Meklēt terminālī"
 
-#: src/kgx-window.ui:60
-msgid "Menu"
-msgstr "Izvēlne"
+#: src/kgx-window.ui:71
+#| msgid "Menu"
+msgid "Main Menu"
+msgstr "Galvenā izvēlne"
 
-#: src/kgx-window.ui:78
+#: src/kgx-window.ui:89
 msgid "Shrink Text"
 msgstr "Samazināt tekstu"
 
-#: src/kgx-window.ui:89
+#: src/kgx-window.ui:100
 msgid "Reset Size"
 msgstr "Atstatīt izmēru"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:117
 msgid "Enlarge Text"
 msgstr "Palielināt tekstu"
 
@@ -341,3 +365,6 @@ msgstr "Atla_sīt visu"
 #: src/menus.ui:36
 msgid "Show in _Files"
 msgstr "Rādīt _Datņu lietotnē"
+
+#~ msgid "View Open Tabs"
+#~ msgstr "Skatīt atvērtās cilnes"
