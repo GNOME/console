@@ -64,20 +64,38 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;primary&gt;Tab</property>
+                <property name="accelerator">&lt;primary&gt;Page_Down &lt;primary&gt;Tab</property>
                 <property name="title" translatable="yes" context="shortcut window">Next Tab</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;shift&gt;&lt;primary&gt;Tab</property>
+                <property name="accelerator">&lt;primary&gt;Page_Up &lt;shift&gt;&lt;primary&gt;Tab</property>
                 <property name="title" translatable="yes" context="shortcut window">Previous Tab</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;shift&gt;&lt;primary&gt;Page_Down</property>
+                <property name="title" translatable="yes" context="shortcut window">Move Tab Right</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;shift&gt;&lt;primary&gt;Page_Up</property>
+                <property name="title" translatable="yes" context="shortcut window">Move Tab Left</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
                 <property name="accelerator">&lt;alt&gt;1...9</property>
-                <property name="title" translatable="yes" context="shortcut window">Switch to Tab</property>
+                <property name="title" translatable="yes" context="shortcut window">Switch to Tab 1–9</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="accelerator">&lt;alt&gt;0</property>
+                <property name="title" translatable="yes" context="shortcut window">Switch to Tab 10</property>
               </object>
             </child>
           </object>

@@ -658,8 +658,6 @@ kgx_pages_init (KgxPages *self)
   adw_tab_view_remove_shortcuts (ADW_TAB_VIEW (priv->view),
                                  ADW_TAB_VIEW_SHORTCUT_CONTROL_HOME |
                                  ADW_TAB_VIEW_SHORTCUT_CONTROL_END |
-                                 ADW_TAB_VIEW_SHORTCUT_CONTROL_SHIFT_PAGE_UP |
-                                 ADW_TAB_VIEW_SHORTCUT_CONTROL_SHIFT_PAGE_DOWN |
                                  ADW_TAB_VIEW_SHORTCUT_CONTROL_SHIFT_HOME |
                                  ADW_TAB_VIEW_SHORTCUT_CONTROL_SHIFT_END);
 }
