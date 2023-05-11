@@ -8,6 +8,7 @@
     <file compressed="true">kgx-terminal.ui</file>
     <file compressed="true">kgx-theme-switcher.ui</file>
     <file compressed="true">kgx-simple-tab.ui</file>
+    <file compressed="true">kgx-preferences-window.ui</file>
     <file compressed="true">style.css</file>
     <file compressed="true">style-dark.css</file>
     <file compressed="true">logo.txt</file>

@@ -7,6 +7,8 @@ kgx_sources = [
   'kgx-close-dialog.h',
   'kgx-pages.c',
   'kgx-pages.h',
+  'kgx-preferences-window.c',
+  'kgx-preferences-window.h',
   'kgx-process.c',
   'kgx-process.h',
   'kgx-proxy-info.c',

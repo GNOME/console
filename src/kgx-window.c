@@ -37,6 +37,7 @@
 #include "kgx-application.h"
 #include "kgx-close-dialog.h"
 #include "kgx-pages.h"
+#include "kgx-preferences-window.h"
 #include "kgx-theme-switcher.h"
 #include "kgx-watcher.h"
 
@@ -488,6 +489,22 @@ tab_switcher_activated (GSimpleAction *action,
 }
 
 
+static void
+show_preferences_window_activated (GSimpleAction *action,
+                                   GVariant      *parameter,
+                                   gpointer       data)
+{
+  KgxWindow *self = data;
+  GtkWindow *preferences;
+
+  preferences = g_object_new (KGX_TYPE_PREFERENCES_WINDOW,
+                              "transient-for", self,
+                              "settings", self->settings,
+                              NULL);
+  gtk_window_present (preferences);
+}
+
+
 static GActionEntry win_entries[] = {
   { "new-window", new_activated, NULL, NULL, NULL },
   { "new-tab", new_tab_activated, NULL, NULL, NULL },
@@ -495,6 +512,7 @@ static GActionEntry win_entries[] = {
   { "about", about_activated, NULL, NULL, NULL },
   { "show-tabs", tab_switcher_activated, NULL, NULL, NULL },
   { "show-tabs-desktop", tab_switcher_activated, NULL, NULL, NULL },
+  { "show-preferences-window", show_preferences_window_activated, NULL, NULL, NULL },
 };
 
 
