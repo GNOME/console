@@ -59,6 +59,11 @@
         <lookup name="settings">KgxTerminal</lookup>
       </lookup>
     </binding>
+    <binding name="audible-bell">
+      <lookup name="audible-bell">
+        <lookup name="settings">KgxTerminal</lookup>
+      </lookup>
+    </binding>
     <signal name="current-directory-uri-changed" handler="location_changed" />
     <signal name="current-file-uri-changed" handler="location_changed" />
     <child>

@@ -27,5 +27,8 @@
     <key name="restore-window-size" type="b">
       <default>true</default>
     </key>
+    <key name="audible-bell" type="b">
+      <default>true</default>
+    </key>
   </schema>
 </schemalist>
