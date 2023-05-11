@@ -54,12 +54,15 @@
 #define RESTORE_SIZE_KEY "restore-window-size"
 #define LAST_SIZE_KEY "last-window-size"
 
+#define AUDIBLE_BELL "audible-bell"
+
 struct _KgxSettings {
   GObject      parent_instance;
 
   KgxTheme     theme;
   double       scale;
   int64_t      scrollback_lines;
+  gboolean     audible_bell;
 
   GSettings   *settings;
   GSettings   *desktop_interface;
@@ -77,6 +80,7 @@ enum {
   PROP_SCALE_CAN_INCREASE,
   PROP_SCALE_CAN_DECREASE,
   PROP_SCROLLBACK_LINES,
+  PROP_AUDIBLE_BELL,
   LAST_PROP
 };
 
@@ -130,6 +134,9 @@ kgx_settings_set_property (GObject      *object,
     case PROP_SCROLLBACK_LINES:
       kgx_settings_set_scrollback (self, g_value_get_int64 (value));
       break;
+    case PROP_AUDIBLE_BELL:
+      kgx_settings_set_audible_bell (self, g_value_get_boolean (value));
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -163,6 +170,9 @@ kgx_settings_get_property (GObject    *object,
       break;
     case PROP_SCROLLBACK_LINES:
       g_value_set_int64 (value, self->scrollback_lines);
+      break;
+    case PROP_AUDIBLE_BELL:
+      g_value_set_boolean (value, self->audible_bell);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -228,6 +238,11 @@ kgx_settings_class_init (KgxSettingsClass *klass)
                         G_MININT64, G_MAXINT64, 512,
                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
+  pspecs[PROP_AUDIBLE_BELL] =
+    g_param_spec_boolean ("audible-bell", "Audible Bell", "Whether to play bell sound",
+                          TRUE,
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 }
 
@@ -264,6 +279,9 @@ kgx_settings_init (KgxSettings *self)
                    G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (self->settings, "scrollback-lines",
                    self, "scrollback-lines",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (self->settings, "audible-bell",
+                   self, "audible-bell",
                    G_SETTINGS_BIND_DEFAULT);
 
   g_signal_connect (self->settings,
@@ -433,4 +451,30 @@ kgx_settings_set_custom_size (KgxSettings *self,
   g_debug ("Store window size: %i×%i", width, height);
 
   g_settings_set (self->settings, LAST_SIZE_KEY, "(ii)", width, height);
+}
+
+
+gboolean
+kgx_settings_get_audible_bell (KgxSettings *self)
+{
+  g_return_val_if_fail (KGX_IS_SETTINGS (self), FALSE);
+
+  return self->audible_bell;
+}
+
+
+void
+kgx_settings_set_audible_bell (KgxSettings *self,
+                            gboolean     audible_bell)
+{
+  g_return_if_fail (KGX_IS_SETTINGS (self));
+
+  if (self->audible_bell == audible_bell)
+    return;
+
+  self->audible_bell = audible_bell;
+
+  g_debug ("Store audible bell: %s", audible_bell ? "TRUE" : "FALSE");
+
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_AUDIBLE_BELL]);
 }
