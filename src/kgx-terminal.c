@@ -751,6 +751,29 @@ dark_changed (KgxTerminal *self)
   }
 }
 
+static gboolean
+on_scroll (GtkEventControllerScroll *scroll,
+           double                   dx,
+           double                   dy,
+           KgxTerminal              *self)
+{
+  GApplication *app = g_application_get_default ();
+  GdkModifierType mods = gtk_event_controller_get_current_event_state (GTK_EVENT_CONTROLLER (scroll));
+  GAction *action = NULL;
+
+  if ((mods & GDK_CONTROL_MASK) == 0 || dy == 0) {
+    return FALSE;
+  }
+
+  if (dy > 0) {
+    action = g_action_map_lookup_action (G_ACTION_MAP (app), "zoom-out");
+  } else {
+    action = g_action_map_lookup_action (G_ACTION_MAP (app), "zoom-in");
+  }
+
+  g_action_activate (action, NULL);
+  return TRUE;
+}
 
 static void
 kgx_terminal_init (KgxTerminal *self)
@@ -768,6 +791,14 @@ kgx_terminal_init (KgxTerminal *self)
   gtk_gesture_single_set_touch_only (GTK_GESTURE_SINGLE (gesture), TRUE);
   g_signal_connect (gesture, "pressed", G_CALLBACK (long_pressed), self);
   gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (gesture));
+
+  controller = gtk_event_controller_scroll_new (GTK_EVENT_CONTROLLER_SCROLL_VERTICAL | GTK_EVENT_CONTROLLER_SCROLL_DISCRETE);
+  gtk_event_controller_set_propagation_phase (controller, GTK_PHASE_CAPTURE);
+  g_signal_connect (controller,
+                    "scroll",
+                    G_CALLBACK (on_scroll),
+                    self);
+  gtk_widget_add_controller (GTK_WIDGET (self), controller);
 
   controller = gtk_shortcut_controller_new ();
   gtk_event_controller_set_propagation_phase (controller, GTK_PHASE_CAPTURE);
