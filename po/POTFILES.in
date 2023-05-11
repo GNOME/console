@@ -8,6 +8,7 @@ src/kgx-close-dialog.c
 src/kgx-close-dialog.ui
 src/kgx-font-picker.ui
 src/kgx-pages.ui
+src/kgx-preferences-window.c
 src/kgx-preferences-window.ui
 src/kgx-simple-tab.c
 src/kgx-tab.c

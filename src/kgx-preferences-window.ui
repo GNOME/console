@@ -7,6 +7,55 @@
         <property name="title" translatable="yes">General</property>
         <child>
           <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Font</property>
+            <child>
+              <object class="AdwSwitchRow" id="use_system_font">
+                <property name="title" translatable="yes">Use _System Default</property>
+                <property name="use-underline">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="custom_font">
+                <property name="title" translatable="yes">Custom _Font</property>
+                <property name="use-underline">True</property>
+                <property name="activatable">True</property>
+                <property name="action-name">prefs.select-font</property>
+                <property name="sensitive" bind-source="use_system_font" bind-property="active" bind-flags="sync-create|invert-boolean"/>
+                <child>
+                  <object class="GtkBox">
+                    <property name="spacing">6</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <binding name="attributes">
+                          <closure type='PangoAttrList' function='font_as_attributes'>
+                            <lookup name="custom-font">
+                              <lookup name="settings">KgxPreferencesWindow</lookup>
+                            </lookup>
+                          </closure>
+                        </binding>
+                        <binding name="label">
+                          <closure type='gchararray' function='font_as_label'>
+                            <lookup name="custom-font">
+                              <lookup name="settings">KgxPreferencesWindow</lookup>
+                            </lookup>
+                          </closure>
+                        </binding>
+                        <property name="ellipsize">middle</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="icon-name">go-next-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Terminal Bell</property>
             <child>
               <object class="AdwSwitchRow" id="audible_bell">

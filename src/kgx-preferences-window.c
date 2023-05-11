@@ -1,6 +1,7 @@
 /* kgx-preferences-window.c
  *
  * Copyright 2023 Maximiliano Sandoval
+ * Copyright 2023 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +19,10 @@
 
 #include "kgx-config.h"
 
+#include <glib/gi18n.h>
+
 #include "kgx-settings.h"
+#include "kgx-font-picker.h"
 #include "kgx-preferences-window.h"
 
 
@@ -30,6 +34,8 @@ struct _KgxPreferencesWindow {
 
   GtkWidget            *audible_bell;
   GtkWidget            *visual_bell;
+  GtkWidget            *use_system_font;
+  GtkWidget            *custom_font;
 };
 
 
@@ -95,6 +101,61 @@ kgx_preferences_window_get_property (GObject    *object,
 }
 
 
+static PangoAttrList *
+font_as_attributes (GObject *object, PangoFontDescription *font)
+{
+  g_autoptr (PangoAttrList) list = pango_attr_list_new ();
+
+  if (font) {
+    pango_attr_list_insert (list, pango_attr_font_desc_new (font));
+  }
+
+  return g_steal_pointer (&list);
+}
+
+
+static char *
+font_as_label (GObject              *object,
+               PangoFontDescription *font)
+{
+  if (!font) {
+    return g_strdup (_("No Font Set"));
+  }
+
+  return pango_font_description_to_string (font);
+}
+
+
+static void
+font_selected (KgxFontPicker        *picker,
+               PangoFontDescription *font,
+               KgxPreferencesWindow *self)
+{
+  kgx_settings_set_custom_font (self->settings, font);
+
+  gtk_window_destroy (GTK_WINDOW (picker));
+}
+
+
+static void
+select_font_activated (GtkWidget  *widget,
+                       const char *action_name,
+                       GVariant   *parameter)
+{
+  KgxPreferencesWindow *self = KGX_PREFERENCES_WINDOW (widget);
+  g_autoptr (PangoFontDescription) initial_value = NULL;
+
+  initial_value = kgx_settings_get_custom_font (self->settings);
+
+  gtk_window_present (g_object_connect (g_object_new (KGX_TYPE_FONT_PICKER,
+                                                      "transient-for", self,
+                                                      "initial-font", initial_value,
+                                                      NULL),
+                                        "object-signal::selected", G_CALLBACK (font_selected), self,
+                                        NULL));
+}
+
+
 static void
 kgx_preferences_window_class_init (KgxPreferencesWindowClass *klass)
 {
@@ -118,6 +179,16 @@ kgx_preferences_window_class_init (KgxPreferencesWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, settings_binds);
   gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, audible_bell);
   gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, visual_bell);
+  gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, use_system_font);
+  gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, custom_font);
+
+  gtk_widget_class_bind_template_callback (widget_class, font_as_attributes);
+  gtk_widget_class_bind_template_callback (widget_class, font_as_label);
+
+  gtk_widget_class_install_action (widget_class,
+                                   "prefs.select-font",
+                                   NULL,
+                                   select_font_activated);
 }
 
 
@@ -132,5 +203,7 @@ kgx_preferences_window_init (KgxPreferencesWindow *self)
   g_binding_group_bind (self->settings_binds, "visual-bell",
                         self->visual_bell, "active",
                         G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+  g_binding_group_bind (self->settings_binds, "use-system-font",
+                        self->use_system_font, "active",
+                        G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 }
-
