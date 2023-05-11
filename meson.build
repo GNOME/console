@@ -70,7 +70,7 @@ config_h = vcs_tag( input: config_h_in,
                   command: ['git', 'rev-parse', '--short', 'HEAD'],
                  fallback: 'Devel')
 
-gtk_ver = 'GDK_VERSION_4_6'
+gtk_ver = 'GDK_VERSION_4_10'
 glib_ver = 'GLIB_VERSION_2_72'
 
 kgx_cargs = [
@@ -124,7 +124,7 @@ gio_dep = dependency('gio-2.0', version: '>= 2.72')
 gio_unix_dep = dependency('gio-unix-2.0', version: '>= 2.72')
 adw_dep = dependency('libadwaita-1', version: '>= 1.3.alpha')
 vte_dep = dependency('vte-2.91-gtk4', version: '>= 0.69.91')
-gtk_dep = dependency('gtk4', version: '>= 4.6')
+gtk_dep = dependency('gtk4', version: '>= 4.10')
 gtop_dep = dependency('libgtop-2.0')
 pcre_dep = dependency('libpcre2-8', version: '>= 10.32')
 schemas_dep = dependency('gsettings-desktop-schemas')

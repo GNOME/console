@@ -166,7 +166,7 @@ kgx_window_close_request (GtkWindow *window)
 
   g_signal_connect_swapped (dlg, "response::close", G_CALLBACK (close_response), self);
 
-  gtk_widget_show (dlg);
+  gtk_window_present (GTK_WINDOW (dlg));
 
   return TRUE; // Block the close
 }

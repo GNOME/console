@@ -343,18 +343,34 @@ menu_popup_activated (KgxTerminal *self)
 
 
 static void
-open_link (KgxTerminal *self, guint32 timestamp)
+open_link_cb (GtkUriLauncher *launcher,
+              GAsyncResult   *result)
 {
-  gtk_show_uri (GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
-                self->current_url,
-                timestamp);
+  g_autoptr (GError) error = NULL;
+
+  if (!gtk_uri_launcher_launch_finish (launcher, result, &error))
+    g_warning ("Couldn't open uri: %s\n", error->message);
+}
+
+
+static void
+open_link (KgxTerminal *self)
+{
+  GtkUriLauncher *launcher;
+
+  launcher = gtk_uri_launcher_new (self->current_url);
+  gtk_uri_launcher_launch (launcher,
+                           GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
+                           NULL,
+                           (GAsyncReadyCallback) open_link_cb,
+                           NULL);
 }
 
 
 static void
 open_link_activated (KgxTerminal *self)
 {
-  open_link (self, GDK_CURRENT_TIME);
+  open_link (self);
 }
 
 
@@ -694,9 +710,8 @@ pressed (GtkGestureClick *gesture,
   if (have_url_under_pointer (self, x, y) &&
       (button == GDK_BUTTON_PRIMARY || button == GDK_BUTTON_MIDDLE) &&
       state & GDK_CONTROL_MASK) {
-    guint32 time = gtk_event_controller_get_current_event_time (GTK_EVENT_CONTROLLER (gesture));
 
-    open_link (self, time);
+    open_link (self);
     gtk_gesture_set_state (GTK_GESTURE (gesture), GTK_EVENT_SEQUENCE_CLAIMED);
 
     return;
@@ -917,7 +932,7 @@ kgx_terminal_accept_paste (KgxTerminal *self,
                               G_CALLBACK (paste_response),
                               g_steal_pointer (&paste));
 
-    gtk_widget_show (dlg);
+    gtk_window_present (GTK_WINDOW (dlg));
   } else {
     paste_response (g_steal_pointer (&paste));
   }

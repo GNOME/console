@@ -249,7 +249,7 @@ size_changed (KgxTab   *tab,
   label = g_strdup_printf ("%i × %i", cols, rows);
 
   gtk_label_set_label (GTK_LABEL (priv->status), label);
-  gtk_widget_show (priv->status_revealer);
+  gtk_widget_set_visible (priv->status_revealer, TRUE);
   gtk_revealer_set_reveal_child (GTK_REVEALER (priv->status_revealer), TRUE);
 }
 
@@ -382,7 +382,7 @@ close_page (AdwTabView *view,
 
   g_signal_connect_swapped (dlg, "response", G_CALLBACK (close_response), page);
 
-  gtk_widget_show (dlg);
+  gtk_window_present (GTK_WINDOW (dlg));
 
   return TRUE; // Block the close
 }
@@ -405,7 +405,7 @@ check_revealer (GtkRevealer *revealer,
                 KgxPages    *self)
 {
   if (!gtk_revealer_get_child_revealed (revealer))
-    gtk_widget_hide (GTK_WIDGET (revealer));
+    gtk_widget_set_visible (GTK_WIDGET (revealer), FALSE);
 }
 
 

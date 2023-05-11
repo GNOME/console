@@ -900,7 +900,9 @@ kgx_tab_push_child (KgxTab     *self,
 
   priv = kgx_tab_get_instance_private (self);
 
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   context = gtk_widget_get_style_context (GTK_WIDGET (self));
+G_GNUC_END_IGNORE_DEPRECATIONS
   pid = kgx_process_get_pid (process);
   argv = kgx_process_get_argv (process);
 
@@ -978,7 +980,9 @@ kgx_tab_pop_child (KgxTab     *self,
 
   priv = kgx_tab_get_instance_private (self);
 
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
   context = gtk_widget_get_style_context (GTK_WIDGET (self));
+G_GNUC_END_IGNORE_DEPRECATIONS
   pid = kgx_process_get_pid (process);
 
   new_status |= pop_type (priv->remote, pid, context, KGX_REMOTE);
