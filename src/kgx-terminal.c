@@ -890,6 +890,9 @@ kgx_terminal_init (KgxTerminal *self)
   g_binding_group_bind (self->settings_binds, "scrollback-lines",
                         self, "scrollback-lines",
                         G_BINDING_SYNC_CREATE);
+  g_binding_group_bind (self->settings_binds, "audible-bell",
+                        self, "audible-bell",
+                        G_BINDING_SYNC_CREATE);
 }
 
 

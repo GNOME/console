@@ -86,5 +86,8 @@ void                  kgx_settings_get_size          (KgxSettings       *self,
 void                  kgx_settings_set_custom_size   (KgxSettings       *self,
                                                       int                width,
                                                       int                height);
+gboolean              kgx_settings_get_audible_bell  (KgxSettings       *self);
+void                  kgx_settings_set_audible_bell  (KgxSettings       *self,
+                                                      gboolean           audible_bell);
 
 G_END_DECLS
