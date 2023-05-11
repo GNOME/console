@@ -239,7 +239,7 @@ kgx_settings_class_init (KgxSettingsClass *klass)
                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
   pspecs[PROP_AUDIBLE_BELL] =
-    g_param_spec_boolean ("audible-bell", "Audible Bell", "Whether to play bell sound",
+    g_param_spec_boolean ("audible-bell", NULL, NULL,
                           TRUE,
                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
@@ -456,7 +456,7 @@ kgx_settings_get_audible_bell (KgxSettings *self)
 
 void
 kgx_settings_set_audible_bell (KgxSettings *self,
-                            gboolean     audible_bell)
+                               gboolean     audible_bell)
 {
   g_return_if_fail (KGX_IS_SETTINGS (self));
 
@@ -464,8 +464,6 @@ kgx_settings_set_audible_bell (KgxSettings *self,
     return;
 
   self->audible_bell = audible_bell;
-
-  g_debug ("Store audible bell: %s", audible_bell ? "TRUE" : "FALSE");
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_AUDIBLE_BELL]);
 }

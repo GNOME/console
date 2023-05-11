@@ -27,6 +27,10 @@
     </section>
     <section>
       <item>
+        <attribute name="label" translatable="yes">_Preferences</attribute>
+        <attribute name="action">win.show-preferences-window</attribute>
+      </item>
+      <item>
         <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
         <attribute name="action">win.show-help-overlay</attribute>
       </item>
