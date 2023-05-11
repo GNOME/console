@@ -27,6 +27,8 @@ struct _KgxPreferencesWindow {
   GBindingGroup        *settings_binds;
 
   AdwSwitchRow         *audible_bell_switch_row;
+  AdwExpanderRow       *use_custom_font_row;
+  AdwActionRow         *custom_font_row;
 };
 
 
@@ -42,6 +44,27 @@ enum {
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 
 
+static gboolean
+description_to_string (GBinding     *binding,
+                       const GValue *from_value,
+                       GValue       *to_value,
+                       gpointer      user_data)
+{
+  PangoFontDescription *font;
+  g_autofree char *font_desc = NULL;
+
+  font = g_value_get_boxed (from_value);
+
+  font_desc = g_strdup_printf ("%s %2.4g",
+                               pango_font_description_get_family (font),
+                               pango_font_description_get_size (font) / (double) PANGO_SCALE);
+
+  g_value_set_string (to_value, font_desc);
+
+  return TRUE;
+}
+
+
 static void
 kgx_preferences_window_set_settings (KgxPreferencesWindow  *self,
                                      KgxSettings           *settings)
@@ -49,6 +72,47 @@ kgx_preferences_window_set_settings (KgxPreferencesWindow  *self,
   if (g_set_object (&self->settings, settings)) {
     g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_SETTINGS]);
   }
+}
+
+
+static void
+font_choosed_cb (GtkFontDialog        *dialog,
+                 GAsyncResult         *result,
+                 KgxPreferencesWindow *self)
+{
+  PangoFontDescription *font;
+  g_autoptr (GError) error = NULL;
+
+  font = gtk_font_dialog_choose_font_finish (dialog, result, &error);
+
+  if (error) {
+    g_critical ("Couldn't get font: %s\n", error->message);
+    return;
+  }
+
+  kgx_settings_set_custom_font (self->settings, font);
+
+  pango_font_description_free (font);
+}
+
+
+static void
+on_font_action_row_activated (KgxPreferencesWindow  *self)
+{
+  GtkFontDialog *dialog;
+  PangoFontDescription *initial_value;
+
+  dialog = gtk_font_dialog_new ();
+
+  initial_value = kgx_settings_get_custom_font (self->settings);
+
+  gtk_font_dialog_choose_font (dialog, GTK_WINDOW (self),
+                               initial_value,
+                               NULL,
+                               (GAsyncReadyCallback) font_choosed_cb,
+                               self);
+
+  pango_font_description_free (initial_value);
 }
 
 
@@ -123,6 +187,10 @@ kgx_preferences_window_class_init (KgxPreferencesWindowClass *klass)
                                                KGX_APPLICATION_PATH "kgx-preferences-window.ui");
 
   gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, audible_bell_switch_row);
+  gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, use_custom_font_row);
+  gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, custom_font_row);
+
+  gtk_widget_class_bind_template_callback (widget_class, on_font_action_row_activated);
 }
 
 
@@ -139,6 +207,15 @@ kgx_preferences_window_init (KgxPreferencesWindow *self)
   g_binding_group_bind (self->settings_binds, "audible-bell",
                         self->audible_bell_switch_row, "active",
                         G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+
+  g_binding_group_bind (self->settings_binds, "use-custom-font",
+                        self->use_custom_font_row, "enable-expansion",
+                        G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+
+  g_binding_group_bind_full (self->settings_binds, "custom-font",
+                             self->custom_font_row, "title",
+                             G_BINDING_SYNC_CREATE,
+                             description_to_string, NULL, NULL, NULL);
 }
 
 

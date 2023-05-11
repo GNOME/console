@@ -89,5 +89,11 @@ void                  kgx_settings_set_custom_size   (KgxSettings       *self,
 gboolean              kgx_settings_get_audible_bell  (KgxSettings       *self);
 void                  kgx_settings_set_audible_bell  (KgxSettings       *self,
                                                       gboolean           audible_bell);
+gboolean              kgx_settings_get_use_custom_font  (KgxSettings           *self);
+void                  kgx_settings_set_use_custom_font  (KgxSettings           *self,
+                                                         gboolean               use_custom_font);
+PangoFontDescription *kgx_settings_get_custom_font      (KgxSettings           *self);
+void                  kgx_settings_set_custom_font      (KgxSettings           *self,
+                                                         PangoFontDescription  *custom_font);
 
 G_END_DECLS

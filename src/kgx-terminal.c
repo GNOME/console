@@ -114,6 +114,26 @@ static guint signals[N_SIGNALS];
 
 
 static void
+update_font (KgxTerminal *self)
+{
+  PangoFontDescription *font;
+
+  if (!self->settings) {
+    return;
+  }
+
+  if (kgx_settings_get_use_custom_font (self->settings)) {
+    font = kgx_settings_get_custom_font (self->settings);
+  } else {
+    font = kgx_settings_get_font (self->settings);
+  }
+
+  vte_terminal_set_font (VTE_TERMINAL (self), font);
+  pango_font_description_free (font);
+}
+
+
+static void
 kgx_terminal_dispose (GObject *object)
 {
   KgxTerminal *self = KGX_TERMINAL (object);
@@ -208,6 +228,7 @@ kgx_terminal_set_property (GObject      *object,
     case PROP_SETTINGS:
       g_set_object (&self->settings, g_value_get_object (value));
       update_terminal_colours (self);
+      update_font (self);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -876,14 +897,20 @@ kgx_terminal_init (KgxTerminal *self)
   g_signal_group_connect_swapped (self->settings_signals,
                                   "notify::theme", G_CALLBACK (update_terminal_colours),
                                   self);
+  g_signal_group_connect_swapped (self->settings_signals,
+                                  "notify::use-custom-font", G_CALLBACK (update_font),
+                                  self);
+  g_signal_group_connect_swapped (self->settings_signals,
+                                  "notify::custom-font", G_CALLBACK (update_font),
+                                  self);
+  g_signal_group_connect_swapped (self->settings_signals,
+                                  "notify::font", G_CALLBACK (update_font),
+                                  self);
 
   self->settings_binds = g_binding_group_new ();
   g_object_bind_property (self, "settings",
                           self->settings_binds, "source",
                           G_BINDING_DEFAULT);
-  g_binding_group_bind (self->settings_binds, "font",
-                        self, "font-desc",
-                        G_BINDING_SYNC_CREATE);
   g_binding_group_bind (self->settings_binds, "font-scale",
                         self, "font-scale",
                         G_BINDING_SYNC_CREATE);

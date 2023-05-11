@@ -56,16 +56,21 @@
 
 #define AUDIBLE_BELL "audible-bell"
 
+#define USE_CUSTOM_FONT "use-custom-font"
+#define CUSTOM_FONT "custom-font"
+
 struct _KgxSettings {
   GObject      parent_instance;
 
-  KgxTheme     theme;
-  double       scale;
-  int64_t      scrollback_lines;
-  gboolean     audible_bell;
+  KgxTheme              theme;
+  double                scale;
+  int64_t               scrollback_lines;
+  gboolean              audible_bell;
+  gboolean              use_custom_font;
+  PangoFontDescription *custom_font;
 
-  GSettings   *settings;
-  GSettings   *desktop_interface;
+  GSettings            *settings;
+  GSettings            *desktop_interface;
 };
 
 
@@ -81,6 +86,8 @@ enum {
   PROP_SCALE_CAN_DECREASE,
   PROP_SCROLLBACK_LINES,
   PROP_AUDIBLE_BELL,
+  PROP_USE_CUSTOM_FONT,
+  PROP_CUSTOM_FONT,
   LAST_PROP
 };
 
@@ -137,6 +144,12 @@ kgx_settings_set_property (GObject      *object,
     case PROP_AUDIBLE_BELL:
       kgx_settings_set_audible_bell (self, g_value_get_boolean (value));
       break;
+    case PROP_USE_CUSTOM_FONT:
+      kgx_settings_set_use_custom_font (self, g_value_get_boolean (value));
+      break;
+    case PROP_CUSTOM_FONT:
+      kgx_settings_set_custom_font (self, g_value_get_boxed (value));
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -173,6 +186,12 @@ kgx_settings_get_property (GObject    *object,
       break;
     case PROP_AUDIBLE_BELL:
       g_value_set_boolean (value, self->audible_bell);
+      break;
+    case PROP_USE_CUSTOM_FONT:
+      g_value_set_boolean (value, self->use_custom_font);
+      break;
+    case PROP_CUSTOM_FONT:
+      g_value_set_boxed (value, self->custom_font);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -243,6 +262,16 @@ kgx_settings_class_init (KgxSettingsClass *klass)
                           TRUE,
                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
+  pspecs[PROP_USE_CUSTOM_FONT] =
+    g_param_spec_boolean ("use-custom-font", "Use Custom Font", "Whether to use a custom font",
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
+  pspecs[PROP_CUSTOM_FONT] =
+    g_param_spec_boxed ("custom-font", "Custom Font", "The custom font",
+                        PANGO_TYPE_FONT_DESCRIPTION,
+                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 }
 
@@ -266,6 +295,42 @@ restore_window_size_changed (GSettings   *settings,
   }
 }
 
+static gboolean
+custom_font_get_mapping (GValue   *value,
+                         GVariant *variant,
+                         gpointer  data)
+{
+  const char *font_desc;
+  PangoFontDescription *font;
+
+  font_desc = g_variant_get_string (variant, NULL);
+  if (font_desc == NULL || g_strcmp0 (font_desc, "") == 0)
+    font = pango_font_description_new ();
+  else
+    font = pango_font_description_from_string (font_desc);
+
+  g_value_set_boxed (value, font);
+
+  pango_font_description_free (font);
+
+  return TRUE;
+}
+
+
+static GVariant *
+custom_font_set_mapping (const GValue       *value,
+                         const GVariantType *variant_ty,
+                         gpointer            data)
+{
+  g_autofree char *font_desc = NULL;
+  PangoFontDescription *font;
+
+  font = g_value_get_boxed (value);
+  font_desc = pango_font_description_to_string (font);
+
+  return g_variant_new_string (font_desc);
+}
+
 
 static void
 kgx_settings_init (KgxSettings *self)
@@ -283,6 +348,15 @@ kgx_settings_init (KgxSettings *self)
   g_settings_bind (self->settings, "audible-bell",
                    self, "audible-bell",
                    G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (self->settings, "use-custom-font",
+                   self, "use-custom-font",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind_with_mapping (self->settings, "custom-font",
+                                self, "custom-font",
+                                G_SETTINGS_BIND_DEFAULT,
+                                custom_font_get_mapping,
+                                custom_font_set_mapping,
+                                NULL, NULL);
 
   g_signal_connect (self->settings,
                     "changed::restore-window-size",
@@ -466,4 +540,63 @@ kgx_settings_set_audible_bell (KgxSettings *self,
   self->audible_bell = audible_bell;
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_AUDIBLE_BELL]);
+}
+
+
+gboolean
+kgx_settings_get_use_custom_font (KgxSettings *self)
+{
+  g_return_val_if_fail (KGX_IS_SETTINGS (self), FALSE);
+
+  return self->use_custom_font;
+}
+
+
+void
+kgx_settings_set_use_custom_font (KgxSettings *self,
+                                  gboolean     use_custom_font)
+{
+  g_return_if_fail (KGX_IS_SETTINGS (self));
+
+  if (self->use_custom_font == use_custom_font)
+    return;
+
+  self->use_custom_font = use_custom_font;
+
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_USE_CUSTOM_FONT]);
+}
+
+
+PangoFontDescription *
+kgx_settings_get_custom_font (KgxSettings *self)
+{
+  g_return_val_if_fail (KGX_IS_SETTINGS (self), FALSE);
+
+  return pango_font_description_copy (self->custom_font);
+}
+
+
+void
+kgx_settings_set_custom_font (KgxSettings          *self,
+                              PangoFontDescription *custom_font)
+{
+  g_autofree char *font_desc = NULL;
+
+  g_return_if_fail (KGX_IS_SETTINGS (self));
+  g_return_if_fail (custom_font != NULL);
+
+  if (self->custom_font == custom_font ||
+      (self->custom_font && custom_font &&
+       pango_font_description_equal (self->custom_font, custom_font)))
+    return;
+
+  if (self->custom_font)
+    pango_font_description_free (self->custom_font);
+
+  self->custom_font = pango_font_description_copy (custom_font);
+
+  font_desc = pango_font_description_to_string (custom_font);
+  g_settings_set_string (self->settings, CUSTOM_FONT, font_desc);
+
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_CUSTOM_FONT]);
 }

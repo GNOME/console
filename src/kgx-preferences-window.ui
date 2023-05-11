@@ -7,6 +7,30 @@
         <property name="title" translatable="yes">General</property>
         <child>
           <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Appearance</property>
+            <child>
+              <object class="AdwExpanderRow" id="use_custom_font_row">
+                <property name="show-enable-switch">True</property>
+                <property name="title" translatable="yes">_Custom Font</property>
+                <property name="use-underline">True</property>
+                <child>
+                  <object class="AdwActionRow" id="custom_font_row">
+                    <property name="title" translatable="yes">No font set</property>
+                    <property name="activatable">True</property>
+                    <signal name="activated" handler="on_font_action_row_activated" swapped="yes"/>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="icon-name">go-next-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Sound</property>
             <child>
               <object class="AdwSwitchRow" id="audible_bell_switch_row">
