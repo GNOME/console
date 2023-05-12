@@ -865,7 +865,6 @@ static inline KgxStatus
 push_type (GHashTable      *table,
            GPid             pid,
            KgxProcess      *process,
-           GtkStyleContext *context,
            KgxStatus        status)
 {
   g_hash_table_insert (table,
@@ -889,7 +888,6 @@ void
 kgx_tab_push_child (KgxTab     *self,
                     KgxProcess *process)
 {
-  GtkStyleContext *context;
   GPid pid = 0;
   GStrv argv;
   g_autofree char *program = NULL;
@@ -900,9 +898,6 @@ kgx_tab_push_child (KgxTab     *self,
 
   priv = kgx_tab_get_instance_private (self);
 
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  context = gtk_widget_get_style_context (GTK_WIDGET (self));
-G_GNUC_END_IGNORE_DEPRECATIONS
   pid = kgx_process_get_pid (process);
   argv = kgx_process_get_argv (process);
 
@@ -914,23 +909,23 @@ G_GNUC_END_IGNORE_DEPRECATIONS
                   g_strcmp0 (program, "mosh-client") == 0 ||
                   g_strcmp0 (program, "mosh") == 0 ||
                   g_strcmp0 (program, "et") == 0)) {
-    new_status |= push_type (priv->remote, pid, NULL, context, KGX_REMOTE);
+    new_status |= push_type (priv->remote, pid, NULL, KGX_REMOTE);
   }
 
   if (G_UNLIKELY (g_strcmp0 (program, "waypipe") == 0)) {
     for (int i = 1; argv[i]; i++) {
       if (G_UNLIKELY (g_strcmp0 (argv[i], "ssh") == 0)) {
-        new_status |= push_type (priv->remote, pid, NULL, context, KGX_REMOTE);
+        new_status |= push_type (priv->remote, pid, NULL, KGX_REMOTE);
         break;
       }
     }
   }
 
   if (G_UNLIKELY (kgx_process_get_is_root (process))) {
-    new_status |= push_type (priv->root, pid, NULL, context, KGX_PRIVILEGED);
+    new_status |= push_type (priv->root, pid, NULL, KGX_PRIVILEGED);
   }
 
-  push_type (priv->children, pid, process, context, KGX_NONE);
+  push_type (priv->children, pid, process, KGX_NONE);
 
   set_status (self, new_status);
 }
@@ -939,7 +934,6 @@ G_GNUC_END_IGNORE_DEPRECATIONS
 inline static KgxStatus
 pop_type (GHashTable      *table,
           GPid             pid,
-          GtkStyleContext *context,
           KgxStatus        status)
 {
   guint size = 0;
@@ -971,7 +965,6 @@ void
 kgx_tab_pop_child (KgxTab     *self,
                    KgxProcess *process)
 {
-  GtkStyleContext *context;
   GPid pid = 0;
   KgxStatus new_status = KGX_NONE;
   KgxTabPrivate *priv;
@@ -980,14 +973,11 @@ kgx_tab_pop_child (KgxTab     *self,
 
   priv = kgx_tab_get_instance_private (self);
 
-G_GNUC_BEGIN_IGNORE_DEPRECATIONS
-  context = gtk_widget_get_style_context (GTK_WIDGET (self));
-G_GNUC_END_IGNORE_DEPRECATIONS
   pid = kgx_process_get_pid (process);
 
-  new_status |= pop_type (priv->remote, pid, context, KGX_REMOTE);
-  new_status |= pop_type (priv->root, pid, context, KGX_PRIVILEGED);
-  pop_type (priv->children, pid, context, KGX_NONE);
+  new_status |= pop_type (priv->remote, pid, KGX_REMOTE);
+  new_status |= pop_type (priv->root, pid, KGX_PRIVILEGED);
+  pop_type (priv->children, pid, KGX_NONE);
 
   set_status (self, new_status);
 
