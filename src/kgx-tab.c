@@ -906,6 +906,7 @@ kgx_tab_push_child (KgxTab     *self,
   }
 
   if (G_UNLIKELY (g_strcmp0 (program, "ssh") == 0 ||
+                  g_strcmp0 (program, "telnet") == 0 ||
                   g_strcmp0 (program, "mosh-client") == 0 ||
                   g_strcmp0 (program, "mosh") == 0 ||
                   g_strcmp0 (program, "et") == 0)) {
@@ -914,7 +915,8 @@ kgx_tab_push_child (KgxTab     *self,
 
   if (G_UNLIKELY (g_strcmp0 (program, "waypipe") == 0)) {
     for (int i = 1; argv[i]; i++) {
-      if (G_UNLIKELY (g_strcmp0 (argv[i], "ssh") == 0)) {
+      if (G_UNLIKELY (g_strcmp0 (argv[i], "ssh") == 0 ||
+                      g_strcmp0 (argv[i], "telnet") == 0)) {
         new_status |= push_type (priv->remote, pid, NULL, KGX_REMOTE);
         break;
       }
