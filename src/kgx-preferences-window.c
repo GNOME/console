@@ -86,7 +86,9 @@ font_choosed_cb (GtkFontDialog        *dialog,
   font = gtk_font_dialog_choose_font_finish (dialog, result, &error);
 
   if (error) {
-    g_critical ("Couldn't get font: %s\n", error->message);
+    if (error->code != GTK_DIALOG_ERROR_DISMISSED)
+      g_warning ("Could not get font: %s\n", error->message);
+
     return;
   }
 
