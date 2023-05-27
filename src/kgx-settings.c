@@ -375,7 +375,8 @@ kgx_settings_init (KgxSettings *self)
  * kgx_settings_get_font:
  * @self: the #KgxSettings
  *
- * Creates a #PangoFontDescription for the system monospace font.
+ * Creates a #PangoFontDescription for the system monospace font or the
+ * user-defined font if KgxSettings:use-custom-font is set to %TRUE.
  *
  * Returns: (transfer full): a new #PangoFontDescription
  */
@@ -386,6 +387,9 @@ kgx_settings_get_font (KgxSettings *self)
   g_autofree char *font = NULL;
 
   g_return_val_if_fail (KGX_IS_SETTINGS (self), NULL);
+
+  if (self->use_custom_font)
+    return pango_font_description_copy (self->custom_font);
 
   font = g_settings_get_string (self->desktop_interface,
                                 MONOSPACE_FONT_KEY_NAME);
@@ -564,6 +568,7 @@ kgx_settings_set_use_custom_font (KgxSettings *self,
   self->use_custom_font = use_custom_font;
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_USE_CUSTOM_FONT]);
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_FONT]);
 }
 
 
@@ -599,4 +604,5 @@ kgx_settings_set_custom_font (KgxSettings          *self,
   g_settings_set_string (self->settings, CUSTOM_FONT, font_desc);
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_CUSTOM_FONT]);
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_FONT]);
 }
