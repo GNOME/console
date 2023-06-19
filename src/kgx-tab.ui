@@ -64,6 +64,8 @@
                   <object class="GtkSpinner">
                     <signal name="map" handler="spinner_mapped" swapped="no"/>
                     <signal name="unmap" handler="spinner_unmapped" swapped="no"/>
+                    <property name="valign">center</property>
+                    <property name="halign">center</property>
                   </object>
                 </property>
               </object>
