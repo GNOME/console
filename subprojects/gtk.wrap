@@ -1,7 +1,7 @@
 [wrap-git]
 directory=gtk
 url=https://gitlab.gnome.org/GNOME/gtk.git
-revision=origin/main
+revision=main
 
 [provide]
 gtk4=libgtk_dep
