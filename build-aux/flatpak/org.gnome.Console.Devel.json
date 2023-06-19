@@ -27,6 +27,7 @@
         {
             "name" : "vte",
             "config-opts" : [
+                "-Dgir=false",
                 "-Dvapi=false",
                 "-Dgtk3=false",
                 "-Dgtk4=true"
