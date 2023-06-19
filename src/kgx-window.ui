@@ -52,7 +52,7 @@
               <object class="GtkHeaderBar" id="header_bar">
                 <property name="title-widget">
                   <object class="AdwWindowTitle" id="window_title">
-                    <property name="title" translatable="yes">King’s Cross</property>
+                    <property name="title">KGX</property>
                   </object>
                 </property>
                 <child type="start">

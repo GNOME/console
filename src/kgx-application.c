@@ -361,7 +361,7 @@ kgx_application_handle_local_options (GApplication *app,
       }
 
       print_logo (w.ws_col);
-      print_center (_("King’s Cross"), -1, w.ws_col);
+      print_center ("KGX", -1, w.ws_col);
       print_center (PACKAGE_VERSION, -1, w.ws_col);
       print_center (_("Terminal Emulator"), -1, w.ws_col);
       print_center (copyright, -1, w.ws_col);
