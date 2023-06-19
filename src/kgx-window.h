@@ -41,8 +41,6 @@ G_BEGIN_DECLS
  * @header_bar: the #GtkHeaderBar that the styles are applied to
  * @search_entry: the #GtkSearchEntry inside @search_bar
  * @search_bar: the windows #GtkSearchBar
- * @exit_info: the #GtkRevealer hat wraps @exit_message
- * @exit_message: the #GtkLabel for showing important messages
  * @zoom_level: the #GtkLabel in the #GtkPopover showing the current zoom level
  * @pages: the #KgxPages of #KgxPage current in the window
  */
@@ -65,8 +63,6 @@ struct _KgxWindow
 
   /* Template widgets */
   GtkWidget            *window_title;
-  GtkWidget            *exit_info;
-  GtkWidget            *exit_message;
   GtkWidget            *theme_switcher;
   GtkWidget            *zoom_level;
   GtkWidget            *tab_bar;

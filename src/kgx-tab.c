@@ -63,8 +63,8 @@ struct _KgxTabPrivate {
   GtkWidget            *content;
   guint                 spinner_timeout;
 
-  GtkWidget            *revealer;
-  GtkWidget            *label;
+  GtkWidget            *exit_revealer;
+  GtkWidget            *exit_message;
   GtkWidget            *search_entry;
   GtkWidget            *search_bar;
   char                 *last_search;
@@ -488,15 +488,15 @@ kgx_tab_real_died (KgxTab         *self,
 
   priv = kgx_tab_get_instance_private (self);
 
-  gtk_label_set_markup (GTK_LABEL (priv->label), message);
+  gtk_label_set_markup (GTK_LABEL (priv->exit_message), message);
 
   if (type == GTK_MESSAGE_ERROR) {
-    gtk_widget_add_css_class (priv->revealer, "error");
+    gtk_widget_add_css_class (priv->exit_revealer, "error");
   } else {
-    gtk_widget_remove_css_class (priv->revealer, "error");
+    gtk_widget_remove_css_class (priv->exit_revealer, "error");
   }
 
-  gtk_revealer_set_reveal_child (GTK_REVEALER (priv->revealer), TRUE);
+  gtk_revealer_set_reveal_child (GTK_REVEALER (priv->exit_revealer), TRUE);
 }
 
 
@@ -648,8 +648,8 @@ kgx_tab_class_init (KgxTabClass *klass)
 
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, stack);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, spinner_revealer);
-  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, revealer);
-  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, label);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, exit_revealer);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, exit_message);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, search_entry);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, search_bar);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, terminal_signals);

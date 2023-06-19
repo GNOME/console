@@ -316,8 +316,6 @@ kgx_window_class_init (KgxWindowClass *klass)
                                                KGX_APPLICATION_PATH "kgx-window.ui");
 
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, window_title);
-  gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_info);
-  gtk_widget_class_bind_template_child (widget_class, KgxWindow, exit_message);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, theme_switcher);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, zoom_level);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, tab_bar);

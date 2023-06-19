@@ -166,26 +166,6 @@
                 <signal name="notify::status" handler="status_changed" swapped="yes" />
               </object>
             </child>
-            <child>
-              <object class="GtkRevealer" id="exit_info">
-                <property name="reveal_child">False</property>
-                <property name="child">
-                  <object class="GtkBox">
-                    <property name="can_focus">False</property>
-                    <property name="valign">end</property>
-                    <child>
-                      <object class="GtkLabel" id="exit_message">
-                        <property name="halign">start</property>
-                        <property name="hexpand">True</property>
-                      </object>
-                    </child>
-                    <style>
-                      <class name="exit-info"/>
-                    </style>
-                  </object>
-                </property>
-              </object>
-            </child>
           </object>
         </property>
       </object>
