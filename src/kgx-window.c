@@ -45,7 +45,6 @@ G_DEFINE_TYPE (KgxWindow, kgx_window, ADW_TYPE_APPLICATION_WINDOW)
 enum {
   PROP_0,
   PROP_SETTINGS,
-  PROP_NARROW,
   LAST_PROP
 };
 
@@ -95,9 +94,6 @@ kgx_window_get_property (GObject    *object,
     case PROP_SETTINGS:
       g_value_set_object (value, self->settings);
       break;
-    case PROP_NARROW:
-      g_value_set_boolean (value, self->narrow);
-      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -111,33 +107,6 @@ close_response (KgxWindow *self)
   self->close_anyway = TRUE;
 
   gtk_window_destroy (GTK_WINDOW (self));
-}
-
-
-static void
-kgx_window_size_allocate (GtkWidget *widget,
-                          int        width,
-                          int        height,
-                          int        baseline)
-{
-  KgxWindow *self = KGX_WINDOW (widget);
-  gboolean narrow = width < 400;
-  GAction *action;
-
-  if (narrow != self->narrow) {
-    self->narrow = narrow;
-    g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_NARROW]);
-
-    if (!narrow && kgx_pages_count (KGX_PAGES (self->pages)) > 0) {
-      adw_tab_overview_set_open (ADW_TAB_OVERVIEW (self->tab_overview), FALSE);
-    }
-  }
-
-  action = g_action_map_lookup_action (G_ACTION_MAP (self), "show-tabs-desktop");
-
-  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), !narrow);
-
-  GTK_WIDGET_CLASS (kgx_window_parent_class)->size_allocate (widget, width, height, baseline);
 }
 
 
@@ -286,6 +255,28 @@ create_tab_cb (KgxWindow *self)
 
 
 static void
+breakpoint_applied (KgxWindow *self)
+{
+  GAction *action = g_action_map_lookup_action (G_ACTION_MAP (self), "show-tabs-desktop");
+
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), FALSE);
+}
+
+
+static void
+breakpoint_unapplied (KgxWindow *self)
+{
+  GAction *action = g_action_map_lookup_action (G_ACTION_MAP (self), "show-tabs-desktop");
+
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), TRUE);
+
+  if (kgx_pages_count (KGX_PAGES (self->pages)) > 0) {
+    adw_tab_overview_set_open (ADW_TAB_OVERVIEW (self->tab_overview), FALSE);
+  }
+}
+
+
+static void
 kgx_window_class_init (KgxWindowClass *klass)
 {
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
@@ -296,19 +287,12 @@ kgx_window_class_init (KgxWindowClass *klass)
   object_class->set_property = kgx_window_set_property;
   object_class->get_property = kgx_window_get_property;
 
-  widget_class->size_allocate = kgx_window_size_allocate;
-
   window_class->close_request = kgx_window_close_request;
 
   pspecs[PROP_SETTINGS] =
     g_param_spec_object ("settings", NULL, NULL,
                          KGX_TYPE_SETTINGS,
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_STRINGS);
-
-  pspecs[PROP_NARROW] =
-    g_param_spec_boolean ("narrow", NULL, NULL,
-                          FALSE,
-                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
@@ -333,6 +317,8 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, status_changed);
   gtk_widget_class_bind_template_callback (widget_class, extra_drag_drop);
   gtk_widget_class_bind_template_callback (widget_class, create_tab_cb);
+  gtk_widget_class_bind_template_callback (widget_class, breakpoint_applied);
+  gtk_widget_class_bind_template_callback (widget_class, breakpoint_unapplied);
 }
 
 
