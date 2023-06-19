@@ -26,8 +26,8 @@
 #include "kgx-pages.h"
 #include "kgx-terminal.h"
 #include "kgx-settings.h"
-#include "kgx-util.h"
 #include "kgx-application.h"
+#include "kgx-drop-target.h"
 #include "kgx-marshals.h"
 
 
@@ -54,6 +54,8 @@ struct _KgxTabPrivate {
   KgxTerminal          *terminal;
   GSignalGroup         *terminal_signals;
   GBindingGroup        *terminal_binds;
+
+  KgxDropTarget        *drop_target;
 
   GtkWidget            *stack;
   GtkWidget            *spinner_revealer;
@@ -434,14 +436,16 @@ kgx_tab_set_property (GObject      *object,
 }
 
 
-static gboolean
-drop (GtkDropTarget *target,
-      const GValue  *value,
+static void
+drop (KgxDropTarget *target,
+      const char    *text,
       KgxTab        *self)
 {
-  kgx_tab_accept_drop (self, value);
+  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
 
-  return TRUE;
+  if (priv->terminal) {
+    kgx_terminal_accept_paste (KGX_TERMINAL (priv->terminal), text);
+  }
 }
 
 
@@ -715,6 +719,7 @@ kgx_tab_class_init (KgxTabClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, search_bar);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, terminal_signals);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, terminal_binds);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, drop_target);
 
   gtk_widget_class_bind_template_callback (widget_class, search_enabled);
   gtk_widget_class_bind_template_callback (widget_class, search_changed);
@@ -722,6 +727,7 @@ kgx_tab_class_init (KgxTabClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, search_prev);
   gtk_widget_class_bind_template_callback (widget_class, spinner_mapped);
   gtk_widget_class_bind_template_callback (widget_class, spinner_unmapped);
+  gtk_widget_class_bind_template_callback (widget_class, drop);
 }
 
 
@@ -791,7 +797,6 @@ kgx_tab_init (KgxTab *self)
 {
   static guint last_id = 0;
   KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
-  GtkDropTarget *target;
 
   last_id++;
 
@@ -826,9 +831,7 @@ kgx_tab_init (KgxTab *self)
   gtk_search_bar_connect_entry (GTK_SEARCH_BAR (priv->search_bar),
                                 GTK_EDITABLE (priv->search_entry));
 
-  target = gtk_drop_target_new (G_TYPE_STRING, GDK_ACTION_COPY);
-  g_signal_connect (target, "drop", G_CALLBACK (drop), self);
-  gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (target));
+  kgx_drop_target_mount_on (priv->drop_target, GTK_WIDGET (self));
 }
 
 
@@ -1136,26 +1139,16 @@ kgx_tab_get_children (KgxTab *self)
 
 
 void
-kgx_tab_accept_drop (KgxTab       *self,
-                     const GValue *value)
+kgx_tab_extra_drop (KgxTab       *self,
+                    const GValue *value)
 {
   KgxTabPrivate *priv;
-  g_autofree char *text = NULL;
-  g_auto (GStrv) uris = NULL;
 
   g_return_if_fail (KGX_IS_TAB (self));
 
   priv = kgx_tab_get_instance_private (self);
 
-  uris = g_strsplit (g_value_get_string (value), "\n", 0);
-
-  kgx_util_transform_uris_to_quoted_fuse_paths (uris);
-
-  text = kgx_util_concat_uris (uris, NULL);
-
-  if (priv->terminal) {
-    kgx_terminal_accept_paste (KGX_TERMINAL (priv->terminal), text);
-  }
+  kgx_drop_target_extra_drop (priv->drop_target, value);
 }
 
 

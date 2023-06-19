@@ -288,7 +288,7 @@ extra_drag_drop (AdwTabBar        *bar,
 {
   KgxTab *tab = KGX_TAB (adw_tab_page_get_child (page));
 
-  kgx_tab_accept_drop (tab, value);
+  kgx_tab_extra_drop (tab, value);
 }
 
 
@@ -595,6 +595,7 @@ update_subtitle (GBinding     *binding,
 static void
 kgx_window_init (KgxWindow *self)
 {
+  GType drop_types[] = { GDK_TYPE_FILE_LIST, G_TYPE_STRING };
   g_autoptr (GtkWindowGroup) group = NULL;
   AdwStyleManager *style_manager;
 
@@ -638,12 +639,16 @@ kgx_window_init (KgxWindow *self)
                                update_subtitle,
                                NULL, NULL, NULL);
 
+  /* Note this unfortunately doesn't allow us to workaround the portal
+     situation, but hopefully dropping folders on tabs is relatively rare */
   adw_tab_bar_setup_extra_drop_target (ADW_TAB_BAR (self->tab_bar),
                                        GDK_ACTION_COPY,
-                                       (GType[1]) { G_TYPE_STRING }, 1);
+                                       drop_types,
+                                       G_N_ELEMENTS (drop_types));
   adw_tab_overview_setup_extra_drop_target (ADW_TAB_OVERVIEW (self->tab_overview),
                                             GDK_ACTION_COPY,
-                                            (GType[1]) { G_TYPE_STRING }, 1);
+                                            drop_types,
+                                            G_N_ELEMENTS (drop_types));
 
   group = gtk_window_group_new ();
   gtk_window_group_add_window (group, GTK_WINDOW (self));

@@ -98,7 +98,7 @@ void        kgx_tab_pop_child        (KgxTab               *self,
                                       KgxProcess           *process);
 gboolean    kgx_tab_is_active        (KgxTab               *self);
 GPtrArray  *kgx_tab_get_children     (KgxTab               *self);
-void        kgx_tab_accept_drop      (KgxTab               *self,
+void        kgx_tab_extra_drop       (KgxTab               *self,
                                       const GValue         *value);
 void        kgx_tab_set_initial_title (KgxTab              *self,
                                        const char          *title,

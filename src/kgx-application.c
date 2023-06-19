@@ -38,6 +38,7 @@
 #include "kgx-application.h"
 #include "kgx-window.h"
 #include "kgx-pages.h"
+#include "kgx-drop-target.h"
 #include "kgx-simple-tab.h"
 #include "kgx-resources.h"
 #include "kgx-watcher.h"
@@ -112,6 +113,7 @@ kgx_application_startup (GApplication *app)
 
   g_type_ensure (KGX_TYPE_TERMINAL);
   g_type_ensure (KGX_TYPE_PAGES);
+  g_type_ensure (KGX_TYPE_DROP_TARGET);
 
   G_APPLICATION_CLASS (kgx_application_parent_class)->startup (app);
 
