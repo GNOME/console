@@ -45,12 +45,12 @@
         <property name="enable-new-tab">True</property>
         <signal name="create-tab" handler="create_tab_cb" swapped="yes"/>
         <property name="child">
-          <object class="GtkBox">
-            <property name="orientation">vertical</property>
+          <object class="AdwToolbarView" id="toolbar_view">
             <style>
               <class name="main-box"/>
             </style>
-            <child>
+            <property name="top-bar-style">raised</property>
+            <child type="top">
               <object class="GtkHeaderBar" id="header_bar">
                 <property name="title-widget">
                   <object class="AdwWindowTitle" id="window_title">
@@ -147,7 +147,7 @@
                 </child>
               </object>
             </child>
-            <child>
+            <child type="top">
               <object class="AdwTabBar" id="tab_bar">
                 <signal name="extra-drag-drop" handler="extra_drag_drop" swapped="no"/>
               </object>

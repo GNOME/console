@@ -1,30 +1,27 @@
-@define-color root_headerbar_bg_color       shade(@red_1, 1.37);
+@define-color root_headerbar_bg_color       shade(@red_1, 1.48);
 @define-color root_headerbar_backdrop_color shade(@red_1, 1.45);
 
-@define-color remote_headerbar_bg_color       shade(@purple_1, 1.27);
+@define-color remote_headerbar_bg_color       shade(@purple_1, 1.38);
 @define-color remote_headerbar_backdrop_color shade(@purple_1, 1.35);
 
-.terminal-window.root .main-box headerbar,
-.terminal-window.root .main-box tabbar > revealer > box,
-.tab.root searchbar > revealer > box {
+.tab .top-bar {
+  background-image: none;
+  background-color: @view_bg_color;
+}
+
+.terminal-window.root .main-box > revealer.top-bar {
   background-color: @root_headerbar_bg_color;
 }
 
-.terminal-window.root:backdrop .main-box headerbar,
-.terminal-window.root:backdrop .main-box tabbar > revealer > box,
-.tab.root:backdrop searchbar > revealer > box {
+.terminal-window.root:backdrop .main-box > revealer.top-bar {
   background-color: @root_headerbar_backdrop_color;
 }
 
-.terminal-window.remote .main-box  headerbar,
-.terminal-window.remote .main-box tabbar > revealer > box,
-.tab.remote searchbar > revealer > box {
+.terminal-window.remote .main-box > revealer.top-bar {
   background-color: @remote_headerbar_bg_color;
 }
 
-.terminal-window.remote:backdrop .main-box headerbar,
-.terminal-window.remote:backdrop .main-box tabbar > revealer > box,
-.tab.remote:backdrop searchbar > revealer > box {
+.terminal-window.remote:backdrop .main-box > revealer.top-bar {
   background-color: @remote_headerbar_backdrop_color;
 }
 
