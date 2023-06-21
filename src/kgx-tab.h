@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 #include "kgx-terminal.h"
 #include "kgx-process.h"
@@ -66,7 +66,7 @@ typedef struct _KgxPages KgxPages;
 
 #define KGX_TYPE_TAB kgx_tab_get_type ()
 
-G_DECLARE_DERIVABLE_TYPE (KgxTab, kgx_tab, KGX, TAB, GtkBox)
+G_DECLARE_DERIVABLE_TYPE (KgxTab, kgx_tab, KGX, TAB, AdwBin)
 
 
 /**
@@ -79,7 +79,7 @@ G_DECLARE_DERIVABLE_TYPE (KgxTab, kgx_tab, KGX, TAB, GtkBox)
 struct _KgxTabClass
 {
   /*< private >*/
-  GtkBoxClass parent;
+  AdwBinClass parent;
 
   /*< public >*/
   void (*start)        (KgxTab               *tab,

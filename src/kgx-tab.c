@@ -80,11 +80,12 @@ struct _KgxTabPrivate {
 
 static void kgx_tab_buildable_iface_init (GtkBuildableIface *iface);
 
-G_DEFINE_ABSTRACT_TYPE_WITH_CODE (KgxTab, kgx_tab, GTK_TYPE_BOX,
+G_DEFINE_ABSTRACT_TYPE_WITH_CODE (KgxTab, kgx_tab, ADW_TYPE_BIN,
                                   G_ADD_PRIVATE (KgxTab)
                                   G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
                                                          kgx_tab_buildable_iface_init))
 
+static GtkBuildableIface *parent_buildable_iface;
 
 enum {
   PROP_0,
@@ -682,7 +683,9 @@ kgx_tab_add_child (GtkBuildable *buildable,
     g_set_weak_pointer (&priv->content, GTK_WIDGET (child));
     gtk_stack_add_named (GTK_STACK (priv->stack), GTK_WIDGET (child), "content");
   } else if (GTK_IS_WIDGET (child)) {
-    gtk_box_append (GTK_BOX (self), GTK_WIDGET (child));
+    adw_bin_set_child (ADW_BIN (self), GTK_WIDGET (child));
+  } else {
+    parent_buildable_iface->add_child (buildable, builder, child, type);
   }
 }
 
@@ -690,6 +693,8 @@ kgx_tab_add_child (GtkBuildable *buildable,
 static void
 kgx_tab_buildable_iface_init (GtkBuildableIface *iface)
 {
+  parent_buildable_iface = g_type_interface_peek_parent (iface);
+
   iface->add_child = kgx_tab_add_child;
 }
 
