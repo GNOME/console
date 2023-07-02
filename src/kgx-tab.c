@@ -364,7 +364,7 @@ kgx_tab_set_is_active (KgxTab   *self,
 
   priv->is_active = active;
 
-  if (!active && priv->notification_id) {
+  if (active && priv->notification_id) {
     g_application_withdraw_notification (G_APPLICATION (priv->application),
                                           priv->notification_id);
     g_clear_pointer (&priv->notification_id, g_free);
