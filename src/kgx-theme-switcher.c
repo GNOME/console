@@ -23,11 +23,10 @@
 
 
 struct _KgxThemeSwitcher {
-  GtkWidget parent_instance;
+  AdwBin     parent_instance;
 
   KgxTheme theme;
 
-  GtkWidget *box;
   GtkWidget *system_selector;
   GtkWidget *light_selector;
   GtkWidget *dark_selector;
@@ -35,7 +34,7 @@ struct _KgxThemeSwitcher {
 };
 
 
-G_DEFINE_TYPE (KgxThemeSwitcher, kgx_theme_switcher, GTK_TYPE_WIDGET)
+G_DEFINE_TYPE (KgxThemeSwitcher, kgx_theme_switcher, ADW_TYPE_BIN)
 
 
 enum {
@@ -138,18 +137,6 @@ kgx_theme_switcher_set_property (GObject      *object,
 
 
 static void
-kgx_theme_switcher_dispose (GObject *object)
-{
-  KgxThemeSwitcher *self = KGX_THEME_SWITCHER (object);
-
-  if (self->box)
-    gtk_widget_unparent (self->box);
-
-  G_OBJECT_CLASS (kgx_theme_switcher_parent_class)->dispose (object);
-}
-
-
-static void
 kgx_theme_switcher_class_init (KgxThemeSwitcherClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -157,7 +144,6 @@ kgx_theme_switcher_class_init (KgxThemeSwitcherClass *klass)
 
   object_class->get_property = kgx_theme_switcher_get_property;
   object_class->set_property = kgx_theme_switcher_set_property;
-  object_class->dispose = kgx_theme_switcher_dispose;
 
   pspecs[PROP_THEME] =
     g_param_spec_enum ("theme",
@@ -179,7 +165,6 @@ kgx_theme_switcher_class_init (KgxThemeSwitcherClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                KGX_APPLICATION_PATH "kgx-theme-switcher.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, KgxThemeSwitcher, box);
   gtk_widget_class_bind_template_child (widget_class, KgxThemeSwitcher, system_selector);
   gtk_widget_class_bind_template_child (widget_class, KgxThemeSwitcher, light_selector);
   gtk_widget_class_bind_template_child (widget_class, KgxThemeSwitcher, dark_selector);

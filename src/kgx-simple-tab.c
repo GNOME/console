@@ -1,6 +1,6 @@
-/* kgx-local-page.c
+/* kgx-local-tab.c
  *
- * Copyright 2019-2020 Zander Brown
+ * Copyright 2019-2023 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,6 +32,20 @@
 #include "fp-vte-util.h"
 
 
+struct _KgxSimpleTab {
+  KgxTab        parent_instance;
+
+  char         *title;
+  GFile        *path;
+
+  char         *initial_work_dir;
+  GStrv         command;
+
+  GtkWidget    *terminal;
+  GCancellable *spawn_cancellable;
+};
+
+
 G_DEFINE_TYPE (KgxSimpleTab, kgx_simple_tab, KGX_TYPE_TAB)
 
 enum {
@@ -41,6 +55,21 @@ enum {
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
+
+
+static void
+kgx_simple_tab_dispose (GObject *object)
+{
+  KgxSimpleTab *self = KGX_SIMPLE_TAB (object);
+
+  g_clear_pointer (&self->initial_work_dir, g_free);
+  g_clear_pointer (&self->command, g_strfreev);
+
+  g_cancellable_cancel (self->spawn_cancellable);
+  g_clear_object (&self->spawn_cancellable);
+
+  G_OBJECT_CLASS (kgx_simple_tab_parent_class)->dispose (object);
+}
 
 
 static void
@@ -84,23 +113,6 @@ kgx_simple_tab_get_property (GObject    *object,
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
   }
-}
-
-
-static void
-kgx_simple_tab_finalize (GObject *object)
-{
-  KgxSimpleTab *self = KGX_SIMPLE_TAB (object);
-
-  g_clear_pointer (&self->initial_work_dir, g_free);
-  g_clear_pointer (&self->command, g_strfreev);
-
-  if (self->spawn_cancellable) {
-    g_cancellable_cancel (self->spawn_cancellable);
-  }
-  g_clear_object (&self->spawn_cancellable);
-
-  G_OBJECT_CLASS (kgx_simple_tab_parent_class)->finalize (object);
 }
 
 
@@ -317,14 +329,14 @@ kgx_simple_tab_class_init (KgxSimpleTabClass *klass)
 {
   GObjectClass   *object_class = G_OBJECT_CLASS   (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  KgxTabClass    *page_class   = KGX_TAB_CLASS    (klass);
+  KgxTabClass    *tab_class    = KGX_TAB_CLASS    (klass);
 
+  object_class->dispose = kgx_simple_tab_dispose;
   object_class->set_property = kgx_simple_tab_set_property;
   object_class->get_property = kgx_simple_tab_get_property;
-  object_class->finalize = kgx_simple_tab_finalize;
 
-  page_class->start = kgx_simple_tab_start;
-  page_class->start_finish = kgx_simple_tab_start_finish;
+  tab_class->start = kgx_simple_tab_start;
+  tab_class->start_finish = kgx_simple_tab_start_finish;
 
   /**
    * KgxSimpleTab:initial-work-dir:

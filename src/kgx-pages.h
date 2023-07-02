@@ -1,6 +1,6 @@
 /* kgx-pages.h
  *
- * Copyright 2019 Zander Brown
+ * Copyright 2019-2023 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,6 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
 #include <adwaita.h>
 
 #include "kgx-tab.h"
@@ -30,12 +29,8 @@ G_BEGIN_DECLS
 /**
  * KgxPagesClass:
  */
-struct _KgxPagesClass
-{
-  /*< private >*/
+struct _KgxPagesClass {
   AdwBinClass parent;
-
-  /*< public >*/
 };
 
 

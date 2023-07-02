@@ -1,6 +1,6 @@
 /* kgx-application.h
  *
- * Copyright 2019 Zander Brown
+ * Copyright 2019-2023 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,8 +18,6 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
-
 #include "kgx-window.h"
 #include "kgx-tab.h"
 #include "kgx-settings.h"
@@ -29,26 +27,6 @@ G_BEGIN_DECLS
 #define KGX_DISPLAY_NAME _("Console")
 
 #define KGX_TYPE_APPLICATION (kgx_application_get_type())
-
-
-/**
- * KgxApplication:
- * @theme: the colour palette in use
- * @scale: the font scaling used
- * @desktop_interface: the #GSettings storing the system monospace font
- * @pages: ~ (element-type uint Kgx.Page) the global page id / page map
- *
- * Stability: Private
- */
-struct _KgxApplication
-{
-  /*< private >*/
-  AdwApplication            parent_instance;
-
-  /*< public >*/
-  GTree                    *pages;
-  KgxSettings              *settings;
-};
 
 G_DECLARE_FINAL_TYPE (KgxApplication, kgx_application, KGX, APPLICATION, AdwApplication)
 

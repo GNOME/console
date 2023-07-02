@@ -1,6 +1,7 @@
 /* kgx-theme-switcher.h
  *
  * Copyright 2021 Purism SPC
+ * Copyright 2023 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,12 +19,12 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define KGX_TYPE_THEME_SWITCHER (kgx_theme_switcher_get_type())
 
-G_DECLARE_FINAL_TYPE (KgxThemeSwitcher, kgx_theme_switcher, KGX, THEME_SWITCHER, GtkWidget)
+G_DECLARE_FINAL_TYPE (KgxThemeSwitcher, kgx_theme_switcher, KGX, THEME_SWITCHER, AdwBin)
 
 G_END_DECLS

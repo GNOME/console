@@ -800,12 +800,8 @@ kgx_pages_get_children (KgxPages *self)
 
     page_children = kgx_tab_get_children (KGX_TAB (adw_tab_page_get_child (page)));
 
-    for (int j = 0; j < page_children->len; j++) {
-      g_ptr_array_add (children, g_ptr_array_steal_index (page_children, j));
-    }
-
-    // 2.62: g_ptr_array_extend_and_steal (children, page_children);
-  };
+    g_ptr_array_extend_and_steal (children, g_steal_pointer (&page_children));
+  }
 
   return children;
 }

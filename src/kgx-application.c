@@ -45,18 +45,27 @@
 #define LOGO_COL_SIZE 28
 #define LOGO_ROW_SIZE 14
 
+
+struct _KgxApplication {
+  AdwApplication            parent_instance;
+
+  GTree                    *pages;
+  KgxSettings              *settings;
+};
+
+
 G_DEFINE_TYPE (KgxApplication, kgx_application, ADW_TYPE_APPLICATION)
 
 
 static void
-kgx_application_finalize (GObject *object)
+kgx_application_dispose (GObject *object)
 {
   KgxApplication *self = KGX_APPLICATION (object);
 
   g_clear_object (&self->settings);
   g_clear_pointer (&self->pages, g_tree_unref);
 
-  G_OBJECT_CLASS (kgx_application_parent_class)->finalize (object);
+  G_OBJECT_CLASS (kgx_application_parent_class)->dispose (object);
 }
 
 
@@ -385,7 +394,7 @@ kgx_application_class_init (KgxApplicationClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GApplicationClass *app_class = G_APPLICATION_CLASS (klass);
 
-  object_class->finalize = kgx_application_finalize;
+  object_class->dispose = kgx_application_dispose;
 
   app_class->activate = kgx_application_activate;
   app_class->startup = kgx_application_startup;
