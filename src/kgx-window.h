@@ -44,14 +44,13 @@ G_BEGIN_DECLS
  * @zoom_level: the #GtkLabel in the #GtkPopover showing the current zoom level
  * @pages: the #KgxPages of #KgxPage current in the window
  */
-struct _KgxWindow
-{
-  /*< private >*/
+struct _KgxWindow {
   AdwApplicationWindow  parent_instance;
 
-  /*< public >*/
   KgxSettings          *settings;
   GBindingGroup        *settings_binds;
+
+  gboolean              search_enabled;
 
   /* Size indicator */
   int                   last_cols;
@@ -66,7 +65,6 @@ struct _KgxWindow
   GtkWidget            *theme_switcher;
   GtkWidget            *zoom_level;
   GtkWidget            *tab_bar;
-  GtkWidget            *tab_button;
   GtkWidget            *tab_overview;
   GtkWidget            *pages;
   GMenu                *primary_menu;

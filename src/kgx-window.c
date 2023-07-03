@@ -45,6 +45,7 @@ G_DEFINE_TYPE (KgxWindow, kgx_window, ADW_TYPE_APPLICATION_WINDOW)
 enum {
   PROP_0,
   PROP_SETTINGS,
+  PROP_SEARCH_MODE_ENABLED,
   LAST_PROP
 };
 
@@ -75,6 +76,9 @@ kgx_window_set_property (GObject      *object,
     case PROP_SETTINGS:
       g_set_object (&self->settings, g_value_get_object (value));
       break;
+    case PROP_SEARCH_MODE_ENABLED:
+      self->search_enabled = g_value_get_boolean (value);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -93,6 +97,9 @@ kgx_window_get_property (GObject    *object,
   switch (property_id) {
     case PROP_SETTINGS:
       g_value_set_object (value, self->settings);
+      break;
+    case PROP_SEARCH_MODE_ENABLED:
+      g_value_set_boolean (value, self->search_enabled);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -294,7 +301,16 @@ kgx_window_class_init (KgxWindowClass *klass)
                          KGX_TYPE_SETTINGS,
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_STRINGS);
 
+  pspecs[PROP_SEARCH_MODE_ENABLED] =
+    g_param_spec_boolean ("search-mode-enabled", NULL, NULL,
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
+
+  gtk_widget_class_install_property_action (widget_class,
+                                            "win.find",
+                                            "search-mode-enabled");
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                KGX_APPLICATION_PATH "kgx-window.ui");
@@ -303,7 +319,6 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, theme_switcher);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, zoom_level);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, tab_bar);
-  gtk_widget_class_bind_template_child (widget_class, KgxWindow, tab_button);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, tab_overview);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, pages);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, primary_menu);
@@ -519,7 +534,6 @@ static void
 kgx_window_init (KgxWindow *self)
 {
   g_autoptr (GtkWindowGroup) group = NULL;
-  g_autoptr (GPropertyAction) pact = NULL;
   AdwStyleManager *style_manager;
 
   g_type_ensure (KGX_TYPE_THEME_SWITCHER);
@@ -546,11 +560,6 @@ kgx_window_init (KgxWindow *self)
                                    G_N_ELEMENTS (win_entries),
                                    self);
 
-  pact = g_property_action_new ("find",
-                                G_OBJECT (self->pages),
-                                "search-mode-enabled");
-  g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (pact));
-
   #ifdef IS_DEVEL
   gtk_widget_add_css_class (GTK_WIDGET (self), "devel");
   #endif
@@ -561,25 +570,11 @@ kgx_window_init (KgxWindow *self)
                                update_title,
                                NULL, NULL, NULL);
 
-  g_object_bind_property (self, "title",
-                          self->window_title, "title",
-                          G_BINDING_SYNC_CREATE);
-
   g_object_bind_property_full (self->pages, "path",
                                self->window_title, "subtitle",
                                G_BINDING_SYNC_CREATE,
                                update_subtitle,
                                NULL, NULL, NULL);
-
-  g_object_bind_property (self->pages, "tab-view",
-                          self->tab_bar, "view",
-                          G_BINDING_SYNC_CREATE);
-  g_object_bind_property (self->pages, "tab-view",
-                          self->tab_button, "view",
-                          G_BINDING_SYNC_CREATE);
-  g_object_bind_property (self->pages, "tab-view",
-                          self->tab_overview, "view",
-                          G_BINDING_SYNC_CREATE);
 
   adw_tab_bar_setup_extra_drop_target (ADW_TAB_BAR (self->tab_bar),
                                        GDK_ACTION_COPY,

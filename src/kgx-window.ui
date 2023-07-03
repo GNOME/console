@@ -43,6 +43,7 @@
     <property name="content">
       <object class="AdwTabOverview" id="tab_overview">
         <property name="enable-new-tab">True</property>
+        <property name="view" bind-source="pages" bind-property="tab-view" bind-flags="sync-create" />
         <signal name="create-tab" handler="create_tab_cb" swapped="yes"/>
         <property name="child">
           <object class="AdwToolbarView" id="toolbar_view">
@@ -54,7 +55,7 @@
               <object class="GtkHeaderBar" id="header_bar">
                 <property name="title-widget">
                   <object class="AdwWindowTitle" id="window_title">
-                    <property name="title">KGX</property>
+                    <property name="title" bind-source="KgxWindow" bind-property="title" bind-flags="sync-create" />
                   </object>
                 </property>
                 <child type="start">
@@ -134,6 +135,7 @@
                   <object class="AdwTabButton" id="tab_button">
                     <property name="visible">False</property>
                     <property name="action-name">win.show-tabs</property>
+                    <property name="view" bind-source="pages" bind-property="tab-view" bind-flags="sync-create" />
                   </object>
                 </child>
                 <child type="end">
@@ -149,6 +151,7 @@
             </child>
             <child type="top">
               <object class="AdwTabBar" id="tab_bar">
+                <property name="view" bind-source="pages" bind-property="tab-view" bind-flags="sync-create" />
                 <signal name="extra-drag-drop" handler="extra_drag_drop" swapped="no"/>
               </object>
             </child>
@@ -156,6 +159,7 @@
               <object class="KgxPages" id="pages">
                 <property name="settings" bind-source="KgxWindow" bind-property="settings" bind-flags="sync-create" />
                 <property name="is-active" bind-source="KgxWindow" bind-property="is-active" bind-flags="sync-create" />
+                <property name="search-mode-enabled" bind-source="KgxWindow" bind-property="search-mode-enabled" bind-flags="bidirectional" />
                 <signal name="zoom" handler="zoom" swapped="no"/>
                 <signal name="create-tearoff-host" handler="create_tearoff_host" swapped="no"/>
                 <signal name="maybe-close-window" handler="maybe_close_window" swapped="yes"/>

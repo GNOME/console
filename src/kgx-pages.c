@@ -319,13 +319,7 @@ page_detached (AdwTabView *view,
                int         position,
                KgxPages   *self)
 {
-  KgxPagesPrivate *priv;
-
-  g_return_if_fail (ADW_IS_TAB_PAGE (page));
-
-  priv = kgx_pages_get_instance_private (self);
-
-  if (adw_tab_view_get_n_pages (ADW_TAB_VIEW (priv->view)) == 0) {
+  if (adw_tab_view_get_n_pages (ADW_TAB_VIEW (view)) == 0) {
     g_signal_emit (self, signals[MAYBE_CLOSE_WINDOW], 0);
   }
 }
