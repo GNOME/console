@@ -205,16 +205,15 @@ kgx_pages_set_property (GObject      *object,
 }
 
 
-static gboolean
-size_timeout (KgxPages *self)
+static void
+size_timeout (gpointer data)
 {
+  KgxPages *self = data;
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
 
   priv->timeout = 0;
 
   gtk_revealer_set_reveal_child (GTK_REVEALER (priv->status_revealer), FALSE);
-
-  return G_SOURCE_REMOVE;
 }
 
 
@@ -243,7 +242,7 @@ size_changed (KgxTab   *tab,
   }
 
   g_clear_handle_id (&priv->timeout, g_source_remove);
-  priv->timeout = g_timeout_add (800, G_SOURCE_FUNC (size_timeout), self);
+  priv->timeout = g_timeout_add_once (800, size_timeout, self);
   g_source_set_name_by_id (priv->timeout, "[kgx] resize label timeout");
 
   label = g_strdup_printf ("%i × %i", cols, rows);

@@ -908,7 +908,7 @@ kgx_terminal_accept_paste (KgxTerminal *self,
   len = strlen (text);
 
   g_set_weak_pointer (&paste->dest, self);
-  paste->text = g_strdup (text);
+  g_set_str (&paste->text, text);
 
   if (g_strstr_len (striped, len, "sudo") != NULL &&
       g_strstr_len (striped, len, "\n") != NULL) {

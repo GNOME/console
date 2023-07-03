@@ -206,8 +206,7 @@ search_changed (GtkSearchBar *bar,
   narrowing_down = search && priv->last_search &&
                    g_strrstr (priv->last_search, search);
 
-  g_clear_pointer (&priv->last_search, g_free);
-  priv->last_search = g_strdup (search);
+  g_set_str (&priv->last_search, search);
 
   if (!narrowing_down)
     vte_terminal_search_find_previous (VTE_TERMINAL (priv->terminal));

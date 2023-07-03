@@ -71,7 +71,7 @@ config_h = vcs_tag( input: config_h_in,
                  fallback: 'Devel')
 
 gtk_ver = 'GDK_VERSION_4_10'
-glib_ver = 'GLIB_VERSION_2_72'
+glib_ver = 'GLIB_VERSION_2_76'
 
 kgx_cargs = [
   '-DG_LOG_DOMAIN="@0@"'.format(log_domain),
@@ -120,8 +120,8 @@ endif
 
 add_project_arguments(global_cargs, language: 'c')
 
-gio_dep = dependency('gio-2.0', version: '>= 2.72')
-gio_unix_dep = dependency('gio-unix-2.0', version: '>= 2.72')
+gio_dep = dependency('gio-2.0', version: '>= 2.76')
+gio_unix_dep = dependency('gio-unix-2.0', version: '>= 2.76')
 adw_dep = dependency('libadwaita-1', version: '>= 1.4.alpha')
 vte_dep = dependency('vte-2.91-gtk4', version: '>= 0.69.91')
 gtk_dep = dependency('gtk4', version: '>= 4.10')
