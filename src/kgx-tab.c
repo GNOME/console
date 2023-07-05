@@ -875,7 +875,7 @@ push_type (GHashTable      *table,
                        GINT_TO_POINTER (pid),
                        process != NULL ? g_rc_box_acquire (process) : NULL);
 
-  g_debug ("Now %i %X", g_hash_table_size (table), status);
+  g_debug ("tab: Now %i %X", g_hash_table_size (table), status);
 
   return status;
 }
@@ -949,11 +949,11 @@ pop_type (GHashTable      *table,
   size = g_hash_table_size (table);
 
   if (G_LIKELY (size <= 0)) {
-    g_debug ("No longer %X", status);
+    g_debug ("tab: No longer %X", status);
 
     return KGX_NONE;
   } else {
-    g_debug ("%i %X remaining", size, status);
+    g_debug ("tab: %i %X remaining", size, status);
 
     return status;
   }

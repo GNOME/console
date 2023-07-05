@@ -41,7 +41,7 @@ struct ProcessWatch {
  * @active: counter of #KgxWindow's with #GtkWindow:is-active = %TRUE,
  *          obviously this should only ever be 1 or but we can't be certain
  * @timeout: the current #GSource id of the watcher
- * 
+ *
  * Used to monitor processes running in pages
  */
 struct _KgxWatcher {
@@ -121,7 +121,7 @@ handle_watch_iter (gpointer pid,
       child_watch->process = g_rc_box_acquire (process);
       g_set_weak_pointer (&child_watch->page, watch->page);
 
-      g_debug ("Hello %i!", GPOINTER_TO_INT (pid));
+      g_debug ("watcher: Hello %i!", GPOINTER_TO_INT (pid));
 
       g_tree_insert (self->children, pid, child_watch);
     }
@@ -148,7 +148,7 @@ remove_dead (gpointer pid,
   struct ProcessWatch *watch = val;
 
   if (!g_tree_lookup (data->plist, pid)) {
-    g_debug ("%i marked as dead", GPOINTER_TO_INT (pid));
+    g_debug ("watcher: %i marked as dead", GPOINTER_TO_INT (pid));
 
     kgx_tab_pop_child (watch->page, watch->process);
 
@@ -189,7 +189,7 @@ watch (gpointer data)
 static inline void
 set_watcher (KgxWatcher *self, gboolean focused)
 {
-  g_debug ("updated watcher focused? %s", focused ? "yes" : "no");
+  g_debug ("watcher: focused? %s", focused ? "yes" : "no");
 
   if (self->timeout != 0) {
     g_source_remove (self->timeout);
@@ -222,12 +222,12 @@ kgx_watcher_init (KgxWatcher *self)
 
 /**
  * kgx_watcher_get_default:
- * 
+ *
  * Returns: (transfer none): the #KgxWatcher singleton
  */
 KgxWatcher *
 kgx_watcher_get_default (void)
-{ 
+{
   static KgxWatcher *instance;
 
   if (instance == NULL) {
@@ -261,7 +261,7 @@ kgx_watcher_add (KgxWatcher *self,
   watch->process = kgx_process_new (pid);
   g_set_weak_pointer (&watch->page, page);
 
-  g_debug ("Started watching %i", pid);
+  g_debug ("watcher: started %i", pid);
 
   g_tree_insert (self->watching, GINT_TO_POINTER (pid), watch);
 }
@@ -282,7 +282,7 @@ kgx_watcher_remove (KgxWatcher *self,
 
   if (G_LIKELY (g_tree_lookup (self->watching, GINT_TO_POINTER (pid)))) {
     g_tree_remove (self->watching, GINT_TO_POINTER (pid));
-    g_debug ("Stopped watching %i", pid);
+    g_debug ("watcher: stopped %i", pid);
   } else {
     g_warning ("Unknown process %i", pid);
   }
@@ -302,7 +302,7 @@ kgx_watcher_push_active (KgxWatcher *self)
 
   self->active++;
 
-  g_debug ("push_active");
+  g_debug ("watcher: push_active");
 
   if (G_LIKELY (self->active > 0)) {
     set_watcher (self, TRUE);
@@ -325,7 +325,7 @@ kgx_watcher_pop_active (KgxWatcher *self)
 
   self->active--;
 
-  g_debug ("pop_active");
+  g_debug ("watcher: pop_active");
 
   if (G_LIKELY (self->active < 1)) {
     set_watcher (self, FALSE);

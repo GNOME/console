@@ -801,7 +801,7 @@ kgx_application_add_terminal (KgxApplication *self,
       }
     }
 
-    g_debug ("new window (%i×%i)", width, height);
+    g_debug ("app: new window (%i×%i)", width, height);
 
     window = g_object_new (KGX_TYPE_WINDOW,
                            "application", self,

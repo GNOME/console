@@ -430,7 +430,7 @@ kgx_settings_set_custom_size (KgxSettings *self,
     return;
   }
 
-  g_debug ("Store window size: %i×%i", width, height);
+  g_debug ("settings: store size (%i×%i)", width, height);
 
   g_settings_set (self->settings, LAST_SIZE_KEY, "(ii)", width, height);
 }
