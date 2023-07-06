@@ -40,6 +40,38 @@
 #include "kgx-theme-switcher.h"
 #include "kgx-watcher.h"
 
+
+/**
+ * KgxWindow:
+ * @close_anyway: ignore running children and close without prompt
+ * @header_bar: the #GtkHeaderBar that the styles are applied to
+ * @search_entry: the #GtkSearchEntry inside @search_bar
+ * @search_bar: the windows #GtkSearchBar
+ * @zoom_level: the #GtkLabel in the #GtkPopover showing the current zoom level
+ * @pages: the #KgxPages of #KgxPage current in the window
+ */
+struct _KgxWindow {
+  AdwApplicationWindow  parent_instance;
+
+  KgxSettings          *settings;
+  GBindingGroup        *settings_binds;
+
+  gboolean              search_enabled;
+
+  gboolean              close_anyway;
+
+  /* Template widgets */
+  GtkWidget            *window_title;
+  GtkWidget            *theme_switcher;
+  GtkWidget            *zoom_level;
+  GtkWidget            *tab_bar;
+  GtkWidget            *tab_overview;
+  GtkWidget            *pages;
+
+  GActionMap           *tab_actions;
+};
+
+
 G_DEFINE_TYPE (KgxWindow, kgx_window, ADW_TYPE_APPLICATION_WINDOW)
 
 enum {
@@ -321,7 +353,6 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, tab_bar);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, tab_overview);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, pages);
-  gtk_widget_class_bind_template_child (widget_class, KgxWindow, primary_menu);
   gtk_widget_class_bind_template_child (widget_class, KgxWindow, settings_binds);
 
   gtk_widget_class_bind_template_callback (widget_class, active_changed);
@@ -618,15 +649,19 @@ kgx_window_get_working_dir (KgxWindow *self)
 
 
 /**
- * kgx_window_get_pages:
+ * kgx_window_add_tab:
  * @self: the #KgxWindow
+ * @tab: (transfer none): a #KgxTab
  *
- * Get the tabbed widget inside @self
+ * Adopt a (currently unowned) tab into @self, and present it
  */
-KgxPages *
-kgx_window_get_pages (KgxWindow *self)
+void
+kgx_window_add_tab (KgxWindow *self,
+                    KgxTab    *tab)
 {
-  g_return_val_if_fail (KGX_IS_WINDOW (self), NULL);
+  g_return_if_fail (KGX_IS_WINDOW (self));
+  g_return_if_fail (KGX_IS_TAB (tab));
 
-  return KGX_PAGES (self->pages);
+  kgx_pages_add_page (KGX_PAGES (self->pages), tab);
+  kgx_pages_focus_page (KGX_PAGES (self->pages), tab);
 }

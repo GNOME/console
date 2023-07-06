@@ -1,6 +1,6 @@
 /* kgx-window.h
  *
- * Copyright 2019 Zander Brown
+ * Copyright 2019-2023 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,11 +18,9 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
 #include <adwaita.h>
 
-#include "kgx-settings.h"
-#include "kgx-pages.h"
+#include "kgx-tab.h"
 
 G_BEGIN_DECLS
 
@@ -32,51 +30,11 @@ G_BEGIN_DECLS
 
 #define KGX_TYPE_WINDOW (kgx_window_get_type())
 
-/**
- * KgxWindow:
- * @last_cols: the column width last time we received #GtkWidget::size-allocate
- * @last_rows: the row count last time we received #GtkWidget::size-allocate
- * @timeout: the id of the #GSource used to hide the statusbar
- * @close_anyway: ignore running children and close without prompt
- * @header_bar: the #GtkHeaderBar that the styles are applied to
- * @search_entry: the #GtkSearchEntry inside @search_bar
- * @search_bar: the windows #GtkSearchBar
- * @zoom_level: the #GtkLabel in the #GtkPopover showing the current zoom level
- * @pages: the #KgxPages of #KgxPage current in the window
- */
-struct _KgxWindow {
-  AdwApplicationWindow  parent_instance;
-
-  KgxSettings          *settings;
-  GBindingGroup        *settings_binds;
-
-  gboolean              search_enabled;
-
-  /* Size indicator */
-  int                   last_cols;
-  int                   last_rows;
-  guint                 timeout;
-
-  gboolean              narrow;
-  gboolean              close_anyway;
-
-  /* Template widgets */
-  GtkWidget            *window_title;
-  GtkWidget            *theme_switcher;
-  GtkWidget            *zoom_level;
-  GtkWidget            *tab_bar;
-  GtkWidget            *tab_overview;
-  GtkWidget            *pages;
-  GMenu                *primary_menu;
-
-  GActionMap           *tab_actions;
-};
-
 G_DECLARE_FINAL_TYPE (KgxWindow, kgx_window, KGX, WINDOW, AdwApplicationWindow)
 
+
 GFile      *kgx_window_get_working_dir (KgxWindow    *self);
-void        kgx_window_show_status     (KgxWindow    *self,
-                                        const char   *status);
-KgxPages   *kgx_window_get_pages       (KgxWindow    *self);
+void        kgx_window_add_tab         (KgxWindow    *self,
+                                        KgxTab       *tab);
 
 G_END_DECLS

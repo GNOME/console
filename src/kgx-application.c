@@ -763,8 +763,7 @@ kgx_application_add_terminal (KgxApplication *self,
   g_autofree char *directory = NULL;
   g_auto (GStrv) shell = NULL;
   GtkWindow *window;
-  GtkWidget *tab;
-  KgxPages *pages;
+  KgxTab *tab;
 
   if (G_LIKELY (argv == NULL)) {
     shell = kgx_settings_get_shell (self->settings);
@@ -784,7 +783,7 @@ kgx_application_add_terminal (KgxApplication *self,
                       "tab-title", title,
                       "close-on-quit", argv == NULL,
                       NULL);
-  kgx_tab_start (KGX_TAB (tab), started, self);
+  kgx_tab_start (tab, started, self);
 
   if (existing_window) {
     window = GTK_WINDOW (existing_window);
@@ -811,10 +810,7 @@ kgx_application_add_terminal (KgxApplication *self,
                            NULL);
   }
 
-  pages = kgx_window_get_pages (KGX_WINDOW (window));
-
-  kgx_pages_add_page (pages, KGX_TAB (tab));
-  kgx_pages_focus_page (pages, KGX_TAB (tab));
+  kgx_window_add_tab (KGX_WINDOW (window), tab);
 
   gtk_window_present_with_time (window, timestamp);
 
