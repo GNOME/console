@@ -1,6 +1,6 @@
 /* kgx-tab.h
  *
- * Copyright 2019-2020 Zander Brown
+ * Copyright 2019-2023 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -45,21 +45,6 @@ typedef enum /*< flags,prefix=KGX >*/ {
 } KgxStatus;
 
 
-/**
- * KgxZoom:
- * @KGX_ZOOM_IN: Make text bigger
- * @KGX_ZOOM_OUT: Shrink text
- *
- * Indicates the zoom direction the zoom action was triggered for
- *
- * See #KgxPage::zoom, #KgxPages::zoom
- */
-typedef enum /*< enum,prefix=KGX >*/ {
-  KGX_ZOOM_IN = 0,  /*< nick=in >*/
-  KGX_ZOOM_OUT = 1, /*< nick=out >*/
-} KgxZoom;
-
-
 #ifndef __GTK_DOC_IGNORE__
 typedef struct _KgxPages KgxPages;
 #endif
@@ -76,12 +61,9 @@ G_DECLARE_DERIVABLE_TYPE (KgxTab, kgx_tab, KGX, TAB, AdwBin)
  *
  * Stability: Private
  */
-struct _KgxTabClass
-{
-  /*< private >*/
+struct _KgxTabClass {
   AdwBinClass parent;
 
-  /*< public >*/
   void (*start)        (KgxTab               *tab,
                         GAsyncReadyCallback   callback,
                         gpointer              callback_data);

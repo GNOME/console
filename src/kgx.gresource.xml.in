@@ -5,6 +5,7 @@
     <file compressed="true">kgx-close-dialog.ui</file>
     <file compressed="true">kgx-pages.ui</file>
     <file compressed="true">kgx-tab.ui</file>
+    <file compressed="true">kgx-terminal.ui</file>
     <file compressed="true">kgx-theme-switcher.ui</file>
     <file compressed="true">kgx-simple-tab.ui</file>
     <file compressed="true">style.css</file>
@@ -16,7 +17,6 @@
     <file preprocess="xml-stripblanks">icons/scalable/status/theme-check-symbolic.svg</file>
   </gresource>
   <gresource prefix="@KGX_APPLICATION_PATH_RAW@gtk">
-    <file compressed="true">menus.ui</file>
     <file>help-overlay.ui</file>
   </gresource>
 </gresources>

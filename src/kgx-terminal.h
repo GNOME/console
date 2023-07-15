@@ -1,6 +1,6 @@
 /* kgx-terminal.h
  *
- * Copyright 2019 Zander Brown
+ * Copyright 2019-2023 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,6 +22,21 @@
 #include <vte/vte.h>
 
 G_BEGIN_DECLS
+
+/**
+ * KgxZoom:
+ * @KGX_ZOOM_IN: Make text bigger
+ * @KGX_ZOOM_OUT: Shrink text
+ *
+ * Indicates the zoom direction the zoom action was triggered for
+ *
+ * See #KgxTab::zoom, #KgxPages::zoom
+ */
+typedef enum /*< enum,prefix=KGX >*/ {
+  KGX_ZOOM_IN = 0,  /*< nick=in >*/
+  KGX_ZOOM_OUT = 1, /*< nick=out >*/
+} KgxZoom;
+
 
 #define KGX_TYPE_TERMINAL kgx_terminal_get_type()
 

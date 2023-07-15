@@ -709,18 +709,11 @@ size_changed (KgxTerminal *term,
 
 
 static void
-font_increase (KgxTerminal *term,
-               KgxTab      *self)
+zoom (KgxTerminal *term,
+      KgxZoom      zoom,
+      KgxTab      *self)
 {
-  g_signal_emit (self, signals[ZOOM], 0, KGX_ZOOM_IN);
-}
-
-
-static void
-font_decrease (KgxTerminal *term,
-               KgxTab      *self)
-{
-  g_signal_emit (self, signals[ZOOM], 0, KGX_ZOOM_OUT);
+  g_signal_emit (self, signals[ZOOM], 0, zoom);
 }
 
 
@@ -748,10 +741,7 @@ kgx_tab_init (KgxTab *self)
                           "size-changed", G_CALLBACK (size_changed),
                           self),
   g_signal_group_connect (priv->terminal_signals,
-                          "increase-font-size", G_CALLBACK (font_increase),
-                          self),
-  g_signal_group_connect (priv->terminal_signals,
-                          "decrease-font-size", G_CALLBACK (font_decrease),
+                          "zoom", G_CALLBACK (zoom),
                           self),
 
   g_binding_group_bind (priv->terminal_binds, "window-title",

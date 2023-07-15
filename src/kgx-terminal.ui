@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <menu id="context_model">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Open Link</attribute>
+        <attribute name="action">term.open-link</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Copy _Link</attribute>
+        <attribute name="action">term.copy-link</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Copy</attribute>
+        <attribute name="action">term.copy</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Paste</attribute>
+        <attribute name="action">term.paste</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Select All</attribute>
+        <attribute name="action">term.select-all</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Show in _Files</attribute>
+        <attribute name="action">term.show-in-files</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
+  </menu>
+  <template class="KgxTerminal" parent="VteTerminal">
+    <property name="allow-hyperlink">True</property>
+    <property name="enable-fallback-scrolling">True</property>
+    <property name="scroll-unit-is-pixels">True</property>
+    <binding name="font-desc">
+      <lookup name="font">
+        <lookup name="settings">KgxTerminal</lookup>
+      </lookup>
+    </binding>
+    <binding name="font-scale">
+      <lookup name="font-scale">
+        <lookup name="settings">KgxTerminal</lookup>
+      </lookup>
+    </binding>
+    <binding name="scrollback-lines">
+      <lookup name="scrollback-lines">
+        <lookup name="settings">KgxTerminal</lookup>
+      </lookup>
+    </binding>
+    <signal name="current-directory-uri-changed" handler="location_changed" />
+    <signal name="current-file-uri-changed" handler="location_changed" />
+    <child>
+      <object class="GtkShortcutController">
+        <property name="name">kgx-terminal-shortcuts</property>
+        <property name="propagation-phase">capture</property>
+        <child>
+          <object class="GtkShortcut">
+            <property name="trigger">&lt;Shift&gt;&lt;Primary&gt;c</property>
+            <property name="action">action(term.copy)</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkShortcut">
+            <property name="trigger">&lt;Shift&gt;&lt;Primary&gt;v</property>
+            <property name="action">action(term.paste)</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkGestureClick">
+        <property name="name">kgx-terminal-menu</property>
+        <property name="button">0</property>
+        <signal name="pressed" handler="pressed" />
+      </object>
+    </child>
+    <child>
+      <object class="GtkGestureLongPress">
+        <property name="name">kgx-terminal-touch-menu</property>
+        <property name="touch-only">True</property>
+        <signal name="pressed" handler="long_pressed" />
+      </object>
+    </child>
+    <child>
+      <object class="GtkEventControllerScroll">
+        <property name="name">kgx-terminal-zoom</property>
+        <property name="propagation-phase">capture</property>
+        <property name="flags">vertical|discrete</property>
+        <signal name="scroll" handler="scroll" />
+      </object>
+    </child>
+  </template>
+  <object class="GSignalGroup" id="settings_signals">
+    <property name="target-type">KgxSettings</property>
+    <property name="target" bind-source="KgxTerminal" bind-property="settings" bind-flags="sync-create"/>
+  </object>
+</interface>

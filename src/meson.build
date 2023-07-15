@@ -71,7 +71,8 @@ kgx_enums = gnome.mkenums_simple('kgx-enums',
                                     sources: [
                                       'kgx-close-dialog.h',
                                       'kgx-settings.h',
-                                      'kgx-tab.h'
+                                      'kgx-tab.h',
+                                      'kgx-terminal.h',
                                     ])
 
 kgx_lib = static_library (bin_name,
