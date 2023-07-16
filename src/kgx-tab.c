@@ -525,9 +525,9 @@ kgx_tab_class_init (KgxTabClass *klass)
    * Stability: Private
    */
   pspecs[PROP_APPLICATION] =
-    g_param_spec_object ("application", "Application", "The application",
+    g_param_spec_object ("application", NULL, NULL,
                          KGX_TYPE_APPLICATION,
-                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_SETTINGS] =
     g_param_spec_object ("settings", NULL, NULL,
@@ -547,9 +547,9 @@ kgx_tab_class_init (KgxTabClass *klass)
    * Stability: Private
    */
   pspecs[PROP_TAB_TITLE] =
-    g_param_spec_string ("tab-title", "Page Title", "Title for this tab",
+    g_param_spec_string ("tab-title", NULL, NULL,
                          NULL,
-                         G_PARAM_READWRITE);
+                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   /**
    * KgxTab:tab-path:
@@ -559,26 +559,20 @@ kgx_tab_class_init (KgxTabClass *klass)
    * Stability: Private
    */
   pspecs[PROP_TAB_PATH] =
-    g_param_spec_object ("tab-path", "Page Path", "Current path",
+    g_param_spec_object ("tab-path", NULL, NULL,
                          G_TYPE_FILE,
-                         G_PARAM_READWRITE);
+                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
-  /**
-   * KgxTab:tab-status:
-   *
-   * Stability: Private
-   */
   pspecs[PROP_TAB_STATUS] =
-    g_param_spec_flags ("tab-status", "Page Status", "Session status",
+    g_param_spec_flags ("tab-status", NULL, NULL,
                         KGX_TYPE_STATUS,
                         KGX_NONE,
-                        G_PARAM_READWRITE);
+                        G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_TAB_TOOLTIP] =
-    g_param_spec_string ("tab-tooltip", "Tab Tooltip",
-                         "Extra information to show in the tooltip",
+    g_param_spec_string ("tab-tooltip", NULL, NULL,
                          NULL,
-                         G_PARAM_READWRITE);
+                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   /**
    * KgxTab:is-active:
@@ -588,27 +582,24 @@ kgx_tab_class_init (KgxTabClass *klass)
    * Stability: Private
    */
   pspecs[PROP_IS_ACTIVE] =
-    g_param_spec_boolean ("is-active", "Is Active", "Current tab",
+    g_param_spec_boolean ("is-active", NULL, NULL,
                           FALSE,
-                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_CLOSE_ON_QUIT] =
-    g_param_spec_boolean ("close-on-quit", "Close on quit",
-                          "Should the tab close when dead",
+    g_param_spec_boolean ("close-on-quit", NULL, NULL,
                           FALSE,
-                          G_PARAM_READWRITE);
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_NEEDS_ATTENTION] =
-    g_param_spec_boolean ("needs-attention", "Needs attention",
-                          "Whether the tab needs attention",
+    g_param_spec_boolean ("needs-attention", NULL, NULL,
                           FALSE,
-                          G_PARAM_READWRITE);
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_SEARCH_MODE_ENABLED] =
-    g_param_spec_boolean ("search-mode-enabled", "Search mode enabled",
-                          "Whether the search mode is enabled for active page",
+    g_param_spec_boolean ("search-mode-enabled", NULL, NULL,
                           FALSE,
-                          G_PARAM_READWRITE);
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
@@ -621,6 +612,9 @@ kgx_tab_class_init (KgxTabClass *klass)
                                         2,
                                         G_TYPE_UINT,
                                         G_TYPE_UINT);
+  g_signal_set_va_marshaller (signals[SIZE_CHANGED],
+                              G_TYPE_FROM_CLASS (klass),
+                              kgx_marshals_VOID__UINT_UINTv);
 
   signals[ZOOM] = g_signal_new ("zoom",
                                 G_TYPE_FROM_CLASS (klass),
@@ -630,6 +624,9 @@ kgx_tab_class_init (KgxTabClass *klass)
                                 G_TYPE_NONE,
                                 1,
                                 KGX_TYPE_ZOOM);
+  g_signal_set_va_marshaller (signals[ZOOM],
+                              G_TYPE_FROM_CLASS (klass),
+                              kgx_marshals_VOID__ENUMv);
 
   signals[DIED] = g_signal_new ("died",
                                 G_TYPE_FROM_CLASS (klass),
@@ -642,6 +639,9 @@ kgx_tab_class_init (KgxTabClass *klass)
                                 GTK_TYPE_MESSAGE_TYPE,
                                 G_TYPE_STRING,
                                 G_TYPE_BOOLEAN);
+  g_signal_set_va_marshaller (signals[DIED],
+                              G_TYPE_FROM_CLASS (klass),
+                              kgx_marshals_VOID__ENUM_STRING_BOOLEANv);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                KGX_APPLICATION_PATH "kgx-tab.ui");

@@ -146,19 +146,15 @@ kgx_theme_switcher_class_init (KgxThemeSwitcherClass *klass)
   object_class->set_property = kgx_theme_switcher_set_property;
 
   pspecs[PROP_THEME] =
-    g_param_spec_enum ("theme",
-                       "Theme",
-                       "The selected theme.",
+    g_param_spec_enum ("theme", NULL, NULL,
                        KGX_TYPE_THEME,
                        KGX_THEME_NIGHT,
-                       G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
+                       G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_SHOW_SYSTEM] =
-    g_param_spec_boolean ("show-system",
-                          "Show System",
-                          "Whether to show the system setting",
+    g_param_spec_boolean ("show-system", NULL, NULL,
                           TRUE,
-                          G_PARAM_READWRITE);
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 

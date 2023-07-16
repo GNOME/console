@@ -344,10 +344,9 @@ kgx_simple_tab_class_init (KgxSimpleTabClass *klass)
    * Used to handle --working-dir
    */
   pspecs[PROP_INITIAL_WORK_DIR] =
-    g_param_spec_string ("initial-work-dir", "Initial directory",
-                         "Initial working directory",
+    g_param_spec_string ("initial-work-dir", NULL, NULL,
                          NULL,
-                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   /**
    * KgxSimpleTab:command:
@@ -355,10 +354,9 @@ kgx_simple_tab_class_init (KgxSimpleTabClass *klass)
    * Used to handle -e
    */
   pspecs[PROP_COMMAND] =
-    g_param_spec_boxed ("command", "Command",
-                        "Command to run",
+    g_param_spec_boxed ("command", NULL, NULL,
                         G_TYPE_STRV,
-                        G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+                        G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 

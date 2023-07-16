@@ -58,6 +58,7 @@ kgx_sources += gnome.genmarshal('kgx-marshals',
                   sources: 'kgx-marshals.list',
                  internal: true,
                    prefix: 'kgx_marshals',
+       valist_marshallers: true,
 )
 
 kgx_sources += gnome.gdbus_codegen('xdg-fm1',

@@ -190,17 +190,17 @@ kgx_settings_class_init (KgxSettingsClass *klass)
    * Bound to ‘theme’ GSetting so changes persist
    */
   pspecs[PROP_THEME] =
-    g_param_spec_enum ("theme", "Theme", "Terminal theme",
+    g_param_spec_enum ("theme", NULL, NULL,
                        KGX_TYPE_THEME, KGX_THEME_NIGHT,
                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_FONT] =
-    g_param_spec_boxed ("font", "Font", "Monospace font",
-                         PANGO_TYPE_FONT_DESCRIPTION,
-                         G_PARAM_READABLE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+    g_param_spec_boxed ("font", NULL, NULL,
+                        PANGO_TYPE_FONT_DESCRIPTION,
+                        G_PARAM_READABLE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
   pspecs[PROP_FONT_SCALE] =
-    g_param_spec_double ("font-scale", "Font scale", "Font scaling",
+    g_param_spec_double ("font-scale", NULL, NULL,
                          KGX_FONT_SCALE_MIN,
                          KGX_FONT_SCALE_MAX,
                          KGX_FONT_SCALE_DEFAULT,
@@ -224,7 +224,7 @@ kgx_settings_class_init (KgxSettingsClass *klass)
    * Bound to ‘scrollback-lines’ GSetting so changes persist
    */
   pspecs[PROP_SCROLLBACK_LINES] =
-    g_param_spec_int64 ("scrollback-lines", "Scrollback Lines", "Size of the scrollback",
+    g_param_spec_int64 ("scrollback-lines", NULL, NULL,
                         G_MININT64, G_MAXINT64, 512,
                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 

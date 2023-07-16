@@ -456,7 +456,7 @@ object_accumulator (GSignalInvocationHint *ihint,
 static void
 kgx_pages_class_init (KgxPagesClass *klass)
 {
-  GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->dispose = kgx_pages_dispose;
@@ -476,9 +476,9 @@ kgx_pages_class_init (KgxPagesClass *klass)
    * Stability: Private
    */
   pspecs[PROP_TAB_VIEW] =
-    g_param_spec_object ("tab-view", "Tab View", "The tab view",
+    g_param_spec_object ("tab-view", NULL, NULL,
                          ADW_TYPE_TAB_VIEW,
-                         G_PARAM_READABLE);
+                         G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   /**
    * KgxPages:tab-count:
@@ -488,11 +488,11 @@ kgx_pages_class_init (KgxPagesClass *klass)
    * Stability: Private
    */
   pspecs[PROP_TAB_COUNT] =
-    g_param_spec_uint ("tab-count", "Page Count", "Number of pages",
+    g_param_spec_uint ("tab-count", NULL, NULL,
                        0,
                        G_MAXUINT32,
                        0,
-                       G_PARAM_READABLE);
+                       G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   /**
    * KgxPages:title:
@@ -505,9 +505,9 @@ kgx_pages_class_init (KgxPagesClass *klass)
    * Stability: Private
    */
   pspecs[PROP_TITLE] =
-    g_param_spec_string ("title", "Title", "The title of the active page",
+    g_param_spec_string ("title", NULL, NULL,
                          NULL,
-                         G_PARAM_READWRITE);
+                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   /**
    * KgxPages:path:
@@ -520,9 +520,9 @@ kgx_pages_class_init (KgxPagesClass *klass)
    * Stability: Private
    */
   pspecs[PROP_PATH] =
-    g_param_spec_object ("path", "Path", "The path of the active page",
+    g_param_spec_object ("path", NULL, NULL,
                          G_TYPE_FILE,
-                         G_PARAM_READWRITE);
+                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   /**
    * KgxPages:active-page:
@@ -538,21 +538,20 @@ kgx_pages_class_init (KgxPagesClass *klass)
                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_IS_ACTIVE] =
-    g_param_spec_boolean ("is-active", "Is Active", "Is active pages",
+    g_param_spec_boolean ("is-active", NULL, NULL,
                           FALSE,
-                          G_PARAM_READWRITE);
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_STATUS] =
-    g_param_spec_flags ("status", "Status", "Active page status",
+    g_param_spec_flags ("status", NULL, NULL,
                         KGX_TYPE_STATUS,
                         KGX_NONE,
-                        G_PARAM_READWRITE);
+                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_SEARCH_MODE_ENABLED] =
-    g_param_spec_boolean ("search-mode-enabled", "Search mode enabled",
-                          "Whether the search mode is enabled for active page",
+    g_param_spec_boolean ("search-mode-enabled", NULL, NULL,
                           FALSE,
-                          G_PARAM_READWRITE);
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
@@ -564,6 +563,9 @@ kgx_pages_class_init (KgxPagesClass *klass)
                                 G_TYPE_NONE,
                                 1,
                                 KGX_TYPE_ZOOM);
+  g_signal_set_va_marshaller (signals[ZOOM],
+                              G_TYPE_FROM_CLASS (klass),
+                              kgx_marshals_VOID__ENUMv);
 
   signals[CREATE_TEAROFF_HOST] = g_signal_new ("create-tearoff-host",
                                                G_TYPE_FROM_CLASS (klass),
@@ -573,6 +575,9 @@ kgx_pages_class_init (KgxPagesClass *klass)
                                                kgx_marshals_OBJECT__VOID,
                                                KGX_TYPE_PAGES,
                                                0);
+  g_signal_set_va_marshaller (signals[CREATE_TEAROFF_HOST],
+                              G_TYPE_FROM_CLASS (klass),
+                              kgx_marshals_OBJECT__VOIDv);
 
   signals[MAYBE_CLOSE_WINDOW] = g_signal_new ("maybe-close-window",
                                               G_TYPE_FROM_CLASS (klass),
@@ -582,6 +587,9 @@ kgx_pages_class_init (KgxPagesClass *klass)
                                               kgx_marshals_VOID__VOID,
                                               G_TYPE_NONE,
                                               0);
+  g_signal_set_va_marshaller (signals[MAYBE_CLOSE_WINDOW],
+                              G_TYPE_FROM_CLASS (klass),
+                              kgx_marshals_VOID__VOIDv);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                KGX_APPLICATION_PATH "kgx-pages.ui");

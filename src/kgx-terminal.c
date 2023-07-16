@@ -588,16 +588,10 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
                          KGX_TYPE_SETTINGS,
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_STRINGS);
 
-  /**
-   * KgxTerminal:path:
-   *
-   *
-   * Stability: Private
-   */
   pspecs[PROP_PATH] =
-    g_param_spec_object ("path", "Path", "Current path",
+    g_param_spec_object ("path", NULL, NULL,
                          G_TYPE_FILE,
-                         G_PARAM_READABLE);
+                         G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
@@ -610,6 +604,9 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
                                         2,
                                         G_TYPE_UINT,
                                         G_TYPE_UINT);
+  g_signal_set_va_marshaller (signals[SIZE_CHANGED],
+                              G_TYPE_FROM_CLASS (klass),
+                              kgx_marshals_VOID__UINT_UINTv);
 
   gtk_widget_class_install_action (widget_class,
                                    "menu.popup",
