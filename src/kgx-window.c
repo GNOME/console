@@ -27,7 +27,6 @@
 #include "kgx-config.h"
 
 #include <glib/gi18n.h>
-#include <vte/vte.h>
 #include <math.h>
 #include <adwaita.h>
 
@@ -269,6 +268,19 @@ status_changed (GObject *object, GParamSpec *pspec, gpointer data)
 
 
 static void
+ringing_changed (GObject *object, GParamSpec *pspec, gpointer data)
+{
+  KgxWindow *self = KGX_WINDOW (object);
+
+  if (kgx_pages_is_ringing (KGX_PAGES (self->pages))) {
+    gtk_widget_add_css_class (GTK_WIDGET (self), KGX_WINDOW_STYLE_RINGING);
+  } else {
+    gtk_widget_remove_css_class (GTK_WIDGET (self), KGX_WINDOW_STYLE_RINGING);
+  }
+}
+
+
+static void
 extra_drag_drop (AdwTabBar        *bar,
                  AdwTabPage       *page,
                  GValue           *value,
@@ -362,6 +374,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, create_tearoff_host);
   gtk_widget_class_bind_template_callback (widget_class, maybe_close_window);
   gtk_widget_class_bind_template_callback (widget_class, status_changed);
+  gtk_widget_class_bind_template_callback (widget_class, ringing_changed);
   gtk_widget_class_bind_template_callback (widget_class, extra_drag_drop);
   gtk_widget_class_bind_template_callback (widget_class, create_tab_cb);
   gtk_widget_class_bind_template_callback (widget_class, breakpoint_applied);
@@ -459,7 +472,7 @@ about_activated (GSimpleAction *action,
   g_autofree char *copyright = NULL;
 
   /* Translators: %s is the year range */
-  copyright = g_strdup_printf (_("© %s Zander Brown"), "2019-2021");
+  copyright = g_strdup_printf (_("© %s Zander Brown"), "2019-2023");
 
   adw_show_about_window (GTK_WINDOW (data),
                          "application-name", KGX_DISPLAY_NAME,

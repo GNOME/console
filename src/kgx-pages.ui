@@ -22,6 +22,11 @@
         <lookup name="active-page">KgxPages</lookup>
       </lookup>
     </binding>
+    <binding name="ringing">
+      <lookup name="ringing">
+        <lookup name="active-page">KgxPages</lookup>
+      </lookup>
+    </binding>
     <property name="child">
       <object class="GtkOverlay">
         <child>

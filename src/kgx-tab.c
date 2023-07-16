@@ -1,6 +1,6 @@
 /* kgx-tab.c
  *
- * Copyright 2019-2020 Zander Brown
+ * Copyright 2019-2023 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,12 +14,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * SECTION:kgx-page
- * @title: KgxTab
- * @short_description: Base for things in a #KgxPages
  */
 
 #include "kgx-config.h"
@@ -53,6 +47,9 @@ struct _KgxTabPrivate {
   gboolean              close_on_quit;
   gboolean              needs_attention;
   gboolean              search_mode_enabled;
+
+  gboolean              ringing;
+  guint                 ringing_timeout;
 
   KgxTerminal          *terminal;
   GSignalGroup         *terminal_signals;
@@ -100,6 +97,7 @@ enum {
   PROP_CLOSE_ON_QUIT,
   PROP_NEEDS_ATTENTION,
   PROP_SEARCH_MODE_ENABLED,
+  PROP_RINGING,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -109,6 +107,7 @@ enum {
   SIZE_CHANGED,
   ZOOM,
   DIED,
+  BELL,
   N_SIGNALS
 };
 static guint signals[N_SIGNALS];
@@ -135,6 +134,8 @@ kgx_tab_dispose (GObject *object)
   g_clear_pointer (&priv->title, g_free);
   g_clear_pointer (&priv->tooltip, g_free);
   g_clear_object (&priv->path);
+
+  g_clear_handle_id (&priv->ringing_timeout, g_source_remove);
 
   g_clear_pointer (&priv->root, g_hash_table_unref);
   g_clear_pointer (&priv->remote, g_hash_table_unref);
@@ -340,6 +341,9 @@ kgx_tab_get_property (GObject    *object,
     case PROP_SEARCH_MODE_ENABLED:
       g_value_set_boolean (value, priv->search_mode_enabled);
       break;
+    case PROP_RINGING:
+      g_value_set_boolean (value, priv->ringing);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -501,6 +505,41 @@ kgx_tab_real_died (KgxTab         *self,
 
 
 static void
+clear_ringing (gpointer data)
+{
+  KgxTab *self = data;
+  KgxTabPrivate *priv;
+
+  g_return_if_fail (KGX_IS_TAB (self));
+
+  priv = kgx_tab_get_instance_private (self);
+
+  priv->ringing_timeout = 0;
+
+  priv->ringing = FALSE;
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_RINGING]);
+}
+
+
+static void
+kgx_tab_real_bell (KgxTab *self)
+{
+  KgxTabPrivate *priv;
+
+  g_return_if_fail (KGX_IS_TAB (self));
+
+  priv = kgx_tab_get_instance_private (self);
+
+  priv->ringing = TRUE;
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_RINGING]);
+
+  g_clear_handle_id (&priv->ringing_timeout, g_source_remove);
+  priv->ringing_timeout = g_timeout_add_once (800, clear_ringing, self);
+  g_source_set_name_by_id (priv->ringing_timeout, "[kgx] tab ringing");
+}
+
+
+static void
 kgx_tab_class_init (KgxTabClass *klass)
 {
   GObjectClass   *object_class = G_OBJECT_CLASS   (klass);
@@ -516,6 +555,7 @@ kgx_tab_class_init (KgxTabClass *klass)
   tab_class->start = kgx_tab_real_start;
   tab_class->start_finish = kgx_tab_real_start_finish;
   tab_class->died = kgx_tab_real_died;
+  tab_class->bell = kgx_tab_real_bell;
 
   /**
    * KgxTab:application:
@@ -601,6 +641,11 @@ kgx_tab_class_init (KgxTabClass *klass)
                           FALSE,
                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
+  pspecs[PROP_RINGING] =
+    g_param_spec_boolean ("ringing", NULL, NULL,
+                          FALSE,
+                          G_PARAM_READABLE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   signals[SIZE_CHANGED] = g_signal_new ("size-changed",
@@ -642,6 +687,18 @@ kgx_tab_class_init (KgxTabClass *klass)
   g_signal_set_va_marshaller (signals[DIED],
                               G_TYPE_FROM_CLASS (klass),
                               kgx_marshals_VOID__ENUM_STRING_BOOLEANv);
+
+  signals[BELL] = g_signal_new ("bell",
+                                G_TYPE_FROM_CLASS (klass),
+                                G_SIGNAL_RUN_LAST,
+                                G_STRUCT_OFFSET (KgxTabClass, bell),
+                                NULL, NULL,
+                                kgx_marshals_VOID__VOID,
+                                G_TYPE_NONE,
+                                0);
+  g_signal_set_va_marshaller (signals[BELL],
+                              G_TYPE_FROM_CLASS (klass),
+                              kgx_marshals_VOID__VOIDv);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                KGX_APPLICATION_PATH "kgx-tab.ui");
@@ -718,6 +775,14 @@ zoom (KgxTerminal *term,
 
 
 static void
+bell (KgxTerminal *term,
+      KgxTab      *self)
+{
+  kgx_tab_bell (self);
+}
+
+
+static void
 kgx_tab_init (KgxTab *self)
 {
   static guint last_id = 0;
@@ -742,6 +807,9 @@ kgx_tab_init (KgxTab *self)
                           self),
   g_signal_group_connect (priv->terminal_signals,
                           "zoom", G_CALLBACK (zoom),
+                          self),
+  g_signal_group_connect (priv->terminal_signals,
+                          "bell", G_CALLBACK (bell),
                           self),
 
   g_binding_group_bind (priv->terminal_binds, "window-title",
@@ -809,6 +877,23 @@ kgx_tab_died (KgxTab         *self,
               gboolean        success)
 {
   g_signal_emit (self, signals[DIED], 0, type, message, success);
+}
+
+
+void
+kgx_tab_bell (KgxTab *self)
+{
+  KgxTabPrivate *priv;
+
+  g_return_if_fail (KGX_IS_TAB (self));
+
+  priv = kgx_tab_get_instance_private (self);
+
+  if (!priv->is_active && !priv->needs_attention) {
+    g_object_set (self, "needs-attention", TRUE, NULL);
+  }
+
+  g_signal_emit (self, signals[BELL], 0);
 }
 
 

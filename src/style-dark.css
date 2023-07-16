@@ -3,3 +3,7 @@
 
 @define-color remote_headerbar_bg_color       shade(@purple_5, 0.6);
 @define-color remote_headerbar_backdrop_color shade(@purple_5, 0.45);
+
+@keyframes bell {
+    50% { background-color: shade(@orange_5, 0.7); }
+}

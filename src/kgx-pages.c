@@ -46,6 +46,7 @@ struct _KgxPagesPrivate {
   gboolean              is_active;
   KgxStatus             page_status;
   gboolean              search_mode_enabled;
+  gboolean              ringing;
 
   GtkWidget            *status;
   GtkWidget            *status_revealer;
@@ -78,6 +79,7 @@ enum {
   PROP_IS_ACTIVE,
   PROP_STATUS,
   PROP_SEARCH_MODE_ENABLED,
+  PROP_RINGING,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -149,6 +151,9 @@ kgx_pages_get_property (GObject    *object,
     case PROP_SEARCH_MODE_ENABLED:
       g_value_set_boolean (value, priv->search_mode_enabled);
       break;
+    case PROP_RINGING:
+      g_value_set_boolean (value, priv->ringing);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -197,6 +202,9 @@ kgx_pages_set_property (GObject      *object,
       break;
     case PROP_SEARCH_MODE_ENABLED:
       priv->search_mode_enabled = g_value_get_boolean (value);
+      break;
+    case PROP_RINGING:
+      priv->ringing = g_value_get_boolean (value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -451,6 +459,22 @@ path_to_keyword (GBinding     *binding,
 
 
 static gboolean
+ringing_to_icon (GBinding     *binding,
+                 const GValue *from_value,
+                 GValue       *to_value,
+                 gpointer      user_data)
+{
+  if (g_value_get_boolean (from_value)) {
+    g_value_take_object (to_value, g_themed_icon_new ("bell-outline"));
+  } else {
+    g_value_set_object (to_value, NULL);
+  }
+
+  return TRUE;
+}
+
+
+static gboolean
 object_accumulator (GSignalInvocationHint *ihint,
                     GValue                *return_value,
                     const GValue          *signal_value,
@@ -563,6 +587,12 @@ kgx_pages_class_init (KgxPagesClass *klass)
     g_param_spec_boolean ("search-mode-enabled", NULL, NULL,
                           FALSE,
                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
+  pspecs[PROP_RINGING] =
+    g_param_spec_boolean ("ringing", NULL, NULL,
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
@@ -684,6 +714,8 @@ kgx_pages_add_page (KgxPages *self,
                                status_to_icon, NULL, NULL, NULL);
   g_object_bind_property_full (tab, "tab-path", page, "keyword", G_BINDING_SYNC_CREATE,
                                path_to_keyword, NULL, NULL, NULL);
+  g_object_bind_property_full (tab, "ringing", page, "indicator-icon", G_BINDING_SYNC_CREATE,
+                               ringing_to_icon, NULL, NULL, NULL);
 }
 
 
@@ -758,6 +790,19 @@ kgx_pages_current_status (KgxPages *self)
   priv = kgx_pages_get_instance_private (self);
 
   return priv->page_status;
+}
+
+
+gboolean
+kgx_pages_is_ringing (KgxPages *self)
+{
+  KgxPagesPrivate *priv;
+
+  g_return_val_if_fail (KGX_IS_PAGES (self), FALSE);
+
+  priv = kgx_pages_get_instance_private (self);
+
+  return priv->ringing;
 }
 
 

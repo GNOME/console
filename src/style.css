@@ -4,6 +4,10 @@
 @define-color remote_headerbar_bg_color       shade(@purple_1, 1.38);
 @define-color remote_headerbar_backdrop_color shade(@purple_1, 1.35);
 
+@keyframes bell {
+  50% { background-color: shade(@orange_1, 1.1); }
+}
+
 .tab .top-bar {
   background-image: none;
   background-color: @view_bg_color;
@@ -23,6 +27,10 @@
 
 .terminal-window.remote:backdrop .main-box > revealer.top-bar {
   background-color: @remote_headerbar_backdrop_color;
+}
+
+.terminal-window.bell .main-box > revealer.top-bar {
+  animation: bell 1s ease-out;
 }
 
 .terminal-window vte-terminal {

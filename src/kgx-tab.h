@@ -75,6 +75,7 @@ struct _KgxTabClass {
                         GtkMessageType        type,
                         const char           *message,
                         gboolean              success);
+  void (*bell)         (KgxTab               *self);
 };
 
 
@@ -89,6 +90,7 @@ void        kgx_tab_died             (KgxTab               *self,
                                       GtkMessageType        type,
                                       const char           *message,
                                       gboolean              success);
+void        kgx_tab_bell              (KgxTab               *self);
 KgxPages   *kgx_tab_get_pages        (KgxTab               *self);
 void        kgx_tab_push_child       (KgxTab               *self,
                                       KgxProcess           *process);
