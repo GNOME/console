@@ -318,6 +318,17 @@ page_detached (AdwTabView *view,
                int         position,
                KgxPages   *self)
 {
+  KgxTab *tab;
+
+  g_return_if_fail (ADW_IS_TAB_PAGE (page));
+
+  tab = KGX_TAB (adw_tab_page_get_child (page));
+
+  g_object_disconnect (tab,
+                       "any-signal::died", G_CALLBACK (died), self,
+                       "any-signal::zoom", G_CALLBACK (zoom), self,
+                       NULL);
+
   if (adw_tab_view_get_n_pages (ADW_TAB_VIEW (view)) == 0) {
     g_signal_emit (self, signals[MAYBE_CLOSE_WINDOW], 0);
   }
