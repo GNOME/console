@@ -1,6 +1,6 @@
 /* kgx-settings.c
  *
- * Copyright 2022 Zander Brown
+ * Copyright 2022-2023 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,20 +14,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * SECTION:kgx-proxy-info
- * @short_description: An object with proxy details
- * @title: KgxProxyInfo
- *
- * #KgxProxyInfo maps org.gnome.system.proxy to environmental variables
- * when launching new sessions
- *
- * Note that whilst changes to system settings are tracked, they _cannot_ be
- * applied existing terminals
- *
- * Only manual proxies are supported
  */
 
 #include "kgx-config.h"
@@ -63,6 +49,7 @@ struct _KgxSettings {
   double       scale;
   int64_t      scrollback_lines;
   gboolean     audible_bell;
+  gboolean     visual_bell;
 
   GSettings   *settings;
   GSettings   *desktop_interface;
@@ -81,6 +68,7 @@ enum {
   PROP_SCALE_CAN_DECREASE,
   PROP_SCROLLBACK_LINES,
   PROP_AUDIBLE_BELL,
+  PROP_VISUAL_BELL,
   LAST_PROP
 };
 
@@ -137,6 +125,9 @@ kgx_settings_set_property (GObject      *object,
     case PROP_AUDIBLE_BELL:
       kgx_settings_set_audible_bell (self, g_value_get_boolean (value));
       break;
+    case PROP_VISUAL_BELL:
+      kgx_settings_set_visual_bell (self, g_value_get_boolean (value));
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -173,6 +164,9 @@ kgx_settings_get_property (GObject    *object,
       break;
     case PROP_AUDIBLE_BELL:
       g_value_set_boolean (value, self->audible_bell);
+      break;
+    case PROP_VISUAL_BELL:
+      g_value_set_boolean (value, kgx_settings_get_visual_bell (self));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -243,6 +237,11 @@ kgx_settings_class_init (KgxSettingsClass *klass)
                           TRUE,
                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
+  pspecs[PROP_VISUAL_BELL] =
+    g_param_spec_boolean ("visual-bell", NULL, NULL,
+                          TRUE,
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 }
 
@@ -282,6 +281,9 @@ kgx_settings_init (KgxSettings *self)
                    G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (self->settings, "audible-bell",
                    self, "audible-bell",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (self->settings, "visual-bell",
+                   self, "visual-bell",
                    G_SETTINGS_BIND_DEFAULT);
 
   g_signal_connect (self->settings,
@@ -476,3 +478,28 @@ kgx_settings_set_audible_bell (KgxSettings *self,
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_AUDIBLE_BELL]);
 }
+
+
+gboolean
+kgx_settings_get_visual_bell (KgxSettings *self)
+{
+  g_return_val_if_fail (KGX_IS_SETTINGS (self), FALSE);
+
+  return self->visual_bell;
+}
+
+
+void
+kgx_settings_set_visual_bell (KgxSettings *self,
+                              gboolean     visual_bell)
+{
+  g_return_if_fail (KGX_IS_SETTINGS (self));
+
+  if (self->visual_bell == visual_bell)
+    return;
+
+  self->visual_bell = visual_bell;
+
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_VISUAL_BELL]);
+}
+

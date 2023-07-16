@@ -530,6 +530,10 @@ kgx_tab_real_bell (KgxTab *self)
 
   priv = kgx_tab_get_instance_private (self);
 
+  if (!kgx_settings_get_visual_bell (priv->settings)) {
+    return;
+  }
+
   priv->ringing = TRUE;
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_RINGING]);
 

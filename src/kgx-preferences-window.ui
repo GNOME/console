@@ -7,10 +7,16 @@
         <property name="title" translatable="yes">General</property>
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="title" translatable="yes">Sounds</property>
+            <property name="title" translatable="yes">Terminal Bell</property>
             <child>
               <object class="AdwSwitchRow" id="audible_bell">
-                <property name="title" translatable="yes">_Terminal Bell</property>
+                <property name="title" translatable="yes">Play _Sound</property>
+                <property name="use-underline">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSwitchRow" id="visual_bell">
+                <property name="title" translatable="yes">_Visual Effects</property>
                 <property name="use-underline">True</property>
               </object>
             </child>

@@ -29,6 +29,7 @@ struct _KgxPreferencesWindow {
   GBindingGroup        *settings_binds;
 
   GtkWidget            *audible_bell;
+  GtkWidget            *visual_bell;
 };
 
 
@@ -116,6 +117,7 @@ kgx_preferences_window_class_init (KgxPreferencesWindowClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, settings_binds);
   gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, audible_bell);
+  gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, visual_bell);
 }
 
 
@@ -126,6 +128,9 @@ kgx_preferences_window_init (KgxPreferencesWindow *self)
 
   g_binding_group_bind (self->settings_binds, "audible-bell",
                         self->audible_bell, "active",
+                        G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+  g_binding_group_bind (self->settings_binds, "visual-bell",
+                        self->visual_bell, "active",
                         G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 }
 
