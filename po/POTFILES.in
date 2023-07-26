@@ -6,6 +6,7 @@ src/kgx-application.c
 src/kgx-application.h
 src/kgx-close-dialog.c
 src/kgx-close-dialog.ui
+src/kgx-font-picker.ui
 src/kgx-pages.ui
 src/kgx-preferences-window.ui
 src/kgx-simple-tab.c

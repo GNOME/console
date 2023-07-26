@@ -5,22 +5,23 @@ project('gnome-console', 'c',
           default_options: [
                              'buildtype=debugoptimized',
                              'c_std=c17',
-                             # So, apparently these two don’t currently do
-                             # anything — Yet somehow vte works anyway?
-                             # Mysterious
-                             # https://github.com/mesonbuild/meson/pull/7521
-                             'vte:c_std=gnu11',
-                             'vte:cpp_std=gnu++17',
-                             'vte:werror=false',
-                             'vte:gir=false',
-                             'vte:vapi=false',
-                             'vte:gtk3=false',
-                             'vte:gtk4=true',
-                             'adwaita:vapi=false',
+                             'adwaita:examples=false',
                              'adwaita:introspection=disabled',
                              'adwaita:tests=false',
-                             # libsass may be pulled in via adwaita
+                             'adwaita:vapi=false',
+                             'gtk:build-examples=false',
+                             'gtk:build-tests=false',
+                             'gtk:build-testsuite=false',
+                             'gtk:build-demos=false',
+                             'gtk:introspection=disabled',
                              'libsass:werror=false',
+                             'vte:c_std=gnu11',
+                             'vte:cpp_std=gnu++17',
+                             'vte:gir=false',
+                             'vte:gtk3=false',
+                             'vte:gtk4=true',
+                             'vte:vapi=false',
+                             'vte:werror=false',
                            ],
 )
 
@@ -124,7 +125,7 @@ gio_dep = dependency('gio-2.0', version: '>= 2.76')
 gio_unix_dep = dependency('gio-unix-2.0', version: '>= 2.76')
 adw_dep = dependency('libadwaita-1', version: '>= 1.4.alpha')
 vte_dep = dependency('vte-2.91-gtk4', version: '>= 0.69.91')
-gtk_dep = dependency('gtk4', version: '>= 4.10')
+gtk_dep = dependency('gtk4', version: '>= 4.10.5')
 gtop_dep = dependency('libgtop-2.0')
 pcre_dep = dependency('libpcre2-8', version: '>= 10.32')
 schemas_dep = dependency('gsettings-desktop-schemas')

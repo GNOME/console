@@ -5,6 +5,8 @@ kgx_sources = [
   'kgx-application.h',
   'kgx-close-dialog.c',
   'kgx-close-dialog.h',
+  'kgx-font-picker.c',
+  'kgx-font-picker.h',
   'kgx-pages.c',
   'kgx-pages.h',
   'kgx-preferences-window.c',

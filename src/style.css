@@ -141,3 +141,11 @@ themeswitcher checkbutton.dark radio {
   color: white;
   background-color: #1e1e1e;
 }
+
+.font-picker {
+  margin: 6px;
+}
+
+.font-picker .font-item {
+  margin: 6px;
+}

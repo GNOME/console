@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0" />
+  <template class="KgxFontPicker" parent="AdwWindow">
+    <binding name="current-font">
+      <closure type='PangoFontDescription' function='build_description'>
+        <lookup name="selected-item">selection</lookup>
+        <lookup name="value">size-spin</lookup>
+      </closure>
+    </binding>
+    <property name="modal">True</property>
+    <property name="title" translatable="yes">Terminal Font</property>
+    <property name="default-height">450</property>
+    <property name="default-widget">select</property>
+    <property name="content">
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="AdwHeaderBar">
+            <property name="show-start-title-buttons">False</property>
+            <property name="show-end-title-buttons">False</property>
+            <property name="title-widget">
+              <object class="AdwWindowTitle">
+                <property name="title" bind-source="KgxFontPicker" bind-property="title"
+                  bind-flags="sync-create" />
+              </object>
+            </property>
+            <child type="start">
+              <object class="GtkButton">
+                <property name="label" translatable="yes">_Cancel</property>
+                <property name="use-underline">True</property>
+                <property name="action-name">window.close</property>
+              </object>
+            </child>
+            <child type="end">
+              <object class="GtkButton" id="select">
+                <property name="label" translatable="yes">_Select</property>
+                <property name="use-underline">True</property>
+                <property name="action-name">picker.select</property>
+                <style>
+                  <class name="suggested-action" />
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <property name="spacing">5</property>
+            <child>
+              <object class="GtkSearchEntry" id="search">
+                <property name="placeholder-text" translatable="yes">Font Name</property>
+                <property name="activates-default">True</property>
+                <accessibility>
+                  <property name="label" translatable="yes">Font Name</property>
+                </accessibility>
+              </object>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow">
+                <property name="hscrollbar-policy">never</property>
+                <property name="max-content-height">400</property>
+                <property name="vexpand">True</property>
+                <child>
+                  <object class="GtkListView">
+                    <property name="show-separators">True</property>
+                    <binding name="sensitive">
+                      <closure type="gboolean" function='pending_as_sensitive'>
+                        <lookup name="pending">filterer</lookup>
+                      </closure>
+                    </binding>
+                    <property name="model">
+                      <object class="GtkSingleSelection" id="selection">
+                        <property name="autoselect">False</property>
+                        <property name="can-unselect">False</property>
+                        <property name="model">
+                          <object class="GtkFilterListModel" id="filterer">
+                            <property name="incremental">True</property>
+                            <property name="model" bind-source="KgxFontPicker"
+                              bind-property="font-store" bind-flags="sync-create" />
+                            <signal name="notify::pending" handler="pending_changed" />
+                            <property name="filter">
+                              <object class="GtkEveryFilter" id="multi_filter">
+                                <child>
+                                  <object class="GtkStringFilter">
+                                    <binding name="search">
+                                      <lookup name="text">search</lookup>
+                                    </binding>
+                                    <property name="expression">
+                                      <closure type="gchararray" function="face_as_label"
+                                        swapped="1" />
+                                    </property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkBoolFilter">
+                                    <property name="expression">
+                                      <closure type="gboolean" function="face_is_terminal" />
+                                    </property>
+                                  </object>
+                                </child>
+                              </object>
+                            </property>
+                          </object>
+                        </property>
+                      </object>
+                    </property>
+                    <property name="factory">
+                      <object class="GtkBuilderListItemFactory">
+                        <property name="bytes">
+                      <![CDATA[
+                        <interface>
+                          <template class="GtkListItem">
+                            <property name="child">
+                              <object class="GtkLabel">
+                                <property name="xalign">0.0</property>
+                                <property name="ellipsize">end</property>
+                                <binding name="label">
+                                  <closure type='gchararray' function='face_as_label'>
+                                    <lookup name="item">GtkListItem</lookup>
+                                  </closure>
+                                </binding>
+                                <binding name="attributes">
+                                  <closure type='PangoAttrList' function='face_as_attributes'>
+                                    <lookup name="item">GtkListItem</lookup>
+                                  </closure>
+                                </binding>
+                                <style>
+                                  <class name="font-item" />
+                                </style>
+                              </object>
+                            </property>
+                          </template>
+                        </interface>
+                      ]]>
+                    </property>
+                      </object>
+                    </property>
+                    <signal name="activate" handler="activate" swapped="yes" />
+                    <accessibility>
+                      <property name="label" translatable="yes">Font Family</property>
+                    </accessibility>
+                  </object>
+                </child>
+                <style>
+                  <class name="frame" />
+                  <class name="view" />
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkEntry">
+                <property name="buffer">
+                  <object class="GtkEntryBuffer">
+                    <binding name="text">
+                      <closure type='gchararray' function='preview_text' />
+                    </binding>
+                  </object>
+                </property>
+                <binding name="attributes">
+                  <closure type='PangoAttrList' function='font_as_attributes'>
+                    <lookup name="current-font">KgxFontPicker</lookup>
+                  </closure>
+                </binding>
+                <accessibility>
+                  <property name="label" translatable="yes">Font Preview</property>
+                </accessibility>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="size-spin">
+                <property name='numeric'>True</property>
+                <property name='adjustment'>
+                  <object class="GtkAdjustment">
+                    <property name='lower'>1.0</property>
+                    <property name='upper'>1000.0</property>
+                    <binding name="value">
+                      <closure type='gdouble' function='font_as_size'>
+                        <lookup name="initial-font">KgxFontPicker</lookup>
+                      </closure>
+                    </binding>
+                    <property name="step-increment">1.0</property>
+                    <property name="page-increment">10.0</property>
+                  </object>
+                </property>
+                <accessibility>
+                  <property name="label" translatable="yes">Font Size</property>
+                </accessibility>
+              </object>
+            </child>
+            <style>
+              <class name="font-picker" />
+            </style>
+          </object>
+        </child>
+      </object>
+    </property>
+    <child>
+      <object class='GtkShortcutController'>
+        <property name='scope'>local</property>
+        <child>
+          <object class='GtkShortcut'>
+            <property name='trigger'>Escape</property>
+            <property name='action'>action(window.close)</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
