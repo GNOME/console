@@ -42,6 +42,7 @@
   <template class="KgxTerminal" parent="VteTerminal">
     <property name="allow-hyperlink">True</property>
     <property name="enable-fallback-scrolling">True</property>
+    <property name="has-tooltip">True</property>
     <property name="scroll-unit-is-pixels">True</property>
     <binding name="font-desc">
       <lookup name="font">

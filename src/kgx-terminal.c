@@ -254,18 +254,16 @@ have_url_under_pointer (KgxTerminal *self,
   g_autofree char *match = NULL;
   int match_id;
 
-  g_clear_pointer (&self->current_url, g_free);
-
   hyperlink = vte_terminal_check_hyperlink_at (VTE_TERMINAL (self), x, y);
 
   if (G_UNLIKELY (hyperlink)) {
-    self->current_url = g_steal_pointer (&hyperlink);
+    g_set_str (&self->current_url, g_steal_pointer (&hyperlink));
   } else {
     match = vte_terminal_check_match_at (VTE_TERMINAL (self), x, y, &match_id);
 
     for (int i = 0; i < KGX_TERMINAL_N_LINK_REGEX; i++) {
       if (self->match_id[i] == match_id) {
-        self->current_url = g_steal_pointer (&match);
+        g_set_str (&self->current_url, g_steal_pointer (&match));
         break;
       }
     }
@@ -563,6 +561,32 @@ kgx_terminal_direction_changed (GtkWidget        *widget,
 }
 
 
+static gboolean
+kgx_terminal_query_tooltip (GtkWidget  *widget,
+                            int         x,
+                            int         y,
+                            gboolean    keyboard_tooltip,
+                            GtkTooltip *tooltip)
+{
+  KgxTerminal *self = KGX_TERMINAL (widget);
+  g_autofree char *text = NULL;
+
+  if (!have_url_under_pointer (self, x, y)) {
+    return GTK_WIDGET_CLASS (kgx_terminal_parent_class)->query_tooltip (widget,
+                                                                        x,
+                                                                        y,
+                                                                        keyboard_tooltip,
+                                                                        tooltip);
+  }
+
+  text = g_strdup_printf (_("Ctrl-click to open:\n%s"), self->current_url);
+
+  gtk_tooltip_set_text (tooltip, text);
+
+  return TRUE;
+}
+
+
 static void
 kgx_terminal_selection_changed (VteTerminal *self)
 {
@@ -683,6 +707,7 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
 
   widget_class->size_allocate = kgx_terminal_size_allocate;
   widget_class->direction_changed = kgx_terminal_direction_changed;
+  widget_class->query_tooltip = kgx_terminal_query_tooltip;
 
   term_class->selection_changed = kgx_terminal_selection_changed;
   term_class->increase_font_size = kgx_terminal_increase_font_size;
