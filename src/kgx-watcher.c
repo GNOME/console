@@ -150,7 +150,9 @@ remove_dead (gpointer pid,
   if (!g_tree_lookup (data->plist, pid)) {
     g_debug ("watcher: %i marked as dead", GPOINTER_TO_INT (pid));
 
-    kgx_tab_pop_child (watch->page, watch->process);
+    if (G_LIKELY (watch->page)) {
+      kgx_tab_pop_child (watch->page, watch->process);
+    }
 
     g_ptr_array_add (data->dead, pid);
   }
