@@ -41,6 +41,11 @@
     </section>
   </menu>
   <template class="KgxWindow" parent="AdwApplicationWindow">
+    <binding name="title">
+      <closure type='gchararray' function='title_or_fallback'>
+        <lookup name="title">pages</lookup>
+      </closure>
+    </binding>
     <signal name="notify::is-active" handler="active_changed" swapped="no"/>
     <property name="width-request">360</property>
     <property name="height-request">294</property>
@@ -58,7 +63,12 @@
             <child type="top">
               <object class="GtkHeaderBar" id="header_bar">
                 <property name="title-widget">
-                  <object class="AdwWindowTitle" id="window_title">
+                  <object class="AdwWindowTitle">
+                    <binding name="subtitle">
+                      <closure type='gchararray' function='path_as_subtitle'>
+                        <lookup name="path">pages</lookup>
+                      </closure>
+                    </binding>
                     <property name="title" bind-source="KgxWindow" bind-property="title" bind-flags="sync-create" />
                   </object>
                 </property>
@@ -111,7 +121,14 @@
                                   <class name="numeric"/>
                                 </style>
                                 <child>
-                                  <object class="GtkLabel" id="zoom_level">
+                                  <object class="GtkLabel">
+                                    <binding name="label">
+                                      <closure type='gchararray' function='scale_as_label'>
+                                        <lookup name="font-scale">
+                                          <lookup name="settings">KgxWindow</lookup>
+                                        </lookup>
+                                      </closure>
+                                    </binding>
                                     <property name="width_chars">5</property>
                                   </object>
                                 </child>
