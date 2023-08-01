@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk" version="4.0"/>
+  <requires lib="gtk" version="4.0" />
   <template class="KgxTab" parent="AdwBin">
+    <property name="dropping" bind-source="drop_target" bind-property="active" />
     <property name="child">
       <object class="GtkBox">
         <property name="orientation">vertical</property>
@@ -9,8 +10,9 @@
           <object class="AdwToolbarView">
             <child type="top">
               <object class="GtkSearchBar" id="search_bar">
-                <property name="search-mode-enabled" bind-source="KgxTab" bind-property="search-mode-enabled" bind-flags="sync-create|bidirectional"/>
-                <signal name="notify::search-mode-enabled" handler="search_enabled" swapped="no"/>
+                <property name="search-mode-enabled" bind-source="KgxTab"
+                  bind-property="search-mode-enabled" bind-flags="sync-create|bidirectional" />
+                <signal name="notify::search-mode-enabled" handler="search_enabled" swapped="no" />
                 <child>
                   <object class="AdwClamp">
                     <property name="hexpand">1</property>
@@ -22,9 +24,9 @@
                           <object class="GtkSearchEntry" id="search_entry">
                             <property name="placeholder-text" translatable="yes">Find text</property>
                             <property name="hexpand">1</property>
-                            <signal name="next-match" handler="search_next" swapped="no"/>
-                            <signal name="previous-match" handler="search_prev" swapped="no"/>
-                            <signal name="search-changed" handler="search_changed" swapped="no"/>
+                            <signal name="next-match" handler="search_next" swapped="no" />
+                            <signal name="previous-match" handler="search_prev" swapped="no" />
+                            <signal name="search-changed" handler="search_changed" swapped="no" />
                           </object>
                         </child>
                         <child>
@@ -32,7 +34,7 @@
                             <property name="receives-default">1</property>
                             <property name="icon-name">go-up-symbolic</property>
                             <property name="tooltip-text" translatable="yes">Previous Match</property>
-                            <signal name="clicked" handler="search_prev" swapped="no"/>
+                            <signal name="clicked" handler="search_prev" swapped="no" />
                           </object>
                         </child>
                         <child>
@@ -40,7 +42,7 @@
                             <property name="receives-default">1</property>
                             <property name="icon-name">go-down-symbolic</property>
                             <property name="tooltip-text" translatable="yes">Next Match</property>
-                            <signal name="clicked" handler="search_next" swapped="no"/>
+                            <signal name="clicked" handler="search_next" swapped="no" />
                           </object>
                         </child>
                       </object>
@@ -48,7 +50,7 @@
                   </object>
                 </child>
                 <style>
-                  <class name="view"/>
+                  <class name="view" />
                 </style>
               </object>
             </child>
@@ -57,7 +59,7 @@
                 <child>
                   <object class="GtkBox">
                     <style>
-                      <class name="empty-state"/>
+                      <class name="empty-state" />
                     </style>
                     <child>
                       <object class="GtkRevealer" id="spinner_revealer">
@@ -66,8 +68,8 @@
                         <property name="transition-duration">1000</property>
                         <property name="child">
                           <object class="GtkSpinner">
-                            <signal name="map" handler="spinner_mapped" swapped="no"/>
-                            <signal name="unmap" handler="spinner_unmapped" swapped="no"/>
+                            <signal name="map" handler="spinner_mapped" swapped="no" />
+                            <signal name="unmap" handler="spinner_unmapped" swapped="no" />
                             <property name="valign">center</property>
                             <property name="halign">center</property>
                           </object>
@@ -90,26 +92,23 @@
                 <property name="wrap">True</property>
                 <property name="xalign">0</property>
                 <style>
-                  <class name="exit-info"/>
+                  <class name="exit-info" />
                 </style>
               </object>
             </property>
           </object>
         </child>
-        <style>
-          <class name="tab"/>
-        </style>
       </object>
     </property>
   </template>
   <object class="GSignalGroup" id="terminal_signals">
     <property name="target-type">KgxTerminal</property>
-    <property name="target" bind-source="KgxTab" bind-property="terminal" bind-flags="sync-create"/>
+    <property name="target" bind-source="KgxTab" bind-property="terminal" bind-flags="sync-create" />
   </object>
   <object class="GBindingGroup" id="terminal_binds">
-    <property name="source" bind-source="KgxTab" bind-property="terminal" bind-flags="sync-create"/>
+    <property name="source" bind-source="KgxTab" bind-property="terminal" bind-flags="sync-create" />
   </object>
   <object class="KgxDropTarget" id="drop_target">
-    <signal name="drop" handler="drop" swapped="no"/>
+    <signal name="drop" handler="drop" swapped="no" />
   </object>
 </interface>

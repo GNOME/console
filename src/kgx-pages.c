@@ -1,6 +1,6 @@
 /* kgx-pages.c
  *
- * Copyright 2019 Zander Brown
+ * Copyright 2019-2023 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,14 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * SECTION:kgx-pages
- * @title: KgxPages
- * @short_description: Container of #KgxTab s
- *
- * The container of open #KgxTab (uses #AdwTabView internally)
- */
-
 #include "kgx-config.h"
 
 #include <glib/gi18n.h>
@@ -35,6 +27,11 @@
 #include "kgx-marshals.h"
 
 
+/**
+ * KgxPages:
+ *
+ * The container of open #KgxTab (uses #AdwTabView internally)
+ */
 typedef struct _KgxPagesPrivate KgxPagesPrivate;
 struct _KgxPagesPrivate {
   KgxSettings          *settings;
@@ -48,7 +45,7 @@ struct _KgxPagesPrivate {
   gboolean              search_mode_enabled;
   gboolean              ringing;
 
-  GtkWidget            *status;
+  GtkWidget            *status_message;
   GtkWidget            *status_revealer;
 
   int                   last_cols;
@@ -255,8 +252,7 @@ size_changed (KgxTab   *tab,
 
   label = g_strdup_printf ("%i × %i", cols, rows);
 
-  gtk_label_set_label (GTK_LABEL (priv->status), label);
-  gtk_widget_set_visible (priv->status_revealer, TRUE);
+  gtk_label_set_label (GTK_LABEL (priv->status_message), label);
   gtk_revealer_set_reveal_child (GTK_REVEALER (priv->status_revealer), TRUE);
 }
 
@@ -408,16 +404,6 @@ setup_menu (AdwTabView *view,
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
 
   priv->action_page = page;
-}
-
-
-static void
-check_revealer (GtkRevealer *revealer,
-                GParamSpec  *pspec,
-                KgxPages    *self)
-{
-  if (!gtk_revealer_get_child_revealed (revealer))
-    gtk_widget_set_visible (GTK_WIDGET (revealer), FALSE);
 }
 
 
@@ -636,7 +622,7 @@ kgx_pages_class_init (KgxPagesClass *klass)
                                                KGX_APPLICATION_PATH "kgx-pages.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, view);
-  gtk_widget_class_bind_template_child_private (widget_class, KgxPages, status);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxPages, status_message);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, status_revealer);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, active_page_signals);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, active_page_binds);
@@ -647,7 +633,6 @@ kgx_pages_class_init (KgxPagesClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, create_window);
   gtk_widget_class_bind_template_callback (widget_class, close_page);
   gtk_widget_class_bind_template_callback (widget_class, setup_menu);
-  gtk_widget_class_bind_template_callback (widget_class, check_revealer);
 
   gtk_widget_class_set_css_name (widget_class, "pages");
 }

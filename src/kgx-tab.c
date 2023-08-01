@@ -51,6 +51,8 @@ struct _KgxTabPrivate {
   gboolean              ringing;
   guint                 ringing_timeout;
 
+  gboolean              dropping;
+
   KgxTerminal          *terminal;
   GSignalGroup         *terminal_signals;
   GBindingGroup        *terminal_binds;
@@ -100,6 +102,7 @@ enum {
   PROP_NEEDS_ATTENTION,
   PROP_SEARCH_MODE_ENABLED,
   PROP_RINGING,
+  PROP_DROPPING,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -346,6 +349,9 @@ kgx_tab_get_property (GObject    *object,
     case PROP_RINGING:
       g_value_set_boolean (value, priv->ringing);
       break;
+    case PROP_DROPPING:
+      g_value_set_boolean (value, priv->dropping);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -428,6 +434,9 @@ kgx_tab_set_property (GObject      *object,
       break;
     case PROP_SEARCH_MODE_ENABLED:
       priv->search_mode_enabled = g_value_get_boolean (value);
+      break;
+    case PROP_DROPPING:
+      priv->dropping = g_value_get_boolean (value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -654,6 +663,11 @@ kgx_tab_class_init (KgxTabClass *klass)
                           FALSE,
                           G_PARAM_READABLE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
+  pspecs[PROP_DROPPING] =
+    g_param_spec_boolean ("dropping", NULL, NULL,
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   signals[SIZE_CHANGED] = g_signal_new ("size-changed",
@@ -728,6 +742,8 @@ kgx_tab_class_init (KgxTabClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, spinner_mapped);
   gtk_widget_class_bind_template_callback (widget_class, spinner_unmapped);
   gtk_widget_class_bind_template_callback (widget_class, drop);
+
+  gtk_widget_class_set_css_name (widget_class, "kgx-tab");
 }
 
 
