@@ -254,7 +254,7 @@
     </release>
   </releases>
   <launchable type="desktop-id">@KGX_APPLICATION_ID_RAW@.desktop</launchable>
-  <url type="homepage">https://gitlab.gnome.org/GNOME/console/</url>
+  <url type="homepage">https://apps.gnome.org/en-GB/app/org.gnome.Console/</url>
   <url type="bugtracker">https://gitlab.gnome.org/GNOME/console/issues</url>
   <update_contact>zbrown@gnome.org</update_contact>
   <translation type="gettext">@BIN_NAME@</translation>
