@@ -56,7 +56,7 @@ schema_file = configure_file(
 )
 
 # gnome.compile_schemas only looks at the source tree
-custom_target('kgx-schemas',
+kgx_schemas = custom_target('kgx-schemas',
            input: schema_file,
           output: 'gschemas.compiled',
          command: [compile_schemas, meson.current_build_dir()],

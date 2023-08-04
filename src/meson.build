@@ -86,7 +86,7 @@ kgx_lib = static_library (bin_name,
 )
 kgx_inc = include_directories('.')
 
-kgx_dep = declare_dependency (sources: [config_h, kgx_enums],
+kgx_dep = declare_dependency (sources: [config_h, kgx_enums, kgx_schemas],
                               include_directories: kgx_inc,
                               link_with: kgx_lib,
                               dependencies: kgx_deps)
