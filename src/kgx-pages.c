@@ -408,6 +408,32 @@ setup_menu (AdwTabView *view,
 
 
 static gboolean
+title_to_title (GBinding     *binding,
+                const GValue *from_value,
+                GValue       *to_value,
+                gpointer      user_data)
+{
+  KgxTab *tab = KGX_TAB (user_data);
+  g_autofree char *title = g_value_dup_string (from_value);
+
+  if (G_UNLIKELY (!title)) {
+    /* Translators: %i is, from the users perspective, a random number.
+     * this string will only be seen when the running program has
+     * failed to set a title, and exists purely to avoid blank tabs
+     */
+    g_autofree char *placeholder = g_strdup_printf (_("Tab %i"),
+                                                    kgx_tab_get_id (tab));
+
+    g_set_str (&title, placeholder);
+  }
+
+  g_value_take_string (to_value, g_steal_pointer (&title));
+
+  return TRUE;
+}
+
+
+static gboolean
 status_to_icon (GBinding     *binding,
                 const GValue *from_value,
                 GValue       *to_value,
@@ -692,7 +718,11 @@ kgx_pages_add_page (KgxPages *self,
   kgx_tab_set_initial_title (tab, priv->title, priv->path);
 
   page = adw_tab_view_add_page (ADW_TAB_VIEW (priv->view), GTK_WIDGET (tab), NULL);
-  g_object_bind_property (tab, "tab-title", page, "title", G_BINDING_SYNC_CREATE);
+  g_object_bind_property_full (tab, "tab-title",
+                               page, "title",
+                               G_BINDING_SYNC_CREATE,
+                               title_to_title, NULL,
+                               tab, NULL);
   g_object_bind_property (tab, "tab-tooltip", page, "tooltip", G_BINDING_SYNC_CREATE);
   g_object_bind_property (tab, "needs-attention", page, "needs-attention", G_BINDING_SYNC_CREATE);
   g_object_bind_property_full (tab, "tab-status", page, "icon", G_BINDING_SYNC_CREATE,
