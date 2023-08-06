@@ -1,3 +1,33 @@
+Version 45.beta
+~~~~~~~~~~~~~~~
+
+We now have a preferences window, based on initial work by Maximiliano, for
+setting a custom font and altering bell behaviour.
+
+Some bugs in notifications, drag'n'drop, and assorted visual glitches were
+resolved. Detaching/closing tabs had some minor correctness issues that have
+now been mitigated, and tabs always have a label in switchers.
+
+Once again Alice & Chris helped us keep up with changes in Adwaita and Gtk.
+
+Thanks to Jacob Duba you can now zoom with Ctrl-Scroll, and Martin Nowak
+improved keyboard shortcuts for managing tabs.
+
+Stuart added telnet as a ‘remote’ type, with Sebastian Wiesner, Jonas Ådahl,
+and Automeris, also providing patches in this release.
+
+Updated Translations
+ * Basque  (Asier Sarasua Garmendia)
+ * British English  (Bruce Cowan)
+ * Persian  (Danial Behzadi)
+ * Georgian  (Ekaterine Papava)
+ * German  (Florian Heiser)
+ * Italian  (Gianvito Cavasoli)
+ * Brazilian Portuguese  (Gustavo Costa)
+ * Dutch  (Nathan Follens)
+ * Latvian  (Rūdolfs Mazurs)
+ * Ukrainian  (Yuri Chornoivan)
+
 Version 44.0
 ~~~~~~~~~~~~
 

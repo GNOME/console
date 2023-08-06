@@ -31,6 +31,37 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="45~beta" date="2023-08-06" type="development">
+      <description>
+        <p>We now have a preferences window, for setting a custom font and altering bell behaviour.</p>
+        <p>Some bugs in notifications, drag'n'drop, and assorted visual glitches were resolved. Detaching/closing tabs had some minor correctness issues that have now been mitigated, and tabs always have a label in switchers.</p>
+        <p>Updated Translations:</p>
+        <ul>
+          <li>Basque</li>
+          <li>British English</li>
+          <li>Persian</li>
+          <li>Georgian</li>
+          <li>German</li>
+          <li>Italian</li>
+          <li>Brazilian Portuguese</li>
+          <li>Dutch</li>
+          <li>Latvian</li>
+          <li>Ukrainian</li>
+        </ul>
+      </description>
+    </release>
+    <release version="44.4" date="2023-08-05" type="stable">
+      <description>
+        <p>Updated Translations:</p>
+        <ul>
+          <li>British English</li>
+          <li>Italian</li>
+          <li>Brazilian Portuguese</li>
+          <li>Dutch</li>
+          <li>Latvian</li>
+        </ul>
+      </description>
+    </release>
     <release version="44.0" date="2023-03-19" type="stable">
       <description>
         <p>Updated Translations:</p>
