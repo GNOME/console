@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-02-12 12:31+0000\n"
-"PO-Revision-Date: 2023-02-12 18:44+0300\n"
-"Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
+"POT-Creation-Date: 2023-08-05 06:17+0000\n"
+"PO-Revision-Date: 2023-08-05 11:39+0300\n"
+"Last-Translator: Artur So <arturios2005@mail.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -17,10 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:29
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
 msgid "Console"
 msgstr "Консоль"
 
@@ -33,11 +33,11 @@ msgstr "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgid "New Window"
 msgstr "Новое окно"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:143
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:167
 msgid "New Tab"
 msgstr "Новая вкладка"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:366
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:377
 msgid "Terminal Emulator"
 msgstr "Эмулятор терминала"
 
@@ -49,7 +49,7 @@ msgstr "Простой и удобный эмулятор терминала д�
 msgid "Terminal window"
 msgstr "Окно терминала"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:210 src/kgx-window.c:436
+#: data/org.gnome.Console.metainfo.xml.in.in:262 src/kgx-window.c:457
 msgid "The GNOME Project"
 msgstr "The GNOME Project"
 
@@ -115,80 +115,91 @@ msgstr "Предыдущая вкладка"
 
 #: src/help-overlay.ui:80
 msgctxt "shortcut window"
-msgid "Switch to Tab"
-msgstr "Переключиться на вкладку"
+msgid "Move Tab Right"
+msgstr "Переместить вкладку вправо"
 
-#: src/kgx-application.c:241
+#: src/help-overlay.ui:86
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Переместить вкладку влево"
+
+#: src/help-overlay.ui:92
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Переключиться на вкладку 1–9"
+
+#: src/help-overlay.ui:98
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Переключиться на вкладку 10"
+
+#: src/kgx-application.c:252
 msgid "Cannot use both --command and positional parameters"
 msgstr "Невозможно использовать как --команда, так и позиционные параметры"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:338
+#: src/kgx-application.c:349
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s с использованием VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:350 src/kgx-window.c:431
+#: src/kgx-application.c:361 src/kgx-window.c:452
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:364 src/kgx-window.ui:55
-msgid "King’s Cross"
-msgstr "Кингс-Кросс"
-
-#: src/kgx-application.c:368
+#: src/kgx-application.c:379
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 или более поздняя"
 
-#: src/kgx-application.c:433
+#: src/kgx-application.c:444
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Выполнить аргумент этой опции в терминале"
 
-#: src/kgx-application.c:434
+#: src/kgx-application.c:445
 msgid "COMMAND"
 msgstr "КОМАНДА"
 
-#: src/kgx-application.c:442
+#: src/kgx-application.c:453
 msgid "Set the working directory"
 msgstr "Установить рабочую папку"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:444
+#: src/kgx-application.c:455
 msgid "DIRNAME"
 msgstr "ИМЯ ПАПКИ"
 
-#: src/kgx-application.c:452
+#: src/kgx-application.c:463
 msgid "Wait until the child exits (TODO)"
 msgstr "Подождите, пока дочерний процесс завершится (ЗАДАЧА)"
 
-#: src/kgx-application.c:461
+#: src/kgx-application.c:472
 msgid "Set the initial window title"
 msgstr "Установить начальный заголовок окна"
 
-#: src/kgx-application.c:462
+#: src/kgx-application.c:473
 msgid "TITLE"
 msgstr "ЗАГОЛОВОК"
 
-#: src/kgx-application.c:470
+#: src/kgx-application.c:481
 msgid "ADVANCED: Set the shell to launch"
 msgstr "ДОПОЛНИТЕЛЬНО: Установить оболочку для запуска"
 
-#: src/kgx-application.c:471
+#: src/kgx-application.c:482
 msgid "SHELL"
 msgstr "ОБОЛОЧКА"
 
-#: src/kgx-application.c:479
+#: src/kgx-application.c:490
 msgid "ADVANCED: Set the scrollback length"
 msgstr "ДОПОЛНИТЕЛЬНО: Установить длину прокрутки"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:491
 msgid "LINES"
 msgstr "СТРОКИ"
 
-#: src/kgx-application.c:489
+#: src/kgx-application.c:500
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- КОМАНДА [АРГУМЕНТ...]]"
 
@@ -216,7 +227,7 @@ msgstr ""
 "Некоторые команды все еще выполняются, закрытие этой вкладки приведет к их "
 "завершению и может привести к неожиданным последствиям"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:877
+#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:915
 msgid "_Cancel"
 msgstr "_Отменить"
 
@@ -224,56 +235,130 @@ msgstr "_Отменить"
 msgid "C_lose"
 msgstr "З_акрыть"
 
-#: src/kgx-pages.ui:61
+#: src/kgx-font-picker.ui:12
+msgid "Terminal Font"
+msgstr "Шрифт терминала"
+
+#: src/kgx-font-picker.ui:37
+msgid "_Select"
+msgstr "_Выбрать"
+
+#: src/kgx-font-picker.ui:53 src/kgx-font-picker.ui:56
+msgid "Font Name"
+msgstr "Название шрифта"
+
+#: src/kgx-font-picker.ui:142
+msgid "Font Family"
+msgstr "Семейство шрифтов"
+
+#: src/kgx-font-picker.ui:167
+msgid "Font Preview"
+msgstr "Предпросмотр шрифта"
+
+#: src/kgx-font-picker.ui:188
+msgid "Font Size"
+msgstr "Размер шрифта"
+
+#. Translators: %i is, from the users perspective, a random number.
+#. * this string will only be seen when the running program has
+#. * failed to set a title, and exists purely to avoid blank tabs
+#.
+#: src/kgx-pages.c:424
+#, c-format
+msgid "Tab %i"
+msgstr "Вкладка %i"
+
+#: src/kgx-pages.ui:90
 msgid "_Detach Tab"
 msgstr "_Отсоединить вкладку"
 
-#: src/kgx-pages.ui:67
+#: src/kgx-pages.ui:96
 msgid "_Close"
 msgstr "_Закрыть"
 
+#: src/kgx-preferences-window.c:122
+msgid "No Font Set"
+msgstr "Шрифт не установлен"
+
+#: src/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "Общие"
+
+#: src/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "Шрифт"
+
+#: src/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "Использовать _системный по умолчанию"
+
+#: src/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "Пользовательский _шрифт"
+
+#: src/kgx-preferences-window.ui:59
+msgid "Terminal Bell"
+msgstr "Сигнал терминала"
+
+#: src/kgx-preferences-window.ui:62
+msgid "Play _Sound"
+msgstr "Воспроизводить _звук"
+
+#: src/kgx-preferences-window.ui:68
+msgid "_Visual Effects"
+msgstr "_Визуальные эффекты"
+
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:168
+#: src/kgx-simple-tab.c:180
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Только для Чтения</b> — Команда завершилась с кодом %i"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:177
+#: src/kgx-simple-tab.c:189
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Только для Чтения</b> — Команда завершена"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:210
+#: src/kgx-simple-tab.c:222
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Не удалось начать</b> — %s"
 
-#: src/kgx-tab.c:993
+#: src/kgx-tab.c:1091
 msgid "Command completed"
 msgstr "Команда выполнена"
 
-#: src/kgx-tab.ui:22
+#: src/kgx-tab.ui:25
 msgid "Find text"
 msgstr "Найти текст"
 
-#: src/kgx-tab.ui:33
+#: src/kgx-tab.ui:36
 msgid "Previous Match"
 msgstr "Предыдущее совпадение"
 
-#: src/kgx-tab.ui:41
+#: src/kgx-tab.ui:44
 msgid "Next Match"
 msgstr "Следующее совпадение"
 
-#: src/kgx-terminal.c:870
+#: src/kgx-terminal.c:582
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+"Нажмите Ctrl для открытия:\n"
+"%s"
+
+#: src/kgx-terminal.c:908
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Вы вставляете команду, которая выполняется от имени администратора"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:874
+#: src/kgx-terminal.c:912
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -282,24 +367,44 @@ msgstr ""
 "Убедитесь, что вы знаете, что делает команда:\n"
 "%s"
 
-#: src/kgx-terminal.c:878 src/menus.ui:24
+#: src/kgx-terminal.c:916 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "_Вставить"
 
+#: src/kgx-terminal.ui:7
+msgid "_Open Link"
+msgstr "_Открыть ссылку"
+
+#: src/kgx-terminal.ui:12
+msgid "Copy _Link"
+msgstr "Копировать _ссылку"
+
+#: src/kgx-terminal.ui:19
+msgid "_Copy"
+msgstr "_Копировать"
+
+#: src/kgx-terminal.ui:29
+msgid "_Select All"
+msgstr "_Выделить все"
+
+#: src/kgx-terminal.ui:36
+msgid "Show in _Files"
+msgstr "Показать в _Файлах"
+
 #: src/kgx-theme-switcher.ui:16
-msgid "Use System Colors"
-msgstr "Использовать системные цвета"
+msgid "Follow System Style"
+msgstr "Системный стиль"
 
 #: src/kgx-theme-switcher.ui:44
-msgid "Use Light Colors"
-msgstr "Использовать светлые цвета"
+msgid "Light Style"
+msgstr "Светлый стиль"
 
 #: src/kgx-theme-switcher.ui:71
-msgid "Use Dark Colors"
-msgstr "Использовать темные цвета"
+msgid "Dark Style"
+msgstr "Темный стиль"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:442
+#: src/kgx-window.c:464
 msgid "translator-credits"
 msgstr "Aleksandr Melman <alexmelman88@gmail.com>, 2022-2023"
 
@@ -312,52 +417,45 @@ msgid "_Show All Tabs"
 msgstr "_Показать все вкладки"
 
 #: src/kgx-window.ui:30
+msgid "_Preferences"
+msgstr "Па_раметры"
+
+#: src/kgx-window.ui:34
 msgid "_Keyboard Shortcuts"
 msgstr "_Комбинации клавиш"
 
-#: src/kgx-window.ui:34
+#: src/kgx-window.ui:38
 msgid "_About Console"
 msgstr "_О приложении"
 
-#: src/kgx-window.ui:63
+#: src/kgx-window.ui:80
 msgid "Find in Terminal"
 msgstr "Найти в терминале"
 
-#: src/kgx-window.ui:71
+#: src/kgx-window.ui:88
 msgid "Main Menu"
 msgstr "Главное меню"
 
-#: src/kgx-window.ui:89
+#: src/kgx-window.ui:106
 msgid "Shrink Text"
 msgstr "Уменьшить текст"
 
-#: src/kgx-window.ui:100
+#: src/kgx-window.ui:117
 msgid "Reset Size"
 msgstr "Сбросить размер"
 
-#: src/kgx-window.ui:117
+#: src/kgx-window.ui:141
 msgid "Enlarge Text"
 msgstr "Увеличить текст"
 
-#: src/menus.ui:7
-msgid "_Open Link"
-msgstr "_Открыть ссылку"
+#~ msgid "King’s Cross"
+#~ msgstr "Кингс-Кросс"
 
-#: src/menus.ui:12
-msgid "Copy _Link"
-msgstr "Копировать _ссылку"
+#~ msgid "Use Light Colors"
+#~ msgstr "Использовать светлые цвета"
 
-#: src/menus.ui:19
-msgid "_Copy"
-msgstr "_Копировать"
-
-#: src/menus.ui:29
-msgid "_Select All"
-msgstr "_Выделить все"
-
-#: src/menus.ui:36
-msgid "Show in _Files"
-msgstr "Показать в _Файлах"
+#~ msgid "Use Dark Colors"
+#~ msgstr "Использовать темные цвета"
 
 #~ msgid "View Open Tabs"
 #~ msgstr "Просмотреть открытые вкладки"
