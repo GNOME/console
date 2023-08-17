@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-08-05 01:41+0000\n"
-"PO-Revision-Date: 2023-08-05 07:08+0200\n"
+"POT-Creation-Date: 2023-08-06 01:56+0000\n"
+"PO-Revision-Date: 2023-08-17 21:24+0200\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: \n"
 "Language: ka\n"
@@ -48,7 +48,7 @@ msgstr "მარტივი და ადვილად მოსახმა
 msgid "Terminal window"
 msgstr "ტერმინალის ფანჯარა"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:262 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:293 src/kgx-window.c:457
 msgid "The GNOME Project"
 msgstr "პროექტი \"GNOME\""
 
@@ -257,6 +257,15 @@ msgstr "ფონტის მინიატურა"
 #: src/kgx-font-picker.ui:188
 msgid "Font Size"
 msgstr "ფონტის ზომა"
+
+#. Translators: %i is, from the users perspective, a random number.
+#. * this string will only be seen when the running program has
+#. * failed to set a title, and exists purely to avoid blank tabs
+#.
+#: src/kgx-pages.c:424
+#, c-format
+msgid "Tab %i"
+msgstr "ჩანართი %i"
 
 #: src/kgx-pages.ui:90
 msgid "_Detach Tab"
