@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-08-05 12:30+0000\n"
-"PO-Revision-Date: 2022-09-18 12:37+0600\n"
+"POT-Creation-Date: 2023-08-05 06:17+0000\n"
+"PO-Revision-Date: 2023-08-19 12:29+0600\n"
 "Last-Translator: \n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:43
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
 msgid "Console"
 msgstr "Консоль"
 
@@ -33,11 +33,11 @@ msgstr ""
 msgid "New Window"
 msgstr "Жаңа терезе"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:132
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:167
 msgid "New Tab"
 msgstr "Жаңа бет"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:605
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:377
 msgid "Terminal Emulator"
 msgstr "Терминал эмуляторы"
 
@@ -51,7 +51,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Терминал терезесі"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:104 src/kgx-window.c:497
+#: data/org.gnome.Console.metainfo.xml.in.in:262 src/kgx-window.c:457
 msgid "The GNOME Project"
 msgstr "GNOME жобасы"
 
@@ -102,91 +102,107 @@ msgstr "Бетті жабу"
 
 #: src/help-overlay.ui:62
 msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Барлық беттерді көрсету"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
 msgid "Next Tab"
 msgstr "Келесі бет"
 
-#: src/help-overlay.ui:68
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Previous Tab"
 msgstr "Алдыңғы бет"
 
-#: src/help-overlay.ui:74
+#: src/help-overlay.ui:80
 msgctxt "shortcut window"
-msgid "Switch to Tab"
-msgstr "Бетке ауысу"
+msgid "Move Tab Right"
+msgstr "Бетті оңға жылжыту"
 
-#: src/kgx-application.c:480
+#: src/help-overlay.ui:86
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Бетті солға жылжыту"
+
+#: src/help-overlay.ui:92
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Бетке ауысу: Бет 1–9"
+
+#: src/help-overlay.ui:98
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Бетке ауысу: Бет 10"
+
+#: src/kgx-application.c:252
 msgid "Cannot use both --command and positional parameters"
 msgstr ""
 "Бір уақытта --command және позициялық параметрлерді қолдану мүмкін емес"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:577
+#: src/kgx-application.c:349
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s қолданады VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:589 src/kgx-window.c:492
+#: src/kgx-application.c:361 src/kgx-window.c:452
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:603 src/kgx-window.ui:44
-msgid "King’s Cross"
-msgstr "Король кресті"
-
-#: src/kgx-application.c:607
+#: src/kgx-application.c:379
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 немесе одан кейінгі нұсқасы"
 
-#: src/kgx-application.c:739
+#: src/kgx-application.c:444
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Терминал ішінде осы параметрге аргументтерді орындау"
 
-#: src/kgx-application.c:740
+#: src/kgx-application.c:445
 msgid "COMMAND"
 msgstr "КОМАНДА"
 
-#: src/kgx-application.c:748
+#: src/kgx-application.c:453
 msgid "Set the working directory"
 msgstr "Жұмыс бумасын орнату"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:750
+#: src/kgx-application.c:455
 msgid "DIRNAME"
 msgstr "БУМА_АТЫ"
 
-#: src/kgx-application.c:758
+#: src/kgx-application.c:463
 msgid "Wait until the child exits (TODO)"
 msgstr "Ұрпақ үрдісі аяқталуды күту (TODO)"
 
-#: src/kgx-application.c:767
+#: src/kgx-application.c:472
 msgid "Set the initial window title"
 msgstr "Терезенің бастапқы атауын орнату"
 
-#: src/kgx-application.c:768
+#: src/kgx-application.c:473
 msgid "TITLE"
 msgstr "АТАУЫ"
 
-#: src/kgx-application.c:776
+#: src/kgx-application.c:481
 msgid "ADVANCED: Set the shell to launch"
 msgstr "КЕҢЕЙТІЛГЕН: Жөнелтілетін қоршамды орнату"
 
-#: src/kgx-application.c:777
+#: src/kgx-application.c:482
 msgid "SHELL"
 msgstr "ҚОРШАМ"
 
-#: src/kgx-application.c:785
+#: src/kgx-application.c:490
 msgid "ADVANCED: Set the scrollback length"
 msgstr "КЕҢЕЙТІЛГЕН: Кері айналдыру ұзындығын орнату"
 
-#: src/kgx-application.c:786
+#: src/kgx-application.c:491
 msgid "LINES"
 msgstr "ЖОЛДАР"
 
-#: src/kgx-application.c:795
+#: src/kgx-application.c:500
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- КОМАНДА [АРГУМЕНТ...]]"
 
@@ -214,7 +230,7 @@ msgstr ""
 "Кейбір командалар әлі де жұмыс істеп тұр, бұл бетті жабу оларды аяқтайды "
 "және күтпеген нәтижелерге әкелуі мүмкін"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:814
+#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:915
 msgid "_Cancel"
 msgstr "Ба_с тарту"
 
@@ -222,48 +238,130 @@ msgstr "Ба_с тарту"
 msgid "C_lose"
 msgstr "_Жабу"
 
-#: src/kgx-pages.ui:42
+#: src/kgx-font-picker.ui:12
+msgid "Terminal Font"
+msgstr "Терминал қарібі"
+
+#: src/kgx-font-picker.ui:37
+msgid "_Select"
+msgstr "_Таңдау"
+
+#: src/kgx-font-picker.ui:53 src/kgx-font-picker.ui:56
+msgid "Font Name"
+msgstr "Қаріп атауы"
+
+#: src/kgx-font-picker.ui:142
+msgid "Font Family"
+msgstr "Қаріптер отбасы"
+
+#: src/kgx-font-picker.ui:167
+msgid "Font Preview"
+msgstr "Қаріпті алдын ала қарау"
+
+#: src/kgx-font-picker.ui:188
+msgid "Font Size"
+msgstr "Қаріп өлшемі"
+
+#. Translators: %i is, from the users perspective, a random number.
+#. * this string will only be seen when the running program has
+#. * failed to set a title, and exists purely to avoid blank tabs
+#.
+#: src/kgx-pages.c:424
+#, c-format
+msgid "Tab %i"
+msgstr "Беттер %i"
+
+#: src/kgx-pages.ui:90
 msgid "_Detach Tab"
 msgstr "Бетті бө_ліп жіберу"
 
-#: src/kgx-pages.ui:48
+#: src/kgx-pages.ui:96
 msgid "_Close"
 msgstr "Жа_бу"
 
+#: src/kgx-preferences-window.c:122
+msgid "No Font Set"
+msgstr "Қаріп орнатылмады"
+
+#: src/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "Жалпы"
+
+#: src/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "Қаріп"
+
+#: src/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "Жү_йелік баптауды пайдалану"
+
+#: src/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "Таңдауыңызша қа_ріп"
+
+#: src/kgx-preferences-window.ui:59
+msgid "Terminal Bell"
+msgstr "Терминал сигналы"
+
+#: src/kgx-preferences-window.ui:62
+msgid "Play _Sound"
+msgstr "Дыбы_сты ойнату"
+
+#: src/kgx-preferences-window.ui:68
+msgid "_Visual Effects"
+msgstr "_Визуалды эффекттер"
+
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:168
+#: src/kgx-simple-tab.c:180
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Тек оқу үшін</b> — Команда кодпен аяқталды: %i"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:177
+#: src/kgx-simple-tab.c:189
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Тек оқу үшін</b> — Команда аяқталды"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:210
+#: src/kgx-simple-tab.c:222
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Жөнелту сәтсіз аяқталды</b> — %s"
 
-#: src/kgx-tab.c:1087
+#: src/kgx-tab.c:1091
 msgid "Command completed"
 msgstr "Команда аяқталды"
 
-#: src/kgx-tab-button.ui:5
-msgid "View Open Tabs"
-msgstr "Ашық беттерді қарау"
+#: src/kgx-tab.ui:25
+msgid "Find text"
+msgstr "Мәтінді табу"
 
-#: src/kgx-terminal.c:807
+#: src/kgx-tab.ui:36
+msgid "Previous Match"
+msgstr "Алдыңғы сәйкестік"
+
+#: src/kgx-tab.ui:44
+msgid "Next Match"
+msgstr "Келесі сәйкестік"
+
+#: src/kgx-terminal.c:582
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+"Ашу үшін Ctrl-click:\n"
+"%s"
+
+#: src/kgx-terminal.c:908
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Әкімші ретінде орындалатын команданы кірістіріп отырсыз"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:811
+#: src/kgx-terminal.c:912
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -272,24 +370,44 @@ msgstr ""
 "Команданың не істейтінін білетініңізге көз жеткізіңіз:\n"
 "%s"
 
-#: src/kgx-terminal.c:815 src/menus.ui:24
+#: src/kgx-terminal.c:916 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "Кірі_стіру"
 
+#: src/kgx-terminal.ui:7
+msgid "_Open Link"
+msgstr "Сі_лтемені ашу"
+
+#: src/kgx-terminal.ui:12
+msgid "Copy _Link"
+msgstr "Сі_лтемені көшіріп алу"
+
+#: src/kgx-terminal.ui:19
+msgid "_Copy"
+msgstr "_Көшіру"
+
+#: src/kgx-terminal.ui:29
+msgid "_Select All"
+msgstr "Б_арлығын таңдау"
+
+#: src/kgx-terminal.ui:36
+msgid "Show in _Files"
+msgstr "_Файлдар қолданбасында көрсету"
+
 #: src/kgx-theme-switcher.ui:16
-msgid "Use System Colors"
-msgstr "Жүйе түстерін пайдалану"
+msgid "Follow System Style"
+msgstr "Жүйелік стильді қолдану"
 
 #: src/kgx-theme-switcher.ui:44
-msgid "Use Light Colors"
-msgstr "Ашық түстерді пайдалану"
+msgid "Light Style"
+msgstr "Ашық түсті"
 
 #: src/kgx-theme-switcher.ui:71
-msgid "Use Dark Colors"
-msgstr "Қараңғы түстерді пайдалану"
+msgid "Dark Style"
+msgstr "Қараңғы режим"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:503
+#: src/kgx-window.c:464
 msgid "translator-credits"
 msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>"
 
@@ -298,52 +416,52 @@ msgid "_New Window"
 msgstr "Жаңа тере_зе"
 
 #: src/kgx-window.ui:23
+msgid "_Show All Tabs"
+msgstr "Барлық беттерді көр_сету"
+
+#: src/kgx-window.ui:30
+msgid "_Preferences"
+msgstr "Ба_птаулар"
+
+#: src/kgx-window.ui:34
 msgid "_Keyboard Shortcuts"
 msgstr "П_ернетақта жарлықтары"
 
-#: src/kgx-window.ui:27
+#: src/kgx-window.ui:38
 msgid "_About Console"
 msgstr "Консоль тур_алы"
 
-#: src/kgx-window.ui:52
+#: src/kgx-window.ui:80
 msgid "Find in Terminal"
 msgstr "Терминалда табу"
 
-#: src/kgx-window.ui:60
-msgid "Menu"
-msgstr "Мәзір"
+#: src/kgx-window.ui:88
+msgid "Main Menu"
+msgstr "Басты мәзір"
 
-#: src/kgx-window.ui:78
+#: src/kgx-window.ui:106
 msgid "Shrink Text"
 msgstr "Мәтінді кішірейту"
 
-#: src/kgx-window.ui:89
+#: src/kgx-window.ui:117
 msgid "Reset Size"
 msgstr "Өлшемді тастау"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:141
 msgid "Enlarge Text"
 msgstr "Мәтінді үлкейту"
 
-#: src/menus.ui:7
-msgid "_Open Link"
-msgstr "Сі_лтемені ашу"
+#~ msgid "King’s Cross"
+#~ msgstr "Король кресті"
 
-#: src/menus.ui:12
-msgid "Copy _Link"
-msgstr "Сі_лтемені көшіріп алу"
+#~ msgid "View Open Tabs"
+#~ msgstr "Ашық беттерді қарау"
 
-#: src/menus.ui:19
-msgid "_Copy"
-msgstr "_Көшіру"
+#~ msgid "Use Light Colors"
+#~ msgstr "Ашық түстерді пайдалану"
 
-#: src/menus.ui:29
-msgid "_Select All"
-msgstr "Б_арлығын таңдау"
-
-#: src/menus.ui:36
-msgid "Show in _Files"
-msgstr "_Файлдар қолданбасында көрсету"
+#~ msgid "Use Dark Colors"
+#~ msgstr "Қараңғы түстерді пайдалану"
 
 #~ msgid "Zander Brown"
 #~ msgstr "Zander Brown"
