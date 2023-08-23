@@ -74,8 +74,7 @@
                 </property>
                 <child type="start">
                   <object class="GtkToggleButton">
-                    <property name="can-focus">0</property>
-                    <property name="receives-default">0</property>
+                    <property name="focus-on-click">False</property>
                     <property name="action-name">win.find</property>
                     <property name="tooltip-text" translatable="yes">Find in Terminal</property>
                     <property name="icon-name">edit-find-symbolic</property>
@@ -83,8 +82,7 @@
                 </child>
                 <child type="end">
                   <object class="GtkMenuButton">
-                    <property name="can-focus">0</property>
-                    <property name="receives-default">1</property>
+                    <property name="focus-on-click">False</property>
                     <property name="tooltip-text" translatable="yes">Main Menu</property>
                     <property name="icon-name">open-menu-symbolic</property>
                     <property name="popover">
@@ -161,8 +159,7 @@
                 </child>
                 <child type="end">
                   <object class="GtkButton" id="new_tab_button">
-                    <property name="can-focus">0</property>
-                    <property name="receives-default">0</property>
+                    <property name="focus-on-click">False</property>
                     <property name="action-name">win.new-tab</property>
                     <property name="tooltip-text" translatable="yes">New Tab</property>
                     <property name="icon-name">tab-new-symbolic</property>
