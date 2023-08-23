@@ -2,13 +2,13 @@
 # Copyright (C) 2022 console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the console package.
 #
-# A S Alam <aalam@fedoraproject.org>, 2022.
+# A S Alam <aalam@fedoraproject.org>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-03-17 13:51+0000\n"
-"PO-Revision-Date: 2022-03-17 08:03-0700\n"
+"POT-Creation-Date: 2023-08-05 06:17+0000\n"
+"PO-Revision-Date: 2023-08-22 19:38-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <punjab-translation@googlegroups.com>\n"
 "Language: pa\n"
@@ -16,10 +16,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.2\n"
+"X-Generator: Lokalize 23.04.3\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
 msgid "Console"
 msgstr "ਕਨਸੋਲ"
 
@@ -32,11 +32,11 @@ msgstr "ਕਮਾਂਡ;ਪਰੌਂਟ;ਕਮਾਂਡ-ਲਾਈਨ;ਕਮਾ�
 msgid "New Window"
 msgstr "ਨਵੀਂ ਵਿੰਡੋ"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:168
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:167
 msgid "New Tab"
 msgstr "ਨਵੀਂ ਟੈਬ"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:568
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:377
 msgid "Terminal Emulator"
 msgstr "ਟਰਮੀਨਲ ਈਮੂਲੇਟਰ"
 
@@ -48,123 +48,163 @@ msgstr "ਗਨੋਮ ਡੈਸਕਟਾਪ ਲਈ ਸਰਲ ਵਰਤੋਂਕ�
 msgid "Terminal window"
 msgstr "ਟਰਮੀਨਲ ਵਿੰਡੋ"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:104
-msgid "Zander Brown"
-msgstr ""
+#: data/org.gnome.Console.metainfo.xml.in.in:262 src/kgx-window.c:457
+msgid "The GNOME Project"
+msgstr "ਗਨੋਮ ਪਰੋਜੈਕਟ"
 
-#: src/help-overlay.ui:13
+#: src/help-overlay.ui:12
 msgctxt "shortcut window"
 msgid "Application"
 msgstr "ਐਪਲੀਕੇਸ਼ਨ"
 
-#: src/help-overlay.ui:19
+#: src/help-overlay.ui:16
 msgctxt "shortcut window"
 msgid "New Window"
 msgstr "ਨਵੀਂ ਵਿੰਡੋ"
 
-#: src/help-overlay.ui:26
+#: src/help-overlay.ui:23
 msgctxt "shortcut window"
 msgid "Terminal"
 msgstr "ਟਰਮੀਨਲ"
 
-#: src/help-overlay.ui:32
+#: src/help-overlay.ui:27
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "ਲੱਭੋ"
 
-#: src/help-overlay.ui:39
+#: src/help-overlay.ui:33
 msgctxt "shortcut window"
 msgid "Copy"
 msgstr "ਕਾਪੀ ਕਰੋ"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Paste"
 msgstr "ਚੇਪੋ"
 
-#: src/help-overlay.ui:53
+#: src/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Tabs"
 msgstr "ਟੈਬਾਂ"
 
-#: src/help-overlay.ui:59
+#: src/help-overlay.ui:50
 msgctxt "shortcut window"
 msgid "New Tab"
 msgstr "ਨਵੀਂ ਟੈਬ"
 
-#: src/help-overlay.ui:66
+#: src/help-overlay.ui:56
 msgctxt "shortcut window"
 msgid "Close Tab"
 msgstr "ਟੈਬ ਬੰਦ ਕਰੋ"
 
-#: src/help-overlay.ui:73
+#: src/help-overlay.ui:62
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "ਸਭ ਟੈਬਾਂ ਵੇਖਾਓ"
+
+#: src/help-overlay.ui:68
 msgctxt "shortcut window"
 msgid "Next Tab"
 msgstr "ਅਗਲੀ ਟੈਬ"
 
-#: src/help-overlay.ui:80
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Previous Tab"
 msgstr "ਪਿਛਲੀ ਟੈਬ"
 
-#: src/help-overlay.ui:87
+#: src/help-overlay.ui:80
 msgctxt "shortcut window"
-msgid "Switch to Tab"
-msgstr "ਟੈਬ ਉੱਤੇ ਜਾਓ"
+msgid "Move Tab Right"
+msgstr "ਟੈਬ ਨੂੰ ਸੱਜੇ ਭੇਜੋ"
+
+#: src/help-overlay.ui:86
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "ਟੈਬ ਨੂੰ ਖੱਬੇ ਭੇਜੋ"
+
+#: src/help-overlay.ui:92
+#| msgctxt "shortcut window"
+#| msgid "Switch to Tab"
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "ਟੈਬ 1-9 ਉੱਤੇ ਜਾਓ"
+
+#: src/help-overlay.ui:98
+#| msgctxt "shortcut window"
+#| msgid "Switch to Tab"
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "ਟੈਬ 10 ਉੱਤੇ ਜਾਓ"
+
+#: src/kgx-application.c:252
+msgid "Cannot use both --command and positional parameters"
+msgstr ""
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:540
+#: src/kgx-application.c:349
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s,  VTE %u.%u.%u %s ਵਰਤ ਕੇ\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:552 src/kgx-window.c:525
+#: src/kgx-application.c:361 src/kgx-window.c:452
 #, c-format
 msgid "© %s Zander Brown"
 msgstr ""
 
-#: src/kgx-application.c:566 src/kgx-window.ui:115
-msgid "King’s Cross"
-msgstr "ਕਿੰਗ ਦਾ ਕਰਾਸ"
-
-#: src/kgx-application.c:570
+#: src/kgx-application.c:379
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 ਜਾਂ ਨਵਾਂ"
 
-#: src/kgx-application.c:701
+#: src/kgx-application.c:444
 msgid "Execute the argument to this option inside the terminal"
 msgstr ""
 
-#: src/kgx-application.c:710
+#: src/kgx-application.c:445
+msgid "COMMAND"
+msgstr "ਕਮਾਂਡ"
+
+#: src/kgx-application.c:453
 msgid "Set the working directory"
 msgstr "ਕਾਰਜਕਾਰੀ ਡਾਇਰੈਕਟਰੀ ਸੈੱਟ ਕਰੋ"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:712
+#: src/kgx-application.c:455
 msgid "DIRNAME"
 msgstr ""
 
-#: src/kgx-application.c:720
+#: src/kgx-application.c:463
 msgid "Wait until the child exits (TODO)"
 msgstr ""
 
-#: src/kgx-application.c:729
+#: src/kgx-application.c:472
 msgid "Set the initial window title"
-msgstr ""
+msgstr "ਸ਼ੁਰੂਆਤੀ ਵਿੰਡੋ ਟਾਈਟਲ ਸੈੱਟ ਕਰੋ"
 
-#: src/kgx-application.c:738
+#: src/kgx-application.c:473
+msgid "TITLE"
+msgstr "ਟਾਈਟਲ"
+
+#: src/kgx-application.c:481
 msgid "ADVANCED: Set the shell to launch"
 msgstr ""
 
-#: src/kgx-application.c:747
+#: src/kgx-application.c:482
+msgid "SHELL"
+msgstr "ਸ਼ੈੱਲ"
+
+#: src/kgx-application.c:490
 msgid "ADVANCED: Set the scrollback length"
 msgstr ""
 
-#: src/kgx-application.h:44
-msgid "Console (Development)"
-msgstr "ਕਨਸੋਲ (ਵਿਕਾਸ)"
+#: src/kgx-application.c:491
+msgid "LINES"
+msgstr "ਲਾਈਨਾਂ"
+
+#: src/kgx-application.c:500
+msgid "[-e|-- COMMAND [ARGUMENT...]]"
+msgstr ""
 
 #: src/kgx-close-dialog.c:50
 msgid "Close Window?"
@@ -186,149 +226,266 @@ msgid ""
 "lead to unexpected outcomes"
 msgstr ""
 
-#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:780
+#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:915
 msgid "_Cancel"
 msgstr "ਰੱਦ ਕਰੋ(_C)"
 
-#: src/kgx-close-dialog.ui:32
+#: src/kgx-close-dialog.ui:19
 msgid "C_lose"
 msgstr "ਬੰਦ ਕਰੋ(_l)"
 
-#: src/kgx-pages.ui:47
+#: src/kgx-font-picker.ui:12
+#| msgctxt "shortcut window"
+#| msgid "Terminal"
+msgid "Terminal Font"
+msgstr "ਟਰਮੀਨਲ ਫ਼ੋਂਟ"
+
+#: src/kgx-font-picker.ui:37
+#| msgid "_Select All"
+msgid "_Select"
+msgstr "ਚੁਣੋ(_S)"
+
+#: src/kgx-font-picker.ui:53 src/kgx-font-picker.ui:56
+msgid "Font Name"
+msgstr "ਫ਼ੋਂਟ ਨਾਂ"
+
+#: src/kgx-font-picker.ui:142
+msgid "Font Family"
+msgstr "ਫ਼ੋਂਟ ਗਰੁੱਪ"
+
+#: src/kgx-font-picker.ui:167
+msgid "Font Preview"
+msgstr "ਫ਼ੋਂਟ ਝਲਕ"
+
+#: src/kgx-font-picker.ui:188
+#| msgid "Reset Size"
+msgid "Font Size"
+msgstr "ਫੋਂਟ ਆਕਾਰ"
+
+#. Translators: %i is, from the users perspective, a random number.
+#. * this string will only be seen when the running program has
+#. * failed to set a title, and exists purely to avoid blank tabs
+#.
+#: src/kgx-pages.c:424
+#, c-format
+msgid "Tab %i"
+msgstr "ਟੈਬ %i"
+
+#: src/kgx-pages.ui:90
 msgid "_Detach Tab"
 msgstr "ਟੈਬ ਵੱਖ ਕਰੋ(_D)"
 
-#: src/kgx-pages.ui:53
+#: src/kgx-pages.ui:96
 msgid "_Close"
 msgstr "ਬੰਦ ਕਰੋ(_C)"
 
+#: src/kgx-preferences-window.c:122
+msgid "No Font Set"
+msgstr "ਕੋਈ ਫ਼ੋਂਟ ਸੈੱਟ ਨਹੀਂ ਹੈ"
+
+#: src/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "ਆਮ"
+
+#: src/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "ਫ਼ੋਂਟ"
+
+#: src/kgx-preferences-window.ui:13
+#| msgid "Use System Colors"
+msgid "Use _System Default"
+msgstr "ਸਿਸਟਮ ਡਿਫਾਲਟ ਵਰਤੋਂ(_S)"
+
+#: src/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "ਪਸੰਦੀਦਾ ਫ਼ੋਂਟ(_F)"
+
+#: src/kgx-preferences-window.ui:59
+#| msgctxt "shortcut window"
+#| msgid "Terminal"
+msgid "Terminal Bell"
+msgstr "ਟਰਮੀਨਲ ਘੰਟੀ"
+
+#: src/kgx-preferences-window.ui:62
+msgid "Play _Sound"
+msgstr "ਆਵਜ਼ਾ ਚਲਾਓ(_S)"
+
+#: src/kgx-preferences-window.ui:68
+msgid "_Visual Effects"
+msgstr "ਦਿੱਖ ਪ੍ਰਭਾਵ(_V)"
+
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:168
+#: src/kgx-simple-tab.c:180
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr ""
+msgstr "<b>ਸਿਰਫ਼ ਪੜ੍ਹਨ ਲਈ</b> — ਕਮਾਂਡ %i ਕੋਡ ਨਾਲ ਖਤਮ ਹੋਈ"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:177
+#: src/kgx-simple-tab.c:189
 msgid "<b>Read Only</b> — Command exited"
-msgstr ""
+msgstr "<b>ਸਿਰਫ਼ ਪੜ੍ਹਨ ਲਈ</b> — ਕਮਾਂਡ ਖਤਮ ਹੋਈ"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:210
+#: src/kgx-simple-tab.c:222
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਅਸਫ਼ਲ</b> — %s"
 
-#: src/kgx-tab.c:1160
+#: src/kgx-tab.c:1091
 msgid "Command completed"
 msgstr "ਕਮਾਂਡ ਪੂਰੀ ਹੋਈ"
 
-#: src/kgx-tab-button.ui:5
-msgid "View Open Tabs"
-msgstr "ਖੁੱਲ੍ਹੀਆਂ ਟੈਬਾਂ ਵੇਖੋ"
+#: src/kgx-tab.ui:25
+#| msgctxt "shortcut window"
+#| msgid "Find"
+msgid "Find text"
+msgstr "ਲਿਖਤ ਲੱਭੋ"
 
-#: src/kgx-terminal.c:772
+#: src/kgx-tab.ui:36
+#| msgctxt "shortcut window"
+#| msgid "Previous Tab"
+msgid "Previous Match"
+msgstr "ਪਿਛਲੇ ਮੇਲ"
+
+#: src/kgx-tab.ui:44
+#| msgctxt "shortcut window"
+#| msgid "Next Tab"
+msgid "Next Match"
+msgstr "ਅਗਲਾ ਮੇਲ"
+
+#: src/kgx-terminal.c:582
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+"ਖੋਲ੍ਠਣ ਲਈ Ctrl-ਕਲਿੱਕ:\n"
+"%s"
+
+#: src/kgx-terminal.c:908
 msgid "You are pasting a command that runs as an administrator"
 msgstr "ਤੁਸੀਂ ਉਹ ਕਮਾਂਡ ਚੇਪ ਰਹੇ ਹੋ, ਜੋ ਕਿ ਪਰਸ਼ਾਸ਼ਕ ਚਲਾਉਂਦਾ ਹੈ"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:775
+#: src/kgx-terminal.c:912
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
 "%s"
 msgstr ""
+"ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਤੁਸੀਂ ਜਾਣਦੇ ਹੋ ਕਿ ਕਮਾਂਡ ਕੀ ਕਰਦੀ ਹੈ:\n"
+"%s"
 
-#: src/kgx-terminal.c:783 src/menus.ui:24
+#: src/kgx-terminal.c:916 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "ਚੇਪੋ(_P)"
 
-#: src/kgx-theme-switcher.ui:18
-msgid "Use System Colors"
-msgstr "ਸਿਸਟਮ ਰੰਗ ਵਰਤੋਂ"
+#: src/kgx-terminal.ui:7
+msgid "_Open Link"
+msgstr "ਲਿੰਕ ਖੋਲ੍ਹੋ(_O)"
 
-#: src/kgx-theme-switcher.ui:47
-msgid "Use Light Colors"
-msgstr "ਹਲਕੇ ਰੰਗ ਵਰਤੋਂ"
+#: src/kgx-terminal.ui:12
+msgid "Copy _Link"
+msgstr "ਲਿੰਕ ਕਾਪੀ ਕਰੋ(_L)"
 
-#: src/kgx-theme-switcher.ui:76
-msgid "Use Dark Colors"
-msgstr "ਗੂੜ੍ਹੇ ਰੰਗ ਵਰਤੋਂ"
+#: src/kgx-terminal.ui:19
+msgid "_Copy"
+msgstr "ਕਾਪੀ ਕਰੋ(_C)"
+
+#: src/kgx-terminal.ui:29
+msgid "_Select All"
+msgstr "ਸਭ ਚੁਣੋ(_S)"
+
+#: src/kgx-terminal.ui:36
+msgid "Show in _Files"
+msgstr "ਫਾਇਲਾਂ ਵਿੱਚ ਵੇਖੋ(_F)"
+
+#: src/kgx-theme-switcher.ui:16
+msgid "Follow System Style"
+msgstr "ਸਿਸਟਮ ਸਟਾਈਲ ਦੇ ਮੁਤਾਬਕ"
+
+#: src/kgx-theme-switcher.ui:44
+msgid "Light Style"
+msgstr "ਹਲਕਾ ਸਟਾਈਲ"
+
+#: src/kgx-theme-switcher.ui:71
+msgid "Dark Style"
+msgstr "ਗੂੜ੍ਹਾ ਸਟਾਈਲ"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:531
+#: src/kgx-window.c:464
 msgid "translator-credits"
 msgstr ""
 "ਅ ਸ ਆਲਮ (A S Alam) ੨੦੨੨\n"
 "Punjabi OpenSource Team (POST) www.satluj.org"
 
-#: src/kgx-window.ui:26
-msgid "Shrink Text"
-msgstr "ਲਿਖਤ ਨੂੰ ਸੁੰਘੜੋ"
-
-#: src/kgx-window.ui:39
-msgid "Reset Size"
-msgstr "ਆਕਾਰ ਮੁੜ-ਸੈੱਟ ਕਰੋ"
-
-#: src/kgx-window.ui:52
-msgid "Enlarge Text"
-msgstr "ਲਿਖਤ ਆਕਾਰ ਵਧਾਓ"
-
-#: src/kgx-window.ui:74
+#: src/kgx-window.ui:17
 msgid "_New Window"
 msgstr "ਨਵੀਂ ਵਿੰਡੋ(_N)"
 
-#: src/kgx-window.ui:86
+#: src/kgx-window.ui:23
+msgid "_Show All Tabs"
+msgstr "ਸਭ ਟੈਬਾਂ ਵੇਖਾਓ(_S)"
+
+#: src/kgx-window.ui:30
+msgid "_Preferences"
+msgstr "ਪਸੰਦਾਂ(_P)"
+
+#: src/kgx-window.ui:34
 msgid "_Keyboard Shortcuts"
 msgstr "ਕੀਬੋਰਡ ਸ਼ਾਰਟਕੱਟ(_K)"
 
-#: src/kgx-window.ui:93
+#: src/kgx-window.ui:38
 msgid "_About Console"
 msgstr "ਕਨਸੋਲ ਬਾਰੇ(_A)"
 
-#: src/kgx-window.ui:94
-msgid "About this Program"
-msgstr "ਇਸ ਪਰਗੋਰਾਮ ਬਾਰੇ"
-
-#: src/kgx-window.ui:123
+#: src/kgx-window.ui:80
 msgid "Find in Terminal"
 msgstr "ਟਰਮੀਨਲ ਵਿੱਚ ਲੱਭੋ"
 
+#: src/kgx-window.ui:88
+#| msgid "Menu"
+msgid "Main Menu"
+msgstr "ਮੁੱਖ ਮੇਨੂ"
+
+#: src/kgx-window.ui:106
+msgid "Shrink Text"
+msgstr "ਲਿਖਤ ਨੂੰ ਸੁੰਘੜੋ"
+
+#: src/kgx-window.ui:117
+msgid "Reset Size"
+msgstr "ਆਕਾਰ ਮੁੜ-ਸੈੱਟ ਕਰੋ"
+
 #: src/kgx-window.ui:141
-msgid "Menu"
-msgstr "ਮੇਨੂ"
+msgid "Enlarge Text"
+msgstr "ਲਿਖਤ ਆਕਾਰ ਵਧਾਓ"
 
-#: src/menus.ui:7
-msgid "_Open Link"
-msgstr "ਲਿੰਕ ਖੋਲ੍ਹੋ(_O)"
+#~ msgid "King’s Cross"
+#~ msgstr "ਕਿੰਗ ਦਾ ਕਰਾਸ"
 
-#: src/menus.ui:12
-msgid "Copy _Link"
-msgstr "ਲਿੰਕ ਕਾਪੀ ਕਰੋ(_L)"
+#~ msgid "Console (Development)"
+#~ msgstr "ਕਨਸੋਲ (ਵਿਕਾਸ)"
 
-#: src/menus.ui:19
-msgid "_Copy"
-msgstr "ਕਾਪੀ ਕਰੋ(_C)"
+#~ msgid "View Open Tabs"
+#~ msgstr "ਖੁੱਲ੍ਹੀਆਂ ਟੈਬਾਂ ਵੇਖੋ"
 
-#: src/menus.ui:29
-msgid "_Select All"
-msgstr "ਸਭ ਚੁਣੋ(_S)"
+#~ msgid "Use Light Colors"
+#~ msgstr "ਹਲਕੇ ਰੰਗ ਵਰਤੋਂ"
 
-#: src/menus.ui:36
-msgid "Show in _Files"
-msgstr "ਫਾਇਲਾਂ ਵਿੱਚ ਵੇਖੋ(_F)"
+#~ msgid "Use Dark Colors"
+#~ msgstr "ਗੂੜ੍ਹੇ ਰੰਗ ਵਰਤੋਂ"
 
-#: nautilus/kgx-nautilus-menu-item.c:120
-msgid "Open in Co_nsole (Devel)"
-msgstr "ਕਨਸੋਲ ਵਿੱਚ ਖੋਲ੍ਹੋ(_n) (Devel)"
+#~ msgid "About this Program"
+#~ msgstr "ਇਸ ਪਰਗੋਰਾਮ ਬਾਰੇ"
 
-#: nautilus/kgx-nautilus-menu-item.c:122
-msgid "Open in Co_nsole"
-msgstr "ਕਨਸੋਲ ਵਿੱਚ ਖੋਲ੍ਹੋ(_n)"
+#~ msgid "Open in Co_nsole (Devel)"
+#~ msgstr "ਕਨਸੋਲ ਵਿੱਚ ਖੋਲ੍ਹੋ(_n) (Devel)"
 
-#: nautilus/kgx-nautilus-menu-item.c:124
-msgid "Start a terminal session for this location"
-msgstr "ਇਸ ਟਿਕਾਣੇ ਲਈ ਟਰਮੀਨਲ ਸ਼ੈਸ਼ਨ ਸ਼ੁਰੂ ਕਰੋ"
+#~ msgid "Open in Co_nsole"
+#~ msgstr "ਕਨਸੋਲ ਵਿੱਚ ਖੋਲ੍ਹੋ(_n)"
+
+#~ msgid "Start a terminal session for this location"
+#~ msgstr "ਇਸ ਟਿਕਾਣੇ ਲਈ ਟਰਮੀਨਲ ਸ਼ੈਸ਼ਨ ਸ਼ੁਰੂ ਕਰੋ"
