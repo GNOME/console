@@ -253,23 +253,26 @@ have_url_under_pointer (KgxTerminal *self,
   g_autofree char *hyperlink = NULL;
   g_autofree char *match = NULL;
   int match_id;
+  gboolean current = FALSE;
 
   hyperlink = vte_terminal_check_hyperlink_at (VTE_TERMINAL (self), x, y);
 
   if (G_UNLIKELY (hyperlink)) {
     g_set_str (&self->current_url, g_steal_pointer (&hyperlink));
+    current = TRUE;
   } else {
     match = vte_terminal_check_match_at (VTE_TERMINAL (self), x, y, &match_id);
 
     for (int i = 0; i < KGX_TERMINAL_N_LINK_REGEX; i++) {
       if (self->match_id[i] == match_id) {
         g_set_str (&self->current_url, g_steal_pointer (&match));
+        current = TRUE;
         break;
       }
     }
   }
 
-  return self->current_url != NULL;
+  return current;
 }
 
 
@@ -305,7 +308,7 @@ context_menu (KgxTerminal *self,
   gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.open-link", value);
   gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.copy-link", value);
 
-  if (!self->popup_menu) {
+  if (G_UNLIKELY (!self->popup_menu)) {
     self->popup_menu = gtk_popover_menu_new_from_model (G_MENU_MODEL (self->context_model));
 
     gtk_widget_set_parent (self->popup_menu, GTK_WIDGET (self));
@@ -315,7 +318,7 @@ context_menu (KgxTerminal *self,
 
   update_menu_position (self);
 
-  if (x > -1 && y > -1) {
+  if (G_LIKELY (x > -1 && y > -1)) {
     GdkRectangle rect = { x, y, 1, 1 };
     gtk_popover_set_pointing_to (GTK_POPOVER (self->popup_menu), &rect);
   } else {
