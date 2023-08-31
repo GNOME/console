@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-08-05 06:17+0000\n"
-"PO-Revision-Date: 2023-08-15 22:32+0200\n"
+"POT-Creation-Date: 2023-08-26 11:06+0000\n"
+"PO-Revision-Date: 2023-08-31 23:32+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -35,7 +35,7 @@ msgstr ""
 msgid "New Window"
 msgstr "Nové okno"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:167
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
 msgid "New Tab"
 msgstr "Nová karta"
 
@@ -53,7 +53,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Terminálové okno"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:262 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:293 src/kgx-window.c:457
 msgid "The GNOME Project"
 msgstr "Projekt GNOME"
 
@@ -231,7 +231,7 @@ msgstr ""
 "Některé příkazy doposud běží. Zavřením této karty je zabijete, což může vést "
 "k neočekávaným důsledkům."
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:915
+#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:918
 msgid "_Cancel"
 msgstr "_Zrušit"
 
@@ -348,7 +348,7 @@ msgstr "Předchozí shoda"
 msgid "Next Match"
 msgstr "Následující shoda"
 
-#: src/kgx-terminal.c:582
+#: src/kgx-terminal.c:585
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -357,12 +357,12 @@ msgstr ""
 "Otevřít kliknutím se stisknutou klávesou Ctrl:\n"
 "%s"
 
-#: src/kgx-terminal.c:908
+#: src/kgx-terminal.c:911
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Vkládáte příkaz, který běží pod administrátorským účtem"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:912
+#: src/kgx-terminal.c:915
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -371,7 +371,7 @@ msgstr ""
 "Ujistěte se, že víte, co přesně příkaz dělá:\n"
 "%s"
 
-#: src/kgx-terminal.c:916 src/kgx-terminal.ui:24
+#: src/kgx-terminal.c:919 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "V_ložit"
 
@@ -430,25 +430,25 @@ msgstr "_Klávesové zkratky"
 
 #: src/kgx-window.ui:38
 msgid "_About Console"
-msgstr "O aplikaci Konzola"
+msgstr "O _aplikaci Konzola"
 
-#: src/kgx-window.ui:80
+#: src/kgx-window.ui:79
 msgid "Find in Terminal"
 msgstr "Hledat v terminálu"
 
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:86
 msgid "Main Menu"
 msgstr "Hlavní nabídka"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:104
 msgid "Shrink Text"
 msgstr "Zmenšit text"
 
-#: src/kgx-window.ui:117
+#: src/kgx-window.ui:115
 msgid "Reset Size"
 msgstr "Výchozí velikost"
 
-#: src/kgx-window.ui:141
+#: src/kgx-window.ui:139
 msgid "Enlarge Text"
 msgstr "Zvětšit text"
 
