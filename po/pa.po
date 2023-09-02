@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-08-05 06:17+0000\n"
-"PO-Revision-Date: 2023-08-22 19:38-0700\n"
+"POT-Creation-Date: 2023-08-23 02:39+0000\n"
+"PO-Revision-Date: 2023-09-02 08:38-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <punjab-translation@googlegroups.com>\n"
 "Language: pa\n"
@@ -48,7 +48,7 @@ msgstr "ਗਨੋਮ ਡੈਸਕਟਾਪ ਲਈ ਸਰਲ ਵਰਤੋਂਕ�
 msgid "Terminal window"
 msgstr "ਟਰਮੀਨਲ ਵਿੰਡੋ"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:262 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:293 src/kgx-window.c:457
 msgid "The GNOME Project"
 msgstr "ਗਨੋਮ ਪਰੋਜੈਕਟ"
 
@@ -123,22 +123,18 @@ msgid "Move Tab Left"
 msgstr "ਟੈਬ ਨੂੰ ਖੱਬੇ ਭੇਜੋ"
 
 #: src/help-overlay.ui:92
-#| msgctxt "shortcut window"
-#| msgid "Switch to Tab"
 msgctxt "shortcut window"
 msgid "Switch to Tab 1–9"
 msgstr "ਟੈਬ 1-9 ਉੱਤੇ ਜਾਓ"
 
 #: src/help-overlay.ui:98
-#| msgctxt "shortcut window"
-#| msgid "Switch to Tab"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "ਟੈਬ 10 ਉੱਤੇ ਜਾਓ"
 
 #: src/kgx-application.c:252
 msgid "Cannot use both --command and positional parameters"
-msgstr ""
+msgstr "--command ਅਤੇ ਸਥਿਤੀ ਪੈਰਾਮੀਟਰ ਦੋਵੇਂ ਵਰਤੇ ਨਹੀਂ ਜਾ ਸਕਦੇ ਹਨ"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
@@ -151,7 +147,7 @@ msgstr "# KGX %s,  VTE %u.%u.%u %s ਵਰਤ ਕੇ\n"
 #: src/kgx-application.c:361 src/kgx-window.c:452
 #, c-format
 msgid "© %s Zander Brown"
-msgstr ""
+msgstr "© %s ਜ਼ੈਂਡਰ ਬਰਾਊਨ"
 
 #: src/kgx-application.c:379
 msgid "GPL 3.0 or later"
@@ -159,7 +155,7 @@ msgstr "GPL 3.0 ਜਾਂ ਨਵਾਂ"
 
 #: src/kgx-application.c:444
 msgid "Execute the argument to this option inside the terminal"
-msgstr ""
+msgstr "ਟਰਮੀਨਲ ਵਿੱਚ ਇਸ ਚੋਣ ਨਾਲ ਆਰਗੂਮੈਂਟ ਚਲਾਓ"
 
 #: src/kgx-application.c:445
 msgid "COMMAND"
@@ -172,11 +168,11 @@ msgstr "ਕਾਰਜਕਾਰੀ ਡਾਇਰੈਕਟਰੀ ਸੈੱਟ ਕਰ
 #. Translators: Placeholder of for a given directory
 #: src/kgx-application.c:455
 msgid "DIRNAME"
-msgstr ""
+msgstr "ਡਾਇਰੈਕਟਰੀ-ਨਾਂ"
 
 #: src/kgx-application.c:463
 msgid "Wait until the child exits (TODO)"
-msgstr ""
+msgstr "ਚਲਾਈਲ ਖਤਮ ਹੋਣ ਤੱਕ ਉਡੀਕ (ਕਰਨ-ਵਾਲਾ)"
 
 #: src/kgx-application.c:472
 msgid "Set the initial window title"
@@ -188,7 +184,7 @@ msgstr "ਟਾਈਟਲ"
 
 #: src/kgx-application.c:481
 msgid "ADVANCED: Set the shell to launch"
-msgstr ""
+msgstr "ਤਕਨੀਕੀ: ਚਲਾਉਣ ਲਈ ਸ਼ੈੱਲ ਸੈਟ ਕਰੋ"
 
 #: src/kgx-application.c:482
 msgid "SHELL"
@@ -196,7 +192,7 @@ msgstr "ਸ਼ੈੱਲ"
 
 #: src/kgx-application.c:490
 msgid "ADVANCED: Set the scrollback length"
-msgstr ""
+msgstr "ਤਕਨੀਕੀ: ਪਿੱਛੇ ਵੱਲ ਸਕਰੋਲ ਕਰਨ ਦੀ ਲੰਬਾਈ ਦਿਓ"
 
 #: src/kgx-application.c:491
 msgid "LINES"
@@ -204,7 +200,7 @@ msgstr "ਲਾਈਨਾਂ"
 
 #: src/kgx-application.c:500
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
-msgstr ""
+msgstr "[-e|-- ਕਮਾਂਡ [ਆਰਗੂਮੈਂਟ...]]"
 
 #: src/kgx-close-dialog.c:50
 msgid "Close Window?"
@@ -215,6 +211,8 @@ msgid ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
 msgstr ""
+"ਕੁਝ ਕਮਾਡਾਂ ਹਾਲੇ ਵੀ ਚੱਲ ਰਹੀਆਂ ਹਨ। ਇਹ ਵਿੰਡੋ ਨੂੰ ਬੰਦ ਕਰਨ ਨਾਲ ਉਹਨਾਂ ਨੂੰ ਖਤਮ ਕੀਤਾ"
+" ਜਾਵੇਗਾ ਅਤੇ ਜਿਸ ਨਾਲ ਕੁਝ ਵੀ ਨਤੀਜਾ ਹੋ ਸਕਦਾ ਹੈ।"
 
 #: src/kgx-close-dialog.c:56
 msgid "Close Tab?"
@@ -225,6 +223,8 @@ msgid ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
 msgstr ""
+"ਕੁਝ ਕਮਾਡਾਂ ਹਾਲੇ ਵੀ ਚੱਲ ਰਹੀਆਂ ਹਨ। ਇਹ ਟੈਬ ਨੂੰ ਬੰਦ ਕਰਨ ਨਾਲ ਉਹਨਾਂ ਨੂੰ ਖਤਮ ਕੀਤਾ"
+" ਜਾਵੇਗਾ ਅਤੇ ਜਿਸ ਨਾਲ ਕੁਝ ਵੀ ਨਤੀਜਾ ਹੋ ਸਕਦਾ ਹੈ।"
 
 #: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:915
 msgid "_Cancel"
@@ -235,13 +235,10 @@ msgid "C_lose"
 msgstr "ਬੰਦ ਕਰੋ(_l)"
 
 #: src/kgx-font-picker.ui:12
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
 msgid "Terminal Font"
 msgstr "ਟਰਮੀਨਲ ਫ਼ੋਂਟ"
 
 #: src/kgx-font-picker.ui:37
-#| msgid "_Select All"
 msgid "_Select"
 msgstr "ਚੁਣੋ(_S)"
 
@@ -258,7 +255,6 @@ msgid "Font Preview"
 msgstr "ਫ਼ੋਂਟ ਝਲਕ"
 
 #: src/kgx-font-picker.ui:188
-#| msgid "Reset Size"
 msgid "Font Size"
 msgstr "ਫੋਂਟ ਆਕਾਰ"
 
@@ -292,7 +288,6 @@ msgid "Font"
 msgstr "ਫ਼ੋਂਟ"
 
 #: src/kgx-preferences-window.ui:13
-#| msgid "Use System Colors"
 msgid "Use _System Default"
 msgstr "ਸਿਸਟਮ ਡਿਫਾਲਟ ਵਰਤੋਂ(_S)"
 
@@ -301,8 +296,6 @@ msgid "Custom _Font"
 msgstr "ਪਸੰਦੀਦਾ ਫ਼ੋਂਟ(_F)"
 
 #: src/kgx-preferences-window.ui:59
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
 msgid "Terminal Bell"
 msgstr "ਟਰਮੀਨਲ ਘੰਟੀ"
 
@@ -339,20 +332,14 @@ msgid "Command completed"
 msgstr "ਕਮਾਂਡ ਪੂਰੀ ਹੋਈ"
 
 #: src/kgx-tab.ui:25
-#| msgctxt "shortcut window"
-#| msgid "Find"
 msgid "Find text"
 msgstr "ਲਿਖਤ ਲੱਭੋ"
 
 #: src/kgx-tab.ui:36
-#| msgctxt "shortcut window"
-#| msgid "Previous Tab"
 msgid "Previous Match"
 msgstr "ਪਿਛਲੇ ਮੇਲ"
 
 #: src/kgx-tab.ui:44
-#| msgctxt "shortcut window"
-#| msgid "Next Tab"
 msgid "Next Match"
 msgstr "ਅਗਲਾ ਮੇਲ"
 
@@ -447,7 +434,6 @@ msgid "Find in Terminal"
 msgstr "ਟਰਮੀਨਲ ਵਿੱਚ ਲੱਭੋ"
 
 #: src/kgx-window.ui:88
-#| msgid "Menu"
 msgid "Main Menu"
 msgstr "ਮੁੱਖ ਮੇਨੂ"
 
