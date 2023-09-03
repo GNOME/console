@@ -551,7 +551,7 @@ kgx_tab_real_bell (KgxTab *self)
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_RINGING]);
 
   g_clear_handle_id (&priv->ringing_timeout, g_source_remove);
-  priv->ringing_timeout = g_timeout_add_once (800, clear_ringing, self);
+  priv->ringing_timeout = g_timeout_add_once (500, clear_ringing, self);
   g_source_set_name_by_id (priv->ringing_timeout, "[kgx] tab ringing");
 }
 

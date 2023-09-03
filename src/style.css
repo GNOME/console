@@ -1,7 +1,7 @@
 @define-color root_headerbar_bg_color       shade(@red_1, 1.48);
 @define-color root_headerbar_backdrop_color shade(@red_1, 1.45);
 
-@define-color remote_headerbar_bg_color       shade(@purple_1, 1.38);
+@define-color remote_headerbar_bg_color       shade(@purple_1, 1.27);
 @define-color remote_headerbar_backdrop_color shade(@purple_1, 1.35);
 
 @keyframes bell {
@@ -30,7 +30,7 @@ kgx-tab .top-bar {
 }
 
 .terminal-window.bell .main-box > revealer.top-bar {
-  animation: bell 1s ease-out;
+  animation: bell 0.5s ease-out;
 }
 
 .terminal-window vte-terminal {
