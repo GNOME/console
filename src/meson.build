@@ -5,6 +5,8 @@ kgx_sources = [
   'kgx-application.h',
   'kgx-close-dialog.c',
   'kgx-close-dialog.h',
+  'kgx-despatcher.c',
+  'kgx-despatcher.h',
   'kgx-drop-target.c',
   'kgx-drop-target.h',
   'kgx-font-picker.c',

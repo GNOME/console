@@ -34,9 +34,9 @@
 #include <pcre2.h>
 
 #include "rgba.h"
-#include "xdg-fm1.h"
 
 #include "kgx-terminal.h"
+#include "kgx-despatcher.h"
 #include "kgx-settings.h"
 #include "kgx-marshals.h"
 
@@ -88,6 +88,8 @@ struct _KgxTerminal {
   GMenuModel    *context_model;
   GtkWidget  *popup_menu;
 
+  KgxDespatcher *despatcher;
+
   /* Hyperlinks */
   char       *current_url;
   int         match_id[KGX_TERMINAL_N_LINK_REGEX];
@@ -124,6 +126,8 @@ kgx_terminal_dispose (GObject *object)
   g_clear_pointer (&self->popup_menu, gtk_widget_unparent);
 
   g_clear_object (&self->settings);
+
+  g_clear_object (&self->despatcher);
 
   G_OBJECT_CLASS (kgx_terminal_parent_class)->dispose (object);
 }
@@ -337,27 +341,39 @@ menu_popup_activated (KgxTerminal *self)
 
 
 static void
-open_link_cb (GtkUriLauncher *launcher,
-              GAsyncResult   *result)
+did_open (GObject *source, GAsyncResult *res, gpointer user_data)
 {
+  g_autoptr (KgxTerminal) self = user_data;
   g_autoptr (GError) error = NULL;
 
-  if (!gtk_uri_launcher_launch_finish (launcher, result, &error))
+  kgx_despatcher_open_finish (KGX_DESPATCHER (source), res, &error);
+
+  if (error) {
     g_warning ("Couldn't open uri: %s\n", error->message);
+  }
+}
+
+
+static inline void
+ensure_despatcher (KgxTerminal *self)
+{
+  if (!self->despatcher) {
+    self->despatcher = g_object_new (KGX_TYPE_DESPATCHER, NULL);
+  }
 }
 
 
 static void
 open_link (KgxTerminal *self)
 {
-  GtkUriLauncher *launcher;
+  ensure_despatcher (self);
 
-  launcher = gtk_uri_launcher_new (self->current_url);
-  gtk_uri_launcher_launch (launcher,
-                           GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
-                           NULL,
-                           (GAsyncReadyCallback) open_link_cb,
-                           NULL);
+  kgx_despatcher_open (self->despatcher,
+                       self->current_url,
+                       GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
+                       NULL,
+                       did_open,
+                       g_object_ref (self));
 }
 
 
@@ -375,6 +391,7 @@ copy_link_activated (KgxTerminal *self)
 
   gdk_clipboard_set_text (cb, self->current_url);
 }
+
 
 static void
 copy_activated (KgxTerminal *self)
@@ -422,76 +439,28 @@ select_all_activated (KgxTerminal *self)
 }
 
 
-typedef struct {
-  GStrv     uris;
-  gboolean  show_folders;
-} ShowData;
-
-
 static void
-clear_show_data (gpointer data)
-{
-  ShowData *self = data;
-
-  g_clear_pointer (&self->uris, g_strfreev);
-  g_free (self);
-}
-
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (ShowData, clear_show_data)
-
-
-static void
-complete_call (GObject *source, GAsyncResult *res, gpointer data)
+did_show_item (GObject *source, GAsyncResult *res, gpointer user_data)
 {
   g_autoptr (GError) error = NULL;
-  g_autoptr (ShowData) show = data;
 
-  if (show->show_folders) {
-    xdg_file_manager1_call_show_folders_finish (XDG_FILE_MANAGER1 (source),
-                                                res,
-                                                &error);
-  } else {
-    xdg_file_manager1_call_show_items_finish (XDG_FILE_MANAGER1 (source),
-                                              res,
-                                              &error);
-  }
+  kgx_despatcher_show_item_finish (KGX_DESPATCHER (source), res, &error);
 
   if (error) {
-    g_warning ("term.show-in-files: D-Bus call failed %s", error->message);
+    g_warning ("term.show-in-files: show item failed: %s", error->message);
   }
 }
 
 
 static void
-got_proxy (GObject *source, GAsyncResult *res, gpointer data)
+did_show_folder (GObject *source, GAsyncResult *res, gpointer user_data)
 {
   g_autoptr (GError) error = NULL;
-  g_autoptr (XdgFileManager1) fm = NULL;
-  g_autoptr (ShowData) show = data;
-  g_auto (GStrv) uris = g_steal_pointer (&show->uris);
 
-  fm = xdg_file_manager1_proxy_new_finish (res, &error);
+  kgx_despatcher_show_folder_finish (KGX_DESPATCHER (source), res, &error);
 
   if (error) {
-    g_warning ("term.show-in-files: D-Bus connect failed %s", error->message);
-    return;
-  }
-
-  if (show->show_folders) {
-    xdg_file_manager1_call_show_folders (fm,
-                                         (const char *const *) uris,
-                                         "",
-                                         NULL,
-                                         complete_call,
-                                         g_steal_pointer (&show));
-  } else {
-    xdg_file_manager1_call_show_items (fm,
-                                       (const char *const *) uris,
-                                       "",
-                                       NULL,
-                                       complete_call,
-                                       g_steal_pointer (&show));
+    g_warning ("term.show-in-files: show folder failed: %s", error->message);
   }
 }
 
@@ -499,33 +468,36 @@ got_proxy (GObject *source, GAsyncResult *res, gpointer data)
 static void
 show_in_files_activated (KgxTerminal *self)
 {
-  g_autoptr (ShowData) data = g_new0 (ShowData, 1);
-  g_autoptr (GStrvBuilder) builder = g_strv_builder_new ();
   const char *uri = NULL;
+  GtkWindow *parent = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
 
-  data->show_folders = FALSE;
+  ensure_despatcher (self);
+
   uri = vte_terminal_get_current_file_uri (VTE_TERMINAL (self));
 
-  if (uri == NULL) {
-    data->show_folders = TRUE;
-    uri = vte_terminal_get_current_directory_uri (VTE_TERMINAL (self));
+  if (G_UNLIKELY (uri)) {
+    kgx_despatcher_show_item (self->despatcher,
+                              uri,
+                              parent,
+                              NULL,
+                              did_show_item,
+                              NULL);
+    return;
   }
 
-  if (uri == NULL) {
+  uri = vte_terminal_get_current_directory_uri (VTE_TERMINAL (self));
+
+  if (G_UNLIKELY (!uri)) {
     g_warning ("term.show-in-files: no file");
     return;
   }
 
-  g_strv_builder_add (builder, uri);
-  data->uris = g_strv_builder_end (builder);
-
-  xdg_file_manager1_proxy_new_for_bus (G_BUS_TYPE_SESSION,
-                                       G_DBUS_PROXY_FLAGS_NONE,
-                                       "org.freedesktop.FileManager1",
-                                       "/org/freedesktop/FileManager1",
-                                       NULL,
-                                       got_proxy,
-                                       g_steal_pointer (&data));
+  kgx_despatcher_show_folder (self->despatcher,
+                              uri,
+                              parent,
+                              NULL,
+                              did_show_folder,
+                              NULL);
 }
 
 
@@ -574,7 +546,7 @@ kgx_terminal_query_tooltip (GtkWidget  *widget,
   KgxTerminal *self = KGX_TERMINAL (widget);
   g_autofree char *text = NULL;
 
-  if (!have_url_under_pointer (self, x, y)) {
+  if (keyboard_tooltip || !have_url_under_pointer (self, x, y)) {
     return GTK_WIDGET_CLASS (kgx_terminal_parent_class)->query_tooltip (widget,
                                                                         x,
                                                                         y,
