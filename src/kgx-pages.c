@@ -354,16 +354,47 @@ create_window (AdwTabView *view,
 }
 
 
-static void
-close_response (AdwTabPage *page,
-                const char *response)
-{
-  KgxTab *tab = KGX_TAB (adw_tab_page_get_child (page));
-  KgxPages *self = kgx_tab_get_pages (tab);
-  KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
+typedef struct {
+  AdwTabView *view;
+  AdwTabPage *page;
+} CloseData;
 
-  adw_tab_view_close_page_finish (ADW_TAB_VIEW (priv->view), page,
+
+static void
+close_data_free (gpointer data)
+{
+  CloseData *self = data;
+
+  if (!self) {
+    return;
+  }
+
+  g_clear_object (&self->view);
+  g_clear_weak_pointer (&self->page);
+
+  g_free (self);
+}
+
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (CloseData, close_data_free)
+
+
+static void
+close_response (AdwMessageDialog *dialogue,
+                const char       *response,
+                gpointer          user_data)
+{
+  CloseData *data = user_data;
+
+  if (G_UNLIKELY (!data->page)) {
+    return;
+  }
+
+  adw_tab_view_close_page_finish (ADW_TAB_VIEW (data->view),
+                                  data->page,
                                   !g_strcmp0 (response, "close"));
+
+  gtk_window_destroy (GTK_WINDOW (dialogue));
 }
 
 
@@ -372,14 +403,19 @@ close_page (AdwTabView *view,
             AdwTabPage *page,
             KgxPages   *self)
 {
-  GtkWidget *dlg;
+  g_autoptr (CloseData) data = g_new0 (CloseData, 1);
   g_autoptr (GPtrArray) children = NULL;
+  GtkWidget *dlg;
   GtkRoot *root;
+
+  /* slightly paranoid */
+  g_set_object (&data->view, view);
+  g_set_weak_pointer (&data->page, page);
 
   children = kgx_tab_get_children (KGX_TAB (adw_tab_page_get_child (page)));
 
   if (children->len < 1) {
-    return FALSE; // Aka no, I don’t want to block closing
+    return GDK_EVENT_PROPAGATE; /* Aka no, I don’t want to block closing */
   }
 
   root = gtk_widget_get_root (GTK_WIDGET (self));
@@ -388,11 +424,14 @@ close_page (AdwTabView *view,
 
   gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (root));
 
-  g_signal_connect_swapped (dlg, "response", G_CALLBACK (close_response), page);
+  g_signal_connect_data (dlg,
+                         "response", G_CALLBACK (close_response),
+                         g_steal_pointer (&data), (GClosureNotify) close_data_free,
+                         0);
 
   gtk_window_present (GTK_WINDOW (dlg));
 
-  return TRUE; // Block the close
+  return GDK_EVENT_STOP; // Block the close
 }
 
 
