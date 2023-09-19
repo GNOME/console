@@ -31,6 +31,40 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="45.0" date="2023-09-19" type="stable">
+      <description>
+        <p>Updated Translations:</p>
+        <ul>
+          <li>Belarusian</li>
+          <li>Catalan</li>
+          <li>Chinese (China)</li>
+          <li>Czech</li>
+          <li>Danish</li>
+          <li>Dutch</li>
+          <li>Esperanto</li>
+          <li>Finnish</li>
+          <li>French</li>
+          <li>Galician</li>
+          <li>Georgian</li>
+          <li>German</li>
+          <li>Hebrew</li>
+          <li>Hungarian</li>
+          <li>Indonesian</li>
+          <li>Kazakh</li>
+          <li>Korean</li>
+          <li>Lithuanian</li>
+          <li>Polish</li>
+          <li>Portuguese</li>
+          <li>Punjabi</li>
+          <li>Romanian</li>
+          <li>Russian</li>
+          <li>Slovenian</li>
+          <li>Spanish</li>
+          <li>Swedish</li>
+          <li>Turkish</li>
+        </ul>
+      </description>
+    </release>
     <release version="45~beta" date="2023-08-06" type="development">
       <description>
         <p>We now have a preferences window, for setting a custom font and altering bell behaviour.</p>
