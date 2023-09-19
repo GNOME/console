@@ -39,8 +39,6 @@ G_DECLARE_DERIVABLE_TYPE (KgxPages, kgx_pages, KGX, PAGES, AdwBin)
 
 void        kgx_pages_add_page       (KgxPages   *self,
                                       KgxTab     *page);
-void        kgx_pages_remove_page    (KgxPages   *self,
-                                      KgxTab     *page);
 int         kgx_pages_count          (KgxPages   *self);
 GPtrArray  *kgx_pages_get_children   (KgxPages   *self);
 void        kgx_pages_focus_page     (KgxPages   *self,

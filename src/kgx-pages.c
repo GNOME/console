@@ -773,31 +773,6 @@ kgx_pages_add_page (KgxPages *self,
 }
 
 
-void
-kgx_pages_remove_page (KgxPages *self,
-                       KgxTab   *page)
-{
-  KgxPagesPrivate *priv;
-  AdwTabPage *tab_page;
-
-  g_return_if_fail (KGX_IS_PAGES (self));
-
-  priv = kgx_pages_get_instance_private (self);
-
-  if (!page)
-    {
-      tab_page = adw_tab_view_get_selected_page (ADW_TAB_VIEW (priv->view));
-      adw_tab_view_close_page (ADW_TAB_VIEW (priv->view), tab_page);
-      return;
-    }
-
-  g_return_if_fail (KGX_IS_TAB (page));
-
-  tab_page = adw_tab_view_get_page (ADW_TAB_VIEW (priv->view), GTK_WIDGET (page));
-  adw_tab_view_close_page (ADW_TAB_VIEW (priv->view), tab_page);
-}
-
-
 /**
  * kgx_pages_focus_page:
  * @self: the #KgxPages
