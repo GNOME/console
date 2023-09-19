@@ -268,7 +268,7 @@ kgx_simple_tab_start (KgxTab              *page,
 
   pty = vte_pty_new_sync (VTE_PTY_DEFAULT, self->spawn_cancellable, &error);
   if (error) {
-    g_task_return_error (task, error);
+    g_task_return_error (task, g_steal_pointer (&error));
     g_clear_object (&self->spawn_cancellable);
 
     return;
