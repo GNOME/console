@@ -36,6 +36,8 @@ struct _KgxPreferencesWindow {
   GtkWidget            *visual_bell;
   GtkWidget            *use_system_font;
   GtkWidget            *custom_font;
+  GtkWidget            *scroll_on_keystroke;
+  GtkWidget            *scroll_on_output;
 };
 
 
@@ -181,6 +183,8 @@ kgx_preferences_window_class_init (KgxPreferencesWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, visual_bell);
   gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, use_system_font);
   gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, custom_font);
+  gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, scroll_on_keystroke);
+  gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, scroll_on_output);
 
   gtk_widget_class_bind_template_callback (widget_class, font_as_attributes);
   gtk_widget_class_bind_template_callback (widget_class, font_as_label);
@@ -205,5 +209,11 @@ kgx_preferences_window_init (KgxPreferencesWindow *self)
                         G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
   g_binding_group_bind (self->settings_binds, "use-system-font",
                         self->use_system_font, "active",
+                        G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+  g_binding_group_bind (self->settings_binds, "scroll-on-keystroke",
+                        self->scroll_on_keystroke, "active",
+                        G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+  g_binding_group_bind (self->settings_binds, "scroll-on-output",
+                        self->scroll_on_output, "active",
                         G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 }

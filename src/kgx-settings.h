@@ -99,5 +99,11 @@ void                  kgx_settings_set_use_system_font  (KgxSettings           *
 PangoFontDescription *kgx_settings_get_custom_font      (KgxSettings           *self);
 void                  kgx_settings_set_custom_font      (KgxSettings           *self,
                                                          PangoFontDescription  *custom_font);
+gboolean              kgx_settings_get_scroll_on_keystroke (KgxSettings       *self);
+void                  kgx_settings_set_scroll_on_keystroke (KgxSettings       *self,
+                                                            gboolean           scroll_on_keystroke);
+gboolean              kgx_settings_get_scroll_on_output (KgxSettings       *self);
+void                  kgx_settings_set_scroll_on_output (KgxSettings       *self,
+                                                         gboolean           scroll_on_output);
 
 G_END_DECLS

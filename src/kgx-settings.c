@@ -50,6 +50,8 @@ struct _KgxSettings {
   KgxTheme              theme;
   double                scale;
   int64_t               scrollback_lines;
+  gboolean              scroll_on_keystroke;
+  gboolean              scroll_on_output;
   gboolean              audible_bell;
   gboolean              visual_bell;
   gboolean              use_system_font;
@@ -75,6 +77,8 @@ enum {
   PROP_VISUAL_BELL,
   PROP_USE_SYSTEM_FONT,
   PROP_CUSTOM_FONT,
+  PROP_SCROLL_ON_KEYSTROKE,
+  PROP_SCROLL_ON_OUTPUT,
   LAST_PROP
 };
 
@@ -140,6 +144,12 @@ kgx_settings_set_property (GObject      *object,
     case PROP_CUSTOM_FONT:
       kgx_settings_set_custom_font (self, g_value_get_boxed (value));
       break;
+    case PROP_SCROLL_ON_KEYSTROKE:
+      kgx_settings_set_scroll_on_keystroke (self, g_value_get_boolean (value));
+      break;
+    case PROP_SCROLL_ON_OUTPUT:
+      kgx_settings_set_scroll_on_output (self, g_value_get_boolean (value));
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -185,6 +195,12 @@ kgx_settings_get_property (GObject    *object,
       break;
     case PROP_CUSTOM_FONT:
       g_value_set_boxed (value, self->custom_font);
+      break;
+    case PROP_SCROLL_ON_KEYSTROKE:
+      g_value_set_boolean (value, self->scroll_on_keystroke);
+      break;
+    case PROP_SCROLL_ON_OUTPUT:
+      g_value_set_boolean (value, self->scroll_on_output);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -249,6 +265,16 @@ kgx_settings_class_init (KgxSettingsClass *klass)
     g_param_spec_int64 ("scrollback-lines", NULL, NULL,
                         G_MININT64, G_MAXINT64, 512,
                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
+  pspecs[PROP_SCROLL_ON_KEYSTROKE] =
+    g_param_spec_boolean ("scroll-on-keystroke", NULL, NULL,
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
+  pspecs[PROP_SCROLL_ON_OUTPUT] =
+    g_param_spec_boolean ("scroll-on-output", NULL, NULL,
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
   pspecs[PROP_AUDIBLE_BELL] =
     g_param_spec_boolean ("audible-bell", NULL, NULL,
@@ -351,6 +377,12 @@ kgx_settings_init (KgxSettings *self)
                    G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (self->settings, "scrollback-lines",
                    self, "scrollback-lines",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (self->settings, "scroll-on-keystroke",
+                   self, "scroll-on-keystroke",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (self->settings, "scroll-on-output",
+                   self, "scroll-on-output",
                    G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (self->settings, "audible-bell",
                    self, "audible-bell",
@@ -648,4 +680,50 @@ kgx_settings_set_custom_font (KgxSettings          *self,
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_CUSTOM_FONT]);
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_FONT]);
+}
+
+gboolean
+kgx_settings_get_scroll_on_keystroke (KgxSettings *self)
+{
+  g_return_val_if_fail (KGX_IS_SETTINGS (self), FALSE);
+
+  return self->scroll_on_keystroke;
+}
+
+void
+kgx_settings_set_scroll_on_keystroke (KgxSettings *self,
+                                      gboolean     scroll_on_keystroke)
+{
+  g_return_if_fail (KGX_IS_SETTINGS (self));
+
+  scroll_on_keystroke = !!scroll_on_keystroke;
+
+  if (self->scroll_on_keystroke != scroll_on_keystroke)
+    {
+      self->scroll_on_keystroke = scroll_on_keystroke;
+      g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_SCROLL_ON_KEYSTROKE]);
+    }
+}
+
+gboolean
+kgx_settings_get_scroll_on_output (KgxSettings *self)
+{
+  g_return_val_if_fail (KGX_IS_SETTINGS (self), FALSE);
+
+  return self->scroll_on_output;
+}
+
+void
+kgx_settings_set_scroll_on_output (KgxSettings *self,
+                                   gboolean     scroll_on_output)
+{
+  g_return_if_fail (KGX_IS_SETTINGS (self));
+
+  scroll_on_output = !!scroll_on_output;
+
+  if (self->scroll_on_output != scroll_on_output)
+    {
+      self->scroll_on_output = scroll_on_output;
+      g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_SCROLL_ON_OUTPUT]);
+    }
 }

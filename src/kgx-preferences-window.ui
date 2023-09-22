@@ -71,6 +71,21 @@
             </child>
           </object>
         </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Scrolling</property>
+            <child>
+              <object class="AdwSwitchRow" id="scroll_on_output">
+                <property name="title" translatable="yes">Scroll on Output</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSwitchRow" id="scroll_on_keystroke">
+                <property name="title" translatable="yes">Scroll on Keystroke</property>
+              </object>
+            </child>
+          </object>
+        </child>
       </object>
     </child>
   </template>
