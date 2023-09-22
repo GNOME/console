@@ -32,6 +32,9 @@
 #include "kgx-process.h"
 #include <adwaita.h>
 
+#define MAX_TITLE_LENGTH 100
+
+
 GtkWidget *
 kgx_close_dialog_new (KgxCloseDialogContext  context,
                       GPtrArray             *commands)
@@ -63,11 +66,29 @@ kgx_close_dialog_new (KgxCloseDialogContext  context,
 
   for (int i = 0; i < commands->len; i++) {
     KgxProcess *process = g_ptr_array_index (commands, i);
+    const char *title = kgx_process_get_exec (process);
     GtkWidget *row;
 
-    row = g_object_new (ADW_TYPE_ACTION_ROW,
-                        "title", kgx_process_get_exec (process),
-                        NULL);
+    if (strlen (title) > MAX_TITLE_LENGTH) {
+      GPid pid = kgx_process_get_pid (process);
+      g_autofree char *pid_title = g_strdup_printf (_("Process %d"), pid);
+      g_autoptr (GString) short_title = g_string_new (NULL);
+      const char *iter = title;
+
+      for (guint len = 0; *iter && len < MAX_TITLE_LENGTH; iter = g_utf8_next_char (iter), len++) {
+        g_string_append_unichar (short_title, g_utf8_get_char (iter));
+      }
+      g_string_append (short_title, "…");
+
+      row = g_object_new (ADW_TYPE_ACTION_ROW,
+                          "title", pid_title,
+                          "subtitle", short_title->str,
+                          NULL);
+    } else {
+      row = g_object_new (ADW_TYPE_ACTION_ROW,
+                          "title", title,
+                          NULL);
+    }
 
     gtk_list_box_append (GTK_LIST_BOX (list), row);
   }
