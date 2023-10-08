@@ -11,16 +11,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-08-08 06:18+0000\n"
-"PO-Revision-Date: 2023-08-20 20:37+0200\n"
-"Last-Translator: Tim Sabsch <tim@sabsch.com>\n"
+"POT-Creation-Date: 2023-10-08 11:47+0000\n"
+"PO-Revision-Date: 2023-10-08 14:07+0200\n"
+"Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4\n"
 
 # Der Terminal-Emulator von KDE Plasma heißt bereits "Konsole", deshalb bleiben wir hier beim englischen Original. - pk
 #: data/org.gnome.Console.desktop.in.in:3
@@ -39,7 +39,7 @@ msgstr ""
 msgid "New Window"
 msgstr "Neues Fenster"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:167
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
 msgid "New Tab"
 msgstr "Neuer Reiter"
 
@@ -57,7 +57,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Terminalfenster"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:293 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:327 src/kgx-window.c:457
 msgid "The GNOME Project"
 msgstr "Das GNOME-Projekt"
 
@@ -215,11 +215,11 @@ msgstr "ZEILEN"
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- BEFEHL [ARGUMENT …]]"
 
-#: src/kgx-close-dialog.c:50
+#: src/kgx-close-dialog.c:53
 msgid "Close Window?"
 msgstr "Fenster schließen?"
 
-#: src/kgx-close-dialog.c:51
+#: src/kgx-close-dialog.c:54
 msgid ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
@@ -227,11 +227,11 @@ msgstr ""
 "Einige Befehle laufen immer noch. Dieses Fenster zu schließen würde sie "
 "beenden, was zu unerwarteten Ergebnissen führen kann"
 
-#: src/kgx-close-dialog.c:56
+#: src/kgx-close-dialog.c:59
 msgid "Close Tab?"
 msgstr "Reiter schließen?"
 
-#: src/kgx-close-dialog.c:57
+#: src/kgx-close-dialog.c:60
 msgid ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
@@ -239,7 +239,12 @@ msgstr ""
 "Einige Befehle laufen immer noch. Diesen Reiter zu schließen würde sie "
 "beenden, was zu unerwarteten Ergebnissen führen kann"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:915
+#: src/kgx-close-dialog.c:74
+#, c-format
+msgid "Process %d"
+msgstr "Prozess %d"
+
+#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "A_bbrechen"
 
@@ -275,7 +280,7 @@ msgstr "Schriftgröße"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:424
+#: src/kgx-pages.c:463
 #, c-format
 msgid "Tab %i"
 msgstr "Reiter %i"
@@ -356,7 +361,7 @@ msgstr "Vorheriger Treffer"
 msgid "Next Match"
 msgstr "Nächster Treffer"
 
-#: src/kgx-terminal.c:582
+#: src/kgx-terminal.c:557
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -365,12 +370,12 @@ msgstr ""
 "Strg-Klick, um zu öffnen:\n"
 "%s"
 
-#: src/kgx-terminal.c:908
+#: src/kgx-terminal.c:883
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Sie kopieren einen Befehl, der als Administrator ausgeführt wird"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:912
+#: src/kgx-terminal.c:887
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -379,7 +384,7 @@ msgstr ""
 "Gehen Sie sicher, dass Sie wissen, was dieser Befehl bewirkt:\n"
 "%s"
 
-#: src/kgx-terminal.c:916 src/kgx-terminal.ui:24
+#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "E_infügen"
 
@@ -444,23 +449,23 @@ msgstr "_Tastaturkürzel"
 msgid "_About Console"
 msgstr "_Info zu Console"
 
-#: src/kgx-window.ui:80
+#: src/kgx-window.ui:79
 msgid "Find in Terminal"
 msgstr "Im Terminal suchen"
 
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:86
 msgid "Main Menu"
 msgstr "Hauptmenü"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:104
 msgid "Shrink Text"
 msgstr "Text verkleinern"
 
-#: src/kgx-window.ui:117
+#: src/kgx-window.ui:115
 msgid "Reset Size"
 msgstr "Größe zurücksetzen"
 
-#: src/kgx-window.ui:141
+#: src/kgx-window.ui:139
 msgid "Enlarge Text"
 msgstr "Text vergrößern"
 
