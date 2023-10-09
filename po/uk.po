@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-08-05 06:17+0000\n"
-"PO-Revision-Date: 2023-08-05 09:53+0300\n"
+"POT-Creation-Date: 2023-10-08 11:47+0000\n"
+"PO-Revision-Date: 2023-10-09 09:23+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -35,7 +35,7 @@ msgstr ""
 msgid "New Window"
 msgstr "Нове вікно"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:167
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
 msgid "New Tab"
 msgstr "Нова вкладка"
 
@@ -51,7 +51,7 @@ msgstr "Простий зручний для користувачів термі
 msgid "Terminal window"
 msgstr "Вікно термінала"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:262 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:327 src/kgx-window.c:457
 msgid "The GNOME Project"
 msgstr "Проєкт GNOME"
 
@@ -126,15 +126,11 @@ msgid "Move Tab Left"
 msgstr "Пересунути вкладку ліворуч"
 
 #: src/help-overlay.ui:92
-#| msgctxt "shortcut window"
-#| msgid "Switch to Tab"
 msgctxt "shortcut window"
 msgid "Switch to Tab 1–9"
 msgstr "Перемкнутися на вкладку 1–9"
 
 #: src/help-overlay.ui:98
-#| msgctxt "shortcut window"
-#| msgid "Switch to Tab"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Перемкнутися на вкладку 10"
@@ -209,11 +205,11 @@ msgstr "РЯДКИ"
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- КОМАНДА [АРГУМЕНТ...]]"
 
-#: src/kgx-close-dialog.c:50
+#: src/kgx-close-dialog.c:53
 msgid "Close Window?"
 msgstr "Закрити вікно?"
 
-#: src/kgx-close-dialog.c:51
+#: src/kgx-close-dialog.c:54
 msgid ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
@@ -222,11 +218,11 @@ msgstr ""
 "до аварійного завершення роботи цих команд і може мати непередбачувані "
 "наслідки."
 
-#: src/kgx-close-dialog.c:56
+#: src/kgx-close-dialog.c:59
 msgid "Close Tab?"
 msgstr "Закрити вкладку?"
 
-#: src/kgx-close-dialog.c:57
+#: src/kgx-close-dialog.c:60
 msgid ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
@@ -235,7 +231,12 @@ msgstr ""
 "до аварійного завершення роботи цих команд і може мати непередбачувані "
 "наслідки."
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:915
+#: src/kgx-close-dialog.c:74
+#, c-format
+msgid "Process %d"
+msgstr "Процес %d"
+
+#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "_Скасувати"
 
@@ -244,12 +245,10 @@ msgid "C_lose"
 msgstr "_Закрити"
 
 #: src/kgx-font-picker.ui:12
-#| msgid "Terminal"
 msgid "Terminal Font"
 msgstr "Шрифт термінала"
 
 #: src/kgx-font-picker.ui:37
-#| msgid "_Select All"
 msgid "_Select"
 msgstr "_Вибрати"
 
@@ -266,7 +265,6 @@ msgid "Font Preview"
 msgstr "Попередній перегляд шрифту"
 
 #: src/kgx-font-picker.ui:188
-#| msgid "Reset Size"
 msgid "Font Size"
 msgstr "Розмір шрифту"
 
@@ -274,7 +272,7 @@ msgstr "Розмір шрифту"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:424
+#: src/kgx-pages.c:463
 #, c-format
 msgid "Tab %i"
 msgstr "Вкладка %i"
@@ -300,7 +298,6 @@ msgid "Font"
 msgstr "Шрифт"
 
 #: src/kgx-preferences-window.ui:13
-#| msgid "Use System Colors"
 msgid "Use _System Default"
 msgstr "_Типове для системи"
 
@@ -309,7 +306,6 @@ msgid "Custom _Font"
 msgstr "Нетиповий _шрифт"
 
 #: src/kgx-preferences-window.ui:59
-#| msgid "Terminal"
 msgid "Terminal Bell"
 msgstr "Звуковий сигнал у терміналі"
 
@@ -357,7 +353,7 @@ msgstr "Попередній відповідник"
 msgid "Next Match"
 msgstr "Наступний відповідник"
 
-#: src/kgx-terminal.c:582
+#: src/kgx-terminal.c:557
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -366,12 +362,12 @@ msgstr ""
 "Ctrl-клацання, щоб відкрити:\n"
 "%s"
 
-#: src/kgx-terminal.c:908
+#: src/kgx-terminal.c:883
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Ви вставили команду, яку слід запускати від імені адміністратора"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:912
+#: src/kgx-terminal.c:887
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -380,7 +376,7 @@ msgstr ""
 "Переконайтеся у тому, що вам відомі наслідки виконання команди:\n"
 "%s"
 
-#: src/kgx-terminal.c:916 src/kgx-terminal.ui:24
+#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "Вст_авити"
 
@@ -441,23 +437,23 @@ msgstr "_Клавіатурні скорочення"
 msgid "_About Console"
 msgstr "_Про «Консоль»"
 
-#: src/kgx-window.ui:80
+#: src/kgx-window.ui:79
 msgid "Find in Terminal"
 msgstr "Знайти у терміналі"
 
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:86
 msgid "Main Menu"
 msgstr "Головне меню"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:104
 msgid "Shrink Text"
 msgstr "Стиснути текст"
 
-#: src/kgx-window.ui:117
+#: src/kgx-window.ui:115
 msgid "Reset Size"
 msgstr "Відновити початковий розмір"
 
-#: src/kgx-window.ui:141
+#: src/kgx-window.ui:139
 msgid "Enlarge Text"
 msgstr "Збільшити текст"
 
