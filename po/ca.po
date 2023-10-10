@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-09-02 15:38+0000\n"
-"PO-Revision-Date: 2023-09-10 12:11+0100\n"
+"POT-Creation-Date: 2023-10-08 11:47+0000\n"
+"PO-Revision-Date: 2023-10-09 19:47+0200\n"
 "Last-Translator: Jordi Mas i Hernàndez <jmas@softcatala.org>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -17,15 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
 msgid "Console"
 msgstr "Consola"
 
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Console.desktop.in.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
@@ -52,7 +51,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Finestra de terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:293 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:327 src/kgx-window.c:457
 msgid "The GNOME Project"
 msgstr "El projecte GNOME"
 
@@ -206,31 +205,36 @@ msgstr "LÍNIES"
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- COMMAND [ARGUMENT...]]"
 
-#: src/kgx-close-dialog.c:50
+#: src/kgx-close-dialog.c:53
 msgid "Close Window?"
 msgstr "Voleu tancar la finestra?"
 
-#: src/kgx-close-dialog.c:51
+#: src/kgx-close-dialog.c:54
 msgid ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
 msgstr ""
-"Algunes ordres encara s'estan executant, el tancament d'aquesta finestra les"
-" finalitzarà i pot produir resultats inesperats"
+"Algunes ordres encara s'estan executant, el tancament d'aquesta finestra les "
+"finalitzarà i pot produir resultats inesperats"
 
-#: src/kgx-close-dialog.c:56
+#: src/kgx-close-dialog.c:59
 msgid "Close Tab?"
 msgstr "Voleu tancar la pestanya?"
 
-#: src/kgx-close-dialog.c:57
+#: src/kgx-close-dialog.c:60
 msgid ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
 msgstr ""
-"Algunes ordres encara s'estan executant, el tancament d'aquesta pestanya les"
-" finalitzarà i pot produir resultats inesperats"
+"Algunes ordres encara s'estan executant, el tancament d'aquesta pestanya les "
+"finalitzarà i pot produir resultats inesperats"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:918
+#: src/kgx-close-dialog.c:74
+#, c-format
+msgid "Process %d"
+msgstr "Procés %d"
+
+#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "_Cancel·la"
 
@@ -265,7 +269,8 @@ msgstr "Mida del tipus de lletra"
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
-#: src/kgx-pages.c:424
+#.
+#: src/kgx-pages.c:463
 #, c-format
 msgid "Tab %i"
 msgstr "Pestanya %i"
@@ -346,7 +351,7 @@ msgstr "Coincidència anterior"
 msgid "Next Match"
 msgstr "Coincidència següent"
 
-#: src/kgx-terminal.c:585
+#: src/kgx-terminal.c:557
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -355,12 +360,12 @@ msgstr ""
 "Ctrl-clic per a obrir:\n"
 "%s"
 
-#: src/kgx-terminal.c:911
+#: src/kgx-terminal.c:883
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Esteu enganxant una ordre que s'executa com a administrador"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:915
+#: src/kgx-terminal.c:887
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -369,7 +374,7 @@ msgstr ""
 "Assegureu-vos de saber què fa l'ordre:\n"
 "%s"
 
-#: src/kgx-terminal.c:919 src/kgx-terminal.ui:24
+#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "_Enganxa"
 
