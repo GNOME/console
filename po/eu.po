@@ -6,7 +6,7 @@
 msgid ""
 msgstr "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-08-05 06:17+0000\n"
+"POT-Creation-Date: 2023-10-08 11:47+0000\n"
 "PO-Revision-Date: 2023-08-05 10:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
@@ -29,7 +29,7 @@ msgstr "komandoa;gonbitea;cmd;komando-lerroa;exekutatu;shell-a;terminala;kgx;kin
 msgid "New Window"
 msgstr "Leiho berria"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:167
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
 msgid "New Tab"
 msgstr "Fitxa berria"
 
@@ -45,7 +45,7 @@ msgstr "Terminalaren emuladore sinple eta erraza GNOME mahaigainerako."
 msgid "Terminal window"
 msgstr "Terminalaren leihoa"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:262 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:327 src/kgx-window.c:457
 msgid "The GNOME Project"
 msgstr "GNOME proiektua"
 
@@ -199,27 +199,32 @@ msgstr "LERROAK"
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- KOMANDOA [ARGUMENTUA...]]"
 
-#: src/kgx-close-dialog.c:50
+#: src/kgx-close-dialog.c:53
 msgid "Close Window?"
 msgstr "Itxi leihoa?"
 
-#: src/kgx-close-dialog.c:51
+#: src/kgx-close-dialog.c:54
 msgid ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
 msgstr "Zenbait komando exekutatzen ari dira oraindik, leihoa ixten bada hil egingo dira eta espero gabeko emaitzak egon daitezke"
 
-#: src/kgx-close-dialog.c:56
+#: src/kgx-close-dialog.c:59
 msgid "Close Tab?"
 msgstr "Itxi fitxa?"
 
-#: src/kgx-close-dialog.c:57
+#: src/kgx-close-dialog.c:60
 msgid ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
 msgstr "Zenbait komando exekutatzen ari dira oraindik, fitxa ixten bada hil egingo dira eta espero gabeko emaitzak egon daitezke"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:915
+#: src/kgx-close-dialog.c:74
+#, c-format
+msgid "Process %d"
+msgstr "Prozesatu %d"
+
+#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "_Utzi"
 
@@ -255,7 +260,7 @@ msgstr "Letra-tamaina"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:424
+#: src/kgx-pages.c:463
 #, c-format
 msgid "Tab %i"
 msgstr "%i. fitxa"
@@ -336,7 +341,7 @@ msgstr "Aurreko parekatzea"
 msgid "Next Match"
 msgstr "Hurrengo parekatzea"
 
-#: src/kgx-terminal.c:582
+#: src/kgx-terminal.c:557
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -344,12 +349,12 @@ msgid ""
 msgstr "Ctrl-klik irekitzeko:\n"
 "%s"
 
-#: src/kgx-terminal.c:908
+#: src/kgx-terminal.c:883
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Administratzaile modura exekutatzen den komando bat itsasten ari zara"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:912
+#: src/kgx-terminal.c:887
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -357,7 +362,7 @@ msgid ""
 msgstr "Ziurtatu badakizula komandoak zer egiten duen:\n"
 "%s"
 
-#: src/kgx-terminal.c:916 src/kgx-terminal.ui:24
+#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "_Itsatsi"
 
@@ -418,23 +423,23 @@ msgstr "Las_ter-teklak"
 msgid "_About Console"
 msgstr "Kontsola aplikazioari b_uruz"
 
-#: src/kgx-window.ui:80
+#: src/kgx-window.ui:79
 msgid "Find in Terminal"
 msgstr "Bilatu terminalean"
 
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:86
 msgid "Main Menu"
 msgstr "Menu nagusia"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:104
 msgid "Shrink Text"
 msgstr "Txikiagotu testua"
 
-#: src/kgx-window.ui:117
+#: src/kgx-window.ui:115
 msgid "Reset Size"
 msgstr "Berrezarri tamaina"
 
-#: src/kgx-window.ui:141
+#: src/kgx-window.ui:139
 msgid "Enlarge Text"
 msgstr "Handiagotu testua"
 
