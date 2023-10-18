@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-06-19 23:17+0000\n"
-"PO-Revision-Date: 2023-07-29 14:31+0300\n"
+"POT-Creation-Date: 2023-10-12 11:26+0000\n"
+"PO-Revision-Date: 2023-10-13 13:51+0300\n"
 "Last-Translator: Florentina Mușat <florentina [dot] musat [dot] 28 [at] "
 "gmail [dot] com>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -18,10 +18,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2);;\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:29
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
 msgid "Console"
 msgstr "Consolă"
 
@@ -36,11 +36,11 @@ msgstr ""
 msgid "New Window"
 msgstr "Fereastră nouă"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:143
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
 msgid "New Tab"
 msgstr "Filă nouă"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:366
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:377
 msgid "Terminal Emulator"
 msgstr "Emulator de terminal"
 
@@ -53,7 +53,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Fereastră de terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:262 src/kgx-window.c:434
+#: data/org.gnome.Console.metainfo.xml.in.in:327 src/kgx-window.c:457
 msgid "The GNOME Project"
 msgstr "Proiectul GNOME"
 
@@ -119,76 +119,91 @@ msgstr "Fila anterioară"
 
 #: src/help-overlay.ui:80
 msgctxt "shortcut window"
-msgid "Switch to Tab"
-msgstr "Comută la fila"
+msgid "Move Tab Right"
+msgstr "Mută fila la dreapta"
 
-#: src/kgx-application.c:241
+#: src/help-overlay.ui:86
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Mută fila la stânga"
+
+#: src/help-overlay.ui:92
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Comută la fila 1–9"
+
+#: src/help-overlay.ui:98
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Comută la fila 10"
+
+#: src/kgx-application.c:252
 msgid "Cannot use both --command and positional parameters"
 msgstr "Nu se poate utiliza --command și parametrii poziționali"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:338
+#: src/kgx-application.c:349
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s utilizând VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:350 src/kgx-window.c:429
+#: src/kgx-application.c:361 src/kgx-window.c:452
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:368
+#: src/kgx-application.c:379
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 sau o versiune ulterioară"
 
-#: src/kgx-application.c:433
+#: src/kgx-application.c:444
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Execută argumentul de la această opțiune înăuntrul terminalului"
 
-#: src/kgx-application.c:434
+#: src/kgx-application.c:445
 msgid "COMMAND"
 msgstr "COMANDĂ"
 
-#: src/kgx-application.c:442
+#: src/kgx-application.c:453
 msgid "Set the working directory"
 msgstr "Stabiliți directorul de lucru"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:444
+#: src/kgx-application.c:455
 msgid "DIRNAME"
 msgstr "NUMEDIR"
 
-#: src/kgx-application.c:452
+#: src/kgx-application.c:463
 msgid "Wait until the child exits (TODO)"
 msgstr "Așteptați până ce inferiorul iese (DEFĂCUT)"
 
-#: src/kgx-application.c:461
+#: src/kgx-application.c:472
 msgid "Set the initial window title"
 msgstr "Stabilește titlul inițial al ferestrei"
 
-#: src/kgx-application.c:462
+#: src/kgx-application.c:473
 msgid "TITLE"
 msgstr "TITLU"
 
-#: src/kgx-application.c:470
+#: src/kgx-application.c:481
 msgid "ADVANCED: Set the shell to launch"
 msgstr "AVANSAT: Stabilește shell-ul de lansat"
 
-#: src/kgx-application.c:471
+#: src/kgx-application.c:482
 msgid "SHELL"
 msgstr "SHELL"
 
-#: src/kgx-application.c:479
+#: src/kgx-application.c:490
 msgid "ADVANCED: Set the scrollback length"
 msgstr "AVANSAT: Stabilește lungimea derulării înapoi"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:491
 msgid "LINES"
 msgstr "LINII"
 
-#: src/kgx-application.c:489
+#: src/kgx-application.c:500
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- COMANDĂ [ARGUMENT...]]"
 
@@ -216,7 +231,7 @@ msgstr ""
 "Unele comenzi încă rulează, închiderea acestei file le va termina și poate "
 "conduce la rezultate neașteptate"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:923
+#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "_Anulează"
 
@@ -224,56 +239,130 @@ msgstr "_Anulează"
 msgid "C_lose"
 msgstr "Î_nchide"
 
-#: src/kgx-pages.ui:61
+#: src/kgx-font-picker.ui:12
+msgid "Terminal Font"
+msgstr "Font terminal"
+
+#: src/kgx-font-picker.ui:37
+msgid "_Select"
+msgstr "_Selectează"
+
+#: src/kgx-font-picker.ui:53 src/kgx-font-picker.ui:56
+msgid "Font Name"
+msgstr "Nume font"
+
+#: src/kgx-font-picker.ui:142
+msgid "Font Family"
+msgstr "Familie font"
+
+#: src/kgx-font-picker.ui:167
+msgid "Font Preview"
+msgstr "Previzualizare font"
+
+#: src/kgx-font-picker.ui:188
+msgid "Font Size"
+msgstr "Dimensiune font"
+
+#. Translators: %i is, from the users perspective, a random number.
+#. * this string will only be seen when the running program has
+#. * failed to set a title, and exists purely to avoid blank tabs
+#.
+#: src/kgx-pages.c:463
+#, c-format
+msgid "Tab %i"
+msgstr "Fila %i"
+
+#: src/kgx-pages.ui:90
 msgid "_Detach Tab"
 msgstr "_Detașează fila"
 
-#: src/kgx-pages.ui:67
+#: src/kgx-pages.ui:96
 msgid "_Close"
 msgstr "În_chide"
 
+#: src/kgx-preferences-window.c:122
+msgid "No Font Set"
+msgstr "Nu s-a stabilit niciun font"
+
+#: src/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "Generale"
+
+#: src/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "Font"
+
+#: src/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "Utilizează implicitele _sistemului"
+
+#: src/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "_Font personalizat"
+
+#: src/kgx-preferences-window.ui:59
+msgid "Terminal Bell"
+msgstr "Clopoțel terminal"
+
+#: src/kgx-preferences-window.ui:62
+msgid "Play _Sound"
+msgstr "Redă _sunetul"
+
+#: src/kgx-preferences-window.ui:68
+msgid "_Visual Effects"
+msgstr "Efecte _vizuale"
+
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:168
+#: src/kgx-simple-tab.c:180
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Doar citire</b> — Comanda a ieșit cu codul %i"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:177
+#: src/kgx-simple-tab.c:189
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Doar citire</b> — Comanda a ieșit"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:210
+#: src/kgx-simple-tab.c:222
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Nu s-a putut porni</b> — %s"
 
-#: src/kgx-tab.c:989
+#: src/kgx-tab.c:1091
 msgid "Command completed"
 msgstr "Comandă completată"
 
-#: src/kgx-tab.ui:22
+#: src/kgx-tab.ui:25
 msgid "Find text"
 msgstr "Găsește textul"
 
-#: src/kgx-tab.ui:33
+#: src/kgx-tab.ui:36
 msgid "Previous Match"
 msgstr "Potrivirea anterioară"
 
-#: src/kgx-tab.ui:41
+#: src/kgx-tab.ui:44
 msgid "Next Match"
 msgstr "Potrivirea următoare"
 
-#: src/kgx-terminal.c:916
+#: src/kgx-terminal.c:557
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+"Ctrl-clic pentru a deschide:\n"
+"%s"
+
+#: src/kgx-terminal.c:883
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Lipiți o comandă care rulează ca administrator"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:920
+#: src/kgx-terminal.c:887
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -282,24 +371,44 @@ msgstr ""
 "Asigurați-vă că știți ce face comanda:\n"
 "%s"
 
-#: src/kgx-terminal.c:924 src/menus.ui:24
+#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "Li_pește"
 
+#: src/kgx-terminal.ui:7
+msgid "_Open Link"
+msgstr "_Deschide legătura"
+
+#: src/kgx-terminal.ui:12
+msgid "Copy _Link"
+msgstr "Copiază _legătura"
+
+#: src/kgx-terminal.ui:19
+msgid "_Copy"
+msgstr "_Copiază"
+
+#: src/kgx-terminal.ui:29
+msgid "_Select All"
+msgstr "_Selectează toate"
+
+#: src/kgx-terminal.ui:36
+msgid "Show in _Files"
+msgstr "Arată în _fișiere"
+
 #: src/kgx-theme-switcher.ui:16
-msgid "Use System Colors"
-msgstr "Utilizează culorile sistemului"
+msgid "Follow System Style"
+msgstr "Urmărește stilul sistemului"
 
 #: src/kgx-theme-switcher.ui:44
-msgid "Use Light Colors"
-msgstr "Utilizează culori deschise"
+msgid "Light Style"
+msgstr "Stil luminos"
 
 #: src/kgx-theme-switcher.ui:71
-msgid "Use Dark Colors"
-msgstr "Utilizează culori închise"
+msgid "Dark Style"
+msgstr "Stil întunecat"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:440
+#: src/kgx-window.c:464
 msgid "translator-credits"
 msgstr ""
 "Florentina Mușat <florentina [dot] musat [dot] 28 [at] gmail [dot] com>, "
@@ -314,58 +423,45 @@ msgid "_Show All Tabs"
 msgstr "_Arată toate filele"
 
 #: src/kgx-window.ui:30
+msgid "_Preferences"
+msgstr "_Preferințe"
+
+#: src/kgx-window.ui:34
 msgid "_Keyboard Shortcuts"
 msgstr "Scurtături de _tastatură"
 
-#: src/kgx-window.ui:34
+#: src/kgx-window.ui:38
 msgid "_About Console"
 msgstr "_Despre Consolă"
 
-#: src/kgx-window.ui:63
+#: src/kgx-window.ui:79
 msgid "Find in Terminal"
 msgstr "Găsește în terminal"
 
-#: src/kgx-window.ui:71
+#: src/kgx-window.ui:86
 msgid "Main Menu"
 msgstr "Meniu principal"
 
-#: src/kgx-window.ui:89
+#: src/kgx-window.ui:104
 msgid "Shrink Text"
 msgstr "Micșorează textul"
 
-#: src/kgx-window.ui:100
+#: src/kgx-window.ui:115
 msgid "Reset Size"
 msgstr "Restabilește dimensiunea"
 
-#: src/kgx-window.ui:117
+#: src/kgx-window.ui:139
 msgid "Enlarge Text"
 msgstr "Mărește textul"
 
-#: src/menus.ui:7
-msgid "_Open Link"
-msgstr "_Deschide legătura"
+#~ msgid "Use Light Colors"
+#~ msgstr "Utilizează culori deschise"
 
-#: src/menus.ui:12
-msgid "Copy _Link"
-msgstr "Copiază _legătura"
-
-#: src/menus.ui:19
-msgid "_Copy"
-msgstr "_Copiază"
-
-#: src/menus.ui:29
-msgid "_Select All"
-msgstr "_Selectează toate"
-
-#: src/menus.ui:36
-msgid "Show in _Files"
-msgstr "Arată în _fișiere"
+#~ msgid "Use Dark Colors"
+#~ msgstr "Utilizează culori închise"
 
 #~ msgid "King’s Cross"
 #~ msgstr "Intersecția regelui"
-
-#~ msgid "Terminal"
-#~ msgstr "Terminal"
 
 #~ msgid "Zander Brown"
 #~ msgstr "Zander Brown"
