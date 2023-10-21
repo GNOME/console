@@ -5,7 +5,6 @@ src/help-overlay.ui
 src/kgx-application.c
 src/kgx-application.h
 src/kgx-close-dialog.c
-src/kgx-close-dialog.ui
 src/kgx-font-picker.ui
 src/kgx-pages.c
 src/kgx-pages.ui

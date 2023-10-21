@@ -1,6 +1,6 @@
 /* kgx-close-dialog.h
  *
- * Copyright 2019 Zander Brown
+ * Copyright 2019-2023 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,8 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <gio/gio.h>
+
 #include "kgx-enums.h"
 
 G_BEGIN_DECLS
@@ -28,7 +29,23 @@ typedef enum {
   KGX_CONTEXT_TAB,
 } KgxCloseDialogContext;
 
-GtkWidget *kgx_close_dialog_new (KgxCloseDialogContext  context,
-                                 GPtrArray             *commands);
+
+typedef enum {
+  KGX_CLOSE_ANYWAY,
+  KGX_CLOSE_CANCELLED,
+} KgxCloseDialogResult;
+
+
+#define KGX_TYPE_CLOSE_DIALOG kgx_close_dialog_get_type ()
+
+G_DECLARE_FINAL_TYPE (KgxCloseDialog, kgx_close_dialog, KGX, CLOSE_DIALOG, GObject)
+
+void                 kgx_close_dialog_run           (KgxCloseDialog         *self,
+                                                     GCancellable           *cancellable,
+                                                     GAsyncReadyCallback     callback,
+                                                     gpointer                user_data);
+KgxCloseDialogResult kgx_close_dialog_run_finish    (KgxCloseDialog         *self,
+                                                     GAsyncResult           *res,
+                                                     GError                **error);
 
 G_END_DECLS

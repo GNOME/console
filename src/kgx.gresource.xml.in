@@ -2,7 +2,6 @@
 <gresources>
   <gresource prefix="@KGX_APPLICATION_PATH_RAW@">
     <file preprocess="xml-stripblanks" compressed="true">kgx-window.ui</file>
-    <file preprocess="xml-stripblanks" compressed="true">kgx-close-dialog.ui</file>
     <file preprocess="xml-stripblanks" compressed="true">kgx-font-picker.ui</file>
     <file preprocess="xml-stripblanks" compressed="true">kgx-pages.ui</file>
     <file preprocess="xml-stripblanks" compressed="true">kgx-tab.ui</file>

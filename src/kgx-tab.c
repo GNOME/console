@@ -57,6 +57,8 @@ struct _KgxTabPrivate {
   GSignalGroup         *terminal_signals;
   GBindingGroup        *terminal_binds;
 
+  GCancellable         *cancellable;
+
   KgxDropTarget        *drop_target;
 
   GtkWidget            *stack;
@@ -103,6 +105,7 @@ enum {
   PROP_SEARCH_MODE_ENABLED,
   PROP_RINGING,
   PROP_DROPPING,
+  PROP_CANCELLABLE,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -124,6 +127,8 @@ kgx_tab_dispose (GObject *object)
   KgxTab *self = KGX_TAB (object);
   KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
 
+  g_cancellable_cancel (priv->cancellable);
+
   g_clear_handle_id (&priv->spinner_timeout, g_source_remove);
 
   if (priv->notification_id) {
@@ -135,6 +140,7 @@ kgx_tab_dispose (GObject *object)
   g_clear_object (&priv->application);
   g_clear_object (&priv->settings);
   g_clear_object (&priv->terminal);
+  g_clear_object (&priv->cancellable);
 
   g_clear_pointer (&priv->title, g_free);
   g_clear_pointer (&priv->tooltip, g_free);
@@ -352,6 +358,9 @@ kgx_tab_get_property (GObject    *object,
     case PROP_DROPPING:
       g_value_set_boolean (value, priv->dropping);
       break;
+    case PROP_CANCELLABLE:
+      g_value_set_object (value, priv->cancellable);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -514,6 +523,8 @@ kgx_tab_real_died (KgxTab         *self,
   }
 
   gtk_revealer_set_reveal_child (GTK_REVEALER (priv->exit_revealer), TRUE);
+
+  g_cancellable_cancel (priv->cancellable);
 }
 
 
@@ -667,6 +678,11 @@ kgx_tab_class_init (KgxTabClass *klass)
     g_param_spec_boolean ("dropping", NULL, NULL,
                           FALSE,
                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
+  pspecs[PROP_CANCELLABLE] =
+    g_param_spec_object ("cancellable", NULL, NULL,
+                         G_TYPE_CANCELLABLE,
+                         G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
@@ -824,6 +840,8 @@ kgx_tab_init (KgxTab *self)
                                           g_direct_equal,
                                           NULL,
                                           (GDestroyNotify) kgx_process_unref);
+
+  priv->cancellable = g_cancellable_new ();
 
   gtk_widget_init_template (GTK_WIDGET (self));
 

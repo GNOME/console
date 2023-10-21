@@ -380,21 +380,32 @@ G_DEFINE_AUTOPTR_CLEANUP_FUNC (CloseData, close_data_free)
 
 
 static void
-close_response (AdwMessageDialog *dialogue,
-                const char       *response,
-                gpointer          user_data)
+got_close (GObject      *source,
+           GAsyncResult *res,
+           gpointer      user_data)
 {
-  CloseData *data = user_data;
+  g_autoptr (KgxCloseDialog) dialogue = KGX_CLOSE_DIALOG (source);
+  g_autoptr (CloseData) data = user_data;
+  g_autoptr (GError) error = NULL;
+  KgxCloseDialogResult result;
+
+  result = kgx_close_dialog_run_finish (dialogue, res, &error);
 
   if (G_UNLIKELY (!data->page)) {
     return;
   }
 
+  if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+    /* The tab was cancelled (died), rendering the dialogue moot */
+    result = KGX_CLOSE_ANYWAY;
+  } else if (error) {
+    g_critical ("Unexpected: %s", error->message);
+    return;
+  }
+
   adw_tab_view_close_page_finish (ADW_TAB_VIEW (data->view),
                                   data->page,
-                                  !g_strcmp0 (response, "close"));
-
-  gtk_window_destroy (GTK_WINDOW (dialogue));
+                                  result == KGX_CLOSE_ANYWAY);
 }
 
 
@@ -405,31 +416,30 @@ close_page (AdwTabView *view,
 {
   g_autoptr (CloseData) data = g_new0 (CloseData, 1);
   g_autoptr (GPtrArray) children = NULL;
-  GtkWidget *dlg;
-  GtkRoot *root;
+  g_autoptr (GCancellable) cancellable = NULL;
+  KgxCloseDialog *dlg = NULL;
+  KgxTab *tab;
 
-  /* slightly paranoid */
-  g_set_object (&data->view, view);
-  g_set_weak_pointer (&data->page, page);
-
-  children = kgx_tab_get_children (KGX_TAB (adw_tab_page_get_child (page)));
+  tab = KGX_TAB (adw_tab_page_get_child (page));
+  children = kgx_tab_get_children (tab);
 
   if (children->len < 1) {
     return GDK_EVENT_PROPAGATE; /* Aka no, I don’t want to block closing */
   }
 
-  root = gtk_widget_get_root (GTK_WIDGET (self));
+  dlg = g_object_new (KGX_TYPE_CLOSE_DIALOG,
+                      "context", KGX_CONTEXT_TAB,
+                      "commands", children,
+                      "transient-for", gtk_widget_get_root (GTK_WIDGET (self)),
+                      NULL);
 
-  dlg = kgx_close_dialog_new (KGX_CONTEXT_TAB, children);
+  /* slightly paranoid */
+  g_set_object (&data->view, view);
+  g_set_weak_pointer (&data->page, page);
 
-  gtk_window_set_transient_for (GTK_WINDOW (dlg), GTK_WINDOW (root));
+  g_object_get (tab, "cancellable", &cancellable, NULL);
 
-  g_signal_connect_data (dlg,
-                         "response", G_CALLBACK (close_response),
-                         g_steal_pointer (&data), (GClosureNotify) close_data_free,
-                         0);
-
-  gtk_window_present (GTK_WINDOW (dlg));
+  kgx_close_dialog_run (dlg, cancellable, got_close, g_steal_pointer (&data));
 
   return GDK_EVENT_STOP; // Block the close
 }
