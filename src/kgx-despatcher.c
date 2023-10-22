@@ -61,8 +61,8 @@ kgx_despatcher_init (KgxDespatcher *self)
 
 typedef struct {
   KgxDespatcher *self;
-  GtkWindow      *window;
-  char           *uri;
+  GtkWindow     *window;
+  char          *uri;
 } LaunchData;
 
 
@@ -71,7 +71,7 @@ launch_data_free (gpointer data)
 {
   LaunchData *self = data;
 
-  if (!self) {
+  if (G_UNLIKELY (!self)) {
     return;
   }
 
@@ -90,11 +90,11 @@ static void
 did_open_after_mount (GObject *source, GAsyncResult *res, gpointer data)
 {
   g_autoptr (GError) error = NULL;
-  GTask *task = data;
+  g_autoptr (GTask) task = data;
 
   kgx_despatcher_open_finish (KGX_DESPATCHER (source), res, &error);
 
-  if (error) {
+  if (G_UNLIKELY (error)) {
     g_task_return_error (task, g_steal_pointer (&error));
 
     return;
@@ -108,12 +108,17 @@ static void
 did_mount (GObject *source, GAsyncResult *res, gpointer data)
 {
   g_autoptr (GError) error = NULL;
-  GTask *task = data;
+  g_autoptr (GTask) task = data;
   LaunchData *state = g_task_get_task_data (task);
+  GCancellable *cancellable = g_task_get_cancellable (task);
 
   g_file_mount_enclosing_volume_finish (G_FILE (source), res, &error);
 
-  if (error) {
+  if (G_UNLIKELY (g_task_return_error_if_cancelled (task))) {
+    return;
+  }
+
+  if (G_UNLIKELY (error)) {
     g_task_return_error (task, g_steal_pointer (&error));
 
     return;
@@ -124,9 +129,9 @@ did_mount (GObject *source, GAsyncResult *res, gpointer data)
   kgx_despatcher_open (state->self,
                        state->uri,
                        state->window,
-                       g_task_get_cancellable (task),
+                       cancellable,
                        did_open_after_mount,
-                       task);
+                       g_steal_pointer (&task));
 }
 
 
@@ -134,29 +139,31 @@ static void
 did_launch (GObject *source, GAsyncResult *res, gpointer data)
 {
   g_autoptr (GError) error = NULL;
-  GTask *task = data;
+  g_autoptr (GTask) task = data;
   LaunchData *state = g_task_get_task_data (task);
   GCancellable *cancellable = g_task_get_cancellable (task);
 
   g_app_info_launch_default_for_uri_finish (res, &error);
 
-  if (error) {
-    if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_MOUNTED)) {
-      g_autoptr (GFile) file = g_file_new_for_uri (state->uri);
-      g_autoptr (GMountOperation) op = gtk_mount_operation_new (state->window);
+  if (G_UNLIKELY (g_task_return_error_if_cancelled (task))) {
+    return;
+  }
 
-      g_debug ("despatcher: try mount: %s", state->uri);
+  if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_MOUNTED)) {
+    g_autoptr (GFile) file = g_file_new_for_uri (state->uri);
+    g_autoptr (GMountOperation) op = gtk_mount_operation_new (state->window);
 
-      g_file_mount_enclosing_volume (file,
-                                     G_MOUNT_MOUNT_NONE,
-                                     op,
-                                     cancellable,
-                                     did_mount,
-                                     task);
+    g_debug ("despatcher: try mount: %s", state->uri);
 
-      return;
-    }
+    g_file_mount_enclosing_volume (file,
+                                   G_MOUNT_MOUNT_NONE,
+                                   op,
+                                   cancellable,
+                                   did_mount,
+                                   g_steal_pointer (&task));
 
+    return;
+  } else if (error) {
     g_task_return_error (task, g_steal_pointer (&error));
 
     return;
@@ -176,7 +183,7 @@ kgx_despatcher_open (KgxDespatcher      *self,
 {
   g_autoptr (LaunchData) state = g_new0 (LaunchData, 1);
   g_autoptr (GdkAppLaunchContext) context = NULL;
-  GTask *task;
+  g_autoptr (GTask) task = NULL;
   GdkDisplay *display;
 
   g_debug ("despatcher: open: %s", uri);
@@ -200,7 +207,7 @@ kgx_despatcher_open (KgxDespatcher      *self,
                                            G_APP_LAUNCH_CONTEXT (context),
                                            cancellable,
                                            did_launch,
-                                           task);
+                                           g_steal_pointer (&task));
 }
 
 
@@ -210,7 +217,7 @@ kgx_despatcher_open_finish (KgxDespatcher  *self,
                             GError        **error)
 {
   g_return_if_fail (KGX_IS_DESPATCHER (self));
-  g_return_if_fail (G_IS_TASK (result));
+  g_return_if_fail (g_task_is_valid (result, self));
 
   g_task_propagate_boolean (G_TASK (result), error);
 }
@@ -226,6 +233,10 @@ static void
 show_data_free (gpointer data)
 {
   ShowData *self = data;
+
+  if (G_UNLIKELY (!self)) {
+    return;
+  }
 
   g_clear_object (&self->self);
   g_clear_pointer (&self->uris, g_strfreev);
@@ -256,7 +267,7 @@ static void
 complete_call (GObject *source, GAsyncResult *res, gpointer data)
 {
   g_autoptr (GError) error = NULL;
-  GTask *task = data;
+  g_autoptr (GTask) task = data;
 
   if (G_LIKELY (g_async_result_is_tagged (G_ASYNC_RESULT (task), kgx_despatcher_show_folder))) {
     xdg_file_manager1_call_show_folders_finish (XDG_FILE_MANAGER1 (source),
@@ -268,7 +279,7 @@ complete_call (GObject *source, GAsyncResult *res, gpointer data)
                                               &error);
   }
 
-  if (error) {
+  if (G_UNLIKELY (error)) {
     g_debug ("despatcher: fm: bus call failed %s", error->message);
     g_task_return_error (task, g_steal_pointer (&error));
     return;
@@ -279,24 +290,30 @@ complete_call (GObject *source, GAsyncResult *res, gpointer data)
 
 
 static void
-make_call (GTask *task)
+make_call (gpointer data)
 {
+  g_autoptr (GTask) task = data;
   ShowData *state = g_task_get_task_data (task);
+  GCancellable *cancellable = g_task_get_cancellable (task);
+
+  if (G_UNLIKELY (g_task_return_error_if_cancelled (task))) {
+    return;
+  }
 
   if (G_LIKELY (g_async_result_is_tagged (G_ASYNC_RESULT (task), kgx_despatcher_show_folder))) {
     xdg_file_manager1_call_show_folders (state->self->file_manager,
                                          (const char *const *) state->uris,
                                          "",
-                                         NULL,
+                                         cancellable,
                                          complete_call,
-                                         task);
+                                         g_steal_pointer (&task));
   } else {
     xdg_file_manager1_call_show_items (state->self->file_manager,
                                        (const char *const *) state->uris,
                                        "",
-                                       NULL,
+                                       cancellable,
                                        complete_call,
-                                       task);
+                                       g_steal_pointer (&task));
   }
 }
 
@@ -306,39 +323,43 @@ got_proxy (GObject *source, GAsyncResult *res, gpointer data)
 {
   g_autoptr (GError) error = NULL;
   g_autoptr (XdgFileManager1) fm = NULL;
-  GTask *task = data;
+  g_autoptr (GTask) task = data;
   ShowData *state = g_task_get_task_data (task);
 
   fm = xdg_file_manager1_proxy_new_finish (res, &error);
 
-  if (error) {
+  if (G_UNLIKELY (g_task_return_error_if_cancelled (task))) {
+    return;
+  }
+
+  if (G_UNLIKELY (error)) {
     g_debug ("despatcher: fm: bus connect failed %s", error->message);
     g_task_return_error (task, g_steal_pointer (&error));
     return;
   }
 
-  g_debug ("despatcher: fm: got proxy");
-
   g_set_object (&state->self->file_manager, fm);
 
-  make_call (task);
+  make_call (g_steal_pointer (&task));
 }
 
 
-static void
+static inline void
 get_file_manager (GTask *task)
 {
+  GCancellable *cancellable = g_task_get_cancellable (task);
+
   xdg_file_manager1_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                                        G_DBUS_PROXY_FLAGS_NONE,
                                        "org.freedesktop.FileManager1",
                                        "/org/freedesktop/FileManager1",
-                                       NULL,
+                                       cancellable,
                                        got_proxy,
                                        task);
 }
 
 
-static GTask *
+static inline GTask *
 show_task_new (KgxDespatcher       *self,
                const char          *uri,
                GtkWindow           *window,
@@ -390,7 +411,7 @@ kgx_despatcher_show_item_finish (KgxDespatcher  *self,
                                  GError        **error)
 {
   g_return_if_fail (KGX_IS_DESPATCHER (self));
-  g_return_if_fail (G_IS_TASK (result));
+  g_return_if_fail (g_task_is_valid (result, self));
 
   g_task_propagate_boolean (G_TASK (result), error);
 }
@@ -422,7 +443,7 @@ kgx_despatcher_show_folder_finish (KgxDespatcher  *self,
                                    GError        **error)
 {
   g_return_if_fail (KGX_IS_DESPATCHER (self));
-  g_return_if_fail (G_IS_TASK (result));
+  g_return_if_fail (g_task_is_valid (result, self));
 
   g_task_propagate_boolean (G_TASK (result), error);
 }

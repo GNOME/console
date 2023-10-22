@@ -262,14 +262,14 @@ have_url_under_pointer (KgxTerminal *self,
   hyperlink = vte_terminal_check_hyperlink_at (VTE_TERMINAL (self), x, y);
 
   if (G_UNLIKELY (hyperlink)) {
-    g_set_str (&self->current_url, g_steal_pointer (&hyperlink));
+    g_set_str (&self->current_url, hyperlink);
     current = TRUE;
   } else {
     match = vte_terminal_check_match_at (VTE_TERMINAL (self), x, y, &match_id);
 
     for (int i = 0; i < KGX_TERMINAL_N_LINK_REGEX; i++) {
       if (self->match_id[i] == match_id) {
-        g_set_str (&self->current_url, g_steal_pointer (&match));
+        g_set_str (&self->current_url, match);
         current = TRUE;
         break;
       }
