@@ -144,8 +144,13 @@ G_DEFINE_AUTOPTR_CLEANUP_FUNC (ReadUrisData, read_uris_data_free)
 static void
 emit_list (KgxDropTarget *self, GStrvBuilder *builder)
 {
-  g_auto (GStrv) items = g_strv_builder_end (builder);
-  g_autofree char *text = g_strjoinv (" ", items);
+  g_auto (GStrv) items = NULL;
+  g_autofree char *text = NULL;
+
+  /* Facilitate consecutive list drops by ending string with a space */
+  g_strv_builder_add (builder, "");
+  items = g_strv_builder_end (builder);
+  text = g_strjoinv (" ", items);
 
   g_signal_emit (self, signals[DROP], 0, text);
 }
