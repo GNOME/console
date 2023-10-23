@@ -319,8 +319,11 @@
     </release>
   </releases>
   <launchable type="desktop-id">@KGX_APPLICATION_ID_RAW@.desktop</launchable>
-  <url type="homepage">https://apps.gnome.org/en-GB/app/org.gnome.Console/</url>
+  <url type="homepage">https://apps.gnome.org/Console/</url>
   <url type="bugtracker">https://gitlab.gnome.org/GNOME/console/issues</url>
+  <url type="donation">https://www.gnome.org/donate/</url>
+  <url type="translate">https://l10n.gnome.org/module/console/</url>
+  <url type="vcs-browser">https://gitlab.gnome.org/GNOME/console</url>
   <update_contact>zbrown@gnome.org</update_contact>
   <translation type="gettext">@BIN_NAME@</translation>
   <content_rating type="oars-1.1" />
