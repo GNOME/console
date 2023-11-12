@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Console master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-10-12 11:25+0000\n"
-"PO-Revision-Date: 2023-10-14 11:05+0300\n"
+"POT-Creation-Date: 2023-10-23 20:27+0000\n"
+"PO-Revision-Date: 2023-11-09 20:50+0300\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
@@ -52,7 +52,7 @@ msgstr "GNOME masaüstü için basit, kullanıcı dostu uçbirim öykünücü."
 msgid "Terminal window"
 msgstr "Uçbirim penceresi"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:327 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:469
 msgid "The GNOME Project"
 msgstr "GNOME Projesi"
 
@@ -148,7 +148,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s VTE %u.%u.%u %s kullanıyor\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:452
+#: src/kgx-application.c:361 src/kgx-window.c:464
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -206,40 +206,53 @@ msgstr "SATIRLAR"
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- KOMUT [ARGÜMAN...]]"
 
-#: src/kgx-close-dialog.c:53
+#: src/kgx-close-dialog.c:96
 msgid "Close Window?"
 msgstr "Pencere Kapatılsın Mı?"
 
-#: src/kgx-close-dialog.c:54
+#: src/kgx-close-dialog.c:98
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
+msgstr[0] ""
 "Bazı komutlar hala çalışıyor, bu pencereyi kapatmak onları öldürebilir ve "
 "beklenmedik sonuçlara neden olabilir"
 
-#: src/kgx-close-dialog.c:59
+#: src/kgx-close-dialog.c:105
 msgid "Close Tab?"
 msgstr "Sekme Kapatılsın Mı?"
 
-#: src/kgx-close-dialog.c:60
+#: src/kgx-close-dialog.c:107
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
+msgstr[0] ""
 "Bazı komutlar hala çalışıyor, bu sekmeyi kapatmak onları öldürebilir ve "
 "beklenmedik sonuçlara neden olabilir"
 
-#: src/kgx-close-dialog.c:74
+#: src/kgx-close-dialog.c:123
 #, c-format
 msgid "Process %d"
 msgstr "Süreç %d"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:248
+msgid "Process list"
+msgstr "Süreç listesi"
+
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:262 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "_İptal"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:264
 msgid "C_lose"
 msgstr "_Kapat"
 
@@ -271,7 +284,7 @@ msgstr "Yazı Tipi Boyutu"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:463
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "Sekme %i"
@@ -336,7 +349,7 @@ msgstr "<b>Salt Okunur</b> — Komut çıktı"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Başlatılamadı</b> — %s"
 
-#: src/kgx-tab.c:1091
+#: src/kgx-tab.c:1109
 msgid "Command completed"
 msgstr "Komut tamamlandı"
 
@@ -410,7 +423,7 @@ msgid "Dark Style"
 msgstr "Koyu Biçem"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:464
+#: src/kgx-window.c:476
 msgid "translator-credits"
 msgstr ""
 "Sabri Ünal <libreajans@gmail.com>\n"
