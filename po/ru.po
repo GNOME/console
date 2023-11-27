@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-10-08 12:09+0000\n"
-"PO-Revision-Date: 2023-10-12 21:48+0300\n"
+"POT-Creation-Date: 2023-10-23 20:27+0000\n"
+"PO-Revision-Date: 2023-11-12 11:03+0300\n"
 "Last-Translator: Artur So <arturios2005@mail.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -51,7 +51,7 @@ msgstr "Простой и удобный эмулятор терминала д�
 msgid "Terminal window"
 msgstr "Окно терминала"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:327 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:469
 msgid "The GNOME Project"
 msgstr "The GNOME Project"
 
@@ -147,7 +147,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s с использованием VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:452
+#: src/kgx-application.c:361 src/kgx-window.c:464
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -205,40 +205,65 @@ msgstr "СТРОКИ"
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- КОМАНДА [АРГУМЕНТ...]]"
 
-#: src/kgx-close-dialog.c:53
+#: src/kgx-close-dialog.c:96
 msgid "Close Window?"
 msgstr "Закрыть окно?"
 
-#: src/kgx-close-dialog.c:54
+#: src/kgx-close-dialog.c:98
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
+msgstr[0] ""
+"Команда все еще выполняется, закрытие этого окна приведет к ее завершению и "
+"может привести к неожиданным последствиям"
+msgstr[1] ""
+"Некоторые команды все еще выполняются, закрытие этого окна приведет к их "
+"завершению и может привести к неожиданным последствиям"
+msgstr[2] ""
 "Некоторые команды все еще выполняются, закрытие этого окна приведет к их "
 "завершению и может привести к неожиданным последствиям"
 
-#: src/kgx-close-dialog.c:59
+#: src/kgx-close-dialog.c:105
 msgid "Close Tab?"
 msgstr "Закрыть вкладку?"
 
-#: src/kgx-close-dialog.c:60
+#: src/kgx-close-dialog.c:107
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
+msgstr[0] ""
+"Команда все еще выполняется, закрытие этой вкладки приведет к ее завершению "
+"и может привести к неожиданным последствиям"
+msgstr[1] ""
+"Некоторые команды все еще выполняются, закрытие этой вкладки приведет к их "
+"завершению и может привести к неожиданным последствиям"
+msgstr[2] ""
 "Некоторые команды все еще выполняются, закрытие этой вкладки приведет к их "
 "завершению и может привести к неожиданным последствиям"
 
-#: src/kgx-close-dialog.c:74
+#: src/kgx-close-dialog.c:123
 #, c-format
 msgid "Process %d"
 msgstr "Процесс %d"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:248
+msgid "Process list"
+msgstr "Список процессов"
+
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:262 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "_Отменить"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:264
 msgid "C_lose"
 msgstr "З_акрыть"
 
@@ -270,7 +295,7 @@ msgstr "Размер шрифта"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:463
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "Вкладка %i"
@@ -335,7 +360,7 @@ msgstr "<b>Только для чтения</b> — Команда заверш�
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Не удалось начать</b> — %s"
 
-#: src/kgx-tab.c:1091
+#: src/kgx-tab.c:1109
 msgid "Command completed"
 msgstr "Команда выполнена"
 
@@ -411,7 +436,7 @@ msgid "Dark Style"
 msgstr "Темный стиль"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:464
+#: src/kgx-window.c:476
 msgid "translator-credits"
 msgstr "Aleksandr Melman <alexmelman88@gmail.com>, 2022-2023"
 
