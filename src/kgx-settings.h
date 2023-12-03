@@ -1,6 +1,6 @@
 /* kgx-settings.h
  *
- * Copyright 2022 Zander Brown
+ * Copyright 2022-2024 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -71,6 +71,7 @@ typedef enum /*< enum,prefix=KGX >*/ {
 
 G_DECLARE_FINAL_TYPE (KgxSettings, kgx_settings, KGX, SETTINGS, GObject)
 
+KgxTheme              kgx_settings_get_resolved_theme     (KgxSettings           *self);
 PangoFontDescription *kgx_settings_get_font          (KgxSettings       *self);
 void                  kgx_settings_increase_scale    (KgxSettings       *self);
 void                  kgx_settings_decrease_scale    (KgxSettings       *self);

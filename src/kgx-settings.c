@@ -20,6 +20,7 @@
 
 #include <gio/gio.h>
 #include <vte/vte.h>
+#include <adwaita.h>
 
 #include "kgx-settings.h"
 
@@ -67,6 +68,7 @@ G_DEFINE_TYPE (KgxSettings, kgx_settings, G_TYPE_OBJECT)
 enum {
   PROP_0,
   PROP_THEME,
+  PROP_RESOLVED_THEME,
   PROP_FONT,
   PROP_FONT_SCALE,
   PROP_SCALE_CAN_INCREASE,
@@ -122,6 +124,7 @@ kgx_settings_set_property (GObject      *object,
   switch (property_id) {
     case PROP_THEME:
       self->theme = g_value_get_enum (value);
+      g_object_notify_by_pspec (object, pspecs[PROP_RESOLVED_THEME]);
       break;
     case PROP_FONT_SCALE:
       update_scale (self, g_value_get_double (value));
@@ -159,6 +162,9 @@ kgx_settings_get_property (GObject    *object,
   switch (property_id) {
     case PROP_THEME:
       g_value_set_enum (value, self->theme);
+      break;
+    case PROP_RESOLVED_THEME:
+      g_value_set_enum (value, kgx_settings_get_resolved_theme (self));
       break;
     case PROP_FONT:
       g_value_take_boxed (value, kgx_settings_get_font (self));
@@ -216,6 +222,11 @@ kgx_settings_class_init (KgxSettingsClass *klass)
     g_param_spec_enum ("theme", NULL, NULL,
                        KGX_TYPE_THEME, KGX_THEME_NIGHT,
                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
+  pspecs[PROP_RESOLVED_THEME] =
+    g_param_spec_enum ("resolved-theme", NULL, NULL,
+                       KGX_TYPE_THEME, KGX_THEME_NIGHT,
+                       G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_FONT] =
     g_param_spec_boxed ("font", NULL, NULL,
@@ -339,6 +350,13 @@ encode_font (const GValue       *value,
   return g_variant_new_take_string (pango_font_description_to_string (font));
 }
 
+static void
+dark_changed (KgxSettings *self)
+{
+  if (self->theme == KGX_THEME_AUTO) {
+    g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_RESOLVED_THEME]);
+  }
+}
 
 static void
 kgx_settings_init (KgxSettings *self)
@@ -379,8 +397,36 @@ kgx_settings_init (KgxSettings *self)
                     "changed::" MONOSPACE_FONT_KEY_NAME,
                     G_CALLBACK (system_font_changed),
                     self);
+
+  g_signal_connect_object (adw_style_manager_get_default (),
+                           "notify::dark", G_CALLBACK (dark_changed),
+                           self, G_CONNECT_SWAPPED);
 }
 
+/**
+ * kgx_settings_get_resolved_theme:
+ * @self: the #KgxSettings
+ *
+ * Unlike #KgxSettings:theme this is never %KGX_THEME_AUTO, instead providing
+ * the value %KGX_THEME_AUTO should be treated as
+ */
+KgxTheme
+kgx_settings_get_resolved_theme (KgxSettings *self)
+{
+  AdwStyleManager *manager = adw_style_manager_get_default ();
+
+  g_return_val_if_fail (KGX_IS_SETTINGS (self), KGX_THEME_HACKER);
+
+  if (G_LIKELY (self->theme != KGX_THEME_AUTO)) {
+    return self->theme;
+  }
+
+  if (adw_style_manager_get_dark (manager)) {
+    return KGX_THEME_NIGHT;
+  }
+
+  return KGX_THEME_DAY;
+}
 
 /**
  * kgx_settings_get_font:

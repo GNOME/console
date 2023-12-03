@@ -28,7 +28,7 @@
 #include "kgx-config.h"
 
 #include <glib/gi18n.h>
-#include <adwaita.h>
+
 #include <vte/vte.h>
 #define PCRE2_CODE_UNIT_WIDTH 0
 #include <pcre2.h>
@@ -73,8 +73,6 @@ static const char *links[KGX_TERMINAL_N_LINK_REGEX] = {
 
 /**
  * KgxTerminal:
- * @theme: the palette to use, see #KgxTerminal:theme
- * @actions: action map for the context menu
  * @current_url: the address under the cursor
  * @match_id: regex ids for finding hyperlinks
  *
@@ -135,7 +133,6 @@ kgx_terminal_dispose (GObject *object)
 static void
 update_terminal_colours (KgxTerminal *self)
 {
-  KgxTheme current_theme;
   KgxTheme resolved_theme;
   GdkRGBA fg;
   GdkRGBA bg;
@@ -164,19 +161,7 @@ update_terminal_colours (KgxTerminal *self)
     return;
   }
 
-  g_object_get (self->settings, "theme", &current_theme, NULL);
-
-  if (current_theme == KGX_THEME_AUTO) {
-    AdwStyleManager *manager = adw_style_manager_get_default ();
-
-    if (adw_style_manager_get_dark (manager)) {
-      resolved_theme = KGX_THEME_NIGHT;
-    } else {
-      resolved_theme = KGX_THEME_DAY;
-    }
-  } else {
-    resolved_theme = current_theme;
-  }
+  resolved_theme = kgx_settings_get_resolved_theme (self->settings);
 
   switch (resolved_theme) {
     case KGX_THEME_HACKER:
@@ -706,19 +691,6 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
 
 
 static void
-dark_changed (KgxTerminal *self)
-{
-  KgxTheme theme;
-
-  g_object_get (self->settings, "theme", &theme, NULL);
-
-  if (theme == KGX_THEME_AUTO) {
-    update_terminal_colours (self);
-  }
-}
-
-
-static void
 kgx_terminal_init (KgxTerminal *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
@@ -751,12 +723,8 @@ kgx_terminal_init (KgxTerminal *self)
                                         "pointer");
   }
 
-  g_signal_connect_object (adw_style_manager_get_default (),
-                           "notify::dark", G_CALLBACK (dark_changed),
-                           self, G_CONNECT_SWAPPED);
-
   g_signal_group_connect_swapped (self->settings_signals,
-                                  "notify::theme", G_CALLBACK (update_terminal_colours),
+                                  "notify::resolved-theme", G_CALLBACK (update_terminal_colours),
                                   self);
 }
 
