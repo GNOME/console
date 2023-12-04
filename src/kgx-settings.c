@@ -22,6 +22,8 @@
 #include <vte/vte.h>
 #include <adwaita.h>
 
+#include "kgx-livery-manager.h"
+#include "kgx-livery.h"
 #include "kgx-marshals.h"
 #include "kgx-system-info.h"
 #include "kgx-utils.h"
@@ -50,6 +52,10 @@ struct _KgxSettings {
   int64_t               scrollback_limit;
   gboolean              ignore_scrollback_limit;
   gboolean              software_flow_control;
+  KgxLivery            *livery;
+  gboolean              transparency;
+
+  KgxLiveryManager     *livery_manager;
 
   GSettings            *settings;
   KgxSystemInfo        *system_info;
@@ -75,6 +81,8 @@ enum {
   PROP_SCROLLBACK_LIMIT,
   PROP_IGNORE_SCROLLBACK_LIMIT,
   PROP_SOFTWARE_FLOW_CONTROL,
+  PROP_LIVERY,
+  PROP_TRANSPARENCY,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -90,6 +98,11 @@ kgx_settings_dispose (GObject *object)
 
   g_clear_object (&self->settings);
   g_clear_object (&self->system_info);
+
+  g_clear_pointer (&self->custom_font, pango_font_description_free);
+  g_clear_pointer (&self->livery, kgx_livery_unref);
+
+  g_clear_object (&self->livery_manager);
 
   G_OBJECT_CLASS (kgx_settings_parent_class)->dispose (object);
 }
@@ -124,6 +137,7 @@ kgx_settings_set_property (GObject      *object,
     case PROP_THEME:
       self->theme = g_value_get_enum (value);
       g_object_notify_by_pspec (object, pspecs[PROP_RESOLVED_THEME]);
+      g_object_notify_by_pspec (object, pspecs[PROP_LIVERY]);
       break;
     case PROP_FONT:
       g_clear_pointer (&self->font, pango_font_description_free);
@@ -171,6 +185,17 @@ kgx_settings_set_property (GObject      *object,
                             pspec,
                             &self->software_flow_control,
                             value);
+      break;
+    case PROP_TRANSPARENCY:
+      kgx_set_boolean_prop (object,
+                            pspec,
+                            &self->transparency,
+                            value);
+      break;
+    case PROP_LIVERY:
+      if (kgx_set_livery (&self->livery, g_value_get_boxed (value))) {
+        g_object_notify_by_pspec (object, pspecs[PROP_LIVERY]);
+      }
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -230,6 +255,12 @@ kgx_settings_get_property (GObject    *object,
     case PROP_SOFTWARE_FLOW_CONTROL:
       g_value_set_boolean (value, self->software_flow_control);
       break;
+    case PROP_LIVERY:
+      g_value_set_boxed (value, kgx_settings_get_livery (self));
+      break;
+    case PROP_TRANSPARENCY:
+      g_value_set_boolean (value, self->transparency);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -250,8 +281,6 @@ kgx_settings_class_init (KgxSettingsClass *klass)
    * KgxSettings:theme:
    *
    * The palette to use, one of the values of #KgxTheme
-   *
-   * Officially only "night" exists, "hacker" is just a little fun
    *
    * Bound to ‘theme’ GSetting so changes persist
    */
@@ -334,7 +363,78 @@ kgx_settings_class_init (KgxSettingsClass *klass)
                           FALSE,
                           G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
+  pspecs[PROP_LIVERY] =
+    g_param_spec_boxed ("livery", NULL, NULL,
+                        KGX_TYPE_LIVERY,
+                        G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
+
+  pspecs[PROP_TRANSPARENCY] =
+    g_param_spec_boolean ("transparency", NULL, NULL,
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
+}
+
+
+static gboolean
+variant_to_value (GValue *value, GVariant *variant, gpointer data)
+{
+  g_value_set_variant (value, variant);
+
+  return TRUE;
+}
+
+
+static GVariant *
+value_to_variant (const GValue       *value,
+                  const GVariantType *variant_ty,
+                  gpointer            data)
+{
+  return g_value_dup_variant (value);
+}
+
+
+static gboolean
+resolve_livery (GValue   *value,
+                GVariant *variant,
+                gpointer  data)
+{
+  KgxSettings *self = data;
+  const char *uuid = g_variant_get_string (variant, NULL);
+  KgxLivery *livery = kgx_livery_manager_resolve (self->livery_manager, uuid);
+
+  if (!livery) {
+    g_log_structured (G_LOG_DOMAIN,
+                      G_LOG_LEVEL_WARNING,
+                      "CODE_FILE", __FILE__,
+                      "CODE_LINE", G_STRINGIFY (__LINE__),
+                      "CODE_FUNC", G_STRFUNC,
+                      "KGX_LIVERY_UUID", uuid,
+                      "MESSAGE", "settings: ‘%s’ is unknown, using default livery",
+                      uuid);
+
+    livery = kgx_livery_manager_dup_fallback (self->livery_manager);
+  }
+
+  g_value_set_boxed (value, livery);
+
+  return TRUE;
+}
+
+
+static GVariant *
+select_livery (const GValue       *value,
+               const GVariantType *variant_ty,
+               gpointer            data)
+{
+  KgxLivery *livery = g_value_get_boxed (value);
+
+  if (livery) {
+    return NULL;
+  }
+
+  return g_variant_new_string (kgx_livery_get_uuid (livery));
 }
 
 
@@ -391,11 +491,13 @@ encode_font (const GValue       *value,
   return g_variant_new_take_string (pango_font_description_to_string (font));
 }
 
+
 static void
 dark_changed (KgxSettings *self)
 {
   if (self->theme == KGX_THEME_AUTO) {
     g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_RESOLVED_THEME]);
+    g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_LIVERY]);
   }
 }
 
@@ -459,6 +561,8 @@ setup_lines_expression (KgxSettings *self)
 static void
 kgx_settings_init (KgxSettings *self)
 {
+  self->livery_manager = g_object_new (KGX_TYPE_LIVERY_MANAGER, NULL);
+
   self->settings = g_settings_new (KGX_APPLICATION_ID);
   g_settings_bind (self->settings, "theme",
                    self, "theme",
@@ -491,6 +595,20 @@ kgx_settings_init (KgxSettings *self)
   g_settings_bind (self->settings, "software-flow-control",
                    self, "software-flow-control",
                    G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (self->settings, "transparency",
+                   self, "transparency",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind_with_mapping (self->settings, "custom-liveries",
+                                self->livery_manager, "custom-liveries",
+                                G_SETTINGS_BIND_DEFAULT, variant_to_value,
+                                value_to_variant,
+                                NULL, NULL);
+  g_settings_bind_with_mapping (self->settings, "livery",
+                                self, "livery",
+                                G_SETTINGS_BIND_DEFAULT,
+                                resolve_livery,
+                                select_livery,
+                                self, NULL);
 
   g_signal_connect (self->settings,
                     "changed::" RESTORE_SIZE_KEY,
@@ -729,4 +847,25 @@ kgx_settings_get_software_flow_control (KgxSettings *self)
   g_return_val_if_fail (KGX_IS_SETTINGS (self), FALSE);
 
   return self->software_flow_control;
+}
+
+
+KgxLivery *
+kgx_settings_get_livery (KgxSettings *self)
+{
+  g_return_val_if_fail (KGX_IS_SETTINGS (self), NULL);
+
+  return self->livery;
+}
+
+
+void
+kgx_settings_set_livery (KgxSettings *restrict self,
+                         KgxLivery   *restrict livery)
+{
+  g_return_if_fail (KGX_IS_SETTINGS (self));
+
+  if (kgx_set_livery (&self->livery, livery)) {
+    g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_LIVERY]);
+  }
 }
