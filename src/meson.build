@@ -15,6 +15,8 @@ kgx_sources = [
   'kgx-drop-target.h',
   'kgx-pages.c',
   'kgx-pages.h',
+  'kgx-palette.c',
+  'kgx-palette.h',
   'kgx-paste-dialog.c',
   'kgx-paste-dialog.h',
   'kgx-process.c',
