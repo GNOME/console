@@ -3,6 +3,11 @@
   <requires lib="gtk" version="4.0"/>
   <template class="KgxSimpleTab" parent="KgxTab">
     <property name="terminal">terminal</property>
+    <binding name="tab-tooltip">
+      <closure type='gchararray' function='format_tooltip'>
+        <lookup name="path">terminal</lookup>
+      </closure>
+    </binding>
     <child type="content">
       <object class="GtkScrolledWindow">
         <property name="vexpand">1</property>
@@ -22,7 +27,6 @@
             <binding name="cancellable">
               <lookup name="cancellable">KgxSimpleTab</lookup>
             </binding>
-            <signal name="notify::path" handler="path_changed" swapped="no"/>
           </object>
         </property>
       </object>

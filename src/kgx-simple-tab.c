@@ -308,19 +308,29 @@ kgx_simple_tab_start_finish (KgxTab        *page,
 }
 
 
-static void
-path_changed (GObject *object, GParamSpec *pspec, KgxSimpleTab *self)
+static char *
+format_tooltip (GObject *object, GFile *current_path)
 {
-  g_autofree char *desc = NULL;
-  g_autoptr (GFile) path = NULL;
+  g_autofree char *path_raw = NULL;
+  g_autofree char *path_utf8 = NULL;
+  g_autoptr (GError) error = NULL;
 
-  g_object_get (self->terminal, "path", &path, NULL);
-
-  if (path) {
-    desc = g_strdup_printf ("%s", g_file_get_path (path));
+  if (!current_path) {
+    return NULL;
   }
 
-  g_object_set (self, "tab-tooltip", desc, NULL);
+  path_raw = g_file_get_path (current_path);
+  if (G_UNLIKELY (!path_raw)) {
+    return g_file_get_uri (current_path);
+  }
+
+  path_utf8 = g_filename_to_utf8 (path_raw, -1, NULL, NULL, &error);
+  if (G_UNLIKELY (error)) {
+    g_debug ("simple-tab: path had unexpected encoding (%s)", error->message);
+    return g_file_get_uri (current_path);
+  }
+
+  return g_steal_pointer (&path_utf8);
 }
 
 
@@ -365,7 +375,7 @@ kgx_simple_tab_class_init (KgxSimpleTabClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, KgxSimpleTab, terminal);
 
-  gtk_widget_class_bind_template_callback (widget_class, path_changed);
+  gtk_widget_class_bind_template_callback (widget_class, format_tooltip);
 }
 
 
