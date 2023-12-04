@@ -22,6 +22,7 @@
 #include <pango/pango.h>
 
 #include "kgx-enums.h"
+#include "kgx-livery.h"
 
 G_BEGIN_DECLS
 
@@ -32,7 +33,7 @@ G_BEGIN_DECLS
  *                  the user's global setting
  * @KGX_THEME_NIGHT: The default, dark, theme
  * @KGX_THEME_DAY: Alternate, light, theme
- * @KGX_THEME_HACKER: Little easter egg theme
+ * @KGX_THEME_HACKER: Legacy alias for night
  *
  * Until [meson#1687](https://github.com/mesonbuild/meson/issues/1687) is
  * resolved this enum must be manually kept in sync with
@@ -95,5 +96,8 @@ PangoFontDescription *kgx_settings_get_custom_font      (KgxSettings           *
 void                  kgx_settings_set_custom_font      (KgxSettings           *self,
                                                          PangoFontDescription  *custom_font);
 gboolean              kgx_settings_get_software_flow_control (KgxSettings      *self);
+KgxLivery            *kgx_settings_get_livery                (KgxSettings           *self);
+void                  kgx_settings_set_livery                (KgxSettings           *self,
+                                                              KgxLivery             *livery);
 
 G_END_DECLS
