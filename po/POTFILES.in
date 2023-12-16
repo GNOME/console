@@ -10,6 +10,7 @@ src/kgx-pages.c
 src/kgx-pages.ui
 src/kgx-preferences-window.c
 src/kgx-preferences-window.ui
+src/kgx-process.c
 src/kgx-simple-tab.c
 src/kgx-tab.c
 src/kgx-tab.ui
