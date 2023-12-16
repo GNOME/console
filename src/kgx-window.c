@@ -353,29 +353,57 @@ title_or_fallback (GObject *object, const char *title)
 
 
 static char *
-path_as_subtitle (GObject *object, GFile *file)
+path_as_subtitle (GObject *object, GFile *file, const char *window_title)
 {
-  g_autofree char *path = NULL;
-  const char *home = NULL;
+  g_autoptr (GFile) home = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autofree char *path_raw = NULL;
+  g_autofree char *path_utf8 = NULL;
+  g_autofree char *path_rel_raw = NULL;
+  g_autofree char *path_rel_utf8 = NULL;
+  g_autofree char *short_home = NULL;
+  const char *home_path = NULL;
 
   if (!file) {
     return NULL;
   }
 
-  path = g_file_get_path (file);
-  if (G_UNLIKELY (!path)) {
+  path_raw = g_file_get_path (file);
+  if (G_UNLIKELY (!path_raw || g_strcmp0 (path_raw, window_title) == 0)) {
     return NULL;
   }
 
-  home = g_get_home_dir ();
-  if (G_LIKELY (g_str_has_prefix (path, home))) {
-    g_autofree char *short_home = g_strdup_printf ("~%s",
-                                                   path + strlen (home));
-
-    return g_steal_pointer (&short_home);
+  path_utf8 = g_filename_to_utf8 (path_raw, -1, NULL, NULL, &error);
+  if (G_UNLIKELY (error)) {
+    g_debug ("window: path had unexpected encoding (%s)", error->message);
+    return g_file_get_uri (file);
   }
 
-  return g_steal_pointer (&path);
+  home_path = g_get_home_dir ();
+  if (G_UNLIKELY (!g_str_has_prefix (path_raw, home_path))) {
+    return g_steal_pointer (&path_utf8);
+  }
+
+  home = g_file_new_for_path (home_path);
+  if (!g_file_equal (home, file)) {
+    path_rel_raw = g_file_get_relative_path (home, file);
+    path_rel_utf8 = g_filename_to_utf8 (path_rel_raw, -1, NULL, NULL, &error);
+    if (G_UNLIKELY (error)) {
+      g_debug ("window: path had unexpected encoding (%s)", error->message);
+      return g_file_get_uri (file);
+    }
+
+    short_home = g_strdup_printf ("~/%s", path_rel_utf8);
+  } else {
+    short_home = g_strdup ("~");
+  }
+
+  if (G_LIKELY (g_strcmp0 (short_home, window_title) == 0)) {
+    /* Avoid duplicating the title */
+    return NULL;
+  }
+
+  return g_steal_pointer (&short_home);
 }
 
 

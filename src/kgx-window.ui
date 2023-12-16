@@ -67,6 +67,7 @@
                     <binding name="subtitle">
                       <closure type='gchararray' function='path_as_subtitle'>
                         <lookup name="path">pages</lookup>
+                        <lookup name="title">KgxWindow</lookup>
                       </closure>
                     </binding>
                     <property name="title" bind-source="KgxWindow" bind-property="title" bind-flags="sync-create" />
