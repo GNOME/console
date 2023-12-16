@@ -25,8 +25,6 @@
 #include "kgx-process.h"
 #include "kgx-close-dialog.h"
 
-#define MAX_TITLE_LENGTH 100
-
 
 struct _KgxCloseDialog {
   GObject                parent;
@@ -114,32 +112,18 @@ update_dialog (KgxCloseDialog *self)
   }
 
   for (size_t i = 0; i < n_commands; i++) {
-    KgxProcess *process = g_ptr_array_index (self->commands, i);
-    const char *title = kgx_process_get_exec (process);
-    GtkWidget *row;
+    g_autofree char *title = NULL;
+    g_autofree char *subtitle = NULL;
 
-    if (G_UNLIKELY (strlen (title) > MAX_TITLE_LENGTH)) {
-      GPid pid = kgx_process_get_pid (process);
-      g_autofree char *pid_title = g_strdup_printf (_("Process %d"), pid);
-      g_autoptr (GString) short_title = g_string_new (NULL);
-      const char *iter = title;
+    kgx_process_get_title (g_ptr_array_index (self->commands, i),
+                           &title,
+                           &subtitle);
 
-      for (guint len = 0; *iter && len < MAX_TITLE_LENGTH; iter = g_utf8_next_char (iter), len++) {
-        g_string_append_unichar (short_title, g_utf8_get_char (iter));
-      }
-      g_string_append (short_title, "…");
-
-      row = g_object_new (ADW_TYPE_ACTION_ROW,
-                          "title", pid_title,
-                          "subtitle", short_title->str,
-                          NULL);
-    } else {
-      row = g_object_new (ADW_TYPE_ACTION_ROW,
-                          "title", title,
-                          NULL);
-    }
-
-    gtk_list_box_append (GTK_LIST_BOX (self->list), row);
+    gtk_list_box_append (GTK_LIST_BOX (self->list),
+                         g_object_new (ADW_TYPE_ACTION_ROW,
+                                       "title", title,
+                                       "subtitle", subtitle,
+                                       NULL));
   }
 }
 

@@ -1105,9 +1105,21 @@ kgx_tab_pop_child (KgxTab     *self,
 
   if (!kgx_tab_is_active (self)) {
     g_autoptr (GNotification) noti = NULL;
+    g_autofree char *body = NULL;
+    g_autofree char *process_title = NULL;
+    g_autofree char *process_subtitle = NULL;
 
     noti = g_notification_new (_("Command completed"));
-    g_notification_set_body (noti, kgx_process_get_exec (process));
+
+    kgx_process_get_title (process, &process_title, &process_subtitle);
+    if (process_subtitle) {
+      body = g_strdup_printf ("%s, %s",
+                              process_title,
+                              process_subtitle);
+    } else {
+      body = g_steal_pointer (&process_title);
+    }
+    g_notification_set_body (noti, body);
 
     g_notification_set_default_action_and_target (noti,
                                                   "app.focus-page",

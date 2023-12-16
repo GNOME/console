@@ -26,6 +26,10 @@
  * a #KgxTerminal for the purposes of styling a #KgxWindow
  */
 
+#include "kgx-config.h"
+
+#include <glib/gi18n.h>
+
 #include <gio/gio.h>
 #include <glibtop/proclist.h>
 #include <glibtop/procuid.h>
@@ -33,19 +37,19 @@
 
 #include "kgx-process.h"
 
+#define MAX_TITLE_LENGTH 100
+
 struct _KgxProcess {
   GPid    pid;
   GPid    parent;
   gint32  euid;
   GStrv   argv;
-  char   *exec;
 };
 
 static void
 clear_process (KgxProcess *self)
 {
   g_clear_pointer (&self->argv, g_strfreev);
-  g_clear_pointer (&self->exec, g_free);
 }
 
 /**
@@ -170,24 +174,38 @@ kgx_process_get_argv (KgxProcess *self)
   return self->argv;
 }
 
-/**
- * kgx_process_get_exec:
- * @self: the #KgxProcess
- *
- * Get the command line used to invoke to process, as a space-joined string
- *
- * Stability: Private
- */
-inline const char *
-kgx_process_get_exec (KgxProcess *self)
+inline void
+kgx_process_get_title (KgxProcess *self, char **title, char **subtitle)
 {
-  g_return_val_if_fail (self != NULL, NULL);
+  g_autoptr (GString) exec = g_string_sized_new (MAX_TITLE_LENGTH);
+  GStrv argv;
 
-  if (G_LIKELY (self->exec == NULL)) {
-    self->exec = g_strjoinv (" ", kgx_process_get_argv (self));
+  g_return_if_fail (self != NULL);
+
+  argv = kgx_process_get_argv (self);
+
+  for (size_t i = 0; argv && argv[i]; i++) {
+    size_t arg_len = strlen (argv[i]);
+
+    if (G_UNLIKELY (exec->len + arg_len > MAX_TITLE_LENGTH)) {
+      for (const char *iter = argv[i];
+           *iter && exec->len < MAX_TITLE_LENGTH;
+           iter = g_utf8_next_char (iter)) {
+        g_string_append_unichar (exec, g_utf8_get_char (iter));
+      }
+      g_string_append (exec, "…");
+
+      *title = g_strdup_printf (_("Process %d"), self->pid);
+      *subtitle = g_string_free (g_steal_pointer (&exec), FALSE);
+      return;
+    }
+
+    g_string_append_len (exec, argv[i], arg_len);
+    g_string_append_c (exec, ' ');
   }
 
-  return self->exec;
+  *title = g_string_free (g_steal_pointer (&exec), FALSE);
+  *subtitle = NULL;
 }
 
 /**
