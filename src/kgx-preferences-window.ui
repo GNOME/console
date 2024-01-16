@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <template class="KgxPreferencesWindow" parent="AdwPreferencesWindow">
+  <template class="KgxPreferencesWindow" parent="AdwPreferencesDialog">
     <child>
       <object class="AdwPreferencesPage">
         <property name="title" translatable="yes">General</property>

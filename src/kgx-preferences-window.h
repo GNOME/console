@@ -24,7 +24,7 @@ G_BEGIN_DECLS
 
 #define KGX_TYPE_PREFERENCES_WINDOW (kgx_preferences_window_get_type ())
 
-G_DECLARE_FINAL_TYPE (KgxPreferencesWindow, kgx_preferences_window, KGX, PREFERENCES_WINDOW, AdwPreferencesWindow)
+G_DECLARE_FINAL_TYPE (KgxPreferencesWindow, kgx_preferences_window, KGX, PREFERENCES_WINDOW, AdwPreferencesDialog)
 
 
 G_END_DECLS

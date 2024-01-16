@@ -542,15 +542,13 @@ show_preferences_window_activated (GtkWidget  *widget,
                                    const char *action_name,
                                    GVariant   *parameter)
 {
-  KgxWindow *self = KGX_WINDOW (widget);
-  KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
-  GtkWindow *preferences;
+  KgxWindowPrivate *priv =
+    kgx_window_get_instance_private (KGX_WINDOW (widget));
 
-  preferences = g_object_new (KGX_TYPE_PREFERENCES_WINDOW,
-                              "transient-for", self,
-                              "settings", priv->settings,
-                              NULL);
-  gtk_window_present (preferences);
+  adw_dialog_present (g_object_new (KGX_TYPE_PREFERENCES_WINDOW,
+                                    "settings", priv->settings,
+                                    NULL),
+                      widget);
 }
 
 

@@ -27,7 +27,7 @@
 
 
 struct _KgxPreferencesWindow {
-  AdwPreferencesWindow  parent_instance;
+  AdwPreferencesDialog  parent_instance;
 
   KgxSettings          *settings;
   GBindingGroup        *settings_binds;
@@ -39,7 +39,7 @@ struct _KgxPreferencesWindow {
 };
 
 
-G_DEFINE_TYPE (KgxPreferencesWindow, kgx_preferences_window, ADW_TYPE_PREFERENCES_WINDOW)
+G_DEFINE_TYPE (KgxPreferencesWindow, kgx_preferences_window, ADW_TYPE_PREFERENCES_DIALOG)
 
 
 enum {
@@ -143,12 +143,13 @@ select_font_activated (GtkWidget  *widget,
                        GVariant   *parameter)
 {
   KgxPreferencesWindow *self = KGX_PREFERENCES_WINDOW (widget);
+  GtkWindow *root = GTK_WINDOW (gtk_widget_get_root (widget));
   g_autoptr (PangoFontDescription) initial_value = NULL;
 
   initial_value = kgx_settings_get_custom_font (self->settings);
 
   gtk_window_present (g_object_connect (g_object_new (KGX_TYPE_FONT_PICKER,
-                                                      "transient-for", self,
+                                                      "transient-for", root,
                                                       "initial-font", initial_value,
                                                       NULL),
                                         "object-signal::selected", G_CALLBACK (font_selected), self,
