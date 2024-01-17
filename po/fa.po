@@ -1,21 +1,22 @@
 # Persian translation for console.
 # Copyright (C) 2022 console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the console package.
-# Danial Behzadi <dani.behzi@ubuntu.com>, 2022-2023.
+# Danial Behzadi <dani.behzi@ubuntu.com>, 2022-2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-08-05 06:17+0000\n"
-"PO-Revision-Date: 2023-08-05 15:07+0330\n"
+"POT-Creation-Date: 2023-12-16 16:56+0000\n"
+"PO-Revision-Date: 2024-01-18 03:17+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.2.2\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
@@ -33,7 +34,7 @@ msgstr ""
 msgid "New Window"
 msgstr "پنجرهٔ جدید"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:167
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
 msgid "New Tab"
 msgstr "زبانهٔ جدید"
 
@@ -49,7 +50,7 @@ msgstr "شبیه‌ساز پایانه‌ای کاربرپسند برای میز
 msgid "Terminal window"
 msgstr "پنجرهٔ پایانه"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:262 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
 msgid "The GNOME Project"
 msgstr "پروژهٔ گنوم"
 
@@ -145,7 +146,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s با استفاده از VTE %Iu.%Iu.%Iu %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:452
+#: src/kgx-application.c:361 src/kgx-window.c:466
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s زندر برون"
@@ -203,35 +204,54 @@ msgstr "LINES"
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- COMMAND [ARGUMENT...]]"
 
-#: src/kgx-close-dialog.c:50
+#: src/kgx-close-dialog.c:94
 msgid "Close Window?"
 msgstr "بستن پنجره؟"
 
-#: src/kgx-close-dialog.c:51
+#: src/kgx-close-dialog.c:96
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"برخی دستورها هنوز در حال اجرایند. بستن این پنجره خواهد کشتشان و ممکن است "
-"منجر به نتیجه‌های غیرمنتظره‌ای شود"
+msgstr[0] ""
+"هنوز دستورهایی در حال اجرایند. بستن این پنجره خواهد کشتشان و ممکن است منجر "
+"به نتیجه‌های غیرمنتظره شود"
+msgstr[1] ""
+"هنوز دستوری در حال اجراست. بستن این پنجره خواهد کشتش و ممکن است منجر به "
+"نتیجه‌های غیرمنتظره شود"
 
-#: src/kgx-close-dialog.c:56
+#: src/kgx-close-dialog.c:103
 msgid "Close Tab?"
 msgstr "بستن زبانه؟"
 
-#: src/kgx-close-dialog.c:57
+#: src/kgx-close-dialog.c:105
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"برخی دستورها هنوز در حال اجرایند. بستن این زبانه خواهد کشتشان و ممکن است "
-"منجر به نتیجه‌های غیرمنتظره‌ای شود"
+msgstr[0] ""
+"هنوز دستورهایی در حال اجرایند. بستن این زبانه خواهد کشتشان و ممکن است منجر "
+"به نتیجه‌های غیرمنتظره شود"
+msgstr[1] ""
+"هنوز دستوری در حال اجراست. بستن این زبانه خواهد کشتش و ممکن است منجر به "
+"نتیجه‌های غیرمنتظره شود"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:915
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:232
+msgid "Process list"
+msgstr "سیاههٔ فرایندها"
+
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "_لغو"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:248
 msgid "C_lose"
 msgstr "_بستن"
 
@@ -263,7 +283,7 @@ msgstr "اندازهٔ قلم"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:424
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "زبانهٔ %Ii"
@@ -308,6 +328,11 @@ msgstr "پخش _صدا"
 msgid "_Visual Effects"
 msgstr "_جلوه‌های دیداری"
 
+#: src/kgx-process.c:198
+#, c-format
+msgid "Process %d"
+msgstr "فرایند %Id"
+
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
 #: src/kgx-simple-tab.c:180
@@ -328,7 +353,7 @@ msgstr "<b>فقط خواندنی</b> — دستور خارج شد"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>شکست در آغاز</b> — %s"
 
-#: src/kgx-tab.c:1091
+#: src/kgx-tab.c:1112
 msgid "Command completed"
 msgstr "دستور کامل شد"
 
@@ -344,7 +369,7 @@ msgstr "یافتهٔ پیشین"
 msgid "Next Match"
 msgstr "یافتهٔ بعدی"
 
-#: src/kgx-terminal.c:582
+#: src/kgx-terminal.c:557
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -353,12 +378,12 @@ msgstr ""
 "مهار-کلیک برای گشودن:\n"
 "%s"
 
-#: src/kgx-terminal.c:908
+#: src/kgx-terminal.c:883
 msgid "You are pasting a command that runs as an administrator"
 msgstr "دارید دستوری را جای‌گذاری می‌کنید که به عنوان مدیر اجرا می‌شود"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:912
+#: src/kgx-terminal.c:887
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -367,7 +392,7 @@ msgstr ""
 "مطممئن شوید که می‌دانید دستور چه می‌کند:\n"
 "%s"
 
-#: src/kgx-terminal.c:916 src/kgx-terminal.ui:24
+#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "_جای‌گذاری"
 
@@ -404,7 +429,7 @@ msgid "Dark Style"
 msgstr "سبک تیره"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:464
+#: src/kgx-window.c:478
 msgid "translator-credits"
 msgstr "دانیال بهزادی <dani.behzi@ubuntu.com>"
 
@@ -428,23 +453,23 @@ msgstr "_میان‌برهای صفحه‌کلید"
 msgid "_About Console"
 msgstr "_دربارهٔ کنسول"
 
-#: src/kgx-window.ui:80
+#: src/kgx-window.ui:79
 msgid "Find in Terminal"
 msgstr "یافتن در پایانه"
 
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:86
 msgid "Main Menu"
 msgstr "فهرست اصلی"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:104
 msgid "Shrink Text"
 msgstr "کوچک کردن متن"
 
-#: src/kgx-window.ui:117
+#: src/kgx-window.ui:115
 msgid "Reset Size"
 msgstr "بازنشانی اندازه"
 
-#: src/kgx-window.ui:141
+#: src/kgx-window.ui:139
 msgid "Enlarge Text"
 msgstr "بزرگ کردن متن"
 
