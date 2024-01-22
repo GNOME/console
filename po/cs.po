@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-10-08 11:47+0000\n"
-"PO-Revision-Date: 2023-10-09 12:04+0200\n"
+"POT-Creation-Date: 2023-12-16 16:56+0000\n"
+"PO-Revision-Date: 2024-01-22 14:32+0100\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
@@ -53,7 +53,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Terminálové okno"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:327 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
 msgid "The GNOME Project"
 msgstr "Projekt GNOME"
 
@@ -149,7 +149,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s používá VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:452
+#: src/kgx-application.c:361 src/kgx-window.c:466
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -207,40 +207,60 @@ msgstr "ŘÁDKŮ"
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- PŘÍKAZ [ARGUMENTY…]]"
 
-#: src/kgx-close-dialog.c:53
+#: src/kgx-close-dialog.c:94
 msgid "Close Window?"
 msgstr "Zavřít okno?"
 
-#: src/kgx-close-dialog.c:54
+#: src/kgx-close-dialog.c:96
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"Některé příkazy doposud běží. Zavřením tohoto okna je zabijete, což může "
-"vést k neočekávaným důsledkům."
+msgstr[0] ""
+"Příkaz doposud běží, zavřením tohoto okna jej zabijete, což může vést k "
+"neočekávaným důsledkům"
+msgstr[1] ""
+"Některé příkazy doposud běží, zavřením tohoto okna je zabijete, což může "
+"vést k neočekávaným důsledkům"
+msgstr[2] ""
+"Některé příkazy doposud běží, zavřením tohoto okna je zabijete, což může "
+"vést k neočekávaným důsledkům"
 
-#: src/kgx-close-dialog.c:59
+#: src/kgx-close-dialog.c:103
 msgid "Close Tab?"
 msgstr "Zavřít kartu?"
 
-#: src/kgx-close-dialog.c:60
+#: src/kgx-close-dialog.c:105
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"Některé příkazy doposud běží. Zavřením této karty je zabijete, což může vést "
-"k neočekávaným důsledkům."
+msgstr[0] ""
+"Příkaz doposud běží, zavřením této karty jej zabijete, což může vést k "
+"neočekávaným důsledkům"
+msgstr[1] ""
+"Některé příkazy doposud běží, zavřením této karty je zabijete, což může vést "
+"k neočekávaným důsledkům"
+msgstr[2] ""
+"Některé příkazy doposud běží, zavřením této karty je zabijete, což může vést "
+"k neočekávaným důsledkům"
 
-#: src/kgx-close-dialog.c:74
-#, c-format
-msgid "Process %d"
-msgstr "Proces %d"
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:232
+msgid "Process list"
+msgstr "Seznam procesů"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "_Zrušit"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:248
 msgid "C_lose"
 msgstr "Zavří_t"
 
@@ -272,7 +292,7 @@ msgstr "Velikost písma"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:463
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "Karta %i"
@@ -317,6 +337,11 @@ msgstr "Přehrávat _zvuk"
 msgid "_Visual Effects"
 msgstr "_Vizuální efekty"
 
+#: src/kgx-process.c:198
+#, c-format
+msgid "Process %d"
+msgstr "Proces %d"
+
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
 #: src/kgx-simple-tab.c:180
@@ -337,7 +362,7 @@ msgstr "<b>Jen ke čtení</b> — příkaz skončil"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Selhalo spuštění</b> — %s"
 
-#: src/kgx-tab.c:1091
+#: src/kgx-tab.c:1112
 msgid "Command completed"
 msgstr "Příkaz byl dokončen"
 
@@ -413,7 +438,7 @@ msgid "Dark Style"
 msgstr "Tmavý styl"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:464
+#: src/kgx-window.c:478
 msgid "translator-credits"
 msgstr "Marek Černocký <marek@manet.cz>"
 
