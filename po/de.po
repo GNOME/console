@@ -1,26 +1,27 @@
 # German translation for console.
-# Copyright (C) 2020 console's COPYRIGHT HOLDER
+# Copyright (C) 2024 console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the console package.
 #
 # Tim Sabsch <tim@sabsch.com>, 2020-2021.
 # Philipp Kiemle <philipp.kiemle@gmail.com>, 2020-2023.
 # Jürgen Benvenuti <gastornis@posteo.org>, 2022, 2023.
 # Christian Kirbach <christian.kirbach@gmail.com>, 2022.
+# Gabriel Brand <gabr.brand@gmail.com>, 2024.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: kgx master\n"
+"Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-10-08 11:47+0000\n"
-"PO-Revision-Date: 2023-10-08 14:07+0200\n"
-"Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
+"POT-Creation-Date: 2024-01-22 13:36+0000\n"
+"PO-Revision-Date: 2024-01-26 17:31+0100\n"
+"Last-Translator: Gabriel Brand <gabr.brand@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 # Der Terminal-Emulator von KDE Plasma heißt bereits "Konsole", deshalb bleiben wir hier beim englischen Original. - pk
 #: data/org.gnome.Console.desktop.in.in:3
@@ -57,7 +58,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Terminalfenster"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:327 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
 msgid "The GNOME Project"
 msgstr "Das GNOME-Projekt"
 
@@ -155,7 +156,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s auf Basis von VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:452
+#: src/kgx-application.c:361 src/kgx-window.c:466
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -215,40 +216,54 @@ msgstr "ZEILEN"
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- BEFEHL [ARGUMENT …]]"
 
-#: src/kgx-close-dialog.c:53
+#: src/kgx-close-dialog.c:94
 msgid "Close Window?"
 msgstr "Fenster schließen?"
 
-#: src/kgx-close-dialog.c:54
+#: src/kgx-close-dialog.c:96
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"Einige Befehle laufen immer noch. Dieses Fenster zu schließen würde sie "
-"beenden, was zu unerwarteten Ergebnissen führen kann"
+msgstr[0] ""
+"Ein Befehl läuft noch. Das Schließen dieses Fensters wird ihn beenden und "
+"kann zu unerwarteten Ergebnissen führen"
+msgstr[1] ""
+"Einige Befehle laufen noch. Das Schließen dieses Fensters wird sie beenden "
+"und kann zu unerwarteten Ergebnissen führen"
 
-#: src/kgx-close-dialog.c:59
+#: src/kgx-close-dialog.c:103
 msgid "Close Tab?"
 msgstr "Reiter schließen?"
 
-#: src/kgx-close-dialog.c:60
+#: src/kgx-close-dialog.c:105
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"Einige Befehle laufen immer noch. Diesen Reiter zu schließen würde sie "
-"beenden, was zu unerwarteten Ergebnissen führen kann"
+msgstr[0] ""
+"Ein Befehl läuft noch. Das Schließen dieses Reiters wird ihn beenden und "
+"kann zu unerwarteten Ergebnissen führen"
+msgstr[1] ""
+"Einige Befehle laufen noch. Das Schließen dieses Reiters wird sie beenden "
+"und kann zu unerwarteten Ergebnissen führen"
 
-#: src/kgx-close-dialog.c:74
-#, c-format
-msgid "Process %d"
-msgstr "Prozess %d"
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:232
+msgid "Process list"
+msgstr "Prozessliste"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "A_bbrechen"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:248
 msgid "C_lose"
 msgstr "S_chließen"
 
@@ -280,7 +295,7 @@ msgstr "Schriftgröße"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:463
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "Reiter %i"
@@ -325,6 +340,11 @@ msgstr "Klang ab_spielen"
 msgid "_Visual Effects"
 msgstr "_Visuelle Effekte"
 
+#: src/kgx-process.c:198
+#, c-format
+msgid "Process %d"
+msgstr "Prozess %d"
+
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
 #: src/kgx-simple-tab.c:180
@@ -345,7 +365,7 @@ msgstr "<b>Nur Lesen</b> — Befehl beendet"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Starten gescheitert</b> — %s"
 
-#: src/kgx-tab.c:1091
+#: src/kgx-tab.c:1112
 msgid "Command completed"
 msgstr "Befehl abgeschlossen"
 
@@ -421,13 +441,14 @@ msgid "Dark Style"
 msgstr "Dunkler Stil"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:464
+#: src/kgx-window.c:478
 msgid "translator-credits"
 msgstr ""
 "Philipp Kiemle <philipp.kiemle@gmail.com>\n"
 "Tim Sabsch <tim@sabsch.com>\n"
 "Christian Kirbach <christian.kirbach@gmail.com>\n"
-"Jürgen Benvenuti <gastornis@posteo.org>"
+"Jürgen Benvenuti <gastornis@posteo.org>\n"
+"Gabriel Brand <gabr.brand@gmail.com>"
 
 #: src/kgx-window.ui:17
 msgid "_New Window"
@@ -468,67 +489,3 @@ msgstr "Größe zurücksetzen"
 #: src/kgx-window.ui:139
 msgid "Enlarge Text"
 msgstr "Text vergrößern"
-
-#~ msgid "King’s Cross"
-#~ msgstr "King’s Cross"
-
-#~ msgid "Use Light Colors"
-#~ msgstr "Helle Farben verwenden"
-
-#~ msgid "Use Dark Colors"
-#~ msgstr "Dunkle Farben verwenden"
-
-#~ msgid "View Open Tabs"
-#~ msgstr "Geöffnete Reiter anzeigen"
-
-#~ msgid "Zander Brown"
-#~ msgstr "Zander Brown"
-
-#~ msgid "Console (Development)"
-#~ msgstr "Console (Entwicklung)"
-
-#~ msgid "About this Program"
-#~ msgstr "Info zu dieser Anwendung"
-
-#~ msgid "Open in Co_nsole (Devel)"
-#~ msgstr "In _Console (Entwicklung) öffnen"
-
-#~ msgid "Open in Co_nsole"
-#~ msgstr "In _Console öffnen"
-
-#~ msgid "Start a terminal session for this location"
-#~ msgstr "Eine Terminal-Sitzung für diesen Ort starten"
-
-#~ msgid "KGX Terminal Emulator"
-#~ msgstr "KGX-Terminal-Emulator"
-
-#~ msgid "_About King’s Cross"
-#~ msgstr "_Info zu King's Cross"
-
-#~ msgid "Op_en in King’s Cross"
-#~ msgstr "I_n King's Cross öffnen"
-
-#~ msgctxt "shortcut window"
-#~ msgid "First Tab"
-#~ msgstr "Erster Reiter"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Last Tab"
-#~ msgstr "Letzter Reiter"
-
-#~ msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
-#~ msgstr ""
-#~ "command;prompt;cmd;commandline;run;shell;terminal;kgx;befehl;kommando;"
-#~ "befehlszeile;kommandozeile;ausführen;"
-
-#~ msgid "child watcher"
-#~ msgstr "Unterprozess-Beobachter"
-
-#~ msgid "Copyright © %s Zander Brown"
-#~ msgstr "Copyright © %s Zander Brown"
-
-#~ msgid "Terminal (King’s Cross)"
-#~ msgstr "Terminal (King's Cross)"
-
-#~ msgid "_OK"
-#~ msgstr "_OK"
