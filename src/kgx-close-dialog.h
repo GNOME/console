@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <gio/gio.h>
+#include <gtk/gtk.h>
 
 #include "kgx-enums.h"
 
@@ -36,16 +36,17 @@ typedef enum {
 } KgxCloseDialogResult;
 
 
-#define KGX_TYPE_CLOSE_DIALOG kgx_close_dialog_get_type ()
+#define KGX_TYPE_CLOSE_DIALOG (kgx_close_dialog_get_type ())
 
 G_DECLARE_FINAL_TYPE (KgxCloseDialog, kgx_close_dialog, KGX, CLOSE_DIALOG, GObject)
 
-void                 kgx_close_dialog_run           (KgxCloseDialog         *self,
-                                                     GCancellable           *cancellable,
-                                                     GAsyncReadyCallback     callback,
-                                                     gpointer                user_data);
-KgxCloseDialogResult kgx_close_dialog_run_finish    (KgxCloseDialog         *self,
-                                                     GAsyncResult           *res,
-                                                     GError                **error);
+void                 kgx_close_dialog_run           (KgxCloseDialog       *restrict self,
+                                                     GtkWidget            *restrict parent,
+                                                     GCancellable         *restrict cancellable,
+                                                     GAsyncReadyCallback            callback,
+                                                     gpointer                       user_data);
+KgxCloseDialogResult kgx_close_dialog_run_finish    (KgxCloseDialog       *restrict self,
+                                                     GAsyncResult         *restrict res,
+                                                     GError              **restrict error);
 
 G_END_DECLS

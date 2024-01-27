@@ -168,7 +168,6 @@ kgx_window_close_request (GtkWindow *window)
   KgxWindow *self = KGX_WINDOW (window);
   KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
   g_autoptr (GPtrArray) children = NULL;
-  KgxCloseDialog *dlg;
 
   children = kgx_pages_get_children (KGX_PAGES (priv->pages));
 
@@ -184,12 +183,14 @@ kgx_window_close_request (GtkWindow *window)
     return FALSE; /* Aka no, I don’t want to block closing */
   }
 
-  dlg = g_object_new (KGX_TYPE_CLOSE_DIALOG,
-                      "context", KGX_CONTEXT_WINDOW,
-                      "commands", children,
-                      "transient-for", self,
-                      NULL);
-  kgx_close_dialog_run (dlg, NULL, got_close, g_object_ref (self));
+  kgx_close_dialog_run (g_object_new (KGX_TYPE_CLOSE_DIALOG,
+                                      "context", KGX_CONTEXT_WINDOW,
+                                      "commands", children,
+                                      NULL),
+                        GTK_WIDGET (self),
+                        NULL,
+                        got_close,
+                        g_object_ref (self));
 
   return TRUE; /* Block the close */
 }

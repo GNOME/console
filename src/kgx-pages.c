@@ -430,7 +430,6 @@ close_page (AdwTabView *view,
   dlg = g_object_new (KGX_TYPE_CLOSE_DIALOG,
                       "context", KGX_CONTEXT_TAB,
                       "commands", children,
-                      "transient-for", gtk_widget_get_root (GTK_WIDGET (self)),
                       NULL);
 
   /* slightly paranoid */
@@ -439,7 +438,11 @@ close_page (AdwTabView *view,
 
   g_object_get (tab, "cancellable", &cancellable, NULL);
 
-  kgx_close_dialog_run (dlg, cancellable, got_close, g_steal_pointer (&data));
+  kgx_close_dialog_run (dlg,
+                        GTK_WIDGET (self),
+                        cancellable,
+                        got_close,
+                        g_steal_pointer (&data));
 
   return GDK_EVENT_STOP; // Block the close
 }
