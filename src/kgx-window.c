@@ -145,9 +145,10 @@ got_close (GObject      *source,
     return;
   }
 
-  priv->close_anyway = result == KGX_CLOSE_ANYWAY;
-
-  gtk_window_destroy (GTK_WINDOW (self));
+  if (result == KGX_CLOSE_ANYWAY) {
+    priv->close_anyway = TRUE;
+    gtk_window_close (GTK_WINDOW (self));
+  }
 }
 
 
