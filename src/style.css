@@ -17,6 +17,10 @@ kgx-tab .top-bar {
   color: var(--view-fg-color);
 }
 
+.terminal-window.translucent {
+  background: transparent;
+}
+
 .terminal-window.root {
   --headerbar-bg-color: oklch(from var(--accent-red) var(--headerbar-bg-oklch));
   --headerbar-backdrop-color: oklch(from var(--accent-red) var(--headerbar-backdrop-oklch));
