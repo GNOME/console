@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk" version="4.0"/>
+  <requires lib="gtk" version="4.0" />
   <menu id="context_model">
     <section>
       <item>
@@ -44,6 +44,7 @@
     <property name="enable-fallback-scrolling">False</property>
     <property name="has-tooltip">True</property>
     <property name="scroll-unit-is-pixels">True</property>
+    <property name="context-menu-model">context_model</property>
     <binding name="font-desc">
       <lookup name="font">
         <lookup name="settings">KgxTerminal</lookup>
@@ -66,6 +67,7 @@
     </binding>
     <signal name="current-directory-uri-changed" handler="location_changed" />
     <signal name="current-file-uri-changed" handler="location_changed" />
+    <signal name="setup-context-menu" handler="setup_context_menu" />
     <child>
       <object class="GtkShortcutController">
         <property name="name">kgx-terminal-shortcuts</property>
@@ -89,13 +91,6 @@
         <property name="name">kgx-terminal-menu</property>
         <property name="button">0</property>
         <signal name="pressed" handler="pressed" />
-      </object>
-    </child>
-    <child>
-      <object class="GtkGestureLongPress">
-        <property name="name">kgx-terminal-touch-menu</property>
-        <property name="touch-only">True</property>
-        <signal name="pressed" handler="long_pressed" />
       </object>
     </child>
     <child>

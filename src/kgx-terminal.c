@@ -85,16 +85,11 @@ struct _KgxTerminal {
   KgxSettings   *settings;
   GSignalGroup  *settings_signals;
 
-  GMenuModel    *context_model;
-  GtkWidget  *popup_menu;
-
   KgxDespatcher *despatcher;
 
   /* Hyperlinks */
   char       *current_url;
   int         match_id[KGX_TERMINAL_N_LINK_REGEX];
-
-  gboolean    popup_is_touch;
 };
 
 
@@ -123,7 +118,6 @@ kgx_terminal_dispose (GObject *object)
   KgxTerminal *self = KGX_TERMINAL (object);
 
   g_clear_pointer (&self->current_url, g_free);
-  g_clear_pointer (&self->popup_menu, gtk_widget_unparent);
 
   g_clear_object (&self->settings);
 
@@ -277,66 +271,6 @@ have_url_under_pointer (KgxTerminal *self,
   }
 
   return current;
-}
-
-
-static void
-update_menu_position (KgxTerminal *self)
-{
-  if (!self->popup_menu)
-    return;
-
-  gtk_popover_set_position (GTK_POPOVER (self->popup_menu),
-                            self->popup_is_touch ? GTK_POS_TOP : GTK_POS_BOTTOM);
-
-  gtk_popover_set_has_arrow (GTK_POPOVER (self->popup_menu), self->popup_is_touch);
-
-  if (self->popup_is_touch) {
-    gtk_widget_set_halign (self->popup_menu, GTK_ALIGN_FILL);
-  } else if (gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL) {
-    gtk_widget_set_halign (self->popup_menu, GTK_ALIGN_END);
-  } else {
-    gtk_widget_set_halign (self->popup_menu, GTK_ALIGN_START);
-  }
-}
-
-
-static void
-context_menu (KgxTerminal *self,
-              double       x,
-              double       y,
-              gboolean     touch)
-{
-  gboolean value = have_url_under_pointer (self, x, y);
-
-  gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.open-link", value);
-  gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.copy-link", value);
-
-  if (G_UNLIKELY (!self->popup_menu)) {
-    self->popup_menu = gtk_popover_menu_new_from_model (G_MENU_MODEL (self->context_model));
-
-    gtk_widget_set_parent (self->popup_menu, GTK_WIDGET (self));
-  }
-
-  self->popup_is_touch = touch;
-
-  update_menu_position (self);
-
-  if (G_LIKELY (x > -1 && y > -1)) {
-    GdkRectangle rect = { x, y, 1, 1 };
-    gtk_popover_set_pointing_to (GTK_POPOVER (self->popup_menu), &rect);
-  } else {
-    gtk_popover_set_pointing_to (GTK_POPOVER (self->popup_menu), NULL);
-  }
-
-  gtk_popover_popup (GTK_POPOVER (self->popup_menu));
-}
-
-
-static void
-menu_popup_activated (KgxTerminal *self)
-{
-  context_menu (self, 1, 1, FALSE);
 }
 
 
@@ -512,27 +446,12 @@ kgx_terminal_size_allocate (GtkWidget *widget,
   KgxTerminal *self = KGX_TERMINAL (widget);
   VteTerminal *term = VTE_TERMINAL (self);
 
-  if (self->popup_menu)
-    gtk_popover_present (GTK_POPOVER (self->popup_menu));
-
   GTK_WIDGET_CLASS (kgx_terminal_parent_class)->size_allocate (widget, width, height, baseline);
 
   rows = vte_terminal_get_row_count (term);
   cols = vte_terminal_get_column_count (term);
 
   g_signal_emit (self, signals[SIZE_CHANGED], 0, rows, cols);
-}
-
-
-static void
-kgx_terminal_direction_changed (GtkWidget        *widget,
-                                GtkTextDirection  previous_direction)
-{
-  KgxTerminal *self = KGX_TERMINAL (widget);
-
-  GTK_WIDGET_CLASS (kgx_terminal_parent_class)->direction_changed (widget, previous_direction);
-
-  update_menu_position (self);
 }
 
 
@@ -599,27 +518,37 @@ location_changed (KgxTerminal *self)
 
 
 static void
+setup_context_menu (KgxTerminal *self, VteEventContext *context)
+{
+  gboolean enabled;
+
+  if (context) {
+    double x, y;
+
+    vte_event_context_get_coordinates (context, &x, &y);
+
+    enabled = have_url_under_pointer (self, x, y);
+  } else {
+    enabled = FALSE;
+  }
+
+  gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.open-link", enabled);
+  gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.copy-link", enabled);
+}
+
+
+static void
 pressed (GtkGestureClick *gesture,
          int              n_presses,
          double           x,
          double           y,
          KgxTerminal     *self)
 {
-  GdkEvent *event;
   GdkModifierType state;
   guint button;
 
   if (n_presses > 1) {
     gtk_gesture_set_state (GTK_GESTURE (gesture), GTK_EVENT_SEQUENCE_DENIED);
-    return;
-  }
-
-  event = gtk_event_controller_get_current_event (GTK_EVENT_CONTROLLER (gesture));
-
-  if (gdk_event_triggers_context_menu (event)) {
-    context_menu (self, x, y, FALSE);
-    gtk_gesture_set_state (GTK_GESTURE (gesture), GTK_EVENT_SEQUENCE_CLAIMED);
-
     return;
   }
 
@@ -637,17 +566,6 @@ pressed (GtkGestureClick *gesture,
   }
 
   gtk_gesture_set_state (GTK_GESTURE (gesture), GTK_EVENT_SEQUENCE_DENIED);
-}
-
-
-static void
-long_pressed (GtkGestureLongPress *gesture,
-              double               x,
-              double               y,
-              KgxTerminal         *self)
-{
-  context_menu (self, x, y, TRUE);
-  gtk_gesture_set_state (GTK_GESTURE (gesture), GTK_EVENT_SEQUENCE_CLAIMED);
 }
 
 
@@ -681,7 +599,6 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
   object_class->get_property = kgx_terminal_get_property;
 
   widget_class->size_allocate = kgx_terminal_size_allocate;
-  widget_class->direction_changed = kgx_terminal_direction_changed;
   widget_class->query_tooltip = kgx_terminal_query_tooltip;
 
   term_class->selection_changed = kgx_terminal_selection_changed;
@@ -728,18 +645,13 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                KGX_APPLICATION_PATH "kgx-terminal.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, KgxTerminal, context_model);
   gtk_widget_class_bind_template_child (widget_class, KgxTerminal, settings_signals);
 
   gtk_widget_class_bind_template_callback (widget_class, location_changed);
+  gtk_widget_class_bind_template_callback (widget_class, setup_context_menu);
   gtk_widget_class_bind_template_callback (widget_class, pressed);
-  gtk_widget_class_bind_template_callback (widget_class, long_pressed);
   gtk_widget_class_bind_template_callback (widget_class, scroll);
 
-  gtk_widget_class_install_action (widget_class,
-                                   "menu.popup",
-                                   NULL,
-                                   (GtkWidgetActionActivateFunc) menu_popup_activated);
   gtk_widget_class_install_action (widget_class,
                                    "term.open-link",
                                    NULL,
@@ -764,15 +676,6 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
                                    "term.show-in-files",
                                    NULL,
                                    (GtkWidgetActionActivateFunc) show_in_files_activated);
-
-  gtk_widget_class_add_binding_action (widget_class,
-                                       GDK_KEY_F10, GDK_SHIFT_MASK,
-                                       "menu.popup",
-                                       NULL);
-  gtk_widget_class_add_binding_action (widget_class,
-                                       GDK_KEY_Menu, 0,
-                                       "menu.popup",
-                                       NULL);
 }
 
 
