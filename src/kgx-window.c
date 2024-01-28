@@ -29,6 +29,7 @@
 #include "kgx-settings.h"
 #include "kgx-terminal.h"
 #include "kgx-theme-switcher.h"
+#include "kgx-utils.h"
 
 #include "kgx-window.h"
 
@@ -39,6 +40,7 @@ struct _KgxWindowPrivate {
   GBindingGroup        *settings_binds;
 
   gboolean              search_enabled;
+  gboolean              floating;
 
   gboolean              close_anyway;
 
@@ -47,6 +49,8 @@ struct _KgxWindowPrivate {
   GtkWidget            *tab_bar;
   GtkWidget            *tab_overview;
   GtkWidget            *pages;
+
+  GBindingGroup        *surface_binds;
 };
 
 
@@ -57,6 +61,7 @@ enum {
   PROP_0,
   PROP_SETTINGS,
   PROP_SEARCH_MODE_ENABLED,
+  PROP_FLOATING,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -88,7 +93,10 @@ kgx_window_set_property (GObject      *object,
       g_set_object (&priv->settings, g_value_get_object (value));
       break;
     case PROP_SEARCH_MODE_ENABLED:
-      priv->search_enabled = g_value_get_boolean (value);
+      kgx_set_boolean_prop (object, pspec, &priv->search_enabled, value);
+      break;
+    case PROP_FLOATING:
+      kgx_set_boolean_prop (object, pspec, &priv->floating, value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -113,10 +121,36 @@ kgx_window_get_property (GObject    *object,
     case PROP_SEARCH_MODE_ENABLED:
       g_value_set_boolean (value, priv->search_enabled);
       break;
+    case PROP_FLOATING:
+      g_value_set_boolean (value, priv->floating);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
   }
+}
+
+
+static void
+kgx_window_realize (GtkWidget *widget)
+{
+  KgxWindowPrivate *priv = kgx_window_get_instance_private (KGX_WINDOW (widget));
+
+  GTK_WIDGET_CLASS (kgx_window_parent_class)->realize (widget);
+
+  g_binding_group_set_source (priv->surface_binds,
+                              gtk_native_get_surface (GTK_NATIVE (widget)));
+}
+
+
+static void
+kgx_window_unrealize (GtkWidget *widget)
+{
+  KgxWindowPrivate *priv = kgx_window_get_instance_private (KGX_WINDOW (widget));
+
+  g_binding_group_set_source (priv->surface_binds, NULL);
+
+  GTK_WIDGET_CLASS (kgx_window_parent_class)->unrealize (widget);
 }
 
 
@@ -528,6 +562,9 @@ kgx_window_class_init (KgxWindowClass *klass)
   object_class->set_property = kgx_window_set_property;
   object_class->get_property = kgx_window_get_property;
 
+  widget_class->realize = kgx_window_realize;
+  widget_class->unrealize = kgx_window_unrealize;
+
   window_class->close_request = kgx_window_close_request;
 
   pspecs[PROP_SETTINGS] =
@@ -538,7 +575,12 @@ kgx_window_class_init (KgxWindowClass *klass)
   pspecs[PROP_SEARCH_MODE_ENABLED] =
     g_param_spec_boolean ("search-mode-enabled", NULL, NULL,
                           FALSE,
-                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
+  pspecs[PROP_FLOATING] =
+    g_param_spec_boolean ("floating", NULL, NULL,
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
@@ -554,6 +596,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, tab_overview);
   gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, pages);
   gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, settings_binds);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, surface_binds);
 
   gtk_widget_class_bind_template_callback (widget_class, zoom);
   gtk_widget_class_bind_template_callback (widget_class, create_tearoff_host);
@@ -602,6 +645,27 @@ kgx_window_class_init (KgxWindowClass *klass)
 }
 
 
+static gboolean
+state_to_floating (GBinding     *binding,
+                   const GValue *from_value,
+                   GValue       *to_value,
+                   gpointer      user_data)
+{
+  GdkToplevelState state = g_value_get_flags (from_value);
+
+  g_value_set_boolean (to_value,
+                       !((state & (GDK_TOPLEVEL_STATE_FULLSCREEN |
+                                   GDK_TOPLEVEL_STATE_MAXIMIZED |
+                                   GDK_TOPLEVEL_STATE_TILED |
+                                   GDK_TOPLEVEL_STATE_TOP_TILED |
+                                   GDK_TOPLEVEL_STATE_RIGHT_TILED |
+                                   GDK_TOPLEVEL_STATE_BOTTOM_TILED |
+                                   GDK_TOPLEVEL_STATE_LEFT_TILED)) > 0));
+
+  return TRUE;
+}
+
+
 static void
 kgx_window_init (KgxWindow *self)
 {
@@ -623,6 +687,11 @@ kgx_window_init (KgxWindow *self)
   g_binding_group_bind (priv->settings_binds, "theme",
                         priv->theme_switcher, "theme",
                         G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+
+  g_binding_group_bind_full (priv->surface_binds, "state",
+                             self, "floating",
+                             G_BINDING_SYNC_CREATE,
+                             state_to_floating, NULL, NULL, NULL);
 
   #ifdef IS_DEVEL
   gtk_widget_add_css_class (GTK_WIDGET (self), "devel");
