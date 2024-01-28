@@ -46,6 +46,14 @@
         <lookup name="title">pages</lookup>
       </closure>
     </binding>
+    <binding name="translucent">
+      <closure type='gboolean' function='and'>
+        <lookup name="transparency">
+          <lookup name="settings">KgxWindow</lookup>
+        </lookup>
+        <lookup name="floating">KgxWindow</lookup>
+      </closure>
+    </binding>
     <property name="width-request">360</property>
     <property name="height-request">294</property>
     <property name="content">

@@ -41,6 +41,7 @@ struct _KgxWindowPrivate {
 
   gboolean              search_enabled;
   gboolean              floating;
+  gboolean              translucent;
 
   gboolean              close_anyway;
 
@@ -62,6 +63,7 @@ enum {
   PROP_SETTINGS,
   PROP_SEARCH_MODE_ENABLED,
   PROP_FLOATING,
+  PROP_TRANSLUCENT,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -98,6 +100,15 @@ kgx_window_set_property (GObject      *object,
     case PROP_FLOATING:
       kgx_set_boolean_prop (object, pspec, &priv->floating, value);
       break;
+    case PROP_TRANSLUCENT:
+      if (kgx_set_boolean_prop (object, pspec, &priv->translucent, value)) {
+        if (priv->translucent) {
+          gtk_widget_add_css_class (GTK_WIDGET (self), "translucent");
+        } else {
+          gtk_widget_remove_css_class (GTK_WIDGET (self), "translucent");
+        }
+      }
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -123,6 +134,9 @@ kgx_window_get_property (GObject    *object,
       break;
     case PROP_FLOATING:
       g_value_set_boolean (value, priv->floating);
+      break;
+    case PROP_TRANSLUCENT:
+      g_value_set_boolean (value, priv->translucent);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -210,6 +224,13 @@ kgx_window_close_request (GtkWindow *window)
                         g_object_ref (self));
 
   return TRUE; /* Block the close */
+}
+
+
+static gboolean
+and (KgxWindow *self, gboolean a, gboolean b)
+{
+  return a && b;
 }
 
 
@@ -582,6 +603,11 @@ kgx_window_class_init (KgxWindowClass *klass)
                           FALSE,
                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
+  pspecs[PROP_TRANSLUCENT] =
+    g_param_spec_boolean ("translucent", NULL, NULL,
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   gtk_widget_class_install_property_action (widget_class,
@@ -598,6 +624,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, settings_binds);
   gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, surface_binds);
 
+  gtk_widget_class_bind_template_callback (widget_class, and);
   gtk_widget_class_bind_template_callback (widget_class, zoom);
   gtk_widget_class_bind_template_callback (widget_class, create_tearoff_host);
   gtk_widget_class_bind_template_callback (widget_class, maybe_close_window);
