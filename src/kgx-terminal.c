@@ -33,8 +33,6 @@
 #define PCRE2_CODE_UNIT_WIDTH 0
 #include <pcre2.h>
 
-#include "rgba.h"
-
 #include "kgx-terminal.h"
 #include "kgx-despatcher.h"
 #include "kgx-settings.h"
@@ -82,8 +80,8 @@ struct _KgxTerminal {
   VteTerminal parent_instance;
 
   KgxSettings   *settings;
-  GSignalGroup  *settings_signals;
   GCancellable  *cancellable;
+  KgxPalette    *palette;
 
   KgxDespatcher *despatcher;
 
@@ -100,9 +98,9 @@ enum {
   PROP_SETTINGS,
   PROP_CANCELLABLE,
   PROP_PATH,
+  PROP_PALETTE,
   LAST_PROP
 };
-
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 
 enum {
@@ -126,61 +124,35 @@ kgx_terminal_dispose (GObject *object)
 
   g_clear_object (&self->despatcher);
 
+  g_clear_pointer (&self->palette, kgx_palette_unref);
+
   G_OBJECT_CLASS (kgx_terminal_parent_class)->dispose (object);
 }
 
 
 static void
-update_terminal_colours (KgxTerminal *self)
+kgx_terminal_set_palette (KgxTerminal *self, KgxPalette *palette)
 {
-  KgxTheme resolved_theme;
-  GdkRGBA fg;
-  GdkRGBA bg;
+  GdkRGBA foreground, background;
+  const GdkRGBA *colours;
+  size_t n_colours;
 
-  // Workings of GDK_RGBA prevent this being static
-  GdkRGBA palette[16] = {
-    GDK_RGBA ("241f31"), // Black
-    GDK_RGBA ("c01c28"), // Red
-    GDK_RGBA ("2ec27e"), // Green
-    GDK_RGBA ("f5c211"), // Yellow
-    GDK_RGBA ("1e78e4"), // Blue
-    GDK_RGBA ("9841bb"), // Magenta
-    GDK_RGBA ("0ab9dc"), // Cyan
-    GDK_RGBA ("c0bfbc"), // White
-    GDK_RGBA ("5e5c64"), // Bright Black
-    GDK_RGBA ("ed333b"), // Bright Red
-    GDK_RGBA ("57e389"), // Bright Green
-    GDK_RGBA ("f8e45c"), // Bright Yellow
-    GDK_RGBA ("51a1ff"), // Bright Blue
-    GDK_RGBA ("c061cb"), // Bright Magenta
-    GDK_RGBA ("4fd2fd"), // Bright Cyan
-    GDK_RGBA ("f6f5f4"), // Bright White
-  };
-
-  if (!self->settings) {
+  if (!kgx_set_palette (&self->palette, palette)) {
     return;
   }
 
-  resolved_theme = kgx_settings_get_resolved_theme (self->settings);
+  kgx_palette_get_colours (palette,
+                           &foreground,
+                           &background,
+                           &n_colours,
+                           &colours);
+  vte_terminal_set_colors (VTE_TERMINAL (self),
+                           &foreground,
+                           &background,
+                           colours,
+                           n_colours);
 
-  switch (resolved_theme) {
-    case KGX_THEME_HACKER:
-      fg = (GdkRGBA) { 0.1, 1.0, 0.1, 1.0};
-      bg = (GdkRGBA) { 0.05, 0.05, 0.05, 1.0 };
-      break;
-    case KGX_THEME_DAY:
-      fg = (GdkRGBA) { 0.0, 0.0, 0.0, 0.0 };
-      bg = (GdkRGBA) { 1.0, 1.0, 1.0, 1.0 };
-      break;
-    case KGX_THEME_NIGHT:
-    case KGX_THEME_AUTO:
-    default:
-      fg = (GdkRGBA) { 1.0, 1.0, 1.0, 1.0};
-      bg = (GdkRGBA) { 0.12, 0.12, 0.12, 1.0 };
-      break;
-  }
-
-  vte_terminal_set_colors (VTE_TERMINAL (self), &fg, &bg, palette, 16);
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_PALETTE]);
 }
 
 
@@ -195,7 +167,6 @@ kgx_terminal_set_property (GObject      *object,
   switch (property_id) {
     case PROP_SETTINGS:
       if (g_set_object (&self->settings, g_value_get_object (value))) {
-        update_terminal_colours (self);
         g_object_notify_by_pspec (object, pspec);
       }
       break;
@@ -203,6 +174,9 @@ kgx_terminal_set_property (GObject      *object,
       if (g_set_object (&self->cancellable, g_value_get_object (value))) {
         g_object_notify_by_pspec (object, pspec);
       }
+      break;
+    case PROP_PALETTE:
+      kgx_terminal_set_palette (self, g_value_get_boxed (value));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -282,6 +256,9 @@ kgx_terminal_get_property (GObject    *object,
       break;
     case PROP_PATH:
       g_value_take_object (value, get_location (VTE_TERMINAL (self)));
+      break;
+    case PROP_PALETTE:
+      g_value_set_boxed (value, self->palette);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -558,6 +535,23 @@ kgx_terminal_decrease_font_size (VteTerminal *self)
 }
 
 
+static KgxPalette *
+resolve_livery (KgxTerminal *self,
+                KgxLivery   *livery,
+                gboolean     is_day,
+                gboolean     translucency)
+{
+  return kgx_livery_resolve (livery, is_day, translucency);
+}
+
+
+static gboolean
+enum_is (KgxTerminal *self, int a, int b)
+{
+  return a == b;
+}
+
+
 static void
 location_changed (KgxTerminal *self)
 {
@@ -674,6 +668,11 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
                          G_TYPE_FILE,
                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
+  pspecs[PROP_PALETTE] =
+    g_param_spec_boxed ("palette", NULL, NULL,
+                        KGX_TYPE_PALETTE,
+                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   signals[SIZE_CHANGED] = g_signal_new ("size-changed",
@@ -704,8 +703,8 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                KGX_APPLICATION_PATH "kgx-terminal.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, KgxTerminal, settings_signals);
-
+  gtk_widget_class_bind_template_callback (widget_class, resolve_livery);
+  gtk_widget_class_bind_template_callback (widget_class, enum_is);
   gtk_widget_class_bind_template_callback (widget_class, location_changed);
   gtk_widget_class_bind_template_callback (widget_class, setup_context_menu);
   gtk_widget_class_bind_template_callback (widget_class, pressed);
@@ -770,10 +769,6 @@ kgx_terminal_init (KgxTerminal *self)
                                         self->match_id[i],
                                         "pointer");
   }
-
-  g_signal_group_connect_swapped (self->settings_signals,
-                                  "notify::resolved-theme", G_CALLBACK (update_terminal_colours),
-                                  self);
 }
 
 
