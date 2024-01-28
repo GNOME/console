@@ -139,6 +139,7 @@ kgx_application_startup (GApplication *app)
 
   g_resources_register (kgx_get_resource ());
 
+  g_type_ensure (KGX_TYPE_WINDOW);
   g_type_ensure (KGX_TYPE_TERMINAL);
   g_type_ensure (KGX_TYPE_PAGES);
   g_type_ensure (KGX_TYPE_DROP_TARGET);

@@ -66,6 +66,24 @@
         <lookup name="settings">KgxTerminal</lookup>
       </lookup>
     </binding>
+    <binding name="palette">
+      <closure function="resolve_livery" type="KgxPalette">
+        <lookup name="livery">
+          <lookup name="settings">KgxTerminal</lookup>
+        </lookup>
+        <closure function="enum_is" type="gboolean">
+          <lookup name="resolved-theme">
+            <lookup name="settings">KgxTerminal</lookup>
+          </lookup>
+          <constant type="KgxTheme">day</constant>
+        </closure>
+        <!-- I don't love that we are reaching all the way up to KgxWindow
+             like this, but I can't figure out anything cleaner -->
+        <lookup name="translucent" type="KgxWindow">
+          <lookup name="root">KgxTerminal</lookup>
+        </lookup>
+      </closure>
+    </binding>
     <signal name="termprop-changed::vte.cwf" handler="location_changed" />
     <signal name="termprop-changed::vte.cwd" handler="location_changed" />
     <signal name="setup-context-menu" handler="setup_context_menu" />
@@ -103,8 +121,4 @@
       </object>
     </child>
   </template>
-  <object class="GSignalGroup" id="settings_signals">
-    <property name="target-type">KgxSettings</property>
-    <property name="target" bind-source="KgxTerminal" bind-property="settings" bind-flags="sync-create"/>
-  </object>
 </interface>
