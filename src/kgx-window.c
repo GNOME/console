@@ -492,7 +492,7 @@ about_activated  (GtkWidget  *widget,
   g_autofree char *copyright = NULL;
 
   /* Translators: %s is the year range */
-  copyright = g_strdup_printf (_("© %s Zander Brown"), "2019-2023");
+  copyright = g_strdup_printf (_("© %s Zander Brown"), "2019-2024");
 
   adw_show_about_window (GTK_WINDOW (widget),
                          "application-name", KGX_DISPLAY_NAME,
