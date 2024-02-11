@@ -223,25 +223,6 @@ kgx_watcher_init (KgxWatcher *self)
 
 
 /**
- * kgx_watcher_get_default:
- *
- * Returns: (transfer none): the #KgxWatcher singleton
- */
-KgxWatcher *
-kgx_watcher_get_default (void)
-{
-  static KgxWatcher *instance;
-
-  if (instance == NULL) {
-    instance = g_object_new (KGX_TYPE_WATCHER, NULL);
-    g_object_add_weak_pointer (G_OBJECT (instance), (gpointer *) &instance);
-  }
-
-  return instance;
-}
-
-
-/**
  * kgx_watcher_add:
  * @self: the #KgxWatcher
  * @pid: the shell process to watch

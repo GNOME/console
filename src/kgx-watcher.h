@@ -29,7 +29,6 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (KgxWatcher, kgx_watcher, KGX, WATCHER, GObject)
 
 
-KgxWatcher           *kgx_watcher_get_default       (void);
 void                  kgx_watcher_add               (KgxWatcher     *self,
                                                      GPid            pid,
                                                      KgxTab         *page);
