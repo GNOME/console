@@ -1,7 +1,9 @@
 [wrap-git]
-directory=vte
-url=https://gitlab.gnome.org/GNOME/vte
-revision=master
+directory = vte
+url = https://gitlab.gnome.org/GNOME/vte.git
+push-url = ssh://git@ssh.gitlab.gnome.org:GNOME/vte.git
+revision = master
+depth = 1
 
 [provide]
 vte-2.91-gtk4=libvte_gtk4_dep
