@@ -52,6 +52,7 @@ struct _KgxApplication {
 
   GTree                    *pages;
   KgxSettings              *settings;
+  KgxWatcher               *watcher;
 };
 
 
@@ -63,8 +64,9 @@ kgx_application_dispose (GObject *object)
 {
   KgxApplication *self = KGX_APPLICATION (object);
 
-  g_clear_object (&self->settings);
   g_clear_pointer (&self->pages, g_tree_unref);
+  g_clear_object (&self->settings);
+  g_clear_object (&self->watcher);
 
   G_OBJECT_CLASS (kgx_application_parent_class)->dispose (object);
 }
@@ -359,7 +361,7 @@ kgx_application_handle_local_options (GApplication *app,
   if (g_variant_dict_lookup (options, "about", "b", &about)) {
     if (about) {
       g_autofree char *copyright = g_strdup_printf (_("© %s Zander Brown"),
-                                                    "2019-2023");
+                                                    "2019-2024");
       struct winsize w;
       int padding = 0;
 
@@ -676,6 +678,8 @@ kgx_application_init (KgxApplication *self)
   theme_action = g_property_action_new ("theme", self->settings, "theme");
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (theme_action));
 
+  self->watcher = g_object_new (KGX_TYPE_WATCHER, NULL);
+
   self->pages = g_tree_new_full (kgx_pid_cmp, NULL, NULL, NULL);
 }
 
@@ -737,6 +741,7 @@ started (GObject      *src,
          gpointer      app)
 {
   g_autoptr (GError) error = NULL;
+  KgxApplication *self = KGX_APPLICATION (app);
   KgxTab *page = KGX_TAB (src);
   GPid pid;
 
@@ -750,7 +755,7 @@ started (GObject      *src,
     return;
   }
 
-  kgx_watcher_add (kgx_watcher_get_default (), pid, page);
+  kgx_watcher_add (self->watcher, pid, page);
 }
 
 
@@ -808,6 +813,7 @@ kgx_application_add_terminal (KgxApplication *self,
     window = g_object_new (KGX_TYPE_WINDOW,
                            "application", self,
                            "settings", self->settings,
+                           "watcher", self->watcher,
                            "default-width", width,
                            "default-height", height,
                            "maximized", maximised,
