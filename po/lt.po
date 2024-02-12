@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-09-02 15:38+0000\n"
-"PO-Revision-Date: 2023-09-03 21:59+0300\n"
+"POT-Creation-Date: 2023-12-16 16:56+0000\n"
+"PO-Revision-Date: 2024-02-12 23:34+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
@@ -50,7 +50,7 @@ msgstr "Paprastas terminalo emulatorius GNOME darbalaukio naudotojams."
 msgid "Terminal window"
 msgstr "Terminalo langas"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:293 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
 msgid "The GNOME Project"
 msgstr "GNOME projektas"
 
@@ -146,7 +146,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s naudojant VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:452
+#: src/kgx-application.c:361 src/kgx-window.c:466
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -204,35 +204,60 @@ msgstr "EILUTĖS"
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- KOMANDA [ARGUMENTAI...]]"
 
-#: src/kgx-close-dialog.c:50
+#: src/kgx-close-dialog.c:94
 msgid "Close Window?"
 msgstr "Užverti langą?"
 
-#: src/kgx-close-dialog.c:51
+#: src/kgx-close-dialog.c:96
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"Kai kurios komandos vis dar veikia, šio lango užvėrimas jas nutrauks su "
-"nenuspėjamu rezultatu"
+msgstr[0] ""
+"Yra veikianti komanda, šio lango užvėrimas jas nutrauks su nenuspėjamu "
+"rezultatu"
+msgstr[1] ""
+"Yra veikiančių komandų, šio lango užvėrimas jas nutrauks su nenuspėjamu "
+"rezultatu"
+msgstr[2] ""
+"Yra veikiančių komandų, šio lango užvėrimas jas nutrauks su nenuspėjamu "
+"rezultatu"
 
-#: src/kgx-close-dialog.c:56
+#: src/kgx-close-dialog.c:103
 msgid "Close Tab?"
 msgstr "Užverti kortelę?"
 
-#: src/kgx-close-dialog.c:57
+#: src/kgx-close-dialog.c:105
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"Kai kurios komandos vis dar veikia, kortelės užvėrimas jas nutrauks su "
-"nenuspėjamu rezultatu"
+msgstr[0] ""
+"Yra veikianti komanda, kortelės užvėrimas jas nutrauks su nenuspėjamu "
+"rezultatu"
+msgstr[1] ""
+"Yra veikiančių komandų, kortelės užvėrimas jas nutrauks su nenuspėjamu "
+"rezultatu"
+msgstr[2] ""
+"Yra veikiančių komandų, kortelės užvėrimas jas nutrauks su nenuspėjamu "
+"rezultatu"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:918
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:232
+msgid "Process list"
+msgstr "Procesų sąrašas"
+
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "_Atsisakyti"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:248
 msgid "C_lose"
 msgstr "Už_verti"
 
@@ -264,7 +289,7 @@ msgstr "Šrifto dydis"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:424
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "Kortelė %i"
@@ -309,6 +334,11 @@ msgstr "_Groti garsą"
 msgid "_Visual Effects"
 msgstr "_Vaizdo efektai"
 
+#: src/kgx-process.c:198
+#, c-format
+msgid "Process %d"
+msgstr "Procesas %d"
+
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
 #: src/kgx-simple-tab.c:180
@@ -329,7 +359,7 @@ msgstr "<b>Tik skaitymui</b> – komanda baigėsi"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Nepavyko paleisti</b> – %s"
 
-#: src/kgx-tab.c:1091
+#: src/kgx-tab.c:1112
 msgid "Command completed"
 msgstr "Komanda baigėsi"
 
@@ -345,7 +375,7 @@ msgstr "Ankstesnė atitiktis"
 msgid "Next Match"
 msgstr "Kita atitiktis"
 
-#: src/kgx-terminal.c:585
+#: src/kgx-terminal.c:557
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -354,12 +384,12 @@ msgstr ""
 "Spauskite atvėrimui:\n"
 "%s"
 
-#: src/kgx-terminal.c:911
+#: src/kgx-terminal.c:883
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Jūs įdėjote komandą, kuri vykdoma kaip administratoriaus"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:915
+#: src/kgx-terminal.c:887
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -368,7 +398,7 @@ msgstr ""
 "Įsitikinkite, kad žinote, ką komanda daro:\n"
 "%s"
 
-#: src/kgx-terminal.c:919 src/kgx-terminal.ui:24
+#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "Į_dėti"
 
@@ -405,7 +435,7 @@ msgid "Dark Style"
 msgstr "Tamsus stilius"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:464
+#: src/kgx-window.c:478
 msgid "translator-credits"
 msgstr ""
 "Išvertė:\n"
