@@ -1,14 +1,14 @@
 # Georgian translation for Console.
 # Copyright (C) 2023 console's authors
 # This file is distributed under the same license as the console package.
-# Ekaterine Papava <papava.e@gtu.ge>, 2023.
+# Ekaterine Papava <papava.e@gtu.ge>, 2023-2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-10-08 11:47+0000\n"
-"PO-Revision-Date: 2023-10-11 16:02+0200\n"
+"POT-Creation-Date: 2024-01-22 13:36+0000\n"
+"PO-Revision-Date: 2024-02-12 14:40+0100\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
@@ -48,7 +48,7 @@ msgstr "მარტივი და ადვილად მოსახმა
 msgid "Terminal window"
 msgstr "ტერმინალის ფანჯარა"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:327 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
 msgid "The GNOME Project"
 msgstr "პროექტი \"GNOME\""
 
@@ -144,7 +144,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:452
+#: src/kgx-application.c:361 src/kgx-window.c:466
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -202,40 +202,54 @@ msgstr "ხაზი"
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- ბრძანება [არგუმენტი...]]"
 
-#: src/kgx-close-dialog.c:53
+#: src/kgx-close-dialog.c:94
 msgid "Close Window?"
 msgstr "დავხურო ფანჯარა?"
 
-#: src/kgx-close-dialog.c:54
+#: src/kgx-close-dialog.c:96
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
+msgstr[0] ""
+"ბრძანება ჯერ კიდევ გაშვებულია. ამ ფანჯრის დახურვა დაასრულებს მათ და შეიძლება "
+"უსიამოვნო შედეგებით დასრულდეს"
+msgstr[1] ""
 "ზოგიერთი ბრძანება ჯერ კიდევ გაშვებულია. ამ ჩანართის დახურვა დაასრულებს მათ "
 "და შეიძლება უსიამოვნო შედეგებით დასრულდეს"
 
-#: src/kgx-close-dialog.c:59
+#: src/kgx-close-dialog.c:103
 msgid "Close Tab?"
 msgstr "დავხურო ჩანართი?"
 
-#: src/kgx-close-dialog.c:60
+#: src/kgx-close-dialog.c:105
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
+msgstr[0] ""
+"ბრძანება ჯერ კიდევ გაშვებულია. ამ ჩანართის დახურვა დაასრულებს მათ და "
+"შეიძლება უსიამოვნო შედეგებით დასრულდეს"
+msgstr[1] ""
 "ზოგიერთი ბრძანება ჯერ კიდევ გაშვებულია. ამ ჩანართის დახურვა დაასრულებს მათ "
 "და შეიძლება უსიამოვნო შედეგებით დასრულდეს"
 
-#: src/kgx-close-dialog.c:74
-#, c-format
-msgid "Process %d"
-msgstr "პროცესი %d"
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:232
+msgid "Process list"
+msgstr "პროცესების სია"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "_გაუქმება"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:248
 msgid "C_lose"
 msgstr "_დახურვა"
 
@@ -267,7 +281,7 @@ msgstr "ფონტის ზომა"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:463
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "ჩანართი %i"
@@ -312,6 +326,11 @@ msgstr "ხმის _დაკვრა"
 msgid "_Visual Effects"
 msgstr "ვიზუალური _ეფექტები"
 
+#: src/kgx-process.c:198
+#, c-format
+msgid "Process %d"
+msgstr "პროცესი %d"
+
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
 #: src/kgx-simple-tab.c:180
@@ -332,7 +351,7 @@ msgstr "<b>მხოლოდ-კითხვადი</b> — ბრძან�
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>გაშვების შეცდომა</b> — %s"
 
-#: src/kgx-tab.c:1091
+#: src/kgx-tab.c:1112
 msgid "Command completed"
 msgstr "ბრძანება დასრულდა"
 
@@ -406,7 +425,7 @@ msgid "Dark Style"
 msgstr "მუქი სტილი"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:464
+#: src/kgx-window.c:478
 msgid "translator-credits"
 msgstr "თემური დოღონაძე"
 
