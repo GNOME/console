@@ -2,13 +2,13 @@
 # Copyright (C) 2020 kgx's COPYRIGHT HOLDER
 # This file is distributed under the same license as the kgx package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021, 2022, 2023.
+# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-10-08 11:47+0000\n"
-"PO-Revision-Date: 2023-10-09 09:23+0300\n"
+"POT-Creation-Date: 2024-01-22 13:36+0000\n"
+"PO-Revision-Date: 2024-02-13 20:38+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
@@ -51,7 +51,7 @@ msgstr "Простий зручний для користувачів термі
 msgid "Terminal window"
 msgstr "Вікно термінала"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:327 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
 msgid "The GNOME Project"
 msgstr "Проєкт GNOME"
 
@@ -147,7 +147,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s з використанням VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:452
+#: src/kgx-application.c:361 src/kgx-window.c:466
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© Zander Brown, %s"
@@ -205,42 +205,81 @@ msgstr "РЯДКИ"
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- КОМАНДА [АРГУМЕНТ...]]"
 
-#: src/kgx-close-dialog.c:53
+#: src/kgx-close-dialog.c:94
 msgid "Close Window?"
 msgstr "Закрити вікно?"
 
-#: src/kgx-close-dialog.c:54
+#: src/kgx-close-dialog.c:96
+#| msgid ""
+#| "Some commands are still running, closing this window will kill them and "
+#| "may lead to unexpected outcomes"
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
+msgstr[0] ""
 "Виконання якихось із команд ще не завершено. Закриття цього вікна призведе "
 "до аварійного завершення роботи цих команд і може мати непередбачувані "
 "наслідки."
+msgstr[1] ""
+"Виконання якихось із команд ще не завершено. Закриття цього вікна призведе "
+"до аварійного завершення роботи цих команд і може мати непередбачувані "
+"наслідки."
+msgstr[2] ""
+"Виконання якихось із команд ще не завершено. Закриття цього вікна призведе "
+"до аварійного завершення роботи цих команд і може мати непередбачувані "
+"наслідки."
+msgstr[3] ""
+"Виконання якоїсь із команд ще не завершено. Закриття цього вікна призведе "
+"до аварійного завершення робот цієї команди і може мати непередбачувані "
+"наслідки."
 
-#: src/kgx-close-dialog.c:59
+#: src/kgx-close-dialog.c:103
 msgid "Close Tab?"
 msgstr "Закрити вкладку?"
 
-#: src/kgx-close-dialog.c:60
+#: src/kgx-close-dialog.c:105
+#| msgid ""
+#| "Some commands are still running, closing this tab will kill them and may "
+#| "lead to unexpected outcomes"
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
+msgstr[0] ""
 "Виконання якихось із команд ще не завершено. Закриття цієї вкладки призведе "
 "до аварійного завершення роботи цих команд і може мати непередбачувані "
 "наслідки."
+msgstr[1] ""
+"Виконання якихось із команд ще не завершено. Закриття цієї вкладки призведе "
+"до аварійного завершення роботи цих команд і може мати непередбачувані "
+"наслідки."
+msgstr[2] ""
+"Виконання якихось із команд ще не завершено. Закриття цієї вкладки призведе "
+"до аварійного завершення роботи цих команд і може мати непередбачувані "
+"наслідки."
+msgstr[3] ""
+"Виконання якоїсь із команд ще не завершено. Закриття цієї вкладки призведе "
+"до аварійного завершення роботи цієї команди і може мати непередбачувані "
+"наслідки."
 
-#: src/kgx-close-dialog.c:74
-#, c-format
-msgid "Process %d"
-msgstr "Процес %d"
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:232
+#| msgid "Process %d"
+msgid "Process list"
+msgstr "Список процесів"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "_Скасувати"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:248
 msgid "C_lose"
 msgstr "_Закрити"
 
@@ -272,7 +311,7 @@ msgstr "Розмір шрифту"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:463
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "Вкладка %i"
@@ -317,6 +356,11 @@ msgstr "Відтворити зв_ук"
 msgid "_Visual Effects"
 msgstr "_Візуальні ефекти"
 
+#: src/kgx-process.c:198
+#, c-format
+msgid "Process %d"
+msgstr "Процес %d"
+
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
 #: src/kgx-simple-tab.c:180
@@ -337,7 +381,7 @@ msgstr "<b>Лише читання</b> — виконання команди з�
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Не вдалося запустити</b> – %s"
 
-#: src/kgx-tab.c:1091
+#: src/kgx-tab.c:1112
 msgid "Command completed"
 msgstr "Виконання команди завершено"
 
@@ -413,7 +457,7 @@ msgid "Dark Style"
 msgstr "Темний стиль"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:464
+#: src/kgx-window.c:478
 msgid "translator-credits"
 msgstr "Юрій Чорноіван <yurchor@ukr.net>"
 
