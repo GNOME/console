@@ -9,16 +9,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-08-09 19:16+0000\n"
-"PO-Revision-Date: 2023-08-27 22:30+0200\n"
-"Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
+"POT-Creation-Date: 2023-12-16 16:56+0000\n"
+"PO-Revision-Date: 2024-02-15 03:09+0100\n"
+"Last-Translator: Fran Dieguez <fran.dieguez@gnome.org>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-DL-Team: gl\n"
 "X-DL-Module: console\n"
 "X-DL-Branch: main\n"
@@ -39,7 +39,7 @@ msgstr "orde;prompt;cmd;liña de ores;executar;shell;terminal;kgx;kings cross;"
 msgid "New Window"
 msgstr "Nova xanela"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:167
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
 msgid "New Tab"
 msgstr "Nova lapela"
 
@@ -55,7 +55,7 @@ msgstr "Un emulador de terminal simple e amigábel para o escritorio GNOME."
 msgid "Terminal window"
 msgstr "Xanela de terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:293 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
 msgid "The GNOME Project"
 msgstr "O Proxecto GNOME"
 
@@ -151,7 +151,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s usando VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:452
+#: src/kgx-application.c:361 src/kgx-window.c:466
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -209,35 +209,54 @@ msgstr "LIÑAS"
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- ORDE [ARGUMENTO...]]"
 
-#: src/kgx-close-dialog.c:50
+#: src/kgx-close-dialog.c:94
 msgid "Close Window?"
 msgstr "Desexa pechar a xanela?"
 
-#: src/kgx-close-dialog.c:51
+#: src/kgx-close-dialog.c:96
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"Algunhas ordes aínda están executándose, se pecha esta xanela mataránse e "
+msgstr[0] ""
+"Aínda hai unha orde en execución, se pecha esta xanela mataránse e pode "
+"levar a resultados non esperados"
+msgstr[1] ""
+"Aínda están executándose algunhas ordes, se pecha esta xanela mataránse e "
 "pode levar a resultados non esperados"
 
-#: src/kgx-close-dialog.c:56
+#: src/kgx-close-dialog.c:103
 msgid "Close Tab?"
 msgstr "Pechar a lapela?"
 
-#: src/kgx-close-dialog.c:57
+#: src/kgx-close-dialog.c:105
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
+msgstr[0] ""
+"Aínda hai unha orde en execución, ao pechar esta xanela mataráas e pode "
+"derivar en resultados non agardados"
+msgstr[1] ""
 "Algunhas ordes aínda están executándose, ao pechar esta xanela mataráas e "
 "pode derivar en resultados non agardados"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:915
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:232
+msgid "Process list"
+msgstr "Lista de procesos"
+
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:248
 msgid "C_lose"
 msgstr "_Pechar"
 
@@ -269,7 +288,7 @@ msgstr "Tamaño do tipo de letra"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:424
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "Lapela %i"
@@ -314,6 +333,11 @@ msgstr "Reproducir _son"
 msgid "_Visual Effects"
 msgstr "Efectos _visuais"
 
+#: src/kgx-process.c:198
+#, c-format
+msgid "Process %d"
+msgstr "Proceso %d"
+
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
 #: src/kgx-simple-tab.c:180
@@ -334,7 +358,7 @@ msgstr "<b>Só lectura</b> — A orde saíu"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Produciuse un fallo ao iniciar</b> — %s"
 
-#: src/kgx-tab.c:1091
+#: src/kgx-tab.c:1112
 msgid "Command completed"
 msgstr "Orde completa"
 
@@ -350,7 +374,7 @@ msgstr "Anterior coincidencia"
 msgid "Next Match"
 msgstr "Seguinte coincidencia"
 
-#: src/kgx-terminal.c:582
+#: src/kgx-terminal.c:557
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -359,12 +383,12 @@ msgstr ""
 "Ctrl-clic para abrir:\n"
 "%s"
 
-#: src/kgx-terminal.c:908
+#: src/kgx-terminal.c:883
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Está pegando unha orde que se executa como un administrador"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:912
+#: src/kgx-terminal.c:887
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -373,7 +397,7 @@ msgstr ""
 "Asegúrese que sabe que fai a orde:\n"
 "%s"
 
-#: src/kgx-terminal.c:916 src/kgx-terminal.ui:24
+#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "_Pegar"
 
@@ -410,9 +434,9 @@ msgid "Dark Style"
 msgstr "Estilo escuro"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:464
+#: src/kgx-window.c:478
 msgid "translator-credits"
-msgstr "Fran Diéguez <frandieguez@gnome.org>, 2021-2023."
+msgstr "Fran Diéguez <frandieguez@gnome.org>, 2021-2024."
 
 #: src/kgx-window.ui:17
 msgid "_New Window"
@@ -434,22 +458,22 @@ msgstr "­_Atallos de teclado"
 msgid "_About Console"
 msgstr "_Sobre Consola"
 
-#: src/kgx-window.ui:80
+#: src/kgx-window.ui:79
 msgid "Find in Terminal"
 msgstr "Buscar no terminal"
 
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:86
 msgid "Main Menu"
 msgstr "Menú principal"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:104
 msgid "Shrink Text"
 msgstr "Reducir texto"
 
-#: src/kgx-window.ui:117
+#: src/kgx-window.ui:115
 msgid "Reset Size"
 msgstr "Reiniciar tamaño"
 
-#: src/kgx-window.ui:141
+#: src/kgx-window.ui:139
 msgid "Enlarge Text"
 msgstr "Agrandar texto"
