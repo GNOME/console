@@ -19,6 +19,9 @@
             <binding name="settings">
               <lookup name="settings">KgxSimpleTab</lookup>
             </binding>
+            <binding name="cancellable">
+              <lookup name="cancellable">KgxSimpleTab</lookup>
+            </binding>
             <signal name="notify::path" handler="path_changed" swapped="no"/>
           </object>
         </property>

@@ -1,6 +1,6 @@
 /* kgx-terminal.c
  *
- * Copyright 2019 Zander Brown
+ * Copyright 2019-2024 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -85,6 +85,7 @@ struct _KgxTerminal {
 
   KgxSettings   *settings;
   GSignalGroup  *settings_signals;
+  GCancellable  *cancellable;
 
   KgxDespatcher *despatcher;
 
@@ -99,6 +100,7 @@ G_DEFINE_TYPE (KgxTerminal, kgx_terminal, VTE_TYPE_TERMINAL)
 enum {
   PROP_0,
   PROP_SETTINGS,
+  PROP_CANCELLABLE,
   PROP_PATH,
   LAST_PROP
 };
@@ -117,6 +119,8 @@ static void
 kgx_terminal_dispose (GObject *object)
 {
   KgxTerminal *self = KGX_TERMINAL (object);
+
+  g_clear_object (&self->cancellable);
 
   g_clear_pointer (&self->current_url, g_free);
 
@@ -205,8 +209,15 @@ kgx_terminal_set_property (GObject      *object,
 
   switch (property_id) {
     case PROP_SETTINGS:
-      g_set_object (&self->settings, g_value_get_object (value));
-      update_terminal_colours (self);
+      if (g_set_object (&self->settings, g_value_get_object (value))) {
+        update_terminal_colours (self);
+        g_object_notify_by_pspec (object, pspec);
+      }
+      break;
+    case PROP_CANCELLABLE:
+      if (g_set_object (&self->cancellable, g_value_get_object (value))) {
+        g_object_notify_by_pspec (object, pspec);
+      }
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -228,6 +239,9 @@ kgx_terminal_get_property (GObject    *object,
   switch (property_id) {
     case PROP_SETTINGS:
       g_value_set_object (value, self->settings);
+      break;
+    case PROP_CANCELLABLE:
+      g_value_set_object (value, self->cancellable);
       break;
     case PROP_PATH:
       if ((uri = vte_terminal_get_current_file_uri (VTE_TERMINAL (self)))) {
@@ -306,7 +320,7 @@ open_link (KgxTerminal *self)
   kgx_despatcher_open (self->despatcher,
                        self->current_url,
                        GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
-                       NULL,
+                       self->cancellable,
                        did_open,
                        g_object_ref (self));
 }
@@ -339,17 +353,20 @@ copy_activated (KgxTerminal *self)
 
 
 static void
-got_text (GdkClipboard *cb,
+got_text (GObject      *source,
           GAsyncResult *result,
-          KgxTerminal  *self)
+          gpointer      user_data)
 {
-  g_autofree char *text = NULL;
+  g_autoptr (KgxTerminal) self = user_data;
   g_autoptr (GError) error = NULL;
+  g_autofree char *text = NULL;
 
   /* Get the resulting text of the read operation */
-  text = gdk_clipboard_read_text_finish (cb, result, &error);
+  text = gdk_clipboard_read_text_finish (GDK_CLIPBOARD (source), result, &error);
 
-  if (error) {
+  if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+    return;
+  } else if (error) {
     g_critical ("Couldn't paste text: %s\n", error->message);
     return;
   }
@@ -363,7 +380,10 @@ paste_activated (KgxTerminal *self)
 {
   GdkClipboard *cb = gtk_widget_get_clipboard (GTK_WIDGET (self));
 
-  gdk_clipboard_read_text_async (cb, NULL, (GAsyncReadyCallback) got_text, self);
+  gdk_clipboard_read_text_async (cb,
+                                 self->cancellable,
+                                 got_text,
+                                 g_object_ref (self));
 }
 
 
@@ -414,7 +434,7 @@ show_in_files_activated (KgxTerminal *self)
     kgx_despatcher_show_item (self->despatcher,
                               uri,
                               parent,
-                              NULL,
+                              self->cancellable,
                               did_show_item,
                               NULL);
     return;
@@ -430,7 +450,7 @@ show_in_files_activated (KgxTerminal *self)
   kgx_despatcher_show_folder (self->despatcher,
                               uri,
                               parent,
-                              NULL,
+                              self->cancellable,
                               did_show_folder,
                               NULL);
 }
@@ -609,7 +629,12 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
   pspecs[PROP_SETTINGS] =
     g_param_spec_object ("settings", NULL, NULL,
                          KGX_TYPE_SETTINGS,
-                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_STRINGS);
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
+  pspecs[PROP_CANCELLABLE] =
+    g_param_spec_object ("cancellable", NULL, NULL,
+                         G_TYPE_CANCELLABLE,
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
   pspecs[PROP_PATH] =
     g_param_spec_object ("path", NULL, NULL,
@@ -787,7 +812,7 @@ kgx_terminal_accept_paste (KgxTerminal *self,
                                           NULL);
 
     kgx_paste_dialog_run (paste,
-                          NULL,
+                          self->cancellable,
                           got_paste,
                           g_object_ref (self));
   } else {
