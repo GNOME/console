@@ -29,6 +29,7 @@ kgx_sources = [
   'kgx-terminal.h',
   'kgx-theme-switcher.c',
   'kgx-theme-switcher.h',
+  'kgx-utils.h',
   'kgx-watcher.c',
   'kgx-watcher.h',
   'kgx-window.c',

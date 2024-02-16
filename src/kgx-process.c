@@ -35,6 +35,7 @@
 #include <glibtop/procuid.h>
 #include <glibtop/procargs.h>
 
+#include "kgx-utils.h"
 #include "kgx-process.h"
 
 #define MAX_TITLE_LENGTH 100
@@ -185,22 +186,14 @@ kgx_process_get_title (KgxProcess *self, char **title, char **subtitle)
   argv = kgx_process_get_argv (self);
 
   for (size_t i = 0; argv && argv[i]; i++) {
-    size_t arg_len = strlen (argv[i]);
-
-    if (G_UNLIKELY (exec->len + arg_len > MAX_TITLE_LENGTH)) {
-      for (const char *iter = argv[i];
-           *iter && exec->len < MAX_TITLE_LENGTH;
-           iter = g_utf8_next_char (iter)) {
-        g_string_append_unichar (exec, g_utf8_get_char (iter));
-      }
-      g_string_append (exec, "…");
-
+    if (G_UNLIKELY (kgx_str_constrained_append (exec,
+                                                argv[i],
+                                                MAX_TITLE_LENGTH))) {
       *title = g_strdup_printf (_("Process %d"), self->pid);
       *subtitle = g_string_free (g_steal_pointer (&exec), FALSE);
       return;
     }
 
-    g_string_append_len (exec, argv[i], arg_len);
     g_string_append_c (exec, ' ');
   }
 
