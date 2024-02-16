@@ -38,6 +38,7 @@
 #include "kgx-terminal.h"
 #include "kgx-despatcher.h"
 #include "kgx-settings.h"
+#include "kgx-paste-dialog.h"
 #include "kgx-marshals.h"
 
 /*       Regex adapted from TerminalWidget.vala in Pantheon Terminal       */
@@ -679,34 +680,6 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
 }
 
 
-typedef struct {
-  KgxTerminal *dest;
-  char        *text;
-} PasteData;
-
-
-static void
-clear_paste_data (gpointer data)
-{
-  PasteData *self = data;
-
-  g_clear_weak_pointer (&self->dest);
-  g_free (self->text);
-  g_free (self);
-}
-
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (PasteData, clear_paste_data)
-
-static void
-paste_response (PasteData *data)
-{
-  g_autoptr (PasteData) paste = data;
-
-  vte_terminal_paste_text (VTE_TERMINAL (paste->dest), paste->text);
-}
-
-
 static void
 dark_changed (KgxTerminal *self)
 {
@@ -763,47 +736,61 @@ kgx_terminal_init (KgxTerminal *self)
 }
 
 
+static void
+got_paste (GObject      *source,
+           GAsyncResult *res,
+           gpointer      user_data)
+{
+  g_autoptr (KgxPasteDialog) dialogue = KGX_PASTE_DIALOG (source);
+  g_autoptr (KgxTerminal) self = user_data;
+  g_autoptr (GError) error = NULL;
+  KgxPasteDialogResult result;
+  const char *content;
+
+  result = kgx_paste_dialog_run_finish (dialogue, res, &content, &error);
+
+  if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+    result = KGX_PASTE_CANCELLED;
+  } else if (error) {
+    g_critical ("terminal [paste]: Unexpected: %s", error->message);
+    return;
+  }
+
+  if (result == KGX_PASTE_CANCELLED) {
+    return;
+  }
+
+  vte_terminal_paste_text (VTE_TERMINAL (self), content);
+}
+
+
 void
 kgx_terminal_accept_paste (KgxTerminal *self,
                            const char  *text)
 {
   g_autofree char *striped = g_strchug (g_strdup (text));
-  g_autoptr (PasteData) paste = g_new0 (PasteData, 1);
-  gsize len;
+  size_t len;
 
-  if (!text || !text[0]) {
+  g_return_if_fail (KGX_IS_TERMINAL (self));
+
+  if (G_UNLIKELY (!text || !text[0])) {
     return;
   }
 
-  len = strlen (text);
-
-  g_set_weak_pointer (&paste->dest, self);
-  g_set_str (&paste->text, text);
+  len = strlen (striped);
 
   if (g_strstr_len (striped, len, "sudo") != NULL &&
       g_strstr_len (striped, len, "\n") != NULL) {
-    GtkWidget *dlg = adw_message_dialog_new (GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
-                                             _("You are pasting a command that runs as an administrator"),
-                                             NULL);
-    adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dlg),
-                                    // TRANSLATORS: %s is the command being pasted
-                                    _("Make sure you know what the command does:\n%s"),
-                                    text);
-    adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dlg),
-                                      "cancel", _("_Cancel"),
-                                      "paste", _("_Paste"),
-                                      NULL);
-    adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dlg),
-                                                "paste",
-                                                ADW_RESPONSE_DESTRUCTIVE);
+    KgxPasteDialog *paste = g_object_new (KGX_TYPE_PASTE_DIALOG,
+                                          "content", text,
+                                          "transient-for", gtk_widget_get_root (GTK_WIDGET (self)),
+                                          NULL);
 
-    g_signal_connect_swapped (dlg,
-                              "response::paste",
-                              G_CALLBACK (paste_response),
-                              g_steal_pointer (&paste));
-
-    gtk_window_present (GTK_WINDOW (dlg));
+    kgx_paste_dialog_run (paste,
+                          NULL,
+                          got_paste,
+                          g_object_ref (self));
   } else {
-    paste_response (g_steal_pointer (&paste));
+    vte_terminal_paste_text (VTE_TERMINAL (self), text);
   }
 }
