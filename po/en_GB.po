@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-10-12 11:26+0000\n"
-"PO-Revision-Date: 2023-11-23 19:27+0000\n"
-"Last-Translator: Bruce Cowan <bruce@bcowan.me.uk>\n"
+"POT-Creation-Date: 2023-12-16 16:56+0000\n"
+"PO-Revision-Date: 2024-02-21 20:31+0000\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English - United Kingdom <en@li.org>\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
@@ -49,7 +49,7 @@ msgstr "A simple user-friendly terminal emulator for the GNOME desktop."
 msgid "Terminal window"
 msgstr "Terminal window"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:327 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
 msgid "The GNOME Project"
 msgstr "The GNOME Project"
 
@@ -124,15 +124,11 @@ msgid "Move Tab Left"
 msgstr "Move Tab Left"
 
 #: src/help-overlay.ui:92
-#| msgctxt "shortcut window"
-#| msgid "Switch to Tab"
 msgctxt "shortcut window"
 msgid "Switch to Tab 1–9"
 msgstr "Switch to Tab 1–9"
 
 #: src/help-overlay.ui:98
-#| msgctxt "shortcut window"
-#| msgid "Switch to Tab"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Switch to Tab 10"
@@ -149,7 +145,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s using VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:452
+#: src/kgx-application.c:361 src/kgx-window.c:466
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -207,45 +203,68 @@ msgstr "LINES"
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- COMMAND [ARGUMENT...]]"
 
-#: src/kgx-close-dialog.c:50
+#: src/kgx-close-dialog.c:94
 msgid "Close Window?"
 msgstr "Close Window?"
 
-#: src/kgx-close-dialog.c:51
+#: src/kgx-close-dialog.c:96
+#| msgid ""
+#| "Some commands are still running, closing this window will kill them and "
+#| "may lead to unexpected outcomes"
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
+msgstr[0] ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgstr[1] ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
 
-#: src/kgx-close-dialog.c:56
+#: src/kgx-close-dialog.c:103
 msgid "Close Tab?"
 msgstr "Close Tab?"
 
-#: src/kgx-close-dialog.c:57
+#: src/kgx-close-dialog.c:105
+#| msgid ""
+#| "Some commands are still running, closing this tab will kill them and may "
+#| "lead to unexpected outcomes"
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
+msgstr[0] ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgstr[1] ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:232
+msgid "Process list"
+msgstr "Process list"
+
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "_Cancel"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:248
 msgid "C_lose"
 msgstr "C_lose"
 
 #: src/kgx-font-picker.ui:12
-#| msgid "Terminal"
 msgid "Terminal Font"
 msgstr "Terminal Font"
 
 #: src/kgx-font-picker.ui:37
-#| msgid "_Select All"
 msgid "_Select"
 msgstr "_Select"
 
@@ -269,7 +288,7 @@ msgstr "Font Size"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:463
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "Tab %i"
@@ -295,7 +314,6 @@ msgid "Font"
 msgstr "Font"
 
 #: src/kgx-preferences-window.ui:13
-#| msgid "Use System Colors"
 msgid "Use _System Default"
 msgstr "Use _System Default"
 
@@ -304,7 +322,6 @@ msgid "Custom _Font"
 msgstr "Custom _Font"
 
 #: src/kgx-preferences-window.ui:59
-#| msgid "Terminal"
 msgid "Terminal Bell"
 msgstr "Terminal Bell"
 
@@ -315,6 +332,11 @@ msgstr "Play _Sound"
 #: src/kgx-preferences-window.ui:68
 msgid "_Visual Effects"
 msgstr "_Visual Effects"
+
+#: src/kgx-process.c:198
+#, c-format
+msgid "Process %d"
+msgstr "Process %d"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
@@ -336,7 +358,7 @@ msgstr "<b>Read Only</b> — Command exited"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Failed to start</b> — %s"
 
-#: src/kgx-tab.c:1091
+#: src/kgx-tab.c:1112
 msgid "Command completed"
 msgstr "Command completed"
 
@@ -412,11 +434,12 @@ msgid "Dark Style"
 msgstr "Dark Style"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:464
+#: src/kgx-window.c:478
 msgid "translator-credits"
 msgstr ""
 "Zander Brown <zbrown@gnome.org>\n"
-"Bruce Cowan <bruce@bcowan.me.uk>"
+"Bruce Cowan <bruce@bcowan.me.uk>\n"
+"Andi Chandler <andi@gowling.com>"
 
 #: src/kgx-window.ui:17
 msgid "_New Window"
