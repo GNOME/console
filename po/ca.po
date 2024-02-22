@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-10-08 11:47+0000\n"
-"PO-Revision-Date: 2023-10-09 19:47+0200\n"
+"POT-Creation-Date: 2024-01-22 13:36+0000\n"
+"PO-Revision-Date: 2024-02-21 21:57+0100\n"
 "Last-Translator: Jordi Mas i Hernàndez <jmas@softcatala.org>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -51,7 +51,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Finestra de terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:327 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
 msgid "The GNOME Project"
 msgstr "El projecte GNOME"
 
@@ -147,7 +147,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s usant el VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:452
+#: src/kgx-application.c:361 src/kgx-window.c:466
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -205,40 +205,54 @@ msgstr "LÍNIES"
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- COMMAND [ARGUMENT...]]"
 
-#: src/kgx-close-dialog.c:53
+#: src/kgx-close-dialog.c:94
 msgid "Close Window?"
 msgstr "Voleu tancar la finestra?"
 
-#: src/kgx-close-dialog.c:54
+#: src/kgx-close-dialog.c:96
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"Algunes ordres encara s'estan executant, el tancament d'aquesta finestra les "
-"finalitzarà i pot produir resultats inesperats"
+msgstr[0] ""
+" Encara hi ha una ordre executant-se, tancar aquesta finestra la finalitzarà "
+"i es poden produir resultats inesperats"
+msgstr[1] ""
+" Encara hi ha algunes ordres executant-se, tancar aquesta finestra les "
+"finalitzarà i es poden produir resultats inesperats"
 
-#: src/kgx-close-dialog.c:59
+#: src/kgx-close-dialog.c:103
 msgid "Close Tab?"
 msgstr "Voleu tancar la pestanya?"
 
-#: src/kgx-close-dialog.c:60
+#: src/kgx-close-dialog.c:105
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"Algunes ordres encara s'estan executant, el tancament d'aquesta pestanya les "
-"finalitzarà i pot produir resultats inesperats"
+msgstr[0] ""
+" Encara hi ha una ordre executant-se, tancar aquesta pestanya la finalitzarà "
+"i es poden produir resultats inesperats"
+msgstr[1] ""
+" Encara hi ha algunes ordres executant-se, tancar aquesta pestanya les "
+"finalitzarà i es poden produir resultats inesperats"
 
-#: src/kgx-close-dialog.c:74
-#, c-format
-msgid "Process %d"
-msgstr "Procés %d"
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:232
+msgid "Process list"
+msgstr "Llista de processos"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "_Cancel·la"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:248
 msgid "C_lose"
 msgstr "_Tanca"
 
@@ -270,7 +284,7 @@ msgstr "Mida del tipus de lletra"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:463
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "Pestanya %i"
@@ -315,6 +329,11 @@ msgstr "_Reprodueix so"
 msgid "_Visual Effects"
 msgstr "E_fectes visuals"
 
+#: src/kgx-process.c:198
+#, c-format
+msgid "Process %d"
+msgstr "Procés %d"
+
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
 #: src/kgx-simple-tab.c:180
@@ -335,7 +354,7 @@ msgstr "<b>Només de lectura</b> - L'ordre ha sortit"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Ha fallat iniciar-ho</b> - %s"
 
-#: src/kgx-tab.c:1091
+#: src/kgx-tab.c:1112
 msgid "Command completed"
 msgstr "Ordre completada"
 
@@ -411,7 +430,7 @@ msgid "Dark Style"
 msgstr "Estil fosc"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:464
+#: src/kgx-window.c:478
 msgid "translator-credits"
 msgstr ""
 "Ícar N. S. <icar.nin@protonmail.com>\n"
