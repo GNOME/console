@@ -1,14 +1,14 @@
 # Hungarian translation for console.
-# Copyright (C) 2019, 2021, 2022, 2023 Free Software Foundation, Inc.
+# Copyright (C) 2019, 2021, 2022, 2023, 2024 Free Software Foundation, Inc.
 # This file is distributed under the same license as the console package.
 #
-# Balázs Úr <ur.balazs at fsf dot hu>, 2019, 2021, 2022, 2023.
+# Balázs Úr <ur.balazs at fsf dot hu>, 2019, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: console master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-09-02 15:38+0000\n"
-"PO-Revision-Date: 2023-09-05 21:34+0200\n"
+"POT-Creation-Date: 2023-12-16 16:56+0000\n"
+"PO-Revision-Date: 2024-02-22 01:11+0100\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
@@ -50,7 +50,7 @@ msgstr "Egy egyszerű, felhasználóbarát terminálemulátor a GNOME asztalhoz.
 msgid "Terminal window"
 msgstr "Terminálablak"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:293 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
 msgid "The GNOME Project"
 msgstr "A GNOME projekt"
 
@@ -125,15 +125,11 @@ msgid "Move Tab Left"
 msgstr "Lap mozgatása balra"
 
 #: src/help-overlay.ui:92
-#| msgctxt "shortcut window"
-#| msgid "Switch to Tab"
 msgctxt "shortcut window"
 msgid "Switch to Tab 1–9"
 msgstr "Váltás az 1–9. lapra"
 
 #: src/help-overlay.ui:98
-#| msgctxt "shortcut window"
-#| msgid "Switch to Tab"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Váltás a 10. lapra"
@@ -152,7 +148,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s VTE %u.%u.%u %s használatával\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:452
+#: src/kgx-application.c:361 src/kgx-window.c:466
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -210,46 +206,68 @@ msgstr "SOROK"
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- PARANCS [ARGUMENTUM...]]"
 
-#: src/kgx-close-dialog.c:50
+#: src/kgx-close-dialog.c:94
 msgid "Close Window?"
 msgstr "Bezárja az ablakot?"
 
-#: src/kgx-close-dialog.c:51
+#: src/kgx-close-dialog.c:96
+#| msgid ""
+#| "Some commands are still running, closing this window will kill them and "
+#| "may lead to unexpected outcomes"
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"Néhány parancs még mindig fut, az ablak bezárása ki fogja lőni azokat, és ez "
-"váratlan eredményekhez vezethet"
+msgstr[0] ""
+"Egy parancs még mindig fut, az ablak bezárása ki fogja lőni azt, és ez"
+" váratlan eredményekhez vezethet"
+msgstr[1] ""
+"Néhány parancs még mindig fut, az ablak bezárása ki fogja lőni azokat, és ez"
+" váratlan eredményekhez vezethet"
 
-#: src/kgx-close-dialog.c:56
+#: src/kgx-close-dialog.c:103
 msgid "Close Tab?"
 msgstr "Bezárja a lapot?"
 
-#: src/kgx-close-dialog.c:57
+#: src/kgx-close-dialog.c:105
+#| msgid ""
+#| "Some commands are still running, closing this tab will kill them and may "
+#| "lead to unexpected outcomes"
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"Néhány parancs még mindig fut, a lap bezárása ki fogja lőni azokat, és ez "
-"váratlan eredményekhez vezethet"
+msgstr[0] ""
+"Egy parancs még mindig fut, a lap bezárása ki fogja lőni azt, és ez váratlan"
+" eredményekhez vezethet"
+msgstr[1] ""
+"Néhány parancs még mindig fut, a lap bezárása ki fogja lőni azokat, és ez"
+" váratlan eredményekhez vezethet"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:918
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:232
+msgid "Process list"
+msgstr "Folyamatlista"
+
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "_Mégse"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:248
 msgid "C_lose"
 msgstr "_Bezárás"
 
 #: src/kgx-font-picker.ui:12
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
 msgid "Terminal Font"
 msgstr "Terminál betűkészlete"
 
 #: src/kgx-font-picker.ui:37
-#| msgid "_Select All"
 msgid "_Select"
 msgstr "_Kiválasztás"
 
@@ -266,7 +284,6 @@ msgid "Font Preview"
 msgstr "Betűkészlet előnézete"
 
 #: src/kgx-font-picker.ui:188
-#| msgid "Reset Size"
 msgid "Font Size"
 msgstr "Betűméret"
 
@@ -274,7 +291,7 @@ msgstr "Betűméret"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:424
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "%i. lap"
@@ -300,7 +317,6 @@ msgid "Font"
 msgstr "Betűkészlet"
 
 #: src/kgx-preferences-window.ui:13
-#| msgid "Use System Colors"
 msgid "Use _System Default"
 msgstr "_Rendszer alapértelmezésének használata"
 
@@ -309,8 +325,6 @@ msgid "Custom _Font"
 msgstr "_Egyéni betűkészlet"
 
 #: src/kgx-preferences-window.ui:59
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
 msgid "Terminal Bell"
 msgstr "Terminálcsengő"
 
@@ -321,6 +335,11 @@ msgstr "_Hang lejátszása"
 #: src/kgx-preferences-window.ui:68
 msgid "_Visual Effects"
 msgstr "_Látható hatások"
+
+#: src/kgx-process.c:198
+#, c-format
+msgid "Process %d"
+msgstr "%d. folyamat"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
@@ -342,7 +361,7 @@ msgstr "<b>Csak olvasható</b> — A parancs kilépett"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Indítás sikertelen</b> — %s"
 
-#: src/kgx-tab.c:1091
+#: src/kgx-tab.c:1112
 msgid "Command completed"
 msgstr "Parancs befejezve"
 
@@ -358,7 +377,7 @@ msgstr "Előző találat"
 msgid "Next Match"
 msgstr "Következő találat"
 
-#: src/kgx-terminal.c:585
+#: src/kgx-terminal.c:557
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -367,12 +386,12 @@ msgstr ""
 "Ctrl+kattintás a megnyitáshoz:\n"
 "%s"
 
-#: src/kgx-terminal.c:911
+#: src/kgx-terminal.c:883
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Olyan parancsot illeszt be, amely rendszergazdaként fut"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:915
+#: src/kgx-terminal.c:887
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -381,7 +400,7 @@ msgstr ""
 "Győződjön meg arról, hogy pontosan tudja-e, mit csinál a parancs:\n"
 "%s"
 
-#: src/kgx-terminal.c:919 src/kgx-terminal.ui:24
+#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "_Beillesztés"
 
@@ -418,7 +437,7 @@ msgid "Dark Style"
 msgstr "Sötét stílus"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:464
+#: src/kgx-window.c:478
 msgid "translator-credits"
 msgstr "Úr Balázs <ur.balazs at fsf dot hu>, 2019, 2022."
 
