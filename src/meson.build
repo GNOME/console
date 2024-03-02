@@ -13,6 +13,8 @@ kgx_sources = [
   'kgx-despatcher.h',
   'kgx-drop-target.c',
   'kgx-drop-target.h',
+  'kgx-livery-manager.c',
+  'kgx-livery-manager.h',
   'kgx-livery.c',
   'kgx-livery.h',
   'kgx-pages.c',
