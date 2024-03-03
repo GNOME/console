@@ -324,6 +324,7 @@
   <url type="donation">https://www.gnome.org/donate/</url>
   <url type="translate">https://l10n.gnome.org/module/console/</url>
   <url type="vcs-browser">https://gitlab.gnome.org/GNOME/console</url>
+  <url type="contribute">https://welcome.gnome.org/app/Console/</url>
   <update_contact>zbrown@gnome.org</update_contact>
   <translation type="gettext">@BIN_NAME@</translation>
   <content_rating type="oars-1.1" />
