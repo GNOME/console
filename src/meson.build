@@ -41,6 +41,7 @@ kgx_sources = [
 kgx_deps = [
   gio_dep,
   gio_unix_dep,
+  pango_dep,
   gtk_dep,
   adw_dep,
   vte_dep,

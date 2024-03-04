@@ -86,15 +86,14 @@
                                       <lookup name="text">search</lookup>
                                     </binding>
                                     <property name="expression">
-                                      <closure type="gchararray" function="face_as_label"
-                                        swapped="1" />
+                                      <lookup name="name" type="PangoFontFamily"  />
                                     </property>
                                   </object>
                                 </child>
                                 <child>
                                   <object class="GtkBoolFilter">
                                     <property name="expression">
-                                      <closure type="gboolean" function="face_is_terminal" />
+                                      <lookup name="is-monospace" type="PangoFontFamily" />
                                     </property>
                                   </object>
                                 </child>
@@ -115,9 +114,9 @@
                                 <property name="xalign">0.0</property>
                                 <property name="ellipsize">end</property>
                                 <binding name="label">
-                                  <closure type='gchararray' function='face_as_label'>
+                                  <lookup name="name" type="PangoFontFamily">
                                     <lookup name="item">GtkListItem</lookup>
-                                  </closure>
+                                  </lookup>
                                 </binding>
                                 <binding name="attributes">
                                   <closure type='PangoAttrList' function='face_as_attributes'>

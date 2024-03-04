@@ -145,17 +145,6 @@ build_description (GObject *object, PangoFontFamily *family, double size)
 }
 
 
-static char *
-face_as_label (GObject *object, PangoFontFamily *family)
-{
-  if (!family) {
-    return NULL;
-  }
-
-  return g_strdup (pango_font_family_get_name (family));
-}
-
-
 static PangoAttrList *
 face_as_attributes (GObject *object, PangoFontFamily *family)
 {
@@ -167,14 +156,6 @@ face_as_attributes (GObject *object, PangoFontFamily *family)
   }
 
   return g_steal_pointer (&list);
-}
-
-
-static gboolean
-face_is_terminal (PangoFontFamily *family)
-{
-  /* In future it would be good to exclude emoji fonts */
-  return pango_font_family_is_monospace (family);
 }
 
 
@@ -319,9 +300,7 @@ kgx_font_picker_class_init (KgxFontPickerClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxFontPicker, selection);
 
   gtk_widget_class_bind_template_callback (widget_class, build_description);
-  gtk_widget_class_bind_template_callback (widget_class, face_as_label);
   gtk_widget_class_bind_template_callback (widget_class, face_as_attributes);
-  gtk_widget_class_bind_template_callback (widget_class, face_is_terminal);
   gtk_widget_class_bind_template_callback (widget_class, font_as_attributes);
   gtk_widget_class_bind_template_callback (widget_class, font_as_size);
   gtk_widget_class_bind_template_callback (widget_class, pending_as_sensitive);

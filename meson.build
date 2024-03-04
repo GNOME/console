@@ -140,6 +140,7 @@ add_project_arguments(global_cargs, language: 'c')
 
 gio_dep = dependency('gio-2.0', version: '>= @0@'.format(glib_min_ver))
 gio_unix_dep = dependency('gio-unix-2.0', version: '>= @0@'.format(glib_min_ver))
+pango_dep = dependency('pango', version: '>= 1.51.2')
 adw_dep = dependency('libadwaita-1', version: '>= @0@'.format(adw_min_ver))
 vte_dep = dependency('vte-2.91-gtk4', version: '>= 0.77.0')
 gtk_dep = dependency('gtk4', version: '>= @0@'.format(gtk_min_ver))
