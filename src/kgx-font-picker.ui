@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0" />
-  <template class="KgxFontPicker" parent="AdwWindow">
+  <template class="KgxFontPicker" parent="AdwNavigationPage">
     <binding name="current-font">
       <closure type='PangoFontDescription' function='build_description'>
         <lookup name="selected-item">selection</lookup>
         <lookup name="value">size-spin</lookup>
       </closure>
     </binding>
-    <property name="modal">True</property>
     <property name="title" translatable="yes">Terminal Font</property>
-    <property name="default-height">450</property>
-    <property name="default-widget">select</property>
-    <property name="content">
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
-        <child>
+    <property name="tag">font-picker</property>
+    <property name="child">
+      <object class="AdwToolbarView">
+        <child type="top">
           <object class="AdwHeaderBar">
             <property name="show-start-title-buttons">False</property>
             <property name="show-end-title-buttons">False</property>
+            <property name="show-back-button">False</property>
             <property name="title-widget">
               <object class="AdwWindowTitle">
                 <property name="title" bind-source="KgxFontPicker" bind-property="title"
@@ -29,7 +27,7 @@
               <object class="GtkButton">
                 <property name="label" translatable="yes">_Cancel</property>
                 <property name="use-underline">True</property>
-                <property name="action-name">window.close</property>
+                <property name="action-name">navigation.pop</property>
               </object>
             </child>
             <child type="end">
@@ -44,7 +42,7 @@
             </child>
           </object>
         </child>
-        <child>
+        <property name="content">
           <object class="GtkBox">
             <property name="orientation">vertical</property>
             <property name="spacing">5</property>
@@ -193,19 +191,8 @@
               <class name="font-picker" />
             </style>
           </object>
-        </child>
+        </property>
       </object>
     </property>
-    <child>
-      <object class='GtkShortcutController'>
-        <property name='scope'>local</property>
-        <child>
-          <object class='GtkShortcut'>
-            <property name='trigger'>Escape</property>
-            <property name='action'>action(window.close)</property>
-          </object>
-        </child>
-      </object>
-    </child>
   </template>
 </interface>

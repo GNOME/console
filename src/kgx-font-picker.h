@@ -24,7 +24,7 @@ G_BEGIN_DECLS
 
 #define KGX_TYPE_FONT_PICKER (kgx_font_picker_get_type ())
 
-G_DECLARE_FINAL_TYPE (KgxFontPicker, kgx_font_picker, KGX, FONT_PICKER, AdwWindow)
+G_DECLARE_FINAL_TYPE (KgxFontPicker, kgx_font_picker, KGX, FONT_PICKER, AdwNavigationPage)
 
 
 G_END_DECLS

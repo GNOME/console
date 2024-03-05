@@ -25,7 +25,7 @@
 
 
 struct _KgxFontPicker {
-  AdwWindow              parent_instance;
+  AdwNavigationPage      parent_instance;
 
   PangoFontDescription  *initial;
   PangoFontDescription  *current;
@@ -35,7 +35,7 @@ struct _KgxFontPicker {
 };
 
 
-G_DEFINE_TYPE (KgxFontPicker, kgx_font_picker, ADW_TYPE_WINDOW)
+G_DEFINE_TYPE (KgxFontPicker, kgx_font_picker, ADW_TYPE_NAVIGATION_PAGE)
 
 
 enum {

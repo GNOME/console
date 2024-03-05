@@ -133,7 +133,7 @@ font_selected (KgxFontPicker        *picker,
 {
   kgx_settings_set_custom_font (self->settings, font);
 
-  gtk_window_destroy (GTK_WINDOW (picker));
+  adw_preferences_dialog_pop_subpage (ADW_PREFERENCES_DIALOG (self));
 }
 
 
@@ -143,17 +143,19 @@ select_font_activated (GtkWidget  *widget,
                        GVariant   *parameter)
 {
   KgxPreferencesWindow *self = KGX_PREFERENCES_WINDOW (widget);
-  GtkWindow *root = GTK_WINDOW (gtk_widget_get_root (widget));
   g_autoptr (PangoFontDescription) initial_value = NULL;
+  AdwNavigationPage *picker;
 
   initial_value = kgx_settings_get_custom_font (self->settings);
 
-  gtk_window_present (g_object_connect (g_object_new (KGX_TYPE_FONT_PICKER,
-                                                      "transient-for", root,
-                                                      "initial-font", initial_value,
-                                                      NULL),
-                                        "object-signal::selected", G_CALLBACK (font_selected), self,
-                                        NULL));
+  picker = g_object_connect (g_object_new (KGX_TYPE_FONT_PICKER,
+                                           "initial-font", initial_value,
+                                           NULL),
+                             "object-signal::selected", G_CALLBACK (font_selected), self,
+                             NULL);
+
+  adw_preferences_dialog_push_subpage (ADW_PREFERENCES_DIALOG (self),
+                                       picker);
 }
 
 
