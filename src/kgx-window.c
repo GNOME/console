@@ -509,7 +509,7 @@ about_activated  (GtkWidget  *widget,
   /* Translators: %s is the year range */
   copyright = g_strdup_printf (_("© %s Zander Brown"), "2019-2024");
 
-  adw_show_about_window (GTK_WINDOW (widget),
+  adw_show_about_dialog (widget,
                          "application-name", KGX_DISPLAY_NAME,
                          "application-icon", KGX_APPLICATION_ID,
                          "developer-name", _("The GNOME Project"),
