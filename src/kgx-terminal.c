@@ -774,12 +774,10 @@ kgx_terminal_accept_paste (KgxTerminal *self,
 
   if (g_strstr_len (striped, len, "sudo") != NULL &&
       g_strstr_len (striped, len, "\n") != NULL) {
-    KgxPasteDialog *paste = g_object_new (KGX_TYPE_PASTE_DIALOG,
-                                          "content", text,
-                                          "transient-for", gtk_widget_get_root (GTK_WIDGET (self)),
-                                          NULL);
-
-    kgx_paste_dialog_run (paste,
+    kgx_paste_dialog_run (g_object_new (KGX_TYPE_PASTE_DIALOG,
+                                        "content", text,
+                                        NULL),
+                          GTK_WIDGET (self),
                           self->cancellable,
                           got_paste,
                           g_object_ref (self));

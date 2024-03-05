@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <gio/gio.h>
+#include <gtk/gtk.h>
 
 #include "kgx-enums.h"
 
@@ -35,6 +35,7 @@ typedef enum {
 G_DECLARE_FINAL_TYPE (KgxPasteDialog, kgx_paste_dialog, KGX, PASTE_DIALOG, GObject)
 
 void                 kgx_paste_dialog_run           (KgxPasteDialog                 *restrict       self,
+                                                     GtkWidget                      *restrict       parent,
                                                      GCancellable                   *restrict       cancellable,
                                                      GAsyncReadyCallback                            callback,
                                                      gpointer                                       user_data);
