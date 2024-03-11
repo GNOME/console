@@ -7,18 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-02-12 12:31+0000\n"
-"PO-Revision-Date: 2023-02-28 21:57+0100\n"
+"POT-Creation-Date: 2023-12-16 16:56+0000\n"
+"PO-Revision-Date: 2024-03-11 19:59+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Occitan <totenoc@gmail.com>\n"
 "Language: oc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.2.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:29
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
 msgid "Console"
 msgstr "Consòla"
 
@@ -33,11 +34,11 @@ msgstr ""
 msgid "New Window"
 msgstr "Fenèstra novèla"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:143
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
 msgid "New Tab"
 msgstr "Onglet novèl"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:366
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:377
 msgid "Terminal Emulator"
 msgstr "Emulator de Terminal"
 
@@ -49,7 +50,7 @@ msgstr "Un emulator de terminal simple e de bon utilizaire pel burèu GNOME."
 msgid "Terminal window"
 msgstr "Fenèstra de terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:210 src/kgx-window.c:436
+#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
 msgid "The GNOME Project"
 msgstr "Lo projècte GNOME"
 
@@ -115,166 +116,275 @@ msgstr "Onglet precedent"
 
 #: src/help-overlay.ui:80
 msgctxt "shortcut window"
-msgid "Switch to Tab"
-msgstr "Bascular d'onglet"
+msgid "Move Tab Right"
+msgstr "Desplaçar l'onglet cap a drecha"
 
-#: src/kgx-application.c:241
+#: src/help-overlay.ui:86
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Desplaçar l'onglet cap a esquèrra"
+
+#: src/help-overlay.ui:92
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Passar a l’onglet 1–9"
+
+#: src/help-overlay.ui:98
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Passar a l’onglet 10"
+
+#: src/kgx-application.c:252
 msgid "Cannot use both --command and positional parameters"
 msgstr ""
 "Utilizacion impossibla de --command e de paramètres de posicion a l'encòp"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:338
+#: src/kgx-application.c:349
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s en utilizant VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:350 src/kgx-window.c:431
+#: src/kgx-application.c:361 src/kgx-window.c:466
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:364 src/kgx-window.ui:55
-msgid "King’s Cross"
-msgstr "King’s Cross"
-
-#: src/kgx-application.c:368
+#: src/kgx-application.c:379
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 o superiora"
 
-#: src/kgx-application.c:433
+#: src/kgx-application.c:444
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Executa lo paramètre d'aquesta opcion dins lo terminal"
 
-#: src/kgx-application.c:434
+#: src/kgx-application.c:445
 msgid "COMMAND"
 msgstr "COMANDA"
 
-#: src/kgx-application.c:442
+#: src/kgx-application.c:453
 msgid "Set the working directory"
 msgstr "Definís lo repertòri de trabalh"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:444
+#: src/kgx-application.c:455
 msgid "DIRNAME"
 msgstr "REPTRABALH"
 
-#: src/kgx-application.c:452
+#: src/kgx-application.c:463
 msgid "Wait until the child exits (TODO)"
 msgstr "Esperar fins que l'enfant quite (TODO)"
 
-#: src/kgx-application.c:461
+#: src/kgx-application.c:472
 msgid "Set the initial window title"
 msgstr "Definir lo títol de la fenèstra iniciala"
 
-#: src/kgx-application.c:462
+#: src/kgx-application.c:473
 msgid "TITLE"
 msgstr "TÍTOL"
 
-#: src/kgx-application.c:470
+#: src/kgx-application.c:481
 msgid "ADVANCED: Set the shell to launch"
 msgstr "AVANÇAT : definir lo shell d’aviar"
 
-#: src/kgx-application.c:471
+#: src/kgx-application.c:482
 msgid "SHELL"
 msgstr "SHELL"
 
-#: src/kgx-application.c:479
+#: src/kgx-application.c:490
 msgid "ADVANCED: Set the scrollback length"
 msgstr "AVANÇAT : definir la longor del desplaçament enrèire"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:491
 msgid "LINES"
 msgstr "LINHAS"
 
-#: src/kgx-application.c:489
+#: src/kgx-application.c:500
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- COMANDA [PARAMÈTRE...]]"
 
-#: src/kgx-close-dialog.c:50
+#: src/kgx-close-dialog.c:94
 msgid "Close Window?"
 msgstr "Tampar la fenèstra ?"
 
-#: src/kgx-close-dialog.c:51
+#: src/kgx-close-dialog.c:96
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"D’unas comanda son encara en execucion, tampar aquesta fenèstra las tuarà e "
-"pòt menar a de sortidas inesperadas."
+msgstr[0] ""
+"Una comanda es encara en execucion, tampar aquesta fenèstra la tuarà e pòt "
+"menar a de sortidas inesperadas"
+msgstr[1] ""
+"D’unas comandas son encara en execucion, tampar aquesta fenèstra las tuarà e "
+"pòt menar a de sortidas inesperadas"
 
-#: src/kgx-close-dialog.c:56
+#: src/kgx-close-dialog.c:103
 msgid "Close Tab?"
 msgstr "Tampar l'onglet ?"
 
-#: src/kgx-close-dialog.c:57
+#: src/kgx-close-dialog.c:105
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
+msgstr[0] ""
+"Una comanda es encara en execucion, tampar aqueste onglet la tuarà e pòt "
+"menar a de sortidas inesperadas"
+msgstr[1] ""
 "D’unas comanda son encara en execucion, tampar aqueste onglet las tuarà e "
-"pòt menar a de sortidas inesperadas."
+"pòt menar a de sortidas inesperadas"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:877
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:232
+msgid "Process list"
+msgstr "Lista dels processús"
+
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "_Anullar"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:248
 msgid "C_lose"
 msgstr "T_ampar"
 
-#: src/kgx-pages.ui:61
+#: src/kgx-font-picker.ui:12
+msgid "Terminal Font"
+msgstr "Polissa del terminal"
+
+#: src/kgx-font-picker.ui:37
+msgid "_Select"
+msgstr "_Seleccionar"
+
+#: src/kgx-font-picker.ui:53 src/kgx-font-picker.ui:56
+msgid "Font Name"
+msgstr "Nom de la polissa"
+
+#: src/kgx-font-picker.ui:142
+msgid "Font Family"
+msgstr "Familha de polissa"
+
+#: src/kgx-font-picker.ui:167
+msgid "Font Preview"
+msgstr "Apercebut de la polissa"
+
+#: src/kgx-font-picker.ui:188
+msgid "Font Size"
+msgstr "Talha de la polissa"
+
+#. Translators: %i is, from the users perspective, a random number.
+#. * this string will only be seen when the running program has
+#. * failed to set a title, and exists purely to avoid blank tabs
+#.
+#: src/kgx-pages.c:473
+#, c-format
+msgid "Tab %i"
+msgstr "Onglet %i"
+
+#: src/kgx-pages.ui:90
 msgid "_Detach Tab"
 msgstr "_Destacar l’onglet"
 
-#: src/kgx-pages.ui:67
+#: src/kgx-pages.ui:96
 msgid "_Close"
 msgstr "_Tampar"
 
+#: src/kgx-preferences-window.c:122
+msgid "No Font Set"
+msgstr "Cap de polissa pas definida"
+
+#: src/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "General"
+
+#: src/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "Polissa"
+
+#: src/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "Utilizar los paramètres del _sistèma per defaut"
+
+#: src/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "Polissa _personalizada"
+
+#: src/kgx-preferences-window.ui:59
+msgid "Terminal Bell"
+msgstr "Son del terminal"
+
+#: src/kgx-preferences-window.ui:62
+msgid "Play _Sound"
+msgstr "_Legir son"
+
+#: src/kgx-preferences-window.ui:68
+msgid "_Visual Effects"
+msgstr "Efièches _visuals"
+
+#: src/kgx-process.c:198
+#, c-format
+msgid "Process %d"
+msgstr "Processús %d"
+
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:168
+#: src/kgx-simple-tab.c:180
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Lectura sòla</b> — La comanda a terminat amb lo còdi %i"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:177
+#: src/kgx-simple-tab.c:189
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Lectura sola</b> — La comanda a terminat"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:210
+#: src/kgx-simple-tab.c:222
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Lançament pas reüssit</b> — %s"
 
-#: src/kgx-tab.c:993
+#: src/kgx-tab.c:1112
 msgid "Command completed"
 msgstr "Comanda acabada"
 
-#: src/kgx-tab.ui:22
+#: src/kgx-tab.ui:25
 msgid "Find text"
 msgstr "Trobar lo tèxte"
 
-#: src/kgx-tab.ui:33
+#: src/kgx-tab.ui:36
 msgid "Previous Match"
 msgstr "Ocurréncia precedenta"
 
-#: src/kgx-tab.ui:41
+#: src/kgx-tab.ui:44
 msgid "Next Match"
 msgstr "Ocurréncia seguenta"
 
-#: src/kgx-terminal.c:870
+#: src/kgx-terminal.c:557
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+"Doble clic per dobir :\n"
+"%s"
+
+#: src/kgx-terminal.c:883
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Sètz a pegar una comanda que s'executa coma administrator"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:874
+#: src/kgx-terminal.c:887
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -283,24 +393,44 @@ msgstr ""
 "Asseguratz-vos de saber çò que la comanda fa :\n"
 "%s"
 
-#: src/kgx-terminal.c:878 src/menus.ui:24
+#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "_Pegar"
 
+#: src/kgx-terminal.ui:7
+msgid "_Open Link"
+msgstr "_Dobrir lo ligam"
+
+#: src/kgx-terminal.ui:12
+msgid "Copy _Link"
+msgstr "Copiar l’adreça del _ligam"
+
+#: src/kgx-terminal.ui:19
+msgid "_Copy"
+msgstr "_Copiar"
+
+#: src/kgx-terminal.ui:29
+msgid "_Select All"
+msgstr "_Tot seleccionar"
+
+#: src/kgx-terminal.ui:36
+msgid "Show in _Files"
+msgstr "Afichar dins Fichièrs"
+
 #: src/kgx-theme-switcher.ui:16
-msgid "Use System Colors"
-msgstr "Utilizar la poliça del sistèma"
+msgid "Follow System Style"
+msgstr "Seguir lo tèma del sistèma"
 
 #: src/kgx-theme-switcher.ui:44
-msgid "Use Light Colors"
-msgstr "Utilizar las colors claras"
+msgid "Light Style"
+msgstr "Estil clar"
 
 #: src/kgx-theme-switcher.ui:71
-msgid "Use Dark Colors"
-msgstr "Utilizar las colors escuras"
+msgid "Dark Style"
+msgstr "Estil escur"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:442
+#: src/kgx-window.c:478
 msgid "translator-credits"
 msgstr "Quentin PAGÈS"
 
@@ -313,52 +443,45 @@ msgid "_Show All Tabs"
 msgstr "_Afichar totes los onglets"
 
 #: src/kgx-window.ui:30
+msgid "_Preferences"
+msgstr "_Preferéncias"
+
+#: src/kgx-window.ui:34
 msgid "_Keyboard Shortcuts"
 msgstr "Acorchis de _clavièr"
 
-#: src/kgx-window.ui:34
+#: src/kgx-window.ui:38
 msgid "_About Console"
 msgstr "_A prepaus de Consòla"
 
-#: src/kgx-window.ui:63
+#: src/kgx-window.ui:79
 msgid "Find in Terminal"
 msgstr "Trobar dins un terminal"
 
-#: src/kgx-window.ui:71
+#: src/kgx-window.ui:86
 msgid "Main Menu"
 msgstr "Menú principal"
 
-#: src/kgx-window.ui:89
+#: src/kgx-window.ui:104
 msgid "Shrink Text"
 msgstr "Reduire lo tèxt"
 
-#: src/kgx-window.ui:100
+#: src/kgx-window.ui:115
 msgid "Reset Size"
 msgstr "Reïnicializar la talha"
 
-#: src/kgx-window.ui:117
+#: src/kgx-window.ui:139
 msgid "Enlarge Text"
 msgstr "Agrandir lo tèxt"
 
-#: src/menus.ui:7
-msgid "_Open Link"
-msgstr "_Dobrir lo ligam"
+#~ msgid "King’s Cross"
+#~ msgstr "King’s Cross"
 
-#: src/menus.ui:12
-msgid "Copy _Link"
-msgstr "Copiar l’adreça del _ligam"
+#~ msgid "Use Light Colors"
+#~ msgstr "Utilizar las colors claras"
 
-#: src/menus.ui:19
-msgid "_Copy"
-msgstr "_Copiar"
-
-#: src/menus.ui:29
-msgid "_Select All"
-msgstr "_Tot seleccionar"
-
-#: src/menus.ui:36
-msgid "Show in _Files"
-msgstr "Afichar dins Fichièrs"
+#~ msgid "Use Dark Colors"
+#~ msgstr "Utilizar las colors escuras"
 
 #~ msgid "View Open Tabs"
 #~ msgstr "Afichar los onglets dobèrts"
