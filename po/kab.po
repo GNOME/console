@@ -8,26 +8,26 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-03-11 19:00+0000\n"
-"PO-Revision-Date: 2024-03-12 14:41+0100\n"
-"Last-Translator: ButterflyOfFire <ButterflyOfFire@protonmail.com>\n"
+"POT-Creation-Date: 2024-03-12 13:43+0000\n"
+"PO-Revision-Date: 2024-03-18 01:49+0100\n"
+"Last-Translator: sa\n"
 "Language-Team: Kabyle <>\n"
 "Language: kab\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n>1\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
 "X-DL-Team: kab\n"
 "X-DL-Module: console\n"
 "X-DL-Branch: main\n"
 "X-DL-Domain: po\n"
 "X-DL-State: None\n"
-"X-Generator: Gtranslator 41.0\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
 msgid "Console"
-msgstr ""
+msgstr "Tadiwent"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Console.desktop.in.in:8
@@ -43,12 +43,14 @@ msgid "New Tab"
 msgstr "Iccer amaynut"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:379
+#, fuzzy
 msgid "Terminal Emulator"
-msgstr ""
+msgstr "Emulator n Terminal"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:11
+#, fuzzy
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
-msgstr ""
+msgstr "Emulator n Terminal afessas i tnarit GNOME."
 
 #: data/org.gnome.Console.metainfo.xml.in.in:30
 msgid "Terminal window"
@@ -121,92 +123,93 @@ msgstr "Iccer uzwir"
 #: src/help-overlay.ui:80
 msgctxt "shortcut window"
 msgid "Move Tab Right"
-msgstr ""
+msgstr "Smutti iccer ɣer yeffus"
 
 #: src/help-overlay.ui:86
 msgctxt "shortcut window"
 msgid "Move Tab Left"
-msgstr ""
+msgstr "Smutti iccer ɣer zelmaḍ"
 
 #: src/help-overlay.ui:92
 msgctxt "shortcut window"
 msgid "Switch to Tab 1–9"
-msgstr ""
+msgstr "Uɣal ɣer yiccer 1-9"
 
 #: src/help-overlay.ui:98
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
-msgstr ""
+msgstr "Uɣal ɣer yiccer 10"
 
 #: src/kgx-application.c:254
 msgid "Cannot use both --command and positional parameters"
 msgstr ""
+"Ur yezmir ara ad isseqdec ɣef tikkelt --iɣewwaren n tladna akked uselfu"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
 #: src/kgx-application.c:351
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
-msgstr ""
+msgstr "# KGX %s s useqdec VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
 #: src/kgx-application.c:363 src/kgx-window.c:509
 #, c-format
 msgid "© %s Zander Brown"
-msgstr ""
+msgstr "© %s Zander Brown"
 
 #: src/kgx-application.c:381
 msgid "GPL 3.0 or later"
-msgstr ""
+msgstr "GPL 3.0 neɣ ticki"
 
 #: src/kgx-application.c:446
 msgid "Execute the argument to this option inside the terminal"
-msgstr ""
+msgstr "Selkem afukel i textiṛt-a deg Terminal"
 
 #: src/kgx-application.c:447
 msgid "COMMAND"
-msgstr ""
+msgstr "COMMAND"
 
 #: src/kgx-application.c:455
 msgid "Set the working directory"
-msgstr ""
+msgstr "Sbadu akaram n umahil"
 
 #. Translators: Placeholder of for a given directory
 #: src/kgx-application.c:457
 msgid "DIRNAME"
-msgstr ""
+msgstr "DIRNAME"
 
 #: src/kgx-application.c:465
 msgid "Wait until the child exits (TODO)"
-msgstr ""
+msgstr "Rǧu alamma yeffeɣ ugrud (TODO)"
 
 #: src/kgx-application.c:474
 msgid "Set the initial window title"
-msgstr ""
+msgstr "Sbadu azwel n usfaylu amezwaru"
 
 #: src/kgx-application.c:475
 msgid "TITLE"
-msgstr ""
+msgstr "AZWEL"
 
 #: src/kgx-application.c:483
 msgid "ADVANCED: Set the shell to launch"
-msgstr ""
+msgstr "TALQAYT: Sbadu shell i usenker"
 
 #: src/kgx-application.c:484
 msgid "SHELL"
-msgstr ""
+msgstr "SHELL"
 
 #: src/kgx-application.c:492
 msgid "ADVANCED: Set the scrollback length"
-msgstr ""
+msgstr "TALQAYT: Sbadu adrurem i usenker"
 
 #: src/kgx-application.c:493
 msgid "LINES"
-msgstr ""
+msgstr "IZIRIGEN"
 
 #: src/kgx-application.c:502
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
-msgstr ""
+msgstr "[-e|-- TALADNA [AFUKEL...]]"
 
 #: src/kgx-close-dialog.c:94
 msgid "Close Window?"
@@ -220,7 +223,11 @@ msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
 msgstr[0] ""
+"Tella tladna mazal tesselkam, amdal n usfaylu-a ad tt-isseḥbes, yerna yezmer "
+"ad d-yeglu s wayen ur nettuṛaǧu ara."
 msgstr[1] ""
+"Kra n tiludna mazal-itent sselkament, amdal n usfaylu-a ad tt-isseḥbes, "
+"yerna yezmer ad d-yeglu s wayen ur nettuṛaǧu ara."
 
 #: src/kgx-close-dialog.c:103
 msgid "Close Tab?"
@@ -234,12 +241,16 @@ msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
 msgstr[0] ""
+"Tella tladna mazal tesselkam, amdal n yiccer-a ad tt-isseḥbes, yerna yezmer "
+"ad d-yeglu s wayen ur nettuṛaǧu ara."
 msgstr[1] ""
+"Kra n tiludna mazal-itent sselkament, amdal n yiccer-a ad tt-isseḥbes, yerna "
+"yezmer ad d-yeglu s wayen ur nettuṛaǧu ara."
 
 #. Translators: Screen reader label for the list of running commands
 #: src/kgx-close-dialog.c:232
 msgid "Process list"
-msgstr ""
+msgstr "Taskant n ukala"
 
 #. Translators: This action dismisses the dialogue, leaving the tab/window open
 #: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30
@@ -254,7 +265,7 @@ msgstr "Mde_l"
 
 #: src/kgx-font-picker.ui:12
 msgid "Terminal Font"
-msgstr ""
+msgstr "Tasefsit n Terminal"
 
 #: src/kgx-font-picker.ui:37
 msgid "_Select"
@@ -270,7 +281,7 @@ msgstr "Tawacult n tsefsit"
 
 #: src/kgx-font-picker.ui:167
 msgid "Font Preview"
-msgstr ""
+msgstr "Taskant n tsefsit"
 
 #: src/kgx-font-picker.ui:188
 msgid "Font Size"
@@ -300,10 +311,12 @@ msgid ""
 "Make sure you know what the command does:\n"
 "%s"
 msgstr ""
+"Ḍmen teẓriḍ d acu i txeddem tladna:\n"
+"%s"
 
 #: src/kgx-paste-dialog.c:174
 msgid "You are pasting a command that runs as an administrator"
-msgstr ""
+msgstr "Tesnetḍeḍ taladna isselkamen am unedbal"
 
 #: src/kgx-paste-dialog.c:184 src/kgx-terminal.ui:24
 msgid "_Paste"
@@ -311,7 +324,7 @@ msgstr "Senteḍ (_P)"
 
 #: src/kgx-preferences-window.c:122
 msgid "No Font Set"
-msgstr ""
+msgstr "Ulac tasefsit yettusbadun"
 
 #: src/kgx-preferences-window.ui:7
 msgid "General"
@@ -323,64 +336,64 @@ msgstr "Tasefsit"
 
 #: src/kgx-preferences-window.ui:13
 msgid "Use _System Default"
-msgstr ""
+msgstr "Seqdec _Anagraw amezwer"
 
 #: src/kgx-preferences-window.ui:19
 msgid "Custom _Font"
-msgstr ""
+msgstr "Sagen _Tasefsit"
 
 #: src/kgx-preferences-window.ui:59
 msgid "Terminal Bell"
-msgstr ""
+msgstr "Nnaqus n Terminal"
 
 #: src/kgx-preferences-window.ui:62
 msgid "Play _Sound"
-msgstr ""
+msgstr "Γeṛ-d _Imesli"
 
 #: src/kgx-preferences-window.ui:68
 msgid "_Visual Effects"
-msgstr ""
+msgstr "_Isemda ibanen"
 
 #: src/kgx-process.c:192
 #, c-format
 msgid "Process %d"
-msgstr ""
+msgstr "Akala %d"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
 #: src/kgx-simple-tab.c:180
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr ""
+msgstr "<b>Γeṛ kan</b> — Taladna ifukken s tengalt %i"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
 #: src/kgx-simple-tab.c:189
 msgid "<b>Read Only</b> — Command exited"
-msgstr ""
+msgstr "<b>Γeṛ kan</b> — Taladna ifukken"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
 #: src/kgx-simple-tab.c:222
 #, c-format
 msgid "<b>Failed to start</b> — %s"
-msgstr ""
+msgstr "<b>Yecceḍ usenkar</b> — %s"
 
 #: src/kgx-tab.c:1112
 msgid "Command completed"
-msgstr ""
+msgstr "Taladna temmed"
 
 #: src/kgx-tab.ui:25
 msgid "Find text"
-msgstr ""
+msgstr "Af aḍris"
 
 #: src/kgx-tab.ui:36
 msgid "Previous Match"
-msgstr ""
+msgstr "Amṣada udfir"
 
 #: src/kgx-tab.ui:44
 msgid "Next Match"
-msgstr ""
+msgstr "Amsaḍa uḍfir"
 
 #: src/kgx-terminal.c:482
 #, c-format
@@ -388,6 +401,8 @@ msgid ""
 "Ctrl-click to open:\n"
 "%s"
 msgstr ""
+"Ctrl-click akken ad yeldi:\n"
+"%s"
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -411,20 +426,20 @@ msgstr "Sken-it-id deg yifuyla"
 
 #: src/kgx-theme-switcher.ui:16
 msgid "Follow System Style"
-msgstr ""
+msgstr "Ḍfer aɣanib n unagraw"
 
 #: src/kgx-theme-switcher.ui:44
 msgid "Light Style"
-msgstr ""
+msgstr "Aɣanib aceεlal"
 
 #: src/kgx-theme-switcher.ui:71
 msgid "Dark Style"
-msgstr ""
+msgstr "Anaw ubrik"
 
 #. Translators: Credit yourself here
 #: src/kgx-window.c:521
 msgid "translator-credits"
-msgstr ""
+msgstr "amsuqqel-isemdan"
 
 #: src/kgx-window.ui:17
 msgid "_New Window"
@@ -444,11 +459,11 @@ msgstr "Inegzumen n unasiw (_K)"
 
 #: src/kgx-window.ui:38
 msgid "_About Console"
-msgstr ""
+msgstr "_Γef tdiwent"
 
 #: src/kgx-window.ui:80
 msgid "Find in Terminal"
-msgstr ""
+msgstr "Nadi deg Terminal"
 
 #: src/kgx-window.ui:87
 msgid "Main Menu"
@@ -456,12 +471,12 @@ msgstr "Umuɣ agejdan"
 
 #: src/kgx-window.ui:105
 msgid "Shrink Text"
-msgstr ""
+msgstr "Semẓiyy aḍris"
 
 #: src/kgx-window.ui:116
 msgid "Reset Size"
-msgstr ""
+msgstr "Wennez teɣzi"
 
 #: src/kgx-window.ui:140
 msgid "Enlarge Text"
-msgstr ""
+msgstr "Semɣer aḍris"
