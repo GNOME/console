@@ -31,6 +31,18 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="46.0" date="2024-03-18" type="stable">
+      <description>
+        <p>Updated Translations:</p>
+        <ul>
+          <li>Danish</li>
+          <li>Kabyle</li>
+          <li>Korean</li>
+          <li>Occitan</li>
+          <li>Punjabi</li>
+        </ul>
+      </description>
+    </release>
     <release version="46~rc" date="2024-03-03" type="development">
       <description>
         <p>Updated Translations:</p>
