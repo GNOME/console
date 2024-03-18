@@ -2,21 +2,21 @@
 # Copyright (C) 2022 console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the console package.
 #
-# A S Alam <aalam@fedoraproject.org>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2024 A S Alam <aalam@fedoraproject.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-08-23 02:39+0000\n"
-"PO-Revision-Date: 2023-09-02 08:38-0700\n"
-"Last-Translator: A S Alam <aalam@satluj.org>\n"
+"POT-Creation-Date: 2023-12-16 16:56+0000\n"
+"PO-Revision-Date: 2024-03-18 14:50-0500\n"
+"Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <punjab-translation@googlegroups.com>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
@@ -32,7 +32,7 @@ msgstr "ਕਮਾਂਡ;ਪਰੌਂਟ;ਕਮਾਂਡ-ਲਾਈਨ;ਕਮਾ�
 msgid "New Window"
 msgstr "ਨਵੀਂ ਵਿੰਡੋ"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:167
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
 msgid "New Tab"
 msgstr "ਨਵੀਂ ਟੈਬ"
 
@@ -48,7 +48,7 @@ msgstr "ਗਨੋਮ ਡੈਸਕਟਾਪ ਲਈ ਸਰਲ ਵਰਤੋਂਕ�
 msgid "Terminal window"
 msgstr "ਟਰਮੀਨਲ ਵਿੰਡੋ"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:293 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
 msgid "The GNOME Project"
 msgstr "ਗਨੋਮ ਪਰੋਜੈਕਟ"
 
@@ -144,7 +144,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s,  VTE %u.%u.%u %s ਵਰਤ ਕੇ\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:452
+#: src/kgx-application.c:361 src/kgx-window.c:466
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s ਜ਼ੈਂਡਰ ਬਰਾਊਨ"
@@ -202,35 +202,64 @@ msgstr "ਲਾਈਨਾਂ"
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- ਕਮਾਂਡ [ਆਰਗੂਮੈਂਟ...]]"
 
-#: src/kgx-close-dialog.c:50
+#: src/kgx-close-dialog.c:94
 msgid "Close Window?"
 msgstr "ਵਿੰਡੋ ਬੰਦ ਕਰਨੀ ਹੈ?"
 
-#: src/kgx-close-dialog.c:51
+#: src/kgx-close-dialog.c:96
+#| msgid ""
+#| "Some commands are still running, closing this window will kill them and "
+#| "may lead to unexpected outcomes"
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
+msgstr[0] ""
+"ਇੱਕ ਕਮਾਡ ਹਾਲੇ ਵੀ ਚੱਲ ਰਹੀ ਹੈ। ਇਹ ਵਿੰਡੋ ਨੂੰ ਬੰਦ ਕਰਨ ਨਾਲ ਉਹਨਾਂ ਨੂੰ ਖਤਮ ਕੀਤਾ"
+" ਜਾਵੇਗਾ ਅਤੇ ਜਿਸ "
+"ਨਾਲ ਕੁਝ ਵੀ ਨਤੀਜਾ ਹੋ ਸਕਦਾ ਹੈ।"
+msgstr[1] ""
 "ਕੁਝ ਕਮਾਡਾਂ ਹਾਲੇ ਵੀ ਚੱਲ ਰਹੀਆਂ ਹਨ। ਇਹ ਵਿੰਡੋ ਨੂੰ ਬੰਦ ਕਰਨ ਨਾਲ ਉਹਨਾਂ ਨੂੰ ਖਤਮ ਕੀਤਾ"
-" ਜਾਵੇਗਾ ਅਤੇ ਜਿਸ ਨਾਲ ਕੁਝ ਵੀ ਨਤੀਜਾ ਹੋ ਸਕਦਾ ਹੈ।"
+" ਜਾਵੇਗਾ ਅਤੇ ਜਿਸ "
+"ਨਾਲ ਕੁਝ ਵੀ ਨਤੀਜਾ ਹੋ ਸਕਦਾ ਹੈ।"
 
-#: src/kgx-close-dialog.c:56
+#: src/kgx-close-dialog.c:103
 msgid "Close Tab?"
 msgstr "ਟੈਬ ਬੰਦ ਕਰਨੀ ਹੈ?"
 
-#: src/kgx-close-dialog.c:57
+#: src/kgx-close-dialog.c:105
+#| msgid ""
+#| "Some commands are still running, closing this tab will kill them and may "
+#| "lead to unexpected outcomes"
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
+msgstr[0] ""
+"ਇੱਕ ਕਮਾਂਡ ਹਾਲੇ ਵੀ ਚੱਲ ਰਹੀ ਹੈ। ਇਹ ਟੈਬ ਨੂੰ ਬੰਦ ਕਰਨ ਨਾਲ ਉਹਨਾਂ ਨੂੰ ਖਤਮ ਕੀਤਾ"
+" ਜਾਵੇਗਾ ਅਤੇ ਜਿਸ "
+"ਨਾਲ ਕੁਝ ਵੀ ਨਤੀਜਾ ਹੋ ਸਕਦਾ ਹੈ।"
+msgstr[1] ""
 "ਕੁਝ ਕਮਾਡਾਂ ਹਾਲੇ ਵੀ ਚੱਲ ਰਹੀਆਂ ਹਨ। ਇਹ ਟੈਬ ਨੂੰ ਬੰਦ ਕਰਨ ਨਾਲ ਉਹਨਾਂ ਨੂੰ ਖਤਮ ਕੀਤਾ"
-" ਜਾਵੇਗਾ ਅਤੇ ਜਿਸ ਨਾਲ ਕੁਝ ਵੀ ਨਤੀਜਾ ਹੋ ਸਕਦਾ ਹੈ।"
+" ਜਾਵੇਗਾ ਅਤੇ ਜਿਸ "
+"ਨਾਲ ਕੁਝ ਵੀ ਨਤੀਜਾ ਹੋ ਸਕਦਾ ਹੈ।"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:915
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:232
+msgid "Process list"
+msgstr "ਪਰੋਸੈੱਸ ਸੂਚੀ"
+
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "ਰੱਦ ਕਰੋ(_C)"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:248
 msgid "C_lose"
 msgstr "ਬੰਦ ਕਰੋ(_l)"
 
@@ -262,7 +291,7 @@ msgstr "ਫੋਂਟ ਆਕਾਰ"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:424
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "ਟੈਬ %i"
@@ -307,6 +336,11 @@ msgstr "ਆਵਜ਼ਾ ਚਲਾਓ(_S)"
 msgid "_Visual Effects"
 msgstr "ਦਿੱਖ ਪ੍ਰਭਾਵ(_V)"
 
+#: src/kgx-process.c:198
+#, c-format
+msgid "Process %d"
+msgstr "ਪਰੋਸੈਸ %d"
+
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
 #: src/kgx-simple-tab.c:180
@@ -327,7 +361,7 @@ msgstr "<b>ਸਿਰਫ਼ ਪੜ੍ਹਨ ਲਈ</b> — ਕਮਾਂਡ ਖਤਮ
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਅਸਫ਼ਲ</b> — %s"
 
-#: src/kgx-tab.c:1091
+#: src/kgx-tab.c:1112
 msgid "Command completed"
 msgstr "ਕਮਾਂਡ ਪੂਰੀ ਹੋਈ"
 
@@ -343,7 +377,7 @@ msgstr "ਪਿਛਲੇ ਮੇਲ"
 msgid "Next Match"
 msgstr "ਅਗਲਾ ਮੇਲ"
 
-#: src/kgx-terminal.c:582
+#: src/kgx-terminal.c:557
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -352,12 +386,12 @@ msgstr ""
 "ਖੋਲ੍ਠਣ ਲਈ Ctrl-ਕਲਿੱਕ:\n"
 "%s"
 
-#: src/kgx-terminal.c:908
+#: src/kgx-terminal.c:883
 msgid "You are pasting a command that runs as an administrator"
 msgstr "ਤੁਸੀਂ ਉਹ ਕਮਾਂਡ ਚੇਪ ਰਹੇ ਹੋ, ਜੋ ਕਿ ਪਰਸ਼ਾਸ਼ਕ ਚਲਾਉਂਦਾ ਹੈ"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:912
+#: src/kgx-terminal.c:887
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -366,7 +400,7 @@ msgstr ""
 "ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਤੁਸੀਂ ਜਾਣਦੇ ਹੋ ਕਿ ਕਮਾਂਡ ਕੀ ਕਰਦੀ ਹੈ:\n"
 "%s"
 
-#: src/kgx-terminal.c:916 src/kgx-terminal.ui:24
+#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "ਚੇਪੋ(_P)"
 
@@ -403,7 +437,7 @@ msgid "Dark Style"
 msgstr "ਗੂੜ੍ਹਾ ਸਟਾਈਲ"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:464
+#: src/kgx-window.c:478
 msgid "translator-credits"
 msgstr ""
 "ਅ ਸ ਆਲਮ (A S Alam) ੨੦੨੨\n"
@@ -429,23 +463,23 @@ msgstr "ਕੀਬੋਰਡ ਸ਼ਾਰਟਕੱਟ(_K)"
 msgid "_About Console"
 msgstr "ਕਨਸੋਲ ਬਾਰੇ(_A)"
 
-#: src/kgx-window.ui:80
+#: src/kgx-window.ui:79
 msgid "Find in Terminal"
 msgstr "ਟਰਮੀਨਲ ਵਿੱਚ ਲੱਭੋ"
 
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:86
 msgid "Main Menu"
 msgstr "ਮੁੱਖ ਮੇਨੂ"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:104
 msgid "Shrink Text"
 msgstr "ਲਿਖਤ ਨੂੰ ਸੁੰਘੜੋ"
 
-#: src/kgx-window.ui:117
+#: src/kgx-window.ui:115
 msgid "Reset Size"
 msgstr "ਆਕਾਰ ਮੁੜ-ਸੈੱਟ ਕਰੋ"
 
-#: src/kgx-window.ui:141
+#: src/kgx-window.ui:139
 msgid "Enlarge Text"
 msgstr "ਲਿਖਤ ਆਕਾਰ ਵਧਾਓ"
 
@@ -475,3 +509,4 @@ msgstr "ਲਿਖਤ ਆਕਾਰ ਵਧਾਓ"
 
 #~ msgid "Start a terminal session for this location"
 #~ msgstr "ਇਸ ਟਿਕਾਣੇ ਲਈ ਟਰਮੀਨਲ ਸ਼ੈਸ਼ਨ ਸ਼ੁਰੂ ਕਰੋ"
+
