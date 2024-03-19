@@ -250,7 +250,7 @@ have_url_under_pointer (KgxTerminal *self,
 {
   g_autofree char *hyperlink = NULL;
   g_autofree char *match = NULL;
-  int match_id;
+  int match_id = -1;
   gboolean current = FALSE;
 
   hyperlink = vte_terminal_check_hyperlink_at (VTE_TERMINAL (self), x, y);
@@ -261,11 +261,13 @@ have_url_under_pointer (KgxTerminal *self,
   } else {
     match = vte_terminal_check_match_at (VTE_TERMINAL (self), x, y, &match_id);
 
-    for (int i = 0; i < KGX_TERMINAL_N_LINK_REGEX; i++) {
-      if (self->match_id[i] == match_id) {
-        g_set_str (&self->current_url, match);
-        current = TRUE;
-        break;
+    if (match) {
+      for (int i = 0; i < KGX_TERMINAL_N_LINK_REGEX; i++) {
+        if (self->match_id[i] == match_id) {
+          g_set_str (&self->current_url, match);
+          current = TRUE;
+          break;
+        }
       }
     }
   }
