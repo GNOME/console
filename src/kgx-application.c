@@ -76,16 +76,12 @@ static void
 kgx_application_activate (GApplication *app)
 {
   GtkWindow *window;
-  guint32 timestamp;
-
-  timestamp = GDK_CURRENT_TIME;
 
   /* Get the current window or create one if necessary. */
   window = gtk_application_get_active_window (GTK_APPLICATION (app));
   if (window == NULL) {
     kgx_application_add_terminal (KGX_APPLICATION (app),
                                   NULL,
-                                  timestamp,
                                   NULL,
                                   NULL,
                                   NULL);
@@ -93,7 +89,7 @@ kgx_application_activate (GApplication *app)
     return;
   }
 
-  gtk_window_present_with_time (window, timestamp);
+  gtk_window_present (window);
 }
 
 
@@ -150,12 +146,9 @@ kgx_application_open (GApplication  *app,
                       int            n_files,
                       const char    *hint)
 {
-  guint32 timestamp = GDK_CURRENT_TIME;
-
   for (int i = 0; i < n_files; i++) {
     kgx_application_add_terminal (KGX_APPLICATION (app),
                                   NULL,
-                                  timestamp,
                                   files[i],
                                   NULL,
                                   NULL);
@@ -207,7 +200,6 @@ kgx_application_command_line (GApplication            *app,
                               GApplicationCommandLine *cli)
 {
   KgxApplication *self = KGX_APPLICATION (app);
-  guint32 timestamp = GDK_CURRENT_TIME;
   GVariantDict *options = NULL;
   g_auto (GStrv) argv = NULL;
   const char *command = NULL;
@@ -281,12 +273,11 @@ kgx_application_command_line (GApplication            *app,
   if (g_variant_dict_lookup (options, "tab", "b", &tab) && tab) {
     kgx_application_add_terminal (self,
                                   KGX_WINDOW (gtk_application_get_active_window (GTK_APPLICATION (self))),
-                                  timestamp,
                                   path,
                                   argv,
                                   title);
   } else {
-    kgx_application_add_terminal (self, NULL, timestamp, path, argv, title);
+    kgx_application_add_terminal (self, NULL, path, argv, title);
   }
 
   return EXIT_SUCCESS;
@@ -511,9 +502,8 @@ new_window_activated (GSimpleAction *action,
                       gpointer       data)
 {
   KgxApplication *self = KGX_APPLICATION (data);
-  guint32 timestamp = GDK_CURRENT_TIME;
 
-  kgx_application_add_terminal (self, NULL, timestamp, NULL, NULL, NULL);
+  kgx_application_add_terminal (self, NULL, NULL, NULL, NULL);
 }
 
 
@@ -523,7 +513,6 @@ new_tab_activated (GSimpleAction *action,
                    gpointer       data)
 {
   KgxApplication *self = KGX_APPLICATION (data);
-  guint32 timestamp = GDK_CURRENT_TIME;
   g_autoptr (GFile) dir = NULL;
   GtkWindow *window;
 
@@ -531,9 +520,9 @@ new_tab_activated (GSimpleAction *action,
   if (window) {
     dir = kgx_window_get_working_dir (KGX_WINDOW (window));
 
-    kgx_application_add_terminal (self, KGX_WINDOW (window), timestamp, dir, NULL, NULL);
+    kgx_application_add_terminal (self, KGX_WINDOW (window), dir, NULL, NULL);
   } else {
-    kgx_application_add_terminal (self, NULL, timestamp, NULL, NULL, NULL);
+    kgx_application_add_terminal (self, NULL, NULL, NULL, NULL);
   }
 }
 
@@ -553,7 +542,7 @@ focus_activated (GSimpleAction *action,
   kgx_pages_focus_page (pages, page);
   root = gtk_widget_get_root (GTK_WIDGET (pages));
 
-  gtk_window_present_with_time (GTK_WINDOW (root), GDK_CURRENT_TIME);
+  gtk_window_present (GTK_WINDOW (root));
 }
 
 
@@ -762,7 +751,6 @@ started (GObject      *src,
 KgxTab *
 kgx_application_add_terminal (KgxApplication *self,
                               KgxWindow      *existing_window,
-                              guint32         timestamp,
                               GFile          *working_directory,
                               GStrv           argv,
                               const char     *title)
@@ -822,7 +810,7 @@ kgx_application_add_terminal (KgxApplication *self,
 
   kgx_window_add_tab (KGX_WINDOW (window), tab);
 
-  gtk_window_present_with_time (window, timestamp);
+  gtk_window_present (window);
 
   return KGX_TAB (tab);
 }

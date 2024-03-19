@@ -72,7 +72,7 @@ config_h = vcs_tag( input: config_h_in,
                  fallback: 'Devel')
 
 # Gtk Requirement
-gtk_min_ver = '4.12'
+gtk_min_ver = '4.14'
 gtk_sym_ver = 'GDK_VERSION_@0@'.format(gtk_min_ver.replace('.', '_'))
 
 # GLib Requirement

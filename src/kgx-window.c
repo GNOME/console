@@ -459,7 +459,6 @@ new_activated (GtkWidget  *widget,
                GVariant   *parameter)
 {
   KgxWindow *self = KGX_WINDOW (widget);
-  guint32 timestamp = GDK_CURRENT_TIME;
   GtkApplication *application = NULL;
   g_autoptr (GFile) dir = NULL;
 
@@ -468,7 +467,6 @@ new_activated (GtkWidget  *widget,
 
   kgx_application_add_terminal (KGX_APPLICATION (application),
                                 NULL,
-                                timestamp,
                                 dir,
                                 NULL,
                                 NULL);
@@ -481,7 +479,6 @@ new_tab_activated (GtkWidget  *widget,
                    GVariant   *parameter)
 {
   KgxWindow *self = KGX_WINDOW (widget);
-  guint32 timestamp = GDK_CURRENT_TIME;
   GtkApplication *application = NULL;
   g_autoptr (GFile) dir = NULL;
 
@@ -490,7 +487,6 @@ new_tab_activated (GtkWidget  *widget,
 
   kgx_application_add_terminal (KGX_APPLICATION (application),
                                 self,
-                                timestamp,
                                 dir,
                                 NULL,
                                 NULL);

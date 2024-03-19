@@ -37,7 +37,6 @@ KgxTab               *kgx_application_lookup_page     (KgxApplication *self,
                                                        guint           id);
 KgxTab *              kgx_application_add_terminal    (KgxApplication *self,
                                                        KgxWindow      *existing_window,
-                                                       guint32         timestamp,
                                                        GFile          *working_directory,
                                                        GStrv           command,
                                                        const char     *title);
