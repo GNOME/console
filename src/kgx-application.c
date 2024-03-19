@@ -146,12 +146,19 @@ kgx_application_open (GApplication  *app,
                       int            n_files,
                       const char    *hint)
 {
+  KgxWindow *window = NULL;
+  KgxTab *last_tab = NULL;
+
   for (int i = 0; i < n_files; i++) {
-    kgx_application_add_terminal (KGX_APPLICATION (app),
-                                  NULL,
-                                  files[i],
-                                  NULL,
-                                  NULL);
+    if (G_UNLIKELY (last_tab && !window)) {
+      window = KGX_WINDOW (gtk_widget_get_root (GTK_WIDGET (last_tab)));
+    }
+
+    last_tab = kgx_application_add_terminal (KGX_APPLICATION (app),
+                                             window,
+                                             files[i],
+                                             NULL,
+                                             NULL);
   }
 }
 
