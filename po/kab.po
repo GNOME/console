@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
 "POT-Creation-Date: 2024-03-12 13:43+0000\n"
-"PO-Revision-Date: 2024-03-18 01:49+0100\n"
+"PO-Revision-Date: 2024-03-19 21:38+0100\n"
 "Last-Translator: sa\n"
 "Language-Team: Kabyle <>\n"
 "Language: kab\n"
@@ -33,6 +33,8 @@ msgstr "Tadiwent"
 #: data/org.gnome.Console.desktop.in.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
+"taladna;nced;cmd;izirig n tladan;selkem;shell;terminal;kgx;ticreḍt n "
+"yigelliden;"
 
 #: data/org.gnome.Console.desktop.in.in:21
 msgid "New Window"
@@ -43,12 +45,10 @@ msgid "New Tab"
 msgstr "Iccer amaynut"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:379
-#, fuzzy
 msgid "Terminal Emulator"
 msgstr "Emulator n Terminal"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:11
-#, fuzzy
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr "Emulator n Terminal afessas i tnarit GNOME."
 
@@ -224,10 +224,10 @@ msgid_plural ""
 "lead to unexpected outcomes"
 msgstr[0] ""
 "Tella tladna mazal tesselkam, amdal n usfaylu-a ad tt-isseḥbes, yerna yezmer "
-"ad d-yeglu s wayen ur nettuṛaǧu ara."
+"ad d-yeglu s wayen ur nettuṛaǧu ara"
 msgstr[1] ""
 "Kra n tiludna mazal-itent sselkament, amdal n usfaylu-a ad tt-isseḥbes, "
-"yerna yezmer ad d-yeglu s wayen ur nettuṛaǧu ara."
+"yerna yezmer ad d-yeglu s wayen ur nettuṛaǧu ara"
 
 #: src/kgx-close-dialog.c:103
 msgid "Close Tab?"
@@ -242,10 +242,10 @@ msgid_plural ""
 "lead to unexpected outcomes"
 msgstr[0] ""
 "Tella tladna mazal tesselkam, amdal n yiccer-a ad tt-isseḥbes, yerna yezmer "
-"ad d-yeglu s wayen ur nettuṛaǧu ara."
+"ad d-yeglu s wayen ur nettuṛaǧu ara"
 msgstr[1] ""
 "Kra n tiludna mazal-itent sselkament, amdal n yiccer-a ad tt-isseḥbes, yerna "
-"yezmer ad d-yeglu s wayen ur nettuṛaǧu ara."
+"yezmer ad d-yeglu s wayen ur nettuṛaǧu ara"
 
 #. Translators: Screen reader label for the list of running commands
 #: src/kgx-close-dialog.c:232
