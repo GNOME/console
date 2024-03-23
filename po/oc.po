@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-12-16 16:56+0000\n"
-"PO-Revision-Date: 2024-03-11 19:59+0100\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
+"POT-Creation-Date: 2024-03-11 19:00+0000\n"
+"PO-Revision-Date: 2024-03-23 21:29+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Occitan <totenoc@gmail.com>\n"
 "Language: oc\n"
@@ -34,23 +34,23 @@ msgstr ""
 msgid "New Window"
 msgstr "Fenèstra novèla"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:165
 msgid "New Tab"
 msgstr "Onglet novèl"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:377
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:379
 msgid "Terminal Emulator"
 msgstr "Emulator de Terminal"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
-msgstr "Un emulator de terminal simple e de bon utilizaire pel burèu GNOME."
+msgstr "Un emulator de terminal simple e de bon utilizar pel burèu GNOME."
 
 #: data/org.gnome.Console.metainfo.xml.in.in:30
 msgid "Terminal window"
 msgstr "Fenèstra de terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
+#: data/org.gnome.Console.metainfo.xml.in.in:371 src/kgx-window.c:514
 msgid "The GNOME Project"
 msgstr "Lo projècte GNOME"
 
@@ -134,74 +134,74 @@ msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Passar a l’onglet 10"
 
-#: src/kgx-application.c:252
+#: src/kgx-application.c:254
 msgid "Cannot use both --command and positional parameters"
 msgstr ""
 "Utilizacion impossibla de --command e de paramètres de posicion a l'encòp"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:349
+#: src/kgx-application.c:351
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s en utilizant VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:466
+#: src/kgx-application.c:363 src/kgx-window.c:509
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:379
+#: src/kgx-application.c:381
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 o superiora"
 
-#: src/kgx-application.c:444
+#: src/kgx-application.c:446
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Executa lo paramètre d'aquesta opcion dins lo terminal"
 
-#: src/kgx-application.c:445
+#: src/kgx-application.c:447
 msgid "COMMAND"
 msgstr "COMANDA"
 
-#: src/kgx-application.c:453
+#: src/kgx-application.c:455
 msgid "Set the working directory"
 msgstr "Definís lo repertòri de trabalh"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:455
+#: src/kgx-application.c:457
 msgid "DIRNAME"
 msgstr "REPTRABALH"
 
-#: src/kgx-application.c:463
+#: src/kgx-application.c:465
 msgid "Wait until the child exits (TODO)"
 msgstr "Esperar fins que l'enfant quite (TODO)"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:474
 msgid "Set the initial window title"
 msgstr "Definir lo títol de la fenèstra iniciala"
 
-#: src/kgx-application.c:473
+#: src/kgx-application.c:475
 msgid "TITLE"
 msgstr "TÍTOL"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:483
 msgid "ADVANCED: Set the shell to launch"
 msgstr "AVANÇAT : definir lo shell d’aviar"
 
-#: src/kgx-application.c:482
+#: src/kgx-application.c:484
 msgid "SHELL"
 msgstr "SHELL"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:492
 msgid "ADVANCED: Set the scrollback length"
 msgstr "AVANÇAT : definir la longor del desplaçament enrèire"
 
-#: src/kgx-application.c:491
+#: src/kgx-application.c:493
 msgid "LINES"
 msgstr "LINHAS"
 
-#: src/kgx-application.c:500
+#: src/kgx-application.c:502
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- COMANDA [PARAMÈTRE...]]"
 
@@ -247,7 +247,8 @@ msgid "Process list"
 msgstr "Lista dels processús"
 
 #. Translators: This action dismisses the dialogue, leaving the tab/window open
-#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
+#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30
+#: src/kgx-paste-dialog.c:183
 msgid "_Cancel"
 msgstr "_Anullar"
 
@@ -297,6 +298,24 @@ msgstr "_Destacar l’onglet"
 msgid "_Close"
 msgstr "_Tampar"
 
+#. Translators: %s is the (possibly truncated) command being pasted
+#: src/kgx-paste-dialog.c:88
+#, c-format
+msgid ""
+"Make sure you know what the command does:\n"
+"%s"
+msgstr ""
+"Asseguratz-vos de saber çò que la comanda fa :\n"
+"%s"
+
+#: src/kgx-paste-dialog.c:174
+msgid "You are pasting a command that runs as an administrator"
+msgstr "Sètz a pegar una comanda que s'executa coma administrator"
+
+#: src/kgx-paste-dialog.c:184 src/kgx-terminal.ui:24
+msgid "_Paste"
+msgstr "_Pegar"
+
 #: src/kgx-preferences-window.c:122
 msgid "No Font Set"
 msgstr "Cap de polissa pas definida"
@@ -329,7 +348,7 @@ msgstr "_Legir son"
 msgid "_Visual Effects"
 msgstr "Efièches _visuals"
 
-#: src/kgx-process.c:198
+#: src/kgx-process.c:192
 #, c-format
 msgid "Process %d"
 msgstr "Processús %d"
@@ -370,7 +389,7 @@ msgstr "Ocurréncia precedenta"
 msgid "Next Match"
 msgstr "Ocurréncia seguenta"
 
-#: src/kgx-terminal.c:557
+#: src/kgx-terminal.c:482
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -378,24 +397,6 @@ msgid ""
 msgstr ""
 "Doble clic per dobir :\n"
 "%s"
-
-#: src/kgx-terminal.c:883
-msgid "You are pasting a command that runs as an administrator"
-msgstr "Sètz a pegar una comanda que s'executa coma administrator"
-
-#. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:887
-#, c-format
-msgid ""
-"Make sure you know what the command does:\n"
-"%s"
-msgstr ""
-"Asseguratz-vos de saber çò que la comanda fa :\n"
-"%s"
-
-#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
-msgid "_Paste"
-msgstr "_Pegar"
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -430,7 +431,7 @@ msgid "Dark Style"
 msgstr "Estil escur"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:478
+#: src/kgx-window.c:521
 msgid "translator-credits"
 msgstr "Quentin PAGÈS"
 
@@ -454,23 +455,23 @@ msgstr "Acorchis de _clavièr"
 msgid "_About Console"
 msgstr "_A prepaus de Consòla"
 
-#: src/kgx-window.ui:79
+#: src/kgx-window.ui:80
 msgid "Find in Terminal"
 msgstr "Trobar dins un terminal"
 
-#: src/kgx-window.ui:86
+#: src/kgx-window.ui:87
 msgid "Main Menu"
 msgstr "Menú principal"
 
-#: src/kgx-window.ui:104
+#: src/kgx-window.ui:105
 msgid "Shrink Text"
 msgstr "Reduire lo tèxt"
 
-#: src/kgx-window.ui:115
+#: src/kgx-window.ui:116
 msgid "Reset Size"
 msgstr "Reïnicializar la talha"
 
-#: src/kgx-window.ui:139
+#: src/kgx-window.ui:140
 msgid "Enlarge Text"
 msgstr "Agrandir lo tèxt"
 
