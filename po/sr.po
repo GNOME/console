@@ -3,24 +3,32 @@
 # This file is distributed under the same license as the kgx package.
 # Марко Костић <marko.m.kostic@gmail.com>, 2020.
 # Мирослав Николић <miroslavnikolic@rocketmail.com>, 2021.
+# Душан Симић <dusan.simic1810@gmail.com>, 2024.
+# Dušan Simić <dusan.simic1810@gmail.com>, 2024.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-08-05 12:30+0000\n"
-"PO-Revision-Date: 2022-08-06 16:36+0200\n"
-"Last-Translator: Марко М. Костић <marko.m.kostic@gmail.com>\n"
-"Language-Team: српски <gnome-sr@googlegroups.org>\n"
+"POT-Creation-Date: 2023-12-16 16:56+0000\n"
+"PO-Revision-Date: 2024-03-23 15:52+0100\n"
+"Last-Translator: Dušan Simić <dusan.simic1810@gmail.com>\n"
+"Language-Team: Serbian <gnome-sr@googlegroups.com>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : n"
-"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Poedit 3.1.1\n"
+"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
+"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Gtranslator 46.0\n"
+"X-DL-Lang: sr\n"
+"X-DL-Module: console\n"
+"X-DL-Branch: main\n"
+"X-DL-Domain: po\n"
+"X-DL-State: Translating\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:43
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
 msgid "Console"
 msgstr "Конзола"
 
@@ -35,11 +43,11 @@ msgstr ""
 msgid "New Window"
 msgstr "Нови прозор"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:132
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
 msgid "New Tab"
 msgstr "Нови језичак"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:605
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:377
 msgid "Terminal Emulator"
 msgstr "Опонашавач терминала"
 
@@ -51,7 +59,7 @@ msgstr "Једноставан опонашавач терминала за Гн
 msgid "Terminal window"
 msgstr "Прозор терминала"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:104 src/kgx-window.c:497
+#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
 msgid "The GNOME Project"
 msgstr "Гном пројекат"
 
@@ -102,191 +110,345 @@ msgstr "Затвори језичак"
 
 #: src/help-overlay.ui:62
 msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Прикажи све језичке"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
 msgid "Next Tab"
 msgstr "Следећи језичак"
 
-#: src/help-overlay.ui:68
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Previous Tab"
 msgstr "Претходни језичак"
 
-#: src/help-overlay.ui:74
+#: src/help-overlay.ui:80
 msgctxt "shortcut window"
-msgid "Switch to Tab"
-msgstr "Пређи на језичак"
+msgid "Move Tab Right"
+msgstr "Помери језичак удесно"
 
-#: src/kgx-application.c:480
+#: src/help-overlay.ui:86
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Помери језичак улево"
+
+#: src/help-overlay.ui:92
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Пређи на језичак 1-9"
+
+#: src/help-overlay.ui:98
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Пређи на језичак 10"
+
+#: src/kgx-application.c:252
 msgid "Cannot use both --command and positional parameters"
 msgstr "Не можете користити --comand и положајне параметре у исто време"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:577
+#: src/kgx-application.c:349
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# Краљев Крст %s уз помоћ VTE-а %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:589 src/kgx-window.c:492
+#: src/kgx-application.c:361 src/kgx-window.c:466
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Зандер Браун"
 
-#: src/kgx-application.c:603 src/kgx-window.ui:44
-msgid "King’s Cross"
-msgstr "Краљевски Крст"
-
-#: src/kgx-application.c:607
+#: src/kgx-application.c:379
 msgid "GPL 3.0 or later"
 msgstr "ОЈЛ 3.0 или каснија"
 
-#: src/kgx-application.c:739
+#: src/kgx-application.c:444
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Изврши аргумент ове опције унутар терминала"
 
-#: src/kgx-application.c:740
+#: src/kgx-application.c:445
 msgid "COMMAND"
 msgstr "НАРЕДБА"
 
-#: src/kgx-application.c:748
+#: src/kgx-application.c:453
 msgid "Set the working directory"
 msgstr "Подеси радни директоријум"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:750
+#: src/kgx-application.c:455
 msgid "DIRNAME"
 msgstr "ДИРНАЗИВ"
 
-#: src/kgx-application.c:758
+#: src/kgx-application.c:463
 msgid "Wait until the child exits (TODO)"
 msgstr "Сачекај да дете изађе (УРАДИТИ)"
 
-#: src/kgx-application.c:767
+#: src/kgx-application.c:472
 msgid "Set the initial window title"
 msgstr "Постави почетни наслов прозора"
 
-#: src/kgx-application.c:768
+#: src/kgx-application.c:473
 msgid "TITLE"
 msgstr "НАСЛОВ"
 
-#: src/kgx-application.c:776
+#: src/kgx-application.c:481
 msgid "ADVANCED: Set the shell to launch"
 msgstr "НАПРЕДНО: Постави шкољку за покретање"
 
-#: src/kgx-application.c:777
+#: src/kgx-application.c:482
 msgid "SHELL"
 msgstr "ШКОЉКА"
 
-#: src/kgx-application.c:785
+#: src/kgx-application.c:490
 msgid "ADVANCED: Set the scrollback length"
 msgstr "НАПРЕДНО: Постави дужину премицања"
 
-#: src/kgx-application.c:786
+#: src/kgx-application.c:491
 msgid "LINES"
 msgstr "ЛИНИЈЕ"
 
-#: src/kgx-application.c:795
+#: src/kgx-application.c:500
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- НАРЕДБА [АРГУМЕНТ...]]"
 
-#: src/kgx-close-dialog.c:50
+#: src/kgx-close-dialog.c:94
 msgid "Close Window?"
 msgstr "Да затворим прозор?"
 
-#: src/kgx-close-dialog.c:51
+#: src/kgx-close-dialog.c:96
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"Неке наредбе су и даље покренуте, затварање овог прозора ће их окончати и то "
-"може довести до неочекиваних исхода"
+msgstr[0] ""
+"Неке наредбе се и даље извршавају, затварање овог прозора ће их окончати и "
+"то може довести до неочекиваних исхода"
+msgstr[1] ""
+"Неке наредбе се и даље извршавају, затварање овог прозора ће их окончати и "
+"то може довести до неочекиваних исхода"
+msgstr[2] ""
+"Неке наредбе се и даље извршавају, затварање овог прозора ће их окончати и "
+"то може довести до неочекиваних исхода"
+msgstr[3] ""
+"Наредба се идаље извршава, затварање овог прозора ће је окончати и то може "
+"довести до неочекиваних исхода"
 
-#: src/kgx-close-dialog.c:56
+#: src/kgx-close-dialog.c:103
 msgid "Close Tab?"
 msgstr "Да затворим језичак?"
 
-#: src/kgx-close-dialog.c:57
+#: src/kgx-close-dialog.c:105
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"Неке наредбе су и даље покренуте, затварање овог језичка ће их окончати и то "
-"може довести до неочекиваних исхода"
+msgstr[0] ""
+"Неке наредбе се и даље извршавају, затварање овог прозора ће их окончати и "
+"то може довести до неочекиваних исхода"
+msgstr[1] ""
+"Неке наредбе се и даље извршавају, затварање овог прозора ће их окончати и "
+"то може довести до неочекиваних исхода"
+msgstr[2] ""
+"Неке наредбе се и даље извршавају, затварање овог прозора ће их окончати и "
+"то може довести до неочекиваних исхода"
+msgstr[3] ""
+"Наредба се идаље извршава, затварање овог прозора ће је окончати и то може "
+"довести до неочекиваних исхода"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:814
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:232
+msgid "Process list"
+msgstr "Списак процеса"
+
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "_Откажи"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:248
 msgid "C_lose"
 msgstr "_Затвори"
 
-#: src/kgx-pages.ui:42
+#: src/kgx-font-picker.ui:12
+msgid "Terminal Font"
+msgstr "Фонт терминала"
+
+#: src/kgx-font-picker.ui:37
+msgid "_Select"
+msgstr "_Изабери"
+
+#: src/kgx-font-picker.ui:53 src/kgx-font-picker.ui:56
+msgid "Font Name"
+msgstr "Име фонта"
+
+#: src/kgx-font-picker.ui:142
+msgid "Font Family"
+msgstr "Породица фонта"
+
+#: src/kgx-font-picker.ui:167
+msgid "Font Preview"
+msgstr "Преглед фонта"
+
+#: src/kgx-font-picker.ui:188
+msgid "Font Size"
+msgstr "Величина фонта"
+
+#. Translators: %i is, from the users perspective, a random number.
+#. * this string will only be seen when the running program has
+#. * failed to set a title, and exists purely to avoid blank tabs
+#.
+#: src/kgx-pages.c:473
+#, c-format
+msgid "Tab %i"
+msgstr "Језичак %i"
+
+#: src/kgx-pages.ui:90
 msgid "_Detach Tab"
 msgstr "_Откачи језичак"
 
-#: src/kgx-pages.ui:48
+#: src/kgx-pages.ui:96
 msgid "_Close"
 msgstr "_Затвори"
 
+#: src/kgx-preferences-window.c:122
+msgid "No Font Set"
+msgstr "Фонт није постављен"
+
+#: src/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "Опште"
+
+#: src/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "Фонт"
+
+#: src/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "Користи _системски фонт"
+
+#: src/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "Произвољни _фонт"
+
+#: src/kgx-preferences-window.ui:59
+msgid "Terminal Bell"
+msgstr "Звонце терминала"
+
+#: src/kgx-preferences-window.ui:62
+msgid "Play _Sound"
+msgstr "Пуштај _звук"
+
+#: src/kgx-preferences-window.ui:68
+msgid "_Visual Effects"
+msgstr "_Визуелна упозорења"
+
+#: src/kgx-process.c:198
+#, c-format
+msgid "Process %d"
+msgstr "Процес %d"
+
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:168
+#: src/kgx-simple-tab.c:180
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Само за читање</b> — Наредба је изашла са шифром %i"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:177
+#: src/kgx-simple-tab.c:189
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Само за читање</b> — Наредба је изашла"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:210
+#: src/kgx-simple-tab.c:222
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Нисам успео да покренем</b> — %s"
 
-#: src/kgx-tab.c:1087
+#: src/kgx-tab.c:1112
 msgid "Command completed"
 msgstr "Наредба је обављена"
 
-#: src/kgx-tab-button.ui:5
-msgid "View Open Tabs"
-msgstr "Прегледај отворене језичке"
+#: src/kgx-tab.ui:25
+msgid "Find text"
+msgstr "Пронађи текст"
 
-#: src/kgx-terminal.c:807
+#: src/kgx-tab.ui:36
+msgid "Previous Match"
+msgstr "Претходно поклапање"
+
+#: src/kgx-tab.ui:44
+msgid "Next Match"
+msgstr "Следеће поклапање"
+
+#: src/kgx-terminal.c:557
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+"Ctrl-click да се отвори:\n"
+"%s"
+
+#: src/kgx-terminal.c:883
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Убацујете наредбу која се извршава са админ правима"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:811
+#: src/kgx-terminal.c:887
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
 "%s"
 msgstr "Постарајте се да разумете шта наредба ради: %s"
 
-#: src/kgx-terminal.c:815 src/menus.ui:24
+#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "_Убаци"
 
+#: src/kgx-terminal.ui:7
+msgid "_Open Link"
+msgstr "_Отвори везу"
+
+#: src/kgx-terminal.ui:12
+msgid "Copy _Link"
+msgstr "Копирај _везу"
+
+#: src/kgx-terminal.ui:19
+msgid "_Copy"
+msgstr "_Копирај"
+
+#: src/kgx-terminal.ui:29
+msgid "_Select All"
+msgstr "Изабери _све"
+
+#: src/kgx-terminal.ui:36
+msgid "Show in _Files"
+msgstr "Прикажи у _Датотекама"
+
 #: src/kgx-theme-switcher.ui:16
-msgid "Use System Colors"
-msgstr "Користи системске боје"
+msgid "Follow System Style"
+msgstr "Користи стил система"
 
 #: src/kgx-theme-switcher.ui:44
-msgid "Use Light Colors"
-msgstr "Користи светле боје"
+msgid "Light Style"
+msgstr "Светли стил"
 
 #: src/kgx-theme-switcher.ui:71
-msgid "Use Dark Colors"
-msgstr "Користи тамне боје"
+msgid "Dark Style"
+msgstr "Тамни стил"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:503
+#: src/kgx-window.c:478
 msgid "translator-credits"
 msgstr ""
 "Марко М. Костић <marko.m.kostic@gmail.com>\n"
@@ -298,52 +460,52 @@ msgid "_New Window"
 msgstr "_Нови прозор"
 
 #: src/kgx-window.ui:23
+msgid "_Show All Tabs"
+msgstr "_Прикажи све језичке"
+
+#: src/kgx-window.ui:30
+msgid "_Preferences"
+msgstr "_Поставке"
+
+#: src/kgx-window.ui:34
 msgid "_Keyboard Shortcuts"
 msgstr "Пречице на та_статури"
 
-#: src/kgx-window.ui:27
+#: src/kgx-window.ui:38
 msgid "_About Console"
 msgstr "О Кон_золи"
 
-#: src/kgx-window.ui:52
+#: src/kgx-window.ui:79
 msgid "Find in Terminal"
 msgstr "Нађи у терминалу"
 
-#: src/kgx-window.ui:60
-msgid "Menu"
-msgstr "Мени"
+#: src/kgx-window.ui:86
+msgid "Main Menu"
+msgstr "Главни мени"
 
-#: src/kgx-window.ui:78
+#: src/kgx-window.ui:104
 msgid "Shrink Text"
 msgstr "Скупи текст"
 
-#: src/kgx-window.ui:89
+#: src/kgx-window.ui:115
 msgid "Reset Size"
 msgstr "Поврати величину"
 
-#: src/kgx-window.ui:106
+#: src/kgx-window.ui:139
 msgid "Enlarge Text"
 msgstr "Повећај текст"
 
-#: src/menus.ui:7
-msgid "_Open Link"
-msgstr "_Отвори везу"
+#~ msgid "King’s Cross"
+#~ msgstr "Краљевски Крст"
 
-#: src/menus.ui:12
-msgid "Copy _Link"
-msgstr "Копирај _везу"
+#~ msgid "View Open Tabs"
+#~ msgstr "Прегледај отворене језичке"
 
-#: src/menus.ui:19
-msgid "_Copy"
-msgstr "_Копирај"
+#~ msgid "Use Light Colors"
+#~ msgstr "Користи светле боје"
 
-#: src/menus.ui:29
-msgid "_Select All"
-msgstr "Изабери _све"
-
-#: src/menus.ui:36
-msgid "Show in _Files"
-msgstr "Прикажи у _Датотекама"
+#~ msgid "Use Dark Colors"
+#~ msgstr "Користи тамне боје"
 
 #~ msgid "Zander Brown"
 #~ msgstr "Zander Brown"
@@ -362,9 +524,6 @@ msgstr "Прикажи у _Датотекама"
 
 #~ msgid "Start a terminal session for this location"
 #~ msgstr "Покрени сесију терминала за ово место"
-
-#~ msgid "Terminal"
-#~ msgstr "Терминал"
 
 #~| msgid "Terminal Emulator"
 #~ msgid "KGX Terminal Emulator"
