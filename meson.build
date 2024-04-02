@@ -71,16 +71,27 @@ config_h = vcs_tag( input: config_h_in,
                   command: ['git', 'rev-parse', '--short', 'HEAD'],
                  fallback: 'Devel')
 
-gtk_ver = 'GDK_VERSION_4_12'
-glib_ver = 'GLIB_VERSION_2_76'
+# Gtk Requirement
+gtk_min_ver = '4.12'
+gtk_sym_ver = 'GDK_VERSION_@0@'.format(gtk_min_ver.replace('.', '_'))
+
+# GLib Requirement
+glib_min_ver = '2.78'
+glib_sym_ver = 'GLIB_VERSION_@0@'.format(glib_min_ver.replace('.', '_'))
+
+# Adwaita Requirement
+adw_min_ver = '1.5'
+adw_sym_ver = 'ADW_VERSION_@0@'.format(adw_min_ver.replace('.', '_'))
 
 kgx_cargs = [
   '-DG_LOG_DOMAIN="@0@"'.format(log_domain),
   '-DG_LOG_USE_STRUCTURED',
-  '-DGLIB_VERSION_MIN_REQUIRED=@0@'.format(glib_ver),
-  '-DGLIB_VERSION_MAX_ALLOWED=@0@'.format(glib_ver),
-  '-DGDK_VERSION_MIN_REQUIRED=@0@'.format(gtk_ver),
-  '-DGDK_VERSION_MAX_ALLOWED=@0@'.format(gtk_ver)
+  '-DGLIB_VERSION_MIN_REQUIRED=@0@'.format(glib_sym_ver),
+  '-DGLIB_VERSION_MAX_ALLOWED=@0@'.format(glib_sym_ver),
+  '-DGDK_VERSION_MIN_REQUIRED=@0@'.format(gtk_sym_ver),
+  '-DGDK_VERSION_MAX_ALLOWED=@0@'.format(gtk_sym_ver),
+  '-DADW_VERSION_MIN_REQUIRED=@0@'.format(adw_sym_ver),
+  '-DADW_VERSION_MAX_ALLOWED=@0@'.format(adw_sym_ver),
 ]
 
 cc = meson.get_compiler('c')
@@ -127,11 +138,11 @@ endif
 
 add_project_arguments(global_cargs, language: 'c')
 
-gio_dep = dependency('gio-2.0', version: '>= 2.76')
-gio_unix_dep = dependency('gio-unix-2.0', version: '>= 2.76')
-adw_dep = dependency('libadwaita-1', version: '>= 1.5.alpha')
+gio_dep = dependency('gio-2.0', version: '>= @0@'.format(glib_min_ver))
+gio_unix_dep = dependency('gio-unix-2.0', version: '>= @0@'.format(glib_min_ver))
+adw_dep = dependency('libadwaita-1', version: '>= @0@'.format(adw_min_ver))
 vte_dep = dependency('vte-2.91-gtk4', version: '>= 0.75.1')
-gtk_dep = dependency('gtk4', version: '>= 4.12.2')
+gtk_dep = dependency('gtk4', version: '>= @0@'.format(gtk_min_ver))
 gtop_dep = dependency('libgtop-2.0')
 pcre_dep = dependency('libpcre2-8', version: '>= 10.32')
 schemas_dep = dependency('gsettings-desktop-schemas')
