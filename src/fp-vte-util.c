@@ -14,6 +14,8 @@
 #undef G_LOG_DOMAIN
 #define G_LOG_DOMAIN "fp-vte-util"
 
+#include <termios.h>
+#include <unistd.h>
 
 #include "fp-vte-util.h"
 
@@ -67,6 +69,53 @@ fp_vte_pty_spawn_cb (VtePty       *pty,
 }
 
 
+typedef struct {
+  gboolean disable_sfc;
+} ChildData;
+
+
+static void
+child_data_free (gpointer data)
+{
+  ChildData *self = data;
+
+  g_free (self);
+}
+
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (ChildData, child_data_free)
+
+
+static inline void
+disable_sfc (void)
+{
+  struct termios attrs;
+
+  if (G_UNLIKELY (tcgetattr (STDOUT_FILENO, &attrs) != 0)) {
+    g_debug ("Unable to fetch attributes");
+    return;
+  }
+
+  attrs.c_iflag &= ~(IXON | IXOFF);
+
+  if (G_UNLIKELY (tcsetattr (STDOUT_FILENO, TCSANOW, &attrs) != 0)) {
+    g_debug ("Unable to store attributes");
+    return;
+  }
+}
+
+
+static void
+child_setup (gpointer user_data)
+{
+  ChildData *data = user_data;
+
+  if (G_LIKELY (data->disable_sfc)) {
+    disable_sfc ();
+  }
+}
+
+
 /**
  * fp_vte_pty_spawn_async:
  * @pty: a #VtePty
@@ -96,6 +145,7 @@ fp_vte_pty_spawn_async (VtePty              *pty,
                         GAsyncReadyCallback  callback,
                         gpointer             user_data)
 {
+  g_autoptr (ChildData) data = g_new0 (ChildData, 1);
   g_autoptr (GTask) task = NULL;
   g_auto (GStrv) copy_env = NULL;
 
@@ -116,6 +166,8 @@ fp_vte_pty_spawn_async (VtePty              *pty,
     env = (const char * const *) copy_env;
   }
 
+  data->disable_sfc = TRUE;
+
   task = g_task_new (pty, cancellable, callback, user_data);
   g_task_set_source_tag (task, fp_vte_pty_spawn_async);
 
@@ -124,7 +176,9 @@ fp_vte_pty_spawn_async (VtePty              *pty,
                        (char **) argv,
                        (char **) env,
                        G_SPAWN_SEARCH_PATH | G_SPAWN_SEARCH_PATH_FROM_ENVP,
-                       NULL, NULL, NULL,
+                       child_setup,
+                       g_steal_pointer (&data),
+                       child_data_free,
                        -1,
                        cancellable,
                        (GAsyncReadyCallback) fp_vte_pty_spawn_cb,
