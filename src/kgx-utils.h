@@ -24,6 +24,51 @@ G_BEGIN_DECLS
 
 
 /**
+ * KGX_DEFINE_DATA:
+ * @TypeName: the struct name
+ * @type_name: the method prefix
+ *
+ * Defines a autocleanup'd struct, methods to allocate and free it, and some
+ * utilities for using it with a GTask.
+ *
+ * Requires a struct defined as `struct _TypeName` and a `type_name_cleanup`
+ * function that clears the content of the struct (but not free the struct
+ * itself).
+ */
+#define KGX_DEFINE_DATA(TypeName, type_name)                                 \
+  typedef struct _##TypeName TypeName;                                       \
+  static inline void type_name##_cleanup (TypeName *self);                   \
+  static inline void                                                         \
+  type_name##_free (gpointer data)                                           \
+  {                                                                          \
+    type_name##_cleanup (data);                                              \
+    g_free (data);                                                           \
+  }                                                                          \
+  static inline TypeName *type_name##_alloc (void) G_GNUC_MALLOC;            \
+  static inline TypeName *                                                   \
+  type_name##_alloc (void)                                                   \
+  {                                                                          \
+    return g_new0 (TypeName, 1);                                             \
+  }                                                                          \
+  static inline void                                                         \
+  kgx_task_set_##type_name (GTask *restrict task, TypeName *restrict data)   \
+  {                                                                          \
+    g_task_set_task_data (task, data, type_name##_free);                     \
+  }                                                                          \
+  static inline TypeName *                                                   \
+  kgx_task_get_##type_name (GTask *task)                                     \
+  {                                                                          \
+    return g_task_get_task_data (task);                                      \
+  }                                                                          \
+  static inline void                                                         \
+  clear_##type_name (TypeName **ptr)                                         \
+  {                                                                          \
+    g_clear_pointer (ptr, type_name##_free);                                 \
+  }                                                                          \
+  G_DEFINE_AUTOPTR_CLEANUP_FUNC (TypeName, type_name##_free)
+
+
+/**
  * kgx_str_constrained_append:
  * @buffer: a #GString to append to
  * @source: the text to read from
