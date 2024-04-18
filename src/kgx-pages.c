@@ -24,6 +24,8 @@
 #include "kgx-marshals.h"
 #include "kgx-settings.h"
 #include "kgx-tab.h"
+#include "kgx-terminal.h"
+#include "kgx-train.h"
 #include "kgx-utils.h"
 
 #include "kgx-pages.h"

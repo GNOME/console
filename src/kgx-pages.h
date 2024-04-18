@@ -21,6 +21,7 @@
 #include <adwaita.h>
 
 #include "kgx-tab.h"
+#include "kgx-train.h"
 
 G_BEGIN_DECLS
 

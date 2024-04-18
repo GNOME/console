@@ -20,29 +20,10 @@
 
 #include <adwaita.h>
 
-#include "kgx-terminal.h"
 #include "kgx-process.h"
-#include "kgx-enums.h"
+#include "kgx-train.h"
 
 G_BEGIN_DECLS
-
-
-/**
- * KgxStatus:
- * @KGX_NONE: It's a regular #KgxTab
- * @KGX_REMOTE: The #KgxTab is connected to a "remote" session
- * @KGX_PRIVILEGED: The #KgxTab is running as someone other than the current
- *                  user
- *
- * Indicates the status of the session the #KgxTab represents
- *
- * Stability: Private
- */
-typedef enum /*< flags,prefix=KGX >*/ {
-  KGX_NONE = 0,              /*< nick=none >*/
-  KGX_REMOTE = (1 << 0),     /*< nick=remote >*/
-  KGX_PRIVILEGED = (1 << 1), /*< nick=privileged >*/
-} KgxStatus;
 
 
 #ifndef __GTK_DOC_IGNORE__

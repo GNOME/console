@@ -31,6 +31,8 @@ kgx_sources = [
   'kgx-terminal.h',
   'kgx-theme-switcher.c',
   'kgx-theme-switcher.h',
+  'kgx-train.c',
+  'kgx-train.h',
   'kgx-utils.c',
   'kgx-utils.h',
   'kgx-watcher.c',
@@ -87,8 +89,8 @@ kgx_enums = gnome.mkenums_simple('kgx-enums',
                                       'kgx-close-dialog.h',
                                       'kgx-paste-dialog.h',
                                       'kgx-settings.h',
-                                      'kgx-tab.h',
                                       'kgx-terminal.h',
+                                      'kgx-train.h',
                                       'kgx-utils.h',
                                     ])
 

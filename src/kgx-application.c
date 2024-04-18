@@ -37,6 +37,7 @@
 #include "kgx-settings.h"
 #include "kgx-simple-tab.h"
 #include "kgx-terminal.h"
+#include "kgx-train.h"
 #include "kgx-utils.h"
 #include "kgx-watcher.h"
 #include "kgx-window.h"
