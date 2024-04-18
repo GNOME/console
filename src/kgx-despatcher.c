@@ -20,8 +20,10 @@
 
 #include "xdg-fm1.h"
 
-#include "kgx-despatcher.h"
+#include "kgx-utils.h"
 #include "kgx-marshals.h"
+
+#include "kgx-despatcher.h"
 
 
 struct _KgxDespatcher {
@@ -59,31 +61,23 @@ kgx_despatcher_init (KgxDespatcher *self)
 }
 
 
-typedef struct {
+struct _LaunchData {
   KgxDespatcher *self;
   GtkWindow     *window;
   char          *uri;
-} LaunchData;
+};
 
 
-static void
-launch_data_free (gpointer data)
+KGX_DEFINE_DATA (LaunchData, launch_data)
+
+
+static inline void
+launch_data_cleanup (LaunchData *self)
 {
-  LaunchData *self = data;
-
-  if (G_UNLIKELY (!self)) {
-    return;
-  }
-
   g_clear_object (&self->self);
   g_clear_object (&self->window);
   g_clear_pointer (&self->uri, g_free);
-
-  g_free (self);
 }
-
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (LaunchData, launch_data_free)
 
 
 static void
@@ -109,7 +103,7 @@ did_mount (GObject *source, GAsyncResult *res, gpointer data)
 {
   g_autoptr (GError) error = NULL;
   g_autoptr (GTask) task = data;
-  LaunchData *state = g_task_get_task_data (task);
+  LaunchData *state = kgx_task_get_launch_data (task);
   GCancellable *cancellable = g_task_get_cancellable (task);
 
   g_file_mount_enclosing_volume_finish (G_FILE (source), res, &error);
@@ -140,7 +134,7 @@ did_launch (GObject *source, GAsyncResult *res, gpointer data)
 {
   g_autoptr (GError) error = NULL;
   g_autoptr (GTask) task = data;
-  LaunchData *state = g_task_get_task_data (task);
+  LaunchData *state = kgx_task_get_launch_data (task);
   GCancellable *cancellable = g_task_get_cancellable (task);
 
   g_app_info_launch_default_for_uri_finish (res, &error);
@@ -181,7 +175,7 @@ kgx_despatcher_open (KgxDespatcher      *self,
                      GAsyncReadyCallback  callback,
                      gpointer             user_data)
 {
-  g_autoptr (LaunchData) state = g_new0 (LaunchData, 1);
+  g_autoptr (LaunchData) state = launch_data_alloc ();
   g_autoptr (GdkAppLaunchContext) context = NULL;
   g_autoptr (GTask) task = NULL;
   GdkDisplay *display;
@@ -197,7 +191,7 @@ kgx_despatcher_open (KgxDespatcher      *self,
   g_set_str (&state->uri, uri);
 
   task = g_task_new (self, cancellable, callback, user_data);
-  g_task_set_task_data (task, g_steal_pointer (&state), launch_data_free);
+  kgx_task_set_launch_data (task, g_steal_pointer (&state));
   g_task_set_source_tag (task, kgx_despatcher_open);
 
   display = gtk_widget_get_display (GTK_WIDGET (window));
@@ -223,36 +217,28 @@ kgx_despatcher_open_finish (KgxDespatcher  *self,
 }
 
 
-typedef struct {
+struct _ShowData {
   KgxDespatcher *self;
   GStrv          uris;
-} ShowData;
+};
 
 
-static void
-show_data_free (gpointer data)
+KGX_DEFINE_DATA (ShowData, show_data)
+
+
+static inline void
+show_data_cleanup (ShowData *self)
 {
-  ShowData *self = data;
-
-  if (G_UNLIKELY (!self)) {
-    return;
-  }
-
   g_clear_object (&self->self);
   g_clear_pointer (&self->uris, g_strfreev);
-
-  g_free (self);
 }
-
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (ShowData, show_data_free)
 
 
 static inline ShowData *
 show_data_new (KgxDespatcher *despatcher,
                const char    *uri)
 {
-  g_autoptr (ShowData) self = g_new0 (ShowData, 1);
+  g_autoptr (ShowData) self = show_data_alloc ();
   g_autoptr (GStrvBuilder) builder = g_strv_builder_new ();
 
   g_set_object (&self->self, despatcher);
@@ -293,7 +279,7 @@ static void
 make_call (gpointer data)
 {
   g_autoptr (GTask) task = data;
-  ShowData *state = g_task_get_task_data (task);
+  ShowData *state = kgx_task_get_show_data (task);
   GCancellable *cancellable = g_task_get_cancellable (task);
 
   if (G_UNLIKELY (g_task_return_error_if_cancelled (task))) {
@@ -324,7 +310,7 @@ got_proxy (GObject *source, GAsyncResult *res, gpointer data)
   g_autoptr (GError) error = NULL;
   g_autoptr (XdgFileManager1) fm = NULL;
   g_autoptr (GTask) task = data;
-  ShowData *state = g_task_get_task_data (task);
+  ShowData *state = kgx_task_get_show_data (task);
 
   fm = xdg_file_manager1_proxy_new_finish (res, &error);
 
@@ -379,7 +365,7 @@ show_task_new (KgxDespatcher       *self,
   state = show_data_new (self, uri);
 
   task = g_task_new (self, cancellable, callback, user_data);
-  g_task_set_task_data (task, g_steal_pointer (&state), show_data_free);
+  kgx_task_set_show_data (task, g_steal_pointer (&state));
 
   return g_steal_pointer (&task);
 }
