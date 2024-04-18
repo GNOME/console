@@ -21,11 +21,12 @@
 #include <glib/gi18n.h>
 
 #include "kgx-close-dialog.h"
-#include "kgx-pages.h"
-#include "kgx-tab.h"
-#include "kgx-settings.h"
 #include "kgx-marshals.h"
+#include "kgx-settings.h"
+#include "kgx-tab.h"
+#include "kgx-utils.h"
 
+#include "kgx-pages.h"
 
 /**
  * KgxPages:
@@ -354,29 +355,21 @@ create_window (AdwTabView *view,
 }
 
 
-typedef struct {
+struct _CloseData {
   AdwTabView *view;
   AdwTabPage *page;
-} CloseData;
+};
 
 
-static void
-close_data_free (gpointer data)
+KGX_DEFINE_DATA (CloseData, close_data)
+
+
+static inline void
+close_data_cleanup (CloseData *self)
 {
-  CloseData *self = data;
-
-  if (!self) {
-    return;
-  }
-
   g_clear_object (&self->view);
   g_clear_weak_pointer (&self->page);
-
-  g_free (self);
 }
-
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (CloseData, close_data_free)
 
 
 static void
@@ -414,7 +407,7 @@ close_page (AdwTabView *view,
             AdwTabPage *page,
             KgxPages   *self)
 {
-  g_autoptr (CloseData) data = g_new0 (CloseData, 1);
+  g_autoptr (CloseData) data = close_data_alloc ();
   g_autoptr (GPtrArray) children = NULL;
   g_autoptr (GCancellable) cancellable = NULL;
   KgxCloseDialog *dlg = NULL;
