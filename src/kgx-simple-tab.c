@@ -26,10 +26,12 @@
 
 #include <glib/gi18n.h>
 
-#include "kgx-terminal.h"
-#include "kgx-proxy-info.h"
-#include "kgx-simple-tab.h"
 #include "fp-vte-util.h"
+
+#include "kgx-proxy-info.h"
+#include "kgx-utils.h"
+
+#include "kgx-simple-tab.h"
 
 
 struct _KgxSimpleTab {
@@ -116,44 +118,34 @@ kgx_simple_tab_get_property (GObject    *object,
 }
 
 
-typedef struct {
+struct _StartData {
   KgxSimpleTab *self;
-  GTask *task;
-} StartData;
+};
+
+
+KGX_DEFINE_DATA (StartData, start_data)
 
 
 static void
-clear_start_data (gpointer data)
+start_data_cleanup (StartData *self)
 {
-  StartData *self = data;
-
   g_clear_weak_pointer (&self->self);
-  g_clear_object (&self->task);
-
-  g_free (self);
 }
 
 
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (StartData, clear_start_data)
-
-
-typedef struct {
+struct _WaitData {
   KgxSimpleTab *self;
-} WaitData;
+};
+
+
+KGX_DEFINE_DATA (WaitData, wait_data)
 
 
 static void
-clear_wait_data (gpointer data)
+wait_data_cleanup (WaitData *self)
 {
-  WaitData *self = data;
-
   g_clear_weak_pointer (&self->self);
-
-  g_free (self);
 }
-
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (WaitData, clear_wait_data)
 
 
 static void
@@ -195,12 +187,13 @@ wait_cb (GPid     pid,
 static void
 spawned (VtePty       *pty,
          GAsyncResult *res,
-         gpointer      udata)
+         gpointer      user_data)
 
 {
-  g_autoptr (StartData) start_data = udata;
-  g_autoptr (WaitData) wait_data = NULL;
+  g_autoptr (GTask) task = user_data;
+  g_autoptr (WaitData) wait_data = wait_data_alloc ();
   g_autoptr (GError) error = NULL;
+  StartData *start_data = kgx_task_get_start_data (task);
   GPid pid;
 
   g_return_if_fail (VTE_IS_PTY (pty));
@@ -227,17 +220,16 @@ spawned (VtePty       *pty,
                   message,
                   FALSE);
 
-    g_task_return_error (start_data->task, g_steal_pointer (&error));
+    g_task_return_error (g_steal_pointer (&task), g_steal_pointer (&error));
 
     return;
   }
 
-  wait_data = g_new0 (WaitData, 1);
   g_set_weak_pointer (&wait_data->self, start_data->self);
 
   g_child_watch_add (pid, wait_cb, g_steal_pointer (&wait_data));
 
-  g_task_return_int (G_TASK (start_data->task), pid);
+  g_task_return_int (g_steal_pointer (&task), pid);
 }
 
 
@@ -246,12 +238,12 @@ kgx_simple_tab_start (KgxTab              *page,
                       GAsyncReadyCallback  callback,
                       gpointer             callback_data)
 {
-  KgxSimpleTab *self;
   g_autoptr (VtePty) pty = NULL;
   g_autoptr (GError) error = NULL;
   g_auto (GStrv) env = NULL;
-  g_autoptr (StartData) data = NULL;
+  g_autoptr (StartData) data = start_data_alloc ();
   g_autoptr (GTask) task = NULL;
+  KgxSimpleTab *self;
 
   g_return_if_fail (KGX_IS_SIMPLE_TAB (page));
 
@@ -263,8 +255,11 @@ kgx_simple_tab_start (KgxTab              *page,
     self->spawn_cancellable = g_cancellable_new ();
   }
 
+  g_set_weak_pointer (&data->self, self);
+
   task = g_task_new (self, self->spawn_cancellable, callback, callback_data);
   g_task_set_source_tag (task, kgx_simple_tab_start);
+  kgx_task_set_start_data (task, g_steal_pointer (&data));
 
   pty = vte_pty_new_sync (VTE_PTY_DEFAULT, self->spawn_cancellable, &error);
   if (error) {
@@ -280,10 +275,6 @@ kgx_simple_tab_start (KgxTab              *page,
 
   vte_terminal_set_pty (VTE_TERMINAL (self->terminal), pty);
 
-  data = g_new0 (StartData, 1);
-  g_set_weak_pointer (&data->self, self);
-  g_set_object (&data->task, task);
-
   kgx_proxy_info_apply_to_environ (kgx_proxy_info_get_default (), &env);
 
   fp_vte_pty_spawn_async (pty,
@@ -293,7 +284,7 @@ kgx_simple_tab_start (KgxTab              *page,
                           -1,
                           self->spawn_cancellable,
                           (GAsyncReadyCallback) spawned,
-                          g_steal_pointer (&data));
+                          g_steal_pointer (&task));
 }
 
 
