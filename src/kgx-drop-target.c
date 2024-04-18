@@ -20,8 +20,10 @@
 
 #include <gtk/gtk.h>
 
-#include "kgx-drop-target.h"
 #include "kgx-marshals.h"
+#include "kgx-utils.h"
+
+#include "kgx-drop-target.h"
 
 #define PORTAL "application/vnd.portal.filetransfer"
 #define PORTAL_OLD "application/vnd.portal.files"
@@ -114,31 +116,23 @@ kgx_drop_target_class_init (KgxDropTargetClass *klass)
 }
 
 
-typedef struct {
+struct _ReadUrisData {
   KgxDropTarget *self;
-  GdkDrop       *drop;
-  GStrvBuilder  *builder;
-} ReadUrisData;
+  GdkDrop *drop;
+  GStrvBuilder *builder;
+};
 
 
-static void
-read_uris_data_free (gpointer data)
+KGX_DEFINE_DATA (ReadUrisData, read_uris_data)
+
+
+static inline void
+read_uris_data_cleanup (ReadUrisData *self)
 {
-  ReadUrisData *self = data;
-
-  if (!self) {
-    return;
-  }
-
   g_clear_object (&self->self);
   g_clear_object (&self->drop);
   g_clear_pointer (&self->builder, g_strv_builder_unref);
-
-  g_free (self);
 }
-
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (ReadUrisData, read_uris_data_free)
 
 
 static void
@@ -238,7 +232,7 @@ got_uris (GObject      *source,
   g_data_input_stream_set_newline_type (reader,
                                         G_DATA_STREAM_NEWLINE_TYPE_CR_LF);
 
-  state = g_new0 (ReadUrisData, 1);
+  state = read_uris_data_alloc ();
   g_set_object (&state->self, self);
   g_set_object (&state->drop, drop);
   state->builder = g_strv_builder_new ();
