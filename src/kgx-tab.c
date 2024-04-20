@@ -77,11 +77,6 @@ struct _KgxTabPrivate {
   GtkWidget            *search_bar;
   char                 *last_search;
 
-  /* Remote/root states */
-  GHashTable           *root;
-  GHashTable           *remote;
-  GHashTable           *children;
-
   char                 *notification_id;
 };
 
@@ -160,10 +155,6 @@ kgx_tab_dispose (GObject *object)
   g_clear_object (&priv->path);
 
   g_clear_handle_id (&priv->ringing_timeout, g_source_remove);
-
-  g_clear_pointer (&priv->root, g_hash_table_unref);
-  g_clear_pointer (&priv->remote, g_hash_table_unref);
-  g_clear_pointer (&priv->children, g_hash_table_unref);
 
   g_clear_pointer (&priv->last_search, g_free);
 
@@ -914,13 +905,6 @@ kgx_tab_init (KgxTab *self)
 
   priv->id = last_id;
 
-  priv->root = g_hash_table_new (g_direct_hash, g_direct_equal);
-  priv->remote = g_hash_table_new (g_direct_hash, g_direct_equal);
-  priv->children = g_hash_table_new_full (g_direct_hash,
-                                          g_direct_equal,
-                                          NULL,
-                                          (GDestroyNotify) kgx_process_unref);
-
   priv->cancellable = g_cancellable_new ();
 
   priv->working = 0;
@@ -965,16 +949,16 @@ kgx_tab_start (KgxTab              *self,
 }
 
 
-KgxTrain *
+void
 kgx_tab_start_finish (KgxTab        *self,
                       GAsyncResult  *res,
                       GError       **error)
 {
+  g_autoptr (KgxTrain) train = NULL;
   KgxTabPrivate *priv;
-  KgxTrain *train;
 
-  g_return_val_if_fail (KGX_IS_TAB (self), NULL);
-  g_return_val_if_fail (KGX_TAB_GET_CLASS (self)->start, NULL);
+  g_return_if_fail (KGX_IS_TAB (self));
+  g_return_if_fail (KGX_TAB_GET_CLASS (self)->start);
 
   priv = kgx_tab_get_instance_private (self);
 
@@ -988,8 +972,6 @@ kgx_tab_start_finish (KgxTab        *self,
   if (g_set_object (&priv->train, train)) {
     g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_TRAIN]);
   }
-
-  return train;
 }
 
 
@@ -1063,163 +1045,6 @@ kgx_tab_get_id (KgxTab *self)
 }
 
 
-static inline KgxStatus
-push_type (GHashTable      *table,
-           GPid             pid,
-           KgxProcess      *process,
-           KgxStatus        status)
-{
-  g_hash_table_insert (table,
-                       GINT_TO_POINTER (pid),
-                       process != NULL ? g_rc_box_acquire (process) : NULL);
-
-  g_debug ("tab: Now %i %X", g_hash_table_size (table), status);
-
-  return status;
-}
-
-
-/**
- * kgx_tab_push_child:
- * @self: the #KgxTab
- * @process: the #KgxProcess of the remote process
- *
- * Registers @pid as a child of @self
- */
-void
-kgx_tab_push_child (KgxTab     *self,
-                    KgxProcess *process)
-{
-  GPid pid = 0;
-  GStrv argv;
-  g_autofree char *program = NULL;
-  KgxStatus new_status = KGX_NONE;
-  KgxTabPrivate *priv;
-
-  g_return_if_fail (KGX_IS_TAB (self));
-
-  priv = kgx_tab_get_instance_private (self);
-
-  pid = kgx_process_get_pid (process);
-  argv = kgx_process_get_argv (process);
-
-  if (G_LIKELY (argv[0] != NULL)) {
-    program = g_path_get_basename (argv[0]);
-  }
-
-  if (G_UNLIKELY (g_strcmp0 (program, "ssh") == 0 ||
-                  g_strcmp0 (program, "telnet") == 0 ||
-                  g_strcmp0 (program, "mosh-client") == 0 ||
-                  g_strcmp0 (program, "mosh") == 0 ||
-                  g_strcmp0 (program, "et") == 0)) {
-    new_status |= push_type (priv->remote, pid, NULL, KGX_REMOTE);
-  }
-
-  if (G_UNLIKELY (g_strcmp0 (program, "waypipe") == 0)) {
-    for (int i = 1; argv[i]; i++) {
-      if (G_UNLIKELY (g_strcmp0 (argv[i], "ssh") == 0 ||
-                      g_strcmp0 (argv[i], "telnet") == 0)) {
-        new_status |= push_type (priv->remote, pid, NULL, KGX_REMOTE);
-        break;
-      }
-    }
-  }
-
-  if (G_UNLIKELY (kgx_process_get_is_root (process))) {
-    new_status |= push_type (priv->root, pid, NULL, KGX_PRIVILEGED);
-  }
-
-  push_type (priv->children, pid, process, KGX_NONE);
-
-  set_status (self, new_status);
-}
-
-
-inline static KgxStatus
-pop_type (GHashTable      *table,
-          GPid             pid,
-          KgxStatus        status)
-{
-  guint size = 0;
-
-  g_hash_table_remove (table, GINT_TO_POINTER (pid));
-
-  size = g_hash_table_size (table);
-
-  if (G_LIKELY (size <= 0)) {
-    g_debug ("tab: No longer %X", status);
-
-    return KGX_NONE;
-  } else {
-    g_debug ("tab: %i %X remaining", size, status);
-
-    return status;
-  }
-}
-
-
-/**
- * kgx_tab_pop_child:
- * @self: the #KgxTab
- * @process: the #KgxProcess of the child process
- *
- * Remove a child added with kgx_tab_push_child()
- */
-void
-kgx_tab_pop_child (KgxTab     *self,
-                   KgxProcess *process)
-{
-  GPid pid = 0;
-  KgxStatus new_status = KGX_NONE;
-  KgxTabPrivate *priv;
-
-  g_return_if_fail (KGX_IS_TAB (self));
-
-  priv = kgx_tab_get_instance_private (self);
-
-  pid = kgx_process_get_pid (process);
-
-  new_status |= pop_type (priv->remote, pid, KGX_REMOTE);
-  new_status |= pop_type (priv->root, pid, KGX_PRIVILEGED);
-  pop_type (priv->children, pid, KGX_NONE);
-
-  set_status (self, new_status);
-
-  if (!kgx_tab_is_active (self)) {
-    g_autoptr (GNotification) noti = NULL;
-    g_autofree char *body = NULL;
-    g_autofree char *process_title = NULL;
-    g_autofree char *process_subtitle = NULL;
-
-    noti = g_notification_new (_("Command completed"));
-
-    kgx_process_get_title (process, &process_title, &process_subtitle);
-    if (process_subtitle) {
-      body = g_strdup_printf ("%s, %s",
-                              process_title,
-                              process_subtitle);
-    } else {
-      body = g_steal_pointer (&process_title);
-    }
-    g_notification_set_body (noti, body);
-
-    g_notification_set_default_action_and_target (noti,
-                                                  "app.focus-page",
-                                                  "u",
-                                                  priv->id);
-
-    priv->notification_id = g_strdup_printf ("command-completed-%u", priv->id);
-    g_application_send_notification (G_APPLICATION (priv->application),
-                                     priv->notification_id,
-                                     noti);
-
-    if (!gtk_widget_get_mapped (GTK_WIDGET (self))) {
-      g_object_set (self, "needs-attention", TRUE, NULL);
-    }
-  }
-}
-
-
 gboolean
 kgx_tab_is_active (KgxTab *self)
 {
@@ -1247,22 +1072,12 @@ GPtrArray *
 kgx_tab_get_children (KgxTab *self)
 {
   KgxTabPrivate *priv;
-  GPtrArray *children;
-  GHashTableIter iter;
-  gpointer pid, process;
 
   g_return_val_if_fail (KGX_IS_TAB (self), NULL);
 
   priv = kgx_tab_get_instance_private (self);
 
-  children = g_ptr_array_new_full (3, (GDestroyNotify) kgx_process_unref);
-
-  g_hash_table_iter_init (&iter, priv->children);
-  while (g_hash_table_iter_next (&iter, &pid, &process)) {
-    g_ptr_array_add (children, g_rc_box_acquire (process));
-  }
-
-  return children;
+  return kgx_train_get_children (priv->train);
 }
 
 

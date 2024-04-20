@@ -64,7 +64,7 @@ guint       kgx_tab_get_id           (KgxTab               *self);
 void        kgx_tab_start            (KgxTab               *self,
                                       GAsyncReadyCallback   callback,
                                       gpointer              callback_data);
-KgxTrain   *kgx_tab_start_finish     (KgxTab               *self,
+void        kgx_tab_start_finish     (KgxTab               *self,
                                       GAsyncResult         *res,
                                       GError              **error);
 void        kgx_tab_died             (KgxTab               *self,
@@ -73,10 +73,6 @@ void        kgx_tab_died             (KgxTab               *self,
                                       gboolean              success);
 void        kgx_tab_bell              (KgxTab               *self);
 KgxPages   *kgx_tab_get_pages        (KgxTab               *self);
-void        kgx_tab_push_child       (KgxTab               *self,
-                                      KgxProcess           *process);
-void        kgx_tab_pop_child        (KgxTab               *self,
-                                      KgxProcess           *process);
 gboolean    kgx_tab_is_active        (KgxTab               *self);
 GPtrArray  *kgx_tab_get_children     (KgxTab               *self);
 void        kgx_tab_extra_drop       (KgxTab               *self,

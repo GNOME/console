@@ -226,6 +226,7 @@ got_train (GObject      *source,
   g_autoptr (GTask) task = user_data;
   g_autoptr (GError) error = NULL;
   g_autoptr (KgxTrain) train = NULL;
+  KgxDepot *self = g_task_get_source_object (task);
 
   train = KGX_TRAIN (g_async_initable_new_finish (G_ASYNC_INITABLE (source),
                                                   result,
@@ -234,6 +235,8 @@ got_train (GObject      *source,
     g_task_return_error (task, g_steal_pointer (&error));
     return;
   }
+
+  kgx_watcher_watch (self->watcher, train);
 
   g_task_return_pointer (task, g_steal_pointer (&train), g_object_unref);
 }

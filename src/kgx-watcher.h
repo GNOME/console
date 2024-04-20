@@ -20,8 +20,7 @@
 
 #include <glib-object.h>
 
-#include "kgx-process.h"
-#include "kgx-tab.h"
+#include "kgx-train.h"
 
 G_BEGIN_DECLS
 
@@ -29,9 +28,7 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (KgxWatcher, kgx_watcher, KGX, WATCHER, GObject)
 
-
-void                  kgx_watcher_add               (KgxWatcher     *self,
-                                                     GPid            pid,
-                                                     KgxTab         *page);
+void         kgx_watcher_watch             (KgxWatcher     *self,
+                                            KgxTrain       *train);
 
 G_END_DECLS

@@ -751,22 +751,15 @@ started (GObject      *src,
          GAsyncResult *res,
          gpointer      app)
 {
-  g_autoptr (KgxTrain) train = NULL;
   g_autoptr (GError) error = NULL;
-  KgxApplication *self = KGX_APPLICATION (app);
-  KgxTab *page = KGX_TAB (src);
 
-  train = kgx_tab_start_finish (page, res, &error);
+  kgx_tab_start_finish (KGX_TAB (src), res, &error);
 
   if (error) {
     g_warning ("Failed to start %s: %s",
                G_OBJECT_TYPE_NAME (src),
                error->message);
-
-    return;
   }
-
-  kgx_watcher_add (self->watcher, kgx_train_get_pid (train), page);
 }
 
 

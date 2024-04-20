@@ -18,6 +18,8 @@
 
 #include "kgx-config.h"
 
+#include <gio/gio.h>
+
 #include "kgx-utils.h"
 
 #include "kgx-watcher.h"
@@ -69,7 +71,7 @@ kgx_watcher_dispose (GObject *object)
 
 
 struct _ProcessWatch {
-  KgxTab /*weak*/ *page;
+  KgxTrain /*weak*/ *train;
   KgxProcess *process;
 };
 
@@ -81,7 +83,7 @@ static void
 process_watch_cleanup (ProcessWatch *watch)
 {
   g_clear_pointer (&watch->process, kgx_process_unref);
-  g_clear_weak_pointer (&watch->page);
+  g_clear_weak_pointer (&watch->train);
 }
 
 
@@ -102,7 +104,7 @@ handle_watch_iter (gpointer pid,
   if (G_UNLIKELY (watch != NULL)) {
 
     /* If the page died we stop caring about its processes */
-    if (G_UNLIKELY (watch->page == NULL)) {
+    if (G_UNLIKELY (watch->train == NULL)) {
       g_tree_remove (self->watching, GINT_TO_POINTER (parent));
       g_tree_remove (self->children, pid);
 
@@ -113,14 +115,14 @@ handle_watch_iter (gpointer pid,
       ProcessWatch *child_watch = process_watch_alloc ();
 
       child_watch->process = g_rc_box_acquire (process);
-      g_set_weak_pointer (&child_watch->page, watch->page);
+      g_set_weak_pointer (&child_watch->train, watch->train);
 
       g_debug ("watcher: Hello %i!", GPOINTER_TO_INT (pid));
 
       g_tree_insert (self->children, pid, child_watch);
     }
 
-    kgx_tab_push_child (watch->page, process);
+    kgx_train_push_child (watch->train, process);
   }
 
   return FALSE;
@@ -144,8 +146,8 @@ remove_dead (gpointer pid,
   if (!g_tree_lookup (data->plist, pid)) {
     g_debug ("watcher: %i marked as dead", GPOINTER_TO_INT (pid));
 
-    if (G_LIKELY (watch->page)) {
-      kgx_tab_pop_child (watch->page, watch->process);
+    if (G_LIKELY (watch->train)) {
+      kgx_train_pop_child (watch->train, watch->process);
     }
 
     g_ptr_array_add (data->dead, pid);
@@ -279,26 +281,27 @@ kgx_watcher_init (KgxWatcher *self)
 
 
 /**
- * kgx_watcher_add:
+ * kgx_watcher_watch:
  * @self: the #KgxWatcher
- * @pid: the shell process to watch
- * @page: the #KgxTab the shell is running in
+ * @train: the #KgxTrain to watch
  *
  * Registers a new shell process with the pid watcher
  */
 void
-kgx_watcher_add (KgxWatcher *self,
-                 GPid        pid,
-                 KgxTab     *page)
+kgx_watcher_watch (KgxWatcher *self,
+                   KgxTrain   *train)
 {
   ProcessWatch *watch;
+  GPid pid;
 
   g_return_if_fail (KGX_IS_WATCHER (self));
-  g_return_if_fail (KGX_IS_TAB (page));
+  g_return_if_fail (KGX_IS_TRAIN (train));
+
+  pid = kgx_train_get_pid (train);
 
   watch = process_watch_alloc ();
   watch->process = kgx_process_new (pid);
-  g_set_weak_pointer (&watch->page, page);
+  g_set_weak_pointer (&watch->train, train);
 
   g_debug ("watcher: tracking %i", pid);
 
