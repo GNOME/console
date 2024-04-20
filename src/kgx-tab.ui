@@ -2,6 +2,16 @@
 <interface>
   <requires lib="gtk" version="4.0" />
   <template class="KgxTab" parent="AdwBin">
+    <binding name="tab-title">
+      <lookup name="window-title">
+        <lookup name="terminal">KgxTab</lookup>
+      </lookup>
+    </binding>
+    <binding name="tab-path">
+      <lookup name="path">
+        <lookup name="terminal">KgxTab</lookup>
+      </lookup>
+    </binding>
     <property name="dropping" bind-source="drop_target" bind-property="active" />
     <property name="child">
       <object class="GtkBox">
@@ -104,9 +114,6 @@
   <object class="GSignalGroup" id="terminal_signals">
     <property name="target-type">KgxTerminal</property>
     <property name="target" bind-source="KgxTab" bind-property="terminal" bind-flags="sync-create" />
-  </object>
-  <object class="GBindingGroup" id="terminal_binds">
-    <property name="source" bind-source="KgxTab" bind-property="terminal" bind-flags="sync-create" />
   </object>
   <object class="KgxDropTarget" id="drop_target">
     <signal name="drop" handler="drop" swapped="no" />

@@ -55,7 +55,6 @@ struct _KgxTabPrivate {
 
   KgxTerminal          *terminal;
   GSignalGroup         *terminal_signals;
-  GBindingGroup        *terminal_binds;
 
   GCancellable         *cancellable;
 
@@ -419,8 +418,7 @@ kgx_tab_set_property (GObject      *object,
       g_set_object (&priv->terminal, g_value_get_object (value));
       break;
     case PROP_TAB_TITLE:
-      g_clear_pointer (&priv->title, g_free);
-      priv->title = g_value_dup_string (value);
+      g_set_str (&priv->title, g_value_get_string (value));
       break;
     case PROP_TAB_PATH:
       g_set_object (&priv->path, g_value_get_object (value));
@@ -748,7 +746,6 @@ kgx_tab_class_init (KgxTabClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, search_entry);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, search_bar);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, terminal_signals);
-  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, terminal_binds);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, drop_target);
 
   gtk_widget_class_bind_template_callback (widget_class, search_enabled);
@@ -854,13 +851,6 @@ kgx_tab_init (KgxTab *self)
   g_signal_group_connect (priv->terminal_signals,
                           "bell", G_CALLBACK (bell),
                           self),
-
-  g_binding_group_bind (priv->terminal_binds, "window-title",
-                        self, "tab-title",
-                        G_BINDING_SYNC_CREATE);
-  g_binding_group_bind (priv->terminal_binds, "path",
-                        self, "tab-path",
-                        G_BINDING_SYNC_CREATE);
 
   gtk_search_bar_connect_entry (GTK_SEARCH_BAR (priv->search_bar),
                                 GTK_EDITABLE (priv->search_entry));
