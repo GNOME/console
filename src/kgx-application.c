@@ -1,6 +1,6 @@
 /* kgx-application.c
  *
- * Copyright 2019 Zander Brown
+ * Copyright 2019-2024 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,21 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * SECTION:kgx-application
- * @title: KgxApplication
- * @short_description: Application
- *
- * The application, on the face of it nothing particularly interesting but
- * under the hood it contains a #GSource used to monitor the shells (and
- * there children) running in the open #KgxWindow s
- */
-
 #include "kgx-config.h"
 
 #include <glib/gi18n.h>
 
 #include "kgx-about.h"
+#include "kgx-depot.h"
 #include "kgx-drop-target.h"
 #include "kgx-pages.h"
 #include "kgx-resources.h"
@@ -53,6 +44,7 @@ struct _KgxApplication {
   GTree                    *pages;
   KgxSettings              *settings;
   KgxWatcher               *watcher;
+  KgxDepot                 *depot;
 
   /* this is simply a hashset of pointers, NOT references */
   GHashTable               *active_windows;
@@ -80,6 +72,7 @@ kgx_application_dispose (GObject *object)
   g_clear_pointer (&self->pages, g_tree_unref);
   g_clear_object (&self->settings);
   g_clear_object (&self->watcher);
+  g_clear_object (&self->depot);
 
   g_clear_pointer (&self->active_windows, g_hash_table_unref);
 
@@ -693,6 +686,11 @@ kgx_application_init (KgxApplication *self)
                           self->watcher, "in-background",
                           G_BINDING_SYNC_CREATE);
 
+  self->depot = g_object_new (KGX_TYPE_DEPOT,
+                              "watcher", self->watcher,
+                              "train-type", KGX_TYPE_TRAIN,
+                              NULL);
+
   self->pages = g_tree_new_full (kgx_pid_cmp, NULL, NULL, NULL);
 }
 
@@ -780,25 +778,19 @@ kgx_application_add_terminal (KgxApplication *self,
                               const char     *title)
 {
   g_autofree char *directory = NULL;
-  g_auto (GStrv) shell = NULL;
   GtkWindow *window;
   KgxTab *tab;
 
-  if (G_LIKELY (argv == NULL)) {
-    shell = kgx_settings_get_shell (self->settings);
-  }
-
   if (working_directory) {
     directory = g_file_get_path (working_directory);
-  } else {
-    directory = g_strdup (g_get_home_dir ());
   }
 
   tab = g_object_new (KGX_TYPE_SIMPLE_TAB,
                       "application", self,
                       "settings", self->settings,
+                      "depot", self->depot,
                       "initial-work-dir", directory,
-                      "command", shell != NULL ? shell : argv,
+                      "command", argv,
                       "tab-title", title,
                       "close-on-quit", argv == NULL,
                       NULL);

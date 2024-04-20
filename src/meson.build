@@ -1,6 +1,4 @@
 kgx_sources = [
-  'fp-vte-util.c',
-  'fp-vte-util.h',
   'kgx-about.c',
   'kgx-about.h',
   'kgx-application.c',
