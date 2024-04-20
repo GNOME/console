@@ -2,6 +2,11 @@
 <interface>
   <requires lib="gtk" version="4.0" />
   <template class="KgxTab" parent="AdwBin">
+    <binding name="tab-status">
+      <lookup name="status">
+        <lookup name="train">KgxTab</lookup>
+      </lookup>
+    </binding>
     <binding name="tab-title">
       <lookup name="window-title">
         <lookup name="terminal">KgxTab</lookup>
@@ -122,6 +127,10 @@
       </object>
     </property>
   </template>
+  <object class="GSignalGroup" id="train_signals">
+    <property name="target-type">KgxTrain</property>
+    <property name="target" bind-source="KgxTab" bind-property="train" bind-flags="sync-create" />
+  </object>
   <object class="GSignalGroup" id="terminal_signals">
     <property name="target-type">KgxTerminal</property>
     <property name="target" bind-source="KgxTab" bind-property="terminal" bind-flags="sync-create" />

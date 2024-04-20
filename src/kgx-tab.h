@@ -1,6 +1,6 @@
 /* kgx-tab.h
  *
- * Copyright 2019-2023 Zander Brown
+ * Copyright 2019-2024 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -45,12 +45,12 @@ G_DECLARE_DERIVABLE_TYPE (KgxTab, kgx_tab, KGX, TAB, AdwBin)
 struct _KgxTabClass {
   AdwBinClass parent;
 
-  void (*start)        (KgxTab               *tab,
-                        GAsyncReadyCallback   callback,
-                        gpointer              callback_data);
-  GPid (*start_finish) (KgxTab               *tab,
-                        GAsyncResult         *res,
-                        GError              **error);
+  void         (*start)            (KgxTab               *tab,
+                                    GAsyncReadyCallback   callback,
+                                    gpointer              callback_data);
+  KgxTrain   * (*start_finish)     (KgxTab               *tab,
+                                    GAsyncResult         *res,
+                                    GError              **error);
 
   void (*died)         (KgxTab               *self,
                         GtkMessageType        type,
@@ -64,7 +64,7 @@ guint       kgx_tab_get_id           (KgxTab               *self);
 void        kgx_tab_start            (KgxTab               *self,
                                       GAsyncReadyCallback   callback,
                                       gpointer              callback_data);
-GPid        kgx_tab_start_finish     (KgxTab               *self,
+KgxTrain   *kgx_tab_start_finish     (KgxTab               *self,
                                       GAsyncResult         *res,
                                       GError              **error);
 void        kgx_tab_died             (KgxTab               *self,

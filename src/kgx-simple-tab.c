@@ -29,6 +29,7 @@
 #include "fp-vte-util.h"
 
 #include "kgx-proxy-info.h"
+#include "kgx-train.h"
 #include "kgx-utils.h"
 
 #include "kgx-simple-tab.h"
@@ -194,27 +195,23 @@ wait_cb (GPid     pid,
 
 
 static void
-spawned (VtePty       *pty,
+spawned (GObject      *source,
          GAsyncResult *res,
          gpointer      user_data)
 
 {
   g_autoptr (GTask) task = user_data;
+  g_autoptr (KgxTrain) train = NULL;
   g_autoptr (WaitData) wait_data = wait_data_alloc ();
   g_autoptr (GError) error = NULL;
   StartData *start_data = kgx_task_get_start_data (task);
   GPid pid;
 
-  g_return_if_fail (VTE_IS_PTY (pty));
-  g_return_if_fail (G_IS_ASYNC_RESULT (res));
-
-  fp_vte_pty_spawn_finish (pty, res, &pid, &error);
+  fp_vte_pty_spawn_finish (VTE_PTY (source), res, &pid, &error);
 
   if (!start_data->self) {
     return; /* The tab went away whilst we were spawning */
   }
-
-  g_return_if_fail (KGX_SIMPLE_TAB (start_data->self));
 
   if (error) {
     g_autofree char *message = NULL;
@@ -238,7 +235,12 @@ spawned (VtePty       *pty,
 
   g_child_watch_add (pid, wait_cb, g_steal_pointer (&wait_data));
 
-  g_task_return_int (task, pid);
+  /* A dummy object since we don't have spawner yet */
+  train = g_object_new (KGX_TYPE_TRAIN, "pid", pid, NULL);
+
+  g_task_return_pointer (task,
+                         g_steal_pointer (&train),
+                         g_object_unref);
 }
 
 
@@ -278,12 +280,12 @@ kgx_simple_tab_start (KgxTab              *page,
     return;
   }
 
+  vte_terminal_set_pty (VTE_TERMINAL (self->terminal), pty);
+
   env = g_strdupv (self->environ);
   env = g_environ_setenv (env, "TERM", "xterm-256color", TRUE);
   env = g_environ_setenv (env, "TERM_PROGRAM", "kgx", TRUE);
   env = g_environ_setenv (env, "TERM_PROGRAM_VERSION", PACKAGE_VERSION, TRUE);
-
-  vte_terminal_set_pty (VTE_TERMINAL (self->terminal), pty);
 
   kgx_proxy_info_apply_to_environ (kgx_proxy_info_get_default (), &env);
 
@@ -293,19 +295,19 @@ kgx_simple_tab_start (KgxTab              *page,
                           (const char *const *) env,
                           -1,
                           self->spawn_cancellable,
-                          (GAsyncReadyCallback) spawned,
+                          spawned,
                           g_steal_pointer (&task));
 }
 
 
-static GPid
+static KgxTrain *
 kgx_simple_tab_start_finish (KgxTab        *page,
                              GAsyncResult  *res,
                              GError       **error)
 {
-  g_return_val_if_fail (g_task_is_valid (res, page), 0);
+  g_return_val_if_fail (g_task_is_valid (res, page), NULL);
 
-  return g_task_propagate_int (G_TASK (res), error);
+  return g_task_propagate_pointer (G_TASK (res), error);
 }
 
 
