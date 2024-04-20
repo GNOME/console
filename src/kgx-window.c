@@ -19,27 +19,21 @@
 #include "kgx-config.h"
 
 #include <glib/gi18n.h>
-#include <math.h>
+
 #include <adwaita.h>
 
-#include "rgba.h"
-
-#include "kgx-window.h"
 #include "kgx-application.h"
 #include "kgx-close-dialog.h"
 #include "kgx-pages.h"
 #include "kgx-preferences-window.h"
+#include "kgx-settings.h"
+#include "kgx-terminal.h"
 #include "kgx-theme-switcher.h"
 #include "kgx-watcher.h"
 
+#include "kgx-window.h"
 
-/**
- * KgxWindow:
- * @close_anyway: ignore running children and close without prompt
- * @pages: the #KgxPages of #KgxPage current in the window
- *
- * The main #AdwApplicationWindow that acts as the terminal
- */
+
 typedef struct _KgxWindowPrivate KgxWindowPrivate;
 struct _KgxWindowPrivate {
   KgxSettings          *settings;
@@ -524,8 +518,8 @@ about_activated  (GtkWidget  *widget,
 
 static void
 tab_switcher_activated (GtkWidget  *widget,
-                                   const char *action_name,
-                                   GVariant   *parameter)
+                        const char *action_name,
+                        GVariant   *parameter)
 {
   KgxWindow *self = KGX_WINDOW (widget);
   KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
