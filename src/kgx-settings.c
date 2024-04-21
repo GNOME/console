@@ -49,6 +49,7 @@ struct _KgxSettings {
   PangoFontDescription *custom_font;
   int64_t               scrollback_limit;
   gboolean              ignore_scrollback_limit;
+  gboolean              software_flow_control;
 
   GSettings            *settings;
   KgxSystemInfo        *system_info;
@@ -73,6 +74,7 @@ enum {
   PROP_CUSTOM_FONT,
   PROP_SCROLLBACK_LIMIT,
   PROP_IGNORE_SCROLLBACK_LIMIT,
+  PROP_SOFTWARE_FLOW_CONTROL,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -164,6 +166,12 @@ kgx_settings_set_property (GObject      *object,
                             &self->ignore_scrollback_limit,
                             value);
       break;
+    case PROP_SOFTWARE_FLOW_CONTROL:
+      kgx_set_boolean_prop (object,
+                            pspec,
+                            &self->software_flow_control,
+                            value);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -218,6 +226,9 @@ kgx_settings_get_property (GObject    *object,
       break;
     case PROP_IGNORE_SCROLLBACK_LIMIT:
       g_value_set_boolean (value, self->ignore_scrollback_limit);
+      break;
+    case PROP_SOFTWARE_FLOW_CONTROL:
+      g_value_set_boolean (value, self->software_flow_control);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -315,6 +326,11 @@ kgx_settings_class_init (KgxSettingsClass *klass)
 
   pspecs[PROP_IGNORE_SCROLLBACK_LIMIT] =
     g_param_spec_boolean ("ignore-scrollback-limit", NULL, NULL,
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
+
+  pspecs[PROP_SOFTWARE_FLOW_CONTROL] =
+    g_param_spec_boolean ("software-flow-control", NULL, NULL,
                           FALSE,
                           G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
@@ -471,6 +487,9 @@ kgx_settings_init (KgxSettings *self)
                    G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (self->settings, "ignore-scrollback-limit",
                    self, "ignore-scrollback-limit",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (self->settings, "software-flow-control",
+                   self, "software-flow-control",
                    G_SETTINGS_BIND_DEFAULT);
 
   g_signal_connect (self->settings,
@@ -701,4 +720,13 @@ kgx_settings_set_custom_font (KgxSettings          *self,
   self->custom_font = pango_font_description_copy (custom_font);
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_CUSTOM_FONT]);
+}
+
+
+gboolean
+kgx_settings_get_software_flow_control (KgxSettings *self)
+{
+  g_return_val_if_fail (KGX_IS_SETTINGS (self), FALSE);
+
+  return self->software_flow_control;
 }

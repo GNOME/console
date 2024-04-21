@@ -357,7 +357,8 @@ kgx_depot_spawn (KgxDepot                 *self,
 
   kgx_task_set_spawn_data (task, g_steal_pointer (&spawn_data));
 
-  child_data->disable_sfc = TRUE;
+  child_data->disable_sfc =
+    !kgx_settings_get_software_flow_control (settings);
 
   g_return_if_fail (resolved_argv != NULL);
   g_return_if_fail (resolved_argv[0] != NULL);

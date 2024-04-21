@@ -45,5 +45,8 @@
     <key name="visual-bell" type="b">
       <default>true</default>
     </key>
+    <key name="software-flow-control" type="b">
+      <default>false</default>
+    </key>
   </schema>
 </schemalist>
