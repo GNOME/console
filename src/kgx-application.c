@@ -33,15 +33,14 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 
-#include "rgba.h"
+#include "kgx-drop-target.h"
+#include "kgx-pages.h"
+#include "kgx-resources.h"
+#include "kgx-simple-tab.h"
+#include "kgx-watcher.h"
+#include "kgx-window.h"
 
 #include "kgx-application.h"
-#include "kgx-window.h"
-#include "kgx-pages.h"
-#include "kgx-drop-target.h"
-#include "kgx-simple-tab.h"
-#include "kgx-resources.h"
-#include "kgx-watcher.h"
 
 #define LOGO_COL_SIZE 28
 #define LOGO_ROW_SIZE 14
@@ -53,10 +52,21 @@ struct _KgxApplication {
   GTree                    *pages;
   KgxSettings              *settings;
   KgxWatcher               *watcher;
+
+  /* this is simply a hashset of pointers, NOT references */
+  GHashTable               *active_windows;
 };
 
 
 G_DEFINE_TYPE (KgxApplication, kgx_application, ADW_TYPE_APPLICATION)
+
+
+enum {
+  PROP_0,
+  PROP_IN_BACKGROUND,
+  LAST_PROP
+};
+static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 
 
 static void
@@ -68,7 +78,29 @@ kgx_application_dispose (GObject *object)
   g_clear_object (&self->settings);
   g_clear_object (&self->watcher);
 
+  g_clear_pointer (&self->active_windows, g_hash_table_unref);
+
   G_OBJECT_CLASS (kgx_application_parent_class)->dispose (object);
+}
+
+
+static void
+kgx_application_get_property (GObject    *object,
+                              guint       property_id,
+                              GValue     *value,
+                              GParamSpec *pspec)
+{
+  KgxApplication *self = KGX_APPLICATION (object);
+
+  switch (property_id) {
+    case PROP_IN_BACKGROUND:
+      g_value_set_boolean (value,
+                           g_hash_table_size (self->active_windows) < 1);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+      break;
+  }
 }
 
 
@@ -391,12 +423,61 @@ kgx_application_handle_local_options (GApplication *app,
 
 
 static void
+active_changed (GObject *object, GParamSpec *pspec, gpointer user_data)
+{
+  KgxApplication *self = KGX_APPLICATION (user_data);
+
+  if (gtk_window_is_active (GTK_WINDOW (object))) {
+    g_hash_table_add (self->active_windows, object);
+  } else {
+    g_hash_table_remove (self->active_windows, object);
+  }
+
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_IN_BACKGROUND]);
+}
+
+
+static void
+kgx_application_window_added (GtkApplication *app,
+                              GtkWindow      *window)
+{
+  KgxApplication *self = KGX_APPLICATION (app);
+
+  g_signal_connect (window,
+                    "notify::is-active", G_CALLBACK (active_changed),
+                    self);
+  active_changed (G_OBJECT (window), NULL, self);
+
+  GTK_APPLICATION_CLASS (kgx_application_parent_class)->window_added (app,
+                                                                      window);
+}
+
+
+static void
+kgx_application_window_removed (GtkApplication *app,
+                                GtkWindow      *window)
+{
+  KgxApplication *self = KGX_APPLICATION (app);
+
+  g_signal_handlers_disconnect_by_data (window, self);
+
+  g_hash_table_remove (self->active_windows, window);
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_IN_BACKGROUND]);
+
+  GTK_APPLICATION_CLASS (kgx_application_parent_class)->window_removed (app,
+                                                                        window);
+}
+
+
+static void
 kgx_application_class_init (KgxApplicationClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GApplicationClass *app_class = G_APPLICATION_CLASS (klass);
+  GtkApplicationClass *gtk_app_class = GTK_APPLICATION_CLASS (klass);
 
   object_class->dispose = kgx_application_dispose;
+  object_class->get_property = kgx_application_get_property;
 
   app_class->activate = kgx_application_activate;
   app_class->startup = kgx_application_startup;
@@ -404,6 +485,15 @@ kgx_application_class_init (KgxApplicationClass *klass)
   app_class->local_command_line = kgx_application_local_command_line;
   app_class->command_line = kgx_application_command_line;
   app_class->handle_local_options = kgx_application_handle_local_options;
+
+  gtk_app_class->window_added = kgx_application_window_added;
+  gtk_app_class->window_removed = kgx_application_window_removed;
+
+  pspecs[PROP_IN_BACKGROUND] = g_param_spec_boolean ("in-background", NULL, NULL,
+                                                     FALSE,
+                                                     G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
+
+  g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 }
 
 
@@ -649,6 +739,8 @@ kgx_application_init (KgxApplication *self)
                                    G_N_ELEMENTS (app_entries),
                                    self);
 
+  self->active_windows = g_hash_table_new (g_direct_hash, g_direct_equal);
+
   self->settings = g_object_new (KGX_TYPE_SETTINGS, NULL);
   g_object_bind_property_full (self->settings, "theme",
                                style_manager, "color-scheme",
@@ -675,6 +767,9 @@ kgx_application_init (KgxApplication *self)
   g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (theme_action));
 
   self->watcher = g_object_new (KGX_TYPE_WATCHER, NULL);
+  g_object_bind_property (self, "in-background",
+                          self->watcher, "in-background",
+                          G_BINDING_SYNC_CREATE);
 
   self->pages = g_tree_new_full (kgx_pid_cmp, NULL, NULL, NULL);
 }
@@ -808,7 +903,6 @@ kgx_application_add_terminal (KgxApplication *self,
     window = g_object_new (KGX_TYPE_WINDOW,
                            "application", self,
                            "settings", self->settings,
-                           "watcher", self->watcher,
                            "default-width", width,
                            "default-height", height,
                            "maximized", maximised,

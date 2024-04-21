@@ -46,7 +46,6 @@
         <lookup name="title">pages</lookup>
       </closure>
     </binding>
-    <signal name="notify::is-active" handler="active_changed" swapped="no"/>
     <property name="width-request">360</property>
     <property name="height-request">294</property>
     <property name="content">

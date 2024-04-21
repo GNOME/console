@@ -29,7 +29,6 @@
 #include "kgx-settings.h"
 #include "kgx-terminal.h"
 #include "kgx-theme-switcher.h"
-#include "kgx-watcher.h"
 
 #include "kgx-window.h"
 
@@ -38,8 +37,6 @@ typedef struct _KgxWindowPrivate KgxWindowPrivate;
 struct _KgxWindowPrivate {
   KgxSettings          *settings;
   GBindingGroup        *settings_binds;
-
-  KgxWatcher           *watcher;
 
   gboolean              search_enabled;
 
@@ -59,7 +56,6 @@ G_DEFINE_TYPE_WITH_PRIVATE (KgxWindow, kgx_window, ADW_TYPE_APPLICATION_WINDOW)
 enum {
   PROP_0,
   PROP_SETTINGS,
-  PROP_WATCHER,
   PROP_SEARCH_MODE_ENABLED,
   LAST_PROP
 };
@@ -73,7 +69,6 @@ kgx_window_dispose (GObject *object)
   KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
 
   g_clear_object (&priv->settings);
-  g_clear_object (&priv->watcher);
 
   G_OBJECT_CLASS (kgx_window_parent_class)->dispose (object);
 }
@@ -91,9 +86,6 @@ kgx_window_set_property (GObject      *object,
   switch (property_id) {
     case PROP_SETTINGS:
       g_set_object (&priv->settings, g_value_get_object (value));
-      break;
-    case PROP_WATCHER:
-      g_set_object (&priv->watcher, g_value_get_object (value));
       break;
     case PROP_SEARCH_MODE_ENABLED:
       priv->search_enabled = g_value_get_boolean (value);
@@ -117,9 +109,6 @@ kgx_window_get_property (GObject    *object,
   switch (property_id) {
     case PROP_SETTINGS:
       g_value_set_object (value, priv->settings);
-      break;
-    case PROP_WATCHER:
-      g_value_set_object (value, priv->watcher);
       break;
     case PROP_SEARCH_MODE_ENABLED:
       g_value_set_boolean (value, priv->search_enabled);
@@ -191,20 +180,6 @@ kgx_window_close_request (GtkWindow *window)
 
 
 static void
-active_changed (GObject *object, GParamSpec *pspec, gpointer data)
-{
-  KgxWindow *self = KGX_WINDOW (object);
-  KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
-
-  if (gtk_window_is_active (GTK_WINDOW (self))) {
-    kgx_watcher_push_active (priv->watcher);
-  } else {
-    kgx_watcher_pop_active (priv->watcher);
-  }
-}
-
-
-static void
 zoom (KgxPages  *pages,
       KgxZoom    dir,
       KgxWindow *self)
@@ -241,7 +216,6 @@ create_tearoff_host (KgxPages *pages, KgxWindow *self)
   new_window = g_object_new (KGX_TYPE_WINDOW,
                              "application", application,
                              "settings", priv->settings,
-                             "watcher", priv->watcher,
                              "default-width", width,
                              "default-height", height,
                              NULL);
@@ -561,11 +535,6 @@ kgx_window_class_init (KgxWindowClass *klass)
                          KGX_TYPE_SETTINGS,
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_STRINGS);
 
-  pspecs[PROP_WATCHER] =
-    g_param_spec_object ("watcher", NULL, NULL,
-                         KGX_TYPE_WATCHER,
-                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_STRINGS);
-
   pspecs[PROP_SEARCH_MODE_ENABLED] =
     g_param_spec_boolean ("search-mode-enabled", NULL, NULL,
                           FALSE,
@@ -586,7 +555,6 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, pages);
   gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, settings_binds);
 
-  gtk_widget_class_bind_template_callback (widget_class, active_changed);
   gtk_widget_class_bind_template_callback (widget_class, zoom);
   gtk_widget_class_bind_template_callback (widget_class, create_tearoff_host);
   gtk_widget_class_bind_template_callback (widget_class, maybe_close_window);

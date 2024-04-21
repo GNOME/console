@@ -1,6 +1,6 @@
 /* kgx-watcher.c
  *
- * Copyright 2022 Zander Brown
+ * Copyright 2022-2024 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,28 +18,15 @@
 
 #include "kgx-config.h"
 
+#include "kgx-utils.h"
+
 #include "kgx-watcher.h"
-
-
-/**
- * ProcessWatch:
- * @page: the #KgxTab the #KgxProcess is in
- * @process: what we are watching
- *
- * Stability: Private
- */
-struct ProcessWatch {
-  KgxTab /*weak*/ *page;
-  KgxProcess *process;
-};
 
 
 /**
  * KgxWatcher:
  * @watching: (element-type GLib.Pid ProcessWatch) the shells running in windows
  * @children: (element-type GLib.Pid ProcessWatch) the processes running in shells
- * @active: counter of #KgxWindow's with #GtkWindow:is-active = %TRUE,
- *          obviously this should only ever be 1 or but we can't be certain
  * @timeout: the current #GSource id of the watcher
  *
  * Used to monitor processes running in pages
@@ -47,21 +34,32 @@ struct ProcessWatch {
 struct _KgxWatcher {
   GObject                   parent_instance;
 
+  gboolean                  in_background;
+
   GTree                    *watching;
   GTree                    *children;
 
   guint                     timeout;
-  int                       active;
 };
 
 
 G_DEFINE_TYPE (KgxWatcher, kgx_watcher, G_TYPE_OBJECT)
 
 
+enum {
+  PROP_0,
+  PROP_IN_BACKGROUND,
+  LAST_PROP
+};
+static GParamSpec *pspecs[LAST_PROP] = { NULL, };
+
+
 static void
 kgx_watcher_dispose (GObject *object)
 {
   KgxWatcher *self = KGX_WATCHER (object);
+
+  g_clear_handle_id (&self->timeout, g_source_remove);
 
   g_clear_pointer (&self->watching, g_tree_unref);
   g_clear_pointer (&self->children, g_tree_unref);
@@ -70,24 +68,20 @@ kgx_watcher_dispose (GObject *object)
 }
 
 
+struct _ProcessWatch {
+  KgxTab /*weak*/ *page;
+  KgxProcess *process;
+};
+
+
+KGX_DEFINE_DATA (ProcessWatch, process_watch)
+
+
 static void
-kgx_watcher_class_init (KgxWatcherClass *klass)
+process_watch_cleanup (ProcessWatch *watch)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  object_class->dispose = kgx_watcher_dispose;
-}
-
-
-static void
-clear_watch (struct ProcessWatch *watch)
-{
-  g_return_if_fail (watch != NULL);
-
   g_clear_pointer (&watch->process, kgx_process_unref);
   g_clear_weak_pointer (&watch->page);
-
-  g_clear_pointer (&watch, g_free);
 }
 
 
@@ -99,7 +93,7 @@ handle_watch_iter (gpointer pid,
   KgxProcess *process = val;
   KgxWatcher *self = user_data;
   GPid parent = kgx_process_get_parent (process);
-  struct ProcessWatch *watch = NULL;
+  ProcessWatch *watch = NULL;
 
   watch = g_tree_lookup (self->watching, GINT_TO_POINTER (parent));
 
@@ -116,7 +110,7 @@ handle_watch_iter (gpointer pid,
     }
 
     if (!g_tree_lookup (self->children, pid)) {
-      struct ProcessWatch *child_watch = g_new0 (struct ProcessWatch, 1);
+      ProcessWatch *child_watch = process_watch_alloc ();
 
       child_watch->process = g_rc_box_acquire (process);
       g_set_weak_pointer (&child_watch->page, watch->page);
@@ -145,7 +139,7 @@ remove_dead (gpointer pid,
              gpointer user_data)
 {
   struct RemoveDead *data = user_data;
-  struct ProcessWatch *watch = val;
+  ProcessWatch *watch = val;
 
   if (!g_tree_lookup (data->plist, pid)) {
     g_debug ("watcher: %i marked as dead", GPOINTER_TO_INT (pid));
@@ -188,18 +182,85 @@ watch (gpointer data)
 }
 
 
-static inline void
-set_watcher (KgxWatcher *self, gboolean focused)
+static inline gboolean
+update_watcher (KgxWatcher *self, gboolean in_background)
 {
-  g_debug ("watcher: focused? %s", focused ? "yes" : "no");
-
-  if (self->timeout != 0) {
-    g_source_remove (self->timeout);
+  if (self->in_background == in_background) {
+    return FALSE;
   }
 
-  // Slow down polling when nothing is focused
-  self->timeout = g_timeout_add (focused ? 500 : 2000, watch, self);
-  g_source_set_name_by_id (self->timeout, "[kgx] child watcher");
+  self->in_background = in_background;
+
+  g_debug ("watcher: in_background? %s", in_background ? "yes" : "no");
+
+  g_clear_handle_id (&self->timeout, g_source_remove);
+
+  /* Slow down polling when in the background */
+  self->timeout = g_timeout_add_full (G_PRIORITY_DEFAULT,
+                                      in_background ? 2000 : 500,
+                                      watch,
+                                      g_object_ref (self),
+                                      g_object_unref);
+  g_source_set_name_by_id (self->timeout, "[kgx] watcher");
+
+  return TRUE;
+}
+
+
+static void
+kgx_watcher_set_property (GObject      *object,
+                          guint         property_id,
+                          const GValue *value,
+                          GParamSpec   *pspec)
+{
+  KgxWatcher *self = KGX_WATCHER (object);
+
+  switch (property_id) {
+    case PROP_IN_BACKGROUND:
+      if (update_watcher (self, g_value_get_boolean (value))) {
+        g_object_notify_by_pspec (object, pspec);
+      }
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+      break;
+  }
+}
+
+
+static void
+kgx_watcher_get_property (GObject    *object,
+                          guint       property_id,
+                          GValue     *value,
+                          GParamSpec *pspec)
+{
+  KgxWatcher *self = KGX_WATCHER (object);
+
+  switch (property_id) {
+    case PROP_IN_BACKGROUND:
+      g_value_set_boolean (value, self->in_background);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+      break;
+  }
+}
+
+
+static void
+kgx_watcher_class_init (KgxWatcherClass *klass)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  object_class->dispose = kgx_watcher_dispose;
+  object_class->set_property = kgx_watcher_set_property;
+  object_class->get_property = kgx_watcher_get_property;
+
+  pspecs[PROP_IN_BACKGROUND] = g_param_spec_boolean ("in-background", NULL, NULL,
+                                                     FALSE,
+                                                     G_PARAM_READWRITE | G_PARAM_CONSTRUCT | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
+
+  g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 }
 
 
@@ -209,16 +270,11 @@ kgx_watcher_init (KgxWatcher *self)
   self->watching = g_tree_new_full (kgx_pid_cmp,
                                     NULL,
                                     NULL,
-                                    (GDestroyNotify) clear_watch);
+                                    process_watch_free);
   self->children = g_tree_new_full (kgx_pid_cmp,
                                     NULL,
                                     NULL,
-                                    (GDestroyNotify) clear_watch);
-
-  self->active = 0;
-  self->timeout = 0;
-
-  set_watcher (self, TRUE);
+                                    process_watch_free);
 }
 
 
@@ -235,85 +291,16 @@ kgx_watcher_add (KgxWatcher *self,
                  GPid        pid,
                  KgxTab     *page)
 {
-  struct ProcessWatch *watch;
+  ProcessWatch *watch;
 
   g_return_if_fail (KGX_IS_WATCHER (self));
   g_return_if_fail (KGX_IS_TAB (page));
 
-  watch = g_new0 (struct ProcessWatch, 1);
+  watch = process_watch_alloc ();
   watch->process = kgx_process_new (pid);
   g_set_weak_pointer (&watch->page, page);
 
-  g_debug ("watcher: started %i", pid);
+  g_debug ("watcher: tracking %i", pid);
 
   g_tree_insert (self->watching, GINT_TO_POINTER (pid), watch);
 }
-
-
-/**
- * kgx_watcher_remove:
- * @self: the #KgxWatcher
- * @pid: the shell process to stop watch watching
- *
- * unregisters the shell with #GPid pid
- */
-void
-kgx_watcher_remove (KgxWatcher *self,
-                    GPid        pid)
-{
-  g_return_if_fail (KGX_IS_WATCHER (self));
-
-  if (G_LIKELY (g_tree_lookup (self->watching, GINT_TO_POINTER (pid)))) {
-    g_tree_remove (self->watching, GINT_TO_POINTER (pid));
-    g_debug ("watcher: stopped %i", pid);
-  } else {
-    g_warning ("Unknown process %i", pid);
-  }
-}
-
-
-/**
- * kgx_watcher_push_active:
- * @self: the #KgxWatcher
- *
- * Increase the active window count
- */
-void
-kgx_watcher_push_active (KgxWatcher *self)
-{
-  g_return_if_fail (KGX_IS_WATCHER (self));
-
-  self->active++;
-
-  g_debug ("watcher: push_active");
-
-  if (G_LIKELY (self->active > 0)) {
-    set_watcher (self, TRUE);
-  } else {
-    set_watcher (self, FALSE);
-  }
-}
-
-
-/**
- * kgx_watcher_pop_active:
- * @self: the #KgxWatcher
- *
- * Decrease the active window count
- */
-void
-kgx_watcher_pop_active (KgxWatcher *self)
-{
-  g_return_if_fail (KGX_IS_WATCHER (self));
-
-  self->active--;
-
-  g_debug ("watcher: pop_active");
-
-  if (G_LIKELY (self->active < 1)) {
-    set_watcher (self, FALSE);
-  } else {
-    set_watcher (self, TRUE);
-  }
-}
-

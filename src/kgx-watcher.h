@@ -1,6 +1,6 @@
 /* kgx-watcher.h
  *
- * Copyright 2022 Zander Brown
+ * Copyright 2022-2024 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,16 +25,13 @@
 
 G_BEGIN_DECLS
 
-#define KGX_TYPE_WATCHER kgx_watcher_get_type ()
+#define KGX_TYPE_WATCHER (kgx_watcher_get_type ())
+
 G_DECLARE_FINAL_TYPE (KgxWatcher, kgx_watcher, KGX, WATCHER, GObject)
 
 
 void                  kgx_watcher_add               (KgxWatcher     *self,
                                                      GPid            pid,
                                                      KgxTab         *page);
-void                  kgx_watcher_remove            (KgxWatcher     *self,
-                                                     GPid            pid);
-void                  kgx_watcher_push_active       (KgxWatcher     *self);
-void                  kgx_watcher_pop_active        (KgxWatcher     *self);
 
 G_END_DECLS
