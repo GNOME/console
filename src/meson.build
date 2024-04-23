@@ -25,6 +25,8 @@ kgx_sources = [
   'kgx-settings.h',
   'kgx-simple-tab.c',
   'kgx-simple-tab.h',
+  'kgx-system-info.c',
+  'kgx-system-info.h',
   'kgx-tab.c',
   'kgx-tab.h',
   'kgx-terminal.c',
