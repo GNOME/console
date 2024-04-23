@@ -19,14 +19,14 @@
 /**
  * SECTION:kgx-proxy-info
  * @short_description: An object with proxy details
- * @title: KgxProxyInfo 
+ * @title: KgxProxyInfo
  *
  * #KgxProxyInfo maps org.gnome.system.proxy to environmental variables
  * when launching new sessions
- * 
+ *
  * Note that whilst changes to system settings are tracked, they _cannot_ be
  * applied existing terminals
- * 
+ *
  * Only manual proxies are supported
  */
 
@@ -113,7 +113,7 @@ kgx_proxy_info_class_init (KgxProxyInfoClass *klass)
  * @self: the #KgxProxyInfo
  * @key: (transfer none): the lower case key name
  * @value: (transfer full): the value to set
- * 
+ *
  * Set both upper and lower case variants of @key to @value
  */
 static void
@@ -125,7 +125,7 @@ env_set_both (KgxProxyInfo *self,
     return;
 
   g_hash_table_replace (self->environ,
-                        g_strdup (key), 
+                        g_strdup (key),
                         g_strdup (value));
   g_hash_table_replace (self->environ,
                         g_ascii_strup (key, -1),
@@ -269,29 +269,10 @@ kgx_proxy_info_init (KgxProxyInfo *self)
 
 
 /**
- * kgx_proxy_info_get_default:
- * 
- * Returns: (transfer none): the #KgxProxyInfo singleton
- */
-KgxProxyInfo *
-kgx_proxy_info_get_default (void)
-{ 
-  static KgxProxyInfo *instance;
-
-  if (instance == NULL) {
-    instance = g_object_new (KGX_TYPE_PROXY_INFO, NULL);
-    g_object_add_weak_pointer (G_OBJECT (instance), (gpointer *) &instance);
-  }
-
-  return instance;
-}
-
-
-/**
  * kgx_proxy_info_apply_to_environ:
  * @self: the #KgxProxyInfo
  * @env: (out caller-allocates): an environment to modify
- * 
+ *
  * Add the users current proxy settings to @env
  */
 void

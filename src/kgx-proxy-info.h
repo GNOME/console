@@ -26,7 +26,6 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (KgxProxyInfo, kgx_proxy_info, KGX, PROXY_INFO, GObject)
 
-KgxProxyInfo *kgx_proxy_info_get_default      (void);
 void          kgx_proxy_info_apply_to_environ (KgxProxyInfo   *self,
                                                char         ***env);
 
