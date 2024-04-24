@@ -22,21 +22,10 @@
 #include <vte/vte.h>
 #include <adwaita.h>
 
+#include "kgx-system-info.h"
+#include "kgx-marshals.h"
+
 #include "kgx-settings.h"
-
-
-/**
- * DESKTOP_INTERFACE_SETTINGS_SCHEMA:
- * The schema that defines the system fonts
- */
-#define DESKTOP_INTERFACE_SETTINGS_SCHEMA "org.gnome.desktop.interface"
-
-/**
- * MONOSPACE_FONT_KEY_NAME:
- * The name of the key in %DESKTOP_INTERFACE_SETTINGS_SCHEMA for the monospace
- * font
- */
-#define MONOSPACE_FONT_KEY_NAME "monospace-font-name"
 
 #define RESTORE_SIZE_KEY "restore-window-size"
 #define LAST_SIZE_KEY "last-window-size"
@@ -50,6 +39,7 @@ struct _KgxSettings {
   GObject               parent_instance;
 
   KgxTheme              theme;
+  PangoFontDescription *font;
   double                scale;
   int64_t               scrollback_lines;
   gboolean              audible_bell;
@@ -58,7 +48,8 @@ struct _KgxSettings {
   PangoFontDescription *custom_font;
 
   GSettings            *settings;
-  GSettings            *desktop_interface;
+  KgxSystemInfo        *system_info;
+  GtkExpressionWatch   *font_expression;
 };
 
 
@@ -89,8 +80,13 @@ kgx_settings_dispose (GObject *object)
 {
   KgxSettings *self = KGX_SETTINGS (object);
 
+  g_clear_pointer (&self->font, pango_font_description_free);
+  g_clear_pointer (&self->custom_font, pango_font_description_free);
+
   g_clear_object (&self->settings);
-  g_clear_object (&self->desktop_interface);
+  g_clear_object (&self->system_info);
+
+  g_clear_pointer (&self->font_expression, gtk_expression_watch_unref);
 
   G_OBJECT_CLASS (kgx_settings_parent_class)->dispose (object);
 }
@@ -125,6 +121,11 @@ kgx_settings_set_property (GObject      *object,
     case PROP_THEME:
       self->theme = g_value_get_enum (value);
       g_object_notify_by_pspec (object, pspecs[PROP_RESOLVED_THEME]);
+      break;
+    case PROP_FONT:
+      g_clear_pointer (&self->font, pango_font_description_free);
+      self->font = g_value_dup_boxed (value);
+      g_object_notify_by_pspec (object, pspecs[PROP_FONT]);
       break;
     case PROP_FONT_SCALE:
       update_scale (self, g_value_get_double (value));
@@ -167,7 +168,7 @@ kgx_settings_get_property (GObject    *object,
       g_value_set_enum (value, kgx_settings_get_resolved_theme (self));
       break;
     case PROP_FONT:
-      g_value_take_boxed (value, kgx_settings_get_font (self));
+      g_value_set_boxed (value, self->font);
       break;
     case PROP_FONT_SCALE:
       g_value_set_double (value, self->scale);
@@ -231,7 +232,7 @@ kgx_settings_class_init (KgxSettingsClass *klass)
   pspecs[PROP_FONT] =
     g_param_spec_boxed ("font", NULL, NULL,
                         PANGO_TYPE_FONT_DESCRIPTION,
-                        G_PARAM_READABLE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
   pspecs[PROP_FONT_SCALE] =
     g_param_spec_double ("font-scale", NULL, NULL,
@@ -283,17 +284,6 @@ kgx_settings_class_init (KgxSettingsClass *klass)
                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
-}
-
-
-static void
-system_font_changed (GSettings    *settings,
-                     const char   *key,
-                     KgxSettings  *self)
-{
-  if (self->use_system_font) {
-    g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_FONT]);
-  }
 }
 
 
@@ -358,6 +348,37 @@ dark_changed (KgxSettings *self)
   }
 }
 
+
+static PangoFontDescription *
+resolve_font (GObject              *object,
+              gboolean              use_system,
+              PangoFontDescription *system,
+              PangoFontDescription *custom)
+{
+  return pango_font_description_copy (use_system ? system : custom);
+}
+
+
+static inline void
+setup_font_expression (KgxSettings *self)
+{
+  GtkExpression *params[] = {
+    gtk_property_expression_new (KGX_TYPE_SETTINGS, NULL, "use-system-font"),
+    gtk_property_expression_new (KGX_TYPE_SYSTEM_INFO,
+                                 gtk_constant_expression_new (KGX_TYPE_SYSTEM_INFO, self->system_info),
+                                 "monospace-font"),
+    gtk_property_expression_new (KGX_TYPE_SETTINGS, NULL, "custom-font"),
+  };
+  GtkExpression *exp =
+    gtk_cclosure_expression_new (PANGO_TYPE_FONT_DESCRIPTION,
+                                 kgx_marshals_BOXED__BOOLEAN_BOXED_BOXED,
+                                 G_N_ELEMENTS (params), params,
+                                 G_CALLBACK (resolve_font), NULL, NULL);
+
+  self->font_expression = gtk_expression_bind (exp, self, "font", self);
+}
+
+
 static void
 kgx_settings_init (KgxSettings *self)
 {
@@ -388,15 +409,12 @@ kgx_settings_init (KgxSettings *self)
                                 NULL, NULL);
 
   g_signal_connect (self->settings,
-                    "changed::restore-window-size",
+                    "changed::" RESTORE_SIZE_KEY,
                     G_CALLBACK (restore_window_size_changed),
                     self);
 
-  self->desktop_interface = g_settings_new (DESKTOP_INTERFACE_SETTINGS_SCHEMA);
-  g_signal_connect (self->desktop_interface,
-                    "changed::" MONOSPACE_FONT_KEY_NAME,
-                    G_CALLBACK (system_font_changed),
-                    self);
+  self->system_info = g_object_new (KGX_TYPE_SYSTEM_INFO, NULL);
+  setup_font_expression (self);
 
   g_signal_connect_object (adw_style_manager_get_default (),
                            "notify::dark", G_CALLBACK (dark_changed),
@@ -426,33 +444,6 @@ kgx_settings_get_resolved_theme (KgxSettings *self)
   }
 
   return KGX_THEME_DAY;
-}
-
-/**
- * kgx_settings_get_font:
- * @self: the #KgxSettings
- *
- * Creates a #PangoFontDescription for the system monospace font when
- * #KgxSettings:use-system-font or the user defined font specified by
- * #KgxSettings:custom-font
- *
- * Returns: (transfer full): a new #PangoFontDescription
- */
-PangoFontDescription *
-kgx_settings_get_font (KgxSettings *self)
-{
-  g_autofree char *font = NULL;
-
-  g_return_val_if_fail (KGX_IS_SETTINGS (self), NULL);
-
-  if (!self->use_system_font && self->custom_font) {
-    return pango_font_description_copy (self->custom_font);
-  }
-
-  font = g_settings_get_string (self->desktop_interface,
-                                MONOSPACE_FONT_KEY_NAME);
-
-  return pango_font_description_from_string (font);
 }
 
 
@@ -665,7 +656,6 @@ kgx_settings_set_use_system_font (KgxSettings *self,
   self->use_system_font = use_system_font;
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_USE_SYSTEM_FONT]);
-  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_FONT]);
 }
 
 
@@ -699,5 +689,4 @@ kgx_settings_set_custom_font (KgxSettings          *self,
   self->custom_font = pango_font_description_copy (custom_font);
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_CUSTOM_FONT]);
-  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_FONT]);
 }
