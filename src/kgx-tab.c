@@ -22,13 +22,15 @@
 #define PCRE2_CODE_UNIT_WIDTH 0
 #include <pcre2.h>
 
-#include "kgx-tab.h"
-#include "kgx-pages.h"
-#include "kgx-terminal.h"
-#include "kgx-settings.h"
 #include "kgx-application.h"
 #include "kgx-drop-target.h"
 #include "kgx-marshals.h"
+#include "kgx-pages.h"
+#include "kgx-settings.h"
+#include "kgx-terminal.h"
+#include "kgx-utils.h"
+
+#include "kgx-tab.h"
 
 
 typedef struct _KgxTabPrivate KgxTabPrivate;
@@ -434,16 +436,16 @@ kgx_tab_set_property (GObject      *object,
       kgx_tab_set_is_active (self, g_value_get_boolean (value));
       break;
     case PROP_CLOSE_ON_QUIT:
-      priv->close_on_quit = g_value_get_boolean (value);
+      kgx_set_boolean_prop (object, pspec, &priv->close_on_quit, value);
       break;
     case PROP_NEEDS_ATTENTION:
-      priv->needs_attention = g_value_get_boolean (value);
+      kgx_set_boolean_prop (object, pspec, &priv->needs_attention, value);
       break;
     case PROP_SEARCH_MODE_ENABLED:
-      priv->search_mode_enabled = g_value_get_boolean (value);
+      kgx_set_boolean_prop (object, pspec, &priv->search_mode_enabled, value);
       break;
     case PROP_DROPPING:
-      priv->dropping = g_value_get_boolean (value);
+      kgx_set_boolean_prop (object, pspec, &priv->dropping, value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -655,17 +657,17 @@ kgx_tab_class_init (KgxTabClass *klass)
   pspecs[PROP_CLOSE_ON_QUIT] =
     g_param_spec_boolean ("close-on-quit", NULL, NULL,
                           FALSE,
-                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_NEEDS_ATTENTION] =
     g_param_spec_boolean ("needs-attention", NULL, NULL,
                           FALSE,
-                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_SEARCH_MODE_ENABLED] =
     g_param_spec_boolean ("search-mode-enabled", NULL, NULL,
                           FALSE,
-                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_RINGING] =
     g_param_spec_boolean ("ringing", NULL, NULL,
@@ -675,7 +677,7 @@ kgx_tab_class_init (KgxTabClass *klass)
   pspecs[PROP_DROPPING] =
     g_param_spec_boolean ("dropping", NULL, NULL,
                           FALSE,
-                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_CANCELLABLE] =
     g_param_spec_object ("cancellable", NULL, NULL,
