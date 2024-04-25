@@ -18,8 +18,10 @@
 
 #include "kgx-config.h"
 
-#include "kgx-theme-switcher.h"
 #include "kgx-settings.h"
+#include "kgx-utils.h"
+
+#include "kgx-theme-switcher.h"
 
 
 struct _KgxThemeSwitcher {
@@ -107,7 +109,7 @@ kgx_theme_switcher_get_property (GObject    *object,
       g_value_set_enum (value, self->theme);
       break;
     case PROP_SHOW_SYSTEM:
-      g_value_set_boolean (value, self->show_system);
+      kgx_set_boolean_prop (object, pspec, &self->show_system, value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -154,7 +156,7 @@ kgx_theme_switcher_class_init (KgxThemeSwitcherClass *klass)
   pspecs[PROP_SHOW_SYSTEM] =
     g_param_spec_boolean ("show-system", NULL, NULL,
                           TRUE,
-                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
