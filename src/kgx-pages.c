@@ -193,16 +193,16 @@ kgx_pages_set_property (GObject      *object,
       }
       break;
     case PROP_IS_ACTIVE:
-      priv->is_active = g_value_get_boolean (value);
+      kgx_set_boolean_prop (object, pspec, &priv->is_active, value);
       break;
     case PROP_STATUS:
       priv->page_status = g_value_get_flags (value);
       break;
     case PROP_SEARCH_MODE_ENABLED:
-      priv->search_mode_enabled = g_value_get_boolean (value);
+      kgx_set_boolean_prop (object, pspec, &priv->search_mode_enabled, value);
       break;
     case PROP_RINGING:
-      priv->ringing = g_value_get_boolean (value);
+      kgx_set_boolean_prop (object, pspec, &priv->ringing, value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -632,7 +632,7 @@ kgx_pages_class_init (KgxPagesClass *klass)
   pspecs[PROP_IS_ACTIVE] =
     g_param_spec_boolean ("is-active", NULL, NULL,
                           FALSE,
-                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_STATUS] =
     g_param_spec_flags ("status", NULL, NULL,
@@ -643,12 +643,12 @@ kgx_pages_class_init (KgxPagesClass *klass)
   pspecs[PROP_SEARCH_MODE_ENABLED] =
     g_param_spec_boolean ("search-mode-enabled", NULL, NULL,
                           FALSE,
-                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_RINGING] =
     g_param_spec_boolean ("ringing", NULL, NULL,
                           FALSE,
-                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
