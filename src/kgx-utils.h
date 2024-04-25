@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <glib.h>
+#include <glib-object.h>
 
 G_BEGIN_DECLS
 
@@ -66,6 +66,36 @@ G_BEGIN_DECLS
     g_clear_pointer (ptr, type_name##_free);                                 \
   }                                                                          \
   G_DEFINE_AUTOPTR_CLEANUP_FUNC (TypeName, type_name##_free)
+
+
+/**
+ * kgx_set_boolean_prop:
+ * @object: the #GObject the property is on
+ * @pspec: the #GParamSpec being set
+ * @target: the storage on @object for @pspec
+ * @value: the potential new value for @target
+ *
+ * Update a boolean property, notifying if the value changed
+ *
+ * Returns: %TRUE if the value changed, otherwise %FALSE
+ */
+static inline gboolean
+kgx_set_boolean_prop (GObject      *restrict object,
+                      GParamSpec   *restrict pspec,
+                      gboolean     *restrict target,
+                      const GValue *restrict value)
+{
+  gboolean new_value = g_value_get_boolean (value);
+
+  if (new_value == *target) {
+    return FALSE;
+  }
+
+  *target = new_value;
+  g_object_notify_by_pspec (object, pspec);
+
+  return TRUE;
+}
 
 
 /**
