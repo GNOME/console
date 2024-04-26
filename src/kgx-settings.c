@@ -49,7 +49,6 @@ struct _KgxSettings {
 
   GSettings            *settings;
   KgxSystemInfo        *system_info;
-  GtkExpressionWatch   *font_expression;
 };
 
 
@@ -85,8 +84,6 @@ kgx_settings_dispose (GObject *object)
 
   g_clear_object (&self->settings);
   g_clear_object (&self->system_info);
-
-  g_clear_pointer (&self->font_expression, gtk_expression_watch_unref);
 
   G_OBJECT_CLASS (kgx_settings_parent_class)->dispose (object);
 }
@@ -375,7 +372,7 @@ setup_font_expression (KgxSettings *self)
                                  G_N_ELEMENTS (params), params,
                                  G_CALLBACK (resolve_font), NULL, NULL);
 
-  self->font_expression = gtk_expression_bind (exp, self, "font", self);
+  gtk_expression_bind (exp, self, "font", self);
 }
 
 
