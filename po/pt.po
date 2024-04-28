@@ -1,14 +1,14 @@
 # Portuguese translation for console.
 # Copyright (C) 2022-2023 console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the console package.
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022, 2023.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022, 2023, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-10-08 11:47+0000\n"
-"PO-Revision-Date: 2023-10-11 15:50+0100\n"
+"POT-Creation-Date: 2024-01-22 13:36+0000\n"
+"PO-Revision-Date: 2024-04-28 21:20+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "Language: pt\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
@@ -52,7 +52,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Janela do terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:327 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
 msgid "The GNOME Project"
 msgstr "O Projeto GNOME"
 
@@ -148,7 +148,7 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s a usar VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:452
+#: src/kgx-application.c:361 src/kgx-window.c:466
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -206,40 +206,54 @@ msgstr "LINHAS"
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- COMANDO [ARGUMENTO...]]"
 
-#: src/kgx-close-dialog.c:53
+#: src/kgx-close-dialog.c:94
 msgid "Close Window?"
 msgstr "Fechar janela?"
 
-#: src/kgx-close-dialog.c:54
+#: src/kgx-close-dialog.c:96
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"Alguns comandos ainda estão em execução, fechar esta janela vai terminá-los "
-"e pode levar a resultados inesperados"
+msgstr[0] ""
+"Um comando ainda está a ser executado, fechar esta janela irá terminá-lo e "
+"pode levar a resultados inesperados"
+msgstr[1] ""
+"Alguns comandos ainda estão a ser executados, fechar esta janela irá terminá-"
+"los e pode levar a resultados inesperados"
 
-#: src/kgx-close-dialog.c:59
+#: src/kgx-close-dialog.c:103
 msgid "Close Tab?"
 msgstr "Fechar o separador?"
 
-#: src/kgx-close-dialog.c:60
+#: src/kgx-close-dialog.c:105
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"Alguns comandos ainda estão em execução, fechar este separador vai terminá-"
+msgstr[0] ""
+"Um comando ainda está a ser executado, fechar esta janela irá terminá-lo e "
+"pode levar a resultados inesperados"
+msgstr[1] ""
+"Alguns comandos ainda estão a ser executados, fechar esta janela irá terminá-"
 "los e pode levar a resultados inesperados"
 
-#: src/kgx-close-dialog.c:74
-#, c-format
-msgid "Process %d"
-msgstr "Processo %d"
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:232
+msgid "Process list"
+msgstr "Lista de processos"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:248
 msgid "C_lose"
 msgstr "_Fechar"
 
@@ -271,7 +285,7 @@ msgstr "Tamanho do tipo de letra"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:463
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "Separador %i"
@@ -316,6 +330,11 @@ msgstr "Reproduzir _som"
 msgid "_Visual Effects"
 msgstr "Efeitos _visuais"
 
+#: src/kgx-process.c:198
+#, c-format
+msgid "Process %d"
+msgstr "Processo %d"
+
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
 #: src/kgx-simple-tab.c:180
@@ -336,7 +355,7 @@ msgstr "<b>Apenas leitura</b> — Comando encerrado"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Falha ao iniciar</b> — %s"
 
-#: src/kgx-tab.c:1091
+#: src/kgx-tab.c:1112
 msgid "Command completed"
 msgstr "Comando concluído"
 
@@ -412,7 +431,7 @@ msgid "Dark Style"
 msgstr "Estilo escuro"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:464
+#: src/kgx-window.c:478
 msgid "translator-credits"
 msgstr "Hugo Carvalho <hugokarvalho@hotmail.com>"
 
