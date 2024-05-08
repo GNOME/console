@@ -229,7 +229,7 @@ spawned (VtePty       *pty,
                   message,
                   FALSE);
 
-    g_task_return_error (g_steal_pointer (&task), g_steal_pointer (&error));
+    g_task_return_error (task, g_steal_pointer (&error));
 
     return;
   }
@@ -238,7 +238,7 @@ spawned (VtePty       *pty,
 
   g_child_watch_add (pid, wait_cb, g_steal_pointer (&wait_data));
 
-  g_task_return_int (g_steal_pointer (&task), pid);
+  g_task_return_int (task, pid);
 }
 
 
