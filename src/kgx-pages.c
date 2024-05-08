@@ -770,6 +770,7 @@ kgx_pages_add_page (KgxPages *self,
                                tab, NULL);
   g_object_bind_property (tab, "tab-tooltip", page, "tooltip", G_BINDING_SYNC_CREATE);
   g_object_bind_property (tab, "needs-attention", page, "needs-attention", G_BINDING_SYNC_CREATE);
+  g_object_bind_property (tab, "working", page, "loading", G_BINDING_SYNC_CREATE);
   g_object_bind_property_full (tab, "tab-status", page, "icon", G_BINDING_SYNC_CREATE,
                                status_to_icon, NULL, NULL, NULL);
   g_object_bind_property_full (tab, "tab-path", page, "keyword", G_BINDING_SYNC_CREATE,

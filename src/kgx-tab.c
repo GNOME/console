@@ -54,6 +54,7 @@ struct _KgxTabPrivate {
   guint                 ringing_timeout;
 
   gboolean              dropping;
+  int                   working;
 
   KgxTerminal          *terminal;
   GSignalGroup         *terminal_signals;
@@ -106,6 +107,7 @@ enum {
   PROP_SEARCH_MODE_ENABLED,
   PROP_RINGING,
   PROP_DROPPING,
+  PROP_WORKING,
   PROP_CANCELLABLE,
   LAST_PROP
 };
@@ -130,6 +132,11 @@ kgx_tab_dispose (GObject *object)
 
   g_cancellable_cancel (priv->cancellable);
 
+  if (G_UNLIKELY (priv->working != 0)) {
+    g_warning ("tab: disposed whilst still working");
+    g_application_unmark_busy (G_APPLICATION (priv->application));
+    priv->working = 0;
+  }
   g_clear_handle_id (&priv->spinner_timeout, g_source_remove);
 
   if (priv->notification_id) {
@@ -255,30 +262,13 @@ search_prev (GtkSearchBar *bar,
 
 
 static void
-spinner_mapped (GtkSpinner *spinner,
-                KgxTab     *self)
+start_spinner_timeout_cb (gpointer user_data)
 {
-  gtk_spinner_start (spinner);
-}
-
-
-static void
-spinner_unmapped (GtkSpinner *spinner,
-                  KgxTab     *self)
-{
-  gtk_spinner_stop (spinner);
-}
-
-
-static gboolean
-start_spinner_timeout_cb (KgxTab *self)
-{
+  KgxTab *self = user_data;
   KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
 
   gtk_revealer_set_reveal_child (GTK_REVEALER (priv->spinner_revealer), TRUE);
   priv->spinner_timeout = 0;
-
-  return G_SOURCE_REMOVE;
 }
 
 
@@ -358,6 +348,9 @@ kgx_tab_get_property (GObject    *object,
       break;
     case PROP_DROPPING:
       g_value_set_boolean (value, priv->dropping);
+      break;
+    case PROP_WORKING:
+      g_value_set_boolean (value, priv->working > 0);
       break;
     case PROP_CANCELLABLE:
       g_value_set_object (value, priv->cancellable);
@@ -679,6 +672,11 @@ kgx_tab_class_init (KgxTabClass *klass)
                           FALSE,
                           G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
+  pspecs[PROP_WORKING] =
+    g_param_spec_boolean ("working", NULL, NULL,
+                          FALSE,
+                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
+
   pspecs[PROP_CANCELLABLE] =
     g_param_spec_object ("cancellable", NULL, NULL,
                          G_TYPE_CANCELLABLE,
@@ -754,8 +752,6 @@ kgx_tab_class_init (KgxTabClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, search_changed);
   gtk_widget_class_bind_template_callback (widget_class, search_next);
   gtk_widget_class_bind_template_callback (widget_class, search_prev);
-  gtk_widget_class_bind_template_callback (widget_class, spinner_mapped);
-  gtk_widget_class_bind_template_callback (widget_class, spinner_unmapped);
   gtk_widget_class_bind_template_callback (widget_class, drop);
 
   gtk_widget_class_set_css_name (widget_class, "kgx-tab");
@@ -842,6 +838,8 @@ kgx_tab_init (KgxTab *self)
 
   priv->cancellable = g_cancellable_new ();
 
+  priv->working = 0;
+
   gtk_widget_init_template (GTK_WIDGET (self));
 
   g_signal_group_connect (priv->terminal_signals,
@@ -866,15 +864,10 @@ kgx_tab_start (KgxTab              *self,
                GAsyncReadyCallback  callback,
                gpointer             callback_data)
 {
-  KgxTabPrivate *priv;
-
   g_return_if_fail (KGX_IS_TAB (self));
   g_return_if_fail (KGX_TAB_GET_CLASS (self)->start);
 
-  priv = kgx_tab_get_instance_private (self);
-
-  priv->spinner_timeout =
-    g_timeout_add (100, G_SOURCE_FUNC (start_spinner_timeout_cb), self);
+  kgx_tab_mark_working (self);
 
   KGX_TAB_GET_CLASS (self)->start (self, callback, callback_data);
 }
@@ -895,7 +888,8 @@ kgx_tab_start_finish (KgxTab        *self,
 
   pid = KGX_TAB_GET_CLASS (self)->start_finish (self, res, error);
 
-  g_clear_handle_id (&priv->spinner_timeout, g_source_remove);
+  kgx_tab_unmark_working (self);
+
   gtk_stack_set_visible_child (GTK_STACK (priv->stack), priv->content);
   gtk_widget_grab_focus (GTK_WIDGET (self));
 
@@ -1208,4 +1202,48 @@ kgx_tab_set_initial_title (KgxTab     *self,
                 "tab-title", title,
                 "tab-path", path,
                 NULL);
+}
+
+
+void
+kgx_tab_mark_working (KgxTab *self)
+{
+  KgxTabPrivate *priv;
+  gboolean was_not_working;
+
+  g_return_if_fail (KGX_IS_TAB (self));
+
+  priv = kgx_tab_get_instance_private (self);
+
+  was_not_working = priv->working == 0;
+
+  priv->working += 1;
+
+  if (G_LIKELY (was_not_working)) {
+    g_application_mark_busy (G_APPLICATION (priv->application));
+    g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_WORKING]);
+    priv->spinner_timeout =
+      g_timeout_add_once (100, start_spinner_timeout_cb, self);
+  }
+}
+
+
+void
+kgx_tab_unmark_working (KgxTab *self)
+{
+  KgxTabPrivate *priv;
+
+  g_return_if_fail (KGX_IS_TAB (self));
+
+  priv = kgx_tab_get_instance_private (self);
+
+  g_return_if_fail (priv->working > 0);
+
+  priv->working -= 1;
+
+  if (G_LIKELY (priv->working == 0)) {
+    g_application_unmark_busy (G_APPLICATION (priv->application));
+    g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_WORKING]);
+    g_clear_handle_id (&priv->spinner_timeout, g_source_remove);
+  }
 }

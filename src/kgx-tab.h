@@ -103,5 +103,7 @@ void        kgx_tab_extra_drop       (KgxTab               *self,
 void        kgx_tab_set_initial_title (KgxTab              *self,
                                        const char          *title,
                                        GFile               *path);
+void        kgx_tab_mark_working      (KgxTab              *self);
+void        kgx_tab_unmark_working    (KgxTab              *self);
 
 G_END_DECLS

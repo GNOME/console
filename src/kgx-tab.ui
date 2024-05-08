@@ -68,18 +68,29 @@
               <object class="GtkStack" id="stack">
                 <child>
                   <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">16</property>
                     <style>
                       <class name="empty-state" />
                     </style>
                     <child>
+                      <object class="GtkImage">
+                        <property name="icon-name">org.gnome.Console-symbolic</property>
+                        <property name="pixel-size">128</property>
+                        <property name="vexpand">true</property>
+                        <property name="valign">end</property>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkRevealer" id="spinner_revealer">
-                        <property name="hexpand">True</property>
+                        <property name="vexpand">true</property>
+                        <property name="valign">start</property>
                         <property name="transition-type">crossfade</property>
                         <property name="transition-duration">1000</property>
                         <property name="child">
                           <object class="GtkSpinner">
-                            <signal name="map" handler="spinner_mapped" swapped="no" />
-                            <signal name="unmap" handler="spinner_unmapped" swapped="no" />
+                            <property name="spinning" bind-source="KgxTab"
+                              bind-property="working" bind-flags="sync-create" />
                             <property name="valign">center</property>
                             <property name="halign">center</property>
                           </object>
