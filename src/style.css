@@ -1,32 +1,29 @@
-@define-color root_headerbar_bg_color       shade(@red_1, 1.48);
-@define-color root_headerbar_backdrop_color shade(@red_1, 1.45);
-
-@define-color remote_headerbar_bg_color       shade(@purple_1, 1.27);
-@define-color remote_headerbar_backdrop_color shade(@purple_1, 1.35);
+:root {
+  --kgx-root-bg: shade(var(--red-1), 1.48);
+  --kgx-root-backdrop: shade(var(--red-1), 1.45);
+  --kgx-remote-bg: shade(var(--purple-1), 1.27);
+  --kgx-remote-backdrop: shade(var(--purple-1), 1.35);
+  --kgx-bell: shade(var(--orange-1), 1.1);
+}
 
 @keyframes bell {
-  50% { background-color: shade(@orange_1, 1.1); }
+  50% { background-color: var(--kgx-bell); }
 }
 
 kgx-tab .top-bar {
   background-image: none;
-  background-color: @view_bg_color;
+  background-color: var(--view-bg-color);
+  color: var(--view-fg-color);
 }
 
-.terminal-window.root .main-box > revealer.top-bar {
-  background-color: @root_headerbar_bg_color;
+.terminal-window.root {
+  --headerbar-bg-color: var(--kgx-root-bg);
+  --headerbar-backdrop-color: var(--kgx-root-backdrop);
 }
 
-.terminal-window.root:backdrop .main-box > revealer.top-bar {
-  background-color: @root_headerbar_backdrop_color;
-}
-
-.terminal-window.remote .main-box > revealer.top-bar {
-  background-color: @remote_headerbar_bg_color;
-}
-
-.terminal-window.remote:backdrop .main-box > revealer.top-bar {
-  background-color: @remote_headerbar_backdrop_color;
+.terminal-window.remote {
+  --headerbar-bg-color: var(--kgx-remote-bg);
+  --headerbar-backdrop-color: var(--kgx-remote-backdrop);
 }
 
 .terminal-window.bell .main-box > revealer.top-bar {
@@ -40,44 +37,34 @@ kgx-tab .top-bar {
 
 /* Taken from nautilus */
 .floating-bar {
-  padding: 6px;
-  background-color: @window_bg_color;
-  color: @view_fg_color;
-  box-shadow: 0 0 0 1px @borders;
-  margin-top: 1px;
+  padding: 3px 8px;
+  background-color: var(--view-bg-color);
+  color: var(--view-fg-color);
+  box-shadow: inset 0 100px 0 0 alpha(currentColor, 0.05);
+  margin: 4px;
+  border-radius: 8px;
 }
 
-.floating-bar:dir(rtl) {
-  border-top-right-radius: 6px;
-  margin-right: 1px;
-}
-
-.floating-bar:dir(ltr) {
-  border-top-left-radius: 6px;
-  margin-left: 1px;
+.floating-bar:backdrop {
+  opacity: 0.7;
 }
 
 /* Sync to KgxTerminal! */
 .empty-state {
-  background: @view_bg_color;
-  color: alpha(currentColor, .5);
+  background: var(--view-bg-color);
+  color: alpha(var(--view-fg-color), .5);
 }
 
 .exit-info {
   padding: 6px;
   border-top: 2px solid #1e78e4;
-  background: rgba(13, 54, 104, 0.96);
+  background: rgba(13 54 104 / 0.96);
   color: #ffffff;
 }
 
 .error .exit-info {
   border-top: 2px solid #ed333b;
-  background: rgba(104, 13, 13, 0.96);
-}
-
-window:not(.tiled):not(.tiled-top):not(.tiled-bottom):not(.tiled-left):not(.tiled-right):not(.fullscreen):not(.maximized):not(.solid-csd) {
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
+  background: rgba(104 13 13 / 0.96);
 }
 
 .process-list row .header {
@@ -93,8 +80,8 @@ themeswitcher {
 }
 
 themeswitcher .check {
-  background: @accent_bg_color;
-  color: @accent_fg_color;
+  background: var(--accent-bg-color);
+  color: var(--accent-fg-color);
   padding: 2px;
   border-radius: 17px;
   margin: 3px;
@@ -116,11 +103,11 @@ themeswitcher checkbutton radio {
   border: none;
   outline-color: currentColor;
   transition: none;
-  box-shadow: inset 0 0 0 1px @borders;
+  box-shadow: inset 0 0 0 1px var(--border-color);
 }
 
 themeswitcher checkbutton radio:checked {
-  box-shadow: inset 0 0 0 2px @accent_bg_color;
+  box-shadow: inset 0 0 0 2px var(--accent-bg-color);
 }
 
 themeswitcher checkbutton.system radio {
@@ -154,6 +141,6 @@ kgx-tab:drop(active) {
 /* Drag overlay */
 .drop-highlight {
   border-radius: 8px;
-  background-color: alpha(@blue_2, 0.35);
+  background-color: alpha(var(--blue-2), 0.35);
   margin: 24px;
 }

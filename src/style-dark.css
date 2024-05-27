@@ -1,9 +1,7 @@
-@define-color root_headerbar_bg_color       shade(@red_5, 0.6);
-@define-color root_headerbar_backdrop_color shade(@red_5, 0.45);
-
-@define-color remote_headerbar_bg_color       shade(@purple_5, 0.6);
-@define-color remote_headerbar_backdrop_color shade(@purple_5, 0.45);
-
-@keyframes bell {
-    50% { background-color: shade(@orange_5, 0.7); }
+:root {
+  --kgx-root-bg: shade(var(--red-5), 0.6);
+  --kgx-root-backdrop: shade(var(--red-5), 0.45);
+  --kgx-remote-bg: shade(var(--purple-5), 0.6);
+  --kgx-remote-backdrop: shade(var(--purple-5), 0.45);
+  --kgx-bell: shade(var(--orange-5), 0.7);
 }
