@@ -41,6 +41,9 @@
                           </closure>
                         </binding>
                         <property name="ellipsize">middle</property>
+                        <style>
+                          <class name="dim-label"/>
+                        </style>
                       </object>
                     </child>
                     <child>
