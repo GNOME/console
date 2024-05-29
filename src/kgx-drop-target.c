@@ -342,6 +342,9 @@ drop (GtkDropTargetAsync *target,
   GdkContentFormats *formats = gdk_drop_get_formats (drop);
   const char *const *mimes = NULL;
 
+  self->active = FALSE;
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_ACTIVE]);
+
   mimes = gdk_content_formats_get_mime_types (formats, NULL);
 
   if (G_LIKELY (g_strv_contains (mimes, PORTAL)) || g_strv_contains (mimes, PORTAL_OLD)) {
