@@ -19,6 +19,7 @@
 #include "kgx-config.h"
 
 #include <glib/gi18n.h>
+#include <math.h>
 
 #include "kgx-utils.h"
 
@@ -143,4 +144,101 @@ out:
   } else {
     *command = NULL;
   }
+}
+
+
+static inline gboolean
+is_space_or_percent (const char *const text)
+{
+  gunichar c = g_utf8_get_char (text);
+
+  return g_unichar_isspace (c) || c == '%';
+}
+
+
+static inline gboolean
+is_decimal_separator (const char *const text)
+{
+  gunichar c = g_utf8_get_char (text);
+
+  return c == '.' || c == ',';
+}
+
+
+static inline void
+skip_space_or_percent (const char **const text)
+{
+  const char *ptr = *text;
+
+  while (*ptr && is_space_or_percent (ptr)) {
+    ptr = g_utf8_next_char (ptr);
+  }
+
+  *text = ptr;
+}
+
+
+static inline int
+read_part (const char **const text,
+           size_t      *const n_digits)
+{
+  const char *ptr = *text;
+  size_t a = 0;
+  int parsed = 0;
+
+  while (*ptr) {
+    gunichar c = g_utf8_get_char (ptr);
+    int c_val = g_unichar_digit_value (c);
+
+    if (c_val == -1) {
+      break;
+    }
+
+    parsed = (10 * parsed) + c_val;
+
+    ptr = g_utf8_next_char (ptr);
+    a++;
+  }
+
+  *text = ptr;
+  if (n_digits) {
+    *n_digits = a;
+  }
+
+  return parsed;
+}
+
+
+gboolean
+kgx_parse_percentage (const char *const text,
+                      double     *const value)
+{
+  const char *ptr = text;
+  int whole = 0, frac = 0;
+  size_t n_digits_whole = 0;
+  size_t n_digits_frac = 0;
+
+  skip_space_or_percent (&ptr);
+
+  whole = read_part (&ptr, &n_digits_whole);
+  if (*ptr && is_decimal_separator (ptr)) {
+    ptr = g_utf8_next_char (ptr);
+    frac = read_part (&ptr, &n_digits_frac);
+  }
+
+  if (n_digits_whole == 0 && n_digits_frac == 0) {
+    /* nothing read */
+    return FALSE;
+  }
+
+  skip_space_or_percent (&ptr);
+
+  if (*ptr) {
+    /* garbage at the end */
+    return FALSE;
+  }
+
+  *value = whole + (frac / pow (10, n_digits_frac));
+
+  return TRUE;
 }

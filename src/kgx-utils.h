@@ -210,6 +210,8 @@ GQuark          kgx_argument_error_quark   (void);
 void            kgx_filter_arguments       (GStrv             *arguments,
                                             GStrv             *command,
                                             GError           **error);
+gboolean        kgx_parse_percentage       (const char *const  text,
+                                            double     *const  value);
 
 
 G_END_DECLS

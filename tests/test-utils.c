@@ -219,6 +219,43 @@ test_str_constrained_append (void)
 }
 
 
+struct parse_test {
+  const char *text;
+  double expected;
+  gboolean should_pass;
+} parse_cases[] = {
+  { "12.4", 12.4, TRUE },
+  { "12,4", 12.4, TRUE },
+  { "%12.4", 12.4, TRUE },
+  { "12,4%", 12.4, TRUE },
+  { "%١٢.٣٤٥", 12.345, TRUE },
+  { ".45", 0.45, TRUE },
+  { " %%.67 %", 0.67, TRUE },
+  { "a12", 0.0, FALSE },
+  { "12a", 0.0, FALSE },
+  { "1.a", 0.0, FALSE },
+  { "1.2.3", 0.0, FALSE },
+  { "-1", 0.0, FALSE },
+  { "", 0.0, FALSE },
+};
+
+
+static void
+test_parse_percentage (gconstpointer user_data)
+{
+  const struct parse_test *test = user_data;
+  double result = 0.0;
+  gboolean good = kgx_parse_percentage (test->text, &result);
+
+  if (test->should_pass) {
+    g_assert_true (good);
+  } else {
+    g_assert_false (good);
+    g_assert_cmpfloat (result, ==, test->expected);
+  }
+}
+
+
 int
 main (int argc, char *argv[])
 {
@@ -238,6 +275,13 @@ main (int argc, char *argv[])
       g_strdup_printf ("/kgx/utils/str_constrained_dup/case_%" G_GSIZE_FORMAT, i);
 
     g_test_add_data_func (path, &constrained_cases[i], test_str_constrained_dup);
+  }
+
+  for (size_t i = 0; i < G_N_ELEMENTS (parse_cases); i++) {
+    g_autofree char *path =
+      g_strdup_printf ("/kgx/utils/parse_percentage/case_%li", i);
+
+    g_test_add_data_func (path, &parse_cases[i], test_parse_percentage);
   }
 
   return g_test_run ();
