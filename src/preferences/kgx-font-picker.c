@@ -45,7 +45,6 @@ enum {
   PROP_CURRENT_FONT,
   LAST_PROP
 };
-
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 
 
@@ -295,7 +294,7 @@ kgx_font_picker_class_init (KgxFontPickerClass *klass)
                               kgx_marshals_VOID__BOXEDv);
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               KGX_APPLICATION_PATH "kgx-font-picker.ui");
+                                               KGX_APPLICATION_PATH "preferences/kgx-font-picker.ui");
 
   gtk_widget_class_bind_template_child (widget_class, KgxFontPicker, selection);
 

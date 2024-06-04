@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="@KGX_APPLICATION_PATH_RAW@">
-    <file preprocess="xml-stripblanks" compressed="true">kgx-font-picker.ui</file>
     <file preprocess="xml-stripblanks" compressed="true">kgx-pages.ui</file>
     <file preprocess="xml-stripblanks" compressed="true">kgx-simple-tab.ui</file>
     <file preprocess="xml-stripblanks" compressed="true">kgx-tab.ui</file>
     <file preprocess="xml-stripblanks" compressed="true">kgx-terminal.ui</file>
     <file preprocess="xml-stripblanks" compressed="true">kgx-theme-switcher.ui</file>
     <file preprocess="xml-stripblanks" compressed="true">kgx-window.ui</file>
+    <file preprocess="xml-stripblanks" compressed="true">preferences/kgx-font-picker.ui</file>
     <file preprocess="xml-stripblanks" compressed="true">preferences/kgx-preferences-window.ui</file>
     <file compressed="true">style.css</file>
     <file compressed="true">style-dark.css</file>

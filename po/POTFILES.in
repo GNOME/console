@@ -5,7 +5,6 @@ src/help-overlay.ui
 src/kgx-application.c
 src/kgx-application.h
 src/kgx-close-dialog.c
-src/kgx-font-picker.ui
 src/kgx-pages.c
 src/kgx-pages.ui
 src/kgx-paste-dialog.c
@@ -19,5 +18,6 @@ src/kgx-theme-switcher.ui
 src/kgx-window.c
 src/kgx-window.ui
 src/main.c
+src/preferences/kgx-font-picker.ui
 src/preferences/kgx-preferences-window.c
 src/preferences/kgx-preferences-window.ui

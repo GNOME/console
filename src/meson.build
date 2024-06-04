@@ -9,8 +9,6 @@ kgx_sources = [
   'kgx-despatcher.h',
   'kgx-drop-target.c',
   'kgx-drop-target.h',
-  'kgx-font-picker.c',
-  'kgx-font-picker.h',
   'kgx-pages.c',
   'kgx-pages.h',
   'kgx-paste-dialog.c',
@@ -36,6 +34,8 @@ kgx_sources = [
   'kgx-watcher.h',
   'kgx-window.c',
   'kgx-window.h',
+  'preferences/kgx-font-picker.c',
+  'preferences/kgx-font-picker.h',
   'preferences/kgx-preferences-window.c',
   'preferences/kgx-preferences-window.h',
 ]
