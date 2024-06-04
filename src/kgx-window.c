@@ -25,11 +25,11 @@
 #include "kgx-application.h"
 #include "kgx-close-dialog.h"
 #include "kgx-pages.h"
-#include "kgx-preferences-window.h"
 #include "kgx-settings.h"
 #include "kgx-terminal.h"
 #include "kgx-theme-switcher.h"
 #include "kgx-utils.h"
+#include "preferences/kgx-preferences-window.h"
 
 #include "kgx-window.h"
 

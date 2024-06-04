@@ -15,8 +15,6 @@ kgx_sources = [
   'kgx-pages.h',
   'kgx-paste-dialog.c',
   'kgx-paste-dialog.h',
-  'kgx-preferences-window.c',
-  'kgx-preferences-window.h',
   'kgx-process.c',
   'kgx-process.h',
   'kgx-proxy-info.c',
@@ -38,6 +36,8 @@ kgx_sources = [
   'kgx-watcher.h',
   'kgx-window.c',
   'kgx-window.h',
+  'preferences/kgx-preferences-window.c',
+  'preferences/kgx-preferences-window.h',
 ]
 
 kgx_deps = [

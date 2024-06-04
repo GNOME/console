@@ -21,8 +21,9 @@
 
 #include <glib/gi18n.h>
 
-#include "kgx-settings.h"
 #include "kgx-font-picker.h"
+#include "kgx-settings.h"
+
 #include "kgx-preferences-window.h"
 
 
@@ -177,7 +178,7 @@ kgx_preferences_window_class_init (KgxPreferencesWindowClass *klass)
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               KGX_APPLICATION_PATH "kgx-preferences-window.ui");
+                                               KGX_APPLICATION_PATH "preferences/kgx-preferences-window.ui");
 
   gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, settings_binds);
   gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, audible_bell);

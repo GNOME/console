@@ -9,8 +9,6 @@ src/kgx-font-picker.ui
 src/kgx-pages.c
 src/kgx-pages.ui
 src/kgx-paste-dialog.c
-src/kgx-preferences-window.c
-src/kgx-preferences-window.ui
 src/kgx-process.c
 src/kgx-simple-tab.c
 src/kgx-tab.c
@@ -21,3 +19,5 @@ src/kgx-theme-switcher.ui
 src/kgx-window.c
 src/kgx-window.ui
 src/main.c
+src/preferences/kgx-preferences-window.c
+src/preferences/kgx-preferences-window.ui
