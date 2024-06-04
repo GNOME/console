@@ -37,6 +37,8 @@ struct _KgxPreferencesWindow {
   GtkWidget            *visual_bell;
   GtkWidget            *use_system_font;
   GtkWidget            *custom_font;
+  GtkWidget            *unlimited_scrollback;
+  GtkWidget            *scrollback;
 };
 
 
@@ -185,6 +187,8 @@ kgx_preferences_window_class_init (KgxPreferencesWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, visual_bell);
   gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, use_system_font);
   gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, custom_font);
+  gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, unlimited_scrollback);
+  gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, scrollback);
 
   gtk_widget_class_bind_template_callback (widget_class, font_as_attributes);
   gtk_widget_class_bind_template_callback (widget_class, font_as_label);
@@ -210,4 +214,12 @@ kgx_preferences_window_init (KgxPreferencesWindow *self)
   g_binding_group_bind (self->settings_binds, "use-system-font",
                         self->use_system_font, "active",
                         G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+
+  g_binding_group_bind (self->settings_binds, "ignore-scrollback-limit",
+                        self->unlimited_scrollback, "active",
+                        G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+  g_binding_group_bind (self->settings_binds, "scrollback-limit",
+                        self->scrollback, "value",
+                        G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
+
 }
