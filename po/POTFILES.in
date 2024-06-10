@@ -16,6 +16,7 @@ src/kgx-tab.ui
 src/kgx-terminal.c
 src/kgx-terminal.ui
 src/kgx-theme-switcher.ui
+src/kgx-utils.c
 src/kgx-window.c
 src/kgx-window.ui
 src/main.c

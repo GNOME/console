@@ -31,6 +31,7 @@ kgx_sources = [
   'kgx-terminal.h',
   'kgx-theme-switcher.c',
   'kgx-theme-switcher.h',
+  'kgx-utils.c',
   'kgx-utils.h',
   'kgx-watcher.c',
   'kgx-watcher.h',
@@ -88,6 +89,7 @@ kgx_enums = gnome.mkenums_simple('kgx-enums',
                                       'kgx-settings.h',
                                       'kgx-tab.h',
                                       'kgx-terminal.h',
+                                      'kgx-utils.h',
                                     ])
 
 kgx_lib = static_library ( bin_name,

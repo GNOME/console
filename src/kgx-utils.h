@@ -159,4 +159,20 @@ kgx_str_constrained_dup (const char *source, size_t max_len)
   return g_string_free (g_steal_pointer (&buffer), FALSE);
 }
 
+
+typedef enum /*< enum,prefix=KGX >*/ {
+  KGX_ARGUMENT_ERROR_BOTH,
+  KGX_ARGUMENT_ERROR_MISSING,
+} KgxArgumentError;
+
+
+#define KGX_ARGUMENT_ERROR (kgx_argument_error_quark ())
+
+
+GQuark          kgx_argument_error_quark   (void);
+void            kgx_filter_arguments       (GStrv             *arguments,
+                                            GStrv             *command,
+                                            GError           **error);
+
+
 G_END_DECLS
