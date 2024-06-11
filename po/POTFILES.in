@@ -2,6 +2,7 @@ data/org.gnome.Console.desktop.in.in
 data/org.gnome.Console.gschema.xml.in
 data/org.gnome.Console.metainfo.xml.in.in
 src/help-overlay.ui
+src/kgx-about.c
 src/kgx-application.c
 src/kgx-application.h
 src/kgx-close-dialog.c
