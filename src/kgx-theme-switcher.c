@@ -109,7 +109,7 @@ kgx_theme_switcher_get_property (GObject    *object,
       g_value_set_enum (value, self->theme);
       break;
     case PROP_SHOW_SYSTEM:
-      kgx_set_boolean_prop (object, pspec, &self->show_system, value);
+      g_value_set_boolean (value, self->show_system);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -130,7 +130,7 @@ kgx_theme_switcher_set_property (GObject      *object,
       set_theme (self, g_value_get_enum (value));
       break;
     case PROP_SHOW_SYSTEM:
-      self->show_system = g_value_get_boolean (value);
+      kgx_set_boolean_prop (object, pspec, &self->show_system, value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
