@@ -66,8 +66,8 @@
         <lookup name="settings">KgxTerminal</lookup>
       </lookup>
     </binding>
-    <signal name="current-directory-uri-changed" handler="location_changed" />
-    <signal name="current-file-uri-changed" handler="location_changed" />
+    <signal name="termprop-changed::vte.cwf" handler="location_changed" />
+    <signal name="termprop-changed::vte.cwd" handler="location_changed" />
     <signal name="setup-context-menu" handler="setup_context_menu" />
     <child>
       <object class="GtkShortcutController">

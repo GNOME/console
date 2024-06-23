@@ -211,6 +211,60 @@ kgx_terminal_set_property (GObject      *object,
 }
 
 
+static inline char *
+get_uri_prop (VteTerminal *terminal, const char *prop)
+{
+  g_autoptr (GUri) uri = NULL;
+
+  uri = vte_terminal_ref_termprop_uri (terminal, prop);
+  if (!uri) {
+    return NULL;
+  }
+
+  return g_uri_to_string (uri);
+}
+
+
+static inline char *
+get_file_uri_prop (VteTerminal *terminal)
+{
+  return get_uri_prop (terminal, VTE_TERMPROP_CURRENT_FILE_URI);
+}
+
+
+static inline char *
+get_directory_uri_prop (VteTerminal *terminal)
+{
+  return get_uri_prop (terminal, VTE_TERMPROP_CURRENT_DIRECTORY_URI);
+}
+
+
+static inline char *
+get_either_uri_prop (VteTerminal *terminal)
+{
+  char *res = get_file_uri_prop (terminal);
+
+  if (res) {
+    return res;
+  }
+
+  return get_directory_uri_prop (terminal);
+}
+
+
+static inline GFile *
+get_location (VteTerminal *terminal)
+{
+  g_autofree char *uri = get_either_uri_prop (terminal);
+
+  if (!uri) {
+    return NULL;
+  }
+
+  return g_file_new_for_uri (uri);
+}
+
+
 static void
 kgx_terminal_get_property (GObject    *object,
                            guint       property_id,
@@ -218,8 +272,6 @@ kgx_terminal_get_property (GObject    *object,
                            GParamSpec *pspec)
 {
   KgxTerminal *self = KGX_TERMINAL (object);
-  const char *uri;
-  g_autoptr (GFile) path = NULL;
 
   switch (property_id) {
     case PROP_SETTINGS:
@@ -229,12 +281,7 @@ kgx_terminal_get_property (GObject    *object,
       g_value_set_object (value, self->cancellable);
       break;
     case PROP_PATH:
-      if ((uri = vte_terminal_get_current_file_uri (VTE_TERMINAL (self)))) {
-        path = g_file_new_for_uri (uri);
-      } else if ((uri = vte_terminal_get_current_directory_uri (VTE_TERMINAL (self)))) {
-        path = g_file_new_for_uri (uri);
-      }
-      g_value_set_object (value, path);
+      g_value_take_object (value, get_location (VTE_TERMINAL (self)));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -410,12 +457,12 @@ did_show_folder (GObject *source, GAsyncResult *res, gpointer user_data)
 static void
 show_in_files_activated (KgxTerminal *self)
 {
-  const char *uri = NULL;
+  g_autofree char *uri = NULL;
   GtkWindow *parent = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
 
   ensure_despatcher (self);
 
-  uri = vte_terminal_get_current_file_uri (VTE_TERMINAL (self));
+  uri = get_file_uri_prop (VTE_TERMINAL (self));
 
   if (G_UNLIKELY (uri)) {
     kgx_despatcher_show_item (self->despatcher,
@@ -427,7 +474,7 @@ show_in_files_activated (KgxTerminal *self)
     return;
   }
 
-  uri = vte_terminal_get_current_directory_uri (VTE_TERMINAL (self));
+  uri = get_directory_uri_prop (VTE_TERMINAL (self));
 
   if (G_UNLIKELY (!uri)) {
     g_warning ("term.show-in-files: no file");
@@ -514,12 +561,11 @@ kgx_terminal_decrease_font_size (VteTerminal *self)
 static void
 location_changed (KgxTerminal *self)
 {
-  gboolean value;
+  g_autofree char *uri = get_either_uri_prop (VTE_TERMINAL (self));
 
-  value = vte_terminal_get_current_file_uri (VTE_TERMINAL (self)) ||
-            vte_terminal_get_current_directory_uri (VTE_TERMINAL (self));
-
-  gtk_widget_action_set_enabled (GTK_WIDGET (self), "term.show-in-files", value);
+  gtk_widget_action_set_enabled (GTK_WIDGET (self),
+                                 "term.show-in-files",
+                                 uri != NULL);
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_PATH]);
 }
