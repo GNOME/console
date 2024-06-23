@@ -60,6 +60,7 @@ conf.set('KGX_APPLICATION_PATH_RAW', app_path)
 conf.set_quoted('LOCALEDIR', prefix / get_option('localedir'))
 conf.set('BIN_DIR', prefix / bindir)
 conf.set('BIN_NAME', bin_name)
+conf.set_quoted('KGX_BIN_NAME', bin_name)
 conf.set('IS_DEVEL', get_option('devel'))
 
 config_h_in = configure_file(
@@ -76,7 +77,7 @@ gtk_min_ver = '4.14'
 gtk_sym_ver = 'GDK_VERSION_@0@'.format(gtk_min_ver.replace('.', '_'))
 
 # GLib Requirement
-glib_min_ver = '2.78'
+glib_min_ver = '2.80'
 glib_sym_ver = 'GLIB_VERSION_@0@'.format(glib_min_ver.replace('.', '_'))
 
 # Adwaita Requirement

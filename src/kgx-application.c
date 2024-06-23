@@ -502,11 +502,11 @@ static GOptionEntry entries[] = {
   {
     G_OPTION_REMAINING,
     0,
-    0,
+    G_OPTION_FLAG_HIDDEN,
     G_OPTION_ARG_FILENAME_ARRAY,
     NULL,
     NULL,
-    N_("[-e|-- COMMAND [ARGUMENT...]]")
+    NULL,
   },
   { NULL }
 };
@@ -647,11 +647,18 @@ scale_to_can_reset (GBinding     *binding,
 static void
 kgx_application_init (KgxApplication *self)
 {
-  g_autoptr (GPropertyAction) theme_action = NULL;
   AdwStyleManager *style_manager = adw_style_manager_get_default ();
   GAction *action;
+  g_autoptr (GPropertyAction) theme_action = NULL;
+  /* Translators: %s is the version string, KGX is a codename and should be left as-is */
+  g_autofree char *summary = g_strdup_printf (_("KGX %s — Terminal Emulator"), PACKAGE_VERSION);
 
   g_application_add_main_option_entries (G_APPLICATION (self), entries);
+  g_application_set_option_context_description (G_APPLICATION (self),
+                                                "https://apps.gnome.org/Console/");
+  g_application_set_option_context_parameter_string (G_APPLICATION (self),
+                                                     _("[-e|-- COMMAND [ARGUMENT...]]"));
+  g_application_set_option_context_summary (G_APPLICATION (self), summary);
 
   g_action_map_add_action_entries (G_ACTION_MAP (self),
                                    app_entries,

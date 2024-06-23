@@ -1,6 +1,6 @@
 /* main.c
  *
- * Copyright 2019-2021 Zander Brown
+ * Copyright 2019-2024 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,15 +26,18 @@ main (int argc, char *argv[])
   g_autoptr (GtkApplication) app = NULL;
 
   /* Set up gettext translations */
+  setlocale (LC_ALL, "");
   bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
+  g_set_prgname (KGX_BIN_NAME);
   g_set_application_name (KGX_DISPLAY_NAME);
   gtk_window_set_default_icon_name (KGX_APPLICATION_ID);
 
   app = g_object_new (KGX_TYPE_APPLICATION,
                       "application_id", KGX_APPLICATION_ID,
+                      "version", PACKAGE_VERSION,
                       "flags", G_APPLICATION_HANDLES_COMMAND_LINE |
                                G_APPLICATION_HANDLES_OPEN |
                                G_APPLICATION_CAN_OVERRIDE_APP_ID,
