@@ -1,13 +1,13 @@
 :root {
-  --kgx-root-bg: shade(var(--red-1), 1.48);
-  --kgx-root-backdrop: shade(var(--red-1), 1.45);
-  --kgx-remote-bg: shade(var(--purple-1), 1.27);
-  --kgx-remote-backdrop: shade(var(--purple-1), 1.35);
-  --kgx-bell: shade(var(--orange-1), 1.1);
+  --headerbar-bg-oklch: 0.95 calc(c * 0.3) h;
+  --headerbar-backdrop-oklch: 0.9 calc(c * 0.25) h;
+  --headerbar-bell-oklch: 1 c h;
 }
 
 @keyframes bell {
-  50% { background-color: var(--kgx-bell); }
+  50% {
+    background-color: oklch(from var(--accent-orange) var(--headerbar-bell-oklch));
+  }
 }
 
 kgx-tab .top-bar {
@@ -17,13 +17,13 @@ kgx-tab .top-bar {
 }
 
 .terminal-window.root {
-  --headerbar-bg-color: var(--kgx-root-bg);
-  --headerbar-backdrop-color: var(--kgx-root-backdrop);
+  --headerbar-bg-color: oklch(from var(--accent-red) var(--headerbar-bg-oklch));
+  --headerbar-backdrop-color: oklch(from var(--accent-red) var(--headerbar-backdrop-oklch));
 }
 
 .terminal-window.remote {
-  --headerbar-bg-color: var(--kgx-remote-bg);
-  --headerbar-backdrop-color: var(--kgx-remote-backdrop);
+  --headerbar-bg-color: oklch(from var(--accent-purple) var(--headerbar-bg-oklch));
+  --headerbar-backdrop-color: oklch(from var(--accent-purple) var(--headerbar-backdrop-oklch));
 }
 
 .terminal-window.bell .main-box > revealer.top-bar {
@@ -40,7 +40,7 @@ kgx-tab .top-bar {
   padding: 3px 8px;
   background-color: var(--view-bg-color);
   color: var(--view-fg-color);
-  box-shadow: inset 0 100px 0 0 alpha(currentColor, 0.05);
+  box-shadow: inset 0 100px 0 0 color-mix(in srgb, currentColor 5%, transparent);
   margin: 4px;
   border-radius: 8px;
 }
@@ -52,7 +52,7 @@ kgx-tab .top-bar {
 /* Sync to KgxTerminal! */
 .empty-state {
   background: var(--view-bg-color);
-  color: alpha(var(--view-fg-color), .5);
+  color: color-mix(in srgb, var(--view-fg-color), transparent);
 }
 
 .exit-info {
@@ -104,6 +104,9 @@ themeswitcher checkbutton radio {
   outline-color: currentColor;
   transition: none;
   box-shadow: inset 0 0 0 1px var(--border-color);
+
+  --light-bg: white;
+  --dark-bg: #1e1e1e;
 }
 
 themeswitcher checkbutton radio:checked {
@@ -111,17 +114,15 @@ themeswitcher checkbutton radio:checked {
 }
 
 themeswitcher checkbutton.system radio {
-  background: linear-gradient(-45deg, #1e1e1e 49.99%, white 50.01%);
+  background: linear-gradient(-45deg, var(--dark-bg) 49.99%, var(--light-bg) 50.01%);
 }
 
 themeswitcher checkbutton.light radio {
-  color: alpha(black, .8);
-  background-color: white;
+  background-color: var(--light-bg);
 }
 
 themeswitcher checkbutton.dark radio {
-  color: white;
-  background-color: #1e1e1e;
+  background-color: var(--dark-bg);
 }
 
 .font-picker {
@@ -141,6 +142,6 @@ kgx-tab:drop(active) {
 /* Drag overlay */
 .drop-highlight {
   border-radius: 8px;
-  background-color: alpha(var(--blue-2), 0.35);
+  background-color: color-mix(in srgb, var(--blue-2) 35%, transparent);
   margin: 24px;
 }

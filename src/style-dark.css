@@ -1,7 +1,5 @@
 :root {
-  --kgx-root-bg: shade(var(--red-5), 0.6);
-  --kgx-root-backdrop: shade(var(--red-5), 0.45);
-  --kgx-remote-bg: shade(var(--purple-5), 0.6);
-  --kgx-remote-backdrop: shade(var(--purple-5), 0.45);
-  --kgx-bell: shade(var(--orange-5), 0.7);
+  --headerbar-bg-oklch: 0.32 calc(c * 0.32) h;
+  --headerbar-backdrop-oklch: 0.27 calc(c * 0.27) h;
+  --headerbar-bell-oklch: 0.42 calc(c * 0.6) h;
 }
