@@ -52,19 +52,13 @@ kgx-tab .top-bar {
 /* Sync to KgxTerminal! */
 .empty-state {
   background: var(--view-bg-color);
-  color: color-mix(in srgb, var(--view-fg-color), transparent);
+  color: color-mix(in srgb, var(--view-fg-color) var(--dim-opacity), transparent);
 }
 
 .exit-info {
   padding: 6px;
-  border-top: 2px solid #1e78e4;
-  background: rgba(13 54 104 / 0.96);
-  color: #ffffff;
-}
-
-.error .exit-info {
-  border-top: 2px solid #ed333b;
-  background: rgba(104 13 13 / 0.96);
+  border-top: 2px solid var(--accent-bg-color);
+  background: oklch(from var(--accent-bg-color) l calc(c * 2) h / 20%);
 }
 
 .process-list row .header {
@@ -142,6 +136,6 @@ kgx-tab:drop(active) {
 /* Drag overlay */
 .drop-highlight {
   border-radius: 8px;
-  background-color: color-mix(in srgb, var(--blue-2) 35%, transparent);
+  background-color: color-mix(in srgb, var(--accent-bg-color) 35%, transparent);
   margin: 24px;
 }
