@@ -18,9 +18,8 @@
 
 #pragma once
 
-#include "kgx-window.h"
 #include "kgx-tab.h"
-#include "kgx-settings.h"
+#include "kgx-window.h"
 
 G_BEGIN_DECLS
 

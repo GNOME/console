@@ -1,4 +1,4 @@
-/* kgx-window.c
+/* kgx-application.c
  *
  * Copyright 2019 Zander Brown
  *
@@ -34,11 +34,16 @@
 #include "kgx-drop-target.h"
 #include "kgx-pages.h"
 #include "kgx-resources.h"
+#include "kgx-settings.h"
 #include "kgx-simple-tab.h"
+#include "kgx-terminal.h"
+#include "kgx-utils.h"
 #include "kgx-watcher.h"
 #include "kgx-window.h"
 
 #include "kgx-application.h"
+
+#define ARGV_ARGUMENT "extracted-argv"
 
 
 struct _KgxApplication {
@@ -50,6 +55,8 @@ struct _KgxApplication {
 
   /* this is simply a hashset of pointers, NOT references */
   GHashTable               *active_windows;
+
+  GStrv                     argv;
 };
 
 
@@ -74,6 +81,8 @@ kgx_application_dispose (GObject *object)
   g_clear_object (&self->watcher);
 
   g_clear_pointer (&self->active_windows, g_hash_table_unref);
+
+  g_clear_pointer (&self->argv, g_strfreev);
 
   G_OBJECT_CLASS (kgx_application_parent_class)->dispose (object);
 }
@@ -190,39 +199,20 @@ kgx_application_open (GApplication  *app,
 }
 
 
-static int
+static gboolean
 kgx_application_local_command_line (GApplication   *app,
                                     char         ***arguments,
                                     int            *exit_status)
 {
-  for (size_t i = 0; (*arguments)[i] != NULL; i++) {
-    /* Don't edit argv[0], but also don't start the loop with i = 1,
-     * because it's technically possible to run a program with argc == 0 */
-    if (i == 0) {
-      continue;
-    }
+  g_autoptr (GError) error = NULL;
+  KgxApplication *self = KGX_APPLICATION (app);
 
-    if (strcmp ((*arguments)[i], "-e") == 0) {
-      /* For xterm-compatible handling of -e, we want to stop parsing
-       * other command-line options at this point, so that
-       *
-       *     kgx -T "Directory listing" -e ls -al /
-       *
-       * passes "-al" to ls instead of trying to parse them as kgx
-       * options. To do this, turn -e into the "--" pseudo-argument -
-       * unless there is exactly one argument following it, in which
-       * case leave it as -e, which the GOptionContext will treat
-       * like --command. */
-      if (!((*arguments)[i + 1] != NULL && (*arguments)[i + 2] == NULL)) {
-        (*arguments)[i][1] = '-';
-      }
+  kgx_filter_arguments (arguments, &self->argv, &error);
 
-      break;
-    } else if (strcmp ((*arguments)[i], "--") == 0) {
-      /* Don't continue to edit arguments after the -- separator,
-       * so you can do: kgx -- some-command ... -e ... */
-      break;
-    }
+  if (error) {
+    g_printerr ("%s\n", error->message);
+    *exit_status = EXIT_FAILURE;
+    return TRUE;
   }
 
   return G_APPLICATION_CLASS (kgx_application_parent_class)->local_command_line (app, arguments, exit_status);
@@ -235,23 +225,23 @@ kgx_application_command_line (GApplication            *app,
 {
   KgxApplication *self = KGX_APPLICATION (app);
   GVariantDict *options = NULL;
-  g_auto (GStrv) argv = NULL;
+  g_autofree const char **argv = NULL;
+  g_autofree const char **paths = NULL;
   const char *command = NULL;
   const char *working_dir = NULL;
   const char *title = NULL;
   const char *const *shell = NULL;
-  const char *cwd = NULL;
   gint64 scrollback;
   gboolean tab;
-  g_autoptr (GFile) path = NULL;
+  KgxWindow *window = NULL;
 
   options = g_application_command_line_get_options_dict (cli);
-  cwd = g_application_command_line_get_cwd (cli);
 
   g_variant_dict_lookup (options, "working-directory", "^&ay", &working_dir);
   g_variant_dict_lookup (options, "title", "&s", &title);
   g_variant_dict_lookup (options, "command", "^&ay", &command);
-  g_variant_dict_lookup (options, G_OPTION_REMAINING, "^aay", &argv);
+  g_variant_dict_lookup (options, ARGV_ARGUMENT, "^a&ay", &argv);
+  g_variant_dict_lookup (options, G_OPTION_REMAINING, "^a&ay", &paths);
 
   if (g_variant_dict_lookup (options, "set-shell", "^as", &shell) && shell) {
     kgx_settings_set_custom_shell (self->settings, shell);
@@ -265,53 +255,48 @@ kgx_application_command_line (GApplication            *app,
     return EXIT_SUCCESS;
   }
 
-  if (working_dir != NULL) {
-    path = g_file_new_for_commandline_arg_and_cwd (working_dir, cwd);
-  }
-
-  if (path == NULL) {
-    path = g_file_new_for_path (cwd);
-  }
-
-  if (command != NULL) {
-    gboolean can_exec_directly;
-
-    if (argv != NULL && argv[0] != NULL) {
-      g_warning (_("Cannot use both --command and positional parameters"));
-      return EXIT_FAILURE;
-    }
-
-    g_clear_pointer (&argv, g_strfreev);
-
-    if (strchr (command, '/') != NULL) {
-      can_exec_directly = g_file_test (command, G_FILE_TEST_IS_EXECUTABLE);
-    } else {
-      g_autofree char *program = g_find_program_in_path (command);
-
-      can_exec_directly = (program != NULL);
-    }
-
-    if (can_exec_directly) {
-      argv = g_new0 (char *, 2);
-      argv[0] = g_strdup (command);
-      argv[1] = NULL;
-    } else {
-      argv = g_new0 (char *, 4);
-      argv[0] = g_strdup ("/bin/sh");
-      argv[1] = g_strdup ("-c");
-      argv[2] = g_strdup (command);
-      argv[3] = NULL;
-    }
+  if (working_dir && paths) {
+    g_application_command_line_printerr (cli,
+                                         _("Cannot use both --working-directory and positional parameters"));
+    return EXIT_FAILURE;
   }
 
   if (g_variant_dict_lookup (options, "tab", "b", &tab) && tab) {
-    kgx_application_add_terminal (self,
-                                  KGX_WINDOW (gtk_application_get_active_window (GTK_APPLICATION (self))),
-                                  path,
-                                  argv,
-                                  title);
+    window = KGX_WINDOW (gtk_application_get_active_window (GTK_APPLICATION (self)));
+  }
+
+  if (paths) {
+    KgxTab *last_tab = NULL;
+
+    for (size_t i = 0; paths[i]; i++) {
+      g_autoptr (GFile) path =
+        g_application_command_line_create_file_for_arg (cli, paths[i]);
+
+      if (G_UNLIKELY (last_tab && !window)) {
+        window = KGX_WINDOW (gtk_widget_get_root (GTK_WIDGET (last_tab)));
+      }
+
+      last_tab = kgx_application_add_terminal (KGX_APPLICATION (app),
+                                              window,
+                                              path,
+                                              NULL,
+                                              NULL);
+    }
   } else {
-    kgx_application_add_terminal (self, NULL, path, argv, title);
+    const char *cwd = NULL;
+    g_autoptr (GFile) path = NULL;
+
+    if (working_dir != NULL) {
+      path = g_application_command_line_create_file_for_arg (cli, working_dir);
+    }
+
+    cwd = g_application_command_line_get_cwd (cli);
+
+    if (path == NULL && cwd) {
+      path = g_file_new_for_path (cwd);
+    }
+
+    kgx_application_add_terminal (self, window, path, (GStrv) argv, title);
   }
 
   return EXIT_SUCCESS;
@@ -322,6 +307,7 @@ static int
 kgx_application_handle_local_options (GApplication *app,
                                       GVariantDict *options)
 {
+  KgxApplication *self = KGX_APPLICATION (app);
   gboolean version = FALSE;
   gboolean about = FALSE;
 
@@ -335,6 +321,15 @@ kgx_application_handle_local_options (GApplication *app,
     kgx_about_print_logo ();
 
     return EXIT_SUCCESS;
+  }
+
+  if (self->argv) {
+    GVariant *value =
+      g_variant_new_bytestring_array ((const char * const*) self->argv, -1);
+
+    g_variant_dict_insert_value (options, ARGV_ARGUMENT, value);
+
+    g_clear_pointer (&self->argv, g_strfreev);
   }
 
   return G_APPLICATION_CLASS (kgx_application_parent_class)->handle_local_options (app, options);
