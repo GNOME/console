@@ -104,8 +104,8 @@ kgx_set_boolean_prop (GObject      *restrict object,
  * @source: the text to read from
  * @max_len: the maximum length @buffer should expand to
  *
- * Writes @source to @buffer, but stopping if we reach @max_len, at which point
- * an elipsis is added and we bail out. UTF-8 aware.
+ * Writes @source to @buffer, but stopping if @buffer reachs @max_len bytes,
+ * at which point an elipsis is added and we bail out. UTF-8 aware.
  *
  * Returns: %TRUE if @max_len was reached, otherwise %FALSE
  */
@@ -148,7 +148,7 @@ kgx_str_constrained_dup (const char *source, size_t max_len)
   g_autoptr (GString) buffer = NULL;
   size_t source_len = strlen (source);
 
-  if (G_LIKELY (source_len < max_len - 1)) {
+  if (G_LIKELY (source_len < max_len)) {
     return g_strdup (source);
   }
 

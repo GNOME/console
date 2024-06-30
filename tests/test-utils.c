@@ -172,6 +172,53 @@ test_filter_arguments_missing (void)
 }
 
 
+static struct constrained_test {
+  const char *input;
+  size_t max_len;
+  const char *output;
+} constrained_cases[] = {
+  { "hello world", 5, "hello…" },
+  { "hello", 5, "hello" },
+};
+
+
+static void
+test_str_constrained_dup (gconstpointer user_data)
+{
+  const struct constrained_test *test = user_data;
+  g_autofree char *result = kgx_str_constrained_dup (test->input, test->max_len);
+
+  g_assert_cmpstr (result, ==, test->output);
+  g_assert_cmpint (strlen (result), <=, test->max_len + strlen ("…"));
+}
+
+
+static void
+test_str_constrained_append (void)
+{
+  const size_t len = 10;
+  g_autoptr (GString) buffer = g_string_sized_new (len);
+
+  g_assert_cmpstr (buffer->str, ==, "");
+  g_assert_cmpint (buffer->len, <=, len + strlen ("…"));
+
+  kgx_str_constrained_append (buffer, "some", len);
+
+  g_assert_cmpstr (buffer->str, ==, "some");
+  g_assert_cmpint (buffer->len, <=, len + strlen ("…"));
+
+  kgx_str_constrained_append (buffer, "thing", len);
+
+  g_assert_cmpstr (buffer->str, ==, "something");
+  g_assert_cmpint (buffer->len, <=, len + strlen ("…"));
+
+  kgx_str_constrained_append (buffer, " more", len);
+
+  g_assert_cmpstr (buffer->str, ==, "something …");
+  g_assert_cmpint (buffer->len, <=, len + strlen ("…"));
+}
+
+
 int
 main (int argc, char *argv[])
 {
@@ -185,6 +232,13 @@ main (int argc, char *argv[])
   }
   g_test_add_func ("/kgx/utils/filter_arguments/both", test_filter_arguments_both);
   g_test_add_func ("/kgx/utils/filter_arguments/missing", test_filter_arguments_missing);
+  g_test_add_func ("/kgx/utils/str_constrained_append", test_str_constrained_append);
+  for (size_t i = 0; i < G_N_ELEMENTS (constrained_cases); i++) {
+    g_autofree char *path =
+      g_strdup_printf ("/kgx/utils/str_constrained_dup/case_%li", i);
+
+    g_test_add_data_func (path, &constrained_cases[i], test_str_constrained_dup);
+  }
 
   return g_test_run ();
 }
