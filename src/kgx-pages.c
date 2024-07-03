@@ -522,7 +522,7 @@ ringing_to_icon (GBinding     *binding,
                  gpointer      user_data)
 {
   if (g_value_get_boolean (from_value)) {
-    g_value_take_object (to_value, g_themed_icon_new ("bell-outline"));
+    g_value_take_object (to_value, g_themed_icon_new ("bell-outline-symbolic"));
   } else {
     g_value_set_object (to_value, NULL);
   }
