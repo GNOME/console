@@ -90,21 +90,26 @@ kgx_enums = gnome.mkenums_simple('kgx-enums',
                                       'kgx-terminal.h',
                                     ])
 
-kgx_lib = static_library (bin_name,
-                   kgx_sources + kgx_enums,
-           c_args: kgx_cargs,
-     dependencies: kgx_deps,
+kgx_lib = static_library ( bin_name,
+                           kgx_sources + kgx_enums,
+             dependencies: kgx_deps,
+                   c_args: kgx_cargs,
+                  install: false,
+    gnu_symbol_visibility: 'internal',
 )
 kgx_inc = include_directories('.')
 
-kgx_dep = declare_dependency (sources: [config_h, kgx_enums, kgx_schemas],
-                              include_directories: kgx_inc,
-                              link_with: kgx_lib,
-                              dependencies: kgx_deps)
+kgx_dep = declare_dependency (
+                  sources: [config_h, kgx_enums, kgx_schemas],
+      include_directories: kgx_inc,
+                link_with: kgx_lib,
+             dependencies: kgx_deps
+)
 
-executable(        bin_name,
-                   'main.c',
-     dependencies: kgx_dep,
-           c_args: kgx_cargs,
-          install: true,
+executable(                bin_name,
+                           'main.c',
+             dependencies: kgx_dep,
+                   c_args: kgx_cargs,
+                  install: true,
+    gnu_symbol_visibility: 'internal',
 )
