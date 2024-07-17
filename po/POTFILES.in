@@ -6,6 +6,7 @@ src/kgx-about.c
 src/kgx-application.c
 src/kgx-application.h
 src/kgx-close-dialog.c
+src/kgx-colour-utils.c
 src/kgx-pages.c
 src/kgx-pages.ui
 src/kgx-paste-dialog.c
