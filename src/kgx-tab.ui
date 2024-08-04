@@ -88,11 +88,11 @@
                         <property name="transition-type">crossfade</property>
                         <property name="transition-duration">1000</property>
                         <property name="child">
-                          <object class="GtkSpinner">
-                            <property name="spinning" bind-source="KgxTab"
-                              bind-property="working" bind-flags="sync-create" />
+                          <object class="AdwSpinner">
                             <property name="valign">center</property>
                             <property name="halign">center</property>
+                            <property name="width-request">32</property>
+                            <property name="height-request">32</property>
                           </object>
                         </property>
                       </object>
