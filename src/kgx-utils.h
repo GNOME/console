@@ -99,6 +99,36 @@ kgx_set_boolean_prop (GObject      *restrict object,
 
 
 /**
+ * kgx_set_int64_prop:
+ * @object: the #GObject the property is on
+ * @pspec: the #GParamSpec being set
+ * @target: the storage on @object for @pspec
+ * @value: the potential new value for @target
+ *
+ * Update an int64 property, notifying if the value changed
+ *
+ * Returns: %TRUE if the value changed, otherwise %FALSE
+ */
+static inline gboolean
+kgx_set_int64_prop (GObject      *restrict object,
+                    GParamSpec   *restrict pspec,
+                    int64_t      *restrict target,
+                    const GValue *restrict value)
+{
+  int64_t new_value = g_value_get_int64 (value);
+
+  if (new_value == *target) {
+    return FALSE;
+  }
+
+  *target = new_value;
+  g_object_notify_by_pspec (object, pspec);
+
+  return TRUE;
+}
+
+
+/**
  * kgx_str_constrained_append:
  * @buffer: a #GString to append to
  * @source: the text to read from
