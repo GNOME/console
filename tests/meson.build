@@ -1,5 +1,6 @@
 tests = [
   'colour-utils',
+  'palette',
   'utils',
 ]
 
