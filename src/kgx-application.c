@@ -244,7 +244,7 @@ kgx_application_command_line (GApplication            *app,
   }
 
   if (g_variant_dict_lookup (options, "set-scrollback", "x", &scrollback)) {
-    kgx_settings_set_scrollback (self->settings, scrollback);
+    kgx_settings_set_scrollback_limit (self->settings, scrollback);
 
     return EXIT_SUCCESS;
   }

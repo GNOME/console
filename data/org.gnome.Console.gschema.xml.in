@@ -24,6 +24,9 @@
     <key name="shell" type="as">
       <default>[]</default>
     </key>
+    <key name="ignore-scrollback-limit" type="b">
+      <default>false</default>
+    </key>
     <key name="scrollback-lines" type="x">
       <default>10000</default>
     </key>

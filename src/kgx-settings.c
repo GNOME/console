@@ -22,8 +22,9 @@
 #include <vte/vte.h>
 #include <adwaita.h>
 
-#include "kgx-system-info.h"
 #include "kgx-marshals.h"
+#include "kgx-system-info.h"
+#include "kgx-utils.h"
 
 #include "kgx-settings.h"
 
@@ -46,13 +47,15 @@ struct _KgxSettings {
   gboolean              visual_bell;
   gboolean              use_system_font;
   PangoFontDescription *custom_font;
+  int64_t               scrollback_limit;
+  gboolean              ignore_scrollback_limit;
 
   GSettings            *settings;
   KgxSystemInfo        *system_info;
 };
 
 
-G_DEFINE_TYPE (KgxSettings, kgx_settings, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (KgxSettings, kgx_settings, G_TYPE_OBJECT)
 
 
 enum {
@@ -68,9 +71,10 @@ enum {
   PROP_VISUAL_BELL,
   PROP_USE_SYSTEM_FONT,
   PROP_CUSTOM_FONT,
+  PROP_SCROLLBACK_LIMIT,
+  PROP_IGNORE_SCROLLBACK_LIMIT,
   LAST_PROP
 };
-
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 
 
@@ -128,19 +132,37 @@ kgx_settings_set_property (GObject      *object,
       update_scale (self, g_value_get_double (value));
       break;
     case PROP_SCROLLBACK_LINES:
-      kgx_settings_set_scrollback (self, g_value_get_int64 (value));
+      kgx_set_int64_prop (object, pspec, &self->scrollback_lines, value);
       break;
     case PROP_AUDIBLE_BELL:
-      kgx_settings_set_audible_bell (self, g_value_get_boolean (value));
+      kgx_set_boolean_prop (object,
+                            pspec,
+                            &self->audible_bell,
+                            value);
       break;
     case PROP_VISUAL_BELL:
-      kgx_settings_set_visual_bell (self, g_value_get_boolean (value));
+      kgx_set_boolean_prop (object,
+                            pspec,
+                            &self->visual_bell,
+                            value);
       break;
     case PROP_USE_SYSTEM_FONT:
-      kgx_settings_set_use_system_font (self, g_value_get_boolean (value));
+      kgx_set_boolean_prop (object,
+                            pspec,
+                            &self->use_system_font,
+                            value);
       break;
     case PROP_CUSTOM_FONT:
       kgx_settings_set_custom_font (self, g_value_get_boxed (value));
+      break;
+    case PROP_SCROLLBACK_LIMIT:
+      kgx_set_int64_prop (object, pspec, &self->scrollback_limit, value);
+      break;
+    case PROP_IGNORE_SCROLLBACK_LIMIT:
+      kgx_set_boolean_prop (object,
+                            pspec,
+                            &self->ignore_scrollback_limit,
+                            value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -190,6 +212,12 @@ kgx_settings_get_property (GObject    *object,
       break;
     case PROP_CUSTOM_FONT:
       g_value_set_boxed (value, self->custom_font);
+      break;
+    case PROP_SCROLLBACK_LIMIT:
+      g_value_set_int64 (value, self->scrollback_limit);
+      break;
+    case PROP_IGNORE_SCROLLBACK_LIMIT:
+      g_value_set_boolean (value, self->ignore_scrollback_limit);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -279,6 +307,16 @@ kgx_settings_class_init (KgxSettingsClass *klass)
     g_param_spec_boxed ("custom-font", NULL, NULL,
                         PANGO_TYPE_FONT_DESCRIPTION,
                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
+  pspecs[PROP_SCROLLBACK_LIMIT] =
+    g_param_spec_int64 ("scrollback-limit", NULL, NULL,
+                        G_MININT64, G_MAXINT64, 10000,
+                        G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
+
+  pspecs[PROP_IGNORE_SCROLLBACK_LIMIT] =
+    g_param_spec_boolean ("ignore-scrollback-limit", NULL, NULL,
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 }
@@ -376,6 +414,32 @@ setup_font_expression (KgxSettings *self)
 }
 
 
+static int64_t
+resolve_lines (GObject              *object,
+               gboolean              ignore_limit,
+               int64_t               limit)
+{
+  return ignore_limit ? -1 : limit;
+}
+
+
+static inline void
+setup_lines_expression (KgxSettings *self)
+{
+  GtkExpression *params[] = {
+    gtk_property_expression_new (KGX_TYPE_SETTINGS, NULL, "ignore-scrollback-limit"),
+    gtk_property_expression_new (KGX_TYPE_SETTINGS, NULL, "scrollback-limit"),
+  };
+  GtkExpression *exp =
+    gtk_cclosure_expression_new (G_TYPE_INT64,
+                                 kgx_marshals_INT64__BOOLEAN_INT64,
+                                 G_N_ELEMENTS (params), params,
+                                 G_CALLBACK (resolve_lines), NULL, NULL);
+
+  gtk_expression_bind (exp, self, "scrollback-lines", self);
+}
+
+
 static void
 kgx_settings_init (KgxSettings *self)
 {
@@ -385,9 +449,6 @@ kgx_settings_init (KgxSettings *self)
                    G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (self->settings, "font-scale",
                    self, "font-scale",
-                   G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind (self->settings, "scrollback-lines",
-                   self, "scrollback-lines",
                    G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (self->settings, "audible-bell",
                    self, "audible-bell",
@@ -404,6 +465,13 @@ kgx_settings_init (KgxSettings *self)
                                 decode_font,
                                 encode_font,
                                 NULL, NULL);
+  g_settings_bind (self->settings, "scrollback-lines",
+                   /* Yes, this is intentional */
+                   self, "scrollback-limit",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (self->settings, "ignore-scrollback-limit",
+                   self, "ignore-scrollback-limit",
+                   G_SETTINGS_BIND_DEFAULT);
 
   g_signal_connect (self->settings,
                     "changed::" RESTORE_SIZE_KEY,
@@ -412,6 +480,7 @@ kgx_settings_init (KgxSettings *self)
 
   self->system_info = g_object_new (KGX_TYPE_SYSTEM_INFO, NULL);
   setup_font_expression (self);
+  setup_lines_expression (self);
 
   g_signal_connect_object (adw_style_manager_get_default (),
                            "notify::dark", G_CALLBACK (dark_changed),
@@ -520,8 +589,8 @@ kgx_settings_set_custom_shell (KgxSettings *self, const char *const *shell)
 
 
 void
-kgx_settings_set_scrollback (KgxSettings *self,
-                             int64_t      value)
+kgx_settings_set_scrollback_limit (KgxSettings *self,
+                                   int64_t      value)
 {
   g_return_if_fail (KGX_IS_SETTINGS (self));
 
@@ -531,7 +600,7 @@ kgx_settings_set_scrollback (KgxSettings *self,
 
   self->scrollback_lines = value;
 
-  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_SCROLLBACK_LINES]);
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_SCROLLBACK_LIMIT]);
 }
 
 
@@ -593,66 +662,12 @@ kgx_settings_get_audible_bell (KgxSettings *self)
 }
 
 
-void
-kgx_settings_set_audible_bell (KgxSettings *self,
-                               gboolean     audible_bell)
-{
-  g_return_if_fail (KGX_IS_SETTINGS (self));
-
-  if (self->audible_bell == audible_bell)
-    return;
-
-  self->audible_bell = audible_bell;
-
-  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_AUDIBLE_BELL]);
-}
-
-
 gboolean
 kgx_settings_get_visual_bell (KgxSettings *self)
 {
   g_return_val_if_fail (KGX_IS_SETTINGS (self), FALSE);
 
   return self->visual_bell;
-}
-
-
-void
-kgx_settings_set_visual_bell (KgxSettings *self,
-                              gboolean     visual_bell)
-{
-  g_return_if_fail (KGX_IS_SETTINGS (self));
-
-  if (self->visual_bell == visual_bell)
-    return;
-
-  self->visual_bell = visual_bell;
-
-  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_VISUAL_BELL]);
-}
-
-
-gboolean
-kgx_settings_get_use_system_font (KgxSettings *self)
-{
-  g_return_val_if_fail (KGX_IS_SETTINGS (self), FALSE);
-
-  return self->use_system_font;
-}
-
-
-void
-kgx_settings_set_use_system_font (KgxSettings *self,
-                                  gboolean     use_system_font)
-{
-  g_return_if_fail (KGX_IS_SETTINGS (self));
-
-  if (self->use_system_font == use_system_font)
-    return;
-
-  self->use_system_font = use_system_font;
-
-  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_USE_SYSTEM_FONT]);
 }
 
 
