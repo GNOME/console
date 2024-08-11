@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-10-08 11:47+0000\n"
-"PO-Revision-Date: 2023-10-09 18:24+0300\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
+"POT-Creation-Date: 2024-05-19 12:39+0000\n"
+"PO-Revision-Date: 2024-08-07 13:32+0300\n"
 "Last-Translator: Florentina Mușat <florentina [dot] musat [dot] 28 [at] "
 "gmail [dot] com>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
-"20)) ? 1 : 2);;\n"
-"X-Generator: Poedit 3.4\n"
+"20)) ? 1 : 2);\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
@@ -36,11 +36,11 @@ msgstr ""
 msgid "New Window"
 msgstr "Fereastră nouă"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:165
 msgid "New Tab"
 msgstr "Filă nouă"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:377
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:379
 msgid "Terminal Emulator"
 msgstr "Emulator de terminal"
 
@@ -53,7 +53,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Fereastră de terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:327 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:383 src/kgx-window.c:514
 msgid "The GNOME Project"
 msgstr "Proiectul GNOME"
 
@@ -137,110 +137,131 @@ msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Comută la fila 10"
 
-#: src/kgx-application.c:252
+#: src/kgx-application.c:254
 msgid "Cannot use both --command and positional parameters"
 msgstr "Nu se poate utiliza --command și parametrii poziționali"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:349
+#: src/kgx-application.c:351
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s utilizând VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:452
+#: src/kgx-application.c:363 src/kgx-window.c:509
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:379
+#: src/kgx-application.c:381
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 sau o versiune ulterioară"
 
-#: src/kgx-application.c:444
+#: src/kgx-application.c:446
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Execută argumentul de la această opțiune înăuntrul terminalului"
 
-#: src/kgx-application.c:445
+#: src/kgx-application.c:447
 msgid "COMMAND"
 msgstr "COMANDĂ"
 
-#: src/kgx-application.c:453
+#: src/kgx-application.c:455
 msgid "Set the working directory"
 msgstr "Stabiliți directorul de lucru"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:455
+#: src/kgx-application.c:457
 msgid "DIRNAME"
 msgstr "NUMEDIR"
 
-#: src/kgx-application.c:463
+#: src/kgx-application.c:465
 msgid "Wait until the child exits (TODO)"
 msgstr "Așteptați până ce inferiorul iese (DEFĂCUT)"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:474
 msgid "Set the initial window title"
 msgstr "Stabilește titlul inițial al ferestrei"
 
-#: src/kgx-application.c:473
+#: src/kgx-application.c:475
 msgid "TITLE"
 msgstr "TITLU"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:483
 msgid "ADVANCED: Set the shell to launch"
 msgstr "AVANSAT: Stabilește shell-ul de lansat"
 
-#: src/kgx-application.c:482
+#: src/kgx-application.c:484
 msgid "SHELL"
 msgstr "SHELL"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:492
 msgid "ADVANCED: Set the scrollback length"
 msgstr "AVANSAT: Stabilește lungimea derulării înapoi"
 
-#: src/kgx-application.c:491
+#: src/kgx-application.c:493
 msgid "LINES"
 msgstr "LINII"
 
-#: src/kgx-application.c:500
+#: src/kgx-application.c:502
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- COMANDĂ [ARGUMENT...]]"
 
-#: src/kgx-close-dialog.c:53
+#: src/kgx-close-dialog.c:94
 msgid "Close Window?"
 msgstr "Se închide fereastra?"
 
-#: src/kgx-close-dialog.c:54
+#: src/kgx-close-dialog.c:96
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
+msgstr[0] ""
+"O comandă încă rulează, închiderea acestei ferestre o va termina și poate "
+"conduce la rezultate neașteptate"
+msgstr[1] ""
+"Unele comenzi încă rulează, închiderea acestei ferestre le va termina și "
+"poate conduce la rezultate neașteptate"
+msgstr[2] ""
 "Unele comenzi încă rulează, închiderea acestei ferestre le va termina și "
 "poate conduce la rezultate neașteptate"
 
-#: src/kgx-close-dialog.c:59
+#: src/kgx-close-dialog.c:103
 msgid "Close Tab?"
 msgstr "Se închide fila?"
 
-#: src/kgx-close-dialog.c:60
+#: src/kgx-close-dialog.c:105
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
+msgstr[0] ""
+"O comandă încă rulează, închiderea acestei file o va termina și poate "
+"conduce la rezultate neașteptate"
+msgstr[1] ""
+"Unele comenzi încă rulează, închiderea acestei file le va termina și poate "
+"conduce la rezultate neașteptate"
+msgstr[2] ""
 "Unele comenzi încă rulează, închiderea acestei file le va termina și poate "
 "conduce la rezultate neașteptate"
 
-#: src/kgx-close-dialog.c:74
-#, c-format
-msgid "Process %d"
-msgstr "Procesul %d"
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:232
+msgid "Process list"
+msgstr "Listă de procese"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30
+#: src/kgx-paste-dialog.c:183
 msgid "_Cancel"
 msgstr "_Anulează"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:248
 msgid "C_lose"
 msgstr "Î_nchide"
 
@@ -272,7 +293,7 @@ msgstr "Dimensiune font"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:463
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "Fila %i"
@@ -284,6 +305,24 @@ msgstr "_Detașează fila"
 #: src/kgx-pages.ui:96
 msgid "_Close"
 msgstr "În_chide"
+
+#. Translators: %s is the (possibly truncated) command being pasted
+#: src/kgx-paste-dialog.c:88
+#, c-format
+msgid ""
+"Make sure you know what the command does:\n"
+"%s"
+msgstr ""
+"Asigurați-vă că știți ce face comanda:\n"
+"%s"
+
+#: src/kgx-paste-dialog.c:174
+msgid "You are pasting a command that runs as an administrator"
+msgstr "Lipiți o comandă care rulează ca administrator"
+
+#: src/kgx-paste-dialog.c:184 src/kgx-terminal.ui:24
+msgid "_Paste"
+msgstr "Li_pește"
 
 #: src/kgx-preferences-window.c:122
 msgid "No Font Set"
@@ -317,6 +356,11 @@ msgstr "Redă _sunetul"
 msgid "_Visual Effects"
 msgstr "Efecte _vizuale"
 
+#: src/kgx-process.c:192
+#, c-format
+msgid "Process %d"
+msgstr "Procesul %d"
+
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
 #: src/kgx-simple-tab.c:180
@@ -337,7 +381,7 @@ msgstr "<b>Doar citire</b> — Comanda a ieșit"
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Nu s-a putut porni</b> — %s"
 
-#: src/kgx-tab.c:1091
+#: src/kgx-tab.c:1112
 msgid "Command completed"
 msgstr "Comandă completată"
 
@@ -353,7 +397,7 @@ msgstr "Potrivirea anterioară"
 msgid "Next Match"
 msgstr "Potrivirea următoare"
 
-#: src/kgx-terminal.c:557
+#: src/kgx-terminal.c:482
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -361,24 +405,6 @@ msgid ""
 msgstr ""
 "Ctrl-clic pentru a deschide:\n"
 "%s"
-
-#: src/kgx-terminal.c:883
-msgid "You are pasting a command that runs as an administrator"
-msgstr "Lipiți o comandă care rulează ca administrator"
-
-#. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:887
-#, c-format
-msgid ""
-"Make sure you know what the command does:\n"
-"%s"
-msgstr ""
-"Asigurați-vă că știți ce face comanda:\n"
-"%s"
-
-#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
-msgid "_Paste"
-msgstr "Li_pește"
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -413,11 +439,11 @@ msgid "Dark Style"
 msgstr "Stil întunecat"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:464
+#: src/kgx-window.c:521
 msgid "translator-credits"
 msgstr ""
 "Florentina Mușat <florentina [dot] musat [dot] 28 [at] gmail [dot] com>, "
-"2020-2021, 2023"
+"2020-2021, 2023-2024"
 
 #: src/kgx-window.ui:17
 msgid "_New Window"
@@ -439,23 +465,23 @@ msgstr "Scurtături de _tastatură"
 msgid "_About Console"
 msgstr "_Despre Consolă"
 
-#: src/kgx-window.ui:79
+#: src/kgx-window.ui:80
 msgid "Find in Terminal"
 msgstr "Găsește în terminal"
 
-#: src/kgx-window.ui:86
+#: src/kgx-window.ui:87
 msgid "Main Menu"
 msgstr "Meniu principal"
 
-#: src/kgx-window.ui:104
+#: src/kgx-window.ui:105
 msgid "Shrink Text"
 msgstr "Micșorează textul"
 
-#: src/kgx-window.ui:115
+#: src/kgx-window.ui:116
 msgid "Reset Size"
 msgstr "Restabilește dimensiunea"
 
-#: src/kgx-window.ui:139
+#: src/kgx-window.ui:140
 msgid "Enlarge Text"
 msgstr "Mărește textul"
 
