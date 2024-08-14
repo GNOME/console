@@ -1,3 +1,34 @@
+Version 47.beta
+~~~~~~~~~~~~~~~
+
+The preferences dialogue has been expanded to include scrollback size, and
+there has been behind the scenes work fixing some pesky issues and setting
+up future improvements.
+
+Thanks to work elsewhere in the stack, we now have restored screen reader
+support. This has taken far too long, and there is more work do be done, but
+hopefully this is a significant step forward.
+
+Additionally Alice reworked our styles to take advantage of improvements in
+Gtk, whilst Chris helped us keep current with developments in Adwaita, and
+Balló György provided some fixes.
+
+Updated Translations
+ * Brazilian Portuguese  (Juliano de Souza Camargo)
+ * Greek  (Efstathios Iosifidis)
+ * Hebrew  (Yosef Or Boczko)
+ * Hindi  (Guntupalli Karunakar, Scrambled 777)
+ * Kabyle  (Rachida SACI)
+ * Nepali  (Pawan Chitrakar)
+ * Occitan  (Quentin PAGÈS)
+ * Portuguese  (Hugo Carvalho)
+ * Romanian  (Daniel Șerbănescu)
+ * Serbian  (Dušan Simić)
+ * Serbian (Latin)  (Милош Поповић)
+ * Slovak  (Matej Mrenica)
+ * Slovenian  (Martin)
+ * Turkish  (Sabri Ünal)
+
 Version 46.0
 ~~~~~~~~~~~~
 

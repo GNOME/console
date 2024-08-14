@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2019-2023 Zander Brown -->
+<!-- Copyright 2019-2024 Zander Brown -->
 <component type="desktop-application">
   <id>@KGX_APPLICATION_ID_RAW@</id>
   <metadata_license>CC0-1.0</metadata_license>
@@ -31,6 +31,29 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="47~beta" date="2024-08-14" type="development">
+      <description>
+        <p>Scrollback size can now be controlled in the preference window and screen reader support
+          was much improved</p>
+        <p>Updated Translations:</p>
+        <ul>
+          <li>Brazilian Portuguese</li>
+          <li>Greek</li>
+          <li>Hebrew</li>
+          <li>Hindi</li>
+          <li>Kabyle</li>
+          <li>Nepali</li>
+          <li>Occitan</li>
+          <li>Portuguese</li>
+          <li>Romanian</li>
+          <li>Serbian (Latin)</li>
+          <li>Serbian</li>
+          <li>Slovak</li>
+          <li>Slovenian</li>
+          <li>Turkish</li>
+        </ul>
+      </description>
+    </release>
     <release version="46.0" date="2024-03-18" type="stable">
       <description>
         <p>Updated Translations:</p>
