@@ -39,7 +39,6 @@ struct _KgxPreferencesWindow {
   GtkWidget            *custom_font;
   GtkWidget            *unlimited_scrollback;
   GtkWidget            *scrollback;
-  GtkWidget            *flow_control;
 };
 
 
@@ -190,7 +189,6 @@ kgx_preferences_window_class_init (KgxPreferencesWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, custom_font);
   gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, unlimited_scrollback);
   gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, scrollback);
-  gtk_widget_class_bind_template_child (widget_class, KgxPreferencesWindow, flow_control);
 
   gtk_widget_class_bind_template_callback (widget_class, font_as_attributes);
   gtk_widget_class_bind_template_callback (widget_class, font_as_label);
@@ -224,7 +222,4 @@ kgx_preferences_window_init (KgxPreferencesWindow *self)
                         self->scrollback, "value",
                         G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL);
 
-  g_binding_group_bind (self->settings_binds, "software-flow-control",
-                        self->flow_control, "active",
-                        G_BINDING_SYNC_CREATE | G_BINDING_BIDIRECTIONAL | G_BINDING_INVERT_BOOLEAN);
 }
