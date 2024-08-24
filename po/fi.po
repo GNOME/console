@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-12-16 16:56+0000\n"
-"PO-Revision-Date: 2024-02-22 19:57+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
+"POT-Creation-Date: 2024-08-20 19:30+0000\n"
+"PO-Revision-Date: 2024-08-24 15:42+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: Finnish <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -16,10 +16,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
 msgid "Console"
 msgstr "Konsoli"
 
@@ -34,11 +34,11 @@ msgstr ""
 msgid "New Window"
 msgstr "Uusi ikkuna"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
 msgid "New Tab"
 msgstr "Uusi välilehti"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:377
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
 msgid "Terminal Emulator"
 msgstr "Pääte-emulaattori"
 
@@ -50,7 +50,7 @@ msgstr "Helppokäyttöinen pääte-emulaattori Gnome-työpöydälle."
 msgid "Terminal window"
 msgstr "Pääteikkuna"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
+#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "Gnome-projekti"
 
@@ -134,81 +134,88 @@ msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Vaihda välilehteen 10"
 
-#: src/kgx-application.c:252
-msgid "Cannot use both --command and positional parameters"
-msgstr ""
-
-#. Translators: The leading # is intentional, the initial %s is the
-#. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:349
-#, c-format
-msgid "# KGX %s using VTE %u.%u.%u %s\n"
-msgstr "# KGX %s käyttäen VTE:n versiota %u.%u.%u %s\n"
-
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:466
+#: src/kgx-about.c:83 src/kgx-window.c:529
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:379
+#: src/kgx-about.c:101
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 tai myöhempi"
 
-#: src/kgx-application.c:444
+#. Translators: The leading # is intentional, the initial %s is the
+#. * version of KGX itself, the latter format is the VTE version
+#: src/kgx-about.c:114
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s käyttäen VTE:n versiota %u.%u.%u %s\n"
+
+#: src/kgx-application.c:255
+msgid "Cannot use both --working-directory and positional parameters"
+msgstr ""
+
+#: src/kgx-application.c:443
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Toteuta tämän valinnan argumentti terminaalin sisällä"
 
-#: src/kgx-application.c:445
+#: src/kgx-application.c:444
 msgid "COMMAND"
 msgstr ""
 
-#: src/kgx-application.c:453
+#: src/kgx-application.c:452
 msgid "Set the working directory"
 msgstr "Aseta työskentelyhakemisto"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:455
+#: src/kgx-application.c:454
 msgid "DIRNAME"
 msgstr "DIRNAME"
 
-#: src/kgx-application.c:463
+#: src/kgx-application.c:462
 msgid "Wait until the child exits (TODO)"
 msgstr "Odota kunnes lapsiprosessi valmistuu (TODO)"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:471
 msgid "Set the initial window title"
 msgstr "Aseta esiotsikko ikkunalle"
 
-#: src/kgx-application.c:473
+#: src/kgx-application.c:472
 msgid "TITLE"
 msgstr ""
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:480
 msgid "ADVANCED: Set the shell to launch"
 msgstr "EDISTYNYT: Aseta pääte avautumaan"
 
-#: src/kgx-application.c:482
+#: src/kgx-application.c:481
 msgid "SHELL"
 msgstr ""
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:489
 msgid "ADVANCED: Set the scrollback length"
 msgstr "EDISTYNYT: Aseta takaisinkelauksen määrä"
 
-#: src/kgx-application.c:491
+#: src/kgx-application.c:490
 msgid "LINES"
 msgstr ""
 
-#: src/kgx-application.c:500
+#. Translators: %s is the version string, KGX is a codename and should be left as-is
+#: src/kgx-application.c:644
+#, c-format
+#| msgid "KGX Terminal Emulator"
+msgid "KGX %s — Terminal Emulator"
+msgstr "KGX %s — Pääte-emulaattori"
+
+#: src/kgx-application.c:650
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr ""
 
-#: src/kgx-close-dialog.c:94
+#: src/kgx-close-dialog.c:73
 msgid "Close Window?"
 msgstr "Suljetaanko ikkuna?"
 
-#: src/kgx-close-dialog.c:96
+#: src/kgx-close-dialog.c:75
 msgid ""
 "A command is still running, closing this window will kill it and may lead to "
 "unexpected outcomes"
@@ -222,11 +229,11 @@ msgstr[1] ""
 "Joitain komentoja suoritetaan vielä. Tämän ikkunan sulkeminen tappaa "
 "kyseiset komennot ja saattaa johtaa odottamattomiin tilanteisiin"
 
-#: src/kgx-close-dialog.c:103
+#: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
 msgstr "Suljetaanko välilehti?"
 
-#: src/kgx-close-dialog.c:105
+#: src/kgx-close-dialog.c:84
 msgid ""
 "A command is still running, closing this tab will kill it and may lead to "
 "unexpected outcomes"
@@ -241,49 +248,42 @@ msgstr[1] ""
 "kyseiset komennot ja saattaa johtaa odottamattomiin tilanteisiin"
 
 #. Translators: Screen reader label for the list of running commands
-#: src/kgx-close-dialog.c:232
+#: src/kgx-close-dialog.c:194
 msgid "Process list"
 msgstr "Prosessiluettelo"
 
 #. Translators: This action dismisses the dialogue, leaving the tab/window open
-#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
+#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
+#: src/preferences/kgx-font-picker.ui:22
 msgid "_Cancel"
 msgstr "_Peru"
 
 #. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
-#: src/kgx-close-dialog.c:248
+#: src/kgx-close-dialog.c:207
 msgid "C_lose"
 msgstr "_Sulje"
 
-#: src/kgx-font-picker.ui:12
-msgid "Terminal Font"
-msgstr "Päätteen fontti"
+#: src/kgx-colour-utils.c:58
+msgid "Color string is wrong length"
+msgstr ""
 
-#: src/kgx-font-picker.ui:37
-msgid "_Select"
-msgstr "_Valitse"
+#: src/kgx-livery-manager.c:193
+msgctxt "livery-name"
+msgid "Linux"
+msgstr "Linux"
 
-#: src/kgx-font-picker.ui:53 src/kgx-font-picker.ui:56
-msgid "Font Name"
-msgstr "Fontin nimi"
-
-#: src/kgx-font-picker.ui:142
-msgid "Font Family"
-msgstr "Fonttiperhe"
-
-#: src/kgx-font-picker.ui:167
-msgid "Font Preview"
-msgstr "Fontin esikatselu"
-
-#: src/kgx-font-picker.ui:188
-msgid "Font Size"
-msgstr "Fontin koko"
+#: src/kgx-livery-manager.c:230
+#| msgctxt "shortcut window"
+#| msgid "Terminal"
+msgctxt "livery-name"
+msgid "XTerm"
+msgstr "XTerm"
 
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:473
+#: src/kgx-pages.c:471
 #, c-format
 msgid "Tab %i"
 msgstr "Välilehti %i"
@@ -296,94 +296,8 @@ msgstr "_Irrota välilehti"
 msgid "_Close"
 msgstr "_Sulje"
 
-#: src/kgx-preferences-window.c:122
-msgid "No Font Set"
-msgstr "Fonttia ei ole asetettu"
-
-#: src/kgx-preferences-window.ui:7
-msgid "General"
-msgstr "Yleiset"
-
-#: src/kgx-preferences-window.ui:10
-msgid "Font"
-msgstr "Fontti"
-
-#: src/kgx-preferences-window.ui:13
-msgid "Use _System Default"
-msgstr "Käytä _järjestelmän oletusta"
-
-#: src/kgx-preferences-window.ui:19
-msgid "Custom _Font"
-msgstr "Mukautettu _fontti"
-
-#: src/kgx-preferences-window.ui:59
-msgid "Terminal Bell"
-msgstr "Päätteen äänimerkki"
-
-#: src/kgx-preferences-window.ui:62
-msgid "Play _Sound"
-msgstr "Soita _ääni"
-
-#: src/kgx-preferences-window.ui:68
-msgid "_Visual Effects"
-msgstr "_Visuaaliset tehosteet"
-
-#: src/kgx-process.c:198
-#, c-format
-msgid "Process %d"
-msgstr "Prosessi %d"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:180
-#, c-format
-msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr "<b>Vain luku</b> — Komento poistui koodilla %i"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:189
-msgid "<b>Read Only</b> — Command exited"
-msgstr "<b>Vain luku</b> — Komento poistui"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:222
-#, c-format
-msgid "<b>Failed to start</b> — %s"
-msgstr "<b>Ei voitu käynnistää</b> — %s"
-
-#: src/kgx-tab.c:1112
-msgid "Command completed"
-msgstr "Komento suoritettu"
-
-#: src/kgx-tab.ui:25
-msgid "Find text"
-msgstr "Etsi teksti"
-
-#: src/kgx-tab.ui:36
-msgid "Previous Match"
-msgstr "Edellinen osuma"
-
-#: src/kgx-tab.ui:44
-msgid "Next Match"
-msgstr "Seuraava osuma"
-
-#: src/kgx-terminal.c:557
-#, c-format
-msgid ""
-"Ctrl-click to open:\n"
-"%s"
-msgstr ""
-"Napsauta CTRL pohjassa avataksesi:\n"
-"%s"
-
-#: src/kgx-terminal.c:883
-msgid "You are pasting a command that runs as an administrator"
-msgstr "Olet aikeissa liittää komennon, joka suoritetaan ylläpitäjän oikeuksin"
-
-#. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:887
+#. Translators: %s is the (possibly truncated) command being pasted
+#: src/kgx-paste-dialog.c:76
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -392,9 +306,60 @@ msgstr ""
 "Varmista, että tiedät mitä komento tekee:\n"
 "%s"
 
-#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
+#: src/kgx-paste-dialog.c:129
+msgid "You are pasting a command that runs as an administrator"
+msgstr "Olet aikeissa liittää komennon, joka suoritetaan ylläpitäjän oikeuksin"
+
+#: src/kgx-paste-dialog.c:136 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "_Liitä"
+
+#: src/kgx-process.c:192
+#, c-format
+msgid "Process %d"
+msgstr "Prosessi %d"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-simple-tab.c:169
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Ei voitu käynnistää</b> — %s"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:814
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Vain luku</b> — Komento poistui koodilla %i"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:822
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Vain luku</b> — Komento poistui"
+
+#: src/kgx-tab.c:842
+msgid "Command completed"
+msgstr "Komento suoritettu"
+
+#: src/kgx-tab.ui:40
+msgid "Find text"
+msgstr "Etsi teksti"
+
+#: src/kgx-tab.ui:51
+msgid "Previous Match"
+msgstr "Edellinen osuma"
+
+#: src/kgx-tab.ui:59
+msgid "Next Match"
+msgstr "Seuraava osuma"
+
+#: src/kgx-terminal.c:508
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+"Napsauta CTRL pohjassa avataksesi:\n"
+"%s"
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -428,8 +393,17 @@ msgstr "Vaalea tyyli"
 msgid "Dark Style"
 msgstr "Tumma tyyli"
 
+#. Translators: ‘command’ is the argument name, and shouldn't be translated
+#: src/kgx-utils.c:113
+msgid "Missing argument for --command"
+msgstr ""
+
+#: src/kgx-utils.c:128
+msgid "Cannot use both --command and positional parameters"
+msgstr ""
+
 #. Translators: Credit yourself here
-#: src/kgx-window.c:478
+#: src/kgx-window.c:541
 msgid "translator-credits"
 msgstr ""
 "Jiri Grönroos\n"
@@ -455,25 +429,89 @@ msgstr "_Pikanäppäimet"
 msgid "_About Console"
 msgstr "_Tietoja - Konsoli"
 
-#: src/kgx-window.ui:79
+#: src/kgx-window.ui:88
 msgid "Find in Terminal"
 msgstr "Etsi päätteestä"
 
-#: src/kgx-window.ui:86
+#: src/kgx-window.ui:95
 msgid "Main Menu"
 msgstr "Päävalikko"
 
-#: src/kgx-window.ui:104
+#: src/kgx-window.ui:113
 msgid "Shrink Text"
 msgstr "Kutista teksti"
 
-#: src/kgx-window.ui:115
+#: src/kgx-window.ui:124
 msgid "Reset Size"
 msgstr "Palauta koko"
 
-#: src/kgx-window.ui:139
+#: src/kgx-window.ui:148
 msgid "Enlarge Text"
 msgstr "Suurenna teksti"
+
+#: src/preferences/kgx-font-picker.ui:11
+msgid "Terminal Font"
+msgstr "Päätteen fontti"
+
+#: src/preferences/kgx-font-picker.ui:29
+msgid "_Select"
+msgstr "_Valitse"
+
+#: src/preferences/kgx-font-picker.ui:45 src/preferences/kgx-font-picker.ui:48
+msgid "Font Name"
+msgstr "Fontin nimi"
+
+#: src/preferences/kgx-font-picker.ui:133
+msgid "Font Family"
+msgstr "Fonttiperhe"
+
+#: src/preferences/kgx-font-picker.ui:158
+msgid "Font Preview"
+msgstr "Fontin esikatselu"
+
+#: src/preferences/kgx-font-picker.ui:179
+msgid "Font Size"
+msgstr "Fontin koko"
+
+#: src/preferences/kgx-preferences-window.c:125
+msgid "No Font Set"
+msgstr "Fonttia ei ole asetettu"
+
+#: src/preferences/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "Yleiset"
+
+#: src/preferences/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "Fontti"
+
+#: src/preferences/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "Käytä _järjestelmän oletusta"
+
+#: src/preferences/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "Mukautettu _fontti"
+
+#: src/preferences/kgx-preferences-window.ui:63
+msgid "Behaviour"
+msgstr "Toiminta"
+
+#: src/preferences/kgx-preferences-window.ui:66
+msgid "_Unlimited Scrollback"
+msgstr "_Loputon takaisinvieritys"
+
+#: src/preferences/kgx-preferences-window.ui:92
+msgid "Terminal Bell"
+msgstr "Päätteen äänimerkki"
+
+#: src/preferences/kgx-preferences-window.ui:95
+msgid "Play _Sound"
+msgstr "Soita _ääni"
+
+#: src/preferences/kgx-preferences-window.ui:101
+msgid "_Visual Effects"
+msgstr "_Visuaaliset tehosteet"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
@@ -504,9 +542,6 @@ msgstr "Suurenna teksti"
 
 #~ msgid "Start a terminal session for this location"
 #~ msgstr "Aloita pääteistunto tässä sijainnissa"
-
-#~ msgid "KGX Terminal Emulator"
-#~ msgstr "KGX Pääte-emulaattori"
 
 #~ msgid "_About King’s Cross"
 #~ msgstr "_Tietoja - King’s Cross"
