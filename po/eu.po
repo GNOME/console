@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr "Project-Id-Version: kgx master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2024-01-22 13:36+0000\n"
-"PO-Revision-Date: 2024-02-20 10:00+0100\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
+"POT-Creation-Date: 2024-08-20 19:30+0000\n"
+"PO-Revision-Date: 2024-08-25 10:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -17,7 +17,7 @@ msgstr "Project-Id-Version: kgx master\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
 msgid "Console"
 msgstr "Kontsola"
 
@@ -30,11 +30,11 @@ msgstr "komandoa;gonbitea;cmd;komando-lerroa;exekutatu;shell-a;terminala;kgx;kin
 msgid "New Window"
 msgstr "Leiho berria"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
 msgid "New Tab"
 msgstr "Fitxa berria"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:377
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
 msgid "Terminal Emulator"
 msgstr "Terminalaren emulatzailea"
 
@@ -46,7 +46,7 @@ msgstr "Terminalaren emuladore sinple eta erraza GNOME mahaigainerako."
 msgid "Terminal window"
 msgstr "Terminalaren leihoa"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
+#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "GNOME proiektua"
 
@@ -68,7 +68,7 @@ msgstr "Terminala"
 #: src/help-overlay.ui:27
 msgctxt "shortcut window"
 msgid "Find"
-msgstr "Bilatu"
+msgstr "Aurkitu"
 
 #: src/help-overlay.ui:33
 msgctxt "shortcut window"
@@ -130,81 +130,87 @@ msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Aldatu 10. fitxara"
 
-#: src/kgx-application.c:252
-msgid "Cannot use both --command and positional parameters"
-msgstr "Ezin da aldi berean --command eta posizioko parametroak erabili"
-
-#. Translators: The leading # is intentional, the initial %s is the
-#. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:349
-#, c-format
-msgid "# KGX %s using VTE %u.%u.%u %s\n"
-msgstr "# KGX %s, VTE %u.%u.%u %s\n"
-
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:466
+#: src/kgx-about.c:83 src/kgx-window.c:529
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:379
+#: src/kgx-about.c:101
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 edo berriagoa"
 
-#: src/kgx-application.c:444
+#. Translators: The leading # is intentional, the initial %s is the
+#. * version of KGX itself, the latter format is the VTE version
+#: src/kgx-about.c:114
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s, VTE %u.%u.%u %s\n"
+
+#: src/kgx-application.c:255
+msgid "Cannot use both --working-directory and positional parameters"
+msgstr "Ezin da aldi berean --working-directory eta posizioko parametroak erabili"
+
+#: src/kgx-application.c:443
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Exekutatu aukera honen argumentua terminalaren barruan"
 
-#: src/kgx-application.c:445
+#: src/kgx-application.c:444
 msgid "COMMAND"
 msgstr "KOMANDOA"
 
-#: src/kgx-application.c:453
+#: src/kgx-application.c:452
 msgid "Set the working directory"
 msgstr "Ezarri laneko direktorioa"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:455
+#: src/kgx-application.c:454
 msgid "DIRNAME"
 msgstr "DIRIZENA"
 
-#: src/kgx-application.c:463
+#: src/kgx-application.c:462
 msgid "Wait until the child exits (TODO)"
 msgstr "Itxaron haurrak amaitu arte (EGITEKO)"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:471
 msgid "Set the initial window title"
 msgstr "Ezarri leihoaren hasierako izenburua"
 
-#: src/kgx-application.c:473
+#: src/kgx-application.c:472
 msgid "TITLE"
 msgstr "TITULUA"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:480
 msgid "ADVANCED: Set the shell to launch"
 msgstr "AURRERATUA: Ezarri abiaraziko den shell-a"
 
-#: src/kgx-application.c:482
+#: src/kgx-application.c:481
 msgid "SHELL"
 msgstr "SHELLA"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:489
 msgid "ADVANCED: Set the scrollback length"
 msgstr "AURRERATUA: Ezarri atzeranzko korritzearen luzera"
 
-#: src/kgx-application.c:491
+#: src/kgx-application.c:490
 msgid "LINES"
 msgstr "LERROAK"
 
-#: src/kgx-application.c:500
+#. Translators: %s is the version string, KGX is a codename and should be left as-is
+#: src/kgx-application.c:644
+#, c-format
+msgid "KGX %s — Terminal Emulator"
+msgstr "KGX %s — Terminalaren emulatzailea"
+
+#: src/kgx-application.c:650
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- KOMANDOA [ARGUMENTUA...]]"
 
-#: src/kgx-close-dialog.c:94
+#: src/kgx-close-dialog.c:73
 msgid "Close Window?"
 msgstr "Itxi leihoa?"
 
-#: src/kgx-close-dialog.c:96
+#: src/kgx-close-dialog.c:75
 msgid ""
 "A command is still running, closing this window will kill it and may lead to "
 "unexpected outcomes"
@@ -214,11 +220,11 @@ msgid_plural ""
 msgstr[0] "Komando bat exekutatzen ari da oraindik, leiho hau ixten bada hil egingo da eta espero gabeko emaitzak egon daitezke"
 msgstr[1] "Zenbait komando exekutatzen ari dira oraindik, leihoa ixten bada hil egingo dira eta espero gabeko emaitzak egon daitezke"
 
-#: src/kgx-close-dialog.c:103
+#: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
 msgstr "Itxi fitxa?"
 
-#: src/kgx-close-dialog.c:105
+#: src/kgx-close-dialog.c:84
 msgid ""
 "A command is still running, closing this tab will kill it and may lead to "
 "unexpected outcomes"
@@ -229,49 +235,40 @@ msgstr[0] "Komando bat exekutatzen ari da oraindik, fitxa hau ixten bada hil egi
 msgstr[1] "Zenbait komando exekutatzen ari dira oraindik, fitxa ixten bada hil egingo dira eta espero gabeko emaitzak egon daitezke"
 
 #. Translators: Screen reader label for the list of running commands
-#: src/kgx-close-dialog.c:232
+#: src/kgx-close-dialog.c:194
 msgid "Process list"
 msgstr "Prozesuen zerrenda"
 
 #. Translators: This action dismisses the dialogue, leaving the tab/window open
-#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
+#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
+#: src/preferences/kgx-font-picker.ui:22
 msgid "_Cancel"
 msgstr "_Utzi"
 
 #. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
-#: src/kgx-close-dialog.c:248
+#: src/kgx-close-dialog.c:207
 msgid "C_lose"
 msgstr "It_xi"
 
-#: src/kgx-font-picker.ui:12
-msgid "Terminal Font"
-msgstr "Terminaleko letra-tipoa"
+#: src/kgx-colour-utils.c:58
+msgid "Color string is wrong length"
+msgstr "Kolore-kateak luzera okerra du"
 
-#: src/kgx-font-picker.ui:37
-msgid "_Select"
-msgstr "_Hautatu"
+#: src/kgx-livery-manager.c:193
+msgctxt "livery-name"
+msgid "Linux"
+msgstr "Linux"
 
-#: src/kgx-font-picker.ui:53 src/kgx-font-picker.ui:56
-msgid "Font Name"
-msgstr "Letra-izena"
-
-#: src/kgx-font-picker.ui:142
-msgid "Font Family"
-msgstr "Letra-familia"
-
-#: src/kgx-font-picker.ui:167
-msgid "Font Preview"
-msgstr "Letra-tipoaren aurrebista"
-
-#: src/kgx-font-picker.ui:188
-msgid "Font Size"
-msgstr "Letra-tamaina"
+#: src/kgx-livery-manager.c:230
+msgctxt "livery-name"
+msgid "XTerm"
+msgstr "XTerm"
 
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:473
+#: src/kgx-pages.c:471
 #, c-format
 msgid "Tab %i"
 msgstr "%i. fitxa"
@@ -282,95 +279,10 @@ msgstr "Askat_u fitxa"
 
 #: src/kgx-pages.ui:96
 msgid "_Close"
-msgstr "I_txi"
+msgstr "It_xi"
 
-#: src/kgx-preferences-window.c:122
-msgid "No Font Set"
-msgstr "Ez da letra-tiporik ezarri"
-
-#: src/kgx-preferences-window.ui:7
-msgid "General"
-msgstr "Orokorra"
-
-#: src/kgx-preferences-window.ui:10
-msgid "Font"
-msgstr "Letra-tipoa"
-
-#: src/kgx-preferences-window.ui:13
-msgid "Use _System Default"
-msgstr "Erabili sistemaren _lehenespena"
-
-#: src/kgx-preferences-window.ui:19
-msgid "Custom _Font"
-msgstr "Letra-tipo _pertsonalizatua"
-
-#: src/kgx-preferences-window.ui:59
-msgid "Terminal Bell"
-msgstr "Terminalaren soinua"
-
-#: src/kgx-preferences-window.ui:62
-msgid "Play _Sound"
-msgstr "Erreproduzitu _soinua"
-
-#: src/kgx-preferences-window.ui:68
-msgid "_Visual Effects"
-msgstr "_Ikusizko efektuak"
-
-#: src/kgx-process.c:198
-#, c-format
-msgid "Process %d"
-msgstr "Prozesatu %d"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:180
-#, c-format
-msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr "<b>Irakurtzeko soilik</b> — Komandoa amaitu da %i kodea emanda"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:189
-msgid "<b>Read Only</b> — Command exited"
-msgstr "<b>Irakurtzeko soilik</b> — Komandoa amaitu da"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:222
-#, c-format
-msgid "<b>Failed to start</b> — %s"
-msgstr "<b>Huts egin du abioak</b> — %s"
-
-#: src/kgx-tab.c:1112
-msgid "Command completed"
-msgstr "Komandoa osatu da"
-
-#: src/kgx-tab.ui:25
-msgid "Find text"
-msgstr "Bilatu testua"
-
-#: src/kgx-tab.ui:36
-msgid "Previous Match"
-msgstr "Aurreko parekatzea"
-
-#: src/kgx-tab.ui:44
-msgid "Next Match"
-msgstr "Hurrengo parekatzea"
-
-#: src/kgx-terminal.c:557
-#, c-format
-msgid ""
-"Ctrl-click to open:\n"
-"%s"
-msgstr "Ctrl-klik irekitzeko:\n"
-"%s"
-
-#: src/kgx-terminal.c:883
-msgid "You are pasting a command that runs as an administrator"
-msgstr "Administratzaile modura exekutatzen den komando bat itsasten ari zara"
-
-#. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:887
+#. Translators: %s is the (possibly truncated) command being pasted
+#: src/kgx-paste-dialog.c:76
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -378,9 +290,59 @@ msgid ""
 msgstr "Ziurtatu badakizula komandoak zer egiten duen:\n"
 "%s"
 
-#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
+#: src/kgx-paste-dialog.c:129
+msgid "You are pasting a command that runs as an administrator"
+msgstr "Administratzaile modura exekutatzen den komando bat itsasten ari zara"
+
+#: src/kgx-paste-dialog.c:136 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "_Itsatsi"
+
+#: src/kgx-process.c:192
+#, c-format
+msgid "Process %d"
+msgstr "Prozesatu %d"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-simple-tab.c:169
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Huts egin du abioak</b> — %s"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:814
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Irakurtzeko soilik</b> — Komandoa amaitu da %i kodea emanda"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:822
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Irakurtzeko soilik</b> — Komandoa amaitu da"
+
+#: src/kgx-tab.c:842
+msgid "Command completed"
+msgstr "Komandoa osatu da"
+
+#: src/kgx-tab.ui:40
+msgid "Find text"
+msgstr "Bilatu testua"
+
+#: src/kgx-tab.ui:51
+msgid "Previous Match"
+msgstr "Aurreko parekatzea"
+
+#: src/kgx-tab.ui:59
+msgid "Next Match"
+msgstr "Hurrengo parekatzea"
+
+#: src/kgx-terminal.c:508
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr "Ctrl-klik irekitzeko:\n"
+"%s"
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -414,10 +376,19 @@ msgstr "Estilo argia"
 msgid "Dark Style"
 msgstr "Estilo iluna"
 
+#. Translators: ‘command’ is the argument name, and shouldn't be translated
+#: src/kgx-utils.c:113
+msgid "Missing argument for --command"
+msgstr "Argumentua falta da --command komandorako"
+
+#: src/kgx-utils.c:128
+msgid "Cannot use both --command and positional parameters"
+msgstr "Ezin da aldi berean --command eta posizioko parametroak erabili"
+
 #. Translators: Credit yourself here
-#: src/kgx-window.c:478
+#: src/kgx-window.c:541
 msgid "translator-credits"
-msgstr "Asier Sarasua Garmendia <asier.sarasua@gmail.com>"
+msgstr "translator-credits"
 
 #: src/kgx-window.ui:17
 msgid "_New Window"
@@ -439,25 +410,89 @@ msgstr "Las_ter-teklak"
 msgid "_About Console"
 msgstr "Kontsola aplikazioari b_uruz"
 
-#: src/kgx-window.ui:79
+#: src/kgx-window.ui:88
 msgid "Find in Terminal"
 msgstr "Bilatu terminalean"
 
-#: src/kgx-window.ui:86
+#: src/kgx-window.ui:95
 msgid "Main Menu"
 msgstr "Menu nagusia"
 
-#: src/kgx-window.ui:104
+#: src/kgx-window.ui:113
 msgid "Shrink Text"
 msgstr "Txikiagotu testua"
 
-#: src/kgx-window.ui:115
+#: src/kgx-window.ui:124
 msgid "Reset Size"
 msgstr "Berrezarri tamaina"
 
-#: src/kgx-window.ui:139
+#: src/kgx-window.ui:148
 msgid "Enlarge Text"
 msgstr "Handiagotu testua"
+
+#: src/preferences/kgx-font-picker.ui:11
+msgid "Terminal Font"
+msgstr "Terminaleko letra-tipoa"
+
+#: src/preferences/kgx-font-picker.ui:29
+msgid "_Select"
+msgstr "_Hautatu"
+
+#: src/preferences/kgx-font-picker.ui:45 src/preferences/kgx-font-picker.ui:48
+msgid "Font Name"
+msgstr "Letra-izena"
+
+#: src/preferences/kgx-font-picker.ui:133
+msgid "Font Family"
+msgstr "Letra-familia"
+
+#: src/preferences/kgx-font-picker.ui:158
+msgid "Font Preview"
+msgstr "Letra-tipoaren aurrebista"
+
+#: src/preferences/kgx-font-picker.ui:179
+msgid "Font Size"
+msgstr "Letra-tamaina"
+
+#: src/preferences/kgx-preferences-window.c:125
+msgid "No Font Set"
+msgstr "Ez da letra-tiporik ezarri"
+
+#: src/preferences/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "Orokorra"
+
+#: src/preferences/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "Letra-tipoa"
+
+#: src/preferences/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "Erabili sistemaren _lehenespena"
+
+#: src/preferences/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "Letra-tipo _pertsonalizatua"
+
+#: src/preferences/kgx-preferences-window.ui:63
+msgid "Behaviour"
+msgstr "Portaera"
+
+#: src/preferences/kgx-preferences-window.ui:66
+msgid "_Unlimited Scrollback"
+msgstr "_Mugarik gabeko korritzea"
+
+#: src/preferences/kgx-preferences-window.ui:92
+msgid "Terminal Bell"
+msgstr "Terminalaren soinua"
+
+#: src/preferences/kgx-preferences-window.ui:95
+msgid "Play _Sound"
+msgstr "Erreproduzitu _soinua"
+
+#: src/preferences/kgx-preferences-window.ui:101
+msgid "_Visual Effects"
+msgstr "_Ikusizko efektuak"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
