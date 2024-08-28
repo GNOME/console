@@ -1,26 +1,26 @@
 # Korean translation for console.
 # Copyright (C) 2022 console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the console package.
-# DaeHyun Sung <sungdh86+git@gmail.com>, 2022-2023.
+# DaeHyun Sung <sungdh86+git@gmail.com>, 2022-2024.
 # Seong-ho Cho <shcho@gnome.org>, 2024. (contributed temporarily)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-12-16 16:56+0000\n"
-"PO-Revision-Date: 2024-03-15 23:35+0900\n"
-"Last-Translator: Seong-ho Cho <darkcircle.0426@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
+"POT-Creation-Date: 2024-08-20 19:30+0000\n"
+"PO-Revision-Date: 2024-08-28 14:48+0900\n"
+"Last-Translator: DaeHyun Sung <sungdh86+git@gmail.com>\n"
 "Language-Team: Korean <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
 msgid "Console"
 msgstr "콘솔"
 
@@ -35,11 +35,11 @@ msgstr ""
 msgid "New Window"
 msgstr "새 창"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
 msgid "New Tab"
 msgstr "새 탭"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:377
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
 msgid "Terminal Emulator"
 msgstr "터미널 에뮬레이터"
 
@@ -51,7 +51,7 @@ msgstr "그놈 데스크톱용 간단한 사용자 친화적인 터미널 에뮬
 msgid "Terminal window"
 msgstr "터미널 창"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
+#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "그놈 프로젝트"
 
@@ -135,81 +135,87 @@ msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "탭 10 전환"
 
-#: src/kgx-application.c:252
-msgid "Cannot use both --command and positional parameters"
-msgstr "--command와 위치 매개변수를 동시에 사용할 수 없습니다"
-
-#. Translators: The leading # is intentional, the initial %s is the
-#. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:349
-#, c-format
-msgid "# KGX %s using VTE %u.%u.%u %s\n"
-msgstr "# KGX %s VTE %u.%u.%u %s 사용\n"
-
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:466
+#: src/kgx-about.c:83 src/kgx-window.c:529
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:379
+#: src/kgx-about.c:101
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 이상"
 
-#: src/kgx-application.c:444
+#. Translators: The leading # is intentional, the initial %s is the
+#. * version of KGX itself, the latter format is the VTE version
+#: src/kgx-about.c:114
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s VTE %u.%u.%u %s 사용\n"
+
+#: src/kgx-application.c:255
+msgid "Cannot use both --working-directory and positional parameters"
+msgstr "--working-directory와 위치 매개변수를 동시에 사용할 수 없습니다"
+
+#: src/kgx-application.c:443
 msgid "Execute the argument to this option inside the terminal"
 msgstr "터미널 내에서 이 선택사항에 대한 인수 실행"
 
-#: src/kgx-application.c:445
+#: src/kgx-application.c:444
 msgid "COMMAND"
 msgstr "<명령>"
 
-#: src/kgx-application.c:453
+#: src/kgx-application.c:452
 msgid "Set the working directory"
 msgstr "작업 디렉터리 설정"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:455
+#: src/kgx-application.c:454
 msgid "DIRNAME"
 msgstr "<디렉터리-이름>"
 
-#: src/kgx-application.c:463
+#: src/kgx-application.c:462
 msgid "Wait until the child exits (TODO)"
 msgstr "자식 프로세스가 종료될때까지 기다림(TODO)"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:471
 msgid "Set the initial window title"
 msgstr "초기 윈도우 제목 설정"
 
-#: src/kgx-application.c:473
+#: src/kgx-application.c:472
 msgid "TITLE"
 msgstr "<제목>"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:480
 msgid "ADVANCED: Set the shell to launch"
 msgstr "고급: 실행할 쉘 설정"
 
-#: src/kgx-application.c:482
+#: src/kgx-application.c:481
 msgid "SHELL"
 msgstr "<쉘>"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:489
 msgid "ADVANCED: Set the scrollback length"
 msgstr "고급: 스크롤백 길이 설정"
 
-#: src/kgx-application.c:491
+#: src/kgx-application.c:490
 msgid "LINES"
 msgstr "<줄>"
 
-#: src/kgx-application.c:500
+#. Translators: %s is the version string, KGX is a codename and should be left as-is
+#: src/kgx-application.c:644
+#, c-format
+msgid "KGX %s — Terminal Emulator"
+msgstr "KGX %s — 터미널 에뮬레이터"
+
+#: src/kgx-application.c:650
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- <명령어> [<인자값>...]]"
 
-#: src/kgx-close-dialog.c:94
+#: src/kgx-close-dialog.c:73
 msgid "Close Window?"
 msgstr "이 창을 닫겠습니까?"
 
-#: src/kgx-close-dialog.c:96
+#: src/kgx-close-dialog.c:75
 msgid ""
 "A command is still running, closing this window will kill it and may lead to "
 "unexpected outcomes"
@@ -220,11 +226,11 @@ msgstr[0] ""
 "명령을 아직 실행중입니다. 이 창을 닫으면 실행 중인 명령을 강제로 끝내어 예기"
 "치 않은 결과가 발생할 수 있습니다"
 
-#: src/kgx-close-dialog.c:103
+#: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
 msgstr "이 탭을 닫겠습니까?"
 
-#: src/kgx-close-dialog.c:105
+#: src/kgx-close-dialog.c:84
 msgid ""
 "A command is still running, closing this tab will kill it and may lead to "
 "unexpected outcomes"
@@ -236,50 +242,40 @@ msgstr[0] ""
 "치 않은 결과가 발생할 수 있습니다"
 
 #. Translators: Screen reader label for the list of running commands
-#: src/kgx-close-dialog.c:232
+#: src/kgx-close-dialog.c:194
 msgid "Process list"
 msgstr "프로세스 목록"
 
 #. Translators: This action dismisses the dialogue, leaving the tab/window open
-#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
+#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
+#: src/preferences/kgx-font-picker.ui:22
 msgid "_Cancel"
 msgstr "취소(_C)"
 
 #. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
-#: src/kgx-close-dialog.c:248
+#: src/kgx-close-dialog.c:207
 msgid "C_lose"
 msgstr "닫기(_L)"
 
-#: src/kgx-font-picker.ui:12
-msgid "Terminal Font"
-msgstr "터미널 글꼴"
+#: src/kgx-colour-utils.c:58
+msgid "Color string is wrong length"
+msgstr "색상 문자열 길이가 잘못되었습니다"
 
-#: src/kgx-font-picker.ui:37
-msgid "_Select"
-msgstr "선택(_S)"
+#: src/kgx-livery-manager.c:193
+msgctxt "livery-name"
+msgid "Linux"
+msgstr "리눅스"
 
-#: src/kgx-font-picker.ui:53 src/kgx-font-picker.ui:56
-msgid "Font Name"
-msgstr "글꼴 이름"
-
-# font family를 나타내는 family는 "계열"이라고 번역
-#: src/kgx-font-picker.ui:142
-msgid "Font Family"
-msgstr "글꼴 계열"
-
-#: src/kgx-font-picker.ui:167
-msgid "Font Preview"
-msgstr "글꼴 미리보기"
-
-#: src/kgx-font-picker.ui:188
-msgid "Font Size"
-msgstr "글꼴 크기"
+#: src/kgx-livery-manager.c:230
+msgctxt "livery-name"
+msgid "XTerm"
+msgstr "XTerm"
 
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:473
+#: src/kgx-pages.c:471
 #, c-format
 msgid "Tab %i"
 msgstr "탭 %i"
@@ -292,94 +288,8 @@ msgstr "탭 분리(_D)"
 msgid "_Close"
 msgstr "닫기(_C)"
 
-#: src/kgx-preferences-window.c:122
-msgid "No Font Set"
-msgstr "글꼴 집합 없음"
-
-#: src/kgx-preferences-window.ui:7
-msgid "General"
-msgstr "일반"
-
-#: src/kgx-preferences-window.ui:10
-msgid "Font"
-msgstr "글꼴"
-
-#: src/kgx-preferences-window.ui:13
-msgid "Use _System Default"
-msgstr "시스템 기본 사용(_S)"
-
-#: src/kgx-preferences-window.ui:19
-msgid "Custom _Font"
-msgstr "사용자 지정 글꼴(_F)"
-
-#: src/kgx-preferences-window.ui:59
-msgid "Terminal Bell"
-msgstr "터미널 삑소리"
-
-#: src/kgx-preferences-window.ui:62
-msgid "Play _Sound"
-msgstr "소리내기(_S)"
-
-#: src/kgx-preferences-window.ui:68
-msgid "_Visual Effects"
-msgstr "시각 효과(_V)"
-
-#: src/kgx-process.c:198
-#, c-format
-msgid "Process %d"
-msgstr "프로세스 %d번"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:180
-#, c-format
-msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr "<b>읽기 전용</b> — %i 상태코드로 명령을 끝냈습니다"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:189
-msgid "<b>Read Only</b> — Command exited"
-msgstr "<b>읽기 전용</b> — 명령을 끝냈습니다"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:222
-#, c-format
-msgid "<b>Failed to start</b> — %s"
-msgstr "<b>실행 실패</b> — %s"
-
-#: src/kgx-tab.c:1112
-msgid "Command completed"
-msgstr "명령 완료"
-
-#: src/kgx-tab.ui:25
-msgid "Find text"
-msgstr "텍스트 찾기"
-
-#: src/kgx-tab.ui:36
-msgid "Previous Match"
-msgstr "이전 일치"
-
-#: src/kgx-tab.ui:44
-msgid "Next Match"
-msgstr "다음 일치"
-
-#: src/kgx-terminal.c:557
-#, c-format
-msgid ""
-"Ctrl-click to open:\n"
-"%s"
-msgstr ""
-"Ctrl-클릭으로 열기:\n"
-"%s"
-
-#: src/kgx-terminal.c:883
-msgid "You are pasting a command that runs as an administrator"
-msgstr "관리자로 실행되는 명령어를 붙여넣고 있습니다"
-
-#. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:887
+#. Translators: %s is the (possibly truncated) command being pasted
+#: src/kgx-paste-dialog.c:76
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -388,9 +298,60 @@ msgstr ""
 "명령이 실행되는 작업을 알고 있어야 합니다:\n"
 "%s"
 
-#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
+#: src/kgx-paste-dialog.c:129
+msgid "You are pasting a command that runs as an administrator"
+msgstr "관리자로 실행되는 명령어를 붙여넣고 있습니다"
+
+#: src/kgx-paste-dialog.c:136 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "붙여넣기(_P)"
+
+#: src/kgx-process.c:192
+#, c-format
+msgid "Process %d"
+msgstr "프로세스 %d번"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-simple-tab.c:169
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>실행 실패</b> — %s"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:814
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>읽기 전용</b> — %i 상태코드로 명령을 끝냈습니다"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:822
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>읽기 전용</b> — 명령을 끝냈습니다"
+
+#: src/kgx-tab.c:842
+msgid "Command completed"
+msgstr "명령 완료"
+
+#: src/kgx-tab.ui:40
+msgid "Find text"
+msgstr "텍스트 찾기"
+
+#: src/kgx-tab.ui:51
+msgid "Previous Match"
+msgstr "이전 일치"
+
+#: src/kgx-tab.ui:59
+msgid "Next Match"
+msgstr "다음 일치"
+
+#: src/kgx-terminal.c:508
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+"Ctrl-클릭으로 열기:\n"
+"%s"
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -424,8 +385,17 @@ msgstr "밝음"
 msgid "Dark Style"
 msgstr "어두움"
 
+#. Translators: ‘command’ is the argument name, and shouldn't be translated
+#: src/kgx-utils.c:113
+msgid "Missing argument for --command"
+msgstr "--command 인자가 없습니다"
+
+#: src/kgx-utils.c:128
+msgid "Cannot use both --command and positional parameters"
+msgstr "--command와 위치 매개변수를 동시에 사용할 수 없습니다"
+
 #. Translators: Credit yourself here
-#: src/kgx-window.c:478
+#: src/kgx-window.c:541
 msgid "translator-credits"
 msgstr "성대현 <sungdh86+git@gmail.com>"
 
@@ -449,25 +419,90 @@ msgstr "키보드 바로 가기(_K)"
 msgid "_About Console"
 msgstr "콘솔 정보(_A)"
 
-#: src/kgx-window.ui:79
+#: src/kgx-window.ui:88
 msgid "Find in Terminal"
 msgstr "터미널에서 찾기"
 
-#: src/kgx-window.ui:86
+#: src/kgx-window.ui:95
 msgid "Main Menu"
 msgstr "주 메뉴"
 
-#: src/kgx-window.ui:104
+#: src/kgx-window.ui:113
 msgid "Shrink Text"
 msgstr "텍스트 축소"
 
-#: src/kgx-window.ui:115
+#: src/kgx-window.ui:124
 msgid "Reset Size"
 msgstr "크기 초기화"
 
-#: src/kgx-window.ui:139
+#: src/kgx-window.ui:148
 msgid "Enlarge Text"
 msgstr "텍스트 확대"
+
+#: src/preferences/kgx-font-picker.ui:11
+msgid "Terminal Font"
+msgstr "터미널 글꼴"
+
+#: src/preferences/kgx-font-picker.ui:29
+msgid "_Select"
+msgstr "선택(_S)"
+
+#: src/preferences/kgx-font-picker.ui:45 src/preferences/kgx-font-picker.ui:48
+msgid "Font Name"
+msgstr "글꼴 이름"
+
+# font family를 나타내는 family는 "계열"이라고 번역
+#: src/preferences/kgx-font-picker.ui:133
+msgid "Font Family"
+msgstr "글꼴 계열"
+
+#: src/preferences/kgx-font-picker.ui:158
+msgid "Font Preview"
+msgstr "글꼴 미리보기"
+
+#: src/preferences/kgx-font-picker.ui:179
+msgid "Font Size"
+msgstr "글꼴 크기"
+
+#: src/preferences/kgx-preferences-window.c:125
+msgid "No Font Set"
+msgstr "글꼴 집합 없음"
+
+#: src/preferences/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "일반"
+
+#: src/preferences/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "글꼴"
+
+#: src/preferences/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "시스템 기본 사용(_S)"
+
+#: src/preferences/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "사용자 지정 글꼴(_F)"
+
+#: src/preferences/kgx-preferences-window.ui:63
+msgid "Behaviour"
+msgstr "동작"
+
+#: src/preferences/kgx-preferences-window.ui:66
+msgid "_Unlimited Scrollback"
+msgstr "무제한 스크롤(_U)"
+
+#: src/preferences/kgx-preferences-window.ui:92
+msgid "Terminal Bell"
+msgstr "터미널 삑소리"
+
+#: src/preferences/kgx-preferences-window.ui:95
+msgid "Play _Sound"
+msgstr "소리내기(_S)"
+
+#: src/preferences/kgx-preferences-window.ui:101
+msgid "_Visual Effects"
+msgstr "시각 효과(_V)"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
