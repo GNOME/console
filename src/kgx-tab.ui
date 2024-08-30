@@ -44,6 +44,23 @@
                                 <signal name="next-match" handler="search_next" swapped="no" />
                                 <signal name="previous-match" handler="search_prev" swapped="no" />
                                 <signal name="search-changed" handler="search_changed" swapped="no" />
+                                <child>
+                                  <object class="GtkShortcutController">
+                                    <property name="propagation-phase">capture</property>
+                                    <child>
+                                      <object class="GtkShortcut">
+                                        <property name="trigger">Return</property>
+                                        <property name="action">signal(next-match)</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkShortcut">
+                                        <property name="trigger">&lt;shift&gt;Return</property>
+                                        <property name="action">signal(previous-match)</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
                               </object>
                             </child>
                             <child>
