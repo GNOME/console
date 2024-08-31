@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-20 19:30+0000\n"
-"PO-Revision-Date: 2024-08-23 08:14+0300\n"
+"POT-Creation-Date: 2024-08-30 14:19+0000\n"
+"PO-Revision-Date: 2024-08-31 13:20+0300\n"
 "Last-Translator: Florentina Mușat <florentina [dot] musat [dot] 28 [at] "
 "gmail [dot] com>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -274,12 +274,12 @@ msgstr "Î_nchide"
 
 #: src/kgx-colour-utils.c:58
 msgid "Color string is wrong length"
-msgstr ""
+msgstr "Șirul culorii are lungimea greșită"
 
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
 msgid "Linux"
-msgstr ""
+msgstr "Linux"
 
 #: src/kgx-livery-manager.c:230
 msgctxt "livery-name"
