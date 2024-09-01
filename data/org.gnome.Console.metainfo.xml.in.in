@@ -31,6 +31,34 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="47~rc" date="2024-09-01" type="development">
+      <description>
+        <ul>
+          <li>Basque</li>
+          <li>Belarusian</li>
+          <li>Brazilian Portuguese</li>
+          <li>Bulgarian</li>
+          <li>Catalan</li>
+          <li>Chinese (China)</li>
+          <li>Czech</li>
+          <li>Finnish</li>
+          <li>Georgian</li>
+          <li>German</li>
+          <li>Hindi</li>
+          <li>Hungarian</li>
+          <li>Kazakh</li>
+          <li>Korean</li>
+          <li>Norwegian</li>
+          <li>Occitan</li>
+          <li>Persian</li>
+          <li>Portuguese</li>
+          <li>Romanian</li>
+          <li>Russian</li>
+          <li>Turkish</li>
+          <li>Ukrainian</li>
+        </ul>
+      </description>
+    </release>
     <release version="47~beta" date="2024-08-14" type="development">
       <description>
         <p>Scrollback size can now be controlled in the preference window and screen reader support
