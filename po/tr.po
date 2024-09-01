@@ -1,16 +1,16 @@
 # Turkish translation of Console.
-# Copyright (C) 2019-2023 Console COPYRIGHT HOLDER
+# Copyright (C) 2019-2024 Console COPYRIGHT HOLDER
 # This file is distributed under the same license as the Console package.
 #
 # Muhammet Kara <muhammetk@gmail.com>, 2021.
-# Sabri Ünal <yakushabb@gmail.com>, 2019-2020, 2023-2024.
+# Sabri Ünal <yakushabb@gmail.com>, 2019, 2020, 2023, 2024.
 # Emin Tufan Çetin <etcetin@gmail.com>, 2019-2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Console master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-20 19:30+0000\n"
+"POT-Creation-Date: 2024-08-24 11:51+0000\n"
 "PO-Revision-Date: 2024-08-24 08:00+0300\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
@@ -207,7 +207,6 @@ msgstr "SATIRLAR"
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
 #: src/kgx-application.c:644
 #, c-format
-#| msgid "Terminal Emulator"
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — Uçbirim Öykünücü"
 
@@ -400,7 +399,7 @@ msgstr "--command ve konumsal parametreler birlikte kullanılamaz"
 #: src/kgx-window.c:541
 msgid "translator-credits"
 msgstr ""
-"Sabri Ünal <libreajans@gmail.com>\n"
+"Sabri Ünal <yakushabb@gmail.com>\n"
 "Emin Tufan Çetin <etcetin@gmail.com>"
 
 #: src/kgx-window.ui:17
