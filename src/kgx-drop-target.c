@@ -113,6 +113,9 @@ kgx_drop_target_class_init (KgxDropTargetClass *klass)
                                 kgx_marshals_VOID__STRING,
                                 G_TYPE_NONE,
                                 1, G_TYPE_STRING);
+  g_signal_set_va_marshaller (signals[DROP],
+                              G_TYPE_FROM_CLASS (klass),
+                              kgx_marshals_VOID__STRINGv);
 }
 
 
@@ -213,7 +216,7 @@ got_uris (GObject      *source,
           GAsyncResult *res,
           gpointer      data)
 {
-  KgxDropTarget *self = data;
+  g_autoptr (KgxDropTarget) self = data;
   g_autoptr (GError) error = NULL;
   g_autoptr (GInputStream) stream = NULL;
   g_autoptr (GDataInputStream) reader = NULL;
@@ -245,7 +248,7 @@ got_uris (GObject      *source,
 }
 
 
-static void
+static inline void
 handle_list (KgxDropTarget *self,
              GdkDrop       *drop,
              const GValue  *value)
@@ -263,15 +266,16 @@ handle_list (KgxDropTarget *self,
 }
 
 
-static void
+static inline void
 get_uris (KgxDropTarget *self, GdkDrop *drop)
 {
+  /* self is (transfer full) here, so we can pass it straight on through */
   gdk_drop_read_async (drop,
                        (const char *[]) { URIS, NULL },
                        DROP_PRIORITY,
                        NULL,
                        got_uris,
-                       g_object_ref (self));
+                       self);
 }
 
 
@@ -280,7 +284,7 @@ got_files (GObject      *source,
            GAsyncResult *res,
            gpointer      data)
 {
-  KgxDropTarget *self = data;
+  g_autoptr (KgxDropTarget) self = data;
   g_autoptr (GError) error = NULL;
   GdkDrop *drop = GDK_DROP (source);
   const GValue *value;
@@ -291,10 +295,10 @@ got_files (GObject      *source,
     if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND)) {
       /* This happens when gtk tried to send a directory via the portal */
       g_debug ("drop-target: assuming we are using a broken portal…");
-      get_uris (self, drop);
+      get_uris (g_steal_pointer (&self), drop);
     } else if (g_error_matches (error, G_DBUS_ERROR, G_DBUS_ERROR_ACCESS_DENIED)) {
       g_debug ("drop-target: assuming we are using a broken portal (of the other kind)…");
-      get_uris (self, drop);
+      get_uris (g_steal_pointer (&self), drop);
     } else {
       g_warning ("drop-target: failed to receive file list: %s", error->message);
       gdk_drop_finish (drop, DROP_REJECT);
@@ -338,9 +342,12 @@ drop (GtkDropTargetAsync *target,
       double              y,
       gpointer            user_data)
 {
-  KgxDropTarget *self = user_data;
+  g_autoptr (KgxDropTarget) self = NULL;
   GdkContentFormats *formats = gdk_drop_get_formats (drop);
   const char *const *mimes = NULL;
+
+  /* keep the object alive during async reads  */
+  g_set_object (&self, user_data);
 
   self->active = FALSE;
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_ACTIVE]);
@@ -354,11 +361,11 @@ drop (GtkDropTargetAsync *target,
                                DROP_PRIORITY,
                                NULL,
                                got_files,
-                               user_data);
+                               g_steal_pointer (&self));
     return TRUE;
   } else if (g_strv_contains (mimes, URIS)) {
     /* a file drop from an older application, or a regular uri list */
-    get_uris (self, drop);
+    get_uris (g_steal_pointer (&self), drop);
     return TRUE;
   } else if (G_LIKELY (g_strv_contains (mimes, TEXT))) {
     gdk_drop_read_value_async (drop,
@@ -366,7 +373,7 @@ drop (GtkDropTargetAsync *target,
                                DROP_PRIORITY,
                                NULL,
                                got_text,
-                               user_data);
+                               g_steal_pointer (&self));
     return TRUE;
   } else {
     return FALSE;
