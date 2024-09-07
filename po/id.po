@@ -2,24 +2,25 @@
 # Copyright (C) 2020 kgx's COPYRIGHT HOLDER
 # This file is distributed under the same license as the kgx package.
 # Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2024.
+# Andika Triwidada <andika@gmail.com>, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-12-16 16:56+0000\n"
-"PO-Revision-Date: 2024-02-20 19:45+0700\n"
-"Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
+"POT-Creation-Date: 2024-08-20 19:30+0000\n"
+"PO-Revision-Date: 2024-09-07 16:24+0700\n"
+"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
 msgid "Console"
 msgstr "Konsol"
 
@@ -33,11 +34,11 @@ msgstr ""
 msgid "New Window"
 msgstr "Jendela Baru"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
 msgid "New Tab"
 msgstr "Tab Baru"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:377
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
 msgid "Terminal Emulator"
 msgstr "Emulator Terminal"
 
@@ -49,7 +50,7 @@ msgstr "Emulator terminal sederhana yang mudah digunakan untuk destop GNOME."
 msgid "Terminal window"
 msgstr "Jendela terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
+#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "Proyek GNOME"
 
@@ -133,81 +134,87 @@ msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Beralih ke Tab 10"
 
-#: src/kgx-application.c:252
-msgid "Cannot use both --command and positional parameters"
-msgstr "Tidak dapat menggunakan parameter --command dan positional"
-
-#. Translators: The leading # is intentional, the initial %s is the
-#. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:349
-#, c-format
-msgid "# KGX %s using VTE %u.%u.%u %s\n"
-msgstr "# KGX %s menggunakan VTE %u.%u.%u %s\n"
-
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:466
+#: src/kgx-about.c:83 src/kgx-window.c:529
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:379
+#: src/kgx-about.c:101
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 atau yang lebih baru"
 
-#: src/kgx-application.c:444
+#. Translators: The leading # is intentional, the initial %s is the
+#. * version of KGX itself, the latter format is the VTE version
+#: src/kgx-about.c:114
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s menggunakan VTE %u.%u.%u %s\n"
+
+#: src/kgx-application.c:255
+msgid "Cannot use both --working-directory and positional parameters"
+msgstr "Tidak dapat menggunakan parameter posisional dan --working-directory"
+
+#: src/kgx-application.c:443
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Jalankan argumen untuk opsi ini di dalam terminal"
 
-#: src/kgx-application.c:445
+#: src/kgx-application.c:444
 msgid "COMMAND"
 msgstr "PERINTAH"
 
-#: src/kgx-application.c:453
+#: src/kgx-application.c:452
 msgid "Set the working directory"
 msgstr "Atur direktori kerja"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:455
+#: src/kgx-application.c:454
 msgid "DIRNAME"
 msgstr "NAMA-DIREKTORI"
 
-#: src/kgx-application.c:463
+#: src/kgx-application.c:462
 msgid "Wait until the child exits (TODO)"
 msgstr "Tunggu sampai anak keluar (TODO)"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:471
 msgid "Set the initial window title"
 msgstr "Atur judul jendela awal"
 
-#: src/kgx-application.c:473
+#: src/kgx-application.c:472
 msgid "TITLE"
 msgstr "JUDUL"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:480
 msgid "ADVANCED: Set the shell to launch"
 msgstr "LANJUTAN: Setel shell untuk diluncurkan"
 
-#: src/kgx-application.c:482
+#: src/kgx-application.c:481
 msgid "SHELL"
 msgstr "SHELL"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:489
 msgid "ADVANCED: Set the scrollback length"
 msgstr "TINGKAT LANJUT: Atur panjang gulir balik"
 
-#: src/kgx-application.c:491
+#: src/kgx-application.c:490
 msgid "LINES"
 msgstr "BARIS"
 
-#: src/kgx-application.c:500
+#. Translators: %s is the version string, KGX is a codename and should be left as-is
+#: src/kgx-application.c:644
+#, c-format
+msgid "KGX %s — Terminal Emulator"
+msgstr "KGX %s — Emulator Terminal"
+
+#: src/kgx-application.c:650
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- PERINTAH [ARGUMEN...]]"
 
-#: src/kgx-close-dialog.c:94
+#: src/kgx-close-dialog.c:73
 msgid "Close Window?"
 msgstr "Tutup Jendela?"
 
-#: src/kgx-close-dialog.c:96
+#: src/kgx-close-dialog.c:75
 msgid ""
 "A command is still running, closing this window will kill it and may lead to "
 "unexpected outcomes"
@@ -218,11 +225,11 @@ msgstr[0] ""
 "Beberapa perintah masih berjalan, menutup jendela ini akan membunuh mereka "
 "dan dapat menyebabkan hasil yang tak terduga"
 
-#: src/kgx-close-dialog.c:103
+#: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
 msgstr "Tutup Tab?"
 
-#: src/kgx-close-dialog.c:105
+#: src/kgx-close-dialog.c:84
 msgid ""
 "A command is still running, closing this tab will kill it and may lead to "
 "unexpected outcomes"
@@ -234,49 +241,42 @@ msgstr[0] ""
 "dapat menyebabkan hasil yang tak terduga"
 
 #. Translators: Screen reader label for the list of running commands
-#: src/kgx-close-dialog.c:232
+#: src/kgx-close-dialog.c:194
 msgid "Process list"
 msgstr "Daftar proses"
 
 #. Translators: This action dismisses the dialogue, leaving the tab/window open
-#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
+#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
+#: src/preferences/kgx-font-picker.ui:22
 msgid "_Cancel"
 msgstr "_Batal"
 
 #. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
-#: src/kgx-close-dialog.c:248
+#: src/kgx-close-dialog.c:207
 msgid "C_lose"
 msgstr "_Tutup"
 
-#: src/kgx-font-picker.ui:12
-msgid "Terminal Font"
-msgstr "Fonta Terminal"
+#: src/kgx-colour-utils.c:58
+msgid "Color string is wrong length"
+msgstr "String warna salah panjang"
 
-#: src/kgx-font-picker.ui:37
-msgid "_Select"
-msgstr "_Pilih"
+#: src/kgx-livery-manager.c:193
+msgctxt "livery-name"
+msgid "Linux"
+msgstr "Linux"
 
-#: src/kgx-font-picker.ui:53 src/kgx-font-picker.ui:56
-msgid "Font Name"
-msgstr "Nama Fonta"
-
-#: src/kgx-font-picker.ui:142
-msgid "Font Family"
-msgstr "Keluarga Fonta"
-
-#: src/kgx-font-picker.ui:167
-msgid "Font Preview"
-msgstr "Pratinjau Fonta"
-
-#: src/kgx-font-picker.ui:188
-msgid "Font Size"
-msgstr "Ukuran Fonta"
+#: src/kgx-livery-manager.c:230
+#| msgctxt "shortcut window"
+#| msgid "Terminal"
+msgctxt "livery-name"
+msgid "XTerm"
+msgstr "XTerm"
 
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:473
+#: src/kgx-pages.c:471
 #, c-format
 msgid "Tab %i"
 msgstr "Tab %i"
@@ -289,94 +289,8 @@ msgstr "_Lepas Tab"
 msgid "_Close"
 msgstr "_Tutup"
 
-#: src/kgx-preferences-window.c:122
-msgid "No Font Set"
-msgstr "Tidak Ada Fonta yang Diatur"
-
-#: src/kgx-preferences-window.ui:7
-msgid "General"
-msgstr "Umum"
-
-#: src/kgx-preferences-window.ui:10
-msgid "Font"
-msgstr "Fonta"
-
-#: src/kgx-preferences-window.ui:13
-msgid "Use _System Default"
-msgstr "Gunakan _Sistem Bawaan"
-
-#: src/kgx-preferences-window.ui:19
-msgid "Custom _Font"
-msgstr "_Fonta Ubahan"
-
-#: src/kgx-preferences-window.ui:59
-msgid "Terminal Bell"
-msgstr "Bel Terminal"
-
-#: src/kgx-preferences-window.ui:62
-msgid "Play _Sound"
-msgstr "Mainkan _Suara"
-
-#: src/kgx-preferences-window.ui:68
-msgid "_Visual Effects"
-msgstr "Efek _Visual"
-
-#: src/kgx-process.c:198
-#, c-format
-msgid "Process %d"
-msgstr "Proses %d"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:180
-#, c-format
-msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr "<b>Hanya Baca</b> — Perintah keluar dengan kode %i"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:189
-msgid "<b>Read Only</b> — Command exited"
-msgstr "<b>Hanya Baca</b> — Perintah keluar"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:222
-#, c-format
-msgid "<b>Failed to start</b> — %s"
-msgstr "<b>Gagal untuk memulai</b> — %s"
-
-#: src/kgx-tab.c:1112
-msgid "Command completed"
-msgstr "Perintah selesai"
-
-#: src/kgx-tab.ui:25
-msgid "Find text"
-msgstr "Cari teks"
-
-#: src/kgx-tab.ui:36
-msgid "Previous Match"
-msgstr "Cocok Sebelumnya"
-
-#: src/kgx-tab.ui:44
-msgid "Next Match"
-msgstr "Cocok Berikutnya"
-
-#: src/kgx-terminal.c:557
-#, c-format
-msgid ""
-"Ctrl-click to open:\n"
-"%s"
-msgstr ""
-"Ctrl-click untuk membuka:\n"
-"%s"
-
-#: src/kgx-terminal.c:883
-msgid "You are pasting a command that runs as an administrator"
-msgstr "Anda menempelkan perintah yang dijalankan sebagai administrator"
-
-#. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:887
+#. Translators: %s is the (possibly truncated) command being pasted
+#: src/kgx-paste-dialog.c:76
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -385,9 +299,60 @@ msgstr ""
 "Pastikan Anda tahu apa yang dilakukan perintah:\n"
 "%s"
 
-#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
+#: src/kgx-paste-dialog.c:129
+msgid "You are pasting a command that runs as an administrator"
+msgstr "Anda menempelkan perintah yang dijalankan sebagai administrator"
+
+#: src/kgx-paste-dialog.c:136 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "Tem_pel"
+
+#: src/kgx-process.c:192
+#, c-format
+msgid "Process %d"
+msgstr "Proses %d"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-simple-tab.c:169
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Gagal untuk memulai</b> — %s"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:814
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Hanya Baca</b> — Perintah keluar dengan kode %i"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:822
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Hanya Baca</b> — Perintah keluar"
+
+#: src/kgx-tab.c:842
+msgid "Command completed"
+msgstr "Perintah selesai"
+
+#: src/kgx-tab.ui:40
+msgid "Find text"
+msgstr "Cari teks"
+
+#: src/kgx-tab.ui:51
+msgid "Previous Match"
+msgstr "Cocok Sebelumnya"
+
+#: src/kgx-tab.ui:59
+msgid "Next Match"
+msgstr "Cocok Berikutnya"
+
+#: src/kgx-terminal.c:508
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+"Ctrl-click untuk membuka:\n"
+"%s"
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -421,10 +386,21 @@ msgstr "Gaya Terang"
 msgid "Dark Style"
 msgstr "Gaya Gelap"
 
+#. Translators: ‘command’ is the argument name, and shouldn't be translated
+#: src/kgx-utils.c:113
+msgid "Missing argument for --command"
+msgstr "Kurang argumen untuk --command"
+
+#: src/kgx-utils.c:128
+msgid "Cannot use both --command and positional parameters"
+msgstr "Tidak dapat menggunakan parameter --command dan positional"
+
 #. Translators: Credit yourself here
-#: src/kgx-window.c:478
+#: src/kgx-window.c:541
 msgid "translator-credits"
-msgstr "Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2024."
+msgstr ""
+"Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2024.\n"
+"Andika Triwidada <andika@gmail.com>, 2024."
 
 #: src/kgx-window.ui:17
 msgid "_New Window"
@@ -446,79 +422,86 @@ msgstr "Pintasan Papan Ti_k"
 msgid "_About Console"
 msgstr "Tent_ang Konsol"
 
-#: src/kgx-window.ui:79
+#: src/kgx-window.ui:88
 msgid "Find in Terminal"
 msgstr "Cari di Terminal"
 
-#: src/kgx-window.ui:86
+#: src/kgx-window.ui:95
 msgid "Main Menu"
 msgstr "Menu Utama"
 
-#: src/kgx-window.ui:104
+#: src/kgx-window.ui:113
 msgid "Shrink Text"
 msgstr "Memperkecil Teks"
 
-#: src/kgx-window.ui:115
+#: src/kgx-window.ui:124
 msgid "Reset Size"
 msgstr "Mengatur Ulang Ukuran"
 
-#: src/kgx-window.ui:139
+#: src/kgx-window.ui:148
 msgid "Enlarge Text"
 msgstr "Memperbesar Teks"
 
-#~ msgid "King’s Cross"
-#~ msgstr "King’s Cross"
+#: src/preferences/kgx-font-picker.ui:11
+msgid "Terminal Font"
+msgstr "Fonta Terminal"
 
-#~ msgid "Use Light Colors"
-#~ msgstr "Gunakan Warna Terang"
+#: src/preferences/kgx-font-picker.ui:29
+msgid "_Select"
+msgstr "_Pilih"
 
-#~ msgid "Use Dark Colors"
-#~ msgstr "Gunakan Warna Gelap"
+#: src/preferences/kgx-font-picker.ui:45 src/preferences/kgx-font-picker.ui:48
+msgid "Font Name"
+msgstr "Nama Fonta"
 
-#~ msgid "View Open Tabs"
-#~ msgstr "Lihat Tab Terbuka"
+#: src/preferences/kgx-font-picker.ui:133
+msgid "Font Family"
+msgstr "Keluarga Fonta"
 
-#~ msgid "Zander Brown"
-#~ msgstr "Zander Brown"
+#: src/preferences/kgx-font-picker.ui:158
+msgid "Font Preview"
+msgstr "Pratinjau Fonta"
 
-#~ msgid "Console (Development)"
-#~ msgstr "Konsol (Pengembangan)"
+#: src/preferences/kgx-font-picker.ui:179
+msgid "Font Size"
+msgstr "Ukuran Fonta"
 
-#~ msgid "About this Program"
-#~ msgstr "Tentang Program Ini"
+#: src/preferences/kgx-preferences-window.c:125
+msgid "No Font Set"
+msgstr "Tidak Ada Fonta yang Diatur"
 
-#~ msgid "Open in Co_nsole (Devel)"
-#~ msgstr "Buka di Ko_nsol (Pengembangan)"
+#: src/preferences/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "Umum"
 
-#~ msgid "Open in Co_nsole"
-#~ msgstr "Buka di Ko_nsol"
+#: src/preferences/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "Fonta"
 
-#~ msgid "Start a terminal session for this location"
-#~ msgstr "Memulai sesi terminal untuk lokasi ini"
+#: src/preferences/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "Gunakan _Sistem Bawaan"
 
-#~ msgid "KGX Terminal Emulator"
-#~ msgstr "Emulator Terminal KGX"
+#: src/preferences/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "_Fonta Ubahan"
 
-#~ msgid "_About King’s Cross"
-#~ msgstr "Tent_ang King's Cross"
+#: src/preferences/kgx-preferences-window.ui:63
+msgid "Behaviour"
+msgstr "Perilaku"
 
-#~ msgid "Op_en in King’s Cross"
-#~ msgstr "Buk_a King’s Cross"
+#: src/preferences/kgx-preferences-window.ui:66
+msgid "_Unlimited Scrollback"
+msgstr "G_ulir Balik Tak Terbatas"
 
-#~ msgid "Close Terminal"
-#~ msgstr "Tutup Terminal"
+#: src/preferences/kgx-preferences-window.ui:92
+msgid "Terminal Bell"
+msgstr "Bel Terminal"
 
-#~ msgid "_OK"
-#~ msgstr "_Ok"
+#: src/preferences/kgx-preferences-window.ui:95
+msgid "Play _Sound"
+msgstr "Mainkan _Suara"
 
-#~ msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
-#~ msgstr "perintah;prompt;cmd;baris perintah;jalankan;shell;terminal;kgx;"
-
-#~ msgid "Terminal (King’s Cross)"
-#~ msgstr "Terminal (King's Cross)"
-
-#~ msgid "child watcher"
-#~ msgstr "pengamat anak"
-
-#~ msgid "Copyright © %s Zander Brown"
-#~ msgstr "Hak Cipta © %s Zander Brown"
+#: src/preferences/kgx-preferences-window.ui:101
+msgid "_Visual Effects"
+msgstr "Efek _Visual"
