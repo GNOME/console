@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-08 03:16+0000\n"
-"PO-Revision-Date: 2024-08-08 14:51+0200\n"
+"POT-Creation-Date: 2024-09-11 22:34+0000\n"
+"PO-Revision-Date: 2024-09-12 00:38+0200\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -49,7 +49,7 @@ msgstr "En enkel användarvänlig terminalemulator för GNOME-skrivbordet."
 msgid "Terminal window"
 msgstr "Terminalfönster"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:383 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "GNOME-projektet"
 
@@ -202,7 +202,6 @@ msgstr "RADER"
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
 #: src/kgx-application.c:644
 #, c-format
-#| msgid "Terminal Emulator"
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — terminalemulator"
 
@@ -272,8 +271,6 @@ msgid "Linux"
 msgstr "Linux"
 
 #: src/kgx-livery-manager.c:230
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
 msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
@@ -474,7 +471,7 @@ msgstr "Typsnittsförhandsgranskning"
 msgid "Font Size"
 msgstr "Typsnittsstorlek"
 
-#: src/preferences/kgx-preferences-window.c:126
+#: src/preferences/kgx-preferences-window.c:125
 msgid "No Font Set"
 msgstr "Inget typsnitt inställt"
 
@@ -503,6 +500,10 @@ msgstr "Beteende"
 msgid "_Unlimited Scrollback"
 msgstr "_Obegränsad rullningshistorik"
 
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "_Antal rader rullningshistorik"
+
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
 msgstr "Terminalljud"
@@ -515,13 +516,11 @@ msgstr "Spela upp _ljud"
 msgid "_Visual Effects"
 msgstr "_Visuella effekter"
 
-#: src/preferences/kgx-preferences-window.ui:109
-msgid "Advanced"
-msgstr "Avancerat"
+#~ msgid "Advanced"
+#~ msgstr "Avancerat"
 
-#: src/preferences/kgx-preferences-window.ui:112
-msgid "Disable “Software _Flow Control”"
-msgstr "Inaktivera ”Program_flödeskontroll”"
+#~ msgid "Disable “Software _Flow Control”"
+#~ msgstr "Inaktivera ”Program_flödeskontroll”"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
