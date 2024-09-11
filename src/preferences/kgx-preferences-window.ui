@@ -69,7 +69,7 @@
             </child>
             <child>
               <object class="AdwSpinRow" id="scrollback">
-                <property name="title">_Scrollback Lines</property>
+                <property name="title" translatable="yes">_Scrollback Lines</property>
                 <property name="use-underline">True</property>
                 <property name="sensitive" bind-source="unlimited_scrollback" bind-property="active"
                   bind-flags="sync-create|invert-boolean" />
