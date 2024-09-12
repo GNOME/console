@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-20 19:30+0000\n"
-"PO-Revision-Date: 2024-09-08 17:38+0200\n"
+"POT-Creation-Date: 2024-09-11 22:34+0000\n"
+"PO-Revision-Date: 2024-09-12 15:42+0200\n"
 "Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -48,7 +48,7 @@ msgstr "En simpel brugervenlig terminalemulator til GNOME-skrivebordet."
 msgid "Terminal window"
 msgstr "Terminalvindue"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "GNOME-projektet"
 
@@ -507,6 +507,10 @@ msgstr "Opførsel"
 #: src/preferences/kgx-preferences-window.ui:66
 msgid "_Unlimited Scrollback"
 msgstr "_Ubegrænset rullebuffer"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "Linjer i _rullebuffer"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
