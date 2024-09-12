@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-20 19:30+0000\n"
-"PO-Revision-Date: 2024-09-02 23:17+0200\n"
+"POT-Creation-Date: 2024-09-11 22:34+0000\n"
+"PO-Revision-Date: 2024-09-12 09:43+0200\n"
 "Last-Translator: Fran Dieguez <fran.dieguez@gnome.org>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -55,7 +55,7 @@ msgstr "Un emulador de terminal simple e amigábel para o escritorio GNOME."
 msgid "Terminal window"
 msgstr "Xanela de terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "O Proxecto GNOME"
 
@@ -278,8 +278,6 @@ msgid "Linux"
 msgstr "Linux"
 
 #: src/kgx-livery-manager.c:230
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
 msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
@@ -410,7 +408,7 @@ msgstr "Non foi posíbel usar --command e parámetros posicionais"
 #. Translators: Credit yourself here
 #: src/kgx-window.c:541
 msgid "translator-credits"
-msgstr "Fran Diéguez <frandieguez@gnome.org>, 2021-2024."
+msgstr "Fran Diéguez <frandieguez@gnome.org>, 2021-2024"
 
 #: src/kgx-window.ui:17
 msgid "_New Window"
@@ -503,6 +501,10 @@ msgstr "Comportamento"
 #: src/preferences/kgx-preferences-window.ui:66
 msgid "_Unlimited Scrollback"
 msgstr "Desprazamento _sen límite"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "_Liñas de desprazamento cara atrás"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
