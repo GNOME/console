@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-20 19:30+0000\n"
-"PO-Revision-Date: 2024-08-27 14:53+0330\n"
+"POT-Creation-Date: 2024-09-11 22:34+0000\n"
+"PO-Revision-Date: 2024-09-12 13:38+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "Language: fa\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -27,8 +27,8 @@ msgstr "کنسول"
 #: data/org.gnome.Console.desktop.in.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;دستور;"
-"فرمان;اعلان;خط فرمان;اجرا;پوسته;شل;ترمینال;پایانه;"
+"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;دستور;فرمان;"
+"اعلان;خط فرمان;اجرا;پوسته;شل;ترمینال;پایانه;"
 
 #: data/org.gnome.Console.desktop.in.in:21
 msgid "New Window"
@@ -50,7 +50,7 @@ msgstr "شبیه‌ساز پایانه‌ای کاربرپسند برای میز
 msgid "Terminal window"
 msgstr "پنجرهٔ پایانه"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "پروژهٔ گنوم"
 
@@ -219,14 +219,14 @@ msgid ""
 "A command is still running, closing this window will kill it and may lead to "
 "unexpected outcomes"
 msgid_plural ""
-"Some commands are still running, closing this window will kill them and may "
-"lead to unexpected outcomes"
+"Some commands are still running, closing this window will kill them and may lead "
+"to unexpected outcomes"
 msgstr[0] ""
-"هنوز دستورهایی در حال اجرایند. بستن این پنجره خواهد کشتشان و ممکن است منجر "
-"به نتیجه‌های غیرمنتظره شود"
-msgstr[1] ""
-"هنوز دستوری در حال اجراست. بستن این پنجره خواهد کشتش و ممکن است منجر به "
+"هنوز دستورهایی در حال اجرایند. بستن این پنجره خواهد کشتشان و ممکن است منجر به "
 "نتیجه‌های غیرمنتظره شود"
+msgstr[1] ""
+"هنوز دستوری در حال اجراست. بستن این پنجره خواهد کشتش و ممکن است منجر به نتیجه‌های "
+"غیرمنتظره شود"
 
 #: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
@@ -237,14 +237,14 @@ msgid ""
 "A command is still running, closing this tab will kill it and may lead to "
 "unexpected outcomes"
 msgid_plural ""
-"Some commands are still running, closing this tab will kill them and may "
-"lead to unexpected outcomes"
+"Some commands are still running, closing this tab will kill them and may lead to "
+"unexpected outcomes"
 msgstr[0] ""
-"هنوز دستورهایی در حال اجرایند. بستن این زبانه خواهد کشتشان و ممکن است منجر "
-"به نتیجه‌های غیرمنتظره شود"
-msgstr[1] ""
-"هنوز دستوری در حال اجراست. بستن این زبانه خواهد کشتش و ممکن است منجر به "
+"هنوز دستورهایی در حال اجرایند. بستن این زبانه خواهد کشتشان و ممکن است منجر به "
 "نتیجه‌های غیرمنتظره شود"
+msgstr[1] ""
+"هنوز دستوری در حال اجراست. بستن این زبانه خواهد کشتش و ممکن است منجر به نتیجه‌های "
+"غیرمنتظره شود"
 
 #. Translators: Screen reader label for the list of running commands
 #: src/kgx-close-dialog.c:194
@@ -495,6 +495,10 @@ msgstr "رفتار"
 #: src/preferences/kgx-preferences-window.ui:66
 msgid "_Unlimited Scrollback"
 msgstr "لغزش _نامحدود"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "_خط‌های لغزش به پس"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
