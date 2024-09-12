@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-08 03:16+0000\n"
-"PO-Revision-Date: 2024-08-08 23:30+0300\n"
+"POT-Creation-Date: 2024-09-11 22:34+0000\n"
+"PO-Revision-Date: 2024-09-12 10:14+0300\n"
 "Last-Translator: Artur So <arturios2005@mail.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -51,7 +51,7 @@ msgstr "Простой и удобный эмулятор терминала д�
 msgid "Terminal window"
 msgstr "Окно терминала"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:383 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "Проект GNOME"
 
@@ -154,7 +154,8 @@ msgstr "# KGX %s с использованием VTE %u.%u.%u %s\n"
 
 #: src/kgx-application.c:255
 msgid "Cannot use both --working-directory and positional parameters"
-msgstr "Невозможно использовать как --working-directory, так и позиционные параметры"
+msgstr ""
+"Невозможно использовать как --working-directory, так и позиционные параметры"
 
 #: src/kgx-application.c:443
 msgid "Execute the argument to this option inside the terminal"
@@ -475,7 +476,7 @@ msgstr "Предпросмотр шрифта"
 msgid "Font Size"
 msgstr "Размер шрифта"
 
-#: src/preferences/kgx-preferences-window.c:126
+#: src/preferences/kgx-preferences-window.c:125
 msgid "No Font Set"
 msgstr "Шрифт не установлен"
 
@@ -503,6 +504,10 @@ msgstr "Поведение"
 msgid "_Unlimited Scrollback"
 msgstr "_Неограниченная прокрутка"
 
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "_Линии прокрутки"
+
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
 msgstr "Сигнал терминала"
@@ -515,13 +520,11 @@ msgstr "Воспроизводить _звук"
 msgid "_Visual Effects"
 msgstr "_Визуальные эффекты"
 
-#: src/preferences/kgx-preferences-window.ui:109
-msgid "Advanced"
-msgstr "Дополнительно"
+#~ msgid "Advanced"
+#~ msgstr "Дополнительно"
 
-#: src/preferences/kgx-preferences-window.ui:112
-msgid "Disable “Software _Flow Control”"
-msgstr "Отключить “Программное управление _потоком”"
+#~ msgid "Disable “Software _Flow Control”"
+#~ msgstr "Отключить “Программное управление _потоком”"
 
 #~ msgid "King’s Cross"
 #~ msgstr "Кингс-Кросс"
