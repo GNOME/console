@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-08 03:16+0000\n"
-"PO-Revision-Date: 2024-08-17 22:14+0200\n"
+"POT-Creation-Date: 2024-09-11 22:34+0000\n"
+"PO-Revision-Date: 2024-09-12 08:46+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -50,7 +50,7 @@ msgstr "Egy egyszerű, felhasználóbarát terminálemulátor a GNOME asztalhoz.
 msgid "Terminal window"
 msgstr "Terminálablak"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:383 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "A GNOME projekt"
 
@@ -152,11 +152,10 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s VTE %u.%u.%u %s használatával\n"
 
 #: src/kgx-application.c:255
-#| msgid "Cannot use both --command and positional parameters"
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr ""
-"Nem lehet egyszerre használni a --working-directory kapcsolót és a"
-" pozicionálási paramétereket"
+"Nem lehet egyszerre használni a --working-directory kapcsolót és a "
+"pozicionálási paramétereket"
 
 #: src/kgx-application.c:443
 msgid "Execute the argument to this option inside the terminal"
@@ -206,7 +205,6 @@ msgstr "SOROK"
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
 #: src/kgx-application.c:644
 #, c-format
-#| msgid "Terminal Emulator"
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s – Terminálemulátor"
 
@@ -276,8 +274,6 @@ msgid "Linux"
 msgstr "Linux"
 
 #: src/kgx-livery-manager.c:230
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
 msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
@@ -476,7 +472,7 @@ msgstr "Betűkészlet előnézete"
 msgid "Font Size"
 msgstr "Betűméret"
 
-#: src/preferences/kgx-preferences-window.c:126
+#: src/preferences/kgx-preferences-window.c:125
 msgid "No Font Set"
 msgstr "Nincs betűkészlet beállítva"
 
@@ -504,6 +500,10 @@ msgstr "Viselkedés"
 msgid "_Unlimited Scrollback"
 msgstr "_Korlátlan visszagörgetés"
 
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "Sorok _visszagörgetése"
+
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
 msgstr "Terminálcsengő"
@@ -515,11 +515,3 @@ msgstr "_Hang lejátszása"
 #: src/preferences/kgx-preferences-window.ui:101
 msgid "_Visual Effects"
 msgstr "_Látható hatások"
-
-#: src/preferences/kgx-preferences-window.ui:109
-msgid "Advanced"
-msgstr "Speciális"
-
-#: src/preferences/kgx-preferences-window.ui:112
-msgid "Disable “Software _Flow Control”"
-msgstr "„Szoftveres _folyamvezérlés” letiltása"
