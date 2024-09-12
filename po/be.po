@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console gnome-43\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-20 19:30+0000\n"
-"PO-Revision-Date: 2024-08-24 18:41+0300\n"
+"POT-Creation-Date: 2024-09-11 22:34+0000\n"
+"PO-Revision-Date: 2024-09-12 09:07+0300\n"
 "Last-Translator: Yuras Shumovich <shumovichy@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -51,7 +51,7 @@ msgstr "Просты і зручны тэрмінал для асяроддзя 
 msgid "Terminal window"
 msgstr "Акно тэрмінала"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "Праект GNOME"
 
@@ -205,7 +205,6 @@ msgstr "РАДКОЎ"
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
 #: src/kgx-application.c:644
 #, c-format
-#| msgid "Terminal Emulator"
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — Эмулятар тэрмінала"
 
@@ -282,8 +281,6 @@ msgid "Linux"
 msgstr "Linux"
 
 #: src/kgx-livery-manager.c:230
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
 msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
@@ -507,6 +504,10 @@ msgstr "Паводзіны"
 #: src/preferences/kgx-preferences-window.ui:66
 msgid "_Unlimited Scrollback"
 msgstr "_Неабмежаваная прагортка назад"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "_Радкоў для прагорткі назад"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
