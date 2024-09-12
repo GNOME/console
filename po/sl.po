@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-08 03:16+0000\n"
-"PO-Revision-Date: 2024-08-08 08:28+0200\n"
+"POT-Creation-Date: 2024-09-11 22:34+0000\n"
+"PO-Revision-Date: 2024-09-12 15:23+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -51,7 +51,7 @@ msgstr "Preprost uporabniku prijazen posnemovalnik terminala za namizje GNOME."
 msgid "Terminal window"
 msgstr "Okno terminala"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:383 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "Projekt GNOME"
 
@@ -482,7 +482,7 @@ msgstr "Predogled pisave"
 msgid "Font Size"
 msgstr "Velikost pisave"
 
-#: src/preferences/kgx-preferences-window.c:126
+#: src/preferences/kgx-preferences-window.c:125
 msgid "No Font Set"
 msgstr "Ni nastavljene pisave"
 
@@ -510,6 +510,10 @@ msgstr "Vedenje"
 msgid "_Unlimited Scrollback"
 msgstr "_Neomejeno pomikanje nazaj"
 
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "_Vrstice povrnitvenega drsenja"
+
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
 msgstr "Zvonec terminala"
@@ -521,11 +525,3 @@ msgstr "Predvajaj _zvok"
 #: src/preferences/kgx-preferences-window.ui:101
 msgid "_Visual Effects"
 msgstr "_Učinki"
-
-#: src/preferences/kgx-preferences-window.ui:109
-msgid "Advanced"
-msgstr "Napredno"
-
-#: src/preferences/kgx-preferences-window.ui:112
-msgid "Disable “Software _Flow Control”"
-msgstr "Onemogoči »_Kontrolnik poteka programja«"
