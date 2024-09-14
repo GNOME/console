@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
 "POT-Creation-Date: 2024-09-11 22:34+0000\n"
-"PO-Revision-Date: 2024-09-14 16:49+0200\n"
+"PO-Revision-Date: 2024-09-14 22:49+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <->\n"
 "Language: sk\n"
@@ -412,7 +412,7 @@ msgstr "Tmavý štýl"
 #. Translators: ‘command’ is the argument name, and shouldn't be translated
 #: src/kgx-utils.c:113
 msgid "Missing argument for --command"
-msgstr ""
+msgstr "Chýba argument pre --command"
 
 #: src/kgx-utils.c:128
 msgid "Cannot use both --command and positional parameters"
@@ -519,11 +519,11 @@ msgstr "Správanie"
 
 #: src/preferences/kgx-preferences-window.ui:66
 msgid "_Unlimited Scrollback"
-msgstr ""
+msgstr "_Neobmedzený spätný posun"
 
 #: src/preferences/kgx-preferences-window.ui:72
 msgid "_Scrollback Lines"
-msgstr ""
+msgstr "_Riadkov pre spätný posun"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
