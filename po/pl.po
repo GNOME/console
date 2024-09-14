@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-20 19:30+0000\n"
-"PO-Revision-Date: 2024-09-08 17:47+0200\n"
+"POT-Creation-Date: 2024-09-11 22:34+0000\n"
+"PO-Revision-Date: 2024-09-14 17:29+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -51,7 +51,7 @@ msgstr "Prosty, łatwy w użyciu emulator terminala dla środowiska GNOME."
 msgid "Terminal window"
 msgstr "Okno terminala"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "Projekt GNOME"
 
@@ -506,6 +506,10 @@ msgstr "Zachowanie"
 #: src/preferences/kgx-preferences-window.ui:66
 msgid "_Unlimited Scrollback"
 msgstr "Nie_ograniczone przewijanie"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "_Liczba wierszy przewijania"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
