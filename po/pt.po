@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-20 19:30+0000\n"
-"PO-Revision-Date: 2024-08-30 15:25+0100\n"
+"POT-Creation-Date: 2024-09-11 22:34+0000\n"
+"PO-Revision-Date: 2024-09-15 00:50+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "Language: pt\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -52,7 +52,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Janela do terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "O Projeto GNOME"
 
@@ -275,8 +275,6 @@ msgid "Linux"
 msgstr "Linux"
 
 #: src/kgx-livery-manager.c:230
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
 msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
@@ -500,6 +498,10 @@ msgstr "Comportamento"
 #: src/preferences/kgx-preferences-window.ui:66
 msgid "_Unlimited Scrollback"
 msgstr "Recuo _ilimitado"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "Linhas de _recuo"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
