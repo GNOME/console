@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-20 19:30+0000\n"
-"PO-Revision-Date: 2024-08-29 23:32+0200\n"
+"POT-Creation-Date: 2024-09-11 22:34+0000\n"
+"PO-Revision-Date: 2024-09-15 12:20+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -53,7 +53,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Terminálové okno"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "Projekt GNOME"
 
@@ -281,8 +281,6 @@ msgid "Linux"
 msgstr "Linux"
 
 #: src/kgx-livery-manager.c:230
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
 msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
@@ -506,6 +504,10 @@ msgstr "Chování"
 #: src/preferences/kgx-preferences-window.ui:66
 msgid "_Unlimited Scrollback"
 msgstr "Neomezený zpětný pos_uv"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "Řádky zpětného p_osuvu"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
