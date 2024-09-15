@@ -1,3 +1,35 @@
+Version 47.0
+~~~~~~~~~~~~
+
+A edge case in drag-and-drop has been resolved, and Aleksandr Melman fixed a
+string that hadn't been marked for translation.
+
+Updated Translations
+ * Belarusian  (Vasil Pupkin)
+ * British English  (Andi Chandler)
+ * Bulgarian  (Alexander Shopov)
+ * Catalan  (Jordi Mas i Hernandez)
+ * Chinese (China)  (Luming Zh)
+ * Czech  (Daniel Rusek)
+ * Danish  (Ask Hjorth Larsen)
+ * Galician  (Fran Dieguez)
+ * Georgian  (Ekaterine Papava)
+ * Greek  (Efstathios Iosifidis)
+ * Hebrew  (Yaron Shahrabani)
+ * Hungarian  (Balázs Úr)
+ * Indonesian  (Andika Triwidada)
+ * Lithuanian  (Aurimas Černius)
+ * Norwegian Bokmål  (Brage Fuglseth)
+ * Persian  (Danial Behzadi)
+ * Polish  (Piotr Drąg)
+ * Portuguese  (Hugo Carvalho)
+ * Russian  (Artur S0)
+ * Slovak  (Jose Riha)
+ * Slovenian  (Martin)
+ * Spanish  (Daniel Mustieles)
+ * Swedish  (Anders Jonsson)
+ * Ukrainian  (Yuri Chornoivan)
+
 Version 47.rc
 ~~~~~~~~~~~~~~~
 

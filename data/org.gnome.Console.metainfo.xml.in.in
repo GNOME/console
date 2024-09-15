@@ -31,8 +31,40 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="47.0" date="2024-09-15" type="stable">
+      <description>
+        <p>Updated Translations:</p>
+        <ul>
+          <li>Belarusian</li>
+          <li>British English</li>
+          <li>Bulgarian</li>
+          <li>Catalan</li>
+          <li>Chinese (China)</li>
+          <li>Czech</li>
+          <li>Danish</li>
+          <li>Galician</li>
+          <li>Georgian</li>
+          <li>Greek</li>
+          <li>Hebrew</li>
+          <li>Hungarian</li>
+          <li>Indonesian</li>
+          <li>Lithuanian</li>
+          <li>Norwegian Bokmål</li>
+          <li>Persian</li>
+          <li>Polish</li>
+          <li>Portuguese</li>
+          <li>Russian</li>
+          <li>Slovak</li>
+          <li>Slovenian</li>
+          <li>Spanish</li>
+          <li>Swedish</li>
+          <li>Ukrainian</li>
+        </ul>
+      </description>
+    </release>
     <release version="47~rc" date="2024-09-01" type="development">
       <description>
+        <p>Updated Translations:</p>
         <ul>
           <li>Basque</li>
           <li>Belarusian</li>
