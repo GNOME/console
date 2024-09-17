@@ -10,6 +10,121 @@ variables:
   CONFIG_OPTS: "-Ddevel=true -Dwerror=true"
   APP_ID: "org.gnome.Console.Devel"
   BUNDLE: "org.gnome.Console.Devel.flatpak"
+  FEDORA_32_IMAGE: fedora:rawhide
+  FEDORA_32_DEPS:
+    appstream-devel.i686
+    at-spi2-atk-devel.i686
+    at-spi2-core-devel.i686
+    atk-devel.i686
+    brotli-devel.i686
+    bzip2-devel.i686
+    cairo-devel.i686
+    cairo-gobject-devel.i686
+    check-devel.i686
+    dbus-devel.i686
+    desktop-file-utils
+    elfutils-debuginfod-client-devel.i686
+    elfutils-devel.i686
+    elfutils-libelf-devel.i686
+    expat-devel.i686
+    fontconfig-devel.i686
+    freetype-devel.i686
+    fribidi-devel.i686
+    gcovr
+    gdk-pixbuf2-devel.i686
+    git
+    glib2-devel.i686
+    glibc-*.i686
+    glibc-headers-x86
+    glslc
+    gmp-devel.i686
+    gnutls-devel.i686
+    gobject-introspection-devel.i686
+    graphene-devel.i686
+    graphite2-devel.i686
+    gsettings-desktop-schemas-devel.i686
+    gssdp-devel.i686
+    gstreamer1-devel.i686
+    gstreamer1-plugins-bad-free-devel.i686
+    gstreamer1-plugins-base-devel.i686
+    gtk3-devel.i686
+    gtk4-devel.i686
+    gupnp-devel.i686
+    gupnp-igd-devel.i686
+    harfbuzz-devel.i686
+    kernel-headers.i686
+    libadwaita-devel.i686
+    libblkid-devel.i686
+    libcloudproviders-devel.i686
+    libdatrie-devel.i686
+    libdrm-devel.i686
+    libffi-devel.i686
+    libgcc.i686
+    libglvnd-core-devel.i686
+    libglvnd-devel.i686
+    libgtop2-devel.i686
+    libgudev-devel.i686
+    libicu-devel.i686
+    libidn2-devel.i686
+    libjpeg-turbo-devel.i686
+    libmount-devel.i686
+    libnghttp2-devel.i686
+    libnice-devel.i686
+    libpciaccess-devel.i686
+    libpng-devel.i686
+    libpsl-devel.i686
+    libselinux-devel.i686
+    libsepol-devel.i686
+    libsoup3-devel.i686
+    libstdc++-*.i686
+    libstdc++-devel.i686
+    libstdc++-devel.x86_64
+    libtasn1-devel.i686
+    libthai-devel.i686
+    libtiff-devel.i686
+    libunwind-devel.i686
+    libva-devel.i686
+    libwebp-devel.i686
+    libX11-devel.i686
+    libXau-devel.i686
+    libxcb-devel.i686
+    libXcomposite-devel.i686
+    libxcrypt-devel.i686
+    libXcursor-devel.i686
+    libXdamage-devel.i686
+    libXext-devel.i686
+    libXfixes-devel.i686
+    libXft-devel.i686
+    libXi-devel.i686
+    libXinerama-devel.i686
+    libxkbcommon-devel.i686
+    libxml2-devel.i686
+    libXrandr-devel.i686
+    libXrender-devel.i686
+    libXtst-devel.i686
+    libzstd-devel.i686
+    llvm.i686
+    lz4-devel.i686
+    mesa-libgbm-devel.i686
+    meson clang.i686
+    nettle-devel.i686
+    orc-devel.i686
+    p11-kit-devel.i686
+    pango-devel.i686
+    pcre2-devel.i686
+    pixman-devel.i686
+    sassc libepoxy-devel.i686
+    sqlite-devel.i686
+    subunit-devel.i686
+    sysprof-capture-devel.i686
+    systemd-devel.i686
+    vte291-devel.i686
+    vte291-gtk4-devel.i686
+    vulkan-loader-devel.i686
+    wayland-devel.i686
+    wayland-protocols-devel
+    xz-devel.i686
+    zlib-ng-compat-devel.i686
 
 flatpak:
   stage: build
@@ -18,3 +133,51 @@ flatpak:
 flatpak-aarch64:
   stage: build
   extends: '.flatpak@aarch64'
+
+fedora-32-clang:
+  stage: build
+  image: $FEDORA_32_IMAGE
+  before_script:
+    - dnf update -y --nogpgcheck
+    - dnf install -y --nogpgcheck $FEDORA_32_DEPS
+  script:
+    - export LC_ALL=C.UTF-8
+    - meson setup build --cross-file=.gitlab-ci/ci-32-cross -Db_coverage=true
+    - meson compile -C build
+    - meson test -C build
+  after_script:
+    - gcovr --gcov-executable "llvm-cov gcov"
+        --exclude="build/*" --exclude="subprojects/"
+        --json --output=coverage-${CI_JOB_NAME}.json
+  artifacts:
+    when: always
+    paths:
+      - build/meson-logs
+      - coverage-*.json
+    reports:
+      junit: build/meson-logs/testlog.junit.xml
+
+coverage:
+  image: $FEDORA_32_IMAGE
+  stage: test
+  before_script:
+    - dnf update -y --nogpgcheck
+    - dnf install -y --nogpgcheck gcovr
+  script:
+    - mkdir coverage-report
+    - gcovr --add-tracefile 'coverage-*.json'
+        --html-details --print-summary --output coverage-report/index.html
+    - gcovr --add-tracefile 'coverage-*.json'
+        --xml --output coverage-report/coverage.xml
+  artifacts:
+    expose_as: 'Coverage Report'
+    paths:
+      - coverage-report
+      - coverage-report/index.html
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage-report/coverage.xml
+  coverage: '/^lines: (\d+\.\d+\%)/'
+  needs:
+    - fedora-32-clang
