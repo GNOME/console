@@ -226,7 +226,7 @@ main (int argc, char *argv[])
 
   for (size_t i = 0; i < G_N_ELEMENTS (filter_cases); i++) {
     g_autofree char *path =
-      g_strdup_printf ("/kgx/utils/filter_argument/case_%li", i);
+      g_strdup_printf ("/kgx/utils/filter_argument/case_%" G_GSIZE_FORMAT, i);
 
     g_test_add_data_func (path, &filter_cases[i], test_filter_arguments);
   }
@@ -235,7 +235,7 @@ main (int argc, char *argv[])
   g_test_add_func ("/kgx/utils/str_constrained_append", test_str_constrained_append);
   for (size_t i = 0; i < G_N_ELEMENTS (constrained_cases); i++) {
     g_autofree char *path =
-      g_strdup_printf ("/kgx/utils/str_constrained_dup/case_%li", i);
+      g_strdup_printf ("/kgx/utils/str_constrained_dup/case_%" G_GSIZE_FORMAT, i);
 
     g_test_add_data_func (path, &constrained_cases[i], test_str_constrained_dup);
   }
