@@ -38,29 +38,35 @@ G_BEGIN_DECLS
  */
 #define KGX_DEFINE_DATA(TypeName, type_name)                                 \
   typedef struct _##TypeName TypeName;                                       \
+  G_GNUC_UNUSED                                                              \
   static inline void type_name##_cleanup (TypeName *self);                   \
+  G_GNUC_UNUSED                                                              \
   static inline void                                                         \
   type_name##_free (gpointer data)                                           \
   {                                                                          \
     type_name##_cleanup (data);                                              \
     g_free (data);                                                           \
   }                                                                          \
+  G_GNUC_UNUSED                                                              \
   static inline TypeName *type_name##_alloc (void) G_GNUC_MALLOC;            \
   static inline TypeName *                                                   \
   type_name##_alloc (void)                                                   \
   {                                                                          \
     return g_new0 (TypeName, 1);                                             \
   }                                                                          \
+  G_GNUC_UNUSED                                                              \
   static inline void                                                         \
   kgx_task_set_##type_name (GTask *restrict task, TypeName *restrict data)   \
   {                                                                          \
     g_task_set_task_data (task, data, type_name##_free);                     \
   }                                                                          \
+  G_GNUC_UNUSED                                                              \
   static inline TypeName *                                                   \
   kgx_task_get_##type_name (GTask *task)                                     \
   {                                                                          \
     return g_task_get_task_data (task);                                      \
   }                                                                          \
+  G_GNUC_UNUSED                                                              \
   static inline void                                                         \
   clear_##type_name (TypeName **ptr)                                         \
   {                                                                          \
