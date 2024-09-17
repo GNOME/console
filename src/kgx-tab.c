@@ -1077,7 +1077,11 @@ kgx_tab_get_children (KgxTab *self)
 
   priv = kgx_tab_get_instance_private (self);
 
-  return kgx_train_get_children (priv->train);
+  if (G_LIKELY (priv->train)) {
+    return kgx_train_get_children (priv->train);
+  } else {
+    return g_ptr_array_new ();
+  }
 }
 
 
