@@ -1,0 +1,21 @@
+[binaries]
+c = ['/usr/bin/clang', '-target', 'i686-redhat-linux-gnu']
+cpp = ['/usr/bin/clang++', '-target', 'i686-redhat-linux-gnu']
+ar = '/usr/bin/llvm-ar'
+strip = '/usr/bin/strip'
+pkg-config = '/usr/bin/pkgconf'
+
+[built-in options]
+pkg_config_path = ['/usr/lib/pkgconfig', '/usr/share/pkgconfig']
+prefix = '/usr'
+libdir = 'lib'
+bindir = 'bin'
+
+[properties]
+pkg_config_libdir = '/usr/lib/pkgconfig'
+
+[host_machine]
+system = 'linux'
+cpu_family = 'x86'
+cpu = 'i686'
+endian = 'little'
