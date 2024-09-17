@@ -106,6 +106,7 @@ test_c_args = [
   '-Werror=missing-declarations',
   '-Wformat-nonliteral',
   '-Wformat-security',
+  '-Werror=format',
   '-Winit-self',
   '-Wmaybe-uninitialized',
   '-Wno-strict-aliasing',
