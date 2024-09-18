@@ -10,16 +10,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Console master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-24 11:51+0000\n"
-"PO-Revision-Date: 2024-08-24 08:00+0300\n"
-"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
+"POT-Creation-Date: 2024-09-15 20:26+0000\n"
+"PO-Revision-Date: 2024-09-12 09:47+0300\n"
+"Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -54,7 +54,7 @@ msgstr "GNOME masaüstü için basit, kullanıcı dostu uçbirim öykünücü."
 msgid "Terminal window"
 msgstr "Uçbirim penceresi"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:466 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "GNOME Projesi"
 
@@ -493,6 +493,10 @@ msgstr "Davranış"
 #: src/preferences/kgx-preferences-window.ui:66
 msgid "_Unlimited Scrollback"
 msgstr "_Sınırsız Geri Kaydırma"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "Satırları _Geri Kaydır"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
