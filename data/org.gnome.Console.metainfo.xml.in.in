@@ -31,6 +31,11 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="47.1" date="2024-09-18" type="stable">
+      <description>
+        <p>Minor fixes</p>
+      </description>
+    </release>
     <release version="47.0" date="2024-09-15" type="stable">
       <description>
         <p>Updated Translations:</p>
