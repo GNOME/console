@@ -26,7 +26,7 @@
   </requires>
   <screenshots>
     <screenshot type="default">
-      <image height="561" width="732">https://gitlab.gnome.org/GNOME/console/raw/gnome-43/data/screenshots/01-Terminal.png</image>
+      <image height="602" width="776">https://gitlab.gnome.org/GNOME/console/raw/gnome-47/data/screenshots/01-Terminal.png</image>
       <caption>Terminal window</caption>
     </screenshot>
   </screenshots>
