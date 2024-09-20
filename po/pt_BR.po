@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-20 19:30+0000\n"
-"PO-Revision-Date: 2024-08-25 09:13-0300\n"
+"POT-Creation-Date: 2024-09-11 22:34+0000\n"
+"PO-Revision-Date: 2024-09-19 21:06-0300\n"
 "Last-Translator: Juliano de Souza Camargo <julianosc@pm.me>\n"
 "Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao>>\n"
 "Language: pt_BR\n"
@@ -59,7 +59,7 @@ msgstr "Um simples emulador de terminal fácil de usar para o ambiente GNOME."
 msgid "Terminal window"
 msgstr "Janela do terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "O Projeto GNOME"
 
@@ -511,6 +511,10 @@ msgstr "Comportamento"
 #: src/preferences/kgx-preferences-window.ui:66
 msgid "_Unlimited Scrollback"
 msgstr "_Rolagem ilimitada"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "Rolagem de linha_s"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
