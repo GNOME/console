@@ -1,0 +1,465 @@
+# Thai translation for console.
+# Copyright (C) 2024 console's COPYRIGHT HOLDER
+# This file is distributed under the same license as the console package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: console gnome-46\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
+"POT-Creation-Date: 2024-08-11 11:27+0000\n"
+"PO-Revision-Date: 2024-09-25 21:11+0700\n"
+"Last-Translator: \n"
+"Language-Team: Thai <th@li.org>\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.5\n"
+
+#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
+msgid "Console"
+msgstr "คอนโซล"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Console.desktop.in.in:8
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
+msgstr "คำสั่ง;พรอมต์;cmd;บรรทัดคำสั่ง;เรียกใช้;เชลล์;เทอร์มินัล;kgx;kings cross;"
+
+#: data/org.gnome.Console.desktop.in.in:21
+msgid "New Window"
+msgstr "หน้าต่างใหม่"
+
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:165
+msgid "New Tab"
+msgstr "แท็บใหม่"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:379
+msgid "Terminal Emulator"
+msgstr "เครื่องมือจำลองเทอร์มินัล"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:11
+msgid "A simple user-friendly terminal emulator for the GNOME desktop."
+msgstr "เครื่องมือจำลองเทอร์มินัลซึ่งใช้งานได้ง่ายสำหรับเดสก์ท็อป GNOME"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:30
+msgid "Terminal window"
+msgstr "หน้าต่างเทอร์มินัล"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:383 src/kgx-window.c:514
+msgid "The GNOME Project"
+msgstr "โครงการ GNOME"
+
+#: src/help-overlay.ui:12
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "แอปพลิเคชัน"
+
+#: src/help-overlay.ui:16
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "หน้าต่างใหม่"
+
+#: src/help-overlay.ui:23
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "เทอร์มินัล"
+
+#: src/help-overlay.ui:27
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "ค้นหา"
+
+#: src/help-overlay.ui:33
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "คัดลอก"
+
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "วาง"
+
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "แท็บ"
+
+#: src/help-overlay.ui:50
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "แท็บใหม่"
+
+#: src/help-overlay.ui:56
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "ปิดแท็บ"
+
+#: src/help-overlay.ui:62
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "แสดงแท็บทั้งหมด"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "แท็บถัดไป"
+
+#: src/help-overlay.ui:74
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "แท็บก่อนหน้า"
+
+#: src/help-overlay.ui:80
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "ย้ายแท็บไปทางขวา"
+
+#: src/help-overlay.ui:86
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "ย้ายแท็บไปทางซ้าย"
+
+#: src/help-overlay.ui:92
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "สลับไปยังแท็บที่ 1-9"
+
+#: src/help-overlay.ui:98
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "สลับไปยังแท็บที่ 10"
+
+#: src/kgx-application.c:254
+msgid "Cannot use both --command and positional parameters"
+msgstr ""
+
+#. Translators: The leading # is intentional, the initial %s is the
+#. version of KGX itself, the latter format is the VTE version
+#: src/kgx-application.c:351
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr ""
+
+#. Translators: %s is the year range
+#: src/kgx-application.c:363 src/kgx-window.c:509
+#, c-format
+msgid "© %s Zander Brown"
+msgstr ""
+
+#: src/kgx-application.c:381
+msgid "GPL 3.0 or later"
+msgstr ""
+
+#: src/kgx-application.c:446
+msgid "Execute the argument to this option inside the terminal"
+msgstr ""
+
+#: src/kgx-application.c:447
+msgid "COMMAND"
+msgstr ""
+
+#: src/kgx-application.c:455
+msgid "Set the working directory"
+msgstr ""
+
+#. Translators: Placeholder of for a given directory
+#: src/kgx-application.c:457
+msgid "DIRNAME"
+msgstr ""
+
+#: src/kgx-application.c:465
+msgid "Wait until the child exits (TODO)"
+msgstr ""
+
+#: src/kgx-application.c:474
+msgid "Set the initial window title"
+msgstr ""
+
+#: src/kgx-application.c:475
+msgid "TITLE"
+msgstr ""
+
+#: src/kgx-application.c:483
+msgid "ADVANCED: Set the shell to launch"
+msgstr ""
+
+#: src/kgx-application.c:484
+msgid "SHELL"
+msgstr ""
+
+#: src/kgx-application.c:492
+msgid "ADVANCED: Set the scrollback length"
+msgstr ""
+
+#: src/kgx-application.c:493
+msgid "LINES"
+msgstr ""
+
+#: src/kgx-application.c:502
+msgid "[-e|-- COMMAND [ARGUMENT...]]"
+msgstr ""
+
+#: src/kgx-close-dialog.c:94
+msgid "Close Window?"
+msgstr "ต้องการปิดหน้าต่างหรือไม่?"
+
+#: src/kgx-close-dialog.c:96
+msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this window will kill them and may "
+"lead to unexpected outcomes"
+msgstr[0] ""
+"มีคำสั่งกำลังทำงานอยู่ ถ้าคุณปิดหน้าต่างนี้ ก็จะถือเป็นการหยุดคำสั่งดังกล่าว "
+"ซึ่งอาจทำให้เกิดผลลัพธ์ที่ไม่คาดคิดได้"
+
+#: src/kgx-close-dialog.c:103
+msgid "Close Tab?"
+msgstr "ต้องการปิดแท็บหรือไม่?"
+
+#: src/kgx-close-dialog.c:105
+msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this tab will kill them and may "
+"lead to unexpected outcomes"
+msgstr[0] ""
+"มีคำสั่งกำลังทำงานอยู่ ถ้าคุณปิดแท็บนี้ ก็จะถือเป็นการหยุดคำสั่งดังกล่าว "
+"ซึ่งอาจทำให้เกิดผลลัพธ์ที่ไม่คาดคิดได้"
+
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:232
+msgid "Process list"
+msgstr "รายชื่อโปรเซส"
+
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30
+#: src/kgx-paste-dialog.c:183
+msgid "_Cancel"
+msgstr "_ยกเลิก"
+
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:248
+msgid "C_lose"
+msgstr "_ปิด"
+
+#: src/kgx-font-picker.ui:12
+msgid "Terminal Font"
+msgstr "แบบอักษรสำหรับเทอร์มินัล"
+
+#: src/kgx-font-picker.ui:37
+msgid "_Select"
+msgstr "เ_ลือก"
+
+#: src/kgx-font-picker.ui:53 src/kgx-font-picker.ui:56
+msgid "Font Name"
+msgstr "ชื่อแบบอักษร"
+
+#: src/kgx-font-picker.ui:142
+msgid "Font Family"
+msgstr "ตระกูลแบบอักษร"
+
+#: src/kgx-font-picker.ui:167
+msgid "Font Preview"
+msgstr "ตัวอย่างแบบอักษร"
+
+#: src/kgx-font-picker.ui:188
+msgid "Font Size"
+msgstr "ขนาดแบบอักษร"
+
+#. Translators: %i is, from the users perspective, a random number.
+#. * this string will only be seen when the running program has
+#. * failed to set a title, and exists purely to avoid blank tabs
+#.
+#: src/kgx-pages.c:473
+#, c-format
+msgid "Tab %i"
+msgstr "แท็บที่ %i"
+
+#: src/kgx-pages.ui:90
+msgid "_Detach Tab"
+msgstr "แ_ยกออกจากกัน"
+
+#: src/kgx-pages.ui:96
+msgid "_Close"
+msgstr "_ปิด"
+
+#. Translators: %s is the (possibly truncated) command being pasted
+#: src/kgx-paste-dialog.c:88
+#, c-format
+msgid ""
+"Make sure you know what the command does:\n"
+"%s"
+msgstr ""
+"โปรดยืนยันว่าคุณทราบถึงการทำงานของคำสั่งนี้:\n"
+"%s"
+
+#: src/kgx-paste-dialog.c:174
+msgid "You are pasting a command that runs as an administrator"
+msgstr "คุณกำลังจะวางคำสั่งซึ่งทำงานในฐานะผู้ดูแลระบบ"
+
+#: src/kgx-paste-dialog.c:184 src/kgx-terminal.ui:24
+msgid "_Paste"
+msgstr "_วาง"
+
+#: src/kgx-preferences-window.c:122
+msgid "No Font Set"
+msgstr "ไม่ได้กำหนดแบบอักษร"
+
+#: src/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "ทั่วไป"
+
+#: src/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "แบบอักษร"
+
+#: src/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "ใช้ค่าเริ่มต้นของ_ระบบ"
+
+#: src/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "_กำหนดแบบอักษรเอง"
+
+#: src/kgx-preferences-window.ui:59
+msgid "Terminal Bell"
+msgstr ""
+
+#: src/kgx-preferences-window.ui:62
+msgid "Play _Sound"
+msgstr ""
+
+#: src/kgx-preferences-window.ui:68
+msgid "_Visual Effects"
+msgstr ""
+
+#: src/kgx-process.c:192
+#, c-format
+msgid "Process %d"
+msgstr ""
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:180
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr ""
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:189
+msgid "<b>Read Only</b> — Command exited"
+msgstr ""
+
+#. translators: <b> </b> marks the text as bold, ensure they are
+#. matched please!
+#: src/kgx-simple-tab.c:222
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr ""
+
+#: src/kgx-tab.c:1112
+msgid "Command completed"
+msgstr "คำสั่งทำงานเสร็จสมบูรณ์"
+
+#: src/kgx-tab.ui:25
+msgid "Find text"
+msgstr "ค้นหาข้อความ"
+
+#: src/kgx-tab.ui:36
+msgid "Previous Match"
+msgstr "จุดที่พบก่อนหน้า"
+
+#: src/kgx-tab.ui:44
+msgid "Next Match"
+msgstr "จุดที่พบถัดไป"
+
+#: src/kgx-terminal.c:482
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+
+#: src/kgx-terminal.ui:7
+msgid "_Open Link"
+msgstr ""
+
+#: src/kgx-terminal.ui:12
+msgid "Copy _Link"
+msgstr ""
+
+#: src/kgx-terminal.ui:19
+msgid "_Copy"
+msgstr ""
+
+#: src/kgx-terminal.ui:29
+msgid "_Select All"
+msgstr ""
+
+#: src/kgx-terminal.ui:36
+msgid "Show in _Files"
+msgstr ""
+
+#: src/kgx-theme-switcher.ui:16
+msgid "Follow System Style"
+msgstr "ใช้แบบเดียวกับระบบ"
+
+#: src/kgx-theme-switcher.ui:44
+msgid "Light Style"
+msgstr "แบบสว่าง"
+
+#: src/kgx-theme-switcher.ui:71
+msgid "Dark Style"
+msgstr "แบบมืด"
+
+#. Translators: Credit yourself here
+#: src/kgx-window.c:521
+msgid "translator-credits"
+msgstr "Aefgh Threenine <aefgh39622@gmail.com>"
+
+#: src/kgx-window.ui:17
+msgid "_New Window"
+msgstr "_หน้าต่างใหม่"
+
+#: src/kgx-window.ui:23
+msgid "_Show All Tabs"
+msgstr "แ_สดงแท็บทั้งหมด"
+
+#: src/kgx-window.ui:30
+msgid "_Preferences"
+msgstr "_ปรับแต่ง"
+
+#: src/kgx-window.ui:34
+msgid "_Keyboard Shortcuts"
+msgstr "ปุ่_มลัดแป้นพิมพ์"
+
+#: src/kgx-window.ui:38
+msgid "_About Console"
+msgstr "เ_กี่ยวกับ \"คอนโซล\""
+
+#: src/kgx-window.ui:80
+msgid "Find in Terminal"
+msgstr "ค้นหาในเทอร์มินัล"
+
+#: src/kgx-window.ui:87
+msgid "Main Menu"
+msgstr "เมนูหลัก"
+
+#: src/kgx-window.ui:105
+msgid "Shrink Text"
+msgstr ""
+
+#: src/kgx-window.ui:116
+msgid "Reset Size"
+msgstr ""
+
+#: src/kgx-window.ui:140
+msgid "Enlarge Text"
+msgstr ""
