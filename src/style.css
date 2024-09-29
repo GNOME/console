@@ -66,8 +66,7 @@ kgx-tab .top-bar {
   opacity: 0.7;
 }
 
-/* Sync to KgxTerminal! */
-.empty-state {
+kgx-empty {
   background: var(--view-bg-color);
   color: color-mix(in srgb, var(--view-fg-color) var(--dim-opacity), transparent);
 }

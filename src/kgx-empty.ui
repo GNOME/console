@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0" />
+  <template class="KgxEmpty" parent="GtkBox">
+    <property name="orientation">vertical</property>
+    <property name="spacing">16</property>
+    <child>
+      <object class="GtkRevealer" id="image_revealer">
+        <property name="transition-type">crossfade</property>
+        <property name="transition-duration">1000</property>
+        <property name="child">
+          <object class="GtkImage">
+            <property name="icon-name">org.gnome.Console-symbolic</property>
+            <property name="pixel-size">128</property>
+            <property name="vexpand">true</property>
+            <property name="valign">end</property>
+          </object>
+        </property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkRevealer" id="spinner_revealer">
+        <property name="vexpand">true</property>
+        <property name="valign">start</property>
+        <property name="transition-type">crossfade</property>
+        <property name="transition-duration">1000</property>
+        <property name="child">
+          <object class="AdwSpinner">
+            <property name="valign">center</property>
+            <property name="halign">center</property>
+            <property name="width-request">32</property>
+            <property name="height-request">32</property>
+          </object>
+        </property>
+      </object>
+    </child>
+  </template>
+</interface>
