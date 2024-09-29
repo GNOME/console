@@ -71,6 +71,8 @@
             </child>
             <property name="content">
               <object class="GtkStack" id="stack">
+                <property name="transition-type">crossfade</property>
+                <property name="transition-duration">10</property>
                 <child>
                   <object class="GtkBox">
                     <property name="orientation">vertical</property>
@@ -79,11 +81,17 @@
                       <class name="empty-state" />
                     </style>
                     <child>
-                      <object class="GtkImage">
-                        <property name="icon-name">org.gnome.Console-symbolic</property>
-                        <property name="pixel-size">128</property>
-                        <property name="vexpand">true</property>
-                        <property name="valign">end</property>
+                      <object class="GtkRevealer" id="image_revealer">
+                        <property name="transition-type">crossfade</property>
+                        <property name="transition-duration">1000</property>
+                        <property name="child">
+                          <object class="GtkImage">
+                            <property name="icon-name">org.gnome.Console-symbolic</property>
+                            <property name="pixel-size">128</property>
+                            <property name="vexpand">true</property>
+                            <property name="valign">end</property>
+                          </object>
+                        </property>
                       </object>
                     </child>
                     <child>
