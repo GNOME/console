@@ -24,6 +24,7 @@
 
 #include "kgx-application.h"
 #include "kgx-drop-target.h"
+#include "kgx-empty.h"
 #include "kgx-marshals.h"
 #include "kgx-pages.h"
 #include "kgx-settings.h"
@@ -67,11 +68,7 @@ struct _KgxTabPrivate {
   KgxDropTarget        *drop_target;
 
   GtkWidget            *stack;
-  GtkWidget            *image_revealer;
-  GtkWidget            *spinner_revealer;
   GtkWidget            *content;
-  guint                 image_timeout;
-  guint                 spinner_timeout;
 
   GtkWidget            *exit_revealer;
   GtkWidget            *exit_message;
@@ -138,8 +135,6 @@ kgx_tab_dispose (GObject *object)
     g_application_unmark_busy (G_APPLICATION (priv->application));
     priv->working = 0;
   }
-  g_clear_handle_id (&priv->spinner_timeout, g_source_remove);
-  g_clear_handle_id (&priv->image_timeout, g_source_remove);
 
   if (priv->notification_id) {
     g_application_withdraw_notification (G_APPLICATION (priv->application),
@@ -257,17 +252,6 @@ search_prev (GtkSearchBar *bar,
   KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
 
   vte_terminal_search_find_previous (VTE_TERMINAL (priv->terminal));
-}
-
-
-static void
-start_spinner_timeout_cb (gpointer user_data)
-{
-  KgxTab *self = user_data;
-  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
-
-  gtk_revealer_set_reveal_child (GTK_REVEALER (priv->spinner_revealer), TRUE);
-  priv->spinner_timeout = 0;
 }
 
 
@@ -743,12 +727,14 @@ kgx_tab_class_init (KgxTabClass *klass)
                               G_TYPE_FROM_CLASS (klass),
                               kgx_marshals_VOID__VOIDv);
 
+  g_type_ensure (KGX_TYPE_DROP_TARGET);
+  g_type_ensure (KGX_TYPE_EMPTY);
+  g_type_ensure (KGX_TYPE_TERMINAL);
+
   gtk_widget_class_set_template_from_resource (widget_class,
                                                KGX_APPLICATION_PATH "kgx-tab.ui");
 
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, stack);
-  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, image_revealer);
-  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, spinner_revealer);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, exit_revealer);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, exit_message);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, search_entry);
@@ -1124,17 +1110,6 @@ kgx_tab_set_initial_title (KgxTab     *self,
 }
 
 
-static void
-show_image (gpointer user_data)
-{
-  KgxTab *self = user_data;
-  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
-
-  gtk_revealer_set_reveal_child (GTK_REVEALER (priv->image_revealer), TRUE);
-  priv->image_timeout = 0;
-}
-
-
 void
 kgx_tab_mark_working (KgxTab *self)
 {
@@ -1152,10 +1127,6 @@ kgx_tab_mark_working (KgxTab *self)
   if (G_LIKELY (was_not_working)) {
     g_application_mark_busy (G_APPLICATION (priv->application));
     g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_WORKING]);
-    priv->spinner_timeout =
-      g_timeout_add_once (100, start_spinner_timeout_cb, self);
-    priv->image_timeout =
-      g_timeout_add_once (80, show_image, self);
   }
 }
 
@@ -1176,6 +1147,5 @@ kgx_tab_unmark_working (KgxTab *self)
   if (G_LIKELY (priv->working == 0)) {
     g_application_unmark_busy (G_APPLICATION (priv->application));
     g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_WORKING]);
-    g_clear_handle_id (&priv->spinner_timeout, g_source_remove);
   }
 }
