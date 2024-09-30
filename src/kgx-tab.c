@@ -349,33 +349,6 @@ kgx_tab_get_property (GObject    *object,
 
 
 static void
-kgx_tab_set_is_active (KgxTab   *self,
-                       gboolean active)
-{
-  KgxTabPrivate *priv;
-
-  g_return_if_fail (KGX_IS_TAB (self));
-
-  priv = kgx_tab_get_instance_private (self);
-
-  if (active == priv->is_active) {
-    return;
-  }
-
-  priv->is_active = active;
-
-  if (active && priv->notification_id) {
-    g_application_withdraw_notification (G_APPLICATION (priv->application),
-                                          priv->notification_id);
-    g_clear_pointer (&priv->notification_id, g_free);
-  }
-  g_object_set (self, "needs-attention", FALSE, NULL);
-
-  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_IS_ACTIVE]);
-}
-
-
-static void
 kgx_tab_set_property (GObject      *object,
                       guint         property_id,
                       const GValue *value,
@@ -412,7 +385,14 @@ kgx_tab_set_property (GObject      *object,
       priv->tooltip = g_value_dup_string (value);
       break;
     case PROP_IS_ACTIVE:
-      kgx_tab_set_is_active (self, g_value_get_boolean (value));
+      if (kgx_set_boolean_prop (object, pspec, &priv->is_active, value)) {
+        if (priv->is_active && priv->notification_id) {
+          g_application_withdraw_notification (G_APPLICATION (priv->application),
+                                               priv->notification_id);
+          g_clear_pointer (&priv->notification_id, g_free);
+        }
+        g_object_set (self, "needs-attention", FALSE, NULL);
+      }
       break;
     case PROP_CLOSE_ON_QUIT:
       kgx_set_boolean_prop (object, pspec, &priv->close_on_quit, value);
