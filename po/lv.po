@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-12-16 16:56+0000\n"
-"PO-Revision-Date: 2024-02-26 20:36+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
+"POT-Creation-Date: 2024-09-11 22:34+0000\n"
+"PO-Revision-Date: 2024-10-01 15:41+0300\n"
 "Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
 "Language: lv\n"
@@ -16,10 +16,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 :"
 " 2);\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
 msgid "Console"
 msgstr "Konsole"
 
@@ -33,11 +33,11 @@ msgstr ""
 msgid "New Window"
 msgstr "Jauns logs"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
 msgid "New Tab"
 msgstr "Jauna cilne"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:377
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
 msgid "Terminal Emulator"
 msgstr "Termināļa emulatori"
 
@@ -49,7 +49,7 @@ msgstr "Vienkāršs, lietotājam draudzīgs termināļa emulators GNOME darbvirs
 msgid "Terminal window"
 msgstr "Termināļa logs"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:330 src/kgx-window.c:471
+#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "GNOME projekts"
 
@@ -124,97 +124,98 @@ msgid "Move Tab Left"
 msgstr "Pārvietot cilni pa kreisi"
 
 #: src/help-overlay.ui:92
-#| msgctxt "shortcut window"
-#| msgid "Switch to Tab"
 msgctxt "shortcut window"
 msgid "Switch to Tab 1–9"
 msgstr "Pārslēgties uz cilni 1–9"
 
 #: src/help-overlay.ui:98
-#| msgctxt "shortcut window"
-#| msgid "Switch to Tab"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Pārslēgties uz cilni 10"
 
-#: src/kgx-application.c:252
-msgid "Cannot use both --command and positional parameters"
-msgstr "Nevar vienlaicīgi izmantot --command un pozīcijas parametrus"
-
-#. Translators: The leading # is intentional, the initial %s is the
-#. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:349
-#, c-format
-msgid "# KGX %s using VTE %u.%u.%u %s\n"
-msgstr "# KGX %s izmanto VTE %u.%u.%u %s\n"
-
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:466
+#: src/kgx-about.c:83 src/kgx-window.c:529
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:379
+#: src/kgx-about.c:101
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 vai jaunāks"
 
-#: src/kgx-application.c:444
+#. Translators: The leading # is intentional, the initial %s is the
+#. * version of KGX itself, the latter format is the VTE version
+#: src/kgx-about.c:114
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s izmanto VTE %u.%u.%u %s\n"
+
+#: src/kgx-application.c:255
+#| msgid "Cannot use both --command and positional parameters"
+msgid "Cannot use both --working-directory and positional parameters"
+msgstr "Nevar vienlaicīgi izmantot --working-directory un pozīcijas parametrus"
+
+#: src/kgx-application.c:443
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Izpildīt parametru šai opcijai terminālī."
 
-#: src/kgx-application.c:445
+#: src/kgx-application.c:444
 msgid "COMMAND"
 msgstr "KOMANDA"
 
-#: src/kgx-application.c:453
+#: src/kgx-application.c:452
 msgid "Set the working directory"
 msgstr "Iestatīt termināļa darba direktoriju"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:455
+#: src/kgx-application.c:454
 msgid "DIRNAME"
 msgstr "DIRNOSAUKUMS"
 
-#: src/kgx-application.c:463
+#: src/kgx-application.c:462
 msgid "Wait until the child exits (TODO)"
 msgstr "Pagaidīt, līdz iziet bērna process (TODO)"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:471
 msgid "Set the initial window title"
 msgstr "Sākotnējais loga virsraksts"
 
-#: src/kgx-application.c:473
+#: src/kgx-application.c:472
 msgid "TITLE"
 msgstr "VIRSRAKSTS"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:480
 msgid "ADVANCED: Set the shell to launch"
 msgstr "PAPLAŠINĀTS: Iestatīt čaulu palaišanai"
 
-#: src/kgx-application.c:482
+#: src/kgx-application.c:481
 msgid "SHELL"
 msgstr "ČAULA"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:489
 msgid "ADVANCED: Set the scrollback length"
 msgstr "PAPLAŠINĀTS: Iestatīt atpakaļritināšanas garumu"
 
-#: src/kgx-application.c:491
+#: src/kgx-application.c:490
 msgid "LINES"
 msgstr "RINDAS"
 
-#: src/kgx-application.c:500
+#. Translators: %s is the version string, KGX is a codename and should be left as-is
+#: src/kgx-application.c:644
+#, c-format
+#| msgid "Terminal Emulator"
+msgid "KGX %s — Terminal Emulator"
+msgstr "KGX %s — Termināļa emulatori"
+
+#: src/kgx-application.c:650
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- KOMANDA [ARGUMENTS...]]"
 
-#: src/kgx-close-dialog.c:94
+#: src/kgx-close-dialog.c:73
 msgid "Close Window?"
 msgstr "Aizvērt logu?"
 
-#: src/kgx-close-dialog.c:96
-#| msgid ""
-#| "Some commands are still running, closing this window will kill them and "
-#| "may lead to unexpected outcomes"
+#: src/kgx-close-dialog.c:75
 msgid ""
 "A command is still running, closing this window will kill it and may lead to "
 "unexpected outcomes"
@@ -222,8 +223,8 @@ msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
 msgstr[0] ""
-"Komanda vēl aizvien darbojas; šī loga aizvēršana to apturēs un tas "
-"var radīt negaidītas sekas"
+"Komanda vēl aizvien darbojas; šī loga aizvēršana to apturēs un tas var radīt "
+"negaidītas sekas"
 msgstr[1] ""
 "Dažas komandas vēl aizvien darbojas; šī loga aizvēršana tās apturēs un tas "
 "var radīt negaidītas sekas"
@@ -231,14 +232,11 @@ msgstr[2] ""
 "Dažas komandas vēl aizvien darbojas; šī loga aizvēršana tās apturēs un tas "
 "var radīt negaidītas sekas"
 
-#: src/kgx-close-dialog.c:103
+#: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
 msgstr "Aizvērt cilni?"
 
-#: src/kgx-close-dialog.c:105
-#| msgid ""
-#| "Some commands are still running, closing this tab will kill them and may "
-#| "lead to unexpected outcomes"
+#: src/kgx-close-dialog.c:84
 msgid ""
 "A command is still running, closing this tab will kill it and may lead to "
 "unexpected outcomes"
@@ -246,8 +244,8 @@ msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
 msgstr[0] ""
-"Komanda vēl aizvien darbojas; šīs cilnes aizvēršana to apturēs un tas "
-"var radīt negaidītas sekas"
+"Komanda vēl aizvien darbojas; šīs cilnes aizvēršana to apturēs un tas var "
+"radīt negaidītas sekas"
 msgstr[1] ""
 "Dažas komandas vēl aizvien darbojas; šīs cilnes aizvēršana tās apturēs un "
 "tas var radīt negaidītas sekas"
@@ -256,53 +254,42 @@ msgstr[2] ""
 "tas var radīt negaidītas sekas"
 
 #. Translators: Screen reader label for the list of running commands
-#: src/kgx-close-dialog.c:232
+#: src/kgx-close-dialog.c:194
 msgid "Process list"
 msgstr "Procesu saraksts"
 
 #. Translators: This action dismisses the dialogue, leaving the tab/window open
-#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
+#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
+#: src/preferences/kgx-font-picker.ui:22
 msgid "_Cancel"
 msgstr "At_celt"
 
 #. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
-#: src/kgx-close-dialog.c:248
+#: src/kgx-close-dialog.c:207
 msgid "C_lose"
 msgstr "_Aizvērt"
 
-#: src/kgx-font-picker.ui:12
+#: src/kgx-colour-utils.c:58
+msgid "Color string is wrong length"
+msgstr "Krāsu virknei ir nepareizs garums"
+
+#: src/kgx-livery-manager.c:193
+msgctxt "livery-name"
+msgid "Linux"
+msgstr "Linux"
+
+#: src/kgx-livery-manager.c:230
 #| msgctxt "shortcut window"
 #| msgid "Terminal"
-msgid "Terminal Font"
-msgstr "Termināļa fonts"
-
-#: src/kgx-font-picker.ui:37
-#| msgid "_Select All"
-msgid "_Select"
-msgstr "Atla_sīt"
-
-#: src/kgx-font-picker.ui:53 src/kgx-font-picker.ui:56
-msgid "Font Name"
-msgstr "Fonta nosaukums"
-
-#: src/kgx-font-picker.ui:142
-msgid "Font Family"
-msgstr "Fontu saime"
-
-#: src/kgx-font-picker.ui:167
-msgid "Font Preview"
-msgstr "Fontu priekšskatījums"
-
-#: src/kgx-font-picker.ui:188
-#| msgid "Reset Size"
-msgid "Font Size"
-msgstr "Fontu izmērs"
+msgctxt "livery-name"
+msgid "XTerm"
+msgstr "XTerm"
 
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:473
+#: src/kgx-pages.c:471
 #, c-format
 msgid "Tab %i"
 msgstr "Cilne %i"
@@ -315,97 +302,8 @@ msgstr "_Atvienot cilni"
 msgid "_Close"
 msgstr "_Aizvērt"
 
-#: src/kgx-preferences-window.c:122
-msgid "No Font Set"
-msgstr "Nav iestatīts fonts"
-
-#: src/kgx-preferences-window.ui:7
-msgid "General"
-msgstr "Vispārīgi"
-
-#: src/kgx-preferences-window.ui:10
-msgid "Font"
-msgstr "Fonts"
-
-#: src/kgx-preferences-window.ui:13
-#| msgid "Use System Colors"
-msgid "Use _System Default"
-msgstr "Lietot _sistēmas noklusējuma"
-
-#: src/kgx-preferences-window.ui:19
-msgid "Custom _Font"
-msgstr "Pielāgots _fonts"
-
-#: src/kgx-preferences-window.ui:59
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
-msgid "Terminal Bell"
-msgstr "Termināļa zvans"
-
-#: src/kgx-preferences-window.ui:62
-msgid "Play _Sound"
-msgstr "Atskaņot _skaņu"
-
-#: src/kgx-preferences-window.ui:68
-msgid "_Visual Effects"
-msgstr "_Vizuāli efekti"
-
-#: src/kgx-process.c:198
-#, c-format
-msgid "Process %d"
-msgstr "Apstrādāt %d"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:180
-#, c-format
-msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr "<b>Tikai lasāms</b> — Komanda beidza darbu ar kodu %i"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:189
-msgid "<b>Read Only</b> — Command exited"
-msgstr "<b>Tikai lasāms</b> — Komanda beidza darbu"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:222
-#, c-format
-msgid "<b>Failed to start</b> — %s"
-msgstr "<b>Neizdevās startēt</b> — %s"
-
-#: src/kgx-tab.c:1112
-msgid "Command completed"
-msgstr "Komanda izpildīta"
-
-#: src/kgx-tab.ui:25
-msgid "Find text"
-msgstr "Meklēt tekstu"
-
-#: src/kgx-tab.ui:36
-msgid "Previous Match"
-msgstr "Iepriekšējā atbilsme"
-
-#: src/kgx-tab.ui:44
-msgid "Next Match"
-msgstr "Nākamā atbilsme"
-
-#: src/kgx-terminal.c:557
-#, c-format
-msgid ""
-"Ctrl-click to open:\n"
-"%s"
-msgstr ""
-"Ctrl-klikšķis, lai atvērtu:\n"
-"%s"
-
-#: src/kgx-terminal.c:883
-msgid "You are pasting a command that runs as an administrator"
-msgstr "Jūs ielīmējāt komandu, kas tiek darbināta caur administratoru"
-
-#. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:887
+#. Translators: %s is the (possibly truncated) command being pasted
+#: src/kgx-paste-dialog.c:76
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -414,9 +312,60 @@ msgstr ""
 "Pārliecinieties, ka zināt, ko komanda dara:\n"
 "%s"
 
-#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
+#: src/kgx-paste-dialog.c:129
+msgid "You are pasting a command that runs as an administrator"
+msgstr "Jūs ielīmējāt komandu, kas tiek darbināta caur administratoru"
+
+#: src/kgx-paste-dialog.c:136 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "_Ielīmēt"
+
+#: src/kgx-process.c:192
+#, c-format
+msgid "Process %d"
+msgstr "Apstrādāt %d"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-simple-tab.c:169
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Neizdevās startēt</b> — %s"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:814
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Tikai lasāms</b> — Komanda beidza darbu ar kodu %i"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:822
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Tikai lasāms</b> — Komanda beidza darbu"
+
+#: src/kgx-tab.c:842
+msgid "Command completed"
+msgstr "Komanda izpildīta"
+
+#: src/kgx-tab.ui:40
+msgid "Find text"
+msgstr "Meklēt tekstu"
+
+#: src/kgx-tab.ui:51
+msgid "Previous Match"
+msgstr "Iepriekšējā atbilsme"
+
+#: src/kgx-tab.ui:59
+msgid "Next Match"
+msgstr "Nākamā atbilsme"
+
+#: src/kgx-terminal.c:508
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+"Ctrl-klikšķis, lai atvērtu:\n"
+"%s"
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -450,8 +399,17 @@ msgstr "Gaišais stils"
 msgid "Dark Style"
 msgstr "Tumšais stils"
 
+#. Translators: ‘command’ is the argument name, and shouldn't be translated
+#: src/kgx-utils.c:113
+msgid "Missing argument for --command"
+msgstr "--command trūkst argumenta"
+
+#: src/kgx-utils.c:128
+msgid "Cannot use both --command and positional parameters"
+msgstr "Nevar vienlaicīgi izmantot --command un pozīcijas parametrus"
+
 #. Translators: Credit yourself here
-#: src/kgx-window.c:478
+#: src/kgx-window.c:541
 msgid "translator-credits"
 msgstr "Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>"
 
@@ -475,25 +433,93 @@ msgstr "_Tastatūras īsinājumtaustiņi"
 msgid "_About Console"
 msgstr "P_ar Konsoli"
 
-#: src/kgx-window.ui:79
+#: src/kgx-window.ui:88
 msgid "Find in Terminal"
 msgstr "Meklēt terminālī"
 
-#: src/kgx-window.ui:86
+#: src/kgx-window.ui:95
 msgid "Main Menu"
 msgstr "Galvenā izvēlne"
 
-#: src/kgx-window.ui:104
+#: src/kgx-window.ui:113
 msgid "Shrink Text"
 msgstr "Samazināt tekstu"
 
-#: src/kgx-window.ui:115
+#: src/kgx-window.ui:124
 msgid "Reset Size"
 msgstr "Atstatīt izmēru"
 
-#: src/kgx-window.ui:139
+#: src/kgx-window.ui:148
 msgid "Enlarge Text"
 msgstr "Palielināt tekstu"
+
+#: src/preferences/kgx-font-picker.ui:11
+msgid "Terminal Font"
+msgstr "Termināļa fonts"
+
+#: src/preferences/kgx-font-picker.ui:29
+msgid "_Select"
+msgstr "Atla_sīt"
+
+#: src/preferences/kgx-font-picker.ui:45 src/preferences/kgx-font-picker.ui:48
+msgid "Font Name"
+msgstr "Fonta nosaukums"
+
+#: src/preferences/kgx-font-picker.ui:133
+msgid "Font Family"
+msgstr "Fontu saime"
+
+#: src/preferences/kgx-font-picker.ui:158
+msgid "Font Preview"
+msgstr "Fontu priekšskatījums"
+
+#: src/preferences/kgx-font-picker.ui:179
+msgid "Font Size"
+msgstr "Fontu izmērs"
+
+#: src/preferences/kgx-preferences-window.c:125
+msgid "No Font Set"
+msgstr "Nav iestatīts fonts"
+
+#: src/preferences/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "Vispārīgi"
+
+#: src/preferences/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "Fonts"
+
+#: src/preferences/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "Lietot _sistēmas noklusējuma"
+
+#: src/preferences/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "Pielāgots _fonts"
+
+#: src/preferences/kgx-preferences-window.ui:63
+msgid "Behaviour"
+msgstr "Uzvedība"
+
+#: src/preferences/kgx-preferences-window.ui:66
+msgid "_Unlimited Scrollback"
+msgstr "_Neierobežota ritināšana"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "Atritināšana_s rindas"
+
+#: src/preferences/kgx-preferences-window.ui:92
+msgid "Terminal Bell"
+msgstr "Termināļa zvans"
+
+#: src/preferences/kgx-preferences-window.ui:95
+msgid "Play _Sound"
+msgstr "Atskaņot _skaņu"
+
+#: src/preferences/kgx-preferences-window.ui:101
+msgid "_Visual Effects"
+msgstr "_Vizuāli efekti"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
