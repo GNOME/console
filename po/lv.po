@@ -1,13 +1,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# SPDX-FileCopyrightText: 2013, 2014, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-music/issues\n"
-"POT-Creation-Date: 2024-09-16 16:14+0000\n"
-"PO-Revision-Date: 2024-10-01 15:43+0300\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
+"POT-Creation-Date: 2024-09-11 22:34+0000\n"
+"PO-Revision-Date: 2024-10-01 15:41+0300\n"
 "Last-Translator: Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
 "Language: lv\n"
@@ -18,823 +18,518 @@ msgstr ""
 " 2);\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: data/org.gnome.Music.appdata.xml.in.in:6
-#: data/org.gnome.Music.desktop.in.in:3 data/ui/StatusNavigationPage.ui:4
-#: gnomemusic/about.py:139 gnomemusic/application.py:59 gnomemusic/window.py:65
-msgid "Music"
-msgstr "Mūzika"
-
-#: data/org.gnome.Music.appdata.xml.in.in:7
-#: data/org.gnome.Music.desktop.in.in:5
-msgid "Play and organize your music collection"
-msgstr "Atskaņo un organizē savu mūzikas kolekciju"
-
-#: data/org.gnome.Music.appdata.xml.in.in:9
-msgid "An easy and pleasant way to play your music."
-msgstr "Vienkāršs un patīkams veids, kā atskaņot savu mūziku."
-
-#: data/org.gnome.Music.appdata.xml.in.in:12
-msgid ""
-"Find tracks in your local collection, use automatically generated playlists "
-"or curate a fresh one."
-msgstr ""
-"Atrodi celiņus savā lokālajā kolekcijā, automātiski veido repertuārus vai "
-"izveido jaunus."
-
-#. developer_name tag deprecated with Appstream 1.0
-#: data/org.gnome.Music.appdata.xml.in.in:226
-msgid "The GNOME Music developers"
-msgstr "GNOME Mūzikas izstrādātāji"
-
-#: data/org.gnome.Music.desktop.in.in:4
-msgid "Music Player"
-msgstr "Mūzikas atskaņotājs"
+#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
+msgid "Console"
+msgstr "Konsole"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Music.desktop.in.in:13
-msgid "Music;Player;"
-msgstr "Mūzika;Atskaņotājs;"
-
-#: data/org.gnome.Music.gschema.xml:17
-msgid "Window size"
-msgstr "Loga izmērs"
-
-#: data/org.gnome.Music.gschema.xml:18
-msgid "Window size (width and height)."
-msgstr "Loga izmērs (platums un augstums)."
-
-#: data/org.gnome.Music.gschema.xml:22
-msgid "Window maximized"
-msgstr "Logs maksimizēts"
-
-#: data/org.gnome.Music.gschema.xml:23
-msgid "Window maximized state."
-msgstr "Loga stāvoklis — maksimizēts."
-
-#: data/org.gnome.Music.gschema.xml:27
-msgid "Playback repeat mode"
-msgstr "Atskaņot atkārtošanās režīmā"
-
-#. Translators: Don't translate allowed values, just the description in the brackets
-#: data/org.gnome.Music.gschema.xml:29
-msgid ""
-"Value identifies whether to repeat or randomize playback through the "
-"collection. Allowed values are: “none” (repeat and shuffle are off), “song” "
-"(repeat current song), “all” (repeat playlist, no shuffle), “shuffle” "
-"(shuffle playlist, presumes repeat all)."
+#: data/org.gnome.Console.desktop.in.in:8
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"Vērtība nosaka, vai kolekciju atskaņot atkārtojot vai nejauši samaisot. "
-"Atļautās vērtības ir “none” (atkārtošana un samaisīšana ir izslēgta) , "
-"“song” (atkārtot atskaņoto dziesmu), “all” (atkārtot visu repertuāru, "
-"nemaisīt), “shuffle” (samaisīt repertuāru, arī atkārtot)."
+"komanda;uzvedne;cmd;komandrinda;palaist;čaula;terminālis;kgx;kings cross;"
 
-#: data/org.gnome.Music.gschema.xml:33
-msgid "Enable ReplayGain"
-msgstr "Ieslēgt ReplayGain"
+#: data/org.gnome.Console.desktop.in.in:21
+msgid "New Window"
+msgstr "Jauns logs"
 
-#. Translators: Don't translate allowed values, just the description in the brackets
-#: data/org.gnome.Music.gschema.xml:35
-msgid ""
-"Enables or disables ReplayGain for albums or track. Allowed values are: "
-"“disabled” (disables replaygain), “album” (replaygain per album), “track” "
-"(replaygain per track)."
-msgstr ""
-"Ieslēdz vai izslēdz ReplayGain albumiem vai celiņiem. Atļautās vērtības:"
-" “disabled” (izslēdz replaygain), “album” (replaygain katram albumam),"
-" “track” "
-"(replaygain katram celiņam)."
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
+msgid "New Tab"
+msgstr "Jauna cilne"
 
-#: data/org.gnome.Music.gschema.xml:39
-msgid "Inhibit system suspend"
-msgstr "Nomākt sistēmas iesnaušanu"
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
+msgid "Terminal Emulator"
+msgstr "Termināļa emulatori"
 
-#: data/org.gnome.Music.gschema.xml:40
-msgid "Enables or disables inhibiting system suspend while playing music"
-msgstr "Ieslēdz vai izslēdz sistēmas iesnaušanas nomākšanu, kad atskaņo mūziku"
+#: data/org.gnome.Console.metainfo.xml.in.in:11
+msgid "A simple user-friendly terminal emulator for the GNOME desktop."
+msgstr "Vienkāršs, lietotājam draudzīgs termināļa emulators GNOME darbvirsmai."
 
-#: data/ui/AlbumsSearchNavigationPage.ui:5 data/ui/SearchView.ui:98
-#: gnomemusic/views/albumsview.py:52
-msgid "Albums"
-msgstr "Albumi"
+#: data/org.gnome.Console.metainfo.xml.in.in:30
+msgid "Terminal window"
+msgstr "Termināļa logs"
 
-#: data/ui/AlbumWidget.ui:84 data/ui/PlayerToolbar.ui:87
-#: data/ui/PlaylistControls.ui:101 gnomemusic/widgets/playertoolbar.py:176
-msgid "Play"
-msgstr "Atskaņot"
-
-#: data/ui/AlbumWidget.ui:130 data/ui/PlaylistControls.ui:5
-#: data/ui/SongWidgetMenu.ui:11
-msgid "_Play"
-msgstr "_Atskaņot"
-
-#: data/ui/AlbumWidget.ui:134
-msgid "Add to _Favorite Songs"
-msgstr "Pievienot _iecienītajām dziesmām"
-
-#: data/ui/AlbumWidget.ui:138 data/ui/SongWidgetMenu.ui:15
-msgid "_Add to Playlist…"
-msgstr "_Pievienot repertuāram…"
-
-#: data/ui/ArtistsSearchNavigationPage.ui:5 data/ui/SearchView.ui:41
-#: gnomemusic/views/artistsview.py:51
-msgid "Artists"
-msgstr "Izpildītāji"
-
-#: data/ui/HeaderBar.ui:14
-msgid "Menu"
-msgstr "Izvēlne"
-
-#: data/ui/HeaderBar.ui:22 data/ui/SearchHeaderBar.ui:12
-msgid "Search"
-msgstr "Meklēt"
-
-#: data/ui/HeaderBar.ui:31 data/ui/PreferencesDialog.ui:4
-msgid "Preferences"
-msgstr "Iestatījumi"
-
-#: data/ui/HeaderBar.ui:35
-msgid "Keyboard Shortcuts"
-msgstr "Tastatūras īsinājumtaustiņi"
-
-#: data/ui/HeaderBar.ui:39
-msgid "Help"
-msgstr "Palīdzība"
-
-#: data/ui/HeaderBar.ui:43
-msgid "About Music"
-msgstr "Par Mūziku"
-
-#: data/ui/help-overlay.ui:11
-msgctxt "shortcut window"
-msgid "General"
-msgstr "Vispārīgi"
-
-#: data/ui/help-overlay.ui:14
-#| msgid "Preferences"
-msgctxt "shortcut window"
-msgid "Preferences"
-msgstr "Iestatījumi"
-
-#: data/ui/help-overlay.ui:20
-msgctxt "shortcut window"
-msgid "Search"
-msgstr "Meklēt"
-
-#: data/ui/help-overlay.ui:26
-msgctxt "shortcut window"
-msgid "Help"
-msgstr "Palīdzība"
-
-#: data/ui/help-overlay.ui:32
-msgctxt "shortcut window"
-msgid "Shortcuts"
-msgstr "Saīsnes"
-
-#: data/ui/help-overlay.ui:38
-#| msgid "_Quit"
-msgctxt "shortcut window"
-msgid "Quit"
-msgstr "Iziet"
-
-#: data/ui/help-overlay.ui:46
-msgctxt "shortcut window"
-msgid "Playback"
-msgstr "Atskaņošana"
-
-#: data/ui/help-overlay.ui:49
-msgctxt "shortcut window"
-msgid "Play/Pause"
-msgstr "Atskaņot / pauzēt"
-
-#: data/ui/help-overlay.ui:55
-msgctxt "shortcut window"
-msgid "Next song"
-msgstr "Nākamā dziesma"
-
-#: data/ui/help-overlay.ui:61
-msgctxt "shortcut window"
-msgid "Previous song"
-msgstr "Iepriekšējā dziesma"
-
-#: data/ui/help-overlay.ui:67
-msgctxt "shortcut window"
-msgid "Toggle repeat"
-msgstr "Pārslēgt atkārtošanu"
-
-#: data/ui/help-overlay.ui:73
-msgctxt "shortcut window"
-msgid "Toggle shuffle"
-msgstr "Pārslēgt sajaukšanu"
-
-#: data/ui/help-overlay.ui:81
-msgctxt "shortcut window"
-msgid "Navigation"
-msgstr "Navigācija"
-
-#: data/ui/help-overlay.ui:84
-msgctxt "shortcut window"
-msgid "Go to Albums"
-msgstr "Iet uz albumiem"
-
-#: data/ui/help-overlay.ui:90
-msgctxt "shortcut window"
-msgid "Go to Artists"
-msgstr "Iet uz izpildītājiem"
-
-#: data/ui/help-overlay.ui:96
-msgctxt "shortcut window"
-msgid "Go to Playlists"
-msgstr "Iet uz repertuāriem"
-
-#: data/ui/help-overlay.ui:102
-msgctxt "shortcut window"
-msgid "Go back"
-msgstr "Iet atpakaļ"
-
-#: data/ui/PlayerToolbar.ui:74
-msgid "Previous"
-msgstr "Iepriekšējais"
-
-#: data/ui/PlayerToolbar.ui:106
-msgid "Next"
-msgstr "Nākamais"
-
-#: data/ui/PlaylistControls.ui:9
-msgid "_Delete"
-msgstr "_Dzēst"
-
-#: data/ui/PlaylistControls.ui:13
-msgid "_Rename…"
-msgstr "Pā_rdēvēt…"
-
-#: data/ui/PlaylistControls.ui:28
-msgid "Playlist Name"
-msgstr "Repertuāra nosaukums"
-
-#: data/ui/PlaylistControls.ui:62
-msgid "_Done"
-msgstr "_Gatavs"
-
-#: data/ui/PlaylistDialog.ui:16
-msgid "Add to Playlist"
-msgstr "Pievienot repertuāram"
-
-#: data/ui/PlaylistDialog.ui:27
-msgid "_Cancel"
-msgstr "At_celt"
-
-#: data/ui/PlaylistDialog.ui:36
-msgid "_Add"
-msgstr "_Pievienot"
-
-#: data/ui/PlaylistDialog.ui:91
-msgid "Enter a name for your first playlist"
-msgstr "Ievadiet sava pirmā repertuāra nosaukumu"
-
-#: data/ui/PlaylistDialog.ui:116
-msgid "C_reate"
-msgstr "Iz_veidot"
-
-#: data/ui/PlaylistDialog.ui:177
-msgid "New Playlist…"
-msgstr "Jauns repertuārs…"
-
-#: data/ui/PlaylistDialog.ui:189
-msgid "Add"
-msgstr "Pievienot"
-
-#: data/ui/PreferencesDialog.ui:9
-msgid "Player Settings"
-msgstr "Atskaņotāja iestatījumi"
-
-#: data/ui/PreferencesDialog.ui:12
-msgid "Repeat Mode"
-msgstr "Atkārtošanas režīms"
-
-#: data/ui/PreferencesDialog.ui:16
-msgid "None"
-msgstr "Nekas"
-
-#: data/ui/PreferencesDialog.ui:17
-msgid "Song"
-msgstr "Dziesma"
-
-#: data/ui/PreferencesDialog.ui:18
-msgid "All"
-msgstr "Visi"
-
-#: data/ui/PreferencesDialog.ui:19 gnomemusic/player.py:51
-msgid "Shuffle"
-msgstr "Sajaukt"
-
-#: data/ui/PreferencesDialog.ui:27
-#| msgid "Enable ReplayGain"
-msgid "ReplayGain"
-msgstr "ReplayGain"
-
-#: data/ui/PreferencesDialog.ui:28
-msgid "Balance loudness between songs if ReplayGain metadata is found"
-msgstr "Balansēt skaļumu starp dziesmām, ja ir atrasti ReplayGain metadati"
-
-#: data/ui/PreferencesDialog.ui:32
-msgid "Disabled"
-msgstr "Izslēgts"
-
-#: data/ui/PreferencesDialog.ui:33
-msgid "Album"
-msgstr "Albums"
-
-#: data/ui/PreferencesDialog.ui:34
-#| msgid "Track Title"
-msgid "Track"
-msgstr "Celiņš"
-
-#: data/ui/PreferencesDialog.ui:44
-msgid "Power Settings"
-msgstr "Barošanas iestatījumi"
-
-#: data/ui/PreferencesDialog.ui:47
-msgid "Inhibit Suspend"
-msgstr "Nomākt iesnaušanu"
-
-#: data/ui/PreferencesDialog.ui:48
-msgid "Only while playing"
-msgstr "Tikai, kad atskaņo"
-
-#: data/ui/SearchView.ui:55 data/ui/SearchView.ui:112
-msgid "View All"
-msgstr "Rādīt visu"
-
-#: data/ui/SearchView.ui:154
-msgid "Songs"
-msgstr "Dziesmas"
-
-#: data/ui/SongWidgetMenu.ui:19
-msgid "_Remove from Playlist"
-msgstr "Izņemt no _repertuāra"
-
-#: data/ui/StatusNavigationPage.ui:36
-msgid "Welcome to Music"
-msgstr "Laipni lūdzam Mūzikā"
-
-#: gnomemusic/about.py:141
+#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "GNOME projekts"
 
-#. Translators should localize the following string which
-#. will be displayed at the bottom of the about box to give
-#. credit to the translator(s).
-#: gnomemusic/about.py:147
+#: src/help-overlay.ui:12
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Lietotne"
+
+#: src/help-overlay.ui:16
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Jauns logs"
+
+#: src/help-overlay.ui:23
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Terminālis"
+
+#: src/help-overlay.ui:27
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Meklēt"
+
+#: src/help-overlay.ui:33
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Kopēt"
+
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Ielīmēt"
+
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Cilnes"
+
+#: src/help-overlay.ui:50
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Jauna cilne"
+
+#: src/help-overlay.ui:56
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Aizvērt cilni"
+
+#: src/help-overlay.ui:62
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Rādīt visas cilnes"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Nākamā cilne"
+
+#: src/help-overlay.ui:74
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Iepriekšējā cilne"
+
+#: src/help-overlay.ui:80
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "Pārvietot cilni pa labi"
+
+#: src/help-overlay.ui:86
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Pārvietot cilni pa kreisi"
+
+#: src/help-overlay.ui:92
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Pārslēgties uz cilni 1–9"
+
+#: src/help-overlay.ui:98
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Pārslēgties uz cilni 10"
+
+#. Translators: %s is the year range
+#: src/kgx-about.c:83 src/kgx-window.c:529
+#, c-format
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
+
+#: src/kgx-about.c:101
+msgid "GPL 3.0 or later"
+msgstr "GPL 3.0 vai jaunāks"
+
+#. Translators: The leading # is intentional, the initial %s is the
+#. * version of KGX itself, the latter format is the VTE version
+#: src/kgx-about.c:114
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s izmanto VTE %u.%u.%u %s\n"
+
+#: src/kgx-application.c:255
+#| msgid "Cannot use both --command and positional parameters"
+msgid "Cannot use both --working-directory and positional parameters"
+msgstr "Nevar vienlaicīgi izmantot --working-directory un pozīcijas parametrus"
+
+#: src/kgx-application.c:443
+msgid "Execute the argument to this option inside the terminal"
+msgstr "Izpildīt parametru šai opcijai terminālī."
+
+#: src/kgx-application.c:444
+msgid "COMMAND"
+msgstr "KOMANDA"
+
+#: src/kgx-application.c:452
+msgid "Set the working directory"
+msgstr "Iestatīt termināļa darba direktoriju"
+
+#. Translators: Placeholder of for a given directory
+#: src/kgx-application.c:454
+msgid "DIRNAME"
+msgstr "DIRNOSAUKUMS"
+
+#: src/kgx-application.c:462
+msgid "Wait until the child exits (TODO)"
+msgstr "Pagaidīt, līdz iziet bērna process (TODO)"
+
+#: src/kgx-application.c:471
+msgid "Set the initial window title"
+msgstr "Sākotnējais loga virsraksts"
+
+#: src/kgx-application.c:472
+msgid "TITLE"
+msgstr "VIRSRAKSTS"
+
+#: src/kgx-application.c:480
+msgid "ADVANCED: Set the shell to launch"
+msgstr "PAPLAŠINĀTS: Iestatīt čaulu palaišanai"
+
+#: src/kgx-application.c:481
+msgid "SHELL"
+msgstr "ČAULA"
+
+#: src/kgx-application.c:489
+msgid "ADVANCED: Set the scrollback length"
+msgstr "PAPLAŠINĀTS: Iestatīt atpakaļritināšanas garumu"
+
+#: src/kgx-application.c:490
+msgid "LINES"
+msgstr "RINDAS"
+
+#. Translators: %s is the version string, KGX is a codename and should be left as-is
+#: src/kgx-application.c:644
+#, c-format
+#| msgid "Terminal Emulator"
+msgid "KGX %s — Terminal Emulator"
+msgstr "KGX %s — Termināļa emulatori"
+
+#: src/kgx-application.c:650
+msgid "[-e|-- COMMAND [ARGUMENT...]]"
+msgstr "[-e|-- KOMANDA [ARGUMENTS...]]"
+
+#: src/kgx-close-dialog.c:73
+msgid "Close Window?"
+msgstr "Aizvērt logu?"
+
+#: src/kgx-close-dialog.c:75
+msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this window will kill them and may "
+"lead to unexpected outcomes"
+msgstr[0] ""
+"Komanda vēl aizvien darbojas; šī loga aizvēršana to apturēs un tas var radīt "
+"negaidītas sekas"
+msgstr[1] ""
+"Dažas komandas vēl aizvien darbojas; šī loga aizvēršana tās apturēs un tas "
+"var radīt negaidītas sekas"
+msgstr[2] ""
+"Dažas komandas vēl aizvien darbojas; šī loga aizvēršana tās apturēs un tas "
+"var radīt negaidītas sekas"
+
+#: src/kgx-close-dialog.c:82
+msgid "Close Tab?"
+msgstr "Aizvērt cilni?"
+
+#: src/kgx-close-dialog.c:84
+msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this tab will kill them and may "
+"lead to unexpected outcomes"
+msgstr[0] ""
+"Komanda vēl aizvien darbojas; šīs cilnes aizvēršana to apturēs un tas var "
+"radīt negaidītas sekas"
+msgstr[1] ""
+"Dažas komandas vēl aizvien darbojas; šīs cilnes aizvēršana tās apturēs un "
+"tas var radīt negaidītas sekas"
+msgstr[2] ""
+"Dažas komandas vēl aizvien darbojas; šīs cilnes aizvēršana tās apturēs un "
+"tas var radīt negaidītas sekas"
+
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:194
+msgid "Process list"
+msgstr "Procesu saraksts"
+
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
+#: src/preferences/kgx-font-picker.ui:22
+msgid "_Cancel"
+msgstr "At_celt"
+
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:207
+msgid "C_lose"
+msgstr "_Aizvērt"
+
+#: src/kgx-colour-utils.c:58
+msgid "Color string is wrong length"
+msgstr "Krāsu virknei ir nepareizs garums"
+
+#: src/kgx-livery-manager.c:193
+msgctxt "livery-name"
+msgid "Linux"
+msgstr "Linux"
+
+#: src/kgx-livery-manager.c:230
+#| msgctxt "shortcut window"
+#| msgid "Terminal"
+msgctxt "livery-name"
+msgid "XTerm"
+msgstr "XTerm"
+
+#. Translators: %i is, from the users perspective, a random number.
+#. * this string will only be seen when the running program has
+#. * failed to set a title, and exists purely to avoid blank tabs
+#.
+#: src/kgx-pages.c:471
+#, c-format
+msgid "Tab %i"
+msgstr "Cilne %i"
+
+#: src/kgx-pages.ui:90
+msgid "_Detach Tab"
+msgstr "_Atvienot cilni"
+
+#: src/kgx-pages.ui:96
+msgid "_Close"
+msgstr "_Aizvērt"
+
+#. Translators: %s is the (possibly truncated) command being pasted
+#: src/kgx-paste-dialog.c:76
+#, c-format
+msgid ""
+"Make sure you know what the command does:\n"
+"%s"
+msgstr ""
+"Pārliecinieties, ka zināt, ko komanda dara:\n"
+"%s"
+
+#: src/kgx-paste-dialog.c:129
+msgid "You are pasting a command that runs as an administrator"
+msgstr "Jūs ielīmējāt komandu, kas tiek darbināta caur administratoru"
+
+#: src/kgx-paste-dialog.c:136 src/kgx-terminal.ui:24
+msgid "_Paste"
+msgstr "_Ielīmēt"
+
+#: src/kgx-process.c:192
+#, c-format
+msgid "Process %d"
+msgstr "Apstrādāt %d"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-simple-tab.c:169
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Neizdevās startēt</b> — %s"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:814
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Tikai lasāms</b> — Komanda beidza darbu ar kodu %i"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:822
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Tikai lasāms</b> — Komanda beidza darbu"
+
+#: src/kgx-tab.c:842
+msgid "Command completed"
+msgstr "Komanda izpildīta"
+
+#: src/kgx-tab.ui:40
+msgid "Find text"
+msgstr "Meklēt tekstu"
+
+#: src/kgx-tab.ui:51
+msgid "Previous Match"
+msgstr "Iepriekšējā atbilsme"
+
+#: src/kgx-tab.ui:59
+msgid "Next Match"
+msgstr "Nākamā atbilsme"
+
+#: src/kgx-terminal.c:508
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+"Ctrl-klikšķis, lai atvērtu:\n"
+"%s"
+
+#: src/kgx-terminal.ui:7
+msgid "_Open Link"
+msgstr "_Atvērt saiti"
+
+#: src/kgx-terminal.ui:12
+msgid "Copy _Link"
+msgstr "Kopēt _saiti"
+
+#: src/kgx-terminal.ui:19
+msgid "_Copy"
+msgstr "_Kopēt"
+
+#: src/kgx-terminal.ui:29
+msgid "_Select All"
+msgstr "Atla_sīt visu"
+
+#: src/kgx-terminal.ui:36
+msgid "Show in _Files"
+msgstr "Rādīt _Datņu lietotnē"
+
+#: src/kgx-theme-switcher.ui:16
+msgid "Follow System Style"
+msgstr "Sekot sistēmas stilam"
+
+#: src/kgx-theme-switcher.ui:44
+msgid "Light Style"
+msgstr "Gaišais stils"
+
+#: src/kgx-theme-switcher.ui:71
+msgid "Dark Style"
+msgstr "Tumšais stils"
+
+#. Translators: ‘command’ is the argument name, and shouldn't be translated
+#: src/kgx-utils.c:113
+msgid "Missing argument for --command"
+msgstr "--command trūkst argumenta"
+
+#: src/kgx-utils.c:128
+msgid "Cannot use both --command and positional parameters"
+msgstr "Nevar vienlaicīgi izmantot --command un pozīcijas parametrus"
+
+#. Translators: Credit yourself here
+#: src/kgx-window.c:541
 msgid "translator-credits"
 msgstr "Rūdolfs Mazurs <rudolfs.mazurs@gmail.com>"
 
-#: gnomemusic/about.py:151
-msgid "© The GNOME Music Developers"
-msgstr "© GNOME Mūzikas izstrādātāji"
-
-#. TRANSLATORS: this is a playlist name
-#: gnomemusic/grilowrappers/grltrackerplaylists.py:849
-msgid "Most Played"
-msgstr "Visbiežāk atskaņotās"
-
-#. TRANSLATORS: this is a playlist name
-#: gnomemusic/grilowrappers/grltrackerplaylists.py:903
-msgid "Never Played"
-msgstr "Nekad neatskaņotās"
-
-#. TRANSLATORS: this is a playlist name
-#: gnomemusic/grilowrappers/grltrackerplaylists.py:956
-msgid "Recently Played"
-msgstr "Nesen atskaņotās"
-
-#. TRANSLATORS: this is a playlist name
-#: gnomemusic/grilowrappers/grltrackerplaylists.py:1035
-msgid "Recently Added"
-msgstr "Nesen pievienotās"
-
-#. TRANSLATORS: this is a playlist name
-#: gnomemusic/grilowrappers/grltrackerplaylists.py:1098
-msgid "Favorite Songs"
-msgstr "Iecienītās dziesmas"
-
-#. TRANSLATORS: this is a playlist name indicating that the
-#. files are not tagged enough to be displayed in the albums
-#. or artists views.
-#: gnomemusic/grilowrappers/grltrackerplaylists.py:1152
-msgid "Insufficiently Tagged"
-msgstr "Nepietiekami tagoti"
-
-#: gnomemusic/gstplayer.py:424
-msgid "Unable to play the file"
-msgstr "Neizdevās atskaņot datni"
-
-#: gnomemusic/gstplayer.py:430
-msgid "_Find in {}"
-msgstr "_Meklēt mapē {}"
-
-#. TRANSLATORS: separator for two codecs
-#: gnomemusic/gstplayer.py:440
-msgid " and "
-msgstr " un "
-
-#. TRANSLATORS: separator for a list of codecs
-#: gnomemusic/gstplayer.py:443
-msgid ", "
-msgstr ", "
-
-#: gnomemusic/gstplayer.py:445
-msgid "{} is required to play the file, but is not installed."
-msgid_plural "{} are required to play the file, but are not installed."
-msgstr[0] "Lai atskaņotu datni, nepieciešams {}, bet tas nav uzinstalēts."
-msgstr[1] "Lai atskaņotu datni, nepieciešami {}, bet tie nav uzinstalēti."
-msgstr[2] "Lai atskaņotu datni, nepieciešami {}, bet tie nav uzinstalēti."
-
-#: gnomemusic/inhibitsuspend.py:69
-msgid "Playing music"
-msgstr "Atskaņo mūziku"
-
-#. Translators: "shuffle" causes tracks to play in random order.
-#: gnomemusic/player.py:48
-msgid "Shuffle/Repeat Off"
-msgstr "Izslēgt jaukšanu/atkārtošanu"
-
-#: gnomemusic/player.py:49
-msgid "Repeat Song"
-msgstr "Atkārtot dziesmu"
-
-#: gnomemusic/player.py:50
-msgid "Repeat All"
-msgstr "Atkārtot visas"
-
-#: gnomemusic/playlisttoast.py:55
-msgid "Playlist {} removed"
-msgstr "Repertuāra {} ir izņemts"
-
-#: gnomemusic/playlisttoast.py:56 gnomemusic/songtoast.py:65
-msgid "Undo"
-msgstr "Atsaukt"
-
-#: gnomemusic/songtoast.py:64
-msgid "{} removed from {}"
-msgstr "{} izņemts no {}"
-
-#: gnomemusic/utils.py:89
-msgid "Unknown album"
-msgstr "Nezināms albums"
-
-#: gnomemusic/utils.py:110
-msgid "Unknown Artist"
-msgstr "Nezināms izpildītājs"
-
-#: gnomemusic/views/playlistsview.py:45
-msgid "Playlists"
-msgstr "Repertuāri"
-
-#: gnomemusic/views/searchview.py:224
-msgid "No Search Started"
-msgstr "Meklēšana nav sākta"
-
-#: gnomemusic/views/searchview.py:226
-msgid "Use the searchbar to start searching for albums, artists or songs"
-msgstr ""
-"Izmantojiet meklēšanas joslu, lai sāktu meklēt albumus, izpildītājus vai "
-"dziesmas"
-
-#: gnomemusic/views/searchview.py:230
-msgid "No Results Found"
-msgstr "Nav atrastu rezultātu"
-
-#: gnomemusic/views/searchview.py:232
-msgid "Try a different search"
-msgstr "Mēģiniet ar citu meklējamo vārdu"
-
-#: gnomemusic/widgets/albumwidget.py:230
-msgid "{} minute"
-msgid_plural "{} minutes"
-msgstr[0] "{} minūte"
-msgstr[1] "{} minūtes"
-msgstr[2] "{} minūšu"
-
-#: gnomemusic/widgets/discbox.py:74
-msgid "Disc {}"
-msgstr "Disks (}"
-
-#: gnomemusic/widgets/playertoolbar.py:173
-msgid "Pause"
-msgstr "Pauzēt"
-
-#: gnomemusic/widgets/playlistcontrols.py:130
-msgid "{} Song"
-msgid_plural "{} Songs"
-msgstr[0] "{} dziesma"
-msgstr[1] "{} dziesmas"
-msgstr[2] "{} dziesmu"
-
-#: gnomemusic/widgets/searchheaderbar.py:54
-msgid "Search songs, artists and albums"
-msgstr "Meklēt dziesmas, izpildītājus un albumus"
-
-#. noqa: F841
-#: gnomemusic/widgets/songwidgetmenu.py:94
-msgid "_Open Location"
-msgstr "_Atvērt vietu"
-
-#. TRANSLATORS: These are verbs, to (un)mark something as a
-#. favorite.
-#: gnomemusic/widgets/startoggle.py:36
-msgid "Unstar"
-msgstr "Noņemt zvaigzni"
-
-#: gnomemusic/widgets/startoggle.py:36
-msgid "Star"
-msgstr "Pievienot zvaigzni"
-
-#: gnomemusic/widgets/statusnavigationpage.py:51
-msgid "Your XDG Music directory is not set."
-msgstr "Jūsu XDG mūzikas direktorijs nav iestatīts."
-
-#: gnomemusic/widgets/statusnavigationpage.py:58
-msgid "Music Folder"
-msgstr "Mūzikas mape"
-
-#. TRANSLATORS: This is a label to display a link to open user's music
-#. folder. {} will be replaced with the translated text 'Music folder'
-#: gnomemusic/widgets/statusnavigationpage.py:66
-msgid "The contents of your {} will appear here."
-msgstr "Jūsu {} saturs parādīsies šeit"
-
-#: gnomemusic/widgets/statusnavigationpage.py:116
-msgid "No Music Found"
-msgstr "Nav atrasta mūzika"
-
-#: gnomemusic/widgets/statusnavigationpage.py:117
-msgid "Try a Different Search"
-msgstr "Mēģiniet ar citu meklējamo vārdu"
-
-#: gnomemusic/widgets/statusnavigationpage.py:121
-msgid "GNOME Music could not connect to Tracker."
-msgstr "GNOME Mūzika nevarēja savienoties ar Tracker."
-
-#: gnomemusic/widgets/statusnavigationpage.py:123
-msgid "Your music files cannot be indexed without Tracker running."
-msgstr "Nevar indeksēt jūsu mūzikas datnes, ja nedarbojas Tracker."
-
-#: gnomemusic/widgets/statusnavigationpage.py:129
-msgid "Your system Tracker version seems outdated."
-msgstr "Jūsu sistēmas Tracker versija ir novecojusi."
+#: src/kgx-window.ui:17
+msgid "_New Window"
+msgstr "Jau_ns logs"
+
+#: src/kgx-window.ui:23
+msgid "_Show All Tabs"
+msgstr "Rādīt vi_sas cilnes"
+
+#: src/kgx-window.ui:30
+msgid "_Preferences"
+msgstr "_Iestatījumi"
 
-#: gnomemusic/widgets/statusnavigationpage.py:131
-msgid "Music needs Tracker version 3.0.0 or higher."
-msgstr "Mūzikai vajag Tracker vismaz versiju 3.0.0."
+#: src/kgx-window.ui:34
+msgid "_Keyboard Shortcuts"
+msgstr "_Tastatūras īsinājumtaustiņi"
 
-#~ msgid "Enables or disables ReplayGain for albums"
-#~ msgstr "Ieslēdz vai izslēdz ReplayGain albumiem"
+#: src/kgx-window.ui:38
+msgid "_About Console"
+msgstr "P_ar Konsoli"
 
-#~ msgctxt "shortcut window"
-#~ msgid "Close window"
-#~ msgstr "Aizvērt logu"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Go to Songs"
-#~ msgstr "Iet uz dziesmām"
-
-#~ msgid "Report music history to Last.fm"
-#~ msgstr "Ziņot Last.fm par mūzikas vēsturi"
-
-#~ msgid ""
-#~ "Enables or disables sending scrobbles and the “currently playing” info to "
-#~ "Last.fm."
-#~ msgstr ""
-#~ "Ieslēdz vai izslēdz scrobbles un “palšaik atskaņo” informācijas sūtīšanu "
-#~ "uz Last.fm."
-
-#~ msgid "Last.fm Account"
-#~ msgstr "Last.fm konts"
-
-#~ msgid "Report Music Listening"
-#~ msgstr "Ziņot par mūzikas klausīšanos"
-
-#~ msgid "_Help"
-#~ msgstr "_Palīdzība"
-
-#~ msgid "Select"
-#~ msgstr "Izvēlēties"
-
-#~ msgid "Back"
-#~ msgstr "Atpakaļ"
-
-#~ msgid ""
-#~ "Last.fm is a music discovery service that gives you personalised "
-#~ "recommendations based on the music you listen to."
-#~ msgstr ""
-#~ "Last.fm ir mūzikas atklāšanas pakalpojums, kas jums dod personalizētus "
-#~ "ieteikumus balstoties uz tā, kādu mūziku jūs klausāties."
-
-#~ msgid "Music Reporting Not Setup"
-#~ msgstr "Mūzikas ziņošana nav iestatīta"
-
-#~ msgid "Login to your Last.fm account to report your music listening."
-#~ msgstr ""
-#~ "Ierakstieties savā Last.fm kontā, lai ziņotu par savu mūzikas klausīšanos."
-
-#~ msgid "Login"
-#~ msgstr "Ierakstīties"
-
-#~ msgid "Select All"
-#~ msgstr "Izvēlēties visu"
-
-#~ msgid "Select None"
-#~ msgstr "Iezīmēt neko"
-
-#~ msgid "Click on items to select them"
-#~ msgstr "Spiediet uz vienumiem, lai tos izvēlētos"
-
-#~ msgid "_Add to Playlist"
-#~ msgstr "_Pievienot repertuāram"
-
-#~ msgid "Copyright The GNOME Music Developers"
-#~ msgstr "Autortiesības pieder GNOME Mūzikas izstrādātājiem"
-
-#~ msgid "Translated by"
-#~ msgstr "Tulkojuši"
-
-#~ msgid "Artists Results"
-#~ msgstr "Izpildītāju rezultāti"
-
-#~ msgid "Albums Results"
-#~ msgstr "Albumu rezultāti"
-
-#~ msgid "Selected {} song"
-#~ msgid_plural "Selected {} songs"
-#~ msgstr[0] "Izvēlēta {} dziesma"
-#~ msgstr[1] "Izvēlētas {} dziesmas"
-#~ msgstr[2] "Izvēlētas {} dziesmas"
-
-#~ msgid "Your music listening is reported to Last.fm."
-#~ msgstr "Jūsu mūzikas klausīšanās tiek ziņota uz Last.fm."
-
-#~ msgid "Your music listening is not reported to Last.fm."
-#~ msgstr "Jūsu mūzikas klausīšanās netiek tiek ziņota uz Last.fm."
-
-#~ msgid "Logged in as {}"
-#~ msgstr "Ierakstījies kā {}"
-
-#~ msgid "Configure"
-#~ msgstr "Konfigurēt"
-
-#~ msgid "A music player and management application for GNOME."
-#~ msgstr "Mūzikas atskaņošanas un pārvaldības lietotne GNOME vidē."
-
-#~ msgid "Visit GNOME Music website"
-#~ msgstr "Apmeklēt GNOME Mūzikas tīmekļa vietni"
-
-#~ msgid ""
-#~ "GNOME Music is free software; you can redistribute it and/or modify it "
-#~ "under the terms of the GNU General Public License as published by the "
-#~ "Free Software Foundation; either version 2 of the License, or (at your "
-#~ "option) any later version.\n"
-#~ "\n"
-#~ "GNOME Music is distributed in the hope that it will be useful, but "
-#~ "WITHOUT ANY WARRANTY; without even the implied warranty of "
-#~ "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General "
-#~ "Public License for more details.\n"
-#~ "\n"
-#~ "You should have received a copy of the GNU General Public License along "
-#~ "with GNOME Music; if not, write to the Free Software Foundation, Inc., 51 "
-#~ "Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.\n"
-#~ "\n"
-#~ "The GNOME Music authors hereby grant permission for non-GPL compatible "
-#~ "GStreamer plugins to be used and distributed together with GStreamer and "
-#~ "GNOME Music.  This permission is above and beyond the permissions granted "
-#~ "by the GPL license by which GNOME Music is covered.  If you modify this "
-#~ "code, you may extend this exception to your version of the code, but you "
-#~ "are not obligated to do so.  If you do not wish to do so, delete this "
-#~ "exception statement from your version."
-#~ msgstr ""
-#~ "GNOME Mūzika ir brīvā programmatūra; jūs varat izplatīt un/vai modificēt "
-#~ "to saskaņā ar GNU Vispārējās Publiskās Licences 2. vai kādas vēlākas "
-#~ "versijas noteikumiem.\n"
-#~ "\n"
-#~ "GNOME Mūzika tiek izplatīts ar cerību, ka tas būs noderīgs. Tas tiek "
-#~ "izplatīts BEZ jebkādas garantijas vai iekļautas ražotāja atbildības par "
-#~ "šo produktu. Sīkāku informāciju meklējiet GNU Vispārējās Publiskās "
-#~ "Licences tekstā.\n"
-#~ "GNU Vispārējās Publiskās Licence ir pieejama kopā ar GNOME Mūzika "
-#~ "instalāciju. Ja tā jums nav pieejama, jūs to varat iegūt no Free Software "
-#~ "Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 "
-#~ "USA.\n"
-#~ "\n"
-#~ "GNOME Mūzika autori dod tiesības ar GPL nesavietojamiem GStreamer "
-#~ "spraudņiem tik izplatītiem kopā ar GStreamer un GNOME Mūziku. Šīs "
-#~ "tiesības ir plašākas kā tās, ko sniedz GPL licence, ko izmanto GNOME "
-#~ "Mūzika. Ja vēlaties mainīt šo kodu, jūs varat šo izņēmumu attiecināt arī "
-#~ "uz savas programmas pirmkodu, bet jums nav pienākuma to darīt. Ja "
-#~ "nevēlaties iekļaut izņēmumu, izdzēsiet šo izņēmuma teikumu no savas "
-#~ "versijas."
-
-#~| msgid "The contents of your {} will appear here."
-#~ msgid "The contents of your Music Folder will appear here"
-#~ msgstr "Jūsu mūzikas mapes saturs parādīsies šeit"
-
-#~ msgid "GNOME Music"
-#~ msgstr "GNOME Mūzika"
-
-#~ msgid "Window position"
-#~ msgstr "Loga novietojums"
-
-#~ msgid "Window position (x and y)."
-#~ msgstr "Loga novietojums (x un y)."
-
-#~ msgid "Loading"
-#~ msgstr "Ielādē"
-
-#~ msgid "Add to Playlist…"
-#~ msgstr "Pievienot repertuāram…"
-
-#~ msgid ""
-#~ "An easy way to play your music. Automatically discover music on your "
-#~ "computer, the local network and internet services."
-#~ msgstr ""
-#~ "Vienkāršs veids, kā atskaņot jūsu mūziku. Automātiski atklājiet mūziku uz "
-#~ "sava datora, lokālajā tīklā vai interneta pakalpojumos."
-
-#~ msgid ""
-#~ "Find tracks in your local collection, get music from DLNA servers or try "
-#~ "something new with the Jamendo and Magnatune services."
-#~ msgstr ""
-#~ "Atrodiet celiņus jūsu lokālajā kolekcijā, saņemiet mūziku no DLNA "
-#~ "serveriem vai no Jamendo un Magnatune pakalpojumiem."
-
-#~ msgid "Inital state has been displayed"
-#~ msgstr "Sākotnējais stāvoklis tika parādīts"
-
-#~ msgid "Set to true when initial state has been displayed"
-#~ msgstr "Iestatiet uz “patiess”, kad sākotnējais stāvoklis ir parādīts"
-
-#~ msgid "Released"
-#~ msgstr "Izlaists"
-
-#~ msgid "Running Length"
-#~ msgstr "Atskaņošanas ilgums"
-
-#~ msgid "Composer"
-#~ msgstr "Komponists"
-
-#~ msgctxt "context menu item"
-#~ msgid "Play"
-#~ msgstr "Atskaņot"
-
-#~ msgid "Hey DJ"
-#~ msgstr "Eu DJ"
-
-#~ msgid "Artist"
-#~ msgstr "Izpildītājs"
-
-#~ msgid "Local"
-#~ msgstr "Lokāls"
-
-#~ msgid "Sources"
-#~ msgstr "Avoti"
-
-#~ msgid "Match"
-#~ msgstr "Atbilst"
-
-#~ msgid "@icon@"
-#~ msgstr "@icon@"
-
-#~ msgid "Untitled"
-#~ msgstr "Nenosaukts"
-
-#~ msgid "Music is the new GNOME music playing application."
-#~ msgstr "Mūzika ir jaunā GNOME mūzikas atskaņošanas lietotne."
-
-#~ msgid "org.gnome.Music"
-#~ msgstr "org.gnome.Music"
-
-#~ msgid "Search mode"
-#~ msgstr "Meklēšanas režīms"
-
-#~ msgid "If true, the search bar is shown."
-#~ msgstr "Ja patiess, tiks rādīta meklēšanas josla."
-
-#~ msgid "Notifications mode"
-#~ msgstr "Paziņojumu režīms"
-
-#~ msgid "Enables or disables playback notifications"
-#~ msgstr "Ieslēdz vai izslēdz atskaņošanas paziņojumus"
-
-#~ msgid "Selected %d item"
-#~ msgid_plural "Selected %d items"
-#~ msgstr[0] "Izvēlēts %d vienums"
-#~ msgstr[1] "Izvēlēti %d vienumi"
-#~ msgstr[2] "Izvēlēti %d vienumi"
-
-#~ msgid "%d min"
-#~ msgstr "%d minūte"
-
-#~ msgid "Empty"
-#~ msgstr "Tukšs"
-
-#~ msgid "Select Playlist"
-#~ msgstr "Izvēlieties repertuāru"
+#: src/kgx-window.ui:88
+msgid "Find in Terminal"
+msgstr "Meklēt terminālī"
+
+#: src/kgx-window.ui:95
+msgid "Main Menu"
+msgstr "Galvenā izvēlne"
+
+#: src/kgx-window.ui:113
+msgid "Shrink Text"
+msgstr "Samazināt tekstu"
+
+#: src/kgx-window.ui:124
+msgid "Reset Size"
+msgstr "Atstatīt izmēru"
+
+#: src/kgx-window.ui:148
+msgid "Enlarge Text"
+msgstr "Palielināt tekstu"
+
+#: src/preferences/kgx-font-picker.ui:11
+msgid "Terminal Font"
+msgstr "Termināļa fonts"
+
+#: src/preferences/kgx-font-picker.ui:29
+msgid "_Select"
+msgstr "Atla_sīt"
+
+#: src/preferences/kgx-font-picker.ui:45 src/preferences/kgx-font-picker.ui:48
+msgid "Font Name"
+msgstr "Fonta nosaukums"
+
+#: src/preferences/kgx-font-picker.ui:133
+msgid "Font Family"
+msgstr "Fontu saime"
+
+#: src/preferences/kgx-font-picker.ui:158
+msgid "Font Preview"
+msgstr "Fontu priekšskatījums"
+
+#: src/preferences/kgx-font-picker.ui:179
+msgid "Font Size"
+msgstr "Fontu izmērs"
+
+#: src/preferences/kgx-preferences-window.c:125
+msgid "No Font Set"
+msgstr "Nav iestatīts fonts"
+
+#: src/preferences/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "Vispārīgi"
+
+#: src/preferences/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "Fonts"
+
+#: src/preferences/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "Lietot _sistēmas noklusējuma"
+
+#: src/preferences/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "Pielāgots _fonts"
+
+#: src/preferences/kgx-preferences-window.ui:63
+msgid "Behaviour"
+msgstr "Uzvedība"
+
+#: src/preferences/kgx-preferences-window.ui:66
+msgid "_Unlimited Scrollback"
+msgstr "_Neierobežota ritināšana"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "Atritināšana_s rindas"
+
+#: src/preferences/kgx-preferences-window.ui:92
+msgid "Terminal Bell"
+msgstr "Termināļa zvans"
+
+#: src/preferences/kgx-preferences-window.ui:95
+msgid "Play _Sound"
+msgstr "Atskaņot _skaņu"
+
+#: src/preferences/kgx-preferences-window.ui:101
+msgid "_Visual Effects"
+msgstr "_Vizuāli efekti"
+
+#~ msgid "King’s Cross"
+#~ msgstr "King’s Cross"
+
+#~ msgid "Use Light Colors"
+#~ msgstr "Lietot gaišas krāsas"
+
+#~ msgid "Use Dark Colors"
+#~ msgstr "Lietot tumšas krāsas"
+
+#~ msgid "View Open Tabs"
+#~ msgstr "Skatīt atvērtās cilnes"
 
