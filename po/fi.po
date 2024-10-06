@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-20 19:30+0000\n"
-"PO-Revision-Date: 2024-08-24 15:42+0300\n"
+"POT-Creation-Date: 2024-09-25 14:13+0000\n"
+"PO-Revision-Date: 2024-10-06 17:25+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: Finnish <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -50,7 +50,7 @@ msgstr "Helppokäyttöinen pääte-emulaattori Gnome-työpöydälle."
 msgid "Terminal window"
 msgstr "Pääteikkuna"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:466 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "Gnome-projekti"
 
@@ -203,7 +203,6 @@ msgstr ""
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
 #: src/kgx-application.c:644
 #, c-format
-#| msgid "KGX Terminal Emulator"
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — Pääte-emulaattori"
 
@@ -273,8 +272,6 @@ msgid "Linux"
 msgstr "Linux"
 
 #: src/kgx-livery-manager.c:230
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
 msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
@@ -500,6 +497,10 @@ msgstr "Toiminta"
 #: src/preferences/kgx-preferences-window.ui:66
 msgid "_Unlimited Scrollback"
 msgstr "_Loputon takaisinvieritys"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "_Takaisinvierityksen rivit"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
