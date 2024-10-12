@@ -1,0 +1,527 @@
+# Arabic translation for console.
+# Copyright (C) 2022 console's COPYRIGHT HOLDER
+# This file is distributed under the same license as the console package.
+# Ali Aljishi <ahj696@hotmail.com>, 2022.
+# Ali Galal <AleuqabAli@gmail.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: console main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
+"POT-Creation-Date: 2024-09-29 14:18+0000\n"
+"PO-Revision-Date: 2024-10-12 10:20+0300\n"
+"Last-Translator: Ali Galal <AleuqabAli@gmail.com>\n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Gtranslator 46.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
+msgid "Console"
+msgstr "كونسول"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Console.desktop.in.in:8
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
+msgstr ""
+"الأمر;الطلب;المدخلات;السطر;سطر الأوامر;سطر أوامر;التشغيل;الصدفة;الطرفية"
+
+#: data/org.gnome.Console.desktop.in.in:21
+msgid "New Window"
+msgstr "نافذة جديدة"
+
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
+msgid "New Tab"
+msgstr "لسان جديد"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
+msgid "Terminal Emulator"
+msgstr "مُحاكِي طرفية"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:11
+msgid "A simple user-friendly terminal emulator for the GNOME desktop."
+msgstr "مُحاكِي طرفية سهل الاستخدام لسطح المكتب جنوم."
+
+#: data/org.gnome.Console.metainfo.xml.in.in:30
+msgid "Terminal window"
+msgstr "نافذة الطرفية"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:466 src/kgx-window.c:534
+msgid "The GNOME Project"
+msgstr "المشروع جنوم"
+
+#: src/help-overlay.ui:12
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "التطبيق"
+
+#: src/help-overlay.ui:16
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "نافذة جديدة"
+
+#: src/help-overlay.ui:23
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "الطرفية"
+
+#: src/help-overlay.ui:27
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "جِد"
+
+#: src/help-overlay.ui:33
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "انسخ"
+
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "ألصق"
+
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "الألسنة"
+
+#: src/help-overlay.ui:50
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "لسان جديد"
+
+#: src/help-overlay.ui:56
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "أغلق اللسان"
+
+#: src/help-overlay.ui:62
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "اعرض كل الألسنة"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "اللسان التالي"
+
+#: src/help-overlay.ui:74
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "اللسان السابق"
+
+#: src/help-overlay.ui:80
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "انقل اللسان إلى اليمين"
+
+#: src/help-overlay.ui:86
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "انقل اللسان إلى اليسار"
+
+#: src/help-overlay.ui:92
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "انتقل إلى اللسان 1–9"
+
+#: src/help-overlay.ui:98
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "انتقل إلى اللسان 10"
+
+#. Translators: %s is the year range
+#: src/kgx-about.c:83 src/kgx-window.c:529
+#, c-format
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
+
+#: src/kgx-about.c:101
+msgid "GPL 3.0 or later"
+msgstr "جي‌بي‌إل 3.0 أو أحدث"
+
+#. Translators: The leading # is intentional, the initial %s is the
+#. * version of KGX itself, the latter format is the VTE version
+#: src/kgx-about.c:114
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s using VTE %u.%u.%u %s\n"
+
+#: src/kgx-application.c:255
+msgid "Cannot use both --working-directory and positional parameters"
+msgstr "المُعامَلات الموضعية و‎--command لا يُستعمَلان معًا"
+
+#: src/kgx-application.c:443
+msgid "Execute the argument to this option inside the terminal"
+msgstr "‎نفِّذ مُعطيَات هذا الخيار في الطرفية"
+
+#: src/kgx-application.c:444
+msgid "COMMAND"
+msgstr "‎الأمر"
+
+#: src/kgx-application.c:452
+msgid "Set the working directory"
+msgstr "‎عيِّن مجلد العمل"
+
+#. Translators: Placeholder of for a given directory
+#: src/kgx-application.c:454
+msgid "DIRNAME"
+msgstr "‎اسم المجلد"
+
+#: src/kgx-application.c:462
+msgid "Wait until the child exits (TODO)"
+msgstr "انتظر حتى ينتهي الأمر الفرعي (TODO)"
+
+#: src/kgx-application.c:471
+msgid "Set the initial window title"
+msgstr "‎عيِّن عنوان النافذة الابتدائي"
+
+#: src/kgx-application.c:472
+msgid "TITLE"
+msgstr "‎العنوان"
+
+#: src/kgx-application.c:480
+msgid "ADVANCED: Set the shell to launch"
+msgstr "‎متقدم: عيِّن الصدفة التي ستُشغَّل"
+
+#: src/kgx-application.c:481
+msgid "SHELL"
+msgstr "الصدفة"
+
+#: src/kgx-application.c:489
+msgid "ADVANCED: Set the scrollback length"
+msgstr "‎متقدم: عيِّن حدَّ التمرير إلى الخلف"
+
+#: src/kgx-application.c:490
+msgid "LINES"
+msgstr "‎عدد_الأسطر"
+
+#. Translators: %s is the version string, KGX is a codename and should be left as-is
+#: src/kgx-application.c:644
+#, c-format
+msgid "KGX %s — Terminal Emulator"
+msgstr "كج‌إكس %s — مُحاكِي طرفية"
+
+#: src/kgx-application.c:650
+msgid "[-e|-- COMMAND [ARGUMENT...]]"
+msgstr "[-e|-- الأمر [...‎المُعطيَات]]"
+
+#: src/kgx-close-dialog.c:73
+msgid "Close Window?"
+msgstr "ستُغلِق النافذة؟"
+
+#: src/kgx-close-dialog.c:75
+#| msgid ""
+#| "Some commands are still running, closing this window will kill them and "
+#| "may lead to unexpected outcomes"
+msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this window will kill them and may "
+"lead to unexpected outcomes"
+msgstr[0] "سيُنهَى أمرٌ يعمل بإغلاق النافذة، وقد يؤدي ذلك إلى ما هو غير مُتوقَّع"
+msgstr[1] "ستُنهَى أوامر تعمل بإغلاق النافذة، وقد يؤدي ذلك إلى ما هو غير مُتوقَّع"
+
+#: src/kgx-close-dialog.c:82
+msgid "Close Tab?"
+msgstr "ستُغلِق اللسان؟"
+
+#: src/kgx-close-dialog.c:84
+#| msgid ""
+#| "Some commands are still running, closing this tab will kill them and may "
+#| "lead to unexpected outcomes"
+msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this tab will kill them and may "
+"lead to unexpected outcomes"
+msgstr[0] "سيُنهَى أمرٌ يعمل بإغلاق اللسان، وقد يؤدي ذلك إلى ما هو غير مُتوقَّع"
+msgstr[1] "ستُنهَى أوامر تعمل بإغلاق اللسان، وقد يؤدي ذلك إلى ما هو غير مُتوقَّع"
+
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:194
+msgid "Process list"
+msgstr "قائمة العمليات"
+
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
+#: src/preferences/kgx-font-picker.ui:22
+msgid "_Cancel"
+msgstr "_ألغِ"
+
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:207
+msgid "C_lose"
+msgstr "أ_غلق"
+
+#: src/kgx-colour-utils.c:58
+msgid "Color string is wrong length"
+msgstr "Color string is wrong length"
+
+#: src/kgx-livery-manager.c:193
+msgctxt "livery-name"
+msgid "Linux"
+msgstr "لينكس"
+
+#: src/kgx-livery-manager.c:230
+msgctxt "livery-name"
+msgid "XTerm"
+msgstr "XTerm"
+
+#. Translators: %i is, from the users perspective, a random number.
+#. * this string will only be seen when the running program has
+#. * failed to set a title, and exists purely to avoid blank tabs
+#.
+#: src/kgx-pages.c:471
+#, c-format
+msgid "Tab %i"
+msgstr "اللسان %i"
+
+#: src/kgx-pages.ui:90
+msgid "_Detach Tab"
+msgstr "افصل اللسان"
+
+#: src/kgx-pages.ui:96
+msgid "_Close"
+msgstr "_أغلق"
+
+#. Translators: %s is the (possibly truncated) command being pasted
+#: src/kgx-paste-dialog.c:76
+#, c-format
+msgid ""
+"Make sure you know what the command does:\n"
+"%s"
+msgstr ""
+"تأكد من أنك تعلم ما يفعله الأمر:\n"
+"%s"
+
+#: src/kgx-paste-dialog.c:129
+msgid "You are pasting a command that runs as an administrator"
+msgstr "أنت تلصق أمرًا يعمل مديرًا"
+
+#: src/kgx-paste-dialog.c:136 src/kgx-terminal.ui:24
+msgid "_Paste"
+msgstr "أ_لصق"
+
+#: src/kgx-process.c:192
+#, c-format
+msgid "Process %d"
+msgstr "العملية %Id"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-simple-tab.c:169
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>تعذَّر تشغيل</b> — %s"
+
+# «تُقرأ فقط» تعني أن الطرفية تُقرأ فقط
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:818
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>تُقرَأ فقط</b> — انتهى الأمر بالكود %i"
+
+# «تُقرأ فقط» تعني أن الطرفية تُقرأ فقط
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:826
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>تُقرَأ فقط</b> — انتهى الأمر"
+
+#: src/kgx-tab.c:846
+msgid "Command completed"
+msgstr "أُنجِز الأمر"
+
+#: src/kgx-tab.ui:40
+msgid "Find text"
+msgstr "جِد نصًّا"
+
+#: src/kgx-tab.ui:51
+msgid "Previous Match"
+msgstr "التطابق السابق"
+
+#: src/kgx-tab.ui:59
+msgid "Next Match"
+msgstr "التطابق التالي"
+
+#: src/kgx-terminal.c:508
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+"اضغط Ctrl وانقر تفتح:\n"
+"%s"
+
+#: src/kgx-terminal.ui:7
+msgid "_Open Link"
+msgstr "ا_فتح الرابط"
+
+#: src/kgx-terminal.ui:12
+msgid "Copy _Link"
+msgstr "ا_نسخ الرابط"
+
+#: src/kgx-terminal.ui:19
+msgid "_Copy"
+msgstr "ا_نسخ"
+
+#: src/kgx-terminal.ui:29
+msgid "_Select All"
+msgstr "_حدِّد الكل"
+
+#: src/kgx-terminal.ui:36
+msgid "Show in _Files"
+msgstr "اعرض في «الملفَّات»"
+
+#: src/kgx-theme-switcher.ui:16
+msgid "Follow System Style"
+msgstr "اتبع طراز النظام"
+
+#: src/kgx-theme-switcher.ui:44
+msgid "Light Style"
+msgstr "الطراز المضيء"
+
+#: src/kgx-theme-switcher.ui:71
+msgid "Dark Style"
+msgstr "الطراز المظلم"
+
+#. Translators: ‘command’ is the argument name, and shouldn't be translated
+#: src/kgx-utils.c:113
+msgid "Missing argument for --command"
+msgstr "المعطيات لـ ‎--command مفقودة"
+
+#: src/kgx-utils.c:128
+msgid "Cannot use both --command and positional parameters"
+msgstr "المُعامَلات الموضعية و‎--command لا يُستعمَلان معًا"
+
+#. Translators: Credit yourself here
+#: src/kgx-window.c:541
+msgid "translator-credits"
+msgstr ""
+"علي جلال <AleuqabAli@gmail.com>\n"
+"علي الجشي <ahj696@hotmail.com>"
+
+#: src/kgx-window.ui:17
+msgid "_New Window"
+msgstr "_نافذة جديدة"
+
+#: src/kgx-window.ui:23
+msgid "_Show All Tabs"
+msgstr "اع_رض كل الألسنة"
+
+#: src/kgx-window.ui:30
+msgid "_Preferences"
+msgstr "ال_تفضيلات"
+
+#: src/kgx-window.ui:34
+msgid "_Keyboard Shortcuts"
+msgstr "اختصارات لوحة ال_مفاتيح"
+
+#: src/kgx-window.ui:38
+msgid "_About Console"
+msgstr "_عن كونسول"
+
+#: src/kgx-window.ui:88
+msgid "Find in Terminal"
+msgstr "جِد في الطرفية"
+
+#: src/kgx-window.ui:95
+msgid "Main Menu"
+msgstr "القائمة الرئيسية"
+
+#: src/kgx-window.ui:113
+msgid "Shrink Text"
+msgstr "صغِّر النص"
+
+#: src/kgx-window.ui:124
+msgid "Reset Size"
+msgstr "صفِّر الحجم"
+
+#: src/kgx-window.ui:148
+msgid "Enlarge Text"
+msgstr "كبِّر النص"
+
+#: src/preferences/kgx-font-picker.ui:11
+msgid "Terminal Font"
+msgstr "خط الطرفية"
+
+#: src/preferences/kgx-font-picker.ui:29
+msgid "_Select"
+msgstr "ا_ختر"
+
+#: src/preferences/kgx-font-picker.ui:45 src/preferences/kgx-font-picker.ui:48
+msgid "Font Name"
+msgstr "اسم الخط"
+
+#: src/preferences/kgx-font-picker.ui:133
+msgid "Font Family"
+msgstr "عائلة الخط"
+
+#: src/preferences/kgx-font-picker.ui:158
+msgid "Font Preview"
+msgstr "معاينة الخط"
+
+#: src/preferences/kgx-font-picker.ui:179
+msgid "Font Size"
+msgstr "حجم الخط"
+
+#: src/preferences/kgx-preferences-window.c:125
+msgid "No Font Set"
+msgstr "ما من خط مُعيِّن"
+
+#: src/preferences/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "العامَّة"
+
+#: src/preferences/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "الخط"
+
+#: src/preferences/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "استخدم إعدادات النظام المبدئية"
+
+#: src/preferences/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "خط الطرفية"
+
+#: src/preferences/kgx-preferences-window.ui:63
+msgid "Behaviour"
+msgstr "السلوك"
+
+#: src/preferences/kgx-preferences-window.ui:66
+msgid "_Unlimited Scrollback"
+msgstr "تمرير مطلق إلى الخلف"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "حد التمرير إلى الخلف"
+
+#: src/preferences/kgx-preferences-window.ui:92
+msgid "Terminal Bell"
+msgstr "جرس الطرفية"
+
+#: src/preferences/kgx-preferences-window.ui:95
+msgid "Play _Sound"
+msgstr "إصدار صوت"
+
+#: src/preferences/kgx-preferences-window.ui:101
+msgid "_Visual Effects"
+msgstr "التأثيرات ال_بصرية"
+
+#~ msgid "King’s Cross"
+#~ msgstr "تقاطع الملك"
+
+#~ msgid "Use Light Colors"
+#~ msgstr "استخدم ألوانًا فاتحةً"
+
+#~ msgid "Use Dark Colors"
+#~ msgstr "استخدم ألوانًا داكنةً"
+
+#~ msgid "View Open Tabs"
+#~ msgstr "اعرض الألسنة المفتوحة"
