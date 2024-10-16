@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-30 14:19+0000\n"
-"PO-Revision-Date: 2024-08-31 13:20+0300\n"
+"POT-Creation-Date: 2024-10-14 13:56+0000\n"
+"PO-Revision-Date: 2024-10-16 13:18+0300\n"
 "Last-Translator: Florentina Mușat <florentina [dot] musat [dot] 28 [at] "
 "gmail [dot] com>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -53,7 +53,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Fereastră de terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:466 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "Proiectul GNOME"
 
@@ -333,17 +333,17 @@ msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Nu s-a putut porni</b> — %s"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:814
+#: src/kgx-tab.c:818
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Doar citire</b> — Comanda a ieșit cu codul %i"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:822
+#: src/kgx-tab.c:826
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Doar citire</b> — Comanda a ieșit"
 
-#: src/kgx-tab.c:842
+#: src/kgx-tab.c:846
 msgid "Command completed"
 msgstr "Comandă completată"
 
@@ -507,6 +507,10 @@ msgstr "Comportament"
 #: src/preferences/kgx-preferences-window.ui:66
 msgid "_Unlimited Scrollback"
 msgstr "Derulare înapoi _nelimitată"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "Linii de _derulare înapoi"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
