@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-20 19:30+0000\n"
-"PO-Revision-Date: 2024-08-22 15:33+0100\n"
+"POT-Creation-Date: 2024-09-11 22:34+0000\n"
+"PO-Revision-Date: 2024-09-12 22:52+0100\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English - United Kingdom <en@li.org>\n"
 "Language: en_GB\n"
@@ -49,7 +49,7 @@ msgstr "A simple user-friendly terminal emulator for the GNOME desktop."
 msgid "Terminal window"
 msgstr "Terminal window"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "The GNOME Project"
 
@@ -151,7 +151,6 @@ msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s using VTE %u.%u.%u %s\n"
 
 #: src/kgx-application.c:255
-#| msgid "Cannot use both --command and positional parameters"
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr "Cannot use both --working-directory and positional parameters"
 
@@ -203,7 +202,6 @@ msgstr "LINES"
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
 #: src/kgx-application.c:644
 #, c-format
-#| msgid "KGX Terminal Emulator"
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — Terminal Emulator"
 
@@ -273,8 +271,6 @@ msgid "Linux"
 msgstr "Linux"
 
 #: src/kgx-livery-manager.c:230
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
 msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
@@ -501,6 +497,10 @@ msgstr "Behaviour"
 #: src/preferences/kgx-preferences-window.ui:66
 msgid "_Unlimited Scrollback"
 msgstr "_Unlimited Scrollback"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "_Scrollback Lines"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
