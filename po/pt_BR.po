@@ -1,26 +1,26 @@
-# Brazilian Portuguese translation for kgx.
-# Copyright (C) 2023 kgx's COPYRIGHT HOLDER
-# This file is distributed under the same license as the kgx package.
+# Brazilian Portuguese translation for gnome-console.
+# Copyright (C) 2024 gnome-console's COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-console package.
 # Enrico Nicoletto <hiko@duck.com>, 2021-2022.
 # Leônidas Araújo <leorusvellt@hotmail.com>, 2022.
-# Rafael Fontenelle <rafaelff@gnome.org>, 2019-2023.
 # Giovanni dos Santos Almeida Lombone Rodrigues <giovannilombone.io@gmail.com>, 2024.
 # Juliano de Souza Camargo <julianosc@pm.me>, 2024.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2019-2024.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: kgx master\n"
+"Project-Id-Version: gnome-console master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-20 19:30+0000\n"
-"PO-Revision-Date: 2024-08-25 09:13-0300\n"
-"Last-Translator: Juliano de Souza Camargo <julianosc@pm.me>\n"
-"Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao>>\n"
+"POT-Creation-Date: 2024-10-23 08:36+0000\n"
+"PO-Revision-Date: 2024-10-24 11:13-0300\n"
+"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
+"Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 46.1\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"X-Generator: Gtranslator 47.0\n"
 "X-DL-Team: pt_BR\n"
 "X-DL-Module: console\n"
 "X-DL-Branch: main\n"
@@ -59,7 +59,7 @@ msgstr "Um simples emulador de terminal fácil de usar para o ambiente GNOME."
 msgid "Terminal window"
 msgstr "Janela do terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:471 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "O Projeto GNOME"
 
@@ -511,6 +511,10 @@ msgstr "Comportamento"
 #: src/preferences/kgx-preferences-window.ui:66
 msgid "_Unlimited Scrollback"
 msgstr "_Rolagem ilimitada"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "Rolagem de linha_s"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
