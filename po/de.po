@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-20 19:30+0000\n"
-"PO-Revision-Date: 2024-08-23 21:23+0200\n"
-"Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
+"POT-Creation-Date: 2024-10-23 08:36+0000\n"
+"PO-Revision-Date: 2024-10-26 10:40+0200\n"
+"Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Terminalfenster"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:471 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "Das GNOME-Projekt"
 
@@ -513,7 +513,11 @@ msgstr "Verhalten"
 
 #: src/preferences/kgx-preferences-window.ui:66
 msgid "_Unlimited Scrollback"
-msgstr "_Unbegrenzter Zeilenpuffer"
+msgstr "_Unbegrenzte Bildzeilen"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "_Bildzeilen"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
