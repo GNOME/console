@@ -144,7 +144,7 @@ standard_livery (void)
   };
 
   night = kgx_palette_new (&((GdkRGBA) { 1.0, 1.0, 1.0, 1.0 }),
-                           &((GdkRGBA) { 0.12, 0.12, 0.12, 1.0 }),
+                           &((GdkRGBA) { 0.11, 0.11, 0.12, 1.0 }),
                            0.04,
                            G_N_ELEMENTS (night_colours),
                            night_colours);
