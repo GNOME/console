@@ -23,6 +23,7 @@
 #include "kgx-close-dialog.h"
 #include "kgx-marshals.h"
 #include "kgx-settings.h"
+#include "kgx-shared-closures.h"
 #include "kgx-tab.h"
 #include "kgx-terminal.h"
 #include "kgx-train.h"
@@ -58,6 +59,7 @@ struct _KgxPagesPrivate {
   GSignalGroup         *active_page_signals;
   GBindingGroup        *active_page_binds;
   GSignalGroup         *settings_signals;
+  GSignalGroup         *style_manager_signals;
 
   GBinding             *is_active_bind;
 
@@ -700,14 +702,27 @@ kgx_pages_class_init (KgxPagesClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, active_page_signals);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, active_page_binds);
   gtk_widget_class_bind_template_child_private (widget_class, KgxPages, settings_signals);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxPages, style_manager_signals);
 
   gtk_widget_class_bind_template_callback (widget_class, page_attached);
   gtk_widget_class_bind_template_callback (widget_class, page_detached);
   gtk_widget_class_bind_template_callback (widget_class, create_window);
   gtk_widget_class_bind_template_callback (widget_class, close_page);
   gtk_widget_class_bind_template_callback (widget_class, setup_menu);
+  gtk_widget_class_bind_template_callback (widget_class, kgx_style_manager_for_display);
 
   gtk_widget_class_set_css_name (widget_class, "pages");
+}
+
+
+static void
+style_changed (AdwStyleManager *style_manager,
+               GParamSpec      *pspec,
+               KgxPages        *self)
+{
+  KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
+
+  adw_tab_view_invalidate_thumbnails (ADW_TAB_VIEW (priv->view));
 }
 
 
@@ -715,7 +730,6 @@ static void
 kgx_pages_init (KgxPages *self)
 {
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
-  AdwStyleManager *style_manager = adw_style_manager_get_default ();
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -727,17 +741,14 @@ kgx_pages_init (KgxPages *self)
                                   G_CALLBACK (adw_tab_view_invalidate_thumbnails),
                                   priv->view);
 
-  g_signal_connect_object (style_manager,
-                           "notify::dark",
-                           G_CALLBACK (adw_tab_view_invalidate_thumbnails),
-                           priv->view,
-                           G_CONNECT_SWAPPED);
-
-  g_signal_connect_object (style_manager,
-                           "notify::high-contrast",
-                           G_CALLBACK (adw_tab_view_invalidate_thumbnails),
-                           priv->view,
-                           G_CONNECT_SWAPPED);
+  g_signal_group_connect (priv->style_manager_signals,
+                          "notify::dark",
+                          G_CALLBACK (style_changed),
+                          self);
+  g_signal_group_connect (priv->style_manager_signals,
+                          "notify::high-contrast",
+                          G_CALLBACK (style_changed),
+                          priv->view);
 
   g_binding_group_bind (priv->active_page_binds, "search-mode-enabled",
                         self, "search-mode-enabled",

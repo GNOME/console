@@ -114,4 +114,14 @@
     <property name="target-type">KgxSettings</property>
     <property name="target" bind-source="KgxPages" bind-property="settings" bind-flags="sync-create" />
   </object>
+  <object class="GSignalGroup" id="style_manager_signals">
+    <property name="target-type">AdwStyleManager</property>
+    <binding name="target">
+      <closure type='AdwStyleManager' function='kgx_style_manager_for_display'>
+        <lookup name="display" type="GtkWindow">
+          <lookup name="root">KgxPages</lookup>
+        </lookup>
+      </closure>
+    </binding>
+  </object>
 </interface>
