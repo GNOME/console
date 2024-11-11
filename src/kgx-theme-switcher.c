@@ -19,7 +19,7 @@
 #include "kgx-config.h"
 
 #include "kgx-settings.h"
-#include "kgx-utils.h"
+#include "kgx-shared-closures.h"
 
 #include "kgx-theme-switcher.h"
 
@@ -32,7 +32,6 @@ struct _KgxThemeSwitcher {
   GtkWidget *system_selector;
   GtkWidget *light_selector;
   GtkWidget *dark_selector;
-  gboolean show_system;
 };
 
 
@@ -41,7 +40,6 @@ G_DEFINE_TYPE (KgxThemeSwitcher, kgx_theme_switcher, ADW_TYPE_BIN)
 
 enum {
   PROP_0,
-  PROP_SHOW_SYSTEM,
   PROP_THEME,
   LAST_PROP
 };
@@ -70,7 +68,7 @@ theme_check_active_changed (KgxThemeSwitcher *self)
 }
 
 
-static void
+static inline void
 set_theme (KgxThemeSwitcher *self,
            KgxTheme          theme)
 {
@@ -108,9 +106,6 @@ kgx_theme_switcher_get_property (GObject    *object,
     case PROP_THEME:
       g_value_set_enum (value, self->theme);
       break;
-    case PROP_SHOW_SYSTEM:
-      g_value_set_boolean (value, self->show_system);
-      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
   }
@@ -128,9 +123,6 @@ kgx_theme_switcher_set_property (GObject      *object,
   switch (prop_id) {
     case PROP_THEME:
       set_theme (self, g_value_get_enum (value));
-      break;
-    case PROP_SHOW_SYSTEM:
-      kgx_set_boolean_prop (object, pspec, &self->show_system, value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -153,11 +145,6 @@ kgx_theme_switcher_class_init (KgxThemeSwitcherClass *klass)
                        KGX_THEME_NIGHT,
                        G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
-  pspecs[PROP_SHOW_SYSTEM] =
-    g_param_spec_boolean ("show-system", NULL, NULL,
-                          TRUE,
-                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
-
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
   gtk_widget_class_set_template_from_resource (widget_class,
@@ -168,6 +155,7 @@ kgx_theme_switcher_class_init (KgxThemeSwitcherClass *klass)
   gtk_widget_class_bind_template_child (widget_class, KgxThemeSwitcher, dark_selector);
 
   gtk_widget_class_bind_template_callback (widget_class, theme_check_active_changed);
+  gtk_widget_class_bind_template_callback (widget_class, kgx_style_manager_for_display);
 
   gtk_widget_class_set_css_name (widget_class, "themeswitcher");
   gtk_widget_class_set_layout_manager_type (widget_class, GTK_TYPE_BIN_LAYOUT);
@@ -177,7 +165,5 @@ kgx_theme_switcher_class_init (KgxThemeSwitcherClass *klass)
 static void
 kgx_theme_switcher_init (KgxThemeSwitcher *self)
 {
-  self->show_system = TRUE;
-
   gtk_widget_init_template (GTK_WIDGET (self));
 }

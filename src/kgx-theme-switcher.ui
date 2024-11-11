@@ -9,7 +9,15 @@
         <property name="spacing">18</property>
         <child>
           <object class="GtkOverlay">
-            <property name="visible" bind-source="KgxThemeSwitcher" bind-property="show-system" bind-flags="sync-create"/>
+            <binding name="visible">
+              <lookup name="system-supports-color-schemes">
+                <closure type='AdwStyleManager' function='kgx_style_manager_for_display'>
+                  <lookup name="display" type="GtkWindow">
+                    <lookup name="root">KgxThemeSwitcher</lookup>
+                  </lookup>
+                </closure>
+              </lookup>
+            </binding>
             <property name="halign">center</property>
             <child>
               <object class="GtkCheckButton" id="system_selector">

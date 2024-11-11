@@ -702,15 +702,8 @@ kgx_window_init (KgxWindow *self)
   KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
   GType drop_types[] = { GDK_TYPE_FILE_LIST, G_TYPE_STRING };
   g_autoptr (GtkWindowGroup) group = NULL;
-  AdwStyleManager *style_manager;
 
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  style_manager = adw_style_manager_get_default ();
-
-  g_object_bind_property (style_manager, "system-supports-color-schemes",
-                          priv->theme_switcher, "show-system",
-                          G_BINDING_SYNC_CREATE);
 
   g_binding_group_bind (priv->settings_binds, "theme",
                         priv->theme_switcher, "theme",
