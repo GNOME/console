@@ -614,6 +614,9 @@ kgx_window_class_init (KgxWindowClass *klass)
                                             "win.find",
                                             "search-mode-enabled");
 
+  g_type_ensure (KGX_TYPE_PAGES);
+  g_type_ensure (KGX_TYPE_THEME_SWITCHER);
+
   gtk_widget_class_set_template_from_resource (widget_class,
                                                KGX_APPLICATION_PATH "kgx-window.ui");
 
@@ -700,8 +703,6 @@ kgx_window_init (KgxWindow *self)
   GType drop_types[] = { GDK_TYPE_FILE_LIST, G_TYPE_STRING };
   g_autoptr (GtkWindowGroup) group = NULL;
   AdwStyleManager *style_manager;
-
-  g_type_ensure (KGX_TYPE_THEME_SWITCHER);
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
