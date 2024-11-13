@@ -33,11 +33,13 @@
 #define PCRE2_CODE_UNIT_WIDTH 0
 #include <pcre2.h>
 
-#include "kgx-terminal.h"
 #include "kgx-despatcher.h"
-#include "kgx-settings.h"
-#include "kgx-paste-dialog.h"
 #include "kgx-marshals.h"
+#include "kgx-paste-dialog.h"
+#include "kgx-settings.h"
+#include "kgx-shared-closures.h"
+
+#include "kgx-terminal.h"
 
 /*       Regex adapted from TerminalWidget.vala in Pantheon Terminal       */
 
@@ -545,6 +547,15 @@ resolve_livery (KgxTerminal *self,
 }
 
 
+static KgxTheme
+resolve_theme (KgxTerminal *self,
+               KgxSettings *settings,
+               gboolean     dark_environment)
+{
+  return kgx_settings_resolve_theme (settings, dark_environment);
+}
+
+
 static gboolean
 enum_is (KgxTerminal *self, int a, int b)
 {
@@ -704,11 +715,13 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
                                                KGX_APPLICATION_PATH "kgx-terminal.ui");
 
   gtk_widget_class_bind_template_callback (widget_class, resolve_livery);
+  gtk_widget_class_bind_template_callback (widget_class, resolve_theme);
   gtk_widget_class_bind_template_callback (widget_class, enum_is);
   gtk_widget_class_bind_template_callback (widget_class, location_changed);
   gtk_widget_class_bind_template_callback (widget_class, setup_context_menu);
   gtk_widget_class_bind_template_callback (widget_class, pressed);
   gtk_widget_class_bind_template_callback (widget_class, scroll);
+  gtk_widget_class_bind_template_callback (widget_class, kgx_style_manager_for_display);
 
   gtk_widget_class_install_action (widget_class,
                                    "term.open-link",
