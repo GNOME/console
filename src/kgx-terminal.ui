@@ -72,9 +72,16 @@
           <lookup name="settings">KgxTerminal</lookup>
         </lookup>
         <closure function="enum_is" type="gboolean">
-          <lookup name="resolved-theme">
+          <closure function="resolve_theme" type="KgxTheme">
             <lookup name="settings">KgxTerminal</lookup>
-          </lookup>
+            <lookup name="dark">
+              <closure function="kgx_style_manager_for_display" type="AdwStyleManager">
+                <lookup name="display" type="GtkWindow">
+                  <lookup name="root">KgxTerminal</lookup>
+                </lookup>
+              </closure>
+            </lookup>
+          </closure>
           <constant type="KgxTheme">day</constant>
         </closure>
         <!-- I don't love that we are reaching all the way up to KgxWindow
