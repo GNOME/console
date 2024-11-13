@@ -72,7 +72,6 @@ typedef enum /*< enum,prefix=KGX >*/ {
 
 G_DECLARE_FINAL_TYPE (KgxSettings, kgx_settings, KGX, SETTINGS, GObject)
 
-KgxTheme              kgx_settings_get_resolved_theme     (KgxSettings           *self);
 void                  kgx_settings_increase_scale    (KgxSettings       *self);
 void                  kgx_settings_decrease_scale    (KgxSettings       *self);
 void                  kgx_settings_reset_scale       (KgxSettings       *self);
