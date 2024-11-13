@@ -123,6 +123,30 @@ kgx_application_activate (GApplication *app)
 }
 
 
+static gboolean
+theme_to_colour_scheme (GBinding     *binding,
+                        const GValue *from_value,
+                        GValue       *to_value,
+                        gpointer      user_data)
+{
+  switch (g_value_get_enum (from_value)) {
+    case KGX_THEME_AUTO:
+      g_value_set_enum (to_value, ADW_COLOR_SCHEME_PREFER_LIGHT);
+      break;
+    case KGX_THEME_DAY:
+      g_value_set_enum (to_value, ADW_COLOR_SCHEME_FORCE_LIGHT);
+      break;
+    case KGX_THEME_NIGHT:
+    case KGX_THEME_HACKER:
+    default:
+      g_value_set_enum (to_value, ADW_COLOR_SCHEME_FORCE_DARK);
+      break;
+  }
+
+  return TRUE;
+}
+
+
 static void
 kgx_application_startup (GApplication *app)
 {
@@ -136,6 +160,8 @@ kgx_application_startup (GApplication *app)
   const char *const zoom_out_accels[] = { "<primary>minus", NULL };
   const char *const zoom_normal_accels[] = { "<primary>0", NULL };
   const char *const show_tabs_accels[] = { "<shift><primary>o", NULL };
+  KgxApplication *self = KGX_APPLICATION (app);
+  AdwStyleManager *style_manager;
 
   g_resources_register (kgx_get_resource ());
 
@@ -145,6 +171,12 @@ kgx_application_startup (GApplication *app)
   g_type_ensure (KGX_TYPE_DROP_TARGET);
 
   G_APPLICATION_CLASS (kgx_application_parent_class)->startup (app);
+
+  style_manager = adw_style_manager_get_default ();
+  g_object_bind_property_full (self->settings, "theme",
+                               style_manager, "color-scheme",
+                               G_BINDING_SYNC_CREATE,
+                               theme_to_colour_scheme, NULL, NULL, NULL);
 
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "win.new-window", new_window_accels);
@@ -596,30 +628,6 @@ static GActionEntry app_entries[] = {
 
 
 static gboolean
-theme_to_colour_scheme (GBinding     *binding,
-                        const GValue *from_value,
-                        GValue       *to_value,
-                        gpointer      user_data)
-{
-  switch (g_value_get_enum (from_value)) {
-    case KGX_THEME_AUTO:
-      g_value_set_enum (to_value, ADW_COLOR_SCHEME_PREFER_LIGHT);
-      break;
-    case KGX_THEME_DAY:
-      g_value_set_enum (to_value, ADW_COLOR_SCHEME_FORCE_LIGHT);
-      break;
-    case KGX_THEME_NIGHT:
-    case KGX_THEME_HACKER:
-    default:
-      g_value_set_enum (to_value, ADW_COLOR_SCHEME_FORCE_DARK);
-      break;
-  }
-
-  return TRUE;
-}
-
-
-static gboolean
 scale_to_can_reset (GBinding     *binding,
                     const GValue *from_value,
                     GValue       *to_value,
@@ -637,7 +645,6 @@ scale_to_can_reset (GBinding     *binding,
 static void
 kgx_application_init (KgxApplication *self)
 {
-  AdwStyleManager *style_manager = adw_style_manager_get_default ();
   GAction *action;
   g_autoptr (GPropertyAction) theme_action = NULL;
   /* Translators: %s is the version string, KGX is a codename and should be left as-is */
@@ -658,10 +665,6 @@ kgx_application_init (KgxApplication *self)
   self->active_windows = g_hash_table_new (g_direct_hash, g_direct_equal);
 
   self->settings = g_object_new (KGX_TYPE_SETTINGS, NULL);
-  g_object_bind_property_full (self->settings, "theme",
-                               style_manager, "color-scheme",
-                               G_BINDING_SYNC_CREATE,
-                               theme_to_colour_scheme, NULL, NULL, NULL);
 
   action = g_action_map_lookup_action (G_ACTION_MAP (self), "zoom-out");
   g_object_bind_property (self->settings, "scale-can-decrease",
