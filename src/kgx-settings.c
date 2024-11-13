@@ -638,15 +638,8 @@ kgx_settings_get_resolved_theme (KgxSettings *self)
 
   g_return_val_if_fail (KGX_IS_SETTINGS (self), KGX_THEME_HACKER);
 
-  if (G_LIKELY (self->theme != KGX_THEME_AUTO)) {
-    return self->theme;
-  }
-
-  if (adw_style_manager_get_dark (manager)) {
-    return KGX_THEME_NIGHT;
-  }
-
-  return KGX_THEME_DAY;
+  return kgx_settings_resolve_theme (self,
+                                     adw_style_manager_get_dark (manager));
 }
 
 
@@ -868,4 +861,29 @@ kgx_settings_set_livery (KgxSettings *restrict self,
   if (kgx_set_livery (&self->livery, livery)) {
     g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_LIVERY]);
   }
+}
+
+
+/**
+ * kgx_settings_get_resolved_theme:
+ * @self: the #KgxSettings
+ * @dark_environment: if the environment is dark
+ *
+ * Unlike #KgxSettings:theme this is never %KGX_THEME_AUTO, instead providing
+ * the value %KGX_THEME_AUTO should be treated as
+ */
+KgxTheme
+kgx_settings_resolve_theme (KgxSettings *self, gboolean dark_environment)
+{
+  g_return_val_if_fail (KGX_IS_SETTINGS (self), KGX_THEME_HACKER);
+
+  if (G_LIKELY (self->theme != KGX_THEME_AUTO)) {
+    return self->theme;
+  }
+
+  if (dark_environment) {
+    return KGX_THEME_NIGHT;
+  }
+
+  return KGX_THEME_DAY;
 }

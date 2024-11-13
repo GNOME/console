@@ -99,5 +99,7 @@ gboolean              kgx_settings_get_software_flow_control (KgxSettings      *
 KgxLivery            *kgx_settings_get_livery                (KgxSettings           *self);
 void                  kgx_settings_set_livery                (KgxSettings           *self,
                                                               KgxLivery             *livery);
+KgxTheme              kgx_settings_resolve_theme             (KgxSettings           *self,
+                                                              gboolean               dark_environment);
 
 G_END_DECLS
