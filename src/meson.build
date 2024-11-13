@@ -29,6 +29,7 @@ kgx_sources = [
   'kgx-proxy-info.h',
   'kgx-settings.c',
   'kgx-settings.h',
+  'kgx-shared-closures.h',
   'kgx-simple-tab.c',
   'kgx-simple-tab.h',
   'kgx-system-info.c',
