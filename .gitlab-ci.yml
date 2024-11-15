@@ -27,6 +27,7 @@ variables:
     elfutils-devel.i686
     elfutils-libelf-devel.i686
     expat-devel.i686
+    fast_float-devel
     fontconfig-devel.i686
     freetype-devel.i686
     fribidi-devel.i686
