@@ -25,6 +25,17 @@
     ],
     "modules" : [
         {
+            "name" : "fast_float",
+            "buildsystem" : "cmake-ninja",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://github.com/fastfloat/fast_float.git",
+                    "tag" : "v6.1.6"
+                }
+            ]
+        },
+        {
             "name" : "vte",
             "config-opts" : [
                 "-Dgir=false",
