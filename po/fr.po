@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-09-29 14:18+0000\n"
-"PO-Revision-Date: 2024-09-06 15:29+0200\n"
+"POT-Creation-Date: 2024-10-23 08:36+0000\n"
+"PO-Revision-Date: 2024-10-26 11:34+0200\n"
 "Last-Translator: Irénée Thirion <irenee.thirion@e.email>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "Language: fr\n"
@@ -58,7 +58,7 @@ msgstr "Un émulateur de terminal simpliste pour le bureau GNOME."
 msgid "Terminal window"
 msgstr "Fenêtre de terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:466 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:471 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "Le projet GNOME"
 
@@ -334,17 +334,17 @@ msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Échec de lancement</b> — %s"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:818
+#: src/kgx-tab.c:814
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Lecture seule</b> — La commande s’est terminée avec le code %i"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:826
+#: src/kgx-tab.c:822
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Lecture seule</b> — La commande est terminée"
 
-#: src/kgx-tab.c:846
+#: src/kgx-tab.c:842
 msgid "Command completed"
 msgstr "Commande exécutée"
 
@@ -513,7 +513,7 @@ msgstr "Défilement _illimité"
 
 #: src/preferences/kgx-preferences-window.ui:72
 msgid "_Scrollback Lines"
-msgstr ""
+msgstr "Lignes de _défilement"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
