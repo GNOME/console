@@ -699,12 +699,32 @@ kgx_application_init (KgxApplication *self)
 }
 
 
-static void
-page_died (gpointer data, GObject *dead_object)
-{
-  KgxApplication *self = KGX_APPLICATION (g_application_get_default ());
+struct _PageDiedData {
+  KgxApplication *app;
+  guint tab_id;
+};
 
-  g_tree_remove (self->pages, data);
+
+KGX_DEFINE_DATA (PageDiedData, page_died_data)
+
+
+static void
+page_died_data_cleanup (PageDiedData *self)
+{
+  g_clear_weak_pointer (&self->app);
+}
+
+
+static void
+page_died (gpointer user_data, GObject *dead_object)
+{
+  PageDiedData *data = user_data;
+
+  if (G_LIKELY (data->app)) {
+    g_tree_remove (data->app->pages, GINT_TO_POINTER (data->tab_id));
+  }
+
+  page_died_data_free (data);
 }
 
 
@@ -719,15 +739,16 @@ void
 kgx_application_add_page (KgxApplication *self,
                           KgxTab         *page)
 {
-  guint id = 0;
+  g_autoptr (PageDiedData) data = page_died_data_alloc ();
 
   g_return_if_fail (KGX_IS_APPLICATION (self));
   g_return_if_fail (KGX_IS_TAB (page));
 
-  id = kgx_tab_get_id (page);
+  g_set_weak_pointer (&data->app, self);
+  data->tab_id = kgx_tab_get_id (page);
 
-  g_tree_insert (self->pages, GINT_TO_POINTER (id), page);
-  g_object_weak_ref (G_OBJECT (page), page_died, GINT_TO_POINTER (id));
+  g_tree_insert (self->pages, GINT_TO_POINTER (data->tab_id), page);
+  g_object_weak_ref (G_OBJECT (page), page_died, g_steal_pointer (&data));
 }
 
 
