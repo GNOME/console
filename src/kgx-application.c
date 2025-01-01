@@ -150,16 +150,6 @@ theme_to_colour_scheme (GBinding     *binding,
 static void
 kgx_application_startup (GApplication *app)
 {
-  const char *const new_window_accels[] = { "<shift><primary>n", NULL };
-  const char *const new_tab_accels[] = { "<shift><primary>t", NULL };
-  const char *const close_tab_accels[] = { "<shift><primary>w", NULL };
-  const char *const copy_accels[] = { "<shift><primary>c", NULL };
-  const char *const paste_accels[] = { "<shift><primary>v", NULL };
-  const char *const find_accels[] = { "<shift><primary>f", NULL };
-  const char *const zoom_in_accels[] = { "<primary>plus", NULL };
-  const char *const zoom_out_accels[] = { "<primary>minus", NULL };
-  const char *const zoom_normal_accels[] = { "<primary>0", NULL };
-  const char *const show_tabs_accels[] = { "<shift><primary>o", NULL };
   KgxApplication *self = KGX_APPLICATION (app);
   AdwStyleManager *style_manager;
 
@@ -179,27 +169,38 @@ kgx_application_startup (GApplication *app)
                                theme_to_colour_scheme, NULL, NULL, NULL);
 
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
-                                         "win.new-window", new_window_accels);
+                                         "win.new-window",
+                                         (const char *[]) { "<shift><primary>n", NULL });
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
-                                         "win.new-tab", new_tab_accels);
+                                         "win.new-tab",
+                                         (const char *[]) { "<shift><primary>t", NULL });
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
-                                         "win.close-tab", close_tab_accels);
+                                         "win.close-tab",
+                                         (const char *[]) { "<shift><primary>w", NULL });
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
-                                         "term.copy", copy_accels);
+                                         "term.copy",
+                                         (const char *[]) { "<shift><primary>c", NULL });
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
-                                         "term.paste", paste_accels);
+                                         "term.paste",
+                                         (const char *[]) { "<shift><primary>v", NULL });
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
-                                         "win.find", find_accels);
+                                         "win.find",
+                                         (const char *[]) { "<shift><primary>f", NULL });
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
-                                         "app.zoom-in", zoom_in_accels);
+                                         "app.zoom-in",
+                                         (const char *[]) { "<primary>plus", NULL });
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
-                                         "app.zoom-out", zoom_out_accels);
+                                         "app.zoom-out",
+                                         (const char *[]) { "<primary>minus", NULL });
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
-                                         "app.zoom-normal", zoom_normal_accels);
+                                         "app.zoom-normal",
+                                         (const char *[]) { "<primary>0", NULL });
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
-                                         "win.show-tabs", show_tabs_accels);
+                                         "win.show-tabs",
+                                         (const char *[]) { "<shift><primary>o", NULL });
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
-                                         "win.show-tabs-desktop", show_tabs_accels);
+                                         "win.show-tabs-desktop",
+                                         (const char *[]) { "<shift><primary>o", NULL });
 }
 
 
