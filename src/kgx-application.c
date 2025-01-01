@@ -155,11 +155,6 @@ kgx_application_startup (GApplication *app)
 
   g_resources_register (kgx_get_resource ());
 
-  g_type_ensure (KGX_TYPE_WINDOW);
-  g_type_ensure (KGX_TYPE_TERMINAL);
-  g_type_ensure (KGX_TYPE_PAGES);
-  g_type_ensure (KGX_TYPE_DROP_TARGET);
-
   G_APPLICATION_CLASS (kgx_application_parent_class)->startup (app);
 
   style_manager = adw_style_manager_get_default ();
@@ -436,6 +431,8 @@ kgx_application_class_init (KgxApplicationClass *klass)
                                                      G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
+
+  g_type_ensure (KGX_TYPE_WINDOW);
 }
 
 
