@@ -60,6 +60,8 @@
       <object class="AdwTabOverview" id="tab_overview">
         <property name="enable-new-tab">True</property>
         <property name="view" bind-source="pages" bind-property="tab-view" bind-flags="sync-create" />
+        <property name="inverted" bind-source="tab_bar" bind-property="inverted"
+          bind-flags="sync-create" />
         <signal name="create-tab" handler="create_tab_cb" swapped="yes" />
         <property name="child">
           <object class="AdwToolbarView" id="toolbar_view">
@@ -181,6 +183,15 @@
               <object class="AdwTabBar" id="tab_bar">
                 <property name="view" bind-source="pages" bind-property="tab-view"
                   bind-flags="sync-create" />
+                <binding name="inverted">
+                  <closure type='gboolean' function='decoration_is_inverted'>
+                    <lookup name="gtk-decoration-layout">
+                      <closure type='GtkSettings' function='kgx_gtk_settings_for_display'>
+                        <lookup name="display">KgxWindow</lookup>
+                      </closure>
+                    </lookup>
+                  </closure>
+                </binding>
                 <signal name="extra-drag-drop" handler="extra_drag_drop" swapped="no" />
               </object>
             </child>

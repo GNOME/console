@@ -35,4 +35,17 @@ kgx_style_manager_for_display (G_GNUC_UNUSED GObject *self,
   return g_object_ref (adw_style_manager_get_for_display (display));
 }
 
+
+G_GNUC_UNUSED
+static GtkSettings *
+kgx_gtk_settings_for_display (G_GNUC_UNUSED GObject *self,
+                              GdkDisplay            *display)
+{
+  if (G_UNLIKELY (!display)) {
+    return NULL;
+  }
+
+  return g_object_ref (gtk_settings_get_for_display (display));
+}
+
 G_END_DECLS

@@ -26,6 +26,7 @@
 #include "kgx-close-dialog.h"
 #include "kgx-pages.h"
 #include "kgx-settings.h"
+#include "kgx-shared-closures.h"
 #include "kgx-terminal.h"
 #include "kgx-theme-switcher.h"
 #include "kgx-utils.h"
@@ -452,6 +453,32 @@ scale_as_label (GObject *object, double scale)
 }
 
 
+static gboolean
+decoration_is_inverted (GObject    *object,
+                        const char *layout)
+{
+  g_auto (GStrv) sides = g_strsplit (layout, ":", 2);
+  int counts[2] = { 0 };
+
+  for (size_t i = 0; i < G_N_ELEMENTS (counts); i++) {
+    g_auto (GStrv) elements = NULL;
+
+    if (sides[i] == NULL)
+      continue;
+
+    elements = g_strsplit (sides[i], ",", -1);
+
+    for (size_t j = 0; elements[j]; j++) {
+      if (g_str_equal (elements[j], "close")) {
+        counts[i]++;
+      }
+    }
+  }
+
+  return counts[0] > counts[1];
+}
+
+
 static void
 close_tab_activated (GtkWidget  *widget,
                      const char *action_name,
@@ -640,6 +667,8 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, title_or_fallback);
   gtk_widget_class_bind_template_callback (widget_class, path_as_subtitle);
   gtk_widget_class_bind_template_callback (widget_class, scale_as_label);
+  gtk_widget_class_bind_template_callback (widget_class, decoration_is_inverted);
+  gtk_widget_class_bind_template_callback (widget_class, kgx_gtk_settings_for_display);
 
   gtk_widget_class_install_action (widget_class, "tab.close", NULL, close_tab_activated);
   gtk_widget_class_install_action (widget_class, "tab.detach", NULL, detach_tab_activated);
