@@ -326,6 +326,23 @@ kgx_application_command_line (GApplication            *app,
 }
 
 
+static inline void
+print_colour (size_t colour, size_t n)
+{
+  g_print ("\e[0;%02" G_GSIZE_FORMAT "m #%02" G_GSIZE_FORMAT " \e[0m", colour, n);
+}
+
+
+static inline void
+print_colour_row (size_t base, bool second_row)
+{
+  for (size_t i = 0; i < 8; i++) {
+    print_colour (base + i, i + (second_row ? 8 : 0));
+  }
+  g_print ("\n");
+}
+
+
 static int
 kgx_application_handle_local_options (GApplication *app,
                                       GVariantDict *options)
@@ -333,6 +350,7 @@ kgx_application_handle_local_options (GApplication *app,
   KgxApplication *self = KGX_APPLICATION (app);
   gboolean version = FALSE;
   gboolean about = FALSE;
+  gboolean colour_table = FALSE;
 
   if (g_variant_dict_lookup (options, "version", "b", &version) && version) {
     kgx_about_print_version ();
@@ -342,6 +360,18 @@ kgx_application_handle_local_options (GApplication *app,
 
   if (g_variant_dict_lookup (options, "about", "b", &about) && about) {
     kgx_about_print_logo ();
+
+    return EXIT_SUCCESS;
+  }
+
+  if (g_variant_dict_lookup (options, "colour-table", "b", &colour_table) &&
+      colour_table) {
+    g_print ("Colour Table\n");
+
+    print_colour_row (30, false);
+    print_colour_row (90, true);
+    print_colour_row (40, false);
+    print_colour_row (100, true);
 
     return EXIT_SUCCESS;
   }
@@ -524,6 +554,15 @@ static GOptionEntry entries[] = {
     0,
     G_OPTION_FLAG_HIDDEN,
     G_OPTION_ARG_FILENAME_ARRAY,
+    NULL,
+    NULL,
+    NULL,
+  },
+  {
+    "colour-table",
+    0,
+    G_OPTION_FLAG_HIDDEN,
+    G_OPTION_ARG_NONE,
     NULL,
     NULL,
     NULL,
