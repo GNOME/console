@@ -18,7 +18,11 @@
 
 #include <glib/gi18n.h>
 
+#include <gtk/gtk.h>
+#include <locale.h>
+
 #include <kgx.h>
+
 
 int
 main (int argc, char *argv[])
@@ -40,6 +44,7 @@ main (int argc, char *argv[])
                       "version", PACKAGE_VERSION,
                       "flags", G_APPLICATION_HANDLES_COMMAND_LINE |
                                G_APPLICATION_HANDLES_OPEN |
+                               G_APPLICATION_SEND_ENVIRONMENT |
                                G_APPLICATION_CAN_OVERRIDE_APP_ID,
                       "register-session", TRUE,
                       NULL);
