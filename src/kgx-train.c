@@ -410,7 +410,6 @@ void
 kgx_train_push_child (KgxTrain   *self,
                       KgxProcess *process)
 {
-  g_autofree char *program = NULL;
   GPid pid = 0;
   GStrv argv;
   KgxStatus new_status = KGX_NONE;
@@ -424,23 +423,23 @@ kgx_train_push_child (KgxTrain   *self,
   argv = kgx_process_get_argv (process);
 
   if (G_LIKELY (argv[0] != NULL)) {
-    program = g_path_get_basename (argv[0]);
-  }
+    g_autofree char *program = g_path_get_basename (argv[0]);
 
-  if (G_UNLIKELY (g_strcmp0 (program, "ssh") == 0 ||
-                  g_strcmp0 (program, "telnet") == 0 ||
-                  g_strcmp0 (program, "mosh-client") == 0 ||
-                  g_strcmp0 (program, "mosh") == 0 ||
-                  g_strcmp0 (program, "et") == 0)) {
-    new_status |= push_type (priv->remote, pid, NULL, KGX_REMOTE);
-  }
+    if (G_UNLIKELY (g_strcmp0 (program, "ssh") == 0 ||
+                    g_strcmp0 (program, "telnet") == 0 ||
+                    g_strcmp0 (program, "mosh-client") == 0 ||
+                    g_strcmp0 (program, "mosh") == 0 ||
+                    g_strcmp0 (program, "et") == 0)) {
+      new_status |= push_type (priv->remote, pid, NULL, KGX_REMOTE);
+    }
 
-  if (G_UNLIKELY (g_strcmp0 (program, "waypipe") == 0)) {
-    for (int i = 1; argv[i]; i++) {
-      if (G_UNLIKELY (g_strcmp0 (argv[i], "ssh") == 0 ||
-                      g_strcmp0 (argv[i], "telnet") == 0)) {
-        new_status |= push_type (priv->remote, pid, NULL, KGX_REMOTE);
-        break;
+    if (G_UNLIKELY (g_strcmp0 (program, "waypipe") == 0)) {
+      for (int i = 1; argv[i]; i++) {
+        if (G_UNLIKELY (g_strcmp0 (argv[i], "ssh") == 0 ||
+                        g_strcmp0 (argv[i], "telnet") == 0)) {
+          new_status |= push_type (priv->remote, pid, NULL, KGX_REMOTE);
+          break;
+        }
       }
     }
   }
