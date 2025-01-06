@@ -198,7 +198,7 @@ update_watcher (KgxWatcher *self, gboolean in_background)
   g_clear_handle_id (&self->timeout, g_source_remove);
 
   /* Slow down polling when in the background */
-  self->timeout = g_timeout_add_full (G_PRIORITY_DEFAULT,
+  self->timeout = g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE,
                                       in_background ? 2000 : 500,
                                       watch,
                                       g_object_ref (self),
