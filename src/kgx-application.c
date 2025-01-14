@@ -165,28 +165,28 @@ kgx_application_startup (GApplication *app)
 
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "win.new-window",
-                                         (const char *[]) { "<shift><primary>n", NULL });
+                                         (const char *[]) { "<shift><primary>n", "New", NULL });
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "win.new-tab",
-                                         (const char *[]) { "<shift><primary>t", NULL });
+                                         (const char *[]) { "<shift><primary>t", "<shift>New", NULL });
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "win.close-tab",
                                          (const char *[]) { "<shift><primary>w", NULL });
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "term.copy",
-                                         (const char *[]) { "<shift><primary>c", NULL });
+                                         (const char *[]) { "<shift><primary>c", "Copy", NULL });
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "term.paste",
-                                         (const char *[]) { "<shift><primary>v", NULL });
+                                         (const char *[]) { "<shift><primary>v", "Paste", NULL });
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "win.find",
-                                         (const char *[]) { "<shift><primary>f", NULL });
+                                         (const char *[]) { "<shift><primary>f", "Find", NULL });
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "app.zoom-in",
-                                         (const char *[]) { "<primary>plus", NULL });
+                                         (const char *[]) { "<primary>plus", "ZoomIn", NULL });
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "app.zoom-out",
-                                         (const char *[]) { "<primary>minus", NULL });
+                                         (const char *[]) { "<primary>minus", "ZoomOut", NULL });
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "app.zoom-normal",
                                          (const char *[]) { "<primary>0", NULL });
