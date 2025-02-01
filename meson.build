@@ -74,6 +74,7 @@ config_h = vcs_tag( input: config_h_in,
                    output: 'kgx-config.h',
                   command: ['git', 'rev-parse', '--short', 'HEAD'],
                  fallback: 'Devel')
+config_h_inc = include_directories('.')
 
 # Gtk Requirement
 gtk_min_ver = '4.14'

@@ -31,20 +31,21 @@
 #include <glib/gi18n.h>
 
 #include <gio/gio.h>
-#include <glibtop/proclist.h>
-#include <glibtop/procuid.h>
-#include <glibtop/procargs.h>
+#include <sys/types.h>
 
+#include "kgx-pids.h"
 #include "kgx-utils.h"
+
 #include "kgx-process.h"
 
 #define MAX_TITLE_LENGTH 100
 
+
 struct _KgxProcess {
-  GPid    pid;
-  GPid    parent;
-  gint32  euid;
-  GStrv   argv;
+  GPid  pid;
+  GPid  parent;
+  uid_t euid;
+  GStrv argv;
 };
 
 static void
@@ -73,6 +74,7 @@ kgx_process_unref (KgxProcess *self)
 
 G_DEFINE_BOXED_TYPE (KgxProcess, kgx_process, g_rc_box_acquire, kgx_process_unref)
 
+
 /**
  * kgx_process_new:
  * @pid: The #GPid to get info about
@@ -84,20 +86,19 @@ G_DEFINE_BOXED_TYPE (KgxProcess, kgx_process, g_rc_box_acquire, kgx_process_unre
 inline KgxProcess *
 kgx_process_new (GPid pid)
 {
-  glibtop_proc_uid   info;
-  KgxProcess        *self = NULL;
-
-  self = g_rc_box_new0 (KgxProcess);
+  g_autoptr (KgxProcess) self = g_rc_box_new0 (KgxProcess);
 
   self->pid = pid;
 
-  glibtop_get_proc_uid (&info, pid);
+  if (G_UNLIKELY (kgx_pids_get_pid_info (pid,
+                                         &self->parent,
+                                         &self->euid) != KGX_PIDS_OK)) {
+    return NULL;
+  }
 
-  self->parent = info.ppid;
-  self->euid = info.euid;
-
-  return self;
+  return g_steal_pointer (&self);
 }
+
 
 /**
  * kgx_process_get_pid:
@@ -153,6 +154,7 @@ kgx_process_get_parent (KgxProcess *self)
   return self->parent;
 }
 
+
 /**
  * kgx_process_get_argv:
  * @self: the #KgxProcess
@@ -167,13 +169,15 @@ kgx_process_get_argv (KgxProcess *self)
   g_return_val_if_fail (self != NULL, NULL);
 
   if (G_LIKELY (self->argv == NULL)) {
-    glibtop_proc_args args_size;
-
-    self->argv = glibtop_get_proc_argv (&args_size, self->pid, 0);
+    if (G_UNLIKELY (kgx_pids_get_pid_cmdline (self->pid,
+                                              &self->argv) != KGX_PIDS_OK)) {
+      self->argv = NULL;
+    }
   }
 
   return self->argv;
 }
+
 
 inline void
 kgx_process_get_title (KgxProcess *self, char **title, char **subtitle)
@@ -241,20 +245,22 @@ kgx_pid_cmp (gconstpointer a, gconstpointer b, gpointer data)
 GTree *
 kgx_process_get_list (void)
 {
-  glibtop_proclist pid_list;
   g_autofree GPid *pids = NULL;
   GTree *list = NULL;
+  size_t n_pids;
 
   list = g_tree_new_full (kgx_pid_cmp,
                           NULL,
                           NULL,
                           (GDestroyNotify) kgx_process_unref);
 
-  pids = glibtop_get_proclist (&pid_list, GLIBTOP_KERN_PROC_ALL, 0);
+  if (G_UNLIKELY (kgx_pids_get_running_pids (&pids, &n_pids) != KGX_PIDS_OK)) {
+    return list;
+  }
 
   g_return_val_if_fail (pids != NULL, NULL);
 
-  for (int i = 0; i < pid_list.number; i++) {
+  for (size_t i = 0; i < n_pids; i++) {
     g_tree_insert (list, GINT_TO_POINTER (pids[i]), kgx_process_new (pids[i]));
   }
 
