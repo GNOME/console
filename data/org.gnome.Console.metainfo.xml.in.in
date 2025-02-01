@@ -12,10 +12,6 @@
       A simple user-friendly terminal emulator for the GNOME desktop.
     </p>
   </description>
-  <kudos>
-    <kudo>HiDpiIcon</kudo>
-    <kudo>ModernToolkit</kudo>
-  </kudos>
   <recommends>
     <control>keyboard</control>
     <control>pointing</control>
