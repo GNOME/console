@@ -464,8 +464,4 @@
   <translation type="gettext">@BIN_NAME@</translation>
   <content_rating type="oars-1.1" />
   <developer_name>The GNOME Project</developer_name>
-  <custom>
-    <value key="Purism::form_factor">workstation</value>
-    <value key="Purism::form_factor">mobile</value>
-  </custom>
 </component>
