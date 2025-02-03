@@ -1,7 +1,7 @@
 src_datadir = meson.current_source_dir()
 
 desktop_utils = find_program('desktop-file-validate', required: false)
-appstream_util = find_program('appstream-util', required: false)
+appstreamcli = find_program('appstreamcli', required: false)
 compile_schemas = find_program('glib-compile-schemas')
 
 desktop_filename = 'org.gnome.Console.desktop.in.in'
@@ -42,9 +42,9 @@ appstream_file = i18n.merge_file(
       install_dir: datadir / 'metainfo'
 )
 
-if appstream_util.found() and get_option('tests')
-  test('Validate appstream file', appstream_util,
-    args: ['validate', '--nonet', appstream_file]
+if appstreamcli.found() and get_option('tests')
+  test('Validate appstream file', appstreamcli,
+    args: ['validate', '--no-net', '--explain', appstream_file]
   )
 endif
 

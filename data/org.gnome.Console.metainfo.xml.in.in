@@ -12,10 +12,6 @@
       A simple user-friendly terminal emulator for the GNOME desktop.
     </p>
   </description>
-  <kudos>
-    <kudo>HiDpiIcon</kudo>
-    <kudo>ModernToolkit</kudo>
-  </kudos>
   <recommends>
     <control>keyboard</control>
     <control>pointing</control>
@@ -464,8 +460,4 @@
   <translation type="gettext">@BIN_NAME@</translation>
   <content_rating type="oars-1.1" />
   <developer_name>The GNOME Project</developer_name>
-  <custom>
-    <value key="Purism::form_factor">workstation</value>
-    <value key="Purism::form_factor">mobile</value>
-  </custom>
 </component>
