@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-08 03:16+0000\n"
-"PO-Revision-Date: 2024-08-09 12:43+0530\n"
+"POT-Creation-Date: 2024-09-11 22:34+0000\n"
+"PO-Revision-Date: 2024-09-24 22:01-0700\n"
 "Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
 "Language: hi\n"
@@ -50,7 +50,7 @@ msgstr "गनोम डेस्कटॉप के लिए एक साध�
 msgid "Terminal window"
 msgstr "टर्मिनल खिड़की"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:383 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
 msgid "The GNOME Project"
 msgstr "गनोम परियोजना"
 
@@ -472,7 +472,7 @@ msgstr "फॉन्ट पूर्वावलोकन"
 msgid "Font Size"
 msgstr "फॉन्ट आकार"
 
-#: src/preferences/kgx-preferences-window.c:126
+#: src/preferences/kgx-preferences-window.c:125
 msgid "No Font Set"
 msgstr "कोई फॉन्ट समूह नहीं"
 
@@ -500,6 +500,10 @@ msgstr "व्यवहार"
 msgid "_Unlimited Scrollback"
 msgstr "असीमित स्क्रॉलबैक (_U)"
 
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "स्क्रॉलबैक पंक्तियां (_S)"
+
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
 msgstr "टर्मिनल घंटी"
@@ -511,11 +515,3 @@ msgstr "ध्वनि बजायें (_S)"
 #: src/preferences/kgx-preferences-window.ui:101
 msgid "_Visual Effects"
 msgstr "दृश्यात्मक प्रभाव (_V)"
-
-#: src/preferences/kgx-preferences-window.ui:109
-msgid "Advanced"
-msgstr "उन्नत"
-
-#: src/preferences/kgx-preferences-window.ui:112
-msgid "Disable “Software _Flow Control”"
-msgstr "“सॉफ़्टवेयर प्रवाह नियंत्रण” अक्षम करें (_F)"
