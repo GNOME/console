@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gnome Nepali Translation\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-05-19 12:39+0000\n"
-"PO-Revision-Date: 2024-05-28 20:28+0545\n"
+"POT-Creation-Date: 2025-02-10 19:24+0000\n"
+"PO-Revision-Date: 2025-02-27 15:33+0545\n"
 "Last-Translator: Pawan Chitrakar <chautari@gmail.com>\n"
 "Language-Team: Nepali Team <chautari@gmail.com>\n"
 "Language: ne\n"
@@ -16,10 +16,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/org.gnome.Console.desktop.in.in:3 data/org.gnome.Console.metainfo.xml.in.in:8
-#: src/kgx-application.h:27
+#: src/kgx-application.h:26
 msgid "Console"
 msgstr "कन्सोल"
 
@@ -32,23 +32,23 @@ msgstr "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgid "New Window"
 msgstr "नयाँ सञ्झ्याल"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:165
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:176
 msgid "New Tab"
 msgstr "नयाँ ट्याब"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:379
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
 msgid "Terminal Emulator"
 msgstr "टर्मिनल इमुलेटर"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
-msgstr "जिनोम डेस्कटपका लागि एउटा साधारण प्रयोगकर्ता-अनुकूल टर्मिनल इमुलेटर ।"
+msgstr "जिनोम डेस्कटपका लागि एउटा साधारण प्रयोगकर्ता-अनुकूल टर्मिनल इमुलेटर ।."
 
-#: data/org.gnome.Console.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "टर्मिनल सञ्झ्याल"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:383 src/kgx-window.c:514
+#: data/org.gnome.Console.metainfo.xml.in.in:462 src/kgx-window.c:561
 msgid "The GNOME Project"
 msgstr "जिनोम परियोजना"
 
@@ -132,146 +132,141 @@ msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "ट्याब १० मा स्विच गर्नुहोस्"
 
-#: src/kgx-application.c:254
-msgid "Cannot use both --command and positional parameters"
-msgstr "दुवै प्रयोग गर्न सकिँदैन -- आदेश र स्थितिगत परिमितिहरू"
-
-#. Translators: The leading # is intentional, the initial %s is the
-#. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:351
-#, c-format
-msgid "# KGX %s using VTE %u.%u.%u %s\n"
-msgstr "# KGX %s VTE को प्रयोग %u.%u.%u %s\n"
-
 #. Translators: %s is the year range
-#: src/kgx-application.c:363 src/kgx-window.c:509
+#: src/kgx-about.c:83 src/kgx-window.c:556
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s जान्डर ब्राउन"
 
-#: src/kgx-application.c:381
+#: src/kgx-about.c:101
 msgid "GPL 3.0 or later"
 msgstr "जि पि एल ३.० वा पछि"
 
-#: src/kgx-application.c:446
-msgid "Execute the argument to this option inside the terminal"
-msgstr "टर्मिनलको भित्रको यस विकल्पमा चरलाई कार्यान्वयन गर्नुहोस् ।"
+#. Translators: The leading # is intentional, the initial %s is the
+#. * version of KGX itself, the latter format is the VTE version
+#: src/kgx-about.c:114
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s VTE को प्रयोग %u.%u.%u %s\n"
 
-#: src/kgx-application.c:447
+#: src/kgx-application.c:283
+msgid "Cannot use both --working-directory and positional parameters"
+msgstr "दुवै --कार्य-डाइरेक्टरी र स्थितिगत परिमितिहरू प्रयोग गर्न सकिँदैन"
+
+#: src/kgx-application.c:503
+msgid "Execute the argument to this option inside the terminal"
+msgstr "टर्मिनलको भित्रको यस विकल्पमा चरलाई कार्यान्वयन गर्नुहोस्"
+
+#: src/kgx-application.c:504
 msgid "COMMAND"
 msgstr "आदेश"
 
-#: src/kgx-application.c:455
+#: src/kgx-application.c:512
 msgid "Set the working directory"
 msgstr "कार्य डाइरेक्टरी सेट गर्नुहोस्"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:457
+#: src/kgx-application.c:514
 msgid "DIRNAME"
 msgstr "DIRNAME"
 
-#: src/kgx-application.c:465
+#: src/kgx-application.c:522
 msgid "Wait until the child exits (TODO)"
 msgstr "शाखा बाहिरिदासम्म प्रतिक्षा गर्नुहोस् (TODO)"
 
-#: src/kgx-application.c:474
+#: src/kgx-application.c:531
 msgid "Set the initial window title"
 msgstr "सुरुआत सञ्झ्याल शीर्षक सेट गर्नुहोस्"
 
-#: src/kgx-application.c:475
+#: src/kgx-application.c:532
 msgid "TITLE"
 msgstr "शीर्षक"
 
-#: src/kgx-application.c:483
+#: src/kgx-application.c:540
 msgid "ADVANCED: Set the shell to launch"
 msgstr "उन्नत: सुरुआतमा शेल सेट गर्नुहोस्"
 
-#: src/kgx-application.c:484
+#: src/kgx-application.c:541
 msgid "SHELL"
 msgstr "सेल"
 
-#: src/kgx-application.c:492
+#: src/kgx-application.c:549
 msgid "ADVANCED: Set the scrollback length"
 msgstr "उन्नत: स्क्रोलब्याक लम्बाइ सेट गर्नुहोस्"
 
-#: src/kgx-application.c:493
+#: src/kgx-application.c:550
 msgid "LINES"
 msgstr "लाइन"
 
-#: src/kgx-application.c:502
+#. Translators: %s is the version string, KGX is a codename and should be left as-is
+#: src/kgx-application.c:688
+#, c-format
+msgid "KGX %s — Terminal Emulator"
+msgstr "केजीएक्स %s — टर्मिनल एमुलेटर"
+
+#: src/kgx-application.c:694
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- COMMAND [ARGUMENT...]]"
 
-#: src/kgx-close-dialog.c:94
+#: src/kgx-close-dialog.c:73
 msgid "Close Window?"
 msgstr "सञ्झ्याल बन्द गर्नुहुन्छ?"
 
-#: src/kgx-close-dialog.c:96
+#: src/kgx-close-dialog.c:75
 msgid ""
 "A command is still running, closing this window will kill it and may lead to unexpected "
 "outcomes"
 msgid_plural ""
 "Some commands are still running, closing this window will kill them and may lead to "
 "unexpected outcomes"
-msgstr[0] "आदेश अझै चलिरहेका छ, यो सञ्झ्याल बन्द गर्नाले ति नष्ट हुनेछ र अनपेक्षित नतिजा ल्याउन सक्छ ।"
+msgstr[0] "आदेश अझै चलिरहेका छ, यो सञ्झ्याल बन्द गर्नाले ति नष्ट हुनेछ र अनपेक्षित नतिजा ल्याउन सक्छ"
 msgstr[1] ""
-"केही आदेश अझै चलिरहेका छन्, यो सञ्झ्याल बन्द गर्नाले तिनीहरूलाई नष्ट गर्नेछ र अनपेक्षित नतिजा ल्याउन सक्छ "
-"।"
+"केही आदेश अझै चलिरहेका छन्, यो सञ्झ्याल बन्द गर्नाले तिनीहरूलाई नष्ट गर्नेछ र अनपेक्षित नतिजाहरू ल्याउन सक्छ"
 
-#: src/kgx-close-dialog.c:103
+#: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
 msgstr "ट्याब बन्द गर्नुहुन्छ?"
 
-#: src/kgx-close-dialog.c:105
+#: src/kgx-close-dialog.c:84
 msgid ""
 "A command is still running, closing this tab will kill it and may lead to unexpected "
 "outcomes"
 msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may lead to "
 "unexpected outcomes"
-msgstr[0] ""
-"एउटा आदेश अझै चलिरहेको छ, यो ट्याब बन्द गर्दा यसले मार्नेछ र अनपेक्षित परिणामहरू निम्त्याउन सक्छ"
+msgstr[0] "एउटा आदेश अझै चलिरहेको छ, यो ट्याब बन्द गर्दा यसले मार्नेछ र अनपेक्षित परिणामहरू निम्त्याउन सक्छ"
 msgstr[1] ""
 "केही आदेशहरू अझै चलिरहेको छ, यो ट्याब बन्द गर्दा तिनीहरूलाई मार्नेछ र अनपेक्षित परिणामहरू निम्त्याउन सक्छ"
 
 #. Translators: Screen reader label for the list of running commands
-#: src/kgx-close-dialog.c:232
+#: src/kgx-close-dialog.c:194
 msgid "Process list"
 msgstr "प्रक्रिया सूची दृश्य"
 
 #. Translators: This action dismisses the dialogue, leaving the tab/window open
-#: src/kgx-close-dialog.c:246 src/kgx-font-picker.ui:30 src/kgx-paste-dialog.c:183
+#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
+#: src/preferences/kgx-font-picker.ui:22
 msgid "_Cancel"
 msgstr "रद्द गर्नुहोस्"
 
 #. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
-#: src/kgx-close-dialog.c:248
+#: src/kgx-close-dialog.c:207
 msgid "C_lose"
 msgstr "बन्द गर्नुहोस्"
 
-#: src/kgx-font-picker.ui:12
-msgid "Terminal Font"
-msgstr "टर्मिनल फन्ट"
+#: src/kgx-colour-utils.c:58
+msgid "Color string is wrong length"
+msgstr "रङ स्ट्रिङ गलत लम्बाइ हो"
 
-#: src/kgx-font-picker.ui:37
-msgid "_Select"
-msgstr "चयन गर्नुहोस्"
+#: src/kgx-livery-manager.c:193
+msgctxt "livery-name"
+msgid "Linux"
+msgstr "लिनक्स्"
 
-#: src/kgx-font-picker.ui:53 src/kgx-font-picker.ui:56
-msgid "Font Name"
-msgstr "फन्टको नाम"
-
-#: src/kgx-font-picker.ui:142
-msgid "Font Family"
-msgstr "फन्ट परिवार"
-
-#: src/kgx-font-picker.ui:167
-msgid "Font Preview"
-msgstr "फन्ट पूर्वावलोकन"
-
-#: src/kgx-font-picker.ui:188
-msgid "Font Size"
-msgstr "फन्टको साइज"
+#: src/kgx-livery-manager.c:230
+msgctxt "livery-name"
+msgid "XTerm"
+msgstr "XTerm"
 
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
@@ -291,7 +286,7 @@ msgid "_Close"
 msgstr "_बन्द"
 
 #. Translators: %s is the (possibly truncated) command being pasted
-#: src/kgx-paste-dialog.c:88
+#: src/kgx-paste-dialog.c:76
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -300,88 +295,53 @@ msgstr ""
 "तपाईँलाई आदेशले के गर्छ भन्ने निश्चित गर्नुहोस्:\n"
 "%s"
 
-#: src/kgx-paste-dialog.c:174
+#: src/kgx-paste-dialog.c:129
 msgid "You are pasting a command that runs as an administrator"
 msgstr "तपाईँले प्रशासकको रूपमा चल्ने आदेश टाँस्नु भएको छ"
 
-#: src/kgx-paste-dialog.c:184 src/kgx-terminal.ui:24
+#: src/kgx-paste-dialog.c:136 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "_टाँस्नुहोस्"
-
-#: src/kgx-preferences-window.c:122
-msgid "No Font Set"
-msgstr "फन्ट सेट गरिएको छैन"
-
-#: src/kgx-preferences-window.ui:7
-msgid "General"
-msgstr "सामान्य"
-
-#: src/kgx-preferences-window.ui:10
-msgid "Font"
-msgstr "फन्ट"
-
-#: src/kgx-preferences-window.ui:13
-msgid "Use _System Default"
-msgstr "पूर्वनिर्धारित प्रणाली प्रयोग गर्नुहोस्"
-
-#: src/kgx-preferences-window.ui:19
-msgid "Custom _Font"
-msgstr "अनुकूल फन्ट"
-
-#: src/kgx-preferences-window.ui:59
-msgid "Terminal Bell"
-msgstr "टर्मिनल घण्टी"
-
-#: src/kgx-preferences-window.ui:62
-msgid "Play _Sound"
-msgstr "ध्वनी बजाउनुहोस्"
-
-#: src/kgx-preferences-window.ui:68
-msgid "_Visual Effects"
-msgstr "दृश्य प्रभावहरू"
 
 #: src/kgx-process.c:192
 #, c-format
 msgid "Process %d"
 msgstr "प्रक्रियामा %d"
 
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:180
-#, c-format
-msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr "<b>पढ्ने मात्र</b> — सङ्केत %i आदेश सँग बाहिरियो"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:189
-msgid "<b>Read Only</b> — Command exited"
-msgstr "<b>पढ्ने मात्र</b> – आदेश बाहिरियो"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:222
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-simple-tab.c:169
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>सुरु गर्न असफल</b> भयो - %s"
 
-#: src/kgx-tab.c:1112
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:784
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>पढ्ने मात्र</b> — सङ्केत %i आदेश सँग बाहिरियो"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:792
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>पढ्ने मात्र</b> – आदेश बाहिरियो"
+
+#: src/kgx-tab.c:812
 msgid "Command completed"
 msgstr "आदेश समाप्त भयो"
 
-#: src/kgx-tab.ui:25
+#: src/kgx-tab.ui:40
 msgid "Find text"
 msgstr "पाठ खोज्नुहोस्"
 
-#: src/kgx-tab.ui:36
+#: src/kgx-tab.ui:51
 msgid "Previous Match"
 msgstr "अघिल्लो फेला पार्नुहोस्"
 
-#: src/kgx-tab.ui:44
+#: src/kgx-tab.ui:59
 msgid "Next Match"
 msgstr "पछिल्लो फेला पार्नुहोस्"
 
-#: src/kgx-terminal.c:482
+#: src/kgx-terminal.c:510
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -410,20 +370,29 @@ msgstr "सबै चयन गर्नुहोस्"
 msgid "Show in _Files"
 msgstr "फाइलहरूमा देखाउनुहोस्"
 
-#: src/kgx-theme-switcher.ui:16
+#: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
 msgstr "प्रणाली शैली पछ्याउनुहोस्"
 
-#: src/kgx-theme-switcher.ui:44
+#: src/kgx-theme-switcher.ui:52
 msgid "Light Style"
 msgstr "उज्जयालो शैली"
 
-#: src/kgx-theme-switcher.ui:71
+#: src/kgx-theme-switcher.ui:79
 msgid "Dark Style"
 msgstr "गाढा शैली"
 
+#. Translators: ‘command’ is the argument name, and shouldn't be translated
+#: src/kgx-utils.c:113
+msgid "Missing argument for --command"
+msgstr "--command लागि तर्क हराइरहेको छ"
+
+#: src/kgx-utils.c:128
+msgid "Cannot use both --command and positional parameters"
+msgstr "दुवै प्रयोग गर्न सकिँदैन -- आदेश र स्थितिगत परिमितिहरू"
+
 #. Translators: Credit yourself here
-#: src/kgx-window.c:521
+#: src/kgx-window.c:568
 msgid "translator-credits"
 msgstr ""
 "pawan chitrakar <chautari@gmail.com>,Jyotsna Shrestha <jyoshrestha@hotmail.com>,Ganesh "
@@ -451,25 +420,93 @@ msgstr "कुञ्जीपाटी सर्टकट"
 msgid "_About Console"
 msgstr "कन्सोलका बारेमा"
 
-#: src/kgx-window.ui:80
+#: src/kgx-window.ui:90
 msgid "Find in Terminal"
 msgstr "टर्मिनलमा फेला पार्नुहोस्"
 
-#: src/kgx-window.ui:87
+#: src/kgx-window.ui:97
 msgid "Main Menu"
 msgstr "मुख्य मेनु"
 
-#: src/kgx-window.ui:105
+#: src/kgx-window.ui:115
 msgid "Shrink Text"
 msgstr "संकुचित पाठ"
 
-#: src/kgx-window.ui:116
+#: src/kgx-window.ui:126
 msgid "Reset Size"
 msgstr "साइज रिसेट गर्नुहोस्"
 
-#: src/kgx-window.ui:140
+#: src/kgx-window.ui:150
 msgid "Enlarge Text"
 msgstr "पाठ ठूलो पार्नुहोस्"
+
+#: src/preferences/kgx-font-picker.ui:11
+msgid "Terminal Font"
+msgstr "टर्मिनल फन्ट"
+
+#: src/preferences/kgx-font-picker.ui:29
+msgid "_Select"
+msgstr "चयन गर्नुहोस्"
+
+#: src/preferences/kgx-font-picker.ui:45 src/preferences/kgx-font-picker.ui:48
+msgid "Font Name"
+msgstr "फन्टको नाम"
+
+#: src/preferences/kgx-font-picker.ui:133
+msgid "Font Family"
+msgstr "फन्ट परिवार"
+
+#: src/preferences/kgx-font-picker.ui:158
+msgid "Font Preview"
+msgstr "फन्ट पूर्वावलोकन"
+
+#: src/preferences/kgx-font-picker.ui:179
+msgid "Font Size"
+msgstr "फन्टको साइज"
+
+#: src/preferences/kgx-preferences-window.c:125
+msgid "No Font Set"
+msgstr "फन्ट सेट गरिएको छैन"
+
+#: src/preferences/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "सामान्य"
+
+#: src/preferences/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "फन्ट"
+
+#: src/preferences/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "पूर्वनिर्धारित प्रणाली प्रयोग गर्नुहोस्"
+
+#: src/preferences/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "अनुकूल फन्ट"
+
+#: src/preferences/kgx-preferences-window.ui:63
+msgid "Behaviour"
+msgstr "ब्यवहार"
+
+#: src/preferences/kgx-preferences-window.ui:66
+msgid "_Unlimited Scrollback"
+msgstr "असीमित स्क्रोलब्याक"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "स्क्रोलब्याक रेखाहरू"
+
+#: src/preferences/kgx-preferences-window.ui:92
+msgid "Terminal Bell"
+msgstr "टर्मिनल घण्टी"
+
+#: src/preferences/kgx-preferences-window.ui:95
+msgid "Play _Sound"
+msgstr "ध्वनी बजाउनुहोस्"
+
+#: src/preferences/kgx-preferences-window.ui:101
+msgid "_Visual Effects"
+msgstr "दृश्य प्रभावहरू"
 
 #~ msgid "King’s Cross"
 #~ msgstr "राजाको क्रस"
