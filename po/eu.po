@@ -1,14 +1,14 @@
 # Basque translation for kgx.
 # Copyright (C) 2019 kgx's COPYRIGHT HOLDER
 # This file is distributed under the same license as the kgx package.
-# Asier Sarasua Garmendia <asiersarasua@ni.eus>, 2019, 2022, 2023.
+# Asier Saratsua Garmendia <asiersarasua@ni.eus>, 2019, 2022, 2023, 2025.
 #
 msgid ""
 msgstr "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-20 19:30+0000\n"
-"PO-Revision-Date: 2024-08-25 10:00+0100\n"
-"Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
+"POT-Creation-Date: 2025-02-10 19:24+0000\n"
+"PO-Revision-Date: 2025-03-02 10:00+0100\n"
+"Last-Translator: Asier Saratsua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr "komandoa;gonbitea;cmd;komando-lerroa;exekutatu;shell-a;terminala;kgx;kin
 msgid "New Window"
 msgstr "Leiho berria"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:176
 msgid "New Tab"
 msgstr "Fitxa berria"
 
@@ -42,11 +42,11 @@ msgstr "Terminalaren emulatzailea"
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr "Terminalaren emuladore sinple eta erraza GNOME mahaigainerako."
 
-#: data/org.gnome.Console.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "Terminalaren leihoa"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:462 src/kgx-window.c:561
 msgid "The GNOME Project"
 msgstr "GNOME proiektua"
 
@@ -131,7 +131,7 @@ msgid "Switch to Tab 10"
 msgstr "Aldatu 10. fitxara"
 
 #. Translators: %s is the year range
-#: src/kgx-about.c:83 src/kgx-window.c:529
+#: src/kgx-about.c:83 src/kgx-window.c:556
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -147,62 +147,62 @@ msgstr "GPL 3.0 edo berriagoa"
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s, VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:255
+#: src/kgx-application.c:283
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr "Ezin da aldi berean --working-directory eta posizioko parametroak erabili"
 
-#: src/kgx-application.c:443
+#: src/kgx-application.c:503
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Exekutatu aukera honen argumentua terminalaren barruan"
 
-#: src/kgx-application.c:444
+#: src/kgx-application.c:504
 msgid "COMMAND"
 msgstr "KOMANDOA"
 
-#: src/kgx-application.c:452
+#: src/kgx-application.c:512
 msgid "Set the working directory"
 msgstr "Ezarri laneko direktorioa"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:454
+#: src/kgx-application.c:514
 msgid "DIRNAME"
 msgstr "DIRIZENA"
 
-#: src/kgx-application.c:462
+#: src/kgx-application.c:522
 msgid "Wait until the child exits (TODO)"
 msgstr "Itxaron haurrak amaitu arte (EGITEKO)"
 
-#: src/kgx-application.c:471
+#: src/kgx-application.c:531
 msgid "Set the initial window title"
 msgstr "Ezarri leihoaren hasierako izenburua"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:532
 msgid "TITLE"
 msgstr "TITULUA"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:540
 msgid "ADVANCED: Set the shell to launch"
 msgstr "AURRERATUA: Ezarri abiaraziko den shell-a"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:541
 msgid "SHELL"
 msgstr "SHELLA"
 
-#: src/kgx-application.c:489
+#: src/kgx-application.c:549
 msgid "ADVANCED: Set the scrollback length"
 msgstr "AURRERATUA: Ezarri atzeranzko korritzearen luzera"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:550
 msgid "LINES"
 msgstr "LERROAK"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:644
+#: src/kgx-application.c:688
 #, c-format
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — Terminalaren emulatzailea"
 
-#: src/kgx-application.c:650
+#: src/kgx-application.c:694
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- KOMANDOA [ARGUMENTUA...]]"
 
@@ -268,7 +268,7 @@ msgstr "XTerm"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:471
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "%i. fitxa"
@@ -310,17 +310,17 @@ msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Huts egin du abioak</b> — %s"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:814
+#: src/kgx-tab.c:784
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Irakurtzeko soilik</b> — Komandoa amaitu da %i kodea emanda"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:822
+#: src/kgx-tab.c:792
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Irakurtzeko soilik</b> — Komandoa amaitu da"
 
-#: src/kgx-tab.c:842
+#: src/kgx-tab.c:812
 msgid "Command completed"
 msgstr "Komandoa osatu da"
 
@@ -336,7 +336,7 @@ msgstr "Aurreko parekatzea"
 msgid "Next Match"
 msgstr "Hurrengo parekatzea"
 
-#: src/kgx-terminal.c:508
+#: src/kgx-terminal.c:510
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -364,15 +364,15 @@ msgstr "_Hautatu denak"
 msgid "Show in _Files"
 msgstr "Erakutsi _Fitxategiak aplikazioan"
 
-#: src/kgx-theme-switcher.ui:16
+#: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
 msgstr "Jarraitu sistemaren estiloa"
 
-#: src/kgx-theme-switcher.ui:44
+#: src/kgx-theme-switcher.ui:52
 msgid "Light Style"
 msgstr "Estilo argia"
 
-#: src/kgx-theme-switcher.ui:71
+#: src/kgx-theme-switcher.ui:79
 msgid "Dark Style"
 msgstr "Estilo iluna"
 
@@ -386,7 +386,7 @@ msgid "Cannot use both --command and positional parameters"
 msgstr "Ezin da aldi berean --command eta posizioko parametroak erabili"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:541
+#: src/kgx-window.c:568
 msgid "translator-credits"
 msgstr "translator-credits"
 
@@ -410,23 +410,23 @@ msgstr "Las_ter-teklak"
 msgid "_About Console"
 msgstr "Kontsola aplikazioari b_uruz"
 
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:90
 msgid "Find in Terminal"
 msgstr "Bilatu terminalean"
 
-#: src/kgx-window.ui:95
+#: src/kgx-window.ui:97
 msgid "Main Menu"
 msgstr "Menu nagusia"
 
-#: src/kgx-window.ui:113
+#: src/kgx-window.ui:115
 msgid "Shrink Text"
 msgstr "Txikiagotu testua"
 
-#: src/kgx-window.ui:124
+#: src/kgx-window.ui:126
 msgid "Reset Size"
 msgstr "Berrezarri tamaina"
 
-#: src/kgx-window.ui:148
+#: src/kgx-window.ui:150
 msgid "Enlarge Text"
 msgstr "Handiagotu testua"
 
@@ -481,6 +481,10 @@ msgstr "Portaera"
 #: src/preferences/kgx-preferences-window.ui:66
 msgid "_Unlimited Scrollback"
 msgstr "_Mugarik gabeko korritzea"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "Korritu marrak at_zerantz"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
