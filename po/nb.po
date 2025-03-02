@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-09-11 22:34+0000\n"
-"PO-Revision-Date: 2024-09-15 09:10+0200\n"
+"POT-Creation-Date: 2025-02-10 19:24+0000\n"
+"PO-Revision-Date: 2025-03-02 15:48+0100\n"
 "Last-Translator: Brage <bragefuglseth@gnome.org>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -33,7 +33,7 @@ msgstr "kommandolinje;terminal;kgx;kings cross;cmd;prompt;"
 msgid "New Window"
 msgstr "Nytt vindu"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:176
 msgid "New Tab"
 msgstr "Ny fane"
 
@@ -47,11 +47,11 @@ msgstr ""
 "Et enkelt og brukervennlig verktøy som gir tilgang til systemet gjennom "
 "kommandolinjen."
 
-#: data/org.gnome.Console.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "Terminalvindu"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:462 src/kgx-window.c:561
 msgid "The GNOME Project"
 msgstr "GNOME"
 
@@ -136,7 +136,7 @@ msgid "Switch to Tab 10"
 msgstr "Bytt til fane 10"
 
 #. Translators: %s is the year range
-#: src/kgx-about.c:83 src/kgx-window.c:529
+#: src/kgx-about.c:83 src/kgx-window.c:556
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -152,62 +152,62 @@ msgstr "GPL 3.0 eller senere"
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s med VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:255
+#: src/kgx-application.c:283
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr "Kan ikke bruke både --working-directory- og posisjonsparametere"
 
-#: src/kgx-application.c:443
+#: src/kgx-application.c:503
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Kjør denne kommandoen i terminalen"
 
-#: src/kgx-application.c:444
+#: src/kgx-application.c:504
 msgid "COMMAND"
 msgstr "KOMMANDO"
 
-#: src/kgx-application.c:452
+#: src/kgx-application.c:512
 msgid "Set the working directory"
 msgstr "Åpne terminalen i denne mappen"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:454
+#: src/kgx-application.c:514
 msgid "DIRNAME"
 msgstr "MAPPENAVN"
 
-#: src/kgx-application.c:462
+#: src/kgx-application.c:522
 msgid "Wait until the child exits (TODO)"
 msgstr "Vent til underprosessen avsluttes (TODO)"
 
-#: src/kgx-application.c:471
+#: src/kgx-application.c:531
 msgid "Set the initial window title"
 msgstr "Velg vindusnavn"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:532
 msgid "TITLE"
 msgstr "NAVN"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:540
 msgid "ADVANCED: Set the shell to launch"
 msgstr "AVANSERT: Velg skall til terminalen"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:541
 msgid "SHELL"
 msgstr "SKALL"
 
-#: src/kgx-application.c:489
+#: src/kgx-application.c:549
 msgid "ADVANCED: Set the scrollback length"
 msgstr "AVANSERT: Velg hvor mange linjer det skal kunne rulles tilbake til"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:550
 msgid "LINES"
 msgstr "LINJER"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:644
+#: src/kgx-application.c:688
 #, c-format
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — Terminal"
 
-#: src/kgx-application.c:650
+#: src/kgx-application.c:694
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- KOMMANDO [ARGUMENT…]]"
 
@@ -281,7 +281,7 @@ msgstr "XTerm"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:471
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "Fane %i"
@@ -324,17 +324,17 @@ msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Oppstart mislyktes</b> — %s"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:814
+#: src/kgx-tab.c:784
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Skrivebeskyttet</b> — Kommando avsluttet med kode %i"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:822
+#: src/kgx-tab.c:792
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Skrivebeskyttet</b> — Kommando avsluttet"
 
-#: src/kgx-tab.c:842
+#: src/kgx-tab.c:812
 msgid "Command completed"
 msgstr "Kommando fullført"
 
@@ -350,7 +350,7 @@ msgstr "Forrige treff"
 msgid "Next Match"
 msgstr "Neste treff"
 
-#: src/kgx-terminal.c:508
+#: src/kgx-terminal.c:510
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -379,15 +379,15 @@ msgstr "_Velg alt"
 msgid "Show in _Files"
 msgstr "Vis i _Filer"
 
-#: src/kgx-theme-switcher.ui:16
+#: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
 msgstr "Følg systemet"
 
-#: src/kgx-theme-switcher.ui:44
+#: src/kgx-theme-switcher.ui:52
 msgid "Light Style"
 msgstr "Lys"
 
-#: src/kgx-theme-switcher.ui:71
+#: src/kgx-theme-switcher.ui:79
 msgid "Dark Style"
 msgstr "Mørk"
 
@@ -401,9 +401,12 @@ msgid "Cannot use both --command and positional parameters"
 msgstr "Kan ikke bruke både --command- og posisjonsparametere"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:541
+#: src/kgx-window.c:568
 msgid "translator-credits"
-msgstr "Brage Fuglseth https://bragefuglseth.dev"
+msgstr ""
+"Brage Fuglseth https://bragefuglseth.dev\n"
+"Kjartan Maraas <kmaraas@gnome.org>\n"
+"Torstein Adolf Winterseth <kvikende@fsfe.org>"
 
 #: src/kgx-window.ui:17
 msgid "_New Window"
@@ -425,23 +428,23 @@ msgstr "_Tastatursnarveier"
 msgid "_About Console"
 msgstr "_Om Konsoll"
 
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:90
 msgid "Find in Terminal"
 msgstr "Finn i terminal"
 
-#: src/kgx-window.ui:95
+#: src/kgx-window.ui:97
 msgid "Main Menu"
 msgstr "Hovedmeny"
 
-#: src/kgx-window.ui:113
+#: src/kgx-window.ui:115
 msgid "Shrink Text"
 msgstr "Forminsk"
 
-#: src/kgx-window.ui:124
+#: src/kgx-window.ui:126
 msgid "Reset Size"
 msgstr "Tilbakestill skalering"
 
-#: src/kgx-window.ui:148
+#: src/kgx-window.ui:150
 msgid "Enlarge Text"
 msgstr "Forstørr"
 
