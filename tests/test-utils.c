@@ -279,7 +279,7 @@ main (int argc, char *argv[])
 
   for (size_t i = 0; i < G_N_ELEMENTS (parse_cases); i++) {
     g_autofree char *path =
-      g_strdup_printf ("/kgx/utils/parse_percentage/case_%li", i);
+      g_strdup_printf ("/kgx/utils/parse_percentage/case_%" G_GSIZE_FORMAT, i);
 
     g_test_add_data_func (path, &parse_cases[i], test_parse_percentage);
   }
