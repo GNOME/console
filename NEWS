@@ -1,3 +1,34 @@
+Version 48.rc
+~~~~~~~~~~~~~
+
+We have kept up with some changes in Adwaita, modernised some of our metadata,
+and continued chasing those bugs and filing the rough edges.
+
+New Translations
+ * Arabic  (Ali Galal)
+ * Thai  (Aefgh Threenine)
+
+Updated Translations
+ * Basque  (Asier Saratsua Garmendia)
+ * Brazilian Portuguese  (Juliano de Souza Camargo)
+ * British English  (Andi Chandler)
+ * Dutch  (Nathan Follens)
+ * Finnish  (Jiri Grönroos)
+ * French  (Alexandre Franke, Irénée THIRION)
+ * Friulian  (Fabio Tomat)
+ * German  (Florian Heiser)
+ * Hindi  (Scrambled 777)
+ * Indonesian  (Andika Triwidada)
+ * Latvian  (Rūdolfs Mazurs)
+ * Lithuanian  (Aurimas Černius)
+ * Nepali  (Pawan Chitrakar)
+ * Norwegian Bokmål  (Brage Fuglseth)
+ * Occitan  (Quentin PAGÈS)
+ * Romanian  (Florentina Mușat)
+ * Serbian  (Марко Костић)
+ * Spanish  (Daniel Mustieles)
+ * Turkish  (Sabri Ünal)
+
 Version 47.0
 ~~~~~~~~~~~~
 
