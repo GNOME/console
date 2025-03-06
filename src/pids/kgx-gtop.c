@@ -55,8 +55,17 @@ KgxPidsResult
 kgx_gtop_get_list (GPid **pids, size_t *n_pids)
 {
   glibtop_proclist pid_list;
+  GPid *res = glibtop_get_proclist (&pid_list, GLIBTOP_KERN_PROC_ALL, 0);
 
-  *pids = glibtop_get_proclist (&pid_list, GLIBTOP_KERN_PROC_ALL, 0);
+  if (G_UNLIKELY (res == NULL)) {
+    *pids = NULL;
+    *n_pids = 0;
+
+    return KGX_PIDS_ERR;
+  }
+
+  *pids = res;
+  *n_pids = pid_list.total;
 
   return KGX_PIDS_OK;
 }
