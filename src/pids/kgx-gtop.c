@@ -65,7 +65,7 @@ kgx_gtop_get_list (GPid **pids, size_t *n_pids)
   }
 
   *pids = res;
-  *n_pids = pid_list.total;
+  *n_pids = pid_list.number;
 
   return KGX_PIDS_OK;
 }
