@@ -1,6 +1,11 @@
 include:
   - project: 'gnome/citemplates'
     file: 'flatpak/flatpak_ci_initiative.yml'
+  - component: "gitlab.gnome.org/GNOME/citemplates/release-service@master"
+    inputs:
+      job-stage: "release"
+      dist-job-name: "release-tarball"
+      tarball-artifact-path: "build/meson-dist/gnome-console-$CI_COMMIT_TAG.tar.xz"
 
 variables:
   MANIFEST_PATH: "build-aux/flatpak/org.gnome.Console.Devel.json"
@@ -10,9 +15,24 @@ variables:
   CONFIG_OPTS: "-Ddevel=true -Dwerror=true"
   APP_ID: "org.gnome.Console.Devel"
   BUNDLE: "org.gnome.Console.Devel.flatpak"
+  FEDORA_IMAGE: fedora:latest
+  FEDORA_DEPS: appstream
+    desktop-file-utils
+    gcc
+    gcovr
+    git
+    meson
+    pkgconfig(libadwaita-1)
+    pkgconfig(gtk4)
+    pkgconfig(pango)
+    pkgconfig(vte-2.91-gtk4)
+    pkgconfig(gio-2.0)
+    pkgconfig(gio-unix-2.0)
+    pkgconfig(libpcre2-8)
+    pkgconfig(gsettings-desktop-schemas)
+    pkgconfig(libgtop-2.0)
   FEDORA_32_IMAGE: fedora:rawhide
-  FEDORA_32_DEPS:
-    appstream-devel.i686
+  FEDORA_32_DEPS: appstream-devel.i686
     appstream.i686
     at-spi2-atk-devel.i686
     at-spi2-atk.i686
@@ -209,29 +229,32 @@ variables:
     xz-devel.i686
     zlib-ng-compat-devel.i686
 
+stages:
+  - build
+  - test
+  - release
+
 flatpak:
   stage: build
   extends: .flatpak
 
 flatpak-aarch64:
   stage: build
-  extends: '.flatpak@aarch64'
+  extends: ".flatpak@aarch64"
 
-fedora-32-clang:
+.fedora-build:
   stage: build
-  image: $FEDORA_32_IMAGE
   before_script:
     - dnf update -y --nogpgcheck
-    - dnf install -y --nogpgcheck $FEDORA_32_DEPS
+    - dnf install -y --nogpgcheck ${DNF_DEPS}
   script:
     - export LC_ALL=C.UTF-8
-    - meson setup build --cross-file=.gitlab-ci/ci-32-cross -Db_coverage=true
+    - meson setup build ${MESON_EXTRA_ARGS} -Db_coverage=true -Dtests=true
     - meson compile -C build
     - meson test -C build
   after_script:
-    - gcovr --gcov-executable "llvm-cov gcov"
-        --exclude="build/*" --exclude="subprojects/"
-        --json --output=coverage-${CI_JOB_NAME}.json
+    - gcovr --exclude="build/*" --exclude="subprojects/"
+      --json --output=coverage-${CI_JOB_NAME}.json
   artifacts:
     when: always
     paths:
@@ -240,8 +263,22 @@ fedora-32-clang:
     reports:
       junit: build/meson-logs/testlog.junit.xml
 
-coverage:
+fedora-gcc:
+  image: $FEDORA_IMAGE
+  extends: .fedora-build
+  variables:
+    DNF_DEPS: $FEDORA_DEPS
+
+fedora-32-clang:
   image: $FEDORA_32_IMAGE
+  extends: .fedora-build
+  variables:
+    DNF_DEPS: $FEDORA_32_DEPS
+    MESON_EXTRA_ARGS: --cross-file=.gitlab-ci/ci-32-cross
+    GCOV: llvm-cov gcov
+
+coverage:
+  image: $FEDORA_IMAGE
   stage: test
   before_script:
     - dnf update -y --nogpgcheck
@@ -249,11 +286,11 @@ coverage:
   script:
     - mkdir coverage-report
     - gcovr --add-tracefile 'coverage-*.json'
-        --html-details --print-summary --output coverage-report/index.html
+      --html-details --print-summary --output coverage-report/index.html
     - gcovr --add-tracefile 'coverage-*.json'
-        --xml --output coverage-report/coverage.xml
+      --xml --output coverage-report/coverage.xml
   artifacts:
-    expose_as: 'Coverage Report'
+    expose_as: "Coverage Report"
     paths:
       - coverage-report
       - coverage-report/index.html
@@ -263,4 +300,21 @@ coverage:
         path: coverage-report/coverage.xml
   coverage: '/^lines: (\d+\.\d+\%)/'
   needs:
-    - fedora-32-clang
+    - fedora-gcc
+
+release-tarball:
+  image: $FEDORA_IMAGE
+  stage: release
+  before_script:
+    - dnf update -y --nogpgcheck
+    - dnf install -y --nogpgcheck ${FEDORA_DEPS}
+  script:
+    - export LC_ALL=C.UTF-8
+    - git config --global --add safe.directory $CI_PROJECT_DIR
+    - meson setup build
+    - meson dist -C build
+  artifacts:
+    paths:
+      - "build/meson-dist/*.xz"
+  needs:
+    - fedora-gcc
