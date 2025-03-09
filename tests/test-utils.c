@@ -68,7 +68,7 @@ static struct filter_test {
   {
     (const char *[]) { KGX_BIN_NAME, "--command=true", NULL },
     PLAIN_KGX,
-    (const char *[]) { "/usr/bin/true", NULL },
+    (const char *[]) { TRUE_BIN_PATH, NULL },
   },
   {
     (const char *[]) { KGX_BIN_NAME, "--command=foo", "--command=bar", NULL },
@@ -78,7 +78,7 @@ static struct filter_test {
   {
     (const char *[]) { KGX_BIN_NAME, "-e", "true", NULL },
     PLAIN_KGX,
-    (const char *[]) { "/usr/bin/true", NULL },
+    (const char *[]) { TRUE_BIN_PATH, NULL },
   },
   {
     (const char *[]) { KGX_BIN_NAME, "--", "true", NULL },
