@@ -81,7 +81,7 @@ void
 kgx_about_print_logo (void)
 {
   g_autofree char *copyright = g_strdup_printf (_("© %s Zander Brown"),
-                                                "2019-2024");
+                                                "2019-2025");
   struct winsize w;
   int padding = 0;
 
