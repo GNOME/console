@@ -9,11 +9,10 @@ kgx_pids_enums = gnome.mkenums_simple(
 
 kgx_pids_lib = static_library(
   '@0@-pids'.format(bin_name),
-  kgx_pids_sources + kgx_pids_enums,
+  kgx_pids_sources + kgx_pids_enums + config_h,
   dependencies: [gtop_dep, gio_unix_dep],
   c_args: kgx_cargs,
   install: false,
-  include_directories: config_h_inc,
   gnu_symbol_visibility: 'internal',
 )
 kgx_pids_inc = include_directories('.')

@@ -1,6 +1,6 @@
 project('gnome-console', 'c',
                   version: '49.alpha',
-            meson_version: '>= 0.59.0',
+            meson_version: '>= 1.5.0',
                   license: 'GPL-3.0-or-later',
           default_options: [
                              'buildtype=debugoptimized',
@@ -43,6 +43,8 @@ else
   package_version = meson.project_version()
 endif
 
+copyright_range = '2019-2025'
+
 prefix = get_option('prefix')
 bindir = prefix / get_option('bindir')
 libdir = prefix / get_option('libdir')
@@ -64,6 +66,8 @@ conf.set_quoted('LOCALEDIR', prefix / get_option('localedir'))
 conf.set('BIN_DIR', prefix / bindir)
 conf.set('BIN_NAME', bin_name)
 conf.set_quoted('KGX_BIN_NAME', bin_name)
+conf.set_quoted('KGX_COPYRIGHT_RANGE', copyright_range)
+conf.set('KGX_COPYRIGHT_RANGE_RAW', copyright_range)
 conf.set('IS_DEVEL', get_option('devel'))
 
 if get_option('tests')
@@ -78,7 +82,6 @@ config_h = vcs_tag( input: config_h_in,
                    output: 'kgx-config.h',
                   command: ['git', 'rev-parse', '--short', 'HEAD'],
                  fallback: 'Devel')
-config_h_inc = include_directories('.')
 
 # Gtk Requirement
 gtk_min_ver = '4.14'

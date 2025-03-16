@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2019-2025 Zander Brown -->
+<!-- Copyright @KGX_COPYRIGHT_RANGE_RAW@ Zander Brown -->
 <component type="desktop-application">
   <id>@KGX_APPLICATION_ID_RAW@</id>
   <metadata_license>CC0-1.0</metadata_license>
