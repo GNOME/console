@@ -27,11 +27,14 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="48.0.1" date="2025-03-16" type="stable" />
     <release version="48.0" date="2025-03-15" type="stable">
-      <p>Updated Translations:</p>
-      <ul>
-        <li>Punjabi</li>
-      </ul>
+      <description>
+        <p>Updated Translations:</p>
+        <ul>
+          <li>Punjabi</li>
+        </ul>
+      </description>
     </release>
     <release version="48~rc" date="2025-03-09" type="development">
       <description>
