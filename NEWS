@@ -1,3 +1,21 @@
+Version 47.2
+~~~~~~~~~~~~
+
+Includes a small workaround for Gtk deciding to break applications, whilst
+this should be sufficient to avoid the crash it is recommended to either use
+48.0.1 or patch/downgrade Gtk.
+
+Updated Translations:
+ * Brazilian Portuguese  (Rafael Fontenelle)
+ * Dutch  (Nathan Follens)
+ * French  (Alexandre Franke, Vincent Chatelain)
+ * German  (Christian Kirbach)
+ * Indonesian  (Andika Triwidada)
+ * Lithuanian  (Aurimas Černius)
+ * Occitan  (Quentin PAGÈS)
+ * Serbian  (Марко Костић)
+ * Turkish  (Sabri Ünal)
+
 Version 47.1
 ~~~~~~~~~~~~
 

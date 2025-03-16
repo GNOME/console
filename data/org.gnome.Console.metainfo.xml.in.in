@@ -31,6 +31,22 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="47.2" date="2025-03-16" type="stable">
+      <description>
+        <p>Updated Translations:</p>
+        <ul>
+          <li>Brazilian Portuguese</li>
+          <li>Dutch</li>
+          <li>French</li>
+          <li>German</li>
+          <li>Indonesian</li>
+          <li>Lithuanian</li>
+          <li>Occitan</li>
+          <li>Serbian</li>
+          <li>Turkish</li>
+        </ul>
+      </description>
+    </release>
     <release version="47.1" date="2024-09-18" type="stable">
       <description>
         <p>Minor fixes</p>
