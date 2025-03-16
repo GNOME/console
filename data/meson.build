@@ -1,7 +1,8 @@
-src_datadir = meson.current_source_dir()
-
-desktop_utils = find_program('desktop-file-validate', required: false)
-appstreamcli = find_program('appstreamcli', required: false)
+desktop_utils = find_program(
+ 'desktop-file-validate',
+ required: get_option('tests'),
+)
+appstreamcli = find_program('appstreamcli', required: get_option('tests'))
 compile_schemas = find_program('glib-compile-schemas')
 
 desktop_filename = 'org.gnome.Console.desktop.in.in'
@@ -24,10 +25,8 @@ desktop_file = i18n.merge_file(
       install_dir: datadir / 'applications'
 )
 
-if desktop_utils.found() and get_option('tests')
-  test('Validate desktop file', desktop_utils,
-    args: [desktop_file]
-  )
+if get_option('tests')
+ test('Validate desktop file', desktop_utils, args: [desktop_file])
 endif
 
 appstream_file = i18n.merge_file(
@@ -42,10 +41,12 @@ appstream_file = i18n.merge_file(
       install_dir: datadir / 'metainfo'
 )
 
-if appstreamcli.found() and get_option('tests')
-  test('Validate appstream file', appstreamcli,
-    args: ['validate', '--no-net', '--explain', appstream_file]
-  )
+if get_option('tests')
+ test(
+  'Validate appstream file',
+  appstreamcli,
+  args: ['validate', '--no-net', '--explain', appstream_file],
+ )
 endif
 
 schema_file = configure_file(
@@ -63,9 +64,13 @@ kgx_schemas = custom_target('kgx-schemas',
 )
 meson.add_devenv({'GSETTINGS_SCHEMA_DIR': meson.current_build_dir()})
 
-test('Validate schema file', compile_schemas,
-            args: ['--strict', '--dry-run', meson.current_build_dir()]
-)
+if get_option('tests')
+ test(
+  'Validate schema file',
+  compile_schemas,
+  args: ['--strict', '--dry-run', meson.current_build_dir()],
+ )
+endif
 
 configure_file(
            input: 'org.gnome.Console.service.in',

@@ -5,5 +5,5 @@ option('devel',
 
 option('tests',
        type: 'boolean',
-       value: false,
+       value: true,
        description: 'Enable tests')
