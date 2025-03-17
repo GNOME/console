@@ -2,6 +2,7 @@ tests = [
   'colour-utils',
   'livery',
   'palette',
+  'shared-closures',
   'utils',
 ]
 

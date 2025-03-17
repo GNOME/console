@@ -20,6 +20,8 @@
 
 #include <adwaita.h>
 
+#include "kgx-utils.h"
+
 G_BEGIN_DECLS
 
 
@@ -47,5 +49,34 @@ kgx_gtk_settings_for_display (G_GNUC_UNUSED GObject *self,
 
   return g_object_ref (gtk_settings_get_for_display (display));
 }
+
+
+G_GNUC_UNUSED
+static char *
+kgx_text_or_fallback (G_GNUC_UNUSED GObject *self,
+                      const char            *text,
+                      const char            *fallback)
+{
+  if (!kgx_str_non_empty (text)) {
+    return g_strdup (fallback);
+  }
+
+  return g_strdup (text);
+}
+
+
+G_GNUC_UNUSED
+static GObject *
+kgx_object_or_fallback (G_GNUC_UNUSED GObject *self,
+                        GObject               *object,
+                        GObject               *fallback)
+{
+  if (G_UNLIKELY (!object)) {
+    return fallback ? g_object_ref (fallback) : NULL;
+  }
+
+  return g_object_ref (object);
+}
+
 
 G_END_DECLS
