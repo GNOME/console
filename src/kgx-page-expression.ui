@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0" />
+  <template class="AdwTabPage">
+    <binding name="title">
+      <closure type='gchararray' function='kgx_text_or_fallback'>
+        <lookup name="tab-title" type="KgxTab">
+          <lookup name="child">AdwTabPage</lookup>
+        </lookup>
+        <closure type='gchararray' function='fallback_title'>
+          <lookup name="child">AdwTabPage</lookup>
+        </closure>
+      </closure>
+    </binding>
+    <binding name="tooltip">
+      <lookup name="tab-tooltip" type="KgxTab">
+        <lookup name="child">AdwTabPage</lookup>
+      </lookup>
+    </binding>
+    <binding name="needs-attention">
+      <lookup name="needs-attention" type="KgxTab">
+        <lookup name="child">AdwTabPage</lookup>
+      </lookup>
+    </binding>
+    <binding name="loading">
+      <lookup name="working" type="KgxTab">
+        <lookup name="child">AdwTabPage</lookup>
+      </lookup>
+    </binding>
+    <binding name="icon">
+      <closure type='GIcon' function='status_as_icon'>
+        <lookup name="tab-status" type="KgxTab">
+          <lookup name="child">AdwTabPage</lookup>
+        </lookup>
+      </closure>
+    </binding>
+    <binding name="keyword">
+      <closure type='gchararray' function='path_as_keyword'>
+        <lookup name="tab-path" type="KgxTab">
+          <lookup name="child">AdwTabPage</lookup>
+        </lookup>
+      </closure>
+    </binding>
+    <binding name="indicator-icon">
+      <closure type='GIcon' function='ringing_as_icon'>
+        <lookup name="ringing" type="KgxTab">
+          <lookup name="child">AdwTabPage</lookup>
+        </lookup>
+      </closure>
+    </binding>
+  </template>
+</interface>
