@@ -67,7 +67,16 @@ struct _KgxPagesPrivate {
 };
 
 
-G_DEFINE_TYPE_WITH_PRIVATE (KgxPages, kgx_pages, ADW_TYPE_BIN)
+typedef struct _KgxPagesClassPrivate KgxPagesClassPrivate;
+struct _KgxPagesClassPrivate {
+  GBytes          *page_expression_data;
+  GtkBuilderScope *page_expression_scope;
+};
+
+
+G_DEFINE_TYPE_WITH_CODE (KgxPages, kgx_pages, ADW_TYPE_BIN,
+                         G_ADD_PRIVATE (KgxPages)
+                         g_type_add_class_private (g_define_type_id, sizeof (KgxPagesClassPrivate)))
 
 
 enum {
@@ -456,82 +465,57 @@ setup_menu (AdwTabView *view,
 }
 
 
-static gboolean
-title_to_title (GBinding     *binding,
-                const GValue *from_value,
-                GValue       *to_value,
-                gpointer      user_data)
+static char *
+fallback_title (G_GNUC_UNUSED GObject *self,
+                KgxTab                *tab)
 {
-  KgxTab *tab = KGX_TAB (user_data);
-  g_autofree char *title = g_value_dup_string (from_value);
-
-  if (G_UNLIKELY (!title)) {
-    /* Translators: %i is, from the users perspective, a random number.
-     * this string will only be seen when the running program has
-     * failed to set a title, and exists purely to avoid blank tabs
-     */
-    g_autofree char *placeholder = g_strdup_printf (_("Tab %i"),
-                                                    kgx_tab_get_id (tab));
-
-    g_set_str (&title, placeholder);
-  }
-
-  g_value_take_string (to_value, g_steal_pointer (&title));
-
-  return TRUE;
+  /* Translators: %i is, from the users perspective, a random number.
+   * this string will only be seen when the running program has
+   * failed to set a title, and exists purely to avoid blank tabs
+   */
+  return g_strdup_printf (_("Tab %i"), kgx_tab_get_id (tab));
 }
 
 
-static gboolean
-status_to_icon (GBinding     *binding,
-                const GValue *from_value,
-                GValue       *to_value,
-                gpointer      user_data)
+static GIcon *
+status_as_icon (G_GNUC_UNUSED GObject *self,
+                KgxStatus              status)
 {
-  KgxStatus status = g_value_get_flags (from_value);
+  if (status & KGX_REMOTE) {
+    return g_themed_icon_new ("status-remote-symbolic");
+  } else if (status & KGX_PRIVILEGED) {
+    return g_themed_icon_new ("status-privileged-symbolic");
+  }
 
-  if (status & KGX_REMOTE)
-    g_value_take_object (to_value, g_themed_icon_new ("status-remote-symbolic"));
-  else if (status & KGX_PRIVILEGED)
-    g_value_take_object (to_value, g_themed_icon_new ("status-privileged-symbolic"));
-  else
-    g_value_set_object (to_value, NULL);
-
-  return TRUE;
+  return NULL;
 }
 
 
-static gboolean
-path_to_keyword (GBinding     *binding,
-                 const GValue *from_value,
-                 GValue       *to_value,
-                 gpointer      user_data)
+static char *
+path_as_keyword (G_GNUC_UNUSED GObject *self,
+                 GFile                 *path)
 {
-  GFile *path = g_value_get_object (from_value);
+  g_autofree char *raw_path = NULL;
 
-  if (path) {
-    g_value_take_string (to_value, g_file_get_path (path));
-  } else {
-    g_value_set_static_string (to_value, "");
+  if (!path) {
+    return NULL;
   }
 
-  return TRUE;
+  raw_path = g_file_get_path (path);
+
+  return g_filename_display_name (raw_path);
 }
 
 
-static gboolean
-ringing_to_icon (GBinding     *binding,
-                 const GValue *from_value,
-                 GValue       *to_value,
-                 gpointer      user_data)
+static GIcon *
+ringing_as_icon (G_GNUC_UNUSED GObject *self,
+                 gboolean               ringing)
 {
-  if (g_value_get_boolean (from_value)) {
-    g_value_take_object (to_value, g_themed_icon_new ("bell-outline-symbolic"));
-  } else {
-    g_value_set_object (to_value, NULL);
+  if (ringing) {
+    return g_themed_icon_new ("bell-outline-symbolic");
   }
 
-  return TRUE;
+  return NULL;
 }
 
 
@@ -552,8 +536,13 @@ object_accumulator (GSignalInvocationHint *ihint,
 static void
 kgx_pages_class_init (KgxPagesClass *klass)
 {
+  g_autoptr (GFile) file =
+    g_file_new_for_uri ("resource://" KGX_APPLICATION_PATH "kgx-page-expression.ui");
+  g_autoptr (GError) error = NULL;
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  KgxPagesClassPrivate *class_priv =
+    G_TYPE_CLASS_GET_PRIVATE (klass, KGX_TYPE_PAGES, KgxPagesClassPrivate);
 
   object_class->dispose = kgx_pages_dispose;
   object_class->get_property = kgx_pages_get_property;
@@ -709,9 +698,26 @@ kgx_pages_class_init (KgxPagesClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, create_window);
   gtk_widget_class_bind_template_callback (widget_class, close_page);
   gtk_widget_class_bind_template_callback (widget_class, setup_menu);
+
   gtk_widget_class_bind_template_callback (widget_class, kgx_style_manager_for_display);
+  gtk_widget_class_bind_template_callback (widget_class, kgx_text_or_fallback);
+  gtk_widget_class_bind_template_callback (widget_class, kgx_object_or_fallback);
 
   gtk_widget_class_set_css_name (widget_class, "pages");
+
+  class_priv->page_expression_data = g_file_load_bytes (file, NULL, NULL, &error);
+  if (error) {
+    g_critical ("pages: Failed to load template: %s", error->message);
+  }
+
+  class_priv->page_expression_scope = gtk_builder_cscope_new ();
+  gtk_builder_cscope_add_callback_symbols (GTK_BUILDER_CSCOPE (class_priv->page_expression_scope),
+                                           "kgx_text_or_fallback", G_CALLBACK (kgx_text_or_fallback),
+                                           "fallback_title", G_CALLBACK (fallback_title),
+                                           "status_as_icon", G_CALLBACK (status_as_icon),
+                                           "path_as_keyword", G_CALLBACK (path_as_keyword),
+                                           "ringing_as_icon", G_CALLBACK (ringing_as_icon),
+                                           NULL);
 }
 
 
@@ -766,30 +772,39 @@ void
 kgx_pages_add_page (KgxPages *self,
                     KgxTab   *tab)
 {
+  KgxPagesClassPrivate *class_priv;
   KgxPagesPrivate *priv;
   AdwTabPage *page;
+  size_t length;
+  const char *buffer;
+  g_autoptr (GtkBuilder) builder = gtk_builder_new ();
+  g_autoptr (GError) error = NULL;
 
   g_return_if_fail (KGX_IS_PAGES (self));
+  g_return_if_fail (KGX_IS_TAB (tab));
+
+  class_priv =
+    G_TYPE_CLASS_GET_PRIVATE (G_OBJECT_GET_CLASS (self), KGX_TYPE_PAGES, KgxPagesClassPrivate);
 
   priv = kgx_pages_get_instance_private (self);
 
   kgx_tab_set_initial_title (tab, priv->title, priv->path);
 
   page = adw_tab_view_add_page (ADW_TAB_VIEW (priv->view), GTK_WIDGET (tab), NULL);
-  g_object_bind_property_full (tab, "tab-title",
-                               page, "title",
-                               G_BINDING_SYNC_CREATE,
-                               title_to_title, NULL,
-                               tab, NULL);
-  g_object_bind_property (tab, "tab-tooltip", page, "tooltip", G_BINDING_SYNC_CREATE);
-  g_object_bind_property (tab, "needs-attention", page, "needs-attention", G_BINDING_SYNC_CREATE);
-  g_object_bind_property (tab, "working", page, "loading", G_BINDING_SYNC_CREATE);
-  g_object_bind_property_full (tab, "tab-status", page, "icon", G_BINDING_SYNC_CREATE,
-                               status_to_icon, NULL, NULL, NULL);
-  g_object_bind_property_full (tab, "tab-path", page, "keyword", G_BINDING_SYNC_CREATE,
-                               path_to_keyword, NULL, NULL, NULL);
-  g_object_bind_property_full (tab, "ringing", page, "indicator-icon", G_BINDING_SYNC_CREATE,
-                               ringing_to_icon, NULL, NULL, NULL);
+
+  gtk_builder_set_current_object (builder, G_OBJECT (page));
+  gtk_builder_set_scope (builder, class_priv->page_expression_scope);
+
+  buffer = g_bytes_get_data (class_priv->page_expression_data, &length);
+
+  if (!gtk_builder_extend_with_template (builder,
+                                         G_OBJECT (page),
+                                         ADW_TYPE_TAB_PAGE,
+                                         buffer,
+                                         length,
+                                         &error)) {
+    g_critical ("pages: Tab setup failed: %s", error->message);
+  }
 }
 
 
