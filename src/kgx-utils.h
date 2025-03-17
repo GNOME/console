@@ -197,6 +197,24 @@ kgx_str_constrained_dup (const char *source, size_t max_len)
 }
 
 
+static inline gboolean
+kgx_str_non_empty (const char *str)
+{
+  const char *first_non_space = str;
+
+  if (first_non_space == NULL) {
+    return FALSE;
+  }
+
+  while (*first_non_space &&
+         g_unichar_isspace (g_utf8_get_char (first_non_space))) {
+    first_non_space = g_utf8_next_char (first_non_space);
+  }
+
+  return *first_non_space;
+}
+
+
 typedef enum /*< enum,prefix=KGX >*/ {
   KGX_ARGUMENT_ERROR_BOTH,
   KGX_ARGUMENT_ERROR_MISSING,

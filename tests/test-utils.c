@@ -256,6 +256,33 @@ test_parse_percentage (gconstpointer user_data)
 }
 
 
+struct non_empty_test {
+  const char *text;
+  gboolean expected;
+} non_empty_cases[] = {
+  { NULL, FALSE },
+  { "", FALSE },
+  { " ", FALSE },
+  { "\t", FALSE },
+  { "hello", TRUE },
+  { " world", TRUE },
+};
+
+
+static void
+test_str_non_empty (gconstpointer user_data)
+{
+  const struct non_empty_test *test = user_data;
+  gboolean result = kgx_str_non_empty (test->text);
+
+  if (test->expected) {
+    g_assert_true (result);
+  } else {
+    g_assert_false (result);
+  }
+}
+
+
 int
 main (int argc, char *argv[])
 {
@@ -275,6 +302,13 @@ main (int argc, char *argv[])
       g_strdup_printf ("/kgx/utils/str_constrained_dup/case_%" G_GSIZE_FORMAT, i);
 
     g_test_add_data_func (path, &constrained_cases[i], test_str_constrained_dup);
+  }
+
+  for (size_t i = 0; i < G_N_ELEMENTS (non_empty_cases); i++) {
+    g_autofree char *path =
+      g_strdup_printf ("/kgx/utils/str_non_empty/case_%" G_GSIZE_FORMAT, i);
+
+    g_test_add_data_func (path, &non_empty_cases[i], test_str_non_empty);
   }
 
   for (size_t i = 0; i < G_N_ELEMENTS (parse_cases); i++) {
