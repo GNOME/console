@@ -42,8 +42,12 @@
   </menu>
   <template class="KgxWindow" parent="AdwApplicationWindow">
     <binding name="title">
-      <closure type='gchararray' function='title_or_fallback'>
+      <closure type="gchararray" function="kgx_text_or_fallback">
         <lookup name="title">pages</lookup>
+        <!-- TODO: Gtk 4.20:
+        <constant type="gchararray" translatable="yes">Console</constant>
+        -->
+        <closure type="gchararray" function="fallback_title" />
       </closure>
     </binding>
     <binding name="translucent">
