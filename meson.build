@@ -84,8 +84,13 @@ config_h = vcs_tag( input: config_h_in,
                  fallback: 'Devel')
 
 # Gtk Requirement
-gtk_min_ver = '4.14'
-gtk_sym_ver = 'GDK_VERSION_@0@'.format(gtk_min_ver.replace('.', '_'))
+gtk_min_ver = '4.19'
+gtk_min_ver_parts = gtk_min_ver.split('.')
+if gtk_min_ver_parts[1].to_int().is_odd()
+  gtk_sym_ver = 'GDK_VERSION_@0@_@1@'.format(gtk_min_ver_parts[0], gtk_min_ver_parts[1].to_int() + 1)
+else
+  gtk_sym_ver = 'GDK_VERSION_@0@@_@_@1@'.format(gtk_min_ver_parts[0], gtk_min_ver_parts[1])
+endif
 
 # GLib Requirement
 glib_min_ver = '2.80'
@@ -153,10 +158,10 @@ add_project_arguments(global_cargs, language: 'c')
 
 gio_dep = dependency('gio-2.0', version: '>= @0@'.format(glib_min_ver))
 gio_unix_dep = dependency('gio-unix-2.0', version: '>= @0@'.format(glib_min_ver))
-pango_dep = dependency('pango', version: '>= 1.51.2')
 adw_dep = dependency('libadwaita-1', version: '>= @0@'.format(adw_min_ver))
 vte_dep = dependency('vte-2.91-gtk4', version: '>= 0.77.0')
 gtk_dep = dependency('gtk4', version: '>= @0@'.format(gtk_min_ver))
+pango_dep = dependency('pango', version: '>= 1.51.2')
 gtop_dep = dependency('libgtop-2.0')
 pcre_dep = dependency('libpcre2-8', version: '>= 10.32')
 schemas_dep = dependency('gsettings-desktop-schemas')

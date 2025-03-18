@@ -42,8 +42,9 @@
   </menu>
   <template class="KgxWindow" parent="AdwApplicationWindow">
     <binding name="title">
-      <closure type='gchararray' function='title_or_fallback'>
+      <closure type="gchararray" function="kgx_text_or_fallback">
         <lookup name="title">pages</lookup>
+        <constant type="gchararray" translatable="yes">Console</constant>
       </closure>
     </binding>
     <binding name="translucent">

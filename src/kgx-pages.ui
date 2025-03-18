@@ -8,14 +8,24 @@
       </lookup>
     </binding>
     <binding name="title">
-      <lookup name="tab-title">
-        <lookup name="active-page">KgxPages</lookup>
-      </lookup>
+      <closure type='gchararray' function='kgx_text_or_fallback'>
+        <lookup name="tab-title">
+          <lookup name="active-page">KgxPages</lookup>
+        </lookup>
+        <lookup name="initial-title">
+          <lookup name="active-page">KgxPages</lookup>
+        </lookup>
+      </closure>
     </binding>
     <binding name="path">
-      <lookup name="tab-path">
-        <lookup name="active-page">KgxPages</lookup>
-      </lookup>
+      <closure type='GFile' function='kgx_object_or_fallback'>
+        <lookup name="tab-path">
+          <lookup name="active-page">KgxPages</lookup>
+        </lookup>
+        <lookup name="initial-path">
+          <lookup name="active-page">KgxPages</lookup>
+        </lookup>
+      </closure>
     </binding>
     <binding name="status">
       <lookup name="tab-status">

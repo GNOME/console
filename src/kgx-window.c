@@ -381,17 +381,6 @@ breakpoint_unapplied (KgxWindow *self)
 
 
 static char *
-title_or_fallback (GObject *object, const char *title)
-{
-  if (G_UNLIKELY (!title || !title[0])) {
-    return g_strdup (KGX_DISPLAY_NAME);
-  }
-
-  return g_strdup (title);
-}
-
-
-static char *
 path_as_subtitle (GObject *object, GFile *file, const char *window_title)
 {
   g_autoptr (GFile) home = NULL;
@@ -664,11 +653,11 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, create_tab_cb);
   gtk_widget_class_bind_template_callback (widget_class, breakpoint_applied);
   gtk_widget_class_bind_template_callback (widget_class, breakpoint_unapplied);
-  gtk_widget_class_bind_template_callback (widget_class, title_or_fallback);
   gtk_widget_class_bind_template_callback (widget_class, path_as_subtitle);
   gtk_widget_class_bind_template_callback (widget_class, scale_as_label);
   gtk_widget_class_bind_template_callback (widget_class, decoration_is_inverted);
   gtk_widget_class_bind_template_callback (widget_class, kgx_gtk_settings_for_display);
+  gtk_widget_class_bind_template_callback (widget_class, kgx_text_or_fallback);
 
   gtk_widget_class_install_action (widget_class, "tab.close", NULL, close_tab_activated);
   gtk_widget_class_install_action (widget_class, "tab.detach", NULL, detach_tab_activated);

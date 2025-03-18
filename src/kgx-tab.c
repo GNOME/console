@@ -65,6 +65,10 @@ struct _KgxTabPrivate {
 
   GCancellable         *cancellable;
 
+  char                 *initial_title;
+  GFile                *initial_path;
+  guint                 initial_timeout;
+
   KgxDropTarget        *drop_target;
 
   GtkWidget            *stack;
@@ -107,6 +111,8 @@ enum {
   PROP_DROPPING,
   PROP_WORKING,
   PROP_CANCELLABLE,
+  PROP_INITIAL_TITLE,
+  PROP_INITIAL_PATH,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -153,6 +159,10 @@ kgx_tab_dispose (GObject *object)
   g_clear_object (&priv->path);
 
   g_clear_handle_id (&priv->ringing_timeout, g_source_remove);
+
+  g_clear_pointer (&priv->initial_title, g_free);
+  g_clear_object (&priv->initial_path);
+  g_clear_handle_id (&priv->initial_timeout, g_source_remove);
 
   g_clear_pointer (&priv->last_search, g_free);
 
@@ -341,10 +351,45 @@ kgx_tab_get_property (GObject    *object,
     case PROP_CANCELLABLE:
       g_value_set_object (value, priv->cancellable);
       break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+    case PROP_INITIAL_TITLE:
+      g_value_set_string (value, priv->initial_title);
       break;
+    case PROP_INITIAL_PATH:
+      g_value_set_object (value, priv->initial_path);
+      break;
+    KGX_INVALID_PROP (object, property_id, pspec);
   }
+}
+
+
+static void
+clear_initial (gpointer data)
+{
+  KgxTab *self = data;
+  KgxTabPrivate *priv;
+
+  g_return_if_fail (KGX_IS_TAB (self));
+
+  priv = kgx_tab_get_instance_private (self);
+
+  priv->initial_timeout = 0;
+
+  g_clear_pointer (&priv->initial_title, g_free);
+  g_clear_object (&priv->initial_path);
+
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_INITIAL_TITLE]);
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_INITIAL_PATH]);
+}
+
+
+static void inline
+schedule_clear_initial (KgxTab *self)
+{
+  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
+
+  g_clear_handle_id (&priv->initial_timeout, g_source_remove);
+  priv->initial_timeout = g_timeout_add_once (200, clear_initial, self);
+  g_source_set_name_by_id (priv->initial_timeout, "[kgx] clear initial title");
 }
 
 
@@ -407,9 +452,18 @@ kgx_tab_set_property (GObject      *object,
     case PROP_DROPPING:
       kgx_set_boolean_prop (object, pspec, &priv->dropping, value);
       break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+    case PROP_INITIAL_TITLE:
+      if (kgx_set_str_prop (object, pspec, &priv->initial_title, value)) {
+        schedule_clear_initial (self);
+      }
       break;
+    case PROP_INITIAL_PATH:
+      if (g_set_object (&priv->initial_path, g_value_get_object (value))) {
+        schedule_clear_initial (self);
+        g_object_notify_by_pspec (object, pspecs[PROP_INITIAL_PATH]);
+      }
+      break;
+    KGX_INVALID_PROP (object, property_id, pspec);
   }
 }
 
@@ -653,6 +707,16 @@ kgx_tab_class_init (KgxTabClass *klass)
     g_param_spec_object ("cancellable", NULL, NULL,
                          G_TYPE_CANCELLABLE,
                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
+
+  pspecs[PROP_INITIAL_TITLE] =
+    g_param_spec_string ("initial-title", NULL, NULL,
+                         NULL,
+                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
+
+  pspecs[PROP_INITIAL_PATH] =
+    g_param_spec_object ("initial-path", NULL, NULL,
+                         G_TYPE_FILE,
+                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 
@@ -1075,18 +1139,11 @@ kgx_tab_set_initial_title (KgxTab     *self,
                            const char *title,
                            GFile      *path)
 {
-  KgxTabPrivate *priv;
-
   g_return_if_fail (KGX_IS_TAB (self));
 
-  priv = kgx_tab_get_instance_private (self);
-
-  if (priv->title || priv->path)
-    return;
-
   g_object_set (self,
-                "tab-title", title,
-                "tab-path", path,
+                "initial-title", title,
+                "initial-path", path,
                 NULL);
 }
 
