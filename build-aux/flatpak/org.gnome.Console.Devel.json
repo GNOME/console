@@ -1,10 +1,15 @@
 {
-    "app-id" : "org.gnome.Console.Devel",
-    "runtime" : "org.gnome.Platform",
-    "runtime-version" : "master",
-    "sdk" : "org.gnome.Sdk",
-    "command" : "kgx-devel",
-    "finish-args" : [
+    "app-id": "org.gnome.Console.Devel",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "master",
+    "sdk": "org.gnome.Sdk",
+    "command": "kgx-devel",
+    "tags": [
+        "devel",
+        "development",
+        "nightly"
+    ],
+    "finish-args": [
         "--device=dri",
         "--share=ipc",
         "--socket=fallback-x11",
@@ -12,7 +17,7 @@
         "--talk-name=org.gtk.vfs.*",
         "--filesystem=xdg-run/gvfsd"
     ],
-    "cleanup" : [
+    "cleanup": [
         "/include",
         "/lib/pkgconfig",
         "/man",
@@ -23,71 +28,82 @@
         "*.la",
         "*.a"
     ],
-    "modules" : [
+    "modules": [
         {
-            "name" : "fast_float",
-            "buildsystem" : "cmake-ninja",
-            "sources" : [
+            "name": "fast_float",
+            "buildsystem": "cmake-ninja",
+            "sources": [
                 {
-                    "type" : "git",
-                    "url" : "https://github.com/fastfloat/fast_float.git",
-                    "tag" : "v6.1.6"
+                    "type": "git",
+                    "url": "https://github.com/fastfloat/fast_float.git",
+                    "tag": "v6.1.6"
                 }
             ]
         },
         {
-            "name" : "simdutf",
-            "buildsystem" : "cmake-ninja",
-            "config-opts" : [
-                "-DCMAKE_POSITION_INDEPENDENT_CODE=TRUE", 
-                "-DCMAKE_CXX_VISIBILITY_PRESET=hidden", 
+            "name": "simdutf",
+            "buildsystem": "cmake-ninja",
+            "config-opts": [
+                "-DCMAKE_POSITION_INDEPENDENT_CODE=TRUE",
+                "-DCMAKE_CXX_VISIBILITY_PRESET=hidden",
                 "-DCMAKE_VISIBILITY_INLINES_HIDDEN=TRUE"
             ],
-            "sources" : [
+            "sources": [
                 {
-                    "type" : "git",
-                    "url" : "https://github.com/simdutf/simdutf",
-                    "tag" : "v6.4.0"
+                    "type": "git",
+                    "url": "https://github.com/simdutf/simdutf",
+                    "tag": "v6.4.0"
                 }
             ]
         },
         {
-            "name" : "vte",
-            "config-opts" : [
+            "name": "vte",
+            "config-opts": [
                 "-Dgir=false",
                 "-Dvapi=false",
                 "-Dgtk3=false",
                 "-Dgtk4=true"
             ],
-            "buildsystem" : "meson",
-            "sources" : [
+            "buildsystem": "meson",
+            "sources": [
                 {
-                    "type" : "git",
-                    "url" : "https://gitlab.gnome.org/GNOME/vte.git"
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/vte.git"
                 }
             ]
         },
         {
-            "name" : "libgtop",
-            "buildsystem" : "autotools",
-            "sources" : [
+            "name": "libgtop",
+            "buildsystem": "autotools",
+            "sources": [
                 {
-                    "type" : "git",
-                    "url" : "https://gitlab.gnome.org/GNOME/libgtop.git"
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/libgtop.git"
                 }
             ]
         },
         {
-            "name" : "gnome-console",
-            "builddir" : true,
-            "buildsystem" : "meson",
-            "config-opts" : [
+            "name": "gnome-console",
+            "run-tests": true,
+            "builddir": true,
+            "buildsystem": "meson",
+            "build-options": {
+                "test-args": [
+                    "--device=dri",
+                    "--share=ipc",
+                    "--socket=fallback-x11",
+                    "--socket=wayland",
+                    "--talk-name=org.gtk.vfs.*",
+                    "--filesystem=xdg-run/gvfsd"
+                ]
+            },
+            "config-opts": [
                 "-Ddevel=true"
             ],
-            "sources" : [
+            "sources": [
                 {
-                    "type" : "dir",
-                    "path" : "../../"
+                    "type": "dir",
+                    "path": "../../"
                 }
             ]
         }
