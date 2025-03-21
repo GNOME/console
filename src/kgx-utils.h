@@ -214,7 +214,7 @@ kgx_str_constrained_dup (const char *source, size_t max_len)
   g_autoptr (GString) buffer = NULL;
   size_t source_len = strlen (source);
 
-  if (G_LIKELY (source_len < max_len)) {
+  if (G_LIKELY (source_len <= max_len)) {
     return g_strdup (source);
   }
 
