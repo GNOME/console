@@ -3,6 +3,7 @@ tests = [
   'livery',
   'palette',
   'shared-closures',
+  'tab',
   'utils',
 ]
 
