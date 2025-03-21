@@ -21,6 +21,248 @@
 #include "kgx-utils.h"
 
 
+#define KGX_TYPE_TEST_OBJECT (kgx_test_object_get_type ())
+
+G_DECLARE_FINAL_TYPE (KgxTestObject, kgx_test_object, KGX, TEST_OBJECT, GObject)
+
+
+struct _KgxTestObject {
+  GObject parent;
+
+  gboolean a_bool;
+  int64_t a_int64;
+  char *a_string;
+};
+
+
+G_DEFINE_FINAL_TYPE (KgxTestObject, kgx_test_object, G_TYPE_OBJECT)
+
+
+enum {
+  PROP_0,
+  PROP_A_BOOL,
+  PROP_A_INT64,
+  PROP_A_STRING,
+  LAST_PROP
+};
+static GParamSpec *pspecs[LAST_PROP] = { NULL, };
+
+
+static void
+kgx_test_object_dispose (GObject *object)
+{
+  KgxTestObject *self = KGX_TEST_OBJECT (object);
+
+  g_clear_pointer (&self->a_string, g_free);
+}
+
+
+static void
+kgx_test_object_get_property (GObject    *object,
+                              guint       property_id,
+                              GValue     *value,
+                              GParamSpec *pspec)
+{
+  KgxTestObject *self = KGX_TEST_OBJECT (object);
+
+  switch (property_id) {
+    case PROP_A_BOOL:
+      g_value_set_boolean (value, self->a_bool);
+      break;
+    case PROP_A_INT64:
+      g_value_set_int64 (value, self->a_int64);
+      break;
+    case PROP_A_STRING:
+      g_value_set_string (value, self->a_string);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+      break;
+  }
+}
+
+
+static void
+kgx_test_object_set_property (GObject      *object,
+                              guint         property_id,
+                              const GValue *value,
+                              GParamSpec   *pspec)
+{
+  KgxTestObject *self = KGX_TEST_OBJECT (object);
+
+  switch (property_id) {
+    case PROP_A_BOOL:
+      kgx_set_boolean_prop (object, pspec, &self->a_bool, value);
+      break;
+    case PROP_A_INT64:
+      kgx_set_int64_prop (object, pspec, &self->a_int64, value);
+      break;
+    case PROP_A_STRING:
+      kgx_set_str_prop (object, pspec, &self->a_string, value);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+      break;
+  }
+}
+
+
+static void
+kgx_test_object_class_init (KgxTestObjectClass *klass)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  object_class->dispose = kgx_test_object_dispose;
+  object_class->get_property = kgx_test_object_get_property;
+  object_class->set_property = kgx_test_object_set_property;
+
+  pspecs[PROP_A_BOOL] =
+    g_param_spec_boolean ("a-bool", NULL, NULL,
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
+
+  pspecs[PROP_A_INT64] =
+    g_param_spec_int64 ("a-int64", NULL, NULL,
+                        G_MININT64, G_MAXINT64, 0,
+                        G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
+
+  pspecs[PROP_A_STRING] =
+    g_param_spec_string ("a-string", NULL, NULL,
+                         NULL,
+                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
+
+  g_object_class_install_properties (object_class, LAST_PROP, pspecs);
+}
+
+
+static void
+kgx_test_object_init (KgxTestObject *self)
+{
+}
+
+
+static const char *prop_notified = FALSE;
+
+
+static void
+got_notify (GObject *self, GParamSpec *pspec, gpointer data)
+{
+  prop_notified = g_param_spec_get_name (pspec);
+}
+
+
+static void
+test_set_boolean (void)
+{
+  g_autoptr (KgxTestObject) obj = g_object_new (KGX_TYPE_TEST_OBJECT, NULL);
+  gboolean res;
+
+  g_signal_connect (obj, "notify::a-bool", G_CALLBACK (got_notify), NULL);
+
+  g_object_get (obj, "a-bool", &res, NULL);
+  g_assert_false (res);
+
+  prop_notified = NULL;
+  g_object_set (obj, "a-bool", TRUE, NULL);
+  g_assert_cmpstr (prop_notified, ==, "a-bool");
+
+  g_object_get (obj, "a-bool", &res, NULL);
+  g_assert_true (res);
+
+  prop_notified = NULL;
+  g_object_set (obj, "a-bool", TRUE, NULL);
+  g_assert_null (prop_notified);
+
+  g_object_get (obj, "a-bool", &res, NULL);
+  g_assert_true (res);
+
+  prop_notified = NULL;
+  g_object_set (obj, "a-bool", FALSE, NULL);
+  g_assert_cmpstr (prop_notified, ==, "a-bool");
+
+  g_object_get (obj, "a-bool", &res, NULL);
+  g_assert_false (res);
+}
+
+
+static void
+test_set_int64 (void)
+{
+  g_autoptr (KgxTestObject) obj = g_object_new (KGX_TYPE_TEST_OBJECT, NULL);
+  int64_t res_a, res_b, res_c;
+
+  g_signal_connect (obj, "notify::a-int64", G_CALLBACK (got_notify), NULL);
+
+  g_object_get (obj, "a-int64", &res_a, NULL);
+  g_assert_cmpint (res_a, ==, 0);
+
+  prop_notified = NULL;
+  g_object_set (obj, "a-int64", (int64_t) 1234, NULL);
+  g_assert_cmpstr (prop_notified, ==, "a-int64");
+
+  g_object_get (obj, "a-int64", &res_a, NULL);
+  g_assert_cmpint (res_a, ==, 1234);
+
+  prop_notified = NULL;
+  g_object_set (obj, "a-int64", (int64_t) 1234, NULL);
+  g_assert_null (prop_notified);
+
+  g_object_get (obj, "a-int64", &res_b, NULL);
+  g_assert_cmpint (res_b, ==, 1234);
+
+  g_assert_cmpint (res_a, ==, res_b);
+
+  prop_notified = NULL;
+  g_object_set (obj, "a-int64", (int64_t) 789, NULL);
+  g_assert_cmpstr (prop_notified, ==, "a-int64");
+
+  g_object_get (obj, "a-int64", &res_c, NULL);
+  g_assert_cmpint (res_c, ==, 789);
+
+  g_assert_cmpint (res_c, !=, res_b);
+}
+
+
+static void
+test_set_str (void)
+{
+  g_autoptr (KgxTestObject) obj = g_object_new (KGX_TYPE_TEST_OBJECT, NULL);
+  g_autofree char *res_a = NULL;
+  g_autofree char *res_b = NULL;
+  g_autofree char *res_c = NULL;
+
+  g_signal_connect (obj, "notify::a-string", G_CALLBACK (got_notify), NULL);
+
+  g_object_get (obj, "a-string", &res_a, NULL);
+  g_assert_null (res_a);
+
+  prop_notified = NULL;
+  g_object_set (obj, "a-string", "trans rights", NULL);
+  g_assert_cmpstr (prop_notified, ==, "a-string");
+
+  g_object_get (obj, "a-string", &res_a, NULL);
+  g_assert_cmpstr (res_a, ==, "trans rights");
+
+  prop_notified = NULL;
+  g_object_set (obj, "a-string", "trans rights", NULL);
+  g_assert_null (prop_notified);
+
+  g_object_get (obj, "a-string", &res_b, NULL);
+  g_assert_cmpstr (res_b, ==, "trans rights");
+
+  g_assert_cmpstr (res_a, ==, res_b);
+
+  prop_notified = NULL;
+  g_object_set (obj, "a-string", "are human rights", NULL);
+  g_assert_cmpstr (prop_notified, ==, "a-string");
+
+  g_object_get (obj, "a-string", &res_c, NULL);
+  g_assert_cmpstr (res_c, ==, "are human rights");
+
+  g_assert_cmpstr (res_c, !=, res_b);
+}
+
+
 #define PLAIN_KGX ((const char *[]) { KGX_BIN_NAME, NULL })
 #define SH_WRAPPED(...) ((const char *[]) { "/bin/sh", "-c", __VA_ARGS__ })
 
@@ -287,6 +529,10 @@ int
 main (int argc, char *argv[])
 {
   g_test_init (&argc, &argv, NULL);
+
+  g_test_add_func ("/kgx/utils/set_boolean", test_set_boolean);
+  g_test_add_func ("/kgx/utils/set_int64", test_set_int64);
+  g_test_add_func ("/kgx/utils/set_str", test_set_str);
 
   for (size_t i = 0; i < G_N_ELEMENTS (filter_cases); i++) {
     g_autofree char *path =
