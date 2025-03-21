@@ -197,14 +197,14 @@ test_set_int64 (void)
   g_assert_cmpint (res_a, ==, 0);
 
   prop_notified = NULL;
-  g_object_set (obj, "a-int64", 1234, NULL);
+  g_object_set (obj, "a-int64", (int64_t) 1234, NULL);
   g_assert_cmpstr (prop_notified, ==, "a-int64");
 
   g_object_get (obj, "a-int64", &res_a, NULL);
   g_assert_cmpint (res_a, ==, 1234);
 
   prop_notified = NULL;
-  g_object_set (obj, "a-int64", 1234, NULL);
+  g_object_set (obj, "a-int64", (int64_t) 1234, NULL);
   g_assert_null (prop_notified);
 
   g_object_get (obj, "a-int64", &res_b, NULL);
@@ -213,7 +213,7 @@ test_set_int64 (void)
   g_assert_cmpint (res_a, ==, res_b);
 
   prop_notified = NULL;
-  g_object_set (obj, "a-int64", 789, NULL);
+  g_object_set (obj, "a-int64", (int64_t) 789, NULL);
   g_assert_cmpstr (prop_notified, ==, "a-int64");
 
   g_object_get (obj, "a-int64", &res_c, NULL);
