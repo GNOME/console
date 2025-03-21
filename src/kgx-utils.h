@@ -136,6 +136,35 @@ kgx_set_int64_prop (GObject      *restrict object,
 
 
 /**
+ * kgx_set_str_prop:
+ * @object: the #GObject the property is on
+ * @pspec: the #GParamSpec being set
+ * @target: the storage on @object for @pspec
+ * @value: the potential new value for @target
+ *
+ * Update a string property, notifying if the value changed
+ *
+ * Returns: %TRUE if the value changed, otherwise %FALSE
+ */
+static inline gboolean
+kgx_set_str_prop (GObject       *restrict object,
+                  GParamSpec    *restrict pspec,
+                  char         **restrict target,
+                  const GValue  *restrict value)
+{
+  const char *new_value = g_value_get_string (value);
+
+  if (!g_set_str (target, new_value)) {
+    return FALSE;
+  }
+
+  g_object_notify_by_pspec (object, pspec);
+
+  return TRUE;
+}
+
+
+/**
  * kgx_str_constrained_append:
  * @buffer: a #GString to append to
  * @source: the text to read from

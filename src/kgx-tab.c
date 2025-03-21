@@ -372,17 +372,18 @@ kgx_tab_set_property (GObject      *object,
       g_set_object (&priv->terminal, g_value_get_object (value));
       break;
     case PROP_TAB_TITLE:
-      g_set_str (&priv->title, g_value_get_string (value));
+      kgx_set_str_prop (object, pspec, &priv->title, value);
       break;
     case PROP_TAB_PATH:
-      g_set_object (&priv->path, g_value_get_object (value));
+      if (g_set_object (&priv->path, g_value_get_object (value))) {
+        g_object_notify_by_pspec (object, pspec);
+      }
       break;
     case PROP_TAB_STATUS:
       set_status (self, g_value_get_flags (value));
       break;
     case PROP_TAB_TOOLTIP:
-      g_clear_pointer (&priv->tooltip, g_free);
-      priv->tooltip = g_value_dup_string (value);
+      kgx_set_str_prop (object, pspec, &priv->tooltip, value);
       break;
     case PROP_IS_ACTIVE:
       if (kgx_set_boolean_prop (object, pspec, &priv->is_active, value)) {
@@ -581,7 +582,7 @@ kgx_tab_class_init (KgxTabClass *klass)
   pspecs[PROP_TAB_TITLE] =
     g_param_spec_string ("tab-title", NULL, NULL,
                          NULL,
-                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   /**
    * KgxTab:tab-path:
@@ -593,7 +594,7 @@ kgx_tab_class_init (KgxTabClass *klass)
   pspecs[PROP_TAB_PATH] =
     g_param_spec_object ("tab-path", NULL, NULL,
                          G_TYPE_FILE,
-                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_TAB_STATUS] =
     g_param_spec_flags ("tab-status", NULL, NULL,
@@ -604,7 +605,7 @@ kgx_tab_class_init (KgxTabClass *klass)
   pspecs[PROP_TAB_TOOLTIP] =
     g_param_spec_string ("tab-tooltip", NULL, NULL,
                          NULL,
-                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   /**
    * KgxTab:is-active:
