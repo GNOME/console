@@ -83,9 +83,7 @@ kgx_test_object_get_property (GObject    *object,
     case PROP_A_FLAGS:
       g_value_set_flags (value, self->a_flags);
       break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
+    KGX_INVALID_PROP (object, property_id, pspec);
   }
 }
 
@@ -111,9 +109,7 @@ kgx_test_object_set_property (GObject      *object,
     case PROP_A_FLAGS:
       kgx_set_flags_prop (object, pspec, &self->a_flags, value);
       break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
+    KGX_INVALID_PROP (object, property_id, pspec);
   }
 }
 

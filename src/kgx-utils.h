@@ -76,6 +76,25 @@ G_BEGIN_DECLS
 
 
 /**
+ * KGX_INVALID_PROP:
+ * @object: the object the property was set on
+ * @property_id: the attempted property id
+ * @pspec: the @pspec of @property_id
+ *
+ * This is simple wrapper around G_OBJECT_WARN_INVALID_PROPERTY_ID that lets
+ * us easily ignore this in coverage reports.
+ *
+ * Whilst we could ‘test’ these lines, it's rather fiddly for really no
+ * reward, but if we can't easily exclude them they stand up in coverage like
+ * sore thumbs.
+ */
+#define KGX_INVALID_PROP(object, property_id, pspec)                         \
+    default:                                                                 \
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);        \
+      break;
+
+
+/**
  * kgx_set_boolean_prop:
  * @object: the #GObject the property is on
  * @pspec: the #GParamSpec being set

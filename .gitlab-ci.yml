@@ -266,8 +266,7 @@ flatpak-aarch64:
     - meson compile -C build
     - meson test -C build
   after_script:
-    - gcovr --exclude="build/*" --exclude="subprojects/"
-      --json --output=coverage-${CI_JOB_NAME}.json
+    - gcovr --json --output=coverage-${CI_JOB_NAME}.json
   artifacts:
     when: always
     paths:
