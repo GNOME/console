@@ -1,0 +1,516 @@
+# Uzbek (Latin) translation for console.
+# Copyright (C) 2025 console's COPYRIGHT HOLDER
+# This file is distributed under the same license as the console package.
+# akmal <isakulovdev@gmail.com>,  Baxrom Raxmatov <magdiyevbahrom@gmail.com> 2025.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: console main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
+"POT-Creation-Date: 2025-03-18 14:56+0000\n"
+"PO-Revision-Date: 2025-03-27 10:23+0500\n"
+"Last-Translator: Baxrom Raxmatov\n"
+"Language-Team: Uzbek (Latin) <uz@li.org>\n"
+"Language: uz\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.5\n"
+
+#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
+msgid "Console"
+msgstr "Konsol"
+
+# Tahminiy: buyruq;chaqiruv
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Console.desktop.in.in:8
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
+msgstr "buyruq;prompt;cmd;buyruqlar qatori;run;shell;terminal;kgx;kings cross;"
+
+#: data/org.gnome.Console.desktop.in.in:21
+msgid "New Window"
+msgstr "Yangi Oyna"
+
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:176
+msgid "New Tab"
+msgstr "Yangi Tab"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
+msgid "Terminal Emulator"
+msgstr "Terminal Emulyatori"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:11
+msgid "A simple user-friendly terminal emulator for the GNOME desktop."
+msgstr "GNOME ish stoli uchun oddiy foydalanuvchiga qulay terminal emulyatori."
+
+#: data/org.gnome.Console.metainfo.xml.in.in:26
+msgid "Terminal window"
+msgstr "Terminal oynasi"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:503 src/kgx-window.c:561
+msgid "The GNOME Project"
+msgstr "GNOME Loyihasi"
+
+#: src/help-overlay.ui:12
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Ilova"
+
+#: src/help-overlay.ui:16
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Yangi Oyna"
+
+#: src/help-overlay.ui:23
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Terminal"
+
+#: src/help-overlay.ui:27
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Qidirish"
+
+#: src/help-overlay.ui:33
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Nusxalash"
+
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Qo'yish"
+
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Tablar"
+
+#: src/help-overlay.ui:50
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Yangi Tab"
+
+#: src/help-overlay.ui:56
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Tabni yopish"
+
+#: src/help-overlay.ui:62
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Barcha Tablarni Ko'rsatish"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Keyingi Tab"
+
+#: src/help-overlay.ui:74
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Oldingi Tab"
+
+#: src/help-overlay.ui:80
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "Tabni O'nga Surish"
+
+#: src/help-overlay.ui:86
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Tabni Chapga Surish"
+
+#: src/help-overlay.ui:92
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "1-9 Tabga O'tish"
+
+#: src/help-overlay.ui:98
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Tab 10 ga o'tish"
+
+#. Translators: %s is the year range
+#: src/kgx-about.c:83 src/kgx-window.c:556
+#, c-format
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Braun"
+
+#: src/kgx-about.c:101
+msgid "GPL 3.0 or later"
+msgstr "GPL 3.0 yoki yangiroq"
+
+#. Translators: The leading # is intentional, the initial %s is the
+#. * version of KGX itself, the latter format is the VTE version
+#: src/kgx-about.c:114
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s VTE %u.%u.%u %s yordamida\n"
+
+#: src/kgx-application.c:283
+msgid "Cannot use both --working-directory and positional parameters"
+msgstr ""
+"Bir vaqtda --working-directory va joylashuv parameterlarini ishlatib "
+"bo'lmaydi"
+
+#: src/kgx-application.c:503
+msgid "Execute the argument to this option inside the terminal"
+msgstr "Terminal ichida ushbu parametrga argumentni bajaring"
+
+#: src/kgx-application.c:504
+msgid "COMMAND"
+msgstr "BUYRUQ"
+
+#: src/kgx-application.c:512
+msgid "Set the working directory"
+msgstr "Ishchi jildni belgilash"
+
+#. Translators: Placeholder of for a given directory
+#: src/kgx-application.c:514
+msgid "DIRNAME"
+msgstr "JILDNOMI"
+
+#: src/kgx-application.c:522
+msgid "Wait until the child exits (TODO)"
+msgstr "Jarayon tugaguncha kuting(TODO)"
+
+#: src/kgx-application.c:531
+msgid "Set the initial window title"
+msgstr "Dastlabki oyna sarlavhasini o'rnatish"
+
+#: src/kgx-application.c:532
+msgid "TITLE"
+msgstr "SARLAVHA"
+
+#: src/kgx-application.c:540
+msgid "ADVANCED: Set the shell to launch"
+msgstr "MUVOFIQ: qobiqni ishga tushirish uchun sozlang"
+
+#: src/kgx-application.c:541
+msgid "SHELL"
+msgstr "QOBIQ"
+
+#: src/kgx-application.c:549
+msgid "ADVANCED: Set the scrollback length"
+msgstr "ADVANCED: Orqaga aylantirish uzunligini o'rnating"
+
+#: src/kgx-application.c:550
+msgid "LINES"
+msgstr "QATORLAR"
+
+#. Translators: %s is the version string, KGX is a codename and should be left as-is
+#: src/kgx-application.c:688
+#, c-format
+msgid "KGX %s — Terminal Emulator"
+msgstr "KGX %s — Terminal Emulyatori"
+
+#: src/kgx-application.c:694
+msgid "[-e|-- COMMAND [ARGUMENT...]]"
+msgstr "[-e|-- BUYRUQ [ARGUMENT...]]"
+
+#: src/kgx-close-dialog.c:73
+msgid "Close Window?"
+msgstr "Oynani Yopish?"
+
+#: src/kgx-close-dialog.c:75
+msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this window will kill them and may "
+"lead to unexpected outcomes"
+msgstr[0] ""
+"Buyruq hali ham bajarilmoqda, ushbu oynani yopish uni to'xtatadi va "
+"kutilmagan natijalarga olib kelishi mumkin"
+msgstr[1] ""
+"Ayrim buyruqlar hali ham bajarilmoqda, ushbu oynani yopish ularni to'xtatadi "
+"va kutilmagan natijalarga olib kelishi mumkin"
+
+#: src/kgx-close-dialog.c:82
+msgid "Close Tab?"
+msgstr "Tabni Yopish?"
+
+#: src/kgx-close-dialog.c:84
+msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this tab will kill them and may "
+"lead to unexpected outcomes"
+msgstr[0] ""
+"Buyruq hali ham bajarilmoqda, ushbu tabni yopish uni to'xtatadi va "
+"kutilmagan natijalarga olib kelishi mumkin"
+msgstr[1] ""
+"Ayrim buyruqlar hali ham bajarilmoqda, ushbu tabni yopish ularni to'xtatadi "
+"va kutilmagan natijalarga olib kelishi mumkin"
+
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:194
+msgid "Process list"
+msgstr "Jarayonlar ro'yxati"
+
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
+#: src/preferences/kgx-font-picker.ui:22
+msgid "_Cancel"
+msgstr "_Bekor qilish"
+
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:207
+msgid "C_lose"
+msgstr ""
+
+#: src/kgx-colour-utils.c:58
+msgid "Color string is wrong length"
+msgstr "Rang chizig’i noto’g’ri uzunlikda"
+
+#: src/kgx-livery-manager.c:193
+msgctxt "livery-name"
+msgid "Linux"
+msgstr "Linux"
+
+#: src/kgx-livery-manager.c:230
+msgctxt "livery-name"
+msgid "XTerm"
+msgstr "XTerm"
+
+#. Translators: %i is, from the users perspective, a random number.
+#. * this string will only be seen when the running program has
+#. * failed to set a title, and exists purely to avoid blank tabs
+#.
+#: src/kgx-pages.c:473
+#, c-format
+msgid "Tab %i"
+msgstr "Tab %i"
+
+#: src/kgx-pages.ui:90
+msgid "_Detach Tab"
+msgstr "_Yordamni ajratish"
+
+#: src/kgx-pages.ui:96
+msgid "_Close"
+msgstr "_Yopish"
+
+#. Translators: %s is the (possibly truncated) command being pasted
+#: src/kgx-paste-dialog.c:76
+#, c-format
+msgid ""
+"Make sure you know what the command does:\n"
+"%s"
+msgstr ""
+"Buyruq nima qilishini aniq bilishingizga ishonch hosil qiling: \n"
+"%s"
+
+#: src/kgx-paste-dialog.c:129
+msgid "You are pasting a command that runs as an administrator"
+msgstr "Siz administrator huquqlarida ishlovchi buyruqni qo'yayapsiz"
+
+#: src/kgx-paste-dialog.c:136 src/kgx-terminal.ui:24
+msgid "_Paste"
+msgstr "_Qo'yish"
+
+#: src/kgx-process.c:196
+#, c-format
+msgid "Process %d"
+msgstr "Jarayon %d"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-simple-tab.c:169
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Ishga tushirib bo‘lmadi</b> — %s"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:784
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Faqat o'qish uchun</b> — Buyruq %i kodi bilan tugadi"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:792
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Faqat o'qish uchun</b> — Buyruq tugadi"
+
+#: src/kgx-tab.c:812
+msgid "Command completed"
+msgstr "Buyruq bajarildi"
+
+#: src/kgx-tab.ui:40
+msgid "Find text"
+msgstr "Matnni qidirish"
+
+#: src/kgx-tab.ui:51
+msgid "Previous Match"
+msgstr "Oldingi moslik"
+
+#: src/kgx-tab.ui:59
+msgid "Next Match"
+msgstr "Keyingi moslik"
+
+#: src/kgx-terminal.c:510
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+"Ochish uchun Ctrl bilan bosing: \n"
+"%s"
+
+#: src/kgx-terminal.ui:7
+msgid "_Open Link"
+msgstr "_Havolani ochish"
+
+#: src/kgx-terminal.ui:12
+msgid "Copy _Link"
+msgstr "_Havolani Nusxalash"
+
+#: src/kgx-terminal.ui:19
+msgid "_Copy"
+msgstr "_Nusxalash"
+
+#: src/kgx-terminal.ui:29
+msgid "_Select All"
+msgstr "_Barchasini belgilash"
+
+#: src/kgx-terminal.ui:36
+msgid "Show in _Files"
+msgstr "_Fayllarda ochish"
+
+#: src/kgx-theme-switcher.ui:24
+msgid "Follow System Style"
+msgstr "Tizim uslubiga rioya qiling"
+
+#: src/kgx-theme-switcher.ui:52
+msgid "Light Style"
+msgstr "Yorqin Uslub"
+
+#: src/kgx-theme-switcher.ui:79
+msgid "Dark Style"
+msgstr "Tungi Uslub"
+
+#. Translators: ‘command’ is the argument name, and shouldn't be translated
+#: src/kgx-utils.c:114
+msgid "Missing argument for --command"
+msgstr "--command uchun argument yetishmayabdi"
+
+#: src/kgx-utils.c:129
+msgid "Cannot use both --command and positional parameters"
+msgstr "Bir vaqtda --command va joylashuv parameterlarini ishlatib bo'lmaydi"
+
+#. Translators: Credit yourself here
+#: src/kgx-window.c:568
+msgid "translator-credits"
+msgstr "tarjimonlarga-minnatdorchilik"
+
+#: src/kgx-window.ui:17
+msgid "_New Window"
+msgstr "_Yangi Oyna"
+
+#: src/kgx-window.ui:23
+msgid "_Show All Tabs"
+msgstr "_Barcha Tablarni Ko'rsatish"
+
+#: src/kgx-window.ui:30
+msgid "_Preferences"
+msgstr "Sozlamalar"
+
+#: src/kgx-window.ui:34
+msgid "_Keyboard Shortcuts"
+msgstr "_Klaviatura yorliqlari"
+
+#: src/kgx-window.ui:38
+msgid "_About Console"
+msgstr "_Konsol Haqida"
+
+# Qidirish o'rniga Topish ishlatgan maqulmi yoki?
+#: src/kgx-window.ui:90
+msgid "Find in Terminal"
+msgstr "Terminalda Qidirish"
+
+#: src/kgx-window.ui:97
+msgid "Main Menu"
+msgstr "Asosiy Menyu"
+
+#: src/kgx-window.ui:115
+msgid "Shrink Text"
+msgstr "Matnni kichraytirish"
+
+#: src/kgx-window.ui:126
+msgid "Reset Size"
+msgstr "Oʻlchamni tiklash"
+
+#: src/kgx-window.ui:150
+msgid "Enlarge Text"
+msgstr "Mattni Kattalashtirish"
+
+#: src/preferences/kgx-font-picker.ui:11
+msgid "Terminal Font"
+msgstr "Terminal Shrifti"
+
+#: src/preferences/kgx-font-picker.ui:29
+msgid "_Select"
+msgstr "_Tanlash"
+
+#: src/preferences/kgx-font-picker.ui:45 src/preferences/kgx-font-picker.ui:48
+msgid "Font Name"
+msgstr "Font Nomi"
+
+#: src/preferences/kgx-font-picker.ui:133
+msgid "Font Family"
+msgstr "Font Oylasi"
+
+#: src/preferences/kgx-font-picker.ui:158
+msgid "Font Preview"
+msgstr "Shrift Ko‘rinishi"
+
+#: src/preferences/kgx-font-picker.ui:179
+msgid "Font Size"
+msgstr "Font O'lchami"
+
+#: src/preferences/kgx-preferences-window.c:125
+msgid "No Font Set"
+msgstr "Shrift O'rnatilmagan"
+
+#: src/preferences/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "Asosiy"
+
+#: src/preferences/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "Font"
+
+#: src/preferences/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "_Tizim Standartini Ishlatish"
+
+#: src/preferences/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "Maxsus _shrift"
+
+#: src/preferences/kgx-preferences-window.ui:63
+msgid "Behaviour"
+msgstr "Xulq-atvor"
+
+#: src/preferences/kgx-preferences-window.ui:66
+msgid "_Unlimited Scrollback"
+msgstr "_Cheksiz orqaga qaytish"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "_Orqaga aylantiruvchi chiziqlar"
+
+#: src/preferences/kgx-preferences-window.ui:92
+msgid "Terminal Bell"
+msgstr "Terminal Qo'ng'irog'i"
+
+# Kuylash o'rniga Ijro Etish ishaltish mumkinmi?
+#: src/preferences/kgx-preferences-window.ui:95
+msgid "Play _Sound"
+msgstr "_Ovozni Kuylash"
+
+#: src/preferences/kgx-preferences-window.ui:101
+msgid "_Visual Effects"
+msgstr "_Vizual Effektlar"
