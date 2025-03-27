@@ -204,7 +204,8 @@ kgx_window_close_request (GtkWindow *window)
   children = kgx_pages_get_children (KGX_PAGES (priv->pages));
 
   if (children->len < 1 || priv->close_anyway) {
-    if (gtk_window_is_active (GTK_WINDOW (self))) {
+    if (gtk_window_is_active (GTK_WINDOW (self)) &&
+        !adw_application_window_get_adaptive_preview (ADW_APPLICATION_WINDOW (self))) {
       gboolean maximised = gtk_window_is_maximized (GTK_WINDOW (self));
       int width, height;
 

@@ -97,7 +97,7 @@ glib_min_ver = '2.80'
 glib_sym_ver = 'GLIB_VERSION_@0@'.format(glib_min_ver.replace('.', '_'))
 
 # Adwaita Requirement
-adw_min_ver = '1.6'
+adw_min_ver = '1.7'
 adw_sym_ver = 'ADW_VERSION_@0@'.format(adw_min_ver.replace('.', '_'))
 
 kgx_cargs = [
