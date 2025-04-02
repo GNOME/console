@@ -36,6 +36,22 @@
             ]
         },
         {
+            "name" : "simdutf",
+            "buildsystem" : "cmake-ninja",
+            "config-opts" : [
+                "-DCMAKE_POSITION_INDEPENDENT_CODE=TRUE", 
+                "-DCMAKE_CXX_VISIBILITY_PRESET=hidden", 
+                "-DCMAKE_VISIBILITY_INLINES_HIDDEN=TRUE"
+            ],
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://github.com/simdutf/simdutf",
+                    "tag" : "v6.4.0"
+                }
+            ]
+        },
+        {
             "name" : "vte",
             "config-opts" : [
                 "-Dgir=false",

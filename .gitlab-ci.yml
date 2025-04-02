@@ -21,16 +21,25 @@ variables:
     gcc
     gcovr
     git
+    glslc
     meson
-    pkgconfig(libadwaita-1)
-    pkgconfig(gtk4)
-    pkgconfig(pango)
-    pkgconfig(vte-2.91-gtk4)
+    pkgconfig(fmt)
     pkgconfig(gio-2.0)
     pkgconfig(gio-unix-2.0)
-    pkgconfig(libpcre2-8)
     pkgconfig(gsettings-desktop-schemas)
+    pkgconfig(gstreamer-allocators-1.0)
+    pkgconfig(gstreamer-gl-1.0)
+    pkgconfig(gstreamer-player-1.0)
+    pkgconfig(gtk4)
+    pkgconfig(libadwaita-1)
     pkgconfig(libgtop-2.0)
+    pkgconfig(libpcre2-8)
+    pkgconfig(pango)
+    pkgconfig(simdutf)
+    pkgconfig(vte-2.91-gtk4)
+    pkgconfig(wayland-client)
+    pkgconfig(wayland-egl)
+    pkgconfig(wayland-protocols)
   FEDORA_32_IMAGE: fedora:rawhide
   FEDORA_32_DEPS: appstream-devel.i686
     appstream.i686
@@ -66,6 +75,8 @@ variables:
     expat-devel.i686
     fast_float-devel
     flac-libs.i686
+    fmt-devel.i686
+    fmt.i686
     fontconfig-devel.i686
     fontconfig.i686
     freetype-devel.i686
@@ -214,6 +225,8 @@ variables:
     pkgconf.i686
     polkit-libs.i686
     sassc
+    simdutf-devel.i686
+    simdutf.i686
     sqlite-devel.i686
     sqlite.i686
     subunit-devel.i686
