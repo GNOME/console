@@ -3,6 +3,7 @@ tests = [
   'icon-closures',
   'livery',
   'palette',
+  'settings',
   'shared-closures',
   'tab',
   'utils',
