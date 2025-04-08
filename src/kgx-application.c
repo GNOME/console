@@ -684,12 +684,13 @@ kgx_application_init (KgxApplication *self)
 {
   GAction *action;
   g_autoptr (GPropertyAction) theme_action = NULL;
+  g_autofree char *version = kgx_about_dup_version_string ();
   /* Translators: %s is the version string, KGX is a codename and should be left as-is */
-  g_autofree char *summary = g_strdup_printf (_("KGX %s — Terminal Emulator"), PACKAGE_VERSION);
+  g_autofree char *summary = g_strdup_printf (_("KGX %s — Terminal Emulator"), version);
 
   g_application_add_main_option_entries (G_APPLICATION (self), entries);
   g_application_set_option_context_description (G_APPLICATION (self),
-                                                "https://apps.gnome.org/Console/");
+                                                KGX_HOMEPAGE_URL);
   g_application_set_option_context_parameter_string (G_APPLICATION (self),
                                                      _("[-e|-- COMMAND [ARGUMENT...]]"));
   g_application_set_option_context_summary (G_APPLICATION (self), summary);

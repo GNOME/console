@@ -18,11 +18,16 @@
 
 #pragma once
 
-#include <glib.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
 void            kgx_about_print_logo              (void);
 void            kgx_about_print_version           (void);
+char           *kgx_about_dup_version_string      (void);
+char           *kgx_about_dup_copyright_string    (void);
+void            kgx_about_present_dialogue        (GtkWidget     *parent);
+void            kgx_about_append_sys_info         (GString       *buf,
+                                                   GtkRoot       *root);
 
 G_END_DECLS

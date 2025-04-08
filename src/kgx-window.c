@@ -22,6 +22,7 @@
 
 #include <adwaita.h>
 
+#include "kgx-about.h"
 #include "kgx-application.h"
 #include "kgx-close-dialog.h"
 #include "kgx-pages.h"
@@ -534,31 +535,11 @@ new_tab_activated (GtkWidget  *widget,
 
 
 static void
-about_activated  (GtkWidget  *widget,
-                  const char *action_name,
-                  GVariant   *parameter)
+about_activated  (GtkWidget                *widget,
+                  G_GNUC_UNUSED const char *action_name,
+                  G_GNUC_UNUSED GVariant   *parameter)
 {
-  const char *developers[] = { "Zander Brown <zbrown@gnome.org>", NULL };
-  const char *designers[] = { "Tobias Bernard", NULL };
-  g_autofree char *copyright = NULL;
-
-  /* Translators: %s is the year range */
-  copyright = g_strdup_printf (_("© %s Zander Brown"), KGX_COPYRIGHT_RANGE);
-
-  adw_show_about_dialog (widget,
-                         "application-name", KGX_DISPLAY_NAME,
-                         "application-icon", KGX_APPLICATION_ID,
-                         "developer-name", _("The GNOME Project"),
-                         "issue-url", "https://gitlab.gnome.org/GNOME/console/-/issues/",
-                         "website", "https://apps.gnome.org/en-GB/app/org.gnome.Console/",
-                         "version", PACKAGE_VERSION,
-                         "developers", developers,
-                         "designers", designers,
-                         /* Translators: Credit yourself here */
-                         "translator-credits", _("translator-credits"),
-                         "copyright", copyright,
-                         "license-type", GTK_LICENSE_GPL_3_0,
-                         NULL);
+  kgx_about_present_dialogue (widget);
 }
 
 
