@@ -3,9 +3,9 @@
          xmlns:gnome="http://api.gnome.org/doap-extensions#" xmlns="http://usefulinc.com/ns/doap#">
   <name xml:lang="en">Console</name>
   <shortdesc xml:lang="en">Terminal Emulator</shortdesc>
-  <homepage rdf:resource="https://apps.gnome.org/en-GB/app/org.gnome.Console/" />
+  <homepage rdf:resource="https://apps.gnome.org/Console/" />
   <download-page rdf:resource="https://gitlab.gnome.org/GNOME/console" />
-  <bug-database rdf:resource="https://gitlab.gnome.org/GNOME/console/issues/" />
+  <bug-database rdf:resource="https://gitlab.gnome.org/GNOME/console/-/issues/" />
   <programming-language>C</programming-language>
   <platform>GTK 4</platform>
   <platform>Libadwaita</platform>

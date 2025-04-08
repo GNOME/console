@@ -1,0 +1,8 @@
+option(
+  'devel',
+  type: 'boolean',
+  value: false,
+  description: 'Produce a parallel installable development build',
+)
+
+option('tests', type: 'boolean', value: true, description: 'Enable tests')
