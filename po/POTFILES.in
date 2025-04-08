@@ -13,6 +13,8 @@ src/kgx-pages.ui
 src/kgx-paste-dialog.c
 src/kgx-process.c
 src/kgx-simple-tab.c
+src/kgx-spad.c
+src/kgx-spad.ui
 src/kgx-tab.c
 src/kgx-tab.ui
 src/kgx-terminal.c

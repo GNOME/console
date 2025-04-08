@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="KgxSpad" parent="AdwDialog">
+    <property name="title" translatable="yes">Error Details</property>
+    <property name="content-width">550</property>
+    <property name="content-height">400</property>
+    <property name="child">
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar" />
+        </child>
+        <property name="content">
+          <object class="AdwPreferencesPage">
+            <child>
+              <object class="AdwPreferencesGroup">
+                <binding name="description">
+                  <lookup name="error-body">KgxSpad</lookup>
+                </binding>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Error Message</property>
+                <property name="header-suffix">
+                  <object class="GtkButton">
+                    <property name="action-name">spad.copy-message</property>
+                    <binding name="action-target">
+                      <closure type="GVariant" function="text_as_variant">
+                        <lookup name="text">buffer</lookup>
+                      </closure>
+                    </binding>
+                    <binding name="icon-name">
+                      <lookup name="copy-icon-name">KgxSpad</lookup>
+                    </binding>
+                    <property name="tooltip-text" translatable="yes">Copy Error Message</property>
+                    <style>
+                      <class name="flat" />
+                    </style>
+                  </object>
+                </property>
+                <binding name="visible">
+                  <closure type="gboolean" function="non_empty">
+                    <lookup name="error-content">KgxSpad</lookup>
+                  </closure>
+                </binding>
+                <child>
+                  <object class="GtkScrolledWindow">
+                    <property name="vexpand">true</property>
+                    <property name="overflow">hidden</property>
+                    <child>
+                      <object class="GtkTextView">
+                        <property name="editable">false</property>
+                        <property name="wrap-mode">word-char</property>
+                        <property name="buffer">
+                          <object class="GtkTextBuffer" id="buffer">
+                            <binding name="text">
+                              <closure type="gchararray" function="add_sys_info">
+                                <closure type="gboolean" function="kgx_flags_includes">
+                                  <lookup name="spad-flags">KgxSpad</lookup>
+                                  <constant type="KgxSpadFlags">show-sys-info</constant>
+                                </closure>
+                                <lookup name="root">KgxSpad</lookup>
+                                <closure type="gchararray" function="kgx_text_or_fallback">
+                                  <lookup name="error-content">KgxSpad</lookup>
+                                  <constant type="gchararray"></constant>
+                                </closure>
+                              </closure>
+                            </binding>
+                          </object>
+                        </property>
+                        <style>
+                          <class name="error-message" />
+                          <class name="monospace" />
+                        </style>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="card" />
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </property>
+        <child type="bottom">
+          <object class="GtkButton">
+            <property name="action-name">spad.open-issues</property>
+            <property name="halign">center</property>
+            <property name="margin-bottom">24</property>
+            <binding name="visible">
+              <closure type="gboolean" function="kgx_flags_includes">
+                <lookup name="spad-flags">KgxSpad</lookup>
+                <constant type="KgxSpadFlags">show-report</constant>
+              </closure>
+            </binding>
+            <child>
+              <object class="AdwButtonContent">
+                <property name="icon-name">external-link-symbolic</property>
+                <property name="label" translatable="yes">Report _Issue</property>
+                <property name="use-underline">true</property>
+              </object>
+            </child>
+            <style>
+              <class name="suggested-action" />
+              <class name="pill" />
+            </style>
+          </object>
+        </child>
+      </object>
+    </property>
+    <style>
+      <class name="error-details" />
+    </style>
+  </template>
+</interface>

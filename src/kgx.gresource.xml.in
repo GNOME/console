@@ -5,6 +5,7 @@
     <file preprocess="xml-stripblanks" compressed="true">kgx-page-expression.ui</file>
     <file preprocess="xml-stripblanks" compressed="true">kgx-pages.ui</file>
     <file preprocess="xml-stripblanks" compressed="true">kgx-simple-tab.ui</file>
+    <file preprocess="xml-stripblanks" compressed="true">kgx-spad.ui</file>
     <file preprocess="xml-stripblanks" compressed="true">kgx-tab.ui</file>
     <file preprocess="xml-stripblanks" compressed="true">kgx-terminal.ui</file>
     <file preprocess="xml-stripblanks" compressed="true">kgx-theme-switcher.ui</file>
@@ -15,6 +16,8 @@
     <file compressed="true">style-dark.css</file>
     <file compressed="true">logo.txt</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/bell-outline-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/status/emblem-ok-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/status/external-link-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/status-privileged-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/status-regular-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/status-remote-symbolic.svg</file>
