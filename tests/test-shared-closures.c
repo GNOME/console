@@ -18,6 +18,9 @@
 
 #include "kgx-config.h"
 
+#include "kgx-settings.h"
+#include "kgx-train.h"
+
 #include "kgx-shared-closures.h"
 
 
@@ -88,6 +91,46 @@ test_object_or_fallback (void)
 }
 
 
+static void
+test_enum_is (void)
+{
+  g_assert_true (kgx_enum_is (NULL, KGX_THEME_DAY, KGX_THEME_DAY));
+  g_assert_true (kgx_enum_is (NULL, KGX_THEME_NIGHT, KGX_THEME_NIGHT));
+
+  g_assert_false (kgx_enum_is (NULL, KGX_THEME_NIGHT, KGX_THEME_DAY));
+  g_assert_false (kgx_enum_is (NULL, KGX_THEME_DAY, KGX_THEME_NIGHT));
+}
+
+
+static void
+test_flags_includes (void)
+{
+  g_assert_true (kgx_flags_includes (NULL, KGX_REMOTE, KGX_REMOTE));
+  g_assert_true (kgx_flags_includes (NULL, KGX_PRIVILEGED, KGX_PRIVILEGED));
+  g_assert_true (kgx_flags_includes (NULL,
+                                     KGX_REMOTE | KGX_PRIVILEGED,
+                                     KGX_REMOTE));
+  g_assert_true (kgx_flags_includes (NULL,
+                                     KGX_REMOTE | KGX_PRIVILEGED,
+                                     KGX_PRIVILEGED));
+  g_assert_true (kgx_flags_includes (NULL,
+                                     KGX_REMOTE | KGX_PRIVILEGED,
+                                     KGX_REMOTE | KGX_PRIVILEGED));
+
+  g_assert_false (kgx_flags_includes (NULL, KGX_REMOTE, KGX_PRIVILEGED));
+  g_assert_false (kgx_flags_includes (NULL, KGX_PRIVILEGED, KGX_REMOTE));
+  g_assert_false (kgx_flags_includes (NULL,
+                                      KGX_REMOTE,
+                                      KGX_REMOTE | KGX_PRIVILEGED));
+  g_assert_false (kgx_flags_includes (NULL,
+                                      KGX_PRIVILEGED,
+                                      KGX_REMOTE | KGX_PRIVILEGED));
+  g_assert_false (kgx_flags_includes (NULL,
+                                      KGX_NONE,
+                                      KGX_REMOTE | KGX_PRIVILEGED));
+}
+
+
 int
 main (int argc, char *argv[])
 {
@@ -104,6 +147,8 @@ main (int argc, char *argv[])
   }
 
   g_test_add_func ("/kgx/shared-closures/object_or_fallback", test_object_or_fallback);
+  g_test_add_func ("/kgx/shared-closures/enum_is", test_enum_is);
+  g_test_add_func ("/kgx/shared-closures/flags_includes", test_flags_includes);
 
   return g_test_run ();
 }

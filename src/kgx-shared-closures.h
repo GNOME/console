@@ -1,6 +1,6 @@
 /* kgx-shared-closures.h
  *
- * Copyright 2024 Zander Brown
+ * Copyright 2024-2025 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -76,6 +76,26 @@ kgx_object_or_fallback (G_GNUC_UNUSED GObject *self,
   }
 
   return g_object_ref (object);
+}
+
+
+G_GNUC_UNUSED
+static gboolean
+kgx_enum_is (G_GNUC_UNUSED GObject *self,
+             int                    a,
+             int                    b)
+{
+  return a == b;
+}
+
+
+G_GNUC_UNUSED
+static gboolean
+kgx_flags_includes (G_GNUC_UNUSED GObject *self,
+                    guint                  a,
+                    guint                  b)
+{
+  return (a & b) == b;
 }
 
 
