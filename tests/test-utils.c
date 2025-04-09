@@ -1,6 +1,6 @@
 /* test-utils.c
  *
- * Copyright 2024 Zander Brown
+ * Copyright 2024-2025 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,6 +18,9 @@
 
 #include "kgx-config.h"
 
+#include "kgx-enums.h"
+#include "kgx-train.h"
+
 #include "kgx-utils.h"
 
 
@@ -32,6 +35,7 @@ struct _KgxTestObject {
   gboolean a_bool;
   int64_t a_int64;
   char *a_string;
+  guint a_flags;
 };
 
 
@@ -43,6 +47,7 @@ enum {
   PROP_A_BOOL,
   PROP_A_INT64,
   PROP_A_STRING,
+  PROP_A_FLAGS,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -75,6 +80,9 @@ kgx_test_object_get_property (GObject    *object,
     case PROP_A_STRING:
       g_value_set_string (value, self->a_string);
       break;
+    case PROP_A_FLAGS:
+      g_value_set_flags (value, self->a_flags);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
@@ -99,6 +107,9 @@ kgx_test_object_set_property (GObject      *object,
       break;
     case PROP_A_STRING:
       kgx_set_str_prop (object, pspec, &self->a_string, value);
+      break;
+    case PROP_A_FLAGS:
+      kgx_set_flags_prop (object, pspec, &self->a_flags, value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -130,6 +141,12 @@ kgx_test_object_class_init (KgxTestObjectClass *klass)
     g_param_spec_string ("a-string", NULL, NULL,
                          NULL,
                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
+
+  pspecs[PROP_A_FLAGS] =
+    g_param_spec_flags ("a-flags", NULL, NULL,
+                        KGX_TYPE_STATUS,
+                        KGX_NONE,
+                        G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 }
@@ -260,6 +277,44 @@ test_set_str (void)
   g_assert_cmpstr (res_c, ==, "are human rights");
 
   g_assert_cmpstr (res_c, !=, res_b);
+}
+
+
+static void
+test_set_flags (void)
+{
+  g_autoptr (KgxTestObject) obj = g_object_new (KGX_TYPE_TEST_OBJECT, NULL);
+  guint res_a, res_b, res_c;
+
+  g_signal_connect (obj, "notify::a-flags", G_CALLBACK (got_notify), NULL);
+
+  g_object_get (obj, "a-flags", &res_a, NULL);
+  g_assert_cmpint (res_a, ==, KGX_NONE);
+
+  prop_notified = NULL;
+  g_object_set (obj, "a-flags", KGX_PRIVILEGED | KGX_REMOTE, NULL);
+  g_assert_cmpstr (prop_notified, ==, "a-flags");
+
+  g_object_get (obj, "a-flags", &res_a, NULL);
+  g_assert_cmpint (res_a, ==, KGX_PRIVILEGED | KGX_REMOTE);
+
+  prop_notified = NULL;
+  g_object_set (obj, "a-flags", KGX_PRIVILEGED | KGX_REMOTE, NULL);
+  g_assert_null (prop_notified);
+
+  g_object_get (obj, "a-flags", &res_b, NULL);
+  g_assert_cmpint (res_b, ==, KGX_PRIVILEGED | KGX_REMOTE);
+
+  g_assert_cmpint (res_a, ==, res_b);
+
+  prop_notified = NULL;
+  g_object_set (obj, "a-flags", KGX_PRIVILEGED, NULL);
+  g_assert_cmpstr (prop_notified, ==, "a-flags");
+
+  g_object_get (obj, "a-flags", &res_c, NULL);
+  g_assert_cmpint (res_c, ==, KGX_PRIVILEGED);
+
+  g_assert_cmpint (res_c, !=, res_b);
 }
 
 
@@ -533,6 +588,7 @@ main (int argc, char *argv[])
   g_test_add_func ("/kgx/utils/set_boolean", test_set_boolean);
   g_test_add_func ("/kgx/utils/set_int64", test_set_int64);
   g_test_add_func ("/kgx/utils/set_str", test_set_str);
+  g_test_add_func ("/kgx/utils/set_flags", test_set_flags);
 
   for (size_t i = 0; i < G_N_ELEMENTS (filter_cases); i++) {
     g_autofree char *path =
