@@ -9,7 +9,7 @@
         <attribute name="hidden-when">action-disabled</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">Copy _Link</attribute>
+        <attribute name="label" translatable="yes">Copy _Link Address</attribute>
         <attribute name="action">term.copy-link</attribute>
         <attribute name="hidden-when">action-disabled</attribute>
       </item>
@@ -71,7 +71,7 @@
         <lookup name="livery">
           <lookup name="settings">KgxTerminal</lookup>
         </lookup>
-        <closure function="enum_is" type="gboolean">
+        <closure function="kgx_enum_is" type="gboolean">
           <closure function="resolve_theme" type="KgxTheme">
             <lookup name="settings">KgxTerminal</lookup>
             <lookup name="dark">

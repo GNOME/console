@@ -1,6 +1,6 @@
 /* kgx-terminal.c
  *
- * Copyright 2019-2024 Zander Brown
+ * Copyright 2019-2025 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,15 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * SECTION:kgx-terminal
- * @title: KgxTerminal
- * @short_description: The terminal
- *
- * The main terminal widget with various features added such as a context
- * menu (via #GtkPopover) and link detection
- */
-
 #include "kgx-config.h"
 
 #include <glib/gi18n.h>
@@ -38,8 +29,14 @@
 #include "kgx-paste-dialog.h"
 #include "kgx-settings.h"
 #include "kgx-shared-closures.h"
+#include "kgx-spad-source.h"
+#include "kgx-spad.h"
 
 #include "kgx-terminal.h"
+
+/* Translators: The user ctrl-clicked, or used ‘Open Link’, on a URI that,
+ *              for whatever reason, we were unable to open. */
+#define URI_FAILED_MESSAGE C_("toast-message", "Couldn't Open Link")
 
 /*       Regex adapted from TerminalWidget.vala in Pantheon Terminal       */
 
@@ -93,7 +90,9 @@ struct _KgxTerminal {
 };
 
 
-G_DEFINE_TYPE (KgxTerminal, kgx_terminal, VTE_TYPE_TERMINAL)
+G_DEFINE_FINAL_TYPE_WITH_CODE (KgxTerminal, kgx_terminal, VTE_TYPE_TERMINAL,
+                               G_IMPLEMENT_INTERFACE (KGX_TYPE_SPAD_SOURCE, NULL))
+
 
 enum {
   PROP_0,
@@ -104,6 +103,7 @@ enum {
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
+
 
 enum {
   SIZE_CHANGED,
@@ -180,9 +180,7 @@ kgx_terminal_set_property (GObject      *object,
     case PROP_PALETTE:
       kgx_terminal_set_palette (self, g_value_get_boxed (value));
       break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
+    KGX_INVALID_PROP (object, property_id, pspec);
   }
 }
 
@@ -262,9 +260,7 @@ kgx_terminal_get_property (GObject    *object,
     case PROP_PALETTE:
       g_value_set_boxed (value, self->palette);
       break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
+    KGX_INVALID_PROP (object, property_id, pspec);
   }
 }
 
@@ -302,17 +298,92 @@ have_url_under_pointer (KgxTerminal *self,
 }
 
 
+static inline void
+throw_spad (KgxTerminal  *self,
+            const char   *toast_message,
+            KgxSpadFlags  flags,
+            const char   *error_body,
+            const char   *error_content,
+            GError       *error)
+{
+  kgx_spad_source_throw (KGX_SPAD_SOURCE (self), toast_message, flags, error_body, error_content, error);
+}
+
+
+static inline void
+throw_spad_simple (KgxTerminal  *self,
+                   const char   *toast_message,
+                   const char   *error_body)
+{
+  throw_spad (self, toast_message, KGX_SPAD_NONE, error_body, NULL, NULL);
+}
+
+
+struct _OpenURIData {
+  KgxTerminal *terminal;
+  GUri        *uri;
+};
+
+
+KGX_DEFINE_DATA (OpenURIData, open_uri_data)
+
+
+static inline void
+open_uri_data_cleanup (OpenURIData *self)
+{
+  g_clear_object (&self->terminal);
+  g_clear_pointer (&self->uri, g_uri_unref);
+}
+
+
 static void
 did_open (GObject *source, GAsyncResult *res, gpointer user_data)
 {
-  g_autoptr (KgxTerminal) self = user_data;
+  g_autoptr (OpenURIData) data = user_data;
   g_autoptr (GError) error = NULL;
+  g_autofree char *error_body = NULL;
+  g_autofree char *error_content = NULL;
+  g_autofree char *uri_str = NULL;
 
   kgx_despatcher_open_finish (KGX_DESPATCHER (source), res, &error);
 
-  if (error) {
-    g_warning ("Couldn't open uri: %s\n", error->message);
+  if (!error) {
+    return;
   }
+
+  uri_str = g_uri_to_string (data->uri);
+
+  if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED)) {
+    /* Translators: The first two %s are the location/uri in question, the
+     *              final %s is the schema of that uri. This is Pango Markup! */
+    error_body = g_strdup_printf (C_("spad-message",
+                                     "The link “<a href=\"%s\">%s</a>” uses "
+                                     "the protocol “%s”, for which no apps "
+                                     "are installed."),
+                                  uri_str,
+                                  uri_str,
+                                  g_uri_get_scheme (data->uri));
+
+    throw_spad_simple (data->terminal, URI_FAILED_MESSAGE, error_body);
+
+    return;
+  }
+
+  error_body = g_strdup_printf (C_("spad-message",
+                                   "An unexpected error occurred whilst "
+                                   "opening the link “<a href=\"%s\">%s</a>”. "
+                                   "Please include the following information "
+                                   "if you report the error."),
+                                uri_str,
+                                uri_str);
+  error_content = g_strdup_printf ("URI: %s", uri_str);
+
+  throw_spad (data->terminal,
+              URI_FAILED_MESSAGE,
+              KGX_SPAD_SHOW_REPORT | KGX_SPAD_SHOW_SYS_INFO,
+              error_body,
+              error_content,
+              error);
 }
 
 
@@ -328,14 +399,70 @@ ensure_despatcher (KgxTerminal *self)
 static void
 open_link (KgxTerminal *self)
 {
+  g_autoptr (GUri) base_uri = vte_terminal_ref_termprop_uri (VTE_TERMINAL (self),
+                                                             VTE_TERMPROP_CURRENT_DIRECTORY_URI);
+  g_autoptr (OpenURIData) data = open_uri_data_alloc ();
+  g_autoptr (GError) error = NULL;
+  g_autofree char *uri_str = NULL;
+
+  g_set_object (&data->terminal, self);
+  if (base_uri) {
+    data->uri = g_uri_parse_relative (base_uri,
+                                      self->current_url,
+                                      G_URI_FLAGS_NONE,
+                                      &error);
+  } else {
+    data->uri = g_uri_parse (self->current_url, G_URI_FLAGS_NONE, &error);
+  }
+
+  if (error) {
+    g_autofree char *error_body =
+      g_strdup_printf (C_("spad-message",
+                          "The link “<a href=\"%s\">%s</a>” is malformed."),
+                       uri_str,
+                       uri_str);
+
+    throw_spad (data->terminal,
+                URI_FAILED_MESSAGE,
+                KGX_SPAD_NONE,
+                error_body,
+                NULL,
+                error);
+
+    return;
+  }
+
+  uri_str = g_uri_to_string (data->uri);
+
+  if (kgx_uri_is_non_local_file (data->uri)) {
+    g_autofree char *error_body =
+      g_strdup_printf (C_("spad-message",
+                          "The link “<a href=\"%s\">%s</a>” points to a "
+                          "location on a different device.\n\nThis device is "
+                          "“%s” and the location is on “%s”."),
+                       uri_str,
+                       uri_str,
+                       g_get_host_name (),
+                       g_uri_get_host (data->uri));
+
+    throw_spad (self,
+                URI_FAILED_MESSAGE,
+                KGX_SPAD_NONE,
+                error_body,
+                NULL,
+                NULL);
+
+    return;
+  }
+
   ensure_despatcher (self);
 
   kgx_despatcher_open (self->despatcher,
-                       self->current_url,
+                       uri_str,
                        GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
                        self->cancellable,
                        did_open,
-                       g_object_ref (self));
+                       g_steal_pointer (&data));
 }
 
 
@@ -380,7 +507,16 @@ got_text (GObject      *source,
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
     return;
   } else if (error) {
-    g_critical ("Couldn't paste text: %s\n", error->message);
+    throw_spad (self,
+                C_("toast-message", "Couldn't Paste Text"),
+                KGX_SPAD_SHOW_REPORT | KGX_SPAD_SHOW_SYS_INFO,
+                C_("spad-message",
+                   "An unexpected error occurred whilst reading the "
+                   "clipboard. Please include the following information "
+                   "if you report the error."),
+                NULL,
+                error);
+
     return;
   }
 
@@ -407,15 +543,43 @@ select_all_activated (KgxTerminal *self)
 }
 
 
+struct _ShowInData {
+  KgxTerminal *terminal;
+  char        *uri;
+};
+
+
+KGX_DEFINE_DATA (ShowInData, show_in_data)
+
+
+static inline void
+show_in_data_cleanup (ShowInData *self)
+{
+  g_clear_object (&self->terminal);
+  g_clear_pointer (&self->uri, g_free);
+}
+
+
 static void
 did_show_item (GObject *source, GAsyncResult *res, gpointer user_data)
 {
+  g_autoptr (ShowInData) data = user_data;
   g_autoptr (GError) error = NULL;
 
   kgx_despatcher_show_item_finish (KGX_DESPATCHER (source), res, &error);
 
   if (error) {
-    g_warning ("term.show-in-files: show item failed: %s", error->message);
+    g_autofree char *error_content = g_strdup_printf ("show_item: %s", data->uri);
+
+    throw_spad (data->terminal,
+                C_("toast-message", "Couldn't Show File"),
+                KGX_SPAD_SHOW_REPORT | KGX_SPAD_SHOW_SYS_INFO,
+                C_("spad-message",
+                   "An unexpected error occurred whilst showing the "
+                   "file. Please include the following information "
+                   "if you report the error."),
+                error_content,
+                error);
   }
 }
 
@@ -423,12 +587,23 @@ did_show_item (GObject *source, GAsyncResult *res, gpointer user_data)
 static void
 did_show_folder (GObject *source, GAsyncResult *res, gpointer user_data)
 {
+  g_autoptr (ShowInData) data = user_data;
   g_autoptr (GError) error = NULL;
 
   kgx_despatcher_show_folder_finish (KGX_DESPATCHER (source), res, &error);
 
   if (error) {
-    g_warning ("term.show-in-files: show folder failed: %s", error->message);
+    g_autofree char *error_content = g_strdup_printf ("show_folder: %s", data->uri);
+
+    throw_spad (data->terminal,
+                C_("toast-message", "Couldn't Open Folder"),
+                KGX_SPAD_SHOW_REPORT | KGX_SPAD_SHOW_SYS_INFO,
+                C_("spad-message",
+                   "An unexpected error occurred whilst opening the "
+                   "folder. Please include the following information "
+                   "if you report the error."),
+                error_content,
+                error);
   }
 }
 
@@ -436,36 +611,47 @@ did_show_folder (GObject *source, GAsyncResult *res, gpointer user_data)
 static void
 show_in_files_activated (KgxTerminal *self)
 {
-  g_autofree char *uri = NULL;
+  g_autoptr (ShowInData) data = show_in_data_alloc ();
   GtkWindow *parent = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
+  const char *uri;
 
   ensure_despatcher (self);
 
-  uri = get_file_uri_prop (VTE_TERMINAL (self));
+  g_set_object (&data->terminal, self);
 
-  if (G_UNLIKELY (uri)) {
+  data->uri = get_file_uri_prop (VTE_TERMINAL (self));
+
+  if (G_UNLIKELY (data->uri)) {
+    uri = data->uri;
+
     kgx_despatcher_show_item (self->despatcher,
                               uri,
                               parent,
                               self->cancellable,
                               did_show_item,
-                              NULL);
+                              g_steal_pointer (&data));
     return;
   }
 
-  uri = get_directory_uri_prop (VTE_TERMINAL (self));
+  data->uri = get_directory_uri_prop (VTE_TERMINAL (self));
 
-  if (G_UNLIKELY (!uri)) {
+  if (G_UNLIKELY (!data->uri)) {
+    /* We don't throw a spad here since …quite simply this should never
+     * happen, the action is disabled when there is no URI */
     g_warning ("term.show-in-files: no file");
     return;
   }
+
+  /* We can't pass `data->uri` directly as GCC will have already stolen
+   * `data` before it gets to the `uri` param. */
+  uri = data->uri;
 
   kgx_despatcher_show_folder (self->despatcher,
                               uri,
                               parent,
                               self->cancellable,
                               did_show_folder,
-                              NULL);
+                              g_steal_pointer (&data));
 }
 
 
@@ -553,13 +739,6 @@ resolve_theme (KgxTerminal *self,
                gboolean     dark_environment)
 {
   return kgx_settings_resolve_theme (settings, dark_environment);
-}
-
-
-static gboolean
-enum_is (KgxTerminal *self, int a, int b)
-{
-  return a == b;
 }
 
 
@@ -716,12 +895,12 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, resolve_livery);
   gtk_widget_class_bind_template_callback (widget_class, resolve_theme);
-  gtk_widget_class_bind_template_callback (widget_class, enum_is);
   gtk_widget_class_bind_template_callback (widget_class, location_changed);
   gtk_widget_class_bind_template_callback (widget_class, setup_context_menu);
   gtk_widget_class_bind_template_callback (widget_class, pressed);
   gtk_widget_class_bind_template_callback (widget_class, scroll);
   gtk_widget_class_bind_template_callback (widget_class, kgx_style_manager_for_display);
+  gtk_widget_class_bind_template_callback (widget_class, kgx_enum_is);
 
   gtk_widget_class_install_action (widget_class,
                                    "term.open-link",
@@ -801,7 +980,15 @@ got_paste (GObject      *source,
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
     result = KGX_PASTE_CANCELLED;
   } else if (error) {
-    g_critical ("terminal [paste]: Unexpected: %s", error->message);
+    throw_spad (self,
+                C_("toast-message", "Couldn't Paste"),
+                KGX_SPAD_SHOW_REPORT | KGX_SPAD_SHOW_SYS_INFO,
+                C_("spad-message",
+                   "An unexpected error occurred whilst processing the "
+                   "clipboard. Please include the following information "
+                   "if you report the error."),
+                NULL,
+                error);
     return;
   }
 
@@ -822,7 +1009,7 @@ kgx_terminal_accept_paste (KgxTerminal *self,
 
   g_return_if_fail (KGX_IS_TERMINAL (self));
 
-  if (G_UNLIKELY (!text || !text[0])) {
+  if (G_UNLIKELY (!kgx_str_non_empty (text))) {
     return;
   }
 
