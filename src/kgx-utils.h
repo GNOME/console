@@ -293,6 +293,23 @@ kgx_str_non_empty (const char *str)
 }
 
 
+/**
+ * kgx_uri_is_non_local_file:
+ * @uri: the uri to inspect
+ *
+ * Returns: %TRUE when this is both a file-uri *and* one that points to a
+ *          remote machine. All other uris are %FALSE.
+ */
+static inline gboolean
+kgx_uri_is_non_local_file (GUri *uri)
+{
+  return (g_strcmp0 (g_uri_get_scheme (uri), "file") == 0) &&
+         (kgx_str_non_empty (g_uri_get_host (uri)) &&
+          g_strcmp0 (g_uri_get_host (uri), "localhost") != 0 &&
+          g_strcmp0 (g_uri_get_host (uri), g_get_host_name ()) != 0);
+}
+
+
 typedef enum /*< enum,prefix=KGX >*/ {
   KGX_ARGUMENT_ERROR_BOTH,
   KGX_ARGUMENT_ERROR_MISSING,
