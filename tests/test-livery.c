@@ -96,6 +96,45 @@ test_livery_roundtrip (void)
 }
 
 
+static void
+test_livery_set_livery (void)
+{
+  g_autoptr (KgxPalette) palette = kgx_palette_new (&((GdkRGBA) { 0, }),
+                                                    &((GdkRGBA) { 0, }),
+                                                    0.0,
+                                                    0,
+                                                    NULL);
+  g_autoptr (KgxLivery) livery_a = kgx_livery_new (KGX_LIVERY_UUID_KGX,
+                                                   "Test",
+                                                   palette,
+                                                   palette);
+  g_autoptr (KgxLivery) livery_b = kgx_livery_new (KGX_LIVERY_UUID_KGX,
+                                                   "Test",
+                                                   palette,
+                                                   palette);
+
+  g_assert_true (kgx_set_livery (&livery_a, livery_b));
+  g_assert_true (livery_a == livery_b);
+}
+
+
+static void
+test_livery_set_livery_same (void)
+{
+  g_autoptr (KgxPalette) palette = kgx_palette_new (&((GdkRGBA) { 0, }),
+                                                    &((GdkRGBA) { 0, }),
+                                                    0.0,
+                                                    0,
+                                                    NULL);
+  g_autoptr (KgxLivery) livery = kgx_livery_new (KGX_LIVERY_UUID_KGX,
+                                                 "Test",
+                                                 palette,
+                                                 palette);
+
+  g_assert_false (kgx_set_palette (&palette, palette));
+}
+
+
 int
 main (int argc, char *argv[])
 {
@@ -104,6 +143,8 @@ main (int argc, char *argv[])
   g_test_add_func ("/kgx/livery/type", test_livery_type);
   g_test_add_func ("/kgx/livery/new", test_livery_new);
   g_test_add_func ("/kgx/livery/roundtrip", test_livery_roundtrip);
+  g_test_add_func ("/kgx/livery/set_palette", test_livery_set_livery);
+  g_test_add_func ("/kgx/livery/set_palette_same", test_livery_set_livery_same);
 
   return g_test_run ();
 }
