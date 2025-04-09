@@ -28,6 +28,8 @@
 #include "kgx-marshals.h"
 #include "kgx-pages.h"
 #include "kgx-settings.h"
+#include "kgx-spad-source.h"
+#include "kgx-spad.h"
 #include "kgx-terminal.h"
 #include "kgx-utils.h"
 
@@ -79,6 +81,8 @@ struct _KgxTabPrivate {
   GtkWidget            *search_entry;
   GtkWidget            *search_bar;
   char                 *last_search;
+
+  AdwToastOverlay      *toasts;
 
   char                 *notification_id;
 };
@@ -581,6 +585,35 @@ kgx_tab_real_bell (KgxTab *self)
 }
 
 
+static gboolean
+spad_thrown (KgxSpadSource *source,
+             const char    *title,
+             GVariant      *bundle,
+             KgxTab        *self)
+{
+  KgxTabPrivate *priv = kgx_tab_get_instance_private (self);
+  AdwToast *toast = g_object_new (ADW_TYPE_TOAST,
+                                  "title", title,
+                                  "button-label", C_("toast-button", "_Details"),
+                                  "action-name", "tab.show-spad",
+                                  "action-target", bundle,
+                                  NULL);
+
+  adw_toast_overlay_add_toast (priv->toasts, toast);
+
+  return TRUE;
+}
+
+
+static void
+show_spad (GtkWidget                *widget,
+           G_GNUC_UNUSED const char *action,
+           GVariant                 *target)
+{
+  adw_dialog_present (kgx_spad_new_from_bundle (target), widget);
+}
+
+
 static void
 kgx_tab_class_init (KgxTabClass *klass)
 {
@@ -787,12 +820,19 @@ kgx_tab_class_init (KgxTabClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, train_signals);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, terminal_signals);
   gtk_widget_class_bind_template_child_private (widget_class, KgxTab, drop_target);
+  gtk_widget_class_bind_template_child_private (widget_class, KgxTab, toasts);
 
   gtk_widget_class_bind_template_callback (widget_class, search_enabled);
   gtk_widget_class_bind_template_callback (widget_class, search_changed);
   gtk_widget_class_bind_template_callback (widget_class, search_next);
   gtk_widget_class_bind_template_callback (widget_class, search_prev);
   gtk_widget_class_bind_template_callback (widget_class, drop);
+  gtk_widget_class_bind_template_callback (widget_class, spad_thrown);
+
+  gtk_widget_class_install_action (widget_class,
+                                   "tab.show-spad",
+                                   "a{sv}",
+                                   show_spad);
 
   gtk_widget_class_set_css_name (widget_class, "kgx-tab");
 }
@@ -961,6 +1001,9 @@ kgx_tab_init (KgxTab *self)
                           self),
   g_signal_group_connect (priv->terminal_signals,
                           "bell", G_CALLBACK (bell),
+                          self),
+  g_signal_group_connect (priv->terminal_signals,
+                          "spad-thrown", G_CALLBACK (spad_thrown),
                           self),
 
   gtk_search_bar_connect_entry (GTK_SEARCH_BAR (priv->search_bar),

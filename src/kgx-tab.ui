@@ -19,86 +19,90 @@
     </binding>
     <property name="dropping" bind-source="drop_target" bind-property="active" />
     <property name="child">
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="AdwToolbarView">
-            <child type="top">
-              <object class="GtkSearchBar" id="search_bar">
-                <property name="search-mode-enabled" bind-source="KgxTab"
-                  bind-property="search-mode-enabled" bind-flags="sync-create|bidirectional" />
-                <signal name="notify::search-mode-enabled" handler="search_enabled" swapped="no" />
-                <child>
-                  <object class="AdwClamp">
-                    <property name="hexpand">1</property>
-                    <property name="maximum-size">500</property>
-                    <property name="child">
-                      <object class="GtkBox">
-                        <property name="spacing">6</property>
-                        <child>
-                          <object class="GtkSearchEntry" id="search_entry">
-                            <property name="placeholder-text" translatable="yes">Find text</property>
-                            <property name="hexpand">1</property>
-                            <signal name="next-match" handler="search_next" swapped="no" />
-                            <signal name="previous-match" handler="search_prev" swapped="no" />
-                            <signal name="search-changed" handler="search_changed" swapped="no" />
+      <object class="AdwToastOverlay" id="toasts">
+        <property name="child">
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="GtkSearchBar" id="search_bar">
+                    <property name="search-mode-enabled" bind-source="KgxTab"
+                      bind-property="search-mode-enabled" bind-flags="sync-create|bidirectional" />
+                    <signal name="notify::search-mode-enabled" handler="search_enabled" swapped="no" />
+                    <child>
+                      <object class="AdwClamp">
+                        <property name="hexpand">1</property>
+                        <property name="maximum-size">500</property>
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="spacing">6</property>
+                            <child>
+                              <object class="GtkSearchEntry" id="search_entry">
+                                <property name="placeholder-text" translatable="yes">Find text</property>
+                                <property name="hexpand">1</property>
+                                <signal name="next-match" handler="search_next" swapped="no" />
+                                <signal name="previous-match" handler="search_prev" swapped="no" />
+                                <signal name="search-changed" handler="search_changed" swapped="no" />
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton">
+                                <property name="receives-default">1</property>
+                                <property name="icon-name">go-up-symbolic</property>
+                                <property name="tooltip-text" translatable="yes">Previous Match</property>
+                                <signal name="clicked" handler="search_prev" swapped="no" />
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkButton">
+                                <property name="receives-default">1</property>
+                                <property name="icon-name">go-down-symbolic</property>
+                                <property name="tooltip-text" translatable="yes">Next Match</property>
+                                <signal name="clicked" handler="search_next" swapped="no" />
+                              </object>
+                            </child>
                           </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton">
-                            <property name="receives-default">1</property>
-                            <property name="icon-name">go-up-symbolic</property>
-                            <property name="tooltip-text" translatable="yes">Previous Match</property>
-                            <signal name="clicked" handler="search_prev" swapped="no" />
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton">
-                            <property name="receives-default">1</property>
-                            <property name="icon-name">go-down-symbolic</property>
-                            <property name="tooltip-text" translatable="yes">Next Match</property>
-                            <signal name="clicked" handler="search_next" swapped="no" />
-                          </object>
-                        </child>
+                        </property>
                       </object>
-                    </property>
+                    </child>
+                    <style>
+                      <class name="view" />
+                    </style>
                   </object>
                 </child>
-                <style>
-                  <class name="view" />
-                </style>
+                <property name="content">
+                  <object class="GtkStack" id="stack">
+                    <property name="transition-type">crossfade</property>
+                    <property name="transition-duration">10</property>
+                    <child>
+                      <object class="KgxEmpty">
+                        <property name="working" bind-source="KgxTab" bind-property="working"
+                          bind-flags="sync-create" />
+                      </object>
+                    </child>
+                  </object>
+                </property>
               </object>
             </child>
-            <property name="content">
-              <object class="GtkStack" id="stack">
-                <property name="transition-type">crossfade</property>
-                <property name="transition-duration">10</property>
-                <child>
-                  <object class="KgxEmpty">
-                    <property name="working" bind-source="KgxTab" bind-property="working"
-                      bind-flags="sync-create" />
+            <child>
+              <object class="GtkRevealer" id="exit_revealer">
+                <property name="can_focus">False</property>
+                <property name="transition_type">slide-up</property>
+                <property name="child">
+                  <object class="GtkLabel" id="exit_message">
+                    <property name="use_markup">True</property>
+                    <property name="wrap">True</property>
+                    <property name="xalign">0</property>
+                    <style>
+                      <class name="exit-info" />
+                    </style>
                   </object>
-                </child>
+                </property>
               </object>
-            </property>
+            </child>
           </object>
-        </child>
-        <child>
-          <object class="GtkRevealer" id="exit_revealer">
-            <property name="can_focus">False</property>
-            <property name="transition_type">slide-up</property>
-            <property name="child">
-              <object class="GtkLabel" id="exit_message">
-                <property name="use_markup">True</property>
-                <property name="wrap">True</property>
-                <property name="xalign">0</property>
-                <style>
-                  <class name="exit-info" />
-                </style>
-              </object>
-            </property>
-          </object>
-        </child>
+        </property>
       </object>
     </property>
   </template>
@@ -112,5 +116,6 @@
   </object>
   <object class="KgxDropTarget" id="drop_target">
     <signal name="drop" handler="drop" swapped="no" />
+    <signal name="spad-thrown" handler="spad_thrown" swapped="no" />
   </object>
 </interface>
