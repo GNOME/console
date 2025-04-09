@@ -43,6 +43,8 @@ kgx_sources = files(
   'kgx-shared-closures.h',
   'kgx-simple-tab.c',
   'kgx-simple-tab.h',
+  'kgx-spad-source.c',
+  'kgx-spad-source.h',
   'kgx-spad.c',
   'kgx-spad.h',
   'kgx-system-info.c',
