@@ -18,10 +18,13 @@
 
 #include "kgx-config.h"
 
+#include <glib/gi18n.h>
+
 #include <gtk/gtk.h>
 
 #include "kgx-marshals.h"
 #include "kgx-utils.h"
+#include "kgx-spad-source.h"
 
 #include "kgx-drop-target.h"
 
@@ -41,7 +44,8 @@ struct _KgxDropTarget {
 };
 
 
-G_DEFINE_TYPE (KgxDropTarget, kgx_drop_target, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE_WITH_CODE (KgxDropTarget, kgx_drop_target, G_TYPE_OBJECT,
+                               G_IMPLEMENT_INTERFACE (KGX_TYPE_SPAD_SOURCE, NULL))
 
 
 enum {
@@ -189,6 +193,22 @@ got_line (GObject      *source,
                                                     NULL,
                                                     &error);
 
+  if (error) {
+    kgx_spad_source_throw (KGX_SPAD_SOURCE (state->self),
+                           C_("toast-message", "Drop Failed"),
+                           KGX_SPAD_SHOW_REPORT | KGX_SPAD_SHOW_SYS_INFO,
+                           C_("spad-message",
+                              "An unexpected error occurred whilst receiving "
+                              "a URI list drop. Please include the following "
+                              "information if you report the error."),
+                           NULL,
+                           error);
+
+    gdk_drop_finish (state->drop, DROP_REJECT);
+
+    return;
+  }
+
   /* we've reached the end */
   if (G_UNLIKELY (!line)) {
     emit_list (state->self, state->builder);
@@ -226,8 +246,18 @@ got_uris (GObject      *source,
   stream = gdk_drop_read_finish (drop, res, NULL, &error);
 
   if (error) {
-    g_warning ("drop-target: failed to receive uri list: %s", error->message);
+    kgx_spad_source_throw (KGX_SPAD_SOURCE (self),
+                           C_("toast-message", "Drop Failed"),
+                           KGX_SPAD_SHOW_REPORT | KGX_SPAD_SHOW_SYS_INFO,
+                           C_("spad-message",
+                              "An unexpected error occurred whilst receiving "
+                              "a URI list drop. Please include the following "
+                              "information if you report the error."),
+                           NULL,
+                           error);
+
     gdk_drop_finish (drop, DROP_REJECT);
+
     return;
   }
 
@@ -300,7 +330,16 @@ got_files (GObject      *source,
       g_debug ("drop-target: assuming we are using a broken portal (of the other kind)…");
       get_uris (g_steal_pointer (&self), drop);
     } else {
-      g_warning ("drop-target: failed to receive file list: %s", error->message);
+      kgx_spad_source_throw (KGX_SPAD_SOURCE (self),
+                             C_("toast-message", "Drop Failed"),
+                             KGX_SPAD_SHOW_REPORT | KGX_SPAD_SHOW_SYS_INFO,
+                             C_("spad-message",
+                               "An unexpected error occurred whilst receiving "
+                               "a file list drop. Please include the following "
+                               "information if you report the error."),
+                             NULL,
+                             error);
+
       gdk_drop_finish (drop, DROP_REJECT);
     }
 
@@ -325,8 +364,18 @@ got_text (GObject      *source,
   value = gdk_drop_read_value_finish (drop, res, &error);
 
   if (error) {
-    g_warning ("drop-target: failed to receive text: %s", error->message);
+    kgx_spad_source_throw (KGX_SPAD_SOURCE (self),
+                           C_("toast-message", "Drop Failed"),
+                           KGX_SPAD_SHOW_REPORT | KGX_SPAD_SHOW_SYS_INFO,
+                           C_("spad-message",
+                              "An unexpected error occurred whilst receiving "
+                              "a text drop. Please include the following "
+                              "information if you report the error."),
+                           NULL,
+                           error);
+
     gdk_drop_finish (drop, DROP_REJECT);
+
     return;
   }
 
@@ -440,8 +489,28 @@ kgx_drop_target_extra_drop (KgxDropTarget *self,
   } else if (G_VALUE_HOLDS_STRING (value)) {
     g_signal_emit (self, signals[DROP], 0, g_value_get_string (value));
   } else {
-    g_critical ("drop-target: unexpected value: %s",
-                G_VALUE_TYPE_NAME (value));
+    g_auto (GValue) as_string = G_VALUE_INIT;
+    g_autofree char *error_content = NULL;
+
+    g_value_init (&as_string, G_TYPE_STRING);
+
+    if (g_value_transform (value, &as_string)) {
+      error_content = g_strdup_printf ("Value: %s", G_VALUE_TYPE_NAME (value));
+    } else {
+      error_content = g_strdup_printf ("Value: %s\nTo-String: %s",
+                                       G_VALUE_TYPE_NAME (value),
+                                       g_value_get_string (value));
+    }
+
+    kgx_spad_source_throw (KGX_SPAD_SOURCE (self),
+                           C_("toast-message", "Drop Failed"),
+                           KGX_SPAD_SHOW_REPORT | KGX_SPAD_SHOW_SYS_INFO,
+                           C_("spad-message",
+                              "An unexpected value was received. Please "
+                              "include the following information if you "
+                              "report the error."),
+                           error_content,
+                           NULL);
   }
 }
 

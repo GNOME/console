@@ -7,6 +7,7 @@ src/kgx-application.c
 src/kgx-application.h
 src/kgx-close-dialog.c
 src/kgx-colour-utils.c
+src/kgx-drop-target.c
 src/kgx-livery-manager.c
 src/kgx-pages.c
 src/kgx-pages.ui
