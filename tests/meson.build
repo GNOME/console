@@ -1,5 +1,6 @@
 tests = [
   'colour-utils',
+  'file-closures',
   'icon-closures',
   'livery',
   'locale',
