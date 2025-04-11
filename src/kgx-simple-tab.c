@@ -24,6 +24,7 @@
 #include "kgx-settings.h"
 #include "kgx-train.h"
 #include "kgx-utils.h"
+#include "kgx-file-closures.h"
 
 #include "kgx-simple-tab.h"
 
@@ -249,32 +250,6 @@ kgx_simple_tab_start_finish (KgxTab        *page,
 }
 
 
-static char *
-format_tooltip (GObject *object, GFile *current_path)
-{
-  g_autofree char *path_raw = NULL;
-  g_autofree char *path_utf8 = NULL;
-  g_autoptr (GError) error = NULL;
-
-  if (!current_path) {
-    return NULL;
-  }
-
-  path_raw = g_file_get_path (current_path);
-  if (G_UNLIKELY (!path_raw)) {
-    return g_file_get_uri (current_path);
-  }
-
-  path_utf8 = g_filename_to_utf8 (path_raw, -1, NULL, NULL, &error);
-  if (G_UNLIKELY (error)) {
-    g_debug ("simple-tab: path had unexpected encoding (%s)", error->message);
-    return g_file_get_uri (current_path);
-  }
-
-  return g_steal_pointer (&path_utf8);
-}
-
-
 static void
 kgx_simple_tab_class_init (KgxSimpleTabClass *klass)
 {
@@ -324,7 +299,7 @@ kgx_simple_tab_class_init (KgxSimpleTabClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                KGX_APPLICATION_PATH "kgx-simple-tab.ui");
 
-  gtk_widget_class_bind_template_callback (widget_class, format_tooltip);
+  gtk_widget_class_bind_template_callback (widget_class, kgx_file_as_display_or_uri);
 }
 
 

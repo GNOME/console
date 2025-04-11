@@ -4,7 +4,7 @@
   <template class="KgxSimpleTab" parent="KgxTab">
     <property name="terminal">terminal</property>
     <binding name="tab-tooltip">
-      <closure type='gchararray' function='format_tooltip'>
+      <closure type='gchararray' function='kgx_file_as_display_or_uri'>
         <lookup name="path">terminal</lookup>
       </closure>
     </binding>
