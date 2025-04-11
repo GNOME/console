@@ -21,6 +21,7 @@
 #include <glib/gi18n.h>
 
 #include "kgx-close-dialog.h"
+#include "kgx-file-closures.h"
 #include "kgx-icon-closures.h"
 #include "kgx-marshals.h"
 #include "kgx-settings.h"
@@ -478,22 +479,6 @@ fallback_title (G_GNUC_UNUSED GObject *self,
 }
 
 
-static char *
-path_as_keyword (G_GNUC_UNUSED GObject *self,
-                 GFile                 *path)
-{
-  g_autofree char *raw_path = NULL;
-
-  if (!path) {
-    return NULL;
-  }
-
-  raw_path = g_file_get_path (path);
-
-  return g_filename_display_name (raw_path);
-}
-
-
 static gboolean
 object_accumulator (GSignalInvocationHint *ihint,
                     GValue                *return_value,
@@ -688,10 +673,10 @@ kgx_pages_class_init (KgxPagesClass *klass)
   class_priv->page_expression_scope = gtk_builder_cscope_new ();
   gtk_builder_cscope_add_callback_symbols (GTK_BUILDER_CSCOPE (class_priv->page_expression_scope),
                                            "kgx_text_or_fallback", G_CALLBACK (kgx_text_or_fallback),
+                                           "kgx_file_as_display", G_CALLBACK (kgx_file_as_display),
                                            "kgx_status_as_icon", G_CALLBACK (kgx_status_as_icon),
                                            "kgx_ringing_as_icon", G_CALLBACK (kgx_ringing_as_icon),
                                            "fallback_title", G_CALLBACK (fallback_title),
-                                           "path_as_keyword", G_CALLBACK (path_as_keyword),
                                            NULL);
 }
 

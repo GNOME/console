@@ -35,7 +35,7 @@
       </closure>
     </binding>
     <binding name="keyword">
-      <closure type='gchararray' function='path_as_keyword'>
+      <closure type='gchararray' function='kgx_file_as_display'>
         <lookup name="tab-path" type="KgxTab">
           <lookup name="child">AdwTabPage</lookup>
         </lookup>
