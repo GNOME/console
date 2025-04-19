@@ -6,6 +6,8 @@
     <property name="spacing">16</property>
     <child>
       <object class="GtkRevealer" id="image_revealer">
+        <property name="reveal-child" bind-source="KgxEmpty" bind-property="logo-visible"
+          bind-flags="sync-create" />
         <property name="transition-type">crossfade</property>
         <property name="transition-duration">1000</property>
         <property name="child">
@@ -20,6 +22,8 @@
     </child>
     <child>
       <object class="GtkRevealer" id="spinner_revealer">
+        <property name="reveal-child" bind-source="KgxEmpty" bind-property="spinner-visible"
+          bind-flags="sync-create" />
         <property name="vexpand">true</property>
         <property name="valign">start</property>
         <property name="transition-type">crossfade</property>
