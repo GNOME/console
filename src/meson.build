@@ -23,6 +23,8 @@ kgx_sources = files(
   'kgx-empty.c',
   'kgx-empty.h',
   'kgx-file-closures.h',
+  'kgx-fullscreen-box.c',
+  'kgx-fullscreen-box.h',
   'kgx-icon-closures.h',
   'kgx-livery-manager.c',
   'kgx-livery-manager.h',
