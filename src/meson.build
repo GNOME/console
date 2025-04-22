@@ -17,6 +17,7 @@ kgx_sources = files(
   'kgx-drop-target.h',
   'kgx-empty.c',
   'kgx-empty.h',
+  'kgx-icon-closures.h',
   'kgx-livery-manager.c',
   'kgx-livery-manager.h',
   'kgx-livery.c',

@@ -21,6 +21,7 @@
 #include <glib/gi18n.h>
 
 #include "kgx-close-dialog.h"
+#include "kgx-icon-closures.h"
 #include "kgx-marshals.h"
 #include "kgx-settings.h"
 #include "kgx-shared-closures.h"
@@ -477,20 +478,6 @@ fallback_title (G_GNUC_UNUSED GObject *self,
 }
 
 
-static GIcon *
-status_as_icon (G_GNUC_UNUSED GObject *self,
-                KgxStatus              status)
-{
-  if (status & KGX_REMOTE) {
-    return g_themed_icon_new ("status-remote-symbolic");
-  } else if (status & KGX_PRIVILEGED) {
-    return g_themed_icon_new ("status-privileged-symbolic");
-  }
-
-  return NULL;
-}
-
-
 static char *
 path_as_keyword (G_GNUC_UNUSED GObject *self,
                  GFile                 *path)
@@ -504,18 +491,6 @@ path_as_keyword (G_GNUC_UNUSED GObject *self,
   raw_path = g_file_get_path (path);
 
   return g_filename_display_name (raw_path);
-}
-
-
-static GIcon *
-ringing_as_icon (G_GNUC_UNUSED GObject *self,
-                 gboolean               ringing)
-{
-  if (ringing) {
-    return g_themed_icon_new ("bell-outline-symbolic");
-  }
-
-  return NULL;
 }
 
 
@@ -713,10 +688,10 @@ kgx_pages_class_init (KgxPagesClass *klass)
   class_priv->page_expression_scope = gtk_builder_cscope_new ();
   gtk_builder_cscope_add_callback_symbols (GTK_BUILDER_CSCOPE (class_priv->page_expression_scope),
                                            "kgx_text_or_fallback", G_CALLBACK (kgx_text_or_fallback),
+                                           "kgx_status_as_icon", G_CALLBACK (kgx_status_as_icon),
+                                           "kgx_ringing_as_icon", G_CALLBACK (kgx_ringing_as_icon),
                                            "fallback_title", G_CALLBACK (fallback_title),
-                                           "status_as_icon", G_CALLBACK (status_as_icon),
                                            "path_as_keyword", G_CALLBACK (path_as_keyword),
-                                           "ringing_as_icon", G_CALLBACK (ringing_as_icon),
                                            NULL);
 }
 

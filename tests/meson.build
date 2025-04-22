@@ -1,5 +1,6 @@
 tests = [
   'colour-utils',
+  'icon-closures',
   'livery',
   'palette',
   'shared-closures',

@@ -28,7 +28,7 @@
       </lookup>
     </binding>
     <binding name="icon">
-      <closure type='GIcon' function='status_as_icon'>
+      <closure type='GIcon' function='kgx_status_as_icon'>
         <lookup name="tab-status" type="KgxTab">
           <lookup name="child">AdwTabPage</lookup>
         </lookup>
@@ -42,7 +42,7 @@
       </closure>
     </binding>
     <binding name="indicator-icon">
-      <closure type='GIcon' function='ringing_as_icon'>
+      <closure type='GIcon' function='kgx_ringing_as_icon'>
         <lookup name="ringing" type="KgxTab">
           <lookup name="child">AdwTabPage</lookup>
         </lookup>
