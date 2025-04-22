@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0" />
+  <template class="KgxFullscreenBox" parent="AdwBin">
+    <binding name="last-focus">
+      <lookup name="focus-widget" type="GtkWindow">
+        <lookup name="root">KgxFullscreenBox</lookup>
+      </lookup>
+    </binding>
+    <property name="child">
+      <object class="AdwToolbarView" id="toolbar_view">
+        <property name="top-bar-style">raised</property>
+        <property name="content" bind-source="KgxFullscreenBox" bind-property="content"
+          bind-flags="sync-create" />
+        <style>
+          <class name="main-box" />
+        </style>
+      </object>
+    </property>
+    <child>
+      <object class="GtkEventControllerMotion">
+        <property name="name">kgx-fullscreen-motion</property>
+        <property name="propagation-phase">capture</property>
+        <signal name="motion" handler="motion" swapped="yes" />
+        <signal name="enter" handler="enter" swapped="yes" />
+      </object>
+    </child>
+    <child>
+      <object class="GtkGestureClick">
+        <property name="name">kgx-fullscreen-pressed</property>
+        <property name="propagation-phase">capture</property>
+        <property name="touch-only">True</property>
+        <signal name="pressed" handler="pressed" swapped="yes" />
+      </object>
+    </child>
+  </template>
+</interface>
