@@ -242,6 +242,28 @@
             </child>
           </object>
         </property>
+        <property name="secondary-menu">
+          <menu>
+            <section>
+              <item>
+                <attribute name="label" translatable="yes">_New Window</attribute>
+                <attribute name="action">win.new-window</attribute>
+              </item>
+            </section>
+            <section>
+              <item>
+                <attribute name="label" translatable="yes">_Fullscreen</attribute>
+                <attribute name="action">win.fullscreen</attribute>
+                <attribute name="hidden-when">action-disabled</attribute>
+              </item>
+              <item>
+                <attribute name="label" translatable="yes">Leave _Fullscreen</attribute>
+                <attribute name="action">win.unfullscreen</attribute>
+                <attribute name="hidden-when">action-disabled</attribute>
+              </item>
+            </section>
+          </menu>
+        </property>
       </object>
     </property>
     <child>
