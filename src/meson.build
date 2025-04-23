@@ -27,6 +27,7 @@ kgx_sources = files(
   'kgx-livery-manager.h',
   'kgx-livery.c',
   'kgx-livery.h',
+  'kgx-locale.h',
   'kgx-pages.c',
   'kgx-pages.h',
   'kgx-palette.c',

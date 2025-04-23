@@ -2,6 +2,7 @@ tests = [
   'colour-utils',
   'icon-closures',
   'livery',
+  'locale',
   'palette',
   'settings',
   'shared-closures',
