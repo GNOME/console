@@ -25,7 +25,7 @@
                   <object class="GtkButton">
                     <property name="action-name">spad.copy-message</property>
                     <binding name="action-target">
-                      <closure type="GVariant" function="text_as_variant">
+                      <closure type="GVariant" function="kgx_text_as_variant">
                         <lookup name="text">buffer</lookup>
                       </closure>
                     </binding>
@@ -39,7 +39,7 @@
                   </object>
                 </property>
                 <binding name="visible">
-                  <closure type="gboolean" function="non_empty">
+                  <closure type="gboolean" function="kgx_text_non_empty">
                     <lookup name="error-content">KgxSpad</lookup>
                   </closure>
                 </binding>

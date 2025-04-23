@@ -99,4 +99,72 @@ kgx_flags_includes (G_GNUC_UNUSED GObject *self,
 }
 
 
+G_GNUC_UNUSED
+static gboolean
+kgx_bool_and (G_GNUC_UNUSED GObject *self,
+              gboolean               a,
+              gboolean               b)
+{
+  return a && b;
+}
+
+
+G_GNUC_UNUSED
+static char *
+kgx_format_percentage (G_GNUC_UNUSED GObject *object, double scale)
+{
+  return g_strdup_printf ("%i%%", (int) round (scale * 100));
+}
+
+
+G_GNUC_UNUSED
+static GVariant *
+kgx_text_as_variant (G_GNUC_UNUSED GObject *self, const char *text)
+{
+  if (!kgx_str_non_empty (text)) {
+    return NULL;
+  }
+
+  return g_variant_ref_sink (g_variant_new_string (text));
+}
+
+
+G_GNUC_UNUSED
+static gboolean
+kgx_text_non_empty (G_GNUC_UNUSED GObject *self, const char *text)
+{
+  return kgx_str_non_empty (text);
+}
+
+
+G_GNUC_UNUSED
+static gboolean
+kgx_decoration_layout_is_inverted (G_GNUC_UNUSED GObject *object,
+                                   const char            *decoration_layout)
+{
+  g_auto (GStrv) sides = g_strsplit (decoration_layout ?
+                                       decoration_layout : "",
+                                     ":",
+                                     2);
+  int counts[2] = { 0 };
+
+  for (size_t i = 0; i < G_N_ELEMENTS (counts); i++) {
+    g_auto (GStrv) elements = NULL;
+
+    if (sides[i] == NULL)
+      continue;
+
+    elements = g_strsplit (sides[i], ",", -1);
+
+    for (size_t j = 0; elements[j]; j++) {
+      if (g_str_equal (elements[j], "close")) {
+        counts[i]++;
+      }
+    }
+  }
+
+  return counts[0] > counts[1];
+}
+
+
 G_END_DECLS

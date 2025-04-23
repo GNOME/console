@@ -124,20 +124,6 @@ kgx_spad_set_property (GObject      *object,
 }
 
 
-static GVariant *
-text_as_variant (G_GNUC_UNUSED GObject *self, const char *text)
-{
-  return g_variant_new_string (text);
-}
-
-
-static gboolean
-non_empty (G_GNUC_UNUSED GObject *self, const char *text)
-{
-  return kgx_str_non_empty (text);
-}
-
-
 static char *
 add_sys_info (G_GNUC_UNUSED GObject *self,
               gboolean               show_sys_info,
@@ -273,11 +259,12 @@ kgx_spad_class_init (KgxSpadClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                KGX_APPLICATION_PATH "kgx-spad.ui");
 
-  gtk_widget_class_bind_template_callback (widget_class, text_as_variant);
-  gtk_widget_class_bind_template_callback (widget_class, non_empty);
   gtk_widget_class_bind_template_callback (widget_class, add_sys_info);
+
   gtk_widget_class_bind_template_callback (widget_class, kgx_flags_includes);
   gtk_widget_class_bind_template_callback (widget_class, kgx_text_or_fallback);
+  gtk_widget_class_bind_template_callback (widget_class, kgx_text_as_variant);
+  gtk_widget_class_bind_template_callback (widget_class, kgx_text_non_empty);
 
   gtk_widget_class_install_action (widget_class,
                                    "spad.copy-message",

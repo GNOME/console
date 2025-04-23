@@ -48,7 +48,7 @@
       </closure>
     </binding>
     <binding name="translucent">
-      <closure type='gboolean' function='and'>
+      <closure type='gboolean' function='kgx_bool_and'>
         <lookup name="transparency">
           <lookup name="settings">KgxWindow</lookup>
         </lookup>
@@ -133,7 +133,7 @@
                                 <child>
                                   <object class="GtkLabel">
                                     <binding name="label">
-                                      <closure type='gchararray' function='scale_as_label'>
+                                      <closure type='gchararray' function='kgx_format_percentage'>
                                         <lookup name="font-scale">
                                           <lookup name="settings">KgxWindow</lookup>
                                         </lookup>
@@ -185,7 +185,7 @@
                 <property name="view" bind-source="pages" bind-property="tab-view"
                   bind-flags="sync-create" />
                 <binding name="inverted">
-                  <closure type='gboolean' function='decoration_is_inverted'>
+                  <closure type='gboolean' function='kgx_decoration_layout_is_inverted'>
                     <lookup name="gtk-decoration-layout">
                       <closure type='GtkSettings' function='kgx_gtk_settings_for_display'>
                         <lookup name="display">KgxWindow</lookup>

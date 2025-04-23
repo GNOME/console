@@ -231,13 +231,6 @@ kgx_window_close_request (GtkWindow *window)
 }
 
 
-static gboolean
-and (KgxWindow *self, gboolean a, gboolean b)
-{
-  return a && b;
-}
-
-
 static void
 zoom (KgxPages  *pages,
       KgxZoom    dir,
@@ -380,39 +373,6 @@ breakpoint_unapplied (KgxWindow *self)
   if (kgx_pages_count (KGX_PAGES (priv->pages)) > 0) {
     adw_tab_overview_set_open (ADW_TAB_OVERVIEW (priv->tab_overview), FALSE);
   }
-}
-
-
-static char *
-scale_as_label (GObject *object, double scale)
-{
-  return g_strdup_printf ("%i%%", (int) round (scale * 100));
-}
-
-
-static gboolean
-decoration_is_inverted (GObject    *object,
-                        const char *layout)
-{
-  g_auto (GStrv) sides = g_strsplit (layout, ":", 2);
-  int counts[2] = { 0 };
-
-  for (size_t i = 0; i < G_N_ELEMENTS (counts); i++) {
-    g_auto (GStrv) elements = NULL;
-
-    if (sides[i] == NULL)
-      continue;
-
-    elements = g_strsplit (sides[i], ",", -1);
-
-    for (size_t j = 0; elements[j]; j++) {
-      if (g_str_equal (elements[j], "close")) {
-        counts[i]++;
-      }
-    }
-  }
-
-  return counts[0] > counts[1];
 }
 
 
@@ -571,7 +531,6 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, settings_binds);
   gtk_widget_class_bind_template_child_private (widget_class, KgxWindow, surface_binds);
 
-  gtk_widget_class_bind_template_callback (widget_class, and);
   gtk_widget_class_bind_template_callback (widget_class, zoom);
   gtk_widget_class_bind_template_callback (widget_class, create_tearoff_host);
   gtk_widget_class_bind_template_callback (widget_class, maybe_close_window);
@@ -581,11 +540,12 @@ kgx_window_class_init (KgxWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, create_tab_cb);
   gtk_widget_class_bind_template_callback (widget_class, breakpoint_applied);
   gtk_widget_class_bind_template_callback (widget_class, breakpoint_unapplied);
-  gtk_widget_class_bind_template_callback (widget_class, scale_as_label);
-  gtk_widget_class_bind_template_callback (widget_class, decoration_is_inverted);
 
   gtk_widget_class_bind_template_callback (widget_class, kgx_gtk_settings_for_display);
   gtk_widget_class_bind_template_callback (widget_class, kgx_text_or_fallback);
+  gtk_widget_class_bind_template_callback (widget_class, kgx_bool_and);
+  gtk_widget_class_bind_template_callback (widget_class, kgx_format_percentage);
+  gtk_widget_class_bind_template_callback (widget_class, kgx_decoration_layout_is_inverted);
   gtk_widget_class_bind_template_callback (widget_class, kgx_file_as_subtitle);
 
   gtk_widget_class_install_action (widget_class, "tab.close", NULL, close_tab_activated);
