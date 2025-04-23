@@ -11,6 +11,7 @@ tests = [
   'spad-source',
   'spad',
   'tab',
+  'theme-switcher',
   'utils',
 ]
 

@@ -106,8 +106,7 @@ kgx_theme_switcher_get_property (GObject    *object,
     case PROP_THEME:
       g_value_set_enum (value, self->theme);
       break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    KGX_INVALID_PROP (object, prop_id, pspec);
   }
 }
 
@@ -124,8 +123,7 @@ kgx_theme_switcher_set_property (GObject      *object,
     case PROP_THEME:
       set_theme (self, g_value_get_enum (value));
       break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    KGX_INVALID_PROP (object, prop_id, pspec);
   }
 }
 
