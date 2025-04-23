@@ -1,6 +1,6 @@
 /* main.c
  *
- * Copyright 2019-2024 Zander Brown
+ * Copyright 2019-2025 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,12 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "kgx-config.h"
+
 #include <glib/gi18n.h>
 
 #include <gtk/gtk.h>
-#include <locale.h>
 
-#include <kgx.h>
+#include "kgx-application.h"
+#include "kgx-locale.h"
 
 
 int
@@ -29,11 +31,7 @@ main (int argc, char *argv[])
 {
   g_autoptr (GtkApplication) app = NULL;
 
-  /* Set up gettext translations */
-  setlocale (LC_ALL, "");
-  bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
-  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-  textdomain (GETTEXT_PACKAGE);
+  kgx_locale_init (KGX_LOCALE_DYNAMIC);
 
   g_set_prgname (KGX_BIN_NAME);
   g_set_application_name (KGX_DISPLAY_NAME);
