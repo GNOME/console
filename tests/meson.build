@@ -6,6 +6,7 @@ tests = [
   'palette',
   'settings',
   'shared-closures',
+  'spad-source',
   'spad',
   'tab',
   'utils',
