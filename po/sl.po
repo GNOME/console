@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-04-23 07:45+0000\n"
-"PO-Revision-Date: 2025-04-27 10:01+0200\n"
+"POT-Creation-Date: 2025-04-27 08:04+0000\n"
+"PO-Revision-Date: 2025-04-30 16:49+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -289,39 +289,35 @@ msgstr "Barvni niz je napačna dolžina"
 #: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
 #: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
 #: src/kgx-drop-target.c:506
-#, fuzzy
 msgctxt "toast-message"
 msgid "Drop Failed"
-msgstr "Pripad ni uspel"
+msgstr "Spuščanje ni uspelo"
 
 #: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
-#, fuzzy
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst receiving a URI list drop. Please "
 "include the following information if you report the error."
 msgstr ""
-"Med prejemanjem pripadlega seznama URI je prišlo do nepričakovane napake. Če "
+"Med prejemanjem spuščenega seznama URI je prišlo do nepričakovane napake. Če "
 "prijavite napako, vključite naslednje podatke."
 
 #: src/kgx-drop-target.c:337
-#, fuzzy
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst receiving a file list drop. Please "
 "include the following information if you report the error."
 msgstr ""
-"Med prejemanjem seznama pripadlih datotek je prišlo do nepričakovane napake. "
+"Med prejemanjem seznama spuščenih datotek je prišlo do nepričakovane napake. "
 "Če prijavite napako, vključite naslednje podatke."
 
 #: src/kgx-drop-target.c:371
-#, fuzzy
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst receiving a text drop. Please include "
 "the following information if you report the error."
 msgstr ""
-"Med prejemanjem pripadlega besedila je prišlo do nepričakovane napake. Če "
+"Med prejemanjem spuščenega besedila je prišlo do nepričakovane napake. Če "
 "prijavite napako, vključite naslednje podatke."
 
 #: src/kgx-drop-target.c:509
