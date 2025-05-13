@@ -2,25 +2,25 @@
 # Copyright (C) 2022 console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the console package.
 # Dušan Kazik <prescott66@gmail.com>, 2022.
-# Matej Mrenica <matejm98mthw@gmail.com>, 2024.
-#
+# Nostragodus <nostragodus@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-09-11 22:34+0000\n"
-"PO-Revision-Date: 2024-09-14 22:49+0200\n"
-"Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
-"Language-Team: Slovak <->\n"
+"POT-Creation-Date: 2025-05-10 11:27+0000\n"
+"PO-Revision-Date: 2025-05-13 14:08+0200\n"
+"Last-Translator: Peter Mráz <etkinator@gmail.com>\n"
+"Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0\n"
-"X-Generator: Gtranslator 46.1\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
+#: src/kgx-window.ui:47
 msgid "Console"
 msgstr "Konzola"
 
@@ -34,11 +34,11 @@ msgstr ""
 msgid "New Window"
 msgstr "Nové okno"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:177
 msgid "New Tab"
 msgstr "Nová karta"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "Emulátor terminálu"
 
@@ -47,11 +47,11 @@ msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr ""
 "Jednoduchý a priateľský emulátor terminálu pre pracovné prostredie GNOME."
 
-#: data/org.gnome.Console.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "Okno terminálu"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:503 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Projekt GNOME"
 
@@ -73,17 +73,17 @@ msgstr "Terminál"
 #: src/help-overlay.ui:27
 msgctxt "shortcut window"
 msgid "Find"
-msgstr "Hľadať"
+msgstr "Nájdenie"
 
 #: src/help-overlay.ui:33
 msgctxt "shortcut window"
 msgid "Copy"
-msgstr "Kopírovať"
+msgstr "Kopírovanie"
 
 #: src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Paste"
-msgstr "Vložiť"
+msgstr "Vloženie"
 
 #: src/help-overlay.ui:46
 msgctxt "shortcut window"
@@ -98,12 +98,12 @@ msgstr "Nová karta"
 #: src/help-overlay.ui:56
 msgctxt "shortcut window"
 msgid "Close Tab"
-msgstr "Zatvoriť kartu"
+msgstr "Zatvorenie karty"
 
 #: src/help-overlay.ui:62
 msgctxt "shortcut window"
 msgid "Show All Tabs"
-msgstr "Zobraziť všetky karty"
+msgstr "Zobrazenie všetkých karit"
 
 #: src/help-overlay.ui:68
 msgctxt "shortcut window"
@@ -118,106 +118,108 @@ msgstr "Predchádzajúca karta"
 #: src/help-overlay.ui:80
 msgctxt "shortcut window"
 msgid "Move Tab Right"
-msgstr "Presunúť kartu vpravo"
+msgstr "Posunutie karty doprava"
 
 #: src/help-overlay.ui:86
 msgctxt "shortcut window"
 msgid "Move Tab Left"
-msgstr "Presunúť kartu vľavo"
+msgstr "Posunutie karty doľava"
 
 #: src/help-overlay.ui:92
-#| msgid "Switch to Tab 1–9"
 msgctxt "shortcut window"
 msgid "Switch to Tab 1–9"
-msgstr "Prepnúť na kartu 1–9"
+msgstr "Prepínanie kariet 1–9"
 
 #: src/help-overlay.ui:98
-#| msgid "Switch to Tab 10"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
-msgstr "Prepnúť na kartu 10"
+msgstr "Prepnutie na kartu 10"
 
-#. Translators: %s is the year range
-#: src/kgx-about.c:83 src/kgx-window.c:529
-#, c-format
-msgid "© %s Zander Brown"
-msgstr "© %s Zander Brown"
-
-#: src/kgx-about.c:101
+#: src/kgx-about.c:104
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 alebo novšia"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. * version of KGX itself, the latter format is the VTE version
-#: src/kgx-about.c:114
+#: src/kgx-about.c:119
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s s použitím VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:255
-#| msgid "Cannot use both --command and positional parameters"
+#. Translators: %s is the year range
+#: src/kgx-about.c:148
+#, c-format
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
+
+#. Translators: Credit yourself here
+#: src/kgx-about.c:176
+msgid "translator-credits"
+msgstr ""
+"Dušan Kazik <prescott66@gmail.com>, Nostragodus <nostragodus@gmail.com>"
+
+#: src/kgx-application.c:283
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr "Nedá sa použiť naraz argument --working-directory a pozičné parametre"
 
 # cmd line desc
-#: src/kgx-application.c:443
+#: src/kgx-application.c:503
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Vykoná parameter pre túto voľbu v termináli"
 
-#: src/kgx-application.c:444
+#: src/kgx-application.c:504
 msgid "COMMAND"
 msgstr "PRÍKAZ"
 
 # cmd line desc
-#: src/kgx-application.c:452
+#: src/kgx-application.c:512
 msgid "Set the working directory"
 msgstr "Nastaví pracovný adresár"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:454
+#: src/kgx-application.c:514
 msgid "DIRNAME"
 msgstr "NÁZOV_PRIEČINKU"
 
 # cmd line desc
-#: src/kgx-application.c:462
+#: src/kgx-application.c:522
 msgid "Wait until the child exits (TODO)"
 msgstr "Počká, kým potomok neskončí (TODO)"
 
 # cmd line desc
-#: src/kgx-application.c:471
+#: src/kgx-application.c:531
 msgid "Set the initial window title"
 msgstr "Nastaví titulok počiatočného okna"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:532
 msgid "TITLE"
 msgstr "TITULOK"
 
 # cmd line desc
-#: src/kgx-application.c:480
+#: src/kgx-application.c:540
 msgid "ADVANCED: Set the shell to launch"
 msgstr "POKROČILÉ: Nastaví príkazový riadok, ktorý sa má spustiť"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:541
 msgid "SHELL"
 msgstr "PRÍKAZOVÝ_RIADOK"
 
 # cmd line desc
-#: src/kgx-application.c:489
+#: src/kgx-application.c:549
 msgid "ADVANCED: Set the scrollback length"
 msgstr "POKROČILÉ: Nastaví dĺžku spätného rolovania"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:550
 msgid "LINES"
 msgstr "RIADKY"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:644
+#: src/kgx-application.c:689
 #, c-format
-#| msgid "Terminal Emulator"
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — Emulátor terminálu"
 
-#: src/kgx-application.c:650
+#: src/kgx-application.c:695
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- PRÍKAZ [PARAMETER...]]"
 
@@ -233,14 +235,14 @@ msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
 msgstr[0] ""
-"Niektoré príkazy sú stále spustené. Zavretím tohto okna ich zabijete, čo "
-"môže viesť k neočakávaným výsledkom."
+"Niektoré príkazy stále bežia, zatvorenie tohto okna ich ukončí a môže viesť "
+"k neočakávaným výsledkom"
 msgstr[1] ""
-"Niektoré príkazy sú stále spustené. Zavretím tohto okna ich zabijete, čo "
-"môže viesť k neočakávaným výsledkom."
+"Príkaz stále beží, zatvorenie tohto okna ho ukončí a môže viesť k "
+"neočakávaným výsledkom"
 msgstr[2] ""
-"Niektoré príkazy sú stále spustené. Zavretím tohto okna ich zabijete, čo "
-"môže viesť k neočakávaným výsledkom."
+"Niektoré príkazy stále bežia, zatvorenie tohto okna ich ukončí a môže viesť "
+"k neočakávaným výsledkom"
 
 #: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
@@ -254,14 +256,14 @@ msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
 msgstr[0] ""
-"Niektoré príkazy sú stále spustené. Zavretím tejto karty ich zabijete, čo "
-"môže viesť k neočakávaným výsledkom."
+"Niektoré príkazy stále bežia, zatvorenie tejto karty ich ukončí a môže viesť "
+"k neočakávaným výsledkom"
 msgstr[1] ""
-"Niektoré príkazy sú stále spustené. Zavretím tejto karty ich zabijete, čo "
-"môže viesť k neočakávaným výsledkom."
+"Príkaz stále beží, zatvorenie tejto karty ho ukončí a môže viesť k "
+"neočakávaným výsledkom"
 msgstr[2] ""
-"Niektoré príkazy sú stále spustené. Zavretím tejto karty ich zabijete, čo "
-"môže viesť k neočakávaným výsledkom."
+"Niektoré príkazy stále bežia, zatvorenie tejto karty ich ukončí a môže viesť "
+"k neočakávaným výsledkom"
 
 #. Translators: Screen reader label for the list of running commands
 #: src/kgx-close-dialog.c:194
@@ -281,7 +283,50 @@ msgstr "Zav_rieť"
 
 #: src/kgx-colour-utils.c:58
 msgid "Color string is wrong length"
-msgstr "Reťazec farby mé neplatnú dĺžku"
+msgstr "Reťazec farby má nesprávnu dĺžku"
+
+#: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
+#: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
+#: src/kgx-drop-target.c:506
+msgctxt "toast-message"
+msgid "Drop Failed"
+msgstr "Pustenie zlyhalo"
+
+#: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a URI list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+"Pri prijímaní pusteného zoznamu URI nastala neočakávaná chyba. Ak budete "
+"chybu nahlasovať, priložte nasledujúce informácie."
+
+#: src/kgx-drop-target.c:337
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a file list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+"Pri prijímaní pusteného zoznamu súborov nastala neočakávaná chyba. Ak budete "
+"chybu nahlasovať, priložte nasledujúce informácie."
+
+#: src/kgx-drop-target.c:371
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a text drop. Please include "
+"the following information if you report the error."
+msgstr ""
+"Pri prijímaní pusteného textu nastala neočakávaná chyba. Ak budete chybu "
+"nahlasovať, priložte nasledujúce informácie."
+
+#: src/kgx-drop-target.c:509
+msgctxt "spad-message"
+msgid ""
+"An unexpected value was received. Please include the following information "
+"if you report the error."
+msgstr ""
+"Bol prijatý neočakávaný údaj. Ak budete chybu nahlasovať, priložte "
+"nasledujúce informácie."
 
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
@@ -299,16 +344,16 @@ msgstr "XTerm"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:471
+#: src/kgx-pages.c:478
 #, c-format
 msgid "Tab %i"
 msgstr "Karta %i"
 
-#: src/kgx-pages.ui:90
+#: src/kgx-pages.ui:100
 msgid "_Detach Tab"
 msgstr "_Odpojiť kartu"
 
-#: src/kgx-pages.ui:96
+#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Zavrieť"
 
@@ -330,60 +375,197 @@ msgstr "Vkladáte príkaz, ktorý sa spúšťa ako správca"
 msgid "_Paste"
 msgstr "_Vložiť"
 
-#: src/kgx-process.c:192
+#: src/kgx-process.c:196
 #, c-format
 msgid "Process %d"
 msgstr "Proces %d"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-simple-tab.c:169
+#: src/kgx-simple-tab.c:170
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Zlyhalo spustenie</b> — %s"
 
+# Titulok dialogu
+#: src/kgx-spad.c:194
+msgid "Unable To Open"
+msgstr "Nepodarilo sa otvorenie"
+
+#: src/kgx-spad.c:197
+#, c-format
+msgid ""
+"Opening ‘<a href=\"%s\">%s</a>’ failed:\n"
+"%s"
+msgstr ""
+"Otvorenie ‘<a href=\"%s\">%s</a>’ zlyhalo:\n"
+"%s"
+
+#: src/kgx-spad.c:339 src/kgx-spad.ui:4
+msgid "Error Details"
+msgstr "Podrobnosti o chybe"
+
+#: src/kgx-spad.ui:23
+msgid "Error Message"
+msgstr "Chybová správa"
+
+#: src/kgx-spad.ui:35
+msgid "Copy Error Message"
+msgstr "Skopírovať chybovú správu"
+
+#: src/kgx-spad.ui:100
+msgid "Report _Issue"
+msgstr "_Nahlásiť problém"
+
+#: src/kgx-tab.c:597
+msgctxt "toast-button"
+msgid "_Details"
+msgstr "_Podrobnosti"
+
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:814
+#: src/kgx-tab.c:889
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Iba načítanie</b> — Príkaz skončil s kódom %i"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:822
+#: src/kgx-tab.c:897
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Iba načítanie</b> — Príkaz skončil"
 
-#: src/kgx-tab.c:842
+#: src/kgx-tab.c:917
 msgid "Command completed"
 msgstr "Príkaz dokončený"
 
-#: src/kgx-tab.ui:40
+#: src/kgx-tab.ui:42
 msgid "Find text"
 msgstr "Nájsť text"
 
-#: src/kgx-tab.ui:51
+#: src/kgx-tab.ui:53
 msgid "Previous Match"
 msgstr "Predchádzajúca zhoda"
 
-#: src/kgx-tab.ui:59
+#: src/kgx-tab.ui:61
 msgid "Next Match"
 msgstr "Nasledujúca zhoda"
 
-#: src/kgx-terminal.c:508
+#. Translators: The user ctrl-clicked, or used ‘Open Link’, on a URI that,
+#. *              for whatever reason, we were unable to open.
+#: src/kgx-terminal.c:39
+msgctxt "toast-message"
+msgid "Couldn't Open Link"
+msgstr "Nepodarilo sa otvoriť odkaz"
+
+#: src/kgx-terminal.c:360
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
+"are installed."
+msgstr ""
+"Odkaz “<a href=\"%s\">%s</a>” používa protokol “%s”, ore ktorý nie je "
+"nainštalovaná žiadna aplikácia."
+
+#: src/kgx-terminal.c:373
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
+"a>”. Please include the following information if you report the error."
+msgstr ""
+"Pri otváraní odkazu „<a href=\"%s\">%s</a>“ došlo k neočakávanej chybe. Ak "
+"budete chybu nahlasovať, priložte prosím nasledujúce informácie."
+
+#: src/kgx-terminal.c:421
+#, c-format
+msgctxt "spad-message"
+msgid "The link “<a href=\"%s\">%s</a>” is malformed."
+msgstr "Odkaz „<a href=\"%s\">%s</a>“ má neplatný formát."
+
+#: src/kgx-terminal.c:440
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” points to a location on a different "
+"device.\n"
+"\n"
+"This device is “%s” and the location is on “%s”."
+msgstr ""
+"Odkaz „<a href=\"%s\">%s</a>“ smeruje na umiestnenie na inom zariadení.\n"
+"\n"
+"Toto zariadenie je „%s“ a cieľové umiestnenie sa nachádza na „%s“."
+
+#: src/kgx-terminal.c:511
+msgctxt "toast-message"
+msgid "Couldn't Paste Text"
+msgstr "Nepodarilo sa vložiť text"
+
+#: src/kgx-terminal.c:514
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst reading the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"Pri čítaní schránky došlo k neočakávanej chybe. Ak budete chybu nahlasovať, "
+"priložte prosím nasledujúce informácie."
+
+#: src/kgx-terminal.c:575
+msgctxt "toast-message"
+msgid "Couldn't Show File"
+msgstr "Nepodarilo sa zobraziť súbor"
+
+#: src/kgx-terminal.c:578
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst showing the file. Please include the "
+"following information if you report the error."
+msgstr ""
+"Pri zobrazovaní súboru došlo k neočakávanej chybe. Ak budete chybu "
+"nahlasovať, priložte prosím nasledujúce informácie."
+
+#: src/kgx-terminal.c:599
+msgctxt "toast-message"
+msgid "Couldn't Open Folder"
+msgstr "Nepodarilo sa otvoriť priečinok"
+
+#: src/kgx-terminal.c:602
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the folder. Please include the "
+"following information if you report the error."
+msgstr ""
+"Pri otváraní priečinka došlo k neočakávanej chybe. Ak budete chybu "
+"nahlasovať, priložte prosím nasledujúce informácie."
+
+#: src/kgx-terminal.c:696
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
 "%s"
 msgstr ""
-"Stlačením klávesy Ctrl a kliknutím otvoríte:\n"
+"Ctrl-kliknúť otvoríte:\n"
 "%s"
+
+#: src/kgx-terminal.c:984
+msgctxt "toast-message"
+msgid "Couldn't Paste"
+msgstr "Nepodarilo sa vloženie"
+
+#: src/kgx-terminal.c:987
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst processing the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"Pri spracovávaní schránky došlo k neočakávanej chybe. Ak budete chybu "
+"nahlasovať, priložte prosím nasledujúce informácie."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
 msgstr "_Otvoriť odkaz"
 
 #: src/kgx-terminal.ui:12
-msgid "Copy _Link"
-msgstr "_Kopírovať odkaz"
+msgid "Copy _Link Address"
+msgstr "Kopírovať _adresu odkazu"
 
 #: src/kgx-terminal.ui:19
 msgid "_Copy"
@@ -397,31 +579,26 @@ msgstr "Vybr_ať všetko"
 msgid "Show in _Files"
 msgstr "Zobraziť v aplikácii _Súbory"
 
-#: src/kgx-theme-switcher.ui:16
+#: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
-msgstr "Nasledovať štýl systému"
+msgstr "Použiť systémový vzhľad"
 
-#: src/kgx-theme-switcher.ui:44
+#: src/kgx-theme-switcher.ui:52
 msgid "Light Style"
 msgstr "Svetlý štýl"
 
-#: src/kgx-theme-switcher.ui:71
+#: src/kgx-theme-switcher.ui:79
 msgid "Dark Style"
 msgstr "Tmavý štýl"
 
 #. Translators: ‘command’ is the argument name, and shouldn't be translated
-#: src/kgx-utils.c:113
+#: src/kgx-utils.c:114
 msgid "Missing argument for --command"
-msgstr "Chýba argument pre --command"
+msgstr "Chýbajúca voľba pre argument --command"
 
-#: src/kgx-utils.c:128
+#: src/kgx-utils.c:129
 msgid "Cannot use both --command and positional parameters"
 msgstr "Nedá sa použiť naraz argument --command a pozičné parametre"
-
-#. Translators: Credit yourself here
-#: src/kgx-window.c:541
-msgid "translator-credits"
-msgstr "Dušan Kazik <prescott66@gmail.com>"
 
 #: src/kgx-window.ui:17
 msgid "_New Window"
@@ -429,11 +606,11 @@ msgstr "_Nové okno"
 
 #: src/kgx-window.ui:23
 msgid "_Show All Tabs"
-msgstr "Zobraziť všetky karty"
+msgstr "_Zobraziť všetky karty"
 
 #: src/kgx-window.ui:30
 msgid "_Preferences"
-msgstr "Predvoľby"
+msgstr "_Predvoľby"
 
 #: src/kgx-window.ui:34
 msgid "_Keyboard Shortcuts"
@@ -444,26 +621,26 @@ msgid "_About Console"
 msgstr "_O aplikácii Konzola"
 
 # tooltip
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:91
 msgid "Find in Terminal"
-msgstr "Nájde v termináli"
+msgstr "Nájdi v termináli"
 
-#: src/kgx-window.ui:95
+#: src/kgx-window.ui:98
 msgid "Main Menu"
-msgstr "Hlavná ponuka"
+msgstr "Hlavné menu"
 
 # tooltip
-#: src/kgx-window.ui:113
+#: src/kgx-window.ui:116
 msgid "Shrink Text"
 msgstr "Zmenší text"
 
 # tooltip
-#: src/kgx-window.ui:124
+#: src/kgx-window.ui:127
 msgid "Reset Size"
 msgstr "Obnoví veľkosť"
 
 # tooltip
-#: src/kgx-window.ui:148
+#: src/kgx-window.ui:151
 msgid "Enlarge Text"
 msgstr "Zväčší text"
 
@@ -473,7 +650,7 @@ msgstr "Písmo terminálu"
 
 #: src/preferences/kgx-font-picker.ui:29
 msgid "_Select"
-msgstr "Vybr_ať"
+msgstr "_Vybrať"
 
 #: src/preferences/kgx-font-picker.ui:45 src/preferences/kgx-font-picker.ui:48
 msgid "Font Name"
@@ -481,7 +658,7 @@ msgstr "Názov písma"
 
 #: src/preferences/kgx-font-picker.ui:133
 msgid "Font Family"
-msgstr "Rodina písma"
+msgstr "Typ písma"
 
 #: src/preferences/kgx-font-picker.ui:158
 msgid "Font Preview"
@@ -490,11 +667,11 @@ msgstr "Náhľad písma"
 # tooltip
 #: src/preferences/kgx-font-picker.ui:179
 msgid "Font Size"
-msgstr "Veľkost písma"
+msgstr "Veľkosť písma"
 
 #: src/preferences/kgx-preferences-window.c:125
 msgid "No Font Set"
-msgstr "Žiadna sada písiem"
+msgstr "Nie je nastavené žiadne písmo"
 
 #: src/preferences/kgx-preferences-window.ui:7
 msgid "General"
@@ -507,11 +684,11 @@ msgstr "Písmo"
 # tooltip
 #: src/preferences/kgx-preferences-window.ui:13
 msgid "Use _System Default"
-msgstr "Použiť predvolené systémom"
+msgstr "Použiť _predvolené nastavenie"
 
 #: src/preferences/kgx-preferences-window.ui:19
 msgid "Custom _Font"
-msgstr "Vlastné písmo"
+msgstr "Vlastné _písmo"
 
 #: src/preferences/kgx-preferences-window.ui:63
 msgid "Behaviour"
@@ -519,11 +696,11 @@ msgstr "Správanie"
 
 #: src/preferences/kgx-preferences-window.ui:66
 msgid "_Unlimited Scrollback"
-msgstr "_Neobmedzený spätný posun"
+msgstr "_Neobmedzená história rolovania"
 
 #: src/preferences/kgx-preferences-window.ui:72
 msgid "_Scrollback Lines"
-msgstr "_Riadkov pre spätný posun"
+msgstr "_Počet riadkov histórie rolovania"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
@@ -531,7 +708,7 @@ msgstr "Zvonček terminálu"
 
 #: src/preferences/kgx-preferences-window.ui:95
 msgid "Play _Sound"
-msgstr "Prehrať zvuk"
+msgstr "Prehrať _zvuk"
 
 #: src/preferences/kgx-preferences-window.ui:101
 msgid "_Visual Effects"
