@@ -36,7 +36,7 @@ test_palette_new (void)
                                                     &((GdkRGBA) { 0, }),
                                                     0.0,
                                                     0,
-                                                    NULL);
+                                                    ((GdkRGBA []) { 0, }));
 
   kgx_palette_ref (palette);
   kgx_palette_unref (palette);
@@ -50,7 +50,7 @@ test_palette_transparency (void)
                                                     &((GdkRGBA) { 0, }),
                                                     0.5,
                                                     0,
-                                                    NULL);
+                                                    ((GdkRGBA []) { 0, }));
   g_autoptr (KgxPalette) opaque_palette = NULL;
 
   g_assert_cmpfloat (kgx_palette_get_transparency (palette), ==, 0.5);
@@ -69,7 +69,7 @@ test_palette_opaque (void)
                                                     &((GdkRGBA) { 0, }),
                                                     0.0,
                                                     0,
-                                                    NULL);
+                                                    ((GdkRGBA []) { 0, }));
   g_autoptr (KgxPalette) opaque_palette = NULL;
 
   g_assert_cmpfloat (kgx_palette_get_transparency (palette), ==, 0.0);
@@ -191,12 +191,12 @@ test_palette_set_palette (void)
                                                       &((GdkRGBA) { 0, }),
                                                       0.0,
                                                       0,
-                                                      NULL);
+                                                      ((GdkRGBA []) { 0, }));
   g_autoptr (KgxPalette) palette_b = kgx_palette_new (&((GdkRGBA) { 0, }),
                                                       &((GdkRGBA) { 0, }),
                                                       0.0,
                                                       0,
-                                                      NULL);
+                                                      ((GdkRGBA []) { 0, }));
 
 
   g_assert_true (kgx_set_palette (&palette_a, palette_b));
@@ -211,7 +211,7 @@ test_palette_set_palette_same (void)
                                                     &((GdkRGBA) { 0, }),
                                                     0.0,
                                                     0,
-                                                    NULL);
+                                                    ((GdkRGBA []) { 0, }));
 
   g_assert_false (kgx_set_palette (&palette, palette));
 }
