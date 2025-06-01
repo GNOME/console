@@ -34,7 +34,11 @@ test_livery_new (void)
 {
   GdkRGBA fg = {};
   GdkRGBA bg = {};
-  g_autoptr (KgxPalette) palette = kgx_palette_new (&fg, &bg, 0.0, 0, NULL);
+  g_autoptr (KgxPalette) palette = kgx_palette_new (&fg,
+                                                    &bg,
+                                                    0.0,
+                                                    0,
+                                                    ((GdkRGBA []) { 0, }));
   g_autoptr (KgxLivery) livery = kgx_livery_new (KGX_LIVERY_UUID_KGX, "Test", NULL, NULL);
 
   kgx_livery_ref (livery);
@@ -103,7 +107,7 @@ test_livery_set_livery (void)
                                                     &((GdkRGBA) { 0, }),
                                                     0.0,
                                                     0,
-                                                    NULL);
+                                                    ((GdkRGBA []) { 0, }));
   g_autoptr (KgxLivery) livery_a = kgx_livery_new (KGX_LIVERY_UUID_KGX,
                                                    "Test",
                                                    palette,
@@ -125,7 +129,7 @@ test_livery_set_livery_same (void)
                                                     &((GdkRGBA) { 0, }),
                                                     0.0,
                                                     0,
-                                                    NULL);
+                                                    ((GdkRGBA []) { 0, }));
   g_autoptr (KgxLivery) livery = kgx_livery_new (KGX_LIVERY_UUID_KGX,
                                                  "Test",
                                                  palette,
