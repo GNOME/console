@@ -6,6 +6,7 @@ include:
       job-stage: "release"
       dist-job-name: "release-tarball"
       tarball-artifact-path: "build/meson-dist/gnome-console-$CI_COMMIT_TAG.tar.xz"
+  - component: "gitlab.gnome.org/GNOME/citemplates/gnomeos-basic-ci@master"
 
 variables:
   MANIFEST_PATH: "build-aux/flatpak/org.gnome.Console.Devel.json"
