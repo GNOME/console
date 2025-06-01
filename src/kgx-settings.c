@@ -406,7 +406,7 @@ resolve_livery (GValue   *value,
     livery = kgx_livery_manager_dup_fallback (self->livery_manager);
   }
 
-  g_value_set_boxed (value, livery);
+  g_value_take_boxed (value, livery);
 
   return TRUE;
 }
