@@ -398,6 +398,9 @@ drop (GtkDropTargetAsync *target,
   /* keep the object alive during async reads  */
   g_set_object (&self, user_data);
 
+  /* Keep scan-build happy */
+  g_return_val_if_fail (KGX_IS_DROP_TARGET (self), FALSE);
+
   self->active = FALSE;
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_ACTIVE]);
 
