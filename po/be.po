@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: console gnome-43\n"
+"Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-09-11 22:34+0000\n"
-"PO-Revision-Date: 2024-09-12 09:07+0300\n"
+"POT-Creation-Date: 2025-05-13 12:09+0000\n"
+"PO-Revision-Date: 2025-06-02 21:33+0300\n"
 "Last-Translator: Yuras Shumovich <shumovichy@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -21,6 +21,7 @@ msgstr ""
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
+#: src/kgx-window.ui:47
 msgid "Console"
 msgstr "Кансоль"
 
@@ -35,11 +36,11 @@ msgstr ""
 msgid "New Window"
 msgstr "Новае акно"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:177
 msgid "New Tab"
 msgstr "Новая ўкладка"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "Эмулятар тэрмінала"
 
@@ -47,11 +48,11 @@ msgstr "Эмулятар тэрмінала"
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr "Просты і зручны тэрмінал для асяроддзя GNOME."
 
-#: data/org.gnome.Console.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "Акно тэрмінала"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:503 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Праект GNOME"
 
@@ -78,7 +79,7 @@ msgstr "Пошук"
 #: src/help-overlay.ui:33
 msgctxt "shortcut window"
 msgid "Copy"
-msgstr "Капіяваць"
+msgstr "Скапіяваць"
 
 #: src/help-overlay.ui:39
 msgctxt "shortcut window"
@@ -135,80 +136,85 @@ msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Пераключыцца на ўкладку 10"
 
-#. Translators: %s is the year range
-#: src/kgx-about.c:83 src/kgx-window.c:529
-#, c-format
-msgid "© %s Zander Brown"
-msgstr "© %s Zander Brown"
-
-#: src/kgx-about.c:101
+#: src/kgx-about.c:104
 msgid "GPL 3.0 or later"
 msgstr "GPL версіі 3.0 або любой пазнейшай"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. * version of KGX itself, the latter format is the VTE version
-#: src/kgx-about.c:114
+#: src/kgx-about.c:119
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s праз VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:255
+#. Translators: %s is the year range
+#: src/kgx-about.c:148
+#, c-format
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
+
+#. Translators: Credit yourself here
+#: src/kgx-about.c:176
+msgid "translator-credits"
+msgstr "Юрась Шумовіч <shumovichy@gmail.com>"
+
+#: src/kgx-application.c:283
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr ""
 "Нельга адначасова выкарыстоўваць --working-directory і пазіцыйныя параметры"
 
-#: src/kgx-application.c:443
+#: src/kgx-application.c:503
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Выканаць аргумент гэтага параметра ў тэрмінале"
 
-#: src/kgx-application.c:444
+#: src/kgx-application.c:504
 msgid "COMMAND"
 msgstr "КАМАНДА"
 
-#: src/kgx-application.c:452
+#: src/kgx-application.c:512
 msgid "Set the working directory"
 msgstr "Задаць працоўны каталог"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:454
+#: src/kgx-application.c:514
 msgid "DIRNAME"
 msgstr "НАЗВА_ПАПКІ"
 
-#: src/kgx-application.c:462
+#: src/kgx-application.c:522
 msgid "Wait until the child exits (TODO)"
 msgstr "Чакаць завяршэння даччынага працэсу (У ПЛАНАХ)"
 
-#: src/kgx-application.c:471
+#: src/kgx-application.c:531
 msgid "Set the initial window title"
 msgstr "Задаць першапачатковы загаловак акна"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:532
 msgid "TITLE"
 msgstr "ЗАГАЛОВАК"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:540
 msgid "ADVANCED: Set the shell to launch"
 msgstr "ДЛЯ ДАСВЕДЧАНЫХ: Задаць абалонку запуску"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:541
 msgid "SHELL"
 msgstr "АБАЛОНКА"
 
-#: src/kgx-application.c:489
+#: src/kgx-application.c:549
 msgid "ADVANCED: Set the scrollback length"
 msgstr "ДЛЯ ДАСВЕДЧАНЫХ: Задаць даўжыню прагорткі назад"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:550
 msgid "LINES"
 msgstr "РАДКОЎ"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:644
+#: src/kgx-application.c:689
 #, c-format
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — Эмулятар тэрмінала"
 
-#: src/kgx-application.c:650
+#: src/kgx-application.c:695
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- КАМАНДА [АРГУМЕНТ...]]"
 
@@ -275,6 +281,50 @@ msgstr "_Закрыць"
 msgid "Color string is wrong length"
 msgstr "Няправільная даўжыня радка колеру"
 
+#: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
+#: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
+#: src/kgx-drop-target.c:506
+msgctxt "toast-message"
+msgid "Drop Failed"
+msgstr "Збой перацягвання"
+
+#: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a URI list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+"Падчас атрымання перацягнутага спіса URI адбылася нечаканая памылка. Калі вы "
+"будзеце паведамляць пра памылку, дадайце ў справаздачу наступную інфармацыю."
+
+#: src/kgx-drop-target.c:337
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a file list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+"Падчас атрымання перацягнутага спіса файлаў адбылася нечаканая памылка. Калі "
+"вы будзеце паведамляць пра памылку, дадайце ў справаздачу наступную "
+"інфармацыю."
+
+#: src/kgx-drop-target.c:371
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a text drop. Please include "
+"the following information if you report the error."
+msgstr ""
+"Падчас атрымання перацягнутага тэксту адбылася нечаканая памылка. Калі вы "
+"будзеце паведамляць пра памылку, дадайце ў справаздачу наступную інфармацыю."
+
+#: src/kgx-drop-target.c:509
+msgctxt "spad-message"
+msgid ""
+"An unexpected value was received. Please include the following information "
+"if you report the error."
+msgstr ""
+"Было атрымана нечаканае значэнне. Калі вы будзеце паведамляць пра памылку, "
+"дадайце ў справаздачу наступную інфармацыю."
+
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
 msgid "Linux"
@@ -289,16 +339,16 @@ msgstr "XTerm"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:471
+#: src/kgx-pages.c:478
 #, c-format
 msgid "Tab %i"
 msgstr "Укладка %i"
 
-#: src/kgx-pages.ui:90
+#: src/kgx-pages.ui:100
 msgid "_Detach Tab"
 msgstr "_Адлучыць укладку"
 
-#: src/kgx-pages.ui:96
+#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Закрыць"
 
@@ -320,45 +370,168 @@ msgstr "Вы ўстаўляеце каманду, якая выконваецц�
 msgid "_Paste"
 msgstr "_Уставіць"
 
-#: src/kgx-process.c:192
+#: src/kgx-process.c:196
 #, c-format
 msgid "Process %d"
 msgstr "Працэс %d"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-simple-tab.c:169
+#: src/kgx-simple-tab.c:170
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Не ўдалося запусціць</b> — %s"
 
+#: src/kgx-spad.c:194
+msgid "Unable To Open"
+msgstr "Немагчыма адкрыць"
+
+#: src/kgx-spad.c:197
+#, c-format
+msgid ""
+"Opening ‘<a href=\"%s\">%s</a>’ failed:\n"
+"%s"
+msgstr ""
+"Не ўдалося адкрыць ‘<a href=\"%s\">%s</a>’:\n"
+"%s"
+
+#: src/kgx-spad.c:339 src/kgx-spad.ui:4
+msgid "Error Details"
+msgstr "Падрабязнасці памылкі"
+
+#: src/kgx-spad.ui:23
+msgid "Error Message"
+msgstr "Паведамленне пра памылку"
+
+#: src/kgx-spad.ui:35
+msgid "Copy Error Message"
+msgstr "Скапіяваць паведамленне пра памылку"
+
+#: src/kgx-spad.ui:100
+msgid "Report _Issue"
+msgstr "Паведаміць аб _праблеме"
+
+#: src/kgx-tab.c:597
+msgctxt "toast-button"
+msgid "_Details"
+msgstr "_Падрабязнасці"
+
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:814
+#: src/kgx-tab.c:889
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Толькі для чытання</b> — Выкананне каманды спынена з кодам %i"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:822
+#: src/kgx-tab.c:897
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Толькі для чытання</b> — Выкананне каманды спынена"
 
-#: src/kgx-tab.c:842
+#: src/kgx-tab.c:917
 msgid "Command completed"
 msgstr "Каманда выканана"
 
-#: src/kgx-tab.ui:40
+#: src/kgx-tab.ui:42
 msgid "Find text"
 msgstr "Пошук тэксту"
 
-#: src/kgx-tab.ui:51
+#: src/kgx-tab.ui:53
 msgid "Previous Match"
 msgstr "Папярэдняе супадзенне"
 
-#: src/kgx-tab.ui:59
+#: src/kgx-tab.ui:61
 msgid "Next Match"
 msgstr "Наступнае супадзенне"
 
-#: src/kgx-terminal.c:508
+#. Translators: The user ctrl-clicked, or used ‘Open Link’, on a URI that,
+#. *              for whatever reason, we were unable to open.
+#: src/kgx-terminal.c:39
+msgctxt "toast-message"
+msgid "Couldn't Open Link"
+msgstr "Не ўдалося адкрыць спасылку"
+
+#: src/kgx-terminal.c:360
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
+"are installed."
+msgstr ""
+"Спасылка «<a href=\"%s\">%s</a>» выкарыстоўвае пратакол «%s» для якога не "
+"ўсталявана праграма."
+
+#: src/kgx-terminal.c:373
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
+"a>”. Please include the following information if you report the error."
+msgstr ""
+"Падчас адкрыцця спасылкі «<a href=\"%s\">%s</a>» адбылася нечаканая памылка. "
+"Калі вы будзеце паведамляць пра памылку, дадайце ў справаздачу наступную "
+"інфармацыю."
+
+#: src/kgx-terminal.c:421
+#, c-format
+msgctxt "spad-message"
+msgid "The link “<a href=\"%s\">%s</a>” is malformed."
+msgstr "«<a href=\"%s\">%s</a>» мае няправільны фармат."
+
+#: src/kgx-terminal.c:440
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” points to a location on a different "
+"device.\n"
+"\n"
+"This device is “%s” and the location is on “%s”."
+msgstr ""
+"Спасылка «<a href=\"%s\">%s</a>» указвае на размяшчэнне на іншай прыладзе.\n"
+"\n"
+"Прылада: «%s», размяшчэнне: «%s»."
+
+#: src/kgx-terminal.c:511
+msgctxt "toast-message"
+msgid "Couldn't Paste Text"
+msgstr "Не ўдалося ўставіць тэкст"
+
+#: src/kgx-terminal.c:514
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst reading the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"Падчас чытання даных буфера абмену адбылася нечаканая памылка. Калі вы "
+"будзеце паведамляць пра памылку, дадайце ў справаздачу наступную інфармацыю."
+
+#: src/kgx-terminal.c:575
+msgctxt "toast-message"
+msgid "Couldn't Show File"
+msgstr "Не ўдалося паказаць файл"
+
+#: src/kgx-terminal.c:578
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst showing the file. Please include the "
+"following information if you report the error."
+msgstr ""
+"Падчас паказу файла адбылася нечаканая памылка. Калі вы будзеце паведамляць "
+"пра памылку, дадайце ў справаздачу наступную інфармацыю."
+
+#: src/kgx-terminal.c:599
+msgctxt "toast-message"
+msgid "Couldn't Open Folder"
+msgstr "Не ўдалося адкрыць папку"
+
+#: src/kgx-terminal.c:602
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the folder. Please include the "
+"following information if you report the error."
+msgstr ""
+"Падчас адкрыцця папкі адбылася нечаканая памылка. Калі вы будзеце "
+"паведамляць пра памылку, дадайце ў справаздачу наступную інфармацыю."
+
+#: src/kgx-terminal.c:696
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -367,51 +540,60 @@ msgstr ""
 "Утрымлівайце Ctrl і націсніце мышшу, каб адкрыць:\n"
 "%s"
 
+#: src/kgx-terminal.c:984
+msgctxt "toast-message"
+msgid "Couldn't Paste"
+msgstr "Не ўдалося ўставіць"
+
+#: src/kgx-terminal.c:987
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst processing the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"Падчас апрацоўкі даных буфера абмену адбылася нечаканая памылка. Калі вы "
+"будзеце паведамляць пра памылку, дадайце ў справаздачу наступную інфармацыю."
+
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
 msgstr "_Адкрыць спасылку"
 
 #: src/kgx-terminal.ui:12
-msgid "Copy _Link"
-msgstr "Скапіяваць _спасылку"
+msgid "Copy _Link Address"
+msgstr "Скапіяваць адрас _спасылкі"
 
 #: src/kgx-terminal.ui:19
 msgid "_Copy"
-msgstr "_Капіяваць"
+msgstr "С_капіяваць"
 
 #: src/kgx-terminal.ui:29
 msgid "_Select All"
-msgstr "Вылучыць усё"
+msgstr "Вылучыць _усё"
 
 #: src/kgx-terminal.ui:36
 msgid "Show in _Files"
 msgstr "Паказаць праз «_Файлы»"
 
-#: src/kgx-theme-switcher.ui:16
+#: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
-msgstr "Прытрымлівацца стылю сістэмы"
+msgstr "Стыль сістэмы"
 
-#: src/kgx-theme-switcher.ui:44
+#: src/kgx-theme-switcher.ui:52
 msgid "Light Style"
 msgstr "Светлы стыль"
 
-#: src/kgx-theme-switcher.ui:71
+#: src/kgx-theme-switcher.ui:79
 msgid "Dark Style"
 msgstr "Цёмны стыль"
 
 #. Translators: ‘command’ is the argument name, and shouldn't be translated
-#: src/kgx-utils.c:113
+#: src/kgx-utils.c:114
 msgid "Missing argument for --command"
 msgstr "Адсутнічае аргумент для --command"
 
-#: src/kgx-utils.c:128
+#: src/kgx-utils.c:129
 msgid "Cannot use both --command and positional parameters"
 msgstr "Нельга адначасова выкарыстоўваць --command і пазіцыйныя параметры"
-
-#. Translators: Credit yourself here
-#: src/kgx-window.c:541
-msgid "translator-credits"
-msgstr "Юрась Шумовіч <shumovichy@gmail.com>"
 
 #: src/kgx-window.ui:17
 msgid "_New Window"
@@ -433,23 +615,23 @@ msgstr "_Спалучэнні клавіш"
 msgid "_About Console"
 msgstr "_Пра Кансоль"
 
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:91
 msgid "Find in Terminal"
 msgstr "Пошук у тэрмінале"
 
-#: src/kgx-window.ui:95
+#: src/kgx-window.ui:98
 msgid "Main Menu"
 msgstr "Галоўнае меню"
 
-#: src/kgx-window.ui:113
+#: src/kgx-window.ui:116
 msgid "Shrink Text"
 msgstr "Паменшыць тэкст"
 
-#: src/kgx-window.ui:124
+#: src/kgx-window.ui:127
 msgid "Reset Size"
 msgstr "Скінуць маштабаванне"
 
-#: src/kgx-window.ui:148
+#: src/kgx-window.ui:151
 msgid "Enlarge Text"
 msgstr "Павялічыць тэкст"
 
