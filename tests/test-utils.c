@@ -602,6 +602,15 @@ test_uri_is_non_local_file (gconstpointer user_data)
 int
 main (int argc, char *argv[])
 {
+  struct non_local_test non_local_cases[] = {
+    { "file", g_get_host_name (), "foo", FALSE },
+    { "file", "localhost", "bar", FALSE },
+    { "file", "", "/baz", FALSE },
+    { "file", "hopefully-not-the-host", "whoops", TRUE },
+    { "https", "gnome.org", "", FALSE },
+    { "man", "", "false", FALSE },
+  };
+
   g_test_init (&argc, &argv, NULL);
 
   g_test_add_func ("/kgx/utils/set_boolean", test_set_boolean);
@@ -639,22 +648,11 @@ main (int argc, char *argv[])
     g_test_add_data_func (path, &parse_cases[i], test_parse_percentage);
   }
 
-  {
-    struct non_local_test non_local_cases[] = {
-      { "file", g_get_host_name (), "foo", FALSE },
-      { "file", "localhost", "bar", FALSE },
-      { "file", "", "/baz", FALSE },
-      { "file", "hopefully-not-the-host", "whoops", TRUE },
-      { "https", "gnome.org", "", FALSE },
-      { "man", "", "false", FALSE },
-    };
+  for (size_t i = 0; i < G_N_ELEMENTS (non_local_cases); i++) {
+    g_autofree char *path =
+      g_strdup_printf ("/kgx/utils/uri_is_non_local_file/case_%" G_GSIZE_FORMAT, i);
 
-    for (size_t i = 0; i < G_N_ELEMENTS (non_local_cases); i++) {
-      g_autofree char *path =
-        g_strdup_printf ("/kgx/utils/uri_is_non_local_file/case_%" G_GSIZE_FORMAT, i);
-
-      g_test_add_data_func (path, &non_local_cases[i], test_uri_is_non_local_file);
-    }
+    g_test_add_data_func (path, &non_local_cases[i], test_uri_is_non_local_file);
   }
 
   return g_test_run ();
