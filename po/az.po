@@ -1,0 +1,647 @@
+# Azərbaycan dilinə tərcümə console üçün.
+# Müəllif hüququ (C) 2025 console-un MÜƏLLİF HÜQUQU SAHİBİ
+# Bu fayl console paketi ilə eyni lisenziya altında yayılır.
+# Ramal Rəhimov <jhonaluman@gmail.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: console main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
+"POT-Creation-Date: 2025-06-02 18:36+0000\n"
+"PO-Revision-Date: 2025-06-02 18:36+0000\n"
+"Last-Translator: Ramal Rəhimov <jhonaluman@gmail.com>\n"
+"Language-Team: Azərbaycan <contact@azlinux.org>\n"
+"Language: az\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
+#: src/kgx-window.ui:47
+msgid "Console"
+msgstr "Konsol"
+
+#: data/org.gnome.Console.desktop.in.in:8
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
+msgstr "əmr;komanda;cmd;komanda xətti;işə sal;shell;terminal;kgx;kings cross;"
+
+#: data/org.gnome.Console.desktop.in.in:21
+msgid "New Window"
+msgstr "Yeni Pəncərə"
+
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:177
+msgid "New Tab"
+msgstr "Yeni Vərəq"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
+msgid "Terminal Emulator"
+msgstr "Terminal Emulatoru"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:11
+msgid "A simple user-friendly terminal emulator for the GNOME desktop."
+msgstr "GNOME masaüstü üçün sadə və istifadəçi dostu terminal emulatoru."
+
+#: data/org.gnome.Console.metainfo.xml.in.in:26
+msgid "Terminal window"
+msgstr "Terminal pəncərəsi"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:503 src/kgx-about.c:166
+msgid "The GNOME Project"
+msgstr "GNOME Layihəsi"
+
+#: src/help-overlay.ui:12
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Tətbiq"
+
+#: src/help-overlay.ui:16
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Yeni Pəncərə"
+
+#: src/help-overlay.ui:23
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Terminal"
+
+#: src/help-overlay.ui:27
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Axtar"
+
+#: src/help-overlay.ui:33
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Kopyala"
+
+#: src/help-overlay.ui:39
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Yapışdır"
+
+#: src/help-overlay.ui:46
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Vərəqlər"
+
+#: src/help-overlay.ui:50
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Yeni Vərəq"
+
+#: src/help-overlay.ui:56
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Vərəqi Bağla"
+
+#: src/help-overlay.ui:62
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Bütün Vərəqləri Göstər"
+
+#: src/help-overlay.ui:68
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Növbəti Vərəq"
+
+#: src/help-overlay.ui:74
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Əvvəlki Vərəq"
+
+#: src/help-overlay.ui:80
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "Vərəqi Sağa Apar"
+
+#: src/help-overlay.ui:86
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Vərəqi Sola Apar"
+
+#: src/help-overlay.ui:92
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "1–9 Vərəqlərə Keç"
+
+#: src/help-overlay.ui:98
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "10-cu Vərəqə Keç"
+
+#: src/kgx-about.c:104
+msgid "GPL 3.0 or later"
+msgstr "GPL 3.0 və ya daha sonrakı"
+
+#: src/kgx-about.c:119
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s, VTE %u.%u.%u %s istifadə edir\n"
+
+#: src/kgx-about.c:148
+#, c-format
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
+
+#: src/kgx-about.c:176
+msgid "translator-credits"
+msgstr "Ramal Rəhimov <jhonaluman@gmail.com>"
+
+#: src/kgx-application.c:283
+msgid "Cannot use both --working-directory and positional parameters"
+msgstr "--working-directory və mövqe parametrləri birlikdə istifadə oluna bilməz"
+
+#: src/kgx-application.c:503
+msgid "Execute the argument to this option inside the terminal"
+msgstr "Bu seçimə aid arqumenti terminal daxilində icra et"
+
+#: src/kgx-application.c:504
+msgid "COMMAND"
+msgstr "ƏMR"
+
+#: src/kgx-application.c:512
+msgid "Set the working directory"
+msgstr "İşçi qovluğu təyin et"
+
+#: src/kgx-application.c:514
+msgid "DIRNAME"
+msgstr "QOVLUQ_ADI"
+
+#: src/kgx-application.c:522
+msgid "Wait until the child exits (TODO)"
+msgstr "Alt proses başa çatana qədər gözlə (GÖRÜLƏCƏK)"
+
+#: src/kgx-application.c:531
+msgid "Set the initial window title"
+msgstr "İlkin pəncərə başlığını təyin et"
+
+#: src/kgx-application.c:532
+msgid "TITLE"
+msgstr "BAŞLIQ"
+
+#: src/kgx-application.c:540
+msgid "ADVANCED: Set the shell to launch"
+msgstr "QABAQCIL: Başlatmaq üçün qabığı təyin et"
+
+#: src/kgx-application.c:541
+msgid "SHELL"
+msgstr "QABIQ"
+
+#: src/kgx-application.c:549
+msgid "ADVANCED: Set the scrollback length"
+msgstr "QABAQCIL: Geri sarma uzunluğunu təyin et"
+
+#: src/kgx-application.c:550
+msgid "LINES"
+msgstr "SƏTİRLƏR"
+
+#: src/kgx-application.c:689
+#, c-format
+msgid "KGX %s — Terminal Emulator"
+msgstr "KGX %s — Terminal Emulatoru"
+
+#: src/kgx-application.c:695
+msgid "[-e|-- COMMAND [ARGUMENT...]]"
+msgstr "[-e|-- ƏMR [ARQUMENT...]]"
+
+#: src/kgx-close-dialog.c:73
+msgid "Close Window?"
+msgstr "Pəncərəni bağlamaq?"
+
+#: src/kgx-close-dialog.c:75
+msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this window will kill them and may "
+"lead to unexpected outcomes"
+msgstr[0] "Əmr hələ də işləyir, bu pəncərəni bağlamaq onu dayandıracaq və gözlənilməz nəticələrə səbəb ola bilər"
+msgstr[1] "Bəzi əmrlər hələ də işləyir, bu pəncərəni bağlamaq onları dayandıracaq və gözlənilməz nəticələrə səbəb ola bilər"
+
+#: src/kgx-close-dialog.c:82
+msgid "Close Tab?"
+msgstr "Vərəqi bağlamaq?"
+
+#: src/kgx-close-dialog.c:84
+msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this tab will kill them and may "
+"lead to unexpected outcomes"
+msgstr[0] "Əmr hələ də işləyir, bu vərəqi bağlamaq onu dayandıracaq və gözlənilməz nəticələrə səbəb ola bilər"
+msgstr[1] "Bəzi əmrlər hələ də işləyir, bu vərəqi bağlamaq onları dayandıracaq və gözlənilməz nəticələrə səbəb ola bilər"
+
+#: src/kgx-close-dialog.c:194
+msgid "Process list"
+msgstr "Proses siyahısı"
+
+#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
+#: src/preferences/kgx-font-picker.ui:22
+msgid "_Cancel"
+msgstr "_Ləğv et"
+
+#: src/kgx-close-dialog.c:207
+msgid "C_lose"
+msgstr "_Bağla"
+
+#: src/kgx-colour-utils.c:58
+msgid "Color string is wrong length"
+msgstr "Rəng sətri yanlış uzunluqdadır"
+
+#: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
+#: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
+#: src/kgx-drop-target.c:506
+msgctxt "toast-message"
+msgid "Drop Failed"
+msgstr "Atma Uğursuz Oldu"
+
+#: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a URI list drop. Please "
+"include the following information if you report the error."
+msgstr "URI siyahısı atması zamanı gözlənilməz xəta baş verdi. Xətanı bildirsəniz, aşağıdakı məlumatları daxil edin."
+
+#: src/kgx-drop-target.c:337
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a file list drop. Please "
+"include the following information if you report the error."
+msgstr "Fayl siyahısı atması zamanı gözlənilməz xəta baş verdi. Xətanı bildirsəniz, aşağıdakı məlumatları daxil edin."
+
+#: src/kgx-drop-target.c:371
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a text drop. Please include "
+"the following information if you report the error."
+msgstr "Mətn atması zamanı gözlənilməz xəta baş verdi. Xətanı bildirsəniz, aşağıdakı məlumatları daxil edin."
+
+#: src/kgx-drop-target.c:509
+msgctxt "spad-message"
+msgid ""
+"An unexpected value was received. Please include the following information "
+"if you report the error."
+msgstr "Gözlənilməz dəyər alındı. Xətanı bildirsəniz, aşağıdakı məlumatları daxil edin."
+
+#: src/kgx-livery-manager.c:193
+msgctxt "livery-name"
+msgid "Linux"
+msgstr "Linux"
+
+#: src/kgx-livery-manager.c:230
+msgctxt "livery-name"
+msgid "XTerm"
+msgstr "XTerm"
+
+#: src/kgx-pages.c:478
+#, c-format
+msgid "Tab %i"
+msgstr "Vərəq %i"
+
+#: src/kgx-pages.ui:100
+msgid "_Detach Tab"
+msgstr "_Vərəqi Ayır"
+
+#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+msgid "_Close"
+msgstr "_Bağla"
+
+#: src/kgx-paste-dialog.c:76
+#, c-format
+msgid ""
+"Make sure you know what the command does:\n"
+"%s"
+msgstr ""
+"Əmrin nə etdiyini bildiyinizə əmin olun:\n"
+"%s"
+
+#: src/kgx-paste-dialog.c:129
+msgid "You are pasting a command that runs as an administrator"
+msgstr "Siz idarəçi kimi işləyən bir əmri yapışdırırsınız"
+
+#: src/kgx-paste-dialog.c:136 src/kgx-terminal.ui:24
+msgid "_Paste"
+msgstr "_Yapışdır"
+
+#: src/kgx-process.c:196
+#, c-format
+msgid "Process %d"
+msgstr "Proses %d"
+
+#: src/kgx-simple-tab.c:170
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Başlamaq alınmadı</b> — %s"
+
+#: src/kgx-spad.c:194
+msgid "Unable To Open"
+msgstr "Açmaq Mümkün Olmadı"
+
+#: src/kgx-spad.c:197
+#, c-format
+msgid ""
+"Opening ‘<a href=\"%s\">%s</a>’ failed:\n"
+"%s"
+msgstr ""
+"‘<a href=\"%s\">%s</a>’ açılması uğursuz oldu:\n"
+"%s"
+
+#: src/kgx-spad.c:339 src/kgx-spad.ui:4
+msgid "Error Details"
+msgstr "Xəta Təfərrüatları"
+
+#: src/kgx-spad.ui:23
+msgid "Error Message"
+msgstr "Xəta Mesajı"
+
+#: src/kgx-spad.ui:35
+msgid "Copy Error Message"
+msgstr "Xəta Mesajını Kopyala"
+
+#: src/kgx-spad.ui:100
+msgid "Report _Issue"
+msgstr "_Problemi Bildir"
+
+#: src/kgx-tab.c:597
+msgctxt "toast-button"
+msgid "_Details"
+msgstr "_Təfərrüatlar"
+
+#: src/kgx-tab.c:889
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Yalnız Oxuma</b> — Əmr %i kodu ilə başa çatdı"
+
+#: src/kgx-tab.c:897
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Yalnız Oxuma</b> — Əmr başa çatdı"
+
+#: src/kgx-tab.c:917
+msgid "Command completed"
+msgstr "Əmr tamamlandı"
+
+#: src/kgx-tab.ui:42
+msgid "Find text"
+msgstr "Mətn axtar"
+
+#: src/kgx-tab.ui:53
+msgid "Previous Match"
+msgstr "Əvvəlki Uyğunluq"
+
+#: src/kgx-tab.ui:61
+msgid "Next Match"
+msgstr "Növbəti Uyğunluq"
+
+#: src/kgx-terminal.c:39
+msgctxt "toast-message"
+msgid "Couldn't Open Link"
+msgstr "Linki Açmaq Mümkün Olmadı"
+
+#: src/kgx-terminal.c:360
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
+"are installed."
+msgstr ""
+"“<a href=\"%s\">%s</a>” linki “%s” protokolundan istifadə edir, bunun üçün heç bir tətbiq quraşdırılmayıb."
+
+#: src/kgx-terminal.c:373
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
+"a>”. Please include the following information if you report the error."
+msgstr ""
+"“<a href=\"%s\">%s</a>” linkini açarkən gözlənilməz xəta baş verdi. Xətanı bildirsəniz, aşağıdakı məlumatları daxil edin."
+
+#: src/kgx-terminal.c:421
+#, c-format
+msgctxt "spad-message"
+msgid "The link “<a href=\"%s\">%s</a>” is malformed."
+msgstr "“<a href=\"%s\">%s</a>” linki səhv formadadır."
+
+#: src/kgx-terminal.c:440
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” points to a location on a different "
+"device.\n"
+"\n"
+"This device is “%s” and the location is on “%s”."
+msgstr ""
+"“<a href=\"%s\">%s</a>” linki fərqli bir cihazda yerə işarə edir.\n"
+"\n"
+"Bu cihaz “%s”dir və yer “%s” üzərindədir."
+
+#: src/kgx-terminal.c:511
+msgctxt "toast-message"
+msgid "Couldn't Paste Text"
+msgstr "Mətni Yapışdırmaq Mümkün Olmadı"
+
+#: src/kgx-terminal.c:514
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst reading the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"Mübadilə buferindən oxunarkən gözlənilməz xəta baş verdi. Xətanı bildirsəniz, aşağıdakı məlumatları daxil edin."
+
+#: src/kgx-terminal.c:575
+msgctxt "toast-message"
+msgid "Couldn't Show File"
+msgstr "Faylı Göstərmək Mümkün Olmadı"
+
+#: src/kgx-terminal.c:578
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst showing the file. Please include the "
+"following information if you report the error."
+msgstr ""
+"Faylı göstərərkən gözlənilməz xəta baş verdi. Xətanı bildirsəniz, aşağıdakı məlumatları daxil edin."
+
+#: src/kgx-terminal.c:599
+msgctxt "toast-message"
+msgid "Couldn't Open Folder"
+msgstr "Qovluğu Açmaq Mümkün Olmadı"
+
+#: src/kgx-terminal.c:602
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the folder. Please include the "
+"following information if you report the error."
+msgstr ""
+"Qovluğu açarkən gözlənilməz xəta baş verdi. Xətanı bildirsəniz, aşağıdakı məlumatları daxil edin."
+
+#: src/kgx-terminal.c:696
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+"Açmaq üçün Ctrl-klik edin:\n"
+"%s"
+
+#: src/kgx-terminal.c:984
+msgctxt "toast-message"
+msgid "Couldn't Paste"
+msgstr "Yapışdırmaq Mümkün Olmadı"
+
+#: src/kgx-terminal.c:987
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst processing the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"Mübadilə buferini emal edərkən gözlənilməz xəta baş verdi. Xətanı bildirsəniz, aşağıdakı məlumatları daxil edin."
+
+#: src/kgx-terminal.ui:7
+msgid "_Open Link"
+msgstr "_Linki Aç"
+
+#: src/kgx-terminal.ui:12
+msgid "Copy _Link Address"
+msgstr "_Link Ünvanını Kopyala"
+
+#: src/kgx-terminal.ui:19
+msgid "_Copy"
+msgstr "_Kopyala"
+
+#: src/kgx-terminal.ui:29
+msgid "_Select All"
+msgstr "_Hamısını Seç"
+
+#: src/kgx-terminal.ui:36
+msgid "Show in _Files"
+msgstr "_Fayllarda Göstər"
+
+#: src/kgx-theme-switcher.ui:24
+msgid "Follow System Style"
+msgstr "Sistem Stilini Təqib Et"
+
+#: src/kgx-theme-switcher.ui:52
+msgid "Light Style"
+msgstr "Açıq Stil"
+
+#: src/kgx-theme-switcher.ui:79
+msgid "Dark Style"
+msgstr "Tünd Stil"
+
+#: src/kgx-utils.c:114
+msgid "Missing argument for --command"
+msgstr "--command üçün arqument yoxdur"
+
+#: src/kgx-utils.c:129
+msgid "Cannot use both --command and positional parameters"
+msgstr "--command və mövqe parametrləri birlikdə istifadə oluna bilməz"
+
+#: src/kgx-window.ui:17
+msgid "_New Window"
+msgstr "_Yeni Pəncərə"
+
+#: src/kgx-window.ui:23
+msgid "_Show All Tabs"
+msgstr "_Bütün Vərəqləri Göstər"
+
+#: src/kgx-window.ui:30
+msgid "_Preferences"
+msgstr "_Tərcihlər"
+
+#: src/kgx-window.ui:34
+msgid "_Keyboard Shortcuts"
+msgstr "_Klaviatura Qısayolları"
+
+#: src/kgx-window.ui:38
+msgid "_About Console"
+msgstr "_Konsol Haqqında"
+
+#: src/kgx-window.ui:91
+msgid "Find in Terminal"
+msgstr "Terminalda Axtar"
+
+#: src/kgx-window.ui:98
+msgid "Main Menu"
+msgstr "Əsas Menyu"
+
+#: src/kgx-window.ui:116
+msgid "Shrink Text"
+msgstr "Mətni Kiçilt"
+
+#: src/kgx-window.ui:127
+msgid "Reset Size"
+msgstr "Ölçünü Sıfırla"
+
+#: src/kgx-window.ui:151
+msgid "Enlarge Text"
+msgstr "Mətni Böyüt"
+
+#: src/preferences/kgx-font-picker.ui:11
+msgid "Terminal Font"
+msgstr "Terminal Şrifti"
+
+#: src/preferences/kgx-font-picker.ui:29
+msgid "_Select"
+msgstr "_Seç"
+
+#: src/preferences/kgx-font-picker.ui:45 src/preferences/kgx-font-picker.ui:48
+msgid "Font Name"
+msgstr "Şrift Adı"
+
+#: src/preferences/kgx-font-picker.ui:133
+msgid "Font Family"
+msgstr "Şrift Ailəsi"
+
+#: src/preferences/kgx-font-picker.ui:158
+msgid "Font Preview"
+msgstr "Şrift Önizləməsi"
+
+#: src/preferences/kgx-font-picker.ui:179
+msgid "Font Size"
+msgstr "Şrift Ölçüsü"
+
+#: src/preferences/kgx-preferences-window.c:125
+msgid "No Font Set"
+msgstr "Şrift Təyin Edilməyib"
+
+#: src/preferences/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "Ümumi"
+
+#: src/preferences/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "Şrift"
+
+#: src/preferences/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "_Sistem Varsayılanını İstifadə Et"
+
+#: src/preferences/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "Xüsusi _Şrift"
+
+#: src/preferences/kgx-preferences-window.ui:63
+msgid "Behaviour"
+msgstr "Davranış"
+
+#: src/preferences/kgx-preferences-window.ui:66
+msgid "_Unlimited Scrollback"
+msgstr "_Limitsiz Geri Sarma"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "_Geri Sarma Sətirləri"
+
+#: src/preferences/kgx-preferences-window.ui:92
+msgid "Terminal Bell"
+msgstr "Terminal Zəngi"
+
+#: src/preferences/kgx-preferences-window.ui:95
+msgid "Play _Sound"
+msgstr "_Səs Çal"
+
+#: src/preferences/kgx-preferences-window.ui:101
+msgid "_Visual Effects"
+msgstr "_Vizual Effektlər"
