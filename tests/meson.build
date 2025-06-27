@@ -26,6 +26,10 @@ test_env = {
   'GSETTINGS_BACKEND': 'memory',
   'GSETTINGS_SCHEMA_DIR': meson.project_build_root() / 'data',
   'GTK_A11Y': 'test',
+  # Setting this to an empty string prevents gtk from looking in the system
+  # dirs where an older gtk install may have placed a print backend that
+  # conflicts with those now built into gtk
+  'GTK_EXE_PREFIX': '',
   'MALLOC_CHECK_': '2',
   'NO_AT_BRIDGE': '1',
   'PYTHONDEVMODE': '1',

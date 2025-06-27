@@ -2,7 +2,7 @@
 directory = gtk
 url = https://gitlab.gnome.org/GNOME/gtk.git
 push-url = ssh://git@ssh.gitlab.gnome.org:GNOME/gtk.git
-revision = main
+revision = zbrown/a-pointer-is-not-an-int
 depth = 1
 
 [provide]
