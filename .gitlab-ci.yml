@@ -7,6 +7,8 @@ include:
       dist-job-name: "release-tarball"
       tarball-artifact-path: "build/meson-dist/gnome-console-$CI_COMMIT_TAG.tar.xz"
   - component: "gitlab.gnome.org/GNOME/citemplates/gnomeos-basic-ci@master"
+    inputs:
+      lsan-options: "suppressions=${CI_PROJECT_DIR}/tests/lsan.supp"
 
 variables:
   MANIFEST_PATH: "build-aux/flatpak/org.gnome.Console.Devel.json"
@@ -25,8 +27,9 @@ variables:
     gcovr
     git
     glslc
-    meson
     mutter
+    ninja-build
+    pipx
     pkgconfig(fmt)
     pkgconfig(gio-2.0)
     pkgconfig(gio-unix-2.0)
@@ -46,7 +49,7 @@ variables:
     pkgconfig(wayland-egl)
     pkgconfig(wayland-protocols)
     sassc
-  FEDORA_32_IMAGE: fedora:rawhide
+  FEDORA_32_IMAGE: fedora:latest
   FEDORA_32_DEPS: appstream-devel.i686
     appstream.i686
     at-spi2-atk-devel.i686
@@ -166,6 +169,8 @@ variables:
     libpkgconf.i686
     libpng-devel.i686
     libpsl-devel.i686
+    librsvg2-devel.i686
+    librsvg2.i686
     libselinux-devel.i686
     libsepol-devel.i686
     libsoup.i686
@@ -216,9 +221,9 @@ variables:
     mesa-libgbm-devel.i686
     mesa-libgbm.i686
     mesa-libGL.i686
-    meson
     mutter
     nettle-devel.i686
+    ninja-build
     orc-devel.i686
     p11-kit-devel.i686
     pango-devel.i686
@@ -228,6 +233,7 @@ variables:
     pcre2-utf32.i686
     pcre2.i686
     pipewire-libs.i686
+    pipx
     pixman-devel.i686
     pixman.i686
     pkgconf-pkg-config.i686
@@ -272,6 +278,8 @@ flatpak@aarch64:
   before_script:
     - dnf update -y --nogpgcheck
     - dnf install -y --nogpgcheck ${DNF_DEPS}
+    - export PATH=$PATH:/root/.local/bin
+    - pipx install meson
   script:
     - export XDG_RUNTIME_DIR="$(mktemp -p $(pwd) -d xdg-runtime-XXXXXX)"
     - meson setup build ${MESON_EXTRA_ARGS} -Db_coverage=true -Dtests=true
@@ -335,6 +343,8 @@ release-tarball:
   before_script:
     - dnf update -y --nogpgcheck
     - dnf install -y --nogpgcheck ${FEDORA_DEPS}
+    - export PATH=$PATH:/root/.local/bin
+    - pipx install meson
   script:
     - export XDG_RUNTIME_DIR="$(mktemp -p $(pwd) -d xdg-runtime-XXXXXX)"
     - git config --global --add safe.directory $CI_PROJECT_DIR
