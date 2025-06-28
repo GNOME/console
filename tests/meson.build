@@ -6,6 +6,7 @@ tests = [
   'livery',
   'locale',
   'palette',
+  'proxy-info',
   'settings',
   'shared-closures',
   'spad-source',
