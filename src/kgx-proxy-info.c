@@ -1,6 +1,6 @@
 /* kgx-proxy-info.c
  *
- * Copyright 2021 Zander Brown
+ * Copyright 2021-2025 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,10 +16,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "kgx-config.h"
+
+#include <gio/gio.h>
+#include <gdesktop-enums.h>
+
+#include "kgx-utils.h"
+
+#include "kgx-proxy-info.h"
+
+
 /**
- * SECTION:kgx-proxy-info
- * @short_description: An object with proxy details
- * @title: KgxProxyInfo
+ * KgxProxyInfo:
  *
  * #KgxProxyInfo maps org.gnome.system.proxy to environmental variables
  * when launching new sessions
@@ -29,21 +37,11 @@
  *
  * Only manual proxies are supported
  */
-
-#include "kgx-config.h"
-
-#include <gio/gio.h>
-#include <gdesktop-enums.h>
-
-#include "kgx-proxy-info.h"
-
-
 struct _KgxProxyInfo {
   GObject            parent_instance;
 
   GSettings         *settings;
   GSettings         *protocols[4];
-  gulong             changed_handler[4];
 
   GDesktopProxyMode  mode;
 
@@ -83,13 +81,9 @@ kgx_proxy_info_dispose (GObject *object)
 {
   KgxProxyInfo *self = KGX_PROXY_INFO (object);
 
-  G_STATIC_ASSERT (G_N_ELEMENTS (self->protocols) ==
-                   G_N_ELEMENTS (self->changed_handler));
-
   g_clear_object (&self->settings);
 
-  for (int i = 0; i < G_N_ELEMENTS (self->protocols); i++) {
-    g_clear_signal_handler (&self->changed_handler[i], self->protocols[i]);
+  for (size_t i = 0; i < G_N_ELEMENTS (self->protocols); i++) {
     g_clear_object (&self->protocols[i]);
   }
 
@@ -116,13 +110,14 @@ kgx_proxy_info_class_init (KgxProxyInfoClass *klass)
  *
  * Set both upper and lower case variants of @key to @value
  */
-static void
+static inline void
 env_set_both (KgxProxyInfo *self,
               const char   *key,
               char         *value)
 {
-  if (!value)
+  if (!kgx_str_non_empty (value)) {
     return;
+  }
 
   g_hash_table_replace (self->environ,
                         g_strdup (key),
@@ -133,7 +128,7 @@ env_set_both (KgxProxyInfo *self,
 }
 
 
-static void
+static inline void
 handle_protocol (KgxProxyInfo *self,
                  Protocol      protocol)
 {
@@ -147,7 +142,7 @@ handle_protocol (KgxProxyInfo *self,
   host = g_settings_get_string (settings, "host");
   port = g_settings_get_int (settings, "port");
 
-  if (!host || !host[0] || port == 0) {
+  if (!kgx_str_non_empty (host) || port == 0) {
     g_hash_table_remove (self->environ, proxy_variable[protocol]);
     return;
   }
@@ -162,8 +157,8 @@ handle_protocol (KgxProxyInfo *self,
 
   uri = g_uri_build_with_user (G_URI_FLAGS_NONE,
                                proxy_scheme[protocol],
-                               user && user[0] ? user : NULL,
-                               password && password[0] ? password : NULL,
+                               kgx_str_non_empty (user) ? user : NULL,
+                               kgx_str_non_empty (password) ? password : NULL,
                                NULL,
                                host,
                                port,
@@ -175,7 +170,7 @@ handle_protocol (KgxProxyInfo *self,
 }
 
 
-static void
+static inline void
 handle_ignored (KgxProxyInfo *self)
 {
   g_autoptr (GString) value = NULL;
@@ -187,7 +182,7 @@ handle_ignored (KgxProxyInfo *self)
   }
 
   value = g_string_sized_new (100);
-  for (int i = 0; hosts[i] != NULL; ++i) {
+  for (size_t i = 0; kgx_str_non_empty (hosts[i]); ++i) {
     if (i > 0) {
       g_string_append_c (value, ',');
     }
@@ -201,11 +196,13 @@ handle_ignored (KgxProxyInfo *self)
 
 
 static void
-manual_settings_changed (GSettings *settings, const char *key, KgxProxyInfo *self)
+manual_settings_changed (G_GNUC_UNUSED GSettings  *settings_ignored,
+                         G_GNUC_UNUSED const char *key,
+                         KgxProxyInfo             *self)
 {
   g_hash_table_remove_all (self->environ);
 
-  for (int i = 0; i < G_N_ELEMENTS (self->protocols); i++) {
+  for (size_t i = 0; i < G_N_ELEMENTS (self->protocols); i++) {
     handle_protocol (self, i);
   }
 
@@ -214,31 +211,20 @@ manual_settings_changed (GSettings *settings, const char *key, KgxProxyInfo *sel
 
 
 static void
-proxy_settings_changed (GSettings *settings, const char *key, KgxProxyInfo *self)
+proxy_settings_changed (G_GNUC_UNUSED GSettings  *settings_ignored,
+                        G_GNUC_UNUSED const char *key,
+                        KgxProxyInfo             *self)
 {
-  GDesktopProxyMode mode = g_settings_get_enum (settings, "mode");
+  self->mode = g_settings_get_enum (self->settings, "mode");
 
-  if (mode == self->mode) {
-    return;
-  }
-
-  switch (mode) {
+  switch (self->mode) {
     case G_DESKTOP_PROXY_MODE_MANUAL:
-      for (int i = 0; i < G_N_ELEMENTS (self->changed_handler); i++) {
-        self->changed_handler[i] =
-          g_signal_connect (self->protocols[i],
-                            "changed", G_CALLBACK (manual_settings_changed),
-                            self);
-      }
       manual_settings_changed (NULL, NULL, self);
       break;
     case G_DESKTOP_PROXY_MODE_AUTO:
-      g_info ("Can't handle auto proxy");
+      g_info ("proxy-info: we don't know how to handle ‘auto’ proxies");
+      break;
     case G_DESKTOP_PROXY_MODE_NONE:
-      for (int i = 0; i < G_N_ELEMENTS (self->changed_handler); i++) {
-        g_clear_signal_handler (&self->changed_handler[i], self->protocols[i]);
-      }
-      g_hash_table_remove_all (self->environ);
       break;
     default:
       g_return_if_reached ();
@@ -246,24 +232,37 @@ proxy_settings_changed (GSettings *settings, const char *key, KgxProxyInfo *self
 }
 
 
+static inline GSettings *
+get_protocol_settings (KgxProxyInfo *self, const char *protocol)
+{
+  GSettings *settings = g_settings_get_child (self->settings, protocol);
+
+  g_signal_connect_object (settings,
+                           "changed", G_CALLBACK (manual_settings_changed), self,
+                           G_CONNECT_DEFAULT);
+
+  return settings;
+}
+
+
 static void
 kgx_proxy_info_init (KgxProxyInfo *self)
 {
-  self->settings = g_settings_new ("org.gnome.system.proxy");
-
-  self->protocols[HTTP] = g_settings_get_child (self->settings, "http");
-  self->protocols[HTTPS] = g_settings_get_child (self->settings, "https");
-  self->protocols[FTP] = g_settings_get_child (self->settings, "ftp");
-  self->protocols[SOCKS] = g_settings_get_child (self->settings, "socks");
-
   self->environ = g_hash_table_new_full (g_str_hash,
                                          g_str_equal,
                                          g_free,
                                          g_free);
 
-  g_signal_connect (self->settings,
-                    "changed", G_CALLBACK (proxy_settings_changed),
-                    self);
+  self->settings = g_settings_new ("org.gnome.system.proxy");
+  g_signal_connect_object (self->settings,
+                           "changed", G_CALLBACK (proxy_settings_changed), self,
+                           G_CONNECT_DEFAULT);
+
+  self->protocols[HTTP] = get_protocol_settings (self, "http");
+  self->protocols[HTTPS] = get_protocol_settings (self, "https");
+  self->protocols[FTP] = get_protocol_settings (self, "ftp");
+  self->protocols[SOCKS] = get_protocol_settings (self, "socks");
+
   proxy_settings_changed (self->settings, NULL, self);
 }
 
@@ -283,6 +282,11 @@ kgx_proxy_info_apply_to_environ (KgxProxyInfo   *self,
   char *key, *value;
 
   g_return_if_fail (KGX_IS_PROXY_INFO (self));
+
+  /* Just do nothing when we don't know what to do */
+  if (self->mode != G_DESKTOP_PROXY_MODE_MANUAL) {
+    return;
+  }
 
   g_hash_table_iter_init (&iter, self->environ);
   while (g_hash_table_iter_next (&iter,
