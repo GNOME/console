@@ -5,6 +5,7 @@ tests = [
   'icon-closures',
   'livery',
   'locale',
+  'pages',
   'palette',
   'proxy-info',
   'settings',
