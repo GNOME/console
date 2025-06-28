@@ -33,6 +33,13 @@
     </section>
     <section>
       <item>
+        <attribute name="label" translatable="yes">Leave _Fullscreen</attribute>
+        <attribute name="action">win.unfullscreen</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
         <attribute name="label" translatable="yes">Show in _Files</attribute>
         <attribute name="action">term.show-in-files</attribute>
         <attribute name="hidden-when">action-disabled</attribute>
