@@ -162,6 +162,5 @@ dialog.error-details textview {
 }
 
 .error-message {
-  padding: 12px;
   font-size: 0.95em;
 }

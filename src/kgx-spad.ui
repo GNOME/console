@@ -51,6 +51,10 @@
                       <object class="GtkTextView">
                         <property name="editable">false</property>
                         <property name="wrap-mode">word-char</property>
+                        <property name="top-margin">12</property>
+                        <property name="bottom-margin">12</property>
+                        <property name="left-margin">12</property>
+                        <property name="right-margin">12</property>
                         <property name="buffer">
                           <object class="GtkTextBuffer" id="buffer">
                             <binding name="text">
