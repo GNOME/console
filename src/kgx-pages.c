@@ -27,6 +27,7 @@
 #include "kgx-settings.h"
 #include "kgx-shared-closures.h"
 #include "kgx-tab.h"
+#include "kgx-templated.h"
 #include "kgx-terminal.h"
 #include "kgx-train.h"
 #include "kgx-utils.h"
@@ -496,9 +497,11 @@ object_accumulator (GSignalInvocationHint *ihint,
 static void
 kgx_pages_class_init (KgxPagesClass *klass)
 {
-  g_autoptr (GFile) file =
-    g_file_new_for_uri ("resource://" KGX_APPLICATION_PATH "kgx-page-expression.ui");
   g_autoptr (GError) error = NULL;
+  g_autoptr (GBytes) template =
+    g_resources_lookup_data (KGX_APPLICATION_PATH "kgx-page-expression.ui",
+                             G_RESOURCE_LOOKUP_FLAGS_NONE,
+                             &error);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   KgxPagesClassPrivate *class_priv =
@@ -665,7 +668,7 @@ kgx_pages_class_init (KgxPagesClass *klass)
 
   gtk_widget_class_set_css_name (widget_class, "pages");
 
-  class_priv->page_expression_data = g_file_load_bytes (file, NULL, NULL, &error);
+  class_priv->page_expression_data = g_steal_pointer (&template);
   if (error) {
     g_critical ("pages: Failed to load template: %s", error->message);
   }
@@ -735,10 +738,6 @@ kgx_pages_add_page (KgxPages *self,
   KgxPagesClassPrivate *class_priv;
   KgxPagesPrivate *priv;
   AdwTabPage *page;
-  size_t length;
-  const char *buffer;
-  g_autoptr (GtkBuilder) builder = gtk_builder_new ();
-  g_autoptr (GError) error = NULL;
 
   g_return_if_fail (KGX_IS_PAGES (self));
   g_return_if_fail (KGX_IS_TAB (tab));
@@ -752,19 +751,9 @@ kgx_pages_add_page (KgxPages *self,
 
   page = adw_tab_view_add_page (ADW_TAB_VIEW (priv->view), GTK_WIDGET (tab), NULL);
 
-  gtk_builder_set_current_object (builder, G_OBJECT (page));
-  gtk_builder_set_scope (builder, class_priv->page_expression_scope);
-
-  buffer = g_bytes_get_data (class_priv->page_expression_data, &length);
-
-  if (!gtk_builder_extend_with_template (builder,
-                                         G_OBJECT (page),
-                                         ADW_TYPE_TAB_PAGE,
-                                         buffer,
-                                         length,
-                                         &error)) {
-    g_critical ("pages: Tab setup failed: %s", error->message);
-  }
+  kgx_templated_apply (G_OBJECT (page),
+                       class_priv->page_expression_scope,
+                       class_priv->page_expression_data);
 }
 
 
