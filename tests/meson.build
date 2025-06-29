@@ -13,9 +13,20 @@ tests = [
   'spad-source',
   'spad',
   'tab',
+  'templated',
   'theme-switcher',
   'utils',
 ]
+
+test_resources = gnome.compile_resources(
+  'kgx-test-resources',
+  configure_file(
+    input: 'kgx-test.gresource.xml.in',
+    output: 'kgx-test.gresource.xml',
+    configuration: conf,
+  ),
+  c_name: 'kgx_test',
+)
 
 test_env = {
   'G_DEBUG': 'gc-friendly,fatal-warnings',
@@ -43,7 +54,7 @@ foreach test : tests
     test,
     executable(
       'test-@0@'.format(test),
-      'test-@0@.c'.format(test),
+      ['test-@0@.c'.format(test), test_resources],
       c_args: kgx_cargs,
       dependencies: kgx_dep,
     ),
