@@ -1,7 +1,6 @@
 data/org.gnome.Console.desktop.in.in
 data/org.gnome.Console.gschema.xml.in
 data/org.gnome.Console.metainfo.xml.in.in
-src/help-overlay.ui
 src/kgx-about.c
 src/kgx-application.c
 src/kgx-application.h
@@ -28,3 +27,4 @@ src/main.c
 src/preferences/kgx-font-picker.ui
 src/preferences/kgx-preferences-window.c
 src/preferences/kgx-preferences-window.ui
+src/shortcuts-dialog.ui

@@ -13,6 +13,7 @@
     <file preprocess="xml-stripblanks" compressed="true">kgx-window.ui</file>
     <file preprocess="xml-stripblanks" compressed="true">preferences/kgx-font-picker.ui</file>
     <file preprocess="xml-stripblanks" compressed="true">preferences/kgx-preferences-window.ui</file>
+    <file preprocess="xml-stripblanks" compressed="true">shortcuts-dialog.ui</file>
     <file compressed="true">style.css</file>
     <file compressed="true">style-dark.css</file>
     <file compressed="true">logo.txt</file>
@@ -23,8 +24,5 @@
     <file preprocess="xml-stripblanks">icons/scalable/status/status-regular-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/status-remote-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/theme-check-symbolic.svg</file>
-  </gresource>
-  <gresource prefix="@KGX_APPLICATION_PATH_RAW@gtk">
-    <file preprocess="xml-stripblanks">help-overlay.ui</file>
   </gresource>
 </gresources>
