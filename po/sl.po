@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-04-27 08:04+0000\n"
-"PO-Revision-Date: 2025-04-30 16:49+0200\n"
+"POT-Creation-Date: 2025-06-28 23:08+0000\n"
+"PO-Revision-Date: 2025-06-29 12:44+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
-#: src/kgx-window.ui:47
+#: src/kgx-window.ui:52
 msgid "Console"
 msgstr "Konzola"
 
@@ -36,7 +36,7 @@ msgstr "ukaz;cmd;ukazna vrstica;zagon;lupina;terminal;kgx;"
 msgid "New Window"
 msgstr "Novo okno"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:177
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:221
 msgid "New Tab"
 msgstr "Nov zavihek"
 
@@ -158,63 +158,63 @@ msgstr "© %s Zander Brown"
 msgid "translator-credits"
 msgstr "Matej Urbančič <mateju@src.gnome.org>"
 
-#: src/kgx-application.c:283
+#: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr ""
 "Ni mogoče uporabiti obeh: --working-directory in pozicijskih parametrov"
 
-#: src/kgx-application.c:503
+#: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Izvedi argument možnosti znotraj terminala"
 
-#: src/kgx-application.c:504
+#: src/kgx-application.c:510
 msgid "COMMAND"
 msgstr "UKAZ"
 
-#: src/kgx-application.c:512
+#: src/kgx-application.c:518
 msgid "Set the working directory"
 msgstr "Nastavi delovni imenik terminala"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:514
+#: src/kgx-application.c:520
 msgid "DIRNAME"
 msgstr "IMEIMENIKA"
 
-#: src/kgx-application.c:522
+#: src/kgx-application.c:528
 msgid "Wait until the child exits (TODO)"
 msgstr "Počakajte na končanje podrejenega opravila (v pripravi)"
 
-#: src/kgx-application.c:531
+#: src/kgx-application.c:537
 msgid "Set the initial window title"
 msgstr "Nastavi začetni naslov okna"
 
-#: src/kgx-application.c:532
+#: src/kgx-application.c:538
 msgid "TITLE"
 msgstr "NASLOV"
 
-#: src/kgx-application.c:540
+#: src/kgx-application.c:546
 msgid "ADVANCED: Set the shell to launch"
 msgstr "NAPREDNO: Nastavi lupino z zagon"
 
-#: src/kgx-application.c:541
+#: src/kgx-application.c:547
 msgid "SHELL"
 msgstr "LUPINA"
 
-#: src/kgx-application.c:549
+#: src/kgx-application.c:555
 msgid "ADVANCED: Set the scrollback length"
 msgstr "NAPREDNO: Nastavi dolžino povrnitvenega drsenja"
 
-#: src/kgx-application.c:550
+#: src/kgx-application.c:556
 msgid "LINES"
 msgstr "VRSTICE"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:689
+#: src/kgx-application.c:695
 #, c-format
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — Posnemovalnik terminala"
 
-#: src/kgx-application.c:695
+#: src/kgx-application.c:701
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- UKAZ [ARGUMENT ...]]"
 
@@ -288,7 +288,7 @@ msgstr "Barvni niz je napačna dolžina"
 
 #: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
 #: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
-#: src/kgx-drop-target.c:506
+#: src/kgx-drop-target.c:509
 msgctxt "toast-message"
 msgid "Drop Failed"
 msgstr "Spuščanje ni uspelo"
@@ -320,7 +320,7 @@ msgstr ""
 "Med prejemanjem spuščenega besedila je prišlo do nepričakovane napake. Če "
 "prijavite napako, vključite naslednje podatke."
 
-#: src/kgx-drop-target.c:509
+#: src/kgx-drop-target.c:512
 msgctxt "spad-message"
 msgid ""
 "An unexpected value was received. Please include the following information "
@@ -408,7 +408,7 @@ msgstr "Sporočilo o napaki"
 msgid "Copy Error Message"
 msgstr "Kopiraj sporočilo o napaki"
 
-#: src/kgx-spad.ui:100
+#: src/kgx-spad.ui:104
 msgid "Report _Issue"
 msgstr "Pošlji poroč_ilo o napaki"
 
@@ -436,11 +436,11 @@ msgstr "Ukaz je končan"
 msgid "Find text"
 msgstr "Najdi besedilo"
 
-#: src/kgx-tab.ui:53
+#: src/kgx-tab.ui:70
 msgid "Previous Match"
 msgstr "Predhodni zadetek"
 
-#: src/kgx-tab.ui:61
+#: src/kgx-tab.ui:78
 msgid "Next Match"
 msgstr "Naslednji zadetek"
 
@@ -571,7 +571,11 @@ msgstr "_Kopiraj"
 msgid "_Select All"
 msgstr "Izberi _vse"
 
-#: src/kgx-terminal.ui:36
+#: src/kgx-terminal.ui:36 src/kgx-window.ui:260
+msgid "Leave _Fullscreen"
+msgstr "_Zapusti celozaslonski način"
+
+#: src/kgx-terminal.ui:43
 msgid "Show in _Files"
 msgstr "Pokaži v _mapi"
 
@@ -596,7 +600,7 @@ msgstr "Manjkajoči argument za --command"
 msgid "Cannot use both --command and positional parameters"
 msgstr "Ni mogoče uporabiti obeh -- ukaznega in pozicijskih parametrov"
 
-#: src/kgx-window.ui:17
+#: src/kgx-window.ui:17 src/kgx-window.ui:249
 msgid "_New Window"
 msgstr "_Novo okno"
 
@@ -604,35 +608,43 @@ msgstr "_Novo okno"
 msgid "_Show All Tabs"
 msgstr "Pokaži _vse zavihke"
 
-#: src/kgx-window.ui:30
+#: src/kgx-window.ui:28 src/kgx-window.ui:255
+msgid "_Fullscreen"
+msgstr "_Celozaslonski način"
+
+#: src/kgx-window.ui:35
 msgid "_Preferences"
 msgstr "_Možnosti"
 
-#: src/kgx-window.ui:34
+#: src/kgx-window.ui:39
 msgid "_Keyboard Shortcuts"
 msgstr "_Tipkovne bližnjice"
 
-#: src/kgx-window.ui:38
+#: src/kgx-window.ui:43
 msgid "_About Console"
 msgstr "_O programu"
 
-#: src/kgx-window.ui:91
+#: src/kgx-window.ui:123
 msgid "Find in Terminal"
 msgstr "Najdi v terminalu"
 
-#: src/kgx-window.ui:98
+#: src/kgx-window.ui:135
+msgid "Leave Fullscreen"
+msgstr "Zapusti celozaslonski način"
+
+#: src/kgx-window.ui:142
 msgid "Main Menu"
 msgstr "Glavni meni"
 
-#: src/kgx-window.ui:116
+#: src/kgx-window.ui:160
 msgid "Shrink Text"
 msgstr "Skrči besedilo"
 
-#: src/kgx-window.ui:127
+#: src/kgx-window.ui:171
 msgid "Reset Size"
 msgstr "Ponastavi velikost"
 
-#: src/kgx-window.ui:151
+#: src/kgx-window.ui:195
 msgid "Enlarge Text"
 msgstr "Povečaj besedilo"
 
