@@ -103,7 +103,7 @@ glib_min_ver = '2.80'
 glib_sym_ver = 'GLIB_VERSION_@0@'.format(glib_min_ver.replace('.', '_'))
 
 # Adwaita Requirement
-adw_min_ver = '1.7'
+adw_min_ver = '1.8'
 adw_sym_ver = 'ADW_VERSION_@0@'.format(adw_min_ver.replace('.', '_'))
 
 kgx_cargs = [
@@ -161,9 +161,9 @@ add_global_arguments(global_cargs, language: 'c')
 
 gio_dep = dependency('gio-2.0', version: '>= @0@'.format(glib_min_ver))
 gio_unix_dep = dependency('gio-unix-2.0', version: '>= @0@'.format(glib_min_ver))
-adw_dep = dependency('libadwaita-1', version: '>= @0@'.format(adw_min_ver))
 vte_dep = dependency('vte-2.91-gtk4', version: '>= 0.77.0')
 gtk_dep = dependency('gtk4', version: '>= @0@'.format(gtk_min_ver))
+adw_dep = dependency('libadwaita-1', version: '>= @0@'.format(adw_min_ver))
 pango_dep = dependency('pango', version: '>= 1.51.2')
 gtop_dep = dependency('libgtop-2.0')
 pcre_dep = dependency('libpcre2-8', version: '>= 10.32')
