@@ -54,6 +54,8 @@ kgx_sources = files(
   'kgx-system-info.h',
   'kgx-tab.c',
   'kgx-tab.h',
+  'kgx-templated.c',
+  'kgx-templated.h',
   'kgx-terminal.c',
   'kgx-terminal.h',
   'kgx-theme-switcher.c',
