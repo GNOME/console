@@ -12,6 +12,7 @@ tests = [
   'shared-closures',
   'spad-source',
   'spad',
+  'system-info',
   'tab',
   'templated',
   'theme-switcher',
