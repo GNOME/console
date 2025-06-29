@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="KgxAlsoTemplated" parent="KgxUntemplatedIntermediate">
+    <property name="b">3</property>
+    <binding name="c">
+      <lookup name="n-items">list_store</lookup>
+    </binding>
+  </template>
+  <object class="GMemoryInputStream" id="input_stream" />
+  <object class="GListStore" id="list_store">
+    <property name="item-type">GObject</property>
+    <signal name="items-changed" handler="items_changed" />
+  </object>
+</interface>
