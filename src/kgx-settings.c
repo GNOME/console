@@ -133,7 +133,7 @@ kgx_settings_set_property (GObject      *object,
   switch (property_id) {
     case PROP_THEME:
       self->theme = g_value_get_enum (value);
-      g_object_notify_by_pspec (object, pspecs[PROP_LIVERY]);
+      g_object_notify_by_pspec (object, pspec);
       break;
     case PROP_FONT:
       g_clear_pointer (&self->font, pango_font_description_free);
@@ -168,7 +168,7 @@ kgx_settings_set_property (GObject      *object,
       kgx_settings_set_custom_font (self, g_value_get_boxed (value));
       break;
     case PROP_SCROLLBACK_LIMIT:
-      kgx_set_int64_prop (object, pspec, &self->scrollback_limit, value);
+      kgx_settings_set_scrollback_limit (self, g_value_get_int64 (value));
       break;
     case PROP_IGNORE_SCROLLBACK_LIMIT:
       kgx_set_boolean_prop (object,
@@ -260,7 +260,7 @@ resolve_lines (GObject  *object,
                gboolean  ignore_limit,
                int64_t   limit)
 {
-  return ignore_limit ? -1 : limit;
+  return ignore_limit ? 0 : limit;
 }
 
 
@@ -451,7 +451,7 @@ select_livery (const GValue       *value,
 {
   KgxLivery *livery = g_value_get_boxed (value);
 
-  if (livery) {
+  if (!livery) {
     return NULL;
   }
 
@@ -478,7 +478,7 @@ decode_font (GValue   *value,
   const char *font_desc = g_variant_get_string (variant, NULL);
   g_autoptr (PangoFontDescription) font = NULL;
 
-  if (!font_desc || g_strcmp0 (font_desc, "") == 0) {
+  if (!kgx_str_non_empty (font_desc)) {
     g_value_set_boxed (value, NULL);
 
     return TRUE;
@@ -505,9 +505,11 @@ encode_font (const GValue       *value,
              const GVariantType *variant_ty,
              gpointer            data)
 {
-  PangoFontDescription *font;
+  PangoFontDescription *font = g_value_get_boxed (value);
 
-  font = g_value_get_boxed (value);
+  if (!font) {
+    return g_variant_new_string ("");
+  }
 
   return g_variant_new_take_string (pango_font_description_to_string (font));
 }
@@ -652,11 +654,11 @@ kgx_settings_set_scrollback_limit (KgxSettings *self,
 {
   g_return_if_fail (KGX_IS_SETTINGS (self));
 
-  if (self->scrollback_lines == value) {
+  if (self->scrollback_limit == value) {
     return;
   }
 
-  self->scrollback_lines = value;
+  self->scrollback_limit = value;
 
   g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_SCROLLBACK_LIMIT]);
 }
@@ -806,6 +808,10 @@ kgx_settings_resolve_theme (KgxSettings *self, gboolean dark_environment)
   g_return_val_if_fail (KGX_IS_SETTINGS (self), KGX_THEME_HACKER);
 
   if (G_LIKELY (self->theme != KGX_THEME_AUTO)) {
+    if (G_UNLIKELY (self->theme == KGX_THEME_HACKER)) {
+      return KGX_THEME_NIGHT;
+    }
+
     return self->theme;
   }
 
