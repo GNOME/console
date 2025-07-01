@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2025-05-13 12:09+0000\n"
-"PO-Revision-Date: 2025-06-02 21:33+0300\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
+"POT-Creation-Date: 2025-06-28 23:08+0000\n"
+"PO-Revision-Date: 2025-07-01 23:25+0300\n"
 "Last-Translator: Yuras Shumovich <shumovichy@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/org.gnome.Console.desktop.in.in:3
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
-#: src/kgx-window.ui:47
+#: src/kgx-window.ui:52
 msgid "Console"
 msgstr "Кансоль"
 
@@ -36,7 +36,7 @@ msgstr ""
 msgid "New Window"
 msgstr "Новае акно"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:177
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:221
 msgid "New Tab"
 msgstr "Новая ўкладка"
 
@@ -158,63 +158,63 @@ msgstr "© %s Zander Brown"
 msgid "translator-credits"
 msgstr "Юрась Шумовіч <shumovichy@gmail.com>"
 
-#: src/kgx-application.c:283
+#: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr ""
 "Нельга адначасова выкарыстоўваць --working-directory і пазіцыйныя параметры"
 
-#: src/kgx-application.c:503
+#: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Выканаць аргумент гэтага параметра ў тэрмінале"
 
-#: src/kgx-application.c:504
+#: src/kgx-application.c:510
 msgid "COMMAND"
 msgstr "КАМАНДА"
 
-#: src/kgx-application.c:512
+#: src/kgx-application.c:518
 msgid "Set the working directory"
 msgstr "Задаць працоўны каталог"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:514
+#: src/kgx-application.c:520
 msgid "DIRNAME"
 msgstr "НАЗВА_ПАПКІ"
 
-#: src/kgx-application.c:522
+#: src/kgx-application.c:528
 msgid "Wait until the child exits (TODO)"
 msgstr "Чакаць завяршэння даччынага працэсу (У ПЛАНАХ)"
 
-#: src/kgx-application.c:531
+#: src/kgx-application.c:537
 msgid "Set the initial window title"
 msgstr "Задаць першапачатковы загаловак акна"
 
-#: src/kgx-application.c:532
+#: src/kgx-application.c:538
 msgid "TITLE"
 msgstr "ЗАГАЛОВАК"
 
-#: src/kgx-application.c:540
+#: src/kgx-application.c:546
 msgid "ADVANCED: Set the shell to launch"
 msgstr "ДЛЯ ДАСВЕДЧАНЫХ: Задаць абалонку запуску"
 
-#: src/kgx-application.c:541
+#: src/kgx-application.c:547
 msgid "SHELL"
 msgstr "АБАЛОНКА"
 
-#: src/kgx-application.c:549
+#: src/kgx-application.c:555
 msgid "ADVANCED: Set the scrollback length"
 msgstr "ДЛЯ ДАСВЕДЧАНЫХ: Задаць даўжыню прагорткі назад"
 
-#: src/kgx-application.c:550
+#: src/kgx-application.c:556
 msgid "LINES"
 msgstr "РАДКОЎ"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:689
+#: src/kgx-application.c:695
 #, c-format
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — Эмулятар тэрмінала"
 
-#: src/kgx-application.c:695
+#: src/kgx-application.c:701
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- КАМАНДА [АРГУМЕНТ...]]"
 
@@ -283,7 +283,7 @@ msgstr "Няправільная даўжыня радка колеру"
 
 #: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
 #: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
-#: src/kgx-drop-target.c:506
+#: src/kgx-drop-target.c:509
 msgctxt "toast-message"
 msgid "Drop Failed"
 msgstr "Збой перацягвання"
@@ -316,7 +316,7 @@ msgstr ""
 "Падчас атрымання перацягнутага тэксту адбылася нечаканая памылка. Калі вы "
 "будзеце паведамляць пра памылку, дадайце ў справаздачу наступную інфармацыю."
 
-#: src/kgx-drop-target.c:509
+#: src/kgx-drop-target.c:512
 msgctxt "spad-message"
 msgid ""
 "An unexpected value was received. Please include the following information "
@@ -406,7 +406,7 @@ msgstr "Паведамленне пра памылку"
 msgid "Copy Error Message"
 msgstr "Скапіяваць паведамленне пра памылку"
 
-#: src/kgx-spad.ui:100
+#: src/kgx-spad.ui:104
 msgid "Report _Issue"
 msgstr "Паведаміць аб _праблеме"
 
@@ -434,11 +434,11 @@ msgstr "Каманда выканана"
 msgid "Find text"
 msgstr "Пошук тэксту"
 
-#: src/kgx-tab.ui:53
+#: src/kgx-tab.ui:70
 msgid "Previous Match"
 msgstr "Папярэдняе супадзенне"
 
-#: src/kgx-tab.ui:61
+#: src/kgx-tab.ui:78
 msgid "Next Match"
 msgstr "Наступнае супадзенне"
 
@@ -570,7 +570,11 @@ msgstr "С_капіяваць"
 msgid "_Select All"
 msgstr "Вылучыць _усё"
 
-#: src/kgx-terminal.ui:36
+#: src/kgx-terminal.ui:36 src/kgx-window.ui:260
+msgid "Leave _Fullscreen"
+msgstr "_Выйсці з поўнаэкраннага рэжыму"
+
+#: src/kgx-terminal.ui:43
 msgid "Show in _Files"
 msgstr "Паказаць праз «_Файлы»"
 
@@ -595,7 +599,7 @@ msgstr "Адсутнічае аргумент для --command"
 msgid "Cannot use both --command and positional parameters"
 msgstr "Нельга адначасова выкарыстоўваць --command і пазіцыйныя параметры"
 
-#: src/kgx-window.ui:17
+#: src/kgx-window.ui:17 src/kgx-window.ui:249
 msgid "_New Window"
 msgstr "_Новае акно"
 
@@ -603,35 +607,43 @@ msgstr "_Новае акно"
 msgid "_Show All Tabs"
 msgstr "Паказаць _усе ўкладкі"
 
-#: src/kgx-window.ui:30
+#: src/kgx-window.ui:28 src/kgx-window.ui:255
+msgid "_Fullscreen"
+msgstr "_Поўнаэкранны рэжым"
+
+#: src/kgx-window.ui:35
 msgid "_Preferences"
 msgstr "_Налады"
 
-#: src/kgx-window.ui:34
+#: src/kgx-window.ui:39
 msgid "_Keyboard Shortcuts"
 msgstr "_Спалучэнні клавіш"
 
-#: src/kgx-window.ui:38
+#: src/kgx-window.ui:43
 msgid "_About Console"
 msgstr "_Пра Кансоль"
 
-#: src/kgx-window.ui:91
+#: src/kgx-window.ui:123
 msgid "Find in Terminal"
 msgstr "Пошук у тэрмінале"
 
-#: src/kgx-window.ui:98
+#: src/kgx-window.ui:135
+msgid "Leave Fullscreen"
+msgstr "Выйсці з поўнаэкраннага рэжыму"
+
+#: src/kgx-window.ui:142
 msgid "Main Menu"
 msgstr "Галоўнае меню"
 
-#: src/kgx-window.ui:116
+#: src/kgx-window.ui:160
 msgid "Shrink Text"
 msgstr "Паменшыць тэкст"
 
-#: src/kgx-window.ui:127
+#: src/kgx-window.ui:171
 msgid "Reset Size"
 msgstr "Скінуць маштабаванне"
 
-#: src/kgx-window.ui:151
+#: src/kgx-window.ui:195
 msgid "Enlarge Text"
 msgstr "Павялічыць тэкст"
 
