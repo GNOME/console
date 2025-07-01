@@ -103,6 +103,13 @@ kgx_generated_sources = [
       configuration: conf,
     ),
     c_name: 'kgx',
+    dependencies: [
+      configure_file(
+        input: 'kgx-settings.ui.in',
+        output: 'kgx-settings.ui',
+        configuration: conf,
+      ),
+    ],
   ),
   gnome.genmarshal(
     'kgx-marshals',
