@@ -25,6 +25,7 @@
 #include "kgx-livery.h"
 #include "kgx-marshals.h"
 #include "kgx-system-info.h"
+#include "kgx-templated.h"
 #include "kgx-utils.h"
 
 #include "kgx-settings.h"
@@ -61,7 +62,8 @@ struct _KgxSettings {
 };
 
 
-G_DEFINE_FINAL_TYPE (KgxSettings, kgx_settings, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE_WITH_CODE (KgxSettings, kgx_settings, G_TYPE_OBJECT,
+                               G_IMPLEMENT_INTERFACE (KGX_TYPE_TEMPLATED, NULL))
 
 
 enum {
@@ -91,16 +93,13 @@ kgx_settings_dispose (GObject *object)
 {
   KgxSettings *self = KGX_SETTINGS (object);
 
+  kgx_templated_dispose_template (KGX_TEMPLATED (object), KGX_TYPE_SETTINGS);
+
   g_clear_pointer (&self->font, pango_font_description_free);
   g_clear_pointer (&self->custom_font, pango_font_description_free);
 
-  g_clear_object (&self->settings);
-  g_clear_object (&self->system_info);
-
   g_clear_pointer (&self->custom_font, pango_font_description_free);
   g_clear_pointer (&self->livery, kgx_livery_unref);
-
-  g_clear_object (&self->livery_manager);
 
   G_OBJECT_CLASS (kgx_settings_parent_class)->dispose (object);
 }
@@ -139,7 +138,7 @@ kgx_settings_set_property (GObject      *object,
     case PROP_FONT:
       g_clear_pointer (&self->font, pango_font_description_free);
       self->font = g_value_dup_boxed (value);
-      g_object_notify_by_pspec (object, pspecs[PROP_FONT]);
+      g_object_notify_by_pspec (object, pspec);
       break;
     case PROP_FONT_SCALE:
       update_scale (self, g_value_get_double (value));
@@ -190,13 +189,9 @@ kgx_settings_set_property (GObject      *object,
                             value);
       break;
     case PROP_LIVERY:
-      if (kgx_set_livery (&self->livery, g_value_get_boxed (value))) {
-        g_object_notify_by_pspec (object, pspecs[PROP_LIVERY]);
-      }
+      kgx_settings_set_livery (self, g_value_get_boxed (value));
       break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
+    KGX_INVALID_PROP (object, property_id, pspec);
   }
 }
 
@@ -229,7 +224,7 @@ kgx_settings_get_property (GObject    *object,
       g_value_set_int64 (value, self->scrollback_lines);
       break;
     case PROP_AUDIBLE_BELL:
-      g_value_set_boolean (value, self->audible_bell);
+      g_value_set_boolean (value, kgx_settings_get_audible_bell (self));
       break;
     case PROP_VISUAL_BELL:
       g_value_set_boolean (value, kgx_settings_get_visual_bell (self));
@@ -238,7 +233,7 @@ kgx_settings_get_property (GObject    *object,
       g_value_set_boolean (value, self->use_system_font);
       break;
     case PROP_CUSTOM_FONT:
-      g_value_set_boxed (value, self->custom_font);
+      g_value_set_boxed (value, kgx_settings_get_custom_font (self));
       break;
     case PROP_SCROLLBACK_LIMIT:
       g_value_set_int64 (value, self->scrollback_limit);
@@ -247,7 +242,7 @@ kgx_settings_get_property (GObject    *object,
       g_value_set_boolean (value, self->ignore_scrollback_limit);
       break;
     case PROP_SOFTWARE_FLOW_CONTROL:
-      g_value_set_boolean (value, self->software_flow_control);
+      g_value_set_boolean (value, kgx_settings_get_software_flow_control (self));
       break;
     case PROP_LIVERY:
       g_value_set_boxed (value, kgx_settings_get_livery (self));
@@ -255,10 +250,31 @@ kgx_settings_get_property (GObject    *object,
     case PROP_TRANSPARENCY:
       g_value_set_boolean (value, self->transparency);
       break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
+    KGX_INVALID_PROP (object, property_id, pspec);
   }
+}
+
+
+static int64_t
+resolve_lines (GObject  *object,
+               gboolean  ignore_limit,
+               int64_t   limit)
+{
+  return ignore_limit ? -1 : limit;
+}
+
+
+static PangoFontDescription *
+resolve_font (GObject              *object,
+              gboolean              use_system,
+              PangoFontDescription *system,
+              PangoFontDescription *custom)
+{
+  if (!use_system && custom) {
+    return pango_font_description_copy (custom);
+  }
+
+  return pango_font_description_copy (system);
 }
 
 
@@ -363,6 +379,22 @@ kgx_settings_class_init (KgxSettingsClass *klass)
                           G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
+
+  g_type_ensure (KGX_TYPE_SYSTEM_INFO);
+  g_type_ensure (KGX_TYPE_LIVERY_MANAGER);
+
+  kgx_templated_class_set_template_from_resource (object_class,
+                                                  KGX_APPLICATION_PATH "kgx-settings.ui");
+
+  kgx_templated_class_bind_template_child (object_class, KgxSettings, livery_manager);
+  kgx_templated_class_bind_template_child (object_class, KgxSettings, settings);
+
+  /* We don't interact with this from C but GtkExpression doesn't keep it
+   * alive on it's own */
+  kgx_templated_class_bind_template_child (object_class, KgxSettings, system_info);
+
+  kgx_templated_class_bind_template_callback (object_class, resolve_lines);
+  kgx_templated_class_bind_template_callback (object_class, resolve_font);
 }
 
 
@@ -481,68 +513,11 @@ encode_font (const GValue       *value,
 }
 
 
-static PangoFontDescription *
-resolve_font (GObject              *object,
-              gboolean              use_system,
-              PangoFontDescription *system,
-              PangoFontDescription *custom)
-{
-  return pango_font_description_copy (use_system ? system : custom);
-}
-
-
-static inline void
-setup_font_expression (KgxSettings *self)
-{
-  GtkExpression *params[] = {
-    gtk_property_expression_new (KGX_TYPE_SETTINGS, NULL, "use-system-font"),
-    gtk_property_expression_new (KGX_TYPE_SYSTEM_INFO,
-                                 gtk_constant_expression_new (KGX_TYPE_SYSTEM_INFO, self->system_info),
-                                 "monospace-font"),
-    gtk_property_expression_new (KGX_TYPE_SETTINGS, NULL, "custom-font"),
-  };
-  GtkExpression *exp =
-    gtk_cclosure_expression_new (PANGO_TYPE_FONT_DESCRIPTION,
-                                 kgx_marshals_BOXED__BOOLEAN_BOXED_BOXED,
-                                 G_N_ELEMENTS (params), params,
-                                 G_CALLBACK (resolve_font), NULL, NULL);
-
-  gtk_expression_bind (exp, self, "font", self);
-}
-
-
-static int64_t
-resolve_lines (GObject              *object,
-               gboolean              ignore_limit,
-               int64_t               limit)
-{
-  return ignore_limit ? -1 : limit;
-}
-
-
-static inline void
-setup_lines_expression (KgxSettings *self)
-{
-  GtkExpression *params[] = {
-    gtk_property_expression_new (KGX_TYPE_SETTINGS, NULL, "ignore-scrollback-limit"),
-    gtk_property_expression_new (KGX_TYPE_SETTINGS, NULL, "scrollback-limit"),
-  };
-  GtkExpression *exp =
-    gtk_cclosure_expression_new (G_TYPE_INT64,
-                                 kgx_marshals_INT64__BOOLEAN_INT64,
-                                 G_N_ELEMENTS (params), params,
-                                 G_CALLBACK (resolve_lines), NULL, NULL);
-
-  gtk_expression_bind (exp, self, "scrollback-lines", self);
-}
-
-
 static void
 kgx_settings_init (KgxSettings *self)
 {
-  self->livery_manager = g_object_new (KGX_TYPE_LIVERY_MANAGER, NULL);
+  kgx_templated_init_template (KGX_TEMPLATED (self));
 
-  self->settings = g_settings_new (KGX_APPLICATION_ID);
   g_settings_bind (self->settings, "theme",
                    self, "theme",
                    G_SETTINGS_BIND_DEFAULT);
@@ -593,10 +568,6 @@ kgx_settings_init (KgxSettings *self)
                     "changed::" RESTORE_SIZE_KEY,
                     G_CALLBACK (restore_window_size_changed),
                     self);
-
-  self->system_info = g_object_new (KGX_TYPE_SYSTEM_INFO, NULL);
-  setup_font_expression (self);
-  setup_lines_expression (self);
 }
 
 
