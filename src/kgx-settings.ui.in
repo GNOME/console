@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="KgxSettings">
+    <binding name="font">
+      <closure type='PangoFontDescription' function='resolve_font'>
+        <lookup name="use-system-font">KgxSettings</lookup>
+        <lookup name="monospace-font">system_info</lookup>
+        <lookup name="custom-font">KgxSettings</lookup>
+      </closure>
+    </binding>
+    <binding name="scrollback-lines">
+      <closure type='gint64' function='resolve_lines'>
+        <lookup name="ignore-scrollback-limit">KgxSettings</lookup>
+        <lookup name="scrollback-limit">KgxSettings</lookup>
+      </closure>
+    </binding>
+  </template>
+  <object class="KgxSystemInfo" id="system_info" />
+  <object class="GSettings" id="settings">
+    <property name="schema-id">@KGX_APPLICATION_ID_RAW@</property>
+  </object>
+  <object class="KgxLiveryManager" id="livery_manager" />
+</interface>
