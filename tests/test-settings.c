@@ -221,7 +221,7 @@ test_settings_custom_font (Fixture *fixture, gconstpointer unused)
 
   kgx_settings_set_custom_font (settings, font_set);
 
-  font_got = kgx_settings_get_custom_font (settings);
+  font_got = kgx_settings_dup_custom_font (settings);
 
   g_assert_true (pango_font_description_equal (font_set, font_got));
 
@@ -239,7 +239,7 @@ test_settings_custom_font (Fixture *fixture, gconstpointer unused)
   g_object_set (settings, "custom-font", NULL, NULL);
 
   g_clear_pointer (&font_got, pango_font_description_free);
-  font_got = kgx_settings_get_custom_font (settings);
+  font_got = kgx_settings_dup_custom_font (settings);
   custom_font = g_settings_get_string (fixture->settings, "custom-font");
 
   g_assert_null (font_got);
