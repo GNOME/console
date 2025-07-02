@@ -233,7 +233,7 @@ kgx_settings_get_property (GObject    *object,
       g_value_set_boolean (value, self->use_system_font);
       break;
     case PROP_CUSTOM_FONT:
-      g_value_set_boxed (value, kgx_settings_get_custom_font (self));
+      g_value_take_boxed (value, kgx_settings_dup_custom_font (self));
       break;
     case PROP_SCROLLBACK_LIMIT:
       g_value_set_int64 (value, self->scrollback_limit);
@@ -732,12 +732,12 @@ kgx_settings_get_visual_bell (KgxSettings *self)
 
 
 /**
- * kgx_settings_get_custom_font:
+ * kgx_settings_dup_custom_font:
  *
  * Return: (transfer full):
  */
 PangoFontDescription *
-kgx_settings_get_custom_font (KgxSettings *self)
+kgx_settings_dup_custom_font (KgxSettings *self)
 {
   g_return_val_if_fail (KGX_IS_SETTINGS (self), NULL);
 

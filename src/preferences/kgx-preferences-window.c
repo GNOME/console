@@ -149,7 +149,7 @@ select_font_activated (GtkWidget  *widget,
   g_autoptr (PangoFontDescription) initial_value = NULL;
   AdwNavigationPage *picker;
 
-  initial_value = kgx_settings_get_custom_font (self->settings);
+  initial_value = kgx_settings_dup_custom_font (self->settings);
 
   picker = g_object_connect (g_object_new (KGX_TYPE_FONT_PICKER,
                                            "initial-font", initial_value,
