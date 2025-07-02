@@ -18,7 +18,12 @@ tests = [
   'utils',
 ]
 
-test_resources = gnome.compile_resources(
+test_sources = files(
+  'kgx-test-utils.c',
+  'kgx-test-utils.h',
+)
+
+test_sources += gnome.compile_resources(
   'kgx-test-resources',
   configure_file(
     input: 'kgx-test.gresource.xml.in',
@@ -54,7 +59,7 @@ foreach test : tests
     test,
     executable(
       'test-@0@'.format(test),
-      ['test-@0@.c'.format(test), test_resources],
+      ['test-@0@.c'.format(test), test_sources],
       c_args: kgx_cargs,
       dependencies: kgx_dep,
     ),
