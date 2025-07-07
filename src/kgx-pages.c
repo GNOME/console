@@ -86,7 +86,6 @@ enum {
   PROP_0,
   PROP_SETTINGS,
   PROP_TAB_VIEW,
-  PROP_TAB_COUNT,
   PROP_TITLE,
   PROP_PATH,
   PROP_ACTIVE_PAGE,
@@ -121,8 +120,8 @@ kgx_pages_dispose (GObject *object)
   g_clear_pointer (&priv->title, g_free);
   g_clear_object (&priv->path);
 
-  g_clear_object (&priv->is_active_bind);
-  g_clear_object (&priv->active_page);
+  g_clear_weak_pointer (&priv->is_active_bind);
+  g_clear_weak_pointer (&priv->active_page);
 
   G_OBJECT_CLASS (kgx_pages_parent_class)->dispose (object);
 }
@@ -140,9 +139,6 @@ kgx_pages_get_property (GObject    *object,
   switch (property_id) {
     case PROP_SETTINGS:
       g_value_set_object (value, priv->settings);
-      break;
-    case PROP_TAB_COUNT:
-      g_value_set_uint (value, adw_tab_view_get_n_pages (ADW_TAB_VIEW (priv->view)));
       break;
     case PROP_TAB_VIEW:
       g_value_set_object (value, priv->view);
@@ -168,10 +164,50 @@ kgx_pages_get_property (GObject    *object,
     case PROP_RINGING:
       g_value_set_boolean (value, priv->ringing);
       break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
+    KGX_INVALID_PROP (object, property_id, pspec);
   }
+}
+
+
+static inline void
+set_active_page (KgxPages *self, KgxTab *incoming_page)
+{
+  KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
+  g_autoptr (KgxTab) original_page = NULL;
+
+  /* Before we do anything, grab a reference to the current page (if any) */
+  g_set_object (&original_page, priv->active_page);
+
+  /* Update our weak ref point at the new page */
+  if (!g_set_weak_pointer (&priv->active_page, incoming_page)) {
+    /* The page didn't actually change, do nothing */
+    return;
+  }
+
+  /* First, disconnect from the old page, if any */
+  if (G_LIKELY (priv->is_active_bind)) {
+    g_binding_unbind (priv->is_active_bind);
+  }
+  g_clear_weak_pointer (&priv->is_active_bind);
+
+  /* If we had an old page, set it inactive */
+  if (original_page) {
+    g_object_set (original_page, "is-active", FALSE, NULL);
+  }
+
+  /* If we've got a new page, connect it up */
+  if (G_LIKELY (priv->active_page)) {
+    GBinding *bind =
+      g_object_bind_property (self, "is-active",
+                              priv->active_page, "is-active",
+                              G_BINDING_SYNC_CREATE);
+    /* GBinding confusingly owns itself, it's lifetime being tied to the
+      * pair of objects it binds, so we don't get — or need — a full ref */
+    g_set_weak_pointer (&priv->is_active_bind, bind);
+  }
+
+  /* Phew, now lets update everything else! */
+  g_object_notify_by_pspec (G_OBJECT (self), pspecs[PROP_ACTIVE_PAGE]);
 }
 
 
@@ -196,17 +232,7 @@ kgx_pages_set_property (GObject      *object,
       g_set_object (&priv->path, g_value_get_object (value));
       break;
     case PROP_ACTIVE_PAGE:
-      if (priv->active_page) {
-        g_object_set (priv->active_page, "is-active", FALSE, NULL);
-      }
-      g_clear_object (&priv->is_active_bind);
-      g_set_object (&priv->active_page, g_value_get_object (value));
-      if (priv->active_page) {
-        priv->is_active_bind =
-          g_object_bind_property (self, "is-active",
-                                  priv->active_page, "is-active",
-                                  G_BINDING_SYNC_CREATE);
-      }
+      set_active_page (self, g_value_get_object (value));
       break;
     case PROP_IS_ACTIVE:
       kgx_set_boolean_prop (object, pspec, &priv->is_active, value);
@@ -220,9 +246,7 @@ kgx_pages_set_property (GObject      *object,
     case PROP_RINGING:
       kgx_set_boolean_prop (object, pspec, &priv->ringing, value);
       break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
+    KGX_INVALID_PROP (object, property_id, pspec);
   }
 }
 
@@ -281,23 +305,15 @@ died (KgxTab         *page,
       gboolean        success,
       KgxPages       *self)
 {
-  KgxPagesPrivate *priv;
-  AdwTabPage *tab_page;
+  KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
+  AdwTabPage *tab_page =
+    adw_tab_view_get_page (ADW_TAB_VIEW (priv->view), GTK_WIDGET (page));
+  int tab_count = adw_tab_view_get_n_pages (ADW_TAB_VIEW (priv->view));
   gboolean close_on_quit;
-  int tab_count;
-
-  priv = kgx_pages_get_instance_private (self);
-  tab_page = adw_tab_view_get_page (ADW_TAB_VIEW (priv->view), GTK_WIDGET (page));
 
   g_object_get (page, "close-on-quit", &close_on_quit, NULL);
 
-  if (!(close_on_quit && success)) {
-    return;
-  }
-
-  g_object_get (self, "tab-count", &tab_count, NULL);
-
-  if (tab_count < 1) {
+  if (!(close_on_quit && success) || tab_count < 1) {
     return;
   }
 
@@ -529,20 +545,6 @@ kgx_pages_class_init (KgxPagesClass *klass)
                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   /**
-   * KgxPages:tab-count:
-   *
-   * The number of open pages
-   *
-   * Stability: Private
-   */
-  pspecs[PROP_TAB_COUNT] =
-    g_param_spec_uint ("tab-count", NULL, NULL,
-                       0,
-                       G_MAXUINT32,
-                       0,
-                       G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
-
-  /**
    * KgxPages:title:
    *
    * The #KgxTab:tab-title of the current #KgxTab
@@ -583,7 +585,7 @@ kgx_pages_class_init (KgxPagesClass *klass)
   pspecs[PROP_ACTIVE_PAGE] =
     g_param_spec_object ("active-page", NULL, NULL,
                          KGX_TYPE_TAB,
-                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   pspecs[PROP_IS_ACTIVE] =
     g_param_spec_boolean ("is-active", NULL, NULL,
