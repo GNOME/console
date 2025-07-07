@@ -82,18 +82,43 @@
             <property name="autohide" bind-source="primary_menu_popover" bind-property="visible"
               bind-flags="invert-boolean" />
             <property name="content">
-              <object class="KgxPages" id="pages">
-                <property name="settings" bind-source="KgxWindow" bind-property="settings"
-                  bind-flags="sync-create" />
-                <property name="is-active" bind-source="KgxWindow" bind-property="is-active"
-                  bind-flags="sync-create" />
-                <property name="search-mode-enabled" bind-source="KgxWindow"
-                  bind-property="search-mode-enabled" bind-flags="bidirectional" />
-                <signal name="zoom" handler="zoom" swapped="no" />
-                <signal name="create-tearoff-host" handler="create_tearoff_host" swapped="no" />
-                <signal name="maybe-close-window" handler="maybe_close_window" swapped="yes" />
-                <signal name="notify::status" handler="status_changed" swapped="yes" />
-                <signal name="notify::ringing" handler="ringing_changed" swapped="yes" />
+              <object class="GtkStack">
+                <binding name="visible-child-name">
+                  <closure type="gchararray" function="content_or_empty">
+                    <lookup name="n-pages">
+                      <lookup name="tab-view">pages</lookup>
+                    </lookup>
+                  </closure>
+                </binding>
+                <child>
+                  <object class="GtkStackPage">
+                    <property name="name">content</property>
+                    <property name="child">
+                      <object class="KgxPages" id="pages">
+                        <property name="settings" bind-source="KgxWindow" bind-property="settings"
+                          bind-flags="sync-create" />
+                        <property name="is-active" bind-source="KgxWindow" bind-property="is-active"
+                          bind-flags="sync-create" />
+                        <property name="search-mode-enabled" bind-source="KgxWindow"
+                          bind-property="search-mode-enabled" bind-flags="bidirectional" />
+                        <signal name="zoom" handler="zoom" swapped="no" />
+                        <signal name="create-tearoff-host" handler="create_tearoff_host"
+                          swapped="no" />
+                        <signal name="maybe-close-window" handler="maybe_close_window" swapped="yes" />
+                        <signal name="notify::status" handler="status_changed" swapped="yes" />
+                        <signal name="notify::ringing" handler="ringing_changed" swapped="yes" />
+                      </object>
+                    </property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkStackPage">
+                    <property name="name">empty</property>
+                    <property name="child">
+                      <object class="KgxEmpty" />
+                    </property>
+                  </object>
+                </child>
               </object>
             </property>
             <child type="top">
