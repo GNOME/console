@@ -116,6 +116,9 @@
                     </style>
                   </object>
                 </property>
+                <style>
+                  <class name="background" />
+                </style>
               </object>
             </child>
           </object>
