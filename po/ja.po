@@ -2,23 +2,25 @@
 # Copyright (C) 2022 console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the console package.
 # sicklylife <translation@sicklylife.jp>, 2022.
+# Seiji Iizuka <seiji@iizuka.dev>, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2022-03-12 09:36+0000\n"
-"PO-Revision-Date: 2022-03-12 21:00+0900\n"
-"Last-Translator: sicklylife <translation@sicklylife.jp>\n"
-"Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
+"POT-Creation-Date: 2025-05-10 11:27+0000\n"
+"PO-Revision-Date: 2025-06-29 22:26+0900\n"
+"Last-Translator: Seiji Iizuka <seiji@iizuka.dev>\n"
+"Language-Team: Japanese <https://l10n.gnome.org/teams/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 48.0\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:46
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
 msgid "Console"
 msgstr "コンソール"
 
@@ -26,222 +28,285 @@ msgstr "コンソール"
 #: data/org.gnome.Console.desktop.in.in:8
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
-"コマンド;プロンプト;コマンドライン;実行;シェル;ターミナル;端末;"
+"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;コマンド;プ"
+"ロンプト;コマンドライン;実行;シェル;ターミナル;端末;"
 
 #: data/org.gnome.Console.desktop.in.in:21
 msgid "New Window"
 msgstr "新しいウィンドウ"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:168
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:176
 msgid "New Tab"
 msgstr "新しいタブ"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:568
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
 msgid "Terminal Emulator"
 msgstr "端末エミュレーター"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr ""
-"GNOME デスクトップ向けのシンプルでユーザーフレンドリーな端末エミュレーターです。"
+"GNOME デスクトップ向けのシンプルでユーザーフレンドリーな端末エミュレーターで"
+"す。"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "端末ウィンドウ"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:104
-msgid "Zander Brown"
-msgstr "Zander Brown"
+#: data/org.gnome.Console.metainfo.xml.in.in:504 src/kgx-window.c:561
+msgid "The GNOME Project"
+msgstr "The GNOME Project"
 
-#: src/help-overlay.ui:13
+#: src/help-overlay.ui:12
 msgctxt "shortcut window"
 msgid "Application"
 msgstr "アプリケーション"
 
-#: src/help-overlay.ui:19
+#: src/help-overlay.ui:16
 msgctxt "shortcut window"
 msgid "New Window"
 msgstr "新しいウィンドウ"
 
-#: src/help-overlay.ui:26
+#: src/help-overlay.ui:23
 msgctxt "shortcut window"
 msgid "Terminal"
 msgstr "端末"
 
-#: src/help-overlay.ui:32
+#: src/help-overlay.ui:27
 msgctxt "shortcut window"
 msgid "Find"
 msgstr "検索"
 
-#: src/help-overlay.ui:39
+#: src/help-overlay.ui:33
 msgctxt "shortcut window"
 msgid "Copy"
 msgstr "コピー"
 
-#: src/help-overlay.ui:46
+#: src/help-overlay.ui:39
 msgctxt "shortcut window"
 msgid "Paste"
 msgstr "貼り付け"
 
-#: src/help-overlay.ui:53
+#: src/help-overlay.ui:46
 msgctxt "shortcut window"
 msgid "Tabs"
 msgstr "タブ"
 
-#: src/help-overlay.ui:59
+#: src/help-overlay.ui:50
 msgctxt "shortcut window"
 msgid "New Tab"
 msgstr "新しいタブ"
 
-#: src/help-overlay.ui:66
+#: src/help-overlay.ui:56
 msgctxt "shortcut window"
 msgid "Close Tab"
 msgstr "タブを閉じる"
 
-#: src/help-overlay.ui:73
+#: src/help-overlay.ui:62
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "すべてのタブを表示"
+
+#: src/help-overlay.ui:68
 msgctxt "shortcut window"
 msgid "Next Tab"
 msgstr "次のタブ"
 
-#: src/help-overlay.ui:80
+#: src/help-overlay.ui:74
 msgctxt "shortcut window"
 msgid "Previous Tab"
 msgstr "前のタブ"
 
-#: src/help-overlay.ui:87
+#: src/help-overlay.ui:80
 msgctxt "shortcut window"
-msgid "Switch to Tab"
+msgid "Move Tab Right"
+msgstr "タブを右に移動"
+
+#: src/help-overlay.ui:86
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "タブを左に移動"
+
+#: src/help-overlay.ui:92
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Switch to Tab"
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
 msgstr "タブを切り替える"
 
-#. Translators: The leading # is intentional, the initial %s is the
-#. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:540
-#, c-format
-msgid "# KGX %s using VTE %u.%u.%u %s\n"
-msgstr "# KGX %s (VTE %u.%u.%u %s を使用)\n"
+#: src/help-overlay.ui:98
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Switch to Tab"
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "タブを切り替える"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:552 src/kgx-window.c:525
+#: src/kgx-about.c:83 src/kgx-window.c:556
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:566 src/kgx-window.ui:115
-msgid "King’s Cross"
-msgstr "King’s Cross"
-
-#: src/kgx-application.c:570
+#: src/kgx-about.c:101
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 or later"
 
-#: src/kgx-application.c:701
+#. Translators: The leading # is intentional, the initial %s is the
+#. * version of KGX itself, the latter format is the VTE version
+#: src/kgx-about.c:114
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s (VTE %u.%u.%u %s を使用)\n"
+
+#: src/kgx-application.c:283
+msgid "Cannot use both --working-directory and positional parameters"
+msgstr "--working-directory と位置引数は同時に使用できません"
+
+#: src/kgx-application.c:503
 msgid "Execute the argument to this option inside the terminal"
 msgstr "このオプションの引数を端末内で実行する"
 
-#: src/kgx-application.c:710
+#: src/kgx-application.c:504
+msgid "COMMAND"
+msgstr "コマンド"
+
+#: src/kgx-application.c:512
 msgid "Set the working directory"
 msgstr "作業用ディレクトリを設定する"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:712
+#: src/kgx-application.c:514
 msgid "DIRNAME"
 msgstr "DIRNAME"
 
-#: src/kgx-application.c:720
+#: src/kgx-application.c:522
 msgid "Wait until the child exits (TODO)"
 msgstr "子が終了するまで待つ (TODO)"
 
-#: src/kgx-application.c:729
+#: src/kgx-application.c:531
 msgid "Set the initial window title"
 msgstr "ウィンドウの初期タイトルを設定する"
 
-#: src/kgx-application.c:738
+#: src/kgx-application.c:532
+msgid "TITLE"
+msgstr "タイトル"
+
+#: src/kgx-application.c:540
 msgid "ADVANCED: Set the shell to launch"
 msgstr "高度: 起動する Shell を設定する"
 
-#: src/kgx-application.c:747
+#: src/kgx-application.c:541
+msgid "SHELL"
+msgstr "シェル"
+
+#: src/kgx-application.c:549
 msgid "ADVANCED: Set the scrollback length"
 msgstr "高度: Scrollback Length を設定する"
 
-#: src/kgx-application.h:44
-msgid "Console (Development)"
-msgstr "Console (開発版)"
+#: src/kgx-application.c:550
+msgid "LINES"
+msgstr "行数"
 
-#: src/kgx-close-dialog.c:50
+#. Translators: %s is the version string, KGX is a codename and should be left as-is
+#: src/kgx-application.c:688
+#, fuzzy, c-format
+#| msgid "Terminal Emulator"
+msgid "KGX %s — Terminal Emulator"
+msgstr "端末エミュレーター"
+
+#: src/kgx-application.c:694
+msgid "[-e|-- COMMAND [ARGUMENT...]]"
+msgstr "[-e|-- コマンド [引数...]]"
+
+#: src/kgx-close-dialog.c:73
 msgid "Close Window?"
 msgstr "ウィンドウを閉じますか?"
 
-#: src/kgx-close-dialog.c:51
+#: src/kgx-close-dialog.c:75
+#, fuzzy
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
+msgstr[0] ""
 "このウィンドウを閉じると未だ実行中のコマンドが強制終了され想定外の結果につな"
 "がる可能性があります"
 
-#: src/kgx-close-dialog.c:56
+#: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
 msgstr "タブを閉じますか?"
 
-#: src/kgx-close-dialog.c:57
+#: src/kgx-close-dialog.c:84
+#, fuzzy
+#| msgid ""
+#| "Some commands are still running, closing this tab will kill them and may "
+#| "lead to unexpected outcomes"
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
+msgstr[0] ""
 "このタブを閉じると未だ実行中のコマンドが強制終了され想定外の結果につながる可"
 "能性があります"
 
-#: src/kgx-close-dialog.ui:24 src/kgx-terminal.c:780
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:194
+msgid "Process list"
+msgstr "プロセス一覧"
+
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
+#: src/preferences/kgx-font-picker.ui:22
 msgid "_Cancel"
 msgstr "キャンセル(_C)"
 
-#: src/kgx-close-dialog.ui:32
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:207
 msgid "C_lose"
 msgstr "閉じる(_L)"
 
-#: src/kgx-pages.ui:47
+#: src/kgx-colour-utils.c:58
+msgid "Color string is wrong length"
+msgstr "色の文字列の長さが正しくありません"
+
+#: src/kgx-livery-manager.c:193
+msgctxt "livery-name"
+msgid "Linux"
+msgstr "Linux"
+
+#: src/kgx-livery-manager.c:230
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Terminal"
+msgctxt "livery-name"
+msgid "XTerm"
+msgstr "端末"
+
+#. Translators: %i is, from the users perspective, a random number.
+#. * this string will only be seen when the running program has
+#. * failed to set a title, and exists purely to avoid blank tabs
+#.
+#: src/kgx-pages.c:473
+#, c-format
+msgid "Tab %i"
+msgstr "タブ %i"
+
+#: src/kgx-pages.ui:90
 msgid "_Detach Tab"
 msgstr "タブを分離(_D)"
 
-#: src/kgx-pages.ui:53
+#: src/kgx-pages.ui:96
 msgid "_Close"
 msgstr "閉じる(_C)"
 
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:168
-#, c-format
-msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr "<b>読み取り専用</b> — コマンドがコード %i で終了しました"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:177
-msgid "<b>Read Only</b> — Command exited"
-msgstr "<b>読み取り専用</b> — コマンドが終了しました"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:210
-#, c-format
-msgid "<b>Failed to start</b> — %s"
-msgstr "<b>起動に失敗しました</b> — %s"
-
-#: src/kgx-tab.c:1160
-msgid "Command completed"
-msgstr "コマンドが完了しました"
-
-#: src/kgx-tab-button.ui:5
-msgid "View Open Tabs"
-msgstr "開いているタブを表示する"
-
-#: src/kgx-terminal.c:772
-msgid "You are pasting a command that runs as an administrator"
-msgstr "管理者として実行されるコマンドを貼り付けています"
-
-#. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:775
+#. Translators: %s is the (possibly truncated) command being pasted
+#: src/kgx-paste-dialog.c:76
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -250,92 +315,267 @@ msgstr ""
 "何をするコマンドなのか必ず確認してください:\n"
 "%s"
 
-#: src/kgx-terminal.c:783 src/menus.ui:24
+#: src/kgx-paste-dialog.c:129
+msgid "You are pasting a command that runs as an administrator"
+msgstr "管理者として実行されるコマンドを貼り付けています"
+
+#: src/kgx-paste-dialog.c:136 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "貼り付け(_P)"
 
-#: src/kgx-theme-switcher.ui:18
-msgid "Use System Colors"
-msgstr "システムの色を使用する"
+#: src/kgx-process.c:196
+#, c-format
+msgid "Process %d"
+msgstr "プロセス %d"
 
-#: src/kgx-theme-switcher.ui:47
-msgid "Use Light Colors"
-msgstr "明るい色を使用する"
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-simple-tab.c:169
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>起動に失敗しました</b> — %s"
 
-#: src/kgx-theme-switcher.ui:76
-msgid "Use Dark Colors"
-msgstr "暗い色を使用する"
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:784
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>読み取り専用</b> — コマンドがコード %i で終了しました"
 
-#. Translators: Credit yourself here
-#: src/kgx-window.c:531
-msgid "translator-credits"
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:792
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>読み取り専用</b> — コマンドが終了しました"
+
+#: src/kgx-tab.c:812
+msgid "Command completed"
+msgstr "コマンドが完了しました"
+
+#: src/kgx-tab.ui:40
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Find"
+msgid "Find text"
+msgstr "検索"
+
+#: src/kgx-tab.ui:51
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Previous Tab"
+msgid "Previous Match"
+msgstr "前のタブ"
+
+#: src/kgx-tab.ui:59
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Next Tab"
+msgid "Next Match"
+msgstr "次のタブ"
+
+#: src/kgx-terminal.c:510
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
 msgstr ""
-"sicklylife <translation@sicklylife.jp>"
+"Ctrl+クリックで開く：\n"
+"%s"
 
-#: src/kgx-window.ui:26
-msgid "Shrink Text"
-msgstr "文字を縮小する"
-
-#: src/kgx-window.ui:39
-msgid "Reset Size"
-msgstr "サイズを元に戻す"
-
-#: src/kgx-window.ui:52
-msgid "Enlarge Text"
-msgstr "文字を拡大する"
-
-#: src/kgx-window.ui:74
-msgid "_New Window"
-msgstr "新しいウィンドウ(_N)"
-
-#: src/kgx-window.ui:86
-msgid "_Keyboard Shortcuts"
-msgstr "キーボードショートカット(_K)"
-
-#: src/kgx-window.ui:93
-msgid "_About Console"
-msgstr "“コンソール”について(_A)"
-
-#: src/kgx-window.ui:94
-msgid "About this Program"
-msgstr "このプログラムについて"
-
-#: src/kgx-window.ui:123
-msgid "Find in Terminal"
-msgstr "端末内で検索する"
-
-#: src/kgx-window.ui:141
-msgid "Menu"
-msgstr "メニュー"
-
-#: src/menus.ui:7
+#: src/kgx-terminal.ui:7
 msgid "_Open Link"
 msgstr "リンクを開く(_O)"
 
-#: src/menus.ui:12
+#: src/kgx-terminal.ui:12
 msgid "Copy _Link"
 msgstr "リンクをコピー(_L)"
 
-#: src/menus.ui:19
+#: src/kgx-terminal.ui:19
 msgid "_Copy"
 msgstr "コピー(_C)"
 
-#: src/menus.ui:29
+#: src/kgx-terminal.ui:29
 msgid "_Select All"
 msgstr "すべて選択(_S)"
 
-#: src/menus.ui:36
+#: src/kgx-terminal.ui:36
 msgid "Show in _Files"
 msgstr "“ファイル”で表示(_F)"
 
-#: nautilus/kgx-nautilus-menu-item.c:120
-msgid "Open in Co_nsole (Devel)"
-msgstr "“コンソール (開発版)”で開く(_N)"
+#: src/kgx-theme-switcher.ui:24
+msgid "Follow System Style"
+msgstr "システムのスタイルに従う"
 
-#: nautilus/kgx-nautilus-menu-item.c:122
-msgid "Open in Co_nsole"
-msgstr "“コンソール”で開く(_N)"
+#: src/kgx-theme-switcher.ui:52
+msgid "Light Style"
+msgstr "ライトテーマ"
 
-#: nautilus/kgx-nautilus-menu-item.c:124
-msgid "Start a terminal session for this location"
-msgstr "この場所で端末セッションを開始します"
+#: src/kgx-theme-switcher.ui:79
+msgid "Dark Style"
+msgstr "ダークテーマ"
+
+#. Translators: ‘command’ is the argument name, and shouldn't be translated
+#: src/kgx-utils.c:114
+msgid "Missing argument for --command"
+msgstr "--command に引数が必要です"
+
+#: src/kgx-utils.c:129
+msgid "Cannot use both --command and positional parameters"
+msgstr "--command と位置引数は併用できません"
+
+#. Translators: Credit yourself here
+#: src/kgx-window.c:568
+msgid "translator-credits"
+msgstr ""
+"sicklylife <translation@sicklylife.jp>\n"
+"Japanese Translation Team https://l10n.gnome.org/teams/ja/\n"
+"Seiji Iizuka <seiji@iizuka.dev>"
+
+#: src/kgx-window.ui:17
+msgid "_New Window"
+msgstr "新しいウィンドウ(_N)"
+
+#: src/kgx-window.ui:23
+msgid "_Show All Tabs"
+msgstr "すべてのタブを表示(_S)"
+
+#: src/kgx-window.ui:30
+msgid "_Preferences"
+msgstr "設定(_P)"
+
+#: src/kgx-window.ui:34
+msgid "_Keyboard Shortcuts"
+msgstr "キーボードショートカット(_K)"
+
+#: src/kgx-window.ui:38
+msgid "_About Console"
+msgstr "“コンソール”について(_A)"
+
+#: src/kgx-window.ui:90
+msgid "Find in Terminal"
+msgstr "端末内で検索する"
+
+#: src/kgx-window.ui:97
+#, fuzzy
+#| msgid "Menu"
+msgid "Main Menu"
+msgstr "メニュー"
+
+#: src/kgx-window.ui:115
+msgid "Shrink Text"
+msgstr "文字を縮小する"
+
+#: src/kgx-window.ui:126
+msgid "Reset Size"
+msgstr "サイズを元に戻す"
+
+#: src/kgx-window.ui:150
+msgid "Enlarge Text"
+msgstr "文字を拡大する"
+
+#: src/preferences/kgx-font-picker.ui:11
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Terminal"
+msgid "Terminal Font"
+msgstr "端末"
+
+#: src/preferences/kgx-font-picker.ui:29
+#, fuzzy
+#| msgid "_Select All"
+msgid "_Select"
+msgstr "すべて選択(_S)"
+
+#: src/preferences/kgx-font-picker.ui:45 src/preferences/kgx-font-picker.ui:48
+msgid "Font Name"
+msgstr "フォント名"
+
+#: src/preferences/kgx-font-picker.ui:133
+msgid "Font Family"
+msgstr "フォントファミリー"
+
+#: src/preferences/kgx-font-picker.ui:158
+msgid "Font Preview"
+msgstr "フォントのプレビュー"
+
+#: src/preferences/kgx-font-picker.ui:179
+#, fuzzy
+#| msgid "Reset Size"
+msgid "Font Size"
+msgstr "サイズを元に戻す"
+
+#: src/preferences/kgx-preferences-window.c:125
+msgid "No Font Set"
+msgstr "フォントが設定されていません"
+
+#: src/preferences/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "一般"
+
+#: src/preferences/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "フォント"
+
+#: src/preferences/kgx-preferences-window.ui:13
+#, fuzzy
+#| msgid "Use System Colors"
+msgid "Use _System Default"
+msgstr "システムの色を使用する"
+
+#: src/preferences/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "カスタムフォント(_F)"
+
+#: src/preferences/kgx-preferences-window.ui:63
+msgid "Behaviour"
+msgstr "動作"
+
+#: src/preferences/kgx-preferences-window.ui:66
+msgid "_Unlimited Scrollback"
+msgstr "無制限スクロールバック(_U)"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "スクロールバック行数(_S)"
+
+#: src/preferences/kgx-preferences-window.ui:92
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Terminal"
+msgid "Terminal Bell"
+msgstr "端末"
+
+#: src/preferences/kgx-preferences-window.ui:95
+msgid "Play _Sound"
+msgstr "サウンドを再生(_S)"
+
+#: src/preferences/kgx-preferences-window.ui:101
+msgid "_Visual Effects"
+msgstr "視覚効果(_V)"
+
+#~ msgid "Zander Brown"
+#~ msgstr "Zander Brown"
+
+#~ msgid "King’s Cross"
+#~ msgstr "King’s Cross"
+
+#~ msgid "Console (Development)"
+#~ msgstr "Console (開発版)"
+
+#~ msgid "View Open Tabs"
+#~ msgstr "開いているタブを表示する"
+
+#~ msgid "Use Light Colors"
+#~ msgstr "明るい色を使用する"
+
+#~ msgid "Use Dark Colors"
+#~ msgstr "暗い色を使用する"
+
+#~ msgid "About this Program"
+#~ msgstr "このプログラムについて"
+
+#~ msgid "Open in Co_nsole (Devel)"
+#~ msgstr "“コンソール (開発版)”で開く(_N)"
+
+#~ msgid "Open in Co_nsole"
+#~ msgstr "“コンソール”で開く(_N)"
+
+#~ msgid "Start a terminal session for this location"
+#~ msgstr "この場所で端末セッションを開始します"
