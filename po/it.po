@@ -8,20 +8,20 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: unnamed project\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-05-05 13:44+0000\n"
-"PO-Revision-Date: 2023-05-18 10:49+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
+"POT-Creation-Date: 2024-10-12 10:01+0000\n"
+"PO-Revision-Date: 2024-01-08 00:13+0100\n"
 "Last-Translator: Gianvito Cavasoli <gianvito@gmx.it>\n"
 "Language-Team: Italian <gnome-it-list@gnome.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Generator: Gtranslator 42.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:29
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
 msgid "Console"
 msgstr "Console"
 
@@ -34,11 +34,11 @@ msgstr "comando:prompt;cmd;riga di comando;shell;terminale;kgx;kings cross;"
 msgid "New Window"
 msgstr "Nuova finestra"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:143
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
 msgid "New Tab"
 msgstr "Nuova scheda"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:366
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:377
 msgid "Terminal Emulator"
 msgstr "Emulatore di terminale"
 
@@ -50,7 +50,7 @@ msgstr "Un semplice e amichevole emulatore di terminale per il desktop GNOME."
 msgid "Terminal window"
 msgstr "Finestra terminale"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:262 src/kgx-window.c:436
+#: data/org.gnome.Console.metainfo.xml.in.in:327 src/kgx-window.c:457
 msgid "The GNOME Project"
 msgstr "Il progetto GNOME"
 
@@ -116,80 +116,91 @@ msgstr "Scheda precedente"
 
 #: src/help-overlay.ui:80
 msgctxt "shortcut window"
-msgid "Switch to Tab"
-msgstr "Passa a una scheda"
+msgid "Move Tab Right"
+msgstr "Sposta scheda a destra"
 
-#: src/kgx-application.c:241
+#: src/help-overlay.ui:86
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Sposta scheda a sinistra"
+
+#: src/help-overlay.ui:92
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Passa alla scheda 1–9"
+
+#: src/help-overlay.ui:98
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Passa alla scheda 10"
+
+#: src/kgx-application.c:252
 msgid "Cannot use both --command and positional parameters"
 msgstr "Impossibile usare sia il parametro --command che di posizione"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:338
+#: src/kgx-application.c:349
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s con VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:350 src/kgx-window.c:431
+#: src/kgx-application.c:361 src/kgx-window.c:452
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:364 src/kgx-window.ui:55
-msgid "King’s Cross"
-msgstr "King's Cross"
-
-#: src/kgx-application.c:368
+#: src/kgx-application.c:379
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 o successiva"
 
-#: src/kgx-application.c:433
+#: src/kgx-application.c:444
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Esegue l'argomento su questa opzione all'interno del terminale"
 
-#: src/kgx-application.c:434
+#: src/kgx-application.c:445
 msgid "COMMAND"
 msgstr "COMANDO"
 
-#: src/kgx-application.c:442
+#: src/kgx-application.c:453
 msgid "Set the working directory"
 msgstr "Imposta la directory di lavoro"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:444
+#: src/kgx-application.c:455
 msgid "DIRNAME"
 msgstr "NOMEDIR"
 
-#: src/kgx-application.c:452
+#: src/kgx-application.c:463
 msgid "Wait until the child exits (TODO)"
-msgstr "Aspetta sino a che il processo figlio termini"
+msgstr "Aspetta sino a che il processo figlio termini (TODO)"
 
-#: src/kgx-application.c:461
+#: src/kgx-application.c:472
 msgid "Set the initial window title"
 msgstr "Imposta il titolo iniziale della finestra"
 
-#: src/kgx-application.c:462
+#: src/kgx-application.c:473
 msgid "TITLE"
 msgstr "TITOLO"
 
-#: src/kgx-application.c:470
+#: src/kgx-application.c:481
 msgid "ADVANCED: Set the shell to launch"
 msgstr "Avanzato: imposta la shell da avviare"
 
-#: src/kgx-application.c:471
+#: src/kgx-application.c:482
 msgid "SHELL"
 msgstr "SHELL"
 
-#: src/kgx-application.c:479
+#: src/kgx-application.c:490
 msgid "ADVANCED: Set the scrollback length"
 msgstr "Avanzato: imposta la lunghezza dello scrollback"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:491
 msgid "LINES"
 msgstr "RIGHE"
 
-#: src/kgx-application.c:489
+#: src/kgx-application.c:500
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- COMANDO [ARGOMENTO...]]"
 
@@ -203,7 +214,7 @@ msgid ""
 "lead to unexpected outcomes"
 msgstr ""
 "Alcuni comandi sono ancora in esecuzione: la chiusura di questa finestra "
-"terminerà questi comandi e potrebbe portare risultati non attesi"
+"terminerà questi comandi e potrebbe portare a risultati inattesi"
 
 #: src/kgx-close-dialog.c:56
 msgid "Close Tab?"
@@ -215,9 +226,9 @@ msgid ""
 "lead to unexpected outcomes"
 msgstr ""
 "Alcuni comandi sono ancora in esecuzione: la chiusura di questa scheda "
-"terminerà questi comandi e potrebbe portare risultati non attesi"
+"terminerà questi comandi e potrebbe portare a risultati inattesi"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-terminal.c:877
+#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
 msgid "_Cancel"
 msgstr "A_nnulla"
 
@@ -225,56 +236,130 @@ msgstr "A_nnulla"
 msgid "C_lose"
 msgstr "Chiu_di"
 
-#: src/kgx-pages.ui:61
+#: src/kgx-font-picker.ui:12
+msgid "Terminal Font"
+msgstr "Tipo di carattere del terminale"
+
+#: src/kgx-font-picker.ui:37
+msgid "_Select"
+msgstr "_Seleziona"
+
+#: src/kgx-font-picker.ui:53 src/kgx-font-picker.ui:56
+msgid "Font Name"
+msgstr "Nome del tipo di carattere"
+
+#: src/kgx-font-picker.ui:142
+msgid "Font Family"
+msgstr "Famiglia del tipo di carattere"
+
+#: src/kgx-font-picker.ui:167
+msgid "Font Preview"
+msgstr "Anteprima tipo di carattere"
+
+#: src/kgx-font-picker.ui:188
+msgid "Font Size"
+msgstr "Dimensione dei caratteri"
+
+#. Translators: %i is, from the users perspective, a random number.
+#. * this string will only be seen when the running program has
+#. * failed to set a title, and exists purely to avoid blank tabs
+#.
+#: src/kgx-pages.c:463
+#, c-format
+msgid "Tab %i"
+msgstr "Scheda %i"
+
+#: src/kgx-pages.ui:90
 msgid "_Detach Tab"
 msgstr "_Stacca scheda"
 
-#: src/kgx-pages.ui:67
+#: src/kgx-pages.ui:96
 msgid "_Close"
 msgstr "_Chiudi"
 
+#: src/kgx-preferences-window.c:122
+msgid "No Font Set"
+msgstr "Nessun tipo di carattere"
+
+#: src/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "Generali"
+
+#: src/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "Tipo di carattere"
+
+#: src/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "Utilizza _predefinito del sistema"
+
+#: src/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "_Tipo di carattere personalizzato"
+
+#: src/kgx-preferences-window.ui:59
+msgid "Terminal Bell"
+msgstr "Campanello del terminale"
+
+#: src/kgx-preferences-window.ui:62
+msgid "Play _Sound"
+msgstr "Riproduci _audio"
+
+#: src/kgx-preferences-window.ui:68
+msgid "_Visual Effects"
+msgstr "Effetti _visivi"
+
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:168
+#: src/kgx-simple-tab.c:180
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Solo lettura</b> — Comando terminato con codice %i"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:177
+#: src/kgx-simple-tab.c:189
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Solo lettura</b> — Comando terminato"
 
 #. translators: <b> </b> marks the text as bold, ensure they are
 #. matched please!
-#: src/kgx-simple-tab.c:210
+#: src/kgx-simple-tab.c:222
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Avvio non riuscito</b> — %s"
 
-#: src/kgx-tab.c:993
+#: src/kgx-tab.c:1091
 msgid "Command completed"
 msgstr "Comando completato"
 
-#: src/kgx-tab.ui:22
+#: src/kgx-tab.ui:25
 msgid "Find text"
 msgstr "Trova testo"
 
-#: src/kgx-tab.ui:33
+#: src/kgx-tab.ui:36
 msgid "Previous Match"
 msgstr "Corrispondenza precedente"
 
-#: src/kgx-tab.ui:41
+#: src/kgx-tab.ui:44
 msgid "Next Match"
 msgstr "Corrispondenza successiva"
 
-#: src/kgx-terminal.c:870
+#: src/kgx-terminal.c:557
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+"Ctrl-clic per aprire:\n"
+"%s"
+
+#: src/kgx-terminal.c:883
 msgid "You are pasting a command that runs as an administrator"
 msgstr "Copiato un comando che viene eseguito come amministratore"
 
 #. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:874
+#: src/kgx-terminal.c:887
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -283,26 +368,47 @@ msgstr ""
 "Assicurarsi di sapere cosa fa il comando:\n"
 "%s"
 
-#: src/kgx-terminal.c:878 src/menus.ui:24
+#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "_Incolla"
 
+#: src/kgx-terminal.ui:7
+msgid "_Open Link"
+msgstr "_Apri collegamento"
+
+#: src/kgx-terminal.ui:12
+msgid "Copy _Link"
+msgstr "Copia _collegamento"
+
+#: src/kgx-terminal.ui:19
+msgid "_Copy"
+msgstr "_Copia"
+
+#: src/kgx-terminal.ui:29
+msgid "_Select All"
+msgstr "_Seleziona tutto"
+
+#: src/kgx-terminal.ui:36
+msgid "Show in _Files"
+msgstr "Mostra in _File"
+
 #: src/kgx-theme-switcher.ui:16
-msgid "Use System Colors"
-msgstr "Utilizza colori di sistema"
+msgid "Follow System Style"
+msgstr "Segui lo stile del sistema"
 
 #: src/kgx-theme-switcher.ui:44
-msgid "Use Light Colors"
-msgstr "Utilizza colori chiari"
+msgid "Light Style"
+msgstr "Stile chiaro"
 
 #: src/kgx-theme-switcher.ui:71
-msgid "Use Dark Colors"
-msgstr "Utilizza colori scuri"
+msgid "Dark Style"
+msgstr "Stile scuro"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:442
+#: src/kgx-window.c:464
 msgid "translator-credits"
 msgstr ""
+"Salvatore Cocuzza <info@salvatorecocuzza.it>, 2023\n"
 "Antonio Pandolfo <ant.pandolfo@gmail.com>, 2019\n"
 "Milo Casagrande <milo@milo.name>, 2019"
 
@@ -315,49 +421,42 @@ msgid "_Show All Tabs"
 msgstr "_Mostra tutte le schede"
 
 #: src/kgx-window.ui:30
+msgid "_Preferences"
+msgstr "_Preferenze"
+
+#: src/kgx-window.ui:34
 msgid "_Keyboard Shortcuts"
 msgstr "_Scorciatoie da tastiera"
 
-#: src/kgx-window.ui:34
+#: src/kgx-window.ui:38
 msgid "_About Console"
 msgstr "I_nformazioni su Console"
 
-#: src/kgx-window.ui:63
+#: src/kgx-window.ui:79
 msgid "Find in Terminal"
-msgstr "Trova nel Terminale"
+msgstr "Trova nel terminale"
 
-#: src/kgx-window.ui:71
+#: src/kgx-window.ui:86
 msgid "Main Menu"
 msgstr "Menù principale"
 
-#: src/kgx-window.ui:89
+#: src/kgx-window.ui:104
 msgid "Shrink Text"
 msgstr "Riduci testo"
 
-#: src/kgx-window.ui:100
+#: src/kgx-window.ui:115
 msgid "Reset Size"
 msgstr "Ripristina dimensione"
 
-#: src/kgx-window.ui:117
+#: src/kgx-window.ui:139
 msgid "Enlarge Text"
 msgstr "Ingrandisci testo"
 
-#: src/menus.ui:7
-msgid "_Open Link"
-msgstr "_Apri collegamento"
+#~ msgid "King’s Cross"
+#~ msgstr "King's Cross"
 
-#: src/menus.ui:12
-msgid "Copy _Link"
-msgstr "Copia _collegamento"
+#~ msgid "Use Light Colors"
+#~ msgstr "Utilizza colori chiari"
 
-#: src/menus.ui:19
-msgid "_Copy"
-msgstr "_Copia"
-
-#: src/menus.ui:29
-msgid "_Select All"
-msgstr "_Seleziona tutto"
-
-#: src/menus.ui:36
-msgid "Show in _Files"
-msgstr "Mostra in _File"
+#~ msgid "Use Dark Colors"
+#~ msgstr "Utilizza colori scuri"
