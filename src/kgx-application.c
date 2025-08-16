@@ -202,6 +202,9 @@ kgx_application_startup (GApplication *app)
   gtk_application_set_accels_for_action (GTK_APPLICATION (app),
                                          "win.unfullscreen",
                                          (const char *[]) { "<shift><primary>F11", NULL });
+  gtk_application_set_accels_for_action (GTK_APPLICATION (app),
+                                         "win.show-preferences-window",
+                                         (const char *[]) { "<primary>comma", NULL });
 }
 
 
