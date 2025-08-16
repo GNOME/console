@@ -58,7 +58,7 @@
         </child>
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="title" translatable="yes">Behaviour</property>
+            <property name="title" translatable="yes">Behavior</property>
             <child>
               <object class="AdwSwitchRow" id="unlimited_scrollback">
                 <property name="title" translatable="yes">_Unlimited Scrollback</property>
