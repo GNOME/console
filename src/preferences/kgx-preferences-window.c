@@ -23,6 +23,7 @@
 
 #include "kgx-font-picker.h"
 #include "kgx-settings.h"
+#include "kgx-utils.h"
 
 #include "kgx-preferences-window.h"
 
@@ -200,10 +201,64 @@ kgx_preferences_window_class_init (KgxPreferencesWindowClass *klass)
 }
 
 
+struct _WatchData {
+  KgxPreferencesWindow *window;
+  GtkExpressionWatch   *watch;
+};
+
+
+KGX_DEFINE_DATA (WatchData, watch_data)
+
+
+static inline void
+watch_data_cleanup (WatchData *self)
+{
+  g_clear_weak_pointer (&self->window);
+}
+
+
+static void
+notify_use_system (gpointer user_data)
+{
+  WatchData *data = user_data;
+  g_auto (GValue) value = G_VALUE_INIT;
+
+  if (G_UNLIKELY (!data->window)) {
+    return;
+  }
+
+  if (G_LIKELY (gtk_expression_watch_evaluate (data->watch, &value))) {
+    gtk_widget_action_set_enabled (GTK_WIDGET (data->window),
+                                   "prefs.select-font",
+                                   !g_value_get_boolean (&value));
+  } else {
+    gtk_widget_action_set_enabled (GTK_WIDGET (data->window),
+                                   "prefs.select-font",
+                                   FALSE);
+  }
+}
+
+
 static void
 kgx_preferences_window_init (KgxPreferencesWindow *self)
 {
+  g_autoptr (GtkExpression) expression = NULL;
+  g_autoptr (WatchData) data = watch_data_alloc ();
+
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  g_set_weak_pointer (&data->window, self);
+
+  expression =
+    gtk_property_expression_new (KGX_TYPE_SETTINGS,
+                                 gtk_property_expression_new (G_TYPE_BINDING_GROUP,
+                                                              gtk_object_expression_new (G_OBJECT (self->settings_binds)),
+                                                              "source"),
+                                 "use-system-font");
+
+  data->watch =
+    gtk_expression_watch (expression, self, notify_use_system, data, watch_data_free);
+  g_steal_pointer (&data); /* this is actually stolen by the watch */
 
   g_binding_group_bind (self->settings_binds, "audible-bell",
                         self->audible_bell, "active",

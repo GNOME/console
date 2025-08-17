@@ -20,8 +20,6 @@
                 <property name="use-underline">True</property>
                 <property name="activatable">True</property>
                 <property name="action-name">prefs.select-font</property>
-                <property name="sensitive" bind-source="use_system_font" bind-property="active"
-                  bind-flags="sync-create|invert-boolean" />
                 <child>
                   <object class="GtkBox">
                     <property name="spacing">6</property>
