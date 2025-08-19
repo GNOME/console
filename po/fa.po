@@ -2,40 +2,46 @@
 # Copyright (C) 2022 console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the console package.
 # Danial Behzadi <dani.behzi@ubuntu.com>, 2022-2025.
+# میر سبحان <me@mirsobhan.ir>, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-04-23 07:45+0000\n"
-"PO-Revision-Date: 2025-04-23 17:33+0330\n"
+"POT-Creation-Date: 2025-08-17 10:17+0000\n"
+"PO-Revision-Date: 2025-08-19 17:47+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
-"Language-Team: Persian <fa@li.org>\n"
+"Language-Team: Persian\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.6\n"
+"X-DL-Lang: fa\n"
+"X-DL-Module: console\n"
+"X-DL-Branch: main\n"
+"X-DL-Domain: po\n"
+"X-DL-State: Translating\n"
 
-#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
-#: src/kgx-window.ui:47
+#: src/kgx-window.ui:52
 msgid "Console"
 msgstr "کنسول"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Console.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
 "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings "
 "cross;دستور;فرمان;اعلان;خط فرمان;اجرا;پوسته;شل;ترمینال;پایانه;"
 
-#: data/org.gnome.Console.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
 msgstr "پنجرهٔ جدید"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:177
+#: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:246
 msgid "New Tab"
 msgstr "زبانهٔ جدید"
 
@@ -54,86 +60,6 @@ msgstr "پنجرهٔ پایانه"
 #: data/org.gnome.Console.metainfo.xml.in.in:503 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "پروژهٔ گنوم"
-
-#: src/help-overlay.ui:12
-msgctxt "shortcut window"
-msgid "Application"
-msgstr "برنامه"
-
-#: src/help-overlay.ui:16
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "پنجرهٔ جدید"
-
-#: src/help-overlay.ui:23
-msgctxt "shortcut window"
-msgid "Terminal"
-msgstr "پایانه"
-
-#: src/help-overlay.ui:27
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "یافتن"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
-msgid "Copy"
-msgstr "رونوشت"
-
-#: src/help-overlay.ui:39
-msgctxt "shortcut window"
-msgid "Paste"
-msgstr "جای‌گذاری"
-
-#: src/help-overlay.ui:46
-msgctxt "shortcut window"
-msgid "Tabs"
-msgstr "زبانه‌ها"
-
-#: src/help-overlay.ui:50
-msgctxt "shortcut window"
-msgid "New Tab"
-msgstr "زبانهٔ جدید"
-
-#: src/help-overlay.ui:56
-msgctxt "shortcut window"
-msgid "Close Tab"
-msgstr "بستن زبانه"
-
-#: src/help-overlay.ui:62
-msgctxt "shortcut window"
-msgid "Show All Tabs"
-msgstr "نمایش تمام زبانه‌ها"
-
-#: src/help-overlay.ui:68
-msgctxt "shortcut window"
-msgid "Next Tab"
-msgstr "زبانهٔ بعدی"
-
-#: src/help-overlay.ui:74
-msgctxt "shortcut window"
-msgid "Previous Tab"
-msgstr "زبانهٔ پیشین"
-
-#: src/help-overlay.ui:80
-msgctxt "shortcut window"
-msgid "Move Tab Right"
-msgstr "جابه‌جایی زبانه به چپ"
-
-#: src/help-overlay.ui:86
-msgctxt "shortcut window"
-msgid "Move Tab Left"
-msgstr "جابه‌جایی زبانه به راست"
-
-#: src/help-overlay.ui:92
-msgctxt "shortcut window"
-msgid "Switch to Tab 1–9"
-msgstr "تعویض به زبانهٔ ۱–۹"
-
-#: src/help-overlay.ui:98
-msgctxt "shortcut window"
-msgid "Switch to Tab 10"
-msgstr "تعویض به زبانهٔ ۱۰"
 
 #: src/kgx-about.c:104
 msgid "GPL 3.0 or later"
@@ -157,62 +83,62 @@ msgstr "© %s زندر برون"
 msgid "translator-credits"
 msgstr "دانیال بهزادی <dani.behzi@ubuntu.com>"
 
-#: src/kgx-application.c:283
+#: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr "نمی‌توان هم‌زمان با ‪--working-directory‬ از پارامترهای ترتیبی استفاده کرد"
 
-#: src/kgx-application.c:503
+#: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
 msgstr "اجرای آرگومان این گزینه داخل پایانه"
 
-#: src/kgx-application.c:504
+#: src/kgx-application.c:510
 msgid "COMMAND"
 msgstr "COMMAND"
 
-#: src/kgx-application.c:512
+#: src/kgx-application.c:518
 msgid "Set the working directory"
 msgstr "شاخهٔ کاری پایانه را تنظیم کنید"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:514
+#: src/kgx-application.c:520
 msgid "DIRNAME"
 msgstr "DIRNAME"
 
-#: src/kgx-application.c:522
+#: src/kgx-application.c:528
 msgid "Wait until the child exits (TODO)"
 msgstr "انتظار تا هنگام وجود فرزند (TODO)"
 
-#: src/kgx-application.c:531
+#: src/kgx-application.c:537
 msgid "Set the initial window title"
 msgstr "تنظیم عنوان نخستینِ پنجره"
 
-#: src/kgx-application.c:532
+#: src/kgx-application.c:538
 msgid "TITLE"
 msgstr "TITLE"
 
-#: src/kgx-application.c:540
+#: src/kgx-application.c:546
 msgid "ADVANCED: Set the shell to launch"
 msgstr "پیشرفته: تنظیم پوسته برای اجرا"
 
-#: src/kgx-application.c:541
+#: src/kgx-application.c:547
 msgid "SHELL"
 msgstr "SHELL"
 
-#: src/kgx-application.c:549
+#: src/kgx-application.c:555
 msgid "ADVANCED: Set the scrollback length"
 msgstr "پیشرفته: تنظیم درازای لغزش به عقب"
 
-#: src/kgx-application.c:550
+#: src/kgx-application.c:556
 msgid "LINES"
 msgstr "LINES"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:689
+#: src/kgx-application.c:695
 #, c-format
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — شبیه‌ساز پایانه"
 
-#: src/kgx-application.c:695
+#: src/kgx-application.c:701
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- COMMAND [ARGUMENT...]]"
 
@@ -273,7 +199,7 @@ msgid "Color string is wrong length"
 msgstr "درازای رشتهٔ رنگ اشتباه است"
 
 #: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250 src/kgx-drop-target.c:334
-#: src/kgx-drop-target.c:368 src/kgx-drop-target.c:506
+#: src/kgx-drop-target.c:368 src/kgx-drop-target.c:509
 msgctxt "toast-message"
 msgid "Drop Failed"
 msgstr "انداختن شکست خورد"
@@ -305,7 +231,7 @@ msgstr ""
 "هنگام دریافت کردن انداختن متن خطایی غیرمنتظره رخ داد. اگر خطا را گزارش می‌کنید "
 "لطفاً اطّلاعات زیر را نیز پیوست کنید."
 
-#: src/kgx-drop-target.c:509
+#: src/kgx-drop-target.c:512
 msgctxt "spad-message"
 msgid ""
 "An unexpected value was received. Please include the following information if "
@@ -328,7 +254,7 @@ msgstr "اکس‌ترم"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:478
+#: src/kgx-pages.c:495
 #, c-format
 msgid "Tab %i"
 msgstr "زبانهٔ %Ii"
@@ -395,7 +321,7 @@ msgstr "پیام خطا"
 msgid "Copy Error Message"
 msgstr "رونوشت از پیام خطا"
 
-#: src/kgx-spad.ui:100
+#: src/kgx-spad.ui:104
 msgid "Report _Issue"
 msgstr "_گزارش مشکل"
 
@@ -423,11 +349,11 @@ msgstr "دستور کامل شد"
 msgid "Find text"
 msgstr "یافتن متن"
 
-#: src/kgx-tab.ui:53
+#: src/kgx-tab.ui:70
 msgid "Previous Match"
 msgstr "یافتهٔ پیشین"
 
-#: src/kgx-tab.ui:61
+#: src/kgx-tab.ui:78
 msgid "Next Match"
 msgstr "یافتهٔ بعدی"
 
@@ -557,7 +483,11 @@ msgstr "_رونوشت"
 msgid "_Select All"
 msgstr "_گزینش همه"
 
-#: src/kgx-terminal.ui:36
+#: src/kgx-terminal.ui:36 src/kgx-window.ui:285
+msgid "Leave _Fullscreen"
+msgstr "خروج از -تمام‌صفحه"
+
+#: src/kgx-terminal.ui:43
 msgid "Show in _Files"
 msgstr "_نمایش پرونده‌ها"
 
@@ -582,7 +512,7 @@ msgstr "آرگومان غایب برای ‪--command"
 msgid "Cannot use both --command and positional parameters"
 msgstr "نمی‌توان با ‪--command‬ از پارامترهای ترتیبی استفاده کرد"
 
-#: src/kgx-window.ui:17
+#: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
 msgstr "_پنجرهٔ جدید"
 
@@ -590,35 +520,43 @@ msgstr "_پنجرهٔ جدید"
 msgid "_Show All Tabs"
 msgstr "نمایش تمام _زبانه‌ها"
 
-#: src/kgx-window.ui:30
+#: src/kgx-window.ui:28 src/kgx-window.ui:280
+msgid "_Fullscreen"
+msgstr "_تمام‌صفحه"
+
+#: src/kgx-window.ui:35
 msgid "_Preferences"
 msgstr "تر_جیحات"
 
-#: src/kgx-window.ui:34
+#: src/kgx-window.ui:39
 msgid "_Keyboard Shortcuts"
 msgstr "_میان‌برهای صفحه‌کلید"
 
-#: src/kgx-window.ui:38
+#: src/kgx-window.ui:43
 msgid "_About Console"
 msgstr "_دربارهٔ کنسول"
 
-#: src/kgx-window.ui:91
+#: src/kgx-window.ui:148
 msgid "Find in Terminal"
 msgstr "یافتن در پایانه"
 
-#: src/kgx-window.ui:98
+#: src/kgx-window.ui:160
+msgid "Leave Fullscreen"
+msgstr "خروج از تمام‌صفحه"
+
+#: src/kgx-window.ui:167
 msgid "Main Menu"
 msgstr "فهرست اصلی"
 
-#: src/kgx-window.ui:116
+#: src/kgx-window.ui:185
 msgid "Shrink Text"
 msgstr "کوچک کردن متن"
 
-#: src/kgx-window.ui:127
+#: src/kgx-window.ui:196
 msgid "Reset Size"
 msgstr "بازنشانی اندازه"
 
-#: src/kgx-window.ui:151
+#: src/kgx-window.ui:220
 msgid "Enlarge Text"
 msgstr "بزرگ کردن متن"
 
@@ -646,7 +584,7 @@ msgstr "پیش‌نمایش قلم"
 msgid "Font Size"
 msgstr "اندازهٔ قلم"
 
-#: src/preferences/kgx-preferences-window.c:125
+#: src/preferences/kgx-preferences-window.c:126
 msgid "No Font Set"
 msgstr "هیچ قلمی تنظیم نشده"
 
@@ -666,29 +604,109 @@ msgstr "استفاده از پیش‌گزیدهٔ _سامانه"
 msgid "Custom _Font"
 msgstr "_قلم سفارشی"
 
-#: src/preferences/kgx-preferences-window.ui:63
+#: src/preferences/kgx-preferences-window.ui:61
 msgid "Behaviour"
 msgstr "رفتار"
 
-#: src/preferences/kgx-preferences-window.ui:66
+#: src/preferences/kgx-preferences-window.ui:64
 msgid "_Unlimited Scrollback"
 msgstr "لغزش _نامحدود"
 
-#: src/preferences/kgx-preferences-window.ui:72
+#: src/preferences/kgx-preferences-window.ui:70
 msgid "_Scrollback Lines"
 msgstr "_خط‌های لغزش به پس"
 
-#: src/preferences/kgx-preferences-window.ui:92
+#: src/preferences/kgx-preferences-window.ui:90
 msgid "Terminal Bell"
 msgstr "زنگ پایانه"
 
-#: src/preferences/kgx-preferences-window.ui:95
+#: src/preferences/kgx-preferences-window.ui:93
 msgid "Play _Sound"
 msgstr "پخش _صدا"
 
-#: src/preferences/kgx-preferences-window.ui:101
+#: src/preferences/kgx-preferences-window.ui:99
 msgid "_Visual Effects"
 msgstr "_جلوه‌های دیداری"
+
+#: src/shortcuts-dialog.ui:7
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "برنامه"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "پنجرهٔ جدید"
+
+#: src/shortcuts-dialog.ui:18
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "پایانه"
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "یافتن"
+
+#: src/shortcuts-dialog.ui:27
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "رونوشت"
+
+#: src/shortcuts-dialog.ui:33
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "جایگذاری"
+
+#: src/shortcuts-dialog.ui:41
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "زبانه‌ها"
+
+#: src/shortcuts-dialog.ui:44
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "زبانهٔ جدید"
+
+#: src/shortcuts-dialog.ui:50
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "بستن زبانه"
+
+#: src/shortcuts-dialog.ui:56
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "نمایش تمام زبانه‌ها"
+
+#: src/shortcuts-dialog.ui:62
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "زبانهٔ بعدی"
+
+#: src/shortcuts-dialog.ui:68
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "زبانهٔ پیشین"
+
+#: src/shortcuts-dialog.ui:74 src/shortcuts-dialog.ui:95
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "جابه‌جایی زبانه به راست"
+
+#: src/shortcuts-dialog.ui:81 src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "جابه‌جایی زبانه به چپ"
+
+#: src/shortcuts-dialog.ui:102
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "تعویض به زبانهٔ ۱–۹"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "تعویض به زبانهٔ ۱۰"
 
 #~ msgid "King’s Cross"
 #~ msgstr "صلیب پادشاه"
