@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
 "POT-Creation-Date: 2024-09-12 19:22+0000\n"
-"PO-Revision-Date: 2024-09-14 17:32+0200\n"
+"PO-Revision-Date: 2025-08-21 17:32+0200\n"
 "Last-Translator: Jordi Mas i Hernàndez <jmas@softcatala.org>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -103,7 +103,7 @@ msgstr "Tanca la pestanya"
 #: src/help-overlay.ui:62
 msgctxt "shortcut window"
 msgid "Show All Tabs"
-msgstr "Mostra totes les penstanyes"
+msgstr "Mostra totes les pestanyes"
 
 #: src/help-overlay.ui:68
 msgctxt "shortcut window"
