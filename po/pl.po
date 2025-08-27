@@ -1,15 +1,15 @@
 # Polish translation for console.
-# Copyright © 2019-2024 the console authors.
+# Copyright © 2019-2025 the console authors.
 # This file is distributed under the same license as the console package.
-# Piotr Drąg <piotrdrag@gmail.com>, 2019-2024.
-# Aviary.pl <community-poland@mozilla.org>, 2019-2024.
+# Piotr Drąg <piotrdrag@gmail.com>, 2019-2025.
+# Aviary.pl <community-poland@mozilla.org>, 2019-2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-09-11 22:34+0000\n"
-"PO-Revision-Date: 2024-09-14 17:29+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
+"POT-Creation-Date: 2025-08-25 17:25+0000\n"
+"PO-Revision-Date: 2025-08-27 12:04+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -19,27 +19,28 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
+#: src/kgx-window.ui:52
 msgid "Console"
 msgstr "Konsola"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Console.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
 "powłoka;shell;prompt;polecenie;komenda;wiersz poleceń;linia poleceń;wiersz "
 "komend;linia komend;cmd;konsola;terminal;kgx;kings cross;"
 
-#: data/org.gnome.Console.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
 msgstr "Nowe okno"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
+#: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:246
 msgid "New Tab"
 msgstr "Nowa karta"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "Emulator terminala"
 
@@ -47,169 +48,96 @@ msgstr "Emulator terminala"
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr "Prosty, łatwy w użyciu emulator terminala dla środowiska GNOME."
 
-#: data/org.gnome.Console.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "Okno terminala"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:503 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Projekt GNOME"
 
-#: src/help-overlay.ui:12
-msgctxt "shortcut window"
-msgid "Application"
-msgstr "Program"
-
-#: src/help-overlay.ui:16
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "Nowe okno"
-
-#: src/help-overlay.ui:23
-msgctxt "shortcut window"
-msgid "Terminal"
-msgstr "Terminal"
-
-#: src/help-overlay.ui:27
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "Wyszukiwanie"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
-msgid "Copy"
-msgstr "Skopiowanie"
-
-#: src/help-overlay.ui:39
-msgctxt "shortcut window"
-msgid "Paste"
-msgstr "Wklejenie"
-
-#: src/help-overlay.ui:46
-msgctxt "shortcut window"
-msgid "Tabs"
-msgstr "Karty"
-
-#: src/help-overlay.ui:50
-msgctxt "shortcut window"
-msgid "New Tab"
-msgstr "Nowa karta"
-
-#: src/help-overlay.ui:56
-msgctxt "shortcut window"
-msgid "Close Tab"
-msgstr "Zamknięcie karty"
-
-#: src/help-overlay.ui:62
-msgctxt "shortcut window"
-msgid "Show All Tabs"
-msgstr "Wyświetlenie wszystkich kart"
-
-#: src/help-overlay.ui:68
-msgctxt "shortcut window"
-msgid "Next Tab"
-msgstr "Następna karta"
-
-#: src/help-overlay.ui:74
-msgctxt "shortcut window"
-msgid "Previous Tab"
-msgstr "Poprzednia karta"
-
-#: src/help-overlay.ui:80
-msgctxt "shortcut window"
-msgid "Move Tab Right"
-msgstr "Przeniesienie karty w prawo"
-
-#: src/help-overlay.ui:86
-msgctxt "shortcut window"
-msgid "Move Tab Left"
-msgstr "Przeniesienie karty w lewo"
-
-#: src/help-overlay.ui:92
-msgctxt "shortcut window"
-msgid "Switch to Tab 1–9"
-msgstr "Przełączenie na 1-9. kartę"
-
-#: src/help-overlay.ui:98
-msgctxt "shortcut window"
-msgid "Switch to Tab 10"
-msgstr "Przełączenie na 10. kartę"
-
-#. Translators: %s is the year range
-#: src/kgx-about.c:83 src/kgx-window.c:529
-#, c-format
-msgid "© %s Zander Brown"
-msgstr "© %s Zander Brown"
-
-#: src/kgx-about.c:101
+#: src/kgx-about.c:104
 msgid "GPL 3.0 or later"
 msgstr "GPL, wersja 3.0 lub późniejsza"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. * version of KGX itself, the latter format is the VTE version
-#: src/kgx-about.c:114
+#: src/kgx-about.c:119
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s, używa biblioteki VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:255
+#. Translators: %s is the year range
+#: src/kgx-about.c:148
+#, c-format
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
+
+#. Translators: Credit yourself here
+#: src/kgx-about.c:176
+msgid "translator-credits"
+msgstr ""
+"Piotr Drąg <piotrdrag@gmail.com>, 2019-2025\n"
+"Aviary.pl <community-poland@mozilla.org>, 2019-2025"
+
+#: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr ""
 "Opcji --working-directory i parametrów pozycyjnych nie można używać "
 "jednocześnie"
 
-#: src/kgx-application.c:443
+#: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Wykonuje parametr do tej opcji wewnątrz terminala"
 
-#: src/kgx-application.c:444
+#: src/kgx-application.c:510
 msgid "COMMAND"
 msgstr "POLECENIE"
 
-#: src/kgx-application.c:452
+#: src/kgx-application.c:518
 msgid "Set the working directory"
 msgstr "Ustawia katalog roboczy"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:454
+#: src/kgx-application.c:520
 msgid "DIRNAME"
 msgstr "NAZWA-KATALOGU"
 
-#: src/kgx-application.c:462
+#: src/kgx-application.c:528
 msgid "Wait until the child exits (TODO)"
 msgstr "Czeka, aż proces potomny zakończy działanie (niezaimplementowane)"
 
-#: src/kgx-application.c:471
+#: src/kgx-application.c:537
 msgid "Set the initial window title"
 msgstr "Ustawia początkowy tytuł okna"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:538
 msgid "TITLE"
 msgstr "TYTUŁ"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:546
 msgid "ADVANCED: Set the shell to launch"
 msgstr "ZAAWANSOWANE: ustawia uruchamianą powłokę"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:547
 msgid "SHELL"
 msgstr "POWŁOKA"
 
-#: src/kgx-application.c:489
+#: src/kgx-application.c:555
 msgid "ADVANCED: Set the scrollback length"
 msgstr "ZAAWANSOWANE: ustawia długość buforu przewijania"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:556
 msgid "LINES"
 msgstr "WIERSZE"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:644
+#: src/kgx-application.c:695
 #, c-format
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — emulator terminala"
 
-#: src/kgx-application.c:650
+#: src/kgx-application.c:701
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- POLECENIE [PARAMETR…]]"
 
@@ -275,6 +203,49 @@ msgstr "_Zamknij"
 msgid "Color string is wrong length"
 msgstr "Ciąg koloru ma błędną długość"
 
+#: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
+#: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
+#: src/kgx-drop-target.c:509
+msgctxt "toast-message"
+msgid "Drop Failed"
+msgstr "Przeciągnięcie się nie powiodło"
+
+#: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a URI list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+"Wystąpił nieoczekiwany błąd podczas odbierania przeciągniętej listy adresów "
+"URL. Proszę dołączyć poniższe informacje podczas zgłaszania błędu."
+
+#: src/kgx-drop-target.c:337
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a file list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+"Wystąpił nieoczekiwany błąd podczas odbierania przeciągniętej listy plików. "
+"Proszę dołączyć poniższe informacje podczas zgłaszania błędu."
+
+#: src/kgx-drop-target.c:371
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a text drop. Please include "
+"the following information if you report the error."
+msgstr ""
+"Wystąpił nieoczekiwany błąd podczas odbierania przeciągniętego tekstu. "
+"Proszę dołączyć poniższe informacje podczas zgłaszania błędu."
+
+#: src/kgx-drop-target.c:512
+msgctxt "spad-message"
+msgid ""
+"An unexpected value was received. Please include the following information "
+"if you report the error."
+msgstr ""
+"Odebrano nieoczekiwaną wartość. Proszę dołączyć poniższe informacje podczas "
+"zgłaszania błędu."
+
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
 msgid "Linux"
@@ -289,16 +260,16 @@ msgstr "XTerm"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:471
+#: src/kgx-pages.c:495
 #, c-format
 msgid "Tab %i"
 msgstr "Karta %i"
 
-#: src/kgx-pages.ui:90
+#: src/kgx-pages.ui:100
 msgid "_Detach Tab"
 msgstr "_Odłącz kartę"
 
-#: src/kgx-pages.ui:96
+#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "Za_mknij"
 
@@ -320,45 +291,167 @@ msgstr "Wklejane jest polecenie wykonywane jako administrator"
 msgid "_Paste"
 msgstr "Wk_lej"
 
-#: src/kgx-process.c:192
+#: src/kgx-process.c:196
 #, c-format
 msgid "Process %d"
 msgstr "Proces %d"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-simple-tab.c:169
+#: src/kgx-simple-tab.c:170
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Uruchomienie się nie powiodło</b> — %s"
 
+#: src/kgx-spad.c:194
+msgid "Unable To Open"
+msgstr "Nie można otworzyć"
+
+#: src/kgx-spad.c:197
+#, c-format
+msgid ""
+"Opening ‘<a href=\"%s\">%s</a>’ failed:\n"
+"%s"
+msgstr ""
+"Otwarcie „<a href=\"%s\">%s</a>” się nie powiodło:\n"
+"%s"
+
+#: src/kgx-spad.c:339 src/kgx-spad.ui:4
+msgid "Error Details"
+msgstr "Informacje o błędzie"
+
+#: src/kgx-spad.ui:23
+msgid "Error Message"
+msgstr "Komunikat o błędzie"
+
+#: src/kgx-spad.ui:35
+msgid "Copy Error Message"
+msgstr "Kopiuje komunikat o błędzie"
+
+#: src/kgx-spad.ui:104
+msgid "Report _Issue"
+msgstr "Zgłoś _błąd"
+
+#: src/kgx-tab.c:597
+msgctxt "toast-button"
+msgid "_Details"
+msgstr "_Szczegóły"
+
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:814
+#: src/kgx-tab.c:889
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Tylko do odczytu</b> — polecenie zakończyło działanie z kodem %i"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:822
+#: src/kgx-tab.c:897
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Tylko do odczytu</b> — polecenie zakończyło działanie"
 
-#: src/kgx-tab.c:842
+#: src/kgx-tab.c:917
 msgid "Command completed"
 msgstr "Ukończono polecenie"
 
-#: src/kgx-tab.ui:40
+#: src/kgx-tab.ui:42
 msgid "Find text"
 msgstr "Wyszukiwanie tekstu"
 
-#: src/kgx-tab.ui:51
+#: src/kgx-tab.ui:70
 msgid "Previous Match"
 msgstr "Poprzedni wynik"
 
-#: src/kgx-tab.ui:59
+#: src/kgx-tab.ui:78
 msgid "Next Match"
 msgstr "Następny wynik"
 
-#: src/kgx-terminal.c:508
+#. Translators: The user ctrl-clicked, or used ‘Open Link’, on a URI that,
+#. *              for whatever reason, we were unable to open.
+#: src/kgx-terminal.c:39
+msgctxt "toast-message"
+msgid "Couldn't Open Link"
+msgstr "Nie można otworzyć odnośnika"
+
+#: src/kgx-terminal.c:360
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
+"are installed."
+msgstr ""
+"Odnośnik „<a href=\"%s\">%s</a>” używa protokołu „%s”, dla którego nie "
+"zainstalowano żadnych programów."
+
+#: src/kgx-terminal.c:373
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
+"a>”. Please include the following information if you report the error."
+msgstr ""
+"Wystąpił nieoczekiwany błąd podczas otwierania odnośnika „<a href=\"%s\">%s</"
+"a>”. Proszę dołączyć poniższe informacje podczas zgłaszania błędu."
+
+#: src/kgx-terminal.c:421
+#, c-format
+msgctxt "spad-message"
+msgid "The link “<a href=\"%s\">%s</a>” is malformed."
+msgstr "Odnośnik „<a href=\"%s\">%s</a>” jest błędnie sformatowany."
+
+#: src/kgx-terminal.c:440
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” points to a location on a different "
+"device.\n"
+"\n"
+"This device is “%s” and the location is on “%s”."
+msgstr ""
+"Odnośnik „<a href=\"%s\">%s</a>” wskazuje na położenie na innym urządzeniu.\n"
+"\n"
+"To urządzenie to „%s”, a położenie jest na urządzeniu „%s”."
+
+#: src/kgx-terminal.c:511
+msgctxt "toast-message"
+msgid "Couldn't Paste Text"
+msgstr "Nie można wkleić tekstu"
+
+#: src/kgx-terminal.c:514
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst reading the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"Wystąpił nieoczekiwany błąd podczas odczytywania schowka. Proszę dołączyć "
+"poniższe informacje podczas zgłaszania błędu."
+
+#: src/kgx-terminal.c:575
+msgctxt "toast-message"
+msgid "Couldn't Show File"
+msgstr "Nie można wyświetlić pliku"
+
+#: src/kgx-terminal.c:578
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst showing the file. Please include the "
+"following information if you report the error."
+msgstr ""
+"Wystąpił nieoczekiwany błąd podczas wyświetlania pliku. Proszę dołączyć "
+"poniższe informacje podczas zgłaszania błędu."
+
+#: src/kgx-terminal.c:599
+msgctxt "toast-message"
+msgid "Couldn't Open Folder"
+msgstr "Nie można otworzyć katalogu"
+
+#: src/kgx-terminal.c:602
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the folder. Please include the "
+"following information if you report the error."
+msgstr ""
+"Wystąpił nieoczekiwany błąd podczas otwierania katalogu. Proszę dołączyć "
+"poniższe informacje podczas zgłaszania błędu."
+
+#: src/kgx-terminal.c:696
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -367,13 +460,27 @@ msgstr ""
 "Kliknięcie przy przytrzymanym klawiszu Ctrl otwiera:\n"
 "%s"
 
+#: src/kgx-terminal.c:984
+msgctxt "toast-message"
+msgid "Couldn't Paste"
+msgstr "Nie można wkleić"
+
+#: src/kgx-terminal.c:987
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst processing the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"Wystąpił nieoczekiwany błąd podczas przetwarzania schowka. Proszę dołączyć "
+"poniższe informacje podczas zgłaszania błędu."
+
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
 msgstr "_Otwórz odnośnik"
 
 #: src/kgx-terminal.ui:12
-msgid "Copy _Link"
-msgstr "Skopiuj o_dnośnik"
+msgid "Copy _Link Address"
+msgstr "Skopiuj adres o_dnośnika"
 
 #: src/kgx-terminal.ui:19
 msgid "_Copy"
@@ -383,39 +490,36 @@ msgstr "S_kopiuj"
 msgid "_Select All"
 msgstr "Z_aznacz wszystko"
 
-#: src/kgx-terminal.ui:36
+#: src/kgx-terminal.ui:36 src/kgx-window.ui:285
+msgid "Leave _Fullscreen"
+msgstr "_Opuść pełny ekran"
+
+#: src/kgx-terminal.ui:43
 msgid "Show in _Files"
 msgstr "_Wyświetl w menedżerze plików"
 
-#: src/kgx-theme-switcher.ui:16
+#: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
 msgstr "Styl systemu"
 
-#: src/kgx-theme-switcher.ui:44
+#: src/kgx-theme-switcher.ui:52
 msgid "Light Style"
 msgstr "Jasny styl"
 
-#: src/kgx-theme-switcher.ui:71
+#: src/kgx-theme-switcher.ui:79
 msgid "Dark Style"
 msgstr "Ciemny styl"
 
 #. Translators: ‘command’ is the argument name, and shouldn't be translated
-#: src/kgx-utils.c:113
+#: src/kgx-utils.c:114
 msgid "Missing argument for --command"
 msgstr "Brak parametru dla opcji --command"
 
-#: src/kgx-utils.c:128
+#: src/kgx-utils.c:129
 msgid "Cannot use both --command and positional parameters"
 msgstr "Opcji --command i parametrów pozycyjnych nie można używać jednocześnie"
 
-#. Translators: Credit yourself here
-#: src/kgx-window.c:541
-msgid "translator-credits"
-msgstr ""
-"Piotr Drąg <piotrdrag@gmail.com>, 2019-2024\n"
-"Aviary.pl <community-poland@mozilla.org>, 2019-2024"
-
-#: src/kgx-window.ui:17
+#: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
 msgstr "_Nowe okno"
 
@@ -423,35 +527,43 @@ msgstr "_Nowe okno"
 msgid "_Show All Tabs"
 msgstr "_Wyświetl wszystkie karty"
 
-#: src/kgx-window.ui:30
+#: src/kgx-window.ui:28 src/kgx-window.ui:280
+msgid "_Fullscreen"
+msgstr "P_ełny ekran"
+
+#: src/kgx-window.ui:35
 msgid "_Preferences"
 msgstr "_Preferencje"
 
-#: src/kgx-window.ui:34
+#: src/kgx-window.ui:39
 msgid "_Keyboard Shortcuts"
 msgstr "_Skróty klawiszowe"
 
-#: src/kgx-window.ui:38
+#: src/kgx-window.ui:43
 msgid "_About Console"
 msgstr "_O programie"
 
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:148
 msgid "Find in Terminal"
 msgstr "Wyszukuje w terminalu"
 
-#: src/kgx-window.ui:95
+#: src/kgx-window.ui:160
+msgid "Leave Fullscreen"
+msgstr "Opuszcza pełny ekran"
+
+#: src/kgx-window.ui:167
 msgid "Main Menu"
 msgstr "Menu główne"
 
-#: src/kgx-window.ui:113
+#: src/kgx-window.ui:185
 msgid "Shrink Text"
 msgstr "Pomniejsza tekst"
 
-#: src/kgx-window.ui:124
+#: src/kgx-window.ui:196
 msgid "Reset Size"
 msgstr "Przywraca zwykły rozmiar tekstu"
 
-#: src/kgx-window.ui:148
+#: src/kgx-window.ui:220
 msgid "Enlarge Text"
 msgstr "Powiększa tekst"
 
@@ -479,7 +591,7 @@ msgstr "Podgląd czcionki"
 msgid "Font Size"
 msgstr "Rozmiar czcionki"
 
-#: src/preferences/kgx-preferences-window.c:125
+#: src/preferences/kgx-preferences-window.c:126
 msgid "No Font Set"
 msgstr "Nie ustawiono czcionki"
 
@@ -499,26 +611,106 @@ msgstr "Domyślna _systemu"
 msgid "Custom _Font"
 msgstr "_Niestandardowa czcionka"
 
-#: src/preferences/kgx-preferences-window.ui:63
+#: src/preferences/kgx-preferences-window.ui:61
 msgid "Behaviour"
 msgstr "Zachowanie"
 
-#: src/preferences/kgx-preferences-window.ui:66
+#: src/preferences/kgx-preferences-window.ui:64
 msgid "_Unlimited Scrollback"
 msgstr "Nie_ograniczone przewijanie"
 
-#: src/preferences/kgx-preferences-window.ui:72
+#: src/preferences/kgx-preferences-window.ui:70
 msgid "_Scrollback Lines"
 msgstr "_Liczba wierszy przewijania"
 
-#: src/preferences/kgx-preferences-window.ui:92
+#: src/preferences/kgx-preferences-window.ui:90
 msgid "Terminal Bell"
 msgstr "Dzwonek terminala"
 
-#: src/preferences/kgx-preferences-window.ui:95
+#: src/preferences/kgx-preferences-window.ui:93
 msgid "Play _Sound"
 msgstr "_Dźwięk"
 
-#: src/preferences/kgx-preferences-window.ui:101
+#: src/preferences/kgx-preferences-window.ui:99
 msgid "_Visual Effects"
 msgstr "_Efekty wizualne"
+
+#: src/shortcuts-dialog.ui:7
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Program"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Nowe okno"
+
+#: src/shortcuts-dialog.ui:18
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Terminal"
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Wyszukiwanie"
+
+#: src/shortcuts-dialog.ui:27
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Skopiowanie"
+
+#: src/shortcuts-dialog.ui:33
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Wklejenie"
+
+#: src/shortcuts-dialog.ui:41
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Karty"
+
+#: src/shortcuts-dialog.ui:44
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Nowa karta"
+
+#: src/shortcuts-dialog.ui:50
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Zamknięcie karty"
+
+#: src/shortcuts-dialog.ui:56
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Wyświetlenie wszystkich kart"
+
+#: src/shortcuts-dialog.ui:62
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Następna karta"
+
+#: src/shortcuts-dialog.ui:68
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Poprzednia karta"
+
+#: src/shortcuts-dialog.ui:74 src/shortcuts-dialog.ui:95
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Przeniesienie karty w lewo"
+
+#: src/shortcuts-dialog.ui:81 src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "Przeniesienie karty w prawo"
+
+#: src/shortcuts-dialog.ui:102
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Przełączenie na 1-9. kartę"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Przełączenie na 10. kartę"
