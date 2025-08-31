@@ -1,7 +1,7 @@
 project(
   'gnome-console',
   'c',
-  version: '49.alpha',
+  version: '49.rc',
   meson_version: '>= 1.5.0',
   license: 'GPL-3.0-or-later',
   license_files: ['COPYING'],
