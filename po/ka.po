@@ -1,14 +1,14 @@
 # Georgian translation for Console.
 # Copyright (C) 2023 console's authors
 # This file is distributed under the same license as the console package.
-# Ekaterine Papava <papava.e@gtu.ge>, 2023-2024.
+# Ekaterine Papava <papava.e@gtu.ge>, 2023-2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-09-11 22:34+0000\n"
-"PO-Revision-Date: 2024-09-12 03:17+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
+"POT-Creation-Date: 2025-08-31 08:05+0000\n"
+"PO-Revision-Date: 2025-09-04 12:18+0200\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -16,27 +16,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.7\n"
 
-#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
+#: src/kgx-window.ui:52
 msgid "Console"
 msgstr "კონსოლი"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Console.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 
-#: data/org.gnome.Console.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
 msgstr "ახალი ფანჯარა"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
+#: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:246
 msgid "New Tab"
 msgstr "ახალი ჩანართი"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "ტერმინალის ემულატორი"
 
@@ -44,168 +45,93 @@ msgstr "ტერმინალის ემულატორი"
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr "მარტივი და ადვილად მოსახმარი ტერმინალის ემულატორი GNOME-სთვის."
 
-#: data/org.gnome.Console.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "ტერმინალის ფანჯარა"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "პროექტი \"GNOME\""
 
-#: src/help-overlay.ui:12
-msgctxt "shortcut window"
-msgid "Application"
-msgstr "აპლიკაცია"
-
-#: src/help-overlay.ui:16
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "ახალი ფანჯარა"
-
-#: src/help-overlay.ui:23
-msgctxt "shortcut window"
-msgid "Terminal"
-msgstr "ტერმინალი"
-
-#: src/help-overlay.ui:27
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "მოძებნა"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
-msgid "Copy"
-msgstr "ასლი"
-
-#: src/help-overlay.ui:39
-msgctxt "shortcut window"
-msgid "Paste"
-msgstr "ჩასმა"
-
-#: src/help-overlay.ui:46
-msgctxt "shortcut window"
-msgid "Tabs"
-msgstr "დაფები"
-
-#: src/help-overlay.ui:50
-msgctxt "shortcut window"
-msgid "New Tab"
-msgstr "ახალი ჩანართი"
-
-#: src/help-overlay.ui:56
-msgctxt "shortcut window"
-msgid "Close Tab"
-msgstr "ჩანართის დახურვა"
-
-#: src/help-overlay.ui:62
-msgctxt "shortcut window"
-msgid "Show All Tabs"
-msgstr "ყველა ჩანართის ჩვენება"
-
-#: src/help-overlay.ui:68
-msgctxt "shortcut window"
-msgid "Next Tab"
-msgstr "შემდეგი ჩანართი"
-
-#: src/help-overlay.ui:74
-msgctxt "shortcut window"
-msgid "Previous Tab"
-msgstr "წინა ჩანართი"
-
-#: src/help-overlay.ui:80
-msgctxt "shortcut window"
-msgid "Move Tab Right"
-msgstr "ჩანართის მარჯვნივ გადატანა"
-
-#: src/help-overlay.ui:86
-msgctxt "shortcut window"
-msgid "Move Tab Left"
-msgstr "ჩანართის მარცხნივ გადატანა"
-
-#: src/help-overlay.ui:92
-msgctxt "shortcut window"
-msgid "Switch to Tab 1–9"
-msgstr "1-9-ე ჩანართზე გადართვა"
-
-#: src/help-overlay.ui:98
-msgctxt "shortcut window"
-msgid "Switch to Tab 10"
-msgstr "გადართე·10·ჩანართზე"
-
-#. Translators: %s is the year range
-#: src/kgx-about.c:83 src/kgx-window.c:529
-#, c-format
-msgid "© %s Zander Brown"
-msgstr "© %s Zander Brown"
-
-#: src/kgx-about.c:101
+#: src/kgx-about.c:104
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 ან უფრო ახალი"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. * version of KGX itself, the latter format is the VTE version
-#: src/kgx-about.c:114
+#: src/kgx-about.c:119
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:255
+#. Translators: %s is the year range
+#: src/kgx-about.c:148
+#, c-format
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
+
+#. Translators: Credit yourself here
+#: src/kgx-about.c:176
+msgid "translator-credits"
+msgstr "თემური დოღონაძე"
+
+#: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr ""
 "ორივეს,--working-directory და მდებარეობის პარამეტრებს ერთად ვერ გამოიყენებთ"
 
-#: src/kgx-application.c:443
+#: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
 msgstr "ამ პარამეტრის არგუმენტის ტერმინალში გაშვება"
 
-#: src/kgx-application.c:444
+#: src/kgx-application.c:510
 msgid "COMMAND"
 msgstr "ბრძანება"
 
-#: src/kgx-application.c:452
+#: src/kgx-application.c:518
 msgid "Set the working directory"
 msgstr "სამუშაო საქაღალდის დაყენება"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:454
+#: src/kgx-application.c:520
 msgid "DIRNAME"
 msgstr "საქაღალდის სახელი"
 
-#: src/kgx-application.c:462
+#: src/kgx-application.c:528
 msgid "Wait until the child exits (TODO)"
 msgstr "შვილი პროცესის დასასრულის დალოდება (დაუსრულებელია)"
 
-#: src/kgx-application.c:471
+#: src/kgx-application.c:537
 msgid "Set the initial window title"
 msgstr "საწყისი ფანჯრის სათაურის დაყენება"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:538
 msgid "TITLE"
 msgstr "სათაური"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:546
 msgid "ADVANCED: Set the shell to launch"
 msgstr "დამატებით: გასაშვები გარსის დაყენება"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:547
 msgid "SHELL"
 msgstr "გარსი"
 
-#: src/kgx-application.c:489
+#: src/kgx-application.c:555
 msgid "ADVANCED: Set the scrollback length"
 msgstr "დამატებით: ჩოჩიის სიგრძის მითითება"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:556
 msgid "LINES"
 msgstr "ხაზი"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:644
+#: src/kgx-application.c:695
 #, c-format
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — ტერმინალის ემულატორი"
 
-#: src/kgx-application.c:650
+#: src/kgx-application.c:701
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- ბრძანება [არგუმენტი...]]"
 
@@ -265,6 +191,49 @@ msgstr "_დახურვა"
 msgid "Color string is wrong length"
 msgstr "ფერის სტრიქონის სიგრძე არასწორია"
 
+#: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
+#: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
+#: src/kgx-drop-target.c:509
+msgctxt "toast-message"
+msgid "Drop Failed"
+msgstr "დაგდება ჩავარდა"
+
+#: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a URI list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+"მოულოდნელი შეცდომა URI-ების სიის დაგდებისას. ჩასვით შემდეგი ინფორმაცია, თუ "
+"აპირებთ, ამ შეცდომის შესახებ მოგვწეროთ."
+
+#: src/kgx-drop-target.c:337
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a file list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+"მოულოდნელი შეცდომა ფაილების სიის დაგდებისას. ჩასვით შემდეგი ინფორმაცია, თუ "
+"აპირებთ, ამ შეცდომის შესახებ მოგვწეროთ."
+
+#: src/kgx-drop-target.c:371
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a text drop. Please include "
+"the following information if you report the error."
+msgstr ""
+"მოულოდნელი შეცდომა ტექსტის დაგდებისას. ჩასვით შემდეგი ინფორმაცია, თუ "
+"აპირებთ, ამ შეცდომის შესახებ მოგვწეროთ."
+
+#: src/kgx-drop-target.c:512
+msgctxt "spad-message"
+msgid ""
+"An unexpected value was received. Please include the following information "
+"if you report the error."
+msgstr ""
+"მიღებულია მოულოდნელი მნიშვნელობა. ჩასვით შემდეგი ინფორმაცია, თუ აპირებთ, ამ "
+"შეცდომის შესახებ მოგვწეროთ."
+
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
 msgid "Linux"
@@ -279,16 +248,16 @@ msgstr "Xterm"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:471
+#: src/kgx-pages.c:495
 #, c-format
 msgid "Tab %i"
 msgstr "ჩანართი %i"
 
-#: src/kgx-pages.ui:90
+#: src/kgx-pages.ui:100
 msgid "_Detach Tab"
 msgstr "ჩანართის მოძრობა"
 
-#: src/kgx-pages.ui:96
+#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "დახურვა"
 
@@ -308,45 +277,168 @@ msgstr "სვამთ ბრძანებას, რომელიც ა�
 msgid "_Paste"
 msgstr "ჩასმა"
 
-#: src/kgx-process.c:192
+#: src/kgx-process.c:196
 #, c-format
 msgid "Process %d"
 msgstr "პროცესი %d"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-simple-tab.c:169
+#: src/kgx-simple-tab.c:170
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>გაშვების შეცდომა</b> — %s"
 
+#: src/kgx-spad.c:194
+msgid "Unable To Open"
+msgstr "გახსნის შეცდომა"
+
+#: src/kgx-spad.c:197
+#, c-format
+msgid ""
+"Opening ‘<a href=\"%s\">%s</a>’ failed:\n"
+"%s"
+msgstr ""
+"‘<a href=\"%s\">%s</a>’-ის გახსნა ჩავარდა:\n"
+"%s"
+
+#: src/kgx-spad.c:339 src/kgx-spad.ui:4
+msgid "Error Details"
+msgstr "შეცდომის დეტალები"
+
+#: src/kgx-spad.ui:23
+msgid "Error Message"
+msgstr "შეცდომის შეტყობინება"
+
+#: src/kgx-spad.ui:35
+msgid "Copy Error Message"
+msgstr "შეცდომის შეტყობინების კოპირება"
+
+#: src/kgx-spad.ui:104
+msgid "Report _Issue"
+msgstr "პრობლემ_ის რეპორტი"
+
+#: src/kgx-tab.c:597
+msgctxt "toast-button"
+msgid "_Details"
+msgstr "_დეტალები"
+
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:814
+#: src/kgx-tab.c:889
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>მხოლოდ-კითხვადი</b> — ბრძანების დასრულების კოდი: %i"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:822
+#: src/kgx-tab.c:897
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>მხოლოდ-კითხვადი</b> — ბრძანება დასრულდა"
 
-#: src/kgx-tab.c:842
+#: src/kgx-tab.c:917
 msgid "Command completed"
 msgstr "ბრძანება დასრულდა"
 
-#: src/kgx-tab.ui:40
+#: src/kgx-tab.ui:42
 msgid "Find text"
 msgstr "შემდეგის ძებნა"
 
-#: src/kgx-tab.ui:51
+#: src/kgx-tab.ui:70
 msgid "Previous Match"
 msgstr "წინა ნაპოვნი"
 
-#: src/kgx-tab.ui:59
+#: src/kgx-tab.ui:78
 msgid "Next Match"
 msgstr "შემდეგი ნაპოვნი"
 
-#: src/kgx-terminal.c:508
+#. Translators: The user ctrl-clicked, or used ‘Open Link’, on a URI that,
+#. *              for whatever reason, we were unable to open.
+#: src/kgx-terminal.c:39
+msgctxt "toast-message"
+msgid "Couldn't Open Link"
+msgstr "ბმულის გახსნა შეუძლებელია"
+
+#: src/kgx-terminal.c:360
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
+"are installed."
+msgstr ""
+"ბმული “<a href=\"%s\">%s</a>” იყენებს პროტოკოლს “%s”, რომლისთვის აპები "
+"დაყენებული არაა."
+
+#: src/kgx-terminal.c:373
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
+"a>”. Please include the following information if you report the error."
+msgstr ""
+"გახსნის მოულოდნელი შეცდომა ბმულისთვის “<a href=\"%s\">%s</a>”. ჩასვით "
+"შემდეგი ინფორმაცია, თუ აპირებთ, ამ შეცდომის შესახებ მოგვწეროთ."
+
+#: src/kgx-terminal.c:421
+#, c-format
+msgctxt "spad-message"
+msgid "The link “<a href=\"%s\">%s</a>” is malformed."
+msgstr "ბმული “<a href=\"%s\">%s</a>” არასწორია."
+
+#: src/kgx-terminal.c:440
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” points to a location on a different "
+"device.\n"
+"\n"
+"This device is “%s” and the location is on “%s”."
+msgstr ""
+"ბმული “<a href=\"%s\">%s</a>” მიუთითებს ადგილზე, რომელიც სხვა "
+"მოწყობილობაზეა.\n"
+"\n"
+"მოწყობილობაა “%s” და მდებარეობაა “%s”."
+
+#: src/kgx-terminal.c:511
+msgctxt "toast-message"
+msgid "Couldn't Paste Text"
+msgstr "ტექსტის ჩასმა შეუძლებელია"
+
+#: src/kgx-terminal.c:514
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst reading the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"მოულოდნელი შეცდომა ბუფერის წაკითხვისას. ჩასვით შემდეგი ინფორმაცია, თუ "
+"აპირებთ, ამ შეცდომის შესახებ მოგვწეროთ."
+
+#: src/kgx-terminal.c:575
+msgctxt "toast-message"
+msgid "Couldn't Show File"
+msgstr "ფაილის ჩვენება შეუძლებელია"
+
+#: src/kgx-terminal.c:578
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst showing the file. Please include the "
+"following information if you report the error."
+msgstr ""
+"მოულოდნელი შეცდომა ფაილის ჩვენებისას. ჩასვით შემდეგი ინფორმაცია, თუ აპირებთ, "
+"ამ შეცდომის შესახებ მოგვწეროთ."
+
+#: src/kgx-terminal.c:599
+msgctxt "toast-message"
+msgid "Couldn't Open Folder"
+msgstr "საქაღალდის გახსნა შეუძლებელია"
+
+#: src/kgx-terminal.c:602
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the folder. Please include the "
+"following information if you report the error."
+msgstr ""
+"მოულოდნელი შეცდომა საქაღალდის გახსნისას. ჩასვით შემდეგი ინფორმაცია, თუ "
+"აპირებთ, ამ შეცდომის შესახებ მოგვწეროთ."
+
+#: src/kgx-terminal.c:696
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -355,13 +447,27 @@ msgstr ""
 "გასახსნელად Ctrl +წკაპი:\n"
 "%s"
 
+#: src/kgx-terminal.c:984
+msgctxt "toast-message"
+msgid "Couldn't Paste"
+msgstr "ჩასმა შეუძლებელია"
+
+#: src/kgx-terminal.c:987
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst processing the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"მოულოდნელი შეცდომა ბუფერის დამუშავებისას. ჩასვით შემდეგი ინფორმაცია, თუ "
+"აპირებთ, ამ შეცდომის შესახებ მოგვწეროთ."
+
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
 msgstr "_ბმულის გახსნა"
 
 #: src/kgx-terminal.ui:12
-msgid "Copy _Link"
-msgstr "Ბმულის _კოპირება"
+msgid "Copy _Link Address"
+msgstr "ბმუ_ლის მისამართის კოპირება"
 
 #: src/kgx-terminal.ui:19
 msgid "_Copy"
@@ -371,37 +477,36 @@ msgstr "ასლი"
 msgid "_Select All"
 msgstr "ყველაფრის _მონიშვნა"
 
-#: src/kgx-terminal.ui:36
+#: src/kgx-terminal.ui:36 src/kgx-window.ui:285
+msgid "Leave _Fullscreen"
+msgstr "სრული ეკრანის დატოვება"
+
+#: src/kgx-terminal.ui:43
 msgid "Show in _Files"
 msgstr "ფაილებში _ჩვენება"
 
-#: src/kgx-theme-switcher.ui:16
+#: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
 msgstr "სისტემის სტილის მიყოლა"
 
-#: src/kgx-theme-switcher.ui:44
+#: src/kgx-theme-switcher.ui:52
 msgid "Light Style"
 msgstr "ღია სტილი"
 
-#: src/kgx-theme-switcher.ui:71
+#: src/kgx-theme-switcher.ui:79
 msgid "Dark Style"
 msgstr "მუქი სტილი"
 
 #. Translators: ‘command’ is the argument name, and shouldn't be translated
-#: src/kgx-utils.c:113
+#: src/kgx-utils.c:114
 msgid "Missing argument for --command"
 msgstr "--command-ს არგუმენტი აკლია"
 
-#: src/kgx-utils.c:128
+#: src/kgx-utils.c:129
 msgid "Cannot use both --command and positional parameters"
 msgstr "ორივეს,--command და მდებარეობის პარამეტრებს ერთად ვერ გამოიყენებთ"
 
-#. Translators: Credit yourself here
-#: src/kgx-window.c:541
-msgid "translator-credits"
-msgstr "თემური დოღონაძე"
-
-#: src/kgx-window.ui:17
+#: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
 msgstr "_ახალი ფანჯარა"
 
@@ -409,35 +514,43 @@ msgstr "_ახალი ფანჯარა"
 msgid "_Show All Tabs"
 msgstr "_ყველა ჩანართის ჩვენება"
 
-#: src/kgx-window.ui:30
+#: src/kgx-window.ui:28 src/kgx-window.ui:280
+msgid "_Fullscreen"
+msgstr "სრული ეკრა_ნზე"
+
+#: src/kgx-window.ui:35
 msgid "_Preferences"
 msgstr "გამართვა"
 
-#: src/kgx-window.ui:34
+#: src/kgx-window.ui:39
 msgid "_Keyboard Shortcuts"
 msgstr "კლავიატურის მალსახმობები"
 
-#: src/kgx-window.ui:38
+#: src/kgx-window.ui:43
 msgid "_About Console"
 msgstr "Console-ს შესახებ"
 
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:148
 msgid "Find in Terminal"
 msgstr "ტერმინალში ძებნა"
 
-#: src/kgx-window.ui:95
+#: src/kgx-window.ui:160
+msgid "Leave Fullscreen"
+msgstr "სრული ეკრანიდან გამოსვლა"
+
+#: src/kgx-window.ui:167
 msgid "Main Menu"
 msgstr "მთავარი მენიუ"
 
-#: src/kgx-window.ui:113
+#: src/kgx-window.ui:185
 msgid "Shrink Text"
 msgstr "ტექსტის დაპატარავება"
 
-#: src/kgx-window.ui:124
+#: src/kgx-window.ui:196
 msgid "Reset Size"
 msgstr "ზომის საწყის მნიშვნელობაზე დაბრუნება"
 
-#: src/kgx-window.ui:148
+#: src/kgx-window.ui:220
 msgid "Enlarge Text"
 msgstr "ტექსტის გადიდება"
 
@@ -465,7 +578,7 @@ msgstr "ფონტის მინიატურა"
 msgid "Font Size"
 msgstr "ფონტის ზომა"
 
-#: src/preferences/kgx-preferences-window.c:125
+#: src/preferences/kgx-preferences-window.c:126
 msgid "No Font Set"
 msgstr "ფონტი დაყენებული არაა"
 
@@ -485,29 +598,109 @@ msgstr "სისტემის _ნაგულისხმევის გა
 msgid "Custom _Font"
 msgstr "მომხმარებლის _ფონტი"
 
-#: src/preferences/kgx-preferences-window.ui:63
+#: src/preferences/kgx-preferences-window.ui:61
 msgid "Behaviour"
 msgstr "ქცევა"
 
-#: src/preferences/kgx-preferences-window.ui:66
+#: src/preferences/kgx-preferences-window.ui:64
 msgid "_Unlimited Scrollback"
 msgstr "შეუზღუდავი _გადახვევა"
 
-#: src/preferences/kgx-preferences-window.ui:72
+#: src/preferences/kgx-preferences-window.ui:70
 msgid "_Scrollback Lines"
 msgstr "ჩოჩიი_ს ხაზები"
 
-#: src/preferences/kgx-preferences-window.ui:92
+#: src/preferences/kgx-preferences-window.ui:90
 msgid "Terminal Bell"
 msgstr "ტერმინალის ზარი"
 
-#: src/preferences/kgx-preferences-window.ui:95
+#: src/preferences/kgx-preferences-window.ui:93
 msgid "Play _Sound"
 msgstr "ხმის _დაკვრა"
 
-#: src/preferences/kgx-preferences-window.ui:101
+#: src/preferences/kgx-preferences-window.ui:99
 msgid "_Visual Effects"
 msgstr "ვიზუალური _ეფექტები"
+
+#: src/shortcuts-dialog.ui:7
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "აპლიკაცია"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "ახალი ფანჯარა"
+
+#: src/shortcuts-dialog.ui:18
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "ტერმინალი"
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "მოძებნა"
+
+#: src/shortcuts-dialog.ui:27
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "ასლი"
+
+#: src/shortcuts-dialog.ui:33
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "ჩასმა"
+
+#: src/shortcuts-dialog.ui:41
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "დაფები"
+
+#: src/shortcuts-dialog.ui:44
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "ახალი ჩანართი"
+
+#: src/shortcuts-dialog.ui:50
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "ჩანართის დახურვა"
+
+#: src/shortcuts-dialog.ui:56
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "ყველა ჩანართის ჩვენება"
+
+#: src/shortcuts-dialog.ui:62
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "შემდეგი ჩანართი"
+
+#: src/shortcuts-dialog.ui:68
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "წინა ჩანართი"
+
+#: src/shortcuts-dialog.ui:74 src/shortcuts-dialog.ui:95
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "ჩანართის მარცხნივ გადატანა"
+
+#: src/shortcuts-dialog.ui:81 src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "ჩანართის მარჯვნივ გადატანა"
+
+#: src/shortcuts-dialog.ui:102
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "1-9-ე ჩანართზე გადართვა"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "გადართე·10·ჩანართზე"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
