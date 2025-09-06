@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-04-23 07:45+0000\n"
-"PO-Revision-Date: 2025-04-23 11:57+0300\n"
+"POT-Creation-Date: 2025-09-06 02:12+0000\n"
+"PO-Revision-Date: 2025-09-06 19:29+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -19,24 +19,25 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 23.04.3\n"
 
-#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
-#: src/kgx-window.ui:47
+#: src/kgx-window.ui:52
 msgid "Console"
 msgstr "Консоль"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Console.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;команда;"
-"запит;командний рядок;запустити;запуск;оболонка;термінал;кінгс-кросс;"
+"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings "
+"cross;команда;запит;командний рядок;запустити;запуск;оболонка;термінал;кінгс-"
+"кросс;"
 
-#: data/org.gnome.Console.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
 msgstr "Нове вікно"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:177
+#: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:246
 msgid "New Tab"
 msgstr "Нова вкладка"
 
@@ -52,89 +53,9 @@ msgstr "Простий зручний для користувачів термі
 msgid "Terminal window"
 msgstr "Вікно термінала"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:503 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Проєкт GNOME"
-
-#: src/help-overlay.ui:12
-msgctxt "shortcut window"
-msgid "Application"
-msgstr "Програма"
-
-#: src/help-overlay.ui:16
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "Нове вікно"
-
-#: src/help-overlay.ui:23
-msgctxt "shortcut window"
-msgid "Terminal"
-msgstr "Термінал"
-
-#: src/help-overlay.ui:27
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "Знайти"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
-msgid "Copy"
-msgstr "Копіювати"
-
-#: src/help-overlay.ui:39
-msgctxt "shortcut window"
-msgid "Paste"
-msgstr "Вставити"
-
-#: src/help-overlay.ui:46
-msgctxt "shortcut window"
-msgid "Tabs"
-msgstr "Вкладки"
-
-#: src/help-overlay.ui:50
-msgctxt "shortcut window"
-msgid "New Tab"
-msgstr "Нова вкладка"
-
-#: src/help-overlay.ui:56
-msgctxt "shortcut window"
-msgid "Close Tab"
-msgstr "Закрити вкладку"
-
-#: src/help-overlay.ui:62
-msgctxt "shortcut window"
-msgid "Show All Tabs"
-msgstr "Показати усі вкладки"
-
-#: src/help-overlay.ui:68
-msgctxt "shortcut window"
-msgid "Next Tab"
-msgstr "Наступна вкладка"
-
-#: src/help-overlay.ui:74
-msgctxt "shortcut window"
-msgid "Previous Tab"
-msgstr "Попередня вкладка"
-
-#: src/help-overlay.ui:80
-msgctxt "shortcut window"
-msgid "Move Tab Right"
-msgstr "Пересунути вкладку праворуч"
-
-#: src/help-overlay.ui:86
-msgctxt "shortcut window"
-msgid "Move Tab Left"
-msgstr "Пересунути вкладку ліворуч"
-
-#: src/help-overlay.ui:92
-msgctxt "shortcut window"
-msgid "Switch to Tab 1–9"
-msgstr "Перемкнутися на вкладку 1–9"
-
-#: src/help-overlay.ui:98
-msgctxt "shortcut window"
-msgid "Switch to Tab 10"
-msgstr "Перемкнутися на вкладку 10"
 
 #: src/kgx-about.c:104
 msgid "GPL 3.0 or later"
@@ -158,63 +79,63 @@ msgstr "© Zander Brown, %s"
 msgid "translator-credits"
 msgstr "Юрій Чорноіван <yurchor@ukr.net>"
 
-#: src/kgx-application.c:283
+#: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr ""
 "Не можна використовувати одночасно --working-directory і позиційні аргументи"
 
-#: src/kgx-application.c:503
+#: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Виконати аргумент цього параметра у терміналі"
 
-#: src/kgx-application.c:504
+#: src/kgx-application.c:510
 msgid "COMMAND"
 msgstr "КОМАНДА"
 
-#: src/kgx-application.c:512
+#: src/kgx-application.c:518
 msgid "Set the working directory"
 msgstr "Встановити робочий каталог"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:514
+#: src/kgx-application.c:520
 msgid "DIRNAME"
 msgstr "НАЗВА_КАТАЛОГУ"
 
-#: src/kgx-application.c:522
+#: src/kgx-application.c:528
 msgid "Wait until the child exits (TODO)"
 msgstr "Очікувати на завершення дочірнього процесу (ЩЕ НЕ РЕАЛІЗОВАНО)"
 
-#: src/kgx-application.c:531
+#: src/kgx-application.c:537
 msgid "Set the initial window title"
 msgstr "Встановити початковий заголовок вікна"
 
-#: src/kgx-application.c:532
+#: src/kgx-application.c:538
 msgid "TITLE"
 msgstr "ЗАГОЛОВОК"
 
-#: src/kgx-application.c:540
+#: src/kgx-application.c:546
 msgid "ADVANCED: Set the shell to launch"
 msgstr "ДЛЯ ДОСВІДЧЕНИХ: встановити командну оболонку для запуску"
 
-#: src/kgx-application.c:541
+#: src/kgx-application.c:547
 msgid "SHELL"
 msgstr "ОБОЛОНКА"
 
-#: src/kgx-application.c:549
+#: src/kgx-application.c:555
 msgid "ADVANCED: Set the scrollback length"
 msgstr "ДЛЯ ДОСВІДЧЕНИХ: встановити довжину буфера гортання"
 
-#: src/kgx-application.c:550
+#: src/kgx-application.c:556
 msgid "LINES"
 msgstr "РЯДКИ"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:689
+#: src/kgx-application.c:695
 #, c-format
 msgid "KGX %s — Terminal Emulator"
 msgstr " %s — емулятор термінала"
 
-#: src/kgx-application.c:695
+#: src/kgx-application.c:701
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- КОМАНДА [АРГУМЕНТ...]]"
 
@@ -296,7 +217,7 @@ msgstr "Помилкова довжина рядка кольору"
 
 #: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
 #: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
-#: src/kgx-drop-target.c:506
+#: src/kgx-drop-target.c:509
 msgctxt "toast-message"
 msgid "Drop Failed"
 msgstr "Невдале скидання"
@@ -307,9 +228,9 @@ msgid ""
 "An unexpected error occurred whilst receiving a URI list drop. Please "
 "include the following information if you report the error."
 msgstr ""
-"Під час отримання скинутого списку адрес сталася неочікувана помилка. Будь"
-" ласка, включіть вказані нижче дані, якщо повідомлятимете розробникам про цю"
-" помилку."
+"Під час отримання скинутого списку адрес сталася неочікувана помилка. Будь "
+"ласка, включіть вказані нижче дані, якщо повідомлятимете розробникам про цю "
+"помилку."
 
 #: src/kgx-drop-target.c:337
 msgctxt "spad-message"
@@ -317,9 +238,9 @@ msgid ""
 "An unexpected error occurred whilst receiving a file list drop. Please "
 "include the following information if you report the error."
 msgstr ""
-"Під час отримання скинутого списку файлів сталася неочікувана помилка. Будь"
-" ласка, включіть вказані нижче дані, якщо повідомлятимете розробникам про цю"
-" помилку."
+"Під час отримання скинутого списку файлів сталася неочікувана помилка. Будь "
+"ласка, включіть вказані нижче дані, якщо повідомлятимете розробникам про цю "
+"помилку."
 
 #: src/kgx-drop-target.c:371
 msgctxt "spad-message"
@@ -327,17 +248,17 @@ msgid ""
 "An unexpected error occurred whilst receiving a text drop. Please include "
 "the following information if you report the error."
 msgstr ""
-"Під час отримання скинутого тексту сталася неочікувана помилка. Будь ласка,"
-" включіть вказані нижче дані, якщо повідомлятимете розробникам про цю помилку."
+"Під час отримання скинутого тексту сталася неочікувана помилка. Будь ласка, "
+"включіть вказані нижче дані, якщо повідомлятимете розробникам про цю помилку."
 
-#: src/kgx-drop-target.c:509
+#: src/kgx-drop-target.c:512
 msgctxt "spad-message"
 msgid ""
 "An unexpected value was received. Please include the following information "
 "if you report the error."
 msgstr ""
-"Отримано неочікуване значення. Будь ласка, включіть вказані нижче дані, якщо"
-" повідомлятимете розробникам про цю помилку."
+"Отримано неочікуване значення. Будь ласка, включіть вказані нижче дані, якщо "
+"повідомлятимете розробникам про цю помилку."
 
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
@@ -353,7 +274,7 @@ msgstr "XTerm"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:478
+#: src/kgx-pages.c:495
 #, c-format
 msgid "Tab %i"
 msgstr "Вкладка %i"
@@ -420,7 +341,7 @@ msgstr "Повідомлення про помилку"
 msgid "Copy Error Message"
 msgstr "Копіювати повідомлення про помилку"
 
-#: src/kgx-spad.ui:100
+#: src/kgx-spad.ui:104
 msgid "Report _Issue"
 msgstr "Повідомити про _проблему"
 
@@ -448,18 +369,17 @@ msgstr "Виконання команди завершено"
 msgid "Find text"
 msgstr "Знайти текст"
 
-#: src/kgx-tab.ui:53
+#: src/kgx-tab.ui:70
 msgid "Previous Match"
 msgstr "Попередній відповідник"
 
-#: src/kgx-tab.ui:61
+#: src/kgx-tab.ui:78
 msgid "Next Match"
 msgstr "Наступний відповідник"
 
 #. Translators: The user ctrl-clicked, or used ‘Open Link’, on a URI that,
 #. *              for whatever reason, we were unable to open.
 #: src/kgx-terminal.c:39
-#| msgid "_Open Link"
 msgctxt "toast-message"
 msgid "Couldn't Open Link"
 msgstr "Не вдалося відкрити посилання"
@@ -471,8 +391,8 @@ msgid ""
 "The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
 "are installed."
 msgstr ""
-"У посиланні «<a href=\"%s\">%s</a>» використано протокол «%s», для обробки"
-" якого не встановлено жодної програми."
+"У посиланні «<a href=\"%s\">%s</a>» використано протокол «%s», для обробки "
+"якого не встановлено жодної програми."
 
 #: src/kgx-terminal.c:373
 #, c-format
@@ -481,9 +401,9 @@ msgid ""
 "An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
 "a>”. Please include the following information if you report the error."
 msgstr ""
-"Під час спроби відкрити посилання «<a href=\"%s\">%s</a>» сталася помилка."
-" Будь ласка, включіть вказані нижче дані, якщо повідомлятимете розробникам"
-" про цю помилку."
+"Під час спроби відкрити посилання «<a href=\"%s\">%s</a>» сталася помилка. "
+"Будь ласка, включіть вказані нижче дані, якщо повідомлятимете розробникам "
+"про цю помилку."
 
 #: src/kgx-terminal.c:421
 #, c-format
@@ -515,8 +435,8 @@ msgid ""
 "An unexpected error occurred whilst reading the clipboard. Please include "
 "the following information if you report the error."
 msgstr ""
-"Під час спроби прочитати дані з буфера обміну сталася помилка. Будь ласка,"
-" включіть вказані нижче дані, якщо повідомлятимете розробникам про цю помилку."
+"Під час спроби прочитати дані з буфера обміну сталася помилка. Будь ласка, "
+"включіть вказані нижче дані, якщо повідомлятимете розробникам про цю помилку."
 
 #: src/kgx-terminal.c:575
 msgctxt "toast-message"
@@ -529,8 +449,8 @@ msgid ""
 "An unexpected error occurred whilst showing the file. Please include the "
 "following information if you report the error."
 msgstr ""
-"Під час спроби показати вміст файла сталася помилка. Будь ласка, включіть"
-" вказані нижче дані, якщо повідомлятимете розробникам про цю помилку."
+"Під час спроби показати вміст файла сталася помилка. Будь ласка, включіть "
+"вказані нижче дані, якщо повідомлятимете розробникам про цю помилку."
 
 #: src/kgx-terminal.c:599
 msgctxt "toast-message"
@@ -543,8 +463,8 @@ msgid ""
 "An unexpected error occurred whilst opening the folder. Please include the "
 "following information if you report the error."
 msgstr ""
-"Під час спроби відкрити теку сталася неочікувана помилка. Будь ласка,"
-" включіть вказані нижче дані, якщо повідомлятимете розробникам про цю помилку."
+"Під час спроби відкрити теку сталася неочікувана помилка. Будь ласка, "
+"включіть вказані нижче дані, якщо повідомлятимете розробникам про цю помилку."
 
 #: src/kgx-terminal.c:696
 #, c-format
@@ -566,15 +486,14 @@ msgid ""
 "An unexpected error occurred whilst processing the clipboard. Please include "
 "the following information if you report the error."
 msgstr ""
-"Під час спроби обробити дані з буфера обміну сталася помилка. Будь ласка,"
-" включіть вказані нижче дані, якщо повідомлятимете розробникам про цю помилку."
+"Під час спроби обробити дані з буфера обміну сталася помилка. Будь ласка, "
+"включіть вказані нижче дані, якщо повідомлятимете розробникам про цю помилку."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
 msgstr "_Відкрити посилання"
 
 #: src/kgx-terminal.ui:12
-#| msgid "Copy _Link"
 msgid "Copy _Link Address"
 msgstr "Копіювати адресу _посилання"
 
@@ -586,7 +505,11 @@ msgstr "_Копіювати"
 msgid "_Select All"
 msgstr "Ви_брати все"
 
-#: src/kgx-terminal.ui:36
+#: src/kgx-terminal.ui:36 src/kgx-window.ui:285
+msgid "Leave _Fullscreen"
+msgstr "Вийти з _повноекранного режиму"
+
+#: src/kgx-terminal.ui:43
 msgid "Show in _Files"
 msgstr "Показати у «_Файлах»"
 
@@ -611,7 +534,7 @@ msgstr "Пропущено аргумент до --command"
 msgid "Cannot use both --command and positional parameters"
 msgstr "Не можна використовувати одночасно --command і позиційні аргументи"
 
-#: src/kgx-window.ui:17
+#: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
 msgstr "_Нове вікно"
 
@@ -619,35 +542,43 @@ msgstr "_Нове вікно"
 msgid "_Show All Tabs"
 msgstr "По_казати усі вкладки"
 
-#: src/kgx-window.ui:30
+#: src/kgx-window.ui:28 src/kgx-window.ui:280
+msgid "_Fullscreen"
+msgstr "На весь _екран"
+
+#: src/kgx-window.ui:35
 msgid "_Preferences"
 msgstr "_Налаштування"
 
-#: src/kgx-window.ui:34
+#: src/kgx-window.ui:39
 msgid "_Keyboard Shortcuts"
 msgstr "_Клавіатурні скорочення"
 
-#: src/kgx-window.ui:38
+#: src/kgx-window.ui:43
 msgid "_About Console"
 msgstr "_Про «Консоль»"
 
-#: src/kgx-window.ui:91
+#: src/kgx-window.ui:148
 msgid "Find in Terminal"
 msgstr "Знайти у терміналі"
 
-#: src/kgx-window.ui:98
+#: src/kgx-window.ui:160
+msgid "Leave Fullscreen"
+msgstr "Вийти з повноекранного режиму"
+
+#: src/kgx-window.ui:167
 msgid "Main Menu"
 msgstr "Головне меню"
 
-#: src/kgx-window.ui:116
+#: src/kgx-window.ui:185
 msgid "Shrink Text"
 msgstr "Стиснути текст"
 
-#: src/kgx-window.ui:127
+#: src/kgx-window.ui:196
 msgid "Reset Size"
 msgstr "Відновити початковий розмір"
 
-#: src/kgx-window.ui:151
+#: src/kgx-window.ui:220
 msgid "Enlarge Text"
 msgstr "Збільшити текст"
 
@@ -675,7 +606,7 @@ msgstr "Попередній перегляд шрифту"
 msgid "Font Size"
 msgstr "Розмір шрифту"
 
-#: src/preferences/kgx-preferences-window.c:125
+#: src/preferences/kgx-preferences-window.c:126
 msgid "No Font Set"
 msgstr "Шрифт не встановлено"
 
@@ -695,29 +626,109 @@ msgstr "_Типове для системи"
 msgid "Custom _Font"
 msgstr "Нетиповий _шрифт"
 
-#: src/preferences/kgx-preferences-window.ui:63
+#: src/preferences/kgx-preferences-window.ui:61
 msgid "Behaviour"
 msgstr "Поведінка"
 
-#: src/preferences/kgx-preferences-window.ui:66
+#: src/preferences/kgx-preferences-window.ui:64
 msgid "_Unlimited Scrollback"
 msgstr "_Гортання без обмежень"
 
-#: src/preferences/kgx-preferences-window.ui:72
+#: src/preferences/kgx-preferences-window.ui:70
 msgid "_Scrollback Lines"
 msgstr "_Рядки гортання"
 
-#: src/preferences/kgx-preferences-window.ui:92
+#: src/preferences/kgx-preferences-window.ui:90
 msgid "Terminal Bell"
 msgstr "Звуковий сигнал у терміналі"
 
-#: src/preferences/kgx-preferences-window.ui:95
+#: src/preferences/kgx-preferences-window.ui:93
 msgid "Play _Sound"
 msgstr "Відтворити зв_ук"
 
-#: src/preferences/kgx-preferences-window.ui:101
+#: src/preferences/kgx-preferences-window.ui:99
 msgid "_Visual Effects"
 msgstr "_Візуальні ефекти"
+
+#: src/shortcuts-dialog.ui:7
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Програма"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Нове вікно"
+
+#: src/shortcuts-dialog.ui:18
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Термінал"
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Знайти"
+
+#: src/shortcuts-dialog.ui:27
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Копіювати"
+
+#: src/shortcuts-dialog.ui:33
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Вставити"
+
+#: src/shortcuts-dialog.ui:41
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Вкладки"
+
+#: src/shortcuts-dialog.ui:44
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Нова вкладка"
+
+#: src/shortcuts-dialog.ui:50
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Закрити вкладку"
+
+#: src/shortcuts-dialog.ui:56
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Показати усі вкладки"
+
+#: src/shortcuts-dialog.ui:62
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Наступна вкладка"
+
+#: src/shortcuts-dialog.ui:68
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Попередня вкладка"
+
+#: src/shortcuts-dialog.ui:74 src/shortcuts-dialog.ui:95
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Пересунути вкладку ліворуч"
+
+#: src/shortcuts-dialog.ui:81 src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "Пересунути вкладку праворуч"
+
+#: src/shortcuts-dialog.ui:102
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Перемкнутися на вкладку 1–9"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Перемкнутися на вкладку 10"
 
 #~ msgid "King’s Cross"
 #~ msgstr "Кінгс-кросс"
@@ -777,8 +788,8 @@ msgstr "_Візуальні ефекти"
 
 #~ msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
 #~ msgstr ""
-#~ "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;команда;"
-#~ "запит;командний рядок;запустити;запуск;оболонка;термінал;"
+#~ "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings "
+#~ "cross;команда;запит;командний рядок;запустити;запуск;оболонка;термінал;"
 
 #~ msgid "child watcher"
 #~ msgstr "дитячний наглядач"
