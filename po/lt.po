@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-09-11 22:34+0000\n"
-"PO-Revision-Date: 2024-09-23 22:19+0300\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
+"POT-Creation-Date: 2025-09-07 14:21+0000\n"
+"PO-Revision-Date: 2025-09-07 21:14+0300\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -17,28 +17,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.7\n"
 
-#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
+#: src/kgx-window.ui:52
 msgid "Console"
 msgstr "Konsolė"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Console.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
 "komandų;eilutė;cmd;komanda;vykdyti;apvalkalas;terminalas;kgx;kings cross;"
 
-#: data/org.gnome.Console.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
 msgstr "Naujas langas"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
+#: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:246
 msgid "New Tab"
 msgstr "Nauja kortelė"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "Terminalo emuliatorius"
 
@@ -46,167 +47,94 @@ msgstr "Terminalo emuliatorius"
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr "Paprastas terminalo emulatorius GNOME darbalaukio naudotojams."
 
-#: data/org.gnome.Console.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "Terminalo langas"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "GNOME projektas"
 
-#: src/help-overlay.ui:12
-msgctxt "shortcut window"
-msgid "Application"
-msgstr "Programa"
-
-#: src/help-overlay.ui:16
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "Naujas langas"
-
-#: src/help-overlay.ui:23
-msgctxt "shortcut window"
-msgid "Terminal"
-msgstr "Terminalas"
-
-#: src/help-overlay.ui:27
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "Rasti"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
-msgid "Copy"
-msgstr "Kopijuoti"
-
-#: src/help-overlay.ui:39
-msgctxt "shortcut window"
-msgid "Paste"
-msgstr "Įdėti"
-
-#: src/help-overlay.ui:46
-msgctxt "shortcut window"
-msgid "Tabs"
-msgstr "Kortelės"
-
-#: src/help-overlay.ui:50
-msgctxt "shortcut window"
-msgid "New Tab"
-msgstr "Nauja kortelė"
-
-#: src/help-overlay.ui:56
-msgctxt "shortcut window"
-msgid "Close Tab"
-msgstr "Užverti kortelę"
-
-#: src/help-overlay.ui:62
-msgctxt "shortcut window"
-msgid "Show All Tabs"
-msgstr "Rodyti visas korteles"
-
-#: src/help-overlay.ui:68
-msgctxt "shortcut window"
-msgid "Next Tab"
-msgstr "Kita kortelė"
-
-#: src/help-overlay.ui:74
-msgctxt "shortcut window"
-msgid "Previous Tab"
-msgstr "Ankstesnė kortelė"
-
-#: src/help-overlay.ui:80
-msgctxt "shortcut window"
-msgid "Move Tab Right"
-msgstr "Perkelti kortelę kairėn"
-
-#: src/help-overlay.ui:86
-msgctxt "shortcut window"
-msgid "Move Tab Left"
-msgstr "Perkelti kortelę dešinėn"
-
-#: src/help-overlay.ui:92
-msgctxt "shortcut window"
-msgid "Switch to Tab 1–9"
-msgstr "Pereiti į kortelę 1-9"
-
-#: src/help-overlay.ui:98
-msgctxt "shortcut window"
-msgid "Switch to Tab 10"
-msgstr "Pereiti į kortelę 10"
-
-#. Translators: %s is the year range
-#: src/kgx-about.c:83 src/kgx-window.c:529
-#, c-format
-msgid "© %s Zander Brown"
-msgstr "© %s Zander Brown"
-
-#: src/kgx-about.c:101
+#: src/kgx-about.c:104
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 arba vėlesnė"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. * version of KGX itself, the latter format is the VTE version
-#: src/kgx-about.c:114
+#: src/kgx-about.c:119
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s naudojant VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:255
+#. Translators: %s is the year range
+#: src/kgx-about.c:148
+#, c-format
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
+
+#. Translators: Credit yourself here
+#: src/kgx-about.c:176
+msgid "translator-credits"
+msgstr ""
+"Išvertė:\n"
+"Aurimas Černius <aurimas.cernius@mailo.com>"
+
+#: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr "Negalima naudoti ir --working-directory, ir pozicinių parametrų"
 
-#: src/kgx-application.c:443
+#: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Vykdyti šio parametro argumentą terminale"
 
-#: src/kgx-application.c:444
+#: src/kgx-application.c:510
 msgid "COMMAND"
 msgstr "KOMANDA"
 
-#: src/kgx-application.c:452
+#: src/kgx-application.c:518
 msgid "Set the working directory"
 msgstr "Nustatyti darbinį katalogą"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:454
+#: src/kgx-application.c:520
 msgid "DIRNAME"
 msgstr "KATALOGAS"
 
-#: src/kgx-application.c:462
+#: src/kgx-application.c:528
 msgid "Wait until the child exits (TODO)"
 msgstr "Laukti, kol vaikas išeis (NEPADARYTA)"
 
-#: src/kgx-application.c:471
+#: src/kgx-application.c:537
 msgid "Set the initial window title"
 msgstr "Nustatyti pradinį lango pavadinimą"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:538
 msgid "TITLE"
 msgstr "PAVADINIMAS"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:546
 msgid "ADVANCED: Set the shell to launch"
 msgstr "SUDĖTINGESNIS: nustatyti paleidžiamą apvalkalą"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:547
 msgid "SHELL"
 msgstr "APVALKALAS"
 
-#: src/kgx-application.c:489
+#: src/kgx-application.c:555
 msgid "ADVANCED: Set the scrollback length"
 msgstr "SUDĖTINGESNIS: nustatyti grįžimo atgal ilgį"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:556
 msgid "LINES"
 msgstr "EILUTĖS"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:644
+#: src/kgx-application.c:695
 #, c-format
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — Terminalo emuliatorius"
 
-#: src/kgx-application.c:650
+#: src/kgx-application.c:701
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- KOMANDA [ARGUMENTAI...]]"
 
@@ -272,6 +200,48 @@ msgstr "Už_verti"
 msgid "Color string is wrong length"
 msgstr "Spalvos eilutė yra žodžio ilgio"
 
+#: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
+#: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
+#: src/kgx-drop-target.c:509
+msgctxt "toast-message"
+msgid "Drop Failed"
+msgstr "Numesti nepavyko"
+
+#: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a URI list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+"Kilo netikėta klaida gaunant URI sąrašo numetimą. Įtraukite į pranešimą apie "
+"klaidą šią informaciją."
+
+#: src/kgx-drop-target.c:337
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a file list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+"Kilo netikėta klaida gaunant failų sąrašo numetimą. Įtraukite į pranešimą "
+"apie klaidą šią informaciją."
+
+#: src/kgx-drop-target.c:371
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a text drop. Please include "
+"the following information if you report the error."
+msgstr ""
+"Kilo netikėta klaida gaunant teksto numetimą. Įtraukite į pranešimą apie "
+"klaidą šią informaciją."
+
+#: src/kgx-drop-target.c:512
+msgctxt "spad-message"
+msgid ""
+"An unexpected value was received. Please include the following information "
+"if you report the error."
+msgstr ""
+"Gauta netikėta vertė. Įtraukite į pranešimą apie klaidą šią informaciją."
+
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
 msgid "Linux"
@@ -286,16 +256,16 @@ msgstr "XTerm"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:471
+#: src/kgx-pages.c:495
 #, c-format
 msgid "Tab %i"
 msgstr "Kortelė %i"
 
-#: src/kgx-pages.ui:90
+#: src/kgx-pages.ui:100
 msgid "_Detach Tab"
 msgstr "_Atkabinti kortelę"
 
-#: src/kgx-pages.ui:96
+#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Užverti"
 
@@ -317,45 +287,167 @@ msgstr "Jūs įdėjote komandą, kuri vykdoma kaip administratoriaus"
 msgid "_Paste"
 msgstr "Į_dėti"
 
-#: src/kgx-process.c:192
+#: src/kgx-process.c:196
 #, c-format
 msgid "Process %d"
 msgstr "Procesas %d"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-simple-tab.c:169
+#: src/kgx-simple-tab.c:170
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Nepavyko paleisti</b> – %s"
 
+#: src/kgx-spad.c:194
+msgid "Unable To Open"
+msgstr "Nepavyko atverti"
+
+#: src/kgx-spad.c:197
+#, c-format
+msgid ""
+"Opening ‘<a href=\"%s\">%s</a>’ failed:\n"
+"%s"
+msgstr ""
+"Atverti „<a href=\"%s\">%s</a>“ nepavyko:\n"
+"%s"
+
+#: src/kgx-spad.c:339 src/kgx-spad.ui:4
+msgid "Error Details"
+msgstr "Klaidos informacija"
+
+#: src/kgx-spad.ui:23
+msgid "Error Message"
+msgstr "Klaidos pranešimas"
+
+#: src/kgx-spad.ui:35
+msgid "Copy Error Message"
+msgstr "Kopijuoti klaidos pranešimą"
+
+#: src/kgx-spad.ui:104
+msgid "Report _Issue"
+msgstr "Pranešti apie _klaidą"
+
+#: src/kgx-tab.c:597
+msgctxt "toast-button"
+msgid "_Details"
+msgstr "_Detalės"
+
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:814
+#: src/kgx-tab.c:889
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Tik skaitymui</b> – komanda baigėsi su kodu %i"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:822
+#: src/kgx-tab.c:897
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Tik skaitymui</b> – komanda baigėsi"
 
-#: src/kgx-tab.c:842
+#: src/kgx-tab.c:917
 msgid "Command completed"
 msgstr "Komanda baigėsi"
 
-#: src/kgx-tab.ui:40
+#: src/kgx-tab.ui:42
 msgid "Find text"
 msgstr "Rasti tekstą"
 
-#: src/kgx-tab.ui:51
+#: src/kgx-tab.ui:70
 msgid "Previous Match"
 msgstr "Ankstesnė atitiktis"
 
-#: src/kgx-tab.ui:59
+#: src/kgx-tab.ui:78
 msgid "Next Match"
 msgstr "Kita atitiktis"
 
-#: src/kgx-terminal.c:508
+#. Translators: The user ctrl-clicked, or used ‘Open Link’, on a URI that,
+#. *              for whatever reason, we were unable to open.
+#: src/kgx-terminal.c:39
+msgctxt "toast-message"
+msgid "Couldn't Open Link"
+msgstr "Nepavyko atverti saito"
+
+#: src/kgx-terminal.c:360
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
+"are installed."
+msgstr ""
+"Saitas „<a href=\"%s\">%s</a>“ naudoja protokolą „%s“, kuriam nėra įdiegtos "
+"programos."
+
+#: src/kgx-terminal.c:373
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
+"a>”. Please include the following information if you report the error."
+msgstr ""
+"Kilo netikėta klaida atveriant saitą „<a href=\"%s\">%s</a>“. Jei pranešite "
+"apie klaidą, įtraukite šią informaciją."
+
+#: src/kgx-terminal.c:421
+#, c-format
+msgctxt "spad-message"
+msgid "The link “<a href=\"%s\">%s</a>” is malformed."
+msgstr "Saitas „<a href=\"%s\">%s</a>“ yra blogai suformuotas."
+
+#: src/kgx-terminal.c:440
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” points to a location on a different "
+"device.\n"
+"\n"
+"This device is “%s” and the location is on “%s”."
+msgstr ""
+"Saitas „<a href=\"%s\">%s</a>“ rodo į vietą kitame įrenginyje.\n"
+"\n"
+"Šis įrenginys yra „%s“, o vieta yra įrenginyje „%s“."
+
+#: src/kgx-terminal.c:511
+msgctxt "toast-message"
+msgid "Couldn't Paste Text"
+msgstr "Nepavyko įdėti teksto"
+
+#: src/kgx-terminal.c:514
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst reading the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"Kilo netikėta klaida skaitant iškarpinę. Jei pranešite apie klaidą, "
+"įtraukite šią informaciją."
+
+#: src/kgx-terminal.c:575
+msgctxt "toast-message"
+msgid "Couldn't Show File"
+msgstr "Nepavyko parodyti failo"
+
+#: src/kgx-terminal.c:578
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst showing the file. Please include the "
+"following information if you report the error."
+msgstr ""
+"Kilo netikėta klaida bandant parodyti failą. Jei pranešite apie klaidą, "
+"įtraukite šią informaciją."
+
+#: src/kgx-terminal.c:599
+msgctxt "toast-message"
+msgid "Couldn't Open Folder"
+msgstr "Nepavyko atverti aplanko"
+
+#: src/kgx-terminal.c:602
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the folder. Please include the "
+"following information if you report the error."
+msgstr ""
+"Kilo netikėta klaida atveriant aplanką. Jei pranešite apie klaidą, įtraukite "
+"šią informaciją."
+
+#: src/kgx-terminal.c:696
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -364,13 +456,27 @@ msgstr ""
 "Spauskite atvėrimui:\n"
 "%s"
 
+#: src/kgx-terminal.c:984
+msgctxt "toast-message"
+msgid "Couldn't Paste"
+msgstr "Nepavyko įdėti"
+
+#: src/kgx-terminal.c:987
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst processing the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"Kilo netikėta klaida apdorojant iškarpinę. Jei pranešite apie klaidą, "
+"įtraukite šią informaciją."
+
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
 msgstr "_Atverti saitą"
 
 #: src/kgx-terminal.ui:12
-msgid "Copy _Link"
-msgstr "Kopijuoti _saitą"
+msgid "Copy _Link Address"
+msgstr "Kopijuoti _saito adresą"
 
 #: src/kgx-terminal.ui:19
 msgid "_Copy"
@@ -380,39 +486,36 @@ msgstr "_Kopijuoti"
 msgid "_Select All"
 msgstr "Žymėti _viską"
 
-#: src/kgx-terminal.ui:36
+#: src/kgx-terminal.ui:36 src/kgx-window.ui:285
+msgid "Leave _Fullscreen"
+msgstr "Išeiti iš _viso ekrano"
+
+#: src/kgx-terminal.ui:43
 msgid "Show in _Files"
 msgstr "Rodyti _failuose"
 
-#: src/kgx-theme-switcher.ui:16
+#: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
 msgstr "Sekti sistemos stilių"
 
-#: src/kgx-theme-switcher.ui:44
+#: src/kgx-theme-switcher.ui:52
 msgid "Light Style"
 msgstr "Šviesus stilius"
 
-#: src/kgx-theme-switcher.ui:71
+#: src/kgx-theme-switcher.ui:79
 msgid "Dark Style"
 msgstr "Tamsus stilius"
 
 #. Translators: ‘command’ is the argument name, and shouldn't be translated
-#: src/kgx-utils.c:113
+#: src/kgx-utils.c:114
 msgid "Missing argument for --command"
 msgstr "Trūksta argumento parametrui --command"
 
-#: src/kgx-utils.c:128
+#: src/kgx-utils.c:129
 msgid "Cannot use both --command and positional parameters"
 msgstr "Negalima naudoti ir --command, ir pozicinių parametrų"
 
-#. Translators: Credit yourself here
-#: src/kgx-window.c:541
-msgid "translator-credits"
-msgstr ""
-"Išvertė:\n"
-"Aurimas Černius <aurisc4@gmail.com>"
-
-#: src/kgx-window.ui:17
+#: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
 msgstr "_Naujas langas"
 
@@ -420,35 +523,43 @@ msgstr "_Naujas langas"
 msgid "_Show All Tabs"
 msgstr "_Rodyti visas korteles"
 
-#: src/kgx-window.ui:30
+#: src/kgx-window.ui:28 src/kgx-window.ui:280
+msgid "_Fullscreen"
+msgstr "_Visame ekrane"
+
+#: src/kgx-window.ui:35
 msgid "_Preferences"
 msgstr "_Nuostatos"
 
-#: src/kgx-window.ui:34
+#: src/kgx-window.ui:39
 msgid "_Keyboard Shortcuts"
 msgstr "_Klaviatūros trumpiniai"
 
-#: src/kgx-window.ui:38
+#: src/kgx-window.ui:43
 msgid "_About Console"
 msgstr "_Apie konsolę"
 
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:148
 msgid "Find in Terminal"
 msgstr "Rasti terminale"
 
-#: src/kgx-window.ui:95
+#: src/kgx-window.ui:160
+msgid "Leave Fullscreen"
+msgstr "Išeiti iš viso ekrano"
+
+#: src/kgx-window.ui:167
 msgid "Main Menu"
 msgstr "Pagrindinis meniu"
 
-#: src/kgx-window.ui:113
+#: src/kgx-window.ui:185
 msgid "Shrink Text"
 msgstr "Sumažinti tekstą"
 
-#: src/kgx-window.ui:124
+#: src/kgx-window.ui:196
 msgid "Reset Size"
 msgstr "Atstatyti dydį"
 
-#: src/kgx-window.ui:148
+#: src/kgx-window.ui:220
 msgid "Enlarge Text"
 msgstr "Padidinti tekstą"
 
@@ -476,7 +587,7 @@ msgstr "Šrifto peržiūra"
 msgid "Font Size"
 msgstr "Šrifto dydis"
 
-#: src/preferences/kgx-preferences-window.c:125
+#: src/preferences/kgx-preferences-window.c:126
 msgid "No Font Set"
 msgstr "Šriftas nenustatytas"
 
@@ -496,29 +607,109 @@ msgstr "Naudoti _sistemos numatytąjį"
 msgid "Custom _Font"
 msgstr "Pasirinktinis šri_ftas"
 
-#: src/preferences/kgx-preferences-window.ui:63
+#: src/preferences/kgx-preferences-window.ui:61
 msgid "Behaviour"
 msgstr "Elgsena"
 
-#: src/preferences/kgx-preferences-window.ui:66
+#: src/preferences/kgx-preferences-window.ui:64
 msgid "_Unlimited Scrollback"
 msgstr "_Neribota sliktis"
 
-#: src/preferences/kgx-preferences-window.ui:72
+#: src/preferences/kgx-preferences-window.ui:70
 msgid "_Scrollback Lines"
 msgstr "_Grįžtamojo slinkimo eilutės"
 
-#: src/preferences/kgx-preferences-window.ui:92
+#: src/preferences/kgx-preferences-window.ui:90
 msgid "Terminal Bell"
 msgstr "Terminalo skambutis"
 
-#: src/preferences/kgx-preferences-window.ui:95
+#: src/preferences/kgx-preferences-window.ui:93
 msgid "Play _Sound"
 msgstr "_Groti garsą"
 
-#: src/preferences/kgx-preferences-window.ui:101
+#: src/preferences/kgx-preferences-window.ui:99
 msgid "_Visual Effects"
 msgstr "_Vaizdo efektai"
+
+#: src/shortcuts-dialog.ui:7
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Programa"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Naujas langas"
+
+#: src/shortcuts-dialog.ui:18
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Terminalas"
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Rasti"
+
+#: src/shortcuts-dialog.ui:27
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Kopijuoti"
+
+#: src/shortcuts-dialog.ui:33
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Įdėti"
+
+#: src/shortcuts-dialog.ui:41
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Kortelės"
+
+#: src/shortcuts-dialog.ui:44
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Nauja kortelė"
+
+#: src/shortcuts-dialog.ui:50
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Užverti kortelę"
+
+#: src/shortcuts-dialog.ui:56
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Rodyti visas korteles"
+
+#: src/shortcuts-dialog.ui:62
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Kita kortelė"
+
+#: src/shortcuts-dialog.ui:68
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Ankstesnė kortelė"
+
+#: src/shortcuts-dialog.ui:74 src/shortcuts-dialog.ui:95
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Perkelti kortelę dešinėn"
+
+#: src/shortcuts-dialog.ui:81 src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "Perkelti kortelę kairėn"
+
+#: src/shortcuts-dialog.ui:102
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Pereiti į kortelę 1-9"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Pereiti į kortelę 10"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
