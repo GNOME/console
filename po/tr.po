@@ -10,36 +10,36 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Console master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-04-23 07:45+0000\n"
-"PO-Revision-Date: 2025-04-23 08:00+0300\n"
-"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
+"POT-Creation-Date: 2025-09-04 22:45+0000\n"
+"PO-Revision-Date: 2025-08-28 13:50+0300\n"
+"Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
-#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
-#: src/kgx-window.ui:47
+#: src/kgx-window.ui:52
 msgid "Console"
 msgstr "Konsol"
 
 # https://gitlab.gnome.org/GNOME/glib/-/issues/443 hatası sebebiyle uygulama adı dahil ingilizce hallerini de koruyalım.
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Console.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"Console;command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
-"komut;istem;komut satırı;çalıştır;kabuk;uçbirim;"
+"Console;command;prompt;cmd;commandline;run;shell;terminal;kgx;kings "
+"cross;komut;istem;komut satırı;çalıştır;kabuk;uçbirim;"
 
-#: data/org.gnome.Console.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
 msgstr "Yeni Pencere"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:177
+#: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:246
 msgid "New Tab"
 msgstr "Yeni Sekme"
 
@@ -55,89 +55,9 @@ msgstr "GNOME masaüstü için basit, kullanıcı dostu uçbirim öykünücü."
 msgid "Terminal window"
 msgstr "Uçbirim penceresi"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:503 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "GNOME Projesi"
-
-#: src/help-overlay.ui:12
-msgctxt "shortcut window"
-msgid "Application"
-msgstr "Uygulama"
-
-#: src/help-overlay.ui:16
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "Yeni Pencere"
-
-#: src/help-overlay.ui:23
-msgctxt "shortcut window"
-msgid "Terminal"
-msgstr "Uçbirim"
-
-#: src/help-overlay.ui:27
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "Bul"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
-msgid "Copy"
-msgstr "Kopyala"
-
-#: src/help-overlay.ui:39
-msgctxt "shortcut window"
-msgid "Paste"
-msgstr "Yapıştır"
-
-#: src/help-overlay.ui:46
-msgctxt "shortcut window"
-msgid "Tabs"
-msgstr "Sekmeler"
-
-#: src/help-overlay.ui:50
-msgctxt "shortcut window"
-msgid "New Tab"
-msgstr "Yeni Sekme"
-
-#: src/help-overlay.ui:56
-msgctxt "shortcut window"
-msgid "Close Tab"
-msgstr "Sekmeyi Kapat"
-
-#: src/help-overlay.ui:62
-msgctxt "shortcut window"
-msgid "Show All Tabs"
-msgstr "Tüm Sekmeleri Göster"
-
-#: src/help-overlay.ui:68
-msgctxt "shortcut window"
-msgid "Next Tab"
-msgstr "Sonraki Sekme"
-
-#: src/help-overlay.ui:74
-msgctxt "shortcut window"
-msgid "Previous Tab"
-msgstr "Önceki Sekme"
-
-#: src/help-overlay.ui:80
-msgctxt "shortcut window"
-msgid "Move Tab Right"
-msgstr "Sekmeyi Sağa Taşı"
-
-#: src/help-overlay.ui:86
-msgctxt "shortcut window"
-msgid "Move Tab Left"
-msgstr "Sekmeyi Sola Taşı"
-
-#: src/help-overlay.ui:92
-msgctxt "shortcut window"
-msgid "Switch to Tab 1–9"
-msgstr "1-9. Sekmeye Geç"
-
-#: src/help-overlay.ui:98
-msgctxt "shortcut window"
-msgid "Switch to Tab 10"
-msgstr "10. Sekmeye Geç"
 
 #: src/kgx-about.c:104
 msgid "GPL 3.0 or later"
@@ -163,62 +83,62 @@ msgstr ""
 "Sabri Ünal <yakushabb@gmail.com>\n"
 "Emin Tufan Çetin <etcetin@gmail.com>"
 
-#: src/kgx-application.c:283
+#: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr "--working-directory ve konumsal parametreler birlikte kullanılamaz"
 
-#: src/kgx-application.c:503
+#: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Argümanı uçbirimin içinde bu seçeneğe çalıştır"
 
-#: src/kgx-application.c:504
+#: src/kgx-application.c:510
 msgid "COMMAND"
 msgstr "KOMUT"
 
-#: src/kgx-application.c:512
+#: src/kgx-application.c:518
 msgid "Set the working directory"
 msgstr "Çalışma dizinini belirle"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:514
+#: src/kgx-application.c:520
 msgid "DIRNAME"
 msgstr "DİZİNADI"
 
-#: src/kgx-application.c:522
+#: src/kgx-application.c:528
 msgid "Wait until the child exits (TODO)"
 msgstr "Alt süreç çıkana dek bekle (TODO)"
 
-#: src/kgx-application.c:531
+#: src/kgx-application.c:537
 msgid "Set the initial window title"
 msgstr "İlk pencere başlığını belirle"
 
-#: src/kgx-application.c:532
+#: src/kgx-application.c:538
 msgid "TITLE"
 msgstr "BAŞLIK"
 
-#: src/kgx-application.c:540
+#: src/kgx-application.c:546
 msgid "ADVANCED: Set the shell to launch"
 msgstr "GELİŞMİŞ: Başlatılacak kabuğu belirle"
 
-#: src/kgx-application.c:541
+#: src/kgx-application.c:547
 msgid "SHELL"
 msgstr "KABUK"
 
-#: src/kgx-application.c:549
+#: src/kgx-application.c:555
 msgid "ADVANCED: Set the scrollback length"
 msgstr "GELİŞMİŞ: Geri kaydırma uzunluğunu belirle"
 
-#: src/kgx-application.c:550
+#: src/kgx-application.c:556
 msgid "LINES"
 msgstr "SATIRLAR"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:689
+#: src/kgx-application.c:695
 #, c-format
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — Uçbirim Öykünücü"
 
-#: src/kgx-application.c:695
+#: src/kgx-application.c:701
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- KOMUT [ARGÜMAN...]]"
 
@@ -274,7 +194,7 @@ msgstr "Renk dizgesi yanlış uzunlukta"
 
 #: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
 #: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
-#: src/kgx-drop-target.c:506
+#: src/kgx-drop-target.c:509
 msgctxt "toast-message"
 msgid "Drop Failed"
 msgstr "Bırakma Başarısız"
@@ -306,7 +226,7 @@ msgstr ""
 "Metin bırakımı alınırken beklenmedik hata oluştu. Eğer hatayı "
 "bildirecekseniz lütfen şu bilgileri ekleyin."
 
-#: src/kgx-drop-target.c:509
+#: src/kgx-drop-target.c:512
 msgctxt "spad-message"
 msgid ""
 "An unexpected value was received. Please include the following information "
@@ -329,7 +249,7 @@ msgstr "XTerm"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:478
+#: src/kgx-pages.c:495
 #, c-format
 msgid "Tab %i"
 msgstr "Sekme %i"
@@ -396,7 +316,7 @@ msgstr "Hata İletisi"
 msgid "Copy Error Message"
 msgstr "Hata İletisini Kopyala"
 
-#: src/kgx-spad.ui:100
+#: src/kgx-spad.ui:104
 msgid "Report _Issue"
 msgstr "_Sorun Bildir"
 
@@ -424,11 +344,11 @@ msgstr "Komut tamamlandı"
 msgid "Find text"
 msgstr "Metin bul"
 
-#: src/kgx-tab.ui:53
+#: src/kgx-tab.ui:70
 msgid "Previous Match"
 msgstr "Önceki Eşleşme"
 
-#: src/kgx-tab.ui:61
+#: src/kgx-tab.ui:78
 msgid "Next Match"
 msgstr "Sonraki Eşleşme"
 
@@ -446,8 +366,8 @@ msgid ""
 "The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
 "are installed."
 msgstr ""
-"“<a href=\"%s\">%s</a>” bağlantısı “%s” iletişim kuralını kullanıyor, bunu açacak "
-"uygulama kurulu değil."
+"“<a href=\"%s\">%s</a>” bağlantısı “%s” iletişim kuralını kullanıyor, bunu "
+"açacak uygulama kurulu değil."
 
 #: src/kgx-terminal.c:373
 #, c-format
@@ -456,8 +376,8 @@ msgid ""
 "An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
 "a>”. Please include the following information if you report the error."
 msgstr ""
-"“<a href=\"%s\">%s</a>” bağlantısı açılırken beklenmedik hata oluştu."
-"Eğer hatayı bildirecekseniz lütfen şu bilgileri ekleyin."
+"“<a href=\"%s\">%s</a>” bağlantısı açılırken beklenmedik hata oluştu.Eğer "
+"hatayı bildirecekseniz lütfen şu bilgileri ekleyin."
 
 #: src/kgx-terminal.c:421
 #, c-format
@@ -489,8 +409,8 @@ msgid ""
 "An unexpected error occurred whilst reading the clipboard. Please include "
 "the following information if you report the error."
 msgstr ""
-"Pano okunurken beklenmedik hata oluştu. Eğer hatayı "
-"bildirecekseniz lütfen şu bilgileri ekleyin."
+"Pano okunurken beklenmedik hata oluştu. Eğer hatayı bildirecekseniz lütfen "
+"şu bilgileri ekleyin."
 
 #: src/kgx-terminal.c:575
 msgctxt "toast-message"
@@ -503,8 +423,8 @@ msgid ""
 "An unexpected error occurred whilst showing the file. Please include the "
 "following information if you report the error."
 msgstr ""
-"Dosya gösterilirken beklenmedik hata oluştu. Eğer hatayı "
-"bildirecekseniz lütfen şu bilgileri ekleyin."
+"Dosya gösterilirken beklenmedik hata oluştu. Eğer hatayı bildirecekseniz "
+"lütfen şu bilgileri ekleyin."
 
 #: src/kgx-terminal.c:599
 msgctxt "toast-message"
@@ -517,8 +437,8 @@ msgid ""
 "An unexpected error occurred whilst opening the folder. Please include the "
 "following information if you report the error."
 msgstr ""
-"Klasör açılırken beklenmedik hata oluştu. Eğer hatayı "
-"bildirecekseniz lütfen şu bilgileri ekleyin."
+"Klasör açılırken beklenmedik hata oluştu. Eğer hatayı bildirecekseniz lütfen "
+"şu bilgileri ekleyin."
 
 #: src/kgx-terminal.c:696
 #, c-format
@@ -538,8 +458,8 @@ msgid ""
 "An unexpected error occurred whilst processing the clipboard. Please include "
 "the following information if you report the error."
 msgstr ""
-"Pano işlenirken beklenmedik hata oluştu. Eğer hatayı "
-"bildirecekseniz lütfen şu bilgileri ekleyin."
+"Pano işlenirken beklenmedik hata oluştu. Eğer hatayı bildirecekseniz lütfen "
+"şu bilgileri ekleyin."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -557,7 +477,11 @@ msgstr "_Kopyala"
 msgid "_Select All"
 msgstr "Tümünü _Seç"
 
-#: src/kgx-terminal.ui:36
+#: src/kgx-terminal.ui:36 src/kgx-window.ui:285
+msgid "Leave _Fullscreen"
+msgstr "Tam Ekranı _Kapat"
+
+#: src/kgx-terminal.ui:43
 msgid "Show in _Files"
 msgstr "_Dosyalarʼda Göster"
 
@@ -582,7 +506,7 @@ msgstr "--command için eksik argüman"
 msgid "Cannot use both --command and positional parameters"
 msgstr "--command ve konumsal parametreler birlikte kullanılamaz"
 
-#: src/kgx-window.ui:17
+#: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
 msgstr "_Yeni Pencere"
 
@@ -590,35 +514,43 @@ msgstr "_Yeni Pencere"
 msgid "_Show All Tabs"
 msgstr "Tüm _Sekmeleri Göster"
 
-#: src/kgx-window.ui:30
+#: src/kgx-window.ui:28 src/kgx-window.ui:280
+msgid "_Fullscreen"
+msgstr "_Tam Ekran"
+
+#: src/kgx-window.ui:35
 msgid "_Preferences"
 msgstr "Ter_cihler"
 
-#: src/kgx-window.ui:34
+#: src/kgx-window.ui:39
 msgid "_Keyboard Shortcuts"
 msgstr "_Klavye Kısayolları"
 
-#: src/kgx-window.ui:38
+#: src/kgx-window.ui:43
 msgid "_About Console"
 msgstr "Konsol _Hakkında"
 
-#: src/kgx-window.ui:91
+#: src/kgx-window.ui:148
 msgid "Find in Terminal"
 msgstr "Uçbirimde Bul"
 
-#: src/kgx-window.ui:98
+#: src/kgx-window.ui:160
+msgid "Leave Fullscreen"
+msgstr "Tam Ekranı Kapat"
+
+#: src/kgx-window.ui:167
 msgid "Main Menu"
 msgstr "Ana Menü"
 
-#: src/kgx-window.ui:116
+#: src/kgx-window.ui:185
 msgid "Shrink Text"
 msgstr "Metni Daralt"
 
-#: src/kgx-window.ui:127
+#: src/kgx-window.ui:196
 msgid "Reset Size"
 msgstr "Boyutu Sıfırla"
 
-#: src/kgx-window.ui:151
+#: src/kgx-window.ui:220
 msgid "Enlarge Text"
 msgstr "Metni Genişlet"
 
@@ -646,7 +578,7 @@ msgstr "Yazı Tipi Ön İzle"
 msgid "Font Size"
 msgstr "Yazı Tipi Boyutu"
 
-#: src/preferences/kgx-preferences-window.c:125
+#: src/preferences/kgx-preferences-window.c:126
 msgid "No Font Set"
 msgstr "Yazı Tipi Ayarlanmadı"
 
@@ -666,26 +598,106 @@ msgstr "_Sistem Öntanımlısını Kullan"
 msgid "Custom _Font"
 msgstr "Özel _Yazı Tipi"
 
-#: src/preferences/kgx-preferences-window.ui:63
+#: src/preferences/kgx-preferences-window.ui:61
 msgid "Behaviour"
 msgstr "Davranış"
 
-#: src/preferences/kgx-preferences-window.ui:66
+#: src/preferences/kgx-preferences-window.ui:64
 msgid "_Unlimited Scrollback"
 msgstr "_Sınırsız Geri Kaydırma"
 
-#: src/preferences/kgx-preferences-window.ui:72
+#: src/preferences/kgx-preferences-window.ui:70
 msgid "_Scrollback Lines"
 msgstr "Satırları _Geri Kaydır"
 
-#: src/preferences/kgx-preferences-window.ui:92
+#: src/preferences/kgx-preferences-window.ui:90
 msgid "Terminal Bell"
 msgstr "Uçbirim Zili"
 
-#: src/preferences/kgx-preferences-window.ui:95
+#: src/preferences/kgx-preferences-window.ui:93
 msgid "Play _Sound"
 msgstr "Ses _Çal"
 
-#: src/preferences/kgx-preferences-window.ui:101
+#: src/preferences/kgx-preferences-window.ui:99
 msgid "_Visual Effects"
 msgstr "Görsel _Etkiler"
+
+#: src/shortcuts-dialog.ui:7
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Uygulama"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Yeni Pencere"
+
+#: src/shortcuts-dialog.ui:18
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Uçbirim"
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Bul"
+
+#: src/shortcuts-dialog.ui:27
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Kopyala"
+
+#: src/shortcuts-dialog.ui:33
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Yapıştır"
+
+#: src/shortcuts-dialog.ui:41
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Sekmeler"
+
+#: src/shortcuts-dialog.ui:44
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Yeni Sekme"
+
+#: src/shortcuts-dialog.ui:50
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Sekmeyi Kapat"
+
+#: src/shortcuts-dialog.ui:56
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Tüm Sekmeleri Göster"
+
+#: src/shortcuts-dialog.ui:62
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Sonraki Sekme"
+
+#: src/shortcuts-dialog.ui:68
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Önceki Sekme"
+
+#: src/shortcuts-dialog.ui:74 src/shortcuts-dialog.ui:95
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Sekmeyi Sola Taşı"
+
+#: src/shortcuts-dialog.ui:81 src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "Sekmeyi Sağa Taşı"
+
+#: src/shortcuts-dialog.ui:102
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "1-9. Sekmeye Geç"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "10. Sekmeye Geç"
