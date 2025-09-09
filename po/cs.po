@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-08-17 03:04+0000\n"
-"PO-Revision-Date: 2025-08-17 12:14+0200\n"
+"POT-Creation-Date: 2025-09-09 11:51+0000\n"
+"PO-Revision-Date: 2025-09-09 17:06+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 #: data/org.gnome.Console.desktop.in.in:2 data/org.gnome.Console.metainfo.xml.in.in:8
 #: src/kgx-application.h:26 src/kgx-window.ui:52
@@ -52,7 +52,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Terminálové okno"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:503 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Projekt GNOME"
 
@@ -477,7 +477,7 @@ msgstr "Zkopírovat adresu o_dkazu"
 
 #: src/kgx-terminal.ui:19
 msgid "_Copy"
-msgstr "Z_kopírovat"
+msgstr "_Kopírovat"
 
 #: src/kgx-terminal.ui:29
 msgid "_Select All"
@@ -651,7 +651,7 @@ msgstr "Hledat"
 #: src/shortcuts-dialog.ui:27
 msgctxt "shortcut window"
 msgid "Copy"
-msgstr "Zkopírovat"
+msgstr "Kopírovat"
 
 #: src/shortcuts-dialog.ui:33
 msgctxt "shortcut window"
