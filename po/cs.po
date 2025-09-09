@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-09-11 22:34+0000\n"
-"PO-Revision-Date: 2024-09-15 12:20+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
+"POT-Creation-Date: 2025-09-03 02:36+0000\n"
+"PO-Revision-Date: 2025-09-09 17:10+0200\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -17,25 +17,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.7\n"
 
-#: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
+#: data/org.gnome.Console.desktop.in.in:2 data/org.gnome.Console.metainfo.xml.in.in:8
+#: src/kgx-application.h:26
 msgid "Console"
 msgstr "Konzola"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Console.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"příkaz;výzva;cmd;command;prompt;commandline;cli;spustit;spouštění;shell;"
-"terminál;kgx;kings cross;"
+"příkaz;výzva;cmd;command;prompt;commandline;cli;spustit;spouštění;shell;terminál;kgx;kings "
+"cross;"
 
-#: data/org.gnome.Console.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
 msgstr "Nové okno"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
+#: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:176
 msgid "New Tab"
 msgstr "Nová karta"
 
@@ -46,14 +46,13 @@ msgstr "Emulátor terminálu"
 #: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr ""
-"Jednoduchý, uživatelsky přívětivý emulátor terminálu pro uživatelské "
-"prostředí GNOME."
+"Jednoduchý, uživatelsky přívětivý emulátor terminálu pro uživatelské prostředí GNOME."
 
-#: data/org.gnome.Console.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "Terminálové okno"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:434 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:504 src/kgx-window.c:561
 msgid "The GNOME Project"
 msgstr "Projekt GNOME"
 
@@ -80,7 +79,7 @@ msgstr "Hledat"
 #: src/help-overlay.ui:33
 msgctxt "shortcut window"
 msgid "Copy"
-msgstr "Zkopírovat"
+msgstr "Kopírovat"
 
 #: src/help-overlay.ui:39
 msgctxt "shortcut window"
@@ -138,7 +137,7 @@ msgid "Switch to Tab 10"
 msgstr "Přepnout na kartu 10"
 
 #. Translators: %s is the year range
-#: src/kgx-about.c:83 src/kgx-window.c:529
+#: src/kgx-about.c:83 src/kgx-window.c:556
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -154,62 +153,62 @@ msgstr "GPL 3.0 nebo novější"
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s používá VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:255
+#: src/kgx-application.c:283
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr "Parametry s pozicí a --working-directory nelze použít naráz"
 
-#: src/kgx-application.c:443
+#: src/kgx-application.c:503
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Provést argument této volby jako příkaz uvnitř terminálu"
 
-#: src/kgx-application.c:444
+#: src/kgx-application.c:504
 msgid "COMMAND"
 msgstr "PŘÍKAZ"
 
-#: src/kgx-application.c:452
+#: src/kgx-application.c:512
 msgid "Set the working directory"
 msgstr "Nastavit pracovní složku"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:454
+#: src/kgx-application.c:514
 msgid "DIRNAME"
 msgstr "SLOŽKA"
 
-#: src/kgx-application.c:462
+#: src/kgx-application.c:522
 msgid "Wait until the child exits (TODO)"
 msgstr "Počkat, dokud potomek neskončí (NENÍ HOTOVÉ)"
 
-#: src/kgx-application.c:471
+#: src/kgx-application.c:531
 msgid "Set the initial window title"
 msgstr "Nastavit oknu počáteční titulek"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:532
 msgid "TITLE"
 msgstr "TITULEK"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:540
 msgid "ADVANCED: Set the shell to launch"
 msgstr "POKROČILÉ: Nastavit shell, který se má spustit"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:541
 msgid "SHELL"
 msgstr "SHELL"
 
-#: src/kgx-application.c:489
+#: src/kgx-application.c:549
 msgid "ADVANCED: Set the scrollback length"
 msgstr "POKROČILÉ: Nastavit délku historie pro posuv zpět"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:550
 msgid "LINES"
 msgstr "ŘÁDKŮ"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:644
+#: src/kgx-application.c:688
 #, c-format
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — Emulátor terminálu"
 
-#: src/kgx-application.c:650
+#: src/kgx-application.c:694
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- PŘÍKAZ [ARGUMENTY…]]"
 
@@ -219,20 +218,20 @@ msgstr "Zavřít okno?"
 
 #: src/kgx-close-dialog.c:75
 msgid ""
-"A command is still running, closing this window will kill it and may lead to "
-"unexpected outcomes"
+"A command is still running, closing this window will kill it and may lead to unexpected "
+"outcomes"
 msgid_plural ""
-"Some commands are still running, closing this window will kill them and may "
-"lead to unexpected outcomes"
+"Some commands are still running, closing this window will kill them and may lead to "
+"unexpected outcomes"
 msgstr[0] ""
-"Příkaz doposud běží, zavřením tohoto okna jej zabijete, což může vést k "
-"neočekávaným důsledkům"
+"Příkaz doposud běží, zavřením tohoto okna jej zabijete, což může vést k neočekávaným "
+"důsledkům"
 msgstr[1] ""
-"Některé příkazy doposud běží, zavřením tohoto okna je zabijete, což může "
-"vést k neočekávaným důsledkům"
+"Některé příkazy doposud běží, zavřením tohoto okna je zabijete, což může vést k "
+"neočekávaným důsledkům"
 msgstr[2] ""
-"Některé příkazy doposud běží, zavřením tohoto okna je zabijete, což může "
-"vést k neočekávaným důsledkům"
+"Některé příkazy doposud běží, zavřením tohoto okna je zabijete, což může vést k "
+"neočekávaným důsledkům"
 
 #: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
@@ -240,20 +239,20 @@ msgstr "Zavřít kartu?"
 
 #: src/kgx-close-dialog.c:84
 msgid ""
-"A command is still running, closing this tab will kill it and may lead to "
-"unexpected outcomes"
+"A command is still running, closing this tab will kill it and may lead to unexpected "
+"outcomes"
 msgid_plural ""
-"Some commands are still running, closing this tab will kill them and may "
-"lead to unexpected outcomes"
+"Some commands are still running, closing this tab will kill them and may lead to "
+"unexpected outcomes"
 msgstr[0] ""
-"Příkaz doposud běží, zavřením této karty jej zabijete, což může vést k "
-"neočekávaným důsledkům"
+"Příkaz doposud běží, zavřením této karty jej zabijete, což může vést k neočekávaným "
+"důsledkům"
 msgstr[1] ""
-"Některé příkazy doposud běží, zavřením této karty je zabijete, což může vést "
-"k neočekávaným důsledkům"
+"Některé příkazy doposud běží, zavřením této karty je zabijete, což může vést k "
+"neočekávaným důsledkům"
 msgstr[2] ""
-"Některé příkazy doposud běží, zavřením této karty je zabijete, což může vést "
-"k neočekávaným důsledkům"
+"Některé příkazy doposud běží, zavřením této karty je zabijete, což může vést k "
+"neočekávaným důsledkům"
 
 #. Translators: Screen reader label for the list of running commands
 #: src/kgx-close-dialog.c:194
@@ -289,7 +288,7 @@ msgstr "XTerm"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:471
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "Karta %i"
@@ -320,7 +319,7 @@ msgstr "Vkládáte příkaz, který běží pod administrátorským účtem"
 msgid "_Paste"
 msgstr "V_ložit"
 
-#: src/kgx-process.c:192
+#: src/kgx-process.c:196
 #, c-format
 msgid "Process %d"
 msgstr "Proces %d"
@@ -332,17 +331,17 @@ msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Selhalo spuštění</b> — %s"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:814
+#: src/kgx-tab.c:784
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Jen ke čtení</b> — příkaz skončil s kódem %i"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:822
+#: src/kgx-tab.c:792
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Jen ke čtení</b> — příkaz skončil"
 
-#: src/kgx-tab.c:842
+#: src/kgx-tab.c:812
 msgid "Command completed"
 msgstr "Příkaz byl dokončen"
 
@@ -358,7 +357,7 @@ msgstr "Předchozí shoda"
 msgid "Next Match"
 msgstr "Následující shoda"
 
-#: src/kgx-terminal.c:508
+#: src/kgx-terminal.c:510
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -377,7 +376,7 @@ msgstr "Zkopírovat o_dkaz"
 
 #: src/kgx-terminal.ui:19
 msgid "_Copy"
-msgstr "Z_kopírovat"
+msgstr "_Kopírovat"
 
 #: src/kgx-terminal.ui:29
 msgid "_Select All"
@@ -387,29 +386,29 @@ msgstr "_Vybrat vše"
 msgid "Show in _Files"
 msgstr "Zobrazit v _Souborech"
 
-#: src/kgx-theme-switcher.ui:16
+#: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
 msgstr "Řídit se systémovým stylem"
 
-#: src/kgx-theme-switcher.ui:44
+#: src/kgx-theme-switcher.ui:52
 msgid "Light Style"
 msgstr "Světlý styl"
 
-#: src/kgx-theme-switcher.ui:71
+#: src/kgx-theme-switcher.ui:79
 msgid "Dark Style"
 msgstr "Tmavý styl"
 
 #. Translators: ‘command’ is the argument name, and shouldn't be translated
-#: src/kgx-utils.c:113
+#: src/kgx-utils.c:114
 msgid "Missing argument for --command"
 msgstr "Chybí argument pro --command"
 
-#: src/kgx-utils.c:128
+#: src/kgx-utils.c:129
 msgid "Cannot use both --command and positional parameters"
 msgstr "Parametry s pozicí a --command nelze použít naráz"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:541
+#: src/kgx-window.c:568
 msgid "translator-credits"
 msgstr "Marek Černocký <marek@manet.cz>"
 
@@ -433,23 +432,23 @@ msgstr "_Klávesové zkratky"
 msgid "_About Console"
 msgstr "O _aplikaci Konzola"
 
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:90
 msgid "Find in Terminal"
 msgstr "Hledat v terminálu"
 
-#: src/kgx-window.ui:95
+#: src/kgx-window.ui:97
 msgid "Main Menu"
 msgstr "Hlavní nabídka"
 
-#: src/kgx-window.ui:113
+#: src/kgx-window.ui:115
 msgid "Shrink Text"
 msgstr "Zmenšit text"
 
-#: src/kgx-window.ui:124
+#: src/kgx-window.ui:126
 msgid "Reset Size"
 msgstr "Výchozí velikost"
 
-#: src/kgx-window.ui:148
+#: src/kgx-window.ui:150
 msgid "Enlarge Text"
 msgstr "Zvětšit text"
 
