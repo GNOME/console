@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-09-10 11:40+0000\n"
-"PO-Revision-Date: 2025-09-11 12:43-0300\n"
+"POT-Creation-Date: 2025-09-11 16:23+0000\n"
+"PO-Revision-Date: 2025-09-11 18:30-0300\n"
 "Last-Translator: Emilio Sepúlveda <emism.translations@gmail.com>\n"
 "Language-Team: Interlingua <softinterlingua@gmail.com>\n"
 "Language: ia\n"
@@ -28,12 +28,14 @@ msgstr ""
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
 #: src/kgx-window.ui:52
 msgid "Console"
-msgstr ""
+msgstr "Consola"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
+"commando;prompt;cmd;linea de commandos;executar;shell;terminal;kgx;kings "
+"cross;"
 
 #: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
@@ -62,7 +64,7 @@ msgstr "Le projecto GNOME"
 
 #: src/kgx-about.c:104
 msgid "GPL 3.0 or later"
-msgstr ""
+msgstr "GPL 3.0 o ulterior"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. * version of KGX itself, the latter format is the VTE version
@@ -88,20 +90,20 @@ msgstr "Non se pote usar ambes --working-directory e parametros positional"
 
 #: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
-msgstr ""
+msgstr "Executa le argumento a iste option intra le terminal"
 
 #: src/kgx-application.c:510
 msgid "COMMAND"
-msgstr ""
+msgstr "COMMANDO"
 
 #: src/kgx-application.c:518
 msgid "Set the working directory"
-msgstr ""
+msgstr "Defini le directorio de travalio"
 
 #. Translators: Placeholder of for a given directory
 #: src/kgx-application.c:520
 msgid "DIRNAME"
-msgstr ""
+msgstr "NOMINEDIR"
 
 #: src/kgx-application.c:528
 msgid "Wait until the child exits (TODO)"
@@ -109,19 +111,19 @@ msgstr ""
 
 #: src/kgx-application.c:537
 msgid "Set the initial window title"
-msgstr ""
+msgstr "Defini le titulo initial de fenestra"
 
 #: src/kgx-application.c:538
 msgid "TITLE"
-msgstr ""
+msgstr "TITULO"
 
 #: src/kgx-application.c:546
 msgid "ADVANCED: Set the shell to launch"
-msgstr ""
+msgstr "AVANTIATE: Defini le interpretator a lancear"
 
 #: src/kgx-application.c:547
 msgid "SHELL"
-msgstr ""
+msgstr "INTERPRETATOR"
 
 #: src/kgx-application.c:555
 msgid "ADVANCED: Set the scrollback length"
@@ -129,17 +131,17 @@ msgstr ""
 
 #: src/kgx-application.c:556
 msgid "LINES"
-msgstr ""
+msgstr "LINEAS"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
 #: src/kgx-application.c:695
 #, c-format
 msgid "KGX %s — Terminal Emulator"
-msgstr ""
+msgstr "KGX %s — Emulator de terminal"
 
 #: src/kgx-application.c:701
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
-msgstr ""
+msgstr "[-e|-- COMMANDO [ARGUMENTO...]]"
 
 #: src/kgx-close-dialog.c:73
 msgid "Close Window?"
@@ -327,22 +329,22 @@ msgstr "Commando completate"
 
 #: src/kgx-tab.ui:42
 msgid "Find text"
-msgstr ""
+msgstr "Cerca texto"
 
 #: src/kgx-tab.ui:70
 msgid "Previous Match"
-msgstr ""
+msgstr "Coincidentia precedente"
 
 #: src/kgx-tab.ui:78
 msgid "Next Match"
-msgstr ""
+msgstr "Coincidentia sequente"
 
 #. Translators: The user ctrl-clicked, or used ‘Open Link’, on a URI that,
 #. *              for whatever reason, we were unable to open.
 #: src/kgx-terminal.c:39
 msgctxt "toast-message"
 msgid "Couldn't Open Link"
-msgstr ""
+msgstr "Non poteva aperir le ligamine"
 
 #: src/kgx-terminal.c:360
 #, c-format
@@ -379,7 +381,7 @@ msgstr ""
 #: src/kgx-terminal.c:511
 msgctxt "toast-message"
 msgid "Couldn't Paste Text"
-msgstr ""
+msgstr "Non poteva collar le texto"
 
 #: src/kgx-terminal.c:514
 msgctxt "spad-message"
@@ -391,7 +393,7 @@ msgstr ""
 #: src/kgx-terminal.c:575
 msgctxt "toast-message"
 msgid "Couldn't Show File"
-msgstr ""
+msgstr "Non poteva monstrar le file"
 
 #: src/kgx-terminal.c:578
 msgctxt "spad-message"
@@ -403,7 +405,7 @@ msgstr ""
 #: src/kgx-terminal.c:599
 msgctxt "toast-message"
 msgid "Couldn't Open Folder"
-msgstr ""
+msgstr "Non poteva aperir le dossier"
 
 #: src/kgx-terminal.c:602
 msgctxt "spad-message"
@@ -422,7 +424,7 @@ msgstr ""
 #: src/kgx-terminal.c:984
 msgctxt "toast-message"
 msgid "Couldn't Paste"
-msgstr ""
+msgstr "Non poteva collar"
 
 #: src/kgx-terminal.c:987
 msgctxt "spad-message"
@@ -470,7 +472,7 @@ msgstr "Stilo obscur"
 #. Translators: ‘command’ is the argument name, and shouldn't be translated
 #: src/kgx-utils.c:114
 msgid "Missing argument for --command"
-msgstr ""
+msgstr "Argumento perdite pro --command"
 
 #: src/kgx-utils.c:129
 msgid "Cannot use both --command and positional parameters"
@@ -514,7 +516,7 @@ msgstr "Menu principal"
 
 #: src/kgx-window.ui:185
 msgid "Shrink Text"
-msgstr ""
+msgstr "Diminuer le texto"
 
 #: src/kgx-window.ui:196
 msgid "Reset Size"
@@ -522,7 +524,7 @@ msgstr "Reinitialisar dimension"
 
 #: src/kgx-window.ui:220
 msgid "Enlarge Text"
-msgstr ""
+msgstr "Aggrandir le texto"
 
 #: src/preferences/kgx-font-picker.ui:11
 msgid "Terminal Font"
@@ -562,7 +564,7 @@ msgstr "Typo de litteras"
 
 #: src/preferences/kgx-preferences-window.ui:13
 msgid "Use _System Default"
-msgstr ""
+msgstr "Usar predefinite del _systema"
 
 #: src/preferences/kgx-preferences-window.ui:19
 msgid "Custom _Font"
@@ -582,7 +584,7 @@ msgstr ""
 
 #: src/preferences/kgx-preferences-window.ui:90
 msgid "Terminal Bell"
-msgstr ""
+msgstr "Campana de terminal"
 
 #: src/preferences/kgx-preferences-window.ui:93
 msgid "Play _Sound"
@@ -670,4 +672,4 @@ msgstr "Cambiar al scheda 1–9"
 #: src/shortcuts-dialog.ui:108
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
-msgstr ""
+msgstr "Cambiar al scheda 10"
