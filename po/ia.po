@@ -1,0 +1,673 @@
+# Interlingua translation for console.
+# Copyright (C) 2025 console's COPYRIGHT HOLDER
+# This file is distributed under the same license as the console package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Emilio Sepúlveda <emism.translations@gmail.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: console main\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
+"POT-Creation-Date: 2025-09-10 11:40+0000\n"
+"PO-Revision-Date: 2025-09-11 12:43-0300\n"
+"Last-Translator: Emilio Sepúlveda <emism.translations@gmail.com>\n"
+"Language-Team: Interlingua <softinterlingua@gmail.com>\n"
+"Language: ia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-DL-Lang: ia\n"
+"X-DL-Module: console\n"
+"X-DL-Branch: main\n"
+"X-DL-Domain: po\n"
+"X-DL-State: Translating\n"
+"X-Generator: Gtranslator 48.0\n"
+
+#: data/org.gnome.Console.desktop.in.in:2
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
+#: src/kgx-window.ui:52
+msgid "Console"
+msgstr ""
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Console.desktop.in.in:7
+msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
+msgstr ""
+
+#: data/org.gnome.Console.desktop.in.in:20
+msgid "New Window"
+msgstr "Nove fenestra"
+
+#: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:246
+msgid "New Tab"
+msgstr "Nove scheda"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
+msgid "Terminal Emulator"
+msgstr "Emulator de terminal"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:11
+msgid "A simple user-friendly terminal emulator for the GNOME desktop."
+msgstr ""
+"Un emulator de terminal simple e amicabile al usator pro le scriptorio GNOME"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:26
+msgid "Terminal window"
+msgstr "Fenestra de terminal"
+
+#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
+msgid "The GNOME Project"
+msgstr "Le projecto GNOME"
+
+#: src/kgx-about.c:104
+msgid "GPL 3.0 or later"
+msgstr ""
+
+#. Translators: The leading # is intentional, the initial %s is the
+#. * version of KGX itself, the latter format is the VTE version
+#: src/kgx-about.c:119
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s usante VTE %u.%u.%u %s\n"
+
+#. Translators: %s is the year range
+#: src/kgx-about.c:148
+#, c-format
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
+
+#. Translators: Credit yourself here
+#: src/kgx-about.c:176
+msgid "translator-credits"
+msgstr "Emilio Sepúlveda <emism.translations@gmail.com>"
+
+#: src/kgx-application.c:289
+msgid "Cannot use both --working-directory and positional parameters"
+msgstr "Non se pote usar ambes --working-directory e parametros positional"
+
+#: src/kgx-application.c:509
+msgid "Execute the argument to this option inside the terminal"
+msgstr ""
+
+#: src/kgx-application.c:510
+msgid "COMMAND"
+msgstr ""
+
+#: src/kgx-application.c:518
+msgid "Set the working directory"
+msgstr ""
+
+#. Translators: Placeholder of for a given directory
+#: src/kgx-application.c:520
+msgid "DIRNAME"
+msgstr ""
+
+#: src/kgx-application.c:528
+msgid "Wait until the child exits (TODO)"
+msgstr ""
+
+#: src/kgx-application.c:537
+msgid "Set the initial window title"
+msgstr ""
+
+#: src/kgx-application.c:538
+msgid "TITLE"
+msgstr ""
+
+#: src/kgx-application.c:546
+msgid "ADVANCED: Set the shell to launch"
+msgstr ""
+
+#: src/kgx-application.c:547
+msgid "SHELL"
+msgstr ""
+
+#: src/kgx-application.c:555
+msgid "ADVANCED: Set the scrollback length"
+msgstr ""
+
+#: src/kgx-application.c:556
+msgid "LINES"
+msgstr ""
+
+#. Translators: %s is the version string, KGX is a codename and should be left as-is
+#: src/kgx-application.c:695
+#, c-format
+msgid "KGX %s — Terminal Emulator"
+msgstr ""
+
+#: src/kgx-application.c:701
+msgid "[-e|-- COMMAND [ARGUMENT...]]"
+msgstr ""
+
+#: src/kgx-close-dialog.c:73
+msgid "Close Window?"
+msgstr "Clauder fenestra?"
+
+#: src/kgx-close-dialog.c:75
+msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this window will kill them and may "
+"lead to unexpected outcomes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/kgx-close-dialog.c:82
+msgid "Close Tab?"
+msgstr "Clauder scheda?"
+
+#: src/kgx-close-dialog.c:84
+msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this tab will kill them and may "
+"lead to unexpected outcomes"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:194
+msgid "Process list"
+msgstr "Lista de processos"
+
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
+#: src/preferences/kgx-font-picker.ui:22
+msgid "_Cancel"
+msgstr "_Cancellar"
+
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:207
+msgid "C_lose"
+msgstr "C_lauder"
+
+#: src/kgx-colour-utils.c:58
+msgid "Color string is wrong length"
+msgstr ""
+
+#: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
+#: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
+#: src/kgx-drop-target.c:509
+msgctxt "toast-message"
+msgid "Drop Failed"
+msgstr ""
+
+#: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a URI list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+
+#: src/kgx-drop-target.c:337
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a file list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+
+#: src/kgx-drop-target.c:371
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a text drop. Please include "
+"the following information if you report the error."
+msgstr ""
+
+#: src/kgx-drop-target.c:512
+msgctxt "spad-message"
+msgid ""
+"An unexpected value was received. Please include the following information "
+"if you report the error."
+msgstr ""
+
+#: src/kgx-livery-manager.c:193
+msgctxt "livery-name"
+msgid "Linux"
+msgstr "Linux"
+
+#: src/kgx-livery-manager.c:230
+msgctxt "livery-name"
+msgid "XTerm"
+msgstr "XTerm"
+
+#. Translators: %i is, from the users perspective, a random number.
+#. * this string will only be seen when the running program has
+#. * failed to set a title, and exists purely to avoid blank tabs
+#.
+#: src/kgx-pages.c:495
+#, c-format
+msgid "Tab %i"
+msgstr "Scheda %i"
+
+#: src/kgx-pages.ui:100
+msgid "_Detach Tab"
+msgstr ""
+
+#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+msgid "_Close"
+msgstr "_Clauder"
+
+#. Translators: %s is the (possibly truncated) command being pasted
+#: src/kgx-paste-dialog.c:76
+#, c-format
+msgid ""
+"Make sure you know what the command does:\n"
+"%s"
+msgstr ""
+
+#: src/kgx-paste-dialog.c:129
+msgid "You are pasting a command that runs as an administrator"
+msgstr ""
+
+#: src/kgx-paste-dialog.c:136 src/kgx-terminal.ui:24
+msgid "_Paste"
+msgstr "Co_llar"
+
+#: src/kgx-process.c:196
+#, c-format
+msgid "Process %d"
+msgstr "Processo %d"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-simple-tab.c:170
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Falleva le initio</b> — %s"
+
+#: src/kgx-spad.c:194
+msgid "Unable To Open"
+msgstr "Impossibile de aperir"
+
+#: src/kgx-spad.c:197
+#, c-format
+msgid ""
+"Opening ‘<a href=\"%s\">%s</a>’ failed:\n"
+"%s"
+msgstr ""
+
+#: src/kgx-spad.c:339 src/kgx-spad.ui:4
+msgid "Error Details"
+msgstr "Detalios de error"
+
+#: src/kgx-spad.ui:23
+msgid "Error Message"
+msgstr "Message de error"
+
+#: src/kgx-spad.ui:35
+msgid "Copy Error Message"
+msgstr "Copiar message de error"
+
+#: src/kgx-spad.ui:104
+msgid "Report _Issue"
+msgstr "Signalar _incidente"
+
+#: src/kgx-tab.c:597
+msgctxt "toast-button"
+msgid "_Details"
+msgstr "_Detalios"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:889
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr ""
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:897
+msgid "<b>Read Only</b> — Command exited"
+msgstr ""
+
+#: src/kgx-tab.c:917
+msgid "Command completed"
+msgstr "Commando completate"
+
+#: src/kgx-tab.ui:42
+msgid "Find text"
+msgstr ""
+
+#: src/kgx-tab.ui:70
+msgid "Previous Match"
+msgstr ""
+
+#: src/kgx-tab.ui:78
+msgid "Next Match"
+msgstr ""
+
+#. Translators: The user ctrl-clicked, or used ‘Open Link’, on a URI that,
+#. *              for whatever reason, we were unable to open.
+#: src/kgx-terminal.c:39
+msgctxt "toast-message"
+msgid "Couldn't Open Link"
+msgstr ""
+
+#: src/kgx-terminal.c:360
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
+"are installed."
+msgstr ""
+
+#: src/kgx-terminal.c:373
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
+"a>”. Please include the following information if you report the error."
+msgstr ""
+
+#: src/kgx-terminal.c:421
+#, c-format
+msgctxt "spad-message"
+msgid "The link “<a href=\"%s\">%s</a>” is malformed."
+msgstr ""
+
+#: src/kgx-terminal.c:440
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” points to a location on a different "
+"device.\n"
+"\n"
+"This device is “%s” and the location is on “%s”."
+msgstr ""
+
+#: src/kgx-terminal.c:511
+msgctxt "toast-message"
+msgid "Couldn't Paste Text"
+msgstr ""
+
+#: src/kgx-terminal.c:514
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst reading the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+
+#: src/kgx-terminal.c:575
+msgctxt "toast-message"
+msgid "Couldn't Show File"
+msgstr ""
+
+#: src/kgx-terminal.c:578
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst showing the file. Please include the "
+"following information if you report the error."
+msgstr ""
+
+#: src/kgx-terminal.c:599
+msgctxt "toast-message"
+msgid "Couldn't Open Folder"
+msgstr ""
+
+#: src/kgx-terminal.c:602
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the folder. Please include the "
+"following information if you report the error."
+msgstr ""
+
+#: src/kgx-terminal.c:696
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+
+#: src/kgx-terminal.c:984
+msgctxt "toast-message"
+msgid "Couldn't Paste"
+msgstr ""
+
+#: src/kgx-terminal.c:987
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst processing the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+
+#: src/kgx-terminal.ui:7
+msgid "_Open Link"
+msgstr "_Aperir ligamine"
+
+#: src/kgx-terminal.ui:12
+msgid "Copy _Link Address"
+msgstr "_Copiar adresse de ligamine"
+
+#: src/kgx-terminal.ui:19
+msgid "_Copy"
+msgstr "_Copiar"
+
+#: src/kgx-terminal.ui:29
+msgid "_Select All"
+msgstr "Seliger _toto"
+
+#: src/kgx-terminal.ui:36 src/kgx-window.ui:285
+msgid "Leave _Fullscreen"
+msgstr ""
+
+#: src/kgx-terminal.ui:43
+msgid "Show in _Files"
+msgstr "Monstrar in _files"
+
+#: src/kgx-theme-switcher.ui:24
+msgid "Follow System Style"
+msgstr "Sequer le stilo de systema"
+
+#: src/kgx-theme-switcher.ui:52
+msgid "Light Style"
+msgstr "Stilo clar"
+
+#: src/kgx-theme-switcher.ui:79
+msgid "Dark Style"
+msgstr "Stilo obscur"
+
+#. Translators: ‘command’ is the argument name, and shouldn't be translated
+#: src/kgx-utils.c:114
+msgid "Missing argument for --command"
+msgstr ""
+
+#: src/kgx-utils.c:129
+msgid "Cannot use both --command and positional parameters"
+msgstr ""
+
+#: src/kgx-window.ui:17 src/kgx-window.ui:274
+msgid "_New Window"
+msgstr "_Nove fenestra"
+
+#: src/kgx-window.ui:23
+msgid "_Show All Tabs"
+msgstr "Monstrar tote le _schedas"
+
+#: src/kgx-window.ui:28 src/kgx-window.ui:280
+msgid "_Fullscreen"
+msgstr "Schermo p_len"
+
+#: src/kgx-window.ui:35
+msgid "_Preferences"
+msgstr "_Preferentias"
+
+#: src/kgx-window.ui:39
+msgid "_Keyboard Shortcuts"
+msgstr "Vias breve de _claviero"
+
+#: src/kgx-window.ui:43
+msgid "_About Console"
+msgstr "_A proposito de Consola"
+
+#: src/kgx-window.ui:148
+msgid "Find in Terminal"
+msgstr "Cercar in terminal"
+
+#: src/kgx-window.ui:160
+msgid "Leave Fullscreen"
+msgstr ""
+
+#: src/kgx-window.ui:167
+msgid "Main Menu"
+msgstr "Menu principal"
+
+#: src/kgx-window.ui:185
+msgid "Shrink Text"
+msgstr ""
+
+#: src/kgx-window.ui:196
+msgid "Reset Size"
+msgstr "Reinitialisar dimension"
+
+#: src/kgx-window.ui:220
+msgid "Enlarge Text"
+msgstr ""
+
+#: src/preferences/kgx-font-picker.ui:11
+msgid "Terminal Font"
+msgstr "Typo de littera de terminal"
+
+#: src/preferences/kgx-font-picker.ui:29
+msgid "_Select"
+msgstr "_Seliger"
+
+#: src/preferences/kgx-font-picker.ui:45 src/preferences/kgx-font-picker.ui:48
+msgid "Font Name"
+msgstr "Nomine de typo de litteras"
+
+#: src/preferences/kgx-font-picker.ui:133
+msgid "Font Family"
+msgstr ""
+
+#: src/preferences/kgx-font-picker.ui:158
+msgid "Font Preview"
+msgstr "Previsualisation de typo de litteras"
+
+#: src/preferences/kgx-font-picker.ui:179
+msgid "Font Size"
+msgstr "Dimension "
+
+#: src/preferences/kgx-preferences-window.c:126
+msgid "No Font Set"
+msgstr "Necun typo de littera definite"
+
+#: src/preferences/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "General"
+
+#: src/preferences/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "Typo de litteras"
+
+#: src/preferences/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr ""
+
+#: src/preferences/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "Typo de litteras _personalisate"
+
+#: src/preferences/kgx-preferences-window.ui:61
+msgid "Behaviour"
+msgstr "Comportamento"
+
+#: src/preferences/kgx-preferences-window.ui:64
+msgid "_Unlimited Scrollback"
+msgstr ""
+
+#: src/preferences/kgx-preferences-window.ui:70
+msgid "_Scrollback Lines"
+msgstr ""
+
+#: src/preferences/kgx-preferences-window.ui:90
+msgid "Terminal Bell"
+msgstr ""
+
+#: src/preferences/kgx-preferences-window.ui:93
+msgid "Play _Sound"
+msgstr "Reproducer _sono"
+
+#: src/preferences/kgx-preferences-window.ui:99
+msgid "_Visual Effects"
+msgstr "Effectos _visual"
+
+#: src/shortcuts-dialog.ui:7
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Application"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Nove fenestra"
+
+#: src/shortcuts-dialog.ui:18
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Terminal"
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Cercar"
+
+#: src/shortcuts-dialog.ui:27
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Copiar"
+
+#: src/shortcuts-dialog.ui:33
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Collar"
+
+#: src/shortcuts-dialog.ui:41
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Schedas"
+
+#: src/shortcuts-dialog.ui:44
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Nove scheda"
+
+#: src/shortcuts-dialog.ui:50
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Clauder scheda"
+
+#: src/shortcuts-dialog.ui:56
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Monstrar tote le schedas"
+
+#: src/shortcuts-dialog.ui:62
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Scheda sequente"
+
+#: src/shortcuts-dialog.ui:68
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Scheda precedente"
+
+#: src/shortcuts-dialog.ui:74 src/shortcuts-dialog.ui:95
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Displaciar scheda al dextra"
+
+#: src/shortcuts-dialog.ui:81 src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "Displaciar scheda al sinistra"
+
+#: src/shortcuts-dialog.ui:102
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Cambiar al scheda 1–9"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr ""
