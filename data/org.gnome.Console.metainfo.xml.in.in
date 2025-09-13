@@ -27,6 +27,22 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="48.1" date="2025-09-13" type="stable">
+      <description>
+        <p>New Translations:</p>
+        <ul>
+          <li>Uighur</li>
+          <li>Uzbek (Latin)</li>
+        </ul>
+        <p>Updated Translations:</p>
+        <ul>
+          <li>Czech</li>
+          <li>Italian</li>
+          <li>Japanese</li>
+          <li>Romanian</li>
+        </ul>
+      </description>
+    </release>
     <release version="48.0.1" date="2025-03-16" type="stable" />
     <release version="48.0" date="2025-03-15" type="stable">
       <description>
