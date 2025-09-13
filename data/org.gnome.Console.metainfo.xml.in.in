@@ -27,6 +27,37 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="49.0" date="2025-09-13" type="stable">
+      <description>
+        <p>New Translations:</p>
+        <ul>
+          <li>Interlingua</li>
+        </ul>
+        <p>Updated Translations:</p>
+        <ul>
+          <li>Basque</li>
+          <li>British English</li>
+          <li>Catalan</li>
+          <li>Chinese (China)</li>
+          <li>Czech</li>
+          <li>Danish</li>
+          <li>Dutch</li>
+          <li>Esperanto</li>
+          <li>Finnish</li>
+          <li>Galician</li>
+          <li>Georgian</li>
+          <li>German</li>
+          <li>Hungarian</li>
+          <li>Japanese</li>
+          <li>Korean</li>
+          <li>Lithuanian</li>
+          <li>Spanish</li>
+          <li>Swedish</li>
+          <li>Turkish</li>
+          <li>Ukrainian</li>
+        </ul>
+      </description>
+    </release>
     <release version="49~rc" date="2025-08-31" type="development">
       <description>
         <p>Fullscreen mode is now supported, and error-handling has been much improved.</p>
