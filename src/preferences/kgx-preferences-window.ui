@@ -88,6 +88,7 @@
         <child>
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Terminal Bell</property>
+            <property name="description" translatable="yes">Control how alerts are indicated</property>
             <child>
               <object class="AdwSwitchRow" id="audible_bell">
                 <property name="title" translatable="yes">Play _Sound</property>
