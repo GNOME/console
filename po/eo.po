@@ -1,14 +1,14 @@
 # Esperanto translation for console.
 # Copyright (C) 2023 console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the console package.
-# Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>, 2023.
+# Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>, 2023-2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-09-11 19:13+0000\n"
-"PO-Revision-Date: 2023-09-14 14:30+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
+"POT-Creation-Date: 2025-09-11 21:35+0000\n"
+"PO-Revision-Date: 2025-09-13 15:30+0200\n"
 "Last-Translator: Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>\n"
 "Language-Team: Esperanto <gnome-eo-list@gnome.org>\n"
 "Language: eo\n"
@@ -16,27 +16,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Generator: Gtranslator 42.0\n"
+"X-Generator: Gtranslator 48.0\n"
 
-#: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
+#: data/org.gnome.Console.desktop.in.in:2
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
+#: src/kgx-window.ui:52
 msgid "Console"
 msgstr "Konsolo"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Console.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr "komando;prompto;cmd;komentlinio;lanĉi;ŝelo;terminalo;"
 
-#: data/org.gnome.Console.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
 msgstr "Nova fenestro"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
+#: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:246
 msgid "New Tab"
 msgstr "Nova langeto"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:377
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "Terminalemulilo"
 
@@ -44,320 +45,214 @@ msgstr "Terminalemulilo"
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr "Simpla kaj uzantoamika terminalemulilo por la GNOME-labortablo."
 
-#: data/org.gnome.Console.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "Terminalfenestro"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:293 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
 msgid "The GNOME Project"
-msgstr "La GNOME-Projekto"
+msgstr "La GNOMO-Projekto"
 
-#: src/help-overlay.ui:12
-msgctxt "shortcut window"
-msgid "Application"
-msgstr "Aplikaĵo"
-
-#: src/help-overlay.ui:16
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "Nova fenestro"
-
-#: src/help-overlay.ui:23
-msgctxt "shortcut window"
-msgid "Terminal"
-msgstr "Terminalo"
-
-#: src/help-overlay.ui:27
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "Serĉi"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
-msgid "Copy"
-msgstr "Kopii"
-
-#: src/help-overlay.ui:39
-msgctxt "shortcut window"
-msgid "Paste"
-msgstr "Alglui"
-
-#: src/help-overlay.ui:46
-msgctxt "shortcut window"
-msgid "Tabs"
-msgstr "Langetoj"
-
-#: src/help-overlay.ui:50
-msgctxt "shortcut window"
-msgid "New Tab"
-msgstr "Nova langeto"
-
-#: src/help-overlay.ui:56
-msgctxt "shortcut window"
-msgid "Close Tab"
-msgstr "Fermi langeton"
-
-#: src/help-overlay.ui:62
-msgctxt "shortcut window"
-msgid "Show All Tabs"
-msgstr "Montri ĉiujn langetojn"
-
-#: src/help-overlay.ui:68
-msgctxt "shortcut window"
-msgid "Next Tab"
-msgstr "Sekva langeto"
-
-#: src/help-overlay.ui:74
-msgctxt "shortcut window"
-msgid "Previous Tab"
-msgstr "Antaŭa langeto"
-
-#: src/help-overlay.ui:80
-msgctxt "shortcut window"
-msgid "Move Tab Right"
-msgstr "Movi langeton dekstren"
-
-#: src/help-overlay.ui:86
-msgctxt "shortcut window"
-msgid "Move Tab Left"
-msgstr "Movi langeton maldekstren"
-
-#: src/help-overlay.ui:92
-msgctxt "shortcut window"
-msgid "Switch to Tab 1–9"
-msgstr "Ŝalti al langeto 1–9"
-
-#: src/help-overlay.ui:98
-msgctxt "shortcut window"
-msgid "Switch to Tab 10"
-msgstr "Ŝalti al langeto 10"
-
-#: src/kgx-application.c:252
-msgid "Cannot use both --command and positional parameters"
-msgstr "Ne povas uzi kaj --komando kaj pozician parametrojn samtempe"
+#: src/kgx-about.c:104
+msgid "GPL 3.0 or later"
+msgstr "GPL 3.0 aŭ pli nova"
 
 #. Translators: The leading # is intentional, the initial %s is the
-#. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:349
+#. * version of KGX itself, the latter format is the VTE version
+#: src/kgx-about.c:119
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s uzanta VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:452
+#: src/kgx-about.c:148
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander BROWN"
 
-#: src/kgx-application.c:379
-msgid "GPL 3.0 or later"
-msgstr "GPL 3.0 aŭ pli nova"
+#. Translators: Credit yourself here
+#: src/kgx-about.c:176
+msgid "translator-credits"
+msgstr "Kristjan SCHMIDT"
 
-#: src/kgx-application.c:444
+#: src/kgx-application.c:289
+msgid "Cannot use both --working-directory and positional parameters"
+msgstr "Ne povas uzi kaj --labor-dosierujo kaj poziciaj parametroj samtempe"
+
+#: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Plenumi la argumenton de tiu opcio en la terminalo"
 
-#: src/kgx-application.c:445
+#: src/kgx-application.c:510
 msgid "COMMAND"
 msgstr "KOMANDO"
 
-#: src/kgx-application.c:453
+#: src/kgx-application.c:518
 msgid "Set the working directory"
 msgstr "Agordi la laboran dosierujon"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:455
+#: src/kgx-application.c:520
 msgid "DIRNAME"
 msgstr "DOSIERUJO"
 
-#: src/kgx-application.c:463
+#: src/kgx-application.c:528
 msgid "Wait until the child exits (TODO)"
 msgstr "Atendi ĝis la infano eliras (TODO)"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:537
 msgid "Set the initial window title"
 msgstr "Agordi la komencan fenestran titolon"
 
-#: src/kgx-application.c:473
+#: src/kgx-application.c:538
 msgid "TITLE"
 msgstr "TITOLO"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:546
 msgid "ADVANCED: Set the shell to launch"
 msgstr "PROGESINTA: Agordi la ŝelon por lanĉi"
 
-#: src/kgx-application.c:482
+#: src/kgx-application.c:547
 msgid "SHELL"
 msgstr "ŜELO"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:555
 msgid "ADVANCED: Set the scrollback length"
 msgstr "PROGESINTA: Agordi la rulvica longecon"
 
-#: src/kgx-application.c:491
+#: src/kgx-application.c:556
 msgid "LINES"
 msgstr "LINIOJ"
 
-#: src/kgx-application.c:500
+#. Translators: %s is the version string, KGX is a codename and should be left as-is
+#: src/kgx-application.c:695
+msgid "KGX %s — Terminal Emulator"
+msgstr "KGX %s — Terminalemulilo"
+
+#: src/kgx-application.c:701
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- KOMANDO [ARGUMENTOJ...]]"
 
-#: src/kgx-close-dialog.c:50
+#: src/kgx-close-dialog.c:73
 msgid "Close Window?"
 msgstr "Ĉu fermi la fenestron?"
 
-#: src/kgx-close-dialog.c:51
+#: src/kgx-close-dialog.c:75
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"Kelkaj komandoj ankoraŭ funkcias, fermante tiun fenestron vi mortigos ilin "
+msgstr[0] ""
+"Unu komando ankoraŭ rulas, fermante tiun fenestron vi mortigos ĝin "
+"kaj eble kreas neatenditajn rezultojn"
+msgstr[1] ""
+"Kelkaj komandoj ankoraŭ rulas, fermante tiun fenestron vi mortigos ilin "
 "kaj eble kreas neatenditajn rezultojn"
 
-#: src/kgx-close-dialog.c:56
+#: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
 msgstr "Ĉu fermi la langeton?"
 
-#: src/kgx-close-dialog.c:57
+#: src/kgx-close-dialog.c:84
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr ""
-"Kelkaj komandoj ankoraŭ funkcias, fermante tiun langeton vi mortigos ilin "
+msgstr[0] ""
+"Unu komando ankoraŭ rulas, fermante tiun langeton vi mortigos ĝin "
+"kaj eble kreas neatenditajn rezultojn"
+msgstr[1] ""
+"Kelkaj komandoj ankoraŭ rulas, fermante tiun langeton vi mortigos ilin "
 "kaj eble kreas neatenditajn rezultojn"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:918
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:194
+msgid "Process list"
+msgstr "Listo de procesoj"
+
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
+#: src/preferences/kgx-font-picker.ui:22
 msgid "_Cancel"
 msgstr "_Nuligi"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:207
 msgid "C_lose"
 msgstr "_Fermi"
 
-#: src/kgx-font-picker.ui:12
-msgid "Terminal Font"
-msgstr "Terminalfonto"
+#: src/kgx-colour-utils.c:58
+msgid "Color string is wrong length"
+msgstr "La kolor-stringo havas malĝustan longecon"
 
-#: src/kgx-font-picker.ui:37
-msgid "_Select"
-msgstr "_Elekti"
+#: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
+#: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
+#: src/kgx-drop-target.c:509
+msgctxt "toast-message"
+msgid "Drop Failed"
+msgstr "Ŝovo malsukcesis"
 
-#: src/kgx-font-picker.ui:53 src/kgx-font-picker.ui:56
-msgid "Font Name"
-msgstr "Fontnomo"
+#: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a URI list drop. Please "
+"include the following information if you report the error."
+msgstr "Okazis neatendita eraro dum ricevo de URI-lista ŝovo. Bonvolu inkludi la sekvan informon se vi raportos la eraron."
 
-#: src/kgx-font-picker.ui:142
-msgid "Font Family"
-msgstr "Fontofamilio"
+#: src/kgx-drop-target.c:337
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a file list drop. Please "
+"include the following information if you report the error."
+msgstr "Okazis neatendita eraro dum ricevo de dosier-lista ŝovo. Bonvolu inkluzi la sekvan informon se vi raportos la eraron."
 
-#: src/kgx-font-picker.ui:167
-msgid "Font Preview"
-msgstr "Fonta antaŭvido"
+#: src/kgx-drop-target.c:371
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a text drop. Please include "
+"the following information if you report the error."
+msgstr "Okazis neatendita eraro dum ricevo de teksta ŝovo. Bonvolu inkluzi la sekvan informon se vi raportos la eraron."
 
-#: src/kgx-font-picker.ui:188
-msgid "Font Size"
-msgstr "Fontgrandeco"
+#: src/kgx-drop-target.c:512
+msgctxt "spad-message"
+msgid ""
+"An unexpected value was received. Please include the following information "
+"if you report the error."
+msgstr "Riceviĝis neatendita valoro. Bonvolu inkluzi la sekvan informon se vi raportos la eraron."
+
+#: src/kgx-livery-manager.c:193
+msgctxt "livery-name"
+msgid "Linux"
+msgstr "Linukso"
+
+#: src/kgx-livery-manager.c:230
+msgctxt "livery-name"
+msgid "XTerm"
+msgstr "XTerm"
 
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:424
+#: src/kgx-pages.c:495
 #, c-format
 msgid "Tab %i"
 msgstr "Langeto %i"
 
-#: src/kgx-pages.ui:90
+#: src/kgx-pages.ui:100
 msgid "_Detach Tab"
 msgstr "_Demeti langeton"
 
-#: src/kgx-pages.ui:96
+#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Fermi"
 
-#: src/kgx-preferences-window.c:122
-msgid "No Font Set"
-msgstr "Neniu fonto agordita"
-
-#: src/kgx-preferences-window.ui:7
-msgid "General"
-msgstr "Ĝenerala"
-
-#: src/kgx-preferences-window.ui:10
-msgid "Font"
-msgstr "Fonto"
-
-#: src/kgx-preferences-window.ui:13
-msgid "Use _System Default"
-msgstr "Uzi _sisteman defaŭlton"
-
-#: src/kgx-preferences-window.ui:19
-msgid "Custom _Font"
-msgstr "Propra _fonto"
-
-#: src/kgx-preferences-window.ui:59
-msgid "Terminal Bell"
-msgstr "Terminala kloŝo"
-
-#: src/kgx-preferences-window.ui:62
-msgid "Play _Sound"
-msgstr "Ludi _sonon"
-
-#: src/kgx-preferences-window.ui:68
-msgid "_Visual Effects"
-msgstr "_Videblaj efektoj"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:180
-#, c-format
-msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr "<b>Nurlega</b> — La komando eliris kun kodo %i"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:189
-msgid "<b>Read Only</b> — Command exited"
-msgstr "<b>Nurlega</b> — La komando eliris"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:222
-#, c-format
-msgid "<b>Failed to start</b> — %s"
-msgstr "<b>Malsukcesis lanĉi</b> — %s"
-
-#: src/kgx-tab.c:1091
-msgid "Command completed"
-msgstr "La komando kompletigita"
-
-#: src/kgx-tab.ui:25
-msgid "Find text"
-msgstr "Serĉi tekston"
-
-#: src/kgx-tab.ui:36
-msgid "Previous Match"
-msgstr "Antaŭa trovo"
-
-#: src/kgx-tab.ui:44
-msgid "Next Match"
-msgstr "Sekva trovo"
-
-#: src/kgx-terminal.c:585
-#, c-format
-msgid ""
-"Ctrl-click to open:\n"
-"%s"
-msgstr ""
-"Premu Ctrl-kaj-kliku por malfermi:\n"
-"%s"
-
-#: src/kgx-terminal.c:911
-msgid "You are pasting a command that runs as an administrator"
-msgstr "Vi algluas komandon, kiu funkcias kiel administranto"
-
-#. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:915
+#. Translators: %s is the (possibly truncated) command being pasted
+#: src/kgx-paste-dialog.c:76
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -366,16 +261,186 @@ msgstr ""
 "Certigu vin, ke vi scias, kion faras la komando:\n"
 "%s"
 
-#: src/kgx-terminal.c:919 src/kgx-terminal.ui:24
+#: src/kgx-paste-dialog.c:129
+msgid "You are pasting a command that runs as an administrator"
+msgstr "Vi algluas komandon, kiu funkcias kiel administranto"
+
+#: src/kgx-paste-dialog.c:136 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "_Alglui"
+
+#: src/kgx-process.c:196
+#, c-format
+msgid "Process %d"
+msgstr "Procezo %d"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-simple-tab.c:170
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>Malsukcesis lanĉi</b> — %s"
+
+#: src/kgx-spad.c:194
+msgid "Unable To Open"
+msgstr "Ne eblas malfermi"
+
+#: src/kgx-spad.c:197
+#, c-format
+msgid ""
+"Opening ‘<a href=\"%s\">%s</a>’ failed:\n"
+"%s"
+msgstr "Malsukcesis malfermi ‘<a href=\"%s\">%s</a>’:\n%s"
+
+#: src/kgx-spad.c:339 src/kgx-spad.ui:4
+msgid "Error Details"
+msgstr "Erardetaloj"
+
+#: src/kgx-spad.ui:23
+msgid "Error Message"
+msgstr "Erarmesaĝo"
+
+#: src/kgx-spad.ui:35
+msgid "Copy Error Message"
+msgstr "Kopii erarmesaĝon"
+
+#: src/kgx-spad.ui:104
+msgid "Report _Issue"
+msgstr "Raporti _problemon"
+
+#: src/kgx-tab.c:597
+msgctxt "toast-button"
+msgid "_Details"
+msgstr "_Detaloj"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:889
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>Nurlega</b> — La komando eliris kun kodo %i"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:897
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>Nurlega</b> — La komando eliris"
+
+#: src/kgx-tab.c:917
+msgid "Command completed"
+msgstr "La komando kompletigita"
+
+#: src/kgx-tab.ui:42
+msgid "Find text"
+msgstr "Serĉi tekston"
+
+#: src/kgx-tab.ui:70
+msgid "Previous Match"
+msgstr "Antaŭa trovo"
+
+#: src/kgx-tab.ui:78
+msgid "Next Match"
+msgstr "Sekva trovo"
+
+#. Translators: The user ctrl-clicked, or used ‘Open Link’, on a URI that,
+#. *              for whatever reason, we were unable to open.
+#: src/kgx-terminal.c:39
+msgctxt "toast-message"
+msgid "Couldn't Open Link"
+msgstr "Ne eblis malfermi ligilon"
+
+#: src/kgx-terminal.c:360
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
+"are installed."
+msgstr "La ligilo “<a href=\"%s\">%s</a>” uzas la protokolon “%s”, por kiu neniu programaro estas instalita."
+
+#: src/kgx-terminal.c:373
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
+"a>”. Please include the following information if you report the error."
+msgstr "Okazis neatendita eraro dum malfermo de la ligilo “<a href=\"%s\">%s</a>”. Bonvolu inkludi la sekvan informon se vi raportos la eraron."
+
+#: src/kgx-terminal.c:421
+#, c-format
+msgctxt "spad-message"
+msgid "The link “<a href=\"%s\">%s</a>” is malformed."
+msgstr "La ligilo “<a href=\"%s\">%s</a>” estas misforma."
+
+#: src/kgx-terminal.c:440
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” points to a location on a different "
+"device.\n"
+"\n"
+"This device is “%s” and the location is on “%s”."
+msgstr "La ligilo “<a href=\"%s\">%s</a>” celas lokon sur alia aparato.\n\nTiu aparato estas “%s” kaj la loko troviĝas sur “%s”."
+
+#: src/kgx-terminal.c:511
+msgctxt "toast-message"
+msgid "Couldn't Paste Text"
+msgstr "Ne eblis alglui tekston"
+
+#: src/kgx-terminal.c:514
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst reading the clipboard. Please include "
+"the following information if you report the error."
+msgstr "Okazis neatendita eraro dum legado de la poŝtabulo. Bonvolu inkluzi la sekvan informon se vi raportos la eraron."
+
+#: src/kgx-terminal.c:575
+msgctxt "toast-message"
+msgid "Couldn't Show File"
+msgstr "Ne eblis montri dosieron"
+
+#: src/kgx-terminal.c:578
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst showing the file. Please include the "
+"following information if you report the error."
+msgstr "Okazis neatendita eraro dum montrado de la dosiero. Bonvolu inkluzi la sekvan informon se vi raportos la eraron."
+
+#: src/kgx-terminal.c:599
+msgctxt "toast-message"
+msgid "Couldn't Open Folder"
+msgstr "Ne eblis malfermi dosierujon"
+
+#: src/kgx-terminal.c:602
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the folder. Please include the "
+"following information if you report the error."
+msgstr "Okazis neatendita eraro dum malfermo de la dosierujo. Bonvolu inkluzi la sekvan informon se vi raportos la eraron."
+
+#: src/kgx-terminal.c:696
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+"Premu Ctrl-kaj-kliku por malfermi:\n"
+"%s"
+
+#: src/kgx-terminal.c:984
+msgctxt "toast-message"
+msgid "Couldn't Paste"
+msgstr "Ne eblis alglui"
+
+#: src/kgx-terminal.c:987
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst processing the clipboard. Please include "
+"the following information if you report the error."
+msgstr "Okazis neatendita eraro dum prilaborado de la poŝtabulo. Bonvolu inkluzi la sekvan informon se vi raportos la eraron."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
 msgstr "_Malfermi ligilon"
 
 #: src/kgx-terminal.ui:12
-msgid "Copy _Link"
+msgid "Copy _Link Address"
 msgstr "Kopii _ligilon"
 
 #: src/kgx-terminal.ui:19
@@ -386,28 +451,36 @@ msgstr "_Kopii"
 msgid "_Select All"
 msgstr "_Elekti ĉion"
 
-#: src/kgx-terminal.ui:36
+#: src/kgx-terminal.ui:36 src/kgx-window.ui:285
+msgid "Leave _Fullscreen"
+msgstr "Eliri el _plenekrano"
+
+#: src/kgx-terminal.ui:43
 msgid "Show in _Files"
 msgstr "Montri en _dosieroj"
 
-#: src/kgx-theme-switcher.ui:16
+#: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
 msgstr "Sekvi la stilan de la sistemo"
 
-#: src/kgx-theme-switcher.ui:44
+#: src/kgx-theme-switcher.ui:52
 msgid "Light Style"
 msgstr "Hela stilo"
 
-#: src/kgx-theme-switcher.ui:71
+#: src/kgx-theme-switcher.ui:79
 msgid "Dark Style"
 msgstr "Malhela stilo"
 
-#. Translators: Credit yourself here
-#: src/kgx-window.c:464
-msgid "translator-credits"
-msgstr "Kristjan SCHMIDT"
+#. Translators: ‘command’ is the argument name, and shouldn't be translated
+#: src/kgx-utils.c:114
+msgid "Missing argument for --command"
+msgstr "Mankas argumento por --komando"
 
-#: src/kgx-window.ui:17
+#: src/kgx-utils.c:129
+msgid "Cannot use both --command and positional parameters"
+msgstr "Ne povas uzi kaj --komando kaj pozician parametrojn samtempe"
+
+#: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
 msgstr "Nova _fenestro"
 
@@ -415,34 +488,190 @@ msgstr "Nova _fenestro"
 msgid "_Show All Tabs"
 msgstr "Montri ĉiujn _langetojn"
 
-#: src/kgx-window.ui:30
+#: src/kgx-window.ui:28 src/kgx-window.ui:280
+msgid "_Fullscreen"
+msgstr "_Plenekrano"
+
+#: src/kgx-window.ui:35
 msgid "_Preferences"
 msgstr "_Agordoj"
 
-#: src/kgx-window.ui:34
+#: src/kgx-window.ui:39
 msgid "_Keyboard Shortcuts"
 msgstr "_Klavkombinoj"
 
-#: src/kgx-window.ui:38
+#: src/kgx-window.ui:43
 msgid "_About Console"
 msgstr "_Pri Konsolo"
 
-#: src/kgx-window.ui:79
+#: src/kgx-window.ui:148
 msgid "Find in Terminal"
 msgstr "Serĉi en terminalo"
 
-#: src/kgx-window.ui:86
+#: src/kgx-window.ui:160
+msgid "Leave Fullscreen"
+msgstr "Eliri el plenekrano"
+
+#: src/kgx-window.ui:167
 msgid "Main Menu"
 msgstr "Ĉefa menuo"
 
-#: src/kgx-window.ui:104
+#: src/kgx-window.ui:185
 msgid "Shrink Text"
 msgstr "Malgrandigi tekston"
 
-#: src/kgx-window.ui:115
+#: src/kgx-window.ui:196
 msgid "Reset Size"
 msgstr "Restarigi grandecon"
 
-#: src/kgx-window.ui:139
+#: src/kgx-window.ui:220
 msgid "Enlarge Text"
 msgstr "Pligrandigi tekston"
+
+#: src/preferences/kgx-font-picker.ui:11
+msgid "Terminal Font"
+msgstr "Terminalfonto"
+
+#: src/preferences/kgx-font-picker.ui:29
+msgid "_Select"
+msgstr "_Elekti"
+
+#: src/preferences/kgx-font-picker.ui:45 src/preferences/kgx-font-picker.ui:48
+msgid "Font Name"
+msgstr "Fontnomo"
+
+#: src/preferences/kgx-font-picker.ui:133
+msgid "Font Family"
+msgstr "Fontofamilio"
+
+#: src/preferences/kgx-font-picker.ui:158
+msgid "Font Preview"
+msgstr "Fonta antaŭvido"
+
+#: src/preferences/kgx-font-picker.ui:179
+msgid "Font Size"
+msgstr "Fontgrandeco"
+
+#: src/preferences/kgx-preferences-window.c:126
+msgid "No Font Set"
+msgstr "Neniu fonto agordita"
+
+#: src/preferences/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "Ĝenerala"
+
+#: src/preferences/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "Fonto"
+
+#: src/preferences/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "Uzi _sisteman defaŭlton"
+
+#: src/preferences/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "Propra _fonto"
+
+#: src/preferences/kgx-preferences-window.ui:61
+msgid "Behaviour"
+msgstr "Konduto"
+
+#: src/preferences/kgx-preferences-window.ui:64
+msgid "_Unlimited Scrollback"
+msgstr "_Senlima rulvico"
+
+#: src/preferences/kgx-preferences-window.ui:70
+msgid "_Scrollback Lines"
+msgstr "_Rulvicaj linioj"
+
+#: src/preferences/kgx-preferences-window.ui:90
+msgid "Terminal Bell"
+msgstr "Terminala kloŝo"
+
+#: src/preferences/kgx-preferences-window.ui:93
+msgid "Play _Sound"
+msgstr "Ludi _sonon"
+
+#: src/preferences/kgx-preferences-window.ui:99
+msgid "_Visual Effects"
+msgstr "_Videblaj efektoj"
+
+#: src/shortcuts-dialog.ui:7
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Aplikaĵo"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Nova fenestro"
+
+#: src/shortcuts-dialog.ui:18
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Terminalo"
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Serĉi"
+
+#: src/shortcuts-dialog.ui:27
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Kopii"
+
+#: src/shortcuts-dialog.ui:33
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Alglui"
+
+#: src/shortcuts-dialog.ui:41
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Langetoj"
+
+#: src/shortcuts-dialog.ui:44
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Nova langeto"
+
+#: src/shortcuts-dialog.ui:50
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Fermi langeton"
+
+#: src/shortcuts-dialog.ui:56
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Montri ĉiujn langetojn"
+
+#: src/shortcuts-dialog.ui:62
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Sekva langeto"
+
+#: src/shortcuts-dialog.ui:68
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Antaŭa langeto"
+
+#: src/shortcuts-dialog.ui:74 src/shortcuts-dialog.ui:95
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Movi langeton maldekstren"
+
+#: src/shortcuts-dialog.ui:81 src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "Movi langeton dekstren"
+
+#: src/shortcuts-dialog.ui:102
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Ŝalti al langeto 1–9"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Ŝalti al langeto 10"
