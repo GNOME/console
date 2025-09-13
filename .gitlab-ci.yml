@@ -232,6 +232,8 @@ variables:
 stages:
   - build
   - test
+  - report
+  - deploy
   - release
 
 flatpak:
