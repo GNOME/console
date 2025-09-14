@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-09-05 19:36+0000\n"
-"PO-Revision-Date: 2025-09-06 10:11+0800\n"
+"POT-Creation-Date: 2025-09-13 21:18+0000\n"
+"PO-Revision-Date: 2025-09-14 08:53+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -53,7 +53,7 @@ msgstr "GNOME 桌面的简单、用户友好的终端模拟器。"
 msgid "Terminal window"
 msgstr "终端窗口"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "GNOME 项目"
 
@@ -578,7 +578,7 @@ msgid "Custom _Font"
 msgstr "自定义字体(_F)"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "行为"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -593,11 +593,15 @@ msgstr "回滚行数(_S)"
 msgid "Terminal Bell"
 msgstr "终端响铃"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "控制警告提示的方式"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "播放声音(_S)"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "可视效果(_V)"
 
@@ -680,6 +684,16 @@ msgstr "切换到标签页 1-9"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "切换到标签页 10"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "窗口"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "全屏"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
