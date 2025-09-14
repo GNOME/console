@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Console master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-09-04 22:45+0000\n"
-"PO-Revision-Date: 2025-08-28 13:50+0300\n"
-"Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
+"POT-Creation-Date: 2025-09-14 08:23+0000\n"
+"PO-Revision-Date: 2025-09-14 08:00+0300\n"
+"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgstr "GNOME masaüstü için basit, kullanıcı dostu uçbirim öykünücü."
 msgid "Terminal window"
 msgstr "Uçbirim penceresi"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "GNOME Projesi"
 
@@ -599,7 +599,7 @@ msgid "Custom _Font"
 msgstr "Özel _Yazı Tipi"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "Davranış"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -614,11 +614,15 @@ msgstr "Satırları _Geri Kaydır"
 msgid "Terminal Bell"
 msgstr "Uçbirim Zili"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "Uyarıların nasıl belirtileceğini denetler"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "Ses _Çal"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "Görsel _Etkiler"
 
@@ -701,3 +705,13 @@ msgstr "1-9. Sekmeye Geç"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "10. Sekmeye Geç"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Pencere"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Tam Ekran"
