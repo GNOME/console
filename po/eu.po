@@ -6,8 +6,8 @@
 msgid ""
 msgstr "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-08-31 05:53+0000\n"
-"PO-Revision-Date: 2025-08-31 10:00+0100\n"
+"POT-Creation-Date: 2025-09-14 00:54+0000\n"
+"PO-Revision-Date: 2025-09-14 10:00+0100\n"
 "Last-Translator: Asier Saratsua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -47,7 +47,7 @@ msgstr "Terminalaren emuladore sinple eta erraza GNOME mahaigainerako."
 msgid "Terminal window"
 msgstr "Terminalaren leihoa"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "GNOME proiektua"
 
@@ -565,7 +565,7 @@ msgid "Custom _Font"
 msgstr "Letra-tipo _pertsonalizatua"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "Portaera"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -580,11 +580,15 @@ msgstr "Korritu marrak at_zerantz"
 msgid "Terminal Bell"
 msgstr "Terminalaren soinua"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "Kontrolatu alertak nola adierazten diren"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "Erreproduzitu _soinua"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "_Ikusizko efektuak"
 
@@ -667,6 +671,16 @@ msgstr "Aldatu 1-9. fitxara"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Aldatu 10. fitxara"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Leihoa"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Pantaila osoa"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
