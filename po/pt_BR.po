@@ -4,16 +4,16 @@
 # Enrico Nicoletto <hiko@duck.com>, 2021-2022.
 # Leônidas Araújo <leorusvellt@hotmail.com>, 2022.
 # Giovanni dos Santos Almeida Lombone Rodrigues <giovannilombone.io@gmail.com>, 2024.
-# Juliano de Souza Camargo <julianosc@pm.me>, 2024.
 # Rafael Fontenelle <rafaelff@gnome.org>, 2019-2025.
+# Juliano de Souza Camargo <julianosc@pm.me>, 2024-2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-08-22 23:40+0000\n"
-"PO-Revision-Date: 2025-08-25 14:23-0300\n"
-"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
+"POT-Creation-Date: 2025-09-14 11:09+0000\n"
+"PO-Revision-Date: 2025-09-14 09:56-0300\n"
+"Last-Translator: Juliano de Souza Camargo <julianosc@pm.me>\n"
 "Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -37,8 +37,8 @@ msgstr "Console"
 #: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"comando;command;prompt;cmd;linha de "
-"comando;commandline;executar;run;shell;terminal;kgx;kings cross;"
+"comando;command;prompt;cmd;linha de comando;commandline;executar;run;shell;"
+"terminal;kgx;kings cross;"
 
 #: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
@@ -60,7 +60,7 @@ msgstr "Um simples emulador de terminal fácil de usar para o ambiente GNOME."
 msgid "Terminal window"
 msgstr "Janela do terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:503 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "O Projeto GNOME"
 
@@ -618,7 +618,7 @@ msgid "Custom _Font"
 msgstr "_Fonte personalizada"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "Comportamento"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -633,11 +633,15 @@ msgstr "Rolagem de linha_s"
 msgid "Terminal Bell"
 msgstr "Campainha de terminal"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "Controle como os alertas são indicados"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "Reproduzir _sons"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "Efeitos _visuais"
 
@@ -720,6 +724,16 @@ msgstr "Alterna para a aba 1-9"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Alterna para a aba 10"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Janela"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Tela cheia"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
