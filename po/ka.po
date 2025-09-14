@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-08-31 08:05+0000\n"
-"PO-Revision-Date: 2025-09-04 12:18+0200\n"
+"POT-Creation-Date: 2025-09-14 00:54+0000\n"
+"PO-Revision-Date: 2025-09-14 06:07+0200\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -49,7 +49,7 @@ msgstr "მარტივი და ადვილად მოსახმა
 msgid "Terminal window"
 msgstr "ტერმინალის ფანჯარა"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "პროექტი \"GNOME\""
 
@@ -599,7 +599,7 @@ msgid "Custom _Font"
 msgstr "მომხმარებლის _ფონტი"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "ქცევა"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -614,11 +614,15 @@ msgstr "ჩოჩიი_ს ხაზები"
 msgid "Terminal Bell"
 msgstr "ტერმინალის ზარი"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "მართეთ, როგორ მოხდება განგაშების ჩვენება"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "ხმის _დაკვრა"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "ვიზუალური _ეფექტები"
 
@@ -701,6 +705,16 @@ msgstr "1-9-ე ჩანართზე გადართვა"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "გადართე·10·ჩანართზე"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "ფანჯარა"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "სრულ ეკრანზე"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
