@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-06-28 23:08+0000\n"
-"PO-Revision-Date: 2025-07-06 14:04+0300\n"
+"POT-Creation-Date: 2025-09-14 00:54+0000\n"
+"PO-Revision-Date: 2025-09-14 12:43+0300\n"
 "Last-Translator: Artur So <arturios2005@mail.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -17,26 +17,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
-#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
 #: src/kgx-window.ui:52
 msgid "Console"
 msgstr "Консоль"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Console.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;команда;"
-"терминал;"
+"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings "
+"cross;команда;терминал;"
 
-#: data/org.gnome.Console.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
 msgstr "Новое окно"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:221
+#: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:246
 msgid "New Tab"
 msgstr "Новая вкладка"
 
@@ -52,89 +52,9 @@ msgstr "Простой и удобный эмулятор терминала д�
 msgid "Terminal window"
 msgstr "Окно терминала"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:503 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Проект GNOME"
-
-#: src/help-overlay.ui:12
-msgctxt "shortcut window"
-msgid "Application"
-msgstr "Приложение"
-
-#: src/help-overlay.ui:16
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "Новое окно"
-
-#: src/help-overlay.ui:23
-msgctxt "shortcut window"
-msgid "Terminal"
-msgstr "Терминал"
-
-#: src/help-overlay.ui:27
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "Найти"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
-msgid "Copy"
-msgstr "Копировать"
-
-#: src/help-overlay.ui:39
-msgctxt "shortcut window"
-msgid "Paste"
-msgstr "Вставить"
-
-#: src/help-overlay.ui:46
-msgctxt "shortcut window"
-msgid "Tabs"
-msgstr "Вкладки"
-
-#: src/help-overlay.ui:50
-msgctxt "shortcut window"
-msgid "New Tab"
-msgstr "Новая вкладка"
-
-#: src/help-overlay.ui:56
-msgctxt "shortcut window"
-msgid "Close Tab"
-msgstr "Закрыть вкладку"
-
-#: src/help-overlay.ui:62
-msgctxt "shortcut window"
-msgid "Show All Tabs"
-msgstr "Показать все вкладки"
-
-#: src/help-overlay.ui:68
-msgctxt "shortcut window"
-msgid "Next Tab"
-msgstr "Следующая вкладка"
-
-#: src/help-overlay.ui:74
-msgctxt "shortcut window"
-msgid "Previous Tab"
-msgstr "Предыдущая вкладка"
-
-#: src/help-overlay.ui:80
-msgctxt "shortcut window"
-msgid "Move Tab Right"
-msgstr "Переместить вкладку вправо"
-
-#: src/help-overlay.ui:86
-msgctxt "shortcut window"
-msgid "Move Tab Left"
-msgstr "Переместить вкладку влево"
-
-#: src/help-overlay.ui:92
-msgctxt "shortcut window"
-msgid "Switch to Tab 1–9"
-msgstr "Переключиться на вкладку 1–9"
-
-#: src/help-overlay.ui:98
-msgctxt "shortcut window"
-msgid "Switch to Tab 10"
-msgstr "Переключиться на вкладку 10"
 
 #: src/kgx-about.c:104
 msgid "GPL 3.0 or later"
@@ -293,7 +213,8 @@ msgid ""
 "An unexpected error occurred whilst receiving a URI list drop. Please "
 "include the following information if you report the error."
 msgstr ""
-"При получении списка URI произошла непредвиденная ошибка. Пожалуйста, укажите следующую информацию, если вы сообщаете об ошибке."
+"При получении списка URI произошла непредвиденная ошибка. Пожалуйста, "
+"укажите следующую информацию, если вы сообщаете об ошибке."
 
 #: src/kgx-drop-target.c:337
 msgctxt "spad-message"
@@ -301,7 +222,8 @@ msgid ""
 "An unexpected error occurred whilst receiving a file list drop. Please "
 "include the following information if you report the error."
 msgstr ""
-"При получении списка файлов произошла непредвиденная ошибка. Пожалуйста, укажите следующую информацию, если вы сообщаете об ошибке."
+"При получении списка файлов произошла непредвиденная ошибка. Пожалуйста, "
+"укажите следующую информацию, если вы сообщаете об ошибке."
 
 #: src/kgx-drop-target.c:371
 msgctxt "spad-message"
@@ -309,7 +231,8 @@ msgid ""
 "An unexpected error occurred whilst receiving a text drop. Please include "
 "the following information if you report the error."
 msgstr ""
-"При получении текста произошла непредвиденная ошибка. Пожалуйста, укажите следующую информацию, если вы сообщаете об ошибке."
+"При получении текста произошла непредвиденная ошибка. Пожалуйста, укажите "
+"следующую информацию, если вы сообщаете об ошибке."
 
 #: src/kgx-drop-target.c:512
 msgctxt "spad-message"
@@ -317,7 +240,8 @@ msgid ""
 "An unexpected value was received. Please include the following information "
 "if you report the error."
 msgstr ""
-"Получено неожиданное значение. Пожалуйста, укажите следующую информацию, если вы сообщаете об ошибке."
+"Получено неожиданное значение. Пожалуйста, укажите следующую информацию, "
+"если вы сообщаете об ошибке."
 
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
@@ -333,7 +257,7 @@ msgstr "XTerm"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:478
+#: src/kgx-pages.c:495
 #, c-format
 msgid "Tab %i"
 msgstr "Вкладка %i"
@@ -450,7 +374,8 @@ msgid ""
 "The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
 "are installed."
 msgstr ""
-"Ссылка “<a href=\"%s\">%s</a>” использует протокол “%s”, для которого не установлены приложения."
+"Ссылка “<a href=\"%s\">%s</a>” использует протокол “%s”, для которого не "
+"установлены приложения."
 
 #: src/kgx-terminal.c:373
 #, c-format
@@ -459,7 +384,8 @@ msgid ""
 "An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
 "a>”. Please include the following information if you report the error."
 msgstr ""
-"При открытии ссылки “<a href=\"%s\">%s</a>” произошла непредвиденная ошибка. Пожалуйста, укажите следующую информацию, если вы сообщаете об ошибке."
+"При открытии ссылки “<a href=\"%s\">%s</a>” произошла непредвиденная ошибка. "
+"Пожалуйста, укажите следующую информацию, если вы сообщаете об ошибке."
 
 #: src/kgx-terminal.c:421
 #, c-format
@@ -476,7 +402,8 @@ msgid ""
 "\n"
 "This device is “%s” and the location is on “%s”."
 msgstr ""
-"Ссылка “<a href=\"%s\">%s</a>” указывает на расположение на другом устройстве.\n"
+"Ссылка “<a href=\"%s\">%s</a>” указывает на расположение на другом "
+"устройстве.\n"
 "\n"
 "Это устройство называется “%s”, а расположение указано на “%s”."
 
@@ -491,7 +418,8 @@ msgid ""
 "An unexpected error occurred whilst reading the clipboard. Please include "
 "the following information if you report the error."
 msgstr ""
-"Во время чтения из буфера обмена произошла непредвиденная ошибка. Пожалуйста, укажите следующую информацию, если вы сообщаете об ошибке."
+"Во время чтения из буфера обмена произошла непредвиденная ошибка. "
+"Пожалуйста, укажите следующую информацию, если вы сообщаете об ошибке."
 
 #: src/kgx-terminal.c:575
 msgctxt "toast-message"
@@ -504,7 +432,8 @@ msgid ""
 "An unexpected error occurred whilst showing the file. Please include the "
 "following information if you report the error."
 msgstr ""
-"При отображении файла произошла непредвиденная ошибка. Пожалуйста, укажите следующую информацию, если вы сообщаете об ошибке."
+"При отображении файла произошла непредвиденная ошибка. Пожалуйста, укажите "
+"следующую информацию, если вы сообщаете об ошибке."
 
 #: src/kgx-terminal.c:599
 msgctxt "toast-message"
@@ -517,7 +446,8 @@ msgid ""
 "An unexpected error occurred whilst opening the folder. Please include the "
 "following information if you report the error."
 msgstr ""
-"При открытии папки произошла непредвиденная ошибка. Пожалуйста, укажите следующую информацию, если вы сообщаете об ошибке."
+"При открытии папки произошла непредвиденная ошибка. Пожалуйста, укажите "
+"следующую информацию, если вы сообщаете об ошибке."
 
 #: src/kgx-terminal.c:696
 #, c-format
@@ -539,7 +469,8 @@ msgid ""
 "An unexpected error occurred whilst processing the clipboard. Please include "
 "the following information if you report the error."
 msgstr ""
-"При обработке буфера обмена произошла непредвиденная ошибка. Пожалуйста, укажите следующую информацию, если вы сообщаете об ошибке."
+"При обработке буфера обмена произошла непредвиденная ошибка. Пожалуйста, "
+"укажите следующую информацию, если вы сообщаете об ошибке."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -557,7 +488,7 @@ msgstr "_Копировать"
 msgid "_Select All"
 msgstr "_Выделить все"
 
-#: src/kgx-terminal.ui:36 src/kgx-window.ui:260
+#: src/kgx-terminal.ui:36 src/kgx-window.ui:285
 msgid "Leave _Fullscreen"
 msgstr "Выйти из _полноэкранного режима"
 
@@ -586,7 +517,7 @@ msgstr "Отсутствует аргумент для --command"
 msgid "Cannot use both --command and positional parameters"
 msgstr "Невозможно использовать как --command, так и позиционные параметры"
 
-#: src/kgx-window.ui:17 src/kgx-window.ui:249
+#: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
 msgstr "_Новое окно"
 
@@ -594,7 +525,7 @@ msgstr "_Новое окно"
 msgid "_Show All Tabs"
 msgstr "_Показать все вкладки"
 
-#: src/kgx-window.ui:28 src/kgx-window.ui:255
+#: src/kgx-window.ui:28 src/kgx-window.ui:280
 msgid "_Fullscreen"
 msgstr "По_лноэкранный режим"
 
@@ -610,27 +541,27 @@ msgstr "_Комбинации клавиш"
 msgid "_About Console"
 msgstr "_О приложении"
 
-#: src/kgx-window.ui:123
+#: src/kgx-window.ui:148
 msgid "Find in Terminal"
 msgstr "Найти в терминале"
 
-#: src/kgx-window.ui:135
+#: src/kgx-window.ui:160
 msgid "Leave Fullscreen"
 msgstr "Выйти из полноэкранного режима"
 
-#: src/kgx-window.ui:142
+#: src/kgx-window.ui:167
 msgid "Main Menu"
 msgstr "Главное меню"
 
-#: src/kgx-window.ui:160
+#: src/kgx-window.ui:185
 msgid "Shrink Text"
 msgstr "Уменьшить текст"
 
-#: src/kgx-window.ui:171
+#: src/kgx-window.ui:196
 msgid "Reset Size"
 msgstr "Сбросить размер"
 
-#: src/kgx-window.ui:195
+#: src/kgx-window.ui:220
 msgid "Enlarge Text"
 msgstr "Увеличить текст"
 
@@ -658,7 +589,7 @@ msgstr "Предпросмотр шрифта"
 msgid "Font Size"
 msgstr "Размер шрифта"
 
-#: src/preferences/kgx-preferences-window.c:125
+#: src/preferences/kgx-preferences-window.c:126
 msgid "No Font Set"
 msgstr "Шрифт не установлен"
 
@@ -678,29 +609,123 @@ msgstr "Использовать _системный по умолчанию"
 msgid "Custom _Font"
 msgstr "Пользовательский _шрифт"
 
-#: src/preferences/kgx-preferences-window.ui:63
-msgid "Behaviour"
+#: src/preferences/kgx-preferences-window.ui:61
+msgid "Behavior"
 msgstr "Поведение"
 
-#: src/preferences/kgx-preferences-window.ui:66
+#: src/preferences/kgx-preferences-window.ui:64
 msgid "_Unlimited Scrollback"
 msgstr "_Неограниченная прокрутка"
 
-#: src/preferences/kgx-preferences-window.ui:72
+#: src/preferences/kgx-preferences-window.ui:70
 msgid "_Scrollback Lines"
 msgstr "_Линии прокрутки"
 
-#: src/preferences/kgx-preferences-window.ui:92
+#: src/preferences/kgx-preferences-window.ui:90
 msgid "Terminal Bell"
 msgstr "Сигнал терминала"
 
-#: src/preferences/kgx-preferences-window.ui:95
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "Управление индикацией предупреждений"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "Воспроизводить _звук"
 
-#: src/preferences/kgx-preferences-window.ui:101
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "_Визуальные эффекты"
+
+#: src/shortcuts-dialog.ui:7
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Приложение"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Новое окно"
+
+#: src/shortcuts-dialog.ui:18
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Терминал"
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Найти"
+
+#: src/shortcuts-dialog.ui:27
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Копировать"
+
+#: src/shortcuts-dialog.ui:33
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Вставить"
+
+#: src/shortcuts-dialog.ui:41
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Вкладки"
+
+#: src/shortcuts-dialog.ui:44
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Новая вкладка"
+
+#: src/shortcuts-dialog.ui:50
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Закрыть вкладку"
+
+#: src/shortcuts-dialog.ui:56
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Показать все вкладки"
+
+#: src/shortcuts-dialog.ui:62
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Следующая вкладка"
+
+#: src/shortcuts-dialog.ui:68
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Предыдущая вкладка"
+
+#: src/shortcuts-dialog.ui:74 src/shortcuts-dialog.ui:95
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Переместить вкладку влево"
+
+#: src/shortcuts-dialog.ui:81 src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "Переместить вкладку вправо"
+
+#: src/shortcuts-dialog.ui:102
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Переключиться на вкладку 1–9"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Переключиться на вкладку 10"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Окно"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Полноэкранный режим"
 
 #~ msgid "Advanced"
 #~ msgstr "Дополнительно"
