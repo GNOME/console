@@ -227,7 +227,7 @@ search_changed (GtkSearchBar *bar,
    * consider a buffer like "foo bar baz". If "baz" is currently highlighted and
    * we press backspace, our regex is "ba" so "ba" in "bar" starts to match as
    * well. If we go to the previous match, change regex from "bar" to "ba" and
-   * go next, it will select the occurence in "bar" while we want it to stay on
+   * go next, it will select the occurrence in "bar" while we want it to stay on
    * "baz". Hence, if we're narrowing down the search, go previous/next after
    * setting the regex and not before. */
 
@@ -1084,7 +1084,7 @@ kgx_tab_bell (KgxTab *self)
  * kgx_tab_get_pages:
  * @self: the #KgxTab
  *
- * Find the #KgxTabs @self is (currently) a memember of
+ * Find the #KgxTabs @self is (currently) a member of
  *
  * Returns: (transfer none): the #KgxTabs
  */

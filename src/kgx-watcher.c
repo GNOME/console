@@ -173,7 +173,7 @@ watch (gpointer data)
 
   g_tree_foreach (self->children, remove_dead, &dead);
 
-  // We can't modify self->chilren whilst walking it
+  // We can't modify self->children whilst walking it
   for (int i = 0; i < dead.dead->len; i++) {
     g_tree_remove (self->children, g_ptr_array_index (dead.dead, i));
   }

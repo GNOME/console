@@ -219,8 +219,8 @@ kgx_set_flags_prop (GObject      *restrict object,
  * @source: the text to read from
  * @max_len: the maximum length @buffer should expand to
  *
- * Writes @source to @buffer, but stopping if @buffer reachs @max_len bytes,
- * at which point an elipsis is added and we bail out. UTF-8 aware.
+ * Writes @source to @buffer, but stopping if @buffer reaches @max_len bytes,
+ * at which point an ellipsis is added and we bail out. UTF-8 aware.
  *
  * Returns: %TRUE if @max_len was reached, otherwise %FALSE
  */

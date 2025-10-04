@@ -577,7 +577,7 @@ test_settings_scrollback_basic (Fixture *fixture, gconstpointer unused)
   g_settings_set_boolean (fixture->settings, "ignore-scrollback-limit", TRUE);
   kgx_assert_expected_notifies (settings);
 
-  /* So the lines is now ‘-1’ — infinite */
+  /* So the lines is now ‘-1’ — infinate */
   g_object_get (settings, "scrollback-lines", &lines, NULL);
   g_assert_cmpint (lines, ==, -1);
 
@@ -588,7 +588,7 @@ test_settings_scrollback_basic (Fixture *fixture, gconstpointer unused)
   /* Updating the limit with the limit disabled */
   g_object_set (settings, "scrollback-limit", (int64_t) 5000, NULL);
 
-  /* …the acutal lines value should remain -1 */
+  /* …the actual lines value should remain -1 */
   g_object_get (settings, "scrollback-lines", &lines, NULL);
   g_assert_cmpint (lines, ==, -1);
 

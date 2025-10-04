@@ -58,7 +58,7 @@ clear_process (KgxProcess *self)
  * kgx_process_unref:
  * @self: the #KgxProcess
  *
- * Reduce the refrence count of @self, possibly freeing @self
+ * Reduce the reference count of @self, possibly freeing @self
  *
  * See g_rc_box_acquire() and g_rc_box_release_full()
  *
