@@ -11,9 +11,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2025-09-04 10:19+0000\n"
-"PO-Revision-Date: 2025-09-05 00:42+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
+"POT-Creation-Date: 2025-09-04 22:45+0000\n"
+"PO-Revision-Date: 2025-09-05 21:11+0200\n"
 "Last-Translator: Philipp Kiemle <l10n@prly.mozmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.0.1\n"
 
 # Der Terminal-Emulator von KDE Plasma heißt bereits "Konsole", deshalb bleiben wir hier beim englischen Original. - pk
 #: data/org.gnome.Console.desktop.in.in:2
@@ -33,7 +33,9 @@ msgstr "Console"
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
-msgstr "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;befehl;kommando;befehlszeile;kommandozeile;ausführen;"
+msgstr ""
+"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;befehl;"
+"kommando;befehlszeile;kommandozeile;ausführen;"
 
 #: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
@@ -49,7 +51,9 @@ msgstr "Terminal-Emulator"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
-msgstr "Ein einfacher, nutzerfreundlicher Terminal-Emulator für die GNOME Arbeitsumgebung."
+msgstr ""
+"Ein einfacher, nutzerfreundlicher Terminal-Emulator für die GNOME "
+"Arbeitsumgebung."
 
 #: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
@@ -89,7 +93,9 @@ msgstr ""
 
 #: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
-msgstr "»--working-directory« darf nicht gleichzeitig mit positionellen Parametern verwendet werden"
+msgstr ""
+"»--working-directory« darf nicht gleichzeitig mit positionellen Parametern "
+"verwendet werden"
 
 #: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
@@ -153,20 +159,36 @@ msgid "Close Window?"
 msgstr "Fenster schließen?"
 
 #: src/kgx-close-dialog.c:75
-msgid "A command is still running, closing this window will kill it and may lead to unexpected outcomes"
-msgid_plural "Some commands are still running, closing this window will kill them and may lead to unexpected outcomes"
-msgstr[0] "Ein Befehl läuft noch. Das Schließen dieses Fensters wird ihn beenden und kann zu unerwarteten Ergebnissen führen"
-msgstr[1] "Einige Befehle laufen noch. Das Schließen dieses Fensters wird sie beenden und kann zu unerwarteten Ergebnissen führen"
+msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this window will kill them and may "
+"lead to unexpected outcomes"
+msgstr[0] ""
+"Ein Befehl läuft noch. Das Schließen dieses Fensters wird ihn beenden und "
+"kann zu unerwarteten Ergebnissen führen"
+msgstr[1] ""
+"Einige Befehle laufen noch. Das Schließen dieses Fensters wird sie beenden "
+"und kann zu unerwarteten Ergebnissen führen"
 
 #: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
 msgstr "Reiter schließen?"
 
 #: src/kgx-close-dialog.c:84
-msgid "A command is still running, closing this tab will kill it and may lead to unexpected outcomes"
-msgid_plural "Some commands are still running, closing this tab will kill them and may lead to unexpected outcomes"
-msgstr[0] "Ein Befehl läuft noch. Das Schließen dieses Reiters wird ihn beenden und kann zu unerwarteten Ergebnissen führen"
-msgstr[1] "Einige Befehle laufen noch. Das Schließen dieses Reiters wird sie beenden und kann zu unerwarteten Ergebnissen führen"
+msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this tab will kill them and may "
+"lead to unexpected outcomes"
+msgstr[0] ""
+"Ein Befehl läuft noch. Das Schließen dieses Reiters wird ihn beenden und "
+"kann zu unerwarteten Ergebnissen führen"
+msgstr[1] ""
+"Einige Befehle laufen noch. Das Schließen dieses Reiters wird sie beenden "
+"und kann zu unerwarteten Ergebnissen führen"
 
 #. Translators: Screen reader label for the list of running commands
 #: src/kgx-close-dialog.c:194
@@ -197,22 +219,30 @@ msgstr ""
 
 #: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst receiving a URI list drop. Please include the following information if you report the error."
+msgid ""
+"An unexpected error occurred whilst receiving a URI list drop. Please "
+"include the following information if you report the error."
 msgstr ""
 
 #: src/kgx-drop-target.c:337
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst receiving a file list drop. Please include the following information if you report the error."
+msgid ""
+"An unexpected error occurred whilst receiving a file list drop. Please "
+"include the following information if you report the error."
 msgstr ""
 
 #: src/kgx-drop-target.c:371
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst receiving a text drop. Please include the following information if you report the error."
+msgid ""
+"An unexpected error occurred whilst receiving a text drop. Please include "
+"the following information if you report the error."
 msgstr ""
 
 #: src/kgx-drop-target.c:512
 msgctxt "spad-message"
-msgid "An unexpected value was received. Please include the following information if you report the error."
+msgid ""
+"An unexpected value was received. Please include the following information "
+"if you report the error."
 msgstr ""
 
 #: src/kgx-livery-manager.c:193
@@ -330,25 +360,28 @@ msgstr "Vorheriger Treffer"
 msgid "Next Match"
 msgstr "Nächster Treffer"
 
+# Link in Klammern zum besseren Verständnis.
 #. Translators: The user ctrl-clicked, or used ‘Open Link’, on a URI that,
 #. *              for whatever reason, we were unable to open.
 #: src/kgx-terminal.c:39
-#, fuzzy
-#| msgid "_Open Link"
 msgctxt "toast-message"
 msgid "Couldn't Open Link"
-msgstr "Verweis ö_ffnen"
+msgstr "Konnte Verweis (Link) nicht öffnen"
 
 #: src/kgx-terminal.c:360
 #, c-format
 msgctxt "spad-message"
-msgid "The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps are installed."
+msgid ""
+"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
+"are installed."
 msgstr ""
 
 #: src/kgx-terminal.c:373
 #, c-format
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</a>”. Please include the following information if you report the error."
+msgid ""
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
+"a>”. Please include the following information if you report the error."
 msgstr ""
 
 #: src/kgx-terminal.c:421
@@ -361,7 +394,8 @@ msgstr ""
 #, c-format
 msgctxt "spad-message"
 msgid ""
-"The link “<a href=\"%s\">%s</a>” points to a location on a different device.\n"
+"The link “<a href=\"%s\">%s</a>” points to a location on a different "
+"device.\n"
 "\n"
 "This device is “%s” and the location is on “%s”."
 msgstr ""
@@ -373,7 +407,9 @@ msgstr ""
 
 #: src/kgx-terminal.c:514
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst reading the clipboard. Please include the following information if you report the error."
+msgid ""
+"An unexpected error occurred whilst reading the clipboard. Please include "
+"the following information if you report the error."
 msgstr ""
 
 #: src/kgx-terminal.c:575
@@ -383,7 +419,9 @@ msgstr ""
 
 #: src/kgx-terminal.c:578
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst showing the file. Please include the following information if you report the error."
+msgid ""
+"An unexpected error occurred whilst showing the file. Please include the "
+"following information if you report the error."
 msgstr ""
 
 #: src/kgx-terminal.c:599
@@ -393,7 +431,9 @@ msgstr ""
 
 #: src/kgx-terminal.c:602
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst opening the folder. Please include the following information if you report the error."
+msgid ""
+"An unexpected error occurred whilst opening the folder. Please include the "
+"following information if you report the error."
 msgstr ""
 
 #: src/kgx-terminal.c:696
@@ -412,18 +452,20 @@ msgstr ""
 
 #: src/kgx-terminal.c:987
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst processing the clipboard. Please include the following information if you report the error."
+msgid ""
+"An unexpected error occurred whilst processing the clipboard. Please include "
+"the following information if you report the error."
 msgstr ""
 
+# Link in Klammern zum besseren Verständnis.
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
-msgstr "Verweis ö_ffnen"
+msgstr "Verweis (Link) ö_ffnen"
 
+# Link in Klammern zum besseren Verständnis.
 #: src/kgx-terminal.ui:12
-#, fuzzy
-#| msgid "Copy _Link"
 msgid "Copy _Link Address"
-msgstr "_Verweis kopieren"
+msgstr "_Verweisadresse (Linkadresse) kopieren"
 
 #: src/kgx-terminal.ui:19
 msgid "_Copy"
@@ -460,7 +502,9 @@ msgstr "Fehlendes Argument für »--command«"
 
 #: src/kgx-utils.c:129
 msgid "Cannot use both --command and positional parameters"
-msgstr "»--command« darf nicht gleichzeitig mit positionellen Parametern verwendet werden"
+msgstr ""
+"»--command« darf nicht gleichzeitig mit positionellen Parametern verwendet "
+"werden"
 
 #: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
