@@ -284,7 +284,7 @@ flatpak@aarch64:
     - export XDG_RUNTIME_DIR="$(mktemp -p $(pwd) -d xdg-runtime-XXXXXX)"
     - meson setup build ${MESON_EXTRA_ARGS} -Db_coverage=true -Dtests=true
     - meson compile -C build
-    - dbus-run-session -- mutter --headless --wayland --no-x11 --virtual-monitor 1024x768 -- meson test -C build
+    - dbus-run-session -- mutter --headless --wayland --no-x11 --virtual-monitor 1024x768 -- meson test -C build --suite gnome-console
   after_script:
     - gcovr --json --output=coverage-${CI_JOB_NAME}.json
   artifacts:
