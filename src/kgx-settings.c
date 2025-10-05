@@ -44,7 +44,7 @@ struct _KgxSettings {
   KgxTheme              theme;
   PangoFontDescription *font;
   double                scale;
-  int64_t               scrollback_lines;
+  int                   scrollback_lines;
   gboolean              audible_bell;
   gboolean              visual_bell;
   gboolean              use_system_font;
@@ -144,7 +144,14 @@ kgx_settings_set_property (GObject      *object,
       update_scale (self, g_value_get_double (value));
       break;
     case PROP_SCROLLBACK_LINES:
-      kgx_set_int64_prop (object, pspec, &self->scrollback_lines, value);
+      {
+        int new_value = g_value_get_int (value);
+
+        if (new_value != self->scrollback_lines) {
+          self->scrollback_lines = new_value;
+          g_object_notify_by_pspec (object, pspec);
+        }
+      }
       break;
     case PROP_AUDIBLE_BELL:
       kgx_set_boolean_prop (object,
@@ -221,7 +228,7 @@ kgx_settings_get_property (GObject    *object,
       g_value_set_boolean (value, self->scale > KGX_FONT_SCALE_MIN);
       break;
     case PROP_SCROLLBACK_LINES:
-      g_value_set_int64 (value, self->scrollback_lines);
+      g_value_set_int (value, self->scrollback_lines);
       break;
     case PROP_AUDIBLE_BELL:
       g_value_set_boolean (value, kgx_settings_get_audible_bell (self));
@@ -255,12 +262,12 @@ kgx_settings_get_property (GObject    *object,
 }
 
 
-static int64_t
+static int
 resolve_lines (GObject  *object,
                gboolean  ignore_limit,
                int64_t   limit)
 {
-  return ignore_limit ? 0 : limit;
+  return CLAMP (ignore_limit ? -1 : limit, -1, G_MAXINT);
 }
 
 
@@ -329,9 +336,9 @@ kgx_settings_class_init (KgxSettingsClass *klass)
    * Bound to ‘scrollback-lines’ GSetting so changes persist
    */
   pspecs[PROP_SCROLLBACK_LINES] =
-    g_param_spec_int64 ("scrollback-lines", NULL, NULL,
-                        G_MININT64, G_MAXINT64, 512,
-                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+    g_param_spec_int ("scrollback-lines", NULL, NULL,
+                      -1, G_MAXINT, 10000,
+                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
   pspecs[PROP_AUDIBLE_BELL] =
     g_param_spec_boolean ("audible-bell", NULL, NULL,

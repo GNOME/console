@@ -540,10 +540,11 @@ test_settings_livery (Fixture *fixture, gconstpointer unused)
 
 
 static void
-test_settings_scrollback (Fixture *fixture, gconstpointer unused)
+test_settings_scrollback_basic (Fixture *fixture, gconstpointer unused)
 {
   g_autoptr (KgxSettings) settings = g_object_new (KGX_TYPE_SETTINGS, NULL);
-  int64_t lines;
+  int64_t limit;
+  int lines;
 
   g_settings_set_boolean (fixture->settings, "ignore-scrollback-limit", FALSE);
   g_settings_set_int64 (fixture->settings, "scrollback-lines", 10000);
@@ -552,8 +553,8 @@ test_settings_scrollback (Fixture *fixture, gconstpointer unused)
   g_object_get (settings, "scrollback-lines", &lines, NULL);
   g_assert_cmpint (lines, ==, 10000);
 
-  g_object_get (settings, "scrollback-limit", &lines, NULL);
-  g_assert_cmpint (lines, ==, 10000);
+  g_object_get (settings, "scrollback-limit", &limit, NULL);
+  g_assert_cmpint (limit, ==, 10000);
 
   /* When we change the limit */
   kgx_expect_property_notify (settings, "scrollback-limit");
@@ -576,24 +577,61 @@ test_settings_scrollback (Fixture *fixture, gconstpointer unused)
   g_settings_set_boolean (fixture->settings, "ignore-scrollback-limit", TRUE);
   kgx_assert_expected_notifies (settings);
 
-  /* So the lines is now ‘0’ — infinate */
+  /* So the lines is now ‘-1’ — infinite */
   g_object_get (settings, "scrollback-lines", &lines, NULL);
-  g_assert_cmpint (lines, ==, 0);
+  g_assert_cmpint (lines, ==, -1);
 
   /* But the stored limit should be unchanged */
-  g_object_get (settings, "scrollback-limit", &lines, NULL);
-  g_assert_cmpint (lines, ==, 20000);
+  g_object_get (settings, "scrollback-limit", &limit, NULL);
+  g_assert_cmpint (limit, ==, 20000);
 
   /* Updating the limit with the limit disabled */
   g_object_set (settings, "scrollback-limit", (int64_t) 5000, NULL);
 
-  /* …the acutal lines value should remain 0 */
+  /* …the acutal lines value should remain -1 */
   g_object_get (settings, "scrollback-lines", &lines, NULL);
-  g_assert_cmpint (lines, ==, 0);
+  g_assert_cmpint (lines, ==, -1);
 
   /* …even as we remember the new limit */
-  g_object_get (settings, "scrollback-limit", &lines, NULL);
-  g_assert_cmpint (lines, ==, 5000);
+  g_object_get (settings, "scrollback-limit", &limit, NULL);
+  g_assert_cmpint (limit, ==, 5000);
+}
+
+
+static struct resolve_lines_test {
+  gboolean ignore_limit;
+  int64_t limit;
+  int result;
+} resolve_lines_cases[] = {
+  { FALSE, 100000, 100000 },
+  { FALSE, G_MAXINT, G_MAXINT },
+  { FALSE, G_MAXINT + ((int64_t) 10), G_MAXINT },
+  { FALSE, G_MAXINT - ((int64_t) 10), G_MAXINT - 10 },
+  { FALSE, G_MININT + ((int64_t) 10), -1 },
+  { FALSE, G_MININT - ((int64_t) 10), -1 },
+  { TRUE, 100000, -1 },
+  { TRUE, G_MAXINT, -1 },
+  { TRUE, G_MAXINT + ((int64_t) 10), -1 },
+  { TRUE, G_MAXINT - ((int64_t) 10), -1 },
+  { TRUE, G_MININT + ((int64_t) 10), -1 },
+  { TRUE, G_MININT - ((int64_t) 10), -1 },
+};
+
+
+static void
+test_settings_scrollback_resolve (Fixture *fixture, gconstpointer user_data)
+{
+  g_autoptr (KgxSettings) settings = g_object_new (KGX_TYPE_SETTINGS, NULL);
+  const struct resolve_lines_test *test = user_data;
+  int lines;
+
+  g_settings_set_boolean (fixture->settings,
+                          "ignore-scrollback-limit",
+                          test->ignore_limit);
+  g_settings_set_int64 (fixture->settings, "scrollback-lines", test->limit);
+
+  g_object_get (settings, "scrollback-lines", &lines, NULL);
+  g_assert_cmpint (lines, ==, test->result);
 }
 
 
@@ -673,7 +711,17 @@ main (int argc, char *argv[])
   fixtured_test ("/kgx/settings/audible-bell", NULL, test_settings_audible_bell);
   fixtured_test ("/kgx/settings/visual-bell", NULL, test_settings_visual_bell);
   fixtured_test ("/kgx/settings/livery", NULL, test_settings_livery);
-  fixtured_test ("/kgx/settings/scrollback", NULL, test_settings_scrollback);
+
+  fixtured_test ("/kgx/settings/scrollback/basic", NULL, test_settings_scrollback_basic);
+  for (size_t i = 0; i < G_N_ELEMENTS (resolve_lines_cases); i++) {
+    g_autofree char *path =
+      g_strdup_printf ("/kgx/settings/scrollback/resolve/%s/%" G_GINT64_FORMAT,
+                       resolve_lines_cases[i].ignore_limit ? "not-limited" : "limited",
+                       resolve_lines_cases[i].limit);
+
+    fixtured_test (path, &resolve_lines_cases[i], test_settings_scrollback_resolve);
+  }
+
   fixtured_test ("/kgx/settings/software-flow-control", NULL, test_settings_software_flow_control);
   fixtured_test ("/kgx/settings/transparency", NULL, test_settings_transparency);
 
