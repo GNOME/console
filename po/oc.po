@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
 "POT-Creation-Date: 2025-10-06 00:18+0000\n"
-"PO-Revision-Date: 2025-10-08 08:04+0200\n"
+"PO-Revision-Date: 2025-10-08 20:12+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Occitan <totenoc@gmail.com>\n"
 "Language: oc\n"
@@ -199,7 +199,7 @@ msgstr "La cadena de tèxte de la color a pas la bona longar"
 #: src/kgx-drop-target.c:509
 msgctxt "toast-message"
 msgid "Drop Failed"
-msgstr ""
+msgstr "Fracàs de la recuperacion"
 
 #: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
 msgctxt "spad-message"
@@ -207,6 +207,8 @@ msgid ""
 "An unexpected error occurred whilst receiving a URI list drop. Please "
 "include the following information if you report the error."
 msgstr ""
+"Una error inesperada s'es producha pendent la recepcion d'una lista d'URI. "
+"Mercés d’inclure las informacions seguentas se senhalatz l'error."
 
 #: src/kgx-drop-target.c:337
 msgctxt "spad-message"
@@ -214,6 +216,8 @@ msgid ""
 "An unexpected error occurred whilst receiving a file list drop. Please "
 "include the following information if you report the error."
 msgstr ""
+"Una error inesperada s'es producha pendent la recepcion d'una lista de "
+"fichièrs. Mercés d’inclure las informacions seguentas se senhalatz l'error."
 
 #: src/kgx-drop-target.c:371
 msgctxt "spad-message"
@@ -221,6 +225,8 @@ msgid ""
 "An unexpected error occurred whilst receiving a text drop. Please include "
 "the following information if you report the error."
 msgstr ""
+"Una error inesperada s'es prochuda al moment de recebre una casuda de tèxte. "
+"Mercés d’inclure las informacions seguentas se senhalatz l'error."
 
 #: src/kgx-drop-target.c:512
 msgctxt "spad-message"
@@ -228,6 +234,8 @@ msgid ""
 "An unexpected value was received. Please include the following information "
 "if you report the error."
 msgstr ""
+"Una valor inesperada es estada recebuda. Mercés d’inclure las informacions "
+"seguentas se senhalatz l'error."
 
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
@@ -360,6 +368,8 @@ msgid ""
 "The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
 "are installed."
 msgstr ""
+"Lo ligam « <a href=\"%s\">%s</a> » utiliza lo protocòl « %s », per lo qual "
+"cap d'aplicacion es pas installada."
 
 #: src/kgx-terminal.c:373
 #, c-format
@@ -368,6 +378,9 @@ msgid ""
 "An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
 "a>”. Please include the following information if you report the error."
 msgstr ""
+"Una error inesperada s'es producha al moment de dobrir lo ligam « <a "
+"href=\"%s\">%s</a> ». Mercés d'inclure las informacions seguentas se "
+"senhalatz l'error."
 
 #: src/kgx-terminal.c:421
 #, c-format
@@ -384,6 +397,10 @@ msgid ""
 "\n"
 "This device is “%s” and the location is on “%s”."
 msgstr ""
+"Lo ligam « <a href=\"%s\">%s</a> » mena cap a un emplaçament sus un "
+"periferic diferent.\n"
+"\n"
+"Aqueste periferic es « %s » e l'emplaçament es sus « %s »."
 
 #: src/kgx-terminal.c:511
 msgctxt "toast-message"
@@ -396,6 +413,8 @@ msgid ""
 "An unexpected error occurred whilst reading the clipboard. Please include "
 "the following information if you report the error."
 msgstr ""
+"Una error inesperada s'es producha pendent la lectura del quichapapièrs. "
+"Mercés d’inclure las informacions seguentas se senhalatz l'error."
 
 #: src/kgx-terminal.c:575
 msgctxt "toast-message"
@@ -408,6 +427,8 @@ msgid ""
 "An unexpected error occurred whilst showing the file. Please include the "
 "following information if you report the error."
 msgstr ""
+"Una error inesperada s'es producha en afichant lo fichièr. Mercés d’inclure "
+"las informacions seguentas se senhalatz l'error."
 
 #: src/kgx-terminal.c:599
 msgctxt "toast-message"
@@ -420,6 +441,8 @@ msgid ""
 "An unexpected error occurred whilst opening the folder. Please include the "
 "following information if you report the error."
 msgstr ""
+"Una error inesperada s'es producha pendent l'obertura del dorsièr. Mercés "
+"d’inclure las informacions seguentas se senhalatz l'error."
 
 #: src/kgx-terminal.c:696
 #, c-format
@@ -441,6 +464,8 @@ msgid ""
 "An unexpected error occurred whilst processing the clipboard. Please include "
 "the following information if you report the error."
 msgstr ""
+"Una error inesperada s'es producha pendent lo tractament del quichapapièrs. "
+"Mercés d’inclure las informacions seguentas se senhalatz l'error."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
