@@ -6,209 +6,141 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-20 19:30+0000\n"
-"PO-Revision-Date: 2024-09-03 00:35+0300\n"
-"Last-Translator: Efstathios Iosifidis <eiosifidis@gnome.org>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
+"POT-Creation-Date: 2025-09-13 20:44+0000\n"
+"PO-Revision-Date: 2025-09-15 13:34+0300\n"
+"Last-Translator: Dimitris Spentzos <jimspentzos2000@gmail.com>\n"
 "Language-Team: Greek <gnome-el-list@gnome.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.7\n"
 
-#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
+#: src/kgx-window.ui:52
 msgid "Console"
 msgstr "Κονσόλα"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Console.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"εντολή;προτροπή εντολών;cmd;γραμμή εντολών;εκτέλεση;κέλυφος;τερματικό;kgx;"
-"kings cross;"
+"εντολή;γραμμή "
+"εντολών;τερματικό;προτροπή;εκτέλεση;κέλυφος;command;prompt;cmd;commandline;run;shell;terminal;kgx;kings "
+"cross;"
 
-#: data/org.gnome.Console.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
 msgstr "Νέο παράθυρο"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
+#: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:246
 msgid "New Tab"
 msgstr "Νέα καρτέλα"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
-msgstr "Προσομοίωση τερματικού"
+msgstr "Εξομοίωση τερματικού"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
-msgstr "Ένας απλός φιλικός προς τον χρήστη εξομοιωτής τερματικού για το GNOME."
+msgstr "Μια απλή και εύχρηστη εφαρμογή εξομοίωσης τερματικού για το GNOME."
 
-#: data/org.gnome.Console.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "Παράθυρο τερματικού"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
-msgstr "Το έργο GNOME"
+msgstr "Έργο GNOME"
 
-#: src/help-overlay.ui:12
-msgctxt "shortcut window"
-msgid "Application"
-msgstr "Εφαρμογή"
-
-#: src/help-overlay.ui:16
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "Νέο παράθυρο"
-
-#: src/help-overlay.ui:23
-msgctxt "shortcut window"
-msgid "Terminal"
-msgstr "Τερματικό"
-
-#: src/help-overlay.ui:27
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "Εύρεση"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
-msgid "Copy"
-msgstr "Αντιγραφή"
-
-#: src/help-overlay.ui:39
-msgctxt "shortcut window"
-msgid "Paste"
-msgstr "Επικόλληση"
-
-#: src/help-overlay.ui:46
-msgctxt "shortcut window"
-msgid "Tabs"
-msgstr "Καρτέλες"
-
-#: src/help-overlay.ui:50
-msgctxt "shortcut window"
-msgid "New Tab"
-msgstr "Νέα καρτέλα"
-
-#: src/help-overlay.ui:56
-msgctxt "shortcut window"
-msgid "Close Tab"
-msgstr "Κλείσιμο καρτέλας"
-
-#: src/help-overlay.ui:62
-msgctxt "shortcut window"
-msgid "Show All Tabs"
-msgstr "Εμφάνιση όλων των καρτελών"
-
-#: src/help-overlay.ui:68
-msgctxt "shortcut window"
-msgid "Next Tab"
-msgstr "Επόμενη καρτέλα"
-
-#: src/help-overlay.ui:74
-msgctxt "shortcut window"
-msgid "Previous Tab"
-msgstr "Προηγούμενη καρτέλα"
-
-#: src/help-overlay.ui:80
-msgctxt "shortcut window"
-msgid "Move Tab Right"
-msgstr "Μετακίνηση καρτέλας δεξιά"
-
-#: src/help-overlay.ui:86
-msgctxt "shortcut window"
-msgid "Move Tab Left"
-msgstr "Μετακίνηση καρτέλας αριστερά"
-
-#: src/help-overlay.ui:92
-msgctxt "shortcut window"
-msgid "Switch to Tab 1–9"
-msgstr "Εναλλαγή σε καρτέλες 1–9"
-
-#: src/help-overlay.ui:98
-msgctxt "shortcut window"
-msgid "Switch to Tab 10"
-msgstr "Εναλλαγή στην καρτέλα 10"
-
-#. Translators: %s is the year range
-#: src/kgx-about.c:83 src/kgx-window.c:529
-#, c-format
-msgid "© %s Zander Brown"
-msgstr "© %s Zander Brown"
-
-#: src/kgx-about.c:101
+#: src/kgx-about.c:104
 msgid "GPL 3.0 or later"
-msgstr "GPL 3.0 ή μεταγενέστερη"
+msgstr "GPL 3.0 ή νεότερη"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. * version of KGX itself, the latter format is the VTE version
-#: src/kgx-about.c:114
+#: src/kgx-about.c:119
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s με χρήση VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:255
-msgid "Cannot use both --working-directory and positional parameters"
-msgstr "Δεν είναι δυνατή η χρήση παραμέτρων --working-directory και positional"
+#. Translators: %s is the year range
+#: src/kgx-about.c:148
+#, c-format
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:443
+#. Translators: Credit yourself here
+#: src/kgx-about.c:176
+msgid "translator-credits"
+msgstr ""
+"Ομάδα ελληνικής μετάφρασης GNOME\n"
+" Ευστάθιος Ιωσηφίδης <iosifidis@opensuse.org>\n"
+" Δημήτριος Σπέντζος <jimspentzos2000@gmail.com>"
+
+#: src/kgx-application.c:289
+msgid "Cannot use both --working-directory and positional parameters"
+msgstr ""
+"Δεν είναι δυνατή η ταυτόχρονη χρήση του --working-directory και των "
+"παραμέτρων θέσης"
+
+#: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Εκτέλεση του ορίσματος σε αυτήν την επιλογή μέσα στο τερματικό"
 
-#: src/kgx-application.c:444
+#: src/kgx-application.c:510
 msgid "COMMAND"
 msgstr "ΕΝΤΟΛΗ"
 
-#: src/kgx-application.c:452
+#: src/kgx-application.c:518
 msgid "Set the working directory"
 msgstr "Ορισμός του καταλόγου εργασίας"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:454
+#: src/kgx-application.c:520
 msgid "DIRNAME"
-msgstr "DIRNAME"
+msgstr "ΟΝΟΜΑ ΚΑΤΑΛΟΓΟΥ"
 
-#: src/kgx-application.c:462
+#: src/kgx-application.c:528
 msgid "Wait until the child exits (TODO)"
 msgstr "Περιμένετε έως ότου τερματιστεί η θυγατρική διεργασία (TODO)"
 
-#: src/kgx-application.c:471
+#: src/kgx-application.c:537
 msgid "Set the initial window title"
 msgstr "Ορισμός του αρχικού τίτλου του παραθύρου"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:538
 msgid "TITLE"
 msgstr "ΤΙΤΛΟΣ"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:546
 msgid "ADVANCED: Set the shell to launch"
-msgstr "ΓΙΑ ΠΡΟΧΩΡΗΜΕΝΟΥΣ: Ορίστε το κέλυφος που θα ξεκινήσει"
+msgstr "ΣΥΝΘΕΤΟ: Ορισμός του κελύφους προς εκκίνηση"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:547
 msgid "SHELL"
 msgstr "ΚΕΛΥΦΟΣ"
 
-#: src/kgx-application.c:489
+#: src/kgx-application.c:555
 msgid "ADVANCED: Set the scrollback length"
-msgstr "ΓΙΑ ΠΡΟΧΩΡΗΜΕΝΟΥΣ: Ορίστε το μήκος ανατροφοδότησης"
+msgstr "ΣΥΝΘΕΤΟ: Ορισμός της απόστασης της αντίστροφης κύλισης"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:556
 msgid "LINES"
 msgstr "ΓΡΑΜΜΕΣ"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:644
+#: src/kgx-application.c:695
 #, c-format
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — Προσομοίωση τερματικού"
 
-#: src/kgx-application.c:650
+#: src/kgx-application.c:701
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
-msgstr "[-e|-- COMMAND [ARGUMENT...]]"
+msgstr "[-e|-- ΕΝΤΟΛΗ [ΟΡΙΣΜΑ...]]"
 
 #: src/kgx-close-dialog.c:73
 msgid "Close Window?"
@@ -222,11 +154,11 @@ msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
 msgstr[0] ""
-"Μια εντολή εξακολουθεί να εκτελείται, το κλείσιμο αυτού του παραθύρου θα την "
-"τερματίσει και μπορεί να οδηγήσει σε απροσδόκητα αποτελέσματα"
+"Μια εντολή εξακολουθεί να εκτελείται. Το κλείσιμο αυτού του παραθύρου θα την "
+"τερματίσει και ενδέχεται να οδηγήσει σε απρόσμενα αποτελέσματα"
 msgstr[1] ""
-"Ορισμένες εντολές εξακολουθούν να εκτελούνται, το κλείσιμο αυτού του "
-"παραθύρου θα τις τερματίσει και μπορεί να οδηγήσει σε απροσδόκητα "
+"Ορισμένες εντολές εξακολουθούν να εκτελούνται. Το κλείσιμο αυτού του "
+"παραθύρου θα τις τερματίσει και ενδέχεται να οδηγήσει σε απρόσμενα "
 "αποτελέσματα"
 
 #: src/kgx-close-dialog.c:82
@@ -241,11 +173,12 @@ msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
 msgstr[0] ""
-"Μια εντολή εξακολουθεί να εκτελείται, το κλείσιμο αυτής της καρτέλας θα την "
-"τερματίσει και μπορεί να οδηγήσει σε απροσδόκητα αποτελέσματα"
+"Μια εντολή εξακολουθεί να εκτελείται. Το κλείσιμο αυτής της καρτέλας θα την "
+"τερματίσει και ενδέχεται να οδηγήσει σε απρόσμενα αποτελέσματα"
 msgstr[1] ""
-"Ορισμένες εντολές εξακολουθούν να εκτελούνται, το κλείσιμο αυτής της "
-"καρτέλας θα τις τερματίσει και μπορεί να οδηγήσει σε απροσδόκητα αποτελέσματα"
+"Ορισμένες εντολές εξακολουθούν να εκτελούνται. Το κλείσιμο αυτής της "
+"καρτέλας θα τις τερματίσει και ενδέχεται να οδηγήσει σε απρόσμενα "
+"αποτελέσματα"
 
 #. Translators: Screen reader label for the list of running commands
 #: src/kgx-close-dialog.c:194
@@ -267,14 +200,55 @@ msgstr "Κ_λείσιμο"
 msgid "Color string is wrong length"
 msgstr "Η συμβολοσειρά χρώματος έχει λάθος μήκος"
 
+#: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
+#: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
+#: src/kgx-drop-target.c:509
+msgctxt "toast-message"
+msgid "Drop Failed"
+msgstr "Αποτυχία απόθεσης"
+
+#: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a URI list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+"Προέκυψε απρόσμενο σφάλμα κατά την απόθεση μιας λίστας URI. Συμπεριλάβετε "
+"τις ακόλουθες πληροφορίες εάν αναφέρετε το σφάλμα."
+
+#: src/kgx-drop-target.c:337
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a file list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+"Προέκυψε απρόσμενο σφάλμα κατά την απόθεση μιας λίστας αρχείων. "
+"Συμπεριλάβετε τις ακόλουθες πληροφορίες εάν αναφέρετε το σφάλμα."
+
+#: src/kgx-drop-target.c:371
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a text drop. Please include "
+"the following information if you report the error."
+msgstr ""
+"Προέκυψε απρόσμενο σφάλμα κατά την απόθεση κειμένου. Συμπεριλάβετε τις "
+"ακόλουθες πληροφορίες εάν αναφέρετε το σφάλμα."
+
+#: src/kgx-drop-target.c:512
+msgctxt "spad-message"
+msgid ""
+"An unexpected value was received. Please include the following information "
+"if you report the error."
+msgstr ""
+"Ελήφθη απρόσμενη τιμή. Συμπεριλάβετε τις ακόλουθες πληροφορίες εάν αναφέρετε "
+"το σφάλμα."
+
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
 msgid "Linux"
 msgstr "Linux"
 
 #: src/kgx-livery-manager.c:230
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
 msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
@@ -283,16 +257,16 @@ msgstr "XTerm"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:471
+#: src/kgx-pages.c:495
 #, c-format
 msgid "Tab %i"
 msgstr "Καρτέλα %i"
 
-#: src/kgx-pages.ui:90
+#: src/kgx-pages.ui:100
 msgid "_Detach Tab"
 msgstr "_Απόσπαση καρτέλας"
 
-#: src/kgx-pages.ui:96
+#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Κλείσιμο"
 
@@ -308,112 +282,244 @@ msgstr ""
 
 #: src/kgx-paste-dialog.c:129
 msgid "You are pasting a command that runs as an administrator"
-msgstr "Επικολλάτε μια εντολή που εκτελείται ως διαχειριστής"
+msgstr ""
+"Κάνετε επικόλληση μιας εντολής που εκτελείται με δικαιώματα διαχειριστή"
 
 #: src/kgx-paste-dialog.c:136 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "_Επικόλληση"
 
-#: src/kgx-process.c:192
+#: src/kgx-process.c:196
 #, c-format
 msgid "Process %d"
 msgstr "Διεργασία %d"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-simple-tab.c:169
+#: src/kgx-simple-tab.c:170
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Αποτυχία εκκίνησης</b> — %s"
 
+#: src/kgx-spad.c:194
+msgid "Unable To Open"
+msgstr "Αδυναμία ανοίγματος"
+
+#: src/kgx-spad.c:197
+#, c-format
+msgid ""
+"Opening ‘<a href=\"%s\">%s</a>’ failed:\n"
+"%s"
+msgstr ""
+"Αποτυχία ανοίγματος του «<a href=\"%s\">%s</a>»:\n"
+"%s"
+
+#: src/kgx-spad.c:339 src/kgx-spad.ui:4
+msgid "Error Details"
+msgstr "Λεπτομέρειες σφάλματος"
+
+#: src/kgx-spad.ui:23
+msgid "Error Message"
+msgstr "Μήνυμα σφάλματος"
+
+#: src/kgx-spad.ui:35
+msgid "Copy Error Message"
+msgstr "Αντιγραφή μηνύματος σφάλματος"
+
+#: src/kgx-spad.ui:104
+msgid "Report _Issue"
+msgstr "Αναφορά _προβλήματος"
+
+#: src/kgx-tab.c:597
+msgctxt "toast-button"
+msgid "_Details"
+msgstr "_Λεπτομέρειες"
+
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:814
+#: src/kgx-tab.c:889
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Μόνο ανάγνωση</b> — Η εντολή τερματίστηκε με κωδικό %i"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:822
+#: src/kgx-tab.c:897
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Μόνο ανάγνωση</b> — Η εντολή τερματίστηκε"
 
-#: src/kgx-tab.c:842
+#: src/kgx-tab.c:917
 msgid "Command completed"
 msgstr "Η εντολή ολοκληρώθηκε"
 
-#: src/kgx-tab.ui:40
+#: src/kgx-tab.ui:42
 msgid "Find text"
 msgstr "Εύρεση κειμένου"
 
-#: src/kgx-tab.ui:51
+#: src/kgx-tab.ui:70
 msgid "Previous Match"
 msgstr "Προηγούμενη αντιστοιχία"
 
-#: src/kgx-tab.ui:59
+#: src/kgx-tab.ui:78
 msgid "Next Match"
 msgstr "Επόμενη αντιστοιχία"
 
-#: src/kgx-terminal.c:508
+#. Translators: The user ctrl-clicked, or used ‘Open Link’, on a URI that,
+#. *              for whatever reason, we were unable to open.
+#: src/kgx-terminal.c:39
+msgctxt "toast-message"
+msgid "Couldn't Open Link"
+msgstr "Αδυναμία ανοίγματος συνδέσμου"
+
+#: src/kgx-terminal.c:360
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
+"are installed."
+msgstr ""
+"Ο σύνδεσμος «<a href=\"%s\">%s</a>» χρησιμοποιεί το πρωτόκολλο «%s», για το "
+"οποίο δεν έχουν εγκατασταθεί κατάλληλες εφαρμογές."
+
+#: src/kgx-terminal.c:373
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
+"a>”. Please include the following information if you report the error."
+msgstr ""
+"Προέκυψε απρόσμενο σφάλμα κατά το άνοιγμα του συνδέσμου «<a href=\"%s\">%s</"
+"a>». Συμπεριλάβετε τις ακόλουθες πληροφορίες εάν αναφέρετε το σφάλμα."
+
+#: src/kgx-terminal.c:421
+#, c-format
+msgctxt "spad-message"
+msgid "The link “<a href=\"%s\">%s</a>” is malformed."
+msgstr "Η μορφή του συνδέσμου «<a href=\"%s\">%s</a>» είναι εσφαλμένη."
+
+#: src/kgx-terminal.c:440
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” points to a location on a different "
+"device.\n"
+"\n"
+"This device is “%s” and the location is on “%s”."
+msgstr ""
+"Ο σύνδεσμος «<a href=\"%s\">%s</a>» οδηγεί σε μια τοποθεσία σε άλλη "
+"συσκευή.\n"
+"\n"
+"Αυτή η συσκευή είναι «%s» και η τοποθεσία είναι στο «%s»."
+
+#: src/kgx-terminal.c:511
+msgctxt "toast-message"
+msgid "Couldn't Paste Text"
+msgstr "Αδυναμία επικόλλησης κειμένου"
+
+#: src/kgx-terminal.c:514
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst reading the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"Προέκυψε απρόσμενο σφάλμα κατά την ανάγνωση του προχείρου. Συμπεριλάβετε τις "
+"ακόλουθες πληροφορίες εάν αναφέρετε το σφάλμα."
+
+#: src/kgx-terminal.c:575
+msgctxt "toast-message"
+msgid "Couldn't Show File"
+msgstr "Αδυναμία εμφάνισης αρχείου"
+
+#: src/kgx-terminal.c:578
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst showing the file. Please include the "
+"following information if you report the error."
+msgstr ""
+"Προέκυψε απρόσμενο σφάλμα κατά την εμφάνιση του αρχείου. Συμπεριλάβετε τις "
+"ακόλουθες πληροφορίες εάν αναφέρετε το σφάλμα."
+
+#: src/kgx-terminal.c:599
+msgctxt "toast-message"
+msgid "Couldn't Open Folder"
+msgstr "Αδυναμία ανοίγματος φακέλου"
+
+#: src/kgx-terminal.c:602
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the folder. Please include the "
+"following information if you report the error."
+msgstr ""
+"Προέκυψε απρόσμενο σφάλμα κατά το άνοιγμα του φακέλου. Συμπεριλάβετε τις "
+"ακόλουθες πληροφορίες εάν αναφέρετε το σφάλμα."
+
+#: src/kgx-terminal.c:696
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
 "%s"
 msgstr ""
-"Κάντε κλικ με το πλήκτρο Ctrl για να ανοίξετε:\n"
+"Κάντε κλικ με πατημένο το πλήκτρο Ctrl για άνοιγμα:\n"
 "%s"
+
+#: src/kgx-terminal.c:984
+msgctxt "toast-message"
+msgid "Couldn't Paste"
+msgstr "Αδυναμία επικόλλησης"
+
+#: src/kgx-terminal.c:987
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst processing the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"Προέκυψε απρόσμενο σφάλμα κατά την επεξεργασία του προχείρου. Συμπεριλάβετε "
+"τις ακόλουθες πληροφορίες εάν αναφέρετε το σφάλμα."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
 msgstr "Άν_οιγμα συνδέσμου"
 
 #: src/kgx-terminal.ui:12
-msgid "Copy _Link"
-msgstr "Αντιγραφή _συνδέσμου"
+msgid "Copy _Link Address"
+msgstr "Αντιγραφή διεύθυν_σης συνδέσμου"
 
 #: src/kgx-terminal.ui:19
 msgid "_Copy"
-msgstr "_Αντιγραφή"
+msgstr "Αντιγρα_φή"
 
 #: src/kgx-terminal.ui:29
 msgid "_Select All"
 msgstr "_Επιλογή όλων"
 
-#: src/kgx-terminal.ui:36
+#: src/kgx-terminal.ui:36 src/kgx-window.ui:285
+msgid "Leave _Fullscreen"
+msgstr "Έξοδος από _πλήρη οθόνη"
+
+#: src/kgx-terminal.ui:43
 msgid "Show in _Files"
-msgstr "Εμφάνιση στο _Αρχεία"
+msgstr "Εμφάνιση στα _Αρχεία"
 
-#: src/kgx-theme-switcher.ui:16
+#: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
-msgstr "Ακολουθήστε το στυλ συστήματος"
+msgstr "Χρήση θέματος συστήματος"
 
-#: src/kgx-theme-switcher.ui:44
+#: src/kgx-theme-switcher.ui:52
 msgid "Light Style"
-msgstr "Φωτεινό θέμα"
+msgstr "Ανοιχτόχρωμο θέμα"
 
-#: src/kgx-theme-switcher.ui:71
+#: src/kgx-theme-switcher.ui:79
 msgid "Dark Style"
-msgstr "Σκοτεινό θέμα"
+msgstr "Σκουρόχρωμο θέμα"
 
 #. Translators: ‘command’ is the argument name, and shouldn't be translated
-#: src/kgx-utils.c:113
+#: src/kgx-utils.c:114
 msgid "Missing argument for --command"
-msgstr "Λείπει το όρισμα για την εντολή --command"
+msgstr "Απουσία ορίσματος για το --command"
 
-#: src/kgx-utils.c:128
+#: src/kgx-utils.c:129
 msgid "Cannot use both --command and positional parameters"
 msgstr ""
-"Δεν είναι δυνατή η χρήση τόσο της --command όσο και των κατά θέση παραμέτρων"
+"Δεν είναι δυνατή η ταυτόχρονη χρήση του --command και των παραμέτρων θέσης"
 
-#. Translators: Credit yourself here
-#: src/kgx-window.c:541
-msgid "translator-credits"
-msgstr ""
-"Ελληνική μεταφραστική ομάδα GNOME\n"
-" Ευστάθιος Ιωσηφίδης <iosifidis@opensuse.org>\n"
-"\n"
-"Για περισσότερες πληροφορίες, επισκεφθείτε τη σελίδα\n"
-"http://gnome.gr/"
-
-#: src/kgx-window.ui:17
+#: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
 msgstr "_Νέο παράθυρο"
 
@@ -421,35 +527,43 @@ msgstr "_Νέο παράθυρο"
 msgid "_Show All Tabs"
 msgstr "_Εμφάνιση όλων των καρτελών"
 
-#: src/kgx-window.ui:30
+#: src/kgx-window.ui:28 src/kgx-window.ui:280
+msgid "_Fullscreen"
+msgstr "_Πλήρης οθόνη"
+
+#: src/kgx-window.ui:35
 msgid "_Preferences"
 msgstr "_Προτιμήσεις"
 
-#: src/kgx-window.ui:34
+#: src/kgx-window.ui:39
 msgid "_Keyboard Shortcuts"
-msgstr "_Συντομεύσεις πληκτρολογίου"
+msgstr "Συντομεύσεις π_ληκτρολογίου"
 
-#: src/kgx-window.ui:38
+#: src/kgx-window.ui:43
 msgid "_About Console"
-msgstr "_Περί Κονσόλα"
+msgstr "_Σχετικά με την Κονσόλα"
 
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:148
 msgid "Find in Terminal"
 msgstr "Εύρεση στο τερματικό"
 
-#: src/kgx-window.ui:95
-msgid "Main Menu"
-msgstr "Κυρίως μενού"
+#: src/kgx-window.ui:160
+msgid "Leave Fullscreen"
+msgstr "Έξοδος από πλήρη οθόνη"
 
-#: src/kgx-window.ui:113
+#: src/kgx-window.ui:167
+msgid "Main Menu"
+msgstr "Κύριο μενού"
+
+#: src/kgx-window.ui:185
 msgid "Shrink Text"
 msgstr "Σμίκρυνση κειμένου"
 
-#: src/kgx-window.ui:124
+#: src/kgx-window.ui:196
 msgid "Reset Size"
 msgstr "Επαναφορά μεγέθους"
 
-#: src/kgx-window.ui:148
+#: src/kgx-window.ui:220
 msgid "Enlarge Text"
 msgstr "Μεγέθυνση κειμένου"
 
@@ -459,7 +573,7 @@ msgstr "Γραμματοσειρά τερματικού"
 
 #: src/preferences/kgx-font-picker.ui:29
 msgid "_Select"
-msgstr "_Επιλέξτε"
+msgstr "_Επιλογή"
 
 #: src/preferences/kgx-font-picker.ui:45 src/preferences/kgx-font-picker.ui:48
 msgid "Font Name"
@@ -477,9 +591,9 @@ msgstr "Προεπισκόπηση γραμματοσειράς"
 msgid "Font Size"
 msgstr "Μέγεθος γραμματοσειράς"
 
-#: src/preferences/kgx-preferences-window.c:125
+#: src/preferences/kgx-preferences-window.c:126
 msgid "No Font Set"
-msgstr "Καμία γραμματοσειρά δεν έχει οριστεί"
+msgstr "Δεν έχει οριστεί γραμματοσειρά"
 
 #: src/preferences/kgx-preferences-window.ui:7
 msgid "General"
@@ -491,31 +605,115 @@ msgstr "Γραμματοσειρά"
 
 #: src/preferences/kgx-preferences-window.ui:13
 msgid "Use _System Default"
-msgstr "Χρήση προεπιλογών _συστήματος"
+msgstr "Χρή_ση προεπιλογών συστήματος"
 
 #: src/preferences/kgx-preferences-window.ui:19
 msgid "Custom _Font"
-msgstr "Προσαρμοσμένη _Γραμματοσειρά"
+msgstr "Προσαρμοσμένη _γραμματοσειρά"
 
-#: src/preferences/kgx-preferences-window.ui:63
+#: src/preferences/kgx-preferences-window.ui:61
 msgid "Behaviour"
 msgstr "Συμπεριφορά"
 
-#: src/preferences/kgx-preferences-window.ui:66
+#: src/preferences/kgx-preferences-window.ui:64
 msgid "_Unlimited Scrollback"
 msgstr "_Απεριόριστη κύλιση"
 
-#: src/preferences/kgx-preferences-window.ui:92
+#: src/preferences/kgx-preferences-window.ui:70
+msgid "_Scrollback Lines"
+msgstr "Γραμμές αντίστρο_φης κύλισης"
+
+#: src/preferences/kgx-preferences-window.ui:90
 msgid "Terminal Bell"
 msgstr "Κουδούνι τερματικού"
 
-#: src/preferences/kgx-preferences-window.ui:95
+#: src/preferences/kgx-preferences-window.ui:93
 msgid "Play _Sound"
-msgstr "Αναπαραγωγή _ήχου"
+msgstr "Αναπαραγωγή ή_χου"
 
-#: src/preferences/kgx-preferences-window.ui:101
+#: src/preferences/kgx-preferences-window.ui:99
 msgid "_Visual Effects"
 msgstr "_Οπτικά εφέ"
+
+#: src/shortcuts-dialog.ui:7
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Εφαρμογή"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Νέο παράθυρο"
+
+#: src/shortcuts-dialog.ui:18
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Τερματικό"
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Εύρεση"
+
+#: src/shortcuts-dialog.ui:27
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Αντιγραφή"
+
+#: src/shortcuts-dialog.ui:33
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Επικόλληση"
+
+#: src/shortcuts-dialog.ui:41
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Καρτέλες"
+
+#: src/shortcuts-dialog.ui:44
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Νέα καρτέλα"
+
+#: src/shortcuts-dialog.ui:50
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Κλείσιμο καρτέλας"
+
+#: src/shortcuts-dialog.ui:56
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Εμφάνιση όλων των καρτελών"
+
+#: src/shortcuts-dialog.ui:62
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Επόμενη καρτέλα"
+
+#: src/shortcuts-dialog.ui:68
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Προηγούμενη καρτέλα"
+
+#: src/shortcuts-dialog.ui:74 src/shortcuts-dialog.ui:95
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Μετακίνηση καρτέλας αριστερά"
+
+#: src/shortcuts-dialog.ui:81 src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "Μετακίνηση καρτέλας δεξιά"
+
+#: src/shortcuts-dialog.ui:102
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Μετάβαση στην καρτέλα 1–9"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Μετάβαση στην καρτέλα 10"
 
 #~ msgid "Use Light Colors"
 #~ msgstr "Χρήση ανοικτών χρωμάτων"
