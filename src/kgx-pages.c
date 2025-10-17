@@ -271,6 +271,8 @@ size_changed (KgxTab   *tab,
 {
   KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
   g_autofree char *label = NULL;
+  g_autofree char *a11y_label = NULL;
+  g_autofree char *a11y_announce = NULL;
 
   if (gtk_widget_in_destruction (GTK_WIDGET (self)))
     return;
@@ -288,13 +290,24 @@ size_changed (KgxTab   *tab,
   }
 
   g_clear_handle_id (&priv->timeout, g_source_remove);
-  priv->timeout = g_timeout_add_once (800, size_timeout, self);
+  priv->timeout = g_timeout_add_once (1200, size_timeout, self);
   g_source_set_name_by_id (priv->timeout, "[kgx] resize label timeout");
 
   label = g_strdup_printf ("%i × %i", cols, rows);
+  /* Translators: columns by rows, describing terminal size */
+  a11y_label = g_strdup_printf (_("%i by %i"), cols, rows);
+  a11y_announce = g_strdup_printf (_("%i columns %i rows"), cols, rows);
 
   gtk_label_set_label (GTK_LABEL (priv->status_message), label);
+  gtk_accessible_update_property (GTK_ACCESSIBLE (priv->status_message),
+                                  GTK_ACCESSIBLE_PROPERTY_LABEL, a11y_label,
+                                  -1);
+
   gtk_revealer_set_reveal_child (GTK_REVEALER (priv->status_revealer), TRUE);
+
+  gtk_accessible_announce (GTK_ACCESSIBLE (priv->status_message),
+                           a11y_announce,
+                           GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_MEDIUM);
 }
 
 

@@ -56,6 +56,7 @@
             <property name="valign">end</property>
             <property name="child">
               <object class="GtkRevealer" id="status_revealer">
+                <property name="accessible-role">status</property>
                 <property name="halign">end</property>
                 <property name="valign">end</property>
                 <property name="transition-type">crossfade</property>
