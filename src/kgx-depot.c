@@ -350,6 +350,9 @@ kgx_depot_spawn (KgxDepot                 *self,
   spawn_data->envv = g_environ_setenv (spawn_data->envv,
                                        "TERM_PROGRAM_VERSION", PACKAGE_VERSION,
                                        TRUE);
+  spawn_data->envv = g_environ_setenv (spawn_data->envv,
+                                       "TERM", "xterm-256color",
+                                       TRUE);
 
   kgx_proxy_info_apply_to_environ (self->proxy_info, &spawn_data->envv);
 
