@@ -27,6 +27,21 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="49.1" date="2025-10-19" type="stable">
+      <description>
+        <p>New Translations:</p>
+        <ul>
+          <li>Uighur</li>
+        </ul>
+        <p>Updated Translations:</p>
+        <ul>
+          <li>Bulgarian</li>
+          <li>Greek</li>
+          <li>Occitan</li>
+          <li>Portuguese</li>
+        </ul>
+      </description>
+    </release>
     <release version="49.0" date="2025-09-13" type="stable">
       <description>
         <p>New Translations:</p>
