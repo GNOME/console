@@ -11,17 +11,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2025-09-04 10:19+0000\n"
-"PO-Revision-Date: 2025-09-05 00:42+0200\n"
-"Last-Translator: Philipp Kiemle <l10n@prly.mozmail.com>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
+"POT-Creation-Date: 2025-10-16 16:06+0000\n"
+"PO-Revision-Date: 2025-10-18 01:13+0200\n"
+"Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.6\n"
 
 # Der Terminal-Emulator von KDE Plasma heißt bereits "Konsole", deshalb bleiben wir hier beim englischen Original. - pk
 #: data/org.gnome.Console.desktop.in.in:2
@@ -33,7 +33,9 @@ msgstr "Console"
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
-msgstr "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;befehl;kommando;befehlszeile;kommandozeile;ausführen;"
+msgstr ""
+"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings "
+"cross;befehl;kommando;befehlszeile;kommandozeile;ausführen;"
 
 #: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
@@ -49,13 +51,15 @@ msgstr "Terminal-Emulator"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
-msgstr "Ein einfacher, nutzerfreundlicher Terminal-Emulator für die GNOME Arbeitsumgebung."
+msgstr ""
+"Ein einfacher, nutzerfreundlicher Terminal-Emulator für die GNOME "
+"Arbeitsumgebung."
 
 #: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "Terminalfenster"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Das GNOME-Projekt"
 
@@ -89,7 +93,9 @@ msgstr ""
 
 #: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
-msgstr "»--working-directory« darf nicht gleichzeitig mit positionellen Parametern verwendet werden"
+msgstr ""
+"»--working-directory« darf nicht gleichzeitig mit positionellen Parametern "
+"verwendet werden"
 
 #: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
@@ -153,20 +159,36 @@ msgid "Close Window?"
 msgstr "Fenster schließen?"
 
 #: src/kgx-close-dialog.c:75
-msgid "A command is still running, closing this window will kill it and may lead to unexpected outcomes"
-msgid_plural "Some commands are still running, closing this window will kill them and may lead to unexpected outcomes"
-msgstr[0] "Ein Befehl läuft noch. Das Schließen dieses Fensters wird ihn beenden und kann zu unerwarteten Ergebnissen führen"
-msgstr[1] "Einige Befehle laufen noch. Das Schließen dieses Fensters wird sie beenden und kann zu unerwarteten Ergebnissen führen"
+msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this window will kill them and may "
+"lead to unexpected outcomes"
+msgstr[0] ""
+"Ein Befehl läuft noch. Das Schließen dieses Fensters wird ihn beenden und "
+"kann zu unerwarteten Ergebnissen führen"
+msgstr[1] ""
+"Einige Befehle laufen noch. Das Schließen dieses Fensters wird sie beenden "
+"und kann zu unerwarteten Ergebnissen führen"
 
 #: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
 msgstr "Reiter schließen?"
 
 #: src/kgx-close-dialog.c:84
-msgid "A command is still running, closing this tab will kill it and may lead to unexpected outcomes"
-msgid_plural "Some commands are still running, closing this tab will kill them and may lead to unexpected outcomes"
-msgstr[0] "Ein Befehl läuft noch. Das Schließen dieses Reiters wird ihn beenden und kann zu unerwarteten Ergebnissen führen"
-msgstr[1] "Einige Befehle laufen noch. Das Schließen dieses Reiters wird sie beenden und kann zu unerwarteten Ergebnissen führen"
+msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this tab will kill them and may "
+"lead to unexpected outcomes"
+msgstr[0] ""
+"Ein Befehl läuft noch. Das Schließen dieses Reiters wird ihn beenden und "
+"kann zu unerwarteten Ergebnissen führen"
+msgstr[1] ""
+"Einige Befehle laufen noch. Das Schließen dieses Reiters wird sie beenden "
+"und kann zu unerwarteten Ergebnissen führen"
 
 #. Translators: Screen reader label for the list of running commands
 #: src/kgx-close-dialog.c:194
@@ -193,27 +215,43 @@ msgstr "Farb-String hat die falsche Länge"
 #: src/kgx-drop-target.c:509
 msgctxt "toast-message"
 msgid "Drop Failed"
-msgstr ""
+msgstr "Übergabe fehlgeschlagen"
 
 #: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst receiving a URI list drop. Please include the following information if you report the error."
+msgid ""
+"An unexpected error occurred whilst receiving a URI list drop. Please "
+"include the following information if you report the error."
 msgstr ""
+"Ein unerwarteter Fehler trat beim Empfangen einer Verweislistenübergabe auf. "
+"Bitte geben Sie die folgenden Informationen mit, wenn Sie den Fehler melden."
 
 #: src/kgx-drop-target.c:337
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst receiving a file list drop. Please include the following information if you report the error."
+msgid ""
+"An unexpected error occurred whilst receiving a file list drop. Please "
+"include the following information if you report the error."
 msgstr ""
+"Ein unerwarteter Fehler trat beim Empfangen einer Dateilistenübergabe auf. "
+"Bitte geben Sie die folgenden Informationen mit, wenn Sie den Fehler melden."
 
 #: src/kgx-drop-target.c:371
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst receiving a text drop. Please include the following information if you report the error."
+msgid ""
+"An unexpected error occurred whilst receiving a text drop. Please include "
+"the following information if you report the error."
 msgstr ""
+"Ein unerwarteter Fehler trat beim Empfangen einer Textübergabe auf. Bitte "
+"geben Sie die folgenden Informationen mit, wenn Sie den Fehler melden."
 
 #: src/kgx-drop-target.c:512
 msgctxt "spad-message"
-msgid "An unexpected value was received. Please include the following information if you report the error."
+msgid ""
+"An unexpected value was received. Please include the following information "
+"if you report the error."
 msgstr ""
+"Ein unerwarteter Wert wurde erhalten. Bitte geben Sie die folgenden "
+"Informationen mit, wenn Sie den Fehler melden."
 
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
@@ -273,7 +311,7 @@ msgstr "<b>Starten gescheitert</b> — %s"
 
 #: src/kgx-spad.c:194
 msgid "Unable To Open"
-msgstr ""
+msgstr "Öffnen nicht möglich"
 
 #: src/kgx-spad.c:197
 #, c-format
@@ -281,6 +319,8 @@ msgid ""
 "Opening ‘<a href=\"%s\">%s</a>’ failed:\n"
 "%s"
 msgstr ""
+"Das Öffnen von »<a href=\"%s\">%s</a>« ist fehlgeschlagen:\n"
+"%s"
 
 #: src/kgx-spad.c:339 src/kgx-spad.ui:4
 msgid "Error Details"
@@ -296,7 +336,7 @@ msgstr "Fehlermeldung kopieren"
 
 #: src/kgx-spad.ui:104
 msgid "Report _Issue"
-msgstr ""
+msgstr "Ein _Problem melden"
 
 #: src/kgx-tab.c:597
 msgctxt "toast-button"
@@ -333,68 +373,92 @@ msgstr "Nächster Treffer"
 #. Translators: The user ctrl-clicked, or used ‘Open Link’, on a URI that,
 #. *              for whatever reason, we were unable to open.
 #: src/kgx-terminal.c:39
-#, fuzzy
-#| msgid "_Open Link"
 msgctxt "toast-message"
 msgid "Couldn't Open Link"
-msgstr "Verweis ö_ffnen"
+msgstr "Verweis konnte nicht geöffnet werden"
 
 #: src/kgx-terminal.c:360
 #, c-format
 msgctxt "spad-message"
-msgid "The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps are installed."
+msgid ""
+"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
+"are installed."
 msgstr ""
+"Der Verweis »<a href=\"%s\">%s</a>« verwendet das Protokoll »%s«, für "
+"welches keine Anwendung installiert ist."
 
 #: src/kgx-terminal.c:373
 #, c-format
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</a>”. Please include the following information if you report the error."
+msgid ""
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
+"a>”. Please include the following information if you report the error."
 msgstr ""
+"Ein unbekannter Fehler trat beim Öffnen des Verweises »<a href=\"%s\">%s</"
+"a>« auf. Bitte geben Sie die folgenden Informationen mit, wenn Sie den "
+"Fehler melden."
 
 #: src/kgx-terminal.c:421
 #, c-format
 msgctxt "spad-message"
 msgid "The link “<a href=\"%s\">%s</a>” is malformed."
-msgstr ""
+msgstr "Der Verweis »<a href=\"%s\">%s</a>« ist inkorrekt."
 
 #: src/kgx-terminal.c:440
 #, c-format
 msgctxt "spad-message"
 msgid ""
-"The link “<a href=\"%s\">%s</a>” points to a location on a different device.\n"
+"The link “<a href=\"%s\">%s</a>” points to a location on a different "
+"device.\n"
 "\n"
 "This device is “%s” and the location is on “%s”."
 msgstr ""
+"Der Verweis »<a href=\"%s\">%s</a>« zeigt auf einen ORt auf einem anderen "
+"Gerät.\n"
+"\n"
+"Das Gerät ist »%s« und der Ort ist auf »%s«."
 
 #: src/kgx-terminal.c:511
 msgctxt "toast-message"
 msgid "Couldn't Paste Text"
-msgstr ""
+msgstr "Text konnte nicht eingefügt werden"
 
 #: src/kgx-terminal.c:514
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst reading the clipboard. Please include the following information if you report the error."
+msgid ""
+"An unexpected error occurred whilst reading the clipboard. Please include "
+"the following information if you report the error."
 msgstr ""
+"Ein unbekannter Fehler trat beim Auslesen der Zwischenablage auf. Bitte "
+"geben Sie die folgenden Informationen mit, wenn Sie den Fehler melden."
 
 #: src/kgx-terminal.c:575
 msgctxt "toast-message"
 msgid "Couldn't Show File"
-msgstr ""
+msgstr "Datei konnte nicht angezeigt werden"
 
 #: src/kgx-terminal.c:578
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst showing the file. Please include the following information if you report the error."
+msgid ""
+"An unexpected error occurred whilst showing the file. Please include the "
+"following information if you report the error."
 msgstr ""
+"Ein unbekannter Fehler trat beim Zeigen der Datei auf. Bitte geben Sie die "
+"folgenden Informationen mit, wenn Sie den Fehler melden."
 
 #: src/kgx-terminal.c:599
 msgctxt "toast-message"
 msgid "Couldn't Open Folder"
-msgstr ""
+msgstr "Ordner konnte nicht geöffnet werden"
 
 #: src/kgx-terminal.c:602
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst opening the folder. Please include the following information if you report the error."
+msgid ""
+"An unexpected error occurred whilst opening the folder. Please include the "
+"following information if you report the error."
 msgstr ""
+"Ein unbekannter Fehler trat beim Öffnen des Ordners auf. Bitte geben Sie die "
+"folgenden Informationen mit, wenn Sie den Fehler melden."
 
 #: src/kgx-terminal.c:696
 #, c-format
@@ -408,22 +472,24 @@ msgstr ""
 #: src/kgx-terminal.c:984
 msgctxt "toast-message"
 msgid "Couldn't Paste"
-msgstr ""
+msgstr "Einfügen war nicht möglich"
 
 #: src/kgx-terminal.c:987
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst processing the clipboard. Please include the following information if you report the error."
+msgid ""
+"An unexpected error occurred whilst processing the clipboard. Please include "
+"the following information if you report the error."
 msgstr ""
+"Ein unbekannter Fehler trat bei der Verarbeitung der Zwischenablage auf. "
+"Bitte geben Sie die folgenden Informationen mit, wenn Sie den Fehler melden."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
 msgstr "Verweis ö_ffnen"
 
 #: src/kgx-terminal.ui:12
-#, fuzzy
-#| msgid "Copy _Link"
 msgid "Copy _Link Address"
-msgstr "_Verweis kopieren"
+msgstr "Verknüpfungsadresse _kopieren"
 
 #: src/kgx-terminal.ui:19
 msgid "_Copy"
@@ -435,7 +501,7 @@ msgstr "_Alle auswählen"
 
 #: src/kgx-terminal.ui:36 src/kgx-window.ui:285
 msgid "Leave _Fullscreen"
-msgstr ""
+msgstr "Vollbild _verlassen"
 
 #: src/kgx-terminal.ui:43
 msgid "Show in _Files"
@@ -460,7 +526,9 @@ msgstr "Fehlendes Argument für »--command«"
 
 #: src/kgx-utils.c:129
 msgid "Cannot use both --command and positional parameters"
-msgstr "»--command« darf nicht gleichzeitig mit positionellen Parametern verwendet werden"
+msgstr ""
+"»--command« darf nicht gleichzeitig mit positionellen Parametern verwendet "
+"werden"
 
 #: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
@@ -492,7 +560,7 @@ msgstr "Im Terminal suchen"
 
 #: src/kgx-window.ui:160
 msgid "Leave Fullscreen"
-msgstr ""
+msgstr "Vollbild verlassen"
 
 #: src/kgx-window.ui:167
 msgid "Main Menu"
