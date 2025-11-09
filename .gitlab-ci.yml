@@ -60,6 +60,7 @@ variables:
     atk.i686
     avahi-glib.i686
     avahi-libs.i686
+    bison
     brotli-devel.i686
     bzip2-devel.i686
     cairo-devel.i686
@@ -86,6 +87,7 @@ variables:
     expat-devel.i686
     fast_float-devel
     flac-libs.i686
+    flex
     fmt-devel.i686
     fmt.i686
     fontconfig-devel.i686
@@ -96,7 +98,6 @@ variables:
     fuse3-libs.i686
     gcovr
     gdk-pixbuf2-devel.i686
-    gdk-pixbuf2-modules.i686
     gdk-pixbuf2.i686
     gettext-libs.i686
     git
@@ -106,6 +107,9 @@ variables:
     glibc-*.i686
     glibc-headers-x86
     glslc
+    glycin-devel.i686
+    glycin-libs.i686
+    glycin-loaders.i686
     gmp-devel.i686
     gnutls-devel.i686
     gobject-introspection-devel.i686
@@ -133,6 +137,7 @@ variables:
     harfbuzz.i686
     json-glib.i686
     kernel-headers.i686
+    lcms2-devel.i686
     lcms2.i686
     libadwaita-devel.i686
     libadwaita.i686
@@ -171,6 +176,8 @@ variables:
     libpsl-devel.i686
     librsvg2-devel.i686
     librsvg2.i686
+    libseccomp-devel.i686
+    libseccomp.i686
     libselinux-devel.i686
     libsepol-devel.i686
     libsoup.i686
