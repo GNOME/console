@@ -94,6 +94,22 @@ test_file_as_subtitle_outside_home (void)
 
 
 static void
+test_file_as_subtitle_outside_home_prefix (void)
+{
+  g_autofree char *path =
+    g_strdup_printf ("file://%ssuffix", g_get_home_dir ());
+  g_autofree char *expected = g_strdup_printf ("%ssuffix", g_get_home_dir ());
+  g_autoptr (GFile) file = g_file_new_for_uri (path);
+  g_autofree char *result = kgx_file_as_subtitle (NULL, file, NULL);
+
+  g_test_bug ("https://gitlab.gnome.org/GNOME/console/-/issues/445");
+  g_test_bug ("https://gitlab.gnome.org/GNOME/console/-/merge_requests/188");
+
+  g_assert_cmpstr (result, ==, expected);
+}
+
+
+static void
 test_file_as_subtitle_is_home (void)
 {
   g_autoptr (GFile) file = g_file_new_for_path (g_get_home_dir ());
@@ -208,6 +224,7 @@ main (int argc, char *argv[])
   g_test_add_func ("/kgx/file-closures/file_as_subtitle/non_utf8", test_file_as_subtitle_non_utf8);
   g_test_add_func ("/kgx/file-closures/file_as_subtitle/non_utf8_in_home", test_file_as_subtitle_non_utf8_in_home);
   g_test_add_func ("/kgx/file-closures/file_as_subtitle/outside_home", test_file_as_subtitle_outside_home);
+  g_test_add_func ("/kgx/file-closures/file_as_subtitle/outside_home_prefix", test_file_as_subtitle_outside_home_prefix);
   g_test_add_func ("/kgx/file-closures/file_as_subtitle/is_home", test_file_as_subtitle_is_home);
   g_test_add_func ("/kgx/file-closures/file_as_subtitle/in_home", test_file_as_subtitle_in_home);
 
