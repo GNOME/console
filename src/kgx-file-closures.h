@@ -59,16 +59,21 @@ kgx_file_as_subtitle (G_GNUC_UNUSED GObject *object,
   }
 
   home = g_file_new_for_path (home_path);
-  if (!g_file_equal (home, file)) {
+  if (g_file_equal (home, file)) {
+    short_home = g_strdup ("~");
+  } else {
     path_rel_raw = g_file_get_relative_path (home, file);
+
+    /* Whoops, we weren't in the home dir after all */
+    if (G_UNLIKELY (!path_rel_raw)) {
+      return g_steal_pointer (&path_utf8);
+    }
 
     /* In practice we should have discounted non-utf8 already, but better
      * safe than sorry and replacement chars beats a crash */
     path_rel_utf8 = g_filename_display_name (path_rel_raw);
 
     short_home = g_strdup_printf ("~/%s", path_rel_utf8);
-  } else {
-    short_home = g_strdup ("~");
   }
 
   if (G_LIKELY (g_strcmp0 (short_home, window_title) == 0)) {
