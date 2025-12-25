@@ -7,6 +7,7 @@ tests = [
   'locale',
   'pages',
   'palette',
+  'playbox',
   'proxy-info',
   'settings',
   'shared-closures',

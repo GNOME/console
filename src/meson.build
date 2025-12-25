@@ -37,6 +37,7 @@ kgx_sources = files(
   'kgx-palette.h',
   'kgx-paste-dialog.c',
   'kgx-paste-dialog.h',
+  'kgx-playbox.h',
   'kgx-process.c',
   'kgx-process.h',
   'kgx-proxy-info.c',
