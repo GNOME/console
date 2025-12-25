@@ -1,3 +1,15 @@
+Version 49.2
+~~~~~~~~~~~~
+
+Small fix for an an unfortunate crash, thanks to metamuffin, Johannes
+Altmanninger, and XiJet, for their assistance in catching this.
+
+Updated Translations:
+ * German  (Christian Kirbach)
+ * Norwegian Bokmål  (Kjartan Maraas)
+ * Serbian  (Мирослав Николић)
+ * Serbian (Latin)  (Милош Поповић)
+
 Version 49.1
 ~~~~~~~~~~~~
 

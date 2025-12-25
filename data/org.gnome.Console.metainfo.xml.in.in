@@ -27,6 +27,17 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="49.2" date="2025-12-25" type="stable">
+      <description>
+        <p>Updated Translations:</p>
+        <ul>
+          <li>German</li>
+          <li>Norwegian Bokmål</li>
+          <li>Serbian (Latin)</li>
+          <li>Serbian</li>
+        </ul>
+      </description>
+    </release>
     <release version="49.1" date="2025-10-19" type="stable">
       <description>
         <p>New Translations:</p>
