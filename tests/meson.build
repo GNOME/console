@@ -9,6 +9,7 @@ tests = [
   'palette',
   'playbox',
   'proxy-info',
+  'remote',
   'settings',
   'shared-closures',
   'spad-source',
