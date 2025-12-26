@@ -1,6 +1,6 @@
 /* kgx-train.c
  *
- * Copyright 2021-2024 Zander Brown
+ * Copyright 2021-2025 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@
 #include "kgx-enums.h"
 #include "kgx-marshals.h"
 #include "kgx-playbox.h"
+#include "kgx-remote.h"
 #include "kgx-utils.h"
 
 #include "kgx-train.h"
@@ -429,22 +430,8 @@ kgx_train_push_child (KgxTrain   *self,
   if (G_LIKELY (argv[0] != NULL)) {
     g_autofree char *program = g_path_get_basename (argv[0]);
 
-    if (G_UNLIKELY (g_strcmp0 (program, "ssh") == 0 ||
-                    g_strcmp0 (program, "telnet") == 0 ||
-                    g_strcmp0 (program, "mosh-client") == 0 ||
-                    g_strcmp0 (program, "mosh") == 0 ||
-                    g_strcmp0 (program, "et") == 0)) {
+    if (G_UNLIKELY (kgx_is_remote (program, argv))) {
       new_status |= push_type (priv->remote, pid, NULL, KGX_REMOTE);
-    }
-
-    if (G_UNLIKELY (g_strcmp0 (program, "waypipe") == 0)) {
-      for (int i = 1; argv[i]; i++) {
-        if (G_UNLIKELY (g_strcmp0 (argv[i], "ssh") == 0 ||
-                        g_strcmp0 (argv[i], "telnet") == 0)) {
-          new_status |= push_type (priv->remote, pid, NULL, KGX_REMOTE);
-          break;
-        }
-      }
     }
 
     if (G_UNLIKELY (kgx_is_playbox (program, argv))) {
@@ -502,6 +489,7 @@ kgx_train_pop_child (KgxTrain   *self,
   pid = kgx_process_get_pid (process);
 
   new_status |= pop_type (priv->remote, pid, KGX_REMOTE);
+  new_status |= pop_type (priv->playbox, pid, KGX_PLAYBOX);
   new_status |= pop_type (priv->root, pid, KGX_PRIVILEGED);
   pop_type (priv->children, pid, KGX_NONE);
 

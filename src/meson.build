@@ -42,6 +42,7 @@ kgx_sources = files(
   'kgx-process.h',
   'kgx-proxy-info.c',
   'kgx-proxy-info.h',
+  'kgx-remote.h',
   'kgx-settings.c',
   'kgx-settings.h',
   'kgx-shared-closures.h',
