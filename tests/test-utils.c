@@ -1,6 +1,6 @@
 /* test-utils.c
  *
- * Copyright 2024-2025 Zander Brown
+ * Copyright 2024-2026 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,6 +19,8 @@
 #include "kgx-config.h"
 
 #include "kgx-enums.h"
+#include "kgx-settings.h"
+#include "kgx-test-utils.h"
 #include "kgx-train.h"
 
 #include "kgx-utils.h"
@@ -36,6 +38,7 @@ struct _KgxTestObject {
   int64_t a_int64;
   char *a_string;
   guint a_flags;
+  int a_enum;
 };
 
 
@@ -48,6 +51,7 @@ enum {
   PROP_A_INT64,
   PROP_A_STRING,
   PROP_A_FLAGS,
+  PROP_A_ENUM,
   LAST_PROP
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
@@ -83,6 +87,9 @@ kgx_test_object_get_property (GObject    *object,
     case PROP_A_FLAGS:
       g_value_set_flags (value, self->a_flags);
       break;
+    case PROP_A_ENUM:
+      g_value_set_enum (value, self->a_enum);
+      break;
     KGX_INVALID_PROP (object, property_id, pspec);
   }
 }
@@ -108,6 +115,9 @@ kgx_test_object_set_property (GObject      *object,
       break;
     case PROP_A_FLAGS:
       kgx_set_flags_prop (object, pspec, &self->a_flags, value);
+      break;
+    case PROP_A_ENUM:
+      kgx_set_enum_prop (object, pspec, &self->a_enum, value);
       break;
     KGX_INVALID_PROP (object, property_id, pspec);
   }
@@ -143,6 +153,12 @@ kgx_test_object_class_init (KgxTestObjectClass *klass)
                         KGX_TYPE_STATUS,
                         KGX_NONE,
                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
+
+  pspecs[PROP_A_ENUM] =
+    g_param_spec_enum ("a-enum", NULL, NULL,
+                       KGX_TYPE_THEME,
+                       KGX_THEME_AUTO,
+                       G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, LAST_PROP, pspecs);
 }
@@ -311,6 +327,19 @@ test_set_flags (void)
   g_assert_cmpint (res_c, ==, KGX_PRIVILEGED);
 
   g_assert_cmpint (res_c, !=, res_b);
+}
+
+
+static void
+test_set_enum (void)
+{
+  g_autoptr (KgxTestObject) obj = g_object_new (KGX_TYPE_TEST_OBJECT, NULL);
+  int res;
+
+  g_object_get (obj, "a-enum", &res, NULL);
+  g_assert_cmpint (res, ==, KGX_THEME_AUTO);
+
+  kgx_test_property_notify (obj, "a-enum", KGX_THEME_DAY, KGX_THEME_NIGHT);
 }
 
 
@@ -617,6 +646,7 @@ main (int argc, char *argv[])
   g_test_add_func ("/kgx/utils/set_int64", test_set_int64);
   g_test_add_func ("/kgx/utils/set_str", test_set_str);
   g_test_add_func ("/kgx/utils/set_flags", test_set_flags);
+  g_test_add_func ("/kgx/utils/set_enum", test_set_enum);
 
   for (size_t i = 0; i < G_N_ELEMENTS (filter_cases); i++) {
     g_autofree char *path =

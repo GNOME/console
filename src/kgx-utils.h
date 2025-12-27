@@ -184,6 +184,36 @@ kgx_set_str_prop (GObject       *restrict object,
 
 
 /**
+ * kgx_set_enum_prop:
+ * @object: the #GObject the property is on
+ * @pspec: the #GParamSpec being set
+ * @target: the storage on @object for @pspec
+ * @value: the potential new value for @target
+ *
+ * Update an enum property, notifying if the value changed
+ *
+ * Returns: %TRUE if the value changed, otherwise %FALSE
+ */
+static inline gboolean
+kgx_set_enum_prop (GObject      *restrict object,
+                   GParamSpec   *restrict pspec,
+                   int          *restrict target,
+                   const GValue *restrict value)
+{
+  int new_value = g_value_get_enum (value);
+
+  if (new_value == *target) {
+    return FALSE;
+  }
+
+  *target = new_value;
+  g_object_notify_by_pspec (object, pspec);
+
+  return TRUE;
+}
+
+
+/**
  * kgx_set_flags_prop:
  * @object: the #GObject the property is on
  * @pspec: the #GParamSpec being set
