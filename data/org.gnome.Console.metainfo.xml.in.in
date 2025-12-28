@@ -12,11 +12,11 @@
       A simple user-friendly terminal emulator for the GNOME desktop.
     </p>
   </description>
-  <recommends>
+  <supports>
     <control>keyboard</control>
     <control>pointing</control>
     <control>touch</control>
-  </recommends>
+  </supports>
   <requires>
     <display_length compare="ge">360</display_length>
   </requires>
