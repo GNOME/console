@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-20 19:30+0000\n"
-"PO-Revision-Date: 2024-08-30 19:41+0500\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
+"POT-Creation-Date: 2025-12-25 02:54+0000\n"
+"PO-Revision-Date: 2026-01-10 14:51+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -16,29 +16,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.8\n"
 
-#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
+#: src/kgx-window.ui:52
 msgid "Console"
 msgstr "Консоль"
 
-#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Console.desktop.in.in:8
+#. Translators: Search terms to find this application. Do NOT translate or
+#. localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;команда;"
-"сұраным;командалық жол;жөнелту;қоршам;терминал;король кресті;"
+"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings "
+"cross;команда;сұраным;командалық жол;жөнелту;қоршам;терминал;король кресті;"
 
-#: data/org.gnome.Console.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
 msgstr "Жаңа терезе"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
+#: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:246
 msgid "New Tab"
 msgstr "Жаңа бет"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "Терминал эмуляторы"
 
@@ -48,170 +50,95 @@ msgstr ""
 "GNOME жұмыс үстеліне арналған пайдаланушыға ыңғайлы қарапайым терминал "
 "эмуляторы."
 
-#: data/org.gnome.Console.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "Терминал терезесі"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:590 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "GNOME жобасы"
 
-#: src/help-overlay.ui:12
-msgctxt "shortcut window"
-msgid "Application"
-msgstr "Қолданба"
-
-#: src/help-overlay.ui:16
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "Жаңа терезе"
-
-#: src/help-overlay.ui:23
-msgctxt "shortcut window"
-msgid "Terminal"
-msgstr "Терминал"
-
-#: src/help-overlay.ui:27
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "Табу"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
-msgid "Copy"
-msgstr "Көшіріп алу"
-
-#: src/help-overlay.ui:39
-msgctxt "shortcut window"
-msgid "Paste"
-msgstr "Кірістіру"
-
-#: src/help-overlay.ui:46
-msgctxt "shortcut window"
-msgid "Tabs"
-msgstr "Беттер"
-
-#: src/help-overlay.ui:50
-msgctxt "shortcut window"
-msgid "New Tab"
-msgstr "Жаңа бет"
-
-#: src/help-overlay.ui:56
-msgctxt "shortcut window"
-msgid "Close Tab"
-msgstr "Бетті жабу"
-
-#: src/help-overlay.ui:62
-msgctxt "shortcut window"
-msgid "Show All Tabs"
-msgstr "Барлық беттерді көрсету"
-
-#: src/help-overlay.ui:68
-msgctxt "shortcut window"
-msgid "Next Tab"
-msgstr "Келесі бет"
-
-#: src/help-overlay.ui:74
-msgctxt "shortcut window"
-msgid "Previous Tab"
-msgstr "Алдыңғы бет"
-
-#: src/help-overlay.ui:80
-msgctxt "shortcut window"
-msgid "Move Tab Right"
-msgstr "Бетті оңға жылжыту"
-
-#: src/help-overlay.ui:86
-msgctxt "shortcut window"
-msgid "Move Tab Left"
-msgstr "Бетті солға жылжыту"
-
-#: src/help-overlay.ui:92
-msgctxt "shortcut window"
-msgid "Switch to Tab 1–9"
-msgstr "Бетке ауысу: Бет 1–9"
-
-#: src/help-overlay.ui:98
-msgctxt "shortcut window"
-msgid "Switch to Tab 10"
-msgstr "Бетке ауысу: Бет 10"
-
-#. Translators: %s is the year range
-#: src/kgx-about.c:83 src/kgx-window.c:529
-#, c-format
-msgid "© %s Zander Brown"
-msgstr "© %s Zander Brown"
-
-#: src/kgx-about.c:101
+#: src/kgx-about.c:104
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 немесе одан кейінгі нұсқасы"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. * version of KGX itself, the latter format is the VTE version
-#: src/kgx-about.c:114
+#: src/kgx-about.c:119
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s қолданады VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:255
-#| msgid "Cannot use both --command and positional parameters"
+#. Translators: %s is the year range
+#: src/kgx-about.c:148
+#, c-format
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
+
+#. Translators: Credit yourself here
+#: src/kgx-about.c:176
+msgid "translator-credits"
+msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>"
+
+#: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr ""
-"Бір уақытта --working-directory және позициялық аргументтерді қолдану мүмкін "
-"емес"
+"Бір уақытта --working-directory және позициялық аргументтерді қолдану "
+"мүмкін емес"
 
-#: src/kgx-application.c:443
+#: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Терминал ішінде осы параметрге аргументтерді орындау"
 
-#: src/kgx-application.c:444
+#: src/kgx-application.c:510
 msgid "COMMAND"
 msgstr "КОМАНДА"
 
-#: src/kgx-application.c:452
+#: src/kgx-application.c:518
 msgid "Set the working directory"
 msgstr "Жұмыс бумасын орнату"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:454
+#: src/kgx-application.c:520
 msgid "DIRNAME"
 msgstr "БУМА_АТЫ"
 
-#: src/kgx-application.c:462
+#: src/kgx-application.c:528
 msgid "Wait until the child exits (TODO)"
 msgstr "Ұрпақ үрдісі аяқталуды күту (TODO)"
 
-#: src/kgx-application.c:471
+#: src/kgx-application.c:537
 msgid "Set the initial window title"
 msgstr "Терезенің бастапқы атауын орнату"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:538
 msgid "TITLE"
 msgstr "АТАУЫ"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:546
 msgid "ADVANCED: Set the shell to launch"
 msgstr "КЕҢЕЙТІЛГЕН: Жөнелтілетін қоршамды орнату"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:547
 msgid "SHELL"
 msgstr "ҚОРШАМ"
 
-#: src/kgx-application.c:489
+#: src/kgx-application.c:555
 msgid "ADVANCED: Set the scrollback length"
 msgstr "КЕҢЕЙТІЛГЕН: Кері айналдыру ұзындығын орнату"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:556
 msgid "LINES"
 msgstr "ЖОЛДАР"
 
-#. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:644
+#. Translators: %s is the version string, KGX is a codename and should be left
+#. as-is
+#: src/kgx-application.c:695
 #, c-format
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — Терминал эмуляторы"
 
-#: src/kgx-application.c:650
+#: src/kgx-application.c:701
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- КОМАНДА [АРГУМЕНТ...]]"
 
@@ -221,8 +148,8 @@ msgstr "Терезені жабу керек пе?"
 
 #: src/kgx-close-dialog.c:75
 msgid ""
-"A command is still running, closing this window will kill it and may lead to "
-"unexpected outcomes"
+"A command is still running, closing this window will kill it and may lead "
+"to unexpected outcomes"
 msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
@@ -256,13 +183,15 @@ msgstr[1] ""
 msgid "Process list"
 msgstr "Үрдістер тізімі"
 
-#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#. Translators: This action dismisses the dialogue, leaving the tab/window
+#. open
 #: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
 #: src/preferences/kgx-font-picker.ui:22
 msgid "_Cancel"
 msgstr "Ба_с тарту"
 
-#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the
+#. tab/window
 #: src/kgx-close-dialog.c:207
 msgid "C_lose"
 msgstr "_Жабу"
@@ -271,14 +200,54 @@ msgstr "_Жабу"
 msgid "Color string is wrong length"
 msgstr "Түс жолының ұзындығы қате"
 
+#: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
+#: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
+#: src/kgx-drop-target.c:509
+msgctxt "toast-message"
+msgid "Drop Failed"
+msgstr "Тастау сәтсіз аяқталды"
+
+#: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a URI list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+"URI тізімін тастауды қабылдау кезінде күтпеген қате орын алды. Қате туралы "
+"хабарласаңыз, келесі ақпаратты қосыңыз."
+
+#: src/kgx-drop-target.c:337
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a file list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+"Файлдар тізімін тастауды қабылдау кезінде күтпеген қате орын алды. Қате "
+"туралы хабарласаңыз, келесі ақпаратты қосыңыз."
+
+#: src/kgx-drop-target.c:371
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a text drop. Please include "
+"the following information if you report the error."
+msgstr ""
+"Мәтінді тастауды қабылдау кезінде күтпеген қате орын алды. Қате туралы "
+"хабарласаңыз, келесі ақпаратты қосыңыз."
+
+#: src/kgx-drop-target.c:512
+msgctxt "spad-message"
+msgid ""
+"An unexpected value was received. Please include the following information "
+"if you report the error."
+msgstr ""
+"Күтпеген мән алынды. Қате туралы хабарласаңыз, келесі ақпаратты қосыңыз."
+
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
 msgid "Linux"
 msgstr "Linux"
 
 #: src/kgx-livery-manager.c:230
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
 msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
@@ -286,17 +255,16 @@ msgstr "XTerm"
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
-#.
-#: src/kgx-pages.c:471
+#: src/kgx-pages.c:495
 #, c-format
 msgid "Tab %i"
 msgstr "Беттер %i"
 
-#: src/kgx-pages.ui:90
+#: src/kgx-pages.ui:100
 msgid "_Detach Tab"
 msgstr "Бетті бө_ліп жіберу"
 
-#: src/kgx-pages.ui:96
+#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "Жа_бу"
 
@@ -318,45 +286,170 @@ msgstr "Әкімші ретінде орындалатын команданы к
 msgid "_Paste"
 msgstr "Кірі_стіру"
 
-#: src/kgx-process.c:192
+#: src/kgx-process.c:196
 #, c-format
 msgid "Process %d"
 msgstr "Үрдіс %d"
 
-#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-simple-tab.c:169
+#. Translators: <b> </b> marks the text as bold, ensure they are matched
+#. please!
+#: src/kgx-simple-tab.c:170
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Жөнелту сәтсіз аяқталды</b> — %s"
 
-#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:814
+#: src/kgx-spad.c:194
+msgid "Unable To Open"
+msgstr "Ашу мүмкін емес"
+
+#: src/kgx-spad.c:197
+#, c-format
+msgid ""
+"Opening ‘<a href=\"%s\">%s</a>’ failed:\n"
+"%s"
+msgstr ""
+"‘<a href=\"%s\">%s</a>’ ашу сәтсіз аяқталды:\n"
+"%s"
+
+#: src/kgx-spad.c:339 src/kgx-spad.ui:4
+msgid "Error Details"
+msgstr "Қате ақпараты"
+
+#: src/kgx-spad.ui:23
+msgid "Error Message"
+msgstr "Қате хабарламасы"
+
+#: src/kgx-spad.ui:35
+msgid "Copy Error Message"
+msgstr "Қате хабарламасын көшіру"
+
+#: src/kgx-spad.ui:104
+msgid "Report _Issue"
+msgstr "Мәселе туралы _хабарлау"
+
+#: src/kgx-tab.c:597
+msgctxt "toast-button"
+msgid "_Details"
+msgstr "_Мәліметтер"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched
+#. please!
+#: src/kgx-tab.c:889
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Тек оқу үшін</b> — Команда кодпен аяқталды: %i"
 
-#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:822
+#. Translators: <b> </b> marks the text as bold, ensure they are matched
+#. please!
+#: src/kgx-tab.c:897
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Тек оқу үшін</b> — Команда аяқталды"
 
-#: src/kgx-tab.c:842
+#: src/kgx-tab.c:917
 msgid "Command completed"
 msgstr "Команда аяқталды"
 
-#: src/kgx-tab.ui:40
+#: src/kgx-tab.ui:42
 msgid "Find text"
 msgstr "Мәтінді табу"
 
-#: src/kgx-tab.ui:51
+#: src/kgx-tab.ui:70
 msgid "Previous Match"
 msgstr "Алдыңғы сәйкестік"
 
-#: src/kgx-tab.ui:59
+#: src/kgx-tab.ui:78
 msgid "Next Match"
 msgstr "Келесі сәйкестік"
 
-#: src/kgx-terminal.c:508
+#. Translators: The user ctrl-clicked, or used ‘Open Link’, on a URI that,
+#. *              for whatever reason, we were unable to open.
+#: src/kgx-terminal.c:39
+msgctxt "toast-message"
+msgid "Couldn't Open Link"
+msgstr "Сілтемені ашу мүмкін болмады"
+
+#: src/kgx-terminal.c:360
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
+"are installed."
+msgstr ""
+"“<a href=\"%s\">%s</a>” сілтемесі “%s” протоколын қолданады, ол үшін ешбір "
+"қолданба орнатылмаған."
+
+#: src/kgx-terminal.c:373
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
+"a>”. Please include the following information if you report the error."
+msgstr ""
+"“<a href=\"%s\">%s</a>” сілтемесін ашу кезінде күтпеген қате орын алды. "
+"Қате туралы хабарласаңыз, келесі ақпаратты қосыңыз."
+
+#: src/kgx-terminal.c:421
+#, c-format
+msgctxt "spad-message"
+msgid "The link “<a href=\"%s\">%s</a>” is malformed."
+msgstr "“<a href=\"%s\">%s</a>” сілтемесі қате пішімделген."
+
+#: src/kgx-terminal.c:440
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” points to a location on a different "
+"device.\n"
+"\n"
+"This device is “%s” and the location is on “%s”."
+msgstr ""
+"“<a href=\"%s\">%s</a>” сілтемесі басқа құрылғыдағы орынға сілтейді.\n"
+"\n"
+"Бұл құрылғы — “%s” және ол орын “%s” құрылғысында."
+
+#: src/kgx-terminal.c:511
+msgctxt "toast-message"
+msgid "Couldn't Paste Text"
+msgstr "Мәтінді кірістіру мүмкін болмады"
+
+#: src/kgx-terminal.c:514
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst reading the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"Алмасу буферін оқу кезінде күтпеген қате орын алды. Қате туралы "
+"хабарласаңыз, келесі ақпаратты қосыңыз."
+
+#: src/kgx-terminal.c:575
+msgctxt "toast-message"
+msgid "Couldn't Show File"
+msgstr "Файлды көрсету мүмкін болмады"
+
+#: src/kgx-terminal.c:578
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst showing the file. Please include the "
+"following information if you report the error."
+msgstr ""
+"Файлды көрсету кезінде күтпеген қате орын алды. Егер қате туралы "
+"хабарласаңыз, келесі ақпаратты қоса жіберіңіз."
+
+#: src/kgx-terminal.c:599
+msgctxt "toast-message"
+msgid "Couldn't Open Folder"
+msgstr "Буманы ашу мүмкін емес"
+
+#: src/kgx-terminal.c:602
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the folder. Please include the "
+"following information if you report the error."
+msgstr ""
+"Буманы ашу кезінде күтпеген қате орын алды. Егер қате туралы хабарласаңыз, "
+"келесі ақпаратты қоса жіберіңіз."
+
+#: src/kgx-terminal.c:696
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -365,13 +458,27 @@ msgstr ""
 "Ашу үшін Ctrl-click:\n"
 "%s"
 
+#: src/kgx-terminal.c:984
+msgctxt "toast-message"
+msgid "Couldn't Paste"
+msgstr "Кірістіру мүмкін емес"
+
+#: src/kgx-terminal.c:987
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst processing the clipboard. Please "
+"include the following information if you report the error."
+msgstr ""
+"Алмасу буферін өңдеу кезінде күтпеген қате орын алды. Егер қате туралы "
+"хабарласаңыз, келесі ақпаратты қоса жіберіңіз."
+
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
 msgstr "Сі_лтемені ашу"
 
 #: src/kgx-terminal.ui:12
-msgid "Copy _Link"
-msgstr "Сі_лтемені көшіріп алу"
+msgid "Copy _Link Address"
+msgstr "Сілтеме _адресін көшіру"
 
 #: src/kgx-terminal.ui:19
 msgid "_Copy"
@@ -381,38 +488,37 @@ msgstr "_Көшіру"
 msgid "_Select All"
 msgstr "Б_арлығын таңдау"
 
-#: src/kgx-terminal.ui:36
+#: src/kgx-terminal.ui:36 src/kgx-window.ui:285
+msgid "Leave _Fullscreen"
+msgstr "_Толық экраннан шығу"
+
+#: src/kgx-terminal.ui:43
 msgid "Show in _Files"
 msgstr "_Файлдар қолданбасында көрсету"
 
-#: src/kgx-theme-switcher.ui:16
+#: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
 msgstr "Жүйелік стильді қолдану"
 
-#: src/kgx-theme-switcher.ui:44
+#: src/kgx-theme-switcher.ui:52
 msgid "Light Style"
 msgstr "Ашық түсті"
 
-#: src/kgx-theme-switcher.ui:71
+#: src/kgx-theme-switcher.ui:79
 msgid "Dark Style"
 msgstr "Қараңғы режим"
 
 #. Translators: ‘command’ is the argument name, and shouldn't be translated
-#: src/kgx-utils.c:113
+#: src/kgx-utils.c:114
 msgid "Missing argument for --command"
 msgstr "--command үшін аргумент жоқ"
 
-#: src/kgx-utils.c:128
+#: src/kgx-utils.c:129
 msgid "Cannot use both --command and positional parameters"
 msgstr ""
 "Бір уақытта --command және позициялық параметрлерді қолдану мүмкін емес"
 
-#. Translators: Credit yourself here
-#: src/kgx-window.c:541
-msgid "translator-credits"
-msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>"
-
-#: src/kgx-window.ui:17
+#: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
 msgstr "Жаңа тере_зе"
 
@@ -420,35 +526,43 @@ msgstr "Жаңа тере_зе"
 msgid "_Show All Tabs"
 msgstr "Барлық беттерді көр_сету"
 
-#: src/kgx-window.ui:30
+#: src/kgx-window.ui:28 src/kgx-window.ui:280
+msgid "_Fullscreen"
+msgstr "_Толық экран"
+
+#: src/kgx-window.ui:35
 msgid "_Preferences"
 msgstr "Ба_птаулар"
 
-#: src/kgx-window.ui:34
+#: src/kgx-window.ui:39
 msgid "_Keyboard Shortcuts"
 msgstr "П_ернетақта жарлықтары"
 
-#: src/kgx-window.ui:38
+#: src/kgx-window.ui:43
 msgid "_About Console"
 msgstr "Консоль тур_алы"
 
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:148
 msgid "Find in Terminal"
 msgstr "Терминалда табу"
 
-#: src/kgx-window.ui:95
+#: src/kgx-window.ui:160
+msgid "Leave Fullscreen"
+msgstr "Толық экраннан шығу"
+
+#: src/kgx-window.ui:167
 msgid "Main Menu"
 msgstr "Басты мәзір"
 
-#: src/kgx-window.ui:113
+#: src/kgx-window.ui:185
 msgid "Shrink Text"
 msgstr "Мәтінді кішірейту"
 
-#: src/kgx-window.ui:124
+#: src/kgx-window.ui:196
 msgid "Reset Size"
 msgstr "Өлшемді тастау"
 
-#: src/kgx-window.ui:148
+#: src/kgx-window.ui:220
 msgid "Enlarge Text"
 msgstr "Мәтінді үлкейту"
 
@@ -476,7 +590,7 @@ msgstr "Қаріпті алдын ала қарау"
 msgid "Font Size"
 msgstr "Қаріп өлшемі"
 
-#: src/preferences/kgx-preferences-window.c:125
+#: src/preferences/kgx-preferences-window.c:126
 msgid "No Font Set"
 msgstr "Қаріп орнатылмады"
 
@@ -496,25 +610,109 @@ msgstr "Жү_йелік баптауды пайдалану"
 msgid "Custom _Font"
 msgstr "Таңдауыңызша қа_ріп"
 
-#: src/preferences/kgx-preferences-window.ui:63
+#: src/preferences/kgx-preferences-window.ui:61
 msgid "Behaviour"
 msgstr "Мінез-құлығы"
 
-#: src/preferences/kgx-preferences-window.ui:66
+#: src/preferences/kgx-preferences-window.ui:64
 msgid "_Unlimited Scrollback"
 msgstr "_Шексіз кері айналдыру"
 
-#: src/preferences/kgx-preferences-window.ui:92
+#: src/preferences/kgx-preferences-window.ui:70
+msgid "_Scrollback Lines"
+msgstr "Кері айналдыру _жолдары"
+
+#: src/preferences/kgx-preferences-window.ui:90
 msgid "Terminal Bell"
 msgstr "Терминал сигналы"
 
-#: src/preferences/kgx-preferences-window.ui:95
+#: src/preferences/kgx-preferences-window.ui:93
 msgid "Play _Sound"
 msgstr "Дыбы_сты ойнату"
 
-#: src/preferences/kgx-preferences-window.ui:101
+#: src/preferences/kgx-preferences-window.ui:99
 msgid "_Visual Effects"
 msgstr "_Визуалды эффекттер"
+
+#: src/shortcuts-dialog.ui:7
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Қолданба"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Жаңа терезе"
+
+#: src/shortcuts-dialog.ui:18
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Терминал"
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Табу"
+
+#: src/shortcuts-dialog.ui:27
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Көшіріп алу"
+
+#: src/shortcuts-dialog.ui:33
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Кірістіру"
+
+#: src/shortcuts-dialog.ui:41
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Беттер"
+
+#: src/shortcuts-dialog.ui:44
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Жаңа бет"
+
+#: src/shortcuts-dialog.ui:50
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Бетті жабу"
+
+#: src/shortcuts-dialog.ui:56
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Барлық беттерді көрсету"
+
+#: src/shortcuts-dialog.ui:62
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Келесі бет"
+
+#: src/shortcuts-dialog.ui:68
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Алдыңғы бет"
+
+#: src/shortcuts-dialog.ui:74 src/shortcuts-dialog.ui:95
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Бетті солға жылжыту"
+
+#: src/shortcuts-dialog.ui:81 src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "Бетті оңға жылжыту"
+
+#: src/shortcuts-dialog.ui:102
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Бетке ауысу: Бет 1–9"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Бетке ауысу: Бет 10"
 
 #~ msgid "King’s Cross"
 #~ msgstr "Король кресті"
