@@ -2,14 +2,14 @@
 # Copyright (C) 2020 kgx's COPYRIGHT HOLDER
 # This file is distributed under the same license as the kgx package.
 # Florentina Mușat <emryslokadottir@gmail.com>, 2020.
-# Antonio Marin <gnmer.6qxyg@slmail.me>, 2025.
+# Antonio Marin <gnmer.6qxyg@slmail.me>, 2025-2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-07-10 23:31+0000\n"
-"PO-Revision-Date: 2025-07-13 11:14+0200\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
+"PO-Revision-Date: 2026-01-20 18:04+0100\n"
 "Last-Translator: Antonio Marin <gnmer.6qxyg@slmail.me>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -20,123 +20,43 @@ msgstr ""
 "20)) ? 1 : 2);\n"
 "X-Generator: Gtranslator 48.0\n"
 
-#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
 #: src/kgx-window.ui:52
 msgid "Console"
 msgstr "Console"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Console.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
 "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings "
 "cross;comandă;linie de comandă;"
 
-#: data/org.gnome.Console.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
 msgstr "Fereastră nouă"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:221
+#: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:246
 msgid "New Tab"
 msgstr "Filă nouă"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
-msgstr "Emulator de terminal"
+msgstr "Simulator de terminal"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr ""
-"Un emulator de terminal pentru interfața GNOME simplu și ușor de utilizat."
+"Un simulator de terminal pentru interfața GNOME simplu și ușor de utilizat."
 
 #: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "Fereastră de terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:503 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Proiectul GNOME"
-
-#: src/help-overlay.ui:12
-msgctxt "shortcut window"
-msgid "Application"
-msgstr "Aplicație"
-
-#: src/help-overlay.ui:16
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "Fereastră nouă"
-
-#: src/help-overlay.ui:23
-msgctxt "shortcut window"
-msgid "Terminal"
-msgstr "Terminal"
-
-#: src/help-overlay.ui:27
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "Caută"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
-msgid "Copy"
-msgstr "Copiază"
-
-#: src/help-overlay.ui:39
-msgctxt "shortcut window"
-msgid "Paste"
-msgstr "Lipește"
-
-#: src/help-overlay.ui:46
-msgctxt "shortcut window"
-msgid "Tabs"
-msgstr "File"
-
-#: src/help-overlay.ui:50
-msgctxt "shortcut window"
-msgid "New Tab"
-msgstr "Filă nouă"
-
-#: src/help-overlay.ui:56
-msgctxt "shortcut window"
-msgid "Close Tab"
-msgstr "Închide fila"
-
-#: src/help-overlay.ui:62
-msgctxt "shortcut window"
-msgid "Show All Tabs"
-msgstr "Arată toate filele"
-
-#: src/help-overlay.ui:68
-msgctxt "shortcut window"
-msgid "Next Tab"
-msgstr "Fila următoare"
-
-#: src/help-overlay.ui:74
-msgctxt "shortcut window"
-msgid "Previous Tab"
-msgstr "Fila precedentă"
-
-#: src/help-overlay.ui:80
-msgctxt "shortcut window"
-msgid "Move Tab Right"
-msgstr "Mută fila la dreapta"
-
-#: src/help-overlay.ui:86
-msgctxt "shortcut window"
-msgid "Move Tab Left"
-msgstr "Mută fila la stânga"
-
-#: src/help-overlay.ui:92
-msgctxt "shortcut window"
-msgid "Switch to Tab 1–9"
-msgstr "Trece la fila 1–9"
-
-#: src/help-overlay.ui:98
-msgctxt "shortcut window"
-msgid "Switch to Tab 10"
-msgstr "Trece la fila 10"
 
 #: src/kgx-about.c:104
 msgid "GPL 3.0 or later"
@@ -159,9 +79,8 @@ msgstr "© %s Zander Brown"
 #: src/kgx-about.c:176
 msgid "translator-credits"
 msgstr ""
-"Florentina Mușat <florentina [dot] musat [dot] 28 [at] gmail [dot] com>, "
-"2020-2021, 2023-2024\n"
-"Antonio Marin <gnmer.6qxyg@slmail.me>, 2025"
+"Florentina Mușat <florentina [dot] musat [dot] 28 [at] gmail [dot] com>\n"
+"Antonio Marin <gnmer.6qxyg@slmail.me>"
 
 #: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
@@ -338,20 +257,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i x %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i coloane %i rânduri"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:478
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "Fila %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "_Detașează fila"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "În_chide"
 
@@ -572,7 +502,7 @@ msgstr "_Copiază"
 msgid "_Select All"
 msgstr "_Selecționează tot"
 
-#: src/kgx-terminal.ui:36 src/kgx-window.ui:260
+#: src/kgx-terminal.ui:36 src/kgx-window.ui:285
 msgid "Leave _Fullscreen"
 msgstr "_Fereastră normală"
 
@@ -582,15 +512,15 @@ msgstr "Arată în _Fișiere"
 
 #: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
-msgstr "Stilul sistemului"
+msgstr "Aspectul sistemului"
 
 #: src/kgx-theme-switcher.ui:52
 msgid "Light Style"
-msgstr "Stil luminos"
+msgstr "Aspect luminos"
 
 #: src/kgx-theme-switcher.ui:79
 msgid "Dark Style"
-msgstr "Stil întunecos"
+msgstr "Aspect întunecos"
 
 #. Translators: ‘command’ is the argument name, and shouldn't be translated
 #: src/kgx-utils.c:114
@@ -601,7 +531,7 @@ msgstr "Lipsește argumentul pentru --command"
 msgid "Cannot use both --command and positional parameters"
 msgstr "Nu se poate utiliza --command și parametrii poziționali"
 
-#: src/kgx-window.ui:17 src/kgx-window.ui:249
+#: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
 msgstr "Fereastră _nouă"
 
@@ -609,7 +539,7 @@ msgstr "Fereastră _nouă"
 msgid "_Show All Tabs"
 msgstr "_Arată toate filele"
 
-#: src/kgx-window.ui:28 src/kgx-window.ui:255
+#: src/kgx-window.ui:28 src/kgx-window.ui:280
 msgid "_Fullscreen"
 msgstr "Pe tot _ecranul"
 
@@ -625,27 +555,27 @@ msgstr "Scur_tături"
 msgid "_About Console"
 msgstr "_Despre Console"
 
-#: src/kgx-window.ui:123
+#: src/kgx-window.ui:148
 msgid "Find in Terminal"
 msgstr "Caută în terminal"
 
-#: src/kgx-window.ui:135
+#: src/kgx-window.ui:160
 msgid "Leave Fullscreen"
 msgstr "Fereastră normală"
 
-#: src/kgx-window.ui:142
+#: src/kgx-window.ui:167
 msgid "Main Menu"
 msgstr "Opțiuni"
 
-#: src/kgx-window.ui:160
+#: src/kgx-window.ui:185
 msgid "Shrink Text"
 msgstr "Micșorează textul"
 
-#: src/kgx-window.ui:171
+#: src/kgx-window.ui:196
 msgid "Reset Size"
 msgstr "Restabilește mărimea"
 
-#: src/kgx-window.ui:195
+#: src/kgx-window.ui:220
 msgid "Enlarge Text"
 msgstr "Mărește textul"
 
@@ -673,7 +603,7 @@ msgstr "Previzualizare caractere"
 msgid "Font Size"
 msgstr "Mărime caractere"
 
-#: src/preferences/kgx-preferences-window.c:125
+#: src/preferences/kgx-preferences-window.c:126
 msgid "No Font Set"
 msgstr "Niciun tip stabilit"
 
@@ -693,26 +623,120 @@ msgstr "Folosește tipul _sistemului"
 msgid "Custom _Font"
 msgstr "Caractere _personalizate"
 
-#: src/preferences/kgx-preferences-window.ui:63
-msgid "Behaviour"
+#: src/preferences/kgx-preferences-window.ui:61
+msgid "Behavior"
 msgstr "Comportament"
 
-#: src/preferences/kgx-preferences-window.ui:66
+#: src/preferences/kgx-preferences-window.ui:64
 msgid "_Unlimited Scrollback"
 msgstr "Derulare înapoi _nelimitată"
 
-#: src/preferences/kgx-preferences-window.ui:72
+#: src/preferences/kgx-preferences-window.ui:70
 msgid "_Scrollback Lines"
 msgstr "Rânduri _derulate înapoi"
 
-#: src/preferences/kgx-preferences-window.ui:92
+#: src/preferences/kgx-preferences-window.ui:90
 msgid "Terminal Bell"
 msgstr "Sunetul terminalului"
 
-#: src/preferences/kgx-preferences-window.ui:95
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "Cum să fie semnalate avertizările"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "Emite un _sunet"
 
-#: src/preferences/kgx-preferences-window.ui:101
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "Efecte _vizuale"
+
+#: src/shortcuts-dialog.ui:7
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Aplicație"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Fereastră nouă"
+
+#: src/shortcuts-dialog.ui:18
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Terminal"
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Caută"
+
+#: src/shortcuts-dialog.ui:27
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Copiază"
+
+#: src/shortcuts-dialog.ui:33
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Lipește"
+
+#: src/shortcuts-dialog.ui:41
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "File"
+
+#: src/shortcuts-dialog.ui:44
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Filă nouă"
+
+#: src/shortcuts-dialog.ui:50
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Închide fila"
+
+#: src/shortcuts-dialog.ui:56
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Arată toate filele"
+
+#: src/shortcuts-dialog.ui:62
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Fila următoare"
+
+#: src/shortcuts-dialog.ui:68
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Fila precedentă"
+
+#: src/shortcuts-dialog.ui:74 src/shortcuts-dialog.ui:95
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Mută fila la stânga"
+
+#: src/shortcuts-dialog.ui:81 src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "Mută fila la dreapta"
+
+#: src/shortcuts-dialog.ui:102
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Trece la fila 1–9"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Trece la fila 10"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Fereastră"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Pe tot ecranul"
