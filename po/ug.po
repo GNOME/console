@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-09-10 11:40+0000\n"
-"PO-Revision-Date: 2025-09-19 21:31-0400\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
+"PO-Revision-Date: 2026-01-26 10:56-0500\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: \n"
 "Language: ug\n"
@@ -16,16 +16,20 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.8\n"
 
-#: data/org.gnome.Console.desktop.in.in:2 data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26 src/kgx-window.ui:52
+#: data/org.gnome.Console.desktop.in.in:2
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
+#: src/kgx-window.ui:52
 msgid "Console"
 msgstr "تىزگىن تاختا"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
-msgstr "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;بۇيرۇق;ئەسكەرتىش;بۇيرۇق قۇرى;ئىجرا;"
+msgstr ""
+"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings "
+"cross;بۇيرۇق;ئەسكەرتىش;بۇيرۇق قۇرى;ئىجرا;"
 
 #: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
@@ -41,13 +45,14 @@ msgstr "تېرمىنال تەقلىدلەشتۈرگۈچ"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
-msgstr "GNOME ئۈستەلئۈستى ئاددىي، ئىشلەتكۈچىگە دوستانە تېرمىنال تەقلىدلەشتۈرگۈچ."
+msgstr ""
+"GNOME ئۈستەلئۈستى ئاددىي، ئىشلەتكۈچىگە دوستانە تېرمىنال تەقلىدلەشتۈرگۈچ."
 
 #: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "تېرمىنال كۆزنىكى"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "GNOME قۇرۇلۇشى"
 
@@ -140,20 +145,36 @@ msgid "Close Window?"
 msgstr "كۆزنەكنى ياپامدۇ؟"
 
 #: src/kgx-close-dialog.c:75
-msgid "A command is still running, closing this window will kill it and may lead to unexpected outcomes"
-msgid_plural "Some commands are still running, closing this window will kill them and may lead to unexpected outcomes"
-msgstr[0] "بىر بۇيرۇق يەنىلا ئىجرا قىلىنىۋاتىدۇ، بۇ كۆزنەك تاقالسا بۇيرۇقنى توختىتىپ ئويلىشىلمىغان نەتىجە كۆرۈلۈشى مۇمكىن"
-msgstr[1] "بىر قانچە بۇيرۇق يەنىلا ئىجرا قىلىنىۋاتىدۇ، بۇ كۆزنەك تاقالسا بۇيرۇقنى توختىتىپ ئويلىشىلمىغان نەتىجە كۆرۈلۈشى مۇمكىن"
+msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this window will kill them and may "
+"lead to unexpected outcomes"
+msgstr[0] ""
+"بىر بۇيرۇق يەنىلا ئىجرا قىلىنىۋاتىدۇ، بۇ كۆزنەك تاقالسا بۇيرۇقنى توختىتىپ "
+"ئويلىشىلمىغان نەتىجە كۆرۈلۈشى مۇمكىن"
+msgstr[1] ""
+"بىر قانچە بۇيرۇق يەنىلا ئىجرا قىلىنىۋاتىدۇ، بۇ كۆزنەك تاقالسا بۇيرۇقنى "
+"توختىتىپ ئويلىشىلمىغان نەتىجە كۆرۈلۈشى مۇمكىن"
 
 #: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
 msgstr "بەتكۈچ ياپاپدۇ؟"
 
 #: src/kgx-close-dialog.c:84
-msgid "A command is still running, closing this tab will kill it and may lead to unexpected outcomes"
-msgid_plural "Some commands are still running, closing this tab will kill them and may lead to unexpected outcomes"
-msgstr[0] "بىر بۇيرۇق يەنىلا ئىجرا قىلىنىۋاتىدۇ، بۇ بەتكۈچ تاقالسا بۇيرۇقنى توختىتىپ ئويلىشىلمىغان نەتىجە كۆرۈلۈشى مۇمكىن"
-msgstr[1] "بىر قانچە بۇيرۇق يەنىلا ئىجرا قىلىنىۋاتىدۇ، بۇ بەتكۈچ تاقالسا بۇيرۇقنى توختىتىپ ئويلىشىلمىغان نەتىجە كۆرۈلۈشى مۇمكىن"
+msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this tab will kill them and may "
+"lead to unexpected outcomes"
+msgstr[0] ""
+"بىر بۇيرۇق يەنىلا ئىجرا قىلىنىۋاتىدۇ، بۇ بەتكۈچ تاقالسا بۇيرۇقنى توختىتىپ "
+"ئويلىشىلمىغان نەتىجە كۆرۈلۈشى مۇمكىن"
+msgstr[1] ""
+"بىر قانچە بۇيرۇق يەنىلا ئىجرا قىلىنىۋاتىدۇ، بۇ بەتكۈچ تاقالسا بۇيرۇقنى "
+"توختىتىپ ئويلىشىلمىغان نەتىجە كۆرۈلۈشى مۇمكىن"
 
 #. Translators: Screen reader label for the list of running commands
 #: src/kgx-close-dialog.c:194
@@ -161,7 +182,8 @@ msgid "Process list"
 msgstr "جەريان تىزىمى"
 
 #. Translators: This action dismisses the dialogue, leaving the tab/window open
-#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135 src/preferences/kgx-font-picker.ui:22
+#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
+#: src/preferences/kgx-font-picker.ui:22
 msgid "_Cancel"
 msgstr "ۋاز كەچ(_C)"
 
@@ -174,30 +196,49 @@ msgstr "ياپ(_L)"
 msgid "Color string is wrong length"
 msgstr "رەڭ تىزىقىنىڭ ئۇزۇنلۇقى خاتا"
 
-#: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250 src/kgx-drop-target.c:334 src/kgx-drop-target.c:368 src/kgx-drop-target.c:509
+#: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
+#: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
+#: src/kgx-drop-target.c:509
 msgctxt "toast-message"
 msgid "Drop Failed"
 msgstr "سۆرەپ تاشلاش مەغلۇپ بولدى"
 
 #: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst receiving a URI list drop. Please include the following information if you report the error."
-msgstr "سۆرەپ تاشلىغان URI تىزىمىنى قوبۇللاۋاتقاندا تاسادىپىي خاتالىق كۆرۈلدى. ئەگەر بۇ خاتالىقنى مەلۇم قىلماقچى بولسىڭىز تۆۋەندىكى ئۇچۇرلارنى ئۆز ئىچىگە ئالىدۇ."
+msgid ""
+"An unexpected error occurred whilst receiving a URI list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+"سۆرەپ تاشلىغان URI تىزىمىنى قوبۇللاۋاتقاندا تاسادىپىي خاتالىق كۆرۈلدى. ئەگەر "
+"بۇ خاتالىقنى مەلۇم قىلماقچى بولسىڭىز تۆۋەندىكى ئۇچۇرلارنى ئۆز ئىچىگە ئالىدۇ."
 
 #: src/kgx-drop-target.c:337
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst receiving a file list drop. Please include the following information if you report the error."
-msgstr "سۆرەپ تاشلىغان ھۆججەت تىزىمىنى قوبۇللاۋاتقاندا تاسادىپىي خاتالىق كۆرۈلدى. ئەگەر بۇ خاتالىقنى مەلۇم قىلماقچى بولسىڭىز تۆۋەندىكى ئۇچۇرلارنى ئۆز ئىچىگە ئالىدۇ."
+msgid ""
+"An unexpected error occurred whilst receiving a file list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+"سۆرەپ تاشلىغان ھۆججەت تىزىمىنى قوبۇللاۋاتقاندا تاسادىپىي خاتالىق كۆرۈلدى. "
+"ئەگەر بۇ خاتالىقنى مەلۇم قىلماقچى بولسىڭىز تۆۋەندىكى ئۇچۇرلارنى ئۆز ئىچىگە "
+"ئالىدۇ."
 
 #: src/kgx-drop-target.c:371
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst receiving a text drop. Please include the following information if you report the error."
-msgstr "سۆرەپ تاشلىغان تېكىستنى قوبۇللاۋاتقاندا تاسادىپىي خاتالىق كۆرۈلدى. ئەگەر بۇ خاتالىقنى مەلۇم قىلماقچى بولسىڭىز تۆۋەندىكى ئۇچۇرلارنى ئۆز ئىچىگە ئالىدۇ."
+msgid ""
+"An unexpected error occurred whilst receiving a text drop. Please include "
+"the following information if you report the error."
+msgstr ""
+"سۆرەپ تاشلىغان تېكىستنى قوبۇللاۋاتقاندا تاسادىپىي خاتالىق كۆرۈلدى. ئەگەر بۇ "
+"خاتالىقنى مەلۇم قىلماقچى بولسىڭىز تۆۋەندىكى ئۇچۇرلارنى ئۆز ئىچىگە ئالىدۇ."
 
 #: src/kgx-drop-target.c:512
 msgctxt "spad-message"
-msgid "An unexpected value was received. Please include the following information if you report the error."
-msgstr "كۈتۈلمىگەن قىممەتنى تاپشۇرۇلدى. ئەگەر بۇ خاتالىقنى مەلۇم قىلماقچى بولسىڭىز تۆۋەندىكى ئۇچۇرلارنى ئۆز ئىچىگە ئالىدۇ."
+msgid ""
+"An unexpected value was received. Please include the following information "
+"if you report the error."
+msgstr ""
+"كۈتۈلمىگەن قىممەتنى تاپشۇرۇلدى. ئەگەر بۇ خاتالىقنى مەلۇم قىلماقچى بولسىڭىز "
+"تۆۋەندىكى ئۇچۇرلارنى ئۆز ئىچىگە ئالىدۇ."
 
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
@@ -209,20 +250,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i - %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i رەت %i قۇر"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "%i-بەتكۈچ ‏"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "بەتكۈچنى ئايرىۋەت(_D)"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "ياپ(_C)"
 
@@ -326,14 +378,23 @@ msgstr "ئۇلانمىنى ئاچقىلى بولمىدى"
 #: src/kgx-terminal.c:360
 #, c-format
 msgctxt "spad-message"
-msgid "The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps are installed."
-msgstr "ئۇلانما «<a href=\"%s\">%s</a>» «%s» كېلىشىمنى ئىشلىتىدۇ ئەمما كېلىشىمنى قوللايدىغان ھېچ قانداق پىروگرامما ئورنىتىلمىغان."
+msgid ""
+"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
+"are installed."
+msgstr ""
+"ئۇلانما «<a href=\"%s\">%s</a>» «%s» كېلىشىمنى ئىشلىتىدۇ ئەمما كېلىشىمنى "
+"قوللايدىغان ھېچ قانداق پىروگرامما ئورنىتىلمىغان."
 
 #: src/kgx-terminal.c:373
 #, c-format
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</a>”. Please include the following information if you report the error."
-msgstr "ئۇلانما «<a href=\"%s\">%s</a>» نى ئاچقاندا ئويلىشىلمىغان خاتالىق كۆرۈلدى. ئەگەر بۇ خاتالىقنى مەلۇم قىلماقچى بولسىڭىز تۆۋەندىكى ئۇچۇرلارنى ئۆز ئىچىگە ئالىدۇ."
+msgid ""
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
+"a>”. Please include the following information if you report the error."
+msgstr ""
+"ئۇلانما «<a href=\"%s\">%s</a>» نى ئاچقاندا ئويلىشىلمىغان خاتالىق كۆرۈلدى. "
+"ئەگەر بۇ خاتالىقنى مەلۇم قىلماقچى بولسىڭىز تۆۋەندىكى ئۇچۇرلارنى ئۆز ئىچىگە "
+"ئالىدۇ."
 
 #: src/kgx-terminal.c:421
 #, c-format
@@ -345,7 +406,8 @@ msgstr "ئۇلانما «<a href=\"%s\">%s</a>» نىڭ پىچىمى خاتا."
 #, c-format
 msgctxt "spad-message"
 msgid ""
-"The link “<a href=\"%s\">%s</a>” points to a location on a different device.\n"
+"The link “<a href=\"%s\">%s</a>” points to a location on a different "
+"device.\n"
 "\n"
 "This device is “%s” and the location is on “%s”."
 msgstr ""
@@ -360,8 +422,12 @@ msgstr "تېكىستنى چاپلىيالمايدۇ"
 
 #: src/kgx-terminal.c:514
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst reading the clipboard. Please include the following information if you report the error."
-msgstr "چاپلاش تاختىسىنى ئوقۇۋاتقاندا تاسادىپىي خاتالىق كۆرۈلدى. ئەگەر بۇ خاتالىقنى مەلۇم قىلماقچى بولسىڭىز تۆۋەندىكى ئۇچۇرلارنى ئۆز ئىچىگە ئالىدۇ."
+msgid ""
+"An unexpected error occurred whilst reading the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"چاپلاش تاختىسىنى ئوقۇۋاتقاندا تاسادىپىي خاتالىق كۆرۈلدى. ئەگەر بۇ خاتالىقنى "
+"مەلۇم قىلماقچى بولسىڭىز تۆۋەندىكى ئۇچۇرلارنى ئۆز ئىچىگە ئالىدۇ."
 
 #: src/kgx-terminal.c:575
 msgctxt "toast-message"
@@ -370,8 +436,12 @@ msgstr "ھۆججەتنى كۆرسىتەلمەيدۇ"
 
 #: src/kgx-terminal.c:578
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst showing the file. Please include the following information if you report the error."
-msgstr "ھۆججەتنى كۆرسىتىۋاتقاندا تاسادىپىي خاتالىق كۆرۈلدى. ئەگەر بۇ خاتالىقنى مەلۇم قىلماقچى بولسىڭىز تۆۋەندىكى ئۇچۇرلارنى ئۆز ئىچىگە ئالىدۇ."
+msgid ""
+"An unexpected error occurred whilst showing the file. Please include the "
+"following information if you report the error."
+msgstr ""
+"ھۆججەتنى كۆرسىتىۋاتقاندا تاسادىپىي خاتالىق كۆرۈلدى. ئەگەر بۇ خاتالىقنى مەلۇم "
+"قىلماقچى بولسىڭىز تۆۋەندىكى ئۇچۇرلارنى ئۆز ئىچىگە ئالىدۇ."
 
 #: src/kgx-terminal.c:599
 msgctxt "toast-message"
@@ -380,8 +450,12 @@ msgstr "قىسقۇچنى ئاچالمايدۇ"
 
 #: src/kgx-terminal.c:602
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst opening the folder. Please include the following information if you report the error."
-msgstr "قىسقۇچنى ئېچىۋاتقاندا تاسادىپىي خاتالىق كۆرۈلدى. ئەگەر بۇ خاتالىقنى مەلۇم قىلماقچى بولسىڭىز تۆۋەندىكى ئۇچۇرلارنى ئۆز ئىچىگە ئالىدۇ."
+msgid ""
+"An unexpected error occurred whilst opening the folder. Please include the "
+"following information if you report the error."
+msgstr ""
+"قىسقۇچنى ئېچىۋاتقاندا تاسادىپىي خاتالىق كۆرۈلدى. ئەگەر بۇ خاتالىقنى مەلۇم "
+"قىلماقچى بولسىڭىز تۆۋەندىكى ئۇچۇرلارنى ئۆز ئىچىگە ئالىدۇ."
 
 #: src/kgx-terminal.c:696
 #, c-format
@@ -399,8 +473,12 @@ msgstr "چاپلىيالمايدۇ"
 
 #: src/kgx-terminal.c:987
 msgctxt "spad-message"
-msgid "An unexpected error occurred whilst processing the clipboard. Please include the following information if you report the error."
-msgstr "چاپلاش تاختىسىنى بىر تەرەپ قىلىۋاتقاندا تاسادىپىي خاتالىق كۆرۈلدى. ئەگەر بۇ خاتالىقنى مەلۇم قىلماقچى بولسىڭىز تۆۋەندىكى ئۇچۇرلارنى ئۆز ئىچىگە ئالىدۇ."
+msgid ""
+"An unexpected error occurred whilst processing the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"چاپلاش تاختىسىنى بىر تەرەپ قىلىۋاتقاندا تاسادىپىي خاتالىق كۆرۈلدى. ئەگەر بۇ "
+"خاتالىقنى مەلۇم قىلماقچى بولسىڭىز تۆۋەندىكى ئۇچۇرلارنى ئۆز ئىچىگە ئالىدۇ."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -540,7 +618,7 @@ msgid "Custom _Font"
 msgstr "ئىختىيارى خەت نۇسخا(_F)"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "قىلمىش"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -555,11 +633,15 @@ msgstr "كەينىگە دومىلىتىش قۇر سانى(_S)"
 msgid "Terminal Bell"
 msgstr "تېرمىنال قوڭغۇراق"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "ئاگاھلاندۇرۇشنىڭ كۆرۈنۈش ئۇسۇلىنى تىزگىنلەيدۇ"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "ئاۋاز ياڭرات(_S)"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "كۆرۈنۈش ئۈنۈمى(_V)"
 
@@ -642,3 +724,13 @@ msgstr "بەتكۈچ ‏1–9‎‏ غا ئالماشتۇر"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "بەتكۈچ 10 غا ئالماشتۇر"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "كۆزنەك"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "تولۇق ئېكران"
