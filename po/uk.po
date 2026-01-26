@@ -2,13 +2,13 @@
 # Copyright (C) 2020 kgx's COPYRIGHT HOLDER
 # This file is distributed under the same license as the kgx package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021, 2022, 2023, 2024, 2025.
+# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021, 2022, 2023, 2024, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-09-06 02:12+0000\n"
-"PO-Revision-Date: 2025-09-06 19:29+0300\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
+"PO-Revision-Date: 2026-01-26 03:21+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -53,7 +53,7 @@ msgstr "Простий зручний для користувачів термі
 msgid "Terminal window"
 msgstr "Вікно термінала"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Проєкт GNOME"
 
@@ -270,20 +270,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i на %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i стовпчиків, %i рядків"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "Вкладка %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "_Від'єднати вкладку"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Закрити"
 
@@ -627,7 +638,8 @@ msgid "Custom _Font"
 msgstr "Нетиповий _шрифт"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+#| msgid "Behaviour"
+msgid "Behavior"
 msgstr "Поведінка"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -642,11 +654,15 @@ msgstr "_Рядки гортання"
 msgid "Terminal Bell"
 msgstr "Звуковий сигнал у терміналі"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "Керує тим, як буде позначено попередження"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "Відтворити зв_ук"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "_Візуальні ефекти"
 
@@ -729,6 +745,18 @@ msgstr "Перемкнутися на вкладку 1–9"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Перемкнутися на вкладку 10"
+
+#: src/shortcuts-dialog.ui:116
+#| msgid "New Window"
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Вікно"
+
+#: src/shortcuts-dialog.ui:119
+#| msgid "_Fullscreen"
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Повноекранний режим"
 
 #~ msgid "King’s Cross"
 #~ msgstr "Кінгс-кросс"
