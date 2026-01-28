@@ -7,20 +7,20 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues\n"
-"POT-Creation-Date: 2023-09-30 15:04+0000\n"
-"PO-Revision-Date: 2023-10-05 14:10+0800\n"
-"Last-Translator: Cheng-Chia Tseng <zerngjia@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
+"POT-Creation-Date: 2025-03-16 01:55+0000\n"
+"PO-Revision-Date: 2025-04-03 21:14+0800\n"
+"Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
 "Language-Team: Chinese - Taiwan <chinese-l10n@googlegroups.com>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #: data/org.gnome.Console.desktop.in.in:3
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:27
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
 msgid "Console"
 msgstr "主控臺"
 
@@ -35,11 +35,11 @@ msgstr ""
 msgid "New Window"
 msgstr "新視窗"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:164
+#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:176
 msgid "New Tab"
 msgstr "新分頁"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-application.c:377
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
 msgid "Terminal Emulator"
 msgstr "終端機模擬器"
 
@@ -47,11 +47,11 @@ msgstr "終端機模擬器"
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr "專為 GNOME 桌面所打造，一款簡單易用的終端機模擬器。"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "終端機視窗"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:327 src/kgx-window.c:457
+#: data/org.gnome.Console.metainfo.xml.in.in:503 src/kgx-window.c:561
 msgid "The GNOME Project"
 msgstr "GNOME 專案"
 
@@ -135,133 +135,145 @@ msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "切換至分頁 10"
 
-#: src/kgx-application.c:252
-msgid "Cannot use both --command and positional parameters"
-msgstr "無法同時使用「--命令」與「位置」參數"
-
-#. Translators: The leading # is intentional, the initial %s is the
-#. version of KGX itself, the latter format is the VTE version
-#: src/kgx-application.c:349
-#, c-format
-msgid "# KGX %s using VTE %u.%u.%u %s\n"
-msgstr "# KGX %s 係採用 VTE %u.%u.%u %s\n"
-
 #. Translators: %s is the year range
-#: src/kgx-application.c:361 src/kgx-window.c:452
+#: src/kgx-about.c:83 src/kgx-window.c:556
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
-#: src/kgx-application.c:379
+#: src/kgx-about.c:101
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 或更新版本"
 
-#: src/kgx-application.c:444
+#. Translators: The leading # is intentional, the initial %s is the
+#. * version of KGX itself, the latter format is the VTE version
+#: src/kgx-about.c:114
+#, c-format
+msgid "# KGX %s using VTE %u.%u.%u %s\n"
+msgstr "# KGX %s 係採用 VTE %u.%u.%u %s\n"
+
+#: src/kgx-application.c:283
+msgid "Cannot use both --working-directory and positional parameters"
+msgstr "無法同時使用「--working-directory」與位置參數"
+
+#: src/kgx-application.c:503
 msgid "Execute the argument to this option inside the terminal"
 msgstr "在終端機中執行此選項的參數"
 
-#: src/kgx-application.c:445
+#: src/kgx-application.c:504
 msgid "COMMAND"
 msgstr "COMMAND"
 
-#: src/kgx-application.c:453
+#: src/kgx-application.c:512
 msgid "Set the working directory"
 msgstr "設定工作資料夾"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:455
+#: src/kgx-application.c:514
 msgid "DIRNAME"
 msgstr "DIRNAME"
 
-#: src/kgx-application.c:463
+#: src/kgx-application.c:522
 msgid "Wait until the child exits (TODO)"
 msgstr "等待直到子程序離開 (TODO)"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:531
 msgid "Set the initial window title"
 msgstr "設定初始視窗標題"
 
-#: src/kgx-application.c:473
+#: src/kgx-application.c:532
 msgid "TITLE"
 msgstr "TITLE"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:540
 msgid "ADVANCED: Set the shell to launch"
 msgstr "進階：設定要啟動的 Shell"
 
-#: src/kgx-application.c:482
+#: src/kgx-application.c:541
 msgid "SHELL"
 msgstr "SHELL"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:549
 msgid "ADVANCED: Set the scrollback length"
 msgstr "進階：設定螢幕緩衝區長度"
 
-#: src/kgx-application.c:491
+#: src/kgx-application.c:550
 msgid "LINES"
 msgstr "LINES"
 
-#: src/kgx-application.c:500
+#. Translators: %s is the version string, KGX is a codename and should be left as-is
+#: src/kgx-application.c:688
+#, c-format
+msgid "KGX %s — Terminal Emulator"
+msgstr "KGX %s — 終端機模擬器"
+
+#: src/kgx-application.c:694
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- 命令 [參數...]]"
 
-#: src/kgx-close-dialog.c:50
+#: src/kgx-close-dialog.c:73
 msgid "Close Window?"
 msgstr "要關閉視窗嗎？"
 
-#: src/kgx-close-dialog.c:51
+#: src/kgx-close-dialog.c:75
 msgid ""
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr "仍有命令處於執行狀態，關閉視窗恐造成預料之外的結果"
+msgstr[0] "仍有還在執行的命令，關閉視窗會中止這個命令，恐造成預料之外的結果"
 
-#: src/kgx-close-dialog.c:56
+#: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
 msgstr "要關閉分頁嗎？"
 
-#: src/kgx-close-dialog.c:57
+#: src/kgx-close-dialog.c:84
 msgid ""
+"A command is still running, closing this tab will kill it and may lead to "
+"unexpected outcomes"
+msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr "仍有命令處於執行狀態，關閉分頁恐造成預料之外的結果"
+msgstr[0] "仍有還在執行的命令，關閉分頁會中止這個命令，恐造成預料之外的結果"
 
-#: src/kgx-close-dialog.ui:18 src/kgx-font-picker.ui:30 src/kgx-terminal.c:890
+#. Translators: Screen reader label for the list of running commands
+#: src/kgx-close-dialog.c:194
+msgid "Process list"
+msgstr "程序列表"
+
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
+#: src/preferences/kgx-font-picker.ui:22
 msgid "_Cancel"
 msgstr "取消(_C)"
 
-#: src/kgx-close-dialog.ui:19
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#: src/kgx-close-dialog.c:207
 msgid "C_lose"
 msgstr "關閉(_L)"
 
-#: src/kgx-font-picker.ui:12
-msgid "Terminal Font"
-msgstr "終端機字型"
+#: src/kgx-colour-utils.c:58
+msgid "Color string is wrong length"
+msgstr "色彩字串長度錯誤"
 
-#: src/kgx-font-picker.ui:37
-msgid "_Select"
-msgstr "選擇(_S)"
+#: src/kgx-livery-manager.c:193
+msgctxt "livery-name"
+msgid "Linux"
+msgstr "Linux"
 
-#: src/kgx-font-picker.ui:53 src/kgx-font-picker.ui:56
-msgid "Font Name"
-msgstr "字型名稱"
-
-#: src/kgx-font-picker.ui:142
-msgid "Font Family"
-msgstr "字型家族"
-
-#: src/kgx-font-picker.ui:167
-msgid "Font Preview"
-msgstr "字型預覽"
-
-#: src/kgx-font-picker.ui:188
-msgid "Font Size"
-msgstr "字型大小"
+#: src/kgx-livery-manager.c:230
+#| msgctxt "shortcut window"
+#| msgid "Terminal"
+msgctxt "livery-name"
+msgid "XTerm"
+msgstr "XTerm"
 
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:463
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "分頁 %i"
@@ -274,89 +286,8 @@ msgstr "將分頁分離(_D)"
 msgid "_Close"
 msgstr "關閉分頁(_C)"
 
-#: src/kgx-preferences-window.c:122
-msgid "No Font Set"
-msgstr "沒有設定字型"
-
-#: src/kgx-preferences-window.ui:7
-msgid "General"
-msgstr "一般"
-
-#: src/kgx-preferences-window.ui:10
-msgid "Font"
-msgstr "字型"
-
-#: src/kgx-preferences-window.ui:13
-msgid "Use _System Default"
-msgstr "使用系統預設值(_S)"
-
-#: src/kgx-preferences-window.ui:19
-msgid "Custom _Font"
-msgstr "自訂字型(_F)"
-
-#: src/kgx-preferences-window.ui:59
-msgid "Terminal Bell"
-msgstr "終端機鈴響"
-
-#: src/kgx-preferences-window.ui:62
-msgid "Play _Sound"
-msgstr "播放音效(_S)"
-
-#: src/kgx-preferences-window.ui:68
-msgid "_Visual Effects"
-msgstr "視覺效果(_V)"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:180
-#, c-format
-msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr "<b>唯讀狀態</b>―命令已退出並回傳代碼 %i"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:189
-msgid "<b>Read Only</b> — Command exited"
-msgstr "<b>唯讀狀態</b>―命令已退出"
-
-#. translators: <b> </b> marks the text as bold, ensure they are
-#. matched please!
-#: src/kgx-simple-tab.c:222
-#, c-format
-msgid "<b>Failed to start</b> — %s"
-msgstr "<b>無法執行</b> ― %s"
-
-#: src/kgx-tab.c:1091
-msgid "Command completed"
-msgstr "執行完畢"
-
-#: src/kgx-tab.ui:25
-msgid "Find text"
-msgstr "尋找文字"
-
-#: src/kgx-tab.ui:36
-msgid "Previous Match"
-msgstr "上一個符合"
-
-#: src/kgx-tab.ui:44
-msgid "Next Match"
-msgstr "下一個符合"
-
-#: src/kgx-terminal.c:557
-#, c-format
-msgid ""
-"Ctrl-click to open:\n"
-"%s"
-msgstr ""
-"Ctrl-點按開啟：\n"
-"%s"
-
-#: src/kgx-terminal.c:883
-msgid "You are pasting a command that runs as an administrator"
-msgstr "貼上的命令會以管理員身份執行"
-
-#. TRANSLATORS: %s is the command being pasted
-#: src/kgx-terminal.c:887
+#. Translators: %s is the (possibly truncated) command being pasted
+#: src/kgx-paste-dialog.c:76
 #, c-format
 msgid ""
 "Make sure you know what the command does:\n"
@@ -365,9 +296,60 @@ msgstr ""
 "請確保您已了解命令之用途：\n"
 "%s"
 
-#: src/kgx-terminal.c:891 src/kgx-terminal.ui:24
+#: src/kgx-paste-dialog.c:129
+msgid "You are pasting a command that runs as an administrator"
+msgstr "貼上的命令會以管理員身份執行"
+
+#: src/kgx-paste-dialog.c:136 src/kgx-terminal.ui:24
 msgid "_Paste"
 msgstr "貼上(_P)"
+
+#: src/kgx-process.c:196
+#, c-format
+msgid "Process %d"
+msgstr "程序 %d"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-simple-tab.c:169
+#, c-format
+msgid "<b>Failed to start</b> — %s"
+msgstr "<b>無法執行</b> ― %s"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:784
+#, c-format
+msgid "<b>Read Only</b> — Command exited with code %i"
+msgstr "<b>唯讀狀態</b>―命令已退出並回傳代碼 %i"
+
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#: src/kgx-tab.c:792
+msgid "<b>Read Only</b> — Command exited"
+msgstr "<b>唯讀狀態</b>―命令已退出"
+
+#: src/kgx-tab.c:812
+msgid "Command completed"
+msgstr "執行完畢"
+
+#: src/kgx-tab.ui:40
+msgid "Find text"
+msgstr "尋找文字"
+
+#: src/kgx-tab.ui:51
+msgid "Previous Match"
+msgstr "上一個符合"
+
+#: src/kgx-tab.ui:59
+msgid "Next Match"
+msgstr "下一個符合"
+
+#: src/kgx-terminal.c:510
+#, c-format
+msgid ""
+"Ctrl-click to open:\n"
+"%s"
+msgstr ""
+"Ctrl-點按開啟：\n"
+"%s"
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -389,22 +371,33 @@ msgstr "全選(_S)"
 msgid "Show in _Files"
 msgstr "於檔案中顯示(_F)"
 
-#: src/kgx-theme-switcher.ui:16
+#: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
 msgstr "跟隨系統風格"
 
-#: src/kgx-theme-switcher.ui:44
+#: src/kgx-theme-switcher.ui:52
 msgid "Light Style"
 msgstr "淺色風格"
 
-#: src/kgx-theme-switcher.ui:71
+#: src/kgx-theme-switcher.ui:79
 msgid "Dark Style"
 msgstr "深色風格"
 
+#. Translators: ‘command’ is the argument name, and shouldn't be translated
+#: src/kgx-utils.c:114
+msgid "Missing argument for --command"
+msgstr "缺少傳入 --command 的引數"
+
+#: src/kgx-utils.c:129
+msgid "Cannot use both --command and positional parameters"
+msgstr "無法同時使用「--命令」與「位置」參數"
+
 #. Translators: Credit yourself here
-#: src/kgx-window.c:464
+#: src/kgx-window.c:568
 msgid "translator-credits"
-msgstr "Freddy Cheng <freddy4212@gmail.com>, 2022-2023."
+msgstr ""
+"Freddy Cheng <freddy4212@gmail.com>, 2022-2023.\n"
+"Yi-Jyun Pan <me@pan93.com>, 2025."
 
 #: src/kgx-window.ui:17
 msgid "_New Window"
@@ -426,25 +419,93 @@ msgstr "鍵盤快捷鍵(_K)"
 msgid "_About Console"
 msgstr "關於主控臺(_A)"
 
-#: src/kgx-window.ui:79
+#: src/kgx-window.ui:90
 msgid "Find in Terminal"
 msgstr "於終端機中尋找"
 
-#: src/kgx-window.ui:86
+#: src/kgx-window.ui:97
 msgid "Main Menu"
 msgstr "主選單"
 
-#: src/kgx-window.ui:104
+#: src/kgx-window.ui:115
 msgid "Shrink Text"
 msgstr "縮小"
 
-#: src/kgx-window.ui:115
+#: src/kgx-window.ui:126
 msgid "Reset Size"
 msgstr "重設縮放"
 
-#: src/kgx-window.ui:139
+#: src/kgx-window.ui:150
 msgid "Enlarge Text"
 msgstr "放大"
+
+#: src/preferences/kgx-font-picker.ui:11
+msgid "Terminal Font"
+msgstr "終端機字型"
+
+#: src/preferences/kgx-font-picker.ui:29
+msgid "_Select"
+msgstr "選擇(_S)"
+
+#: src/preferences/kgx-font-picker.ui:45 src/preferences/kgx-font-picker.ui:48
+msgid "Font Name"
+msgstr "字型名稱"
+
+#: src/preferences/kgx-font-picker.ui:133
+msgid "Font Family"
+msgstr "字型家族"
+
+#: src/preferences/kgx-font-picker.ui:158
+msgid "Font Preview"
+msgstr "字型預覽"
+
+#: src/preferences/kgx-font-picker.ui:179
+msgid "Font Size"
+msgstr "字型大小"
+
+#: src/preferences/kgx-preferences-window.c:125
+msgid "No Font Set"
+msgstr "沒有設定字型"
+
+#: src/preferences/kgx-preferences-window.ui:7
+msgid "General"
+msgstr "一般"
+
+#: src/preferences/kgx-preferences-window.ui:10
+msgid "Font"
+msgstr "字型"
+
+#: src/preferences/kgx-preferences-window.ui:13
+msgid "Use _System Default"
+msgstr "使用系統預設值(_S)"
+
+#: src/preferences/kgx-preferences-window.ui:19
+msgid "Custom _Font"
+msgstr "自訂字型(_F)"
+
+#: src/preferences/kgx-preferences-window.ui:63
+msgid "Behaviour"
+msgstr "行為"
+
+#: src/preferences/kgx-preferences-window.ui:66
+msgid "_Unlimited Scrollback"
+msgstr "無限捲動紀錄(_U)"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "捲動紀錄列數(_S)"
+
+#: src/preferences/kgx-preferences-window.ui:92
+msgid "Terminal Bell"
+msgstr "終端機鈴響"
+
+#: src/preferences/kgx-preferences-window.ui:95
+msgid "Play _Sound"
+msgstr "播放音效(_S)"
+
+#: src/preferences/kgx-preferences-window.ui:101
+msgid "_Visual Effects"
+msgstr "視覺效果(_V)"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
