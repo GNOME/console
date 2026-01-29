@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-12-25 02:54+0000\n"
-"PO-Revision-Date: 2026-01-10 14:51+0500\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
+"PO-Revision-Date: 2026-01-29 22:27+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -24,8 +24,7 @@ msgstr ""
 msgid "Console"
 msgstr "Консоль"
 
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
@@ -54,7 +53,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Терминал терезесі"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:590 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "GNOME жобасы"
 
@@ -67,7 +66,7 @@ msgstr "GPL 3.0 немесе одан кейінгі нұсқасы"
 #: src/kgx-about.c:119
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
-msgstr "# KGX %s қолданады VTE %u.%u.%u %s\n"
+msgstr "# KGX %s using VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
 #: src/kgx-about.c:148
@@ -83,8 +82,8 @@ msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>"
 #: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr ""
-"Бір уақытта --working-directory және позициялық аргументтерді қолдану "
-"мүмкін емес"
+"Бір уақытта --working-directory және позициялық аргументтерді қолдану мүмкін "
+"емес"
 
 #: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
@@ -131,8 +130,7 @@ msgstr "КЕҢЕЙТІЛГЕН: Кері айналдыру ұзындығын �
 msgid "LINES"
 msgstr "ЖОЛДАР"
 
-#. Translators: %s is the version string, KGX is a codename and should be left
-#. as-is
+#. Translators: %s is the version string, KGX is a codename and should be left as-is
 #: src/kgx-application.c:695
 #, c-format
 msgid "KGX %s — Terminal Emulator"
@@ -148,8 +146,8 @@ msgstr "Терезені жабу керек пе?"
 
 #: src/kgx-close-dialog.c:75
 msgid ""
-"A command is still running, closing this window will kill it and may lead "
-"to unexpected outcomes"
+"A command is still running, closing this window will kill it and may lead to "
+"unexpected outcomes"
 msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
@@ -183,15 +181,13 @@ msgstr[1] ""
 msgid "Process list"
 msgstr "Үрдістер тізімі"
 
-#. Translators: This action dismisses the dialogue, leaving the tab/window
-#. open
+#. Translators: This action dismisses the dialogue, leaving the tab/window open
 #: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
 #: src/preferences/kgx-font-picker.ui:22
 msgid "_Cancel"
 msgstr "Ба_с тарту"
 
-#. Translators: This action accepts the ‘unexpected outcomes’ and closes the
-#. tab/window
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
 #: src/kgx-close-dialog.c:207
 msgid "C_lose"
 msgstr "_Жабу"
@@ -252,19 +248,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i x %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i баған %i жол"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
-#: src/kgx-pages.c:495
+#.
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "Беттер %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "Бетті бө_ліп жіберу"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "Жа_бу"
 
@@ -291,8 +299,7 @@ msgstr "Кірі_стіру"
 msgid "Process %d"
 msgstr "Үрдіс %d"
 
-#. Translators: <b> </b> marks the text as bold, ensure they are matched
-#. please!
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
 #: src/kgx-simple-tab.c:170
 #, c-format
 msgid "<b>Failed to start</b> — %s"
@@ -332,15 +339,13 @@ msgctxt "toast-button"
 msgid "_Details"
 msgstr "_Мәліметтер"
 
-#. Translators: <b> </b> marks the text as bold, ensure they are matched
-#. please!
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
 #: src/kgx-tab.c:889
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Тек оқу үшін</b> — Команда кодпен аяқталды: %i"
 
-#. Translators: <b> </b> marks the text as bold, ensure they are matched
-#. please!
+#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
 #: src/kgx-tab.c:897
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Тек оқу үшін</b> — Команда аяқталды"
@@ -385,8 +390,8 @@ msgid ""
 "An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
 "a>”. Please include the following information if you report the error."
 msgstr ""
-"“<a href=\"%s\">%s</a>” сілтемесін ашу кезінде күтпеген қате орын алды. "
-"Қате туралы хабарласаңыз, келесі ақпаратты қосыңыз."
+"“<a href=\"%s\">%s</a>” сілтемесін ашу кезінде күтпеген қате орын алды. Қате "
+"туралы хабарласаңыз, келесі ақпаратты қосыңыз."
 
 #: src/kgx-terminal.c:421
 #, c-format
@@ -466,8 +471,8 @@ msgstr "Кірістіру мүмкін емес"
 #: src/kgx-terminal.c:987
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst processing the clipboard. Please "
-"include the following information if you report the error."
+"An unexpected error occurred whilst processing the clipboard. Please include "
+"the following information if you report the error."
 msgstr ""
 "Алмасу буферін өңдеу кезінде күтпеген қате орын алды. Егер қате туралы "
 "хабарласаңыз, келесі ақпаратты қоса жіберіңіз."
@@ -611,7 +616,7 @@ msgid "Custom _Font"
 msgstr "Таңдауыңызша қа_ріп"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "Мінез-құлығы"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -626,11 +631,15 @@ msgstr "Кері айналдыру _жолдары"
 msgid "Terminal Bell"
 msgstr "Терминал сигналы"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "Ескертулердің қалай көрсетілетінін басқару"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "Дыбы_сты ойнату"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "_Визуалды эффекттер"
 
@@ -713,6 +722,16 @@ msgstr "Бетке ауысу: Бет 1–9"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Бетке ауысу: Бет 10"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Терезе"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Толық экран"
 
 #~ msgid "King’s Cross"
 #~ msgstr "Король кресті"
