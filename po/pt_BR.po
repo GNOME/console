@@ -5,22 +5,22 @@
 # Leônidas Araújo <leorusvellt@hotmail.com>, 2022.
 # Giovanni dos Santos Almeida Lombone Rodrigues <giovannilombone.io@gmail.com>, 2024.
 # Rafael Fontenelle <rafaelff@gnome.org>, 2019-2025.
-# Juliano de Souza Camargo <julianosc@pm.me>, 2024-2025.
+# Juliano de Souza Camargo <julianosc@pm.me>, 2024-2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-09-14 11:09+0000\n"
-"PO-Revision-Date: 2025-09-14 09:56-0300\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
+"PO-Revision-Date: 2026-01-31 19:56-0300\n"
 "Last-Translator: Juliano de Souza Camargo <julianosc@pm.me>\n"
-"Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao>\n"
+"Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 48.0\n"
+"X-Generator: Gtranslator 49.0\n"
 "X-DL-Team: pt_BR\n"
 "X-DL-Module: console\n"
 "X-DL-Branch: main\n"
@@ -37,8 +37,8 @@ msgstr "Console"
 #: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"comando;command;prompt;cmd;linha de comando;commandline;executar;run;shell;"
-"terminal;kgx;kings cross;"
+"comando;command;prompt;cmd;linha de "
+"comando;commandline;executar;run;shell;terminal;kgx;kings cross;"
 
 #: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
@@ -261,20 +261,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i por %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i colunas %i linhas"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "Aba %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "_Desanexar aba"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Fechar"
 
