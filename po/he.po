@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-08-27 16:26+0000\n"
-"PO-Revision-Date: 2025-08-29 17:13+0300\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
+"PO-Revision-Date: 2026-02-01 08:53+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew\n"
 "Language: he\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
 "2 : 3);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -50,7 +50,7 @@ msgstr "מדמה מסוף פשוט וידידותי למשתמש עבוד שול
 msgid "Terminal window"
 msgstr "חלון המסוף"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:503 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "מיזם GNOME"
 
@@ -69,7 +69,7 @@ msgstr "# KGX %s using VTE %u.%u.%u %s\n"
 #: src/kgx-about.c:148
 #, c-format
 msgid "© %s Zander Brown"
-msgstr "© %s Zander Brown"
+msgstr "© %s זנדר בראון"
 
 #. Translators: Credit yourself here
 #: src/kgx-about.c:176
@@ -257,20 +257,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i על %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i עמודות %i שורות"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "לשונית %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "_ניתוק לשונית"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_סגירה"
 
@@ -503,7 +514,7 @@ msgstr "הצגה ב_קבצים"
 
 #: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
-msgstr "שימוש בסגנון מערכת"
+msgstr "כמו סגנון המערכת"
 
 #: src/kgx-theme-switcher.ui:52
 msgid "Light Style"
@@ -516,11 +527,11 @@ msgstr "סגנון כהה"
 #. Translators: ‘command’ is the argument name, and shouldn't be translated
 #: src/kgx-utils.c:114
 msgid "Missing argument for --command"
-msgstr "Missing argument for --command"
+msgstr "חסר ארגומנט ל־‎--command"
 
 #: src/kgx-utils.c:129
 msgid "Cannot use both --command and positional parameters"
-msgstr "Cannot use both --command and positional parameters"
+msgstr "לא ניתן להשתמש גם ב־‎--command וגם במשתנים לפי סדר"
 
 #: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
@@ -544,7 +555,7 @@ msgstr "_צירופי מקשים"
 
 #: src/kgx-window.ui:43
 msgid "_About Console"
-msgstr "_על אודות מסוף"
+msgstr "_על המסוף"
 
 #: src/kgx-window.ui:148
 msgid "Find in Terminal"
@@ -616,7 +627,7 @@ msgid "Custom _Font"
 msgstr "גופן _מותאם"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "התנהגות"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -632,11 +643,15 @@ msgstr "שורות גלילה ל_אחור"
 msgid "Terminal Bell"
 msgstr "פעמון מסוך"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "שליטה בחיווי התראות"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "ניגון _צליל"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "אפקטים _חזותיים"
 
@@ -713,13 +728,23 @@ msgstr "הזזת לשונית שמאלה"
 #: src/shortcuts-dialog.ui:102
 msgctxt "shortcut window"
 msgid "Switch to Tab 1–9"
-msgstr "מעבר ללשונית 1-9"
+msgstr "מעבר ללשונית 1‏-9"
 
 # msgctxt "shortcut window"
 #: src/shortcuts-dialog.ui:108
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "מעבר ללשונית 10"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "חלון"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "מסך מלא"
 
 #~ msgid "Advanced"
 #~ msgstr "מתקדם"
