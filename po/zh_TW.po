@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
 "POT-Creation-Date: 2025-12-28 14:23+0000\n"
-"PO-Revision-Date: 2025-04-03 21:14+0800\n"
-"Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
-"Language-Team: Chinese - Taiwan <chinese-l10n@googlegroups.com>\n"
+"PO-Revision-Date: 2026-02-02 06:59+0000\n"
+"Last-Translator: Weblate Admin <webadmin@darkbear.duckdns.org>\n"
+"Language-Team: Chinese (Traditional Han script) <http://darkbear.duckdns.org/"
+"projects/gnome-50/console-po-ui-main-zh_tw/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -190,35 +191,35 @@ msgstr "色彩字串長度錯誤"
 #: src/kgx-drop-target.c:509
 msgctxt "toast-message"
 msgid "Drop Failed"
-msgstr ""
+msgstr "拖放失敗"
 
 #: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst receiving a URI list drop. Please "
 "include the following information if you report the error."
-msgstr ""
+msgstr "接收 URI 列表拖放時發生意外錯誤。若您回報此錯誤，請包含以下資訊。"
 
 #: src/kgx-drop-target.c:337
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst receiving a file list drop. Please "
 "include the following information if you report the error."
-msgstr ""
+msgstr "在接收檔案清單拖放時發生意外錯誤。若您回報此錯誤，請包含以下資訊。"
 
 #: src/kgx-drop-target.c:371
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst receiving a text drop. Please include "
 "the following information if you report the error."
-msgstr ""
+msgstr "接收文字拖放時發生意外錯誤。若您回報此錯誤，請包含以下資訊。"
 
 #: src/kgx-drop-target.c:512
 msgctxt "spad-message"
 msgid ""
 "An unexpected value was received. Please include the following information "
 "if you report the error."
-msgstr ""
+msgstr "收到意外數值。若您回報此錯誤，請提供以下資訊。"
 
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
@@ -234,12 +235,12 @@ msgstr "XTerm"
 #: src/kgx-pages.c:298
 #, c-format
 msgid "%i by %i"
-msgstr ""
+msgstr "%i x %i"
 
 #: src/kgx-pages.c:299
 #, c-format
 msgid "%i columns %i rows"
-msgstr ""
+msgstr "%i 列 %i 行"
 
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
@@ -289,7 +290,7 @@ msgstr "<b>無法執行</b> ― %s"
 
 #: src/kgx-spad.c:194
 msgid "Unable To Open"
-msgstr ""
+msgstr "無法開啟"
 
 #: src/kgx-spad.c:197
 #, c-format
@@ -297,27 +298,29 @@ msgid ""
 "Opening ‘<a href=\"%s\">%s</a>’ failed:\n"
 "%s"
 msgstr ""
+"開啟 '<a href=\"%s\"> %s </a>' 失敗：\n"
+"%s"
 
 #: src/kgx-spad.c:339 src/kgx-spad.ui:4
 msgid "Error Details"
-msgstr ""
+msgstr "錯誤詳細資訊"
 
 #: src/kgx-spad.ui:23
 msgid "Error Message"
-msgstr ""
+msgstr "錯誤訊息"
 
 #: src/kgx-spad.ui:35
 msgid "Copy Error Message"
-msgstr ""
+msgstr "複製錯誤訊息"
 
 #: src/kgx-spad.ui:104
 msgid "Report _Issue"
-msgstr ""
+msgstr "回報問題(_I)"
 
 #: src/kgx-tab.c:597
 msgctxt "toast-button"
 msgid "_Details"
-msgstr ""
+msgstr "詳細資料(_D)"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
 #: src/kgx-tab.c:889
@@ -349,11 +352,9 @@ msgstr "下一個符合"
 #. Translators: The user ctrl-clicked, or used ‘Open Link’, on a URI that,
 #. *              for whatever reason, we were unable to open.
 #: src/kgx-terminal.c:39
-#, fuzzy
-#| msgid "_Open Link"
 msgctxt "toast-message"
 msgid "Couldn't Open Link"
-msgstr "開啟連結(_O)"
+msgstr "無法開啟連結"
 
 #: src/kgx-terminal.c:360
 #, c-format
@@ -361,7 +362,7 @@ msgctxt "spad-message"
 msgid ""
 "The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
 "are installed."
-msgstr ""
+msgstr "連結「<a href=\"%s\"> %s </a>」使用「%s」協定，但系統未安裝任何相關應用程式。"
 
 #: src/kgx-terminal.c:373
 #, c-format
@@ -370,12 +371,14 @@ msgid ""
 "An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
 "a>”. Please include the following information if you report the error."
 msgstr ""
+"開啟連結「<a href=\"%s\"> %s </a>」時發生意外錯誤。若您回報此錯誤，請包含以下"
+"資訊。"
 
 #: src/kgx-terminal.c:421
 #, c-format
 msgctxt "spad-message"
 msgid "The link “<a href=\"%s\">%s</a>” is malformed."
-msgstr ""
+msgstr "連結「<a href=\"%s\"> %s </a>」格式錯誤。"
 
 #: src/kgx-terminal.c:440
 #, c-format
@@ -386,42 +389,45 @@ msgid ""
 "\n"
 "This device is “%s” and the location is on “%s”."
 msgstr ""
+"連結「<a href=\"%s\"> %s </a>」指向另一台裝置上的位置。\n"
+"\n"
+"該裝置為「%s」，位置位於「%s」。"
 
 #: src/kgx-terminal.c:511
 msgctxt "toast-message"
 msgid "Couldn't Paste Text"
-msgstr ""
+msgstr "無法貼上文字"
 
 #: src/kgx-terminal.c:514
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst reading the clipboard. Please include "
 "the following information if you report the error."
-msgstr ""
+msgstr "讀取剪貼簿時發生意外錯誤。若您回報此錯誤，請提供以下資訊。"
 
 #: src/kgx-terminal.c:575
 msgctxt "toast-message"
 msgid "Couldn't Show File"
-msgstr ""
+msgstr "無法顯示檔案"
 
 #: src/kgx-terminal.c:578
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst showing the file. Please include the "
 "following information if you report the error."
-msgstr ""
+msgstr "顯示檔案時發生意外錯誤。若您回報此錯誤，請提供以下資訊。"
 
 #: src/kgx-terminal.c:599
 msgctxt "toast-message"
 msgid "Couldn't Open Folder"
-msgstr ""
+msgstr "無法開啟資料夾"
 
 #: src/kgx-terminal.c:602
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst opening the folder. Please include the "
 "following information if you report the error."
-msgstr ""
+msgstr "開啟資料夾時發生意外錯誤。若您回報此錯誤，請提供以下資訊。"
 
 #: src/kgx-terminal.c:696
 #, c-format
@@ -435,24 +441,22 @@ msgstr ""
 #: src/kgx-terminal.c:984
 msgctxt "toast-message"
 msgid "Couldn't Paste"
-msgstr ""
+msgstr "無法貼上"
 
 #: src/kgx-terminal.c:987
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst processing the clipboard. Please include "
 "the following information if you report the error."
-msgstr ""
+msgstr "處理剪貼簿時發生意外錯誤。若您回報此錯誤，請提供以下資訊。"
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
 msgstr "開啟連結(_O)"
 
 #: src/kgx-terminal.ui:12
-#, fuzzy
-#| msgid "Copy _Link"
 msgid "Copy _Link Address"
-msgstr "複製連結(_L)"
+msgstr "複製連結位址(_L)"
 
 #: src/kgx-terminal.ui:19
 msgid "_Copy"
@@ -464,7 +468,7 @@ msgstr "全選(_S)"
 
 #: src/kgx-terminal.ui:36 src/kgx-window.ui:285
 msgid "Leave _Fullscreen"
-msgstr ""
+msgstr "退出全螢幕(_F)"
 
 #: src/kgx-terminal.ui:43
 msgid "Show in _Files"
@@ -501,7 +505,7 @@ msgstr "顯示所有分頁(_S)"
 
 #: src/kgx-window.ui:28 src/kgx-window.ui:280
 msgid "_Fullscreen"
-msgstr ""
+msgstr "全螢幕(_F)"
 
 #: src/kgx-window.ui:35
 msgid "_Preferences"
@@ -521,7 +525,7 @@ msgstr "於終端機中尋找"
 
 #: src/kgx-window.ui:160
 msgid "Leave Fullscreen"
-msgstr ""
+msgstr "退出全螢幕"
 
 #: src/kgx-window.ui:167
 msgid "Main Menu"
@@ -584,8 +588,6 @@ msgid "Custom _Font"
 msgstr "自訂字型(_F)"
 
 #: src/preferences/kgx-preferences-window.ui:61
-#, fuzzy
-#| msgid "Behaviour"
 msgid "Behavior"
 msgstr "行為"
 
@@ -603,7 +605,7 @@ msgstr "終端機鈴響"
 
 #: src/preferences/kgx-preferences-window.ui:91
 msgid "Control how alerts are indicated"
-msgstr ""
+msgstr "控制如何顯示警示訊息"
 
 #: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
@@ -694,16 +696,14 @@ msgid "Switch to Tab 10"
 msgstr "切換至分頁 10"
 
 #: src/shortcuts-dialog.ui:116
-#, fuzzy
-#| msgid "New Window"
 msgctxt "shortcut window"
 msgid "Window"
-msgstr "新視窗"
+msgstr "視窗"
 
 #: src/shortcuts-dialog.ui:119
 msgctxt "shortcut window"
 msgid "Fullscreen"
-msgstr ""
+msgstr "全螢幕"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
