@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2025-03-16 01:55+0000\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
 "PO-Revision-Date: 2025-04-03 21:14+0800\n"
 "Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
 "Language-Team: Chinese - Taiwan <chinese-l10n@googlegroups.com>\n"
@@ -19,27 +19,28 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.6\n"
 
-#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
+#: src/kgx-window.ui:52
 msgid "Console"
 msgstr "主控臺"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Console.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
 "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;console;終"
 "端機;主控台;主控臺;命令;命令列;命令提示字元;執行;"
 
-#: data/org.gnome.Console.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
 msgstr "新視窗"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:176
+#: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:246
 msgid "New Tab"
 msgstr "新分頁"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "終端機模擬器"
 
@@ -51,163 +52,90 @@ msgstr "專為 GNOME 桌面所打造，一款簡單易用的終端機模擬器�
 msgid "Terminal window"
 msgstr "終端機視窗"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:503 src/kgx-window.c:561
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "GNOME 專案"
 
-#: src/help-overlay.ui:12
-msgctxt "shortcut window"
-msgid "Application"
-msgstr "一般"
-
-#: src/help-overlay.ui:16
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "新視窗"
-
-#: src/help-overlay.ui:23
-msgctxt "shortcut window"
-msgid "Terminal"
-msgstr "終端機操作"
-
-#: src/help-overlay.ui:27
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "尋找"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
-msgid "Copy"
-msgstr "複製"
-
-#: src/help-overlay.ui:39
-msgctxt "shortcut window"
-msgid "Paste"
-msgstr "貼上"
-
-#: src/help-overlay.ui:46
-msgctxt "shortcut window"
-msgid "Tabs"
-msgstr "分頁"
-
-#: src/help-overlay.ui:50
-msgctxt "shortcut window"
-msgid "New Tab"
-msgstr "新分頁"
-
-#: src/help-overlay.ui:56
-msgctxt "shortcut window"
-msgid "Close Tab"
-msgstr "關閉分頁"
-
-#: src/help-overlay.ui:62
-msgctxt "shortcut window"
-msgid "Show All Tabs"
-msgstr "顯示所有分頁"
-
-#: src/help-overlay.ui:68
-msgctxt "shortcut window"
-msgid "Next Tab"
-msgstr "下個分頁"
-
-#: src/help-overlay.ui:74
-msgctxt "shortcut window"
-msgid "Previous Tab"
-msgstr "上個分頁"
-
-#: src/help-overlay.ui:80
-msgctxt "shortcut window"
-msgid "Move Tab Right"
-msgstr "向右移動分頁"
-
-#: src/help-overlay.ui:86
-msgctxt "shortcut window"
-msgid "Move Tab Left"
-msgstr "向左移動分頁"
-
-#: src/help-overlay.ui:92
-msgctxt "shortcut window"
-msgid "Switch to Tab 1–9"
-msgstr "切換至分頁 1-9"
-
-#: src/help-overlay.ui:98
-msgctxt "shortcut window"
-msgid "Switch to Tab 10"
-msgstr "切換至分頁 10"
-
-#. Translators: %s is the year range
-#: src/kgx-about.c:83 src/kgx-window.c:556
-#, c-format
-msgid "© %s Zander Brown"
-msgstr "© %s Zander Brown"
-
-#: src/kgx-about.c:101
+#: src/kgx-about.c:104
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 或更新版本"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. * version of KGX itself, the latter format is the VTE version
-#: src/kgx-about.c:114
+#: src/kgx-about.c:119
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s 係採用 VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:283
+#. Translators: %s is the year range
+#: src/kgx-about.c:148
+#, c-format
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
+
+#. Translators: Credit yourself here
+#: src/kgx-about.c:176
+msgid "translator-credits"
+msgstr ""
+"Freddy Cheng <freddy4212@gmail.com>, 2022-2023.\n"
+"Yi-Jyun Pan <me@pan93.com>, 2025."
+
+#: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr "無法同時使用「--working-directory」與位置參數"
 
-#: src/kgx-application.c:503
+#: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
 msgstr "在終端機中執行此選項的參數"
 
-#: src/kgx-application.c:504
+#: src/kgx-application.c:510
 msgid "COMMAND"
 msgstr "COMMAND"
 
-#: src/kgx-application.c:512
+#: src/kgx-application.c:518
 msgid "Set the working directory"
 msgstr "設定工作資料夾"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:514
+#: src/kgx-application.c:520
 msgid "DIRNAME"
 msgstr "DIRNAME"
 
-#: src/kgx-application.c:522
+#: src/kgx-application.c:528
 msgid "Wait until the child exits (TODO)"
 msgstr "等待直到子程序離開 (TODO)"
 
-#: src/kgx-application.c:531
+#: src/kgx-application.c:537
 msgid "Set the initial window title"
 msgstr "設定初始視窗標題"
 
-#: src/kgx-application.c:532
+#: src/kgx-application.c:538
 msgid "TITLE"
 msgstr "TITLE"
 
-#: src/kgx-application.c:540
+#: src/kgx-application.c:546
 msgid "ADVANCED: Set the shell to launch"
 msgstr "進階：設定要啟動的 Shell"
 
-#: src/kgx-application.c:541
+#: src/kgx-application.c:547
 msgid "SHELL"
 msgstr "SHELL"
 
-#: src/kgx-application.c:549
+#: src/kgx-application.c:555
 msgid "ADVANCED: Set the scrollback length"
 msgstr "進階：設定螢幕緩衝區長度"
 
-#: src/kgx-application.c:550
+#: src/kgx-application.c:556
 msgid "LINES"
 msgstr "LINES"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:688
+#: src/kgx-application.c:695
 #, c-format
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — 終端機模擬器"
 
-#: src/kgx-application.c:694
+#: src/kgx-application.c:701
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- 命令 [參數...]]"
 
@@ -257,32 +185,76 @@ msgstr "關閉(_L)"
 msgid "Color string is wrong length"
 msgstr "色彩字串長度錯誤"
 
+#: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
+#: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
+#: src/kgx-drop-target.c:509
+msgctxt "toast-message"
+msgid "Drop Failed"
+msgstr ""
+
+#: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a URI list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+
+#: src/kgx-drop-target.c:337
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a file list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+
+#: src/kgx-drop-target.c:371
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a text drop. Please include "
+"the following information if you report the error."
+msgstr ""
+
+#: src/kgx-drop-target.c:512
+msgctxt "spad-message"
+msgid ""
+"An unexpected value was received. Please include the following information "
+"if you report the error."
+msgstr ""
+
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
 msgid "Linux"
 msgstr "Linux"
 
 #: src/kgx-livery-manager.c:230
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
 msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
+
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr ""
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr ""
 
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:473
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "分頁 %i"
 
-#: src/kgx-pages.ui:90
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "將分頁分離(_D)"
 
-#: src/kgx-pages.ui:96
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "關閉分頁(_C)"
 
@@ -310,39 +282,148 @@ msgid "Process %d"
 msgstr "程序 %d"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-simple-tab.c:169
+#: src/kgx-simple-tab.c:170
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>無法執行</b> ― %s"
 
+#: src/kgx-spad.c:194
+msgid "Unable To Open"
+msgstr ""
+
+#: src/kgx-spad.c:197
+#, c-format
+msgid ""
+"Opening ‘<a href=\"%s\">%s</a>’ failed:\n"
+"%s"
+msgstr ""
+
+#: src/kgx-spad.c:339 src/kgx-spad.ui:4
+msgid "Error Details"
+msgstr ""
+
+#: src/kgx-spad.ui:23
+msgid "Error Message"
+msgstr ""
+
+#: src/kgx-spad.ui:35
+msgid "Copy Error Message"
+msgstr ""
+
+#: src/kgx-spad.ui:104
+msgid "Report _Issue"
+msgstr ""
+
+#: src/kgx-tab.c:597
+msgctxt "toast-button"
+msgid "_Details"
+msgstr ""
+
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:784
+#: src/kgx-tab.c:889
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>唯讀狀態</b>―命令已退出並回傳代碼 %i"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:792
+#: src/kgx-tab.c:897
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>唯讀狀態</b>―命令已退出"
 
-#: src/kgx-tab.c:812
+#: src/kgx-tab.c:917
 msgid "Command completed"
 msgstr "執行完畢"
 
-#: src/kgx-tab.ui:40
+#: src/kgx-tab.ui:42
 msgid "Find text"
 msgstr "尋找文字"
 
-#: src/kgx-tab.ui:51
+#: src/kgx-tab.ui:70
 msgid "Previous Match"
 msgstr "上一個符合"
 
-#: src/kgx-tab.ui:59
+#: src/kgx-tab.ui:78
 msgid "Next Match"
 msgstr "下一個符合"
 
-#: src/kgx-terminal.c:510
+#. Translators: The user ctrl-clicked, or used ‘Open Link’, on a URI that,
+#. *              for whatever reason, we were unable to open.
+#: src/kgx-terminal.c:39
+#, fuzzy
+#| msgid "_Open Link"
+msgctxt "toast-message"
+msgid "Couldn't Open Link"
+msgstr "開啟連結(_O)"
+
+#: src/kgx-terminal.c:360
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
+"are installed."
+msgstr ""
+
+#: src/kgx-terminal.c:373
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
+"a>”. Please include the following information if you report the error."
+msgstr ""
+
+#: src/kgx-terminal.c:421
+#, c-format
+msgctxt "spad-message"
+msgid "The link “<a href=\"%s\">%s</a>” is malformed."
+msgstr ""
+
+#: src/kgx-terminal.c:440
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” points to a location on a different "
+"device.\n"
+"\n"
+"This device is “%s” and the location is on “%s”."
+msgstr ""
+
+#: src/kgx-terminal.c:511
+msgctxt "toast-message"
+msgid "Couldn't Paste Text"
+msgstr ""
+
+#: src/kgx-terminal.c:514
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst reading the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+
+#: src/kgx-terminal.c:575
+msgctxt "toast-message"
+msgid "Couldn't Show File"
+msgstr ""
+
+#: src/kgx-terminal.c:578
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst showing the file. Please include the "
+"following information if you report the error."
+msgstr ""
+
+#: src/kgx-terminal.c:599
+msgctxt "toast-message"
+msgid "Couldn't Open Folder"
+msgstr ""
+
+#: src/kgx-terminal.c:602
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the folder. Please include the "
+"following information if you report the error."
+msgstr ""
+
+#: src/kgx-terminal.c:696
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -351,12 +432,26 @@ msgstr ""
 "Ctrl-點按開啟：\n"
 "%s"
 
+#: src/kgx-terminal.c:984
+msgctxt "toast-message"
+msgid "Couldn't Paste"
+msgstr ""
+
+#: src/kgx-terminal.c:987
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst processing the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
 msgstr "開啟連結(_O)"
 
 #: src/kgx-terminal.ui:12
-msgid "Copy _Link"
+#, fuzzy
+#| msgid "Copy _Link"
+msgid "Copy _Link Address"
 msgstr "複製連結(_L)"
 
 #: src/kgx-terminal.ui:19
@@ -367,7 +462,11 @@ msgstr "複製(_C)"
 msgid "_Select All"
 msgstr "全選(_S)"
 
-#: src/kgx-terminal.ui:36
+#: src/kgx-terminal.ui:36 src/kgx-window.ui:285
+msgid "Leave _Fullscreen"
+msgstr ""
+
+#: src/kgx-terminal.ui:43
 msgid "Show in _Files"
 msgstr "於檔案中顯示(_F)"
 
@@ -392,14 +491,7 @@ msgstr "缺少傳入 --command 的引數"
 msgid "Cannot use both --command and positional parameters"
 msgstr "無法同時使用「--命令」與「位置」參數"
 
-#. Translators: Credit yourself here
-#: src/kgx-window.c:568
-msgid "translator-credits"
-msgstr ""
-"Freddy Cheng <freddy4212@gmail.com>, 2022-2023.\n"
-"Yi-Jyun Pan <me@pan93.com>, 2025."
-
-#: src/kgx-window.ui:17
+#: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
 msgstr "新視窗(_N)"
 
@@ -407,35 +499,43 @@ msgstr "新視窗(_N)"
 msgid "_Show All Tabs"
 msgstr "顯示所有分頁(_S)"
 
-#: src/kgx-window.ui:30
+#: src/kgx-window.ui:28 src/kgx-window.ui:280
+msgid "_Fullscreen"
+msgstr ""
+
+#: src/kgx-window.ui:35
 msgid "_Preferences"
 msgstr "偏好設定(_P)"
 
-#: src/kgx-window.ui:34
+#: src/kgx-window.ui:39
 msgid "_Keyboard Shortcuts"
 msgstr "鍵盤快捷鍵(_K)"
 
-#: src/kgx-window.ui:38
+#: src/kgx-window.ui:43
 msgid "_About Console"
 msgstr "關於主控臺(_A)"
 
-#: src/kgx-window.ui:90
+#: src/kgx-window.ui:148
 msgid "Find in Terminal"
 msgstr "於終端機中尋找"
 
-#: src/kgx-window.ui:97
+#: src/kgx-window.ui:160
+msgid "Leave Fullscreen"
+msgstr ""
+
+#: src/kgx-window.ui:167
 msgid "Main Menu"
 msgstr "主選單"
 
-#: src/kgx-window.ui:115
+#: src/kgx-window.ui:185
 msgid "Shrink Text"
 msgstr "縮小"
 
-#: src/kgx-window.ui:126
+#: src/kgx-window.ui:196
 msgid "Reset Size"
 msgstr "重設縮放"
 
-#: src/kgx-window.ui:150
+#: src/kgx-window.ui:220
 msgid "Enlarge Text"
 msgstr "放大"
 
@@ -463,7 +563,7 @@ msgstr "字型預覽"
 msgid "Font Size"
 msgstr "字型大小"
 
-#: src/preferences/kgx-preferences-window.c:125
+#: src/preferences/kgx-preferences-window.c:126
 msgid "No Font Set"
 msgstr "沒有設定字型"
 
@@ -483,29 +583,127 @@ msgstr "使用系統預設值(_S)"
 msgid "Custom _Font"
 msgstr "自訂字型(_F)"
 
-#: src/preferences/kgx-preferences-window.ui:63
-msgid "Behaviour"
+#: src/preferences/kgx-preferences-window.ui:61
+#, fuzzy
+#| msgid "Behaviour"
+msgid "Behavior"
 msgstr "行為"
 
-#: src/preferences/kgx-preferences-window.ui:66
+#: src/preferences/kgx-preferences-window.ui:64
 msgid "_Unlimited Scrollback"
 msgstr "無限捲動紀錄(_U)"
 
-#: src/preferences/kgx-preferences-window.ui:72
+#: src/preferences/kgx-preferences-window.ui:70
 msgid "_Scrollback Lines"
 msgstr "捲動紀錄列數(_S)"
 
-#: src/preferences/kgx-preferences-window.ui:92
+#: src/preferences/kgx-preferences-window.ui:90
 msgid "Terminal Bell"
 msgstr "終端機鈴響"
 
-#: src/preferences/kgx-preferences-window.ui:95
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr ""
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "播放音效(_S)"
 
-#: src/preferences/kgx-preferences-window.ui:101
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "視覺效果(_V)"
+
+#: src/shortcuts-dialog.ui:7
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "一般"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "新視窗"
+
+#: src/shortcuts-dialog.ui:18
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "終端機操作"
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "尋找"
+
+#: src/shortcuts-dialog.ui:27
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "複製"
+
+#: src/shortcuts-dialog.ui:33
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "貼上"
+
+#: src/shortcuts-dialog.ui:41
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "分頁"
+
+#: src/shortcuts-dialog.ui:44
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "新分頁"
+
+#: src/shortcuts-dialog.ui:50
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "關閉分頁"
+
+#: src/shortcuts-dialog.ui:56
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "顯示所有分頁"
+
+#: src/shortcuts-dialog.ui:62
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "下個分頁"
+
+#: src/shortcuts-dialog.ui:68
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "上個分頁"
+
+#: src/shortcuts-dialog.ui:74 src/shortcuts-dialog.ui:95
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "向左移動分頁"
+
+#: src/shortcuts-dialog.ui:81 src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "向右移動分頁"
+
+#: src/shortcuts-dialog.ui:102
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "切換至分頁 1-9"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "切換至分頁 10"
+
+#: src/shortcuts-dialog.ui:116
+#, fuzzy
+#| msgid "New Window"
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "新視窗"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr ""
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
