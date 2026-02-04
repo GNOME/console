@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-08-17 10:17+0000\n"
-"PO-Revision-Date: 2025-08-19 17:47+0330\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
+"PO-Revision-Date: 2026-02-04 16:37+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian\n"
 "Language: fa\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 "X-DL-Lang: fa\n"
 "X-DL-Module: console\n"
 "X-DL-Branch: main\n"
@@ -57,7 +57,7 @@ msgstr "شبیه‌ساز پایانه‌ای کاربرپسند برای میز
 msgid "Terminal window"
 msgstr "پنجرهٔ پایانه"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:503 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "پروژهٔ گنوم"
 
@@ -70,7 +70,7 @@ msgstr "نگارش ۳ یا بالاتر جی‌پی‌ال"
 #: src/kgx-about.c:119
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
-msgstr "# KGX %s با استفاده از VTE %Iu.%Iu.%Iu %s\n"
+msgstr "‏# KGX %s با استفاده از VTE %Iu.%Iu.%Iu %s\n"
 
 #. Translators: %s is the year range
 #: src/kgx-about.c:148
@@ -250,20 +250,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "اکس‌ترم"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "‏%Ii در %Ii"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "‏%Ii ستون و %Ii ردیف"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "زبانهٔ %Ii"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "_تفکیک زبانه"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_بستن"
 
@@ -605,7 +616,7 @@ msgid "Custom _Font"
 msgstr "_قلم سفارشی"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "رفتار"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -620,11 +631,15 @@ msgstr "_خط‌های لغزش به پس"
 msgid "Terminal Bell"
 msgstr "زنگ پایانه"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "واپایشگ چگونگی نشان داده شدن هشدارها"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "پخش _صدا"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "_جلوه‌های دیداری"
 
@@ -707,6 +722,16 @@ msgstr "تعویض به زبانهٔ ۱–۹"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "تعویض به زبانهٔ ۱۰"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "پنجره"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "تمام‌صفحه"
 
 #~ msgid "King’s Cross"
 #~ msgstr "صلیب پادشاه"
