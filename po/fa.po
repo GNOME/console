@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
 "POT-Creation-Date: 2025-12-28 14:23+0000\n"
-"PO-Revision-Date: 2026-02-04 16:37+0330\n"
+"PO-Revision-Date: 2026-02-04 16:38+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian\n"
 "Language: fa\n"
@@ -24,9 +24,8 @@ msgstr ""
 "X-DL-Domain: po\n"
 "X-DL-State: Translating\n"
 
-#: data/org.gnome.Console.desktop.in.in:2
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
-#: src/kgx-window.ui:52
+#: data/org.gnome.Console.desktop.in.in:2 data/org.gnome.Console.metainfo.xml.in.in:8
+#: src/kgx-application.h:26 src/kgx-window.ui:52
 msgid "Console"
 msgstr "کنسول"
 
@@ -151,8 +150,8 @@ msgid ""
 "A command is still running, closing this window will kill it and may lead to "
 "unexpected outcomes"
 msgid_plural ""
-"Some commands are still running, closing this window will kill them and may lead "
-"to unexpected outcomes"
+"Some commands are still running, closing this window will kill them and may lead to "
+"unexpected outcomes"
 msgstr[0] ""
 "هنوز دستورهایی در حال اجرایند. بستن این پنجره خواهد کشتشان و ممکن است منجر به "
 "نتیجه‌های غیرمنتظره شود"
@@ -207,8 +206,8 @@ msgstr "انداختن شکست خورد"
 #: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst receiving a URI list drop. Please include "
-"the following information if you report the error."
+"An unexpected error occurred whilst receiving a URI list drop. Please include the "
+"following information if you report the error."
 msgstr ""
 "هنگام دریافت کردن انداختن سیاههٔ نشانی خطایی غیرمنتظره رخ داد. اگر خطا را گزارش "
 "می‌کنید لطفاً اطّلاعات زیر را نیز پیوست کنید."
@@ -216,8 +215,8 @@ msgstr ""
 #: src/kgx-drop-target.c:337
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst receiving a file list drop. Please include "
-"the following information if you report the error."
+"An unexpected error occurred whilst receiving a file list drop. Please include the "
+"following information if you report the error."
 msgstr ""
 "هنگام دریافت کردن انداختن سیاههٔ پرونده غیرمنتظره رخ داد. اگر خطا را گزارش می‌کنید "
 "لطفاً اطّلاعات زیر را نیز پیوست کنید."
@@ -228,17 +227,17 @@ msgid ""
 "An unexpected error occurred whilst receiving a text drop. Please include the "
 "following information if you report the error."
 msgstr ""
-"هنگام دریافت کردن انداختن متن خطایی غیرمنتظره رخ داد. اگر خطا را گزارش می‌کنید "
-"لطفاً اطّلاعات زیر را نیز پیوست کنید."
+"هنگام دریافت کردن انداختن متن خطایی غیرمنتظره رخ داد. اگر خطا را گزارش می‌کنید لطفاً "
+"اطّلاعات زیر را نیز پیوست کنید."
 
 #: src/kgx-drop-target.c:512
 msgctxt "spad-message"
 msgid ""
-"An unexpected value was received. Please include the following information if "
-"you report the error."
+"An unexpected value was received. Please include the following information if you "
+"report the error."
 msgstr ""
-"مقداری غیرمنتظره دریافت شد. اگر خطا را گزارش می‌کنید لطفاً اطّلاعات زیر را نیز "
-"پیوست کنید."
+"مقداری غیرمنتظره دریافت شد. اگر خطا را گزارش می‌کنید لطفاً اطّلاعات زیر را نیز پیوست "
+"کنید."
 
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
@@ -392,8 +391,8 @@ msgid ""
 "An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</a>”. "
 "Please include the following information if you report the error."
 msgstr ""
-"هنگام گشودن پیوند «<a href=\"%s\">%s</a>» خطایی غیرمنتظره رخ داد. اگر خطا را "
-"گزارش می‌کنید لطفاً اطّلاعات زیر را نیز پیوست کنید."
+"هنگام گشودن پیوند «<a href=\"%s\">%s</a>» خطایی غیرمنتظره رخ داد. اگر خطا را گزارش "
+"می‌کنید لطفاً اطّلاعات زیر را نیز پیوست کنید."
 
 #: src/kgx-terminal.c:421
 #, c-format
@@ -424,8 +423,8 @@ msgid ""
 "An unexpected error occurred whilst reading the clipboard. Please include the "
 "following information if you report the error."
 msgstr ""
-"هنگام خواندن تخته‌گیره خطایی غیرمنتظره رخ داد. اگر خطا را گزارش می‌کنید لطفاً "
-"اطّلاعات زیر را نیز پیوست کنید."
+"هنگام خواندن تخته‌گیره خطایی غیرمنتظره رخ داد. اگر خطا را گزارش می‌کنید لطفاً اطّلاعات "
+"زیر را نیز پیوست کنید."
 
 #: src/kgx-terminal.c:575
 msgctxt "toast-message"
@@ -435,8 +434,8 @@ msgstr "نتوانست پرونده را نشان دهد"
 #: src/kgx-terminal.c:578
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst showing the file. Please include the "
-"following information if you report the error."
+"An unexpected error occurred whilst showing the file. Please include the following "
+"information if you report the error."
 msgstr ""
 "هنگام نمایش دادن پرونده خطایی غیرمنتظره رخ داد. اگر خطا را گزارش می‌کنید لطفاً "
 "اطّلاعات زیر را نیز پیوست کنید."
@@ -452,8 +451,8 @@ msgid ""
 "An unexpected error occurred whilst opening the folder. Please include the "
 "following information if you report the error."
 msgstr ""
-"هنگام گشودن شاخه خطایی غیرمنتظره رخ داد. اگر خطا را گزارش می‌کنید لطفاً اطّلاعات "
-"زیر را نیز پیوست کنید."
+"هنگام گشودن شاخه خطایی غیرمنتظره رخ داد. اگر خطا را گزارش می‌کنید لطفاً اطّلاعات زیر "
+"را نیز پیوست کنید."
 
 #: src/kgx-terminal.c:696
 #, c-format
@@ -475,8 +474,8 @@ msgid ""
 "An unexpected error occurred whilst processing the clipboard. Please include the "
 "following information if you report the error."
 msgstr ""
-"هنگام پردازش تخته‌گیره خطایی غیرمنتظره رخ داد. اگر خطا را گزارش می‌کنید لطفاً "
-"اطّلاعات زیر را نیز پیوست کنید."
+"هنگام پردازش تخته‌گیره خطایی غیرمنتظره رخ داد. اگر خطا را گزارش می‌کنید لطفاً اطّلاعات "
+"زیر را نیز پیوست کنید."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -633,7 +632,7 @@ msgstr "زنگ پایانه"
 
 #: src/preferences/kgx-preferences-window.ui:91
 msgid "Control how alerts are indicated"
-msgstr "واپایشگ چگونگی نشان داده شدن هشدارها"
+msgstr "واپایش چگونگی نشان داده شدن هشدارها"
 
 #: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
