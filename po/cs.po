@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kgx\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
 "POT-Creation-Date: 2025-12-28 14:23+0000\n"
-"PO-Revision-Date: 2026-02-05 00:30+0100\n"
+"PO-Revision-Date: 2026-02-12 01:26+0100\n"
 "Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -255,12 +255,12 @@ msgstr "XTerm"
 #: src/kgx-pages.c:298
 #, c-format
 msgid "%i by %i"
-msgstr ""
+msgstr "%i x %i"
 
 #: src/kgx-pages.c:299
 #, c-format
 msgid "%i columns %i rows"
-msgstr ""
+msgstr "%i sloupců %i řádků"
 
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
@@ -633,7 +633,7 @@ msgstr "Zvonek terminálu"
 
 #: src/preferences/kgx-preferences-window.ui:91
 msgid "Control how alerts are indicated"
-msgstr ""
+msgstr "Ovládání způsobu zobrazování upozornění"
 
 #: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
