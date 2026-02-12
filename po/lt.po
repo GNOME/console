@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-09-07 14:21+0000\n"
-"PO-Revision-Date: 2025-09-07 21:14+0300\n"
-"Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
+"PO-Revision-Date: 2026-02-12 22:35+0200\n"
+"Last-Translator: Aurimas Černius <aurimas.cernius@mailo.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "(n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.8\n"
 
 #: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -51,7 +51,7 @@ msgstr "Paprastas terminalo emulatorius GNOME darbalaukio naudotojams."
 msgid "Terminal window"
 msgstr "Terminalo langas"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "GNOME projektas"
 
@@ -75,9 +75,7 @@ msgstr "© %s Zander Brown"
 #. Translators: Credit yourself here
 #: src/kgx-about.c:176
 msgid "translator-credits"
-msgstr ""
-"Išvertė:\n"
-"Aurimas Černius <aurimas.cernius@mailo.com>"
+msgstr "Aurimas Černius <aurimas.cernius@mailo.com>"
 
 #: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
@@ -252,20 +250,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i iš %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i stulpeliai %i eilutės"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "Kortelė %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "_Atkabinti kortelę"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Užverti"
 
@@ -608,7 +617,7 @@ msgid "Custom _Font"
 msgstr "Pasirinktinis šri_ftas"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "Elgsena"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -623,11 +632,15 @@ msgstr "_Grįžtamojo slinkimo eilutės"
 msgid "Terminal Bell"
 msgstr "Terminalo skambutis"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "Valdo, kai rodomi pranešimai"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "_Groti garsą"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "_Vaizdo efektai"
 
@@ -710,6 +723,16 @@ msgstr "Pereiti į kortelę 1-9"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Pereiti į kortelę 10"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Langas"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Visame ekrane"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
