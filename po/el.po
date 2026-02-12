@@ -7,20 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-09-13 20:44+0000\n"
-"PO-Revision-Date: 2025-09-15 13:34+0300\n"
-"Last-Translator: Dimitris Spentzos <jimspentzos2000@gmail.com>\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
+"PO-Revision-Date: 2026-02-12 23:02+0200\n"
+"Last-Translator: Efstathios Iosifidis <eiosifidis@gmail.com>\n"
 "Language-Team: Greek <gnome-el-list@gnome.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#: data/org.gnome.Console.desktop.in.in:2
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
-#: src/kgx-window.ui:52
+#: data/org.gnome.Console.desktop.in.in:2 data/org.gnome.Console.metainfo.xml.in.in:8
+#: src/kgx-application.h:26 src/kgx-window.ui:52
 msgid "Console"
 msgstr "Κονσόλα"
 
@@ -28,9 +27,8 @@ msgstr "Κονσόλα"
 #: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"εντολή;γραμμή "
-"εντολών;τερματικό;προτροπή;εκτέλεση;κέλυφος;command;prompt;cmd;commandline;run;shell;terminal;kgx;kings "
-"cross;"
+"εντολή;γραμμή εντολών;τερματικό;προτροπή;εκτέλεση;κέλυφος;command;prompt;cmd;commandline;run;shell;"
+"terminal;kgx;kings cross;"
 
 #: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
@@ -83,9 +81,7 @@ msgstr ""
 
 #: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
-msgstr ""
-"Δεν είναι δυνατή η ταυτόχρονη χρήση του --working-directory και των "
-"παραμέτρων θέσης"
+msgstr "Δεν είναι δυνατή η ταυτόχρονη χρήση του --working-directory και των παραμέτρων θέσης"
 
 #: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
@@ -147,38 +143,30 @@ msgid "Close Window?"
 msgstr "Κλείσιμο παραθύρου;"
 
 #: src/kgx-close-dialog.c:75
-msgid ""
-"A command is still running, closing this window will kill it and may lead to "
-"unexpected outcomes"
+msgid "A command is still running, closing this window will kill it and may lead to unexpected outcomes"
 msgid_plural ""
-"Some commands are still running, closing this window will kill them and may "
-"lead to unexpected outcomes"
+"Some commands are still running, closing this window will kill them and may lead to unexpected outcomes"
 msgstr[0] ""
-"Μια εντολή εξακολουθεί να εκτελείται. Το κλείσιμο αυτού του παραθύρου θα την "
-"τερματίσει και ενδέχεται να οδηγήσει σε απρόσμενα αποτελέσματα"
+"Μια εντολή εξακολουθεί να εκτελείται. Το κλείσιμο αυτού του παραθύρου θα την τερματίσει και ενδέχεται "
+"να οδηγήσει σε απρόσμενα αποτελέσματα"
 msgstr[1] ""
-"Ορισμένες εντολές εξακολουθούν να εκτελούνται. Το κλείσιμο αυτού του "
-"παραθύρου θα τις τερματίσει και ενδέχεται να οδηγήσει σε απρόσμενα "
-"αποτελέσματα"
+"Ορισμένες εντολές εξακολουθούν να εκτελούνται. Το κλείσιμο αυτού του παραθύρου θα τις τερματίσει και "
+"ενδέχεται να οδηγήσει σε απρόσμενα αποτελέσματα"
 
 #: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
 msgstr "Κλείσιμο καρτέλας;"
 
 #: src/kgx-close-dialog.c:84
-msgid ""
-"A command is still running, closing this tab will kill it and may lead to "
-"unexpected outcomes"
+msgid "A command is still running, closing this tab will kill it and may lead to unexpected outcomes"
 msgid_plural ""
-"Some commands are still running, closing this tab will kill them and may "
-"lead to unexpected outcomes"
+"Some commands are still running, closing this tab will kill them and may lead to unexpected outcomes"
 msgstr[0] ""
-"Μια εντολή εξακολουθεί να εκτελείται. Το κλείσιμο αυτής της καρτέλας θα την "
-"τερματίσει και ενδέχεται να οδηγήσει σε απρόσμενα αποτελέσματα"
+"Μια εντολή εξακολουθεί να εκτελείται. Το κλείσιμο αυτής της καρτέλας θα την τερματίσει και ενδέχεται να "
+"οδηγήσει σε απρόσμενα αποτελέσματα"
 msgstr[1] ""
-"Ορισμένες εντολές εξακολουθούν να εκτελούνται. Το κλείσιμο αυτής της "
-"καρτέλας θα τις τερματίσει και ενδέχεται να οδηγήσει σε απρόσμενα "
-"αποτελέσματα"
+"Ορισμένες εντολές εξακολουθούν να εκτελούνται. Το κλείσιμο αυτής της καρτέλας θα τις τερματίσει και "
+"ενδέχεται να οδηγήσει σε απρόσμενα αποτελέσματα"
 
 #. Translators: Screen reader label for the list of running commands
 #: src/kgx-close-dialog.c:194
@@ -186,8 +174,7 @@ msgid "Process list"
 msgstr "Λίστα διεργασιών"
 
 #. Translators: This action dismisses the dialogue, leaving the tab/window open
-#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
-#: src/preferences/kgx-font-picker.ui:22
+#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135 src/preferences/kgx-font-picker.ui:22
 msgid "_Cancel"
 msgstr "_Aκύρωση"
 
@@ -200,8 +187,7 @@ msgstr "Κ_λείσιμο"
 msgid "Color string is wrong length"
 msgstr "Η συμβολοσειρά χρώματος έχει λάθος μήκος"
 
-#: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
-#: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
+#: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250 src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
 #: src/kgx-drop-target.c:509
 msgctxt "toast-message"
 msgid "Drop Failed"
@@ -210,38 +196,35 @@ msgstr "Αποτυχία απόθεσης"
 #: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst receiving a URI list drop. Please "
-"include the following information if you report the error."
+"An unexpected error occurred whilst receiving a URI list drop. Please include the following information "
+"if you report the error."
 msgstr ""
-"Προέκυψε απρόσμενο σφάλμα κατά την απόθεση μιας λίστας URI. Συμπεριλάβετε "
-"τις ακόλουθες πληροφορίες εάν αναφέρετε το σφάλμα."
+"Προέκυψε απρόσμενο σφάλμα κατά την απόθεση μιας λίστας URI. Συμπεριλάβετε τις ακόλουθες πληροφορίες εάν "
+"αναφέρετε το σφάλμα."
 
 #: src/kgx-drop-target.c:337
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst receiving a file list drop. Please "
-"include the following information if you report the error."
+"An unexpected error occurred whilst receiving a file list drop. Please include the following "
+"information if you report the error."
 msgstr ""
-"Προέκυψε απρόσμενο σφάλμα κατά την απόθεση μιας λίστας αρχείων. "
-"Συμπεριλάβετε τις ακόλουθες πληροφορίες εάν αναφέρετε το σφάλμα."
+"Προέκυψε απρόσμενο σφάλμα κατά την απόθεση μιας λίστας αρχείων. Συμπεριλάβετε τις ακόλουθες πληροφορίες "
+"εάν αναφέρετε το σφάλμα."
 
 #: src/kgx-drop-target.c:371
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst receiving a text drop. Please include "
-"the following information if you report the error."
+"An unexpected error occurred whilst receiving a text drop. Please include the following information if "
+"you report the error."
 msgstr ""
-"Προέκυψε απρόσμενο σφάλμα κατά την απόθεση κειμένου. Συμπεριλάβετε τις "
-"ακόλουθες πληροφορίες εάν αναφέρετε το σφάλμα."
+"Προέκυψε απρόσμενο σφάλμα κατά την απόθεση κειμένου. Συμπεριλάβετε τις ακόλουθες πληροφορίες εάν "
+"αναφέρετε το σφάλμα."
 
 #: src/kgx-drop-target.c:512
 msgctxt "spad-message"
 msgid ""
-"An unexpected value was received. Please include the following information "
-"if you report the error."
-msgstr ""
-"Ελήφθη απρόσμενη τιμή. Συμπεριλάβετε τις ακόλουθες πληροφορίες εάν αναφέρετε "
-"το σφάλμα."
+"An unexpected value was received. Please include the following information if you report the error."
+msgstr "Ελήφθη απρόσμενη τιμή. Συμπεριλάβετε τις ακόλουθες πληροφορίες εάν αναφέρετε το σφάλμα."
 
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
@@ -253,20 +236,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i από %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i στήλες %i σειρές"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "Καρτέλα %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "_Απόσπαση καρτέλας"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Κλείσιμο"
 
@@ -282,8 +276,7 @@ msgstr ""
 
 #: src/kgx-paste-dialog.c:129
 msgid "You are pasting a command that runs as an administrator"
-msgstr ""
-"Κάνετε επικόλληση μιας εντολής που εκτελείται με δικαιώματα διαχειριστή"
+msgstr "Κάνετε επικόλληση μιας εντολής που εκτελείται με δικαιώματα διαχειριστή"
 
 #: src/kgx-paste-dialog.c:136 src/kgx-terminal.ui:24
 msgid "_Paste"
@@ -371,22 +364,20 @@ msgstr "Αδυναμία ανοίγματος συνδέσμου"
 #: src/kgx-terminal.c:360
 #, c-format
 msgctxt "spad-message"
-msgid ""
-"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
-"are installed."
+msgid "The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps are installed."
 msgstr ""
-"Ο σύνδεσμος «<a href=\"%s\">%s</a>» χρησιμοποιεί το πρωτόκολλο «%s», για το "
-"οποίο δεν έχουν εγκατασταθεί κατάλληλες εφαρμογές."
+"Ο σύνδεσμος «<a href=\"%s\">%s</a>» χρησιμοποιεί το πρωτόκολλο «%s», για το οποίο δεν έχουν "
+"εγκατασταθεί κατάλληλες εφαρμογές."
 
 #: src/kgx-terminal.c:373
 #, c-format
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
-"a>”. Please include the following information if you report the error."
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</a>”. Please include the "
+"following information if you report the error."
 msgstr ""
-"Προέκυψε απρόσμενο σφάλμα κατά το άνοιγμα του συνδέσμου «<a href=\"%s\">%s</"
-"a>». Συμπεριλάβετε τις ακόλουθες πληροφορίες εάν αναφέρετε το σφάλμα."
+"Προέκυψε απρόσμενο σφάλμα κατά το άνοιγμα του συνδέσμου «<a href=\"%s\">%s</a>». Συμπεριλάβετε τις "
+"ακόλουθες πληροφορίες εάν αναφέρετε το σφάλμα."
 
 #: src/kgx-terminal.c:421
 #, c-format
@@ -398,13 +389,11 @@ msgstr "Η μορφή του συνδέσμου «<a href=\"%s\">%s</a>» είν
 #, c-format
 msgctxt "spad-message"
 msgid ""
-"The link “<a href=\"%s\">%s</a>” points to a location on a different "
-"device.\n"
+"The link “<a href=\"%s\">%s</a>” points to a location on a different device.\n"
 "\n"
 "This device is “%s” and the location is on “%s”."
 msgstr ""
-"Ο σύνδεσμος «<a href=\"%s\">%s</a>» οδηγεί σε μια τοποθεσία σε άλλη "
-"συσκευή.\n"
+"Ο σύνδεσμος «<a href=\"%s\">%s</a>» οδηγεί σε μια τοποθεσία σε άλλη συσκευή.\n"
 "\n"
 "Αυτή η συσκευή είναι «%s» και η τοποθεσία είναι στο «%s»."
 
@@ -416,11 +405,11 @@ msgstr "Αδυναμία επικόλλησης κειμένου"
 #: src/kgx-terminal.c:514
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst reading the clipboard. Please include "
-"the following information if you report the error."
+"An unexpected error occurred whilst reading the clipboard. Please include the following information if "
+"you report the error."
 msgstr ""
-"Προέκυψε απρόσμενο σφάλμα κατά την ανάγνωση του προχείρου. Συμπεριλάβετε τις "
-"ακόλουθες πληροφορίες εάν αναφέρετε το σφάλμα."
+"Προέκυψε απρόσμενο σφάλμα κατά την ανάγνωση του προχείρου. Συμπεριλάβετε τις ακόλουθες πληροφορίες εάν "
+"αναφέρετε το σφάλμα."
 
 #: src/kgx-terminal.c:575
 msgctxt "toast-message"
@@ -430,11 +419,11 @@ msgstr "Αδυναμία εμφάνισης αρχείου"
 #: src/kgx-terminal.c:578
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst showing the file. Please include the "
-"following information if you report the error."
+"An unexpected error occurred whilst showing the file. Please include the following information if you "
+"report the error."
 msgstr ""
-"Προέκυψε απρόσμενο σφάλμα κατά την εμφάνιση του αρχείου. Συμπεριλάβετε τις "
-"ακόλουθες πληροφορίες εάν αναφέρετε το σφάλμα."
+"Προέκυψε απρόσμενο σφάλμα κατά την εμφάνιση του αρχείου. Συμπεριλάβετε τις ακόλουθες πληροφορίες εάν "
+"αναφέρετε το σφάλμα."
 
 #: src/kgx-terminal.c:599
 msgctxt "toast-message"
@@ -444,11 +433,11 @@ msgstr "Αδυναμία ανοίγματος φακέλου"
 #: src/kgx-terminal.c:602
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst opening the folder. Please include the "
-"following information if you report the error."
+"An unexpected error occurred whilst opening the folder. Please include the following information if you "
+"report the error."
 msgstr ""
-"Προέκυψε απρόσμενο σφάλμα κατά το άνοιγμα του φακέλου. Συμπεριλάβετε τις "
-"ακόλουθες πληροφορίες εάν αναφέρετε το σφάλμα."
+"Προέκυψε απρόσμενο σφάλμα κατά το άνοιγμα του φακέλου. Συμπεριλάβετε τις ακόλουθες πληροφορίες εάν "
+"αναφέρετε το σφάλμα."
 
 #: src/kgx-terminal.c:696
 #, c-format
@@ -467,11 +456,11 @@ msgstr "Αδυναμία επικόλλησης"
 #: src/kgx-terminal.c:987
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst processing the clipboard. Please include "
-"the following information if you report the error."
+"An unexpected error occurred whilst processing the clipboard. Please include the following information "
+"if you report the error."
 msgstr ""
-"Προέκυψε απρόσμενο σφάλμα κατά την επεξεργασία του προχείρου. Συμπεριλάβετε "
-"τις ακόλουθες πληροφορίες εάν αναφέρετε το σφάλμα."
+"Προέκυψε απρόσμενο σφάλμα κατά την επεξεργασία του προχείρου. Συμπεριλάβετε τις ακόλουθες πληροφορίες "
+"εάν αναφέρετε το σφάλμα."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -516,8 +505,7 @@ msgstr "Απουσία ορίσματος για το --command"
 
 #: src/kgx-utils.c:129
 msgid "Cannot use both --command and positional parameters"
-msgstr ""
-"Δεν είναι δυνατή η ταυτόχρονη χρήση του --command και των παραμέτρων θέσης"
+msgstr "Δεν είναι δυνατή η ταυτόχρονη χρήση του --command και των παραμέτρων θέσης"
 
 #: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
@@ -612,7 +600,7 @@ msgid "Custom _Font"
 msgstr "Προσαρμοσμένη _γραμματοσειρά"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "Συμπεριφορά"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -627,11 +615,15 @@ msgstr "Γραμμές αντίστρο_φης κύλισης"
 msgid "Terminal Bell"
 msgstr "Κουδούνι τερματικού"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "Ελέγξτε τον τρόπο εμφάνισης των ειδοποιήσεων"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "Αναπαραγωγή ή_χου"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "_Οπτικά εφέ"
 
@@ -714,6 +706,16 @@ msgstr "Μετάβαση στην καρτέλα 1–9"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Μετάβαση στην καρτέλα 10"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Παράθυρο"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Πλήρης οθόνη"
 
 #~ msgid "Use Light Colors"
 #~ msgstr "Χρήση ανοικτών χρωμάτων"
