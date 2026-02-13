@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-08-20 19:30+0000\n"
-"PO-Revision-Date: 2024-08-30 19:41+0500\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
+"POT-Creation-Date: 2025-09-13 19:58+0000\n"
+"PO-Revision-Date: 2026-02-13 22:07+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -16,25 +16,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.8\n"
 
-#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
 msgid "Console"
 msgstr "Консоль"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Console.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;команда;"
-"сұраным;командалық жол;жөнелту;қоршам;терминал;король кресті;"
+"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings "
+"cross;команда;сұраным;командалық жол;жөнелту;қоршам;терминал;король кресті;"
 
-#: data/org.gnome.Console.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
 msgstr "Жаңа терезе"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
+#: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:176
 msgid "New Tab"
 msgstr "Жаңа бет"
 
@@ -48,11 +48,11 @@ msgstr ""
 "GNOME жұмыс үстеліне арналған пайдаланушыға ыңғайлы қарапайым терминал "
 "эмуляторы."
 
-#: data/org.gnome.Console.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "Терминал терезесі"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:406 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:520 src/kgx-window.c:561
 msgid "The GNOME Project"
 msgstr "GNOME жобасы"
 
@@ -137,7 +137,7 @@ msgid "Switch to Tab 10"
 msgstr "Бетке ауысу: Бет 10"
 
 #. Translators: %s is the year range
-#: src/kgx-about.c:83 src/kgx-window.c:529
+#: src/kgx-about.c:83 src/kgx-window.c:556
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
@@ -153,65 +153,64 @@ msgstr "GPL 3.0 немесе одан кейінгі нұсқасы"
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s қолданады VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:255
-#| msgid "Cannot use both --command and positional parameters"
+#: src/kgx-application.c:283
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr ""
 "Бір уақытта --working-directory және позициялық аргументтерді қолдану мүмкін "
 "емес"
 
-#: src/kgx-application.c:443
+#: src/kgx-application.c:503
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Терминал ішінде осы параметрге аргументтерді орындау"
 
-#: src/kgx-application.c:444
+#: src/kgx-application.c:504
 msgid "COMMAND"
 msgstr "КОМАНДА"
 
-#: src/kgx-application.c:452
+#: src/kgx-application.c:512
 msgid "Set the working directory"
 msgstr "Жұмыс бумасын орнату"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:454
+#: src/kgx-application.c:514
 msgid "DIRNAME"
 msgstr "БУМА_АТЫ"
 
-#: src/kgx-application.c:462
+#: src/kgx-application.c:522
 msgid "Wait until the child exits (TODO)"
 msgstr "Ұрпақ үрдісі аяқталуды күту (TODO)"
 
-#: src/kgx-application.c:471
+#: src/kgx-application.c:531
 msgid "Set the initial window title"
 msgstr "Терезенің бастапқы атауын орнату"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:532
 msgid "TITLE"
 msgstr "АТАУЫ"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:540
 msgid "ADVANCED: Set the shell to launch"
 msgstr "КЕҢЕЙТІЛГЕН: Жөнелтілетін қоршамды орнату"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:541
 msgid "SHELL"
 msgstr "ҚОРШАМ"
 
-#: src/kgx-application.c:489
+#: src/kgx-application.c:549
 msgid "ADVANCED: Set the scrollback length"
 msgstr "КЕҢЕЙТІЛГЕН: Кері айналдыру ұзындығын орнату"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:550
 msgid "LINES"
 msgstr "ЖОЛДАР"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:644
+#: src/kgx-application.c:688
 #, c-format
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — Терминал эмуляторы"
 
-#: src/kgx-application.c:650
+#: src/kgx-application.c:694
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- КОМАНДА [АРГУМЕНТ...]]"
 
@@ -277,8 +276,6 @@ msgid "Linux"
 msgstr "Linux"
 
 #: src/kgx-livery-manager.c:230
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
 msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
@@ -287,7 +284,7 @@ msgstr "XTerm"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:471
+#: src/kgx-pages.c:473
 #, c-format
 msgid "Tab %i"
 msgstr "Беттер %i"
@@ -318,7 +315,7 @@ msgstr "Әкімші ретінде орындалатын команданы к
 msgid "_Paste"
 msgstr "Кірі_стіру"
 
-#: src/kgx-process.c:192
+#: src/kgx-process.c:196
 #, c-format
 msgid "Process %d"
 msgstr "Үрдіс %d"
@@ -330,17 +327,17 @@ msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Жөнелту сәтсіз аяқталды</b> — %s"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:814
+#: src/kgx-tab.c:784
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Тек оқу үшін</b> — Команда кодпен аяқталды: %i"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:822
+#: src/kgx-tab.c:792
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Тек оқу үшін</b> — Команда аяқталды"
 
-#: src/kgx-tab.c:842
+#: src/kgx-tab.c:812
 msgid "Command completed"
 msgstr "Команда аяқталды"
 
@@ -356,7 +353,7 @@ msgstr "Алдыңғы сәйкестік"
 msgid "Next Match"
 msgstr "Келесі сәйкестік"
 
-#: src/kgx-terminal.c:508
+#: src/kgx-terminal.c:510
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -385,30 +382,30 @@ msgstr "Б_арлығын таңдау"
 msgid "Show in _Files"
 msgstr "_Файлдар қолданбасында көрсету"
 
-#: src/kgx-theme-switcher.ui:16
+#: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
 msgstr "Жүйелік стильді қолдану"
 
-#: src/kgx-theme-switcher.ui:44
+#: src/kgx-theme-switcher.ui:52
 msgid "Light Style"
 msgstr "Ашық түсті"
 
-#: src/kgx-theme-switcher.ui:71
+#: src/kgx-theme-switcher.ui:79
 msgid "Dark Style"
 msgstr "Қараңғы режим"
 
 #. Translators: ‘command’ is the argument name, and shouldn't be translated
-#: src/kgx-utils.c:113
+#: src/kgx-utils.c:114
 msgid "Missing argument for --command"
 msgstr "--command үшін аргумент жоқ"
 
-#: src/kgx-utils.c:128
+#: src/kgx-utils.c:129
 msgid "Cannot use both --command and positional parameters"
 msgstr ""
 "Бір уақытта --command және позициялық параметрлерді қолдану мүмкін емес"
 
 #. Translators: Credit yourself here
-#: src/kgx-window.c:541
+#: src/kgx-window.c:568
 msgid "translator-credits"
 msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>"
 
@@ -432,23 +429,23 @@ msgstr "П_ернетақта жарлықтары"
 msgid "_About Console"
 msgstr "Консоль тур_алы"
 
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:90
 msgid "Find in Terminal"
 msgstr "Терминалда табу"
 
-#: src/kgx-window.ui:95
+#: src/kgx-window.ui:97
 msgid "Main Menu"
 msgstr "Басты мәзір"
 
-#: src/kgx-window.ui:113
+#: src/kgx-window.ui:115
 msgid "Shrink Text"
 msgstr "Мәтінді кішірейту"
 
-#: src/kgx-window.ui:124
+#: src/kgx-window.ui:126
 msgid "Reset Size"
 msgstr "Өлшемді тастау"
 
-#: src/kgx-window.ui:148
+#: src/kgx-window.ui:150
 msgid "Enlarge Text"
 msgstr "Мәтінді үлкейту"
 
@@ -503,6 +500,10 @@ msgstr "Мінез-құлығы"
 #: src/preferences/kgx-preferences-window.ui:66
 msgid "_Unlimited Scrollback"
 msgstr "_Шексіз кері айналдыру"
+
+#: src/preferences/kgx-preferences-window.ui:72
+msgid "_Scrollback Lines"
+msgstr "Кері а_йналдыру жолдар"
 
 #: src/preferences/kgx-preferences-window.ui:92
 msgid "Terminal Bell"
