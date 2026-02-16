@@ -1,13 +1,13 @@
 # Basque translation for kgx.
 # Copyright (C) 2019 kgx's COPYRIGHT HOLDER
 # This file is distributed under the same license as the kgx package.
-# Asier Saratsua Garmendia <asiersarasua@ni.eus>, 2019, 2022, 2023, 2025.
+# Asier Saratsua Garmendia <asiersarasua@ni.eus>, 2019, 2022, 2023, 2025, 2026.
 #
 msgid ""
 msgstr "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-09-14 00:54+0000\n"
-"PO-Revision-Date: 2025-09-14 10:00+0100\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
+"PO-Revision-Date: 2026-02-16 10:00+0100\n"
 "Last-Translator: Asier Saratsua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -225,20 +225,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i / %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i zutabe %i errenkada"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "%i. fitxa"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "Askat_u fitxa"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "It_xi"
 
