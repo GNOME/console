@@ -1,2 +1,4 @@
+# Ignore EGL leak
+leak:gdk_display_init_egl
 # Ignore fontconfig leak
 leak:XML_ParseBuffer
