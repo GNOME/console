@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-09-06 16:30+0000\n"
-"PO-Revision-Date: 2025-09-07 17:20+0300\n"
-"Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
+"PO-Revision-Date: 2026-02-18 18:21+0200\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.8\n"
 
 #: data/org.gnome.Console.desktop.in.in:2 data/org.gnome.Console.metainfo.xml.in.in:8
 #: src/kgx-application.h:26 src/kgx-window.ui:52
@@ -50,7 +50,7 @@ msgstr "Helppokäyttöinen pääte-emulaattori Gnome-työpöydälle."
 msgid "Terminal window"
 msgstr "Pääteikkuna"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Gnome-projekti"
 
@@ -241,20 +241,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i × %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i saraketta %i riviä"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "Välilehti %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "_Irrota välilehti"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Sulje"
 
@@ -479,7 +490,7 @@ msgstr "Poistu _koko näytön tilasta"
 
 #: src/kgx-terminal.ui:43
 msgid "Show in _Files"
-msgstr "Näytä tie_dostohallinnassa"
+msgstr "Näytä tie_dostonhallinnassa"
 
 #: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
@@ -595,7 +606,7 @@ msgid "Custom _Font"
 msgstr "Mukautettu _fontti"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "Toiminta"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -610,11 +621,15 @@ msgstr "_Takaisinvierityksen rivit"
 msgid "Terminal Bell"
 msgstr "Päätteen äänimerkki"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "Määritä miten hälytykset ilmaistaan"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "Soita _ääni"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "_Visuaaliset tehosteet"
 
@@ -697,6 +712,16 @@ msgstr "Vaihda välilehteen 1–9"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Vaihda välilehteen 10"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Ikkuna"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Koko näyttö"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
