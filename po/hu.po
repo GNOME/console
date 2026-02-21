@@ -1,14 +1,14 @@
 # Hungarian translation for console.
-# Copyright (C) 2019, 2021, 2022, 2023, 2024, 2025 Free Software Foundation, Inc.
+# Copyright (C) 2019, 2021, 2022, 2023, 2024, 2025, 2026 Free Software Foundation, Inc.
 # This file is distributed under the same license as the console package.
 #
-# Balázs Úr <ur.balazs at fsf dot hu>, 2019, 2021, 2022, 2023, 2024, 2025.
+# Balázs Úr <ur.balazs at fsf dot hu>, 2019, 2021, 2022, 2023, 2024, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: console master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-09-08 14:46+0000\n"
-"PO-Revision-Date: 2025-09-08 17:01+0200\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
+"PO-Revision-Date: 2026-02-21 18:15+0100\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -51,7 +51,7 @@ msgstr "Egy egyszerű, felhasználóbarát terminálemulátor a GNOME asztalhoz.
 msgid "Terminal window"
 msgstr "Terminálablak"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "A GNOME projekt"
 
@@ -207,8 +207,8 @@ msgid ""
 "An unexpected error occurred whilst receiving a URI list drop. Please "
 "include the following information if you report the error."
 msgstr ""
-"Váratlan hiba történt az URI-lista ejtésének fogadásakor. Mellékelje a követke"
-"ző információkat, ha jelenti a hibát."
+"Váratlan hiba történt az URI-lista ejtésének fogadásakor. Mellékelje a "
+"következő információkat, ha jelenti a hibát."
 
 #: src/kgx-drop-target.c:337
 msgctxt "spad-message"
@@ -216,8 +216,8 @@ msgid ""
 "An unexpected error occurred whilst receiving a file list drop. Please "
 "include the following information if you report the error."
 msgstr ""
-"Váratlan hiba történt a fájllista ejtésének fogadásakor. Mellékelje a következ"
-"ő információkat, ha jelenti a hibát."
+"Váratlan hiba történt a fájllista ejtésének fogadásakor. Mellékelje a "
+"következő információkat, ha jelenti a hibát."
 
 #: src/kgx-drop-target.c:371
 msgctxt "spad-message"
@@ -225,8 +225,8 @@ msgid ""
 "An unexpected error occurred whilst receiving a text drop. Please include "
 "the following information if you report the error."
 msgstr ""
-"Váratlan hiba történt a szöveg ejtésének fogadásakor. Mellékelje a következő i"
-"nformációkat, ha jelenti a hibát."
+"Váratlan hiba történt a szöveg ejtésének fogadásakor. Mellékelje a következő "
+"információkat, ha jelenti a hibát."
 
 #: src/kgx-drop-target.c:512
 msgctxt "spad-message"
@@ -234,8 +234,8 @@ msgid ""
 "An unexpected value was received. Please include the following information "
 "if you report the error."
 msgstr ""
-"Váratlan érték érkezett. Mellékelje a következő információkat, ha jelenti a hi"
-"bát."
+"Váratlan érték érkezett. Mellékelje a következő információkat, ha jelenti a "
+"hibát."
 
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
@@ -247,20 +247,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i × %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i oszlop, %i sor"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "%i. lap"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "Lap _leválasztása"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Bezárás"
 
@@ -357,7 +368,6 @@ msgstr "Következő találat"
 #. Translators: The user ctrl-clicked, or used ‘Open Link’, on a URI that,
 #. *              for whatever reason, we were unable to open.
 #: src/kgx-terminal.c:39
-#| msgid "_Open Link"
 msgctxt "toast-message"
 msgid "Couldn't Open Link"
 msgstr "Nem sikerült megnyitni a hivatkozást"
@@ -369,8 +379,8 @@ msgid ""
 "The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
 "are installed."
 msgstr ""
-"A(z) „<a href=\"%s\">%s</a>” hivatkozás „%s” protokollt használ, amelyhez ninc"
-"senek alkalmazások telepítve."
+"A(z) „<a href=\"%s\">%s</a>” hivatkozás „%s” protokollt használ, amelyhez "
+"nincsenek alkalmazások telepítve."
 
 #: src/kgx-terminal.c:373
 #, c-format
@@ -379,8 +389,8 @@ msgid ""
 "An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
 "a>”. Please include the following information if you report the error."
 msgstr ""
-"Váratlan hiba történt a(z) „<a href=\"%s\">%s</a>” hivatkozás megnyitásakor. M"
-"ellékelje a következő információkat, ha jelenti a hibát."
+"Váratlan hiba történt a(z) „<a href=\"%s\">%s</a>” hivatkozás megnyitásakor. "
+"Mellékelje a következő információkat, ha jelenti a hibát."
 
 #: src/kgx-terminal.c:421
 #, c-format
@@ -397,8 +407,8 @@ msgid ""
 "\n"
 "This device is “%s” and the location is on “%s”."
 msgstr ""
-"A(z) „<a href=\"%s\">%s</a>” hivatkozás egy másik eszközön lévő helyre mutat."
-"\n"
+"A(z) „<a href=\"%s\">%s</a>” hivatkozás egy másik eszközön lévő helyre "
+"mutat.\n"
 "\n"
 "Az eszköz „%s”, és a hely ezen van: „%s”."
 
@@ -413,8 +423,8 @@ msgid ""
 "An unexpected error occurred whilst reading the clipboard. Please include "
 "the following information if you report the error."
 msgstr ""
-"Váratlan hiba történt a vágólap olvasásakor. Mellékelje a következő információ"
-"kat, ha jelenti a hibát."
+"Váratlan hiba történt a vágólap olvasásakor. Mellékelje a következő "
+"információkat, ha jelenti a hibát."
 
 #: src/kgx-terminal.c:575
 msgctxt "toast-message"
@@ -427,8 +437,8 @@ msgid ""
 "An unexpected error occurred whilst showing the file. Please include the "
 "following information if you report the error."
 msgstr ""
-"Váratlan hiba történt a fájl megjelenítésekor. Mellékelje a következő informác"
-"iókat, ha jelenti a hibát."
+"Váratlan hiba történt a fájl megjelenítésekor. Mellékelje a következő "
+"információkat, ha jelenti a hibát."
 
 #: src/kgx-terminal.c:599
 msgctxt "toast-message"
@@ -441,8 +451,8 @@ msgid ""
 "An unexpected error occurred whilst opening the folder. Please include the "
 "following information if you report the error."
 msgstr ""
-"Váratlan hiba történt a mappa megnyitásakor. Mellékelje a következő információ"
-"kat, ha jelenti a hibát."
+"Váratlan hiba történt a mappa megnyitásakor. Mellékelje a következő "
+"információkat, ha jelenti a hibát."
 
 #: src/kgx-terminal.c:696
 #, c-format
@@ -464,15 +474,14 @@ msgid ""
 "An unexpected error occurred whilst processing the clipboard. Please include "
 "the following information if you report the error."
 msgstr ""
-"Váratlan hiba történt a vágólap feldolgozásakor. Mellékelje a következő inform"
-"ációkat, ha jelenti a hibát."
+"Váratlan hiba történt a vágólap feldolgozásakor. Mellékelje a következő "
+"információkat, ha jelenti a hibát."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
 msgstr "_Hivatkozás megnyitása"
 
 #: src/kgx-terminal.ui:12
-#| msgid "Copy _Link"
 msgid "Copy _Link Address"
 msgstr "_Hivatkozás címének másolása"
 
@@ -608,7 +617,8 @@ msgid "Custom _Font"
 msgstr "_Egyéni betűkészlet"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+#| msgid "Behaviour"
+msgid "Behavior"
 msgstr "Viselkedés"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -623,11 +633,15 @@ msgstr "Sorok _visszagörgetése"
 msgid "Terminal Bell"
 msgstr "Terminálcsengő"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "A riasztások jelzésének vezérlése"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "_Hang lejátszása"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "_Látható hatások"
 
@@ -710,3 +724,15 @@ msgstr "Váltás az 1–9. lapra"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Váltás a 10. lapra"
+
+#: src/shortcuts-dialog.ui:116
+#| msgid "New Window"
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Ablak"
+
+#: src/shortcuts-dialog.ui:119
+#| msgid "_Fullscreen"
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Teljes képernyő"
