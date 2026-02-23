@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the kgx package.
 # Rodrigo Lledó <rodhos92@gmail.com>, 2020.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2023-2024.
-# Daniel Mustieles García <daniel.mustieles@gmail.com>, 2024-2025.
+# Daniel Mustieles García <daniel.mustieles@gmail.com>, 2024-2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2025-09-09 17:47+0000\n"
-"PO-Revision-Date: 2025-09-10 10:38+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
+"PO-Revision-Date: 2026-02-12 13:36+0100\n"
 "Last-Translator: Daniel Mustieles García <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Generator: Gtranslator 48.0\n"
+"X-Generator: Gtranslator 49.0\n"
 
 #: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -26,7 +26,8 @@ msgstr ""
 msgid "Console"
 msgstr "Consola"
 
-#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or
+#. localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr "comando;prompt;cmd;línea;ejecutar;shell;terminal;kgx;kings cross;"
@@ -51,7 +52,7 @@ msgstr "Un emulador de terminal sencillo y amigable para el escritorio GNOME."
 msgid "Terminal window"
 msgstr "Ventana de la terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "El Proyecto GNOME"
 
@@ -126,7 +127,8 @@ msgstr "AVANZADO: establecer la longitud del desplazamiento hacia atrás"
 msgid "LINES"
 msgstr "LÍNEAS"
 
-#. Translators: %s is the version string, KGX is a codename and should be left as-is
+#. Translators: %s is the version string, KGX is a codename and should be left
+#. as-is
 #: src/kgx-application.c:695
 #, c-format
 msgid "KGX %s — Terminal Emulator"
@@ -177,13 +179,15 @@ msgstr[1] ""
 msgid "Process list"
 msgstr "Lista de procesos"
 
-#. Translators: This action dismisses the dialogue, leaving the tab/window open
+#. Translators: This action dismisses the dialogue, leaving the tab/window
+#. open
 #: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
 #: src/preferences/kgx-font-picker.ui:22
 msgid "_Cancel"
 msgstr "C_ancelar"
 
-#. Translators: This action accepts the ‘unexpected outcomes’ and closes the tab/window
+#. Translators: This action accepts the ‘unexpected outcomes’ and closes the
+#. tab/window
 #: src/kgx-close-dialog.c:207
 msgid "C_lose"
 msgstr "C_errar"
@@ -245,20 +249,30 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i por %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i columnas %i filas"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
-#.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "Pestaña %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "_Desacoplar pestaña"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Cerrar"
 
@@ -285,7 +299,8 @@ msgstr "_Pegar"
 msgid "Process %d"
 msgstr "Proceso %d"
 
-#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#. Translators: <b> </b> marks the text as bold, ensure they are matched
+#. please!
 #: src/kgx-simple-tab.c:170
 #, c-format
 msgid "<b>Failed to start</b> — %s"
@@ -325,13 +340,15 @@ msgctxt "toast-button"
 msgid "_Details"
 msgstr "_Detalles"
 
-#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#. Translators: <b> </b> marks the text as bold, ensure they are matched
+#. please!
 #: src/kgx-tab.c:889
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Sólo lectura</b> — el comando ha terminado con código %i"
 
-#. Translators: <b> </b> marks the text as bold, ensure they are matched please!
+#. Translators: <b> </b> marks the text as bold, ensure they are matched
+#. please!
 #: src/kgx-tab.c:897
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Sólo lectura</b> — el comando ha terminado"
@@ -602,7 +619,7 @@ msgid "Custom _Font"
 msgstr "_Tipografía personalizada"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "Comportamiento"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -617,11 +634,15 @@ msgstr "Líneas de desplazamiento hacia atrás"
 msgid "Terminal Bell"
 msgstr "Campana de la terminal"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "Controlar cómo se indican las alertas"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "Reproducir un _sonido"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "Efectos _visuales"
 
@@ -705,56 +726,84 @@ msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Cambiar a la pestaña 10"
 
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Ventana"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Pantalla completa"
+
+#, fuzzy
 #~ msgid "King’s Cross"
-#~ msgstr "King’s Cross"
+#~ msgstr "Cruz del Rey"
 
+#, fuzzy
 #~ msgid "Use Light Colors"
-#~ msgstr "Usar colores claros"
+#~ msgstr "Usa colores claros"
 
+#, fuzzy
 #~ msgid "Use Dark Colors"
-#~ msgstr "Usar colores oscuros"
+#~ msgstr "Usa colores oscuros"
 
+#, fuzzy
 #~ msgid "View Open Tabs"
 #~ msgstr "Ver pestañas abiertas"
 
+#, fuzzy
 #~ msgid "Zander Brown"
-#~ msgstr "Zander Brown"
+#~ msgstr "Zander marrón"
 
+#, fuzzy
 #~ msgid "Open in Co_nsole (Devel)"
-#~ msgstr "Abrir en Co_nsola (desarrollo)"
+#~ msgstr "Abrir en Co_nsole (Devel)"
 
+#, fuzzy
 #~ msgid "Open in Co_nsole"
-#~ msgstr "Abrir en Co_nsola"
+#~ msgstr "Abrir en consola"
 
+#, fuzzy
 #~ msgid "Start a terminal session for this location"
 #~ msgstr "Iniciar una sesión de terminal para esta ubicación"
 
+#, fuzzy
 #~ msgid "Console (Development)"
-#~ msgstr "Consola (desarrollo)"
+#~ msgstr "Consola (Desarrollo)"
 
+#, fuzzy
 #~ msgid "About this Program"
 #~ msgstr "Acerca de este programa"
 
+#, fuzzy
 #~ msgid "_About King’s Cross"
-#~ msgstr "_Acerca de King’s Cross"
+#~ msgstr "_Acerca de King's Cross"
 
+#, fuzzy
 #~ msgid "Op_en in King’s Cross"
-#~ msgstr "A_brir en King’s Cross"
+#~ msgstr "Abrir en King's Cross"
 
+#, fuzzy
 #~ msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;"
-#~ msgstr "comando;prompt;cmd;línea;ejecutar;shell;terminal;kgx;"
+#~ msgstr "comando;solicitud;cmd;línea de comando;ejecutar;shell;terminal;kgx;"
 
+#, fuzzy
 #~ msgid "child watcher"
-#~ msgstr "monitor de los hijos"
+#~ msgstr "vigilante infantil"
 
+#, fuzzy
 #~ msgid "Copyright © %s Zander Brown"
-#~ msgstr "Copyright © %s Zander Brown"
+#~ msgstr "Derechos de autor © %s Zander Brown"
 
+#, fuzzy
 #~ msgid "Terminal (King’s Cross)"
-#~ msgstr "Terminal (King’s Cross)"
+#~ msgstr "Terminal (King's Cross)"
 
+#, fuzzy
 #~ msgid "Close Terminal"
-#~ msgstr "Cerrar la terminal"
+#~ msgstr "Cerrar terminal"
 
+#, fuzzy
 #~ msgid "_OK"
-#~ msgstr "_Aceptar"
+#~ msgstr "_DE ACUERDO"
