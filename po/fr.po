@@ -5,48 +5,50 @@
 # Charles Monzat <charles.monzat@free.fr>, 2022.
 # Jean-Marc Tissières <jmetissieres@gmail.com>, 2023.
 # Irénée THIRION <irenee.thirion@e.email>, 2024.
+# Julien Humbert <julroy67@gmail.com>, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2024-11-20 11:48+0000\n"
-"PO-Revision-Date: 2024-10-26 11:34+0200\n"
-"Last-Translator: Irénée Thirion <irenee.thirion@e.email>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
+"PO-Revision-Date: 2025-09-11 12:56+0900\n"
+"Last-Translator: Julien Humbert <julroy67@gmail.com>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Gtranslator 48.0\n"
 "X-DL-Lang: fr\n"
 "X-DL-Module: console\n"
 "X-DL-Branch: main\n"
 "X-DL-Domain: po\n"
 "X-DL-State: Translating\n"
 
-#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
+#: src/kgx-window.ui:52
 msgid "Console"
 msgstr "Console"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Console.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"commande;prompt;invite;cmd;commandline;ligne de commande;exécuter;lancer;"
-"shell;terminal;kgx;kings cross;"
+"commande;prompt;invite;cmd;commandline;ligne de "
+"commande;exécuter;lancer;shell;terminal;kgx;kings cross;"
 
-#: data/org.gnome.Console.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
 msgstr "Nouvelle fenêtre"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:174
+#: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:246
 msgid "New Tab"
 msgstr "Nouvel onglet"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:99
+#: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "Émulateur de terminal"
 
@@ -54,169 +56,98 @@ msgstr "Émulateur de terminal"
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr "Un émulateur de terminal simpliste pour le bureau GNOME."
 
-#: data/org.gnome.Console.metainfo.xml.in.in:30
+#: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "Fenêtre de terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:471 src/kgx-window.c:534
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Le projet GNOME"
 
-#: src/help-overlay.ui:12
-msgctxt "shortcut window"
-msgid "Application"
-msgstr "Application"
-
-#: src/help-overlay.ui:16
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "Nouvelle fenêtre"
-
-#: src/help-overlay.ui:23
-msgctxt "shortcut window"
-msgid "Terminal"
-msgstr "Terminal"
-
-#: src/help-overlay.ui:27
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "Rechercher"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
-msgid "Copy"
-msgstr "Copier"
-
-#: src/help-overlay.ui:39
-msgctxt "shortcut window"
-msgid "Paste"
-msgstr "Coller"
-
-#: src/help-overlay.ui:46
-msgctxt "shortcut window"
-msgid "Tabs"
-msgstr "Onglets"
-
-#: src/help-overlay.ui:50
-msgctxt "shortcut window"
-msgid "New Tab"
-msgstr "Nouvel onglet"
-
-#: src/help-overlay.ui:56
-msgctxt "shortcut window"
-msgid "Close Tab"
-msgstr "Fermer l’onglet"
-
-#: src/help-overlay.ui:62
-msgctxt "shortcut window"
-msgid "Show All Tabs"
-msgstr "Afficher tous les onglets"
-
-#: src/help-overlay.ui:68
-msgctxt "shortcut window"
-msgid "Next Tab"
-msgstr "Onglet suivant"
-
-#: src/help-overlay.ui:74
-msgctxt "shortcut window"
-msgid "Previous Tab"
-msgstr "Onglet précédent"
-
-#: src/help-overlay.ui:80
-msgctxt "shortcut window"
-msgid "Move Tab Right"
-msgstr "Déplacer l’onglet vers la droite"
-
-#: src/help-overlay.ui:86
-msgctxt "shortcut window"
-msgid "Move Tab Left"
-msgstr "Déplacer l’onglet vers la gauche"
-
-#: src/help-overlay.ui:92
-msgctxt "shortcut window"
-msgid "Switch to Tab 1–9"
-msgstr "Basculer vers les onglets 1 à 9"
-
-#: src/help-overlay.ui:98
-msgctxt "shortcut window"
-msgid "Switch to Tab 10"
-msgstr "Basculer vers l’onglet 10"
-
-#. Translators: %s is the year range
-#: src/kgx-about.c:83 src/kgx-window.c:529
-#, c-format
-msgid "© %s Zander Brown"
-msgstr "© %s Zander Brown"
-
-#: src/kgx-about.c:101
+#: src/kgx-about.c:104
 msgid "GPL 3.0 or later"
 msgstr "GPL 3.0 ou ultérieure"
 
 #. Translators: The leading # is intentional, the initial %s is the
 #. * version of KGX itself, the latter format is the VTE version
-#: src/kgx-about.c:114
+#: src/kgx-about.c:119
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s avec VTE %u.%u.%u %s\n"
 
-#: src/kgx-application.c:255
+#. Translators: %s is the year range
+#: src/kgx-about.c:148
+#, c-format
+msgid "© %s Zander Brown"
+msgstr "© %s Zander Brown"
+
+#. Translators: Credit yourself here
+#: src/kgx-about.c:176
+msgid "translator-credits"
+msgstr ""
+"Thibault Martin\n"
+"Charles Monzat\n"
+"Irénée Thirion\n"
+"Julien Humbert <julroy67@gmail.com>"
+
+#: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr ""
 "Impossible d’utiliser à la fois --working-directory et des paramètres "
 "positionnels"
 
-#: src/kgx-application.c:443
+#: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Exécuter l’argument de cette option au sein du terminal"
 
-#: src/kgx-application.c:444
+#: src/kgx-application.c:510
 msgid "COMMAND"
 msgstr "COMMANDE"
 
-#: src/kgx-application.c:452
+#: src/kgx-application.c:518
 msgid "Set the working directory"
 msgstr "Définir le répertoire de travail"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:454
+#: src/kgx-application.c:520
 msgid "DIRNAME"
 msgstr "RÉPERTOIRE"
 
-#: src/kgx-application.c:462
+#: src/kgx-application.c:528
 msgid "Wait until the child exits (TODO)"
 msgstr "En attente de la fin d’exécution du processus fils (TODO)"
 
-#: src/kgx-application.c:471
+#: src/kgx-application.c:537
 msgid "Set the initial window title"
 msgstr "Définir le titre initial de la fenêtre"
 
-#: src/kgx-application.c:472
+#: src/kgx-application.c:538
 msgid "TITLE"
 msgstr "TITRE"
 
-#: src/kgx-application.c:480
+#: src/kgx-application.c:546
 msgid "ADVANCED: Set the shell to launch"
 msgstr "AVANCÉ : définir le shell à lancer"
 
-#: src/kgx-application.c:481
+#: src/kgx-application.c:547
 msgid "SHELL"
 msgstr "SHELL"
 
-#: src/kgx-application.c:489
+#: src/kgx-application.c:555
 msgid "ADVANCED: Set the scrollback length"
 msgstr "AVANCÉ : définir la longueur du défilement"
 
-#: src/kgx-application.c:490
+#: src/kgx-application.c:556
 msgid "LINES"
 msgstr "LIGNES"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:644
+#: src/kgx-application.c:695
 #, c-format
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — Émulateur de terminal"
 
-#: src/kgx-application.c:650
+#: src/kgx-application.c:701
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- COMMANDE [ARGUMENT...]]"
 
@@ -276,6 +207,50 @@ msgstr "_Fermer"
 msgid "Color string is wrong length"
 msgstr "La chaîne de couleur n’a pas la bonne longueur"
 
+#: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
+#: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
+#: src/kgx-drop-target.c:509
+msgctxt "toast-message"
+msgid "Drop Failed"
+msgstr "Échec du glisser-déposer"
+
+#: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a URI list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+"Une erreur inattendue s’est produite lors de la réception de la liste d’URI. "
+"Veuillez inclure les informations suivantes si vous signalez l’erreur."
+
+#: src/kgx-drop-target.c:337
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a file list drop. Please "
+"include the following information if you report the error."
+msgstr ""
+"Une erreur inattendue s’est produite lors de la réception de la liste de "
+"fichiers. Veuillez inclure les informations suivantes si vous signalez "
+"l’erreur."
+
+#: src/kgx-drop-target.c:371
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst receiving a text drop. Please include "
+"the following information if you report the error."
+msgstr ""
+"Une erreur inattendue s’est produite lors de la réception du texte. Veuillez "
+"inclure les informations suivantes si vous signalez l’erreur."
+
+#: src/kgx-drop-target.c:512
+msgctxt "spad-message"
+msgid ""
+"An unexpected value was received. Please include the following information "
+"if you report the error."
+msgstr ""
+"Une valeur inattendue a été reçue. Veuillez inclure les informations "
+"suivantes si vous signalez l’erreur."
+
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
 msgid "Linux"
@@ -286,20 +261,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr ""
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr ""
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:471
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "Onglet %i"
 
-#: src/kgx-pages.ui:90
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "_Détacher l’onglet"
 
-#: src/kgx-pages.ui:96
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Fermer"
 
@@ -322,45 +308,169 @@ msgstr ""
 msgid "_Paste"
 msgstr "C_oller"
 
-#: src/kgx-process.c:192
+#: src/kgx-process.c:196
 #, c-format
 msgid "Process %d"
 msgstr "Processus %d"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-simple-tab.c:169
+#: src/kgx-simple-tab.c:170
 #, c-format
 msgid "<b>Failed to start</b> — %s"
 msgstr "<b>Échec de lancement</b> — %s"
 
+#: src/kgx-spad.c:194
+msgid "Unable To Open"
+msgstr "Impossible d’ouvrir"
+
+#: src/kgx-spad.c:197
+#, c-format
+msgid ""
+"Opening ‘<a href=\"%s\">%s</a>’ failed:\n"
+"%s"
+msgstr ""
+"Échec de l’ouverture de « <a href=\"%s\">%s</a> » :\n"
+"%s"
+
+#: src/kgx-spad.c:339 src/kgx-spad.ui:4
+msgid "Error Details"
+msgstr "Détails de l’erreur"
+
+#: src/kgx-spad.ui:23
+msgid "Error Message"
+msgstr "Message d’erreur"
+
+#: src/kgx-spad.ui:35
+msgid "Copy Error Message"
+msgstr "Copier le message d’erreur"
+
+#: src/kgx-spad.ui:104
+msgid "Report _Issue"
+msgstr "Signaler le _problème"
+
+#: src/kgx-tab.c:597
+msgctxt "toast-button"
+msgid "_Details"
+msgstr "_Détails"
+
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:814
+#: src/kgx-tab.c:889
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
 msgstr "<b>Lecture seule</b> — La commande s’est terminée avec le code %i"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
-#: src/kgx-tab.c:822
+#: src/kgx-tab.c:897
 msgid "<b>Read Only</b> — Command exited"
 msgstr "<b>Lecture seule</b> — La commande est terminée"
 
-#: src/kgx-tab.c:842
+#: src/kgx-tab.c:917
 msgid "Command completed"
 msgstr "Commande exécutée"
 
-#: src/kgx-tab.ui:40
+#: src/kgx-tab.ui:42
 msgid "Find text"
 msgstr "Rechercher du texte"
 
-#: src/kgx-tab.ui:51
+#: src/kgx-tab.ui:70
 msgid "Previous Match"
 msgstr "Occurrence précédente"
 
-#: src/kgx-tab.ui:59
+#: src/kgx-tab.ui:78
 msgid "Next Match"
 msgstr "Prochaine occurrence"
 
-#: src/kgx-terminal.c:508
+#. Translators: The user ctrl-clicked, or used ‘Open Link’, on a URI that,
+#. *              for whatever reason, we were unable to open.
+#: src/kgx-terminal.c:39
+msgctxt "toast-message"
+msgid "Couldn't Open Link"
+msgstr "Impossible d’ouvrir le lien"
+
+#: src/kgx-terminal.c:360
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
+"are installed."
+msgstr ""
+"Le lien « <a href=\"%s\">%s</a> » utilise le protocole « %s », pour lequel "
+"aucune application n’est installée."
+
+#: src/kgx-terminal.c:373
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
+"a>”. Please include the following information if you report the error."
+msgstr ""
+"Une erreur inattendue s’est produite lors de l’ouverture du lien « <a "
+"href=\"%s\">%s</a> ». Veuillez inclure les informations suivantes si vous "
+"signalez l’erreur."
+
+#: src/kgx-terminal.c:421
+#, c-format
+msgctxt "spad-message"
+msgid "The link “<a href=\"%s\">%s</a>” is malformed."
+msgstr "Le lien « <a href=\"%s\">%s</a> » est malformé."
+
+#: src/kgx-terminal.c:440
+#, c-format
+msgctxt "spad-message"
+msgid ""
+"The link “<a href=\"%s\">%s</a>” points to a location on a different "
+"device.\n"
+"\n"
+"This device is “%s” and the location is on “%s”."
+msgstr ""
+"Le lien « <a href=\"%s\">%s</a> » pointe vers un emplacement sur un autre "
+"appareil.\n"
+"\n"
+"Cet appareil est « %s » et l’emplacement se trouve sur « %s »."
+
+#: src/kgx-terminal.c:511
+msgctxt "toast-message"
+msgid "Couldn't Paste Text"
+msgstr "Impossible de coller le texte"
+
+#: src/kgx-terminal.c:514
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst reading the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"Une erreur inattendue s’est produite lors de la lecture du presse-papiers. "
+"Veuillez inclure les informations suivantes si vous signalez l’erreur."
+
+#: src/kgx-terminal.c:575
+msgctxt "toast-message"
+msgid "Couldn't Show File"
+msgstr "Impossible d’afficher le fichier"
+
+#: src/kgx-terminal.c:578
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst showing the file. Please include the "
+"following information if you report the error."
+msgstr ""
+"Une erreur inattendue s’est produite lors de l’affichage du fichier. "
+"Veuillez inclure les informations suivantes si vous signalez l’erreur."
+
+#: src/kgx-terminal.c:599
+msgctxt "toast-message"
+msgid "Couldn't Open Folder"
+msgstr "Impossible d’ouvrir le dossier"
+
+#: src/kgx-terminal.c:602
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst opening the folder. Please include the "
+"following information if you report the error."
+msgstr ""
+"Une erreur inattendue s’est produite lors de l’ouverture du dossier. "
+"Veuillez inclure les informations suivantes si vous signalez l’erreur."
+
+#: src/kgx-terminal.c:696
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -369,13 +479,27 @@ msgstr ""
 "Ctrl-clic pour ouvrir :\n"
 "%s"
 
+#: src/kgx-terminal.c:984
+msgctxt "toast-message"
+msgid "Couldn't Paste"
+msgstr "Impossible de coller"
+
+#: src/kgx-terminal.c:987
+msgctxt "spad-message"
+msgid ""
+"An unexpected error occurred whilst processing the clipboard. Please include "
+"the following information if you report the error."
+msgstr ""
+"Une erreur inattendue s’est produite lors du traitement du presse-papiers. "
+"Veuillez inclure les informations suivantes si vous signalez l’erreur."
+
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
 msgstr "O_uvrir le lien"
 
 #: src/kgx-terminal.ui:12
-msgid "Copy _Link"
-msgstr "Copier le _lien"
+msgid "Copy _Link Address"
+msgstr "Copier l’adresse du _lien"
 
 #: src/kgx-terminal.ui:19
 msgid "_Copy"
@@ -385,41 +509,37 @@ msgstr "Co_pier"
 msgid "_Select All"
 msgstr "Tout _sélectionner"
 
-#: src/kgx-terminal.ui:36
+#: src/kgx-terminal.ui:36 src/kgx-window.ui:285
+msgid "Leave _Fullscreen"
+msgstr "Quitter le mode _plein écran"
+
+#: src/kgx-terminal.ui:43
 msgid "Show in _Files"
 msgstr "Afficher dans _Fichiers"
 
-#: src/kgx-theme-switcher.ui:16
+#: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
 msgstr "Suivre le style du système"
 
-#: src/kgx-theme-switcher.ui:44
+#: src/kgx-theme-switcher.ui:52
 msgid "Light Style"
 msgstr "Style clair"
 
-#: src/kgx-theme-switcher.ui:71
+#: src/kgx-theme-switcher.ui:79
 msgid "Dark Style"
 msgstr "Style sombre"
 
 #. Translators: ‘command’ is the argument name, and shouldn't be translated
-#: src/kgx-utils.c:113
+#: src/kgx-utils.c:114
 msgid "Missing argument for --command"
 msgstr "Argument manquant pour --command"
 
-#: src/kgx-utils.c:128
+#: src/kgx-utils.c:129
 msgid "Cannot use both --command and positional parameters"
 msgstr ""
 "Impossible d’utiliser à la fois --commande et des paramètres positionnels"
 
-#. Translators: Credit yourself here
-#: src/kgx-window.c:541
-msgid "translator-credits"
-msgstr ""
-"Thibault Martin\n"
-"Charles Monzat\n"
-"Irénée Thirion"
-
-#: src/kgx-window.ui:17
+#: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
 msgstr "_Nouvelle fenêtre"
 
@@ -427,35 +547,43 @@ msgstr "_Nouvelle fenêtre"
 msgid "_Show All Tabs"
 msgstr "_Afficher tous les onglets"
 
-#: src/kgx-window.ui:30
+#: src/kgx-window.ui:28 src/kgx-window.ui:280
+msgid "_Fullscreen"
+msgstr "_Plein écran"
+
+#: src/kgx-window.ui:35
 msgid "_Preferences"
 msgstr "_Préférences"
 
-#: src/kgx-window.ui:34
+#: src/kgx-window.ui:39
 msgid "_Keyboard Shortcuts"
 msgstr "_Raccourcis clavier"
 
-#: src/kgx-window.ui:38
+#: src/kgx-window.ui:43
 msgid "_About Console"
 msgstr "À _propos de Console"
 
-#: src/kgx-window.ui:88
+#: src/kgx-window.ui:148
 msgid "Find in Terminal"
 msgstr "Rechercher dans le terminal"
 
-#: src/kgx-window.ui:95
+#: src/kgx-window.ui:160
+msgid "Leave Fullscreen"
+msgstr "Quitter le mode plein écran"
+
+#: src/kgx-window.ui:167
 msgid "Main Menu"
 msgstr "Menu principal"
 
-#: src/kgx-window.ui:113
+#: src/kgx-window.ui:185
 msgid "Shrink Text"
 msgstr "Réduire le texte"
 
-#: src/kgx-window.ui:124
+#: src/kgx-window.ui:196
 msgid "Reset Size"
 msgstr "Réinitialiser la taille"
 
-#: src/kgx-window.ui:148
+#: src/kgx-window.ui:220
 msgid "Enlarge Text"
 msgstr "Agrandir le texte"
 
@@ -483,7 +611,7 @@ msgstr "Aperçu de la police"
 msgid "Font Size"
 msgstr "Taille de la police"
 
-#: src/preferences/kgx-preferences-window.c:125
+#: src/preferences/kgx-preferences-window.c:126
 msgid "No Font Set"
 msgstr "Aucune police définie"
 
@@ -503,26 +631,122 @@ msgstr "Utiliser les paramètres par défaut du _système"
 msgid "Custom _Font"
 msgstr "_Police personnalisée"
 
-#: src/preferences/kgx-preferences-window.ui:63
-msgid "Behaviour"
+#: src/preferences/kgx-preferences-window.ui:61
+#, fuzzy
+#| msgid "Behaviour"
+msgid "Behavior"
 msgstr "Comportement"
 
-#: src/preferences/kgx-preferences-window.ui:66
+#: src/preferences/kgx-preferences-window.ui:64
 msgid "_Unlimited Scrollback"
 msgstr "Défilement _illimité"
 
-#: src/preferences/kgx-preferences-window.ui:72
+#: src/preferences/kgx-preferences-window.ui:70
 msgid "_Scrollback Lines"
 msgstr "Lignes de _défilement"
 
-#: src/preferences/kgx-preferences-window.ui:92
+#: src/preferences/kgx-preferences-window.ui:90
 msgid "Terminal Bell"
 msgstr "Bip du terminal"
 
-#: src/preferences/kgx-preferences-window.ui:95
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr ""
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "Produire un _bip"
 
-#: src/preferences/kgx-preferences-window.ui:101
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "Effets _visuels"
+
+#: src/shortcuts-dialog.ui:7
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Application"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Nouvelle fenêtre"
+
+#: src/shortcuts-dialog.ui:18
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Terminal"
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Rechercher"
+
+#: src/shortcuts-dialog.ui:27
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Copier"
+
+#: src/shortcuts-dialog.ui:33
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Coller"
+
+#: src/shortcuts-dialog.ui:41
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Onglets"
+
+#: src/shortcuts-dialog.ui:44
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Nouvel onglet"
+
+#: src/shortcuts-dialog.ui:50
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Fermer l’onglet"
+
+#: src/shortcuts-dialog.ui:56
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Afficher tous les onglets"
+
+#: src/shortcuts-dialog.ui:62
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Onglet suivant"
+
+#: src/shortcuts-dialog.ui:68
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Onglet précédent"
+
+#: src/shortcuts-dialog.ui:74 src/shortcuts-dialog.ui:95
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Déplacer l’onglet vers la gauche"
+
+#: src/shortcuts-dialog.ui:81 src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "Déplacer l’onglet vers la droite"
+
+#: src/shortcuts-dialog.ui:102
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Basculer vers les onglets 1 à 9"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Basculer vers l’onglet 10"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Fenêtre"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Plein écran"
