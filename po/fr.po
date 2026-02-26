@@ -6,13 +6,14 @@
 # Jean-Marc Tissières <jmetissieres@gmail.com>, 2023.
 # Irénée THIRION <irenee.thirion@e.email>, 2024.
 # Julien Humbert <julroy67@gmail.com>, 2025.
+# Lucien Ouoba <luiz01luciano04@gmail.com>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
 "POT-Creation-Date: 2025-12-28 14:23+0000\n"
-"PO-Revision-Date: 2025-09-11 12:56+0900\n"
+"PO-Revision-Date: 2026-02-24 17:40+0000\n"
 "Last-Translator: Julien Humbert <julroy67@gmail.com>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "Language: fr\n"
@@ -20,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 48.0\n"
+"X-Generator: Poedit 3.8\n"
 "X-DL-Lang: fr\n"
 "X-DL-Module: console\n"
 "X-DL-Branch: main\n"
@@ -88,7 +89,8 @@ msgstr ""
 "Thibault Martin\n"
 "Charles Monzat\n"
 "Irénée Thirion\n"
-"Julien Humbert <julroy67@gmail.com>"
+"Julien Humbert <julroy67@gmail.com>\n"
+"Lucien Luiz <luiz01luciano04@gmail.com>"
 
 #: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
@@ -265,12 +267,12 @@ msgstr "XTerm"
 #: src/kgx-pages.c:298
 #, c-format
 msgid "%i by %i"
-msgstr ""
+msgstr "%i × %i"
 
 #: src/kgx-pages.c:299
 #, c-format
 msgid "%i columns %i rows"
-msgstr ""
+msgstr "%i colonnes %i lignes"
 
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
@@ -632,8 +634,6 @@ msgid "Custom _Font"
 msgstr "_Police personnalisée"
 
 #: src/preferences/kgx-preferences-window.ui:61
-#, fuzzy
-#| msgid "Behaviour"
 msgid "Behavior"
 msgstr "Comportement"
 
@@ -651,7 +651,7 @@ msgstr "Bip du terminal"
 
 #: src/preferences/kgx-preferences-window.ui:91
 msgid "Control how alerts are indicated"
-msgstr ""
+msgstr "Définir la façon dont les alertes sont signalées"
 
 #: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
