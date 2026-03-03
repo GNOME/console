@@ -1,16 +1,16 @@
 # Japanese translation for console.
-# Copyright (C) 2022, 2023, 2025 console's COPYRIGHT HOLDER
+# Copyright (C) 2022, 2023, 2025-2026 console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the console package.
 # sicklylife <translation@sicklylife.jp>, 2022.
 # TSUJI Kento <tuziemon@pclives.org>, 2023.
-# 小山田 純 <oyamadajun@outlook.jp>, 2025.
+# 小山田 純 <oyamadajun@outlook.jp>, 2025-2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-08-31 03:40+0000\n"
-"PO-Revision-Date: 2025-08-31 14:51+0900\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
+"PO-Revision-Date: 2026-03-03 17:59+0900\n"
 "Last-Translator: 小山田 純 <oyamadajun@outlook.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -54,7 +54,7 @@ msgstr ""
 msgid "Terminal window"
 msgstr "端末ウィンドウ"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "The GNOME Project"
 
@@ -85,7 +85,7 @@ msgstr ""
 
 #: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
-msgstr ""
+msgstr "--working-directory オプションと位置引数は同時には使えません"
 
 #: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
@@ -237,20 +237,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i ✕ %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr ""
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "タブ %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "タブを新しいウィンドウへ移動(_D)"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "閉じる(_C)"
 
@@ -479,11 +490,11 @@ msgstr "暗いスタイル"
 #. Translators: ‘command’ is the argument name, and shouldn't be translated
 #: src/kgx-utils.c:114
 msgid "Missing argument for --command"
-msgstr ""
+msgstr "--command オプションに必要な引数が指定されていません"
 
 #: src/kgx-utils.c:129
 msgid "Cannot use both --command and positional parameters"
-msgstr ""
+msgstr "--command オプションと位置引数は同時には使えません"
 
 #: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
@@ -578,7 +589,7 @@ msgid "Custom _Font"
 msgstr "カスタムフォント(_F)"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "動作"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -593,11 +604,15 @@ msgstr "スクロールして遡ることができる行数(_S)"
 msgid "Terminal Bell"
 msgstr "ターミナルのベル音"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr ""
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "ベル音を鳴らす"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "タブにベル音が鳴っていることを表示(_V)"
 
@@ -680,6 +695,16 @@ msgstr "タブ 1–9 に切り替える"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "タブ 10 に切り替える"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "ウィンドウ"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "全画面表示"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
