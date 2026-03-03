@@ -1,14 +1,14 @@
 # Portuguese translation for console.
 # Copyright (C) 2022-2024 console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the console package.
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022, 2023, 2024, 2025.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022, 2023, 2024, 2025, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-09-13 20:44+0000\n"
-"PO-Revision-Date: 2025-09-22 22:59+0100\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
+"PO-Revision-Date: 2026-03-03 12:03+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "Language: pt\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.8\n"
 
 #: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -248,20 +248,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i por %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i colunas %i linhas"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "Separador %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "_Desanexar separador"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Fechar"
 
@@ -485,7 +496,7 @@ msgstr "_Selecionar tudo"
 
 #: src/kgx-terminal.ui:36 src/kgx-window.ui:285
 msgid "Leave _Fullscreen"
-msgstr "Sair de ecrã completo"
+msgstr "Sair de ecrã inteiro"
 
 #: src/kgx-terminal.ui:43
 msgid "Show in _Files"
@@ -522,7 +533,7 @@ msgstr "_Mostrar todos os separadores"
 
 #: src/kgx-window.ui:28 src/kgx-window.ui:280
 msgid "_Fullscreen"
-msgstr "Ecrã completo"
+msgstr "_Ecrã inteiro"
 
 #: src/kgx-window.ui:35
 msgid "_Preferences"
@@ -542,7 +553,7 @@ msgstr "Localizar no terminal"
 
 #: src/kgx-window.ui:160
 msgid "Leave Fullscreen"
-msgstr "Sair de ecrã completo"
+msgstr "Sair de ecrã inteiro"
 
 #: src/kgx-window.ui:167
 msgid "Main Menu"
@@ -605,7 +616,7 @@ msgid "Custom _Font"
 msgstr "Tipo de letra personalizado"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "Comportamento"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -620,11 +631,15 @@ msgstr "Linhas de _recuo"
 msgid "Terminal Bell"
 msgstr "Campainha do terminal"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "Controla como os alertas são indicados"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "Reproduzir _som"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "Efeitos _visuais"
 
@@ -707,6 +722,16 @@ msgstr "Mudar para separador 1–9"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Mudar para separador 10"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Janela"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Ecrã inteiro"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
