@@ -1,15 +1,15 @@
 # Korean translation for console.
 # Copyright (C) 2022 console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the console package.
-# DaeHyun Sung <sungdh86+git@gmail.com>, 2022-2025.
+# DaeHyun Sung <sungdh86+git@gmail.com>, 2022-2026.
 # Seong-ho Cho <shcho@gnome.org>, 2024. (contributed temporarily)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-09-06 02:12+0000\n"
-"PO-Revision-Date: 2025-09-08 02:08+0900\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
+"PO-Revision-Date: 2026-03-01 23:25+0900\n"
 "Last-Translator: DaeHyun Sung <sungdh86+git@gmail.com>\n"
 "Language-Team: Korean <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.8\n"
 
 #: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -52,7 +52,7 @@ msgstr "그놈 데스크톱용 간단한 사용자 친화적인 터미널 에뮬
 msgid "Terminal window"
 msgstr "터미널 창"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "그놈 프로젝트"
 
@@ -101,7 +101,7 @@ msgstr "<디렉터리-이름>"
 
 #: src/kgx-application.c:528
 msgid "Wait until the child exits (TODO)"
-msgstr "자식 프로세스가 종료될때까지 기다림(TODO)"
+msgstr "자식 프로세스가 끝날 때까지 기다림 (TODO)"
 
 #: src/kgx-application.c:537
 msgid "Set the initial window title"
@@ -240,20 +240,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i x %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i 열 %i 행"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "탭 %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "탭 분리(_D)"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "닫기(_C)"
 
@@ -596,7 +607,7 @@ msgid "Custom _Font"
 msgstr "사용자 지정 글꼴(_F)"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "동작"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -611,11 +622,15 @@ msgstr "스크롤백 줄(_S)"
 msgid "Terminal Bell"
 msgstr "터미널 삑소리"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "알람을 표시하는 방법을 설정합니다"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "소리내기(_S)"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "시각 효과(_V)"
 
@@ -698,6 +713,16 @@ msgstr "탭 1-9 전환"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "탭 10 전환"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "창"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "전체 화면"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
