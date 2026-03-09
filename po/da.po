@@ -1,15 +1,15 @@
 # Danish translation for kgx.
-# Copyright (C) 2019, 2023-2025 kgx's COPYRIGHT HOLDER
+# Copyright (C) 2019, 2023-2026 kgx's COPYRIGHT HOLDER
 # This file is distributed under the same license as the kgx package.
 #
 # scootergrisen, 2019-2021.
-# Ask Hjorth Larsen <asklarsen@gmail.com>, 2022-2025.
+# Ask Hjorth Larsen <asklarsen@gmail.com>, 2022-2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-08-31 08:05+0000\n"
-"PO-Revision-Date: 2025-09-02 16:18+0200\n"
+"POT-Creation-Date: 2025-12-28 14:23+0000\n"
+"PO-Revision-Date: 2026-03-07 13:17+0100\n"
 "Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -49,7 +49,7 @@ msgstr "En simpel brugervenlig terminalemulator til GNOME-skrivebordet."
 msgid "Terminal window"
 msgstr "Terminalvindue"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:533 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "GNOME-projektet"
 
@@ -157,8 +157,12 @@ msgid ""
 msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr[0] "Der kører stadig en kommando. Den dræbes, hvis vinduet lukkes, hvilket kan føre til uventede resultater"
-msgstr[1] "Nogle kommandoer kører stadigvæk. De dræbes, hvis vinuet lukkes, hvilket kan føre til uventede resultater"
+msgstr[0] ""
+"Der kører stadig en kommando. Den dræbes, hvis vinduet lukkes, hvilket kan "
+"føre til uventede resultater"
+msgstr[1] ""
+"Nogle kommandoer kører stadigvæk. De dræbes, hvis vinuet lukkes, hvilket kan "
+"føre til uventede resultater"
 
 #: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
@@ -171,8 +175,12 @@ msgid ""
 msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr[0] "Der kører stadig en kommando. Den dræbes, hvis fanebladet lukkes, hvilket kan føre til uventede resultater"
-msgstr[1] "Nogle kommandoer kører stadigvæk. De dræbes, hvis fanebladet lukkes, hvilket kan føre til uventede resultater"
+msgstr[0] ""
+"Der kører stadig en kommando. Den dræbes, hvis fanebladet lukkes, hvilket "
+"kan føre til uventede resultater"
+msgstr[1] ""
+"Nogle kommandoer kører stadigvæk. De dræbes, hvis fanebladet lukkes, hvilket "
+"kan føre til uventede resultater"
 
 #. Translators: Screen reader label for the list of running commands
 #: src/kgx-close-dialog.c:194
@@ -206,28 +214,36 @@ msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst receiving a URI list drop. Please "
 "include the following information if you report the error."
-msgstr "Der opstod en uventet fejl, da en URI-liste blev sluppet. Inkludér venligst følgende oplysninger, hvis du vil rapportere fejlen."
+msgstr ""
+"Der opstod en uventet fejl, da en URI-liste blev sluppet. Inkludér venligst "
+"følgende oplysninger, hvis du vil rapportere fejlen."
 
 #: src/kgx-drop-target.c:337
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst receiving a file list drop. Please "
 "include the following information if you report the error."
-msgstr "Der opstod en uventet fejl, da en filliste blev sluppet. Inkludér venligst følgende oplysninger, hvis du vil rapportere fejlen."
+msgstr ""
+"Der opstod en uventet fejl, da en filliste blev sluppet. Inkludér venligst "
+"følgende oplysninger, hvis du vil rapportere fejlen."
 
 #: src/kgx-drop-target.c:371
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst receiving a text drop. Please include "
 "the following information if you report the error."
-msgstr "Der opstod en uventet fejl, da en tekst blev sluppet. Inkludér venligst følgende oplysninger, hvis du vil rapportere fejlen."
+msgstr ""
+"Der opstod en uventet fejl, da en tekst blev sluppet. Inkludér venligst "
+"følgende oplysninger, hvis du vil rapportere fejlen."
 
 #: src/kgx-drop-target.c:512
 msgctxt "spad-message"
 msgid ""
 "An unexpected value was received. Please include the following information "
 "if you report the error."
-msgstr "En uventet værdi blev modtaget. Inkludér venligst følgende oplysninger, hvis du vil rapportere fejlen."
+msgstr ""
+"En uventet værdi blev modtaget. Inkludér venligst følgende oplysninger, hvis "
+"du vil rapportere fejlen."
 
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
@@ -239,20 +255,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i gange %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i kolonner %i rækker"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "Faneblad %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "_Løsriv faneblad"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Luk"
 
@@ -359,7 +386,9 @@ msgctxt "spad-message"
 msgid ""
 "The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
 "are installed."
-msgstr "Linket “<a href=\"%s\">%s</a>” bruger protokollen “%s”, som ikke understøttes af noget installeret program."
+msgstr ""
+"Linket “<a href=\"%s\">%s</a>” bruger protokollen “%s”, som ikke "
+"understøttes af noget installeret program."
 
 #: src/kgx-terminal.c:373
 #, c-format
@@ -367,7 +396,9 @@ msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
 "a>”. Please include the following information if you report the error."
-msgstr "Der opstod en uventet fejl ved åbning af linket “<a href=\"%s\">%s</a>”. Hvis du rapporterer fejlen, så inkludér venligst følgende oplysninger."
+msgstr ""
+"Der opstod en uventet fejl ved åbning af linket “<a href=\"%s\">%s</a>”. "
+"Hvis du rapporterer fejlen, så inkludér venligst følgende oplysninger."
 
 #: src/kgx-terminal.c:421
 #, c-format
@@ -398,7 +429,9 @@ msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst reading the clipboard. Please include "
 "the following information if you report the error."
-msgstr "Der opstod en uventet fejl ved læsning af udklipsholderen. Inkludér venligst følgende oplysninger, hvis du vil rapportere fejlen."
+msgstr ""
+"Der opstod en uventet fejl ved læsning af udklipsholderen. Inkludér venligst "
+"følgende oplysninger, hvis du vil rapportere fejlen."
 
 #: src/kgx-terminal.c:575
 msgctxt "toast-message"
@@ -410,7 +443,9 @@ msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst showing the file. Please include the "
 "following information if you report the error."
-msgstr "Der opstod en uventet fejl ved visning af filen. Inkludér venligst følgende oplysninger, hvis du vil rapportere fejlen."
+msgstr ""
+"Der opstod en uventet fejl ved visning af filen. Inkludér venligst følgende "
+"oplysninger, hvis du vil rapportere fejlen."
 
 #: src/kgx-terminal.c:599
 msgctxt "toast-message"
@@ -422,7 +457,9 @@ msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst opening the folder. Please include the "
 "following information if you report the error."
-msgstr "Der opstod en uventet fejl ved åbning af mappen. Inkludér venligst følgende oplysninger, hvis du rapporterer fejlen."
+msgstr ""
+"Der opstod en uventet fejl ved åbning af mappen. Inkludér venligst følgende "
+"oplysninger, hvis du rapporterer fejlen."
 
 #: src/kgx-terminal.c:696
 #, c-format
@@ -443,7 +480,9 @@ msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst processing the clipboard. Please include "
 "the following information if you report the error."
-msgstr "Der opstod en uventet fejl ved behandling af udklipsholderen. Inkludér venligst følgende oplysninger, hvis du vil rapportere fejlen."
+msgstr ""
+"Der opstod en uventet fejl ved behandling af udklipsholderen. Inkludér "
+"venligst følgende oplysninger, hvis du vil rapportere fejlen."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -585,7 +624,7 @@ msgid "Custom _Font"
 msgstr "Brugertilpasset s_krifttype"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "Opførsel"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -600,11 +639,16 @@ msgstr "Linjer i _rullebuffer"
 msgid "Terminal Bell"
 msgstr "Terminalklokke"
 
-#: src/preferences/kgx-preferences-window.ui:93
+# Vises?  Men det kunne også være lyd
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "Angiv, hvordan alarmer behandles"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "Afspil _lyd"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "_Visuelle effekter"
 
@@ -687,6 +731,16 @@ msgstr "Skift til faneblad 1–9"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Skift til faneblad 10"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Vindue"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Fuldskærm"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
