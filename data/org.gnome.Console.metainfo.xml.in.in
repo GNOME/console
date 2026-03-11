@@ -27,6 +27,55 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="50~rc" date="2026-03-11" type="development">
+      <description>
+        <p>New Translations:</p>
+        <ul>
+          <li>Cornish</li>
+          <li>Uighur</li>
+        </ul>
+        <p>Updated Translations:</p>
+        <ul>
+          <li>Basque</li>
+          <li>Brazilian Portuguese</li>
+          <li>British English</li>
+          <li>Bulgarian</li>
+          <li>Catalan</li>
+          <li>Chinese (China)</li>
+          <li>Chinese (Taiwan)</li>
+          <li>Czech</li>
+          <li>Danish</li>
+          <li>Dutch</li>
+          <li>Finnish</li>
+          <li>French</li>
+          <li>Galician</li>
+          <li>Georgian</li>
+          <li>German</li>
+          <li>Greek</li>
+          <li>Hebrew</li>
+          <li>Hungarian</li>
+          <li>Indonesian</li>
+          <li>Japanese</li>
+          <li>Kazakh</li>
+          <li>Korean</li>
+          <li>Lithuanian</li>
+          <li>Nepali</li>
+          <li>Occitan</li>
+          <li>Persian</li>
+          <li>Polish</li>
+          <li>Portuguese</li>
+          <li>Romanian</li>
+          <li>Russian</li>
+          <li>Serbian</li>
+          <li>Serbian (Latin)</li>
+          <li>Slovenian</li>
+          <li>Spanish</li>
+          <li>Swedish</li>
+          <li>Turkish</li>
+          <li>Ukrainian</li>
+        </ul>
+      </description>
+    </release>
     <release version="49.0" date="2025-09-13" type="stable">
       <description>
         <p>New Translations:</p>
