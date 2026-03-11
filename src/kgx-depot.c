@@ -89,9 +89,7 @@ kgx_depot_set_property (GObject      *object,
         g_object_notify_by_pspec (object, pspec);
       }
       break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
+    KGX_INVALID_PROP (object, property_id, pspec);
   }
 }
 
@@ -114,9 +112,7 @@ kgx_depot_get_property (GObject    *object,
     case PROP_PROXY_INFO:
       g_value_set_object (value, self->proxy_info);
       break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
+    KGX_INVALID_PROP (object, property_id, pspec);
   }
 }
 
