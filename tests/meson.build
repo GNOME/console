@@ -1,5 +1,6 @@
 tests = [
   'colour-utils',
+  'despatcher',
   'empty',
   'file-closures',
   'icon-closures',
