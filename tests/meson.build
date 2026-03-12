@@ -37,6 +37,12 @@ test_sources += gnome.compile_resources(
   c_name: 'kgx_test',
 )
 
+dummy_process = executable(
+  'kgx-dummy-process',
+  'dummy-process.c',
+  dependencies: [glib_dep, kgx_config_dep],
+)
+
 test_env = {
   'G_DEBUG': 'gc-friendly,fatal-warnings',
   'G_ENABLE_DIAGNOSTIC': '1',
@@ -52,6 +58,7 @@ test_env = {
   # dirs where an older gtk install may have placed a print backend that
   # conflicts with those now built into gtk
   'GTK_EXE_PREFIX': '',
+  'KGX_DUMMY_PROCESS': dummy_process.full_path(),
   'MALLOC_CHECK_': '2',
   'NO_AT_BRIDGE': '1',
   'PYTHONDEVMODE': '1',
@@ -69,5 +76,6 @@ foreach test : tests
     ),
     env: test_env,
     protocol: 'tap',
+    depends: [dummy_process],
   )
 endforeach

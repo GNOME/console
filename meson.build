@@ -159,6 +159,7 @@ endif
 
 add_global_arguments(global_cargs, language: 'c')
 
+glib_dep = dependency('glib-2.0', version: '>= @0@'.format(glib_min_ver))
 gio_dep = dependency('gio-2.0', version: '>= @0@'.format(glib_min_ver))
 gio_unix_dep = dependency('gio-unix-2.0', version: '>= @0@'.format(glib_min_ver))
 vte_dep = dependency('vte-2.91-gtk4', version: '>= 0.77.0')

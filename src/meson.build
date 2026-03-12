@@ -77,6 +77,7 @@ kgx_sources = files(
 )
 
 kgx_deps = [
+  glib_dep,
   gio_dep,
   gio_unix_dep,
   pango_dep,
