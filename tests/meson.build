@@ -20,6 +20,7 @@ tests = [
   'tab',
   'templated',
   'theme-switcher',
+  'train',
   'utils',
 ]
 

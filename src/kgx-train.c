@@ -108,9 +108,7 @@ kgx_train_get_property (GObject    *object,
     case PROP_STATUS:
       g_value_set_flags (value, priv->status);
       break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
+    KGX_INVALID_PROP (object, property_id, pspec);
   }
 }
 
@@ -132,9 +130,7 @@ kgx_train_set_property (GObject      *object,
     case PROP_PID:
       priv->pid = g_value_get_int (value);
       break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
+    KGX_INVALID_PROP (object, property_id, pspec);
   }
 }
 
@@ -395,6 +391,13 @@ set_status (KgxTrain  *self,
 }
 
 
+static inline gpointer
+pid_as_key (pid_t pid)
+{
+  return GINT_TO_POINTER (pid);
+}
+
+
 static inline KgxStatus
 push_type (GHashTable *table,
            GPid        pid,
@@ -402,7 +405,7 @@ push_type (GHashTable *table,
            KgxStatus   status)
 {
   g_hash_table_insert (table,
-                       GINT_TO_POINTER (pid),
+                       pid_as_key (pid),
                        process != NULL ? g_rc_box_acquire (process) : NULL);
 
   g_debug ("train: Now %i %X", g_hash_table_size (table), status);
@@ -443,9 +446,13 @@ kgx_train_push_child (KgxTrain   *self,
     new_status |= push_type (priv->root, pid, NULL, KGX_PRIVILEGED);
   }
 
-  push_type (priv->children, pid, process, KGX_NONE);
-
   set_status (self, new_status);
+
+  if (g_hash_table_contains (priv->children, pid_as_key (pid))) {
+    return;
+  }
+
+  push_type (priv->children, pid, process, KGX_NONE);
 
   g_signal_emit (self, signals[CHILD_ADDED], 0, process);
 }
@@ -487,6 +494,10 @@ kgx_train_pop_child (KgxTrain   *self,
   priv = kgx_train_get_instance_private (self);
 
   pid = kgx_process_get_pid (process);
+
+  if (!g_hash_table_contains (priv->children, pid_as_key (pid))) {
+    return;
+  }
 
   new_status |= pop_type (priv->remote, pid, KGX_REMOTE);
   new_status |= pop_type (priv->playbox, pid, KGX_PLAYBOX);
