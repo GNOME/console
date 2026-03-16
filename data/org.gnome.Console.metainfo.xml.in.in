@@ -27,6 +27,14 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="50.0" date="2026-03-16" type="stable">
+      <description>
+        <p>Updated Translations:</p>
+        <ul>
+          <li>Thai</li>
+        </ul>
+      </description>
+    </release>
     <release version="50~rc" date="2026-03-11" type="development">
       <description>
         <p>New Translations:</p>
