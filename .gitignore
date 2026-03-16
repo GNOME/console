@@ -1,6 +1,9 @@
 .buildconfig
-*~
-build
 .vscode
-/subprojects/vte
+*~
+/subprojects/.wraplock
 /subprojects/adwaita
+/subprojects/vte
+build
+coverage-report
+coverage.json
