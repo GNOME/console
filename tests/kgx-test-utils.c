@@ -35,6 +35,7 @@ G_DEFINE_QUARK (kgx-test-notify-data, kgx_test_notify_data)
 struct _NotifyData {
   GPtrArray *expected_properties;
   GPtrArray *got_properties;
+  GPtrArray *fail_properties;
   GObject *object;
   gulong handler;
   gboolean no_notify;
@@ -49,6 +50,7 @@ notify_data_cleanup (NotifyData *self)
 {
   g_clear_pointer (&self->expected_properties, g_ptr_array_unref);
   g_clear_pointer (&self->got_properties, g_ptr_array_unref);
+  g_clear_pointer (&self->fail_properties, g_ptr_array_unref);
   g_clear_signal_handler (&self->handler, self->object);
   g_clear_weak_pointer (&self->object);
 }
@@ -69,6 +71,16 @@ handle_notify (GObject *object, GParamSpec *pspec, gpointer user_data)
                                         &where)) {
     g_ptr_array_remove_index (data->expected_properties, where);
   }
+
+  if (g_ptr_array_find_with_equal_func (data->fail_properties,
+                                        pspec->name,
+                                        g_str_equal,
+                                        &where)) {
+    g_test_fail_printf ("Saw notification for ‘%s:%s’ despite expectation",
+                        g_type_name (pspec->owner_type),
+                        pspec->name);
+    g_assert_not_reached ();
+  }
 }
 
 
@@ -87,6 +99,8 @@ get_notify_data (gpointer object)
   new_data->expected_properties =
     g_ptr_array_new_null_terminated (5, g_free, TRUE);
   new_data->got_properties =
+    g_ptr_array_new_null_terminated (5, g_free, TRUE);
+  new_data->fail_properties =
     g_ptr_array_new_null_terminated (5, g_free, TRUE);
   g_set_weak_pointer (&new_data->object, object);
   new_data->handler =
@@ -120,6 +134,28 @@ kgx_expect_property_notify (gpointer object, const char *property)
   g_assert_false (data->no_notify);
 
   g_ptr_array_add (data->expected_properties, g_strdup (property));
+}
+
+
+/**
+ * kgx_expect_property_not_notify:
+ * @object: (type GObject.Object): the object to watch
+ * @property: the property to fail on
+ *
+ * Adds @property to the list of property notifications not permitted on
+ * @object, this can be called multiple times with the same @property, and
+ * can be used alongside [func@Kgx.expect_property_notify].
+ *
+ * However unlike [func@Kgx.expect_property_notify] and
+ * [func@Kgx.expect_no_notify] any notification of @property immediately
+ * fails the current test.
+ */
+void
+kgx_expect_property_not_notify (gpointer object, const char *property)
+{
+  NotifyData *data = get_notify_data (object);
+
+  g_ptr_array_add (data->fail_properties, g_strdup (property));
 }
 
 

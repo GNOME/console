@@ -24,6 +24,8 @@ G_BEGIN_DECLS
 
 void            kgx_expect_property_notify               (gpointer    object,
                                                           const char *property);
+void            kgx_expect_property_not_notify           (gpointer    object,
+                                                          const char *property);
 void            kgx_expect_no_notify                     (gpointer    object);
 void            kgx_assert_expected_notifies             (gpointer    object);
 void            kgx_test_property_notify                 (gpointer    object,
