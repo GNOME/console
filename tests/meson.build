@@ -22,6 +22,7 @@ tests = [
   'theme-switcher',
   'train',
   'utils',
+  'window',
 ]
 
 test_sources = files(

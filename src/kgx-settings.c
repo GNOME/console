@@ -132,8 +132,7 @@ kgx_settings_set_property (GObject      *object,
 
   switch (property_id) {
     case PROP_THEME:
-      self->theme = g_value_get_enum (value);
-      g_object_notify_by_pspec (object, pspec);
+      kgx_set_enum_prop (object, pspec, (int *) &self->theme, value);
       break;
     case PROP_FONT:
       g_clear_pointer (&self->font, pango_font_description_free);
