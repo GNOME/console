@@ -84,7 +84,7 @@ if get_option('tests')
 endif
 
 # Gtk Requirement
-gtk_min_ver = '4.19'
+gtk_min_ver = '4.20'
 gtk_min_ver_parts = gtk_min_ver.split('.')
 if gtk_min_ver_parts[1].to_int().is_odd()
   gtk_sym_ver = 'GDK_VERSION_@0@_@1@'.format(
@@ -92,14 +92,14 @@ if gtk_min_ver_parts[1].to_int().is_odd()
     gtk_min_ver_parts[1].to_int() + 1,
   )
 else
-  gtk_sym_ver = 'GDK_VERSION_@0@@_@_@1@'.format(
+  gtk_sym_ver = 'GDK_VERSION_@0@_@1@'.format(
     gtk_min_ver_parts[0],
     gtk_min_ver_parts[1],
   )
 endif
 
 # GLib Requirement
-glib_min_ver = '2.80'
+glib_min_ver = '2.86'
 glib_sym_ver = 'GLIB_VERSION_@0@'.format(glib_min_ver.replace('.', '_'))
 
 # Adwaita Requirement

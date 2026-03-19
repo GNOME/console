@@ -25,6 +25,7 @@ tests = [
 ]
 
 test_sources = files(
+  'kgx-ignore-deprecations.h',
   'kgx-test-utils.c',
   'kgx-test-utils.h',
 )
