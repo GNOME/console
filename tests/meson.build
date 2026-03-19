@@ -22,10 +22,13 @@ tests = [
   'theme-switcher',
   'train',
   'utils',
+  'window',
 ]
 
 test_sources = files(
   'kgx-ignore-deprecations.h',
+  'kgx-test-gtk-utils.c',
+  'kgx-test-gtk-utils.h',
   'kgx-test-utils.c',
   'kgx-test-utils.h',
 )

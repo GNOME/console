@@ -1,6 +1,6 @@
 /* kgx-window.c
  *
- * Copyright 2019-2023 Zander Brown
+ * Copyright 2019-2026 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -97,7 +97,9 @@ kgx_window_set_property (GObject      *object,
 
   switch (property_id) {
     case PROP_SETTINGS:
-      g_set_object (&priv->settings, g_value_get_object (value));
+      if (g_set_object (&priv->settings, g_value_get_object (value))) {
+        g_object_notify_by_pspec (object, pspec);
+      }
       break;
     case PROP_SEARCH_MODE_ENABLED:
       kgx_set_boolean_prop (object, pspec, &priv->search_enabled, value);
@@ -114,9 +116,7 @@ kgx_window_set_property (GObject      *object,
         }
       }
       break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
+    KGX_INVALID_PROP (object, property_id, pspec);
   }
 }
 
@@ -143,9 +143,7 @@ kgx_window_get_property (GObject    *object,
     case PROP_TRANSLUCENT:
       g_value_set_boolean (value, priv->translucent);
       break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-      break;
+    KGX_INVALID_PROP (object, property_id, pspec);
   }
 }
 
@@ -523,7 +521,7 @@ kgx_window_class_init (KgxWindowClass *klass)
   pspecs[PROP_SETTINGS] =
     g_param_spec_object ("settings", NULL, NULL,
                          KGX_TYPE_SETTINGS,
-                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_STRINGS);
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
   pspecs[PROP_SEARCH_MODE_ENABLED] =
     g_param_spec_boolean ("search-mode-enabled", NULL, NULL,
