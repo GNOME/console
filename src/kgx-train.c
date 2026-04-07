@@ -123,9 +123,7 @@ kgx_train_set_property (GObject      *object,
 
   switch (property_id) {
     case PROP_TAG:
-      if (g_set_str (&priv->tag, g_value_get_string (value))) {
-        g_object_notify_by_pspec (object, pspec);
-      }
+      kgx_set_str_prop (object, pspec, &priv->tag, value);
       break;
     case PROP_PID:
       priv->pid = g_value_get_int (value);
@@ -251,7 +249,7 @@ kgx_train_async_initiable_init_async (GAsyncInitable      *initable,
                                       gpointer             user_data)
 {
   g_autoptr (WaitData) wait_data = wait_data_alloc ();
-  GTask *task = g_task_new (initable, cancellable, callback, user_data);
+  g_autoptr (GTask) task = g_task_new (initable, cancellable, callback, user_data);
   KgxTrain *self = KGX_TRAIN (initable);
   KgxTrainPrivate *priv = kgx_train_get_instance_private (self);
 
