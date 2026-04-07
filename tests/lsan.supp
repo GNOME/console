@@ -1,4 +1,13 @@
 # Ignore EGL leak
 leak:gdk_display_init_egl
-# Ignore fontconfig leak
-leak:XML_ParseBuffer
+leak:gdk_display_prepare_gl
+# Gtk seems to leak during snapshots?
+leak:gtk_test_widget_wait_for_draw
+leak:kgx_test_save_screenshot
+# Fontconfig
+leak:FcConfigValues
+leak:FcParsePattern
+leak:FcPatternObjectInsertElt
+leak:FcPatternObjectInsertElt2
+leak:FcValueListCreate
+leak:FcValueSave

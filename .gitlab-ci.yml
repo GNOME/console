@@ -8,7 +8,7 @@ include:
       tarball-artifact-path: "build/meson-dist/gnome-console-$CI_COMMIT_TAG.tar.xz"
   - component: "gitlab.gnome.org/GNOME/citemplates/gnomeos-basic-ci@master"
     inputs:
-      lsan-options: "suppressions=${CI_PROJECT_DIR}/tests/lsan.supp"
+      lsan-options: "malloc_context_size=50,suppressions=/usr/share/gtk-4.0/valgrind/gtk.supp,suppressions=${CI_PROJECT_DIR}/tests/lsan.supp"
 
 variables:
   MANIFEST_PATH: "build-aux/flatpak/org.gnome.Console.Devel.json"
@@ -299,6 +299,7 @@ flatpak@aarch64:
     paths:
       - build/meson-logs
       - coverage-*.json
+      - build/*.png
     reports:
       junit: build/meson-logs/testlog.junit.xml
 
