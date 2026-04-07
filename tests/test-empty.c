@@ -19,6 +19,7 @@
 #include "kgx-config.h"
 
 #include "kgx-locale.h"
+#include "kgx-test-utils.h"
 
 #include "kgx-empty.h"
 
@@ -40,155 +41,155 @@ static const char *prop_notified = NULL;
 static void
 got_notify (GObject *self, GParamSpec *pspec, gpointer data)
 {
-  GMainLoop *loop = data;
+  gboolean *done = data;
 
-  g_main_loop_quit (loop);
+  *done = TRUE;
 
   prop_notified = g_param_spec_get_name (pspec);
 }
 
 
 static void
-timeout (gpointer data)
-{
-  GMainLoop *loop = data;
-
-  g_test_fail ();
-
-  g_main_loop_quit (loop);
-}
-
-
-static void
 test_empty_map_unmap (void)
 {
-  g_autoptr (KgxEmpty) empty = g_object_new (KGX_TYPE_EMPTY, NULL);
-  g_autoptr (GMainLoop) loop = g_main_loop_new (NULL, FALSE);
-  GtkWidget *window = gtk_window_new ();
-  gboolean working = TRUE;
-  gboolean logo_visible = TRUE;
-  gboolean spinner_visible = TRUE;
-  guint source;
+  if (g_test_subprocess ()) {
+    g_autoptr (KgxEmpty) empty = g_object_new (KGX_TYPE_EMPTY, NULL);
+    GtkWidget *window = gtk_window_new ();
+    gboolean done = FALSE;
+    gboolean working = TRUE;
+    gboolean logo_visible = TRUE;
+    gboolean spinner_visible = TRUE;
 
-  g_object_ref_sink (empty);
+    g_object_ref_sink (empty);
 
-  gtk_window_set_child (GTK_WINDOW (window), GTK_WIDGET (empty));
+    gtk_window_set_child (GTK_WINDOW (window), GTK_WIDGET (empty));
 
-  g_signal_connect (empty,
-                    "notify::logo-visible", G_CALLBACK (got_notify),
-                    loop);
-  prop_notified = NULL;
+    g_signal_connect (empty,
+                      "notify::logo-visible", G_CALLBACK (got_notify),
+                      &done);
+    prop_notified = NULL;
 
-  g_object_get (empty,
-                "working", &working,
-                "logo-visible", &logo_visible,
-                "spinner-visible", &spinner_visible,
-                NULL);
+    g_object_get (empty,
+                  "working", &working,
+                  "logo-visible", &logo_visible,
+                  "spinner-visible", &spinner_visible,
+                  NULL);
 
-  g_assert_false (working);
-  g_assert_false (logo_visible);
-  g_assert_false (spinner_visible);
+    g_assert_false (working);
+    g_assert_false (logo_visible);
+    g_assert_false (spinner_visible);
 
-  gtk_widget_map (GTK_WIDGET (empty));
+    gtk_widget_map (GTK_WIDGET (empty));
 
-  source = g_timeout_add_once (100, timeout, loop);
+    while (!done) {
+      g_main_context_iteration (NULL, TRUE);
+    }
 
-  g_main_loop_run (loop);
+    g_assert_cmpstr (prop_notified, ==, "logo-visible");
 
-  g_assert_cmpstr (prop_notified, ==, "logo-visible");
+    g_object_get (empty,
+                  "working", &working,
+                  "logo-visible", &logo_visible,
+                  "spinner-visible", &spinner_visible,
+                  NULL);
 
-  g_object_get (empty,
-                "working", &working,
-                "logo-visible", &logo_visible,
-                "spinner-visible", &spinner_visible,
-                NULL);
+    g_assert_false (working);
+    g_assert_true (logo_visible);
+    g_assert_false (spinner_visible);
 
-  g_assert_false (working);
-  g_assert_true (logo_visible);
-  g_assert_false (spinner_visible);
+    gtk_widget_unmap (GTK_WIDGET (empty));
 
-  gtk_widget_unmap (GTK_WIDGET (empty));
+    gtk_window_destroy (GTK_WINDOW (window));
 
-  gtk_window_destroy (GTK_WINDOW (window));
+    return;
+  }
 
-  g_clear_handle_id (&source, g_source_remove);
+  /* Shouldn't take anything close to five seconds, but process start can
+   * be slow on CI runners */
+  g_test_trap_subprocess (NULL, 5 * G_USEC_PER_SEC, 0);
+  g_test_trap_assert_passed ();
 }
 
 
 static void
 test_empty_working (void)
 {
-  g_autoptr (KgxEmpty) empty = g_object_new (KGX_TYPE_EMPTY, NULL);
-  g_autoptr (GMainLoop) loop = g_main_loop_new (NULL, FALSE);
-  gboolean working = TRUE;
-  gboolean logo_visible = TRUE;
-  gboolean spinner_visible = TRUE;
-  guint source;
+  if (g_test_subprocess ()) {
+    g_autoptr (KgxEmpty) empty = g_object_new (KGX_TYPE_EMPTY, NULL);
+    gboolean done = FALSE;
+    gboolean working = TRUE;
+    gboolean logo_visible = TRUE;
+    gboolean spinner_visible = TRUE;
 
-  g_object_ref_sink (empty);
+    g_object_ref_sink (empty);
 
-  g_signal_connect (empty,
-                    "notify::spinner-visible", G_CALLBACK (got_notify),
-                    loop);
-  g_signal_connect (empty,
-                    "notify::working", G_CALLBACK (got_notify),
-                    loop);
-  prop_notified = NULL;
+    g_signal_connect (empty,
+                      "notify::spinner-visible", G_CALLBACK (got_notify),
+                      &done);
 
-  g_object_get (empty,
-                "working", &working,
-                "logo-visible", &logo_visible,
-                "spinner-visible", &spinner_visible,
-                NULL);
+    g_object_get (empty,
+                  "working", &working,
+                  "logo-visible", &logo_visible,
+                  "spinner-visible", &spinner_visible,
+                  NULL);
 
-  g_assert_false (working);
-  g_assert_false (logo_visible);
-  g_assert_false (spinner_visible);
+    g_assert_false (working);
+    g_assert_false (logo_visible);
+    g_assert_false (spinner_visible);
 
-  source = g_timeout_add_once (120, timeout, loop);
+    kgx_expect_property_notify (empty, "working");
+    g_object_set (empty, "working", TRUE, NULL);
+    kgx_assert_expected_notifies (empty);
 
-  g_object_set (empty, "working", TRUE, NULL);
-  g_assert_cmpstr (prop_notified, ==, "working");
+    g_object_get (empty,
+                  "working", &working,
+                  "logo-visible", &logo_visible,
+                  "spinner-visible", &spinner_visible,
+                  NULL);
 
-  g_object_get (empty,
-                "working", &working,
-                "logo-visible", &logo_visible,
-                "spinner-visible", &spinner_visible,
-                NULL);
+    g_assert_true (working);
+    g_assert_false (logo_visible);
+    g_assert_false (spinner_visible);
 
-  g_assert_true (working);
-  g_assert_false (logo_visible);
-  g_assert_false (spinner_visible);
+    prop_notified = NULL;
 
-  prop_notified = NULL;
-  g_main_loop_run (loop);
+    while (!done) {
+      g_main_context_iteration (NULL, TRUE);
+    }
 
-  g_assert_cmpstr (prop_notified, ==, "spinner-visible");
+    g_assert_cmpstr (prop_notified, ==, "spinner-visible");
 
-  g_object_get (empty,
-                "working", &working,
-                "logo-visible", &logo_visible,
-                "spinner-visible", &spinner_visible,
-                NULL);
+    g_object_get (empty,
+                  "working", &working,
+                  "logo-visible", &logo_visible,
+                  "spinner-visible", &spinner_visible,
+                  NULL);
 
-  g_assert_true (working);
-  g_assert_false (logo_visible);
-  g_assert_true (spinner_visible);
+    g_assert_true (working);
+    g_assert_false (logo_visible);
+    g_assert_true (spinner_visible);
 
-  g_object_set (empty, "working", FALSE, NULL);
-  g_assert_cmpstr (prop_notified, ==, "working");
+    kgx_expect_property_notify (empty, "working");
+    g_object_set (empty, "working", FALSE, NULL);
+    kgx_assert_expected_notifies (empty);
 
-  g_object_get (empty,
-                "working", &working,
-                "logo-visible", &logo_visible,
-                "spinner-visible", &spinner_visible,
-                NULL);
+    g_object_get (empty,
+                  "working", &working,
+                  "logo-visible", &logo_visible,
+                  "spinner-visible", &spinner_visible,
+                  NULL);
 
-  g_assert_false (working);
-  g_assert_false (logo_visible);
-  g_assert_false (spinner_visible);
+    g_assert_false (working);
+    g_assert_false (logo_visible);
+    g_assert_false (spinner_visible);
 
-  g_clear_handle_id (&source, g_source_remove);
+    return;
+  }
+
+  /* Shouldn't take anything close to five seconds, but process start can
+   * be slow on CI runners */
+  g_test_trap_subprocess (NULL, 5 * G_USEC_PER_SEC, 0);
+  g_test_trap_assert_passed ();
 }
 
 
@@ -196,7 +197,6 @@ static void
 test_empty_working_unmap (void)
 {
   g_autoptr (KgxEmpty) empty = g_object_new (KGX_TYPE_EMPTY, NULL);
-  g_autoptr (GMainLoop) loop = g_main_loop_new (NULL, FALSE);
   GtkWidget *window = gtk_window_new ();
   gboolean working = TRUE;
   gboolean logo_visible = TRUE;
