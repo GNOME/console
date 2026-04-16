@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/issues/\n"
-"POT-Creation-Date: 2025-05-10 11:27+0000\n"
-"PO-Revision-Date: 2025-05-13 14:08+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
+"POT-Creation-Date: 2026-03-16 01:41+0000\n"
+"PO-Revision-Date: 2026-04-16 12:51+0200\n"
 "Last-Translator: Peter Mráz <etkinator@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -16,25 +16,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.9\n"
 
-#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
-#: src/kgx-window.ui:47
+#: src/kgx-window.ui:52
 msgid "Console"
 msgstr "Konzola"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Console.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
 "príkaz;príkazový;riadok;cmd;spustiť;spustenie;shell;terminál;kgx;kings cross;"
 
-#: data/org.gnome.Console.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
 msgstr "Nové okno"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:177
+#: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:246
 msgid "New Tab"
 msgstr "Nová karta"
 
@@ -51,89 +51,9 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Okno terminálu"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:503 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:621 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Projekt GNOME"
-
-#: src/help-overlay.ui:12
-msgctxt "shortcut window"
-msgid "Application"
-msgstr "Aplikácia"
-
-#: src/help-overlay.ui:16
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "Nové okno"
-
-#: src/help-overlay.ui:23
-msgctxt "shortcut window"
-msgid "Terminal"
-msgstr "Terminál"
-
-#: src/help-overlay.ui:27
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "Nájdenie"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
-msgid "Copy"
-msgstr "Kopírovanie"
-
-#: src/help-overlay.ui:39
-msgctxt "shortcut window"
-msgid "Paste"
-msgstr "Vloženie"
-
-#: src/help-overlay.ui:46
-msgctxt "shortcut window"
-msgid "Tabs"
-msgstr "Karty"
-
-#: src/help-overlay.ui:50
-msgctxt "shortcut window"
-msgid "New Tab"
-msgstr "Nová karta"
-
-#: src/help-overlay.ui:56
-msgctxt "shortcut window"
-msgid "Close Tab"
-msgstr "Zatvorenie karty"
-
-#: src/help-overlay.ui:62
-msgctxt "shortcut window"
-msgid "Show All Tabs"
-msgstr "Zobrazenie všetkých karit"
-
-#: src/help-overlay.ui:68
-msgctxt "shortcut window"
-msgid "Next Tab"
-msgstr "Nasledujúca karta"
-
-#: src/help-overlay.ui:74
-msgctxt "shortcut window"
-msgid "Previous Tab"
-msgstr "Predchádzajúca karta"
-
-#: src/help-overlay.ui:80
-msgctxt "shortcut window"
-msgid "Move Tab Right"
-msgstr "Posunutie karty doprava"
-
-#: src/help-overlay.ui:86
-msgctxt "shortcut window"
-msgid "Move Tab Left"
-msgstr "Posunutie karty doľava"
-
-#: src/help-overlay.ui:92
-msgctxt "shortcut window"
-msgid "Switch to Tab 1–9"
-msgstr "Prepínanie kariet 1–9"
-
-#: src/help-overlay.ui:98
-msgctxt "shortcut window"
-msgid "Switch to Tab 10"
-msgstr "Prepnutie na kartu 10"
 
 #: src/kgx-about.c:104
 msgid "GPL 3.0 or later"
@@ -158,68 +78,68 @@ msgid "translator-credits"
 msgstr ""
 "Dušan Kazik <prescott66@gmail.com>, Nostragodus <nostragodus@gmail.com>"
 
-#: src/kgx-application.c:283
+#: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr "Nedá sa použiť naraz argument --working-directory a pozičné parametre"
 
 # cmd line desc
-#: src/kgx-application.c:503
+#: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
 msgstr "Vykoná parameter pre túto voľbu v termináli"
 
-#: src/kgx-application.c:504
+#: src/kgx-application.c:510
 msgid "COMMAND"
 msgstr "PRÍKAZ"
 
 # cmd line desc
-#: src/kgx-application.c:512
+#: src/kgx-application.c:518
 msgid "Set the working directory"
 msgstr "Nastaví pracovný adresár"
 
 #. Translators: Placeholder of for a given directory
-#: src/kgx-application.c:514
+#: src/kgx-application.c:520
 msgid "DIRNAME"
 msgstr "NÁZOV_PRIEČINKU"
 
 # cmd line desc
-#: src/kgx-application.c:522
+#: src/kgx-application.c:528
 msgid "Wait until the child exits (TODO)"
 msgstr "Počká, kým potomok neskončí (TODO)"
 
 # cmd line desc
-#: src/kgx-application.c:531
+#: src/kgx-application.c:537
 msgid "Set the initial window title"
 msgstr "Nastaví titulok počiatočného okna"
 
-#: src/kgx-application.c:532
+#: src/kgx-application.c:538
 msgid "TITLE"
 msgstr "TITULOK"
 
 # cmd line desc
-#: src/kgx-application.c:540
+#: src/kgx-application.c:546
 msgid "ADVANCED: Set the shell to launch"
 msgstr "POKROČILÉ: Nastaví príkazový riadok, ktorý sa má spustiť"
 
-#: src/kgx-application.c:541
+#: src/kgx-application.c:547
 msgid "SHELL"
 msgstr "PRÍKAZOVÝ_RIADOK"
 
 # cmd line desc
-#: src/kgx-application.c:549
+#: src/kgx-application.c:555
 msgid "ADVANCED: Set the scrollback length"
 msgstr "POKROČILÉ: Nastaví dĺžku spätného rolovania"
 
-#: src/kgx-application.c:550
+#: src/kgx-application.c:556
 msgid "LINES"
 msgstr "RIADKY"
 
 #. Translators: %s is the version string, KGX is a codename and should be left as-is
-#: src/kgx-application.c:689
+#: src/kgx-application.c:695
 #, c-format
 msgid "KGX %s — Terminal Emulator"
 msgstr "KGX %s — Emulátor terminálu"
 
-#: src/kgx-application.c:695
+#: src/kgx-application.c:701
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
 msgstr "[-e|-- PRÍKAZ [PARAMETER...]]"
 
@@ -287,7 +207,7 @@ msgstr "Reťazec farby má nesprávnu dĺžku"
 
 #: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
 #: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
-#: src/kgx-drop-target.c:506
+#: src/kgx-drop-target.c:509
 msgctxt "toast-message"
 msgid "Drop Failed"
 msgstr "Pustenie zlyhalo"
@@ -319,7 +239,7 @@ msgstr ""
 "Pri prijímaní pusteného textu nastala neočakávaná chyba. Ak budete chybu "
 "nahlasovať, priložte nasledujúce informácie."
 
-#: src/kgx-drop-target.c:509
+#: src/kgx-drop-target.c:512
 msgctxt "spad-message"
 msgid ""
 "An unexpected value was received. Please include the following information "
@@ -334,26 +254,35 @@ msgid "Linux"
 msgstr "Linux"
 
 #: src/kgx-livery-manager.c:230
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
 msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
+
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i x %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i stĺpcov %i riadkov"
 
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:478
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "Karta %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "_Odpojiť kartu"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Zavrieť"
 
@@ -412,7 +341,7 @@ msgstr "Chybová správa"
 msgid "Copy Error Message"
 msgstr "Skopírovať chybovú správu"
 
-#: src/kgx-spad.ui:100
+#: src/kgx-spad.ui:104
 msgid "Report _Issue"
 msgstr "_Nahlásiť problém"
 
@@ -440,11 +369,11 @@ msgstr "Príkaz dokončený"
 msgid "Find text"
 msgstr "Nájsť text"
 
-#: src/kgx-tab.ui:53
+#: src/kgx-tab.ui:70
 msgid "Previous Match"
 msgstr "Predchádzajúca zhoda"
 
-#: src/kgx-tab.ui:61
+#: src/kgx-tab.ui:78
 msgid "Next Match"
 msgstr "Nasledujúca zhoda"
 
@@ -575,7 +504,11 @@ msgstr "_Kopírovať"
 msgid "_Select All"
 msgstr "Vybr_ať všetko"
 
-#: src/kgx-terminal.ui:36
+#: src/kgx-terminal.ui:36 src/kgx-window.ui:285
+msgid "Leave _Fullscreen"
+msgstr "Opustiť _celú obrazovku"
+
+#: src/kgx-terminal.ui:43
 msgid "Show in _Files"
 msgstr "Zobraziť v aplikácii _Súbory"
 
@@ -600,7 +533,7 @@ msgstr "Chýbajúca voľba pre argument --command"
 msgid "Cannot use both --command and positional parameters"
 msgstr "Nedá sa použiť naraz argument --command a pozičné parametre"
 
-#: src/kgx-window.ui:17
+#: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
 msgstr "_Nové okno"
 
@@ -608,39 +541,47 @@ msgstr "_Nové okno"
 msgid "_Show All Tabs"
 msgstr "_Zobraziť všetky karty"
 
-#: src/kgx-window.ui:30
+#: src/kgx-window.ui:28 src/kgx-window.ui:280
+msgid "_Fullscreen"
+msgstr "_Celá obrazovka"
+
+#: src/kgx-window.ui:35
 msgid "_Preferences"
 msgstr "_Predvoľby"
 
-#: src/kgx-window.ui:34
+#: src/kgx-window.ui:39
 msgid "_Keyboard Shortcuts"
 msgstr "_Klávesové skratky"
 
-#: src/kgx-window.ui:38
+#: src/kgx-window.ui:43
 msgid "_About Console"
 msgstr "_O aplikácii Konzola"
 
 # tooltip
-#: src/kgx-window.ui:91
+#: src/kgx-window.ui:148
 msgid "Find in Terminal"
 msgstr "Nájdi v termináli"
 
-#: src/kgx-window.ui:98
+#: src/kgx-window.ui:160
+msgid "Leave Fullscreen"
+msgstr "Opustiť celú obrazovku"
+
+#: src/kgx-window.ui:167
 msgid "Main Menu"
 msgstr "Hlavné menu"
 
 # tooltip
-#: src/kgx-window.ui:116
+#: src/kgx-window.ui:185
 msgid "Shrink Text"
 msgstr "Zmenší text"
 
 # tooltip
-#: src/kgx-window.ui:127
+#: src/kgx-window.ui:196
 msgid "Reset Size"
 msgstr "Obnoví veľkosť"
 
 # tooltip
-#: src/kgx-window.ui:151
+#: src/kgx-window.ui:220
 msgid "Enlarge Text"
 msgstr "Zväčší text"
 
@@ -669,7 +610,7 @@ msgstr "Náhľad písma"
 msgid "Font Size"
 msgstr "Veľkosť písma"
 
-#: src/preferences/kgx-preferences-window.c:125
+#: src/preferences/kgx-preferences-window.c:126
 msgid "No Font Set"
 msgstr "Nie je nastavené žiadne písmo"
 
@@ -690,29 +631,123 @@ msgstr "Použiť _predvolené nastavenie"
 msgid "Custom _Font"
 msgstr "Vlastné _písmo"
 
-#: src/preferences/kgx-preferences-window.ui:63
-msgid "Behaviour"
+#: src/preferences/kgx-preferences-window.ui:61
+msgid "Behavior"
 msgstr "Správanie"
 
-#: src/preferences/kgx-preferences-window.ui:66
+#: src/preferences/kgx-preferences-window.ui:64
 msgid "_Unlimited Scrollback"
 msgstr "_Neobmedzená história rolovania"
 
-#: src/preferences/kgx-preferences-window.ui:72
+#: src/preferences/kgx-preferences-window.ui:70
 msgid "_Scrollback Lines"
 msgstr "_Počet riadkov histórie rolovania"
 
-#: src/preferences/kgx-preferences-window.ui:92
+#: src/preferences/kgx-preferences-window.ui:90
 msgid "Terminal Bell"
 msgstr "Zvonček terminálu"
 
-#: src/preferences/kgx-preferences-window.ui:95
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "Ovládanie spôsobu zobrazovania upozornení"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "Prehrať _zvuk"
 
-#: src/preferences/kgx-preferences-window.ui:101
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "Vizuálne efekty"
+
+#: src/shortcuts-dialog.ui:7
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Aplikácia"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Nové okno"
+
+#: src/shortcuts-dialog.ui:18
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Terminál"
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Nájdenie"
+
+#: src/shortcuts-dialog.ui:27
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Kopírovanie"
+
+#: src/shortcuts-dialog.ui:33
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Vloženie"
+
+#: src/shortcuts-dialog.ui:41
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Karty"
+
+#: src/shortcuts-dialog.ui:44
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Nová karta"
+
+#: src/shortcuts-dialog.ui:50
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Zatvorenie karty"
+
+#: src/shortcuts-dialog.ui:56
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Zobrazenie všetkých karit"
+
+#: src/shortcuts-dialog.ui:62
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Nasledujúca karta"
+
+#: src/shortcuts-dialog.ui:68
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Predchádzajúca karta"
+
+#: src/shortcuts-dialog.ui:74 src/shortcuts-dialog.ui:95
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Posunutie karty doľava"
+
+#: src/shortcuts-dialog.ui:81 src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "Posunutie karty doprava"
+
+#: src/shortcuts-dialog.ui:102
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Prepínanie kariet 1–9"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Prepnutie na kartu 10"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Okno"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Celá obrazovka"
 
 #~ msgid "King’s Cross"
 #~ msgstr "King’s Cross"
