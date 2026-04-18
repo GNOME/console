@@ -700,11 +700,15 @@ kgx_pages_class_init (KgxPagesClass *klass)
 
 
 static void
-style_changed (AdwStyleManager *style_manager,
-               GParamSpec      *pspec,
-               KgxPages        *self)
+style_changed (G_GNUC_UNUSED GObject    *source,
+               G_GNUC_UNUSED GParamSpec *pspec,
+               KgxPages                 *self)
 {
-  KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
+  KgxPagesPrivate *priv;
+
+  g_return_if_fail (KGX_IS_PAGES (self));
+
+  priv = kgx_pages_get_instance_private (self);
 
   adw_tab_view_invalidate_thumbnails (ADW_TAB_VIEW (priv->view));
 }
@@ -721,18 +725,16 @@ kgx_pages_init (KgxPages *self)
                           "size-changed", G_CALLBACK (size_changed),
                           self);
 
-  g_signal_group_connect_swapped (priv->settings_signals, "notify::theme",
-                                  G_CALLBACK (adw_tab_view_invalidate_thumbnails),
-                                  priv->view);
+  g_signal_group_connect (priv->settings_signals,
+                          "notify::theme", G_CALLBACK (style_changed),
+                          self);
 
   g_signal_group_connect (priv->style_manager_signals,
-                          "notify::dark",
-                          G_CALLBACK (style_changed),
+                          "notify::dark", G_CALLBACK (style_changed),
                           self);
   g_signal_group_connect (priv->style_manager_signals,
-                          "notify::high-contrast",
-                          G_CALLBACK (style_changed),
-                          priv->view);
+                          "notify::high-contrast", G_CALLBACK (style_changed),
+                          self);
 
   g_binding_group_bind (priv->active_page_binds, "search-mode-enabled",
                         self, "search-mode-enabled",
