@@ -2,15 +2,15 @@
 # Copyright (C) 2020 kgx's COPYRIGHT HOLDER
 # This file is distributed under the same license as the kgx package.
 #
-# Nathan Follens <nfollens@gnome.org>, 2020-2025.
+# Nathan Follens <nfollens@gnome.org>, 2020-2026.
 # Hannie Dumoleyn <hannie@ubuntu-nl.org>, 2022.
 # Philip Goto, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-09-14 09:26+0000\n"
-"PO-Revision-Date: 2025-09-14 13:08+0200\n"
+"POT-Creation-Date: 2026-03-16 01:41+0000\n"
+"PO-Revision-Date: 2026-04-19 19:53+0200\n"
 "Last-Translator: Nathan Follens <nfollens@gnome.org>\n"
 "Language-Team: GNOME-NL https://matrix.to/#/#nl:gnome.org\n"
 "Language: nl\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.9\n"
 
 #: data/org.gnome.Console.desktop.in.in:2 data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
 #: src/kgx-window.ui:52
@@ -52,7 +52,7 @@ msgstr "Een eenvoudige en gebruiksvriendelijke terminal-emulator voor het GNOME-
 msgid "Terminal window"
 msgstr "Terminalvenster"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:621 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Het GNOME-project"
 
@@ -239,20 +239,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i op %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i kolommen %i rijen"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "Tabblad %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "Tabbla_d losmaken"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Sluiten"
 
