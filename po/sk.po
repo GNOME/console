@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
 "POT-Creation-Date: 2026-03-16 01:41+0000\n"
-"PO-Revision-Date: 2026-04-29 18:51+0200\n"
+"PO-Revision-Date: 2026-04-29 21:47+0200\n"
 "Last-Translator: Peter Mráz <etkinator@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -24,6 +24,7 @@ msgstr ""
 msgid "Console"
 msgstr "Konzola"
 
+# well-spelled: cmd, shell, kgx, kings, cross
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
@@ -66,12 +67,14 @@ msgstr "GPL 3.0 alebo novšia"
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
 msgstr "# KGX %s s použitím VTE %u.%u.%u %s\n"
 
+# |, no-check-spell
 #. Translators: %s is the year range
 #: src/kgx-about.c:148
 #, c-format
 msgid "© %s Zander Brown"
 msgstr "© %s Zander Brown"
 
+# |, no-check-spell
 #. Translators: Credit yourself here
 #: src/kgx-about.c:176
 msgid "translator-credits"
@@ -465,6 +468,7 @@ msgstr ""
 "Pri otváraní priečinka došlo k neočakávanej chybe. Ak budete chybu "
 "nahlasovať, priložte prosím nasledujúce informácie."
 
+# well-spelled: Ctrl
 #: src/kgx-terminal.c:696
 #, c-format
 msgid ""
