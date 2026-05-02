@@ -9,16 +9,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-12-28 14:23+0000\n"
-"PO-Revision-Date: 2026-02-14 17:36+0800\n"
-"Last-Translator: lumingzh <lumingzh@qq.com>\n"
+"POT-Creation-Date: 2026-03-16 01:41+0000\n"
+"PO-Revision-Date: 2026-05-02 13:02+0800\n"
+"Last-Translator: Luke Na <narukeu@outlook.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Gtranslator 49.0\n"
+"X-Generator: Poedit 3.9\n"
 
 #: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -53,7 +53,7 @@ msgstr "GNOME 桌面的简单、用户友好的终端模拟器。"
 msgid "Terminal window"
 msgstr "终端窗口"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:621 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "GNOME 项目"
 
@@ -80,7 +80,8 @@ msgid "translator-credits"
 msgstr ""
 "Damned <damnedlies@163.com>, 2020.\n"
 "lumingzh <lumingzh@qq.com>, 2022-2026.\n"
-"Victor_Trista <ljlzjzm@hotmail.com>, 2023."
+"Victor_Trista <ljlzjzm@hotmail.com>, 2023.\n"
+"Luke Na <narukeu@outlook.com>, 2026."
 
 #: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
@@ -152,7 +153,7 @@ msgid ""
 msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
-msgstr[0] "某些命令仍在运行，关闭此窗口会将其杀死并可能导致意外结果"
+msgstr[0] "某些命令仍在运行，关闭此窗口将终止该命令，并可能导致意外结果"
 
 #: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
@@ -165,7 +166,7 @@ msgid ""
 msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
-msgstr[0] "某些命令仍在运行，关闭此标签页会将其杀死并可能导致意外结果"
+msgstr[0] "某些命令仍在运行，关闭此标签页将终止该命令，并可能导致意外结果"
 
 #. Translators: Screen reader label for the list of running commands
 #: src/kgx-close-dialog.c:194
@@ -392,7 +393,7 @@ msgid ""
 msgstr ""
 "链接“<a href=\"%s\">%s</a>”指向不同设备上的一个位置。\n"
 "\n"
-"此设备为“%s”而位置为“%s”。"
+"此设备为“%s”，而该位置位于“%s”。"
 
 #: src/kgx-terminal.c:511
 msgctxt "toast-message"
