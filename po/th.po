@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console gnome-46\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-12-25 02:54+0000\n"
-"PO-Revision-Date: 2026-03-14 12:40+0700\n"
+"POT-Creation-Date: 2026-03-16 01:41+0000\n"
+"PO-Revision-Date: 2026-05-05 23:45+0700\n"
 "Last-Translator: \n"
 "Language-Team: Thai <th@li.org>\n"
 "Language: th\n"
@@ -18,9 +18,8 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.9\n"
 
-#: data/org.gnome.Console.desktop.in.in:2
-#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
-#: src/kgx-window.ui:52
+#: data/org.gnome.Console.desktop.in.in:2 data/org.gnome.Console.metainfo.xml.in.in:8
+#: src/kgx-application.h:26 src/kgx-window.ui:52
 msgid "Console"
 msgstr "คอนโซล"
 
@@ -49,7 +48,7 @@ msgstr "เครื่องมือจำลองเทอร์มินั
 msgid "Terminal window"
 msgstr "หน้าต่างเทอร์มินัล"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:590 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:621 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "โครงการ GNOME"
 
@@ -140,14 +139,12 @@ msgstr "ต้องการปิดหน้าต่างหรือไม
 
 #: src/kgx-close-dialog.c:75
 msgid ""
-"A command is still running, closing this window will kill it and may lead to "
-"unexpected outcomes"
+"A command is still running, closing this window will kill it and may lead to unexpected "
+"outcomes"
 msgid_plural ""
-"Some commands are still running, closing this window will kill them and may "
-"lead to unexpected outcomes"
-msgstr[0] ""
-"มีคำสั่งกำลังทำงานอยู่ ถ้าคุณปิดหน้าต่างนี้ ก็จะถือเป็นการหยุดคำสั่งดังกล่าว "
-"ซึ่งอาจทำให้เกิดผลลัพธ์ที่ไม่คาดคิดได้"
+"Some commands are still running, closing this window will kill them and may lead to "
+"unexpected outcomes"
+msgstr[0] "มีคำสั่งกำลังทำงานอยู่ ถ้าคุณปิดหน้าต่างนี้ ก็จะถือเป็นการหยุดคำสั่งดังกล่าว ซึ่งอาจทำให้เกิดผลลัพธ์ที่ไม่คาดคิดได้"
 
 #: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
@@ -155,13 +152,11 @@ msgstr "ต้องการปิดแท็บหรือไม่?"
 
 #: src/kgx-close-dialog.c:84
 msgid ""
-"A command is still running, closing this tab will kill it and may lead to "
-"unexpected outcomes"
+"A command is still running, closing this tab will kill it and may lead to unexpected outcomes"
 msgid_plural ""
-"Some commands are still running, closing this tab will kill them and may lead "
-"to unexpected outcomes"
-msgstr[0] ""
-"มีคำสั่งกำลังทำงานอยู่ ถ้าคุณปิดแท็บนี้ ก็จะถือเป็นการหยุดคำสั่งดังกล่าว ซึ่งอาจทำให้เกิดผลลัพธ์ที่ไม่คาดคิดได้"
+"Some commands are still running, closing this tab will kill them and may lead to unexpected "
+"outcomes"
+msgstr[0] "มีคำสั่งกำลังทำงานอยู่ ถ้าคุณปิดแท็บนี้ ก็จะถือเป็นการหยุดคำสั่งดังกล่าว ซึ่งอาจทำให้เกิดผลลัพธ์ที่ไม่คาดคิดได้"
 
 #. Translators: Screen reader label for the list of running commands
 #: src/kgx-close-dialog.c:194
@@ -169,8 +164,7 @@ msgid "Process list"
 msgstr "รายชื่อโปรเซส"
 
 #. Translators: This action dismisses the dialogue, leaving the tab/window open
-#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
-#: src/preferences/kgx-font-picker.ui:22
+#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135 src/preferences/kgx-font-picker.ui:22
 msgid "_Cancel"
 msgstr "_ยกเลิก"
 
@@ -192,32 +186,29 @@ msgstr "การปล่อยล้มเหลว"
 #: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst receiving a URI list drop. Please include "
-"the following information if you report the error."
-msgstr ""
-"เกิดข้อผิดพลาดที่ไม่คาคคิดขณะรับรายการ URI จากการปล่อย โปรดแนบข้อมูลต่อไปนี้ถ้าคุณรายงานข้อผิดพลาด"
+"An unexpected error occurred whilst receiving a URI list drop. Please include the following "
+"information if you report the error."
+msgstr "เกิดข้อผิดพลาดที่ไม่คาคคิดขณะรับรายการ URI จากการปล่อย โปรดแนบข้อมูลต่อไปนี้ถ้าคุณรายงานข้อผิดพลาด"
 
 #: src/kgx-drop-target.c:337
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst receiving a file list drop. Please include "
-"the following information if you report the error."
-msgstr ""
-"เกิดข้อผิดพลาดที่ไม่คาดคิดขณะรับรายการไฟล์จากการปล่อย โปรดแนบข้อมูลต่อไปนี้ถ้าคุณรายงานข้อผิดพลาด"
+"An unexpected error occurred whilst receiving a file list drop. Please include the following "
+"information if you report the error."
+msgstr "เกิดข้อผิดพลาดที่ไม่คาดคิดขณะรับรายการไฟล์จากการปล่อย โปรดแนบข้อมูลต่อไปนี้ถ้าคุณรายงานข้อผิดพลาด"
 
 #: src/kgx-drop-target.c:371
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst receiving a text drop. Please include the "
-"following information if you report the error."
-msgstr ""
-"เกิดข้อผิดพลาดที่ไม่คาดคิดขณะรับข้อความจากการปล่อย โปรดแนบข้อมูลต่อไปนี้ถ้าคุณรายงานข้อผิดพลาด"
+"An unexpected error occurred whilst receiving a text drop. Please include the following "
+"information if you report the error."
+msgstr "เกิดข้อผิดพลาดที่ไม่คาดคิดขณะรับข้อความจากการปล่อย โปรดแนบข้อมูลต่อไปนี้ถ้าคุณรายงานข้อผิดพลาด"
 
 #: src/kgx-drop-target.c:512
 msgctxt "spad-message"
 msgid ""
-"An unexpected value was received. Please include the following information if "
-"you report the error."
+"An unexpected value was received. Please include the following information if you report the "
+"error."
 msgstr "ได้รับค่าที่ไม่คาดคิด โปรดแนบข้อมูลต่อไปนี้ถ้าคุณรายงานข้อผิดพลาด"
 
 #: src/kgx-livery-manager.c:193
@@ -226,26 +217,35 @@ msgid "Linux"
 msgstr "Linux"
 
 #: src/kgx-livery-manager.c:230
-#| msgctxt "shortcut window"
-#| msgid "Terminal"
 msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
+
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i x %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i คอลัมน์ %i แถว"
 
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "แท็บที่ %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "แ_ยกออกจากกัน"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_ปิด"
 
@@ -350,19 +350,16 @@ msgstr "ไม่สามารถเปิดลิงก์ได้"
 #, c-format
 msgctxt "spad-message"
 msgid ""
-"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps are "
-"installed."
+"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps are installed."
 msgstr "ลิงก์ “<a href=\"%s\">%s</a>” ใช้โปรโตคอล “%s” ซึ่งไม่มีแอปที่ติดตั้งไว้รองรับ"
 
 #: src/kgx-terminal.c:373
 #, c-format
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</a>”. "
-"Please include the following information if you report the error."
-msgstr ""
-"เกิดข้อผิดพลาดที่ไม่คาดคิดขณะเปิดลิงก์ “<a href=\"%s\">%s</a>” "
-"โปรดแนบข้อมูลต่อไปนี้ถ้าคุณรายงานข้อผิดพลาด"
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</a>”. Please include "
+"the following information if you report the error."
+msgstr "เกิดข้อผิดพลาดที่ไม่คาดคิดขณะเปิดลิงก์ “<a href=\"%s\">%s</a>” โปรดแนบข้อมูลต่อไปนี้ถ้าคุณรายงานข้อผิดพลาด"
 
 #: src/kgx-terminal.c:421
 #, c-format
@@ -390,8 +387,8 @@ msgstr "ไม่สามารถแปะข้อความได้"
 #: src/kgx-terminal.c:514
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst reading the clipboard. Please include the "
-"following information if you report the error."
+"An unexpected error occurred whilst reading the clipboard. Please include the following "
+"information if you report the error."
 msgstr "เกิดข้อผิดพลาดที่ไม่คาดคิดขณะอ่านคลิปบอร์ด โปรดแนบข้อมูลต่อไปนี้ถ้าคุณรายงานข้อผิดพลาด"
 
 #: src/kgx-terminal.c:575
@@ -402,8 +399,8 @@ msgstr "ไม่สามารถแสดงไฟล์ได้"
 #: src/kgx-terminal.c:578
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst showing the file. Please include the "
-"following information if you report the error."
+"An unexpected error occurred whilst showing the file. Please include the following "
+"information if you report the error."
 msgstr "เกิดข้อผิดพลาดที่ไม่คาดคิดขณะแสดงไฟล์ โปรดแนบข้อมูลต่อไปนี้ถ้าคุณรายงานข้อผิดพลาด"
 
 #: src/kgx-terminal.c:599
@@ -414,8 +411,8 @@ msgstr "ไม่สามารถเปิดโฟลเดอร์ได้
 #: src/kgx-terminal.c:602
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst opening the folder. Please include the "
-"following information if you report the error."
+"An unexpected error occurred whilst opening the folder. Please include the following "
+"information if you report the error."
 msgstr "เกิดข้อผิดพลาดที่ไม่คาดคิดขณะเปิดโฟลเดอร์ โปรดแนบข้อมูลต่อไปนี้ถ้าคุณรายงานข้อผิดพลาด"
 
 #: src/kgx-terminal.c:696
@@ -435,8 +432,8 @@ msgstr "ไม่สามารถแปะได้"
 #: src/kgx-terminal.c:987
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst processing the clipboard. Please include "
-"the following information if you report the error."
+"An unexpected error occurred whilst processing the clipboard. Please include the following "
+"information if you report the error."
 msgstr "เกิดข้อผิดพลาดที่ไม่คาดคิดขณะประมวลผลคลิปบอร์ด โปรดแนบข้อมูลต่อไปนี้ถ้าคุณรายงานข้อผิดพลาด"
 
 #: src/kgx-terminal.ui:7
@@ -577,7 +574,7 @@ msgid "Custom _Font"
 msgstr "_กำหนดแบบอักษรเอง"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "ลักษณะการทำงาน"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -592,11 +589,15 @@ msgstr "จำ_นวนบรรทัดย้อนหลัง"
 msgid "Terminal Bell"
 msgstr "เสียงเตือนของเทอร์มินัล"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "ควบคุมวิธีการแสดงผลการแจ้งเตือน"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "เล่นเ_สียง"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "เ_อฟเฟกต์ภาพ"
 
@@ -679,3 +680,13 @@ msgstr "สลับไปยังแท็บที่ 1-9"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "สลับไปยังแท็บที่ 10"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "หน้าต่าง"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "เต็มจอ"
