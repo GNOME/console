@@ -172,12 +172,12 @@ kgx_palette_serialise_to (KgxPalette *self, GVariantBuilder *builder)
                                 "{'foreground', <(%d, %d, %d)>}",
                                 self->foreground.red,
                                 self->foreground.green,
-                                self->foreground.red);
+                                self->foreground.blue);
   g_variant_builder_add_parsed (builder,
                                 "{'background', <(%d, %d, %d)>}",
                                 self->background.red,
                                 self->background.green,
-                                self->background.red);
+                                self->background.blue);
   g_variant_builder_add_parsed (builder,
                                 "{'transparency', <%d>}",
                                 ALPHA_AS_TRANS (self->background.alpha));
