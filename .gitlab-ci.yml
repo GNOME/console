@@ -8,6 +8,8 @@ include:
       tarball-artifact-path: "build/meson-dist/gnome-console-$CI_COMMIT_TAG.tar.xz"
   - component: "gitlab.gnome.org/GNOME/citemplates/gnomeos-basic-ci@master"
     inputs:
+      gobject-linter: "disabled" # stick to only organic hallucinations
+      goblint: "disabled" # no really, don't run it
       lsan-options: "malloc_context_size=50,suppressions=/usr/share/gtk-4.0/valgrind/gtk.supp,suppressions=${CI_PROJECT_DIR}/tests/lsan.supp"
 
 variables:
