@@ -62,14 +62,21 @@ kgx_palette_new (const GdkRGBA *const foreground,
                  size_t               n_colours,
                  const GdkRGBA        colours[const n_colours])
 {
-  size_t colours_size = sizeof (GdkRGBA) * n_colours;
-  KgxPalette *self = g_rc_box_alloc0 (sizeof (KgxPalette) + colours_size);
+  size_t colours_size;
+  KgxPalette *self;
+
+  g_return_val_if_fail (n_colours == 0 || n_colours <= (SIZE_MAX / sizeof (GdkRGBA)), NULL);
+
+  colours_size = sizeof (GdkRGBA) * n_colours;
+  self = g_rc_box_alloc0 (sizeof (KgxPalette) + colours_size);
 
   self->foreground = *foreground;
   self->background = *background;
   self->background.alpha = TRANS_AS_ALPHA (transparency);
   self->n_colours = n_colours;
-  memcpy (&self->colours, colours, colours_size);
+  if (G_LIKELY (colours_size > 0)) {
+    memcpy (self->colours, colours, colours_size);
+  }
 
   return self;
 }
