@@ -154,6 +154,57 @@ test_palette_serialise (void)
 
 
 static void
+test_palette_serialise_validate (void)
+{
+  GdkRGBA source_colours[] = {
+    GDK_RGBA ("FF0000"),
+    GDK_RGBA ("00FF00"),
+    GDK_RGBA ("0000FF"),
+  };
+  GdkRGBA fg = GDK_RGBA ("ABCDEF");
+  GdkRGBA bg = GDK_RGBA ("FEDCBA");
+  g_autoptr (KgxPalette) palette = kgx_palette_new (&fg,
+                                                    &bg,
+                                                    0.5,
+                                                    G_N_ELEMENTS (source_colours),
+                                                    source_colours);
+  g_autoptr (GVariant) result = kgx_palette_serialise (palette);
+  g_auto (GVariantDict) dict = G_VARIANT_DICT_INIT (result);
+  g_autoptr (GArray) colours = g_array_new (FALSE, FALSE, sizeof (GdkRGBA));
+  g_autoptr (GVariantIter) colours_iter = NULL;
+  double r, g, b, transparency;
+
+  g_test_bug ("https://gitlab.gnome.org/GNOME/console/-/merge_requests/193");
+
+  /* Check it actually looks like we expect, no flipped channels or such */
+
+  g_assert_true (g_variant_dict_lookup (&dict, "foreground", "(ddd)", &r, &g, &b));
+  g_assert_cmpfloat_with_epsilon (r, 0.67, 0.01);
+  g_assert_cmpfloat_with_epsilon (g, 0.8, 0.01);
+  g_assert_cmpfloat_with_epsilon (b, 0.94, 0.01);
+
+  g_assert_true (g_variant_dict_lookup (&dict, "background", "(ddd)", &r, &g, &b));
+  g_assert_cmpfloat_with_epsilon (r, 1.0, 0.01);
+  g_assert_cmpfloat_with_epsilon (g, 0.86, 0.01);
+  g_assert_cmpfloat_with_epsilon (b, 0.73, 0.01);
+
+  g_assert_true (g_variant_dict_lookup (&dict, "transparency", "d", &transparency));
+  g_assert_cmpfloat_with_epsilon (transparency, 0.5, 0.01);
+
+  g_assert_true (g_variant_dict_lookup (&dict, "colours", "a(ddd)", &colours_iter));
+  while (g_variant_iter_loop (colours_iter, "(ddd)", &r, &g, &b)) {
+    g_array_append_val (colours, ((GdkRGBA) { r, g, b, 1.0 }));
+  }
+
+  g_assert_cmpint (colours->len, ==, G_N_ELEMENTS (source_colours));
+
+  for (size_t i = 0; i < G_N_ELEMENTS (source_colours); i++) {
+    assert_colour (&source_colours[i], &g_array_index (colours, GdkRGBA, i));
+  }
+}
+
+
+static void
 test_palette_deserialise (void)
 {
   g_autoptr (KgxPalette) palette = NULL;
@@ -228,6 +279,7 @@ main (int argc, char *argv[])
   g_test_add_func ("/kgx/palette/opaque", test_palette_opaque);
   g_test_add_func ("/kgx/palette/colours", test_palette_colours);
   g_test_add_func ("/kgx/palette/serialise", test_palette_serialise);
+  g_test_add_func ("/kgx/palette/serialise_validate", test_palette_serialise_validate);
   g_test_add_func ("/kgx/palette/deserialise", test_palette_deserialise);
   g_test_add_func ("/kgx/palette/set_palette", test_palette_set_palette);
   g_test_add_func ("/kgx/palette/set_palette_same", test_palette_set_palette_same);
