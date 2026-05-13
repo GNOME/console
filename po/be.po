@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-06-28 23:08+0000\n"
-"PO-Revision-Date: 2025-07-01 23:25+0300\n"
+"POT-Creation-Date: 2026-03-16 01:41+0000\n"
+"PO-Revision-Date: 2026-05-13 21:59+0300\n"
 "Last-Translator: Yuras Shumovich <shumovichy@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -17,26 +17,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.8\n"
 
-#: data/org.gnome.Console.desktop.in.in:3
+#: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
 #: src/kgx-window.ui:52
 msgid "Console"
 msgstr "Кансоль"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.Console.desktop.in.in:8
+#: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;каманда;"
-"камандны;загадны;радок;выканаць;тэрмінал;"
+"command;prompt;cmd;commandline;run;shell;terminal;kgx;kings "
+"cross;каманда;камандны;загадны;радок;выканаць;тэрмінал;"
 
-#: data/org.gnome.Console.desktop.in.in:21
+#: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
 msgstr "Новае акно"
 
-#: data/org.gnome.Console.desktop.in.in:27 src/kgx-window.ui:221
+#: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:246
 msgid "New Tab"
 msgstr "Новая ўкладка"
 
@@ -52,89 +52,9 @@ msgstr "Просты і зручны тэрмінал для асяроддзя 
 msgid "Terminal window"
 msgstr "Акно тэрмінала"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:503 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:621 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Праект GNOME"
-
-#: src/help-overlay.ui:12
-msgctxt "shortcut window"
-msgid "Application"
-msgstr "Праграма"
-
-#: src/help-overlay.ui:16
-msgctxt "shortcut window"
-msgid "New Window"
-msgstr "Новае акно"
-
-#: src/help-overlay.ui:23
-msgctxt "shortcut window"
-msgid "Terminal"
-msgstr "Тэрмінал"
-
-#: src/help-overlay.ui:27
-msgctxt "shortcut window"
-msgid "Find"
-msgstr "Пошук"
-
-#: src/help-overlay.ui:33
-msgctxt "shortcut window"
-msgid "Copy"
-msgstr "Скапіяваць"
-
-#: src/help-overlay.ui:39
-msgctxt "shortcut window"
-msgid "Paste"
-msgstr "Уставіць"
-
-#: src/help-overlay.ui:46
-msgctxt "shortcut window"
-msgid "Tabs"
-msgstr "Укладкі"
-
-#: src/help-overlay.ui:50
-msgctxt "shortcut window"
-msgid "New Tab"
-msgstr "Новая ўкладка"
-
-#: src/help-overlay.ui:56
-msgctxt "shortcut window"
-msgid "Close Tab"
-msgstr "Закрыць укладку"
-
-#: src/help-overlay.ui:62
-msgctxt "shortcut window"
-msgid "Show All Tabs"
-msgstr "Паказаць усе ўкладкі"
-
-#: src/help-overlay.ui:68
-msgctxt "shortcut window"
-msgid "Next Tab"
-msgstr "Наступная ўкладка"
-
-#: src/help-overlay.ui:74
-msgctxt "shortcut window"
-msgid "Previous Tab"
-msgstr "Папярэдняя ўкладка"
-
-#: src/help-overlay.ui:80
-msgctxt "shortcut window"
-msgid "Move Tab Right"
-msgstr "Перамясціць укладку ўправа"
-
-#: src/help-overlay.ui:86
-msgctxt "shortcut window"
-msgid "Move Tab Left"
-msgstr "Перамясціць укладку ўлева"
-
-#: src/help-overlay.ui:92
-msgctxt "shortcut window"
-msgid "Switch to Tab 1–9"
-msgstr "Пераключыцца на ўкладку 1–9"
-
-#: src/help-overlay.ui:98
-msgctxt "shortcut window"
-msgid "Switch to Tab 10"
-msgstr "Пераключыцца на ўкладку 10"
 
 #: src/kgx-about.c:104
 msgid "GPL 3.0 or later"
@@ -335,20 +255,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i на %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i слупкоў %i радкоў"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:478
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "Укладка %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "_Адлучыць укладку"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Закрыць"
 
@@ -570,7 +501,7 @@ msgstr "С_капіяваць"
 msgid "_Select All"
 msgstr "Вылучыць _усё"
 
-#: src/kgx-terminal.ui:36 src/kgx-window.ui:260
+#: src/kgx-terminal.ui:36 src/kgx-window.ui:285
 msgid "Leave _Fullscreen"
 msgstr "_Выйсці з поўнаэкраннага рэжыму"
 
@@ -599,7 +530,7 @@ msgstr "Адсутнічае аргумент для --command"
 msgid "Cannot use both --command and positional parameters"
 msgstr "Нельга адначасова выкарыстоўваць --command і пазіцыйныя параметры"
 
-#: src/kgx-window.ui:17 src/kgx-window.ui:249
+#: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
 msgstr "_Новае акно"
 
@@ -607,7 +538,7 @@ msgstr "_Новае акно"
 msgid "_Show All Tabs"
 msgstr "Паказаць _усе ўкладкі"
 
-#: src/kgx-window.ui:28 src/kgx-window.ui:255
+#: src/kgx-window.ui:28 src/kgx-window.ui:280
 msgid "_Fullscreen"
 msgstr "_Поўнаэкранны рэжым"
 
@@ -623,27 +554,27 @@ msgstr "_Спалучэнні клавіш"
 msgid "_About Console"
 msgstr "_Пра Кансоль"
 
-#: src/kgx-window.ui:123
+#: src/kgx-window.ui:148
 msgid "Find in Terminal"
 msgstr "Пошук у тэрмінале"
 
-#: src/kgx-window.ui:135
+#: src/kgx-window.ui:160
 msgid "Leave Fullscreen"
 msgstr "Выйсці з поўнаэкраннага рэжыму"
 
-#: src/kgx-window.ui:142
+#: src/kgx-window.ui:167
 msgid "Main Menu"
 msgstr "Галоўнае меню"
 
-#: src/kgx-window.ui:160
+#: src/kgx-window.ui:185
 msgid "Shrink Text"
 msgstr "Паменшыць тэкст"
 
-#: src/kgx-window.ui:171
+#: src/kgx-window.ui:196
 msgid "Reset Size"
 msgstr "Скінуць маштабаванне"
 
-#: src/kgx-window.ui:195
+#: src/kgx-window.ui:220
 msgid "Enlarge Text"
 msgstr "Павялічыць тэкст"
 
@@ -671,7 +602,7 @@ msgstr "Папярэдні прагляд шрыфту"
 msgid "Font Size"
 msgstr "Памер шрыфту"
 
-#: src/preferences/kgx-preferences-window.c:125
+#: src/preferences/kgx-preferences-window.c:126
 msgid "No Font Set"
 msgstr "Шрыфт не зададзены"
 
@@ -691,29 +622,123 @@ msgstr "Выкарыстоўваць прадвызначаны _сістэмн�
 msgid "Custom _Font"
 msgstr "_Уласны шрыфт"
 
-#: src/preferences/kgx-preferences-window.ui:63
-msgid "Behaviour"
+#: src/preferences/kgx-preferences-window.ui:61
+msgid "Behavior"
 msgstr "Паводзіны"
 
-#: src/preferences/kgx-preferences-window.ui:66
+#: src/preferences/kgx-preferences-window.ui:64
 msgid "_Unlimited Scrollback"
 msgstr "_Неабмежаваная прагортка назад"
 
-#: src/preferences/kgx-preferences-window.ui:72
+#: src/preferences/kgx-preferences-window.ui:70
 msgid "_Scrollback Lines"
 msgstr "_Радкоў для прагорткі назад"
 
-#: src/preferences/kgx-preferences-window.ui:92
+#: src/preferences/kgx-preferences-window.ui:90
 msgid "Terminal Bell"
 msgstr "Сігнал тэрмінала"
 
-#: src/preferences/kgx-preferences-window.ui:95
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "Вызначае як выводзяцца сігналы"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "Прайграванне _гуку"
 
-#: src/preferences/kgx-preferences-window.ui:101
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "_Візуальныя эфекты"
+
+#: src/shortcuts-dialog.ui:7
+msgctxt "shortcut window"
+msgid "Application"
+msgstr "Праграма"
+
+#: src/shortcuts-dialog.ui:10
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Новае акно"
+
+#: src/shortcuts-dialog.ui:18
+msgctxt "shortcut window"
+msgid "Terminal"
+msgstr "Тэрмінал"
+
+#: src/shortcuts-dialog.ui:21
+msgctxt "shortcut window"
+msgid "Find"
+msgstr "Пошук"
+
+#: src/shortcuts-dialog.ui:27
+msgctxt "shortcut window"
+msgid "Copy"
+msgstr "Скапіяваць"
+
+#: src/shortcuts-dialog.ui:33
+msgctxt "shortcut window"
+msgid "Paste"
+msgstr "Уставіць"
+
+#: src/shortcuts-dialog.ui:41
+msgctxt "shortcut window"
+msgid "Tabs"
+msgstr "Укладкі"
+
+#: src/shortcuts-dialog.ui:44
+msgctxt "shortcut window"
+msgid "New Tab"
+msgstr "Новая ўкладка"
+
+#: src/shortcuts-dialog.ui:50
+msgctxt "shortcut window"
+msgid "Close Tab"
+msgstr "Закрыць укладку"
+
+#: src/shortcuts-dialog.ui:56
+msgctxt "shortcut window"
+msgid "Show All Tabs"
+msgstr "Паказаць усе ўкладкі"
+
+#: src/shortcuts-dialog.ui:62
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Наступная ўкладка"
+
+#: src/shortcuts-dialog.ui:68
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Папярэдняя ўкладка"
+
+#: src/shortcuts-dialog.ui:74 src/shortcuts-dialog.ui:95
+msgctxt "shortcut window"
+msgid "Move Tab Left"
+msgstr "Перамясціць укладку ўлева"
+
+#: src/shortcuts-dialog.ui:81 src/shortcuts-dialog.ui:88
+msgctxt "shortcut window"
+msgid "Move Tab Right"
+msgstr "Перамясціць укладку ўправа"
+
+#: src/shortcuts-dialog.ui:102
+msgctxt "shortcut window"
+msgid "Switch to Tab 1–9"
+msgstr "Пераключыцца на ўкладку 1–9"
+
+#: src/shortcuts-dialog.ui:108
+msgctxt "shortcut window"
+msgid "Switch to Tab 10"
+msgstr "Пераключыцца на ўкладку 10"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Акно"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Поўнаэкранны рэжым"
 
 #~ msgid "King’s Cross"
 #~ msgstr "Кінгс-Крос"
