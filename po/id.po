@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: console gnome-49\n"
+"Project-Id-Version: console gnome-50\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-11-10 11:31+0000\n"
-"PO-Revision-Date: 2026-01-01 18:47+0700\n"
+"POT-Creation-Date: 2026-03-16 01:41+0000\n"
+"PO-Revision-Date: 2026-05-28 13:01+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -51,7 +51,7 @@ msgstr "Emulator terminal sederhana yang mudah digunakan untuk destop GNOME."
 msgid "Terminal window"
 msgstr "Jendela terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:579 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:621 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Proyek GNOME"
 
@@ -77,7 +77,7 @@ msgstr "© %s Zander Brown"
 msgid "translator-credits"
 msgstr ""
 "Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2024.\n"
-"Andika Triwidada <andika@gmail.com>, 2024, 2025."
+"Andika Triwidada <andika@gmail.com>, 2024-2026."
 
 #: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
@@ -241,20 +241,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i kali %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i kolom %i baris"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:508
 #, c-format
 msgid "Tab %i"
 msgstr "Tab %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "_Lepas Tab"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Tutup"
 
@@ -411,7 +422,7 @@ msgstr ""
 #: src/kgx-terminal.c:575
 msgctxt "toast-message"
 msgid "Couldn't Show File"
-msgstr "Tidak Dapat Menampilkan Berkas."
+msgstr "Tidak Dapat Menampilkan Berkas"
 
 #: src/kgx-terminal.c:578
 msgctxt "spad-message"
@@ -597,7 +608,7 @@ msgid "Custom _Font"
 msgstr "_Fonta Ubahan"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "Perilaku"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -612,11 +623,15 @@ msgstr "Bari_s Gulir Balik"
 msgid "Terminal Bell"
 msgstr "Bel Terminal"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "Mengendalikan bagaimana peringatan diindikasikan"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "Mainkan _Suara"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "Efek _Visual"
 
@@ -699,3 +714,13 @@ msgstr "Beralih ke Tab 1–9"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Beralih ke Tab 10"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Jendela"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Layar Penuh"
