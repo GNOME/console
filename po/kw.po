@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
 "POT-Creation-Date: 2026-04-18 16:22+0000\n"
-"PO-Revision-Date: 2026-05-21 17:33+0100\n"
+"PO-Revision-Date: 2026-06-10 14:57+0100\n"
 "Last-Translator: Flynn Peck <cirilla@tuta.io>\n"
 "Language-Team: kw\n"
 "Language: kw\n"
@@ -137,7 +137,7 @@ msgstr "LINENNOW"
 #: src/kgx-application.c:695
 #, c-format
 msgid "KGX %s — Terminal Emulator"
-msgstr "KGX %s — Omhevelell Termynal"
+msgstr "KGX %s — Omhevelell Dermynal"
 
 #: src/kgx-application.c:701
 msgid "[-e|-- COMMAND [ARGUMENT...]]"
@@ -212,8 +212,8 @@ msgid ""
 "An unexpected error occurred whilst receiving a URI list drop. Please "
 "include the following information if you report the error."
 msgstr ""
-"Yth esa error angwaytys dres ow tegemeres droppyans rol URI. Synsewgh an "
-"kedhlow a sew mar terivowgh an error mar pleg."
+"Yth esa kamm angwaytys dres ow tegemeres droppyans rol URI. Synsewgh an "
+"kedhlow a sew mar terivowgh an kamm mar pleg."
 
 #: src/kgx-drop-target.c:337
 msgctxt "spad-message"
@@ -221,8 +221,8 @@ msgid ""
 "An unexpected error occurred whilst receiving a file list drop. Please "
 "include the following information if you report the error."
 msgstr ""
-"Yth esa error angwaytys dres ow tegemeres droppyans rol restrennow. Synsewgh "
-"an kedhlow a sew mar terivowgh an error mar pleg."
+"Yth esa kamm angwaytys dres ow tegemeres droppyans rol restrennow. Synsewgh "
+"an kedhlow a sew mar terivowgh an kamm mar pleg."
 
 #: src/kgx-drop-target.c:371
 msgctxt "spad-message"
@@ -230,8 +230,8 @@ msgid ""
 "An unexpected error occurred whilst receiving a text drop. Please include "
 "the following information if you report the error."
 msgstr ""
-"Yth esa error angwaytys dres ow tegemeres droppyans tekst. Synsewgh an "
-"kedhlow a sew mar terivowgh an error mar pleg."
+"Yth esa kamm angwaytys dres ow tegemeres droppyans tekst. Synsewgh an "
+"kedhlow a sew mar terivowgh an kamm mar pleg."
 
 #: src/kgx-drop-target.c:512
 msgctxt "spad-message"
@@ -240,7 +240,7 @@ msgid ""
 "if you report the error."
 msgstr ""
 "Yth esa tra angwaytys degemerys. Synsewgh an kedhlow a sew mar terivowgh an "
-"error mar pleg."
+"kamm mar pleg."
 
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
@@ -324,15 +324,15 @@ msgstr ""
 
 #: src/kgx-spad.c:339 src/kgx-spad.ui:4
 msgid "Error Details"
-msgstr "Manylyon Error"
+msgstr "Manylyon Kamm"
 
 #: src/kgx-spad.ui:23
 msgid "Error Message"
-msgstr "Messach Error"
+msgstr "Messach Kamm"
 
 #: src/kgx-spad.ui:35
 msgid "Copy Error Message"
-msgstr "Kopia Messach Error"
+msgstr "Kopia Messach Kamm"
 
 #: src/kgx-spad.ui:104
 msgid "Report _Issue"
@@ -384,8 +384,8 @@ msgid ""
 "The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
 "are installed."
 msgstr ""
-"An worgevren “<a href=\"%s\">%s</a>” a dhevnydh an protokol “%s”, rag mayth "
-"nyns eus appys leys."
+"An worgevren “<a href=\"%s\">%s</a>” a dhevnydh an protokol “%s”, rag may "
+"yma appys leys vyth."
 
 #: src/kgx-terminal.c:373
 #, c-format
@@ -394,8 +394,8 @@ msgid ""
 "An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
 "a>”. Please include the following information if you report the error."
 msgstr ""
-"Yth esa error angwaytys dres owth ygeri an worgevren “<a href=\"%s\">%s</"
-"a>”. Synsewgh an kedhlow a sew mar terivowgh an error mar pleg."
+"Yth esa kamm angwaytys dres owth ygeri an worgevren “<a href=\"%s\">%s</a>”. "
+"Synsewgh an kedhlow a sew mar terivowgh an kamm mar pleg."
 
 #: src/kgx-terminal.c:421
 #, c-format
@@ -427,8 +427,8 @@ msgid ""
 "An unexpected error occurred whilst reading the clipboard. Please include "
 "the following information if you report the error."
 msgstr ""
-"Yth esa error angwaytys dres ow redya an astel glypp. Synsewgh an kedhlow a "
-"sew mar terivowgh an error mar pleg."
+"Yth esa kamm angwaytys dres ow redya an astel glypp. Synsewgh an kedhlow a "
+"sew mar terivowgh an kamm mar pleg."
 
 #: src/kgx-terminal.c:575
 msgctxt "toast-message"
@@ -441,8 +441,8 @@ msgid ""
 "An unexpected error occurred whilst showing the file. Please include the "
 "following information if you report the error."
 msgstr ""
-"Yth esa error angwaytys dres ow tiskwedhes an restren. Synsewgh an kedhlow a "
-"sew mar terivowgh an error mar pleg."
+"Yth esa kamm angwaytys dres ow tiskwedhes an restren. Synsewgh an kedhlow a "
+"sew mar terivowgh an kamm mar pleg."
 
 #: src/kgx-terminal.c:599
 msgctxt "toast-message"
@@ -455,8 +455,8 @@ msgid ""
 "An unexpected error occurred whilst opening the folder. Please include the "
 "following information if you report the error."
 msgstr ""
-"Yth esa error angwaytys dres owth ygeri an restrenva. Synsewgh an kedhlow a "
-"sew mar terivowgh an error mar pleg."
+"Yth esa kamm angwaytys dres owth ygeri an restrenva. Synsewgh an kedhlow a "
+"sew mar terivowgh an kamm mar pleg."
 
 #: src/kgx-terminal.c:696
 #, c-format
@@ -478,8 +478,8 @@ msgid ""
 "An unexpected error occurred whilst processing the clipboard. Please include "
 "the following information if you report the error."
 msgstr ""
-"Yth esa error angwaytys dres owth argherdhes an astel glypp. Synsewgh an "
-"kedhlow a sew mar terivowgh an error mar pleg."
+"Yth esa kamm angwaytys dres owth argherdhes an astel glypp. Synsewgh an "
+"kedhlow a sew mar terivowgh an kamm mar pleg."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -544,7 +544,7 @@ msgstr "_Dewisyow"
 
 #: src/kgx-window.ui:39
 msgid "_Keyboard Shortcuts"
-msgstr "_Kesunyansow Vysowek"
+msgstr "_Kesunyansow Bysowek"
 
 #: src/kgx-window.ui:43
 msgid "_About Console"
@@ -644,7 +644,7 @@ msgstr "Seni _Son"
 
 #: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
-msgstr "Effeythyow _Welesek"
+msgstr "Effeythyow _Gwelesek"
 
 #: src/shortcuts-dialog.ui:7
 msgctxt "shortcut window"
