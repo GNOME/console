@@ -1,15 +1,15 @@
 # Norwegian bokmål translation of console.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Kjartan Maraas <kjartan.maraas@gmail.com>, 2022-2026.
+# Kjartan Maraas <kmaraas@gnome.org>, 2022-2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
 "POT-Creation-Date: 2026-03-16 01:41+0000\n"
-"PO-Revision-Date: 2026-05-06 08:45+0200\n"
-"Last-Translator: Kjartan Maraas <kjartan.maraas@gmail.com>\n"
+"PO-Revision-Date: 2026-07-09 13:54+0200\n"
+"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: \n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
@@ -385,7 +385,7 @@ msgstr ""
 #, c-format
 msgctxt "spad-message"
 msgid "The link “<a href=\"%s\">%s</a>” is malformed."
-msgstr ""
+msgstr "Lenken «<a href=«%s»>%s</a>» er feil utformet."
 
 #: src/kgx-terminal.c:440
 #, c-format
