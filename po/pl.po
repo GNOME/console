@@ -3,23 +3,23 @@
 # This file is distributed under the same license as the console package.
 # Piotr Drąg <piotrdrag@gmail.com>, 2019-2025.
 # Aviary.pl <community-poland@mozilla.org>, 2019-2025.
-# Victoria <royal.victoria@proton.me>, 2026.
+# Victoria Niedzielska <victorian@gnome.org>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-12-28 14:23+0000\n"
-"PO-Revision-Date: 2026-03-03 10:47+0100\n"
-"Last-Translator: Victoria <royal.victoria@proton.me>\n"
-"Language-Team: Polish\n"
+"POT-Creation-Date: 2026-04-18 16:22+0000\n"
+"PO-Revision-Date: 2026-07-16 23:23+0200\n"
+"Last-Translator: Victoria Niedzielska <victorian@gnome.org>\n"
+"Language-Team: Polish <https://l10n.gnome.org/teams/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Gtranslator 49.0\n"
+"X-Generator: Gtranslator 50.0\n"
 
 #: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -54,7 +54,7 @@ msgstr "Prosty, łatwy w użyciu emulator terminala dla środowiska GNOME."
 msgid "Terminal window"
 msgstr "Okno terminala"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:621 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Projekt GNOME"
 
@@ -80,7 +80,8 @@ msgstr "© %s Zander Brown"
 msgid "translator-credits"
 msgstr ""
 "Piotr Drąg <piotrdrag@gmail.com>, 2019-2025\n"
-"Aviary.pl <community-poland@mozilla.org>, 2019-2025"
+"Aviary.pl <community-poland@mozilla.org>, 2019-2025\n"
+"Victoria Niedzielska <victorian@gnome.org>, 2026"
 
 #: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
@@ -338,7 +339,7 @@ msgstr "Komunikat o błędzie"
 
 #: src/kgx-spad.ui:35
 msgid "Copy Error Message"
-msgstr "Kopiuje komunikat o błędzie"
+msgstr "Skopiuj komunikat o błędzie"
 
 #: src/kgx-spad.ui:104
 msgid "Report _Issue"
@@ -391,7 +392,7 @@ msgid ""
 "are installed."
 msgstr ""
 "Odnośnik „<a href=\"%s\">%s</a>” używa protokołu „%s”, dla którego nie "
-"zainstalowano żadnych programów."
+"zainstalowano żadnej aplikacji."
 
 #: src/kgx-terminal.c:373
 #, c-format
@@ -554,15 +555,15 @@ msgstr "_Skróty klawiszowe"
 
 #: src/kgx-window.ui:43
 msgid "_About Console"
-msgstr "_O programie"
+msgstr "_O aplikacji"
 
 #: src/kgx-window.ui:148
 msgid "Find in Terminal"
-msgstr "Wyszukuje w terminalu"
+msgstr "Znajdź w terminalu"
 
 #: src/kgx-window.ui:160
 msgid "Leave Fullscreen"
-msgstr "Opuszcza pełny ekran"
+msgstr "Opuść tryb pełnoekranowy"
 
 #: src/kgx-window.ui:167
 msgid "Main Menu"
@@ -570,15 +571,15 @@ msgstr "Menu główne"
 
 #: src/kgx-window.ui:185
 msgid "Shrink Text"
-msgstr "Pomniejsza tekst"
+msgstr "Pomniejsz tekst"
 
 #: src/kgx-window.ui:196
 msgid "Reset Size"
-msgstr "Przywraca zwykły rozmiar tekstu"
+msgstr "Przywróć zwykły rozmiar tekstu"
 
 #: src/kgx-window.ui:220
 msgid "Enlarge Text"
-msgstr "Powiększa tekst"
+msgstr "Powiększ tekst"
 
 #: src/preferences/kgx-font-picker.ui:11
 msgid "Terminal Font"
@@ -655,7 +656,7 @@ msgstr "_Efekty wizualne"
 #: src/shortcuts-dialog.ui:7
 msgctxt "shortcut window"
 msgid "Application"
-msgstr "Program"
+msgstr "Aplikacja"
 
 #: src/shortcuts-dialog.ui:10
 msgctxt "shortcut window"
