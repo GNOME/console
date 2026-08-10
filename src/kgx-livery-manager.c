@@ -304,7 +304,7 @@ kgx_livery_manager_set_custom_liveries (KgxLiveryManager *self,
 
   g_hash_table_remove_all (self->custom_liveries);
 
-  while (g_variant_iter_next (iter, "(&sv)", &uuid, &value)) {
+  while (g_variant_iter_next (iter, "{&sv}", &uuid, &value)) {
     g_autoptr (KgxLivery) livery = kgx_livery_deserialise (value);
 
     if (g_strcmp0 (kgx_livery_get_uuid (livery), uuid) != 0) {
