@@ -117,6 +117,18 @@
             <property name="action">action(term.paste)</property>
           </object>
         </child>
+        <child>
+          <object class="GtkShortcut">
+            <property name="trigger">Copy</property>
+            <property name="action">action(term.copy)</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkShortcut">
+            <property name="trigger">Paste</property>
+            <property name="action">action(term.paste)</property>
+          </object>
+        </child>
       </object>
     </child>
     <child>
