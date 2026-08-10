@@ -5,6 +5,14 @@
   --system-accent: var(--accent-bg-color);
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --headerbar-bg-oklch: 0.32 calc(c * 0.32) h;
+    --headerbar-backdrop-oklch: 0.27 calc(c * 0.27) h;
+    --headerbar-bell-oklch: 0.42 calc(c * 0.6) h;
+  }
+}
+
 @keyframes bell {
   50% {
     background-color: oklch(from var(--accent-orange) var(--headerbar-bell-oklch));

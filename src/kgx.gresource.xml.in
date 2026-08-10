@@ -16,7 +16,6 @@
     <file preprocess="xml-stripblanks" compressed="true">preferences/kgx-preferences-window.ui</file>
     <file preprocess="xml-stripblanks" compressed="true">shortcuts-dialog.ui</file>
     <file compressed="true">style.css</file>
-    <file compressed="true">style-dark.css</file>
     <file compressed="true">logo.txt</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/bell-outline-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/emblem-ok-symbolic.svg</file>
