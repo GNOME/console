@@ -46,7 +46,7 @@ endif
 
 kgx_homepage_url = 'https://apps.gnome.org/Console/'
 kgx_issue_url = 'https://gitlab.gnome.org/GNOME/console/-/issues/'
-copyright_range = '2019-2025'
+copyright_range = '2019-2026'
 vcs_tag_fallback = 'no-tag'
 
 prefix = get_option('prefix')
@@ -84,7 +84,7 @@ if get_option('tests')
 endif
 
 # Gtk Requirement
-gtk_min_ver = '4.20'
+gtk_min_ver = '4.22'
 gtk_min_ver_parts = gtk_min_ver.split('.')
 if gtk_min_ver_parts[1].to_int().is_odd()
   gtk_sym_ver = 'GDK_VERSION_@0@_@1@'.format(
@@ -99,11 +99,11 @@ else
 endif
 
 # GLib Requirement
-glib_min_ver = '2.86'
+glib_min_ver = '2.88'
 glib_sym_ver = 'GLIB_VERSION_@0@'.format(glib_min_ver.replace('.', '_'))
 
 # Adwaita Requirement
-adw_min_ver = '1.8'
+adw_min_ver = '1.9'
 adw_sym_ver = 'ADW_VERSION_@0@'.format(adw_min_ver.replace('.', '_'))
 
 kgx_cargs = [
