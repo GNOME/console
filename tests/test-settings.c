@@ -674,6 +674,35 @@ test_settings_transparency (Fixture *fixture, gconstpointer unused)
 }
 
 
+static void
+test_settings_always_stop_train (Fixture *fixture, gconstpointer unused)
+{
+  g_autoptr (KgxSettings) settings = g_object_new (KGX_TYPE_SETTINGS, NULL);
+  gboolean result = TRUE;
+
+  g_settings_set_boolean (fixture->settings, "always-stop-train", TRUE);
+
+  g_object_get (settings, "always-stop-train", &result, NULL);
+  g_assert_true (result);
+
+  kgx_test_property_notify (settings, "always-stop-train", FALSE, TRUE);
+
+  g_object_get (settings, "always-stop-train", &result, NULL);
+  g_assert_true (result);
+
+  kgx_expect_no_notify (settings);
+  g_settings_set_boolean (fixture->settings, "always-stop-train", TRUE);
+  kgx_assert_expected_notifies (settings);
+
+  kgx_expect_property_notify (settings, "always-stop-train");
+  g_settings_set_boolean (fixture->settings, "always-stop-train", FALSE);
+  kgx_assert_expected_notifies (settings);
+
+  g_object_get (settings, "always-stop-train", &result, NULL);
+  g_assert_false (result);
+}
+
+
 #define fixtured_test(path, data, func) \
   g_test_add ((path), Fixture, (data), fixture_setup, (func), fixture_tear);
 
@@ -724,6 +753,9 @@ main (int argc, char *argv[])
 
   fixtured_test ("/kgx/settings/software-flow-control", NULL, test_settings_software_flow_control);
   fixtured_test ("/kgx/settings/transparency", NULL, test_settings_transparency);
+  fixtured_test ("/kgx/settings/always-stop-train",
+                 NULL,
+                 test_settings_always_stop_train);
 
   return g_test_run ();
 }

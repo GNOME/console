@@ -203,6 +203,10 @@ kgx_window_close_request (GtkWindow *window)
   KgxWindowPrivate *priv = kgx_window_get_instance_private (self);
   g_autoptr (GPtrArray) children = NULL;
 
+  if (G_UNLIKELY (kgx_settings_always_stop_train (priv->settings))) {
+    return FALSE; /* Aka no, I don’t want to block closing */
+  }
+
   children = kgx_pages_get_children (KGX_PAGES (priv->pages));
 
   if (children->len < 1 || priv->close_anyway) {

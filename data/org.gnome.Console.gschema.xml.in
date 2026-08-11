@@ -58,5 +58,9 @@
     <key name="custom-liveries" type="a{sv}">
       <default>{}</default>
     </key>
+    <key name="always-stop-train" type="b">
+      <default>false</default>
+      <summary>Bypass the ‘Close Tab?’ or ‘Close Window?’ dialogues</summary>
+    </key>
   </schema>
 </schemalist>

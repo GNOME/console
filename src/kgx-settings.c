@@ -54,6 +54,7 @@ struct _KgxSettings {
   gboolean              software_flow_control;
   KgxLivery            *livery;
   gboolean              transparency;
+  gboolean              always_stop_train;
 
   KgxLiveryManager     *livery_manager;
 
@@ -83,7 +84,8 @@ enum {
   PROP_SOFTWARE_FLOW_CONTROL,
   PROP_LIVERY,
   PROP_TRANSPARENCY,
-  LAST_PROP
+  PROP_ALWAYS_STOP_TRAIN,
+  LAST_PROP,
 };
 static GParamSpec *pspecs[LAST_PROP] = { NULL, };
 
@@ -197,6 +199,12 @@ kgx_settings_set_property (GObject      *object,
     case PROP_LIVERY:
       kgx_settings_set_livery (self, g_value_get_boxed (value));
       break;
+    case PROP_ALWAYS_STOP_TRAIN:
+      kgx_set_boolean_prop (object,
+                            pspec,
+                            &self->always_stop_train,
+                            value);
+      break;
     KGX_INVALID_PROP (object, property_id, pspec);
   }
 }
@@ -255,6 +263,9 @@ kgx_settings_get_property (GObject    *object,
       break;
     case PROP_TRANSPARENCY:
       g_value_set_boolean (value, self->transparency);
+      break;
+    case PROP_ALWAYS_STOP_TRAIN:
+      g_value_set_boolean (value, self->always_stop_train);
       break;
     KGX_INVALID_PROP (object, property_id, pspec);
   }
@@ -381,6 +392,11 @@ kgx_settings_class_init (KgxSettingsClass *klass)
 
   pspecs[PROP_TRANSPARENCY] =
     g_param_spec_boolean ("transparency", NULL, NULL,
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
+
+  pspecs[PROP_ALWAYS_STOP_TRAIN] =
+    g_param_spec_boolean ("always-stop-train", NULL, NULL,
                           FALSE,
                           G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
@@ -571,6 +587,9 @@ kgx_settings_init (KgxSettings *self)
                                 resolve_livery,
                                 select_livery,
                                 self, NULL);
+  g_settings_bind (self->settings, "always-stop-train",
+                   self, "always-stop-train",
+                   G_SETTINGS_BIND_DEFAULT);
 
   g_signal_connect (self->settings,
                     "changed::" RESTORE_SIZE_KEY,
@@ -826,4 +845,17 @@ kgx_settings_resolve_theme (KgxSettings *self, gboolean dark_environment)
   }
 
   return KGX_THEME_DAY;
+}
+
+
+/**
+ * kgx_settings_always_stop_train: (get-property always-stop-train)
+ * @self: the [type@Kgx.Settings].
+ */
+gboolean
+kgx_settings_always_stop_train (KgxSettings *self)
+{
+  g_return_val_if_fail (KGX_IS_SETTINGS (self), FALSE);
+
+  return self->always_stop_train;
 }

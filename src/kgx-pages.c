@@ -455,8 +455,13 @@ close_page (AdwTabView *view,
   g_autoptr (CloseData) data = close_data_alloc ();
   g_autoptr (GPtrArray) children = NULL;
   g_autoptr (GCancellable) cancellable = NULL;
+  KgxPagesPrivate *priv = kgx_pages_get_instance_private (self);
   KgxCloseDialog *dlg = NULL;
   KgxTab *tab;
+
+  if (G_UNLIKELY (kgx_settings_always_stop_train (priv->settings))) {
+    return GDK_EVENT_PROPAGATE; /* Aka no, I don’t want to block closing */
+  }
 
   tab = KGX_TAB (adw_tab_page_get_child (page));
   children = kgx_tab_get_children (tab);

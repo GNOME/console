@@ -100,5 +100,6 @@ void                  kgx_settings_set_livery                (KgxSettings       
                                                               KgxLivery             *livery);
 KgxTheme              kgx_settings_resolve_theme             (KgxSettings           *self,
                                                               gboolean               dark_environment);
+gboolean              kgx_settings_always_stop_train         (KgxSettings           *self);
 
 G_END_DECLS
