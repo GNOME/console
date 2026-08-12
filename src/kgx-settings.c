@@ -1,6 +1,6 @@
 /* kgx-settings.c
  *
- * Copyright 2022-2023 Zander Brown
+ * Copyright 2022-2026 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,6 +33,7 @@
 #define RESTORE_SIZE_KEY "restore-window-size"
 #define LAST_SIZE_KEY "last-window-size"
 #define LAST_MAXIMISED_KEY "last-window-maximised"
+#define LAST_FULLSCREEN_KEY "last-window-fullscreen"
 
 #define AUDIBLE_BELL "audible-bell"
 
@@ -702,7 +703,8 @@ void
 kgx_settings_get_size (KgxSettings *self,
                        int         *width,
                        int         *height,
-                       gboolean    *maximised)
+                       gboolean    *maximised,
+                       gboolean    *fullscreen)
 {
   g_return_if_fail (KGX_IS_SETTINGS (self));
   g_return_if_fail (width != NULL && height != NULL && maximised != NULL);
@@ -711,11 +713,13 @@ kgx_settings_get_size (KgxSettings *self,
     *width = -1;
     *height = -1;
     *maximised = FALSE;
+    *fullscreen = FALSE;
     return;
   }
 
   g_settings_get (self->settings, LAST_SIZE_KEY, "(ii)", width, height);
   g_settings_get (self->settings, LAST_MAXIMISED_KEY, "b", maximised);
+  g_settings_get (self->settings, LAST_FULLSCREEN_KEY, "b", fullscreen);
 }
 
 
@@ -723,7 +727,8 @@ void
 kgx_settings_set_custom_size (KgxSettings *self,
                               int          width,
                               int          height,
-                              gboolean     maximised)
+                              gboolean     maximised,
+                              gboolean     fullscreen)
 {
   g_return_if_fail (KGX_IS_SETTINGS (self));
 
@@ -735,6 +740,7 @@ kgx_settings_set_custom_size (KgxSettings *self,
 
   g_settings_set (self->settings, LAST_SIZE_KEY, "(ii)", width, height);
   g_settings_set (self->settings, LAST_MAXIMISED_KEY, "b", maximised);
+  g_settings_set (self->settings, LAST_FULLSCREEN_KEY, "b", fullscreen);
 }
 
 

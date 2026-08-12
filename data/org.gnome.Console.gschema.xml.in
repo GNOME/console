@@ -37,6 +37,9 @@
     <key name="last-window-maximised" type="b">
       <default>false</default>
     </key>
+    <key name="last-window-fullscreen" type="b">
+      <default>false</default>
+    </key>
     <key name="restore-window-size" type="b">
       <default>true</default>
     </key>

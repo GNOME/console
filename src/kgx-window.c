@@ -213,10 +213,15 @@ kgx_window_close_request (GtkWindow *window)
     if (gtk_window_is_active (GTK_WINDOW (self)) &&
         !adw_application_window_get_adaptive_preview (ADW_APPLICATION_WINDOW (self))) {
       gboolean maximised = gtk_window_is_maximized (GTK_WINDOW (self));
+      gboolean fullscreen = gtk_window_is_fullscreen (GTK_WINDOW (self));
       int width, height;
 
       gtk_window_get_default_size (GTK_WINDOW (self), &width, &height);
-      kgx_settings_set_custom_size (priv->settings, width, height, maximised);
+      kgx_settings_set_custom_size (priv->settings,
+                                    width,
+                                    height,
+                                    maximised,
+                                    fullscreen);
     }
 
     return FALSE; /* Aka no, I don’t want to block closing */

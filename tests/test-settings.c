@@ -350,12 +350,14 @@ test_settings_size (Fixture *fixture, gconstpointer unused)
   int width = 42;
   int height = 42;
   gboolean maximised = TRUE;
+  gboolean fullscreen = TRUE;
 
-  kgx_settings_get_size (settings, &width, &height, &maximised);
+  kgx_settings_get_size (settings, &width, &height, &maximised, &fullscreen);
 
   g_assert_cmpint (width, ==, -1);
   g_assert_cmpint (height, ==, -1);
   g_assert_false (maximised);
+  g_assert_false (fullscreen);
 }
 
 
@@ -366,13 +368,15 @@ test_settings_custom_size (Fixture *fixture, gconstpointer unused)
   int width = 42;
   int height = 42;
   gboolean maximised = FALSE;
+  gboolean fullscreen = FALSE;
 
-  kgx_settings_set_custom_size (settings, 200, 100, TRUE);
-  kgx_settings_get_size (settings, &width, &height, &maximised);
+  kgx_settings_set_custom_size (settings, 200, 100, TRUE, TRUE);
+  kgx_settings_get_size (settings, &width, &height, &maximised, &fullscreen);
 
   g_assert_cmpint (width, ==, 200);
   g_assert_cmpint (height, ==, 100);
   g_assert_true (maximised);
+  g_assert_true (fullscreen);
 }
 
 

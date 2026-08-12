@@ -1,6 +1,6 @@
 /* kgx-settings.h
  *
- * Copyright 2022-2024 Zander Brown
+ * Copyright 2022-2026 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -81,14 +81,16 @@ void                  kgx_settings_set_custom_shell  (KgxSettings       *self,
 void                  kgx_settings_set_scrollback_limit (KgxSettings       *self,
                                                          int64_t            value);
 gboolean              kgx_settings_get_restore_size  (KgxSettings       *self);
-void                  kgx_settings_get_size             (KgxSettings       *self,
-                                                         int               *width,
-                                                         int               *height,
-                                                         gboolean          *maximised);
-void                  kgx_settings_set_custom_size      (KgxSettings       *self,
-                                                         int                width,
-                                                         int                height,
-                                                         gboolean           maximised);
+void                  kgx_settings_get_size                  (KgxSettings           *self,
+                                                              int                   *width,
+                                                              int                   *height,
+                                                              gboolean              *maximised,
+                                                              gboolean              *fullscreen);
+void                  kgx_settings_set_custom_size           (KgxSettings           *self,
+                                                              int                    width,
+                                                              int                    height,
+                                                              gboolean               maximised,
+                                                              gboolean               fullscreen);
 gboolean              kgx_settings_get_audible_bell  (KgxSettings       *self);
 gboolean              kgx_settings_get_visual_bell   (KgxSettings       *self);
 PangoFontDescription *kgx_settings_dup_custom_font           (KgxSettings           *self);

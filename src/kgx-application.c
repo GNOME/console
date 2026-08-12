@@ -864,13 +864,18 @@ kgx_application_add_terminal (KgxApplication *self,
     GtkWindow *active_window;
     int width = -1, height = -1;
     gboolean maximised = FALSE;
+    gboolean fullscreen = FALSE;
 
     if (kgx_settings_get_restore_size (self->settings)) {
       active_window = gtk_application_get_active_window (GTK_APPLICATION (self));
       if (active_window) {
         gtk_window_get_default_size (active_window, &width, &height);
       } else {
-        kgx_settings_get_size (self->settings, &width, &height, &maximised);
+        kgx_settings_get_size (self->settings,
+                               &width,
+                               &height,
+                               &maximised,
+                               &fullscreen);
       }
     }
 
@@ -882,6 +887,7 @@ kgx_application_add_terminal (KgxApplication *self,
                            "default-width", width,
                            "default-height", height,
                            "maximized", maximised,
+                           "fullscreened", fullscreen,
                            NULL);
   }
 
