@@ -488,7 +488,9 @@ restore_window_size_changed (GSettings   *settings,
                              KgxSettings *self)
 {
   if (!g_settings_get_boolean (self->settings, RESTORE_SIZE_KEY)) {
-    g_settings_set (self->settings, LAST_SIZE_KEY, "(ii)", -1, -1);
+    g_settings_reset (self->settings, LAST_SIZE_KEY);
+    g_settings_reset (self->settings, LAST_MAXIMISED_KEY);
+    g_settings_reset (self->settings, LAST_FULLSCREEN_KEY);
   }
 }
 

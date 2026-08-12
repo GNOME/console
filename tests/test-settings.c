@@ -377,6 +377,52 @@ test_settings_custom_size (Fixture *fixture, gconstpointer unused)
   g_assert_cmpint (height, ==, 100);
   g_assert_true (maximised);
   g_assert_true (fullscreen);
+
+  /* Disable window-state persistence */
+  g_settings_set_boolean (fixture->settings, "restore-window-size", FALSE);
+
+  /* Associated keys get reset */
+  g_assert_null (g_settings_get_user_value (fixture->settings,
+                                            "last-window-size"));
+  g_assert_null (g_settings_get_user_value (fixture->settings,
+                                            "last-window-maximised"));
+  g_assert_null (g_settings_get_user_value (fixture->settings,
+                                            "last-window-fullscreen"));
+
+  /* This should now be a no-op */
+  kgx_settings_set_custom_size (settings, 900, 300, FALSE, FALSE);
+
+  /* Thus no values stored */
+  g_assert_null (g_settings_get_user_value (fixture->settings,
+                                            "last-window-size"));
+  g_assert_null (g_settings_get_user_value (fixture->settings,
+                                            "last-window-maximised"));
+  g_assert_null (g_settings_get_user_value (fixture->settings,
+                                            "last-window-fullscreen"));
+
+  /* Even with manually written values */
+  g_settings_set (fixture->settings, "last-window-size", "(ii)", 42, 42);
+  g_settings_set_boolean (fixture->settings, "last-window-maximised", TRUE);
+  g_settings_set_boolean (fixture->settings, "last-window-fullscreen", TRUE);
+
+  /* We see default values */
+  kgx_settings_get_size (settings, &width, &height, &maximised, &fullscreen);
+
+  g_assert_cmpint (width, ==, -1);
+  g_assert_cmpint (height, ==, -1);
+  g_assert_false (maximised);
+  g_assert_false (fullscreen);
+
+  /* Enable persistence again */
+  g_settings_set_boolean (fixture->settings, "restore-window-size", TRUE);
+
+  /* We see those manually written values */
+  kgx_settings_get_size (settings, &width, &height, &maximised, &fullscreen);
+
+  g_assert_cmpint (width, ==, 42);
+  g_assert_cmpint (height, ==, 42);
+  g_assert_true (maximised);
+  g_assert_true (fullscreen);
 }
 
 
