@@ -9,16 +9,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2026-03-16 01:41+0000\n"
-"PO-Revision-Date: 2026-05-02 13:02+0800\n"
-"Last-Translator: Luke Na <narukeu@outlook.com>\n"
+"POT-Creation-Date: 2026-08-12 00:30+0000\n"
+"PO-Revision-Date: 2026-08-13 12:27+0800\n"
+"Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Gtranslator 50.0\n"
 
 #: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -41,6 +41,10 @@ msgstr "新建窗口"
 msgid "New Tab"
 msgstr "新建标签页"
 
+#: data/org.gnome.Console.gschema.xml.in:66
+msgid "Bypass the ‘Close Tab?’ or ‘Close Window?’ dialogues"
+msgstr "绕过“关闭标签页？”或“关闭窗口？”对话框"
+
 #: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "终端模拟器"
@@ -53,7 +57,8 @@ msgstr "GNOME 桌面的简单、用户友好的终端模拟器。"
 msgid "Terminal window"
 msgstr "终端窗口"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:621 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:621
+#: data/org.gnome.Console.metainfo.xml.in.in:623 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "GNOME 项目"
 
@@ -248,7 +253,7 @@ msgstr "%i 列 %i 行"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:508
+#: src/kgx-pages.c:513
 #, c-format
 msgid "Tab %i"
 msgstr "标签页 %i"
