@@ -1,26 +1,27 @@
 # Brazilian Portuguese translation for gnome-console.
-# Copyright (C) 2025 gnome-console's COPYRIGHT HOLDER
+# Copyright (C) 2026 gnome-console's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-console package.
 # Enrico Nicoletto <hiko@duck.com>, 2021-2022.
 # Leônidas Araújo <leorusvellt@hotmail.com>, 2022.
 # Giovanni dos Santos Almeida Lombone Rodrigues <giovannilombone.io@gmail.com>, 2024.
 # Rafael Fontenelle <rafaelff@gnome.org>, 2019-2025.
 # Juliano de Souza Camargo <julianosc@pm.me>, 2024-2026.
+# Álvaro Burns <>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-12-28 14:23+0000\n"
-"PO-Revision-Date: 2026-01-31 19:56-0300\n"
-"Last-Translator: Juliano de Souza Camargo <julianosc@pm.me>\n"
+"POT-Creation-Date: 2026-08-12 00:30+0000\n"
+"PO-Revision-Date: 2026-08-15 09:44-0300\n"
+"Last-Translator: Álvaro Burns <>\n"
 "Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 49.0\n"
+"X-Generator: Gtranslator 50.0\n"
 "X-DL-Team: pt_BR\n"
 "X-DL-Module: console\n"
 "X-DL-Branch: main\n"
@@ -48,6 +49,10 @@ msgstr "Nova janela"
 msgid "New Tab"
 msgstr "Nova aba"
 
+#: data/org.gnome.Console.gschema.xml.in:66
+msgid "Bypass the ‘Close Tab?’ or ‘Close Window?’ dialogues"
+msgstr "Ignorar as caixas de diálogo “Fechar a aba?” ou “Fechar a janela?”"
+
 #: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "Emulador de terminal"
@@ -60,7 +65,8 @@ msgstr "Um simples emulador de terminal fácil de usar para o ambiente GNOME."
 msgid "Terminal window"
 msgstr "Janela do terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:621
+#: data/org.gnome.Console.metainfo.xml.in.in:623 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "O Projeto GNOME"
 
@@ -276,7 +282,7 @@ msgstr "%i colunas %i linhas"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:508
+#: src/kgx-pages.c:513
 #, c-format
 msgid "Tab %i"
 msgstr "Aba %i"
