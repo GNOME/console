@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-12-28 14:23+0000\n"
-"PO-Revision-Date: 2026-02-06 11:51+0100\n"
+"POT-Creation-Date: 2026-08-12 00:30+0000\n"
+"PO-Revision-Date: 2026-08-17 15:40+0200\n"
 "Last-Translator: Alexander Shopov <ash@kambanaria.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "Language: bg\n"
@@ -41,6 +41,12 @@ msgstr "Нов прозорец"
 msgid "New Tab"
 msgstr "Нов подпрозорец"
 
+#: data/org.gnome.Console.gschema.xml.in:66
+msgid "Bypass the ‘Close Tab?’ or ‘Close Window?’ dialogues"
+msgstr ""
+"Пропускане на прозорчетата за  „Затваряне на подпрозореца?“ или „Затваряне "
+"на прозореца?“"
+
 #: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "Терминален емулатор"
@@ -53,7 +59,8 @@ msgstr "Лесен за ползване емулатор на терминал 
 msgid "Terminal window"
 msgstr "Прозорец на терминала"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:621
+#: data/org.gnome.Console.metainfo.xml.in.in:623 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Проектът GNOME"
 
@@ -273,7 +280,7 @@ msgstr "%i колони, %i рѐда"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:508
+#: src/kgx-pages.c:513
 #, c-format
 msgid "Tab %i"
 msgstr "Подпрозорец %i"
