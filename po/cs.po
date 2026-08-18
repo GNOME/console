@@ -3,24 +3,26 @@
 # This file is distributed under the same license as the kgx package.
 #
 # Marek Černocký <marek@manet.cz>, 2020, 2021, 2022, 2023.
+# Patrik Sivek <patriksivek@gnome.org>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-12-28 14:23+0000\n"
-"PO-Revision-Date: 2026-02-12 01:26+0100\n"
-"Last-Translator: Daniel Rusek <mail@asciiwolf.com>\n"
-"Language-Team: Czech <gnome-cs-list@gnome.org>\n"
+"POT-Creation-Date: 2026-08-12 00:30+0000\n"
+"PO-Revision-Date: 2026-08-18 19:41+0200\n"
+"Last-Translator: Patrik Sivek <patriksivek@gnome.org>\n"
+"Language-Team: Czech\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Gtranslator 50.0\n"
 
-#: data/org.gnome.Console.desktop.in.in:2 data/org.gnome.Console.metainfo.xml.in.in:8
-#: src/kgx-application.h:26 src/kgx-window.ui:52
+#: data/org.gnome.Console.desktop.in.in:2
+#: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
+#: src/kgx-window.ui:52
 msgid "Console"
 msgstr "Konzola"
 
@@ -39,6 +41,10 @@ msgstr "Nové okno"
 msgid "New Tab"
 msgstr "Nová karta"
 
+#: data/org.gnome.Console.gschema.xml.in:66
+msgid "Bypass the ‘Close Tab?’ or ‘Close Window?’ dialogues"
+msgstr "Nezobrazovat dialogy „Zavřít kartu?“ a „Zavřít okno?“"
+
 #: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "Emulátor terminálu"
@@ -46,13 +52,15 @@ msgstr "Emulátor terminálu"
 #: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr ""
-"Jednoduchý, uživatelsky přívětivý emulátor terminálu pro uživatelské prostředí GNOME."
+"Jednoduchý, uživatelsky přívětivý emulátor terminálu pro uživatelské "
+"prostředí GNOME."
 
 #: data/org.gnome.Console.metainfo.xml.in.in:26
 msgid "Terminal window"
 msgstr "Terminálové okno"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:621
+#: data/org.gnome.Console.metainfo.xml.in.in:623 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Projekt GNOME"
 
@@ -143,20 +151,20 @@ msgstr "Zavřít okno?"
 
 #: src/kgx-close-dialog.c:75
 msgid ""
-"A command is still running, closing this window will kill it and may lead to unexpected "
-"outcomes"
-msgid_plural ""
-"Some commands are still running, closing this window will kill them and may lead to "
+"A command is still running, closing this window will kill it and may lead to "
 "unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this window will kill them and may "
+"lead to unexpected outcomes"
 msgstr[0] ""
-"Příkaz doposud běží, zavřením tohoto okna jej zabijete, což může vést k neočekávaným "
-"důsledkům"
+"Příkaz doposud běží, zavřením tohoto okna jej zabijete, což může vést k "
+"neočekávaným důsledkům"
 msgstr[1] ""
-"Některé příkazy doposud běží, zavřením tohoto okna je zabijete, což může vést k "
-"neočekávaným důsledkům"
+"Některé příkazy doposud běží, zavřením tohoto okna je zabijete, což může "
+"vést k neočekávaným důsledkům"
 msgstr[2] ""
-"Některé příkazy doposud běží, zavřením tohoto okna je zabijete, což může vést k "
-"neočekávaným důsledkům"
+"Některé příkazy doposud běží, zavřením tohoto okna je zabijete, což může "
+"vést k neočekávaným důsledkům"
 
 #: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
@@ -164,20 +172,20 @@ msgstr "Zavřít kartu?"
 
 #: src/kgx-close-dialog.c:84
 msgid ""
-"A command is still running, closing this tab will kill it and may lead to unexpected "
-"outcomes"
-msgid_plural ""
-"Some commands are still running, closing this tab will kill them and may lead to "
+"A command is still running, closing this tab will kill it and may lead to "
 "unexpected outcomes"
+msgid_plural ""
+"Some commands are still running, closing this tab will kill them and may "
+"lead to unexpected outcomes"
 msgstr[0] ""
-"Příkaz doposud běží, zavřením této karty jej zabijete, což může vést k neočekávaným "
-"důsledkům"
+"Příkaz doposud běží, zavřením této karty jej zabijete, což může vést k "
+"neočekávaným důsledkům"
 msgstr[1] ""
-"Některé příkazy doposud běží, zavřením této karty je zabijete, což může vést k "
-"neočekávaným důsledkům"
+"Některé příkazy doposud běží, zavřením této karty je zabijete, což může vést "
+"k neočekávaným důsledkům"
 msgstr[2] ""
-"Některé příkazy doposud běží, zavřením této karty je zabijete, což může vést k "
-"neočekávaným důsledkům"
+"Některé příkazy doposud běží, zavřením této karty je zabijete, což může vést "
+"k neočekávaným důsledkům"
 
 #. Translators: Screen reader label for the list of running commands
 #: src/kgx-close-dialog.c:194
@@ -199,8 +207,9 @@ msgstr "Zavří_t"
 msgid "Color string is wrong length"
 msgstr "Řetězec barvy má nesprávnou délku"
 
-#: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250 src/kgx-drop-target.c:334
-#: src/kgx-drop-target.c:368 src/kgx-drop-target.c:509
+#: src/kgx-drop-target.c:198 src/kgx-drop-target.c:250
+#: src/kgx-drop-target.c:334 src/kgx-drop-target.c:368
+#: src/kgx-drop-target.c:509
 msgctxt "toast-message"
 msgid "Drop Failed"
 msgstr "Přijímání se nezdařilo"
@@ -208,38 +217,38 @@ msgstr "Přijímání se nezdařilo"
 #: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst receiving a URI list drop. Please include the "
-"following information if you report the error."
+"An unexpected error occurred whilst receiving a URI list drop. Please "
+"include the following information if you report the error."
 msgstr ""
-"Při přijímání seznamu URI došlo k neočekávané chybě. Pokud chybu nahlásíte, uveďte prosím "
-"následující informace."
+"Při přijímání seznamu URI došlo k neočekávané chybě. Pokud chybu nahlásíte, "
+"uveďte prosím následující informace."
 
 #: src/kgx-drop-target.c:337
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst receiving a file list drop. Please include the "
-"following information if you report the error."
+"An unexpected error occurred whilst receiving a file list drop. Please "
+"include the following information if you report the error."
 msgstr ""
-"Při přijímání seznamu souborů došlo k neočekávané chybě. Pokud chybu nahlásíte, uveďte "
-"prosím následující informace."
+"Při přijímání seznamu souborů došlo k neočekávané chybě. Pokud chybu "
+"nahlásíte, uveďte prosím následující informace."
 
 #: src/kgx-drop-target.c:371
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst receiving a text drop. Please include the following "
-"information if you report the error."
+"An unexpected error occurred whilst receiving a text drop. Please include "
+"the following information if you report the error."
 msgstr ""
-"Při přijímání textu došlo k neočekávané chybě. Pokud chybu nahlásíte, uveďte prosím "
-"následující informace."
+"Při přijímání textu došlo k neočekávané chybě. Pokud chybu nahlásíte, uveďte "
+"prosím následující informace."
 
 #: src/kgx-drop-target.c:512
 msgctxt "spad-message"
 msgid ""
-"An unexpected value was received. Please include the following information if you report "
-"the error."
+"An unexpected value was received. Please include the following information "
+"if you report the error."
 msgstr ""
-"Byla přijata neočekávaná hodnota. Pokud chybu nahlásíte, uveďte prosím následující "
-"informace."
+"Byla přijata neočekávaná hodnota. Pokud chybu nahlásíte, uveďte prosím "
+"následující informace."
 
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
@@ -266,7 +275,7 @@ msgstr "%i sloupců %i řádků"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:508
+#: src/kgx-pages.c:513
 #, c-format
 msgid "Tab %i"
 msgstr "Karta %i"
@@ -380,20 +389,21 @@ msgstr "Nelze otevřít odkaz"
 #, c-format
 msgctxt "spad-message"
 msgid ""
-"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps are installed."
+"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
+"are installed."
 msgstr ""
-"Odkaz „<a href=\"%s\">%s</a>“ používá protokol „%s“, pro který nejsou nainstalovány žádné "
-"aplikace."
+"Odkaz „<a href=\"%s\">%s</a>“ používá protokol „%s“, pro který nejsou "
+"nainstalovány žádné aplikace."
 
 #: src/kgx-terminal.c:373
 #, c-format
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</a>”. Please "
-"include the following information if you report the error."
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
+"a>”. Please include the following information if you report the error."
 msgstr ""
-"Při otevírání odkazu „<a href=\"%s\">%s</a>“ došlo k neočekávané chybě. Pokud chybu "
-"nahlásíte, uveďte prosím následující informace."
+"Při otevírání odkazu „<a href=\"%s\">%s</a>“ došlo k neočekávané chybě. "
+"Pokud chybu nahlásíte, uveďte prosím následující informace."
 
 #: src/kgx-terminal.c:421
 #, c-format
@@ -405,7 +415,8 @@ msgstr "Odkaz „<a href=\"%s\">%s</a>“ má nesprávný tvar."
 #, c-format
 msgctxt "spad-message"
 msgid ""
-"The link “<a href=\"%s\">%s</a>” points to a location on a different device.\n"
+"The link “<a href=\"%s\">%s</a>” points to a location on a different "
+"device.\n"
 "\n"
 "This device is “%s” and the location is on “%s”."
 msgstr ""
@@ -421,11 +432,11 @@ msgstr "Nelze vložit text"
 #: src/kgx-terminal.c:514
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst reading the clipboard. Please include the following "
-"information if you report the error."
+"An unexpected error occurred whilst reading the clipboard. Please include "
+"the following information if you report the error."
 msgstr ""
-"Při čtení schránky došlo k neočekávané chybě. Pokud chybu nahlásíte, uveďte prosím "
-"následující informace."
+"Při čtení schránky došlo k neočekávané chybě. Pokud chybu nahlásíte, uveďte "
+"prosím následující informace."
 
 #: src/kgx-terminal.c:575
 msgctxt "toast-message"
@@ -435,11 +446,11 @@ msgstr "Nelze otevřít soubor"
 #: src/kgx-terminal.c:578
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst showing the file. Please include the following "
-"information if you report the error."
+"An unexpected error occurred whilst showing the file. Please include the "
+"following information if you report the error."
 msgstr ""
-"Při zobrazení souboru došlo k neočekávané chybě. Pokud chybu nahlásíte, uveďte prosím "
-"následující informace."
+"Při zobrazení souboru došlo k neočekávané chybě. Pokud chybu nahlásíte, "
+"uveďte prosím následující informace."
 
 #: src/kgx-terminal.c:599
 msgctxt "toast-message"
@@ -449,11 +460,11 @@ msgstr "Nelze otevřít složku"
 #: src/kgx-terminal.c:602
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst opening the folder. Please include the following "
-"information if you report the error."
+"An unexpected error occurred whilst opening the folder. Please include the "
+"following information if you report the error."
 msgstr ""
-"Při otevírání složky došlo k neočekávané chybě. Pokud chybu nahlásíte, uveďte prosím "
-"následující informace."
+"Při otevírání složky došlo k neočekávané chybě. Pokud chybu nahlásíte, "
+"uveďte prosím následující informace."
 
 #: src/kgx-terminal.c:696
 #, c-format
@@ -472,11 +483,11 @@ msgstr "Nelze vložit"
 #: src/kgx-terminal.c:987
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst processing the clipboard. Please include the following "
-"information if you report the error."
+"An unexpected error occurred whilst processing the clipboard. Please include "
+"the following information if you report the error."
 msgstr ""
-"Při zpracování schránky došlo k neočekávané chybě. Pokud chybu nahlásíte, uveďte prosím "
-"následující informace."
+"Při zpracování schránky došlo k neočekávané chybě. Pokud chybu nahlásíte, "
+"uveďte prosím následující informace."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
