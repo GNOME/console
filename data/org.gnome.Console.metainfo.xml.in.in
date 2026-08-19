@@ -27,6 +27,36 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="51~beta" date="2026-08-19" type="development">
+      <description>
+        <p>New Translations:</p>
+        <ul>
+          <li>Lao</li>
+        </ul>
+        <p>Updated Translations:</p>
+        <ul>
+          <li>Belarusian</li>
+          <li>Brazilian Portuguese</li>
+          <li>Bulgarian</li>
+          <li>Catalan</li>
+          <li>Chinese (China)</li>
+          <li>Cornish</li>
+          <li>Dutch</li>
+          <li>Georgian</li>
+          <li>Italian</li>
+          <li>Norwegian Bokmål</li>
+          <li>Occitan</li>
+          <li>Persian</li>
+          <li>Polish</li>
+          <li>Romanian</li>
+          <li>Serbian</li>
+          <li>Slovak</li>
+          <li>Slovenian</li>
+          <li>Thai</li>
+          <li>Ukrainian</li>
+        </ul>
+      </description>
+    </release>
     <release version="50.0" date="2026-03-16" type="stable">
       <description>
         <p>Updated Translations:</p>

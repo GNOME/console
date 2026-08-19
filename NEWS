@@ -1,3 +1,36 @@
+Version 51.beta
+~~~~~~~~~~~~~~~
+
+This cycle has seen a focus on stability with our ever expanding testsuite
+helping us iron out some rough edges, alongside tackling issues found in the
+wild, all whilst keeping pace with developments in the wider platform.
+
+Thanks to Inochi Amaoto, Maximiliano, and Harald Hoyer, for their patches!
+
+New Translations
+ * Lao  (Saikeo Kavhanxay)
+
+Updated Translations
+ * Belarusian  (Vasil Pupkin)
+ * Brazilian Portuguese  (burns)
+ * Bulgarian  (Alexander Alexandrov Shopov)
+ * Catalan  (Xavi Ivars)
+ * Chinese (China)  (Luke Na, luming zh)
+ * Cornish  (Flynn Peck)
+ * Dutch  (Nathan Follens)
+ * Georgian  (Ekaterine Papava)
+ * Italian  (Davide Ferracin)
+ * Norwegian Bokmål  (Kjartan Maraas)
+ * Occitan  (Quentin PAGÈS)
+ * Persian  (Danial Behzadi)
+ * Polish  (Victoria Niedzielska)
+ * Romanian  (Antonio Marin)
+ * Serbian  (Марко Костић)
+ * Slovak  (Jose Riha)
+ * Slovenian  (Martin)
+ * Thai  (Aefgh Threenine)
+ * Ukrainian  (Yuri Chornoivan)
+ 
 Version 50.0
 ~~~~~~~~~~~~
 
