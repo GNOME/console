@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-12-28 14:23+0000\n"
-"PO-Revision-Date: 2026-02-24 17:40+0000\n"
+"POT-Creation-Date: 2026-08-19 12:03+0000\n"
+"PO-Revision-Date: 2026-08-21 19:44+0200\n"
 "Last-Translator: Julien Humbert <julroy67@gmail.com>\n"
 "Language-Team: French <gnomefr@traduc.org>\n"
 "Language: fr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 "X-DL-Lang: fr\n"
 "X-DL-Module: console\n"
 "X-DL-Branch: main\n"
@@ -49,6 +49,12 @@ msgstr "Nouvelle fenêtre"
 msgid "New Tab"
 msgstr "Nouvel onglet"
 
+#: data/org.gnome.Console.gschema.xml.in:66
+msgid "Bypass the ‘Close Tab?’ or ‘Close Window?’ dialogues"
+msgstr ""
+"Ignorer les boîtes de dialogue « Fermer l’onglet ? » ou « Fermer la "
+"fenêtre ? »"
+
 #: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "Émulateur de terminal"
@@ -61,7 +67,8 @@ msgstr "Un émulateur de terminal simpliste pour le bureau GNOME."
 msgid "Terminal window"
 msgstr "Fenêtre de terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:651
+#: data/org.gnome.Console.metainfo.xml.in.in:653 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Le projet GNOME"
 
@@ -278,7 +285,7 @@ msgstr "%i colonnes %i lignes"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:508
+#: src/kgx-pages.c:513
 #, c-format
 msgid "Tab %i"
 msgstr "Onglet %i"
