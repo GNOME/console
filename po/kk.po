@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-12-28 14:23+0000\n"
-"PO-Revision-Date: 2026-01-29 22:27+0500\n"
+"POT-Creation-Date: 2026-08-19 12:03+0000\n"
+"PO-Revision-Date: 2026-08-21 07:32+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -39,6 +39,12 @@ msgstr "Жаңа терезе"
 msgid "New Tab"
 msgstr "Жаңа бет"
 
+#: data/org.gnome.Console.gschema.xml.in:66
+msgid "Bypass the ‘Close Tab?’ or ‘Close Window?’ dialogues"
+msgstr ""
+"\"Бетті жабу керек пе?\" немесе \"Терезені жабу керек пе?\" сұхбат "
+"терезелерін елемеу"
+
 #: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "Терминал эмуляторы"
@@ -53,7 +59,8 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Терминал терезесі"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:651
+#: data/org.gnome.Console.metainfo.xml.in.in:653 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "GNOME жобасы"
 
@@ -263,7 +270,7 @@ msgstr "%i баған %i жол"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:508
+#: src/kgx-pages.c:513
 #, c-format
 msgid "Tab %i"
 msgstr "Беттер %i"
