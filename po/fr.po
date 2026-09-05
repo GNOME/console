@@ -7,21 +7,22 @@
 # Irénée THIRION <irenee.thirion@e.email>, 2024.
 # Julien Humbert <julroy67@gmail.com>, 2025.
 # Lucien Ouoba <luiz01luciano04@gmail.com>, 2026.
+# Guillaume Bernard <associations@guillaume-bernard.fr>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2026-08-19 12:03+0000\n"
-"PO-Revision-Date: 2026-08-21 19:44+0200\n"
-"Last-Translator: Julien Humbert <julroy67@gmail.com>\n"
-"Language-Team: French <gnomefr@traduc.org>\n"
+"POT-Creation-Date: 2026-08-31 02:34+0000\n"
+"PO-Revision-Date: 2026-09-05 11:17+0200\n"
+"Last-Translator: Guillaume Bernard <associations@guillaume-bernard.fr>\n"
+"Language-Team: French\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Gtranslator 50.0\n"
 "X-DL-Lang: fr\n"
 "X-DL-Module: console\n"
 "X-DL-Branch: main\n"
@@ -67,8 +68,8 @@ msgstr "Un émulateur de terminal simpliste pour le bureau GNOME."
 msgid "Terminal window"
 msgstr "Fenêtre de terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:651
-#: data/org.gnome.Console.metainfo.xml.in.in:653 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:673
+#: data/org.gnome.Console.metainfo.xml.in.in:675 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Le projet GNOME"
 
@@ -172,11 +173,12 @@ msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
 msgstr[0] ""
-"Une commande est toujours en cours d’exécution, fermer cette fenêtre tuera "
-"son processus et pourrait mener à des situations inattendues"
+"Une commande est toujours en cours d’exécution, fermer cette fenêtre force "
+"l’arrêt de son processus et pourrait mener à des situations inattendues"
 msgstr[1] ""
 "Certaines commandes sont toujours en cours d’exécution, fermer cette fenêtre "
-"va tuer leur processus et pourrait mener à des situations inattendues"
+"force l’arrêt de leur processus et pourrait mener à des situations "
+"inattendues"
 
 #: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
@@ -194,7 +196,7 @@ msgstr[0] ""
 "processus et pourrait mener à des situations inattendues"
 msgstr[1] ""
 "Certaines commandes sont toujours en cours d’exécution, fermer cet onglet va "
-"tuer leur processus et pourrait mener à des situations inattenduess"
+"tuer leurs processus et pourrait mener à des situations inattenduess"
 
 #. Translators: Screen reader label for the list of running commands
 #: src/kgx-close-dialog.c:194
