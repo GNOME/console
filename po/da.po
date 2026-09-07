@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the kgx package.
 #
 # scootergrisen, 2019-2021.
-# Ask Hjorth Larsen <asklarsen@gmail.com>, 2022-2026.
+# Ask Hjorth Larsen <askhl@proton.me>, 2022-2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-12-28 14:23+0000\n"
-"PO-Revision-Date: 2026-03-07 13:17+0100\n"
-"Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
-"Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
+"POT-Creation-Date: 2026-08-31 02:34+0000\n"
+"PO-Revision-Date: 2026-09-08 00:06+0200\n"
+"Last-Translator: Ask Hjorth Larsen <askhl@proton.me>\n"
+"Language-Team: Danish <danskgruppen@groups.io>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,6 +37,10 @@ msgstr "Nyt vindue"
 msgid "New Tab"
 msgstr "Nyt faneblad"
 
+#: data/org.gnome.Console.gschema.xml.in:66
+msgid "Bypass the ‘Close Tab?’ or ‘Close Window?’ dialogues"
+msgstr "Spring dialogerne “Luk faneblad?” og “Luk vindue?” over"
+
 #: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "Terminalemulator"
@@ -49,7 +53,8 @@ msgstr "En simpel brugervenlig terminalemulator til GNOME-skrivebordet."
 msgid "Terminal window"
 msgstr "Terminalvindue"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:673
+#: data/org.gnome.Console.metainfo.xml.in.in:675 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "GNOME-projektet"
 
@@ -75,11 +80,11 @@ msgstr "© %s Zander Brown"
 msgid "translator-credits"
 msgstr ""
 "scootergrisen\n"
-"Ask Hjorth Larsen <asklarsen@gmail.com>\n"
+"Ask Hjorth Larsen\n"
 "\n"
 "Dansk-gruppen\n"
-"Websted http://dansk-gruppen.dk\n"
-"E-mail <dansk@dansk-gruppen.dk>"
+"Websted https://l10n.gnome.org/teams/da/\n"
+"E-mail <danskgruppen@groups.io>"
 
 #: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
@@ -270,7 +275,7 @@ msgstr "%i kolonner %i rækker"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:508
+#: src/kgx-pages.c:513
 #, c-format
 msgid "Tab %i"
 msgstr "Faneblad %i"
