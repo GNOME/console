@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2026-03-16 01:41+0000\n"
-"PO-Revision-Date: 2026-07-09 13:54+0200\n"
+"POT-Creation-Date: 2026-08-31 02:34+0000\n"
+"PO-Revision-Date: 2026-09-09 09:21+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-DamnedLies-Scope: partial\n"
 "X-Generator: Poedit 3.4.4\n"
 
 #: data/org.gnome.Console.desktop.in.in:2
@@ -51,7 +52,8 @@ msgstr ""
 msgid "Terminal window"
 msgstr "Terminalvindu"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:621 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:673
+#: data/org.gnome.Console.metainfo.xml.in.in:675 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "GNOME"
 
@@ -207,28 +209,28 @@ msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst receiving a URI list drop. Please "
 "include the following information if you report the error."
-msgstr ""
+msgstr "En uventet feil oppsto under slipp av en URI-liste. Vennligst ta med følgende informasjon hvis du rapporterer feilen."
 
 #: src/kgx-drop-target.c:337
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst receiving a file list drop. Please "
 "include the following information if you report the error."
-msgstr ""
+msgstr "En uventet feil oppsto under slipp av en filliste. Vennligst ta med følgende informasjon hvis du rapporterer feilen."
 
 #: src/kgx-drop-target.c:371
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst receiving a text drop. Please include "
 "the following information if you report the error."
-msgstr ""
+msgstr "En uventet feil oppsto under slipp av tekst. Vennligst ta med følgende informasjon hvis du rapporterer feilen."
 
 #: src/kgx-drop-target.c:512
 msgctxt "spad-message"
 msgid ""
 "An unexpected value was received. Please include the following information "
 "if you report the error."
-msgstr ""
+msgstr "En uventet verdi ble mottatt. Vennligst ta med følgende informasjon hvis du rapporterer feilen."
 
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
@@ -255,7 +257,7 @@ msgstr "%i kolonner %i rader"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:508
+#: src/kgx-pages.c:513
 #, c-format
 msgid "Tab %i"
 msgstr "Fane %i"
@@ -371,7 +373,7 @@ msgctxt "spad-message"
 msgid ""
 "The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
 "are installed."
-msgstr ""
+msgstr "Lenken «<a href=\"%s\">%s</a> bruker protokollen «%s», men ingen installerte programmer håndterer denne."
 
 #: src/kgx-terminal.c:373
 #, c-format
@@ -379,7 +381,7 @@ msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
 "a>”. Please include the following information if you report the error."
-msgstr ""
+msgstr "En uventet feil oppsto under åpning av lenken «<a href=\"%s\">%s</a>». Vennligst ta med følgende informasjon hvis du rapporterer feilen."
 
 #: src/kgx-terminal.c:421
 #, c-format
@@ -396,6 +398,9 @@ msgid ""
 "\n"
 "This device is “%s” and the location is on “%s”."
 msgstr ""
+"Lenken «a href=\"%s>%s</a>» peker til en lokasjon på en annen enhet.\n"
+"\n"
+"Enheten er «%s» og lokasjonen er «%s»."
 
 #: src/kgx-terminal.c:511
 msgctxt "toast-message"
@@ -407,7 +412,7 @@ msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst reading the clipboard. Please include "
 "the following information if you report the error."
-msgstr ""
+msgstr "En uventet feil oppsto under lesing av utklippstavlen. Vennligst ta med følgende informasjon hvis du rapporterer feilen."
 
 #: src/kgx-terminal.c:575
 msgctxt "toast-message"
@@ -419,7 +424,7 @@ msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst showing the file. Please include the "
 "following information if you report the error."
-msgstr ""
+msgstr "En uventet feil oppsto under visning av filen. Vennligst ta med følgende informasjon hvis du rapporterer feilen."
 
 #: src/kgx-terminal.c:599
 msgctxt "toast-message"
@@ -431,7 +436,7 @@ msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst opening the folder. Please include the "
 "following information if you report the error."
-msgstr ""
+msgstr "En uventet feil oppsto under åpning av mappen. Vennligst ta med følgende informasjon hvis du rapporterer feilen."
 
 #: src/kgx-terminal.c:696
 #, c-format
@@ -452,7 +457,7 @@ msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst processing the clipboard. Please include "
 "the following information if you report the error."
-msgstr ""
+msgstr "En uventet feil oppsto under prosessering av utklippstavlen. Vennligst ta med følgende informasjon hvis du rapporterer feilen."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
