@@ -27,6 +27,24 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="51.0" date="2026-09-14" type="stable">
+      <description>
+        <p>New Translations:</p>
+        <ul>
+          <li>Maori</li>
+        </ul>
+        <p>Updated Translations:</p>
+        <ul>
+          <li>Danish</li>
+          <li>French</li>
+          <li>Hungarian</li>
+          <li>Korean</li>
+          <li>Norwegian Bokmål</li>
+          <li>Russian</li>
+          <li>Spanish</li>
+        </ul>
+      </description>
+    </release>
     <release version="51~rc" date="2026-08-31" type="development">
       <description>
         <p>New Translations:</p>
