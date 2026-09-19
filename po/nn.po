@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2026-03-16 01:41+0000\n"
+"POT-Creation-Date: 2026-08-31 02:34+0000\n"
 "PO-Revision-Date: 2026-04-02 13:01+0200\n"
 "Last-Translator: Bjørn Mørkedal <gnome@morkedal.com>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
@@ -37,6 +37,11 @@ msgstr "Nytt vindauge"
 msgid "New Tab"
 msgstr "Ny fane"
 
+#: data/org.gnome.Console.gschema.xml.in:66
+msgid "Bypass the ‘Close Tab?’ or ‘Close Window?’ dialogues"
+msgstr ""
+"Hopp over dialogane «Vil du late att fana?» og «Vil du late att vindauget?»"
+
 #: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "Terminalemulator"
@@ -49,7 +54,8 @@ msgstr "Ein enkel og brukarvenleg terminal for GNOME-skrivebordet."
 msgid "Terminal window"
 msgstr "Terminalvindauge"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:621 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:673
+#: data/org.gnome.Console.metainfo.xml.in.in:675 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "GNOME-prosjektet"
 
@@ -258,7 +264,7 @@ msgstr "%i kolonner %i rader"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:508
+#: src/kgx-pages.c:513
 #, c-format
 msgid "Tab %i"
 msgstr "Fane %i"
