@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgx master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-12-28 14:23+0000\n"
-"PO-Revision-Date: 2026-02-12 23:02+0200\n"
+"POT-Creation-Date: 2026-09-14 14:31+0000\n"
+"PO-Revision-Date: 2026-10-03 13:48+0300\n"
 "Last-Translator: Efstathios Iosifidis <eiosifidis@gmail.com>\n"
 "Language-Team: Greek <gnome-el-list@gnome.org>\n"
 "Language: el\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.9\n"
 
 #: data/org.gnome.Console.desktop.in.in:2 data/org.gnome.Console.metainfo.xml.in.in:8
 #: src/kgx-application.h:26 src/kgx-window.ui:52
@@ -27,8 +27,9 @@ msgstr "Κονσόλα"
 #: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"εντολή;γραμμή εντολών;τερματικό;προτροπή;εκτέλεση;κέλυφος;command;prompt;cmd;commandline;run;shell;"
-"terminal;kgx;kings cross;"
+"εντολή;γραμμή "
+"εντολών;τερματικό;προτροπή;εκτέλεση;κέλυφος;command;prompt;cmd;commandline;run;shell;terminal;kgx;kings "
+"cross;"
 
 #: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
@@ -37,6 +38,10 @@ msgstr "Νέο παράθυρο"
 #: data/org.gnome.Console.desktop.in.in:26 src/kgx-window.ui:246
 msgid "New Tab"
 msgstr "Νέα καρτέλα"
+
+#: data/org.gnome.Console.gschema.xml.in:66
+msgid "Bypass the ‘Close Tab?’ or ‘Close Window?’ dialogues"
+msgstr "Παράκαμψη των διαλόγων «Κλείσιμο καρτέλας;» ή «Κλείσιμο παραθύρου;»"
 
 #: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
@@ -50,7 +55,8 @@ msgstr "Μια απλή και εύχρηστη εφαρμογή εξομοίω�
 msgid "Terminal window"
 msgstr "Παράθυρο τερματικού"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:691 data/org.gnome.Console.metainfo.xml.in.in:693
+#: src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Έργο GNOME"
 
@@ -251,7 +257,7 @@ msgstr "%i στήλες %i σειρές"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:508
+#: src/kgx-pages.c:513
 #, c-format
 msgid "Tab %i"
 msgstr "Καρτέλα %i"
