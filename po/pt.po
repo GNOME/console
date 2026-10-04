@@ -3,20 +3,21 @@
 # This file is distributed under the same license as the console package.
 # Hugo Carvalho <hugokarvalho@hotmail.com>, 2022, 2023, 2024, 2025, 2026.
 #
+# SPDX-FileCopyrightText: 2026 Cátia Silva <catias89@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
 "POT-Creation-Date: 2026-09-14 14:31+0000\n"
-"PO-Revision-Date: 2026-09-26 14:37+0100\n"
-"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
-"Language-Team: Portuguese <pt@li.org>\n"
+"PO-Revision-Date: 2026-10-04 00:17+0100\n"
+"Last-Translator: Cátia Silva <catias89@gmail.com>\n"
+"Language-Team: Portuguese <li@pt.corg>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -28,8 +29,7 @@ msgstr "Consola"
 #: data/org.gnome.Console.desktop.in.in:7
 msgid "command;prompt;cmd;commandline;run;shell;terminal;kgx;kings cross;"
 msgstr ""
-"comando;command;prompt;cmd;consola;linha de comandos;commandline;executar;"
-"run;shell;terminal;kgx;kings cross;"
+"comando;prompt;cmd;linhadecomando;executar;shell;terminal;kgx;kings cross;"
 
 #: data/org.gnome.Console.desktop.in.in:20
 msgid "New Window"
@@ -50,7 +50,7 @@ msgstr "Emulador de terminal"
 #: data/org.gnome.Console.metainfo.xml.in.in:11
 msgid "A simple user-friendly terminal emulator for the GNOME desktop."
 msgstr ""
-"Um emulador de terminal simples e fácil de usar para o ambiente de trabalho "
+"Um emulador de terminal simples e fácil de utilizar para o ambiente gráfico "
 "GNOME."
 
 #: data/org.gnome.Console.metainfo.xml.in.in:26
@@ -71,7 +71,7 @@ msgstr "GPL 3.0 ou posterior"
 #: src/kgx-about.c:119
 #, c-format
 msgid "# KGX %s using VTE %u.%u.%u %s\n"
-msgstr "# KGX %s a usar VTE %u.%u.%u %s\n"
+msgstr "# KGX %s a utilizar VTE %u.%u.%u %s\n"
 
 #. Translators: %s is the year range
 #: src/kgx-about.c:148
@@ -82,12 +82,14 @@ msgstr "© %s Zander Brown"
 #. Translators: Credit yourself here
 #: src/kgx-about.c:176
 msgid "translator-credits"
-msgstr "Hugo Carvalho <hugokarvalho@hotmail.com>"
+msgstr ""
+"Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"Cátia Silva <catias89@gmail.com>"
 
 #: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
 msgstr ""
-"Não é possível usar ambos os parâmetros --working-directory e positional"
+"Não é possível utilizar ambos os parâmetros --working-directory e positional"
 
 #: src/kgx-application.c:509
 msgid "Execute the argument to this option inside the terminal"
@@ -95,7 +97,7 @@ msgstr "Executa o argumento para esta opção dentro do terminal"
 
 #: src/kgx-application.c:510
 msgid "COMMAND"
-msgstr "COMMANDO"
+msgstr "COMANDO"
 
 #: src/kgx-application.c:518
 msgid "Set the working directory"
@@ -108,7 +110,7 @@ msgstr "NOME-DIR"
 
 #: src/kgx-application.c:528
 msgid "Wait until the child exits (TODO)"
-msgstr "Aguarda até o sub-processo sair (ToDo)"
+msgstr "Aguarda até o subprocesso sair (ToDo)"
 
 #: src/kgx-application.c:537
 msgid "Set the initial window title"
@@ -156,11 +158,11 @@ msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
 msgstr[0] ""
-"Um comando ainda está a ser executado, fechar esta janela irá terminá-lo e "
+"Um comando ainda se encontra em execução, fechar esta janela irá termina-lo e "
 "pode levar a resultados inesperados"
 msgstr[1] ""
-"Alguns comandos ainda estão a ser executados, fechar esta janela irá terminá-"
-"los e pode levar a resultados inesperados"
+"Alguns comandos ainda se encontram em execução, fechar esta janela irá"
+" termina-los e pode levar a resultados inesperados"
 
 #: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
@@ -174,11 +176,11 @@ msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
 msgstr[0] ""
-"Um comando ainda está a ser executado, fechar esta janela irá terminá-lo e "
+"Um comando ainda se encontra em execução, fechar esta janela irá termina-lo e "
 "pode levar a resultados inesperados"
 msgstr[1] ""
-"Alguns comandos ainda estão a ser executados, fechar esta janela irá terminá-"
-"los e pode levar a resultados inesperados"
+"Alguns comandos ainda se encontram em execução, fechar esta janela irá"
+" termina-los e pode levar a resultados inesperados"
 
 #. Translators: Screen reader label for the list of running commands
 #: src/kgx-close-dialog.c:194
@@ -214,7 +216,7 @@ msgid ""
 "include the following information if you report the error."
 msgstr ""
 "Ocorreu um erro inesperado ao receber uma lista de URIs. Inclua as seguintes "
-"informações se relatar o erro."
+"informações caso reporte o erro."
 
 #: src/kgx-drop-target.c:337
 msgctxt "spad-message"
@@ -223,7 +225,7 @@ msgid ""
 "include the following information if you report the error."
 msgstr ""
 "Ocorreu um erro inesperado ao receber uma lista de ficheiros. Inclua as "
-"seguintes informações se relatar o erro."
+"seguintes informações caso reporte o erro."
 
 #: src/kgx-drop-target.c:371
 msgctxt "spad-message"
@@ -232,7 +234,7 @@ msgid ""
 "the following information if you report the error."
 msgstr ""
 "Ocorreu um erro inesperado ao receber um texto. Inclua as seguintes "
-"informações se relatar o erro."
+"informações caso reporte o erro."
 
 #: src/kgx-drop-target.c:512
 msgctxt "spad-message"
@@ -240,7 +242,8 @@ msgid ""
 "An unexpected value was received. Please include the following information "
 "if you report the error."
 msgstr ""
-"Um valor inesperado foi recebido. Inclua as seguintes informações se relatar "
+"Foi recebido um valor inesperado. Inclua as seguintes informações caso"
+" reporte "
 "o erro."
 
 #: src/kgx-livery-manager.c:193
@@ -320,7 +323,7 @@ msgid ""
 "Opening ‘<a href=\"%s\">%s</a>’ failed:\n"
 "%s"
 msgstr ""
-"A abertura de  ‘<a href=\"%s\">%s</a>’ falhou:\n"
+"A abertura de ‘<a href=\"%s\">%s</a>’ falhou:\n"
 "%s"
 
 #: src/kgx-spad.c:339 src/kgx-spad.ui:4
@@ -348,7 +351,7 @@ msgstr "_Detalhes"
 #: src/kgx-tab.c:889
 #, c-format
 msgid "<b>Read Only</b> — Command exited with code %i"
-msgstr "<b>Apenas leitura</b> — Comando encerrado com código %i"
+msgstr "<b>Apenas leitura</b> — Comando encerrado com o código %i"
 
 #. Translators: <b> </b> marks the text as bold, ensure they are matched please!
 #: src/kgx-tab.c:897
@@ -385,8 +388,9 @@ msgid ""
 "The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
 "are installed."
 msgstr ""
-"O link “<a href=\"%s\">%s</a>”  usa o protocolo “%s”, para o qual não há "
-"apps instaladas."
+"A ligação “<a href=\"%s\">%s</a>” utiliza o protocolo “%s”, para o qual não"
+" existem "
+"aplicações instaladas."
 
 #: src/kgx-terminal.c:373
 #, c-format
@@ -395,14 +399,15 @@ msgid ""
 "An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
 "a>”. Please include the following information if you report the error."
 msgstr ""
-"Ocorreu um erro inesperado ao abrir o link “<a href=\"%s\">%s</a>” Por favor "
-"inclua a informação seguinte se reportar este erro."
+"Ocorreu um erro inesperado ao abrir a ligação “<a href=\"%s\">%s</a>”. Por"
+" favor "
+"inclua a informação seguinte caso reporte este erro."
 
 #: src/kgx-terminal.c:421
 #, c-format
 msgctxt "spad-message"
 msgid "The link “<a href=\"%s\">%s</a>” is malformed."
-msgstr "O link “<a href=\"%s\">%s</a>” tem um erro de formatação."
+msgstr "A ligação “<a href=\"%s\">%s</a>” possui um erro de formatação."
 
 #: src/kgx-terminal.c:440
 #, c-format
@@ -413,7 +418,7 @@ msgid ""
 "\n"
 "This device is “%s” and the location is on “%s”."
 msgstr ""
-"O link “<a href=\"%s\">%s</a>” aponta para uma localização num dispositivo "
+"A ligação “<a href=\"%s\">%s</a>” aponta para uma localização num dispositivo "
 "diferente.\n"
 "\n"
 "Este dispositivo é “%s” e a sua localização é “%s”."
@@ -430,12 +435,12 @@ msgid ""
 "the following information if you report the error."
 msgstr ""
 "Ocorreu um erro inesperado ao ler a área de transferência. Inclua as "
-"seguintes informações se relatar o erro."
+"seguintes informações caso reporte o erro."
 
 #: src/kgx-terminal.c:575
 msgctxt "toast-message"
 msgid "Couldn't Show File"
-msgstr "Não foi possível mostrar o ficheiro"
+msgstr "Não foi possível apresentar o ficheiro"
 
 #: src/kgx-terminal.c:578
 msgctxt "spad-message"
@@ -443,8 +448,8 @@ msgid ""
 "An unexpected error occurred whilst showing the file. Please include the "
 "following information if you report the error."
 msgstr ""
-"Ocorreu um erro inesperado ao exibir o ficheiro. Inclua as seguintes "
-"informações se relatar o erro."
+"Ocorreu um erro inesperado ao apresentar o ficheiro. Inclua as seguintes "
+"informações caso reporte o erro."
 
 #: src/kgx-terminal.c:599
 msgctxt "toast-message"
@@ -458,7 +463,7 @@ msgid ""
 "following information if you report the error."
 msgstr ""
 "Ocorreu um erro inesperado ao abrir a pasta. Inclua as seguintes informações "
-"se relatar o erro."
+"caso reporte o erro."
 
 #: src/kgx-terminal.c:696
 #, c-format
@@ -481,7 +486,7 @@ msgid ""
 "the following information if you report the error."
 msgstr ""
 "Ocorreu um erro inesperado ao processar a área de transferência. Inclua as "
-"seguintes informações se relatar o erro."
+"seguintes informações caso reporte o erro."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -505,7 +510,7 @@ msgstr "Sair de ecrã inteiro"
 
 #: src/kgx-terminal.ui:43
 msgid "Show in _Files"
-msgstr "Mostrar no Ficheiros"
+msgstr "Mostrar no _Ficheiros"
 
 #: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
@@ -526,7 +531,7 @@ msgstr "Argumento em falta para --command"
 
 #: src/kgx-utils.c:129
 msgid "Cannot use both --command and positional parameters"
-msgstr "Não é possível usar ambos os parâmetros --command e positional"
+msgstr "Não é possível utilizar ambos os parâmetros --command e positional"
 
 #: src/kgx-window.ui:17 src/kgx-window.ui:274
 msgid "_New Window"
@@ -614,7 +619,7 @@ msgstr "Tipo de letra"
 
 #: src/preferences/kgx-preferences-window.ui:13
 msgid "Use _System Default"
-msgstr "Usar a predefinição do sistema"
+msgstr "Utilizar a predefinição do sistema"
 
 #: src/preferences/kgx-preferences-window.ui:19
 msgid "Custom _Font"
@@ -767,3 +772,5 @@ msgstr "Ecrã inteiro"
 
 #~ msgid "Start a terminal session for this location"
 #~ msgstr "Inicia uma sessão de terminal para este local"
+
+
