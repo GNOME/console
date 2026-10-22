@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2026-04-18 16:22+0000\n"
-"PO-Revision-Date: 2026-06-10 14:57+0100\n"
+"POT-Creation-Date: 2026-09-14 14:31+0000\n"
+"PO-Revision-Date: 2026-10-22 01:48+0100\n"
 "Last-Translator: Flynn Peck <cirilla@tuta.io>\n"
-"Language-Team: kw\n"
+"Language-Team: Cornish\n"
 "Language: kw\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,7 @@ msgstr ""
 "X-DL-Branch: main\n"
 "X-DL-Domain: po\n"
 "X-DL-State: Translating\n"
-"X-Generator: Gtranslator 50.0\n"
+"X-Generator: Gtranslator 51.0\n"
 
 #: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -46,6 +46,10 @@ msgstr "Fenester Nowydh"
 msgid "New Tab"
 msgstr "Tabb Nowydh"
 
+#: data/org.gnome.Console.gschema.xml.in:66
+msgid "Bypass the ‘Close Tab?’ or ‘Close Window?’ dialogues"
+msgstr "Tremena an fenestri ‘Degea Tabb?’ po ‘Degea Fenester?’"
+
 #: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "Omhevelell Dermynal"
@@ -58,7 +62,8 @@ msgstr "Omhevelell dermynal sempel devnydhyer-kowethek rag GNOME."
 msgid "Terminal window"
 msgstr "Fenester dermynal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:621 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:691
+#: data/org.gnome.Console.metainfo.xml.in.in:693 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "An Ragdres GNOME"
 
@@ -107,11 +112,11 @@ msgstr "HANOWRESTRENVA"
 
 #: src/kgx-application.c:528
 msgid "Wait until the child exits (TODO)"
-msgstr "Gortos ernag an flogh a gwyt (TODO)"
+msgstr "Gortos erna vo kwytys an flogh (TODO)"
 
 #: src/kgx-application.c:537
 msgid "Set the initial window title"
-msgstr "Gorra an titel fenester gynsa"
+msgstr "Gorra titel kynsa an fenester"
 
 #: src/kgx-application.c:538
 msgid "TITLE"
@@ -155,11 +160,11 @@ msgid_plural ""
 "Some commands are still running, closing this window will kill them and may "
 "lead to unexpected outcomes"
 msgstr[0] ""
-"Yma arghadow owth eksekutya hwath, ow tegea an fenester ma a wra ladha ha "
-"martesen sewyansow angwaytys a wra omsewya"
+"Yma arghadow owth eksekutya hwath, ow tegea an fenester ma a wra y ladha hag "
+"y fydh martesen sewyansow angwaytys"
 msgstr[1] ""
-"Nebes arghadowyow yw owth eksekutya hwath, ow tegea an fenester ma a wra "
-"ladha ha martesen sewyansow angwaytys a wra omsewya"
+"Yma arghadowyow owth eksekutya hwath, ow tegea an fenester ma a wra aga "
+"ladha hag y fydh martesen sewyansow angwaytys"
 
 #: src/kgx-close-dialog.c:82
 msgid "Close Tab?"
@@ -173,11 +178,11 @@ msgid_plural ""
 "Some commands are still running, closing this tab will kill them and may "
 "lead to unexpected outcomes"
 msgstr[0] ""
-"Yma arghadow owth eksekutya hwath, ow tegea an tabb ma a wra ladha ha "
-"martesen sewyansow angwaytys a wra omsewya"
+"Yma arghadow owth eksekutya hwath, ow tegea an tabb ma a wra y ladha hag y "
+"fydh martesen sewyansow angwaytys"
 msgstr[1] ""
-"Nebes arghadowyow yw owth eksekutya hwath, ow tegea an tabb ma a wra ladha "
-"ha martesen sewyansow angwaytys a wra omsewya"
+"Yma arghadowyow owth eksekutya hwath, ow tegea an tabb ma a wra aga ladha "
+"hag y fydh martesen sewyansow angwaytys"
 
 #. Translators: Screen reader label for the list of running commands
 #: src/kgx-close-dialog.c:194
@@ -204,7 +209,7 @@ msgstr "Korden liw yw hirder kamm"
 #: src/kgx-drop-target.c:509
 msgctxt "toast-message"
 msgid "Drop Failed"
-msgstr "Droppyans re Fyllis"
+msgstr "Droppyans Fyllys"
 
 #: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
 msgctxt "spad-message"
@@ -212,8 +217,8 @@ msgid ""
 "An unexpected error occurred whilst receiving a URI list drop. Please "
 "include the following information if you report the error."
 msgstr ""
-"Yth esa kamm angwaytys dres ow tegemeres droppyans rol URI. Synsewgh an "
-"kedhlow a sew mar terivowgh an kamm mar pleg."
+"Yth esa gwall angwaytys hag ow tegemeres droppyans rol URI. Komprehendyewgh "
+"an kedhlow a sew mar pleg mar terivowgh an gwall."
 
 #: src/kgx-drop-target.c:337
 msgctxt "spad-message"
@@ -221,8 +226,8 @@ msgid ""
 "An unexpected error occurred whilst receiving a file list drop. Please "
 "include the following information if you report the error."
 msgstr ""
-"Yth esa kamm angwaytys dres ow tegemeres droppyans rol restrennow. Synsewgh "
-"an kedhlow a sew mar terivowgh an kamm mar pleg."
+"Yth esa gwall angwaytys hag ow tegemeres droppyans rol restrennow. "
+"Komprehendyewgh an kedhlow a sew mar pleg mar terivowgh an gwall."
 
 #: src/kgx-drop-target.c:371
 msgctxt "spad-message"
@@ -230,8 +235,8 @@ msgid ""
 "An unexpected error occurred whilst receiving a text drop. Please include "
 "the following information if you report the error."
 msgstr ""
-"Yth esa kamm angwaytys dres ow tegemeres droppyans tekst. Synsewgh an "
-"kedhlow a sew mar terivowgh an kamm mar pleg."
+"Yth esa gwall angwaytys hag ow tegemeres droppyans tekst. Komprehendyewgh an "
+"kedhlow a sew mar pleg mar terivowgh an gwall."
 
 #: src/kgx-drop-target.c:512
 msgctxt "spad-message"
@@ -239,8 +244,8 @@ msgid ""
 "An unexpected value was received. Please include the following information "
 "if you report the error."
 msgstr ""
-"Yth esa tra angwaytys degemerys. Synsewgh an kedhlow a sew mar terivowgh an "
-"kamm mar pleg."
+"Yth esa tra angwaytys degemerys. Komprehendyewgh an kedhlow a sew mar pleg "
+"mar terivowgh an gwall."
 
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
@@ -267,7 +272,7 @@ msgstr "%i kolovennow %i rewyow"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:508
+#: src/kgx-pages.c:513
 #, c-format
 msgid "Tab %i"
 msgstr "Tabb %i"
@@ -287,12 +292,12 @@ msgid ""
 "Make sure you know what the command does:\n"
 "%s"
 msgstr ""
-"Surhewgh hwi a wor an pyth a wul an arghadow:\n"
+"Surhewgh y hwodhowgh pan'dra wul an arghadow:\n"
 "%s"
 
 #: src/kgx-paste-dialog.c:129
 msgid "You are pasting a command that runs as an administrator"
-msgstr "Ow tasskrifa owgh hwi arghadow owth eksekutya avel menystrer"
+msgstr "Yth esowgh ow tasskrifa arghadow neb a eksekut avel menystrer"
 
 #: src/kgx-paste-dialog.c:136 src/kgx-terminal.ui:24
 msgid "_Paste"
@@ -307,7 +312,7 @@ msgstr "Argerdh %d"
 #: src/kgx-simple-tab.c:170
 #, c-format
 msgid "<b>Failed to start</b> — %s"
-msgstr "<b>Fyllis dhe dhalleth</b> — %s"
+msgstr "<b>Fyllys dhe dhalleth</b> — %s"
 
 #: src/kgx-spad.c:194
 msgid "Unable To Open"
@@ -319,20 +324,20 @@ msgid ""
 "Opening ‘<a href=\"%s\">%s</a>’ failed:\n"
 "%s"
 msgstr ""
-"Owth ygeri ‘<a href=\"%s\">%s</a>’ re fyllis:\n"
+"Ygeri ‘<a href=\"%s\">%s</a>’ re fyllis:\n"
 "%s"
 
 #: src/kgx-spad.c:339 src/kgx-spad.ui:4
 msgid "Error Details"
-msgstr "Manylyon Kamm"
+msgstr "Manylyon Gwall"
 
 #: src/kgx-spad.ui:23
 msgid "Error Message"
-msgstr "Messach Kamm"
+msgstr "Messach Gwall"
 
 #: src/kgx-spad.ui:35
 msgid "Copy Error Message"
-msgstr "Kopia Messach Kamm"
+msgstr "Kopia Messach Gwall"
 
 #: src/kgx-spad.ui:104
 msgid "Report _Issue"
@@ -385,7 +390,7 @@ msgid ""
 "are installed."
 msgstr ""
 "An worgevren “<a href=\"%s\">%s</a>” a dhevnydh an protokol “%s”, rag may "
-"yma appys leys vyth."
+"nyns eus appys leys."
 
 #: src/kgx-terminal.c:373
 #, c-format
@@ -394,14 +399,14 @@ msgid ""
 "An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
 "a>”. Please include the following information if you report the error."
 msgstr ""
-"Yth esa kamm angwaytys dres owth ygeri an worgevren “<a href=\"%s\">%s</a>”. "
-"Synsewgh an kedhlow a sew mar terivowgh an kamm mar pleg."
+"Yth esa gwall angwaytys hag owth ygeri an worgevren “<a href=\"%s\">%s</a>”. "
+"Komprehendyewgh an kedhlow a sew mar pleg mar terivowgh an gwall."
 
 #: src/kgx-terminal.c:421
 #, c-format
 msgctxt "spad-message"
 msgid "The link “<a href=\"%s\">%s</a>” is malformed."
-msgstr "An worgevren “<a href=\"%s\">%s</a>” yw kamm."
+msgstr "An worgevren “<a href=\"%s\">%s</a>” yw anewn."
 
 #: src/kgx-terminal.c:440
 #, c-format
@@ -412,7 +417,7 @@ msgid ""
 "\n"
 "This device is “%s” and the location is on “%s”."
 msgstr ""
-"An worgevren “<a href=\"%s\">%s</a>” a boynt dhe dyller war dhevis dihaval.\n"
+"An worgevren “<a href=\"%s\">%s</a>” a boynt dhe dyller war dhevis aral.\n"
 "\n"
 "An devis ma yw “%s” ha'n tyller yw war “%s”."
 
@@ -427,8 +432,8 @@ msgid ""
 "An unexpected error occurred whilst reading the clipboard. Please include "
 "the following information if you report the error."
 msgstr ""
-"Yth esa kamm angwaytys dres ow redya an astel glypp. Synsewgh an kedhlow a "
-"sew mar terivowgh an kamm mar pleg."
+"Yth esa gwall angwaytys hag ow redya an astel glypp. Komprehendyewgh an "
+"kedhlow a sew mar pleg mar terivowgh an kamm."
 
 #: src/kgx-terminal.c:575
 msgctxt "toast-message"
@@ -441,8 +446,8 @@ msgid ""
 "An unexpected error occurred whilst showing the file. Please include the "
 "following information if you report the error."
 msgstr ""
-"Yth esa kamm angwaytys dres ow tiskwedhes an restren. Synsewgh an kedhlow a "
-"sew mar terivowgh an kamm mar pleg."
+"Yth esa gwall angwaytys hag ow tiskwedhes an restren. Komprehendyewgh an "
+"kedhlow a sew mar pleg mar terivowgh an gwall."
 
 #: src/kgx-terminal.c:599
 msgctxt "toast-message"
@@ -455,8 +460,8 @@ msgid ""
 "An unexpected error occurred whilst opening the folder. Please include the "
 "following information if you report the error."
 msgstr ""
-"Yth esa kamm angwaytys dres owth ygeri an restrenva. Synsewgh an kedhlow a "
-"sew mar terivowgh an kamm mar pleg."
+"Yth esa gwall angwaytys hag owth ygeri an restrenva. Komprehendyewgh an "
+"kedhlow a sew mar pleg mar terivowgh an gwall."
 
 #: src/kgx-terminal.c:696
 #, c-format
@@ -464,7 +469,7 @@ msgid ""
 "Ctrl-click to open:\n"
 "%s"
 msgstr ""
-"Ctrl-klyck rag ygeri:\n"
+"Ktrl-klyck rag ygeri:\n"
 "%s"
 
 #: src/kgx-terminal.c:984
@@ -478,8 +483,8 @@ msgid ""
 "An unexpected error occurred whilst processing the clipboard. Please include "
 "the following information if you report the error."
 msgstr ""
-"Yth esa kamm angwaytys dres owth argherdhes an astel glypp. Synsewgh an "
-"kedhlow a sew mar terivowgh an kamm mar pleg."
+"Yth esa gwall angwaytys hag owth argherdhes an astel glypp. Komprehendyewgh "
+"an kedhlow a sew mar pleg mar terivowgh an gwall."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -507,7 +512,7 @@ msgstr "Diskwedhes yn _Restrennow"
 
 #: src/kgx-theme-switcher.ui:24
 msgid "Follow System Style"
-msgstr "Obaya Gis System"
+msgstr "Obaya Gis an Kevreyth"
 
 #: src/kgx-theme-switcher.ui:52
 msgid "Light Style"
@@ -520,7 +525,7 @@ msgstr "Gis Du"
 #. Translators: ‘command’ is the argument name, and shouldn't be translated
 #: src/kgx-utils.c:114
 msgid "Missing argument for --command"
-msgstr "Oberadow fyllel rag --command"
+msgstr "Yma oberadow ow fyllel rag --command"
 
 #: src/kgx-utils.c:129
 msgid "Cannot use both --command and positional parameters"
@@ -612,7 +617,7 @@ msgstr "Font"
 
 #: src/preferences/kgx-preferences-window.ui:13
 msgid "Use _System Default"
-msgstr "Devnydhya Defowt _System"
+msgstr "Devnydhya Defowt an _Kevreyth"
 
 #: src/preferences/kgx-preferences-window.ui:19
 msgid "Custom _Font"
@@ -636,7 +641,7 @@ msgstr "Klogh Termynal"
 
 #: src/preferences/kgx-preferences-window.ui:91
 msgid "Control how alerts are indicated"
-msgstr "Routya fatel warnyansow yw diskwedhys"
+msgstr "Routya fatel yw diskwedhys gwarnyansow"
 
 #: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
