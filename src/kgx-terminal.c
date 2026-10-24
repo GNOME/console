@@ -87,6 +87,8 @@ struct _KgxTerminal {
   /* Hyperlinks */
   char       *current_url;
   int         match_id[KGX_TERMINAL_N_LINK_REGEX];
+
+  GSignalGroup  *clipboard_signals;
 };
 
 
@@ -893,6 +895,8 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                KGX_APPLICATION_PATH "kgx-terminal.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, KgxTerminal, clipboard_signals);
+
   gtk_widget_class_bind_template_callback (widget_class, resolve_livery);
   gtk_widget_class_bind_template_callback (widget_class, resolve_theme);
   gtk_widget_class_bind_template_callback (widget_class, location_changed);
@@ -901,6 +905,7 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, scroll);
   gtk_widget_class_bind_template_callback (widget_class, kgx_style_manager_for_display);
   gtk_widget_class_bind_template_callback (widget_class, kgx_enum_is);
+  gtk_widget_class_bind_template_callback (widget_class, kgx_clipboard_for_display);
 
   gtk_widget_class_install_action (widget_class,
                                    "term.open-link",
@@ -926,6 +931,22 @@ kgx_terminal_class_init (KgxTerminalClass *klass)
                                    "term.show-in-files",
                                    NULL,
                                    (GtkWidgetActionActivateFunc) show_in_files_activated);
+}
+
+
+static void
+notify_clipboard_formats (GObject                  *object,
+                          G_GNUC_UNUSED GParamSpec *pspec,
+                          gpointer                  user_data)
+{
+  KgxTerminal *self = KGX_TERMINAL (user_data);
+  GdkClipboard *clipboard = GDK_CLIPBOARD (object);
+  GdkContentFormats *formats = gdk_clipboard_get_formats (clipboard);
+
+  gtk_widget_action_set_enabled (GTK_WIDGET (self),
+                                 "term.paste",
+                                 gdk_content_formats_contain_gtype (formats,
+                                                                    G_TYPE_STRING));
 }
 
 
@@ -961,6 +982,10 @@ kgx_terminal_init (KgxTerminal *self)
                                         self->match_id[i],
                                         "pointer");
   }
+
+  g_signal_group_connect (self->clipboard_signals,
+                          "notify::formats", G_CALLBACK (notify_clipboard_formats),
+                          self);
 }
 
 

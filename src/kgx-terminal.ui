@@ -23,7 +23,6 @@
       <item>
         <attribute name="label" translatable="yes">_Paste</attribute>
         <attribute name="action">term.paste</attribute>
-        <attribute name="hidden-when">action-disabled</attribute>
       </item>
       <item>
         <attribute name="label" translatable="yes">_Select All</attribute>
@@ -107,18 +106,6 @@
         <property name="propagation-phase">capture</property>
         <child>
           <object class="GtkShortcut">
-            <property name="trigger">&lt;Shift&gt;&lt;Primary&gt;c</property>
-            <property name="action">action(term.copy)</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkShortcut">
-            <property name="trigger">&lt;Shift&gt;&lt;Primary&gt;v</property>
-            <property name="action">action(term.paste)</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkShortcut">
             <property name="trigger">Copy</property>
             <property name="action">action(term.copy)</property>
           </object>
@@ -126,6 +113,18 @@
         <child>
           <object class="GtkShortcut">
             <property name="trigger">Paste</property>
+            <property name="action">action(term.paste)</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkShortcut">
+            <property name="trigger">&lt;Shift&gt;&lt;Primary&gt;c</property>
+            <property name="action">action(term.copy)</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkShortcut">
+            <property name="trigger">&lt;Shift&gt;&lt;Primary&gt;v</property>
             <property name="action">action(term.paste)</property>
           </object>
         </child>
@@ -147,4 +146,14 @@
       </object>
     </child>
   </template>
+  <object class="GSignalGroup" id="clipboard_signals">
+    <property name="target-type">GdkClipboard</property>
+    <binding name="target">
+      <closure type='GdkClipboard' function='kgx_clipboard_for_display'>
+        <lookup name="display" type="GtkWindow">
+          <lookup name="root">KgxTerminal</lookup>
+        </lookup>
+      </closure>
+    </binding>
+  </object>
 </interface>
