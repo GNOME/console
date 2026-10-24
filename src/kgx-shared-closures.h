@@ -1,6 +1,6 @@
 /* kgx-shared-closures.h
  *
- * Copyright 2024-2025 Zander Brown
+ * Copyright 2024-2026 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -164,6 +164,19 @@ kgx_decoration_layout_is_inverted (G_GNUC_UNUSED GObject *object,
   }
 
   return counts[0] > counts[1];
+}
+
+
+G_GNUC_UNUSED
+static GdkClipboard *
+kgx_clipboard_for_display (G_GNUC_UNUSED GObject *self,
+                           GdkDisplay            *display)
+{
+  if (G_UNLIKELY (!display)) {
+    return NULL;
+  }
+
+  return g_object_ref (gdk_display_get_clipboard (display));
 }
 
 

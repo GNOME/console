@@ -1,6 +1,6 @@
 /* test-shared-closures.c
  *
- * Copyright 2025 Zander Brown
+ * Copyright 2025-2026 Zander Brown
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,9 @@
 
 #include "kgx-config.h"
 
+#include "kgx-locale.h"
 #include "kgx-settings.h"
+#include "kgx-test-gtk-utils.h"
 #include "kgx-train.h"
 
 #include "kgx-shared-closures.h"
@@ -225,10 +227,31 @@ test_decoration_layout_is_inverted (gconstpointer user_data)
 }
 
 
+static void
+test_clipboard_for_display (void)
+{
+  GtkWidget *window = gtk_window_new ();
+  GdkDisplay *display;
+
+  gtk_window_present (GTK_WINDOW (window));
+  kgx_test_flush_widget (GTK_WIDGET (window));
+
+  display = gtk_root_get_display (GTK_ROOT (window));
+
+  g_assert_true (kgx_clipboard_for_display (NULL, display) == gtk_widget_get_clipboard (window));
+
+  gtk_window_destroy (GTK_WINDOW (window));
+
+  g_assert_null (kgx_clipboard_for_display (NULL, NULL));
+}
+
+
 int
 main (int argc, char *argv[])
 {
-  g_test_init (&argc, &argv, NULL);
+  kgx_locale_init (KGX_LOCALE_TEST);
+
+  gtk_test_init (&argc, &argv, NULL);
 
   g_test_add_func ("/kgx/shared-closures/manager_null_when_null", test_manager_null_when_null);
   g_test_add_func ("/kgx/shared-closures/settings_null_when_null", test_settings_null_when_null);
@@ -261,6 +284,9 @@ main (int argc, char *argv[])
 
     g_test_add_data_func (path, &decoration_layout_is_inverted_cases[i], test_decoration_layout_is_inverted);
   }
+
+  g_test_add_func ("/kgx/shared-closures/clipboard_for_display",
+                   test_clipboard_for_display);
 
   return g_test_run ();
 }
