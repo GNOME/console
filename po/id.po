@@ -3,21 +3,22 @@
 # This file is distributed under the same license as the kgx package.
 # Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2024.
 # Andika Triwidada <andika@gmail.com>, 2024.
+# Herpiko Dwi Aguno <herpiko@gmail.com>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: console gnome-49\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-11-10 11:31+0000\n"
-"PO-Revision-Date: 2026-01-01 18:47+0700\n"
-"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
+"POT-Creation-Date: 2026-10-24 01:31+0000\n"
+"PO-Revision-Date: 2026-11-11 07:19+0000\n"
+"Last-Translator: Herpiko Dwi Aguno <herpiko@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: pelokalan.blankon.id\n"
 
 #: data/org.gnome.Console.desktop.in.in:2
 #: data/org.gnome.Console.metainfo.xml.in.in:8 src/kgx-application.h:26
@@ -39,6 +40,10 @@ msgstr "Jendela Baru"
 msgid "New Tab"
 msgstr "Tab Baru"
 
+#: data/org.gnome.Console.gschema.xml.in:66
+msgid "Bypass the ‘Close Tab?’ or ‘Close Window?’ dialogues"
+msgstr "Lewati dialog ‘Tutup Tab?’ atau ‘Tutup Jendela?’"
+
 #: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "Emulator Terminal"
@@ -51,7 +56,8 @@ msgstr "Emulator terminal sederhana yang mudah digunakan untuk destop GNOME."
 msgid "Terminal window"
 msgstr "Jendela terminal"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:579 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:691
+#: data/org.gnome.Console.metainfo.xml.in.in:693 src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "Proyek GNOME"
 
@@ -77,7 +83,8 @@ msgstr "© %s Zander Brown"
 msgid "translator-credits"
 msgstr ""
 "Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2020-2024.\n"
-"Andika Triwidada <andika@gmail.com>, 2024, 2025."
+"Andika Triwidada <andika@gmail.com>, 2024, 2025.\n"
+"Herpiko Dwi Aguno <herpiko@gmail.com>, 2026."
 
 #: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
@@ -241,20 +248,31 @@ msgctxt "livery-name"
 msgid "XTerm"
 msgstr "XTerm"
 
+#. Translators: columns by rows, describing terminal size
+#: src/kgx-pages.c:298
+#, c-format
+msgid "%i by %i"
+msgstr "%i x %i"
+
+#: src/kgx-pages.c:299
+#, c-format
+msgid "%i columns %i rows"
+msgstr "%i kolom %i baris"
+
 #. Translators: %i is, from the users perspective, a random number.
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:495
+#: src/kgx-pages.c:513
 #, c-format
 msgid "Tab %i"
 msgstr "Tab %i"
 
-#: src/kgx-pages.ui:100
+#: src/kgx-pages.ui:101
 msgid "_Detach Tab"
 msgstr "_Lepas Tab"
 
-#: src/kgx-pages.ui:106 src/kgx-spad.c:203 src/kgx-spad.c:372
+#: src/kgx-pages.ui:107 src/kgx-spad.c:203 src/kgx-spad.c:372
 msgid "_Close"
 msgstr "_Tutup"
 
@@ -355,33 +373,35 @@ msgctxt "toast-message"
 msgid "Couldn't Open Link"
 msgstr "Tak Bisa Membuka Tautan"
 
-#: src/kgx-terminal.c:360
+#: src/kgx-terminal.c:362
 #, c-format
 msgctxt "spad-message"
 msgid ""
-"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps "
-"are installed."
+"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which "
+"no apps are installed."
 msgstr ""
 "Tautan \"<a href=\"%s\">%s</a>\" memakai protokol \"%s\", yang untuknya "
 "tidak ada aplikasi yang dipasang."
 
-#: src/kgx-terminal.c:373
+#: src/kgx-terminal.c:375
 #, c-format
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</"
-"a>”. Please include the following information if you report the error."
+"An unexpected error occurred whilst opening the link “<a "
+"href=\"%s\">%s</a>”. Please include the following information if you "
+"report the error."
 msgstr ""
-"Terjadi galat yang tidak diharapkan saat membuka taut \"<a href=\"%s\">%s</"
-"a>\". Harap sertakan informasi berikut bila Anda melaporkan galat."
+"Terjadi galat yang tidak diharapkan saat membuka taut \"<a "
+"href=\"%s\">%s</a>\". Harap sertakan informasi berikut bila Anda melaporkan "
+"galat."
 
-#: src/kgx-terminal.c:421
+#: src/kgx-terminal.c:423
 #, c-format
 msgctxt "spad-message"
 msgid "The link “<a href=\"%s\">%s</a>” is malformed."
 msgstr "Tautan \"<a href=\"%s\">%s</a>\" salah bentuk."
 
-#: src/kgx-terminal.c:440
+#: src/kgx-terminal.c:442
 #, c-format
 msgctxt "spad-message"
 msgid ""
@@ -394,12 +414,12 @@ msgstr ""
 "\n"
 "Perangkat ini adalah \"%s\" dan lokasinya berada di \"%s\"."
 
-#: src/kgx-terminal.c:511
+#: src/kgx-terminal.c:513
 msgctxt "toast-message"
 msgid "Couldn't Paste Text"
 msgstr "Tidak Dapat Menempelkan Teks"
 
-#: src/kgx-terminal.c:514
+#: src/kgx-terminal.c:516
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst reading the clipboard. Please include "
@@ -408,12 +428,12 @@ msgstr ""
 "Terjadi kesalahan tak terduga saat membaca papan klip. Mohon sertakan "
 "informasi berikut jika Anda melaporkan kesalahan tersebut."
 
-#: src/kgx-terminal.c:575
+#: src/kgx-terminal.c:577
 msgctxt "toast-message"
 msgid "Couldn't Show File"
 msgstr "Tidak Dapat Menampilkan Berkas."
 
-#: src/kgx-terminal.c:578
+#: src/kgx-terminal.c:580
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst showing the file. Please include the "
@@ -422,12 +442,12 @@ msgstr ""
 "Terjadi kesalahan tak terduga saat menampilkan berkas. Mohon sertakan "
 "informasi berikut jika Anda melaporkan kesalahan tersebut."
 
-#: src/kgx-terminal.c:599
+#: src/kgx-terminal.c:601
 msgctxt "toast-message"
 msgid "Couldn't Open Folder"
 msgstr "Tidak Dapat Membuka Folder"
 
-#: src/kgx-terminal.c:602
+#: src/kgx-terminal.c:604
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst opening the folder. Please include the "
@@ -436,7 +456,7 @@ msgstr ""
 "Terjadi kesalahan tak terduga saat membuka folder. Mohon sertakan informasi "
 "berikut jika Anda melaporkan kesalahan tersebut."
 
-#: src/kgx-terminal.c:696
+#: src/kgx-terminal.c:698
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -445,12 +465,12 @@ msgstr ""
 "Ctrl-click untuk membuka:\n"
 "%s"
 
-#: src/kgx-terminal.c:984
+#: src/kgx-terminal.c:1009
 msgctxt "toast-message"
 msgid "Couldn't Paste"
 msgstr "Tidak Dapat Menempelkan"
 
-#: src/kgx-terminal.c:987
+#: src/kgx-terminal.c:1012
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst processing the clipboard. Please include "
@@ -471,15 +491,15 @@ msgstr "Salin A_lamat Taut"
 msgid "_Copy"
 msgstr "Sali_n"
 
-#: src/kgx-terminal.ui:29
+#: src/kgx-terminal.ui:28
 msgid "_Select All"
 msgstr "Pilih _Semua"
 
-#: src/kgx-terminal.ui:36 src/kgx-window.ui:285
+#: src/kgx-terminal.ui:35 src/kgx-window.ui:285
 msgid "Leave _Fullscreen"
 msgstr "Keluar dari Layar _Penuh"
 
-#: src/kgx-terminal.ui:43
+#: src/kgx-terminal.ui:42
 msgid "Show in _Files"
 msgstr "Tampilkan pada B_erkas"
 
@@ -597,7 +617,7 @@ msgid "Custom _Font"
 msgstr "_Fonta Ubahan"
 
 #: src/preferences/kgx-preferences-window.ui:61
-msgid "Behaviour"
+msgid "Behavior"
 msgstr "Perilaku"
 
 #: src/preferences/kgx-preferences-window.ui:64
@@ -612,11 +632,15 @@ msgstr "Bari_s Gulir Balik"
 msgid "Terminal Bell"
 msgstr "Bel Terminal"
 
-#: src/preferences/kgx-preferences-window.ui:93
+#: src/preferences/kgx-preferences-window.ui:91
+msgid "Control how alerts are indicated"
+msgstr "Atur bagaimana notifikasi ditampilkan/dibunyikan"
+
+#: src/preferences/kgx-preferences-window.ui:94
 msgid "Play _Sound"
 msgstr "Mainkan _Suara"
 
-#: src/preferences/kgx-preferences-window.ui:99
+#: src/preferences/kgx-preferences-window.ui:100
 msgid "_Visual Effects"
 msgstr "Efek _Visual"
 
@@ -699,3 +723,13 @@ msgstr "Beralih ke Tab 1–9"
 msgctxt "shortcut window"
 msgid "Switch to Tab 10"
 msgstr "Beralih ke Tab 10"
+
+#: src/shortcuts-dialog.ui:116
+msgctxt "shortcut window"
+msgid "Window"
+msgstr "Jendela"
+
+#: src/shortcuts-dialog.ui:119
+msgctxt "shortcut window"
+msgid "Fullscreen"
+msgstr "Layar Penuh"
