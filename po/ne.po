@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gnome Nepali Translation\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/console/-/issues/\n"
-"POT-Creation-Date: 2025-12-28 14:23+0000\n"
-"PO-Revision-Date: 2026-03-02 14:31+0545\n"
-"Last-Translator: Pawan Chitrakar <chautari@gmail.com>\n"
+"POT-Creation-Date: 2026-10-24 01:31+0000\n"
+"PO-Revision-Date: 2026-11-12 14:01+0545\n"
+"Last-Translator: Sailesh Singh <sailesh36687@gmail.com>\n"
 "Language-Team: Nepali Team <chautari@gmail.com>\n"
 "Language: ne\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.9\n"
 
 #: data/org.gnome.Console.desktop.in.in:2 data/org.gnome.Console.metainfo.xml.in.in:8
 #: src/kgx-application.h:26 src/kgx-window.ui:52
@@ -36,6 +36,10 @@ msgstr "नयाँ सञ्झ्याल"
 msgid "New Tab"
 msgstr "नयाँ ट्याब"
 
+#: data/org.gnome.Console.gschema.xml.in:66
+msgid "Bypass the ‘Close Tab?’ or ‘Close Window?’ dialogues"
+msgstr "‘ट्याब बन्द गर्ने हो?’ वा ‘सञ्झ्याल बन्द गर्ने हो?’ संवादहरूलाई बेवास्ता गर्नुहोस्"
+
 #: data/org.gnome.Console.metainfo.xml.in.in:9 src/kgx-about.c:102
 msgid "Terminal Emulator"
 msgstr "टर्मिनल इमुलेटर"
@@ -48,7 +52,8 @@ msgstr "जिनोम डेस्कटपका लागि एउटा �
 msgid "Terminal window"
 msgstr "टर्मिनल सञ्झ्याल"
 
-#: data/org.gnome.Console.metainfo.xml.in.in:564 src/kgx-about.c:166
+#: data/org.gnome.Console.metainfo.xml.in.in:691 data/org.gnome.Console.metainfo.xml.in.in:693
+#: src/kgx-about.c:166
 msgid "The GNOME Project"
 msgstr "जिनोम परियोजना"
 
@@ -73,10 +78,14 @@ msgstr "© %s जान्डर ब्राउन"
 #: src/kgx-about.c:176
 msgid "translator-credits"
 msgstr ""
-"pawan chitrakar <chautari@gmail.com>,Jyotsna Shrestha <jyoshrestha@hotmail.com>,Ganesh "
-"Ghimire <gghimire@gmail.com>,Shiva  Pokharel <pokharelshiva@hotmail.com>,Jaydeep Bhusal "
-"<zaydeep@hotmail.com>,Mahesh Subedi <submanesh@hotmail.com>,Shyam Krishna Bal "
-"<shyamkrishna_bal@yahoo.com>.#"
+"Sailesh Singh <saileshsingh@gnome.org>\n"
+"Pawan Chitrakar <chautari@gmail.com>\n"
+"Jyotsna Shrestha <jyoshrestha@hotmail.com>\n"
+"Ganesh Ghimire <gghimire@gmail.com>\n"
+"Shiva Pokharel <pokharelshiva@hotmail.com>\n"
+"Jaydeep Bhusal <zaydeep@hotmail.com>\n"
+"Mahesh Subedi <submanesh@hotmail.com>\n"
+"Shyam Krishna Bal <shyamkrishna_bal@yahoo.com>"
 
 #: src/kgx-application.c:289
 msgid "Cannot use both --working-directory and positional parameters"
@@ -143,11 +152,10 @@ msgstr "सञ्झ्याल बन्द गर्नुहुन्छ?"
 
 #: src/kgx-close-dialog.c:75
 msgid ""
-"A command is still running, closing this window will kill it and may lead to unexpected "
-"outcomes"
+"A command is still running, closing this window will kill it and may lead to unexpected outcomes"
 msgid_plural ""
-"Some commands are still running, closing this window will kill them and may lead to "
-"unexpected outcomes"
+"Some commands are still running, closing this window will kill them and may lead to unexpected "
+"outcomes"
 msgstr[0] "आदेश अझै चलिरहेका छ, यो सञ्झ्याल बन्द गर्नाले ति नष्ट हुनेछ र अनपेक्षित नतिजा ल्याउन सक्छ"
 msgstr[1] ""
 "केही आदेश अझै चलिरहेका छन्, यो सञ्झ्याल बन्द गर्नाले तिनीहरूलाई नष्ट गर्नेछ र अनपेक्षित नतिजाहरू ल्याउन सक्छ"
@@ -158,13 +166,11 @@ msgstr "ट्याब बन्द गर्नुहुन्छ?"
 
 #: src/kgx-close-dialog.c:84
 msgid ""
-"A command is still running, closing this tab will kill it and may lead to unexpected "
-"outcomes"
+"A command is still running, closing this tab will kill it and may lead to unexpected outcomes"
 msgid_plural ""
-"Some commands are still running, closing this tab will kill them and may lead to "
-"unexpected outcomes"
-msgstr[0] ""
-"एउटा आदेश अझै चलिरहेको छ, यो ट्याब बन्द गर्दा यसले मार्नेछ र अनपेक्षित परिणामहरू निम्त्याउन सक्छ"
+"Some commands are still running, closing this tab will kill them and may lead to unexpected "
+"outcomes"
+msgstr[0] "एउटा आदेश अझै चलिरहेको छ, यो ट्याब बन्द गर्दा यसले मार्नेछ र अनपेक्षित परिणामहरू निम्त्याउन सक्छ"
 msgstr[1] ""
 "केही आदेशहरू अझै चलिरहेको छ, यो ट्याब बन्द गर्दा तिनीहरूलाई मार्नेछ र अनपेक्षित परिणामहरू निम्त्याउन सक्छ"
 
@@ -174,8 +180,7 @@ msgid "Process list"
 msgstr "प्रक्रिया सूची दृश्य"
 
 #. Translators: This action dismisses the dialogue, leaving the tab/window open
-#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135
-#: src/preferences/kgx-font-picker.ui:22
+#: src/kgx-close-dialog.c:205 src/kgx-paste-dialog.c:135 src/preferences/kgx-font-picker.ui:22
 msgid "_Cancel"
 msgstr "रद्द गर्नुहोस्"
 
@@ -197,8 +202,8 @@ msgstr "ड्रप असफल भयो"
 #: src/kgx-drop-target.c:201 src/kgx-drop-target.c:253
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst receiving a URI list drop. Please include the "
-"following information if you report the error."
+"An unexpected error occurred whilst receiving a URI list drop. Please include the following "
+"information if you report the error."
 msgstr ""
 "URI सूची ड्रप प्राप्त गर्दा एउटा अप्रत्याशित त्रुटि भयो। यदि तपाईंले त्रुटि रिपोर्ट गर्नुभयो भने कृपया निम्न "
 "जानकारी समावेश गर्नुहोस्।."
@@ -206,11 +211,11 @@ msgstr ""
 #: src/kgx-drop-target.c:337
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst receiving a file list drop. Please include the "
-"following information if you report the error."
+"An unexpected error occurred whilst receiving a file list drop. Please include the following "
+"information if you report the error."
 msgstr ""
-"फाइल सूची ड्रप प्राप्त गर्दा एउटा अप्रत्याशित त्रुटि भयो। यदि तपाईंले त्रुटि रिपोर्ट गर्नुभयो भने कृपया "
-"निम्न जानकारी समावेश गर्नुहोस्।."
+"फाइल सूची ड्रप प्राप्त गर्दा एउटा अप्रत्याशित त्रुटि भयो। यदि तपाईंले त्रुटि रिपोर्ट गर्नुभयो भने कृपया निम्न "
+"जानकारी समावेश गर्नुहोस्।."
 
 #: src/kgx-drop-target.c:371
 msgctxt "spad-message"
@@ -218,17 +223,16 @@ msgid ""
 "An unexpected error occurred whilst receiving a text drop. Please include the following "
 "information if you report the error."
 msgstr ""
-"टेक्स्ट ड्रप प्राप्त गर्दा एउटा अप्रत्याशित त्रुटि भयो। यदि तपाईंले त्रुटि रिपोर्ट गर्नुभयो भने कृपया निम्न "
-"जानकारी समावेश गर्नुहोस्।."
+"टेक्स्ट ड्रप प्राप्त गर्दा एउटा अप्रत्याशित त्रुटि भयो। यदि तपाईंले त्रुटि रिपोर्ट गर्नुभयो भने कृपया निम्न जानकारी "
+"समावेश गर्नुहोस्।."
 
 #: src/kgx-drop-target.c:512
 msgctxt "spad-message"
 msgid ""
-"An unexpected value was received. Please include the following information if you report "
-"the error."
+"An unexpected value was received. Please include the following information if you report the "
+"error."
 msgstr ""
-"एउटा अप्रत्याशित मान प्राप्त भयो। यदि तपाईंले त्रुटि रिपोर्ट गर्नुभयो भने कृपया निम्न जानकारी समावेश "
-"गर्नुहोस्।."
+"एउटा अप्रत्याशित मान प्राप्त भयो। यदि तपाईंले त्रुटि रिपोर्ट गर्नुभयो भने कृपया निम्न जानकारी समावेश गर्नुहोस्।."
 
 #: src/kgx-livery-manager.c:193
 msgctxt "livery-name"
@@ -255,7 +259,7 @@ msgstr "%i स्तम्भहरू %i पङ्क्तिहरू"
 #. * this string will only be seen when the running program has
 #. * failed to set a title, and exists purely to avoid blank tabs
 #.
-#: src/kgx-pages.c:508
+#: src/kgx-pages.c:513
 #, c-format
 msgid "Tab %i"
 msgstr "ट्याब %i"
@@ -365,32 +369,31 @@ msgctxt "toast-message"
 msgid "Couldn't Open Link"
 msgstr "लिङ्क खोल्न सकिएन"
 
-#: src/kgx-terminal.c:360
+#: src/kgx-terminal.c:362
+#, c-format
+msgctxt "spad-message"
+msgid "The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps are installed."
+msgstr ""
+"लिङ्क “<a href=\"%s\">%s</a>” ले “%s” प्रोटोकल प्रयोग गर्दछ, जसको लागि कुनै पनि एपहरू स्थापना गरिएका "
+"छैनन्।."
+
+#: src/kgx-terminal.c:375
 #, c-format
 msgctxt "spad-message"
 msgid ""
-"The link “<a href=\"%s\">%s</a>” uses the protocol “%s”, for which no apps are installed."
+"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</a>”. Please include "
+"the following information if you report the error."
 msgstr ""
-"लिङ्क “<a href=\"%s\">%s</a>” ले “%s” प्रोटोकल प्रयोग गर्दछ, जसको लागि कुनै पनि एपहरू स्थापना "
-"गरिएका छैनन्।."
+"“<a href=\"%s\">%s</a>” लिङ्क खोल्दा एउटा अप्रत्याशित त्रुटि भयो। यदि तपाईंले त्रुटि रिपोर्ट गर्नुभयो भने "
+"कृपया निम्न जानकारी समावेश गर्नुहोस्।."
 
-#: src/kgx-terminal.c:373
-#, c-format
-msgctxt "spad-message"
-msgid ""
-"An unexpected error occurred whilst opening the link “<a href=\"%s\">%s</a>”. Please "
-"include the following information if you report the error."
-msgstr ""
-"“<a href=\"%s\">%s</a>” लिङ्क खोल्दा एउटा अप्रत्याशित त्रुटि भयो। यदि तपाईंले त्रुटि रिपोर्ट गर्नुभयो "
-"भने कृपया निम्न जानकारी समावेश गर्नुहोस्।."
-
-#: src/kgx-terminal.c:421
+#: src/kgx-terminal.c:423
 #, c-format
 msgctxt "spad-message"
 msgid "The link “<a href=\"%s\">%s</a>” is malformed."
 msgstr "लिङ्क “<a href=\"%s\">%s</a>” विकृत छ।."
 
-#: src/kgx-terminal.c:440
+#: src/kgx-terminal.c:442
 #, c-format
 msgctxt "spad-message"
 msgid ""
@@ -402,49 +405,49 @@ msgstr ""
 "\n"
 "यो उपकरण “%s” हो र स्थान “%s” मा छ।."
 
-#: src/kgx-terminal.c:511
+#: src/kgx-terminal.c:513
 msgctxt "toast-message"
 msgid "Couldn't Paste Text"
 msgstr "पाठ टाँस्न सकिएन"
 
-#: src/kgx-terminal.c:514
+#: src/kgx-terminal.c:516
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst reading the clipboard. Please include the following "
 "information if you report the error."
 msgstr ""
-"क्लिपबोर्ड पढ्दा एउटा अनपेक्षित त्रुटि भयो। यदि तपाईंले त्रुटि रिपोर्ट गर्नुभयो भने कृपया निम्न जानकारी "
-"समावेश गर्नुहोस्।."
+"क्लिपबोर्ड पढ्दा एउटा अनपेक्षित त्रुटि भयो। यदि तपाईंले त्रुटि रिपोर्ट गर्नुभयो भने कृपया निम्न जानकारी समावेश "
+"गर्नुहोस्।."
 
-#: src/kgx-terminal.c:575
+#: src/kgx-terminal.c:577
 msgctxt "toast-message"
 msgid "Couldn't Show File"
 msgstr "फाइल देखाउन सकिएन"
 
-#: src/kgx-terminal.c:578
+#: src/kgx-terminal.c:580
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst showing the file. Please include the following "
-"information if you report the error."
+"An unexpected error occurred whilst showing the file. Please include the following information "
+"if you report the error."
 msgstr ""
-"फाइल देखाउँदा एउटा अप्रत्याशित त्रुटि भयो। यदि तपाईंले त्रुटि रिपोर्ट गर्नुभयो भने कृपया निम्न जानकारी "
-"समावेश गर्नुहोस्।."
+"फाइल देखाउँदा एउटा अप्रत्याशित त्रुटि भयो। यदि तपाईंले त्रुटि रिपोर्ट गर्नुभयो भने कृपया निम्न जानकारी समावेश "
+"गर्नुहोस्।."
 
-#: src/kgx-terminal.c:599
+#: src/kgx-terminal.c:601
 msgctxt "toast-message"
 msgid "Couldn't Open Folder"
 msgstr "फोल्डर खोल्न सकिएन"
 
-#: src/kgx-terminal.c:602
+#: src/kgx-terminal.c:604
 msgctxt "spad-message"
 msgid ""
 "An unexpected error occurred whilst opening the folder. Please include the following "
 "information if you report the error."
 msgstr ""
-"फोल्डर खोल्ने क्रममा एउटा अप्रत्याशित त्रुटि भयो। यदि तपाईंले त्रुटि रिपोर्ट गर्नुभयो भने कृपया निम्न "
-"जानकारी समावेश गर्नुहोस्।."
+"फोल्डर खोल्ने क्रममा एउटा अप्रत्याशित त्रुटि भयो। यदि तपाईंले त्रुटि रिपोर्ट गर्नुभयो भने कृपया निम्न जानकारी "
+"समावेश गर्नुहोस्।."
 
-#: src/kgx-terminal.c:696
+#: src/kgx-terminal.c:698
 #, c-format
 msgid ""
 "Ctrl-click to open:\n"
@@ -453,19 +456,19 @@ msgstr ""
 "खोल्नका लागि Ctrl-क्लिक गर्नुहोस्:\n"
 "%s"
 
-#: src/kgx-terminal.c:984
+#: src/kgx-terminal.c:1009
 msgctxt "toast-message"
 msgid "Couldn't Paste"
 msgstr "टाँस्न सकिएन"
 
-#: src/kgx-terminal.c:987
+#: src/kgx-terminal.c:1012
 msgctxt "spad-message"
 msgid ""
-"An unexpected error occurred whilst processing the clipboard. Please include the "
-"following information if you report the error."
+"An unexpected error occurred whilst processing the clipboard. Please include the following "
+"information if you report the error."
 msgstr ""
-"क्लिपबोर्ड प्रशोधन गर्दा एउटा अप्रत्याशित त्रुटि भयो। यदि तपाईंले त्रुटि रिपोर्ट गर्नुभयो भने कृपया निम्न "
-"जानकारी समावेश गर्नुहोस्।."
+"क्लिपबोर्ड प्रशोधन गर्दा एउटा अप्रत्याशित त्रुटि भयो। यदि तपाईंले त्रुटि रिपोर्ट गर्नुभयो भने कृपया निम्न जानकारी "
+"समावेश गर्नुहोस्।."
 
 #: src/kgx-terminal.ui:7
 msgid "_Open Link"
@@ -479,15 +482,15 @@ msgstr "लिङ्क ठेगाना प्रतिलिपि बना
 msgid "_Copy"
 msgstr "प्रतिलिपि बनाउनुहोस्"
 
-#: src/kgx-terminal.ui:29
+#: src/kgx-terminal.ui:28
 msgid "_Select All"
 msgstr "सबै चयन गर्नुहोस्"
 
-#: src/kgx-terminal.ui:36 src/kgx-window.ui:285
+#: src/kgx-terminal.ui:35 src/kgx-window.ui:285
 msgid "Leave _Fullscreen"
 msgstr "पूरा पर्दा छोड्नुहोस्"
 
-#: src/kgx-terminal.ui:43
+#: src/kgx-terminal.ui:42
 msgid "Show in _Files"
 msgstr "फाइलहरूमा देखाउनुहोस्"
 
